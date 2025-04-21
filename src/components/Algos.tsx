@@ -239,11 +239,14 @@ def heapify(arr, n, i):
   [
     "Two Sum",
     `def two_sum(arr, target):
-    for i in range(len(arr)):
-        for j in range(i+1, len(arr)):
-            if arr[i] + arr[j] == target:
-                return [i, j]
-    return []`,
+    my_dict = {}
+    results = []
+    for num in arr:
+        if num in my_dict:
+            results.append([my_dict[num], num])
+        else:
+            my_dict[target - num] = num
+    return results`,
   ],
 
   [
@@ -697,25 +700,26 @@ export function AlgorithmTrainer() {
   };
 
   return (
-    <div className="min-h-screen bg-[#282a36] text-[#f8f8f2] w-screen flex flex-col">
-      <div className="bg-gradient-to-r from-dracula-purple via-dracula-pink to-dracula-purple animate-gradient-x p-6 mb-4">
-        <h1 className="text-4xl font-bold text-white text-center">
+    <div className="min-h-screen w-screen flex flex-col bg-gradient-to-br from-[#282a36] via-[#44475a] to-[#282a36] text-[#f8f8f2]">
+      <div className="bg-gradient-to-r from-dracula-purple via-dracula-pink to-dracula-purple animate-gradient-x py-1 px-3 fixed top-0 left-0 right-0 z-10">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center">
           Algorithm Trainer
         </h1>
       </div>
-      <div className="p-4 w-full flex-grow">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-4">
+
+      <main className="flex-1 px-2 py-1 w-full mt-[40px] mb-[32px] overflow-y-auto">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 mb-1 sticky top-0 bg-[#282a36] z-10 py-1">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <Button
               onClick={nextPattern}
-              className="bg-[#bd93f9] hover:bg-[#bd93f9]/90"
+              className="bg-[#bd93f9] hover:bg-[#bd93f9]/90 w-full sm:w-auto text-sm sm:text-base whitespace-nowrap h-8 px-3"
             >
               {currentPattern ? "Next Pattern" : "Start Training"}
             </Button>
             {currentPattern && (
               <Button
                 onClick={previousPattern}
-                className="bg-[#6272a4] hover:bg-[#6272a4]/90"
+                className="bg-[#6272a4] hover:bg-[#6272a4]/90 w-full sm:w-auto text-sm sm:text-base whitespace-nowrap h-8 px-3"
                 disabled={currentIndexRef.current <= 0}
               >
                 Previous Pattern
@@ -726,101 +730,129 @@ export function AlgorithmTrainer() {
         </div>
 
         {currentPattern && (
-          <div className="grid grid-cols-2 gap-4 w-full">
-            {/* Left side: Pattern and User Input */}
-            <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full">
-              <h2 className="text-xl font-semibold mb-2 text-[#ff79c6]">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 min-h-[calc(100vh-7.5rem)]">
+            {/* Left side: Pattern/Pseudocode */}
+            <Card className="p-2 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col order-1">
+              <h2 className="text-base sm:text-lg font-semibold mb-1 text-[#ff79c6] truncate flex-shrink-0">
                 {currentPattern}
               </h2>
-              <div className={styles.pseudocodeContainer}>
+              <div className="flex-1 min-h-0">
                 <div
-                  className={styles.pseudocodeContent}
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      pseudocodePatterns.get(currentPattern) ||
-                      "Pseudocode coming soon...",
-                  }}
-                />
+                  className={`${styles.pseudocodeContainer} h-full overflow-y-auto`}
+                >
+                  <div
+                    className={`${styles.pseudocodeContent} text-sm sm:text-base`}
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        pseudocodePatterns.get(currentPattern) ||
+                        "Pseudocode coming soon...",
+                    }}
+                  />
+                </div>
               </div>
-              <div className="h-[400px] w-full rounded-md overflow-hidden">
-                <Editor
-                  height="100%"
-                  defaultLanguage="python"
-                  theme="dracula"
-                  value={userCode}
-                  onChange={(value: string | undefined) =>
-                    setUserCode(value || "")
-                  }
-                  onMount={handleEditorDidMount}
-                  options={{
-                    fontSize: 14,
-                    minimap: { enabled: false },
-                    scrollBeyondLastLine: false,
-                    lineNumbers: "on",
-                    roundedSelection: false,
-                    padding: { top: 8, bottom: 8 },
-                    cursorStyle: "line",
-                    automaticLayout: true,
-                    wordWrap: "on",
-                    tabSize: 4,
-                    insertSpaces: true,
-                  }}
-                />
+            </Card>
+
+            {/* Middle: Code Editor - Always in the middle */}
+            <Card className="p-2 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col xl:col-start-2 xl:col-span-1 order-2 md:order-1 md:col-span-2 xl:order-2">
+              <h2 className="text-base sm:text-lg font-semibold mb-1 text-[#50fa7b] truncate flex-shrink-0">
+                Your Implementation
+              </h2>
+              <div className="flex-1 min-h-0">
+                <div className="h-full w-full rounded-md overflow-hidden">
+                  <Editor
+                    height="100%"
+                    defaultLanguage="python"
+                    theme="dracula"
+                    value={userCode}
+                    onChange={(value: string | undefined) =>
+                      setUserCode(value || "")
+                    }
+                    onMount={handleEditorDidMount}
+                    options={{
+                      fontSize: 14,
+                      minimap: { enabled: false },
+                      scrollBeyondLastLine: false,
+                      lineNumbers: "on",
+                      roundedSelection: false,
+                      padding: { top: 8, bottom: 8 },
+                      cursorStyle: "line",
+                      automaticLayout: true,
+                      wordWrap: "on",
+                      tabSize: 4,
+                      insertSpaces: true,
+                      overviewRulerBorder: false,
+                      hideCursorInOverviewRuler: true,
+                      renderLineHighlight: "line",
+                      lineDecorationsWidth: 0,
+                      renderLineHighlightOnlyWhenFocus: true,
+                      fixedOverflowWidgets: true,
+                    }}
+                  />
+                </div>
               </div>
             </Card>
 
             {/* Right side: Answer */}
-            <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full">
-              <div className="flex justify-between mb-4">
+            <Card className="p-2 bg-[#44475a] border-[#6272a4] w-full flex flex-col order-3 min-h-[300px]">
+              <div className="flex justify-between gap-2 mb-1 flex-shrink-0">
                 <Button
                   onClick={() => setShowAnswer(!showAnswer)}
-                  className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36]"
+                  className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3"
                 >
                   {showAnswer ? "Hide Answer" : "Show Answer"}
                 </Button>
                 <Button
                   onClick={nextPattern}
-                  className="bg-[#ff79c6] hover:bg-[#ff79c6]/90"
+                  className="bg-[#ff79c6] hover:bg-[#ff79c6]/90 text-sm sm:text-base whitespace-nowrap h-8 px-3"
                 >
                   Next Pattern
                 </Button>
               </div>
-              {showAnswer && (
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold mb-2 text-[#50fa7b]">
-                    Implementation:
-                  </h3>
-                  <div className="h-[400px] w-full rounded-md overflow-hidden">
-                    <Editor
-                      height="100%"
-                      defaultLanguage="python"
-                      theme="dracula"
-                      value={patterns.get(currentPattern)}
-                      onMount={handleEditorDidMount}
-                      options={{
-                        fontSize: 14,
-                        minimap: { enabled: false },
-                        scrollBeyondLastLine: false,
-                        lineNumbers: "on",
-                        readOnly: true,
-                        roundedSelection: false,
-                        padding: { top: 8, bottom: 8 },
-                        cursorStyle: "line",
-                        automaticLayout: true,
-                        wordWrap: "on",
-                        tabSize: 4,
-                        insertSpaces: true,
-                      }}
-                    />
-                  </div>
+              <div
+                className={`flex-1 min-h-0 transition-all duration-200 ${
+                  showAnswer ? "opacity-100" : "opacity-0 h-0"
+                }`}
+              >
+                <h3 className="text-base sm:text-lg font-semibold mb-1 text-[#50fa7b] truncate flex-shrink-0">
+                  Implementation:
+                </h3>
+                <div className="h-[calc(100%-2rem)] w-full rounded-md overflow-hidden">
+                  <Editor
+                    height="100%"
+                    defaultLanguage="python"
+                    theme="dracula"
+                    value={patterns.get(currentPattern)}
+                    onMount={handleEditorDidMount}
+                    options={{
+                      fontSize: 14,
+                      minimap: { enabled: false },
+                      scrollBeyondLastLine: false,
+                      lineNumbers: "on",
+                      readOnly: true,
+                      roundedSelection: false,
+                      padding: { top: 8, bottom: 8 },
+                      cursorStyle: "line",
+                      automaticLayout: true,
+                      wordWrap: "on",
+                      tabSize: 4,
+                      insertSpaces: true,
+                      overviewRulerBorder: false,
+                      hideCursorInOverviewRuler: true,
+                      renderLineHighlight: "line",
+                      lineDecorationsWidth: 0,
+                      renderLineHighlightOnlyWhenFocus: true,
+                      fixedOverflowWidgets: true,
+                    }}
+                  />
                 </div>
-              )}
+              </div>
             </Card>
           </div>
         )}
-      </div>
-      <footer className="bg-[#1e1f29] py-4 px-6 text-center">
-        <p className="text-[#6272a4]">
+      </main>
+
+      <footer className="bg-[#1e1f29]/80 backdrop-blur-md py-1 px-3 text-center fixed bottom-0 left-0 right-0 z-10">
+        <p className="text-[#6272a4] text-sm sm:text-base">
           Created by{" "}
           <a
             href="https://breon.xyz"

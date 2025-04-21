@@ -450,6 +450,16 @@ def two_pointers(arr, target):
             right -= 1
     return []
 
+def two_sum(arr, target):
+    my_dict = {}
+    results = []
+    for num in arr:
+        if num in my_dict:
+            results.append([my_dict[num], num])
+        else:
+            my_dict[target - num] = num
+    return results
+
 # Example usage
 if __name__ == "__main__":
     # Sorting examples

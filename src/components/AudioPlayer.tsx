@@ -417,28 +417,31 @@ export function AudioPlayer() {
   };
 
   return (
-    <div className="flex items-center gap-8 bg-[#1e1f29] px-8 py-4 rounded-xl shadow-lg max-w-3xl">
-      <div className="flex flex-col items-start gap-1">
+    <div className="flex items-center gap-8 bg-[#1e1f29]/80 backdrop-blur-md px-8 py-4 rounded-xl shadow-lg max-w-3xl border border-white/5">
+      <div className="flex flex-col items-start gap-1 min-w-0 flex-shrink">
         <div className="text-xs text-[#6272a4] font-medium mb-1">
           Background Music
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full">
           <Button
             onClick={togglePlay}
-            className="bg-[#bd93f9] hover:bg-[#bd93f9]/90 h-10 w-10 p-0"
+            className="bg-[#bd93f9] hover:bg-[#bd93f9]/90 h-10 w-10 p-0 flex-shrink-0"
             title={isPlaying ? "Pause music" : "Play music"}
           >
             {isPlaying ? <Pause size={18} /> : <Play size={18} />}
           </Button>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <div
-              className="text-[#f8f8f2] font-mono max-w-[200px] truncate"
+              className="text-[#f8f8f2] font-mono truncate max-w-[150px]"
               title={currentSongName}
             >
               {currentSongName}
             </div>
-            <div title="Volume" className="flex items-center gap-2">
+            <div
+              title="Volume"
+              className="flex items-center gap-2 flex-shrink-0"
+            >
               <Volume2 size={18} className="text-[#6272a4]" />
               <div className="w-28">
                 <Slider.Root
@@ -462,7 +465,7 @@ export function AudioPlayer() {
         </div>
       </div>
 
-      <div className="h-12 w-px bg-[#44475a]" />
+      <div className="h-12 w-px bg-[#44475a] flex-shrink-0" />
 
       <Timer />
 
