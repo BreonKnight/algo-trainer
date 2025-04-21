@@ -652,6 +652,8 @@ export function AlgorithmTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [userCode, setUserCode] = useState("");
   const monacoRef = useRef<Monaco | null>(null);
+  const patternHistoryRef = useRef<PatternKey[]>([]);
+  const currentIndexRef = useRef<number>(-1);
 
   const handleEditorDidMount = (_editor: unknown, monaco: Monaco) => {
     monacoRef.current = monaco;
@@ -661,26 +663,65 @@ export function AlgorithmTrainer() {
 
   const nextPattern = () => {
     const randomIndex = Math.floor(Math.random() * PATTERN_KEYS.length);
-    setCurrentPattern(PATTERN_KEYS[randomIndex]);
-    setShowAnswer(false);
-    setUserCode("");
+    const nextPattern = PATTERN_KEYS[randomIndex];
+
+    // Add to history if it's a new pattern
+    if (currentPattern !== nextPattern) {
+      // If we're not at the end of the history, remove all patterns after current index
+      if (currentIndexRef.current < patternHistoryRef.current.length - 1) {
+        patternHistoryRef.current = patternHistoryRef.current.slice(
+          0,
+          currentIndexRef.current + 1
+        );
+      }
+
+      // Add the new pattern to history
+      patternHistoryRef.current.push(nextPattern);
+      currentIndexRef.current = patternHistoryRef.current.length - 1;
+
+      setCurrentPattern(nextPattern);
+      setShowAnswer(false);
+      setUserCode("");
+    }
+  };
+
+  const previousPattern = () => {
+    if (currentIndexRef.current > 0) {
+      currentIndexRef.current--;
+      const previousPattern =
+        patternHistoryRef.current[currentIndexRef.current];
+      setCurrentPattern(previousPattern);
+      setShowAnswer(false);
+      setUserCode("");
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#282a36] text-[#f8f8f2] w-screen">
+    <div className="min-h-screen bg-[#282a36] text-[#f8f8f2] w-screen flex flex-col">
       <div className="bg-gradient-to-r from-dracula-purple via-dracula-pink to-dracula-purple animate-gradient-x p-6 mb-4">
         <h1 className="text-4xl font-bold text-white text-center">
           Algorithm Trainer
         </h1>
       </div>
-      <div className="p-4 w-full">
-        <div className="flex items-center gap-4 mb-4">
-          <Button
-            onClick={nextPattern}
-            className="bg-[#bd93f9] hover:bg-[#bd93f9]/90"
-          >
-            {currentPattern ? "Next Pattern" : "Start Training"}
-          </Button>
+      <div className="p-4 w-full flex-grow">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-4">
+            <Button
+              onClick={nextPattern}
+              className="bg-[#bd93f9] hover:bg-[#bd93f9]/90"
+            >
+              {currentPattern ? "Next Pattern" : "Start Training"}
+            </Button>
+            {currentPattern && (
+              <Button
+                onClick={previousPattern}
+                className="bg-[#6272a4] hover:bg-[#6272a4]/90"
+                disabled={currentIndexRef.current <= 0}
+              >
+                Previous Pattern
+              </Button>
+            )}
+          </div>
           <AudioPlayer />
         </div>
 
@@ -778,6 +819,19 @@ export function AlgorithmTrainer() {
           </div>
         )}
       </div>
+      <footer className="bg-[#1e1f29] py-4 px-6 text-center">
+        <p className="text-[#6272a4]">
+          Created by{" "}
+          <a
+            href="https://breon.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#bd93f9] hover:text-[#ff79c6] transition-colors"
+          >
+            Breon
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
