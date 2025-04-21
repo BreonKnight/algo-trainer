@@ -85,7 +85,7 @@ const PLAYLIST_COMMENTS: Record<string, string> = {
 };
 
 // Timer component for algorithm timeboxing
-function Timer() {
+export function Timer() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -417,63 +417,43 @@ export function AudioPlayer() {
   };
 
   return (
-    <div className="flex items-center gap-8 bg-[#1e1f29]/80 backdrop-blur-md px-4 sm:px-8 py-4 rounded-xl shadow-lg min-w-[280px] min-h-[120px] w-full max-w-3xl border border-white/5">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
-        <div className="flex flex-col gap-1 min-w-0 w-full sm:w-auto sm:flex-shrink-0 sm:max-w-[45%]">
-          <div className="text-xs text-[#6272a4] font-medium mb-1">
-            Background Music
-          </div>
-          <div className="flex items-center gap-4 w-full">
-            <Button
-              onClick={togglePlay}
-              className="bg-[#bd93f9] hover:bg-[#bd93f9]/90 h-8 w-8 p-0 flex-shrink-0"
-              title={isPlaying ? "Pause music" : "Play music"}
+    <div className="flex flex-col items-start gap-1">
+      <div className="text-xs text-[#6272a4] font-medium mb-1">
+        Background Music
+      </div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={togglePlay}
+            variant="ghost"
+            size="sm"
+            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            title={isPlaying ? "Pause" : "Play"}
+          >
+            {isPlaying ? <Pause size={14} /> : <Play size={14} />}
+          </Button>
+          <div className="hidden sm:flex items-center gap-2">
+            <Volume2 size={14} className="text-[#6272a4]" />
+            <Slider.Root
+              className="relative flex items-center select-none touch-none w-[100px] h-5"
+              value={[volume]}
+              onValueChange={handleVolumeChange}
+              max={100}
+              step={1}
+              aria-label="Volume"
             >
-              {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-            </Button>
-
-            <div className="flex items-center gap-3 min-w-0 w-full">
-              <div
-                className="text-[#f8f8f2] font-mono text-sm truncate min-w-[80px] max-w-[120px] sm:max-w-[150px]"
-                title={currentSongName}
-              >
-                {currentSongName}
-              </div>
-              <div
-                title="Volume"
-                className="flex items-center gap-2 flex-shrink-0 ml-auto"
-              >
-                <Volume2 size={16} className="text-[#6272a4]" />
-                <div className="w-20">
-                  <Slider.Root
-                    className="relative flex items-center select-none touch-none h-5"
-                    value={[volume]}
-                    max={100}
-                    step={1}
-                    onValueChange={handleVolumeChange}
-                  >
-                    <Slider.Track className="relative h-1 grow rounded-full bg-[#44475a]">
-                      <Slider.Range className="absolute h-full rounded-full bg-[#6272a4]" />
-                    </Slider.Track>
-                    <Slider.Thumb
-                      className="block w-3 h-3 bg-[#f8f8f2] rounded-full shadow-lg hover:bg-[#f8f8f2]/90 focus:outline-none focus:ring-2 focus:ring-[#bd93f9]"
-                      aria-label="Volume"
-                    />
-                  </Slider.Root>
-                </div>
-              </div>
-            </div>
+              <Slider.Track className="bg-[#44475a] relative grow rounded-full h-[3px]">
+                <Slider.Range className="absolute bg-[#6272a4] rounded-full h-full" />
+              </Slider.Track>
+              <Slider.Thumb className="block w-3 h-3 bg-[#f8f8f2] rounded-full hover:bg-[#bd93f9] focus:outline-none" />
+            </Slider.Root>
           </div>
         </div>
-
-        <div className="h-px sm:h-12 w-full sm:w-px bg-[#44475a] my-2 sm:my-0" />
-
-        <div className="flex flex-col gap-1 min-w-0 w-full sm:w-auto sm:flex-shrink-0 sm:max-w-[45%]">
-          <Timer />
+        <div className="hidden sm:block text-sm text-[#6272a4] truncate max-w-[200px]">
+          {currentSongName || "Loading..."}
         </div>
       </div>
-
-      <div id="youtube-player" className="hidden"></div>
+      <div id="youtube-player" className="hidden" />
     </div>
   );
 }
