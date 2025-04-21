@@ -1,8 +1,55 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import Editor from "@monaco-editor/react";
+import Editor, { Monaco } from "@monaco-editor/react";
 import { pseudocodePatterns } from "@/lib/pseudocode-patterns";
+import styles from "@/styles/pseudocode.module.css";
+import { AudioPlayer } from "./AudioPlayer";
+
+// Define Dracula theme
+const draculaTheme = {
+  base: "vs-dark" as const,
+  inherit: true,
+  rules: [
+    { token: "", foreground: "f8f8f2" },
+    { token: "comment", foreground: "6272a4" },
+    { token: "keyword", foreground: "ff79c6" },
+    { token: "string", foreground: "f1fa8c" },
+    { token: "number", foreground: "bd93f9" },
+    { token: "regexp", foreground: "ff5555" },
+    { token: "type", foreground: "8be9fd" },
+    { token: "class", foreground: "50fa7b" },
+    { token: "function", foreground: "50fa7b" },
+    { token: "variable", foreground: "f8f8f2" },
+    { token: "constant", foreground: "bd93f9" },
+    { token: "operator", foreground: "ff79c6" },
+    { token: "delimiter", foreground: "f8f8f2" },
+    { token: "tag", foreground: "ff79c6" },
+    { token: "attribute.name", foreground: "50fa7b" },
+    { token: "attribute.value", foreground: "f1fa8c" },
+  ],
+  colors: {
+    "editor.background": "#282a36",
+    "editor.foreground": "#f8f8f2",
+    "editor.lineHighlightBackground": "#44475a",
+    "editor.selectionBackground": "#44475a",
+    "editor.inactiveSelectionBackground": "#44475a80",
+    "editorCursor.foreground": "#f8f8f2",
+    "editorWhitespace.foreground": "#6272a480",
+    "editorIndentGuide.background": "#6272a440",
+    "editorIndentGuide.activeBackground": "#6272a480",
+    "editor.selectionHighlightBackground": "#44475a80",
+    "editor.wordHighlightBackground": "#44475a80",
+    "editorBracketMatch.background": "#44475a80",
+    "editorBracketMatch.border": "#6272a4",
+    "editorOverviewRuler.border": "#282a36",
+    "editorGutter.background": "#282a36",
+    "editorError.foreground": "#ff5555",
+    "editorWarning.foreground": "#ffb86c",
+    "editorInfo.foreground": "#8be9fd",
+    "editorHint.foreground": "#6272a4",
+  },
+};
 
 const PATTERN_KEYS = [
   "Quick Sort",
@@ -13,6 +60,7 @@ const PATTERN_KEYS = [
   "Selection Sort",
   "Insertion Sort",
   "Binary Search",
+  "Binary Search on Answer",
   "Linear Search",
   "Two Sum",
   "Dynamic Programming",
@@ -21,9 +69,12 @@ const PATTERN_KEYS = [
   "Sliding Window",
   "Bit Manipulation",
   "Topological Sort",
+  "DFS",
+  "BFS",
   "Stack Implementation",
   "Queue Implementation",
   "Linked List",
+  "Circular Linked List",
   "Hash Table",
   "Graph",
   "Tree",
@@ -161,6 +212,22 @@ def heapify(arr, n, i):
   ],
 
   [
+    "Binary Search on Answer",
+    `def binary_search_on_answer(arr, target):
+    def is_valid(mid):
+        return arr[mid] >= target
+
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if is_valid(mid):
+            right = mid - 1
+        else:
+            left = mid + 1
+    return left`,
+  ],
+
+  [
     "Linear Search",
     `def linear_search(arr, target):
     for i, num in enumerate(arr):
@@ -259,6 +326,32 @@ def heapify(arr, n, i):
   ],
 
   [
+    "DFS",
+    `def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)`,
+  ],
+
+  [
+    "BFS",
+    `def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    while queue:
+        node = queue.popleft()
+        print(node, end=' ')
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)`,
+  ],
+
+  [
     "Stack Implementation",
     `class Stack:
     def __init__(self):
@@ -319,7 +412,64 @@ class LinkedList:
     def prepend(self, val):
         new_node = ListNode(val)
         new_node.next = self.head
-        self.head = new_node`,
+        self.head = new_node
+        
+    def search(self, item):
+        current = self.head
+        while current:
+            if current.val == item:
+                return True
+            current = current.next
+        return False
+
+    def delete(self, item):
+        current = self.head
+        while current:
+          if current.val == item:
+            current.next = current.next.next
+        return False
+
+    def print_list(self):
+        current = self.head
+        while current:
+            print(current.val, end=' ')
+            current = current.next
+        print()
+
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current:
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        return prev
+
+    def sort(self):
+        current = self.head
+        while current:
+          next = current.next
+          while next:
+            if current.val > next.val:
+                current.val, next.val = next.val, current.val
+                next = next.next
+            current = current.next
+        return self.head`,
+  ],
+
+  [
+    "Circular Linked List",
+    `def circular_linked_list(arr):
+    if not arr:
+        return None
+    head = ListNode(arr[0])
+    current = head
+    for i in range(1, len(arr)):
+        current.next = ListNode(arr[i]) 
+        current = current.next
+    current.next = head
+    return head`,
   ],
 
   [
@@ -469,14 +619,14 @@ class Trie:
     left = 0
     right = len(arr) - 1
     while left < right:
-        current_sum = arr[left] + arr[right]
-        if current_sum == target:
+        if arr[left] + arr[right] == target:
             return [left, right]
-        elif current_sum < target:
+        elif arr[left] + arr[right] < target:
             left += 1
         else:
             right -= 1
-    return []`,
+    return []
+`,
   ],
 
   [
@@ -501,6 +651,13 @@ export function AlgorithmTrainer() {
   const [currentPattern, setCurrentPattern] = useState<PatternKey | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
   const [userCode, setUserCode] = useState("");
+  const monacoRef = useRef<Monaco | null>(null);
+
+  const handleEditorDidMount = (_editor: unknown, monaco: Monaco) => {
+    monacoRef.current = monaco;
+    monaco.editor.defineTheme("dracula", draculaTheme);
+    monaco.editor.setTheme("dracula");
+  };
 
   const nextPattern = () => {
     const randomIndex = Math.floor(Math.random() * PATTERN_KEYS.length);
@@ -511,13 +668,21 @@ export function AlgorithmTrainer() {
 
   return (
     <div className="min-h-screen bg-[#282a36] text-[#f8f8f2] w-screen">
+      <div className="bg-gradient-to-r from-dracula-purple via-dracula-pink to-dracula-purple animate-gradient-x p-6 mb-4">
+        <h1 className="text-4xl font-bold text-white text-center">
+          Algorithm Trainer
+        </h1>
+      </div>
       <div className="p-4 w-full">
-        <Button
-          onClick={nextPattern}
-          className="mb-4 bg-[#bd93f9] hover:bg-[#bd93f9]/90"
-        >
-          {currentPattern ? "Next Pattern" : "Start Training"}
-        </Button>
+        <div className="flex items-center gap-4 mb-4">
+          <Button
+            onClick={nextPattern}
+            className="bg-[#bd93f9] hover:bg-[#bd93f9]/90"
+          >
+            {currentPattern ? "Next Pattern" : "Start Training"}
+          </Button>
+          <AudioPlayer />
+        </div>
 
         {currentPattern && (
           <div className="grid grid-cols-2 gap-4 w-full">
@@ -526,20 +691,26 @@ export function AlgorithmTrainer() {
               <h2 className="text-xl font-semibold mb-2 text-[#ff79c6]">
                 {currentPattern}
               </h2>
-              <div className="mb-4 font-mono text-sm bg-[#282a36] p-4 rounded-md">
-                <pre className="whitespace-pre-wrap">
-                  {pseudocodePatterns.get(currentPattern)}
-                </pre>
+              <div className={styles.pseudocodeContainer}>
+                <div
+                  className={styles.pseudocodeContent}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      pseudocodePatterns.get(currentPattern) ||
+                      "Pseudocode coming soon...",
+                  }}
+                />
               </div>
               <div className="h-[400px] w-full rounded-md overflow-hidden">
                 <Editor
                   height="100%"
                   defaultLanguage="python"
-                  theme="vs-dark"
+                  theme="dracula"
                   value={userCode}
                   onChange={(value: string | undefined) =>
                     setUserCode(value || "")
                   }
+                  onMount={handleEditorDidMount}
                   options={{
                     fontSize: 14,
                     minimap: { enabled: false },
@@ -576,14 +747,15 @@ export function AlgorithmTrainer() {
               {showAnswer && (
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold mb-2 text-[#50fa7b]">
-                    Answer:
+                    Implementation:
                   </h3>
                   <div className="h-[400px] w-full rounded-md overflow-hidden">
                     <Editor
                       height="100%"
                       defaultLanguage="python"
-                      theme="vs-dark"
+                      theme="dracula"
                       value={patterns.get(currentPattern)}
+                      onMount={handleEditorDidMount}
                       options={{
                         fontSize: 14,
                         minimap: { enabled: false },
