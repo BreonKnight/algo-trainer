@@ -700,14 +700,14 @@ export function AlgorithmTrainer() {
   };
 
   return (
-    <div className="min-h-screen w-screen flex flex-col bg-gradient-to-br from-[#282a36] via-[#44475a] to-[#282a36] text-[#f8f8f2]">
+    <div className="min-h-screen w-[100vw] flex flex-col bg-gradient-to-br from-[#282a36] via-[#44475a] to-[#282a36] text-[#f8f8f2] overflow-x-hidden">
       <div className="bg-gradient-to-r from-dracula-purple via-dracula-pink to-dracula-purple animate-gradient-x py-1 px-3 fixed top-0 left-0 right-0 z-10">
         <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center">
           Algorithm Trainer
         </h1>
       </div>
 
-      <main className="flex-1 px-2 py-1 w-full mt-[40px] mb-[32px] overflow-y-auto">
+      <main className="flex-1 px-2 py-1 w-full mt-[40px] mb-[32px] overflow-y-auto overflow-x-hidden">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 mb-1 sticky top-0 bg-[#282a36] z-10 py-1">
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <Button
@@ -758,7 +758,7 @@ export function AlgorithmTrainer() {
                 Your Implementation
               </h2>
               <div className="flex-1 min-h-0">
-                <div className="h-full w-full rounded-md overflow-hidden">
+                <div className="flex flex-col h-full min-h-[400px] w-full">
                   <Editor
                     height="100%"
                     defaultLanguage="python"
