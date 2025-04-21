@@ -1,13 +1,9 @@
-import { AlgorithmTrainer } from "./components/Algos";
+import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
 
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen min-w-screen bg-gradient-to-br from-[#282a36] via-[#44475a] to-[#282a36] ">
-      <div className="container mx-auto max-w-screen-3xl">
-        <AlgorithmTrainer />
-      </div>
+    <div className="w-screen h-screen overflow-x-hidden">
+      <AlgorithmTrainer />
     </div>
   );
 }
-
-export default App;
