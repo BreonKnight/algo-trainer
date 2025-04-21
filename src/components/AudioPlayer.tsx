@@ -417,59 +417,63 @@ export function AudioPlayer() {
   };
 
   return (
-    <div className="flex items-center gap-8 bg-[#1e1f29]/80 backdrop-blur-md px-8 py-4 rounded-xl shadow-lg max-w-3xl border border-white/5">
-      <div className="flex flex-col items-start gap-1 min-w-0 flex-shrink">
-        <div className="text-xs text-[#6272a4] font-medium mb-1">
-          Background Music
-        </div>
-        <div className="flex items-center gap-4 w-full">
-          <Button
-            onClick={togglePlay}
-            className="bg-[#bd93f9] hover:bg-[#bd93f9]/90 h-10 w-10 p-0 flex-shrink-0"
-            title={isPlaying ? "Pause music" : "Play music"}
-          >
-            {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-          </Button>
+    <div className="flex items-center gap-8 bg-[#1e1f29]/80 backdrop-blur-md px-4 sm:px-8 py-4 rounded-xl shadow-lg min-w-[280px] min-h-[120px] w-full max-w-3xl border border-white/5">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
+        <div className="flex flex-col gap-1 min-w-0 w-full sm:w-auto sm:flex-shrink-0 sm:max-w-[45%]">
+          <div className="text-xs text-[#6272a4] font-medium mb-1">
+            Background Music
+          </div>
+          <div className="flex items-center gap-4 w-full">
+            <Button
+              onClick={togglePlay}
+              className="bg-[#bd93f9] hover:bg-[#bd93f9]/90 h-8 w-8 p-0 flex-shrink-0"
+              title={isPlaying ? "Pause music" : "Play music"}
+            >
+              {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+            </Button>
 
-          <div className="flex items-center gap-3 min-w-0">
-            <div
-              className="text-[#f8f8f2] font-mono truncate max-w-[150px]"
-              title={currentSongName}
-            >
-              {currentSongName}
-            </div>
-            <div
-              title="Volume"
-              className="flex items-center gap-2 flex-shrink-0"
-            >
-              <Volume2 size={18} className="text-[#6272a4]" />
-              <div className="w-28">
-                <Slider.Root
-                  className="relative flex items-center select-none touch-none h-5"
-                  value={[volume]}
-                  max={100}
-                  step={1}
-                  onValueChange={handleVolumeChange}
-                >
-                  <Slider.Track className="relative h-1 grow rounded-full bg-[#44475a]">
-                    <Slider.Range className="absolute h-full rounded-full bg-[#6272a4]" />
-                  </Slider.Track>
-                  <Slider.Thumb
-                    className="block w-3 h-3 bg-[#f8f8f2] rounded-full shadow-lg hover:bg-[#f8f8f2]/90 focus:outline-none focus:ring-2 focus:ring-[#bd93f9]"
-                    aria-label="Volume"
-                  />
-                </Slider.Root>
+            <div className="flex items-center gap-3 min-w-0 w-full">
+              <div
+                className="text-[#f8f8f2] font-mono text-sm truncate min-w-[80px] max-w-[120px] sm:max-w-[150px]"
+                title={currentSongName}
+              >
+                {currentSongName}
+              </div>
+              <div
+                title="Volume"
+                className="flex items-center gap-2 flex-shrink-0 ml-auto"
+              >
+                <Volume2 size={16} className="text-[#6272a4]" />
+                <div className="w-20">
+                  <Slider.Root
+                    className="relative flex items-center select-none touch-none h-5"
+                    value={[volume]}
+                    max={100}
+                    step={1}
+                    onValueChange={handleVolumeChange}
+                  >
+                    <Slider.Track className="relative h-1 grow rounded-full bg-[#44475a]">
+                      <Slider.Range className="absolute h-full rounded-full bg-[#6272a4]" />
+                    </Slider.Track>
+                    <Slider.Thumb
+                      className="block w-3 h-3 bg-[#f8f8f2] rounded-full shadow-lg hover:bg-[#f8f8f2]/90 focus:outline-none focus:ring-2 focus:ring-[#bd93f9]"
+                      aria-label="Volume"
+                    />
+                  </Slider.Root>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div className="h-px sm:h-12 w-full sm:w-px bg-[#44475a] my-2 sm:my-0" />
+
+        <div className="flex flex-col gap-1 min-w-0 w-full sm:w-auto sm:flex-shrink-0 sm:max-w-[45%]">
+          <Timer />
+        </div>
       </div>
 
-      <div className="h-12 w-px bg-[#44475a] flex-shrink-0" />
-
-      <Timer />
-
-      <div id="youtube-player" style={{ display: "none" }}></div>
+      <div id="youtube-player" className="hidden"></div>
     </div>
   );
 }
