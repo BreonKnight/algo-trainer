@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "./ui/button";
-import { Play, Pause, Volume2, RotateCcw } from "lucide-react";
+import { Play, Pause, Volume2, RotateCcw, SkipForward } from "lucide-react";
 import * as Slider from "@radix-ui/react-slider";
 
 interface YouTubePlayer {
@@ -53,17 +53,34 @@ const PLAYLIST = [
   "WLMsWtjo93o", // J Dilla - Two Can Win
   "luKBAq16UZE", // Madlib - Please Set Me At Ease
   "7M1UJmfQ-Kk", // Madlib - Stepping Into Tomorrow
-  "QH2-TGUlwu4", // Madlib - Flight to Brazil
+  "mXNxbvJlSc4", // J Dilla - Mash
   "rcbd-r1xC2o", // J Dilla - Last Donut of the Night
-  "1y7C8cSgLMU", // J Dilla - Donuts
   "aTbp_5fSWRM", // J Dilla - Workinonit
   "8OlhqJDlkN4", // J Dilla - Time: The Donut of the Heart
   "3G7GBYbxf8E", // J Dilla - Lightworks
-  "2_5edxArGT8", // Madvillain - Raid
+  "Q3GajjH6Ix8", // Madvillain - Raid
   "uWHsvv0oJPM", // Mobb Deep - Give Up The Goods (Just Step) (Instrumental)
   "0gcO25U1GbE", // Madvillain - Rhinestone Cowboy
   "e8YQl9h8L0g", // Madvillain - Fancy Clown
   "uSxlZQUqVPY", // Madvillain - Strange Ways
+  "dHcvGqk3Lak", // Madlib - Dillalade Ride
+  "SP741TiUI84", // Madlib - Piano Garden
+  "RZY9Y5iwIZ8", // Jaylib - Strapped
+  "JJ1-UAtn5ho", // J Dilla - Dillatronic #4
+  "rZAiviiEuPk", // Nas - Nas Is Like
+  "Boa9758vADA", // J Dilla - King
+  "uXiwyd4WXLs", // J Dilla - Track 05
+  "yAiuBi14_5k", // J Dilla - Dillatronic 36
+  "TwqvjtbDZ70", //J Dilla - Signs (Motor City 8)
+  "uNenFKeaAow", // Madlib - The Payback (Gotta)
+  "WuIdGt0vGnA", //Madlib - Episode XX (second beat extended)
+  "1y7C8cSgLMU", // Madlib - The Comeup (Come Down)
+  "UrOI3yHKIPU", // Madlib - Two Timer (The Pimp)
+  "jznuomjJFyQ", // Jay Dee (aka J.Dilla) Flyyyyyyy
+  "tQOjNA6zLRY", // MNDSGN - Travvlin (Feels)
+  "5GhqNAy6aUc", //•ŢỤẮMÌÈ• - Ketchup
+  "0q6yZeVpwD8", // SNK∆ - Tchalamatcha
+  "APOAWb0mgwk", // mndsgn-bananacase
 ];
 
 const PLAYLIST_COMMENTS: Record<string, string> = {
@@ -71,17 +88,34 @@ const PLAYLIST_COMMENTS: Record<string, string> = {
   WLMsWtjo93o: "J Dilla - Two Can Win",
   luKBAq16UZE: "Madlib - Please Set Me At Ease",
   "7M1UJmfQ-Kk": "Madlib - Stepping Into Tomorrow",
-  "QH2-TGUlwu4": "Madlib - Flight to Brazil",
+  mXNxbvJlSc4: "J Dilla - Mash",
   "rcbd-r1xC2o": "J Dilla - Last Donut of the Night",
-  "1y7C8cSgLMU": "J Dilla - Donuts",
   aTbp_5fSWRM: "J Dilla - Workinonit",
   "8OlhqJDlkN4": "J Dilla - Time: The Donut of the Heart",
   "3G7GBYbxf8E": "J Dilla - Lightworks",
-  "2_5edxArGT8": "Madvillain - Raid",
+  Q3GajjH6Ix8: "Madvillain - Raid",
   uWHsvv0oJPM: "Mobb Deep - Give Up The Goods (Just Step) (Instrumental)",
   "0gcO25U1GbE": "Madvillain - Rhinestone Cowboy",
   e8YQl9h8L0g: "Madvillain - Fancy Clown",
   uSxlZQUqVPY: "Madvillain - Strange Ways",
+  dHcvGqk3Lak: "Madlib - Dillalade Ride",
+  SP741TiUI84: "Madlib - Piano Garden",
+  RZY9Y5iwIZ8: "Jaylib - Strapped",
+  "JJ1-UAtn5ho": "J Dilla - Dillatronic #4",
+  rZAiviiEuPk: "Nas - Nas Is Like",
+  Boa9758vADA: "J Dilla - King",
+  uXiwyd4WXLs: "J Dilla - Track 05",
+  yAiuBi14_5k: "J Dilla - Dillatronic 36",
+  TwqvjtbDZ70: "J Dilla - Signs (Motor City 8)",
+  uNenFKeaAow: "Madlib - The Payback (Gotta)",
+  WuIdGt0vGnA: "Madlib - Episode XX (second beat extended)",
+  "k9Pi7YJ-yq8": "Madlib - The Comeup (Come Down)",
+  UrOI3yHKIPU: "Madlib - Two Timer (The Pimp)",
+  jznuomjJFyQ: "Jay Dee (aka J.Dilla) Flyyyyyyy",
+  tQOjNA6zLRY: "MNDSGN - Travvlin (Feels)",
+  "5GhqNAy6aUc": "•ŢỤẮMÌÈ• - Ketchup",
+  "0q6yZeVpwD8": "SNK∆ - Tchalamatcha",
+  APOAWb0mgwk: "mndsgn-bananacase",
 };
 
 // Timer component for algorithm timeboxing
@@ -142,12 +176,12 @@ export function Timer() {
   }, []);
 
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-col items-center gap-1">
       <div className="text-xs text-[#6272a4] font-medium mb-1">
         Timebox Timer
       </div>
       <div className="flex items-center gap-4">
-        <div className="font-mono text-xl text-[#f8f8f2] min-w-[80px]">
+        <div className="font-mono text-xl text-[#f8f8f2] min-w-[80px] text-center">
           {formatTime(timeLeft)}
         </div>
         <div className="flex items-center gap-2">
@@ -230,6 +264,10 @@ export function AudioPlayer() {
   const retryCountRef = useRef(0);
   const maxRetries = 3;
 
+  // Keep track of played songs and shuffle queue
+  const [playedSongs, setPlayedSongs] = useState<Set<string>>(new Set());
+  const [shuffleQueue, setShuffleQueue] = useState<string[]>([]);
+
   const getSongName = (videoId: string) => {
     // Check if the video ID exists in the PLAYLIST_COMMENTS
     if (videoId in PLAYLIST_COMMENTS) {
@@ -244,6 +282,92 @@ export function AudioPlayer() {
 
     return "Unknown Song";
   };
+
+  // Function to shuffle array using Fisher-Yates algorithm
+  const shuffleArray = (array: string[]) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // Get next song from shuffle queue or create new queue if empty
+  const getNextSong = useCallback(() => {
+    if (shuffleQueue.length === 0) {
+      console.log("%cRefreshing shuffle queue", "color: #bd93f9");
+      // If we've played all songs, reset the played songs
+      if (playedSongs.size >= PLAYLIST.length - 1) {
+        console.log("%cAll songs played, resetting history", "color: #bd93f9");
+        setPlayedSongs(new Set([currentVideoId]));
+        const newQueue = shuffleArray(
+          PLAYLIST.filter((id) => id !== currentVideoId)
+        );
+        setShuffleQueue(newQueue);
+        return newQueue[0];
+      }
+
+      // Create new queue excluding played songs and current song
+      const availableSongs = PLAYLIST.filter(
+        (id) => !playedSongs.has(id) && id !== currentVideoId
+      );
+      const newQueue = shuffleArray(availableSongs);
+      setShuffleQueue(newQueue);
+      return newQueue[0];
+    }
+
+    // Return and remove the first song from the queue
+    const [nextSong, ...remainingQueue] = shuffleQueue;
+    setShuffleQueue(remainingQueue);
+    return nextSong;
+  }, [shuffleQueue, playedSongs, currentVideoId]);
+
+  const playNextVideo = useCallback(() => {
+    // Log current song being skipped
+    if (currentVideoId) {
+      console.log(
+        `%cSkipping current song: ${currentVideoId} - ${getSongName(
+          currentVideoId
+        )}`,
+        "color: #ff79c6"
+      );
+      // Add current song to played songs
+      setPlayedSongs((prev) => new Set([...prev, currentVideoId]));
+    }
+
+    const nextVideoId = getNextSong();
+
+    console.log(
+      `%cPlaying next song: ${nextVideoId} - ${getSongName(nextVideoId)}`,
+      "color: #50fa7b"
+    );
+    console.log(`%cSongs in queue: ${shuffleQueue.length}`, "color: #6272a4");
+    console.log(
+      `%cSongs played: ${playedSongs.size}/${PLAYLIST.length}`,
+      "color: #6272a4"
+    );
+
+    setCurrentVideoId(nextVideoId);
+    setCurrentSongName(getSongName(nextVideoId));
+    retryCountRef.current = 0;
+
+    attemptPlayback(nextVideoId);
+  }, [currentVideoId, getNextSong, shuffleQueue.length]);
+
+  // Initialize with a random video from the playlist
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
+    const initialSong = PLAYLIST[randomIndex];
+    setCurrentVideoId(initialSong);
+    setPlayedSongs(new Set([initialSong]));
+
+    // Initialize shuffle queue with remaining songs
+    const initialQueue = shuffleArray(
+      PLAYLIST.filter((id) => id !== initialSong)
+    );
+    setShuffleQueue(initialQueue);
+  }, []);
 
   const attemptPlayback = useCallback((videoId: string) => {
     if (playerRef.current) {
@@ -270,33 +394,6 @@ export function AudioPlayer() {
         }
       }
     }
-  }, []);
-
-  const playNextVideo = useCallback(() => {
-    // Create a shuffled copy of the playlist to ensure better randomization
-    const shuffledPlaylist = [...PLAYLIST].sort(() => Math.random() - 0.5);
-
-    // Find the next video that's different from the current one
-    const nextVideoId =
-      shuffledPlaylist.find((id) => id !== currentVideoId) ||
-      shuffledPlaylist[0];
-
-    console.log(
-      `Playing next video: ${nextVideoId} - ${getSongName(nextVideoId)}`
-    );
-
-    setCurrentVideoId(nextVideoId);
-    setCurrentSongName(getSongName(nextVideoId));
-    retryCountRef.current = 0;
-
-    // Reset timer when changing songs
-    attemptPlayback(nextVideoId);
-  }, [currentVideoId, attemptPlayback]);
-
-  // Initialize with a random video from the playlist
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
-    setCurrentVideoId(PLAYLIST[randomIndex]);
   }, []);
 
   // Initialize YouTube Player API
@@ -335,7 +432,12 @@ export function AudioPlayer() {
           onStateChange: (event: YouTubeEvent) => {
             try {
               if (event.data === window.YT.PlayerState.ENDED) {
-                console.log("Video ended, playing next video");
+                console.log(
+                  `%cSong ended naturally: ${currentVideoId} - ${getSongName(
+                    currentVideoId
+                  )}`,
+                  "color: #6272a4"
+                );
                 playNextVideo();
               }
             } catch (error) {
@@ -346,13 +448,18 @@ export function AudioPlayer() {
             // Error code 150 means the video is unavailable
             if (event.data === 150) {
               console.warn(
-                `Video ${currentVideoId} is unavailable, trying next video`
+                `%cVideo unavailable (Error 150): ${currentVideoId} - ${getSongName(
+                  currentVideoId
+                )}`,
+                "color: #ff5555"
               );
               playNextVideo();
             } else {
               console.warn(
-                `YouTube player error for video ${currentVideoId}:`,
-                event.data
+                `%cYouTube player error (Code ${
+                  event.data
+                }): ${currentVideoId} - ${getSongName(currentVideoId)}`,
+                "color: #ff5555"
               );
               // For other errors, try to reload the current video
               if (retryCountRef.current < maxRetries) {
@@ -417,39 +524,48 @@ export function AudioPlayer() {
   };
 
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-col items-center gap-1 w-full max-w-[300px] md:max-w-full">
       <div className="text-xs text-[#6272a4] font-medium mb-1">
         Background Music
       </div>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <Button
             onClick={togglePlay}
             variant="ghost"
             size="sm"
-            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md flex-shrink-0"
             title={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? <Pause size={14} /> : <Play size={14} />}
           </Button>
-          <div className="hidden sm:flex items-center gap-2">
-            <Volume2 size={14} className="text-[#6272a4]" />
-            <Slider.Root
-              className="relative flex items-center select-none touch-none w-[100px] h-5"
-              value={[volume]}
-              onValueChange={handleVolumeChange}
-              max={100}
-              step={1}
-              aria-label="Volume"
-            >
-              <Slider.Track className="bg-[#44475a] relative grow rounded-full h-[3px]">
-                <Slider.Range className="absolute bg-[#6272a4] rounded-full h-full" />
-              </Slider.Track>
-              <Slider.Thumb className="block w-3 h-3 bg-[#f8f8f2] rounded-full hover:bg-[#bd93f9] focus:outline-none" />
-            </Slider.Root>
-          </div>
+          <Button
+            onClick={playNextVideo}
+            variant="ghost"
+            size="sm"
+            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md flex-shrink-0"
+            title="Skip to next song"
+          >
+            <SkipForward size={14} />
+          </Button>
         </div>
-        <div className="hidden sm:block text-sm text-[#6272a4] truncate max-w-[200px]">
+        <div className="hidden md:flex items-center gap-2 flex-shrink-0">
+          <Volume2 size={14} className="text-[#6272a4] flex-shrink-0" />
+          <Slider.Root
+            className="relative flex items-center select-none touch-none w-[60px] lg:w-[80px] h-5 flex-shrink-0"
+            value={[volume]}
+            onValueChange={handleVolumeChange}
+            max={100}
+            step={1}
+            aria-label="Volume"
+          >
+            <Slider.Track className="bg-[#44475a] relative grow rounded-full h-[3px]">
+              <Slider.Range className="absolute bg-[#6272a4] rounded-full h-full" />
+            </Slider.Track>
+            <Slider.Thumb className="block w-3 h-3 bg-[#f8f8f2] rounded-full hover:bg-[#bd93f9] focus:outline-none" />
+          </Slider.Root>
+        </div>
+        <div className="hidden md:block text-sm text-[#6272a4] truncate min-w-0 max-w-[120px] lg:max-w-[150px]">
           {currentSongName || "Loading..."}
         </div>
       </div>
