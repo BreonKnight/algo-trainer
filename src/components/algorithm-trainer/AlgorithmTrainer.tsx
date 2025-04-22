@@ -5,6 +5,7 @@ import { PatternCard } from "./PatternCard";
 import { CodeEditor } from "./CodeEditor";
 // import { TestCases } from "./TestCases";
 import { AnswerCard } from "./AnswerCard";
+import { ReplCard } from "./ReplCard";
 import { PatternKey, PATTERN_KEYS } from "./types";
 
 // interface TestCase {
@@ -96,6 +97,9 @@ export default function AlgorithmTrainer() {
               setShowAnswer={setShowAnswer}
               onNextPattern={nextPattern}
             />
+          </div>
+          <div className="h-[calc(100vh-20rem)]">
+            <ReplCard userCode={userCode} />
           </div>
         </div>
         {/* 
