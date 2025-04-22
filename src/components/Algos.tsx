@@ -5,6 +5,8 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { pseudocodePatterns } from "@/lib/pseudocode-patterns";
 import styles from "@/styles/pseudocode.module.css";
 import { AudioPlayer } from "./AudioPlayer";
+import { ReplCard } from "./algorithm-trainer/ReplCard";
+import { AnswerCard } from "./algorithm-trainer/AnswerCard";
 
 // Define Dracula theme
 const draculaTheme = {
@@ -792,61 +794,16 @@ export function AlgorithmTrainer() {
               </div>
             </Card>
 
-            {/* Right side: Answer */}
-            <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full min-h-[400px] flex flex-col order-3 md:min-h-[500px]">
-              <div className="flex justify-between gap-2 mb-2 flex-shrink-0">
-                <Button
-                  onClick={() => setShowAnswer(!showAnswer)}
-                  className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3"
-                >
-                  {showAnswer ? "Hide Answer" : "Show Answer"}
-                </Button>
-                <Button
-                  onClick={nextPattern}
-                  className="bg-[#ff79c6] hover:bg-[#ff79c6]/90 text-sm sm:text-base whitespace-nowrap h-8 px-3"
-                >
-                  Next Pattern
-                </Button>
-              </div>
-              <div
-                className={`flex-1 min-h-0 transition-all duration-200 ${
-                  showAnswer ? "opacity-100" : "opacity-0 h-0"
-                }`}
-              >
-                <h3 className="text-base sm:text-lg font-semibold mb-1 text-[#50fa7b] truncate flex-shrink-0">
-                  Implementation:
-                </h3>
-                <div className="h-[calc(100%-2rem)] w-full rounded-md overflow-hidden">
-                  <Editor
-                    height="100%"
-                    defaultLanguage="python"
-                    theme="dracula"
-                    value={patterns.get(currentPattern)}
-                    onMount={handleEditorDidMount}
-                    options={{
-                      fontSize: 14,
-                      minimap: { enabled: false },
-                      scrollBeyondLastLine: false,
-                      lineNumbers: "on",
-                      readOnly: true,
-                      roundedSelection: false,
-                      padding: { top: 8, bottom: 8 },
-                      cursorStyle: "line",
-                      automaticLayout: true,
-                      wordWrap: "on",
-                      tabSize: 4,
-                      insertSpaces: true,
-                      overviewRulerBorder: false,
-                      hideCursorInOverviewRuler: true,
-                      renderLineHighlight: "line",
-                      lineDecorationsWidth: 0,
-                      renderLineHighlightOnlyWhenFocus: true,
-                      fixedOverflowWidgets: true,
-                    }}
-                  />
-                </div>
-              </div>
-            </Card>
+            {/* Right side: Answer and REPL */}
+            <div className="flex flex-col gap-4 order-3 md:order-2 xl:order-3">
+              <AnswerCard
+                currentPattern={currentPattern}
+                showAnswer={showAnswer}
+                setShowAnswer={setShowAnswer}
+                onNextPattern={nextPattern}
+              />
+              <ReplCard userCode={userCode} />
+            </div>
           </div>
         )}
       </main>

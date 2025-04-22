@@ -19,7 +19,7 @@ export function AnswerCard({
 }: AnswerCardProps) {
   return (
     <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col">
-      <h2 className="text-base sm:text-lg font-semibold mb-2 text-[#50fa7b] truncate flex-none">
+      <h2 className="text-base sm:text-lg font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#50fa7b] to-[#8be9fd] truncate flex-none">
         Solution
       </h2>
       <div className="flex justify-between gap-2 mb-2 flex-none">
@@ -37,14 +37,14 @@ export function AnswerCard({
         </Button>
       </div>
       <div
-        className={`flex-1 overflow-auto transition-all duration-200 ${
+        className={`flex-1 min-h-0 transition-all duration-200 ${
           showAnswer ? "opacity-100" : "opacity-0 h-0"
         }`}
       >
-        <h3 className="text-base sm:text-lg font-semibold mb-2 text-[#50fa7b] truncate flex-none">
+        <h3 className="text-base sm:text-lg font-semibold mb-2 text-[#ff79c6] truncate flex-none">
           Implementation:
         </h3>
-        <div className="h-[calc(100%-2rem)] w-full rounded-md overflow-hidden">
+        <div className="h-[calc(100%-2.5rem)] w-full rounded-md overflow-hidden">
           <Editor
             height="100%"
             defaultLanguage="python"

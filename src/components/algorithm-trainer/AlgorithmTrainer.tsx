@@ -5,6 +5,7 @@ import { PatternCard } from "./PatternCard";
 import { CodeEditor } from "./CodeEditor";
 // import { TestCases } from "./TestCases";
 import { AnswerCard } from "./AnswerCard";
+import { ReplCard } from "./ReplCard";
 import { PatternKey, PATTERN_KEYS } from "./types";
 
 // interface TestCase {
@@ -60,7 +61,7 @@ export default function AlgorithmTrainer() {
         Algorithm Trainer
       </h1>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 flex-none gap-4 sm:gap-2">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-4 flex-none gap-4 lg:gap-2">
         <div className="flex gap-2">
           <Button
             onClick={nextPattern}
@@ -75,7 +76,7 @@ export default function AlgorithmTrainer() {
             Previous Pattern
           </Button>
         </div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
           <Timer />
           <AudioPlayer />
         </div>
@@ -96,6 +97,9 @@ export default function AlgorithmTrainer() {
               setShowAnswer={setShowAnswer}
               onNextPattern={nextPattern}
             />
+          </div>
+          <div className="h-[calc(100vh-20rem)]">
+            <ReplCard userCode={userCode} />
           </div>
         </div>
         {/* 
