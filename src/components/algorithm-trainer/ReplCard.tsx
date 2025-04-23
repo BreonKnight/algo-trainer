@@ -133,7 +133,8 @@ except Exception as e:
             <pre className="whitespace-pre-wrap text-[#ff5555]">{error}</pre>
           ) : (
             <pre className="whitespace-pre-wrap text-[#f8f8f2]">
-              {output || "Output will appear here..."}
+              {output ||
+                "You can do it! make sure to run code with a print fn to see output. Make sure to put prints everywhere to debug efficiently."}
             </pre>
           )}
         </div>
