@@ -117,3 +117,22 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - 🎵 Background music featuring the works of J Dilla and Madlib
 - 🎨 Dracula theme for the code editor
 - 💫 All the amazing open-source libraries that made this project possible
+
+## 📄 Usage
+
+1. Select an algorithm pattern to practice
+2. Write your implementation in the code editor
+3. Use the Python REPL to test your code
+4. Compare your solution with the provided implementation
+5. Use the timer to track your practice sessions
+6. Navigate between patterns using the navigation buttons
+
+## 📄 Technologies Used
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Monaco Editor
+- Pyodide (Python in the browser)
+- Shadcn UI
