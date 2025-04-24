@@ -1,0 +1,128 @@
+import { PatternKey } from "./types";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const algorithmCategories = {
+  "Sorting Algorithms": [
+    "Quick Sort",
+    "Merge Sort",
+    "Stack Sort",
+    "Heap Sort",
+    "Bubble Sort",
+    "Selection Sort",
+    "Insertion Sort",
+  ],
+  "Search Algorithms": [
+    "Binary Search",
+    "Binary Search on Answer",
+    "Linear Search",
+  ],
+  "Dynamic Programming": [
+    "Dynamic Programming",
+    "Dynamic Programming Fibonacci",
+    "Dynamic Programming Iterative",
+    "Dynamic Programming Coin Change",
+  ],
+  "Greedy Algorithms": [
+    "Greedy",
+    "Greedy Activity Selection",
+    "Greedy Fractional Knapsack",
+    "Greedy Job Scheduling",
+    "Greedy Huffman Coding",
+    "Greedy Dijkstra",
+  ],
+  "Graph Algorithms": [
+    "DFS",
+    "DFS Linked List",
+    "DFS Binary Tree",
+    "BFS",
+    "BFS Linked List",
+    "Topological Sort",
+  ],
+  "Data Structures": [
+    "Stack Implementation",
+    "Queue Implementation",
+    "Linked List",
+    "Circular Linked List",
+    "Hash Table",
+    "Graph",
+    "Tree",
+    "Binary Search Tree",
+    "Heap Implementation",
+    "Trie",
+  ],
+  "Array Techniques": [
+    "Two Sum",
+    "Two Sum Two Pointers",
+    "Sliding Window",
+    "Two Pointers",
+    "Prefix Sum",
+    "Kadane's Algorithm",
+  ],
+  "String Algorithms": [
+    "Rabin-Karp",
+    "Knuth-Morris-Pratt",
+    "Manacher's Algorithm",
+    "Z-Algorithm",
+  ],
+  "Matrix Operations": [
+    "Matrix Traversal",
+    "Matrix Traversal Recursive",
+    "Matrix Spiral Traversal",
+    "Matrix Spiral Recursive",
+  ],
+  "Other Algorithms": [
+    "Backtracking",
+    "Bit Manipulation",
+    "Monotonic Stack",
+    "Monotonic Queue",
+    "Floyd Cycle Detection",
+  ],
+};
+
+interface AlgorithmSelectorProps {
+  currentPattern: PatternKey;
+  onPatternChange: (pattern: PatternKey) => void;
+}
+
+export function AlgorithmSelector({
+  currentPattern,
+  onPatternChange,
+}: AlgorithmSelectorProps) {
+  return (
+    <Select value={currentPattern} onValueChange={onPatternChange}>
+      <SelectTrigger className="w-full sm:w-[280px] bg-[#282a36] border-[#6272a4] text-[#f8f8f2] hover:bg-[#282a36]/80">
+        <SelectValue placeholder="Select an algorithm" />
+      </SelectTrigger>
+      <SelectContent
+        className="bg-[#282a36] border-[#6272a4] text-[#f8f8f2] max-h-[300px] overflow-y-auto"
+        position="popper"
+        sideOffset={4}
+      >
+        {Object.entries(algorithmCategories).map(([category, algorithms]) => (
+          <SelectGroup key={category}>
+            <SelectLabel className="text-[#ff79c6] sticky top-0 bg-[#282a36]/80 backdrop-blur-sm py-2 z-10">
+              {category}
+            </SelectLabel>
+            {algorithms.map((algorithm) => (
+              <SelectItem
+                key={algorithm}
+                value={algorithm}
+                className="text-[#f8f8f2] hover:bg-[#44475a] focus:bg-[#44475a]"
+              >
+                {algorithm}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
