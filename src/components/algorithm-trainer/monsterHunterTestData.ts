@@ -30,55 +30,76 @@ Expected Output: ["Bazelgeuse Scale", "Diablos Horn", "Rathalos Scale", "Rathian
 # Like combining different monster material sets into a complete collection!`,
 
   "Stack Sort": `# Monster Hunter Stack Sort Challenge
-# You are stacking monster materials by rarity!
+# You are organizing your rare material collection!
 
-# Test Case 1: Mixed Rarity Materials
-Input: ["Rathalos Scale+", "Rathalos Scale", "Rathalos Ruby", "Rathalos Plate"]
-Expected Output: ["Rathalos Ruby", "Rathalos Plate", "Rathalos Scale+", "Rathalos Scale"]
+# Test Case 1: Rare Material Stack
+Input: ["Rathalos Ruby", "Rathalos Scale+", "Rathalos Wing", "Rathalos Plate"]
+Expected Output: ["Rathalos Ruby", "Rathalos Plate", "Rathalos Scale+", "Rathalos Wing"]
+
+# Test Case 2: Mixed Monster Materials
+Input: ["Nergigante Gem", "Kushala Scale", "Teostra Gem", "Vaal Hazak Gem"]
+Expected Output: ["Vaal Hazak Gem", "Teostra Gem", "Nergigante Gem", "Kushala Scale"]
 
 # Monster Hunter Tip:
-# Like stacking materials with rarer ones on top!`,
+# Think of stacking materials with the rarest ones on top!`,
 
   "Heap Sort": `# Monster Hunter Heap Sort Challenge
 # You are organizing materials in a priority heap!
 
-# Test Case 1: Material Priority
+# Test Case 1: Material Priority Queue
 Input: ["Rathalos Ruby", "Rathalos Scale", "Rathalos Wing", "Rathalos Plate"]
 Priority: [100, 10, 20, 50]
 Expected Output: ["Rathalos Ruby", "Rathalos Plate", "Rathalos Wing", "Rathalos Scale"]
 
+# Test Case 2: Mixed Monster Materials
+Input: ["Nergigante Gem", "Kushala Scale", "Teostra Gem", "Vaal Hazak Gem"]
+Priority: [90, 10, 85, 95]
+Expected Output: ["Vaal Hazak Gem", "Nergigante Gem", "Teostra Gem", "Kushala Scale"]
+
 # Monster Hunter Tip:
-# Like organizing materials by their rarity value in a heap structure!`,
+# Organize materials like a tree where valuable ones stay at the top!`,
 
   "Bubble Sort": `# Monster Hunter Bubble Sort Challenge
-# You are sorting monster materials by size!
+# You are letting valuable materials bubble up to the top!
 
-# Test Case 1: Material Sizes
-Input: ["Large Scale", "Small Scale", "Medium Scale", "Extra Large Scale"]
-Expected Output: ["Small Scale", "Medium Scale", "Large Scale", "Extra Large Scale"]
+# Test Case 1: Material Value Sorting
+Input: ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+Expected Output: ["Rathalos Ruby", "Rathalos Plate", "Rathalos Scale", "Rathalos Wing"]
+
+# Test Case 2: Mixed Rarity Materials
+Input: ["Common Scale", "Rare Scale", "Scale+", "Scale++"]
+Expected Output: ["Scale++", "Scale+", "Rare Scale", "Common Scale"]
 
 # Monster Hunter Tip:
-# Like bubbling up larger materials to the top of your inventory!`,
+# Watch as valuable materials naturally rise to the top!`,
 
   "Selection Sort": `# Monster Hunter Selection Sort Challenge
-# You are selecting the best materials for crafting!
+# You are selecting the most valuable materials first!
 
-# Test Case 1: Material Quality
-Input: ["Worn Scale", "Quality Scale", "Perfect Scale", "Damaged Scale"]
-Expected Output: ["Damaged Scale", "Worn Scale", "Quality Scale", "Perfect Scale"]
+# Test Case 1: Material Selection
+Input: ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+Expected Output: ["Rathalos Ruby", "Rathalos Plate", "Rathalos Scale", "Rathalos Wing"]
+
+# Test Case 2: Elder Dragon Materials
+Input: ["Dragon Scale", "Dragon Gem", "Dragon Horn", "Dragon Wing"]
+Expected Output: ["Dragon Gem", "Dragon Horn", "Dragon Wing", "Dragon Scale"]
 
 # Monster Hunter Tip:
-# Like selecting the best material for each crafting slot!`,
+# Find the most valuable material in each search!`,
 
   "Insertion Sort": `# Monster Hunter Insertion Sort Challenge
-# You are inserting materials into your sorted inventory!
+# You are organizing your material box one item at a time!
 
-# Test Case 1: Material Insertion
-Input: ["Rathalos Scale", "Rathian Scale", "Azure Scale", "Silver Scale"]
-Expected Output: ["Azure Scale", "Rathalos Scale", "Rathian Scale", "Silver Scale"]
+# Test Case 1: Material Box Organization
+Input: ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+Expected Output: ["Rathalos Ruby", "Rathalos Plate", "Rathalos Scale", "Rathalos Wing"]
+
+# Test Case 2: Progressive Collection
+Input: ["Low Rank Scale", "High Rank Scale", "Master Rank Scale", "G Rank Scale"]
+Expected Output: ["G Rank Scale", "Master Rank Scale", "High Rank Scale", "Low Rank Scale"]
 
 # Monster Hunter Tip:
-# Like inserting new materials into their correct position in your sorted inventory!`,
+# Insert each new material in its proper place as you collect them!`,
 
   "Binary Search": `# Monster Hunter Binary Search Challenge
 # You are searching for specific monster materials in your sorted inventory!
