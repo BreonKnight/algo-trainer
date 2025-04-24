@@ -48,63 +48,63 @@ const monsterHunterExplanations: Record<
     ],
   },
   "Stack Sort": {
-    title: "Monster Nest Organization",
+    title: "Monster Material Stacking",
     description:
-      "Like organizing monsters in a nest where only the strongest can stay at the top, Stack Sort uses a stack to maintain order.",
+      "Like organizing monster materials by stacking them in order of rarity, Stack Sort uses a temporary stack to sort elements.",
     example:
-      "Imagine organizing a nest of monsters where only the strongest can stay at the top. As new monsters arrive, weaker ones are pushed down.",
+      "Imagine you're organizing your material box by stacking materials. You pick up each material and place it in the correct position in your sorted stack.",
     tips: [
-      "Use a stack to maintain order - like a monster hierarchy in a nest",
-      "Compare each new monster with the top of the stack - similar to challenging the current alpha",
-      "Push stronger monsters down - like establishing dominance in the nest",
+      "Use a temporary stack to maintain order - like having a sorting box",
+      "Compare with top of stack - similar to comparing material rarities",
+      "Move items between stacks - like reorganizing your material box",
     ],
   },
   "Heap Sort": {
-    title: "Monster Family Tree",
+    title: "Monster Material Hierarchy",
     description:
-      "Like organizing a family tree of monsters where parents are always stronger than their children, Heap Sort builds and maintains a heap.",
+      "Like organizing monster materials in a hierarchical tree where more valuable materials are at the top, Heap Sort builds and maintains a heap structure.",
     example:
-      "Imagine organizing a family of monsters where each parent is stronger than its children. You build this family tree, then extract the strongest monsters one by one.",
+      "Think of creating a material hierarchy where the rarest materials (like gems) are at the top, and common materials (like scales) are at the bottom.",
     tips: [
-      "Build a max heap - like establishing a monster family hierarchy",
-      "Extract the maximum - similar to sending out the strongest monster on a hunt",
-      "Maintain heap property - ensuring parents remain stronger than children",
+      "Build the initial heap - like creating your material hierarchy",
+      "Extract the maximum - similar to taking the rarest material first",
+      "Maintain the hierarchy - ensure valuable materials stay at the top",
     ],
   },
   "Bubble Sort": {
-    title: "Monster Migration",
+    title: "Material Value Bubbling",
     description:
-      "Like watching monsters migrate and swap positions based on strength, Bubble Sort repeatedly steps through the list and swaps adjacent elements.",
+      "Like watching valuable materials naturally rise to the top of your item box, Bubble Sort repeatedly compares adjacent items and swaps them if needed.",
     example:
-      "Imagine a group of monsters migrating across a landscape. Stronger monsters push weaker ones out of the way as they move forward.",
+      "Imagine your materials are in a box, and the more valuable ones naturally float to the top as you compare and swap adjacent materials.",
     tips: [
-      "Compare adjacent monsters - like watching which monster is stronger",
-      "Swap if in wrong order - similar to stronger monsters pushing weaker ones aside",
-      "Repeat until no swaps needed - continuing until the migration is complete",
+      "Compare adjacent materials - like checking which is more valuable",
+      "Swap if out of order - similar to exchanging positions",
+      "Repeat until sorted - continue until all materials are in order",
     ],
   },
   "Selection Sort": {
-    title: "Monster Tournament",
+    title: "Material Selection Process",
     description:
-      "Like running a tournament to find the strongest monster, Selection Sort repeatedly finds the minimum element and places it at the beginning.",
+      "Like selecting the most valuable material from your unsorted pile and placing it in your organized collection, Selection Sort builds the sorted array one element at a time.",
     example:
-      "Imagine running a tournament to find the strongest monster. You find the strongest, place it at the front, then repeat with the remaining monsters.",
+      "Think of organizing your materials by repeatedly finding the most valuable item in your unsorted pile and moving it to your sorted collection.",
     tips: [
-      "Find the minimum - like identifying the strongest monster in a group",
-      "Swap with first position - similar to awarding the tournament champion",
-      "Repeat with remaining monsters - continuing the tournament with the rest",
+      "Find the most valuable - like identifying the rarest material",
+      "Place it in position - similar to moving it to your sorted pile",
+      "Continue with remaining - repeat until all materials are sorted",
     ],
   },
   "Insertion Sort": {
-    title: "Monster Line Formation",
+    title: "Material Box Organization",
     description:
-      "Like forming a line of monsters by inserting each new one in the correct position based on strength, Insertion Sort builds the final array one item at a time.",
+      "Like organizing your material box by inserting each new material in its proper place, Insertion Sort builds the sorted array by placing each element in its correct position.",
     example:
-      "Imagine forming a line of monsters by strength. As each new monster arrives, you find its proper position in the line and insert it there.",
+      "Imagine organizing your material box as you collect new items. Each time you get a new material, you find the right spot for it among your already sorted materials.",
     tips: [
-      "Start with first monster - like beginning with a single monster in line",
-      "Insert each new monster in correct position - similar to finding where a new monster belongs in the hierarchy",
-      "Shift stronger monsters right - like making space for a more powerful monster",
+      "Take one material at a time - like processing new materials as you find them",
+      "Find its correct position - similar to finding where it belongs in your sorted box",
+      "Shift other materials - make space for the new material in your collection",
     ],
   },
   "Binary Search": {

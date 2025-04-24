@@ -101,4 +101,203 @@ export const monsterHunterPatterns = new Map<PatternKey, string>([
     merged.extend(right_box[right_idx:])
     return merged`,
   ],
+  [
+    "Stack Sort",
+    `def monster_hunter_stack_sort(materials):
+    """
+    Sort monster materials using the Stack Sort strategy.
+    Time Complexity: O(n²)
+    Space Complexity: O(n)
+    
+    Monster Hunter Context:
+    - Like stacking materials in order of rarity
+    - Each comparison is like checking which material is more valuable
+    - The temporary stack is like a sorting box
+    
+    Example:
+    materials = ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+    
+    Step 1: Start with empty stack
+    Stack: []
+    
+    Step 2: Process "Rathalos Scale"
+    Stack: ["Rathalos Scale"]
+    
+    Step 3: Process "Rathalos Ruby" (more valuable)
+    Stack: ["Rathalos Ruby", "Rathalos Scale"]
+    
+    Step 4: Continue with remaining materials...
+    """
+    if not materials:
+        return []
+        
+    temp_stack = []
+    for material in materials:
+        # While stack has materials and top is more valuable
+        while temp_stack and temp_stack[-1] > material:
+            materials.append(temp_stack.pop())
+        temp_stack.append(material)
+    
+    # Return materials in sorted order
+    return temp_stack`,
+  ],
+  [
+    "Heap Sort",
+    `def monster_hunter_heap_sort(materials):
+    """
+    Sort monster materials using the Heap Sort strategy.
+    Time Complexity: O(n log n)
+    Space Complexity: O(1)
+    
+    Monster Hunter Context:
+    - Like organizing materials in a priority queue
+    - The heap is like a material hierarchy tree
+    - Each level represents materials of similar value
+    
+    Example:
+    materials = ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+    
+    Step 1: Build max heap (most valuable at root)
+           Rathalos Ruby
+          /            \\
+    Rathalos Plate    Rathalos Wing
+         /
+    Rathalos Scale
+    
+    Step 2: Extract max and rebuild heap
+    Step 3: Continue until sorted
+    """
+    def heapify(arr, n, i):
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
+        
+        if left < n and arr[left] > arr[largest]:
+            largest = left
+        if right < n and arr[right] > arr[largest]:
+            largest = right
+            
+        if largest != i:
+            arr[i], arr[largest] = arr[largest], arr[i]
+            heapify(arr, n, largest)
+    
+    # Build max heap
+    n = len(materials)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(materials, n, i)
+    
+    # Extract elements from heap
+    for i in range(n - 1, 0, -1):
+        materials[0], materials[i] = materials[i], materials[0]
+        heapify(materials, i, 0)
+    
+    return materials`,
+  ],
+  [
+    "Bubble Sort",
+    `def monster_hunter_bubble_sort(materials):
+    """
+    Sort monster materials using the Bubble Sort strategy.
+    Time Complexity: O(n²)
+    Space Complexity: O(1)
+    
+    Monster Hunter Context:
+    - Like arranging materials by letting valuable ones "bubble up"
+    - Each pass is like a wave moving through your material box
+    - Swaps are like exchanging positions of adjacent materials
+    
+    Example:
+    materials = ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+    
+    Pass 1: Compare adjacent materials
+    ["Rathalos Ruby", "Rathalos Scale", "Rathalos Wing", "Rathalos Plate"]
+    
+    Continue until no more swaps needed
+    """
+    n = len(materials)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            # If current material is more valuable than next
+            if materials[j] > materials[j + 1]:
+                # Swap them
+                materials[j], materials[j + 1] = materials[j + 1], materials[j]
+                swapped = True
+        # If no swapping occurred, array is sorted
+        if not swapped:
+            break
+    
+    return materials`,
+  ],
+  [
+    "Selection Sort",
+    `def monster_hunter_selection_sort(materials):
+    """
+    Sort monster materials using the Selection Sort strategy.
+    Time Complexity: O(n²)
+    Space Complexity: O(1)
+    
+    Monster Hunter Context:
+    - Like selecting the most valuable material repeatedly
+    - Each pass finds the next best material
+    - Building sorted collection from best to worst
+    
+    Example:
+    materials = ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+    
+    Pass 1: Find most valuable
+    Selected: "Rathalos Ruby"
+    Remaining: ["Rathalos Scale", "Rathalos Wing", "Rathalos Plate"]
+    
+    Continue until all materials are sorted
+    """
+    n = len(materials)
+    for i in range(n):
+        # Find the most valuable material in remaining unsorted part
+        max_idx = i
+        for j in range(i + 1, n):
+            if materials[j] > materials[max_idx]:
+                max_idx = j
+        
+        # Place it at the beginning of unsorted section
+        materials[i], materials[max_idx] = materials[max_idx], materials[i]
+    
+    return materials`,
+  ],
+  [
+    "Insertion Sort",
+    `def monster_hunter_insertion_sort(materials):
+    """
+    Sort monster materials using the Insertion Sort strategy.
+    Time Complexity: O(n²)
+    Space Complexity: O(1)
+    
+    Monster Hunter Context:
+    - Like organizing materials one at a time in your item box
+    - Each new material is placed in its correct position
+    - Similar to how you might sort new materials as you collect them
+    
+    Example:
+    materials = ["Rathalos Scale", "Rathalos Ruby", "Rathalos Wing", "Rathalos Plate"]
+    
+    Step 1: Start with first material
+    Sorted: ["Rathalos Scale"]
+    
+    Step 2: Insert "Rathalos Ruby"
+    Sorted: ["Rathalos Ruby", "Rathalos Scale"]
+    
+    Continue until all materials are sorted
+    """
+    for i in range(1, len(materials)):
+        key = materials[i]
+        j = i - 1
+        # Move elements that are more valuable than key
+        # to one position ahead
+        while j >= 0 and materials[j] > key:
+            materials[j + 1] = materials[j]
+            j -= 1
+        materials[j + 1] = key
+    
+    return materials`,
+  ],
 ]);
