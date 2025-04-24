@@ -49,7 +49,7 @@ export const patterns = new Map<PatternKey, string>([
     """
     if len(arr) <= 1:
         return arr
-        
+    
     pivot = arr[-1]
     left = 0
     right = len(arr) - 2
@@ -114,7 +114,7 @@ export const patterns = new Map<PatternKey, string>([
     """
     if len(arr) <= 1:
         return arr
-        
+    
     mid = len(arr) // 2
     left = merge_sort(arr[:mid])
     right = merge_sort(arr[mid:])
@@ -201,19 +201,19 @@ def merge(left, right):
     ...
     [5, 6, 7, 11, 12, 13]  # Final sorted array
     """
-    def heapify(arr, n, i):
-        largest = i
+def heapify(arr, n, i):
+    largest = i
         left = 2 * i + 1
         right = 2 * i + 2
-        
-        if left < n and arr[left] > arr[largest]:
-            largest = left
-        
-        if right < n and arr[right] > arr[largest]:
-            largest = right
-        
-        if largest != i:
-            arr[i], arr[largest] = arr[largest], arr[i]
+    
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+    
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
             heapify(arr, n, largest)
     
     n = len(arr)
@@ -807,9 +807,9 @@ class LinkedList:
         current = self.head
         while current:
             # If we find the node to delete
-            if current.val == item:
+          if current.val == item:
                 # Skip the node by updating the next pointer
-                current.next = current.next.next
+            current.next = current.next.next
                 return True
             current = current.next
         # Node not found
@@ -845,11 +845,11 @@ class LinkedList:
         current = self.head
         while current:
             # Compare current node with all subsequent nodes
-            next = current.next
-            while next:
+          next = current.next
+          while next:
                 # If current node's value is greater, swap values
-                if current.val > next.val:
-                    current.val, next.val = next.val, current.val
+            if current.val > next.val:
+                current.val, next.val = next.val, current.val
                 next = next.next
             # Move to next node
             current = current.next
@@ -1196,7 +1196,7 @@ class BST:
         self.root = None
     
     def insert(self, value):
-        """
+    """
         Insert a value into the BST.
         Time Complexity: O(h) where h is the height of the tree
         Space Complexity: O(h) for recursion stack
@@ -1255,18 +1255,18 @@ class BST:
             if value < node.value:
                 if not node.left:
                     node.left = Node(value)
-                else:
+            else:
                     _insert(node.left, value)
             elif value > node.value:
                 if not node.right:
                     node.right = Node(value)
-                else:
+            else:
                     _insert(node.right, value)
                     
         _insert(self.root, value)
     
     def search(self, value):
-        """
+    """
         Search for a value in the BST.
         Time Complexity: O(h) where h is the height of the tree
         Space Complexity: O(h) for recursion stack
@@ -1311,7 +1311,7 @@ class BST:
         return _search(self.root, value)
     
     def delete(self, value):
-        """
+    """
         Delete a value from the BST.
         Time Complexity: O(h) where h is the height of the tree
         Space Complexity: O(h) for recursion stack
@@ -1356,7 +1356,7 @@ class BST:
                  4   7
                     / \\
                    6   8
-        """
+    """
         def _delete(node, value):
             if not node:
                 return None
