@@ -114,14 +114,14 @@ except Exception as e:
           <Button
             onClick={runCode}
             disabled={isLoading || !pyodide}
-            className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3"
+            className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
           >
             {isLoading ? "Running..." : "Run Code"}
           </Button>
           <Button
             onClick={clearOutput}
             disabled={isLoading}
-            className="bg-[#6272a4] hover:bg-[#6272a4]/90 text-sm sm:text-base whitespace-nowrap h-8 px-3"
+            className="bg-[#6272a4] hover:bg-[#6272a4]/90 text-[#f8f8f2] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
           >
             Clear
           </Button>

@@ -49,13 +49,13 @@ export function AnswerCard({
       <div className="flex justify-between gap-2 mb-2 flex-none">
         <Button
           onClick={() => setShowAnswer(!showAnswer)}
-          className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3"
+          className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
         >
           {showAnswer ? "Hide Answer" : "Show Answer"}
         </Button>
         <Button
           onClick={onNextPattern}
-          className="bg-[#ff79c6] hover:bg-[#ff79c6]/90 text-sm sm:text-base whitespace-nowrap h-8 px-3"
+          className="bg-[#ff79c6] hover:bg-[#ff79c6]/90 text-[#f8f8f2] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
         >
           Next Pattern
         </Button>

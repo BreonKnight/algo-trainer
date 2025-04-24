@@ -7,6 +7,7 @@ import { CodeEditor } from "./CodeEditor";
 import { AnswerCard } from "./AnswerCard";
 import { ReplCard } from "./ReplCard";
 import { PatternKey, PATTERN_KEYS } from "./types";
+import { HelpModal } from "../HelpModal";
 
 // interface TestCase {
 //   input: string;
@@ -56,41 +57,42 @@ export default function AlgorithmTrainer() {
   };
 
   return (
-    <div className="container w-full mx-auto p-4 min-h-screen flex flex-col bg-gradient-to-br from-[#282a36] to-[#44475a]">
-      <h1 className="text-2xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#ff79c6] to-[#bd93f9] text-center flex-none">
+    <div className="container w-full mx-auto p-2 min-h-screen flex flex-col bg-gradient-to-br from-[#282a36] to-[#44475a] relative">
+      <h1 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#ff79c6] to-[#bd93f9] text-center flex-none">
         Algorithm Trainer
       </h1>
 
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-4 flex-none gap-4 lg:gap-2">
-        <div className="flex gap-2">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-2 flex-none gap-2">
+        <div className="flex items-center gap-2">
           <Button
             onClick={nextPattern}
-            className="bg-gradient-to-r from-[#bd93f9] to-[#ff79c6] hover:opacity-90"
+            className="bg-[#ff79c6] hover:bg-[#ff79c6]/90 text-[#f8f8f2] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
           >
             Next Pattern
           </Button>
           <Button
             onClick={previousPattern}
-            className="bg-gradient-to-r from-[#6272a4] to-[#8be9fd] hover:opacity-90"
+            className="bg-[#6272a4] hover:bg-[#6272a4]/90 text-[#f8f8f2] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
           >
             Previous Pattern
           </Button>
+          <HelpModal />
         </div>
-        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2">
           <Timer />
           <AudioPlayer />
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col gap-4 min-h-0">
-        <div className="flex-1 grid grid-cols-1 xl:grid-cols-3 gap-4 min-h-0">
-          <div className="h-[calc(100vh-20rem)]">
+      <div className="flex-1 flex flex-col gap-2 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 min-h-0 flex-1">
+          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto">
             <PatternCard currentPattern={currentPattern} />
           </div>
-          <div className="h-[calc(100vh-20rem)]">
+          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto">
             <CodeEditor userCode={userCode} setUserCode={setUserCode} />
           </div>
-          <div className="h-[calc(100vh-20rem)]">
+          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto">
             <AnswerCard
               currentPattern={currentPattern}
               showAnswer={showAnswer}
@@ -98,7 +100,7 @@ export default function AlgorithmTrainer() {
               onNextPattern={nextPattern}
             />
           </div>
-          <div className="h-[calc(100vh-20rem)]">
+          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto md:col-span-2 xl:col-span-1">
             <ReplCard userCode={userCode} />
           </div>
         </div>
@@ -108,7 +110,7 @@ export default function AlgorithmTrainer() {
         </div> */}
       </div>
 
-      <div className="mt-4 text-center text-sm text-[#6272a4] flex-none">
+      <div className="mt-2 text-center text-sm text-[#6272a4] flex-none">
         Created by{" "}
         <a
           href="https://breon.xyz"
