@@ -1634,4 +1634,321 @@ class BST:
                 heappush(queue, (new_dist, neighbor))
     return distances`,
   ],
+
+  [
+    "Two Sum Two Pointers",
+    `def two_sum_two_pointers(arr, target):
+    """
+    Find two numbers in a sorted array that sum to target using two pointers.
+    Time Complexity: O(n log n) due to sorting
+    Space Complexity: O(1)
+    """
+    arr.sort()
+    left = 0
+    right = len(arr) - 1
+    while left < right:
+        if arr[left] + arr[right] == target:
+            return [left, right]
+        elif arr[left] + arr[right] < target:
+            left += 1
+        else:
+            right -= 1
+    return []`,
+  ],
+
+  [
+    "Prefix Sum",
+    `def prefix_sum(arr):
+    """
+    Calculate prefix sum array where each element is the sum of all previous elements.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    """
+    result = [0] * len(arr)
+    result[0] = arr[0]
+    for i in range(1, len(arr)):
+        result[i] = result[i-1] + arr[i]
+    return result`,
+  ],
+
+  [
+    "Kadane's Algorithm",
+    `def kadane_algorithm(arr):
+    """
+    Find maximum subarray sum in an array.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    current_sum = arr[0]
+    max_sum = arr[0]
+    for i in range(1, len(arr)):
+        current_sum = max(arr[i], current_sum + arr[i])
+        if current_sum > max_sum:
+            max_sum = current_sum
+    return max_sum`,
+  ],
+
+  [
+    "Floyd Cycle Detection",
+    `def floyd_cycle_detection(head):
+    """
+    Detect cycle in a linked list using Floyd's Cycle Detection Algorithm.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    slow = head
+    fast = head
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    return False`,
+  ],
+
+  [
+    "Rabin-Karp",
+    `def rabin_karp(text, pattern):
+    """
+    Pattern matching algorithm using rolling hash.
+    Time Complexity: O(n+m) average case, O(nm) worst case
+    Space Complexity: O(1)
+    """
+    prime = 101
+    pattern_hash = 0
+    for char in pattern:
+        pattern_hash = (pattern_hash * 256 + ord(char)) % prime
+    window_hash = 0
+    for i in range(len(pattern)):
+        window_hash = (window_hash * 256 + ord(text[i])) % prime
+    for i in range(len(text) - len(pattern) + 1):
+        if pattern_hash == window_hash:
+            if text[i:i+len(pattern)] == pattern:
+                return i
+        if i < len(text) - len(pattern):
+            window_hash = ((window_hash * 256 - ord(text[i]) * pow(256, len(pattern)-1, prime)) + ord(text[i+len(pattern)])) % prime
+    return -1`,
+  ],
+
+  [
+    "Knuth-Morris-Pratt",
+    `def knuth_morris_pratt(text, pattern):
+    """
+    Pattern matching algorithm using KMP algorithm.
+    Time Complexity: O(n+m)
+    Space Complexity: O(m)
+    """
+    def build_lps(pattern):
+        lps = [0] * len(pattern)
+        j = 0
+        i = 1
+        while i < len(pattern):
+            if pattern[i] == pattern[j]:
+                j += 1
+                lps[i] = j
+                i += 1
+            elif j > 0:
+                j = lps[j-1]
+            else:
+                lps[i] = 0
+                i += 1
+        return lps
+    
+    lps = build_lps(pattern)
+    i = 0
+    j = 0
+    while i < len(text):
+        if pattern[j] == text[i]:
+            i += 1
+            j += 1
+        if j == len(pattern):
+            return i - j
+        elif i < len(text) and pattern[j] != text[i]:
+            if j != 0:
+                j = lps[j-1]
+            else:
+                i += 1
+    return -1`,
+  ],
+
+  [
+    "Manacher's Algorithm",
+    `def manacher_algorithm(s):
+    """
+    Find longest palindromic substring in linear time.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    """
+    t = '#' + '#'.join(s) + '#'
+    p = [0] * len(t)
+    center = 0
+    right = 0
+    for i in range(len(t)):
+        if i < right:
+            p[i] = min(right - i, p[2*center - i])
+        left = i - (p[i] + 1)
+        r = i + (p[i] + 1)
+        while left >= 0 and r < len(t) and t[left] == t[r]:
+            p[i] += 1
+            left -= 1
+            r += 1
+        if i + p[i] > right:
+            center = i
+            right = i + p[i]
+    max_len = max(p)
+    center_index = p.index(max_len)
+    start = (center_index - max_len) // 2
+    end = start + max_len
+    return s[start:end]`,
+  ],
+
+  [
+    "Z-Algorithm",
+    `def z_algorithm(text, pattern):
+    """
+    Pattern matching using Z-algorithm.
+    Time Complexity: O(n+m)
+    Space Complexity: O(n+m)
+    """
+    s = pattern + '$' + text
+    z = [0] * len(s)
+    left = right = 0
+    for i in range(1, len(s)):
+        if i > right:
+            left = right = i
+            while right < len(s) and s[right-left] == s[right]:
+                right += 1
+            z[i] = right - left
+        else:
+            k = i - left
+            if z[k] < right - i:
+                z[i] = z[k]
+            else:
+                left = i
+                while right < len(s) and s[right-left] == s[right]:
+                    right += 1
+                z[i] = right - left
+    matches = []
+    for i in range(len(pattern) + 1, len(s)):
+        if z[i] == len(pattern):
+            matches.append(i - len(pattern) - 1)
+    return matches`,
+  ],
+
+  [
+    "Matrix Traversal",
+    `def traverse_matrix(matrix):
+    """
+    Basic matrix traversal.
+    Time Complexity: O(rows * cols)
+    Space Complexity: O(1)
+    """
+    rows = len(matrix)
+    cols = len(matrix[0])
+    for i in range(rows):
+        for j in range(cols):
+            print(matrix[i][j], end=' ')
+        print()`,
+  ],
+
+  [
+    "Matrix Traversal Recursive",
+    `def traverse_matrix_recursive(matrix):
+    """
+    Recursive matrix traversal.
+    Time Complexity: O(rows * cols)
+    Space Complexity: O(rows * cols) due to recursion stack
+    """
+    def helper(matrix, row, col, direction, top, bottom, left, right):
+        rows = len(matrix)
+        cols = len(matrix[0])
+        if row < 0 or row >= rows or col < 0 or col >= cols:
+            return
+        if direction == 'right':
+            for i in range(left, right + 1):
+                print(matrix[row][i], end=' ')
+            helper(matrix, row, i + 1, 'down', top, bottom, left, right)
+        elif direction == 'down':
+            for i in range(top, bottom + 1):
+                print(matrix[i][col], end=' ')
+            helper(matrix, i + 1, col, 'left', top, bottom, left, right)
+        elif direction == 'left':
+            for i in range(right, left - 1, -1):
+                print(matrix[row][i], end=' ')
+            helper(matrix, row, i - 1, 'up', top, bottom, left, right)
+        elif direction == 'up':
+            for i in range(bottom, top - 1, -1):    
+                print(matrix[i][col], end=' ')
+            helper(matrix, i - 1, col, 'right', top, bottom, left, right)
+    
+    if not matrix or not matrix[0]:
+        return
+    helper(matrix, 0, 0, 'right', 0, len(matrix)-1, 0, len(matrix[0])-1)`,
+  ],
+
+  [
+    "Matrix Spiral Traversal",
+    `def traverse_matrix_spiral(matrix):
+    """
+    Traverse matrix in spiral order.
+    Time Complexity: O(rows * cols)
+    Space Complexity: O(1)
+    """
+    rows = len(matrix)
+    cols = len(matrix[0])
+    top = 0
+    bottom = rows - 1
+    left = 0
+    right = cols - 1
+
+    while top <= bottom and left <= right:
+        for i in range(left, right + 1):
+            print(matrix[top][i], end=' ')
+        top += 1
+        for i in range(top, bottom + 1):
+            print(matrix[i][right], end=' ')
+        right -= 1
+        if top <= bottom:
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            bottom -= 1
+        if left <= right:
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1`,
+  ],
+
+  [
+    "Matrix Spiral Recursive",
+    `def traverse_matrix_spiral_recursive(matrix):
+    """
+    Traverse matrix in spiral order recursively.
+    Time Complexity: O(rows * cols)
+    Space Complexity: O(rows * cols) due to recursion stack
+    """
+    def helper(matrix, top, bottom, left, right, direction):
+        if top > bottom or left > right:
+            return
+
+        if direction == 'right':
+            for i in range(left, right + 1):
+                print(matrix[top][i], end=' ')
+            helper(matrix, top + 1, bottom, left, right, 'down')
+        elif direction == 'down':
+            for i in range(top, bottom + 1):
+                print(matrix[i][right], end=' ')
+            helper(matrix, top, bottom, left, right - 1, 'left')
+        elif direction == 'left':
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            helper(matrix, top, bottom - 1, left, right, 'up')
+        elif direction == 'up':
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            helper(matrix, top, bottom, left + 1, right, 'right')
+
+    if not matrix or not matrix[0]:
+        return
+    helper(matrix, 0, len(matrix) - 1, 0, len(matrix[0]) - 1, 'right')`,
+  ],
 ]);
