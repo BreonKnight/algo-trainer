@@ -262,22 +262,16 @@ Use Case: In-place sorting with guaranteed performance
     "Bubble Sort",
     `# Bubble Sort Algorithm
 Type: Sorting Algorithm
-Time: O(n²) - worst and average, O(n) best
+Time: O(n²) - worst and average case
 Space: O(1) - in-place
-Use Case: Educational, small arrays, nearly sorted data
+Use Case: Simple sorting, nearly sorted data
 
-1. Outer loop:
-   - Track if any swaps made
-   - Iterate n times
+1. For each pass i from 0 to n-1:
+   - For each element j from 0 to n-i-1:
+     * If arr[j] > arr[j+1]:
+       - Swap arr[j] and arr[j+1]
 
-2. Inner loop:
-   - Compare adjacent elements
-   - Swap if wrong order
-   - Update swap flag
-
-3. Early exit:
-   - If no swaps needed
-   - Array is sorted`,
+2. Return sorted array`,
   ],
 
   [
@@ -288,568 +282,853 @@ Time: O(n²) - all cases
 Space: O(1) - in-place
 Use Case: Small arrays, minimal memory usage
 
-1. Find minimum in unsorted:
-   - Iterate through unsorted
-   - Track minimum element
-   - Remember position
+1. For i from 0 to n-1:
+   - Find minimum element in arr[i:n]
+   - Swap with element at position i
 
-2. Swap elements:
-   - Exchange with first unsorted
-   - Mark position as sorted
-
-3. Repeat process:
-   - Move to next position
-   - Consider remaining elements
-
-4. Until sorted:
-   - Continue until end
-   - Array fully sorted`,
+2. Return sorted array`,
   ],
 
   [
     "Insertion Sort",
     `# Insertion Sort Algorithm
 Type: Sorting Algorithm
-Time: O(n²) - worst and average, O(n) best
+Time: O(n²) worst/avg, O(n) best
 Space: O(1) - in-place
-Use Case: Small arrays, online sorting, nearly sorted data
+Use Case: Small arrays, nearly sorted data
 
-1. Start from second element:
-   - Get current element
-   - Prepare insertion
+1. For i from 1 to n-1:
+   - Store current element as key
+   - Move elements > key one position ahead
+   - Insert key in correct position
 
-2. Find insertion point:
-   - Compare with previous
-   - Shift larger elements
-   - Make space for insertion
-
-3. Insert element:
-   - Place in correct position
-   - Continue with next element`,
+2. Return sorted array`,
   ],
 
   [
     "Binary Search",
     `# Binary Search Algorithm
 Type: Search Algorithm
-Time: O(log n) - all cases
-Space: O(1) - iterative, O(log n) - recursive
-Use Case: Searching in sorted arrays
+Time: O(log n)
+Space: O(1)
+Use Case: Finding element in sorted array
 
 1. Initialize pointers:
-   - Set left to start
-   - Set right to end
+   - left = 0, right = length - 1
 
-2. While valid range:
-   - Calculate middle
-   - Compare with target:
-     * If equal, return index
-     * If less, search right
-     * If more, search left
+2. While left <= right:
+   - mid = (left + right) // 2
+   - If arr[mid] == target:
+     * Return mid
+   - If arr[mid] < target:
+     * left = mid + 1
+   - Else:
+     * right = mid - 1
 
-3. Handle not found:
-   - Return -1 or sentinel`,
+3. Return -1 if not found`,
   ],
 
   [
     "Linear Search",
     `# Linear Search Algorithm
 Type: Search Algorithm
-Time: O(n) - all cases
-Space: O(1) - constant
-Use Case: Unsorted arrays, small arrays
+Time: O(n)
+Space: O(1)
+Use Case: Finding element in unsorted array
 
-1. Initialize:
-   - Start from first element
-   - Track current position
+1. For each element in array:
+   - If element equals target:
+     * Return its index
 
-2. Scan array:
-   - Compare each element
-   - Check against target
-   - Track current index
-
-3. Return result:
-   - Found: return index
-   - Not found: return -1`,
+2. Return -1 if not found`,
   ],
 
   [
     "Two Sum",
     `# Two Sum Algorithm
 Type: Array Algorithm
-Time: O(n) - with hash table, O(n²) - brute force
-Space: O(n) - hash table
-Use Case: Finding pairs with target sum
+Time: O(n)
+Space: O(n)
+Use Case: Finding pair of numbers that sum to target
+
+1. Initialize hash map
+
+2. For each number in array:
+   - Calculate complement = target - num
+   - If complement in hash map:
+     * Return [map[complement], current_index]
+   - Add num to hash map
+
+3. Return [] if no solution`,
+  ],
+
+  [
+    "Two Sum Two Pointers",
+    `# Two Sum Two Pointers Algorithm
+Type: Array Algorithm
+Time: O(n)
+Space: O(1)
+Use Case: Finding pair in sorted array that sums to target
+
+1. Initialize pointers:
+   - left = 0, right = length - 1
+
+2. While left < right:
+   - sum = arr[left] + arr[right]
+   - If sum == target:
+     * Return [left, right]
+   - If sum < target:
+     * left++
+   - Else:
+     * right--
+
+3. Return [] if no solution`,
+  ],
+
+  [
+    "Dynamic Programming Fibonacci",
+    `# Dynamic Programming Fibonacci
+Type: Dynamic Programming
+Time: O(n)
+Space: O(n)
+Use Case: Computing nth Fibonacci number
+
+1. Initialize dp array:
+   - dp[0] = 0, dp[1] = 1
+
+2. For i from 2 to n:
+   - dp[i] = dp[i-1] + dp[i-2]
+
+3. Return dp[n]`,
+  ],
+
+  [
+    "Dynamic Programming Iterative",
+    `# Dynamic Programming Iterative
+Type: Dynamic Programming
+Time: O(n) - linear scan
+Space: O(n) - state array
+Use Case: Bottom-up dynamic programming
+
+1. Initialize state array:
+   - Create array for storing results
+   - Set base cases
+
+2. Iterate through states:
+   - For i from smallest to largest:
+     * Calculate current state
+     * Use previously computed results
+
+3. Return final state`,
+  ],
+
+  [
+    "Dynamic Programming Coin Change",
+    `# Dynamic Programming Coin Change
+Type: Dynamic Programming
+Time: O(amount * coins)
+Space: O(amount)
+Use Case: Finding minimum coins for amount
+
+1. Initialize dp array:
+   - dp[0] = 0
+   - dp[1...amount] = infinity
+
+2. For each amount i from 1 to target:
+   - For each coin in coins:
+     * If coin <= i:
+       - dp[i] = min(dp[i], dp[i-coin] + 1)
+
+3. Return dp[amount]`,
+  ],
+
+  [
+    "Greedy Activity Selection",
+    `# Greedy Activity Selection
+Type: Greedy Algorithm
+Time: O(n log n)
+Space: O(1)
+Use Case: Maximum non-overlapping activities
+
+1. Sort activities by end time
+
+2. Initialize:
+   - Select first activity
+   - prev_end = first activity's end
+
+3. For each remaining activity:
+   - If start time >= prev_end:
+     * Select activity
+     * Update prev_end
+
+4. Return selected activities`,
+  ],
+
+  [
+    "Greedy Fractional Knapsack",
+    `# Greedy Fractional Knapsack
+Type: Greedy Algorithm
+Time: O(n log n)
+Space: O(1)
+Use Case: Maximize value with weight constraint
+
+1. Calculate value/weight ratio for items
+2. Sort items by ratio (descending)
+
+3. For each item:
+   - If can take whole item:
+     * Add to knapsack
+   - Else:
+     * Take fraction that fits
+     * Break loop
+
+4. Return maximum value`,
+  ],
+
+  [
+    "Greedy Job Scheduling",
+    `# Greedy Job Scheduling
+Type: Greedy Algorithm
+Time: O(n log n)
+Space: O(1)
+Use Case: Maximize profit with deadline constraints
+
+1. Sort jobs by profit (descending)
+
+2. Find maximum deadline
+
+3. Initialize time slots array
+
+4. For each job:
+   - Find latest available slot <= deadline
+   - If found, assign job to slot
+
+5. Return maximum profit`,
+  ],
+
+  [
+    "Greedy Huffman Coding",
+    `# Greedy Huffman Coding
+Type: Greedy Algorithm
+Time: O(n log n)
+Space: O(n)
+Use Case: Data compression
+
+1. Create leaf nodes for characters
+
+2. Build Huffman Tree:
+   - While > 1 node remains:
+     * Extract two minimum freq nodes
+     * Create new node with their sum
+     * Add new node to queue
+
+3. Assign codes by traversing tree:
+   - Left edge = 0
+   - Right edge = 1
+
+4. Return character codes`,
+  ],
+
+  [
+    "Greedy Dijkstra",
+    `# Greedy Dijkstra's Algorithm
+Type: Greedy Algorithm
+Time: O((V + E) log V)
+Space: O(V)
+Use Case: Shortest path in weighted graph
 
 1. Initialize:
-   - Track seen numbers
-   - Prepare result array
+   - distances[start] = 0
+   - distances[others] = infinity
+   - priority queue with (0, start)
 
-2. Process each number:
-   - Calculate complement
-   - Check if seen before:
-     * If found, return pair
-     * If not, store current
+2. While queue not empty:
+   - Get vertex with min distance
+   - For each neighbor:
+     * Calculate new distance
+     * If shorter, update and add to queue
 
-3. Return result:
-   - Found: return indices
-   - Not found: return empty`,
+3. Return distances`,
   ],
 
   [
-    "Hash Table",
-    `# Hash Table Implementation
-Type: Data Structure
-Time: O(1) average, O(n) worst for operations
-Space: O(n) - for storing n elements
-Use Case: Fast key-value lookups
+    "DFS Linked List",
+    `# DFS on Linked List
+Type: Graph Algorithm
+Time: O(n)
+Space: O(n)
+Use Case: Traversing linked list recursively
 
-1. Core Components:
-   - Array of buckets
-   - Hash function:
-     * Convert key to index
-     * Distribute uniformly
-   - Collision strategy
+1. Base case:
+   - If node is null, return
 
-2. Basic Operations:
-   - Insert(key, value):
-     * Compute hash index
-     * Handle collisions
-     * Store key-value
-   - Get(key):
-     * Compute hash index
-     * Find key in bucket
-     * Return value
-   - Delete(key):
-     * Find and remove
+2. Process current node:
+   - Visit node
+   - Mark as visited
 
-3. Advanced Features:
-   - Dynamic resizing
-   - Load factor management
-   - Collision resolution`,
+3. Recursive call:
+   - DFS(node.next)
+
+4. Return result`,
   ],
 
   [
-    "Graph",
-    `# Graph Implementation
-Type: Data Structure
-Time: O(1) for adjacency list ops, O(V+E) for traversal
-Space: O(V + E) - vertices and edges
-Use Case: Network modeling, relationships
+    "DFS Binary Tree",
+    `# DFS on Binary Tree
+Type: Tree Algorithm
+Time: O(n)
+Space: O(h) - height of tree
+Use Case: Tree traversal, path finding
 
-1. Structure:
-   - Adjacency list/matrix
-   - Edge properties:
-     * Weight/cost
-     * Direction
+1. Base case:
+   - If node is null, return
 
-2. Basic Operations:
-   - Add vertex:
-     * Create new entry
-     * Initialize edges
-   - Add edge:
-     * Connect vertices
-     * Set properties
-   - Remove vertex/edge
+2. Process current node:
+   - Visit node
+   - Add to result
 
-3. Algorithms:
-   - Traversal (DFS/BFS)
-   - Path finding
-   - Cycle detection`,
+3. Recursive calls:
+   - DFS(node.left)
+   - DFS(node.right)
+
+4. Return result`,
   ],
 
   [
-    "Tree",
-    `# Tree Implementation
-Type: Data Structure
-Time: O(h) for most operations, h = height
-Space: O(n) - for n nodes
-Use Case: Hierarchical data, fast search
+    "BFS Linked List",
+    `# BFS on Linked List
+Type: Graph Algorithm
+Time: O(n)
+Space: O(n)
+Use Case: Level-wise traversal
 
-1. Node Structure:
-   - Value/data
-   - Left/right children
-   - Parent reference
+1. Initialize:
+   - Create queue
+   - Add head to queue
 
-2. Tree Operations:
-   - Insert:
-     * Find position
-     * Update links
-   - Delete:
-     * Handle leaf nodes
-     * Handle single child
-     * Handle two children
-   - Search:
-     * Compare values
-     * Choose path
+2. While queue not empty:
+   - Get current node
+   - Process node
+   - Add next node to queue
 
-3. Traversals:
-   - In-order (LNR)
-   - Pre-order (NLR)
-   - Post-order (LRN)
-   - Level-order`,
-  ],
-
-  [
-    "Binary Search Tree",
-    `# Binary Search Tree
-Type: Data Structure
-Time: O(log n) average, O(n) worst for operations
-Space: O(n) - for n nodes
-Use Case: Ordered data storage and retrieval
-
-1. Properties:
-   - Left subtree < node
-   - Right subtree > node
-   - No duplicates
-
-2. Operations:
-   - Insert:
-     * Compare with root
-     * Choose subtree
-     * Create new node
-   - Delete:
-     * Find node
-     * Handle cases
-     * Maintain BST
-   - Search:
-     * Compare values
-     * Navigate tree
-
-3. Traversal:
-   - In-order gives sorted
-   - Balance if needed`,
-  ],
-
-  [
-    "Heap Implementation",
-    `# Heap Implementation
-Type: Data Structure
-Time: O(log n) for insert/delete, O(1) for peek
-Space: O(n) - for n elements
-Use Case: Priority queues, heap sort
-
-1. Structure:
-   - Array-based tree
-   - Parent-child indices
-   - Size tracking
-
-2. Core Operations:
-   - Insert:
-     * Add at end
-     * Heapify up
-   - Extract root:
-     * Remove top
-     * Replace with last
-     * Heapify down
-
-3. Helper Functions:
-   - Get parent/child
-   - Swap elements
-   - Compare values`,
-  ],
-
-  [
-    "Trie",
-    `# Trie Data Structure
-Type: Data Structure
-Time: O(L) for operations, L = key length
-Space: O(ALPHABET_SIZE * L * N) - N keys
-Use Case: String/prefix operations, autocomplete
-
-1. Node Structure:
-   - Map/Array of children nodes
-   - Boolean flag for word ending
-   - Optional value/frequency counter
-
-2. Basic Operations:
-   - Insert word:
-     * Traverse/create nodes for each character
-     * Mark last node as word end
-   - Search word:
-     * Follow character path
-     * Verify word end marker
-   - Search prefix:
-     * Follow character path
-     * No need to check word end
-
-3. Advanced Operations:
-   - Delete word
-   - Count words with prefix
-   - Autocomplete suggestions`,
+3. Return result`,
   ],
 
   [
     "Stack Implementation",
     `# Stack Implementation
 Type: Data Structure
-Time: O(1) for all operations
-Space: O(n) - for n elements
-Use Case: LIFO operations, function calls
+Operations: O(1)
+Space: O(n)
+Use Case: LIFO operations
 
-1. Structure:
-   - Array/linked list
-   - Top pointer
-   - Size tracking
+Methods:
+1. push(item):
+   - Add item to top
 
-2. Core Operations:
-   - Push:
-     * Add to top
-     * Update pointer
-     * Check overflow
-   - Pop:
-     * Remove from top
-     * Update pointer
-     * Check underflow
+2. pop():
+   - Remove and return top item
 
-3. Helper Methods:
-   - Peek top
-   - Check empty
-   - Get size`,
+3. peek():
+   - Return top item without removing
+
+4. isEmpty():
+   - Check if stack is empty`,
   ],
 
   [
     "Queue Implementation",
     `# Queue Implementation
 Type: Data Structure
-Time: O(1) for all operations
-Space: O(n) - for n elements
-Use Case: FIFO operations, BFS
+Operations: O(1)
+Space: O(n)
+Use Case: FIFO operations
 
-1. Structure:
-   - Array/linked list
-   - Front/rear pointers
-   - Size counter
+Methods:
+1. enqueue(item):
+   - Add item to end
 
-2. Core Operations:
-   - Enqueue:
-     * Add to rear
-     * Update pointer
-     * Handle overflow
-   - Dequeue:
-     * Remove from front
-     * Update pointer
-     * Handle underflow
+2. dequeue():
+   - Remove and return front item
 
-3. Helper Methods:
-   - Peek front
-   - Check empty
-   - Get size
+3. peek():
+   - Return front item without removing
 
-4. Variations:
-   - Circular queue
-   - Priority queue
-   - Double-ended`,
+4. isEmpty():
+   - Check if queue is empty`,
+  ],
+
+  [
+    "Hash Table",
+    `# Hash Table Implementation
+Type: Data Structure
+Operations: O(1) average
+Space: O(n)
+Use Case: Fast key-value lookups
+
+Methods:
+1. put(key, value):
+   - Calculate hash
+   - Handle collision
+   - Store value
+
+2. get(key):
+   - Calculate hash
+   - Return value
+
+3. remove(key):
+   - Calculate hash
+   - Remove entry`,
+  ],
+
+  [
+    "Monotonic Stack",
+    `# Monotonic Stack Algorithm
+Type: Data Structure Technique
+Time: O(n)
+Space: O(n)
+Use Case: Next/previous greater/smaller element
+
+1. Initialize empty stack
+
+2. For each element:
+   - While stack not empty and condition met:
+     * Process stack top
+     * Pop from stack
+   - Push current element
+
+3. Process remaining stack`,
+  ],
+
+  [
+    "Monotonic Queue",
+    `# Monotonic Queue Algorithm
+Type: Data Structure Technique
+Time: O(n)
+Space: O(k)
+Use Case: Sliding window maximum/minimum
+
+1. Initialize deque
+
+2. For each element:
+   - Remove elements outside window
+   - Remove larger/smaller elements
+   - Add current element
+   - Update result
+
+3. Return result`,
+  ],
+
+  [
+    "Two Pointers",
+    `# Two Pointers Algorithm
+Type: Array Algorithm
+Time: O(n)
+Space: O(1)
+Use Case: Array manipulation, substring problems
+
+1. Initialize pointers:
+   - left = start position
+   - right = end position
+
+2. While left < right:
+   - Process elements at both pointers
+   - Move pointers based on condition
+   - Update result if needed
+
+3. Return result`,
+  ],
+
+  [
+    "Prefix Sum",
+    `# Prefix Sum Algorithm
+Type: Array Technique
+Time: O(n)
+Space: O(n)
+Use Case: Range sum queries
+
+1. Build prefix array:
+   - prefix[0] = arr[0]
+   - For i from 1 to n:
+     * prefix[i] = prefix[i-1] + arr[i]
+
+2. Range sum query(left, right):
+   - Return prefix[right] - prefix[left-1]`,
+  ],
+
+  [
+    "Kadane's Algorithm",
+    `# Kadane's Algorithm
+Type: Array Technique
+Time: O(n)
+Space: O(1)
+Use Case: Maximum subarray sum
+
+1. Initialize:
+   - current_sum = 0
+   - max_sum = -infinity
+
+2. For each number:
+   - current_sum = max(num, current_sum + num)
+   - max_sum = max(max_sum, current_sum)
+
+3. Return max_sum`,
+  ],
+
+  [
+    "Floyd Cycle Detection",
+    `# Floyd Cycle Detection
+Type: Graph Algorithm
+Time: O(n)
+Space: O(1)
+Use Case: Finding cycles in linked structures
+
+1. Initialize pointers:
+   - slow = head
+   - fast = head
+
+2. Detect cycle:
+   - Move slow one step
+   - Move fast two steps
+   - If they meet, cycle exists
+
+3. Find cycle start:
+   - Reset slow to head
+   - Move both one step
+   - Meeting point is start`,
+  ],
+
+  [
+    "Rabin-Karp",
+    `# Rabin-Karp Algorithm
+Type: String Algorithm
+Time: O(n+m)
+Space: O(1)
+Use Case: Pattern matching with rolling hash
+
+1. Calculate pattern hash
+
+2. For each window in text:
+   - Calculate window hash
+   - If hashes match:
+     * Check characters
+   - Update rolling hash
+
+3. Return matches`,
+  ],
+
+  [
+    "Knuth-Morris-Pratt",
+    `# Knuth-Morris-Pratt Algorithm
+Type: String Algorithm
+Time: O(n+m)
+Space: O(m)
+Use Case: Efficient string pattern matching
+
+1. Build failure function:
+   - Compute partial match table
+   - Track prefix matches
+
+2. Search pattern:
+   - Use failure function
+   - Skip unnecessary comparisons
+
+3. Return matches`,
+  ],
+
+  [
+    "Manacher's Algorithm",
+    `# Manacher's Algorithm
+Type: String Algorithm
+Time: O(n)
+Space: O(n)
+Use Case: Finding all palindromic substrings
+
+1. Transform string:
+   - Add special characters
+
+2. For each center:
+   - Expand palindrome
+   - Use previous results
+   - Update radius array
+
+3. Return palindromes`,
+  ],
+
+  [
+    "Z-Algorithm",
+    `# Z-Algorithm
+Type: String Algorithm
+Time: O(n)
+Space: O(n)
+Use Case: Pattern matching, string preprocessing
+
+1. Build Z-array:
+   - Track matching prefixes
+   - Use Z-box technique
+
+2. For each position:
+   - Extend match if possible
+   - Use previous results
+
+3. Return Z-array`,
+  ],
+
+  [
+    "Matrix Traversal",
+    `# Matrix Traversal Algorithm
+Type: Matrix Operation
+Time: O(rows * cols)
+Space: O(1)
+Use Case: Grid processing
+
+1. For each row:
+   - For each column:
+     * Process current cell
+     * Update result
+
+2. Return result`,
+  ],
+
+  [
+    "Matrix Traversal Recursive",
+    `# Matrix Traversal Recursive
+Type: Matrix Operation
+Time: O(rows * cols)
+Space: O(rows + cols)
+Use Case: Complex grid patterns
+
+1. Base cases:
+   - Check boundaries
+   - Check visited
+
+2. Process current cell:
+   - Mark visited
+   - Add to result
+
+3. Recursive calls:
+   - Visit neighbors
+   - Combine results`,
+  ],
+
+  [
+    "Matrix Spiral Traversal",
+    `# Matrix Spiral Traversal
+Type: Matrix Operation
+Time: O(rows * cols)
+Space: O(1)
+Use Case: Spiral order processing
+
+1. Initialize boundaries:
+   - top, bottom, left, right
+
+2. While boundaries valid:
+   - Traverse right
+   - Traverse down
+   - Traverse left
+   - Traverse up
+   - Update boundaries
+
+3. Return result`,
+  ],
+
+  [
+    "Matrix Spiral Recursive",
+    `# Matrix Spiral Recursive
+Type: Matrix Operation
+Time: O(rows * cols)
+Space: O(rows + cols)
+Use Case: Recursive spiral patterns
+
+1. Base cases:
+   - Check boundaries
+   - Check completion
+
+2. Process current layer:
+   - Traverse perimeter
+   - Add to result
+
+3. Recursive call:
+   - Process inner layer`,
   ],
 
   [
     "Backtracking",
     `# Backtracking Algorithm
 Type: Algorithm Paradigm
-Time: O(b^d) - b = branching factor, d = depth
+Time: O(b^d) - branching factor ^ depth
 Space: O(d) - recursion depth
 Use Case: Constraint satisfaction problems
 
-1. State Space:
-   - Define parameters
-   - Set constraints
-   - Track current state
+1. Base cases:
+   - Check if solution found
+   - Check if invalid path
 
-2. Recursive Function:
-   - Base cases:
-     * Found solution
-     * Invalid state
-   - For each choice:
-     * Make choice
-     * Recurse deeper
-     * Undo choice
+2. For each choice:
+   - Make choice
+   - Recursively solve
+   - Undo choice (backtrack)
 
-3. Optimization:
-   - Prune invalid paths
-   - Order choices well
-   - Use constraints`,
-  ],
-
-  [
-    "Monotonic Stack",
-    `# Monotonic Stack Algorithm
-Type: Data Structure Pattern
-Time: O(n) - each element pushed/popped once
-Space: O(n) - stack size
-Use Case: Next/previous greater/smaller element
-
-1. Initialize:
-   - Empty stack
-   - Choose property:
-     * Increasing
-     * Decreasing
-
-2. Process Elements:
-   - While stack not empty:
-     * Check property
-     * Pop if violated
-   - Push current
-   - Track result
-
-3. Applications:
-   - Next greater/less
-   - Temperature span
-   - Rectangle area`,
-  ],
-
-  [
-    "Monotonic Queue",
-    `# Monotonic Queue Algorithm
-Type: Data Structure Pattern
-Time: O(n) - each element processed once
-Space: O(k) - k = window size
-Use Case: Sliding window min/max
-
-1. Initialize:
-   - Empty deque
-   - Choose property:
-     * Increasing
-     * Decreasing
-
-2. Process Elements:
-   - Remove outdated
-   - Maintain property:
-     * Remove from back
-     * Add new element
-   - Track optimal
-
-3. Applications:
-   - Sliding window
-   - Next greater/less`,
-  ],
-
-  [
-    "Two Pointers",
-    `# Two Pointers Algorithm
-Type: Algorithm Pattern
-Time: O(n) - single pass through array
-Space: O(1) - constant
-Use Case: Array manipulation, substring problems
-
-1. Initialize:
-   - Set left pointer
-   - Set right pointer
-   - Define target/condition
-
-2. While pointers valid:
-   - Calculate current state
-   - Compare with target:
-     * If match, return result
-     * If too small, move left
-     * If too large, move right
-
-3. Return result:
-   - Found solution
-   - Or not found`,
-  ],
-
-  [
-    "Linked List",
-    `# Linked List Implementation
-Type: Data Structure
-Time: O(1) head ops, O(n) search/tail ops
-Space: O(n) - for n nodes
-Use Case: Dynamic data storage, constant time insertion
-
-1. Node Structure:
-   - Value/data field
-   - Next pointer
-   - Optional prev pointer
-
-2. Basic Operations:
-   - Insert:
-     * At beginning (prepend)
-     * At end (append)
-     * At position
-   - Delete:
-     * From beginning
-     * From end
-     * From position
-   - Search:
-     * Traverse list
-     * Compare values
-
-3. Helper Operations:
-   - Get length
-   - Reverse list
-   - Detect cycle
-   - Find middle
-
-4. Edge Cases:
-   - Empty list
-   - Single node
-   - Last node`,
-  ],
-
-  [
-    "Circular Linked List",
-    `# Circular Linked List Implementation
-Type: Data Structure
-Time: O(1) for tail ops, O(n) for search
-Space: O(n) - for n nodes
-Use Case: Round-robin scheduling, circular buffer
-
-1. Node Structure:
-   - Value/data field
-   - Next pointer
-   - Last node points to head
-
-2. Basic Operations:
-   - Insert:
-     * At beginning:
-       - Update new node's next
-       - Update last node's next
-     * At end:
-       - Set next to head
-       - Update references
-   - Delete:
-     * Update surrounding links
-     * Maintain circular property
-
-3. Special Considerations:
-   - Cycle detection
-   - List traversal:
-     * Stop at head
-     * Handle full cycle
-   - Empty list case
-   - Single node case`,
+3. Return solutions`,
   ],
 
   [
     "Topological Sort",
     `# Topological Sort Algorithm
 Type: Graph Algorithm
-Time: O(V + E) - vertices + edges
-Space: O(V) - for queue and in-degree map
-Use Case: Dependency resolution, task scheduling
+Time: O(V + E)
+Space: O(V)
+Use Case: Ordering tasks with dependencies
 
 1. Initialize:
-   - Create in-degree map
-   - Empty queue for 0 in-degree
-   - Result array/list
+   - Create indegree array
+   - Create queue for nodes with 0 indegree
 
-2. Build In-degree:
-   - Count incoming edges
-   - For each vertex:
-     * Calculate dependencies
-     * Track incoming edges
+2. Build graph:
+   - Count indegree for each node
+   - Add nodes with 0 indegree to queue
 
-3. Process Vertices:
-   - Start with 0 in-degree
+3. Process nodes:
    - While queue not empty:
-     * Remove vertex
+     * Remove node
      * Add to result
-     * Reduce neighbors' in-degree
-     * Add new 0 in-degree
+     * Decrease neighbors' indegree
+     * Add new 0 indegree nodes to queue
 
-4. Detect Cycles:
-   - Check result length
-   - Verify all processed
-   - Handle invalid cases`,
+4. Return result if no cycle`,
+  ],
+
+  [
+    "Circular Linked List",
+    `# Circular Linked List Implementation
+Type: Data Structure
+Operations: O(1) or O(n)
+Space: O(n)
+Use Case: Circular buffer, round-robin scheduling
+
+Methods:
+1. insert(data):
+   - Create new node
+   - If empty, point to self
+   - Else, insert after head
+
+2. delete(node):
+   - Update next pointers
+   - Handle head case
+
+3. traverse():
+   - Stop when back at start`,
+  ],
+
+  [
+    "Graph",
+    `# Graph Implementation
+Type: Data Structure
+Operations: O(1) or O(V+E)
+Space: O(V + E)
+Use Case: Representing relationships
+
+Methods:
+1. addVertex(v):
+   - Add to adjacency list
+
+2. addEdge(v1, v2):
+   - Update adjacency lists
+
+3. removeVertex(v):
+   - Remove all edges
+   - Remove vertex
+
+4. removeEdge(v1, v2):
+   - Update adjacency lists`,
+  ],
+
+  [
+    "Tree",
+    `# Tree Implementation
+Type: Data Structure
+Operations: O(h) - height of tree
+Space: O(n)
+Use Case: Hierarchical data
+
+Methods:
+1. insert(data):
+   - Find proper location
+   - Create new node
+   - Update parent/child links
+
+2. delete(data):
+   - Find node
+   - Update structure
+   - Handle children
+
+3. search(data):
+   - Traverse to find data`,
+  ],
+
+  [
+    "Binary Search Tree",
+    `# Binary Search Tree Implementation
+Type: Data Structure
+Operations: O(h) - height of tree
+Space: O(n)
+Use Case: Ordered data storage
+
+Methods:
+1. insert(data):
+   - Compare with current
+   - Go left if smaller
+   - Go right if larger
+
+2. delete(data):
+   - Find node
+   - Handle leaf/1-child/2-child
+
+3. search(data):
+   - Binary search process`,
+  ],
+
+  [
+    "Heap Implementation",
+    `# Heap Implementation
+Type: Data Structure
+Operations: O(log n)
+Space: O(n)
+Use Case: Priority queue
+
+Methods:
+1. insert(data):
+   - Add at end
+   - Bubble up
+
+2. extractTop():
+   - Remove root
+   - Move last to root
+   - Bubble down
+
+3. heapify():
+   - Build heap property`,
+  ],
+
+  [
+    "Trie",
+    `# Trie Implementation
+Type: Data Structure
+Operations: O(key_length)
+Space: O(ALPHABET_SIZE * key_length * n)
+Use Case: String dictionary
+
+Methods:
+1. insert(word):
+   - Create path of nodes
+   - Mark last as end
+
+2. search(word):
+   - Follow path
+   - Check end marker
+
+3. startsWith(prefix):
+   - Follow path
+   - Return true if exists`,
   ],
 ]);

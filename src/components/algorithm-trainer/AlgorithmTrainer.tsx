@@ -86,21 +86,25 @@ export default function AlgorithmTrainer() {
 
       <div className="flex-1 flex flex-col gap-2 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 min-h-0 flex-1">
-          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto">
-            <PatternCard currentPattern={currentPattern} />
+          <div className="min-h-[300px] md:min-h-0 h-full">
+            <PatternCard
+              currentPattern={currentPattern}
+              onPatternChange={setCurrentPattern}
+            />
           </div>
-          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto">
+          <div className="min-h-[300px] md:min-h-0 h-full">
             <CodeEditor userCode={userCode} setUserCode={setUserCode} />
           </div>
-          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto">
+          <div className="min-h-[300px] md:min-h-0 h-full">
             <AnswerCard
               currentPattern={currentPattern}
               showAnswer={showAnswer}
               setShowAnswer={setShowAnswer}
               onNextPattern={nextPattern}
+              onPatternChange={setCurrentPattern}
             />
           </div>
-          <div className="min-h-[300px] md:min-h-0 h-full overflow-auto md:col-span-2 xl:col-span-1">
+          <div className="min-h-[300px] md:min-h-0 h-full md:col-span-2 xl:col-span-1">
             <ReplCard userCode={userCode} />
           </div>
         </div>
