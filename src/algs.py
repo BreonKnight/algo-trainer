@@ -1,4 +1,5 @@
 from collections import deque
+from heapq import heappush, heappop
 
 # Data Structures
 class ListNode:
@@ -460,6 +461,500 @@ def two_sum(arr, target):
             my_dict[target - num] = num
     return results
 
+def two_sum_two_pointers(arr, target):
+    arr.sort()
+    left = 0
+    right = len(arr) - 1
+    while left < right:
+        if arr[left] + arr[right] == target:
+            return [left, right]
+        elif arr[left] + arr[right] < target:
+            left += 1
+        else:
+            right -= 1
+    return []
+
+def dfs_linked_list(head):
+    if not head:
+        return []
+    return [head.val] + dfs_linked_list(head.next)
+
+def bfs_linked_list(head):
+    if not head:
+        return []
+    queue = deque([head])
+    results = []
+    while queue:
+        node = queue.popleft()
+        results.append(node.val)
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+    return results
+
+def dfs_binary_tree(root):
+    if not root:
+        return []
+    return [root.val] + dfs_binary_tree(root.left) + dfs_binary_tree(root.right)
+
+def dynamic_programming_fibonacci(n):
+    dp = [0] * (n+1)
+    dp[0] = 0
+    dp[1] = 1
+    for i in range(2, n+1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+
+def dynamic_programming_iterative(arr):
+    dp = [0] * len(arr)
+    dp[0] = arr[0]
+    for i in range(1, len(arr)):
+        dp[i] = max(dp[i-1] + arr[i], arr[i])
+    return max(dp)
+
+def dynamic_programming_coin_change(coins, amount):
+    dp = [float('inf')] * (amount+1)
+    dp[0] = 0
+    for coin in coins:
+        for i in range(coin, amount+1):
+            dp[i] = min(dp[i], dp[i-coin] + 1)
+    return dp[amount] if dp[amount] != float('inf') else -1
+
+def greedy_activity_selection(activities):
+    activities.sort(key=lambda x: x[1])
+    results = []
+    current_end = 0
+    for activity in activities:
+        if activity[0] >= current_end:
+            results.append(activity)
+            current_end = activity[1]
+    return results
+
+def greedy_fractional_knapsack(items, capacity):
+    items.sort(key=lambda x: x[1]/x[0], reverse=True)
+    results = []
+    current_weight = 0
+    for item in items:
+        if current_weight + item[0] <= capacity:
+            results.append(item)
+            current_weight += item[0]
+        else:
+            results.append((item[0], capacity - current_weight))
+            break
+    return results
+
+def greedy_job_scheduling(jobs):
+    jobs.sort(key=lambda x: x[1], reverse=True)
+    results = []
+    current_time = 0
+    for job in jobs:
+        if current_time + job[0] <= job[1]:
+            results.append(job)
+            current_time += job[0]
+    return results
+
+def greedy_huffman_coding(data):
+    from collections import Counter
+    heap = []
+    for char, freq in Counter(data).items():
+        heappush(heap, (freq, char))
+    while len(heap) > 1:
+        freq1, char1 = heappop(heap)
+        freq2, char2 = heappop(heap)    
+        heappush(heap, (freq1 + freq2, char1 + char2))
+    codes = {}
+    for char, freq in Counter(data).items():
+        codes[char] = ''
+    while heap:
+        freq, char = heappop(heap)
+        for code in codes:
+            if code in char:
+                codes[code] = '0' + codes[code]
+            else:
+                codes[code] = '1' + codes[code]
+    return codes
+
+def greedy_dijkstra(graph, start):
+    distances = {vertex: float('inf') for vertex in graph}  
+    distances[start] = 0
+    queue = [(0, start)]
+    while queue:
+        dist, vertex = heappop(queue)
+        if dist > distances[vertex]:
+            continue
+        for neighbor, weight in graph[vertex]:  
+            new_dist = dist + weight
+            if new_dist < distances[neighbor]:
+                distances[neighbor] = new_dist
+                heappush(queue, (new_dist, neighbor))
+    return distances    
+
+def travseMatrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    for i in range(rows):
+        for j in range(cols):
+            print(matrix[i][j], end=' ')
+        print()
+
+def travseMatrix_spiral(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    top = 0
+    bottom = rows - 1
+    left = 0
+    right = cols - 1
+
+    while top <= bottom and left <= right:
+        for i in range(left, right + 1):
+            print(matrix[top][i], end=' ')
+        top += 1
+        for i in range(top, bottom + 1):
+            print(matrix[i][right], end=' ')
+        right -= 1  
+        if top <= bottom:
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            bottom -= 1
+        if left <= right:   
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1
+
+def travseMatrix_spiral_recursive(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    def spiral_helper(matrix, top, bottom, left, right):
+        if top > bottom or left > right:
+            return
+        for i in range(left, right + 1):
+            print(matrix[top][i], end=' ')
+        top += 1
+        for i in range(top, bottom + 1):
+            print(matrix[i][right], end=' ')
+        right -= 1
+        if top <= bottom:
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')   
+            bottom -= 1
+        if left <= right:
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1
+    spiral_helper(matrix, 0, rows - 1, 0, cols - 1)
+    
+def traverse_matrix_spiral_recursive(matrix):
+    def helper(matrix, top, bottom, left, right, direction):
+        if top > bottom or left > right:
+            return
+
+        if direction == 'right':
+            for i in range(left, right + 1):
+                print(matrix[top][i], end=' ')
+            helper(matrix, top + 1, bottom, left, right, 'down')
+
+        elif direction == 'down':
+            for i in range(top, bottom + 1):
+                print(matrix[i][right], end=' ')
+            helper(matrix, top, bottom, left, right - 1, 'left')
+
+        elif direction == 'left':
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            helper(matrix, top, bottom - 1, left, right, 'up')
+
+        elif direction == 'up':
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            helper(matrix, top, bottom, left + 1, right, 'right')
+
+    if not matrix or not matrix[0]:
+        return
+
+    helper(matrix, 0, len(matrix) - 1, 0, len(matrix[0]) - 1, 'right')
+
+def matrix_teacher_to_understand_how_to_traverse_matrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    def traverse_helper(matrix, row, col, direction):
+        if row < 0 or row >= rows or col < 0 or col >= cols:
+            return  
+        if direction == 'right':
+            for i in range(left, right + 1):
+                print(matrix[top][i], end=' ')
+            top += 1
+        elif direction == 'down':
+            for i in range(top, bottom + 1):
+                print(matrix[i][right], end=' ')
+            right -= 1
+        elif direction == 'left':
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            bottom -= 1
+        elif direction == 'up':
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1
+    traverse_helper(matrix, 0, 0, 'right')
+
+def matrix_teacher_to_understand_how_to_traverse_matrix_recursive(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, 0, 0, 'right', 0, rows-1, 0, cols-1)
+
+def matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, row, col, direction, top, bottom, left, right):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    if row < 0 or row >= rows or col < 0 or col >= cols:
+        return
+    if direction == 'right':
+        for i in range(left, right + 1):
+            print(matrix[row][i], end=' ')
+        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, row, i + 1, 'down', top, bottom, left, right)
+    elif direction == 'down':
+        for i in range(top, bottom + 1):
+            print(matrix[i][col], end=' ')
+        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, i + 1, col, 'left', top, bottom, left, right)
+    elif direction == 'left':
+        for i in range(right, left - 1, -1):
+            print(matrix[row][i], end=' ')
+        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, row, i - 1, 'up', top, bottom, left, right)
+    elif direction == 'up':
+        for i in range(bottom, top - 1, -1):    
+            print(matrix[i][col], end=' ')
+        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, i - 1, col, 'right', top, bottom, left, right)
+
+# Additional Algorithm Patterns
+def prefix_sum(arr):
+    """
+    Calculate prefix sum array where each element is the sum of all previous elements.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    """
+    # Initialize result array with same length as input
+    result = [0] * len(arr)
+    
+    # First element is same as input array's first element
+    result[0] = arr[0]
+    
+    # For each element, add the previous result to current element
+    for i in range(1, len(arr)):
+        result[i] = result[i-1] + arr[i]
+    
+    return result
+
+def kadane_algorithm(arr):
+    """
+    Find maximum subarray sum in an array.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    # Initialize variables to track current and maximum sum
+    current_sum = arr[0]
+    max_sum = arr[0]
+    
+    # Iterate through array starting from second element
+    for i in range(1, len(arr)):
+        # Update current sum by taking maximum of current element or current sum + current element
+        current_sum = max(arr[i], current_sum + arr[i])
+        
+        # Update maximum sum if current sum is greater
+        if current_sum > max_sum:
+            max_sum = current_sum
+    
+    return max_sum
+
+def floyd_cycle_detection(head):
+    """
+    Detect cycle in a linked list using Floyd's Cycle Detection Algorithm.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    # Initialize two pointers - slow and fast
+    slow = head
+    fast = head
+    
+    # Move slow pointer by 1 and fast pointer by 2
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+        # If pointers meet, cycle exists
+        if slow == fast:
+            return True
+    
+    # If fast pointer reaches end, no cycle
+    return False
+
+def rabin_karp(text, pattern):
+    """
+    Pattern matching algorithm using rolling hash.
+    Time Complexity: O(n+m) average case, O(nm) worst case
+    Space Complexity: O(1)
+    """
+    # Define prime number for hash function
+    prime = 101
+    
+    # Calculate pattern hash
+    pattern_hash = 0
+    for char in pattern:
+        pattern_hash = (pattern_hash * 256 + ord(char)) % prime
+    
+    # Calculate first window hash
+    window_hash = 0
+    for i in range(len(pattern)):
+        window_hash = (window_hash * 256 + ord(text[i])) % prime
+    
+    # Slide window and compare hashes
+    for i in range(len(text) - len(pattern) + 1):
+        # If hashes match, verify pattern
+        if pattern_hash == window_hash:
+            if text[i:i+len(pattern)] == pattern:
+                return i
+        
+        # Calculate hash for next window
+        if i < len(text) - len(pattern):
+            window_hash = ((window_hash * 256 - ord(text[i]) * pow(256, len(pattern)-1, prime)) + ord(text[i+len(pattern)])) % prime
+    
+    return -1
+
+def knuth_morris_pratt(text, pattern):
+    """
+    Pattern matching algorithm using KMP algorithm.
+    Time Complexity: O(n+m)
+    Space Complexity: O(m)
+    """
+    # Build partial match table (failure function)
+    def build_lps(pattern):
+        lps = [0] * len(pattern)
+        j = 0
+        i = 1
+        
+        while i < len(pattern):
+            if pattern[i] == pattern[j]:
+                j += 1
+                lps[i] = j
+                i += 1
+            elif j > 0:
+                j = lps[j-1]
+            else:
+                lps[i] = 0
+                i += 1
+        
+        return lps
+    
+    # Get partial match table
+    lps = build_lps(pattern)
+    
+    # Initialize pointers
+    i = 0  # for text
+    j = 0  # for pattern
+    
+    # Match pattern in text
+    while i < len(text):
+        if pattern[j] == text[i]:
+            i += 1
+            j += 1
+        
+        if j == len(pattern):
+            return i - j
+        elif i < len(text) and pattern[j] != text[i]:
+            if j != 0:
+                j = lps[j-1]
+            else:
+                i += 1
+    
+    return -1
+
+def manacher_algorithm(s):
+    """
+    Find longest palindromic substring in linear time.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    """
+    # Transform string to handle even length palindromes
+    t = '#' + '#'.join(s) + '#'
+    
+    # Initialize array to store palindrome radii
+    p = [0] * len(t)
+    
+    # Center and right boundary of current palindrome
+    center = 0
+    right = 0
+    
+    # Calculate palindrome radii
+    for i in range(len(t)):
+        if i < right:
+            # Use mirror property if within right boundary
+            p[i] = min(right - i, p[2*center - i])
+        
+        # Expand palindrome centered at i
+        left = i - (p[i] + 1)
+        r = i + (p[i] + 1)
+        while left >= 0 and r < len(t) and t[left] == t[r]:
+            p[i] += 1
+            left -= 1
+            r += 1
+        
+        # Update center and right boundary if needed
+        if i + p[i] > right:
+            center = i
+            right = i + p[i]
+    
+    # Find longest palindrome
+    max_len = max(p)
+    center_index = p.index(max_len)
+    
+    # Convert back to original string indices
+    start = (center_index - max_len) // 2
+    end = start + max_len
+    
+    return s[start:end]
+
+def z_algorithm(text, pattern):
+    """
+    Pattern matching using Z-algorithm.
+    Time Complexity: O(n+m)
+    Space Complexity: O(n+m)
+    """
+    # Concatenate pattern and text with special character
+    s = pattern + '$' + text
+    
+    # Initialize Z array
+    z = [0] * len(s)
+    
+    # Initialize left and right boundaries
+    left = right = 0
+    
+    # Calculate Z values
+    for i in range(1, len(s)):
+        if i > right:
+            # If outside current Z-box, start new comparison
+            left = right = i
+            while right < len(s) and s[right-left] == s[right]:
+                right += 1
+            z[i] = right - left
+        else:
+            # If inside Z-box, use previous values
+            k = i - left
+            if z[k] < right - i:
+                z[i] = z[k]
+            else:
+                # Need to compare further
+                left = i
+                while right < len(s) and s[right-left] == s[right]:
+                    right += 1
+                z[i] = right - left
+    
+    # Find pattern matches
+    matches = []
+    for i in range(len(pattern) + 1, len(s)):
+        if z[i] == len(pattern):
+            matches.append(i - len(pattern) - 1)
+    
+    return matches
+
 # Example usage
 if __name__ == "__main__":
     # Sorting examples
@@ -488,3 +983,19 @@ if __name__ == "__main__":
     print("Monotonic Stack:", monotonic_stack([1, 2, 3, 4, 5]))
     print("Monotonic Queue:", monotonic_queue([1, 2, 3, 4, 5]))
     print("Two Pointers:", two_pointers([1, 2, 3, 4, 5], 6))
+    
+    # New pattern examples
+    print("Prefix Sum:", prefix_sum([1, 2, 3, 4, 5]))
+    print("Kadane's Algorithm:", kadane_algorithm([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+    
+    # Create a linked list with cycle for testing
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = head.next  # Create cycle
+    print("Floyd Cycle Detection:", floyd_cycle_detection(head))
+    
+    print("Rabin-Karp:", rabin_karp("hello world", "world"))
+    print("KMP:", knuth_morris_pratt("hello world", "world"))
+    print("Manacher's Algorithm:", manacher_algorithm("babad"))
+    print("Z-Algorithm:", z_algorithm("hello world", "world"))
