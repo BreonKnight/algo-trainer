@@ -1131,4 +1131,70 @@ Methods:
    - Follow path
    - Return true if exists`,
   ],
+
+  [
+    "Two Sum Dict",
+    `# Two Sum Dictionary Pattern
+Type: Array Technique
+Time: O(n) - single pass through array
+Space: O(n) - hash table storage
+Use Case: Finding two numbers that sum to a target value
+
+1. Initialize empty dictionary:
+   - Create hash table to store numbers and indices
+
+2. For each number in array:
+   - Calculate complement = target - current_number
+   - If complement exists in dictionary:
+     * Return sorted [complement_index, current_index]
+   - Add current_number and its index to dictionary
+
+3. Return empty array if no solution found
+
+Example:
+arr = [2, 7, 11, 15]
+target = 9
+
+Step 1: num = 2
+complement = 9 - 2 = 7
+dict = {2: 0}
+
+Step 2: num = 7
+complement = 9 - 7 = 2
+2 in dict
+Found solution: [0, 1]`,
+  ],
+
+  [
+    "Linked List",
+    `# Linked List Implementation
+Type: Data Structure
+Time: Access O(n), Insert/Delete at known position O(1)
+Space: O(n) for n elements
+Use Case: Dynamic data storage with efficient insertions/deletions
+
+1. Node structure:
+   - data: value stored
+   - next: pointer to next node
+
+2. Basic operations:
+   - append(element): Add to end
+   - prepend(element): Add to start
+   - delete(element): Remove first occurrence
+   - insert(element, position): Insert at specific position
+   - search(element): Return position of element
+
+3. Implementation details:
+   - Maintain head pointer
+   - Handle empty list case
+   - Update pointers correctly
+
+Example:
+list = LinkedList()
+list.append(1)    # 1->null
+list.append(2)    # 1->2->null
+list.prepend(0)   # 0->1->2->null
+list.delete(1)    # 0->2->null
+list.insert(1, 1) # 0->1->2->null`,
+  ],
 ]);
