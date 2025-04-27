@@ -145,6 +145,22 @@ Expected Output: [0, 3] (indices of materials summing to 7)
 # Monster Hunter Tip:
 # Like finding two materials that combine to meet a crafting requirement!`,
 
+  "Two Sum Two Pointers": `# Monster Hunter Two Sum Two Pointers Challenge
+# You are finding pairs of monsters that together match a specific criteria!
+
+# Test Case 1: Monster Strength Pairs
+Input: [2, 7, 11, 15] (monster strength values)
+Target: 9 (combined strength needed)
+Expected Output: [0, 1] (indices of monsters with strength 2 and 7)
+
+# Test Case 2: Material Value Pairs
+Input: [3, 2, 4, 6, 8] (material values)
+Target: 10 (combined value needed)
+Expected Output: [1, 3] (indices of materials with values 2 and 8)
+
+# Monster Hunter Tip:
+# Like coordinating a pincer attack on a monster from two directions!`,
+
   "Dynamic Programming": `# Monster Hunter Dynamic Programming Challenge
 # You are optimizing your material farming route!
 
@@ -159,6 +175,36 @@ Expected Output: 18 (maximum value achievable)
 
 # Monster Hunter Tip:
 # Like planning the most efficient farming route for rare materials!`,
+
+  "Dynamic Programming Fibonacci": `# Monster Hunter DP Fibonacci Challenge
+# You are calculating monster population growth!
+
+# Test Case 1: Population Growth
+Input: 5 (generations)
+Expected Output: 5 (population after 5 generations)
+
+# Monster Hunter Tip:
+# Like predicting monster population growth patterns!`,
+
+  "Dynamic Programming Iterative": `# Monster Hunter DP Iterative Challenge
+# You are optimizing material farming routes iteratively!
+
+# Test Case 1: Route Optimization
+Input: [2, 4, 1, 6, 3] (material values)
+Expected Output: 10 (maximum value collectible path)
+
+# Monster Hunter Tip:
+# Like finding the best farming route step by step!`,
+
+  "Dynamic Programming Coin Change": `# Monster Hunter DP Coin Change Challenge
+# You are finding minimum materials needed for crafting!
+
+# Test Case 1: Material Combination
+Input: Materials: [1, 3, 5], Target: 7
+Expected Output: 3 (minimum materials needed)
+
+# Monster Hunter Tip:
+# Like finding the most efficient combination of materials!`,
 
   Greedy: `# Monster Hunter Greedy Challenge
 # You are maximizing your material collection during a limited time hunt!
@@ -175,6 +221,58 @@ Expected Output: ["Nergigante", "Kirin"]
 
 # Monster Hunter Tip:
 # Like choosing which monster to hunt based on time and reward!`,
+
+  "Greedy Activity Selection": `# Monster Hunter Greedy Activity Selection
+# You are scheduling non-overlapping hunts!
+
+# Test Case 1: Hunt Schedule
+Input: [(2,5), (1,4), (6,8)] (start,end times)
+Expected Output: [(1,4), (6,8)] (maximum non-overlapping hunts)
+
+# Monster Hunter Tip:
+# Like scheduling hunts to maximize efficiency!`,
+
+  "Greedy Fractional Knapsack": `# Monster Hunter Fractional Knapsack
+# You are optimizing inventory space with divisible materials!
+
+# Test Case 1: Inventory Optimization
+Input: [(60,10), (100,20), (120,30)] (value,weight)
+Capacity: 50
+Expected Output: 240 (maximum value possible)
+
+# Monster Hunter Tip:
+# Like maximizing value in limited inventory space!`,
+
+  "Greedy Job Scheduling": `# Monster Hunter Job Scheduling
+# You are scheduling hunts with deadlines!
+
+# Test Case 1: Hunt Schedule
+Input: [(2,100), (1,19), (2,27)] (deadline,reward)
+Expected Output: 127 (maximum reward schedule)
+
+# Monster Hunter Tip:
+# Like scheduling hunts to maximize rewards before deadlines!`,
+
+  "Greedy Huffman Coding": `# Monster Hunter Huffman Coding
+# You are compressing monster data efficiently!
+
+# Test Case 1: Data Compression
+Input: "RATHALOSWING" (frequency analysis)
+Expected Output: Optimal binary encoding
+
+# Monster Hunter Tip:
+# Like creating efficient codes for monster data storage!`,
+
+  "Greedy Dijkstra": `# Monster Hunter Dijkstra
+# You are finding shortest paths between hunting grounds!
+
+# Test Case 1: Path Finding
+Input: Graph of areas with distances
+Start: "Base Camp"
+Expected Output: Shortest paths to all areas
+
+# Monster Hunter Tip:
+# Like finding the quickest routes between hunting grounds!`,
 
   Backtracking: `# Monster Hunter Backtracking Challenge
 # You are finding all possible combinations of monster materials!
@@ -233,6 +331,26 @@ Expected Output: All reachable territories in depth-first order
 # Monster Hunter Tip:
 # Like thoroughly exploring each branch of a territory before moving on!`,
 
+  "DFS Linked List": `# Monster Hunter DFS Linked List Challenge
+# You are exploring a chain of connected areas!
+
+# Test Case 1: Area Chain Exploration
+Input: Linked areas [Base → Forest → Desert → Volcano]
+Expected Output: All areas in depth-first order
+
+# Monster Hunter Tip:
+# Like following a chain of connected hunting grounds!`,
+
+  "DFS Binary Tree": `# Monster Hunter DFS Binary Tree Challenge
+# You are exploring a branching path of monster territories!
+
+# Test Case 1: Territory Tree Exploration
+Input: Binary tree of territories
+Expected Output: All territories in depth-first order
+
+# Monster Hunter Tip:
+# Like exploring each branch of territory completely before backtracking!`,
+
   BFS: `# Monster Hunter BFS Challenge
 # You are mapping monster territory levels!
 
@@ -243,6 +361,16 @@ Expected Output: Territories grouped by distance from base
 
 # Monster Hunter Tip:
 # Like exploring all nearby areas before moving to distant ones!`,
+
+  "BFS Linked List": `# Monster Hunter BFS Linked List Challenge
+# You are exploring area connections level by level!
+
+# Test Case 1: Level Order Exploration
+Input: Linked areas with branches
+Expected Output: Areas grouped by distance from start
+
+# Monster Hunter Tip:
+# Like exploring all nearby areas before moving to connected ones!`,
 
   "Stack Implementation": `# Monster Hunter Stack Implementation
 # You are implementing a material stack system!
@@ -410,117 +538,26 @@ Expected Output: [0, 1]
 # Monster Hunter Tip:
 # Like coordinating two hunters approaching from different directions!`,
 
-  "DFS Linked List": `# Monster Hunter DFS Linked List Challenge
-# You are exploring a chain of connected areas!
+  "Prefix Sum": `# Monster Hunter Prefix Sum
+# You are calculating cumulative damage totals!
 
-# Test Case 1: Area Chain Exploration
-Input: Linked areas [Base → Forest → Desert → Volcano]
-Expected Output: All areas in depth-first order
-
-# Monster Hunter Tip:
-# Like following a chain of connected hunting grounds!`,
-
-  "DFS Binary Tree": `# Monster Hunter DFS Binary Tree Challenge
-# You are exploring a branching path of monster territories!
-
-# Test Case 1: Territory Tree Exploration
-Input: Binary tree of territories
-Expected Output: All territories in depth-first order
+# Test Case 1: Damage Calculation
+Input: [10, 20, 30, 40, 50] (damage values)
+Query: Sum from index 1 to 3
+Expected Output: 90 (20 + 30 + 40)
 
 # Monster Hunter Tip:
-# Like exploring each branch of territory completely before backtracking!`,
+# Like tracking cumulative damage in different areas!`,
 
-  "BFS Linked List": `# Monster Hunter BFS Linked List Challenge
-# You are exploring area connections level by level!
+  "Kadane's Algorithm": `# Monster Hunter Kadane
+# You are finding maximum damage streak!
 
-# Test Case 1: Level Order Exploration
-Input: Linked areas with branches
-Expected Output: Areas grouped by distance from start
-
-# Monster Hunter Tip:
-# Like exploring all nearby areas before moving to connected ones!`,
-
-  "Dynamic Programming Fibonacci": `# Monster Hunter DP Fibonacci Challenge
-# You are calculating monster population growth!
-
-# Test Case 1: Population Growth
-Input: 5 (generations)
-Expected Output: Population after 5 generations
+# Test Case 1: Damage Streak
+Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+Expected Output: Maximum sum subarray
 
 # Monster Hunter Tip:
-# Like predicting monster population growth patterns!`,
-
-  "Dynamic Programming Iterative": `# Monster Hunter DP Iterative Challenge
-# You are optimizing material farming routes iteratively!
-
-# Test Case 1: Route Optimization
-Input: [2, 4, 1, 6, 3] (material values)
-Expected Output: Maximum value collectible path
-
-# Monster Hunter Tip:
-# Like finding the best farming route step by step!`,
-
-  "Dynamic Programming Coin Change": `# Monster Hunter DP Coin Change Challenge
-# You are finding minimum materials needed for crafting!
-
-# Test Case 1: Material Combination
-Input: Materials: [1, 3, 5], Target: 7
-Expected Output: Minimum materials needed
-
-# Monster Hunter Tip:
-# Like finding the most efficient combination of materials!`,
-
-  "Greedy Activity Selection": `# Monster Hunter Greedy Activity Selection
-# You are scheduling non-overlapping hunts!
-
-# Test Case 1: Hunt Schedule
-Input: [(2,5), (1,4), (6,8)] (start,end times)
-Expected Output: Maximum non-overlapping hunts
-
-# Monster Hunter Tip:
-# Like scheduling hunts to maximize efficiency!`,
-
-  "Greedy Fractional Knapsack": `# Monster Hunter Fractional Knapsack
-# You are optimizing inventory space with divisible materials!
-
-# Test Case 1: Inventory Optimization
-Input: [(60,10), (100,20), (120,30)] (value,weight)
-Capacity: 50
-Expected Output: Maximum value possible
-
-# Monster Hunter Tip:
-# Like maximizing value in limited inventory space!`,
-
-  "Greedy Job Scheduling": `# Monster Hunter Job Scheduling
-# You are scheduling hunts with deadlines!
-
-# Test Case 1: Hunt Schedule
-Input: [(2,100), (1,19), (2,27)] (deadline,reward)
-Expected Output: Maximum reward schedule
-
-# Monster Hunter Tip:
-# Like scheduling hunts to maximize rewards before deadlines!`,
-
-  "Greedy Huffman Coding": `# Monster Hunter Huffman Coding
-# You are compressing monster data efficiently!
-
-# Test Case 1: Data Compression
-Input: "RATHALOSWING" (frequency analysis)
-Expected Output: Optimal binary encoding
-
-# Monster Hunter Tip:
-# Like creating efficient codes for monster data storage!`,
-
-  "Greedy Dijkstra": `# Monster Hunter Dijkstra
-# You are finding shortest paths between hunting grounds!
-
-# Test Case 1: Path Finding
-Input: Graph of areas with distances
-Start: "Base Camp"
-Expected Output: Shortest paths to all areas
-
-# Monster Hunter Tip:
-# Like finding the quickest routes between hunting grounds!`,
+# Like finding your best damage combo sequence!`,
 
   "Floyd Cycle Detection": `# Monster Hunter Cycle Detection
 # You are detecting monster patrol patterns!
@@ -615,24 +652,14 @@ Expected Output: Recursive spiral path
 # Monster Hunter Tip:
 # Like exploring nested territories in a spiral pattern!`,
 
-  "Prefix Sum": `# Monster Hunter Prefix Sum
-# You are calculating cumulative damage totals!
+  "Two Sum Dict": `# Monster Hunter Two Sum Dict Challenge
+# You are finding material pairs using a material registry!
 
-# Test Case 1: Damage Calculation
-Input: [10, 20, 30, 40, 50] (damage values)
-Query: Sum from index 1 to 3
-Expected Output: 90 (20 + 30 + 40)
-
-# Monster Hunter Tip:
-# Like tracking cumulative damage in different areas!`,
-
-  "Kadane's Algorithm": `# Monster Hunter Kadane
-# You are finding maximum damage streak!
-
-# Test Case 1: Damage Streak
-Input: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-Expected Output: Maximum sum subarray
+# Test Case 1: Material Registry Lookup
+Input: [2, 7, 11, 15] (material values)
+Target: 9 (combined value needed)
+Expected Output: [0, 1] (indices of materials with values 2 and 7)
 
 # Monster Hunter Tip:
-# Like finding your best damage combo sequence!`,
+# Like using a material registry to quickly find complementary materials!`,
 };
