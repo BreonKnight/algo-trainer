@@ -10,6 +10,7 @@ export const PATTERN_KEYS = [
   "Binary Search on Answer",
   "Linear Search",
   "Two Sum",
+  "Two Sum Dict",
   "Two Sum Two Pointers",
   "Dynamic Programming",
   "Dynamic Programming Fibonacci",

@@ -710,6 +710,290 @@ export const monsterHunterPatternsExtended3 = new Map<PatternKey, string>([
     
     return slow  # Start of patrol cycle`,
   ],
+
+  [
+    "DFS" as PatternKey,
+    `def monster_hunter_dfs(territory_map, start_location):
+    """
+    Explore monster territory using Depth-First Search.
+    Time: O(V + E) - vertices + edges
+    Space: O(V) - recursion stack
+    
+    Monster Hunter Context:
+    - Like thoroughly exploring a monster's territory
+    - Follow each path as far as possible before backtracking
+    - Mark visited areas to avoid revisiting
+    
+    Example:
+    territory = {
+        "Ancient Forest": ["Wildspire Waste", "Coral Highlands"],
+        "Wildspire Waste": ["Ancient Forest", "Rotten Vale"],
+        "Coral Highlands": ["Ancient Forest", "Elder's Recess"],
+        "Rotten Vale": ["Wildspire Waste", "Elder's Recess"],
+        "Elder's Recess": ["Coral Highlands", "Rotten Vale"]
+    }
+    start = "Ancient Forest"
+    
+    Process:
+    1. Visit Ancient Forest
+    2. Visit Wildspire Waste
+    3. Visit Rotten Vale
+    4. Visit Elder's Recess
+    5. Visit Coral Highlands
+    """
+    visited = set()
+    
+    def explore(location):
+        if location in visited:
+            return
+        
+        visited.add(location)
+        print(f"Exploring {location}")
+        
+        for connected_area in territory_map[location]:
+            explore(connected_area)
+    
+    explore(start_location)
+    return visited`,
+  ],
+
+  [
+    "BFS" as PatternKey,
+    `def monster_hunter_bfs(territory_map, start_location):
+    """
+    Explore monster territory using Breadth-First Search.
+    Time: O(V + E) - vertices + edges
+    Space: O(V) - queue size
+    
+    Monster Hunter Context:
+    - Like mapping monster territory levels
+    - Explore all areas at the same distance before moving further
+    - Use a queue to track areas to explore next
+    
+    Example:
+    territory = {
+        "Base Camp": ["Ancient Forest", "Wildspire Waste"],
+        "Ancient Forest": ["Base Camp", "Coral Highlands"],
+        "Wildspire Waste": ["Base Camp", "Rotten Vale"],
+        "Coral Highlands": ["Ancient Forest", "Elder's Recess"],
+        "Rotten Vale": ["Wildspire Waste", "Elder's Recess"],
+        "Elder's Recess": ["Coral Highlands", "Rotten Vale"]
+    }
+    start = "Base Camp"
+    
+    Process:
+    Level 0: Base Camp
+    Level 1: Ancient Forest, Wildspire Waste
+    Level 2: Coral Highlands, Rotten Vale
+    Level 3: Elder's Recess
+    """
+    visited = set()
+    queue = [start_location]
+    visited.add(start_location)
+    
+    while queue:
+        current = queue.pop(0)
+        print(f"Exploring {current}")
+        
+        for connected_area in territory_map[current]:
+            if connected_area not in visited:
+                visited.add(connected_area)
+                queue.append(connected_area)
+    
+    return visited`,
+  ],
+
+  [
+    "Graph" as PatternKey,
+    `class MonsterHunterGraph:
+    """
+    Graph representation of monster territories.
+    Operations: O(1) to O(V+E)
+    Space: O(V+E)
+    
+    Monster Hunter Context:
+    - Like mapping monster territories and connections
+    - Vertices represent locations (hunting grounds)
+    - Edges represent paths between locations
+    
+    Example:
+    Territories:
+    - Ancient Forest
+    - Wildspire Waste
+    - Coral Highlands
+    - Rotten Vale
+    - Elder's Recess
+    
+    Connections:
+    - Ancient Forest <-> Wildspire Waste
+    - Ancient Forest <-> Coral Highlands
+    - Wildspire Waste <-> Rotten Vale
+    - Coral Highlands <-> Elder's Recess
+    - Rotten Vale <-> Elder's Recess
+    """
+    def __init__(self):
+        self.territories = {}  # Adjacency list
+    
+    def add_territory(self, name):
+        if name not in self.territories:
+            self.territories[name] = []
+    
+    def add_path(self, from_territory, to_territory):
+        if from_territory not in self.territories:
+            self.add_territory(from_territory)
+        if to_territory not in self.territories:
+            self.add_territory(to_territory)
+        
+        if to_territory not in self.territories[from_territory]:
+            self.territories[from_territory].append(to_territory)
+        if from_territory not in self.territories[to_territory]:
+            self.territories[to_territory].append(from_territory)
+    
+    def get_connected_territories(self, territory):
+        return self.territories.get(territory, [])
+    
+    def has_path(self, from_territory, to_territory):
+        return to_territory in self.territories.get(from_territory, [])`,
+  ],
+
+  [
+    "Tree" as PatternKey,
+    `class MonsterHunterTree:
+    """
+    Tree representation of monster species hierarchy.
+    Operations: O(h) - height of tree
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like organizing monster species in a hierarchy
+    - Root at top (most general category)
+    - Nodes can have children (subcategories)
+    - No cycles (hierarchy doesn't loop back)
+    
+    Example:
+    Tree structure for monster species:
+                Wyvern
+               /      \\
+        Flying Wyvern  Brute Wyvern
+        /     |     \\
+    Rathalos Rathian Bazelgeuse
+    
+    Operations:
+    - Add child: Add subspecies to a species
+    - Find species: Search for a specific monster
+    - Traverse: Visit all monsters in the tree
+    """
+    def __init__(self, species_name):
+        self.species = species_name
+        self.children = []
+    
+    def add_child(self, child_species):
+        child = MonsterHunterTree(child_species)
+        self.children.append(child)
+        return child
+    
+    def find_species(self, target_species):
+        if self.species == target_species:
+            return self
+        
+        for child in self.children:
+            result = child.find_species(target_species)
+            if result:
+                return result
+        
+        return None
+    
+    def traverse(self, level=0):
+        print("  " * level + self.species)
+        for child in self.children:
+            child.traverse(level + 1)`,
+  ],
+
+  [
+    "Trie" as PatternKey,
+    `class MonsterHunterTrie:
+    """
+    Trie for efficient monster name storage and retrieval.
+    Operations: O(m) - length of string
+    Space: O(ALPHABET_SIZE * m * n) - n is number of strings
+    
+    Monster Hunter Context:
+    - Like creating a prefix tree for monster names
+    - Each node represents a character in a monster name
+    - Common prefixes share nodes
+    - Efficient prefix searches
+    
+    Example:
+    Monster names: "Rathalos", "Rathian", "Rajang", "Diablos"
+    
+    Trie structure:
+           R
+          / \\
+         A   D
+        /    |
+       T     I
+      /      |
+     H       A
+    /        |
+   A          B
+  /           |
+ L            L
+ /
+O             O
+              |
+S             S
+    
+    Operations:
+    - Insert: Add a new monster name
+    - Search: Find a specific monster name
+    - Prefix search: Find all monsters with a prefix
+    """
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+    
+    def insert(self, monster_name):
+        node = self
+        for char in monster_name:
+            if char not in node.children:
+                node.children[char] = MonsterHunterTrie()
+            node = node.children[char]
+        node.is_end = True
+    
+    def search(self, monster_name):
+        node = self
+        for char in monster_name:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.is_end
+    
+    def starts_with(self, prefix):
+        node = self
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
+    
+    def get_all_with_prefix(self, prefix):
+        node = self
+        for char in prefix:
+            if char not in node.children:
+                return []
+            node = node.children[char]
+        
+        result = []
+        self._collect_words(node, prefix, result)
+        return result
+    
+    def _collect_words(self, node, prefix, result):
+        if node.is_end:
+            result.append(prefix)
+        
+        for char, child in node.children.items():
+            self._collect_words(child, prefix + char, result)`,
+  ],
 ]);
 
 // Export combined patterns

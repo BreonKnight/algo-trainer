@@ -1,7 +1,10 @@
 from collections import deque
 from heapq import heappush, heappop
 
-# Data Structures
+# ============================================================================
+# DATA STRUCTURES
+# ============================================================================
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -13,171 +16,6 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# Sorting Algorithms
-def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x < pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]       
-    return quick_sort(left) + middle + quick_sort(right)
-
-def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    mid = len(arr) // 2
-    left = merge_sort(arr[:mid])
-    right = merge_sort(arr[mid:])
-    return merge(left, right)
-
-def merge(left, right):
-    result = []
-    i = j = 0
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            result.append(left[i])
-            i += 1
-        else:
-            result.append(right[j])
-            j += 1
-    return result + left[i:] + right[j:]
-
-def heap_sort(arr):
-    n = len(arr)
-    for i in range(n // 2 - 1, -1, -1):
-        heapify(arr, n, i)
-    for i in range(n - 1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]
-        heapify(arr, i, 0)
-    return arr
-
-def heapify(arr, n, i):
-    largest = i
-    left = 2 * i + 1
-    right = 2 * i + 2
-    if left < n and arr[left] > arr[largest]:
-        largest = left
-    if right < n and arr[right] > arr[largest]:
-        largest = right
-    if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]
-        heapify(arr, n, largest)
-
-def bubble_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
-    return arr
-
-def selection_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        min_idx = i
-        for j in range(i+1, n):
-            if arr[j] < arr[min_idx]:
-                min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    return arr
-
-def insertion_sort(arr):
-    for i in range(1, len(arr)):
-        key = arr[i]
-        j = i - 1
-        while j >= 0 and key < arr[j]:
-            arr[j+1] = arr[j]
-            j -= 1
-        arr[j+1] = key
-    return arr
-
-# Search Algorithms
-def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return -1
-
-def linear_search(arr, target):
-    for i, num in enumerate(arr):
-        if num == target:
-            return i
-    return -1
-
-def binary_search_on_answer(arr, target):
-    def is_valid(mid):
-        return arr[mid] >= target
-
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if is_valid(mid):
-            right = mid - 1
-        else:
-            left = mid + 1
-    return left
-
-# Tree Algorithms
-def binary_search_tree(arr):
-    if not arr:
-        return None
-    mid = len(arr) // 2
-    root = TreeNode(arr[mid])
-    root.left = binary_search_tree(arr[:mid])
-    root.right = binary_search_tree(arr[mid+1:])
-    return root
-
-def binary_tree_traversal(root):
-    if not root:
-        return []
-    return [root.val] + binary_tree_traversal(root.left) + binary_tree_traversal(root.right)
-
-# Graph Algorithms
-def dfs(graph, start, visited=None):
-    if visited is None:
-        visited = set()
-    visited.add(start)
-    for neighbor in graph[start]:
-        if neighbor not in visited:
-            dfs(graph, neighbor, visited)
-
-def bfs(graph, start):
-    visited = set()
-    queue = deque([start])
-    visited.add(start)
-    while queue:
-        node = queue.popleft()
-        print(node, end=' ')
-        for neighbor in graph[node]:
-            if neighbor not in visited:
-                visited.add(neighbor)
-                queue.append(neighbor)
-
-def topological_sort(graph):
-    in_degree = {u: 0 for u in graph}
-    for u in graph:
-        for v in graph[u]:
-            in_degree[v] += 1
-
-    queue = deque([u for u in in_degree if in_degree[u] == 0])
-    sorted_list = []
-    while queue:
-        u = queue.popleft()
-        sorted_list.append(u)
-        for v in graph[u]:
-            in_degree[v] -= 1
-            if in_degree[v] == 0:
-                queue.append(v)
-    return sorted_list
-
-# Data Structure Implementations
 class Stack:
     def __init__(self):
         self.items = []
@@ -371,7 +209,251 @@ class Trie:
             node = node.children[char]
         return node.is_end
 
-# Algorithm Techniques
+# ============================================================================
+# SORTING ALGORITHMS
+# ============================================================================
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]       
+    return quick_sort(left) + middle + quick_sort(right)
+
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    return result + left[i:] + right[j:]
+
+def heap_sort(arr):
+    n = len(arr)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+    return arr
+
+def heapify(arr, n, i):
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    return arr
+
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j+1] = arr[j]
+            j -= 1
+        arr[j+1] = key
+    return arr
+
+# ============================================================================
+# SEARCH ALGORITHMS
+# ============================================================================
+
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+def linear_search(arr, target):
+    for i, num in enumerate(arr):
+        if num == target:
+            return i
+    return -1
+
+def binary_search_on_answer(arr, target):
+    def is_valid(mid):
+        return arr[mid] >= target
+
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if is_valid(mid):
+            right = mid - 1
+        else:
+            left = mid + 1
+    return left
+
+# ============================================================================
+# TREE ALGORITHMS
+# ============================================================================
+
+def binary_search_tree(arr):
+    if not arr:
+        return None
+    mid = len(arr) // 2
+    root = TreeNode(arr[mid])
+    root.left = binary_search_tree(arr[:mid])
+    root.right = binary_search_tree(arr[mid+1:])
+    return root
+
+def binary_tree_traversal(root):
+    if not root:
+        return []
+    return [root.val] + binary_tree_traversal(root.left) + binary_tree_traversal(root.right)
+
+def dfs_binary_tree(root):
+    if not root:
+        return []
+    return [root.val] + dfs_binary_tree(root.left) + dfs_binary_tree(root.right)
+
+# ============================================================================
+# GRAPH ALGORITHMS
+# ============================================================================
+
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    while queue:
+        node = queue.popleft()
+        print(node, end=' ')
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+def topological_sort(graph):
+    in_degree = {u: 0 for u in graph}
+    for u in graph:
+        for v in graph[u]:
+            in_degree[v] += 1
+
+    queue = deque([u for u in in_degree if in_degree[u] == 0])
+    sorted_list = []
+    while queue:
+        u = queue.popleft()
+        sorted_list.append(u)
+        for v in graph[u]:
+            in_degree[v] -= 1
+            if in_degree[v] == 0:
+                queue.append(v)
+    return sorted_list
+
+def greedy_dijkstra(graph, start):
+    distances = {vertex: float('inf') for vertex in graph}  
+    distances[start] = 0
+    queue = [(0, start)]
+    while queue:
+        dist, vertex = heappop(queue)
+        if dist > distances[vertex]:
+            continue
+        for neighbor, weight in graph[vertex]:  
+            new_dist = dist + weight
+            if new_dist < distances[neighbor]:
+                distances[neighbor] = new_dist
+                heappush(queue, (new_dist, neighbor))
+    return distances
+
+# ============================================================================
+# LINKED LIST ALGORITHMS
+# ============================================================================
+
+def dfs_linked_list(head):
+    if not head:
+        return []
+    return [head.val] + dfs_linked_list(head.next)
+
+def bfs_linked_list(head):
+    if not head:
+        return []
+    queue = deque([head])
+    results = []
+    while queue:
+        node = queue.popleft()
+        results.append(node.val)
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+    return results
+
+def floyd_cycle_detection(head):
+    """
+    Detect cycle in a linked list using Floyd's Cycle Detection Algorithm.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    # Initialize two pointers - slow and fast
+    slow = head
+    fast = head
+    
+    # Move slow pointer by 1 and fast pointer by 2
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+        # If pointers meet, cycle exists
+        if slow == fast:
+            return True
+    
+    # If fast pointer reaches end, no cycle
+    return False
+
+# ============================================================================
+# ARRAY ALGORITHMS
+# ============================================================================
+
 def two_sum(arr, target):
     for i in range(len(arr)):
         for j in range(i+1, len(arr)):
@@ -379,33 +461,46 @@ def two_sum(arr, target):
                 return [i, j]
     return []
 
-def dynamic_programming(arr):
-    dp = [0] * len(arr)
-    dp[0] = arr[0]
-    for i in range(1, len(arr)):
-        dp[i] = max(dp[i-1] + arr[i], arr[i])
-    return max(dp)
+def two_sum_dict(arr, target):
+    """
+    Find two numbers in an array that add up to a target value.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    Returns indices in format [0,1] where the smaller index comes first
+    """ 
+    num_dict = {}
+    for i, num in enumerate(arr):
+        complement = target - num
+        if complement in num_dict and num_dict[complement] != i:  # Check that we're not using the same index
+            # Return indices in sorted order [0,1]
+            return sorted([num_dict[complement], i])
+        num_dict[num] = i
+    return []
 
-def greedy(arr):
+def two_sum_two_pointers(arr, target):
     arr.sort()
-    max_profit = 0
-    for i in range(1, len(arr)):
-        if arr[i] > arr[i-1]:
-            max_profit += arr[i] - arr[i-1]
-    return max_profit
+    left = 0
+    right = len(arr) - 1
+    while left < right:
+        if arr[left] + arr[right] == target:
+            return [left, right]
+        elif arr[left] + arr[right] < target:
+            left += 1
+        else:
+            right -= 1
+    return []
 
-def backtracking(arr):
-    def backtrack(start, path):
-        if len(path) == len(arr):
-            result.append(path[:])
-            return
-        for i in range(start, len(arr)):
-            path.append(arr[i])
-            backtrack(i+1, path)
-            path.pop()
-    result = []
-    backtrack(0, [])
-    return result
+def two_pointers(arr, target):
+    left = 0
+    right = len(arr) - 1
+    while left < right:
+        if arr[left] + arr[right] == target:
+            return [left, right]
+        elif arr[left] + arr[right] < target:
+            left += 1
+        else:
+            right -= 1
+    return []
 
 def sliding_window(arr, k):
     max_sum = float('-inf')
@@ -439,64 +534,55 @@ def monotonic_queue(arr):
         queue.append(num)
     return queue
 
-def two_pointers(arr, target):
-    left = 0
-    right = len(arr) - 1
-    while left < right:
-        if arr[left] + arr[right] == target:
-            return [left, right]
-        elif arr[left] + arr[right] < target:
-            left += 1
-        else:
-            right -= 1
-    return []
+def prefix_sum(arr):
+    """
+    Calculate prefix sum array where each element is the sum of all previous elements.
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+    """
+    # Initialize result array with same length as input
+    result = [0] * len(arr)
+    
+    # First element is same as input array's first element
+    result[0] = arr[0]
+    
+    # For each element, add the previous result to current element
+    for i in range(1, len(arr)):
+        result[i] = result[i-1] + arr[i]
+    
+    return result
 
-def two_sum(arr, target):
-    my_dict = {}
-    results = []
-    for num in arr:
-        if num in my_dict:
-            results.append([my_dict[num], num])
-        else:
-            my_dict[target - num] = num
-    return results
+def kadane_algorithm(arr):
+    """
+    Find maximum subarray sum in an array.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    """
+    # Initialize variables to track current and maximum sum
+    current_sum = arr[0]
+    max_sum = arr[0]
+    
+    # Iterate through array starting from second element
+    for i in range(1, len(arr)):
+        # Update current sum by taking maximum of current element or current sum + current element
+        current_sum = max(arr[i], current_sum + arr[i])
+        
+        # Update maximum sum if current sum is greater
+        if current_sum > max_sum:
+            max_sum = current_sum
+    
+    return max_sum
 
-def two_sum_two_pointers(arr, target):
-    arr.sort()
-    left = 0
-    right = len(arr) - 1
-    while left < right:
-        if arr[left] + arr[right] == target:
-            return [left, right]
-        elif arr[left] + arr[right] < target:
-            left += 1
-        else:
-            right -= 1
-    return []
+# ============================================================================
+# DYNAMIC PROGRAMMING
+# ============================================================================
 
-def dfs_linked_list(head):
-    if not head:
-        return []
-    return [head.val] + dfs_linked_list(head.next)
-
-def bfs_linked_list(head):
-    if not head:
-        return []
-    queue = deque([head])
-    results = []
-    while queue:
-        node = queue.popleft()
-        results.append(node.val)
-        if node.left:
-            queue.append(node.left)
-        if node.right:
-            queue.append(node.right)
-    return results
-
-def dfs_binary_tree(root):
-    if not root:
-        return []
-    return [root.val] + dfs_binary_tree(root.left) + dfs_binary_tree(root.right)
+def dynamic_programming(arr):
+    dp = [0] * len(arr)
+    dp[0] = arr[0]
+    for i in range(1, len(arr)):
+        dp[i] = max(dp[i-1] + arr[i], arr[i])
+    return max(dp)
 
 def dynamic_programming_fibonacci(n):
     dp = [0] * (n+1)
@@ -520,6 +606,18 @@ def dynamic_programming_coin_change(coins, amount):
         for i in range(coin, amount+1):
             dp[i] = min(dp[i], dp[i-coin] + 1)
     return dp[amount] if dp[amount] != float('inf') else -1
+
+# ============================================================================
+# GREEDY ALGORITHMS
+# ============================================================================
+
+def greedy(arr):
+    arr.sort()
+    max_profit = 0
+    for i in range(1, len(arr)):
+        if arr[i] > arr[i-1]:
+            max_profit += arr[i] - arr[i-1]
+    return max_profit
 
 def greedy_activity_selection(activities):
     activities.sort(key=lambda x: x[1])
@@ -575,217 +673,26 @@ def greedy_huffman_coding(data):
                 codes[code] = '1' + codes[code]
     return codes
 
-def greedy_dijkstra(graph, start):
-    distances = {vertex: float('inf') for vertex in graph}  
-    distances[start] = 0
-    queue = [(0, start)]
-    while queue:
-        dist, vertex = heappop(queue)
-        if dist > distances[vertex]:
-            continue
-        for neighbor, weight in graph[vertex]:  
-            new_dist = dist + weight
-            if new_dist < distances[neighbor]:
-                distances[neighbor] = new_dist
-                heappush(queue, (new_dist, neighbor))
-    return distances    
+# ============================================================================
+# BACKTRACKING
+# ============================================================================
 
-def travseMatrix(matrix):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    for i in range(rows):
-        for j in range(cols):
-            print(matrix[i][j], end=' ')
-        print()
-
-def travseMatrix_spiral(matrix):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    top = 0
-    bottom = rows - 1
-    left = 0
-    right = cols - 1
-
-    while top <= bottom and left <= right:
-        for i in range(left, right + 1):
-            print(matrix[top][i], end=' ')
-        top += 1
-        for i in range(top, bottom + 1):
-            print(matrix[i][right], end=' ')
-        right -= 1  
-        if top <= bottom:
-            for i in range(right, left - 1, -1):
-                print(matrix[bottom][i], end=' ')
-            bottom -= 1
-        if left <= right:   
-            for i in range(bottom, top - 1, -1):
-                print(matrix[i][left], end=' ')
-            left += 1
-
-def travseMatrix_spiral_recursive(matrix):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    def spiral_helper(matrix, top, bottom, left, right):
-        if top > bottom or left > right:
+def backtracking(arr):
+    def backtrack(start, path):
+        if len(path) == len(arr):
+            result.append(path[:])
             return
-        for i in range(left, right + 1):
-            print(matrix[top][i], end=' ')
-        top += 1
-        for i in range(top, bottom + 1):
-            print(matrix[i][right], end=' ')
-        right -= 1
-        if top <= bottom:
-            for i in range(right, left - 1, -1):
-                print(matrix[bottom][i], end=' ')   
-            bottom -= 1
-        if left <= right:
-            for i in range(bottom, top - 1, -1):
-                print(matrix[i][left], end=' ')
-            left += 1
-    spiral_helper(matrix, 0, rows - 1, 0, cols - 1)
-    
-def traverse_matrix_spiral_recursive(matrix):
-    def helper(matrix, top, bottom, left, right, direction):
-        if top > bottom or left > right:
-            return
-
-        if direction == 'right':
-            for i in range(left, right + 1):
-                print(matrix[top][i], end=' ')
-            helper(matrix, top + 1, bottom, left, right, 'down')
-
-        elif direction == 'down':
-            for i in range(top, bottom + 1):
-                print(matrix[i][right], end=' ')
-            helper(matrix, top, bottom, left, right - 1, 'left')
-
-        elif direction == 'left':
-            for i in range(right, left - 1, -1):
-                print(matrix[bottom][i], end=' ')
-            helper(matrix, top, bottom - 1, left, right, 'up')
-
-        elif direction == 'up':
-            for i in range(bottom, top - 1, -1):
-                print(matrix[i][left], end=' ')
-            helper(matrix, top, bottom, left + 1, right, 'right')
-
-    if not matrix or not matrix[0]:
-        return
-
-    helper(matrix, 0, len(matrix) - 1, 0, len(matrix[0]) - 1, 'right')
-
-def matrix_teacher_to_understand_how_to_traverse_matrix(matrix):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    def traverse_helper(matrix, row, col, direction):
-        if row < 0 or row >= rows or col < 0 or col >= cols:
-            return  
-        if direction == 'right':
-            for i in range(left, right + 1):
-                print(matrix[top][i], end=' ')
-            top += 1
-        elif direction == 'down':
-            for i in range(top, bottom + 1):
-                print(matrix[i][right], end=' ')
-            right -= 1
-        elif direction == 'left':
-            for i in range(right, left - 1, -1):
-                print(matrix[bottom][i], end=' ')
-            bottom -= 1
-        elif direction == 'up':
-            for i in range(bottom, top - 1, -1):
-                print(matrix[i][left], end=' ')
-            left += 1
-    traverse_helper(matrix, 0, 0, 'right')
-
-def matrix_teacher_to_understand_how_to_traverse_matrix_recursive(matrix):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, 0, 0, 'right', 0, rows-1, 0, cols-1)
-
-def matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, row, col, direction, top, bottom, left, right):
-    rows = len(matrix)
-    cols = len(matrix[0])
-    if row < 0 or row >= rows or col < 0 or col >= cols:
-        return
-    if direction == 'right':
-        for i in range(left, right + 1):
-            print(matrix[row][i], end=' ')
-        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, row, i + 1, 'down', top, bottom, left, right)
-    elif direction == 'down':
-        for i in range(top, bottom + 1):
-            print(matrix[i][col], end=' ')
-        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, i + 1, col, 'left', top, bottom, left, right)
-    elif direction == 'left':
-        for i in range(right, left - 1, -1):
-            print(matrix[row][i], end=' ')
-        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, row, i - 1, 'up', top, bottom, left, right)
-    elif direction == 'up':
-        for i in range(bottom, top - 1, -1):    
-            print(matrix[i][col], end=' ')
-        matrix_teacher_to_understand_how_to_traverse_matrix_recursive_helper(matrix, i - 1, col, 'right', top, bottom, left, right)
-
-# Additional Algorithm Patterns
-def prefix_sum(arr):
-    """
-    Calculate prefix sum array where each element is the sum of all previous elements.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
-    # Initialize result array with same length as input
-    result = [0] * len(arr)
-    
-    # First element is same as input array's first element
-    result[0] = arr[0]
-    
-    # For each element, add the previous result to current element
-    for i in range(1, len(arr)):
-        result[i] = result[i-1] + arr[i]
-    
+        for i in range(start, len(arr)):
+            path.append(arr[i])
+            backtrack(i+1, path)
+            path.pop()
+    result = []
+    backtrack(0, [])
     return result
 
-def kadane_algorithm(arr):
-    """
-    Find maximum subarray sum in an array.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    # Initialize variables to track current and maximum sum
-    current_sum = arr[0]
-    max_sum = arr[0]
-    
-    # Iterate through array starting from second element
-    for i in range(1, len(arr)):
-        # Update current sum by taking maximum of current element or current sum + current element
-        current_sum = max(arr[i], current_sum + arr[i])
-        
-        # Update maximum sum if current sum is greater
-        if current_sum > max_sum:
-            max_sum = current_sum
-    
-    return max_sum
-
-def floyd_cycle_detection(head):
-    """
-    Detect cycle in a linked list using Floyd's Cycle Detection Algorithm.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    # Initialize two pointers - slow and fast
-    slow = head
-    fast = head
-    
-    # Move slow pointer by 1 and fast pointer by 2
-    while fast and fast.next:
-        slow = slow.next
-        fast = fast.next.next
-        
-        # If pointers meet, cycle exists
-        if slow == fast:
-            return True
-    
-    # If fast pointer reaches end, no cycle
-    return False
+# ============================================================================
+# STRING ALGORITHMS
+# ============================================================================
 
 def rabin_karp(text, pattern):
     """
@@ -955,47 +862,70 @@ def z_algorithm(text, pattern):
     
     return matches
 
-# Example usage
+# ============================================================================
+# MATRIX ALGORITHMS
+# ============================================================================
+
+def traverse_matrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    for i in range(rows):
+        for j in range(cols):
+            print(matrix[i][j], end=' ')
+        print()
+
+def traverse_matrix_spiral(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    top = 0
+    bottom = rows - 1
+    left = 0
+    right = cols - 1
+
+    while top <= bottom and left <= right:
+        for i in range(left, right + 1):
+            print(matrix[top][i], end=' ')
+        top += 1
+        for i in range(top, bottom + 1):
+            print(matrix[i][right], end=' ')
+        right -= 1  
+        if top <= bottom:
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')
+            bottom -= 1
+        if left <= right:   
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1
+
+def traverse_matrix_spiral_recursive(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    def spiral_helper(matrix, top, bottom, left, right):
+        if top > bottom or left > right:
+            return
+        for i in range(left, right + 1):
+            print(matrix[top][i], end=' ')
+        top += 1
+        for i in range(top, bottom + 1):
+            print(matrix[i][right], end=' ')
+        right -= 1
+        if top <= bottom:
+            for i in range(right, left - 1, -1):
+                print(matrix[bottom][i], end=' ')   
+            bottom -= 1
+        if left <= right:
+            for i in range(bottom, top - 1, -1):
+                print(matrix[i][left], end=' ')
+            left += 1
+    spiral_helper(matrix, 0, rows - 1, 0, cols - 1)
+
+# ============================================================================
+# MAIN FUNCTION
+# ============================================================================
+
 if __name__ == "__main__":
-    # Sorting examples
-    print("Quick Sort:", quick_sort([3, 6, 8, 10, 1, 2, 1]))
-    print("Heap Sort:", heap_sort([3, 6, 8, 10, 1, 2, 1]))
-    print("Selection Sort:", selection_sort([3, 6, 8, 10, 1, 2, 1]))
-    
-    # Search examples
-    print("Binary Search:", binary_search([1, 2, 3, 4, 5], 3))
-    print("Linear Search:", linear_search([1, 2, 3, 4, 5], 3))
-    print("Binary Search on Answer:", binary_search_on_answer([1, 2, 3, 4, 5], 3))
-    
-    # Tree examples
-    print("Binary Tree Traversal:", binary_tree_traversal(binary_search_tree([1, 2, 3, 4, 5])))
-    
-    # Graph examples
-    print("Topological Sort:", topological_sort({0: [1, 2], 1: [3], 2: [3], 3: []}))
-    
-    # Algorithm techniques examples
-    print("Two Sum:", two_sum([2, 7, 11, 15], 9))
-    print("Dynamic Programming:", dynamic_programming([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
-    print("Greedy:", greedy([7, 1, 5, 3, 6, 4]))
-    print("Backtracking:", backtracking([1, 2, 3]))
-    print("Sliding Window:", sliding_window([1, 4, 2, 10, 2, 3, 1, 0, 20], 3))
-    print("Bit Manipulation:", bit_manipulation([1, 2, 3, 4, 5]))
-    print("Monotonic Stack:", monotonic_stack([1, 2, 3, 4, 5]))
-    print("Monotonic Queue:", monotonic_queue([1, 2, 3, 4, 5]))
-    print("Two Pointers:", two_pointers([1, 2, 3, 4, 5], 6))
-    
-    # New pattern examples
-    print("Prefix Sum:", prefix_sum([1, 2, 3, 4, 5]))
-    print("Kadane's Algorithm:", kadane_algorithm([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
-    
-    # Create a linked list with cycle for testing
-    head = ListNode(1)
-    head.next = ListNode(2)
-    head.next.next = ListNode(3)
-    head.next.next.next = head.next  # Create cycle
-    print("Floyd Cycle Detection:", floyd_cycle_detection(head))
-    
-    print("Rabin-Karp:", rabin_karp("hello world", "world"))
-    print("KMP:", knuth_morris_pratt("hello world", "world"))
-    print("Manacher's Algorithm:", manacher_algorithm("babad"))
-    print("Z-Algorithm:", z_algorithm("hello world", "world"))
+    # Example usage
+    print("Two Sum Dict:", two_sum_dict([2, 7, 11, 15], 9))
+    print("Two Sum Dict:", two_sum_dict([3, 2, 4], 6))
+    print("Two Sum Dict:", two_sum_dict([3, 3], 6))
