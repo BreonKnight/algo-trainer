@@ -1,52 +1,56 @@
 import { PatternKey } from "./types";
 
-export const patterns = new Map<PatternKey, string>([
-  [
-    "Quick Sort" as PatternKey,
-    `def quick_sort(arr):
-    """
-    Sort array using quick sort algorithm.
-    Time Complexity: O(n log n) average case, O(n²) worst case
-    Space Complexity: O(log n) due to recursion stack
-    
-    Pseudocode:
-    1. Base case: If array length <= 1, return array
-    
-    2. Choose pivot:
-       a. Select last element as pivot
-       b. Initialize left = 0, right = len(arr) - 2
-    
-    3. Partition:
-       a. While left <= right:
-          - If arr[left] <= pivot: move left pointer right
-          - If arr[right] > pivot: move right pointer left
-          - If both conditions false: swap elements
-       b. Place pivot in correct position
-    
-    4. Recursively sort:
-       a. Sort left subarray (elements <= pivot)
-       b. Sort right subarray (elements > pivot)
-    
-    Example:
-    arr = [7, 2, 1, 6, 8, 5, 3, 4]
-    
-    First partition (pivot = 4):
-    [7, 2, 1, 6, 8, 5, 3, 4]
-     L                    P
-    Swap 7 and 3:
-    [3, 2, 1, 6, 8, 5, 7, 4]
-        L              R
-    Swap 6 and 1:
-    [3, 2, 1, 6, 8, 5, 7, 4]
-           L        R
-    Final partition:
-    [3, 2, 1, 4, 8, 5, 7, 6]
-              P
-    
-    Recursive calls:
-    Left: [3, 2, 1]
-    Right: [8, 5, 7, 6]
-    """
+interface AlgorithmPattern {
+  title: string;
+  description: string;
+  timeComplexity: string;
+  spaceComplexity: string;
+  pseudocode: string[];
+  example: string;
+  implementation: string;
+}
+
+export const algorithmPatterns: Record<PatternKey, AlgorithmPattern> = {
+  "Quick Sort": {
+    title: "Quick Sort Algorithm",
+    description:
+      "A divide-and-conquer algorithm that picks a pivot element and partitions the array around it.",
+    timeComplexity: "O(n log n) average case, O(n²) worst case",
+    spaceComplexity: "O(log n) due to recursion stack",
+    pseudocode: [
+      "1. Base case: If array length <= 1, return array",
+      "2. Choose pivot:",
+      "   a. Select last element as pivot",
+      "   b. Initialize left = 0, right = len(arr) - 2",
+      "3. Partition:",
+      "   a. While left <= right:",
+      "      - If arr[left] <= pivot: move left pointer right",
+      "      - If arr[right] > pivot: move right pointer left",
+      "      - If both conditions false: swap elements",
+      "   b. Place pivot in correct position",
+      "4. Recursively sort:",
+      "   a. Sort left subarray (elements <= pivot)",
+      "   b. Sort right subarray (elements > pivot)",
+    ],
+    example: `arr = [7, 2, 1, 6, 8, 5, 3, 4]
+
+First partition (pivot = 4):
+[7, 2, 1, 6, 8, 5, 3, 4]
+ L                    P
+Swap 7 and 3:
+[3, 2, 1, 6, 8, 5, 7, 4]
+    L              R
+Swap 6 and 1:
+[3, 2, 1, 6, 8, 5, 7, 4]
+       L        R
+Final partition:
+[3, 2, 1, 4, 8, 5, 7, 6]
+          P
+
+Recursive calls:
+Left: [3, 2, 1]
+Right: [8, 5, 7, 6]`,
+    implementation: `def quick_sort(arr):
     if len(arr) <= 1:
         return arr
     
@@ -65,53 +69,48 @@ export const patterns = new Map<PatternKey, string>([
     arr[left], arr[-1] = arr[-1], arr[left]
     
     return quick_sort(arr[:left]) + [pivot] + quick_sort(arr[left+1:])`,
-  ],
+  },
 
-  [
-    "Merge Sort",
-    `def merge_sort(arr):
-    """
-    Sort array using merge sort algorithm.
-    Time Complexity: O(n log n)
-    Space Complexity: O(n)
-    
-    Pseudocode:
-    1. Base case: If array length <= 1, return array
-    
-    2. Divide:
-       a. Calculate mid = len(arr) // 2
-       b. Split array into left = arr[:mid] and right = arr[mid:]
-       c. Recursively sort left and right halves
-    
-    3. Merge:
-       a. Initialize result array and pointers i, j = 0
-       b. While both halves have elements:
-          - Compare elements at current pointers
-          - Add smaller element to result
-          - Increment corresponding pointer
-       c. Add remaining elements from non-empty half
-       d. Return merged result
-    
-    Example:
-    arr = [38, 27, 43, 3, 9, 82, 10]
-    
-    First level division:
-    left = [38, 27, 43, 3]
-    right = [9, 82, 10]
-    
-    Second level (left):
-    [38, 27] | [43, 3]
-    
-    Second level (right):
-    [9, 82] | [10]
-    
-    Merging process:
-    [27, 38] | [3, 43] -> [3, 27, 38, 43]
-    [9, 82] | [10] -> [9, 10, 82]
-    
-    Final merge:
-    [3, 27, 38, 43] | [9, 10, 82] -> [3, 9, 10, 27, 38, 43, 82]
-    """
+  "Merge Sort": {
+    title: "Merge Sort Algorithm",
+    description:
+      "A divide-and-conquer algorithm that recursively divides the array into two halves, sorts them, and then merges the sorted halves.",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "1. Base case: If array length <= 1, return array",
+      "2. Divide:",
+      "   a. Calculate mid = len(arr) // 2",
+      "   b. Split array into left = arr[:mid] and right = arr[mid:]",
+      "   c. Recursively sort left and right halves",
+      "3. Merge:",
+      "   a. Initialize result array and pointers i, j = 0",
+      "   b. While both halves have elements:",
+      "      - Compare elements at current pointers",
+      "      - Add smaller element to result",
+      "      - Increment corresponding pointer",
+      "   c. Add remaining elements from non-empty half",
+      "   d. Return merged result",
+    ],
+    example: `arr = [38, 27, 43, 3, 9, 82, 10]
+
+First level division:
+left = [38, 27, 43, 3]
+right = [9, 82, 10]
+
+Second level (left):
+[38, 27] | [43, 3]
+
+Second level (right):
+[9, 82] | [10]
+
+Merging process:
+[27, 38] | [3, 43] -> [3, 27, 38, 43]
+[9, 82] | [10] -> [9, 10, 82]
+
+Final merge:
+[3, 27, 38, 43] | [9, 10, 82] -> [3, 9, 10, 27, 38, 43, 82]`,
+    implementation: `def merge_sort(arr):
     if len(arr) <= 1:
         return arr
     
@@ -136,234 +135,251 @@ def merge(left, right):
     result.extend(left[i:])
     result.extend(right[j:])
     return result`,
-  ],
+  },
 
-  [
-    "Stack Sort",
-    `def stack_sort(arr):
-    """
-    Sorts an array using a stack-based approach.
-    Time Complexity: O(n²)
-    Space Complexity: O(n)
-    """
-    # Initialize an empty stack to store elements in sorted order
+  "Stack Sort": {
+    title: "Stack Sort Algorithm",
+    description:
+      "A sorting algorithm that uses a stack data structure to sort elements in descending order.",
+    timeComplexity: "O(n²)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "1. Initialize an empty stack",
+      "2. For each element in the input array:",
+      "   a. While stack is not empty and top element > current number:",
+      "      - Pop elements from stack",
+      "   b. Push current number to stack",
+      "3. Return the sorted stack",
+    ],
+    example: `Input: [5, 2, 8, 1, 9, 3]
+
+Step 1: Push 5
+Stack: [5]
+
+Step 2: Push 2
+Stack: [5, 2]
+
+Step 3: Push 8
+Stack: [8]
+
+Step 4: Push 1
+Stack: [8, 1]
+
+Step 5: Push 9
+Stack: [9]
+
+Step 6: Push 3
+Stack: [9, 3]
+
+Final result: [9, 3]`,
+    implementation: `def stack_sort(arr):
     stack = []
-    # Iterate through each element in the input array
     for num in arr:
-        # While the stack is not empty and the top element is greater than current number
-        # This ensures elements in stack are in descending order
         while stack and stack[-1] > num:
-            # Remove elements from stack until we find the correct position
             stack.pop()
-        # Add the current number to the stack
         stack.append(num)
-    # Return the sorted stack (elements are in descending order)
     return stack`,
-  ],
+  },
 
-  [
-    "Heap Sort",
-    `def heap_sort(arr):
-    """
-    Sort array using heap sort algorithm.
-    Time Complexity: O(n log n)
-    Space Complexity: O(1) in-place sorting
-    
-    Pseudocode:
-    1. Build max heap from array:
-       a. Start from last non-leaf node (n//2 - 1)
-       b. For each node:
-          - Compare with children
-          - If child > parent, swap
-          - Recursively heapify affected subtree
-    
-    2. Extract elements from heap:
-       a. For i from n-1 to 1:
-          - Swap root (max) with last element
-          - Reduce heap size by 1
-          - Heapify root
-    
-    Example:
-    arr = [12, 11, 13, 5, 6, 7]
-    
-    Step 1: Build max heap
-    Initial:     After heapify:
-      12            13
-     /  \\          /  \\
-    11   13       11   12
-    / \\  /        / \\  /
-    5  6 7        5  6  7
-    
-    Step 2: Extract elements
-    [13, 11, 12, 5, 6, 7]  # Initial heap
-    [7, 11, 12, 5, 6, 13]  # After first extraction
-    [6, 11, 12, 5, 7, 13]  # After second extraction
-    ...
-    [5, 6, 7, 11, 12, 13]  # Final sorted array
-    """
-def heapify(arr, n, i):
-    largest = i
+  "Heap Sort": {
+    title: "Heap Sort Algorithm",
+    description:
+      "A comparison-based sorting algorithm that uses a binary heap data structure to build a max-heap and repeatedly extract the maximum element.",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. Build max heap from input array",
+      "2. Repeatedly extract maximum:",
+      "   a. Swap root with last element",
+      "   b. Reduce heap size by 1",
+      "   c. Heapify root node",
+      "3. Return sorted array",
+    ],
+    example: `arr = [4, 10, 3, 5, 1]
+Build max heap:
+     10
+    /  \\
+   5    3
+  / \\
+ 4   1
+
+Extract max elements:
+1. [1, 5, 3, 4] | 10
+2. [1, 4, 3] | 5, 10
+3. [1, 3] | 4, 5, 10
+4. [1] | 3, 4, 5, 10
+
+Result: [1, 3, 4, 5, 10]`,
+    implementation: `def heap_sort(arr):
+    def heapify(arr, n, i):
+        largest = i
         left = 2 * i + 1
         right = 2 * i + 2
-    
-    if left < n and arr[left] > arr[largest]:
-        largest = left
-    
-    if right < n and arr[right] > arr[largest]:
-        largest = right
-    
-    if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]
+        
+        if left < n and arr[left] > arr[largest]:
+            largest = left
+        if right < n and arr[right] > arr[largest]:
+            largest = right
+            
+        if largest != i:
+            arr[i], arr[largest] = arr[largest], arr[i]
             heapify(arr, n, largest)
     
     n = len(arr)
-    
-    # Build max heap
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
-    
-    # Extract elements from heap one by one
-    for i in range(n-1, 0, -1):
+        
+    for i in range(n - 1, 0, -1):
         arr[0], arr[i] = arr[i], arr[0]
         heapify(arr, i, 0)
     
     return arr`,
-  ],
+  },
 
-  [
-    "Bubble Sort",
-    `def bubble_sort(arr):
-    """
-    Sorts an array using the Bubble Sort algorithm.
-    Time Complexity: O(n²)
-    Space Complexity: O(1)
-    """
-    # Get the length of the array
+  "Bubble Sort": {
+    title: "Bubble Sort Algorithm",
+    description:
+      "A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.",
+    timeComplexity: "O(n²)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. For i from 0 to n-1:",
+      "   a. For j from 0 to n-i-1:",
+      "      - If arr[j] > arr[j+1]:",
+      "        * Swap arr[j] and arr[j+1]",
+      "2. Return sorted array",
+    ],
+    example: `arr = [64, 34, 25, 12, 22]
+
+Pass 1: [34, 25, 12, 22, 64]
+Pass 2: [25, 12, 22, 34, 64]
+Pass 3: [12, 22, 25, 34, 64]
+Pass 4: [12, 22, 25, 34, 64]`,
+    implementation: `def bubble_sort(arr):
     n = len(arr)
-    # Outer loop: iterate through the entire array
     for i in range(n):
-        # Inner loop: compare adjacent elements
-        # After each outer iteration, the largest element "bubbles up" to the end
-        # So we only need to check up to n-i-1 elements
         for j in range(0, n-i-1):
-            # If current element is greater than next element, swap them
             if arr[j] > arr[j+1]:
-                # Swap elements to maintain ascending order
                 arr[j], arr[j+1] = arr[j+1], arr[j]
-    # Return the sorted array
     return arr`,
-  ],
+  },
 
-  [
-    "Selection Sort",
-    `def selection_sort(arr):
-    """
-    Sorts an array using the Selection Sort algorithm.
-    Time Complexity: O(n²)
-    Space Complexity: O(1)
-    """
-    # Get the length of the array
+  "Selection Sort": {
+    title: "Selection Sort Algorithm",
+    description:
+      "A simple sorting algorithm that divides the input into a sorted and unsorted region, repeatedly selecting the smallest element from the unsorted region to add to the sorted region.",
+    timeComplexity: "O(n²)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. For i from 0 to n-1:",
+      "   a. Find minimum element in unsorted region [i..n-1]",
+      "   b. Swap minimum element with first element of unsorted region",
+      "2. Return sorted array",
+    ],
+    example: `arr = [64, 25, 12, 22, 11]
+
+First pass:
+[64, 25, 12, 22, 11] -> min = 11
+[11, 25, 12, 22, 64]
+
+Second pass:
+[11, 25, 12, 22, 64] -> min = 12
+[11, 12, 25, 22, 64]
+
+Third pass:
+[11, 12, 25, 22, 64] -> min = 22
+[11, 12, 22, 25, 64]
+
+Fourth pass:
+[11, 12, 22, 25, 64] -> min = 25
+[11, 12, 22, 25, 64]`,
+    implementation: `def selection_sort(arr):
     n = len(arr)
-    # Outer loop: iterate through the array
     for i in range(n):
-        # Assume the current position has the minimum element
         min_idx = i
-        # Inner loop: find the minimum element in the unsorted portion
-        for j in range(i+1, n):
-            # If we find a smaller element, update the minimum index
+        for j in range(i + 1, n):
             if arr[j] < arr[min_idx]:
                 min_idx = j
-        # Swap the minimum element with the current position
-        # This places the minimum element in its correct position
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    # Return the sorted array
     return arr`,
-  ],
+  },
 
-  [
-    "Insertion Sort",
-    `def insertion_sort(arr):
-    """
-    Sorts an array using the Insertion Sort algorithm.
-    Time Complexity: O(n²)
-    Space Complexity: O(1)
-    """
-    # Start from the second element (index 1)
-    # First element is considered sorted by itself
+  "Insertion Sort": {
+    title: "Insertion Sort Algorithm",
+    description:
+      "A simple sorting algorithm that builds the final sorted array one item at a time, by repeatedly inserting a new element into the sorted portion of the array.",
+    timeComplexity: "O(n²) worst/average case, O(n) best case",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. For i from 1 to n-1:",
+      "   a. key = arr[i]",
+      "   b. j = i - 1",
+      "   c. While j >= 0 and arr[j] > key:",
+      "      - Move arr[j] one position ahead",
+      "      - Decrement j",
+      "   d. Place key at correct position",
+      "2. Return sorted array",
+    ],
+    example: `arr = [12, 11, 13, 5, 6]
+
+Pass 1: [11, 12, 13, 5, 6]
+Pass 2: [11, 12, 13, 5, 6]
+Pass 3: [5, 11, 12, 13, 6]
+Pass 4: [5, 6, 11, 12, 13]
+
+Key steps for inserting 5:
+[11, 12, 13, 13, 6]
+[11, 12, 12, 13, 6]
+[11, 11, 12, 13, 6]
+[5, 11, 12, 13, 6]`,
+    implementation: `def insertion_sort(arr):
     for i in range(1, len(arr)):
-        # Store the current element to be inserted
         key = arr[i]
-        # Initialize j to the position before the current element
         j = i - 1
-        # Move elements of arr[0..i-1] that are greater than key
-        # to one position ahead of their current position
         while j >= 0 and arr[j] > key:
-            # Shift element to the right
-            arr[j+1] = arr[j]
-            # Move to the previous element
+            arr[j + 1] = arr[j]
             j -= 1
-        # Place the key in its correct position
-        arr[j+1] = key
-    # Return the sorted array
+        arr[j + 1] = key
     return arr`,
-  ],
+  },
 
-  [
-    "Binary Search",
-    `def binary_search(arr, target):
-    """
-    Search for target in sorted array using binary search.
-    Time Complexity: O(log n)
-    Space Complexity: O(1)
-    
-    Pseudocode:
-    1. Initialize left = 0, right = len(arr) - 1
-    
-    2. While left <= right:
-       a. Calculate mid = (left + right) // 2
-       b. If arr[mid] == target:
-          - Return mid (found target)
-       c. If arr[mid] < target:
-          - Search right half: left = mid + 1
-       d. If arr[mid] > target:
-          - Search left half: right = mid - 1
-    
-    3. Return -1 (target not found)
-    
-    Example:
-    arr = [1, 3, 5, 7, 9, 11, 13, 15]
-    target = 7
-    
-    Iteration 1: left=0, right=7, mid=3
-    arr[mid] = 7 == target
-    Return 3 (found at index 3)
-    
-    Another example:
-    arr = [1, 3, 5, 7, 9, 11, 13, 15]
-    target = 6
-    
-    Iteration 1: left=0, right=7, mid=3
-    arr[mid] = 7 > 6
-    right = 2
-    
-    Iteration 2: left=0, right=2, mid=1
-    arr[mid] = 3 < 6
-    left = 2
-    
-    Iteration 3: left=2, right=2, mid=2
-    arr[mid] = 5 < 6
-    left = 3
-    
-    Iteration 4: left=3, right=2
-    left > right, loop ends
-    Return -1 (not found)
-    """
-    left = 0
-    right = len(arr) - 1
+  "Binary Search": {
+    title: "Binary Search Algorithm",
+    description:
+      "An efficient search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half.",
+    timeComplexity: "O(log n)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. Initialize left = 0, right = length - 1",
+      "2. While left <= right:",
+      "   a. mid = (left + right) // 2",
+      "   b. If arr[mid] == target:",
+      "      - Return mid",
+      "   c. If arr[mid] < target:",
+      "      - left = mid + 1",
+      "   d. Else:",
+      "      - right = mid - 1",
+      "3. Return -1 if not found",
+    ],
+    example: `arr = [1, 3, 5, 7, 9, 11, 13, 15]
+target = 7
+
+Step 1: mid = 3
+arr[3] = 7 == target
+Found at index 3!
+
+Example 2 (target = 10):
+Step 1: mid = 3, arr[3] = 7 < 10
+left = 4
+Step 2: mid = 5, arr[5] = 11 > 10
+right = 4
+Step 3: left > right
+Not found!`,
+    implementation: `def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
     
     while left <= right:
         mid = (left + right) // 2
-        
         if arr[mid] == target:
             return mid
         elif arr[mid] < target:
@@ -372,820 +388,1600 @@ def heapify(arr, n, i):
             right = mid - 1
     
     return -1`,
-  ],
+  },
 
-  [
-    "Binary Search on Answer",
-    `def binary_search_on_answer(arr, target):
-    """
-    Performs binary search on a sorted array to find the first element >= target.
-    Time Complexity: O(log n)
-    Space Complexity: O(1)
-    """
-    def is_valid(mid):
-        return arr[mid] >= target
+  "Binary Search on Answer": {
+    title: "Binary Search on Answer Algorithm",
+    description:
+      "A problem-solving pattern that uses binary search to find an answer in a range of possible values, typically used when the answer space is monotonic.",
+    timeComplexity: "O(log n) * C, where C is the cost of checking a value",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. Define check(x) function that returns true if x is valid",
+      "2. Initialize left = min_possible, right = max_possible",
+      "3. While left < right:",
+      "   a. mid = (left + right) // 2",
+      "   b. If check(mid):",
+      "      - right = mid",
+      "   c. Else:",
+      "      - left = mid + 1",
+      "4. Return left",
+    ],
+    example: `Problem: Find square root of 16
+left = 1, right = 16
 
-    left, right = 0, len(arr) - 1
-    while left <= right:
+Step 1: mid = 8
+check(8): 8*8 > 16
+right = 8
+
+Step 2: mid = 4
+check(4): 4*4 = 16
+right = 4
+
+Step 3: left = 4, right = 4
+Answer: 4`,
+    implementation: `def binary_search_answer(min_val, max_val, check):
+    def check(x):
+        # Problem-specific check function
+        pass
+    
+    left, right = min_val, max_val
+    while left < right:
         mid = (left + right) // 2
-        if is_valid(mid):
-            right = mid - 1
+        if check(mid):
+            right = mid
         else:
             left = mid + 1
+    
     return left`,
-  ],
+  },
 
-  [
-    "Linear Search",
-    `def linear_search(arr, target):
-    """
-    Searches for a target value in an array using linear search.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    for i, num in enumerate(arr):
-        if num == target:
+  "Linear Search": {
+    title: "Linear Search Algorithm",
+    description:
+      "A simple search algorithm that checks each element in the list sequentially until a match is found or the whole list has been searched.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. For i from 0 to n-1:",
+      "   a. If arr[i] == target:",
+      "      - Return i",
+      "2. Return -1 if not found",
+    ],
+    example: `arr = [64, 34, 25, 12, 22, 11, 90]
+target = 12
+
+Step 1: Check 64 ≠ 12
+Step 2: Check 34 ≠ 12
+Step 3: Check 25 ≠ 12
+Step 4: Check 12 = 12
+Found at index 3!`,
+    implementation: `def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
             return i
     return -1`,
-  ],
+  },
 
-  [
-    "Two Sum",
-    `def two_sum(arr, target):
+  "Two Sum": {
+    title: "Two Sum Algorithm (Brute Force)",
+    description:
+      "A problem-solving pattern that finds two numbers in an array that sum to a target value using a brute force approach.",
+    timeComplexity: "O(n²)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. For i from 0 to n-1:",
+      "   a. For j from i+1 to n-1:",
+      "      - If arr[i] + arr[j] == target:",
+      "         * Return [i, j]",
+      "2. Return [] if no solution found",
+    ],
+    example: `arr = [2, 7, 11, 15]
+target = 9
+
+Step 1: i=0, j=1
+2 + 7 = 9
+Found solution: [0, 1]`,
+    implementation: `def two_sum(arr, target):
+    n = len(arr)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if arr[i] + arr[j] == target:
+                return [i, j]
+    return []`,
+  },
+
+  "Two Sum Dict": {
+    title: "Two Sum Dictionary Pattern",
+    description:
+      "An efficient solution to find two numbers in an array that add up to a target value using a hash table/dictionary for O(n) time complexity.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "1. Initialize empty dictionary",
+      "2. For each number in array:",
+      "   a. Calculate complement = target - current_number",
+      "   b. If complement exists in dictionary:",
+      "      - Return sorted [complement_index, current_index]",
+      "   c. Add current_number and its index to dictionary",
+      "3. Return empty array if no solution found",
+    ],
+    example: `arr = [2, 7, 11, 15]
+target = 9
+
+Step 1: num = 2
+complement = 9 - 2 = 7
+dict = {2: 0}
+
+Step 2: num = 7
+complement = 9 - 7 = 2
+2 in dict
+Found solution: [0, 1]`,
+    implementation: `def two_sum_dict(arr, target):
     """
-    Finds pairs of numbers in an array that sum to a target value.
+    Find two numbers in an array that add up to a target value.
     Time Complexity: O(n)
     Space Complexity: O(n)
-    """
-    # Dictionary to store complement values
-    # Key: complement (target - current number)
-    # Value: current number
-    my_dict = {}
-    results = []
+    Returns indices in format [0,1] where the smaller index comes first
+    """ 
+    num_dict = {}
+    for i, num in enumerate(arr):
+        complement = target - num
+        if complement in num_dict and num_dict[complement] != i:  # Check that we're not using the same index
+            # Return indices in sorted order [0,1]
+            return sorted([num_dict[complement], i])
+        num_dict[num] = i
+    return []`,
+  },
+
+  "Two Sum Two Pointers": {
+    title: "Two Sum Algorithm (Two Pointers)",
+    description:
+      "A solution to the Two Sum problem using two pointers technique, which requires the array to be sorted.",
+    timeComplexity: "O(n log n) due to sorting",
+    spaceComplexity:
+      "O(1) if modifying input array, O(n) if creating new array",
+    pseudocode: [
+      "1. Sort the array (if not already sorted)",
+      "2. Initialize left = 0, right = n-1",
+      "3. While left < right:",
+      "   a. sum = arr[left] + arr[right]",
+      "   b. If sum == target:",
+      "      - Return [left, right]",
+      "   c. If sum < target:",
+      "      - left++",
+      "   d. Else:",
+      "      - right--",
+      "4. Return [] if no solution found",
+    ],
+    example: `arr = [15, 2, 11, 7]
+sorted = [2, 7, 11, 15]
+target = 9
+
+Step 1: sum = 2 + 15 = 17 > 9
+right--
+
+Step 2: sum = 2 + 11 = 13 > 9
+right--
+
+Step 3: sum = 2 + 7 = 9 == target
+Found solution: [0, 1]`,
+    implementation: `def two_sum_two_pointers(arr, target):
+    # Create sorted copy to preserve original indices
+    sorted_arr = sorted(arr)
+    left, right = 0, len(arr) - 1
     
-    # Iterate through each number in the array
-    for num in arr:
-        # If current number is found in dictionary,
-        # we've found a pair that sums to target
-        if num in my_dict:
-            # Add the pair to results
-            # my_dict[num] is the first number we saw earlier
-            # num is the current number
-            results.append([my_dict[num], num])
+    while left < right:
+        curr_sum = sorted_arr[left] + sorted_arr[right]
+        if curr_sum == target:
+            # Find original indices
+            i = arr.index(sorted_arr[left])
+            j = arr.index(sorted_arr[right])
+            return [min(i, j), max(i, j)]
+        elif curr_sum < target:
+            left += 1
         else:
-            # Store the complement (target - num) as key
-            # and current number as value
-            # This helps us find pairs later
-            my_dict[target - num] = num
-    
-    # Return all pairs that sum to target
-    return results`,
-  ],
+            right -= 1
+    return []`,
+  },
 
-  [
-    "Dynamic Programming",
-    `def longest_common_subsequence(str1, str2):
-    """
-    Find the longest common subsequence of two strings using dynamic programming.
-    Time Complexity: O(m*n) where m and n are lengths of input strings
-    Space Complexity: O(m*n) for the DP table
-    
-    Pseudocode:
-    1. Create a DP table of size (m+1) x (n+1)
-    2. Fill the DP table:
-       a. If str1[i-1] == str2[j-1]:
-          dp[i][j] = dp[i-1][j-1] + 1
-       b. Else:
-          dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-    3. Reconstruct the LCS:
-       a. Start from dp[m][n]
-       b. If str1[i-1] == str2[j-1], add character to result
-       c. Move diagonally up-left if match, else move up or left based on max
-    
-    Example:
-    str1 = "ABCDGH"
-    str2 = "AEDFHR"
-    LCS = "ADH" (length 3)
-    
-    DP Table:
-       "" A  E  D  F  H  R
-    "" 0  0  0  0  0  0  0
-    A  0  1  1  1  1  1  1
-    B  0  1  1  1  1  1  1
-    C  0  1  1  1  1  1  1
-    D  0  1  1  2  2  2  2
-    G  0  1  1  2  2  2  2
-    H  0  1  1  2  2  3  3
-    """
-    m, n = len(str1), len(str2)
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    
-    # Fill dp table
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if str1[i-1] == str2[j-1]:
-                dp[i][j] = dp[i-1][j-1] + 1
-            else:
-                dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-    
-    # Reconstruct LCS
-    lcs = []
-    i, j = m, n
-    while i > 0 and j > 0:
-        if str1[i-1] == str2[j-1]:
-            lcs.append(str1[i-1])
-            i -= 1
-            j -= 1
-        elif dp[i-1][j] > dp[i][j-1]:
-            i -= 1
-        else:
-            j -= 1
-    
-    return ''.join(reversed(lcs))`,
-  ],
+  "Dynamic Programming": {
+    title: "Dynamic Programming Pattern",
+    description:
+      "A method for solving complex problems by breaking them down into simpler subproblems, storing the results of subproblems to avoid redundant computation.",
+    timeComplexity: "Varies by problem",
+    spaceComplexity: "Varies by problem",
+    pseudocode: [
+      "1. Define base cases",
+      "2. Define state (what needs to be stored)",
+      "3. Define transitions (how to move between states)",
+      "4. Initialize memoization or tabulation structure",
+      "5. Implement recursive (top-down) or iterative (bottom-up) solution",
+      "6. Return final result",
+    ],
+    example: `Problem: Calculate nth Fibonacci number
 
-  [
-    "Greedy",
-    `def greedy(arr):
-    """
-    Implements a greedy algorithm to maximize profit from array elements.
-    Time Complexity: O(n log n) due to sorting
-    Space Complexity: O(1)
-    """
-    arr.sort()
-    max_profit = 0
-    for i in range(1, len(arr)):
-        if arr[i] > arr[i-1]:
-            max_profit += arr[i] - arr[i-1]
-    return max_profit`,
-  ],
+Base cases:
+- fib(0) = 0
+- fib(1) = 1
 
-  [
-    "Backtracking",
-    `def backtracking(arr):
-    """
-    Generates all possible permutations of an array using backtracking.
-    Time Complexity: O(n!)
-    Space Complexity: O(n)
-    """
-    def backtrack(start, path):
-        if len(path) == len(arr):
-            result.append(path[:])
-            return
-        for i in range(start, len(arr)):
-            path.append(arr[i])
-            backtrack(i+1, path)
-            path.pop()
+State: dp[i] = fib(i)
+
+Transition:
+dp[i] = dp[i-1] + dp[i-2]`,
+    implementation: `def solve_dp(problem_input):
+    # Initialize memoization dictionary
+    memo = {}
+    
+    def dp(state):
+        # Base cases
+        if is_base_case(state):
+            return base_case_value
+        
+        # Check if already computed
+        if state in memo:
+            return memo[state]
+        
+        # Compute result from subproblems
+        result = combine_subproblems(state)
+        memo[state] = result
+        
+        return result
+    
+    return dp(initial_state)`,
+  },
+
+  "Dynamic Programming Fibonacci": {
+    title: "Dynamic Programming Fibonacci",
+    description:
+      "A classic example of dynamic programming that calculates Fibonacci numbers efficiently by storing previously computed values.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "1. Initialize dp array with base cases",
+      "2. For i from 2 to n:",
+      "   a. dp[i] = dp[i-1] + dp[i-2]",
+      "3. Return dp[n]",
+    ],
+    example: `Calculate fib(5)
+
+dp = [0, 1]
+i=2: dp[2] = 1 + 0 = 1
+i=3: dp[3] = 1 + 1 = 2
+i=4: dp[4] = 2 + 1 = 3
+i=5: dp[5] = 3 + 2 = 5
+
+Result: 5`,
+    implementation: `def fibonacci_dp(n):
+    if n <= 1:
+        return n
+    
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    
+    return dp[n]`,
+  },
+
+  "Dynamic Programming Iterative": {
+    title: "Dynamic Programming Iterative (Bottom-up)",
+    description:
+      "A bottom-up approach to dynamic programming that builds the solution iteratively from smaller subproblems to larger ones.",
+    timeComplexity: "Varies by problem",
+    spaceComplexity: "Often O(n) or O(n²)",
+    pseudocode: [
+      "1. Initialize dp array/table",
+      "2. Fill base cases",
+      "3. Iterate through states in order:",
+      "   a. For each state, compute value from previous states",
+      "4. Return final state value",
+    ],
+    example: `Problem: Longest Increasing Subsequence
+
+arr = [10, 9, 2, 5, 3, 7, 101, 18]
+dp[i] = length of LIS ending at i
+
+dp = [1, 1, 1, 2, 2, 3, 4, 4]
+Result: 4`,
+    implementation: `def longest_increasing_subsequence(arr):
+    if not arr:
+        return 0
+    
+    n = len(arr)
+    dp = [1] * n
+    
+    for i in range(1, n):
+        for j in range(i):
+            if arr[i] > arr[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    
+    return max(dp)`,
+  },
+
+  "Dynamic Programming Coin Change": {
+    title: "Dynamic Programming Coin Change",
+    description:
+      "A classic dynamic programming problem that finds the minimum number of coins needed to make a given amount of money.",
+    timeComplexity: "O(amount * number of coins)",
+    spaceComplexity: "O(amount)",
+    pseudocode: [
+      "1. Initialize dp array with infinity",
+      "2. Set dp[0] = 0",
+      "3. For amount from 1 to target:",
+      "   a. For each coin:",
+      "      - If coin <= amount:",
+      "        * dp[amount] = min(dp[amount], dp[amount-coin] + 1)",
+      "4. Return dp[target] if not infinity else -1",
+    ],
+    example: `coins = [1, 2, 5]
+amount = 11
+
+dp[0] = 0
+dp[1] = 1 (1)
+dp[2] = 1 (2)
+dp[3] = 2 (1+2)
+dp[4] = 2 (2+2)
+dp[5] = 1 (5)
+...
+dp[11] = 3 (5+5+1)`,
+    implementation: `def coin_change(coins, amount):
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    
+    for i in range(1, amount + 1):
+        for coin in coins:
+            if coin <= i:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+    
+    return dp[amount] if dp[amount] != float('inf') else -1`,
+  },
+
+  Greedy: {
+    title: "Greedy Algorithm Pattern",
+    description:
+      "A problem-solving approach that makes locally optimal choices at each step with the hope of finding a global optimum.",
+    timeComplexity: "Varies by problem",
+    spaceComplexity: "Usually O(1) or O(n)",
+    pseudocode: [
+      "1. Initialize result structure",
+      "2. While problem not solved:",
+      "   a. Select locally optimal choice",
+      "   b. Add to result",
+      "   c. Reduce problem size",
+      "3. Return result",
+    ],
+    example: `Problem: Make change with minimum coins
+Amount: 30
+Coins: [25, 10, 5, 1]
+
+Step 1: Use 25 (remain: 5)
+Step 2: Use 5 (remain: 0)
+Result: [25, 5]`,
+    implementation: `def greedy_solution(problem_input):
     result = []
-    backtrack(0, [])
+    
+    while not is_solved(problem_input):
+        # Find best local choice
+        choice = find_best_choice(problem_input)
+        
+        # Add to result
+        result.append(choice)
+        
+        # Update problem state
+        problem_input = update_state(problem_input, choice)
+    
     return result`,
-  ],
+  },
 
-  [
-    "Sliding Window",
-    `def sliding_window(arr, k):
-    """
-    Finds the maximum sum of any contiguous subarray of size k.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    # Initialize maximum sum to negative infinity
-    # This will store the maximum sum of any window
-    max_sum = float('-inf')
+  "Greedy Activity Selection": {
+    title: "Greedy Activity Selection",
+    description:
+      "A greedy algorithm that selects the maximum number of non-overlapping activities that can be performed by a single person.",
+    timeComplexity: "O(n log n) for sorting, O(n) after sorting",
+    spaceComplexity: "O(n) for storing result",
+    pseudocode: [
+      "1. Sort activities by finish time",
+      "2. Select first activity",
+      "3. For each remaining activity:",
+      "   a. If start time >= last finish time:",
+      "      - Select activity",
+      "      - Update last finish time",
+      "4. Return selected activities",
+    ],
+    example: `Activities: [(1,4), (3,5), (0,6), (5,7), (3,8), (5,9), (6,10), (8,11)]
+Sorted by finish: [(1,4), (3,5), (0,6), (5,7), (3,8), (5,9), (6,10), (8,11)]
+
+Selected:
+1. (1,4)
+2. (5,7)
+3. (8,11)
+
+Result: 3 activities`,
+    implementation: `def activity_selection(start, finish):
+    n = len(start)
+    # Sort by finish time
+    activities = sorted(zip(start, finish), key=lambda x: x[1])
     
-    # Initialize current sum of window to 0
-    current_sum = 0
+    selected = [activities[0]]
+    last_finish = activities[0][1]
     
-    # Iterate through the array
-    for i in range(len(arr)):
-        # Add current element to window sum
-        current_sum += arr[i]
+    for i in range(1, n):
+        if activities[i][0] >= last_finish:
+            selected.append(activities[i])
+            last_finish = activities[i][1]
+    
+    return selected`,
+  },
+
+  "Greedy Fractional Knapsack": {
+    title: "Greedy Fractional Knapsack",
+    description:
+      "A greedy approach to the knapsack problem where items can be broken into smaller pieces, always choosing the item with the highest value per unit weight.",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "1. Calculate value/weight ratio for each item",
+      "2. Sort items by ratio in descending order",
+      "3. For each item:",
+      "   a. If can take whole item:",
+      "      - Take it completely",
+      "   b. Else:",
+      "      - Take fraction that fits",
+      "4. Return total value",
+    ],
+    example: `Items: [(60,10), (100,20), (120,30)]
+Ratios: [6, 5, 4]
+Capacity: 50
+
+Take:
+1. 10kg of item 1: value = 60
+2. 20kg of item 2: value = 100
+3. 20kg of item 3: value = 80
+
+Total value: 240`,
+    implementation: `def fractional_knapsack(values, weights, capacity):
+    # Calculate value/weight ratios
+    ratios = [(v/w, v, w) for v, w in zip(values, weights)]
+    ratios.sort(reverse=True)
+    
+    total_value = 0
+    remaining = capacity
+    
+    for ratio, value, weight in ratios:
+        if remaining >= weight:
+            # Take whole item
+            total_value += value
+            remaining -= weight
+        else:
+            # Take fraction
+            total_value += ratio * remaining
+            break
+    
+    return total_value`,
+  },
+
+  "Greedy Job Scheduling": {
+    title: "Greedy Job Scheduling",
+    description:
+      "A greedy algorithm that schedules jobs to minimize completion time or maximize profit, typically sorting jobs by duration or profit/time ratio.",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "1. Sort jobs by profit/time ratio",
+      "2. Initialize timeline",
+      "3. For each job in sorted order:",
+      "   a. Find earliest possible slot",
+      "   b. If slot found:",
+      "      - Schedule job in that slot",
+      "4. Return schedule",
+    ],
+    example: `Jobs: [(2,100), (1,19), (2,27), (1,25), (3,15)]
+Sorted by profit/time: [(1,19), (2,100), (1,25), (2,27), (3,15)]
+
+Timeline:
+t=0: Job 2 (100)
+t=2: Job 3 (25)
+t=3: Job 1 (19)
+
+Total profit: 144`,
+    implementation: `def job_scheduling(jobs):
+    # Sort jobs by profit/time ratio
+    sorted_jobs = sorted(jobs, key=lambda x: x[1]/x[0], reverse=True)
+    
+    max_time = sum(job[0] for job in jobs)
+    timeline = [False] * max_time
+    total_profit = 0
+    
+    for duration, profit in sorted_jobs:
+        # Find latest possible slot
+        latest_slot = max_time - duration
+        while latest_slot >= 0:
+            if not any(timeline[latest_slot:latest_slot+duration]):
+                # Schedule job
+                for t in range(latest_slot, latest_slot+duration):
+                    timeline[t] = True
+                total_profit += profit
+                break
+            latest_slot -= 1
+    
+    return total_profit`,
+  },
+
+  "Greedy Huffman Coding": {
+    title: "Greedy Huffman Coding",
+    description:
+      "A greedy algorithm for constructing optimal prefix codes for data compression, building a binary tree from bottom up based on character frequencies.",
+    timeComplexity: "O(n log n)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "1. Create leaf nodes for each character with frequency",
+      "2. While more than one node remains:",
+      "   a. Extract two minimum frequency nodes",
+      "   b. Create new node with sum of frequencies",
+      "   c. Add new node back to queue",
+      "3. Traverse tree to generate codes",
+      "4. Return encoding map",
+    ],
+    example: `Text: "ABRACADABRA"
+Frequencies: A:5, B:2, R:2, C:1, D:1
+
+Tree building:
+1. Join C(1) + D(1) = CD(2)
+2. Join CD(2) + R(2) = CDR(4)
+3. Join B(2) + CDR(4) = BCDR(6)
+4. Join BCDR(6) + A(5) = ABCDR(11)
+
+Codes:
+A: 0
+B: 10
+C: 110
+D: 111
+R: 112`,
+    implementation: `from heapq import heappush, heappop
+
+def huffman_coding(text):
+    # Count frequencies
+    freq = {}
+    for char in text:
+        freq[char] = freq.get(char, 0) + 1
+    
+    # Create priority queue
+    heap = []
+    for char, frequency in freq.items():
+        heappush(heap, (frequency, char))
+    
+    # Build tree
+    while len(heap) > 1:
+        freq1, char1 = heappop(heap)
+        freq2, char2 = heappop(heap)
+        heappush(heap, (freq1 + freq2, char1 + char2))
+    
+    # Generate codes (simplified)
+    codes = {char: bin(i)[2:].zfill(len(bin(len(freq))[2:]))
+            for i, char in enumerate(freq)}
+    
+    return codes`,
+  },
+
+  "Greedy Dijkstra": {
+    title: "Dijkstra's Algorithm",
+    description:
+      "A greedy algorithm that finds the shortest path between nodes in a graph, which may represent road networks, computer networks, etc.",
+    timeComplexity: "O((V + E) log V) with binary heap",
+    spaceComplexity: "O(V)",
+    pseudocode: [
+      "1. Initialize distances to infinity except source (0)",
+      "2. Initialize priority queue with source",
+      "3. While queue not empty:",
+      "   a. Get vertex with minimum distance",
+      "   b. For each neighbor:",
+      "      - Calculate new distance",
+      "      - If better, update distance and add to queue",
+      "4. Return distances array",
+    ],
+    example: `Graph:
+A --4-- B --2-- C
+|       |       |
+8       3       1
+|       |       |
+D --2-- E --7-- F
+
+Source: A
+Step 1: A(0)
+Step 2: B(4), D(8)
+Step 3: E(7), C(6)
+Step 4: F(7)
+
+Shortest paths from A:
+B: 4
+C: 6
+D: 8
+E: 7
+F: 7`,
+    implementation: `from heapq import heappush, heappop
+
+def dijkstra(graph, source):
+    distances = {v: float('inf') for v in graph}
+    distances[source] = 0
+    pq = [(0, source)]
+    
+    while pq:
+        curr_dist, curr = heappop(pq)
         
-        # If window size exceeds k, remove leftmost element
-        if i >= k:
-            current_sum -= arr[i-k]  # Subtract element going out of window
-        
-        # Update maximum sum if current window sum is larger
-        # Note: We only update after window reaches size k
-        max_sum = max(max_sum, current_sum)
+        if curr_dist > distances[curr]:
+            continue
+            
+        for neighbor, weight in graph[curr].items():
+            distance = curr_dist + weight
+            
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heappush(pq, (distance, neighbor))
     
-    # Return maximum sum found in any window of size k
+    return distances`,
+  },
+
+  Backtracking: {
+    title: "Backtracking Algorithm Pattern",
+    description:
+      "A general algorithmic technique that considers searching every possible combination in order to solve a computational problem, abandoning each partial candidate ('backtracking') that cannot possibly be completed to a valid solution.",
+    timeComplexity:
+      "Usually exponential O(b^d) where b is branching factor and d is depth",
+    spaceComplexity: "O(d) where d is the maximum depth of recursion",
+    pseudocode: [
+      "1. Define base cases for valid/invalid solutions",
+      "2. For each possible choice:",
+      "   a. Make choice",
+      "   b. Recursively try to solve rest of problem",
+      "   c. If solution found, return it",
+      "   d. Else, undo choice (backtrack)",
+      "3. Return false if no solution possible",
+    ],
+    example: `Problem: N-Queens (n=4)
+Board:
+. . . .
+. . . .
+. . . .
+. . . .
+
+Try Q at (0,0):
+Q . . .
+. . Q .
+. Q . .
+. . . Q
+
+Solution found!`,
+    implementation: `def backtrack(candidates, path, result):
+    if is_solution(path):
+        result.append(path[:])
+        return
+        
+    for candidate in candidates:
+        if is_valid(path, candidate):
+            # Make choice
+            path.append(candidate)
+            
+            # Recurse
+            backtrack(candidates, path, result)
+            
+            # Undo choice
+            path.pop()
+            
+def solve_backtracking(input):
+    result = []
+    backtrack(get_candidates(input), [], result)
+    return result`,
+  },
+
+  "Sliding Window": {
+    title: "Sliding Window Pattern",
+    description:
+      "An algorithmic technique that involves maintaining a subset of elements as a window that slides over the data, typically used for array/string problems involving contiguous sequences.",
+    timeComplexity: "Usually O(n)",
+    spaceComplexity: "Usually O(1) or O(k) where k is window size",
+    pseudocode: [
+      "1. Initialize window pointers (start, end)",
+      "2. Initialize window state (sum, count, etc.)",
+      "3. While end < array length:",
+      "   a. Add element at end to window",
+      "   b. While window condition not met:",
+      "      - Remove element at start from window",
+      "      - Increment start",
+      "   c. Update result if needed",
+      "   d. Increment end",
+    ],
+    example: `Problem: Find max sum subarray of size k
+Array: [2, 1, 5, 1, 3, 2], k=3
+
+Window sums:
+[2, 1, 5] = 8
+[1, 5, 1] = 7
+[5, 1, 3] = 9
+[1, 3, 2] = 6
+
+Max sum: 9`,
+    implementation: `def sliding_window(arr, k):
+    if not arr or k <= 0:
+        return 0
+        
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    
+    for i in range(k, len(arr)):
+        # Remove first element of previous window
+        window_sum -= arr[i-k]
+        # Add last element of current window
+        window_sum += arr[i]
+        # Update max
+        max_sum = max(max_sum, window_sum)
+    
     return max_sum`,
-  ],
+  },
 
-  [
-    "Bit Manipulation",
-    `def bit_manipulation(arr):
-    """
-    Finds the single number that appears only once in an array where all other numbers appear twice.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    result = 0
-    for num in arr:
-        result ^= num
-    return result`,
-  ],
+  "Bit Manipulation": {
+    title: "Bit Manipulation Pattern",
+    description:
+      "Techniques for performing operations at the bit level, often used to optimize space usage or perform fast arithmetic operations.",
+    timeComplexity: "Usually O(1) or O(number of bits)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "Common operations:",
+      "1. Get bit: num & (1 << i)",
+      "2. Set bit: num | (1 << i)",
+      "3. Clear bit: num & ~(1 << i)",
+      "4. Toggle bit: num ^ (1 << i)",
+      "5. Count set bits: while n: count += n & 1; n >>= 1",
+    ],
+    example: `Number: 10 (1010 in binary)
 
-  [
-    "Topological Sort",
-    `def topological_sort(graph):
-    """
-    Performs topological sort on a directed acyclic graph.
-    Time Complexity: O(V + E) where V is vertices and E is edges
-    Space Complexity: O(V + E)
-    """
-    in_degree = {u: 0 for u in graph}
+Get bit at position 1:
+1010 & (1 << 1) = 1010 & 0010 = 0010 (bit is 1)
+
+Set bit at position 2:
+1010 | (1 << 2) = 1010 | 0100 = 1110
+
+Clear bit at position 3:
+1010 & ~(1 << 3) = 1010 & 0111 = 0010
+
+Toggle bit at position 1:
+1010 ^ (1 << 1) = 1010 ^ 0010 = 1000`,
+    implementation: `class BitManipulation:
+    @staticmethod
+    def get_bit(num, i):
+        return (num & (1 << i)) != 0
+    
+    @staticmethod
+    def set_bit(num, i):
+        return num | (1 << i)
+    
+    @staticmethod
+    def clear_bit(num, i):
+        return num & ~(1 << i)
+    
+    @staticmethod
+    def toggle_bit(num, i):
+        return num ^ (1 << i)
+    
+    @staticmethod
+    def count_set_bits(num):
+        count = 0
+        while num:
+            count += num & 1
+            num >>= 1
+        return count`,
+  },
+
+  "Topological Sort": {
+    title: "Topological Sort Algorithm",
+    description:
+      "An algorithm for ordering the vertices of a directed acyclic graph (DAG) such that for every directed edge u->v, vertex u comes before v in the ordering.",
+    timeComplexity: "O(V + E)",
+    spaceComplexity: "O(V)",
+    pseudocode: [
+      "1. Calculate in-degree for each vertex",
+      "2. Add vertices with in-degree 0 to queue",
+      "3. While queue not empty:",
+      "   a. Remove vertex from queue",
+      "   b. Add to result",
+      "   c. Reduce in-degree of neighbors",
+      "   d. If any neighbor's in-degree becomes 0:",
+      "      - Add to queue",
+      "4. If visited all vertices, return result",
+      "   Else, graph has cycle",
+    ],
+    example: `Graph:
+A -> B -> C
+|         ^
+v         |
+D --------|
+
+In-degrees: A:0, B:1, C:2, D:1
+
+Steps:
+1. Start with A (in-degree 0)
+2. Add B (now in-degree 0)
+3. Add D (now in-degree 0)
+4. Add C (now in-degree 0)
+
+Result: [A, B, D, C]`,
+    implementation: `from collections import defaultdict, deque
+
+def topological_sort(graph):
+    # Calculate in-degree
+    in_degree = defaultdict(int)
     for u in graph:
         for v in graph[u]:
             in_degree[v] += 1
     
-    queue = deque([u for u in in_degree if in_degree[u] == 0])
-    sorted_list = []
+    # Add vertices with in-degree 0 to queue
+    queue = deque([u for u in graph if in_degree[u] == 0])
+    result = []
+    
     while queue:
         u = queue.popleft()
-        sorted_list.append(u)
+        result.append(u)
+        
         for v in graph[u]:
             in_degree[v] -= 1
             if in_degree[v] == 0:
                 queue.append(v)
-    return sorted_list`,
-  ],
+    
+    return result if len(result) == len(graph) else []`,
+  },
 
-  [
-    "DFS",
-    `def dfs(graph, start, visited=None):
-    """
-    Performs depth-first search on a graph starting from a given vertex.
-    Time Complexity: O(V + E) where V is vertices and E is edges
-    Space Complexity: O(V) for visited set and recursion stack
-    """
-    # Initialize visited set if not provided
-    # This tracks nodes we've already explored
+  DFS: {
+    title: "Depth-First Search Algorithm",
+    description:
+      "A graph traversal algorithm that explores as far as possible along each branch before backtracking, typically implemented using recursion or a stack.",
+    timeComplexity: "O(V + E)",
+    spaceComplexity: "O(V) for recursion stack",
+    pseudocode: [
+      "1. Mark current vertex as visited",
+      "2. For each unvisited neighbor:",
+      "   a. Recursively call DFS on neighbor",
+      "3. Backtrack when no unvisited neighbors",
+    ],
+    example: `Graph:
+    1 --- 2
+    |     |
+    4 --- 3
+
+DFS from vertex 1:
+1. Visit 1
+2. Visit 2
+3. Visit 3
+4. Visit 4
+
+Path: 1->2->3->4`,
+    implementation: `def dfs(graph, start, visited=None):
     if visited is None:
         visited = set()
     
-    # Mark current node as visited
     visited.add(start)
+    print(start)  # Process vertex
     
-    # Explore each unvisited neighbor recursively
     for neighbor in graph[start]:
-        # Only visit nodes that haven't been visited yet
-        # This prevents cycles and ensures termination
         if neighbor not in visited:
-            # Recursively explore neighbor's neighbors
-            dfs(graph, neighbor, visited)`,
-  ],
+            dfs(graph, neighbor, visited)
+    
+    return visited`,
+  },
 
-  [
-    "BFS",
-    `def bfs(graph, start):
-    """
-    Performs breadth-first search on a graph starting from a given vertex.
-    Time Complexity: O(V + E) where V is vertices and E is edges
-    Space Complexity: O(V) for visited set and queue
-    """
-    # Initialize set to track visited nodes
-    # This prevents visiting same node multiple times
-    visited = set()
-    
-    # Initialize queue with start node
-    # Queue ensures we process nodes in FIFO order
-    queue = deque([start])
-    
-    # Mark start node as visited
-    visited.add(start)
-    
-    # Continue while there are nodes to process
-    while queue:
-        # Get next node to process from front of queue
-        node = queue.popleft()
-        
-        # Process current node (in this case, print it)
-        print(node, end=' ')
-        
-        # Explore all neighbors of current node
-        for neighbor in graph[node]:
-            # Only process unvisited neighbors
-            if neighbor not in visited:
-                # Mark as visited to prevent cycles
-                visited.add(neighbor)
-                # Add to queue for later processing
-                queue.append(neighbor)`,
-  ],
+  "DFS Linked List": {
+    title: "DFS on Linked List",
+    description:
+      "Application of DFS pattern to traverse or process a linked list recursively, useful for operations like reversing or finding cycles.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n) for recursion stack",
+    pseudocode: [
+      "1. Base case: if node is null, return",
+      "2. Process current node",
+      "3. Recursively call DFS on next node",
+      "4. (Optional) Process node after recursion",
+    ],
+    example: `List: 1->2->3->4->null
 
-  [
-    "Stack Implementation",
-    `class Stack:
-    """
-    Implementation of a Stack data structure using a list.
-    Operations: push, pop, is_empty, peek
-    Time Complexity: O(1) for all operations
-    Space Complexity: O(n) where n is number of elements
-    """
-    def __init__(self):
-        # Initialize an empty list to store stack elements
-        # Using a list provides O(1) append and pop operations at the end
-        self.items = []
-    
-    def push(self, item):
-        # Add an item to the top of the stack (end of the list)
-        # O(1) operation as we're appending to the end of the list
-        self.items.append(item)
-    
-    def pop(self):
-        # Remove and return the top item from the stack
-        # O(1) operation as we're removing from the end of the list
-        # Raises IndexError if stack is empty
-        return self.items.pop()
-    
-    def is_empty(self):
-        # Check if the stack is empty by checking list length
-        # O(1) operation as we're just checking the length
-        return len(self.items) == 0
-    
-    def peek(self):
-        # Return the top item without removing it
-        # O(1) operation as we're accessing the last element
-        # Raises IndexError if stack is empty
-        return self.items[-1]`,
-  ],
-
-  [
-    "Queue Implementation",
-    `class Queue:
-    """
-    Implementation of a Queue data structure using a list.
-    Operations: enqueue, dequeue, is_empty, peek
-    Time Complexity: O(1) for enqueue, O(n) for dequeue
-    Space Complexity: O(n) where n is number of elements
-    """
-    def __init__(self):
-        # Initialize an empty list to store queue elements
-        # Elements will be added at the end and removed from the front
-        self.items = []
-    
-    def enqueue(self, item):
-        # Add an item to the back of the queue (end of the list)
-        # O(1) operation as we're appending to the end of the list
-        self.items.append(item)
-    
-    def dequeue(self):
-        # Remove and return the front item from the queue
-        # O(n) operation as we need to shift all elements left
-        # Raises IndexError if queue is empty
-        return self.items.pop(0)
-    
-    def is_empty(self):
-        # Check if the queue is empty by checking list length
-        # O(1) operation as we're just checking the length
-        return len(self.items) == 0
-    
-    def peek(self):
-        # Return the front item without removing it
-        # O(1) operation as we're accessing the first element
-        # Raises IndexError if queue is empty
-        return self.items[0]`,
-  ],
-
-  [
-    "Linked List",
-    `class ListNode:
-    """
-    Implementation of a Linked List data structure.
-    Operations: append, prepend, search, delete, print_list, reverse, sort
-    Time Complexity: O(n) for most operations
-    Space Complexity: O(1) for most operations
-    """
+DFS to print in reverse:
+1. Visit 1, recurse
+2. Visit 2, recurse
+3. Visit 3, recurse
+4. Visit 4, recurse
+5. Print: 4,3,2,1`,
+    implementation: `class ListNode:
     def __init__(self, val=0, next=None):
-        # Initialize a node with a value and a reference to the next node
-        # val: the data stored in the node
-        # next: reference to the next node in the list (None by default)
         self.val = val
         self.next = next
 
-class LinkedList:
-    def __init__(self):
-        # Initialize an empty linked list with head pointing to None
-        self.head = None
+def dfs_linked_list(node):
+    # Base case
+    if not node:
+        return
     
-    def append(self, val):
-        # Add a new node with the given value at the end of the list
-        if not self.head:
-            # If list is empty, create new head node
-            self.head = ListNode(val)
-        else:
-            # Traverse to the end of the list
-            current = self.head
-            while current.next:
-                current = current.next
-            # Add new node at the end
-            current.next = ListNode(val)
+    # Process node (pre-order)
+    print(node.val)
     
-    def prepend(self, val):
-        # Add a new node with the given value at the beginning of the list
-        # Create new node and make it point to current head
-        new_node = ListNode(val)
-        new_node.next = self.head
-        # Update head to point to new node
-        self.head = new_node
-        
-    def search(self, item):
-        # Search for a node with the given value
-        current = self.head
-        while current:
-            # If value is found, return True
-            if current.val == item:
-                return True
-            # Move to next node
-            current = current.next
-        # Value not found
-        return False
+    # Recurse
+    dfs_linked_list(node.next)
+    
+    # Process node (post-order)
+    # print(node.val)  # Uncomment for reverse order`,
+  },
 
-    def delete(self, item):
-        # Delete the first node with the given value
-        current = self.head
-        while current:
-            # If we find the node to delete
-          if current.val == item:
-                # Skip the node by updating the next pointer
-            current.next = current.next.next
-                return True
-            current = current.next
-        # Node not found
-        return False
+  "DFS Binary Tree": {
+    title: "DFS on Binary Tree",
+    description:
+      "Application of DFS to traverse a binary tree, with three main variations: pre-order, in-order, and post-order traversal.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(h) where h is tree height",
+    pseudocode: [
+      "Pre-order traversal:",
+      "1. Process root",
+      "2. Traverse left subtree",
+      "3. Traverse right subtree",
+      "",
+      "In-order traversal:",
+      "1. Traverse left subtree",
+      "2. Process root",
+      "3. Traverse right subtree",
+      "",
+      "Post-order traversal:",
+      "1. Traverse left subtree",
+      "2. Traverse right subtree",
+      "3. Process root",
+    ],
+    example: `Tree:
+     1
+   /   \\
+  2     3
+ / \\
+4   5
 
-    def print_list(self):
-        # Print all values in the linked list
-        current = self.head
-        while current:
-            # Print current node's value
-            print(current.val, end=' ')
-            # Move to next node
-            current = current.next
-        print()
-
-    def reverse(self):
-        # Reverse the linked list in-place
-        prev = None  # Keep track of previous node
-        current = self.head  # Start from head
-        while current:
-            # Store next node before changing current's next pointer
-            next = current.next
-            # Reverse the link
-            current.next = prev
-            # Move prev and current one step forward
-            prev = current
-            current = next
-        # Return new head (last node of original list)
-        return prev
-
-    def sort(self):
-        # Sort the linked list using bubble sort
-        current = self.head
-        while current:
-            # Compare current node with all subsequent nodes
-          next = current.next
-          while next:
-                # If current node's value is greater, swap values
-            if current.val > next.val:
-                current.val, next.val = next.val, current.val
-                next = next.next
-            # Move to next node
-            current = current.next
-        # Return head of sorted list
-        return self.head`,
-  ],
-
-  [
-    "Circular Linked List",
-    `def circular_linked_list(arr):
-    """
-    Creates a circular linked list from an array of values.
-    Time Complexity: O(n) where n is length of array
-    Space Complexity: O(n)
-    """
-    # Handle empty array case
-    if not arr:
-        return None
-    
-    # Create head node with first element
-    head = ListNode(arr[0])
-    # Keep track of current node while building the list
-    current = head
-    
-    # Iterate through remaining elements in array
-    for i in range(1, len(arr)):
-        # Create new node for current element
-        current.next = ListNode(arr[i]) 
-        # Move to the newly created node
-        current = current.next
-    
-    # Make the list circular by connecting last node to head
-    current.next = head
-    # Return the head of the circular linked list
-    return head`,
-  ],
-
-  [
-    "Hash Table",
-    `class HashTable:
-    """
-    Implementation of a Hash Table data structure.
-    Operations: insert, get
-    Time Complexity: O(1) average case, O(n) worst case
-    Space Complexity: O(n) where n is number of elements
-    """
-    def __init__(self):
-        # Initialize hash table with fixed size array of empty lists
-        # Using lists for collision handling (chaining)
-        self.size = 10  # Fixed size for simplicity
-        self.table = [[] for _ in range(self.size)]
-    
-    def hash_function(self, key):
-        # Simple hash function using modulo operation
-        # Maps any integer key to an index within table size
-        return key % self.size
-    
-    def insert(self, key, value):
-        # Insert a key-value pair into the hash table
-        # Calculate hash value for the key
-        hash_key = self.hash_function(key)
-        # Append the key-value pair to the list at that index
-        # This handles collisions by chaining
-        self.table[hash_key].append((key, value))
-    
-    def get(self, key):
-        # Retrieve value associated with the given key
-        # Calculate hash value for the key
-        hash_key = self.hash_function(key)
-        # Search through the list at that index for the key
-        for k, v in self.table[hash_key]:
-            # If key is found, return its value
-            if k == key:
-                return v
-        # Key not found
-        return None`,
-  ],
-
-  [
-    "Graph",
-    `class Graph:
-    """
-    Implementation of a Graph data structure using adjacency list.
-    Operations: add_vertex, add_edge
-    Time Complexity: O(1) for adding vertex/edge
-    Space Complexity: O(V + E) where V is vertices and E is edges
-    """
-    def __init__(self):
-        # Initialize an empty dictionary to store the graph
-        # Keys are vertices, values are lists of adjacent vertices
-        self.graph = {}
-    
-    def add_vertex(self, vertex):
-        # Add a new vertex to the graph if it doesn't exist
-        # Each vertex is initialized with an empty list of neighbors
-        if vertex not in self.graph:
-            self.graph[vertex] = []
-    
-    def add_edge(self, vertex1, vertex2):
-        # Add an undirected edge between two vertices
-        # For undirected graph, we add edges in both directions
-        if vertex1 in self.graph:
-            # Add vertex2 to vertex1's adjacency list
-            self.graph[vertex1].append(vertex2)
-        if vertex2 in self.graph:
-            # Add vertex1 to vertex2's adjacency list
-            self.graph[vertex2].append(vertex1)`,
-  ],
-
-  [
-    "Tree",
-    `class TreeNode:
-    """
-    Implementation of a Binary Tree data structure.
-    Operations: insert, search, delete
-    Time Complexity: O(h) where h is height of tree
-    Space Complexity: O(h) for recursion stack
-    """
+Pre-order: 1,2,4,5,3
+In-order: 4,2,5,1,3
+Post-order: 4,5,2,3,1`,
+    implementation: `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
-        # Initialize a tree node with a value and references to left and right children
-        # val: the data stored in the node
-        # left: reference to left child (None by default)
-        # right: reference to right child (None by default)
         self.val = val
         self.left = left
         self.right = right
 
-class Tree:
-    def __init__(self):
-        # Initialize an empty binary tree with root pointing to None
-        self.root = None
-    
-    def insert(self, val):
-        # Insert a new value into the binary search tree
-        if not self.root:
-            # If tree is empty, create new root node
-            self.root = TreeNode(val)
-        else:
-            # Otherwise, recursively insert into appropriate subtree
-            self._insert_recursive(self.root, val)
-    
-    def _insert_recursive(self, node, val):
-        # Helper method to recursively insert a value into the tree
-        if val < node.val:
-            # If value is less than current node, go to left subtree
-            if node.left is None:
-                # If left child doesn't exist, create new node
-                node.left = TreeNode(val)
-            else:
-                # Otherwise, continue searching in left subtree
-                self._insert_recursive(node.left, val)
-        else:
-            # If value is greater or equal, go to right subtree
-            if node.right is None:
-                # If right child doesn't exist, create new node
-                node.right = TreeNode(val)
-            else:
-                # Otherwise, continue searching in right subtree
-                self._insert_recursive(node.right, val)`,
-  ],
+def preorder(root):
+    if not root:
+        return
+    print(root.val)  # Process root
+    preorder(root.left)  # Left subtree
+    preorder(root.right)  # Right subtree
 
-  [
-    "Heap Implementation",
-    `class MaxHeap:
-    """
-    Implementation of a Max Heap data structure.
-    Operations: insert, extract_max, heapify
-    Time Complexity: O(log n) for insert and extract_max
-    Space Complexity: O(n) where n is number of elements
-    """
-    def __init__(self):
-        # Initialize an empty list to store heap elements
-        # The heap property will be maintained using list indices
-        self.heap = []
-    
-    def insert(self, item):
-        # Add a new item to the heap
-        # First append to the end of the list
-        self.heap.append(item)
-        # Then restore heap property by moving item up
-        self._heapify_up()
-    
-    def _heapify_up(self):
-        # Restore heap property after insertion
-        # Start from the last element (newly inserted)
-        index = len(self.heap) - 1
-        while index > 0:
-            # Calculate parent index using integer division
-            parent_index = (index - 1) // 2
-            # If current element is greater than its parent
-            if self.heap[index] > self.heap[parent_index]:
-                # Swap with parent to maintain heap property
-                self.heap[index], self.heap[parent_index] = self.heap[parent_index], self.heap[index]
-                # Move up to parent's position
-                index = parent_index
-            else:
-                # Heap property is satisfied
-                break`,
-  ],
+def inorder(root):
+    if not root:
+        return
+    inorder(root.left)  # Left subtree
+    print(root.val)  # Process root
+    inorder(root.right)  # Right subtree
 
-  [
-    "Trie",
-    `class TrieNode:
-    """
-    Implementation of a Trie (prefix tree) data structure.
-    Operations: insert, search, starts_with
-    Time Complexity: O(m) where m is length of string
-    Space Complexity: O(ALPHABET_SIZE * m * n) where n is number of strings
-    """
-    def __init__(self):
-        # Initialize a trie node with:
-        # children: dictionary to store child nodes for each character
-        # is_end: boolean flag indicating if this node represents end of a word
-        self.children = {}
-        self.is_end = False
+def postorder(root):
+    if not root:
+        return
+    postorder(root.left)  # Left subtree
+    postorder(root.right)  # Right subtree
+    print(root.val)  # Process root`,
+  },
 
-class Trie:
-    def __init__(self):
-        # Initialize trie with an empty root node
-        self.root = TrieNode()
-    
-    def insert(self, word):
-        # Insert a word into the trie
-        node = self.root
-        for char in word:
-            # For each character in the word
-            if char not in node.children:
-                # If path doesn't exist, create new node
-                node.children[char] = TrieNode()
-            # Move to the next node in the path
-            node = node.children[char]
-        # Mark the end of the word
-        node.is_end = True
-    
-    def search(self, word):
-        # Search for a complete word in the trie
-        node = self.root
-        for char in word:
-            # For each character in the word
-            if char not in node.children:
-                # If path doesn't exist, word is not in trie
-                return False
-            # Move to the next node in the path
-            node = node.children[char]
-        # Return True only if we found the complete word
-        return node.is_end`,
-  ],
+  BFS: {
+    title: "Breadth-First Search Algorithm",
+    description:
+      "A graph traversal algorithm that explores all vertices at the present depth before moving to vertices at the next depth level, typically implemented using a queue.",
+    timeComplexity: "O(V + E)",
+    spaceComplexity: "O(V)",
+    pseudocode: [
+      "1. Initialize queue with start vertex",
+      "2. While queue not empty:",
+      "   a. Remove vertex from queue",
+      "   b. Process vertex",
+      "   c. Add unvisited neighbors to queue",
+      "   d. Mark neighbors as visited",
+    ],
+    example: `Graph:
+    1 --- 2
+    |     |
+    4 --- 3
 
-  [
-    "Monotonic Stack",
-    `def monotonic_stack(arr):
-    """
-    Maintains a stack where elements are in decreasing order.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
-    # Initialize empty stack to store elements in decreasing order
-    stack = []
-    
-    # Process each element in the input array
-    for num in arr:
-        # While stack is not empty and top element is greater than current number
-        # This maintains the decreasing order property
-        while stack and stack[-1] > num:
-            # Remove elements that violate the monotonic property
-            stack.pop()
-        # Add current number to stack
-        # At this point, all elements in stack are greater than current number
-        stack.append(num)
-    
-    # Return the monotonic stack
-    return stack`,
-  ],
+BFS from vertex 1:
+Queue: [1]
+Visit 1, Queue: [2,4]
+Visit 2, Queue: [4,3]
+Visit 4, Queue: [3]
+Visit 3, Queue: []`,
+    implementation: `from collections import deque
 
-  [
-    "Monotonic Queue",
-    `def monotonic_queue(arr):
-    """
-    Maintains a queue where elements are in decreasing order.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
-    # Initialize empty queue to store elements in decreasing order
-    queue = []
+def bfs(graph, start):
+    visited = set([start])
+    queue = deque([start])
     
-    # Process each element in the input array
-    for num in arr:
-        # While queue is not empty and last element is greater than current number
-        # This maintains the decreasing order property
-        while queue and queue[-1] > num:
-            # Remove elements that violate the monotonic property
-            queue.pop()
-        # Add current number to queue
-        # At this point, all elements in queue are greater than current number
-        queue.append(num)
-    
-    # Return the monotonic queue
-    return queue`,
-  ],
-
-  [
-    "Two Pointers",
-    `def two_pointers(arr, target):
-    """
-    Finds pairs in a sorted array that sum to target using two pointers.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    # Initialize pointers at the start and end of the array
-    left = 0
-    right = len(arr) - 1
-    
-    # Continue while pointers haven't crossed each other
-    while left < right:
-        # Calculate current sum of elements at both pointers
-        current_sum = arr[left] + arr[right]
+    while queue:
+        vertex = queue.popleft()
+        print(vertex)  # Process vertex
         
-        # If sum equals target, we found our pair
-        if current_sum == target:
-            return [left, right]
-        # If sum is less than target, move left pointer right
-        # to increase the sum
-        elif current_sum < target:
-            left += 1
-        # If sum is greater than target, move right pointer left
-        # to decrease the sum
-        else:
-            right -= 1
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
     
-    # If no pair is found, return empty list
-    return []`,
-  ],
+    return visited`,
+  },
 
-  [
-    "Binary Search Tree" as PatternKey,
-    `class Node:
+  "BFS Linked List": {
+    title: "BFS on Linked List",
+    description:
+      "Application of BFS pattern to process a linked list level by level, useful for operations like finding the middle node or detecting cycles.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1) as we process one node at a time",
+    pseudocode: [
+      "1. Initialize slow and fast pointers",
+      "2. While fast pointer valid:",
+      "   a. Move slow one step",
+      "   b. Move fast two steps",
+      "3. Slow pointer at middle/cycle start",
+    ],
+    example: `List: 1->2->3->4->5->null
+
+Find middle:
+Step 1: s=1, f=1
+Step 2: s=2, f=3
+Step 3: s=3, f=5
+Middle: 3`,
+    implementation: `class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def find_middle(head):
+    if not head or not head.next:
+        return head
+    
+    slow = fast = head
+    
+    while fast.next and fast.next.next:
+        slow = slow.next
+        fast = fast.next.next
+    
+    return slow
+
+def has_cycle(head):
+    if not head or not head.next:
+        return False
+    
+    slow = fast = head
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            return True
+    
+    return False`,
+  },
+
+  "Stack Implementation": {
+    title: "Stack Data Structure Implementation",
+    description:
+      "Implementation of a Last-In-First-Out (LIFO) data structure that supports push and pop operations.",
+    timeComplexity: "Push/Pop: O(1)",
+    spaceComplexity: "O(n) for n elements",
+    pseudocode: [
+      "Stack operations:",
+      "1. push(element):",
+      "   - Add element to top",
+      "2. pop():",
+      "   - Remove and return top element",
+      "3. peek():",
+      "   - Return top element without removing",
+      "4. isEmpty():",
+      "   - Return true if stack empty",
+      "5. size():",
+      "   - Return number of elements",
+    ],
+    example: `stack = Stack()
+stack.push(1)  # [1]
+stack.push(2)  # [1,2]
+stack.push(3)  # [1,2,3]
+stack.pop()    # returns 3, stack=[1,2]
+stack.peek()   # returns 2, stack=[1,2]`,
+    implementation: `class Stack:
+    def __init__(self):
+        self.items = []
+    
+    def push(self, item):
+        self.items.append(item)
+    
+    def pop(self):
+        if not self.isEmpty():
+            return self.items.pop()
+        raise IndexError("Stack is empty")
+    
+    def peek(self):
+        if not self.isEmpty():
+            return self.items[-1]
+        raise IndexError("Stack is empty")
+    
+    def isEmpty(self):
+        return len(self.items) == 0
+    
+    def size(self):
+        return len(self.items)`,
+  },
+
+  "Queue Implementation": {
+    title: "Queue Data Structure Implementation",
+    description:
+      "Implementation of a First-In-First-Out (FIFO) data structure that supports enqueue and dequeue operations.",
+    timeComplexity: "Enqueue/Dequeue: O(1)",
+    spaceComplexity: "O(n) for n elements",
+    pseudocode: [
+      "Queue operations:",
+      "1. enqueue(element):",
+      "   - Add element to rear",
+      "2. dequeue():",
+      "   - Remove and return front element",
+      "3. front():",
+      "   - Return front element without removing",
+      "4. isEmpty():",
+      "   - Return true if queue empty",
+      "5. size():",
+      "   - Return number of elements",
+    ],
+    example: `queue = Queue()
+queue.enqueue(1)  # [1]
+queue.enqueue(2)  # [1,2]
+queue.enqueue(3)  # [1,2,3]
+queue.dequeue()   # returns 1, queue=[2,3]
+queue.front()     # returns 2, queue=[2,3]`,
+    implementation: `from collections import deque
+
+class Queue:
+    def __init__(self):
+        self.items = deque()
+    
+    def enqueue(self, item):
+        self.items.append(item)
+    
+    def dequeue(self):
+        if not self.isEmpty():
+            return self.items.popleft()
+        raise IndexError("Queue is empty")
+    
+    def front(self):
+        if not self.isEmpty():
+            return self.items[0]
+        raise IndexError("Queue is empty")
+    
+    def isEmpty(self):
+        return len(self.items) == 0
+    
+    def size(self):
+        return len(self.items)`,
+  },
+
+  "Linked List": {
+    title: "Linked List Implementation",
+    description:
+      "Implementation of a linear data structure where each element points to the next element in the sequence.",
+    timeComplexity: "Access: O(n), Insert/Delete at known position: O(1)",
+    spaceComplexity: "O(n) for n elements",
+    pseudocode: [
+      "Linked List operations:",
+      "1. append(element):",
+      "   - Add element to end",
+      "2. prepend(element):",
+      "   - Add element to start",
+      "3. delete(element):",
+      "   - Remove first occurrence",
+      "4. insert(element, position):",
+      "   - Insert at specific position",
+      "5. search(element):",
+      "   - Return position of element",
+    ],
+    example: `list = LinkedList()
+list.append(1)    # 1->null
+list.append(2)    # 1->2->null
+list.prepend(0)   # 0->1->2->null
+list.delete(1)    # 0->2->null
+list.insert(1, 1) # 0->1->2->null`,
+    implementation: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+    
+    def prepend(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+    
+    def delete(self, data):
+        if not self.head:
+            return
+        
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+        
+        current = self.head
+        while current.next:
+            if current.next.data == data:
+                current.next = current.next.next
+                return
+            current = current.next
+    
+    def insert(self, data, position):
+        if position == 0:
+            self.prepend(data)
+            return
+        
+        new_node = Node(data)
+        current = self.head
+        for i in range(position - 1):
+            if not current:
+                return
+            current = current.next
+        
+        if current:
+            new_node.next = current.next
+            current.next = new_node`,
+  },
+
+  "Circular Linked List": {
+    title: "Circular Linked List Implementation",
+    description:
+      "Implementation of a linked list where the last element points back to the first element, forming a circle.",
+    timeComplexity: "Access: O(n), Insert/Delete at known position: O(1)",
+    spaceComplexity: "O(n) for n elements",
+    pseudocode: [
+      "Circular Linked List operations:",
+      "1. append(element):",
+      "   - Add element and point to head",
+      "2. prepend(element):",
+      "   - Add element and update last->next",
+      "3. delete(element):",
+      "   - Remove and maintain circle",
+      "4. insert(element, position):",
+      "   - Insert and maintain circle",
+      "5. traverse():",
+      "   - Visit each node once",
+    ],
+    example: `list = CircularLinkedList()
+list.append(1)    # 1->1
+list.append(2)    # 1->2->1
+list.prepend(0)   # 0->1->2->0
+list.delete(1)    # 0->2->0
+list.insert(1, 1) # 0->1->2->0`,
+    implementation: `class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            new_node.next = self.head
+            return
+        
+        current = self.head
+        while current.next != self.head:
+            current = current.next
+        current.next = new_node
+        new_node.next = self.head
+    
+    def prepend(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            new_node.next = self.head
+            return
+        
+        current = self.head
+        while current.next != self.head:
+            current = current.next
+        new_node.next = self.head
+        current.next = new_node
+        self.head = new_node
+    
+    def delete(self, data):
+        if not self.head:
+            return
+        
+        if self.head.data == data:
+            if self.head.next == self.head:
+                self.head = None
+                return
+            current = self.head
+            while current.next != self.head:
+                current = current.next
+            current.next = self.head.next
+            self.head = self.head.next
+            return
+        
+        current = self.head
+        while current.next != self.head:
+            if current.next.data == data:
+                current.next = current.next.next
+                return
+            current = current.next
+    
+    def traverse(self):
+        if not self.head:
+            return
+        
+        current = self.head
+        while True:
+            print(current.data)
+            current = current.next
+            if current == self.head:
+                break`,
+  },
+
+  "Hash Table": {
+    title: "Hash Table Implementation",
+    description:
+      "Implementation of a data structure that maps keys to values using a hash function, providing constant-time average case operations.",
+    timeComplexity: "Average: O(1) for insert/delete/search, Worst: O(n)",
+    spaceComplexity: "O(n) for n key-value pairs",
+    pseudocode: [
+      "Hash Table operations:",
+      "1. put(key, value):",
+      "   - Hash key to get index",
+      "   - Handle collisions",
+      "   - Store key-value pair",
+      "2. get(key):",
+      "   - Hash key to get index",
+      "   - Return value if found",
+      "3. remove(key):",
+      "   - Hash key to get index",
+      "   - Remove key-value pair",
+      "4. contains(key):",
+      "   - Check if key exists",
+    ],
+    example: `table = HashTable()
+table.put("name", "John")  # hash("name") = 2
+table.put("age", 30)      # hash("age") = 5
+table.get("name")         # returns "John"
+table.contains("age")     # returns True
+table.remove("name")      # removes entry`,
+    implementation: `class HashTable:
+    def __init__(self, size=1024):
+        self.size = size
+        self.table = [[] for _ in range(size)]
+    
+    def _hash(self, key):
+        return hash(key) % self.size
+    
+    def put(self, key, value):
+        index = self._hash(key)
+        for item in self.table[index]:
+            if item[0] == key:
+                item[1] = value
+                return
+        self.table[index].append([key, value])
+    
+    def get(self, key):
+        index = self._hash(key)
+        for item in self.table[index]:
+            if item[0] == key:
+                return item[1]
+        raise KeyError(key)
+    
+    def remove(self, key):
+        index = self._hash(key)
+        for i, item in enumerate(self.table[index]):
+            if item[0] == key:
+                del self.table[index][i]
+                return
+        raise KeyError(key)
+    
+    def contains(self, key):
+        index = self._hash(key)
+        return any(item[0] == key for item in self.table[index])`,
+  },
+
+  Graph: {
+    title: "Graph Implementation",
+    description:
+      "Implementation of a graph data structure using adjacency list representation, supporting both directed and undirected graphs.",
+    timeComplexity:
+      "Add vertex/edge: O(1), Remove vertex: O(V+E), Remove edge: O(E)",
+    spaceComplexity: "O(V + E) for V vertices and E edges",
+    pseudocode: [
+      "Graph operations:",
+      "1. addVertex(vertex):",
+      "   - Add new vertex to graph",
+      "2. addEdge(v1, v2, weight):",
+      "   - Connect vertices with edge",
+      "3. removeVertex(vertex):",
+      "   - Remove vertex and its edges",
+      "4. removeEdge(v1, v2):",
+      "   - Remove edge between vertices",
+      "5. getNeighbors(vertex):",
+      "   - Get adjacent vertices",
+    ],
+    example: `graph = Graph()
+graph.addVertex("A")
+graph.addVertex("B")
+graph.addVertex("C")
+graph.addEdge("A", "B", 1)
+graph.addEdge("B", "C", 2)
+graph.getNeighbors("B")  # returns ["A", "C"]`,
+    implementation: `class Graph:
+    def __init__(self, directed=False):
+        self.graph = {}
+        self.directed = directed
+    
+    def addVertex(self, vertex):
+        if vertex not in self.graph:
+            self.graph[vertex] = {}
+    
+    def addEdge(self, v1, v2, weight=1):
+        if v1 not in self.graph:
+            self.addVertex(v1)
+        if v2 not in self.graph:
+            self.addVertex(v2)
+        
+        self.graph[v1][v2] = weight
+        if not self.directed:
+            self.graph[v2][v1] = weight
+    
+    def removeVertex(self, vertex):
+        if vertex in self.graph:
+            # Remove edges to this vertex
+            for v in self.graph:
+                if vertex in self.graph[v]:
+                    del self.graph[v][vertex]
+            # Remove vertex and its edges
+            del self.graph[vertex]
+    
+    def removeEdge(self, v1, v2):
+        if v1 in self.graph and v2 in self.graph[v1]:
+            del self.graph[v1][v2]
+            if not self.directed and v1 in self.graph[v2]:
+                del self.graph[v2][v1]
+    
+    def getNeighbors(self, vertex):
+        return list(self.graph.get(vertex, {}).keys())`,
+  },
+
+  Tree: {
+    title: "Tree Implementation",
+    description:
+      "Implementation of a general tree data structure where each node can have multiple children.",
+    timeComplexity: "Insert/Delete: O(1) with parent reference, Search: O(n)",
+    spaceComplexity: "O(n) for n nodes",
+    pseudocode: [
+      "Tree operations:",
+      "1. addChild(parent, child):",
+      "   - Add child to parent node",
+      "2. removeChild(parent, child):",
+      "   - Remove child from parent",
+      "3. findNode(value):",
+      "   - Find node with value",
+      "4. traverse():",
+      "   - Visit all nodes",
+      "5. getDepth(node):",
+      "   - Get depth of node",
+    ],
+    example: `tree = Tree(1)
+tree.addChild(1, 2)
+tree.addChild(1, 3)
+tree.addChild(2, 4)
+tree.addChild(2, 5)
+
+     1
+   /   \\
+  2     3
+ / \\
+4   5`,
+    implementation: `class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.children = []
+        self.parent = None
+
+class Tree:
+    def __init__(self, root_value):
+        self.root = TreeNode(root_value)
+    
+    def addChild(self, parent_value, child_value):
+        parent = self.findNode(parent_value)
+        if parent:
+            child = TreeNode(child_value)
+            child.parent = parent
+            parent.children.append(child)
+    
+    def removeChild(self, parent_value, child_value):
+        parent = self.findNode(parent_value)
+        if parent:
+            parent.children = [
+                child for child in parent.children
+                if child.value != child_value
+            ]
+    
+    def findNode(self, value, node=None):
+        if node is None:
+            node = self.root
+        if node.value == value:
+            return node
+        for child in node.children:
+            result = self.findNode(value, child)
+            if result:
+                return result
+        return None
+    
+    def traverse(self, node=None):
+        if node is None:
+            node = self.root
+        print(node.value)
+        for child in node.children:
+            self.traverse(child)
+    
+    def getDepth(self, node):
+        depth = 0
+        while node.parent:
+            depth += 1
+            node = node.parent
+        return depth`,
+  },
+
+  "Binary Search Tree": {
+    title: "Binary Search Tree Implementation",
+    description:
+      "Implementation of a binary tree that maintains the BST property: left subtree values are less than node, right subtree values are greater.",
+    timeComplexity: "Average: O(log n) for insert/delete/search, Worst: O(n)",
+    spaceComplexity: "O(n) for n nodes",
+    pseudocode: [
+      "BST operations:",
+      "1. insert(value):",
+      "   - Add value maintaining BST property",
+      "2. delete(value):",
+      "   - Remove value maintaining BST property",
+      "3. search(value):",
+      "   - Find node with value",
+      "4. min():",
+      "   - Find minimum value",
+      "5. max():",
+      "   - Find maximum value",
+    ],
+    example: `bst = BST()
+bst.insert(5)
+bst.insert(3)
+bst.insert(7)
+bst.insert(1)
+bst.insert(9)
+
+     5
+   /   \\
+  3     7
+ /       \\
+1         9`,
+    implementation: `class Node:
     def __init__(self, value):
         self.value = value
         self.left = None
@@ -1196,759 +1992,1208 @@ class BST:
         self.root = None
     
     def insert(self, value):
-    """
-        Insert a value into the BST.
-        Time Complexity: O(h) where h is the height of the tree
-        Space Complexity: O(h) for recursion stack
-        
-        Pseudocode:
-        1. If tree is empty:
-           a. Create new node with value
-           b. Set as root
-           c. Return
-        
-        2. Start at root and traverse:
-           a. If value < current node:
-              - If left child is None: insert here
-              - Else: recurse on left subtree
-           b. If value > current node:
-              - If right child is None: insert here
-              - Else: recurse on right subtree
-           c. If value == current node: return (duplicate)
-        
-        Example:
-        Insert 5, 3, 7, 1, 4, 6, 8
-        
-        After 5:    5
-        After 3:    5
-                  /
-                 3
-        After 7:    5
-                  / \\
-                 3   7
-        After 1:    5
-                  / \\
-                 3   7
-                /
-               1
-        After 4:    5
-                  / \\
-                 3   7
-                / \\
-               1   4
-        After 6:    5
-                  / \\
-                 3   7
-                / \\ /
-               1  4 6
-        After 8:    5
-                  / \\
-                 3   7
-                / \\ / \\
-               1  4 6  8
-        """
         if not self.root:
             self.root = Node(value)
             return
-            
+        
         def _insert(node, value):
             if value < node.value:
-                if not node.left:
+                if node.left is None:
                     node.left = Node(value)
-            else:
+                else:
                     _insert(node.left, value)
-            elif value > node.value:
-                if not node.right:
-                    node.right = Node(value)
             else:
+                if node.right is None:
+                    node.right = Node(value)
+                else:
                     _insert(node.right, value)
-                    
+        
         _insert(self.root, value)
     
     def search(self, value):
-    """
-        Search for a value in the BST.
-        Time Complexity: O(h) where h is the height of the tree
-        Space Complexity: O(h) for recursion stack
-        
-        Pseudocode:
-        1. Start at root
-        
-        2. While current node exists:
-           a. If value == current node: return True
-           b. If value < current node: go to left child
-           c. If value > current node: go to right child
-        
-        3. If we reach None: return False
-        
-        Example:
-        Tree:    5
-                / \\
-               3   7
-              / \\ / \\
-             1  4 6  8
-        
-        Search for 4:
-        1. Start at 5: 4 < 5, go left
-        2. At 3: 4 > 3, go right
-        3. At 4: 4 == 4, found!
-        
-        Search for 9:
-        1. Start at 5: 9 > 5, go right
-        2. At 7: 9 > 7, go right
-        3. At 8: 9 > 8, go right
-        4. None found, value not in tree
-        """
         def _search(node, value):
-            if not node:
-                return False
-            if node.value == value:
-                return True
+            if node is None or node.value == value:
+                return node
             if value < node.value:
                 return _search(node.left, value)
             return _search(node.right, value)
-            
+        
         return _search(self.root, value)
     
+    def min(self):
+        if not self.root:
+            return None
+        
+        node = self.root
+        while node.left:
+            node = node.left
+        return node.value
+    
+    def max(self):
+        if not self.root:
+            return None
+        
+        node = self.root
+        while node.right:
+            node = node.right
+        return node.value
+    
     def delete(self, value):
-    """
-        Delete a value from the BST.
-        Time Complexity: O(h) where h is the height of the tree
-        Space Complexity: O(h) for recursion stack
+        def _min_value_node(node):
+            current = node
+            while current.left:
+                current = current.left
+            return current
         
-        Pseudocode:
-        1. Find node to delete
-        
-        2. If node has no children:
-           a. Simply remove node
-        
-        3. If node has one child:
-           a. Replace node with its child
-        
-        4. If node has two children:
-           a. Find inorder successor (smallest in right subtree)
-           b. Replace node value with successor value
-           c. Delete successor node
-        
-        Example:
-        Tree:    5
-                / \\
-               3   7
-              / \\ / \\
-             1  4 6  8
-        
-        Delete 3 (node with two children):
-        1. Find inorder successor (4)
-        2. Replace 3 with 4
-        3. Delete original 4
-        
-        Result:    5
-                  / \\
-                 4   7
-                /   / \\
-               1   6   8
-        
-        Delete 1 (leaf node):
-        1. Simply remove node 1
-        
-        Result:    5
-                  / \\
-                 4   7
-                    / \\
-                   6   8
-    """
         def _delete(node, value):
             if not node:
-                return None
-                
+                return node
+            
             if value < node.value:
                 node.left = _delete(node.left, value)
             elif value > node.value:
                 node.right = _delete(node.right, value)
             else:
-                # Case 1: No children
-                if not node.left and not node.right:
-                    return None
-                    
-                # Case 2: One child
                 if not node.left:
                     return node.right
-                if not node.right:
+                elif not node.right:
                     return node.left
-                    
-                # Case 3: Two children
-                successor = node.right
-                while successor.left:
-                    successor = successor.left
-                node.value = successor.value
-                node.right = _delete(node.right, successor.value)
                 
-            return node
+                temp = _min_value_node(node.right)
+                node.value = temp.value
+                node.right = _delete(node.right, temp.value)
             
+            return node
+        
         self.root = _delete(self.root, value)`,
-  ],
+  },
 
-  [
-    "DFS Linked List",
-    `def dfs_linked_list(head):
-    """
-    Performs depth-first search on a linked list.
-    Time Complexity: O(n) where n is length of linked list
-    Space Complexity: O(n) due to recursion stack
-    """
-    if not head:
-        return []
-    return [head.val] + dfs_linked_list(head.next)`,
-  ],
+  "Heap Implementation": {
+    title: "Binary Heap Implementation",
+    description:
+      "Implementation of a complete binary tree that satisfies the heap property (min-heap or max-heap), commonly used for priority queues.",
+    timeComplexity: "Insert/Delete: O(log n), Get Min/Max: O(1)",
+    spaceComplexity: "O(n) for n elements",
+    pseudocode: [
+      "Heap operations:",
+      "1. insert(value):",
+      "   - Add to end",
+      "   - Bubble up until heap property satisfied",
+      "2. extractMin/Max():",
+      "   - Remove root",
+      "   - Replace with last element",
+      "   - Bubble down until heap property satisfied",
+      "3. peek():",
+      "   - Return root value",
+      "4. heapify(array):",
+      "   - Convert array to heap",
+    ],
+    example: `heap = MinHeap()
+heap.insert(5)
+heap.insert(3)
+heap.insert(7)
+heap.insert(1)
 
-  [
-    "BFS Linked List",
-    `def bfs_linked_list(head):
-    """
-    Performs breadth-first search on a linked list.
-    Time Complexity: O(n) where n is length of linked list
-    Space Complexity: O(n) for queue storage
-    """
-    if not head:
-        return []
-    queue = deque([head])
-    results = []
-    while queue:
-        node = queue.popleft()
-        results.append(node.val)
-        if node.left:
-            queue.append(node.left)
-        if node.right:
-            queue.append(node.right)
-    return results`,
-  ],
-
-  [
-    "DFS Binary Tree",
-    `def dfs_binary_tree(root):
-    """
-    Performs depth-first search on a binary tree.
-    Time Complexity: O(n) where n is number of nodes
-    Space Complexity: O(h) where h is height of tree
-    """
-    if not root:
-        return []
-    return [root.val] + dfs_binary_tree(root.left) + dfs_binary_tree(root.right)`,
-  ],
-
-  [
-    "Dynamic Programming Fibonacci",
-    `def dynamic_programming_fibonacci(n):
-    """
-    Calculates nth Fibonacci number using dynamic programming.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
+     1
+   /   \\
+  3     7
+ /
+5`,
+    implementation: `class MinHeap:
+    def __init__(self):
+        self.heap = []
     
-    Pseudocode:
-    1. Create array dp of size n+1 initialized with zeros
-    2. Set base cases:
-       dp[0] = 0
-       dp[1] = 1
-    3. For each i from 2 to n:
-       dp[i] = dp[i-1] + dp[i-2]
-    4. Return dp[n]
-    """
-    dp = [0] * (n+1)
-    dp[0] = 0
-    dp[1] = 1
-    for i in range(2, n+1):
-        dp[i] = dp[i-1] + dp[i-2]
-    return dp[n]`,
-  ],
+    def parent(self, i):
+        return (i - 1) // 2
+    
+    def leftChild(self, i):
+        return 2 * i + 1
+    
+    def rightChild(self, i):
+        return 2 * i + 2
+    
+    def swap(self, i, j):
+        self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
+    
+    def insert(self, key):
+        self.heap.append(key)
+        self._bubbleUp(len(self.heap) - 1)
+    
+    def _bubbleUp(self, i):
+        parent = self.parent(i)
+        if i > 0 and self.heap[i] < self.heap[parent]:
+            self.swap(i, parent)
+            self._bubbleUp(parent)
+    
+    def extractMin(self):
+        if not self.heap:
+            return None
+        
+        min_val = self.heap[0]
+        self.heap[0] = self.heap[-1]
+        self.heap.pop()
+        
+        if self.heap:
+            self._bubbleDown(0)
+        
+        return min_val
+    
+    def _bubbleDown(self, i):
+        min_idx = i
+        left = self.leftChild(i)
+        right = self.rightChild(i)
+        
+        if left < len(self.heap) and self.heap[left] < self.heap[min_idx]:
+            min_idx = left
+        
+        if right < len(self.heap) and self.heap[right] < self.heap[min_idx]:
+            min_idx = right
+        
+        if min_idx != i:
+            self.swap(i, min_idx)
+            self._bubbleDown(min_idx)
+    
+    def peek(self):
+        return self.heap[0] if self.heap else None`,
+  },
 
-  [
-    "Dynamic Programming Iterative",
-    `def dynamic_programming_iterative(arr):
-    """
-    Finds maximum subarray sum using dynamic programming.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
-    dp = [0] * len(arr)
-    dp[0] = arr[0]
-    for i in range(1, len(arr)):
-        dp[i] = max(dp[i-1] + arr[i], arr[i])
-    return max(dp)`,
-  ],
+  Trie: {
+    title: "Trie Implementation",
+    description:
+      "Implementation of a tree-like data structure for storing and retrieving strings, commonly used for prefix-based operations and autocomplete.",
+    timeComplexity: "Insert/Search: O(m) where m is key length",
+    spaceComplexity: "O(ALPHABET_SIZE * m * n) for n keys of length m",
+    pseudocode: [
+      "Trie operations:",
+      "1. insert(word):",
+      "   - Add characters as nodes",
+      "   - Mark last node as end of word",
+      "2. search(word):",
+      "   - Follow character path",
+      "   - Check if end of word",
+      "3. startsWith(prefix):",
+      "   - Follow character path",
+      "   - Return true if path exists",
+      "4. delete(word):",
+      "   - Remove word marking",
+      "   - Remove unused nodes",
+    ],
+    example: `trie = Trie()
+trie.insert("cat")
+trie.insert("car")
+trie.insert("cart")
 
-  [
-    "Dynamic Programming Coin Change",
-    `def dynamic_programming_coin_change(coins, amount):
-    """
-    Finds minimum number of coins needed to make amount using dynamic programming.
-    Time Complexity: O(amount * len(coins))
-    Space Complexity: O(amount)
-    
-    Pseudocode:
-    1. Create array dp of size amount+1 initialized with infinity
-    2. Set base case: dp[0] = 0 (no coins needed for amount 0)
-    3. For each coin in coins:
-       a. For each amount i from coin to target amount:
-          - Update dp[i] = min(dp[i], dp[i-coin] + 1)
-    4. Return dp[amount] if it's not infinity, else -1
-    
-    Example:
-    coins = [1, 2, 5], amount = 11
-    dp[0] = 0
-    dp[1] = 1 (using coin 1)
-    dp[2] = 1 (using coin 2)
-    dp[3] = 2 (using coins 1+2)
-    ...
-    dp[11] = 3 (using coins 5+5+1)
-    """
-    dp = [float('inf')] * (amount+1)
-    dp[0] = 0
-    for coin in coins:
-        for i in range(coin, amount+1):
-            dp[i] = min(dp[i], dp[i-coin] + 1)
-    return dp[amount] if dp[amount] != float('inf') else -1`,
-  ],
+Structure:
+     root
+      |
+      c
+      |
+      a
+    /   \\
+   r     t*
+   |
+   t*
 
-  [
-    "Greedy Activity Selection",
-    `def greedy_activity_selection(activities):
-    """
-    Selects maximum number of non-overlapping activities using greedy approach.
-    Time Complexity: O(n log n) where n is number of activities
-    Space Complexity: O(n) for storing result
+search("cat")     # True
+startsWith("ca")  # True
+search("cap")     # False`,
+    implementation: `class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
     
-    Pseudocode:
-    1. Sort activities by finish time
-    2. Initialize result with first activity
-    3. For each remaining activity:
-       a. If current activity's start time >= last selected activity's finish time:
-          - Add current activity to result
-          - Update last selected activity
-    4. Return selected activities
+    def insert(self, word):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end = True
     
-    Example:
-    activities = [(1,4), (2,6), (3,9), (5,7)]
-    sorted = [(1,4), (2,6), (5,7), (3,9)]
-    result = [(1,4), (5,7)]  # Maximum non-overlapping activities
-    """
-    # Sort activities by finish time
-    activities.sort(key=lambda x: x[1])
-    result = [activities[0]]
-    last_finish = activities[0][1]
+    def search(self, word):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.is_end
     
-    for i in range(1, len(activities)):
-        if activities[i][0] >= last_finish:
-            result.append(activities[i])
-            last_finish = activities[i][1]
+    def startsWith(self, prefix):
+        node = self.root
+        for char in prefix:
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
+    
+    def delete(self, word):
+        def _delete(node, word, depth):
+            if depth == len(word):
+                if node.is_end:
+                    node.is_end = False
+                return len(node.children) == 0
+            
+            char = word[depth]
+            if char not in node.children:
+                return False
+            
+            should_delete = _delete(node.children[char], word, depth + 1)
+            
+            if should_delete:
+                del node.children[char]
+                return len(node.children) == 0
+            
+            return False
+        
+        _delete(self.root, word, 0)`,
+  },
+
+  "Monotonic Stack": {
+    title: "Monotonic Stack Pattern",
+    description:
+      "A stack that maintains its elements in a strictly increasing or decreasing order, useful for finding the next/previous greater/smaller element.",
+    timeComplexity: "O(n) amortized for n elements",
+    spaceComplexity: "O(n) for stack",
+    pseudocode: [
+      "Monotonic Stack operations:",
+      "1. For each element:",
+      "   a. While stack not empty and current element breaks monotonicity:",
+      "      - Pop elements",
+      "      - Process popped elements",
+      "   b. Push current element",
+      "2. Process remaining elements in stack",
+    ],
+    example: `Find next greater element:
+Array: [4, 5, 2, 10, 8]
+
+Steps:
+4: stack=[4]
+5: pop 4, stack=[5]
+2: stack=[5,2]
+10: pop 2,5, stack=[10]
+8: stack=[10,8]
+
+Result: [5, 10, 10, -1, -1]`,
+    implementation: `def next_greater_element(arr):
+    n = len(arr)
+    result = [-1] * n
+    stack = []
+    
+    for i in range(n):
+        while stack and arr[i] > arr[stack[-1]]:
+            idx = stack.pop()
+            result[idx] = arr[i]
+        stack.append(i)
+    
+    return result
+
+def previous_smaller_element(arr):
+    n = len(arr)
+    result = [-1] * n
+    stack = []
+    
+    for i in range(n):
+        while stack and arr[i] < arr[stack[-1]]:
+            stack.pop()
+        if stack:
+            result[i] = arr[stack[-1]]
+        stack.append(i)
     
     return result`,
-  ],
+  },
 
-  [
-    "Greedy Fractional Knapsack",
-    `def greedy_fractional_knapsack(items, capacity):
-    """
-    Solves fractional knapsack problem using greedy approach.
-    Time Complexity: O(n log n) due to sorting
-    Space Complexity: O(n)
-    """
-    items.sort(key=lambda x: x[1]/x[0], reverse=True)
-    results = []
-    current_weight = 0
-    for item in items:
-        if current_weight + item[0] <= capacity:
-            results.append(item)
-            current_weight += item[0]
-        else:
-            results.append((item[0], capacity - current_weight))
-            break
-    return results`,
-  ],
+  "Monotonic Queue": {
+    title: "Monotonic Queue Pattern",
+    description:
+      "A queue that maintains its elements in a strictly increasing or decreasing order, commonly used for sliding window maximum/minimum problems.",
+    timeComplexity: "O(n) for n elements",
+    spaceComplexity: "O(k) where k is window size",
+    pseudocode: [
+      "Monotonic Queue operations:",
+      "1. For each element:",
+      "   a. Remove elements outside window",
+      "   b. While queue not empty and current element breaks monotonicity:",
+      "      - Remove from back",
+      "   c. Add current element",
+      "   d. Front of queue is max/min in window",
+    ],
+    example: `Find maximum in sliding window of size 3:
+Array: [1, 3, -1, -3, 5, 3, 6, 7]
 
-  [
-    "Greedy Job Scheduling",
-    `def greedy_job_scheduling(jobs):
-    """
-    Schedules jobs to maximize profit using greedy approach.
-    Time Complexity: O(n log n) due to sorting
-    Space Complexity: O(n)
-    """
-    jobs.sort(key=lambda x: x[1], reverse=True)
-    results = []
-    current_time = 0
-    for job in jobs:
-        if current_time + job[0] <= job[1]:
-            results.append(job)
-            current_time += job[0]
-    return results`,
-  ],
+Window positions:
+[1, 3, -1] -> max=3
+[3, -1, -3] -> max=3
+[-1, -3, 5] -> max=5
+[-3, 5, 3] -> max=5
+[5, 3, 6] -> max=6
+[3, 6, 7] -> max=7
 
-  [
-    "Greedy Huffman Coding",
-    `def greedy_huffman_coding(data):
-    """
-    Generates Huffman codes for data compression using greedy approach.
-    Time Complexity: O(n log n) where n is unique characters
-    Space Complexity: O(n)
-    """
-    from collections import Counter
-    heap = []
-    for char, freq in Counter(data).items():
-        heappush(heap, (freq, char))
-    while len(heap) > 1:
-        freq1, char1 = heappop(heap)
-        freq2, char2 = heappop(heap)    
-        heappush(heap, (freq1 + freq2, char1 + char2))
-    codes = {}
-    for char, freq in Counter(data).items():
-        codes[char] = ''
-    while heap:
-        freq, char = heappop(heap)
-        for code in codes:
-            if code in char:
-                codes[code] = '0' + codes[code]
-            else:
-                codes[code] = '1' + codes[code]
-    return codes`,
-  ],
+Result: [3, 3, 5, 5, 6, 7]`,
+    implementation: `from collections import deque
 
-  [
-    "Greedy Dijkstra",
-    `def greedy_dijkstra(graph, start):
-    """
-    Finds shortest paths from start vertex to all vertices using Dijkstra's algorithm.
-    Time Complexity: O((V + E) log V) where V is vertices and E is edges
-    Space Complexity: O(V + E)
-    """
-    distances = {vertex: float('inf') for vertex in graph}  
-    distances[start] = 0
-    queue = [(0, start)]
-    while queue:
-        dist, vertex = heappop(queue)
-        if dist > distances[vertex]:
-            continue
-        for neighbor, weight in graph[vertex]:  
-            new_dist = dist + weight
-            if new_dist < distances[neighbor]:
-                distances[neighbor] = new_dist
-                heappush(queue, (new_dist, neighbor))
-    return distances`,
-  ],
+def sliding_window_maximum(arr, k):
+    result = []
+    window = deque()  # stores indices
+    
+    for i in range(len(arr)):
+        # Remove elements outside window
+        while window and window[0] <= i - k:
+            window.popleft()
+        
+        # Remove smaller elements
+        while window and arr[i] >= arr[window[-1]]:
+            window.pop()
+        
+        window.append(i)
+        
+        # Add to result if window is complete
+        if i >= k - 1:
+            result.append(arr[window[0]])
+    
+    return result
 
-  [
-    "Two Sum Two Pointers",
-    `def two_sum_two_pointers(arr, target):
-    """
-    Find two numbers in a sorted array that sum to target using two pointers.
-    Time Complexity: O(n log n) due to sorting
-    Space Complexity: O(1)
-    """
-    arr.sort()
-    left = 0
-    right = len(arr) - 1
+def sliding_window_minimum(arr, k):
+    result = []
+    window = deque()  # stores indices
+    
+    for i in range(len(arr)):
+        # Remove elements outside window
+        while window and window[0] <= i - k:
+            window.popleft()
+        
+        # Remove larger elements
+        while window and arr[i] <= arr[window[-1]]:
+            window.pop()
+        
+        window.append(i)
+        
+        # Add to result if window is complete
+        if i >= k - 1:
+            result.append(arr[window[0]])
+    
+    return result`,
+  },
+
+  "Two Pointers": {
+    title: "Two Pointers Pattern",
+    description:
+      "A technique that uses two pointers to solve array-related problems efficiently, often moving them towards each other or in the same direction.",
+    timeComplexity: "Usually O(n)",
+    spaceComplexity: "Usually O(1)",
+    pseudocode: [
+      "Two Pointers patterns:",
+      "1. Opposite direction:",
+      "   - left = 0, right = n-1",
+      "   - While left < right:",
+      "     * Process elements",
+      "     * Move pointers based on condition",
+      "2. Same direction:",
+      "   - slow = fast = 0",
+      "   - While fast < n:",
+      "     * Process elements",
+      "     * Move pointers at different speeds",
+    ],
+    example: `Problem: Two Sum in sorted array
+Array: [2, 7, 11, 15], target = 9
+
+left = 0, right = 3
+Step 1: 2 + 15 = 17 > 9
+right--
+Step 2: 2 + 11 = 13 > 9
+right--
+Step 3: 2 + 7 = 9 == target
+Found pair: [0, 1]`,
+    implementation: `def two_pointers_opposite(arr, target):
+    left, right = 0, len(arr) - 1
+    
     while left < right:
-        if arr[left] + arr[right] == target:
+        curr_sum = arr[left] + arr[right]
+        if curr_sum == target:
             return [left, right]
-        elif arr[left] + arr[right] < target:
+        elif curr_sum < target:
             left += 1
         else:
             right -= 1
-    return []`,
-  ],
+    
+    return []
 
-  [
-    "Prefix Sum",
-    `def prefix_sum(arr):
-    """
-    Calculate prefix sum array where each element is the sum of all previous elements.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
-    result = [0] * len(arr)
-    result[0] = arr[0]
-    for i in range(1, len(arr)):
-        result[i] = result[i-1] + arr[i]
-    return result`,
-  ],
+def two_pointers_same_direction(arr):
+    # Example: Remove duplicates
+    if not arr:
+        return 0
+    
+    slow = 0
+    for fast in range(1, len(arr)):
+        if arr[fast] != arr[slow]:
+            slow += 1
+            arr[slow] = arr[fast]
+    
+    return slow + 1`,
+  },
 
-  [
-    "Kadane's Algorithm",
-    `def kadane_algorithm(arr):
-    """
-    Find maximum subarray sum in an array.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    current_sum = arr[0]
-    max_sum = arr[0]
+  "Prefix Sum": {
+    title: "Prefix Sum Pattern",
+    description:
+      "A technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.",
+    timeComplexity: "Build: O(n), Query: O(1)",
+    spaceComplexity: "O(n) for prefix array",
+    pseudocode: [
+      "Prefix Sum operations:",
+      "1. Build prefix array:",
+      "   - prefix[0] = arr[0]",
+      "   - For i from 1 to n-1:",
+      "     * prefix[i] = prefix[i-1] + arr[i]",
+      "2. Range sum query(left, right):",
+      "   - If left == 0:",
+      "     * Return prefix[right]",
+      "   - Else:",
+      "     * Return prefix[right] - prefix[left-1]",
+    ],
+    example: `Array: [1, 2, 3, 4, 5]
+Prefix: [1, 3, 6, 10, 15]
+
+Query sum(1, 3):
+prefix[3] - prefix[0] = 10 - 1 = 9
+(sum of elements at indices 1,2,3)
+
+Query sum(2, 4):
+prefix[4] - prefix[1] = 15 - 3 = 12
+(sum of elements at indices 2,3,4)`,
+    implementation: `class PrefixSum:
+    def __init__(self, arr):
+        self.prefix = [0] * len(arr)
+        self.build_prefix(arr)
+    
+    def build_prefix(self, arr):
+        self.prefix[0] = arr[0]
+        for i in range(1, len(arr)):
+            self.prefix[i] = self.prefix[i-1] + arr[i]
+    
+    def range_sum(self, left, right):
+        if left == 0:
+            return self.prefix[right]
+        return self.prefix[right] - self.prefix[left-1]
+    
+    def range_average(self, left, right):
+        sum_range = self.range_sum(left, right)
+        return sum_range / (right - left + 1)`,
+  },
+
+  "Kadane's Algorithm": {
+    title: "Kadane's Algorithm Pattern",
+    description:
+      "A dynamic programming algorithm for finding the maximum subarray sum in a one-dimensional array.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "Kadane's Algorithm steps:",
+      "1. Initialize:",
+      "   - current_sum = max_sum = arr[0]",
+      "2. For each element from index 1:",
+      "   a. current_sum = max(element, current_sum + element)",
+      "   b. max_sum = max(max_sum, current_sum)",
+      "3. Return max_sum",
+    ],
+    example: `Array: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+
+Steps:
+-2: curr=-2, max=-2
+1:  curr=1,  max=1
+-3: curr=-2, max=1
+4:  curr=4,  max=4
+-1: curr=3,  max=4
+2:  curr=5,  max=5
+1:  curr=6,  max=6
+-5: curr=1,  max=6
+4:  curr=5,  max=6
+
+Maximum subarray sum: 6
+Subarray: [4, -1, 2, 1]`,
+    implementation: `def kadanes_algorithm(arr):
+    if not arr:
+        return 0
+    
+    current_sum = max_sum = arr[0]
+    start = end = temp_start = 0
+    
     for i in range(1, len(arr)):
-        current_sum = max(arr[i], current_sum + arr[i])
+        if arr[i] > current_sum + arr[i]:
+            current_sum = arr[i]
+            temp_start = i
+        else:
+            current_sum = current_sum + arr[i]
+        
         if current_sum > max_sum:
             max_sum = current_sum
-    return max_sum`,
-  ],
+            start = temp_start
+            end = i
+    
+    return max_sum, arr[start:end+1]
 
-  [
-    "Floyd Cycle Detection",
-    `def floyd_cycle_detection(head):
-    """
-    Detect cycle in a linked list using Floyd's Cycle Detection Algorithm.
-    Time Complexity: O(n)
-    Space Complexity: O(1)
-    """
-    slow = head
-    fast = head
+def kadanes_algorithm_simple(arr):
+    if not arr:
+        return 0
+    
+    current_sum = max_sum = arr[0]
+    
+    for num in arr[1:]:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    
+    return max_sum`,
+  },
+
+  "Floyd Cycle Detection": {
+    title: "Floyd's Cycle Detection Algorithm",
+    description:
+      "Also known as the 'tortoise and hare' algorithm, used to detect cycles in a linked list or array, and find the start of the cycle.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "Floyd's Algorithm steps:",
+      "1. Initialize slow and fast pointers to head",
+      "2. Move slow one step, fast two steps",
+      "3. If they meet, cycle exists",
+      "4. To find cycle start:",
+      "   a. Reset slow to head",
+      "   b. Move both one step until they meet",
+      "   c. Meeting point is cycle start",
+    ],
+    example: `Linked List: 1->2->3->4->5->3
+(5 points back to 3)
+
+Detection:
+Step 1: s=1, f=1
+Step 2: s=2, f=3
+Step 3: s=3, f=5
+Step 4: s=4, f=3
+Step 5: s=5, f=5 (meet)
+
+Find start:
+Step 1: s=1, f=5
+Step 2: s=2, f=3
+Step 3: s=3, f=3 (cycle start)`,
+    implementation: `class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def detect_cycle(head):
+    if not head or not head.next:
+        return None
+    
+    # Phase 1: Detect cycle
+    slow = fast = head
+    has_cycle = False
+    
     while fast and fast.next:
         slow = slow.next
         fast = fast.next.next
         if slow == fast:
-            return True
-    return False`,
-  ],
+            has_cycle = True
+            break
+    
+    if not has_cycle:
+        return None
+    
+    # Phase 2: Find cycle start
+    slow = head
+    while slow != fast:
+        slow = slow.next
+        fast = fast.next
+    
+    return slow
 
-  [
-    "Rabin-Karp",
-    `def rabin_karp(text, pattern):
-    """
-    Pattern matching algorithm using rolling hash.
-    Time Complexity: O(n+m) average case, O(nm) worst case
-    Space Complexity: O(1)
-    """
-    prime = 101
+def find_cycle_length(head):
+    if not head or not head.next:
+        return 0
+    
+    slow = fast = head
+    has_cycle = False
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        if slow == fast:
+            has_cycle = True
+            break
+    
+    if not has_cycle:
+        return 0
+    
+    # Count cycle length
+    length = 1
+    fast = fast.next
+    while fast != slow:
+        length += 1
+        fast = fast.next
+    
+    return length`,
+  },
+
+  "Rabin-Karp": {
+    title: "Rabin-Karp String Matching Algorithm",
+    description:
+      "A string matching algorithm that uses hashing to find exact string matches or multiple pattern matches efficiently.",
+    timeComplexity: "Average: O(n+m), Worst: O(nm)",
+    spaceComplexity: "O(1)",
+    pseudocode: [
+      "Rabin-Karp steps:",
+      "1. Calculate hash of pattern",
+      "2. For each m-length substring of text:",
+      "   a. Calculate rolling hash",
+      "   b. If hash matches pattern hash:",
+      "      * Check character by character",
+      "   c. Update rolling hash for next window",
+    ],
+    example: `Text: "AABAACAADAABAAABAA"
+Pattern: "AABA"
+
+Hash function: sum(char * prime^pos)
+Pattern hash: 1*3^0 + 1*3^1 + 2*3^2 + 1*3^3 = 40
+
+Window 1: "AABA" (hash=40) - Match at pos 0
+Window 2: "ABAA" (hash≠40)
+Window 3: "BAAC" (hash≠40)
+...
+Window 13: "AABA" (hash=40) - Match at pos 12`,
+    implementation: `def rabin_karp(text, pattern):
+    if not pattern or not text:
+        return []
+    
+    # Constants for hash calculation
+    d = 256  # number of characters in alphabet
+    q = 101  # prime number for hash modulo
+    
+    m = len(pattern)
+    n = len(text)
+    if m > n:
+        return []
+    
+    # Calculate pattern hash
     pattern_hash = 0
-    for char in pattern:
-        pattern_hash = (pattern_hash * 256 + ord(char)) % prime
     window_hash = 0
-    for i in range(len(pattern)):
-        window_hash = (window_hash * 256 + ord(text[i])) % prime
-    for i in range(len(text) - len(pattern) + 1):
+    h = pow(d, m-1) % q
+    
+    for i in range(m):
+        pattern_hash = (d * pattern_hash + ord(pattern[i])) % q
+        window_hash = (d * window_hash + ord(text[i])) % q
+    
+    matches = []
+    
+    # Slide window and check hashes
+    for i in range(n - m + 1):
         if pattern_hash == window_hash:
-            if text[i:i+len(pattern)] == pattern:
-                return i
-        if i < len(text) - len(pattern):
-            window_hash = ((window_hash * 256 - ord(text[i]) * pow(256, len(pattern)-1, prime)) + ord(text[i+len(pattern)])) % prime
-    return -1`,
-  ],
+            # Verify character by character
+            if text[i:i+m] == pattern:
+                matches.append(i)
+        
+        # Calculate hash for next window
+        if i < n - m:
+            window_hash = (d * (window_hash - ord(text[i]) * h) + 
+                         ord(text[i + m])) % q
+            if window_hash < 0:
+                window_hash += q
+    
+    return matches`,
+  },
 
-  [
-    "Knuth-Morris-Pratt",
-    `def knuth_morris_pratt(text, pattern):
-    """
-    Pattern matching algorithm using KMP algorithm.
-    Time Complexity: O(n+m)
-    Space Complexity: O(m)
-    """
-    def build_lps(pattern):
-        lps = [0] * len(pattern)
-        j = 0
-        i = 1
-        while i < len(pattern):
-            if pattern[i] == pattern[j]:
-                j += 1
-                lps[i] = j
-                i += 1
-            elif j > 0:
-                j = lps[j-1]
+  "Knuth-Morris-Pratt": {
+    title: "Knuth-Morris-Pratt (KMP) Algorithm",
+    description:
+      "An efficient string matching algorithm that preprocesses the pattern to avoid unnecessary comparisons by utilizing a prefix function.",
+    timeComplexity: "O(n + m)",
+    spaceComplexity: "O(m) for pattern array",
+    pseudocode: [
+      "KMP steps:",
+      "1. Build LPS (Longest Proper Prefix Suffix) array:",
+      "   - lps[0] = 0",
+      "   - Use two pointers to find matching prefixes",
+      "2. Search pattern:",
+      "   - Use pattern and lps array to skip comparisons",
+      "   - When mismatch occurs, use lps to determine next position",
+    ],
+    example: `Pattern: "ABABCABAB"
+LPS Array: [0,0,1,2,0,1,2,3,4]
+
+Text: "ABABDABABCABAB"
+Pattern matches at index 6
+
+Building LPS:
+A -> [0]
+AB -> [0,0]
+ABA -> [0,0,1]
+ABAB -> [0,0,1,2]
+...`,
+    implementation: `def compute_lps(pattern):
+    m = len(pattern)
+    lps = [0] * m
+    length = 0  # length of previous longest prefix suffix
+    
+    # lps[0] is always 0
+    i = 1
+    while i < m:
+        if pattern[i] == pattern[length]:
+            length += 1
+            lps[i] = length
+            i += 1
+        else:
+            if length != 0:
+                # Use lps of previous character
+                length = lps[length - 1]
             else:
                 lps[i] = 0
                 i += 1
-        return lps
+    return lps
+
+def kmp_search(text, pattern):
+    n = len(text)
+    m = len(pattern)
+    matches = []
     
-    lps = build_lps(pattern)
-    i = 0
-    j = 0
-    while i < len(text):
+    if m == 0:
+        return matches
+    
+    # Compute LPS array
+    lps = compute_lps(pattern)
+    
+    i = 0  # index for text
+    j = 0  # index for pattern
+    while i < n:
         if pattern[j] == text[i]:
             i += 1
             j += 1
-        if j == len(pattern):
-            return i - j
-        elif i < len(text) and pattern[j] != text[i]:
+        
+        if j == m:
+            matches.append(i - j)
+            j = lps[j - 1]
+        elif i < n and pattern[j] != text[i]:
             if j != 0:
-                j = lps[j-1]
+                j = lps[j - 1]
             else:
                 i += 1
-    return -1`,
-  ],
+    
+    return matches`,
+  },
 
-  [
-    "Manacher's Algorithm",
-    `def manacher_algorithm(s):
-    """
-    Find longest palindromic substring in linear time.
-    Time Complexity: O(n)
-    Space Complexity: O(n)
-    """
+  "Manacher's Algorithm": {
+    title: "Manacher's Algorithm",
+    description:
+      "An efficient algorithm to find all palindromic substrings in a string in linear time.",
+    timeComplexity: "O(n)",
+    spaceComplexity: "O(n)",
+    pseudocode: [
+      "Manacher's steps:",
+      "1. Transform string by adding boundaries:",
+      "   - Insert special char between each char",
+      "   - Add special chars at start and end",
+      "2. For each center position i:",
+      "   a. Use previously computed values if possible",
+      "   b. Expand around center while matches found",
+      "   c. Update right boundary and center",
+      "3. Extract palindrome lengths from array",
+    ],
+    example: `String: "ababa"
+Transform: "#a#b#a#b#a#"
+Centers:   0123456789
+P array:   [0,1,0,3,0,5,0,3,0,1,0]
+
+Palindromes found:
+- a (length 1)
+- aba (length 3)
+- ababa (length 5)`,
+    implementation: `def manacher(s):
+    # Transform string
     t = '#' + '#'.join(s) + '#'
-    p = [0] * len(t)
-    center = 0
-    right = 0
-    for i in range(len(t)):
+    n = len(t)
+    p = [0] * n  # palindrome radii
+    
+    center = right = 0
+    
+    for i in range(n):
         if i < right:
-            p[i] = min(right - i, p[2*center - i])
-        left = i - (p[i] + 1)
-        r = i + (p[i] + 1)
-        while left >= 0 and r < len(t) and t[left] == t[r]:
+            # Use previously computed values
+            mirror = 2 * center - i
+            p[i] = min(right - i, p[mirror])
+        
+        # Expand around center i
+        a = i + (p[i] + 1)
+        b = i - (p[i] + 1)
+        while a < n and b >= 0 and t[a] == t[b]:
             p[i] += 1
-            left -= 1
-            r += 1
+            a += 1
+            b -= 1
+        
+        # Update center and right boundary
         if i + p[i] > right:
             center = i
             right = i + p[i]
-    max_len = max(p)
-    center_index = p.index(max_len)
-    start = (center_index - max_len) // 2
-    end = start + max_len
-    return s[start:end]`,
-  ],
+    
+    return p
 
-  [
-    "Z-Algorithm",
-    `def z_algorithm(text, pattern):
-    """
-    Pattern matching using Z-algorithm.
-    Time Complexity: O(n+m)
-    Space Complexity: O(n+m)
-    """
-    s = pattern + '$' + text
-    z = [0] * len(s)
+def find_palindromes(s):
+    p = manacher(s)
+    palindromes = []
+    
+    for i in range(len(p)):
+        # Convert transformed index to original
+        center = (i - 1) // 2
+        radius = p[i] // 2
+        
+        if p[i] > 0:
+            # Even length palindromes
+            if i % 2 == 0:
+                start = center - radius + 1
+                end = center + radius
+                palindromes.append(s[start:end])
+            # Odd length palindromes
+            else:
+                start = center - radius
+                end = center + radius + 1
+                palindromes.append(s[start:end])
+    
+    return palindromes`,
+  },
+
+  "Z-Algorithm": {
+    title: "Z-Algorithm",
+    description:
+      "A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).",
+    timeComplexity: "O(n + m)",
+    spaceComplexity: "O(n + m)",
+    pseudocode: [
+      "Z-Algorithm steps:",
+      "1. Concatenate pattern + special_char + text",
+      "2. Build Z array:",
+      "   - If inside Z-box, use previous values",
+      "   - Otherwise, compare characters",
+      "   - Maintain Z-box [left, right]",
+      "3. Find pattern matches where Z[i] = pattern_length",
+    ],
+    example: `Pattern: "aab"
+Text: "baabaa"
+Concatenated: "aab$baabaa"
+
+Z array: [0,1,0,0,0,3,1,0,2,1]
+Matches found at index 3 (Z[5] = 3)`,
+    implementation: `def calculate_z_array(s):
+    n = len(s)
+    z = [0] * n
+    
+    # [left,right] make a window which matches 
+    # with prefix of s
     left = right = 0
-    for i in range(1, len(s)):
+    
+    for i in range(1, n):
         if i > right:
+            # If outside Z-box, compute traditionally
             left = right = i
-            while right < len(s) and s[right-left] == s[right]:
+            while right < n and s[right] == s[right-left]:
                 right += 1
             z[i] = right - left
+            right -= 1
         else:
+            # If inside Z-box
             k = i - left
-            if z[k] < right - i:
+            
+            # If value does not stretch till right boundary
+            if z[k] < right - i + 1:
                 z[i] = z[k]
             else:
+                # Try to find more matches
                 left = i
-                while right < len(s) and s[right-left] == s[right]:
+                while right < n and s[right] == s[right-left]:
                     right += 1
                 z[i] = right - left
-    matches = []
-    for i in range(len(pattern) + 1, len(s)):
-        if z[i] == len(pattern):
-            matches.append(i - len(pattern) - 1)
-    return matches`,
-  ],
+                right -= 1
+    
+    return z
 
-  [
-    "Matrix Traversal",
-    `def traverse_matrix(matrix):
-    """
-    Basic matrix traversal.
-    Time Complexity: O(rows * cols)
-    Space Complexity: O(1)
-    """
+def z_algorithm(text, pattern):
+    # Concatenate pattern and text with a special character
+    concat = pattern + "$" + text
+    n = len(concat)
+    
+    # Calculate Z array
+    z = calculate_z_array(concat)
+    
+    # Find matches
+    matches = []
+    pattern_length = len(pattern)
+    
+    for i in range(pattern_length + 1, n):
+        if z[i] == pattern_length:
+            matches.append(i - pattern_length - 1)
+    
+    return matches`,
+  },
+
+  "Matrix Traversal": {
+    title: "Matrix Traversal",
+    description:
+      "A pattern for traversing a 2D matrix iteratively, typically using nested loops to visit each element in a specific order (row-wise or column-wise).",
+    timeComplexity: "O(m*n) where m is rows and n is columns",
+    spaceComplexity: "O(1) for traversal, O(m*n) if storing results",
+    pseudocode: [
+      "Matrix Traversal steps:",
+      "1. For each row i from 0 to rows-1:",
+      "   For each column j from 0 to cols-1:",
+      "     Process matrix[i][j]",
+      "",
+      "Common variations:",
+      "- Row-wise: outer loop on rows",
+      "- Column-wise: outer loop on columns",
+      "- Different directions: top-down, bottom-up",
+      "- Different starting points",
+    ],
+    example: `Matrix:
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+
+Row-wise traversal: 1,2,3,4,5,6,7,8,9
+Column-wise traversal: 1,4,7,2,5,8,3,6,9`,
+    implementation: `def matrix_traversal(matrix):
+    if not matrix or not matrix[0]:
+        return []
+    
     rows = len(matrix)
     cols = len(matrix[0])
+    result = []
+    
+    # Row-wise traversal
     for i in range(rows):
         for j in range(cols):
-            print(matrix[i][j], end=' ')
-        print()`,
-  ],
-
-  [
-    "Matrix Traversal Recursive",
-    `def traverse_matrix_recursive(matrix):
-    """
-    Recursive matrix traversal.
-    Time Complexity: O(rows * cols)
-    Space Complexity: O(rows * cols) due to recursion stack
-    """
-    def helper(matrix, row, col, direction, top, bottom, left, right):
-        rows = len(matrix)
-        cols = len(matrix[0])
-        if row < 0 or row >= rows or col < 0 or col >= cols:
-            return
-        if direction == 'right':
-            for i in range(left, right + 1):
-                print(matrix[row][i], end=' ')
-            helper(matrix, row, i + 1, 'down', top, bottom, left, right)
-        elif direction == 'down':
-            for i in range(top, bottom + 1):
-                print(matrix[i][col], end=' ')
-            helper(matrix, i + 1, col, 'left', top, bottom, left, right)
-        elif direction == 'left':
-            for i in range(right, left - 1, -1):
-                print(matrix[row][i], end=' ')
-            helper(matrix, row, i - 1, 'up', top, bottom, left, right)
-        elif direction == 'up':
-            for i in range(bottom, top - 1, -1):    
-                print(matrix[i][col], end=' ')
-            helper(matrix, i - 1, col, 'right', top, bottom, left, right)
+            result.append(matrix[i][j])
     
-    if not matrix or not matrix[0]:
-        return
-    helper(matrix, 0, 0, 'right', 0, len(matrix)-1, 0, len(matrix[0])-1)`,
-  ],
+    return result
 
-  [
-    "Matrix Spiral Traversal",
-    `def traverse_matrix_spiral(matrix):
-    """
-    Traverse matrix in spiral order.
-    Time Complexity: O(rows * cols)
-    Space Complexity: O(1)
-    """
+def matrix_traversal_columnwise(matrix):
+    if not matrix or not matrix[0]:
+        return []
+    
     rows = len(matrix)
     cols = len(matrix[0])
+    result = []
+    
+    # Column-wise traversal
+    for j in range(cols):
+        for i in range(rows):
+            result.append(matrix[i][j])
+    
+    return result`,
+  },
+
+  "Matrix Traversal Recursive": {
+    title: "Matrix Traversal Recursive",
+    description:
+      "A recursive approach to traverse a 2D matrix, which can be particularly useful for problems requiring backtracking or complex traversal patterns.",
+    timeComplexity: "O(m*n) where m is rows and n is columns",
+    spaceComplexity: "O(m*n) due to recursive call stack",
+    pseudocode: [
+      "Matrix Recursive Traversal steps:",
+      "1. Base case: Check bounds and conditions",
+      "2. Process current cell",
+      "3. Recursive calls for next positions:",
+      "   - Call for next row",
+      "   - Call for next column",
+      "4. Backtrack if needed",
+    ],
+    example: `Matrix:
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+
+Recursive traversal (row-first):
+traverse(0,0) -> 1
+  traverse(1,0) -> 4
+    traverse(2,0) -> 7
+      traverse(0,1) -> 2
+        ...`,
+    implementation: `def matrix_traversal_recursive(matrix):
+    if not matrix or not matrix[0]:
+        return []
+    
+    rows = len(matrix)
+    cols = len(matrix[0])
+    result = []
+    
+    def traverse(row, col):
+        # Base case: out of bounds
+        if row >= rows or col >= cols:
+            return
+        
+        # Process current cell
+        result.append(matrix[row][col])
+        
+        # Recursive calls
+        if col + 1 < cols:
+            # Move right in current row
+            traverse(row, col + 1)
+        elif row + 1 < rows:
+            # Move to start of next row
+            traverse(row + 1, 0)
+    
+    traverse(0, 0)
+    return result`,
+  },
+
+  "Matrix Spiral Traversal": {
+    title: "Matrix Spiral Traversal",
+    description:
+      "An iterative pattern to traverse a matrix in a spiral order, moving in a clockwise direction from the outer elements to the inner elements.",
+    timeComplexity: "O(m*n) where m is rows and n is columns",
+    spaceComplexity: "O(1) excluding the result array",
+    pseudocode: [
+      "Spiral Traversal steps:",
+      "1. Initialize boundaries: top, bottom, left, right",
+      "2. While boundaries haven't crossed:",
+      "   a. Traverse right (top row)",
+      "   b. Traverse down (right column)",
+      "   c. Traverse left (bottom row)",
+      "   d. Traverse up (left column)",
+      "   e. Update boundaries inward",
+    ],
+    example: `Matrix:
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+
+Spiral order: 1,2,3,6,9,8,7,4,5
+
+Steps:
+1. Top row: 1,2,3
+2. Right col: 6,9
+3. Bottom row: 8,7
+4. Left col: 4
+5. Inner element: 5`,
+    implementation: `def spiral_traversal(matrix):
+    if not matrix or not matrix[0]:
+        return []
+    
+    rows = len(matrix)
+    cols = len(matrix[0])
+    result = []
+    
     top = 0
     bottom = rows - 1
     left = 0
     right = cols - 1
-
+    
     while top <= bottom and left <= right:
-        for i in range(left, right + 1):
-            print(matrix[top][i], end=' ')
+        # Traverse right
+        for j in range(left, right + 1):
+            result.append(matrix[top][j])
         top += 1
+        
+        # Traverse down
         for i in range(top, bottom + 1):
-            print(matrix[i][right], end=' ')
+            result.append(matrix[i][right])
         right -= 1
+        
         if top <= bottom:
-            for i in range(right, left - 1, -1):
-                print(matrix[bottom][i], end=' ')
+            # Traverse left
+            for j in range(right, left - 1, -1):
+                result.append(matrix[bottom][j])
             bottom -= 1
+        
         if left <= right:
+            # Traverse up
             for i in range(bottom, top - 1, -1):
-                print(matrix[i][left], end=' ')
-            left += 1`,
-  ],
+                result.append(matrix[i][left])
+            left += 1
+    
+    return result`,
+  },
 
-  [
-    "Matrix Spiral Recursive",
-    `def traverse_matrix_spiral_recursive(matrix):
-    """
-    Traverse matrix in spiral order recursively.
-    Time Complexity: O(rows * cols)
-    Space Complexity: O(rows * cols) due to recursion stack
-    """
-    def helper(matrix, top, bottom, left, right, direction):
-        if top > bottom or left > right:
-            return
+  "Matrix Spiral Recursive": {
+    title: "Matrix Spiral Recursive",
+    description:
+      "A recursive approach to traverse a matrix in spiral order, which breaks down the spiral traversal into smaller subproblems.",
+    timeComplexity: "O(m*n) where m is rows and n is columns",
+    spaceComplexity: "O(min(m,n)) due to recursive call stack",
+    pseudocode: [
+      "Recursive Spiral steps:",
+      "1. Base cases:",
+      "- Empty matrix",
+      "- Single row/column",
+      "2. Process outer layer:",
+      "   - Traverse top row",
+      "   - Traverse right column",
+      "   - Traverse bottom row",
+      "   - Traverse left column",
+      "3. Recursively process inner matrix",
+    ],
+    example: `Matrix:
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
 
-        if direction == 'right':
-            for i in range(left, right + 1):
-                print(matrix[top][i], end=' ')
-            helper(matrix, top + 1, bottom, left, right, 'down')
-        elif direction == 'down':
-            for i in range(top, bottom + 1):
-                print(matrix[i][right], end=' ')
-            helper(matrix, top, bottom, left, right - 1, 'left')
-        elif direction == 'left':
-            for i in range(right, left - 1, -1):
-                print(matrix[bottom][i], end=' ')
-            helper(matrix, top, bottom - 1, left, right, 'up')
-        elif direction == 'up':
-            for i in range(bottom, top - 1, -1):
-                print(matrix[i][left], end=' ')
-            helper(matrix, top, bottom, left + 1, right, 'right')
-
+Recursive calls:
+1. Outer layer: 1,2,3,6,9,8,7,4
+2. Inner matrix: [5]`,
+    implementation: `def spiral_recursive(matrix):
     if not matrix or not matrix[0]:
-        return
-    helper(matrix, 0, len(matrix) - 1, 0, len(matrix[0]) - 1, 'right')`,
-  ],
-]);
+        return []
+    
+    def spiral_helper(top, bottom, left, right):
+        if top > bottom or left > right:
+            return []
+        
+        result = []
+        
+        # Single row
+        if top == bottom:
+            return [matrix[top][j] for j in range(left, right + 1)]
+        
+        # Single column
+        if left == right:
+            return [matrix[i][left] for i in range(top, bottom + 1)]
+        
+        # Process outer layer
+        # Top row
+        result.extend(matrix[top][j] for j in range(left, right + 1))
+        
+        # Right column
+        result.extend(matrix[i][right] for i in range(top + 1, bottom))
+        
+        # Bottom row
+        result.extend(matrix[bottom][j] for j in range(right, left - 1, -1))
+        
+        # Left column
+        result.extend(matrix[i][left] for i in range(bottom - 1, top, -1))
+        
+        # Recursively process inner matrix
+        result.extend(spiral_helper(top + 1, bottom - 1, 
+                                 left + 1, right - 1))
+        
+        return result
+    
+    return spiral_helper(0, len(matrix) - 1, 
+                        0, len(matrix[0]) - 1)`,
+  },
+};
+
+// Export the patterns in the original format for backward compatibility
+export const patterns = new Map<PatternKey, string>(
+  Object.entries(algorithmPatterns).map(([key, pattern]) => [
+    key as PatternKey,
+    `def ${key.toLowerCase().replace(/\s+/g, "_")}(arr):
+    """
+    ${pattern.description}
+    Time Complexity: ${pattern.timeComplexity}
+    Space Complexity: ${pattern.spaceComplexity}
+    
+    Pseudocode:
+    ${pattern.pseudocode.join("\n")}
+    
+    Example:
+    ${pattern.example}
+    """
+    ${pattern.implementation}`,
+  ])
+);

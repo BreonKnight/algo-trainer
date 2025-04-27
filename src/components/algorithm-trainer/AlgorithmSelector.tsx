@@ -60,6 +60,7 @@ const algorithmCategories = {
   ],
   "Array Techniques": [
     "Two Sum",
+    "Two Sum Dict",
     "Two Sum Two Pointers",
     "Sliding Window",
     "Two Pointers",
