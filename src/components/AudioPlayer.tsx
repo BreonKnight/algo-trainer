@@ -1,13 +1,17 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
 import { Button } from "./ui/button";
 import { Play, Pause, Volume2, RotateCcw, SkipForward } from "lucide-react";
 import * as Slider from "@radix-ui/react-slider";
+import { useTheme } from "./ThemeProvider";
+import React from "react";
 
 interface YouTubePlayer {
   playVideo: () => void;
   pauseVideo: () => void;
   setVolume: (volume: number) => void;
   loadVideoById: (videoId: string) => void;
+  unMute: () => void;
+  destroy: () => void;
 }
 
 interface YouTubeEvent {
@@ -32,6 +36,9 @@ declare global {
             showinfo: number;
             enablejsapi?: number;
             origin?: string;
+            playsinline?: number;
+            fs?: number;
+            iv_load_policy?: number;
           };
           events: {
             onReady: (event: YouTubeEvent) => void;
@@ -43,6 +50,7 @@ declare global {
       PlayerState: {
         ENDED: number;
       };
+      ready: (callback: () => void) => void;
     };
     onYouTubeIframeAPIReady: () => void;
   }
@@ -124,6 +132,7 @@ export function Timer() {
   const [isRunning, setIsRunning] = useState(false);
   const [totalTime, setTotalTime] = useState<number>(0); // Track total time for progress
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const { theme } = useTheme();
 
   const startTimer = (minutes: number) => {
     if (timerRef.current) {
@@ -195,7 +204,7 @@ export function Timer() {
         <div className="flex flex-col items-center w-full sm:w-auto">
           <div className="flex flex-col items-center justify-center">
             <span
-              className="mb-4 text-xs text-secondary font-semibold text-center w-full"
+              className="mb-4 px-3 py-1 rounded-full bg-accent/20 text-accent font-bold text-xs text-center w-full shadow-sm"
               aria-live="polite"
             >
               {isRunning
@@ -212,7 +221,7 @@ export function Timer() {
                 className="absolute inset-0"
               >
                 <circle
-                  stroke="#44475a"
+                  stroke="var(--bg-secondary)"
                   fill="transparent"
                   strokeWidth={stroke}
                   r={normalizedRadius}
@@ -242,13 +251,13 @@ export function Timer() {
                     x2="1"
                     y2="1"
                   >
-                    <stop offset="0%" stopColor="#ff79c6" />
-                    <stop offset="100%" stopColor="#8be9fd" />
+                    <stop offset="0%" stopColor="var(--gradient-from)" />
+                    <stop offset="100%" stopColor="var(--gradient-to)" />
                   </linearGradient>
                 </defs>
               </svg>
               <span
-                className="absolute inset-0 flex items-center justify-center font-mono text-xl text-main"
+                className="absolute inset-0 flex items-center justify-center font-mono text-xl font-bold text-main bg-secondary/30 rounded-full px-1 shadow-sm"
                 aria-live="polite"
               >
                 {formatTime(timeLeft)}
@@ -314,7 +323,11 @@ export function Timer() {
                 }
                 variant="default"
                 size="sm"
-                className="h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform"
+                className={`h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ${
+                  isRunning || (!isRunning && timeLeft > 0)
+                    ? "ring-2 ring-accent shadow-lg"
+                    : ""
+                }`}
                 title={isRunning ? "Pause timer" : "Start timer"}
                 aria-label={isRunning ? "Pause timer" : "Start timer"}
               >
@@ -344,18 +357,94 @@ export function Timer() {
   );
 }
 
-export function AudioPlayer() {
+// Error boundary component for the AudioPlayer
+class AudioPlayerErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("AudioPlayer error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center gap-1 w-full max-w-[300px] md:max-w-full">
+          <div className="text-xs text-secondary font-medium mb-1">
+            Background Music
+          </div>
+          <div className="flex flex-col items-center justify-center gap-2 p-4 bg-secondary/20 rounded-lg border border-secondary/40">
+            <p className="text-sm text-error">
+              Audio player encountered an error
+            </p>
+            <Button
+              onClick={() => this.setState({ hasError: false, error: null })}
+              variant="outline"
+              size="sm"
+              className="text-xs"
+            >
+              Try Again
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// Function to create YouTube embed URL
+const createYouTubeEmbedURL = (
+  videoId: string,
+  shouldAutoplay: boolean = false
+) => {
+  return `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=${
+    shouldAutoplay ? 1 : 0
+  }&controls=0&modestbranding=1&rel=0&showinfo=0&origin=${
+    window.location.origin
+  }`;
+};
+
+// Memoized AudioPlayer component
+export const AudioPlayer = memo(function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(50);
   const [currentVideoId, setCurrentVideoId] = useState<string>("");
   const [currentSongName, setCurrentSongName] = useState<string>("");
-  const playerRef = useRef<YouTubePlayer | null>(null);
-  const retryCountRef = useRef(0);
-  const maxRetries = 3;
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const { theme } = useTheme();
 
-  // Keep track of played songs and shuffle queue
-  const [playedSongs, setPlayedSongs] = useState<Set<string>>(new Set());
-  const [shuffleQueue, setShuffleQueue] = useState<string[]>([]);
+  // Function to send commands to YouTube iframe
+  const sendCommand = useCallback((command: string, value?: number) => {
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+      const message = {
+        event: "command",
+        func: command,
+        args: value !== undefined ? [value] : [],
+      };
+      iframeRef.current.contentWindow.postMessage(JSON.stringify(message), "*");
+    }
+  }, []);
+
+  // Handle volume changes
+  const handleVolumeChange = useCallback(
+    (newVolume: number[]) => {
+      const volumeValue = newVolume[0];
+      setVolume(volumeValue);
+      sendCommand("setVolume", volumeValue);
+    },
+    [sendCommand]
+  );
 
   const getSongName = (videoId: string) => {
     // Check if the video ID exists in the PLAYLIST_COMMENTS
@@ -372,316 +461,175 @@ export function AudioPlayer() {
     return "Unknown Song";
   };
 
-  // Function to shuffle array using Fisher-Yates algorithm
-  const shuffleArray = (array: string[]) => {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
-  // Get next song from shuffle queue or create new queue if empty
-  const getNextSong = useCallback(() => {
-    if (shuffleQueue.length === 0) {
-      console.log("%cRefreshing shuffle queue", "color: #bd93f9");
-      // If we've played all songs, reset the played songs
-      if (playedSongs.size >= PLAYLIST.length - 1) {
-        console.log("%cAll songs played, resetting history", "color: #bd93f9");
-        setPlayedSongs(new Set([currentVideoId]));
-        const newQueue = shuffleArray(
-          PLAYLIST.filter((id) => id !== currentVideoId)
-        );
-        setShuffleQueue(newQueue);
-        return newQueue[0];
-      }
-
-      // Create new queue excluding played songs and current song
-      const availableSongs = PLAYLIST.filter(
-        (id) => !playedSongs.has(id) && id !== currentVideoId
-      );
-      const newQueue = shuffleArray(availableSongs);
-      setShuffleQueue(newQueue);
-      return newQueue[0];
-    }
-
-    // Return and remove the first song from the queue
-    const [nextSong, ...remainingQueue] = shuffleQueue;
-    setShuffleQueue(remainingQueue);
-    return nextSong;
-  }, [shuffleQueue, playedSongs, currentVideoId]);
-
-  const playNextVideo = useCallback(() => {
-    // Log current song being skipped
-    if (currentVideoId) {
-      console.log(
-        `%cSkipping current song: ${currentVideoId} - ${getSongName(
-          currentVideoId
-        )}`,
-        "color: #ff79c6"
-      );
-      // Add current song to played songs
-      setPlayedSongs((prev) => new Set([...prev, currentVideoId]));
-    }
-
-    const nextVideoId = getNextSong();
-
-    console.log(
-      `%cPlaying next song: ${nextVideoId} - ${getSongName(nextVideoId)}`,
-      "color: #50fa7b"
-    );
-    console.log(`%cSongs in queue: ${shuffleQueue.length}`, "color: #6272a4");
-    console.log(
-      `%cSongs played: ${playedSongs.size}/${PLAYLIST.length}`,
-      "color: #6272a4"
-    );
-
-    setCurrentVideoId(nextVideoId);
-    setCurrentSongName(getSongName(nextVideoId));
-    retryCountRef.current = 0;
-
-    attemptPlayback(nextVideoId);
-  }, [currentVideoId, getNextSong, shuffleQueue.length]);
-
   // Initialize with a random video from the playlist
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
     const initialSong = PLAYLIST[randomIndex];
     setCurrentVideoId(initialSong);
-    setPlayedSongs(new Set([initialSong]));
-
-    // Initialize shuffle queue with remaining songs
-    const initialQueue = shuffleArray(
-      PLAYLIST.filter((id) => id !== initialSong)
-    );
-    setShuffleQueue(initialQueue);
+    setCurrentSongName(getSongName(initialSong));
+    setIsPlaying(false); // Ensure we start paused
   }, []);
 
-  const attemptPlayback = useCallback((videoId: string) => {
-    if (playerRef.current) {
-      try {
-        console.log(
-          `Attempting to play video: ${videoId} - ${getSongName(videoId)}`
-        );
-        playerRef.current.loadVideoById(videoId);
-        playerRef.current.playVideo();
-      } catch (error) {
-        console.warn(`Failed to play video ${videoId}:`, error);
-        if (retryCountRef.current < maxRetries) {
-          retryCountRef.current++;
-          console.log(`Retry attempt ${retryCountRef.current} for ${videoId}`);
-          setTimeout(() => attemptPlayback(videoId), 1000);
-        } else {
-          console.log(`Max retries reached for ${videoId}, trying next video`);
-          const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
-          const nextVideoId = PLAYLIST[randomIndex];
-          retryCountRef.current = 0;
-          setCurrentVideoId(nextVideoId);
-          setCurrentSongName(getSongName(nextVideoId));
-          attemptPlayback(nextVideoId);
-        }
-      }
-    }
-  }, []);
-
-  // Initialize YouTube Player API
+  // Set initial volume when iframe loads
   useEffect(() => {
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = () => {
-      playerRef.current = new window.YT.Player("youtube-player", {
-        height: "0",
-        width: "0",
-        videoId: currentVideoId,
-        playerVars: {
-          autoplay: 0,
-          controls: 0,
-          modestbranding: 1,
-          rel: 0,
-          showinfo: 0,
-          enablejsapi: 1,
-          origin: window.location.origin,
-        },
-        events: {
-          onReady: (event: YouTubeEvent) => {
-            try {
-              event.target.setVolume(volume);
-              // If we're already supposed to be playing, start playback
-              if (isPlaying) {
-                event.target.playVideo();
-              }
-            } catch (error) {
-              console.warn("Failed to set initial volume:", error);
-            }
-          },
-          onStateChange: (event: YouTubeEvent) => {
-            try {
-              if (event.data === window.YT.PlayerState.ENDED) {
-                console.log(
-                  `%cSong ended naturally: ${currentVideoId} - ${getSongName(
-                    currentVideoId
-                  )}`,
-                  "color: #6272a4"
-                );
-                playNextVideo();
-              }
-            } catch (error) {
-              console.warn("Error handling state change:", error);
-            }
-          },
-          onError: (event: YouTubeEvent) => {
-            // Error code 150 means the video is unavailable
-            if (event.data === 150) {
-              console.warn(
-                `%cVideo unavailable (Error 150): ${currentVideoId} - ${getSongName(
-                  currentVideoId
-                )}`,
-                "color: #ff5555"
-              );
-              playNextVideo();
-            } else {
-              console.warn(
-                `%cYouTube player error (Code ${
-                  event.data
-                }): ${currentVideoId} - ${getSongName(currentVideoId)}`,
-                "color: #ff5555"
-              );
-              // For other errors, try to reload the current video
-              if (retryCountRef.current < maxRetries) {
-                retryCountRef.current++;
-                setTimeout(() => attemptPlayback(currentVideoId), 1000);
-              } else {
-                playNextVideo();
-              }
-            }
-          },
-        },
-      });
+    const handleIframeLoad = () => {
+      sendCommand("setVolume", volume);
     };
+
+    if (iframeRef.current) {
+      iframeRef.current.addEventListener("load", handleIframeLoad);
+    }
 
     return () => {
-      if (retryCountRef.current) {
-        retryCountRef.current = 0;
+      if (iframeRef.current) {
+        iframeRef.current.removeEventListener("load", handleIframeLoad);
       }
     };
-  }, [currentVideoId, volume, playNextVideo, isPlaying, attemptPlayback]);
+  }, [sendCommand, volume]);
 
   const togglePlay = () => {
-    if (playerRef.current) {
+    console.log("Play button clicked, current state:", isPlaying);
+    if (iframeRef.current) {
       try {
         if (isPlaying) {
-          playerRef.current.pauseVideo();
+          // Pause by loading a blank video
+          iframeRef.current.src = iframeRef.current.src.replace(
+            "&autoplay=1",
+            "&autoplay=0"
+          );
+          setIsPlaying(false);
         } else {
-          // If we don't have a current video, select one
-          if (!currentVideoId) {
-            const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
-            const nextVideoId = PLAYLIST[randomIndex];
-            setCurrentVideoId(nextVideoId);
-            setCurrentSongName(getSongName(nextVideoId));
-            attemptPlayback(nextVideoId);
-          } else {
-            playerRef.current.playVideo();
-          }
+          // Play by reloading with autoplay
+          iframeRef.current.src = iframeRef.current.src.replace(
+            "&autoplay=0",
+            "&autoplay=1"
+          );
+          setIsPlaying(true);
         }
-        setIsPlaying(!isPlaying);
       } catch (error) {
-        console.warn("Playback failed, retrying...", error);
-        if (currentVideoId) {
-          attemptPlayback(currentVideoId);
-        } else {
-          // If we don't have a current video, select one
-          const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
-          const nextVideoId = PLAYLIST[randomIndex];
-          setCurrentVideoId(nextVideoId);
-          setCurrentSongName(getSongName(nextVideoId));
-          attemptPlayback(nextVideoId);
-        }
+        console.error("Error toggling play state:", error);
+        setIsPlaying(false);
       }
     }
   };
 
-  const handleVolumeChange = (newVolume: number[]) => {
-    const volumeValue = newVolume[0];
-    setVolume(volumeValue);
-    if (playerRef.current) {
-      playerRef.current.setVolume(volumeValue);
+  const playNextVideo = useCallback(() => {
+    const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
+    const nextVideoId = PLAYLIST[randomIndex];
+    if (iframeRef.current) {
+      iframeRef.current.src = createYouTubeEmbedURL(nextVideoId, false);
     }
-  };
+    setCurrentVideoId(nextVideoId);
+    setCurrentSongName(getSongName(nextVideoId));
+    setIsPlaying(false);
+  }, []);
 
   return (
-    <div className="flex flex-col items-center gap-1 w-full max-w-[300px] md:max-w-full">
-      <div className="text-xs text-secondary font-medium mb-1">
-        Background Music
-      </div>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full gap-y-2">
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <div className="flex flex-col items-center">
-            <Button
-              onClick={togglePlay}
-              variant="ghost"
-              size="sm"
-              className="h-11 w-11 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
-              title={isPlaying ? "Pause" : "Play"}
-              aria-label={
-                isPlaying ? "Pause background music" : "Play background music"
-              }
-            >
-              {isPlaying ? <Pause size={18} /> : <Play size={18} />}
-            </Button>
-            <span className="text-[10px] text-secondary mt-1">
-              {isPlaying ? "Pause" : "Play"}
-            </span>
-            {isPlaying && (
-              <span className="mt-1 animate-pulse text-accent2 text-xs">
-                ● Playing
+    <AudioPlayerErrorBoundary>
+      <div className="flex flex-col items-center gap-1 w-full min-w-0">
+        <div className="text-xs text-secondary font-medium mb-1">
+          Background Music
+        </div>
+        <div className="flex flex-col lg:flex-row items-center justify-between w-full gap-4 px-2 min-w-0">
+          {/* Left section - Controls */}
+          <div className="flex flex-col items-center lg:items-start gap-3 lg:w-auto">
+            <div className="flex items-center gap-3">
+              <div className="relative flex flex-col items-center">
+                <Button
+                  onClick={togglePlay}
+                  variant="ghost"
+                  size="sm"
+                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
+                  title={isPlaying ? "Pause" : "Play"}
+                  aria-label={
+                    isPlaying
+                      ? "Pause background music"
+                      : "Play background music"
+                  }
+                >
+                  {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                </Button>
+                {isPlaying && (
+                  <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 flex items-center gap-1 text-accent2 text-[10px] font-normal bg-[rgba(40,42,54,0.95)] px-1.5 py-0.5 rounded-full shadow-md pointer-events-none whitespace-nowrap border border-secondary/20">
+                    <span className="text-[12px] leading-none text-accent">
+                      •
+                    </span>
+                    Playing
+                  </span>
+                )}
+              </div>
+              <div className="relative">
+                <Button
+                  onClick={playNextVideo}
+                  variant="ghost"
+                  size="sm"
+                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
+                  title="Skip to next song"
+                  aria-label="Skip to next song"
+                >
+                  <SkipForward size={16} />
+                </Button>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 -mt-3">
+              <span className="text-[10px] text-secondary text-center w-10">
+                {isPlaying ? "Pause" : "Play"}
               </span>
-            )}
+              <span className="text-[10px] text-secondary text-center w-10">
+                Skip
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            <Button
-              onClick={playNextVideo}
-              variant="ghost"
-              size="sm"
-              className="h-11 w-11 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
-              title="Skip to next song"
-              aria-label="Skip to next song"
-            >
-              <SkipForward size={18} />
-            </Button>
-            <span className="text-[10px] text-secondary mt-1">Skip</span>
+
+          {/* Middle section - Volume and Song Info */}
+          <div className="flex flex-col lg:flex-row items-center gap-4 lg:flex-1 min-w-0 max-w-full">
+            <div className="flex items-center gap-2 w-full lg:w-auto">
+              <Volume2 size={14} className="text-accent flex-shrink-0" />
+              <Slider.Root
+                className="relative flex items-center select-none touch-none w-[100px] lg:w-[120px] h-5 flex-shrink-0"
+                value={[volume]}
+                onValueChange={handleVolumeChange}
+                max={100}
+                step={1}
+                aria-label="Volume"
+              >
+                <Slider.Track className="bg-secondary/70 relative grow rounded-full h-[4px]">
+                  <Slider.Range className="absolute bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] rounded-full h-full" />
+                </Slider.Track>
+                <Slider.Thumb className="block w-4 h-4 bg-accent rounded-full hover:bg-accent2 focus:outline-none shadow-md ring-2 ring-accent/50" />
+              </Slider.Root>
+            </div>
+            <div className="text-xs text-secondary truncate min-w-0 max-w-[120px] lg:max-w-[180px] w-full text-center lg:text-left">
+              <span
+                tabIndex={0}
+                className="focus:outline-none focus:ring-2 focus:ring-accent2/50 px-2 py-1 rounded-md inline-block truncate w-full"
+                title={currentSongName}
+              >
+                {currentSongName || "Loading..."}
+              </span>
+            </div>
           </div>
         </div>
-        <div className="hidden md:flex items-center gap-2 flex-shrink-0">
-          <Volume2 size={14} className="text-secondary flex-shrink-0" />
-          <Slider.Root
-            className="relative flex items-center select-none touch-none w-[60px] lg:w-[80px] h-5 flex-shrink-0"
-            value={[volume]}
-            onValueChange={handleVolumeChange}
-            max={100}
-            step={1}
-            aria-label="Volume"
-          >
-            <Slider.Track className="bg-secondary relative grow rounded-full h-[3px]">
-              <Slider.Range className="absolute bg-secondary rounded-full h-full" />
-            </Slider.Track>
-            <Slider.Thumb className="block w-3 h-3 bg-main rounded-full hover:bg-accent3 focus:outline-none" />
-          </Slider.Root>
-        </div>
-        <div className="block text-xs md:text-sm text-secondary truncate min-w-0 max-w-[120px] lg:max-w-[150px] w-full text-center md:text-left">
-          <span
-            tabIndex={0}
-            className="focus:outline-none focus:ring-2 focus:ring-accent2/50"
-            title={currentSongName}
-          >
-            {currentSongName || "Loading..."}
-          </span>
-        </div>
+        <iframe
+          ref={iframeRef}
+          src={
+            currentVideoId ? createYouTubeEmbedURL(currentVideoId, false) : ""
+          }
+          width="1"
+          height="1"
+          style={{
+            position: "absolute",
+            left: -9999,
+            top: "auto",
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+          title="YouTube music player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       </div>
-      <div id="youtube-player" className="hidden" />
-    </div>
+    </AudioPlayerErrorBoundary>
   );
-}
+});

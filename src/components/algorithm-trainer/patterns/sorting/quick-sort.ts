@@ -2,7 +2,8 @@ import { AlgorithmPattern } from "../../types";
 
 export const quick_sortPattern: AlgorithmPattern = {
   title: "Quick Sort Algorithm",
-  description: "A divide-and-conquer algorithm that picks a pivot element and partitions the array around it.",
+  description:
+    "A divide-and-conquer algorithm that picks a pivot element and partitions the array around it.",
   timeComplexity: "O(n log n) average case, O(n²) worst case",
   spaceComplexity: "O(log n) due to recursion stack",
   pseudocode: `1. Base case: If array length <= 1, return array\n2. Choose pivot:\n   a. Select last element as pivot\n   b. Initialize left = 0, right = len(arr) - 2\n3. Partition:\n   a. While left <= right:\n      - If arr[left] <= pivot: move left pointer right\n      - If arr[right] > pivot: move right pointer left\n      - If both conditions false: swap elements\n   b. Place pivot in correct position\n4. Recursively sort:\n   a. Sort left subarray (elements <= pivot)\n   b. Sort right subarray (elements > pivot)`,
@@ -39,8 +40,9 @@ Right: [8, 5, 7, 6]`,
             right -= 1
         else:
             arr[left], arr[right] = arr[right], arr[left]
-            
+    
     arr[left], arr[-1] = arr[-1], arr[left]
     
-    return quick_sort(arr[:left]) + [pivot] + quick_sort(arr[left+1:])`
+    return quick_sort(arr[:left]) + [pivot] + quick_sort(arr[left+1:])`,
+  category: "Sorting",
 };

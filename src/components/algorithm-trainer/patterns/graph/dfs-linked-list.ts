@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const dfs_linked_listPattern: AlgorithmPattern = {
   title: "DFS on Linked List",
-  description: "Application of DFS pattern to traverse or process a linked list recursively, useful for operations like reversing or finding cycles.",
+  description:
+    "Application of DFS pattern to traverse or process a linked list recursively, useful for operations like reversing or finding cycles.",
   timeComplexity: "O(n)",
+  category: "Graph Algorithms",
   spaceComplexity: "O(n) for recursion stack",
   pseudocode: `1. Base case: if node is null, return\n2. Process current node\n3. Recursively call DFS on next node\n4. (Optional) Process node after recursion`,
   example: `List: 1->2->3->4->null
@@ -31,5 +33,5 @@ def dfs_linked_list(node):
     dfs_linked_list(node.next)
     
     # Process node (post-order)
-    # print(node.val)  # Uncomment for reverse order`
+    # print(node.val)  # Uncomment for reverse order`,
 };

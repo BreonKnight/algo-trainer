@@ -1,14 +1,5 @@
 import { PatternKey } from "./types";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { algorithmPatterns } from "./patterns";
+import { algorithmPatterns } from "./patterns/index";
 import { ChevronDown, Search, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -82,6 +73,23 @@ export function AlgorithmSelector({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Focus search input when dropdown opens
   useEffect(() => {

@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const two_pointersPattern: AlgorithmPattern = {
   title: "Two Pointers Pattern",
-  description: "A technique that uses two pointers to solve array-related problems efficiently, often moving them towards each other or in the same direction.",
+  description:
+    "A technique that uses two pointers to solve array-related problems efficiently, often moving them towards each other or in the same direction.",
   timeComplexity: "Usually O(n)",
   spaceComplexity: "Usually O(1)",
+  category: "Array",
   pseudocode: `
 Two Pointers patterns:
 1. Opposite direction:
@@ -53,5 +55,5 @@ def two_pointers_same_direction(arr):
             slow += 1
             arr[slow] = arr[fast]
     
-    return slow + 1`
+    return slow + 1`,
 };

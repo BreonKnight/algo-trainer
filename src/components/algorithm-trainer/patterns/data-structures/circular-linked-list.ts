@@ -2,7 +2,8 @@ import { AlgorithmPattern } from "../../types";
 
 export const circular_linked_listPattern: AlgorithmPattern = {
   title: "Circular Linked List Implementation",
-  description: "Implementation of a linked list where the last element points back to the first element, forming a circle.",
+  description:
+    "Implementation of a linked list where the last element points back to the first element, forming a circle.",
   timeComplexity: "Access: O(n), Insert/Delete at known position: O(1)",
   spaceComplexity: "O(n) for n elements",
   pseudocode: `Circular Linked List operations:\n1. append(element):\n   - Add element and point to head\n2. prepend(element):\n   - Add element and update last->next\n3. delete(element):\n   - Remove and maintain circle\n4. insert(element, position):\n   - Insert and maintain circle\n5. traverse():
@@ -80,5 +81,6 @@ class CircularLinkedList:
             print(current.data)
             current = current.next
             if current == self.head:
-                break`
+                break`,
+  category: "Data Structures",
 };

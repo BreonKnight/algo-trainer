@@ -48,4 +48,5 @@ graph = {
     6: [5]
 }
 dfs(graph, 1)`,
+  category: "Graph",
 };

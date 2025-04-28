@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const greedy_job_schedulingPattern: AlgorithmPattern = {
   title: "Greedy Job Scheduling",
-  description: "A greedy algorithm that schedules jobs to minimize completion time or maximize profit, typically sorting jobs by duration or profit/time ratio.",
+  description:
+    "A greedy algorithm that schedules jobs to minimize completion time or maximize profit, typically sorting jobs by duration or profit/time ratio.",
   timeComplexity: "O(n log n)",
   spaceComplexity: "O(n)",
+  category: "Greedy Algorithms",
   pseudocode: `1. Sort jobs by profit/time ratio\n2. Initialize timeline\n3. For each job in sorted order:\n   a. Find earliest possible slot\n   b. If slot found:\n      - Schedule job in that slot\n4. Return schedule`,
   example: `Jobs: [(2,100), (1,19), (2,27), (1,25), (3,15)]
 Sorted by profit/time: [(1,19), (2,100), (1,25), (2,27), (3,15)]
@@ -35,5 +37,5 @@ Total profit: 144`,
                 break
             latest_slot -= 1
     
-    return total_profit`
+    return total_profit`,
 };

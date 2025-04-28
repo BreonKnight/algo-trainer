@@ -36,8 +36,8 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
   };
 
   return (
-    <Card className="p-4 bg-secondary border-secondary w-full flex flex-col">
-      <div className="flex justify-between items-center mb-4">
+    <Card className="p-4 bg-secondary border-secondary w-full h-full flex flex-col overflow-hidden">
+      <div className="flex justify-between items-center mb-4 flex-shrink-0">
         <h2 className="text-base sm:text-lg font-semibold text-accent3">
           Test Cases
         </h2>
@@ -49,7 +49,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
           Add Test Case
         </Button>
       </div>
-      <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
+      <div className="space-y-4 overflow-y-auto flex-1 min-h-0 pr-2">
         {testCases.map((testCase, index) => (
           <div key={index} className="flex gap-4 items-start">
             <div className="flex-1">

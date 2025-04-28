@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const manachers_algorithmPattern: AlgorithmPattern = {
   title: "Manacher's Algorithm",
-  description: "An efficient algorithm to find all palindromic substrings in a string in linear time.",
+  description:
+    "An efficient algorithm to find all palindromic substrings in a string in linear time.",
   timeComplexity: "O(n)",
   spaceComplexity: "O(n)",
+  category: "String Algorithms",
   pseudocode: `
 Manacher's steps:
 1. Transform string by adding boundaries:
@@ -75,5 +77,5 @@ def find_palindromes(s):
                 end = center + radius + 1
                 palindromes.append(s[start:end])
     
-    return palindromes`
+    return palindromes`,
 };
