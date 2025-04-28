@@ -1,0 +1,9 @@
+{
+  "name": "algo-trainer-scripts",
+  "version": "1.0.0",
+  "description": "Scripts for the Algo Trainer project",
+  "scripts": {
+    "extract-patterns": "node extract-patterns.js"
+  },
+  "private": true
+}

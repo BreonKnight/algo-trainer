@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "electron:dev": "tsc -p electron && NODE_ENV=development electron .",
     "electron:build": "npm run build && tsc -p electron && electron-builder",
-    "electron:preview": "npm run build && tsc -p electron && NODE_ENV=production electron ."
+    "electron:preview": "npm run build && tsc -p electron && NODE_ENV=production electron .",
+    "extract-patterns": "node scripts/extract-patterns.js",
+    "create-implementations": "node scripts/create-implementations.js"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
