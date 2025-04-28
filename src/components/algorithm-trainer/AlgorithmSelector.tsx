@@ -191,7 +191,7 @@ export function AlgorithmSelector({
                 algorithms.sort().map((algorithm) => (
                   <div
                     key={algorithm}
-                    className="text-main hover:bg-secondary focus:bg-secondary px-2 py-1.5 rounded-sm cursor-pointer transition-colors duration-150"
+                    className="text-main hover:bg-[color:var(--accent3)]/20 focus:bg-[color:var(--accent3)]/20 hover:text-[color:var(--text-selected-dark)] focus:text-[color:var(--text-selected-dark)] data-[state=selected]:bg-[color:var(--accent3)]/40 data-[state=selected]:text-[color:var(--text-selected-dark)] data-[state=selected]:font-bold px-2 py-1.5 rounded-sm cursor-pointer transition-colors duration-150"
                     onClick={() => handleAlgorithmSelect(algorithm)}
                   >
                     <span className="block overflow-hidden text-ellipsis whitespace-nowrap">

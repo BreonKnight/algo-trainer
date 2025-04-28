@@ -36,7 +36,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
   };
 
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full flex flex-col">
+    <Card className="p-4 bg-secondary border-secondary w-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-base sm:text-lg font-semibold text-accent3">
           Test Cases
