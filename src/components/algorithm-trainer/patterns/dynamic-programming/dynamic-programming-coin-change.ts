@@ -1,8 +1,9 @@
 import { AlgorithmPattern } from "../../types";
 
-export const dynamic_programming_coin_changePattern: AlgorithmPattern = {
+export const dynamicProgrammingCoinChangePattern: AlgorithmPattern = {
   title: "Dynamic Programming Coin Change",
-  description: "A classic dynamic programming problem that finds the minimum number of coins needed to make a given amount of money.",
+  description:
+    "A classic dynamic programming problem that finds the minimum number of coins needed to make a given amount of money.",
   timeComplexity: "O(amount * number of coins)",
   spaceComplexity: "O(amount)",
   pseudocode: `1. Initialize dp array with infinity\n2. Set dp[0] = 0\n3. For amount from 1 to target:\n   a. For each coin:\n      - If coin <= amount:\n        * dp[amount] = min(dp[amount], dp[amount-coin] + 1)\n4. Return dp[target] if not infinity else -1`,
@@ -26,5 +27,5 @@ dp[11] = 3 (5+5+1)`,
             if coin <= i:
                 dp[i] = min(dp[i], dp[i - coin] + 1)
     
-    return dp[amount] if dp[amount] != float('inf') else -1`
+    return dp[amount] if dp[amount] != float('inf') else -1`,
 };

@@ -1,8 +1,9 @@
 import { AlgorithmPattern } from "../../types";
 
-export const dynamic_programming_iterativePattern: AlgorithmPattern = {
+export const dynamicProgrammingIterativePattern: AlgorithmPattern = {
   title: "Dynamic Programming Iterative (Bottom-up)",
-  description: "A bottom-up approach to dynamic programming that builds the solution iteratively from smaller subproblems to larger ones.",
+  description:
+    "A bottom-up approach to dynamic programming that builds the solution iteratively from smaller subproblems to larger ones.",
   timeComplexity: "Varies by problem",
   spaceComplexity: "Often O(n) or O(n²)",
   pseudocode: `1. Initialize dp array/table\n2. Fill base cases\n3. Iterate through states in order:\n   a. For each state, compute value from previous states\n4. Return final state value`,
@@ -25,5 +26,5 @@ Result: 4`,
             if arr[i] > arr[j]:
                 dp[i] = max(dp[i], dp[j] + 1)
     
-    return max(dp)`
+    return max(dp)`,
 };

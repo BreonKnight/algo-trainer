@@ -122,6 +122,7 @@ const PLAYLIST_COMMENTS: Record<string, string> = {
 export function Timer() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [totalTime, setTotalTime] = useState<number>(0); // Track total time for progress
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const startTimer = (minutes: number) => {
@@ -129,6 +130,7 @@ export function Timer() {
       clearInterval(timerRef.current);
     }
     setTimeLeft(minutes * 60);
+    setTotalTime(minutes * 60);
     setIsRunning(true);
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
@@ -157,6 +159,7 @@ export function Timer() {
   const resetTimer = () => {
     pauseTimer();
     setTimeLeft(0);
+    setTotalTime(0);
   };
 
   const formatTime = (totalSeconds: number) => {
@@ -166,6 +169,14 @@ export function Timer() {
       .toString()
       .padStart(2, "0")}`;
   };
+
+  // Circular progress bar calculations
+  const radius = 28;
+  const stroke = 5;
+  const normalizedRadius = radius - stroke / 2;
+  const circumference = normalizedRadius * 2 * Math.PI;
+  const progress = totalTime > 0 ? timeLeft / totalTime : 0;
+  const strokeDashoffset = circumference * (1 - progress);
 
   useEffect(() => {
     return () => {
@@ -177,19 +188,54 @@ export function Timer() {
 
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="text-xs text-[#6272a4] font-medium mb-1">
+      <div className="text-xs text-secondary font-medium mb-1">
         Timebox Timer
       </div>
       <div className="flex items-center gap-4">
-        <div className="font-mono text-xl text-[#f8f8f2] min-w-[80px] text-center">
-          {formatTime(timeLeft)}
+        <div className="relative flex items-center justify-center min-w-[80px] min-h-[56px]">
+          {/* Circular Progress Bar */}
+          <svg
+            height={radius * 2}
+            width={radius * 2}
+            className="absolute inset-0 w-full h-full"
+          >
+            <circle
+              stroke="#44475a"
+              fill="transparent"
+              strokeWidth={stroke}
+              r={normalizedRadius}
+              cx={radius}
+              cy={radius}
+            />
+            <circle
+              stroke="url(#timer-gradient)"
+              fill="transparent"
+              strokeWidth={stroke}
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="round"
+              r={normalizedRadius}
+              cx={radius}
+              cy={radius}
+              style={{ transition: "stroke-dashoffset 0.5s linear" }}
+            />
+            <defs>
+              <linearGradient id="timer-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#ff79c6" />
+                <stop offset="100%" stopColor="#8be9fd" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span className="absolute inset-0 flex items-center justify-center font-mono text-xl text-main">
+            {formatTime(timeLeft)}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <Button
             onClick={() => startTimer(15)}
             variant="ghost"
             size="sm"
-            className="text-xs px-3 h-7 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
             disabled={isRunning}
             title="Set 15 minute timer"
           >
@@ -199,7 +245,7 @@ export function Timer() {
             onClick={() => startTimer(30)}
             variant="ghost"
             size="sm"
-            className="text-xs px-3 h-7 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
             disabled={isRunning}
             title="Set 30 minute timer"
           >
@@ -209,7 +255,7 @@ export function Timer() {
             onClick={() => startTimer(45)}
             variant="ghost"
             size="sm"
-            className="text-xs px-3 h-7 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
             disabled={isRunning}
             title="Set 45 minute timer"
           >
@@ -219,7 +265,7 @@ export function Timer() {
             onClick={() => startTimer(60)}
             variant="ghost"
             size="sm"
-            className="text-xs px-3 h-7 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
             disabled={isRunning}
             title="Set 1 hour timer"
           >
@@ -235,7 +281,7 @@ export function Timer() {
             }
             variant="ghost"
             size="sm"
-            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md"
             title={isRunning ? "Pause timer" : "Start timer"}
           >
             {isRunning ? <Pause size={14} /> : <Play size={14} />}
@@ -244,7 +290,7 @@ export function Timer() {
             onClick={resetTimer}
             variant="ghost"
             size="sm"
-            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md"
+            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md"
             title="Reset timer"
           >
             <RotateCcw size={14} />
@@ -525,7 +571,7 @@ export function AudioPlayer() {
 
   return (
     <div className="flex flex-col items-center gap-1 w-full max-w-[300px] md:max-w-full">
-      <div className="text-xs text-[#6272a4] font-medium mb-1">
+      <div className="text-xs text-secondary font-medium mb-1">
         Background Music
       </div>
       <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full">
@@ -534,7 +580,7 @@ export function AudioPlayer() {
             onClick={togglePlay}
             variant="ghost"
             size="sm"
-            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md flex-shrink-0"
+            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md flex-shrink-0"
             title={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? <Pause size={14} /> : <Play size={14} />}
@@ -543,14 +589,14 @@ export function AudioPlayer() {
             onClick={playNextVideo}
             variant="ghost"
             size="sm"
-            className="h-7 w-7 p-0 bg-[#44475a] text-[#f8f8f2] hover:bg-[#44475a]/80 rounded-md flex-shrink-0"
+            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md flex-shrink-0"
             title="Skip to next song"
           >
             <SkipForward size={14} />
           </Button>
         </div>
         <div className="hidden md:flex items-center gap-2 flex-shrink-0">
-          <Volume2 size={14} className="text-[#6272a4] flex-shrink-0" />
+          <Volume2 size={14} className="text-secondary flex-shrink-0" />
           <Slider.Root
             className="relative flex items-center select-none touch-none w-[60px] lg:w-[80px] h-5 flex-shrink-0"
             value={[volume]}
@@ -565,7 +611,7 @@ export function AudioPlayer() {
             <Slider.Thumb className="block w-3 h-3 bg-[#f8f8f2] rounded-full hover:bg-[#bd93f9] focus:outline-none" />
           </Slider.Root>
         </div>
-        <div className="hidden md:block text-sm text-[#6272a4] truncate min-w-0 max-w-[120px] lg:max-w-[150px]">
+        <div className="hidden md:block text-sm text-secondary truncate min-w-0 max-w-[120px] lg:max-w-[150px]">
           {currentSongName || "Loading..."}
         </div>
       </div>
