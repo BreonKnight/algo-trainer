@@ -1,6 +1,5 @@
-import React from "react";
 import styles from "@/styles/pseudocode.module.css";
-import { PatternKey, PATTERN_KEYS } from "./types";
+import { PatternKey } from "./types";
 
 interface MonsterHunterGuideProps {
   currentPattern: PatternKey;

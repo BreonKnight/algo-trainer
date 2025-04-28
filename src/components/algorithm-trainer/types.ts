@@ -58,3 +58,13 @@ export const PATTERN_KEYS = [
 ] as const;
 
 export type PatternKey = (typeof PATTERN_KEYS)[number];
+
+export interface AlgorithmPattern {
+  title: string;
+  description: string;
+  timeComplexity: string;
+  spaceComplexity: string;
+  pseudocode: string;
+  example: string;
+  implementation: string;
+}

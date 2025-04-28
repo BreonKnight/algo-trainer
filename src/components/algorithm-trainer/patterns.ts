@@ -5,7 +5,7 @@ interface AlgorithmPattern {
   description: string;
   timeComplexity: string;
   spaceComplexity: string;
-  pseudocode: string[];
+  pseudocode: string;
   example: string;
   implementation: string;
 }
@@ -17,38 +17,24 @@ export const algorithmPatterns: Record<PatternKey, AlgorithmPattern> = {
       "A divide-and-conquer algorithm that picks a pivot element and partitions the array around it.",
     timeComplexity: "O(n log n) average case, O(n²) worst case",
     spaceComplexity: "O(log n) due to recursion stack",
-    pseudocode: [
-      "1. Base case: If array length <= 1, return array",
-      "2. Choose pivot:",
-      "   a. Select last element as pivot",
-      "   b. Initialize left = 0, right = len(arr) - 2",
-      "3. Partition:",
-      "   a. While left <= right:",
-      "      - If arr[left] <= pivot: move left pointer right",
-      "      - If arr[right] > pivot: move right pointer left",
-      "      - If both conditions false: swap elements",
-      "   b. Place pivot in correct position",
-      "4. Recursively sort:",
-      "   a. Sort left subarray (elements <= pivot)",
-      "   b. Sort right subarray (elements > pivot)",
-    ],
+    pseudocode: `1. Base case: If array length <= 1, return array\n2. Choose pivot:\n   a. Select last element as pivot\n   b. Initialize left = 0, right = len(arr) - 2\n3. Partition:\n   a. While left <= right:\n      - If arr[left] <= pivot: move left pointer right\n      - If arr[right] > pivot: move right pointer left\n      - If both conditions false: swap elements\n   b. Place pivot in correct position\n4. Recursively sort:\n   a. Sort left subarray (elements <= pivot)\n   b. Sort right subarray (elements > pivot)`,
     example: `arr = [7, 2, 1, 6, 8, 5, 3, 4]
-
-First partition (pivot = 4):
-[7, 2, 1, 6, 8, 5, 3, 4]
- L                    P
-Swap 7 and 3:
-[3, 2, 1, 6, 8, 5, 7, 4]
-    L              R
-Swap 6 and 1:
-[3, 2, 1, 6, 8, 5, 7, 4]
-       L        R
-Final partition:
-[3, 2, 1, 4, 8, 5, 7, 6]
-          P
-
-Recursive calls:
-Left: [3, 2, 1]
+    
+    First partition (pivot = 4):
+    [7, 2, 1, 6, 8, 5, 3, 4]
+     L                    P
+    Swap 7 and 3:
+    [3, 2, 1, 6, 8, 5, 7, 4]
+        L              R
+    Swap 6 and 1:
+    [3, 2, 1, 6, 8, 5, 7, 4]
+           L        R
+    Final partition:
+    [3, 2, 1, 4, 8, 5, 7, 6]
+              P
+    
+    Recursive calls:
+    Left: [3, 2, 1]
 Right: [8, 5, 7, 6]`,
     implementation: `def quick_sort(arr):
     if len(arr) <= 1:
@@ -77,38 +63,24 @@ Right: [8, 5, 7, 6]`,
       "A divide-and-conquer algorithm that recursively divides the array into two halves, sorts them, and then merges the sorted halves.",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "1. Base case: If array length <= 1, return array",
-      "2. Divide:",
-      "   a. Calculate mid = len(arr) // 2",
-      "   b. Split array into left = arr[:mid] and right = arr[mid:]",
-      "   c. Recursively sort left and right halves",
-      "3. Merge:",
-      "   a. Initialize result array and pointers i, j = 0",
-      "   b. While both halves have elements:",
-      "      - Compare elements at current pointers",
-      "      - Add smaller element to result",
-      "      - Increment corresponding pointer",
-      "   c. Add remaining elements from non-empty half",
-      "   d. Return merged result",
-    ],
+    pseudocode: `1. Base case: If array length <= 1, return array\n2. Divide:\n   - Calculate mid = len(arr) // 2\n   - Split array into left = arr[:mid] and right = arr[mid:]\n   - Recursively sort left and right halves\n3. Merge:\n   - Initialize result array and pointers i, j = 0\n   - While both halves have elements:\n     - Compare elements at current pointers\n     - Add smaller element to result\n     - Increment corresponding pointer\n   - Add remaining elements from non-empty half\n   - Return merged result`,
     example: `arr = [38, 27, 43, 3, 9, 82, 10]
-
-First level division:
-left = [38, 27, 43, 3]
-right = [9, 82, 10]
-
-Second level (left):
-[38, 27] | [43, 3]
-
-Second level (right):
-[9, 82] | [10]
-
-Merging process:
-[27, 38] | [3, 43] -> [3, 27, 38, 43]
-[9, 82] | [10] -> [9, 10, 82]
-
-Final merge:
+    
+    First level division:
+    left = [38, 27, 43, 3]
+    right = [9, 82, 10]
+    
+    Second level (left):
+    [38, 27] | [43, 3]
+    
+    Second level (right):
+    [9, 82] | [10]
+    
+    Merging process:
+    [27, 38] | [3, 43] -> [3, 27, 38, 43]
+    [9, 82] | [10] -> [9, 10, 82]
+    
+    Final merge:
 [3, 27, 38, 43] | [9, 10, 82] -> [3, 9, 10, 27, 38, 43, 82]`,
     implementation: `def merge_sort(arr):
     if len(arr) <= 1:
@@ -143,14 +115,7 @@ def merge(left, right):
       "A sorting algorithm that uses a stack data structure to sort elements in descending order.",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "1. Initialize an empty stack",
-      "2. For each element in the input array:",
-      "   a. While stack is not empty and top element > current number:",
-      "      - Pop elements from stack",
-      "   b. Push current number to stack",
-      "3. Return the sorted stack",
-    ],
+    pseudocode: `1. Initialize an empty stack\n2. For each element in the input array:\n   a. While stack is not empty and top element > current number:\n      - Pop elements from stack\n   b. Push current number to stack\n3. Return the sorted stack`,
     example: `Input: [5, 2, 8, 1, 9, 3]
 
 Step 1: Push 5
@@ -187,14 +152,7 @@ Final result: [9, 3]`,
       "A comparison-based sorting algorithm that uses a binary heap data structure to build a max-heap and repeatedly extract the maximum element.",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. Build max heap from input array",
-      "2. Repeatedly extract maximum:",
-      "   a. Swap root with last element",
-      "   b. Reduce heap size by 1",
-      "   c. Heapify root node",
-      "3. Return sorted array",
-    ],
+    pseudocode: `1. Build max heap from input array\n2. Repeatedly extract maximum:\n   a. Swap root with last element\n   b. Reduce heap size by 1\n   c. Heapify root node\n3. Return sorted array`,
     example: `arr = [4, 10, 3, 5, 1]
 Build max heap:
      10
@@ -211,24 +169,24 @@ Extract max elements:
 
 Result: [1, 3, 4, 5, 10]`,
     implementation: `def heap_sort(arr):
-    def heapify(arr, n, i):
-        largest = i
+def heapify(arr, n, i):
+    largest = i
         left = 2 * i + 1
         right = 2 * i + 2
-        
-        if left < n and arr[left] > arr[largest]:
-            largest = left
-        if right < n and arr[right] > arr[largest]:
-            largest = right
-            
-        if largest != i:
-            arr[i], arr[largest] = arr[largest], arr[i]
+    
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+    
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
             heapify(arr, n, largest)
     
     n = len(arr)
     for i in range(n // 2 - 1, -1, -1):
         heapify(arr, n, i)
-        
+    
     for i in range(n - 1, 0, -1):
         arr[0], arr[i] = arr[i], arr[0]
         heapify(arr, i, 0)
@@ -242,13 +200,7 @@ Result: [1, 3, 4, 5, 10]`,
       "A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. For i from 0 to n-1:",
-      "   a. For j from 0 to n-i-1:",
-      "      - If arr[j] > arr[j+1]:",
-      "        * Swap arr[j] and arr[j+1]",
-      "2. Return sorted array",
-    ],
+    pseudocode: `1. For i from 0 to n-1:\n   a. For j from 0 to n-i-1:\n      - If arr[j] > arr[j+1]:\n        * Swap arr[j] and arr[j+1]\n2. Return sorted array`,
     example: `arr = [64, 34, 25, 12, 22]
 
 Pass 1: [34, 25, 12, 22, 64]
@@ -270,12 +222,7 @@ Pass 4: [12, 22, 25, 34, 64]`,
       "A simple sorting algorithm that divides the input into a sorted and unsorted region, repeatedly selecting the smallest element from the unsorted region to add to the sorted region.",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. For i from 0 to n-1:",
-      "   a. Find minimum element in unsorted region [i..n-1]",
-      "   b. Swap minimum element with first element of unsorted region",
-      "2. Return sorted array",
-    ],
+    pseudocode: `1. For i from 0 to n-1:\n   a. Find minimum element in unsorted region [i..n-1]\n   b. Swap minimum element with first element of unsorted region\n2. Return sorted array`,
     example: `arr = [64, 25, 12, 22, 11]
 
 First pass:
@@ -310,16 +257,7 @@ Fourth pass:
       "A simple sorting algorithm that builds the final sorted array one item at a time, by repeatedly inserting a new element into the sorted portion of the array.",
     timeComplexity: "O(n²) worst/average case, O(n) best case",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. For i from 1 to n-1:",
-      "   a. key = arr[i]",
-      "   b. j = i - 1",
-      "   c. While j >= 0 and arr[j] > key:",
-      "      - Move arr[j] one position ahead",
-      "      - Decrement j",
-      "   d. Place key at correct position",
-      "2. Return sorted array",
-    ],
+    pseudocode: `1. For i from 1 to n-1:\n   a. key = arr[i]\n   b. j = i - 1\n   c. While j >= 0 and arr[j] > key:\n      - Move arr[j] one position ahead\n      - Decrement j\n   d. Place key at correct position\n2. Return sorted array`,
     example: `arr = [12, 11, 13, 5, 6]
 
 Pass 1: [11, 12, 13, 5, 6]
@@ -349,21 +287,10 @@ Key steps for inserting 5:
       "An efficient search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half.",
     timeComplexity: "O(log n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. Initialize left = 0, right = length - 1",
-      "2. While left <= right:",
-      "   a. mid = (left + right) // 2",
-      "   b. If arr[mid] == target:",
-      "      - Return mid",
-      "   c. If arr[mid] < target:",
-      "      - left = mid + 1",
-      "   d. Else:",
-      "      - right = mid - 1",
-      "3. Return -1 if not found",
-    ],
+    pseudocode: `1. Initialize left = 0, right = length - 1\n2. While left <= right:\n   a. mid = (left + right) // 2\n   b. If arr[mid] == target:\n      - Return mid\n   c. If arr[mid] < target:\n      - left = mid + 1\n   d. Else:\n      - right = mid - 1\n3. Return -1 if not found`,
     example: `arr = [1, 3, 5, 7, 9, 11, 13, 15]
-target = 7
-
+    target = 7
+    
 Step 1: mid = 3
 arr[3] = 7 == target
 Found at index 3!
@@ -396,17 +323,7 @@ Not found!`,
       "A problem-solving pattern that uses binary search to find an answer in a range of possible values, typically used when the answer space is monotonic.",
     timeComplexity: "O(log n) * C, where C is the cost of checking a value",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. Define check(x) function that returns true if x is valid",
-      "2. Initialize left = min_possible, right = max_possible",
-      "3. While left < right:",
-      "   a. mid = (left + right) // 2",
-      "   b. If check(mid):",
-      "      - right = mid",
-      "   c. Else:",
-      "      - left = mid + 1",
-      "4. Return left",
-    ],
+    pseudocode: `1. Define check(x) function that returns true if x is valid\n2. Initialize left = min_possible, right = max_possible\n3. While left < right:\n   a. mid = (left + right) // 2\n   b. If check(mid):\n      - right = mid\n   c. Else:\n      - left = mid + 1\n4. Return left`,
     example: `Problem: Find square root of 16
 left = 1, right = 16
 
@@ -442,12 +359,7 @@ Answer: 4`,
       "A simple search algorithm that checks each element in the list sequentially until a match is found or the whole list has been searched.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. For i from 0 to n-1:",
-      "   a. If arr[i] == target:",
-      "      - Return i",
-      "2. Return -1 if not found",
-    ],
+    pseudocode: `1. For i from 0 to n-1:\n   a. If arr[i] == target:\n      - Return i\n2. Return -1 if not found`,
     example: `arr = [64, 34, 25, 12, 22, 11, 90]
 target = 12
 
@@ -469,13 +381,7 @@ Found at index 3!`,
       "A problem-solving pattern that finds two numbers in an array that sum to a target value using a brute force approach.",
     timeComplexity: "O(n²)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. For i from 0 to n-1:",
-      "   a. For j from i+1 to n-1:",
-      "      - If arr[i] + arr[j] == target:",
-      "         * Return [i, j]",
-      "2. Return [] if no solution found",
-    ],
+    pseudocode: `1. For i from 0 to n-1:\n   a. For j from i+1 to n-1:\n      - If arr[i] + arr[j] == target:\n         * Return [i, j]\n2. Return [] if no solution found`,
     example: `arr = [2, 7, 11, 15]
 target = 9
 
@@ -497,15 +403,7 @@ Found solution: [0, 1]`,
       "An efficient solution to find two numbers in an array that add up to a target value using a hash table/dictionary for O(n) time complexity.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "1. Initialize empty dictionary",
-      "2. For each number in array:",
-      "   a. Calculate complement = target - current_number",
-      "   b. If complement exists in dictionary:",
-      "      - Return sorted [complement_index, current_index]",
-      "   c. Add current_number and its index to dictionary",
-      "3. Return empty array if no solution found",
-    ],
+    pseudocode: `1. Initialize empty dictionary\n2. For each number in array:\n   a. Calculate complement = target - current_number\n   b. If complement exists in dictionary:\n      - Return sorted [complement_index, current_index]\n   c. Add current_number and its index to dictionary\n3. Return empty array if no solution found`,
     example: `arr = [2, 7, 11, 15]
 target = 9
 
@@ -541,19 +439,7 @@ Found solution: [0, 1]`,
     timeComplexity: "O(n log n) due to sorting",
     spaceComplexity:
       "O(1) if modifying input array, O(n) if creating new array",
-    pseudocode: [
-      "1. Sort the array (if not already sorted)",
-      "2. Initialize left = 0, right = n-1",
-      "3. While left < right:",
-      "   a. sum = arr[left] + arr[right]",
-      "   b. If sum == target:",
-      "      - Return [left, right]",
-      "   c. If sum < target:",
-      "      - left++",
-      "   d. Else:",
-      "      - right--",
-      "4. Return [] if no solution found",
-    ],
+    pseudocode: `1. Sort the array (if not already sorted)\n2. Initialize left = 0, right = n-1\n3. While left < right:\n   a. sum = arr[left] + arr[right]\n   b. If sum == target:\n      - Return [left, right]\n   c. If sum < target:\n      - left++\n   d. Else:\n      - right--\n4. Return [] if no solution found`,
     example: `arr = [15, 2, 11, 7]
 sorted = [2, 7, 11, 15]
 target = 9
@@ -591,14 +477,7 @@ Found solution: [0, 1]`,
       "A method for solving complex problems by breaking them down into simpler subproblems, storing the results of subproblems to avoid redundant computation.",
     timeComplexity: "Varies by problem",
     spaceComplexity: "Varies by problem",
-    pseudocode: [
-      "1. Define base cases",
-      "2. Define state (what needs to be stored)",
-      "3. Define transitions (how to move between states)",
-      "4. Initialize memoization or tabulation structure",
-      "5. Implement recursive (top-down) or iterative (bottom-up) solution",
-      "6. Return final result",
-    ],
+    pseudocode: `1. Define base cases\n2. Define state (what needs to be stored)\n3. Define transitions (how to move between states)\n4. Initialize memoization or tabulation structure\n5. Implement recursive (top-down) or iterative (bottom-up) solution\n6. Return final result`,
     example: `Problem: Calculate nth Fibonacci number
 
 Base cases:
@@ -637,12 +516,7 @@ dp[i] = dp[i-1] + dp[i-2]`,
       "A classic example of dynamic programming that calculates Fibonacci numbers efficiently by storing previously computed values.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "1. Initialize dp array with base cases",
-      "2. For i from 2 to n:",
-      "   a. dp[i] = dp[i-1] + dp[i-2]",
-      "3. Return dp[n]",
-    ],
+    pseudocode: `1. Initialize dp array with base cases\n2. For i from 2 to n:\n   a. dp[i] = dp[i-1] + dp[i-2]\n3. Return dp[n]`,
     example: `Calculate fib(5)
 
 dp = [0, 1]
@@ -671,13 +545,7 @@ Result: 5`,
       "A bottom-up approach to dynamic programming that builds the solution iteratively from smaller subproblems to larger ones.",
     timeComplexity: "Varies by problem",
     spaceComplexity: "Often O(n) or O(n²)",
-    pseudocode: [
-      "1. Initialize dp array/table",
-      "2. Fill base cases",
-      "3. Iterate through states in order:",
-      "   a. For each state, compute value from previous states",
-      "4. Return final state value",
-    ],
+    pseudocode: `1. Initialize dp array/table\n2. Fill base cases\n3. Iterate through states in order:\n   a. For each state, compute value from previous states\n4. Return final state value`,
     example: `Problem: Longest Increasing Subsequence
 
 arr = [10, 9, 2, 5, 3, 7, 101, 18]
@@ -706,15 +574,7 @@ Result: 4`,
       "A classic dynamic programming problem that finds the minimum number of coins needed to make a given amount of money.",
     timeComplexity: "O(amount * number of coins)",
     spaceComplexity: "O(amount)",
-    pseudocode: [
-      "1. Initialize dp array with infinity",
-      "2. Set dp[0] = 0",
-      "3. For amount from 1 to target:",
-      "   a. For each coin:",
-      "      - If coin <= amount:",
-      "        * dp[amount] = min(dp[amount], dp[amount-coin] + 1)",
-      "4. Return dp[target] if not infinity else -1",
-    ],
+    pseudocode: `1. Initialize dp array with infinity\n2. Set dp[0] = 0\n3. For amount from 1 to target:\n   a. For each coin:\n      - If coin <= amount:\n        * dp[amount] = min(dp[amount], dp[amount-coin] + 1)\n4. Return dp[target] if not infinity else -1`,
     example: `coins = [1, 2, 5]
 amount = 11
 
@@ -744,14 +604,7 @@ dp[11] = 3 (5+5+1)`,
       "A problem-solving approach that makes locally optimal choices at each step with the hope of finding a global optimum.",
     timeComplexity: "Varies by problem",
     spaceComplexity: "Usually O(1) or O(n)",
-    pseudocode: [
-      "1. Initialize result structure",
-      "2. While problem not solved:",
-      "   a. Select locally optimal choice",
-      "   b. Add to result",
-      "   c. Reduce problem size",
-      "3. Return result",
-    ],
+    pseudocode: `1. Initialize result structure\n2. While problem not solved:\n   a. Select locally optimal choice\n   b. Add to result\n   c. Reduce problem size\n3. Return result`,
     example: `Problem: Make change with minimum coins
 Amount: 30
 Coins: [25, 10, 5, 1]
@@ -781,15 +634,7 @@ Result: [25, 5]`,
       "A greedy algorithm that selects the maximum number of non-overlapping activities that can be performed by a single person.",
     timeComplexity: "O(n log n) for sorting, O(n) after sorting",
     spaceComplexity: "O(n) for storing result",
-    pseudocode: [
-      "1. Sort activities by finish time",
-      "2. Select first activity",
-      "3. For each remaining activity:",
-      "   a. If start time >= last finish time:",
-      "      - Select activity",
-      "      - Update last finish time",
-      "4. Return selected activities",
-    ],
+    pseudocode: `1. Sort activities by finish time\n2. Select first activity\n3. For each remaining activity:\n   a. If start time >= last finish time:\n      - Select activity\n      - Update last finish time\n4. Return selected activities`,
     example: `Activities: [(1,4), (3,5), (0,6), (5,7), (3,8), (5,9), (6,10), (8,11)]
 Sorted by finish: [(1,4), (3,5), (0,6), (5,7), (3,8), (5,9), (6,10), (8,11)]
 
@@ -821,16 +666,7 @@ Result: 3 activities`,
       "A greedy approach to the knapsack problem where items can be broken into smaller pieces, always choosing the item with the highest value per unit weight.",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "1. Calculate value/weight ratio for each item",
-      "2. Sort items by ratio in descending order",
-      "3. For each item:",
-      "   a. If can take whole item:",
-      "      - Take it completely",
-      "   b. Else:",
-      "      - Take fraction that fits",
-      "4. Return total value",
-    ],
+    pseudocode: `1. Calculate value/weight ratio for each item\n2. Sort items by ratio in descending order\n3. For each item:\n   a. If can take whole item:\n      - Take it completely\n   b. Else:\n      - Take fraction that fits\n4. Return total value`,
     example: `Items: [(60,10), (100,20), (120,30)]
 Ratios: [6, 5, 4]
 Capacity: 50
@@ -868,15 +704,7 @@ Total value: 240`,
       "A greedy algorithm that schedules jobs to minimize completion time or maximize profit, typically sorting jobs by duration or profit/time ratio.",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "1. Sort jobs by profit/time ratio",
-      "2. Initialize timeline",
-      "3. For each job in sorted order:",
-      "   a. Find earliest possible slot",
-      "   b. If slot found:",
-      "      - Schedule job in that slot",
-      "4. Return schedule",
-    ],
+    pseudocode: `1. Sort jobs by profit/time ratio\n2. Initialize timeline\n3. For each job in sorted order:\n   a. Find earliest possible slot\n   b. If slot found:\n      - Schedule job in that slot\n4. Return schedule`,
     example: `Jobs: [(2,100), (1,19), (2,27), (1,25), (3,15)]
 Sorted by profit/time: [(1,19), (2,100), (1,25), (2,27), (3,15)]
 
@@ -915,15 +743,7 @@ Total profit: 144`,
       "A greedy algorithm for constructing optimal prefix codes for data compression, building a binary tree from bottom up based on character frequencies.",
     timeComplexity: "O(n log n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "1. Create leaf nodes for each character with frequency",
-      "2. While more than one node remains:",
-      "   a. Extract two minimum frequency nodes",
-      "   b. Create new node with sum of frequencies",
-      "   c. Add new node back to queue",
-      "3. Traverse tree to generate codes",
-      "4. Return encoding map",
-    ],
+    pseudocode: `1. Create leaf nodes for each character with frequency\n2. While more than one node remains:\n   a. Extract two minimum frequency nodes\n   b. Create new node with sum of frequencies\n   c. Add new node back to queue\n3. Traverse tree to generate codes\n4. Return encoding map`,
     example: `Text: "ABRACADABRA"
 Frequencies: A:5, B:2, R:2, C:1, D:1
 
@@ -971,16 +791,7 @@ def huffman_coding(text):
       "A greedy algorithm that finds the shortest path between nodes in a graph, which may represent road networks, computer networks, etc.",
     timeComplexity: "O((V + E) log V) with binary heap",
     spaceComplexity: "O(V)",
-    pseudocode: [
-      "1. Initialize distances to infinity except source (0)",
-      "2. Initialize priority queue with source",
-      "3. While queue not empty:",
-      "   a. Get vertex with minimum distance",
-      "   b. For each neighbor:",
-      "      - Calculate new distance",
-      "      - If better, update distance and add to queue",
-      "4. Return distances array",
-    ],
+    pseudocode: `1. Initialize distances to infinity except source (0)\n2. Initialize priority queue with source\n3. While queue not empty:\n   a. Get vertex with minimum distance\n   b. For each neighbor:\n      - Calculate new distance\n      - If better, update distance and add to queue\n4. Return distances array`,
     example: `Graph:
 A --4-- B --2-- C
 |       |       |
@@ -1030,15 +841,7 @@ def dijkstra(graph, source):
     timeComplexity:
       "Usually exponential O(b^d) where b is branching factor and d is depth",
     spaceComplexity: "O(d) where d is the maximum depth of recursion",
-    pseudocode: [
-      "1. Define base cases for valid/invalid solutions",
-      "2. For each possible choice:",
-      "   a. Make choice",
-      "   b. Recursively try to solve rest of problem",
-      "   c. If solution found, return it",
-      "   d. Else, undo choice (backtrack)",
-      "3. Return false if no solution possible",
-    ],
+    pseudocode: `1. Define base cases for valid/invalid solutions\n2. For each possible choice:\n   a. Make choice\n   b. Recursively try to solve rest of problem\n   c. If solution found, return it\n   d. Else, undo choice (backtrack)\n3. Return false if no solution possible`,
     example: `Problem: N-Queens (n=4)
 Board:
 . . . .
@@ -1055,8 +858,8 @@ Q . . .
 Solution found!`,
     implementation: `def backtrack(candidates, path, result):
     if is_solution(path):
-        result.append(path[:])
-        return
+            result.append(path[:])
+            return
         
     for candidate in candidates:
         if is_valid(path, candidate):
@@ -1081,17 +884,7 @@ def solve_backtracking(input):
       "An algorithmic technique that involves maintaining a subset of elements as a window that slides over the data, typically used for array/string problems involving contiguous sequences.",
     timeComplexity: "Usually O(n)",
     spaceComplexity: "Usually O(1) or O(k) where k is window size",
-    pseudocode: [
-      "1. Initialize window pointers (start, end)",
-      "2. Initialize window state (sum, count, etc.)",
-      "3. While end < array length:",
-      "   a. Add element at end to window",
-      "   b. While window condition not met:",
-      "      - Remove element at start from window",
-      "      - Increment start",
-      "   c. Update result if needed",
-      "   d. Increment end",
-    ],
+    pseudocode: `1. Initialize window pointers (start, end)\n2. Initialize window state (sum, count, etc.)\n3. While end < array length:\n   a. Add element at end to window\n   b. While window condition not met:\n      - Remove element at start from window\n      - Increment start\n   c. Update result if needed\n   d. Increment end`,
     example: `Problem: Find max sum subarray of size k
 Array: [2, 1, 5, 1, 3, 2], k=3
 
@@ -1126,27 +919,8 @@ Max sum: 9`,
       "Techniques for performing operations at the bit level, often used to optimize space usage or perform fast arithmetic operations.",
     timeComplexity: "Usually O(1) or O(number of bits)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "Common operations:",
-      "1. Get bit: num & (1 << i)",
-      "2. Set bit: num | (1 << i)",
-      "3. Clear bit: num & ~(1 << i)",
-      "4. Toggle bit: num ^ (1 << i)",
-      "5. Count set bits: while n: count += n & 1; n >>= 1",
-    ],
-    example: `Number: 10 (1010 in binary)
-
-Get bit at position 1:
-1010 & (1 << 1) = 1010 & 0010 = 0010 (bit is 1)
-
-Set bit at position 2:
-1010 | (1 << 2) = 1010 | 0100 = 1110
-
-Clear bit at position 3:
-1010 & ~(1 << 3) = 1010 & 0111 = 0010
-
-Toggle bit at position 1:
-1010 ^ (1 << 1) = 1010 ^ 0010 = 1000`,
+    pseudocode: `Common operations:\n1. Get bit: num & (1 << i)\n2. Set bit: num | (1 << i)\n3. Clear bit: num & ~(1 << i)\n4. Toggle bit: num ^ (1 << i)\n5. Count set bits: while n: count += n & 1; n >>= 1`,
+    example: `Number: 10 (1010 in binary)\n\nGet bit at position 1:\n1010 & (1 << 1) = 1010 & 0010 = 0010 (bit is 1)\n\nSet bit at position 2:\n1010 | (1 << 2) = 1010 | 0100 = 1110\n\nClear bit at position 3:\n1010 & ~(1 << 3) = 1010 & 0111 = 0010\n\nToggle bit at position 1:\n1010 ^ (1 << 1) = 1010 ^ 0010 = 1000`,
     implementation: `class BitManipulation:
     @staticmethod
     def get_bit(num, i):
@@ -1179,18 +953,7 @@ Toggle bit at position 1:
       "An algorithm for ordering the vertices of a directed acyclic graph (DAG) such that for every directed edge u->v, vertex u comes before v in the ordering.",
     timeComplexity: "O(V + E)",
     spaceComplexity: "O(V)",
-    pseudocode: [
-      "1. Calculate in-degree for each vertex",
-      "2. Add vertices with in-degree 0 to queue",
-      "3. While queue not empty:",
-      "   a. Remove vertex from queue",
-      "   b. Add to result",
-      "   c. Reduce in-degree of neighbors",
-      "   d. If any neighbor's in-degree becomes 0:",
-      "      - Add to queue",
-      "4. If visited all vertices, return result",
-      "   Else, graph has cycle",
-    ],
+    pseudocode: `1. Calculate in-degree for each vertex\n2. Add vertices with in-degree 0 to queue\n3. While queue not empty:\n   a. Remove vertex from queue\n   b. Add to result\n   c. Reduce in-degree of neighbors\n   d. If any neighbor's in-degree becomes 0:\n      - Add to queue\n4. If visited all vertices, return result\n   Else, graph has cycle`,
     example: `Graph:
 A -> B -> C
 |         ^
@@ -1237,12 +1000,7 @@ def topological_sort(graph):
       "A graph traversal algorithm that explores as far as possible along each branch before backtracking, typically implemented using recursion or a stack.",
     timeComplexity: "O(V + E)",
     spaceComplexity: "O(V) for recursion stack",
-    pseudocode: [
-      "1. Mark current vertex as visited",
-      "2. For each unvisited neighbor:",
-      "   a. Recursively call DFS on neighbor",
-      "3. Backtrack when no unvisited neighbors",
-    ],
+    pseudocode: `1. Mark current vertex as visited\n2. For each unvisited neighbor:\n   a. Recursively call DFS on neighbor\n3. Backtrack when no unvisited neighbors`,
     example: `Graph:
     1 --- 2
     |     |
@@ -1275,12 +1033,7 @@ Path: 1->2->3->4`,
       "Application of DFS pattern to traverse or process a linked list recursively, useful for operations like reversing or finding cycles.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n) for recursion stack",
-    pseudocode: [
-      "1. Base case: if node is null, return",
-      "2. Process current node",
-      "3. Recursively call DFS on next node",
-      "4. (Optional) Process node after recursion",
-    ],
+    pseudocode: `1. Base case: if node is null, return\n2. Process current node\n3. Recursively call DFS on next node\n4. (Optional) Process node after recursion`,
     example: `List: 1->2->3->4->null
 
 DFS to print in reverse:
@@ -1315,22 +1068,7 @@ def dfs_linked_list(node):
       "Application of DFS to traverse a binary tree, with three main variations: pre-order, in-order, and post-order traversal.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(h) where h is tree height",
-    pseudocode: [
-      "Pre-order traversal:",
-      "1. Process root",
-      "2. Traverse left subtree",
-      "3. Traverse right subtree",
-      "",
-      "In-order traversal:",
-      "1. Traverse left subtree",
-      "2. Process root",
-      "3. Traverse right subtree",
-      "",
-      "Post-order traversal:",
-      "1. Traverse left subtree",
-      "2. Traverse right subtree",
-      "3. Process root",
-    ],
+    pseudocode: `Pre-order traversal:\n1. Process root\n2. Traverse left subtree\n3. Traverse right subtree\n\nIn-order traversal:\n1. Traverse left subtree\n2. Process root\n3. Traverse right subtree\n\nPost-order traversal:\n1. Traverse left subtree\n2. Traverse right subtree\n3. Process root`,
     example: `Tree:
      1
    /   \\
@@ -1375,14 +1113,7 @@ def postorder(root):
       "A graph traversal algorithm that explores all vertices at the present depth before moving to vertices at the next depth level, typically implemented using a queue.",
     timeComplexity: "O(V + E)",
     spaceComplexity: "O(V)",
-    pseudocode: [
-      "1. Initialize queue with start vertex",
-      "2. While queue not empty:",
-      "   a. Remove vertex from queue",
-      "   b. Process vertex",
-      "   c. Add unvisited neighbors to queue",
-      "   d. Mark neighbors as visited",
-    ],
+    pseudocode: `1. Initialize queue with start vertex\n2. While queue not empty:\n   a. Remove vertex from queue\n   b. Process vertex\n   c. Add unvisited neighbors to queue\n   d. Mark neighbors as visited`,
     example: `Graph:
     1 --- 2
     |     |
@@ -1418,13 +1149,7 @@ def bfs(graph, start):
       "Application of BFS pattern to process a linked list level by level, useful for operations like finding the middle node or detecting cycles.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1) as we process one node at a time",
-    pseudocode: [
-      "1. Initialize slow and fast pointers",
-      "2. While fast pointer valid:",
-      "   a. Move slow one step",
-      "   b. Move fast two steps",
-      "3. Slow pointer at middle/cycle start",
-    ],
+    pseudocode: `1. Initialize slow and fast pointers\n2. While fast pointer valid:\n   a. Move slow one step\n   b. Move fast two steps\n3. Slow pointer at middle/cycle start`,
     example: `List: 1->2->3->4->5->null
 
 Find middle:
@@ -1470,19 +1195,8 @@ def has_cycle(head):
       "Implementation of a Last-In-First-Out (LIFO) data structure that supports push and pop operations.",
     timeComplexity: "Push/Pop: O(1)",
     spaceComplexity: "O(n) for n elements",
-    pseudocode: [
-      "Stack operations:",
-      "1. push(element):",
-      "   - Add element to top",
-      "2. pop():",
-      "   - Remove and return top element",
-      "3. peek():",
-      "   - Return top element without removing",
-      "4. isEmpty():",
-      "   - Return true if stack empty",
-      "5. size():",
-      "   - Return number of elements",
-    ],
+    pseudocode: `Stack operations:\n1. push(element):\n   - Add element to top\n2. pop():\n   - Remove and return top element\n3. peek():\n   - Return top element without removing\n4. isEmpty():\n   - Return true if stack empty\n5. size():
+   - Return number of elements`,
     example: `stack = Stack()
 stack.push(1)  # [1]
 stack.push(2)  # [1,2]
@@ -1498,7 +1212,7 @@ stack.peek()   # returns 2, stack=[1,2]`,
     
     def pop(self):
         if not self.isEmpty():
-            return self.items.pop()
+        return self.items.pop()
         raise IndexError("Stack is empty")
     
     def peek(self):
@@ -1519,19 +1233,8 @@ stack.peek()   # returns 2, stack=[1,2]`,
       "Implementation of a First-In-First-Out (FIFO) data structure that supports enqueue and dequeue operations.",
     timeComplexity: "Enqueue/Dequeue: O(1)",
     spaceComplexity: "O(n) for n elements",
-    pseudocode: [
-      "Queue operations:",
-      "1. enqueue(element):",
-      "   - Add element to rear",
-      "2. dequeue():",
-      "   - Remove and return front element",
-      "3. front():",
-      "   - Return front element without removing",
-      "4. isEmpty():",
-      "   - Return true if queue empty",
-      "5. size():",
-      "   - Return number of elements",
-    ],
+    pseudocode: `Queue operations:\n1. enqueue(element):\n   - Add element to rear\n2. dequeue():\n   - Remove and return front element\n3. front():\n   - Return front element without removing\n4. isEmpty():\n   - Return true if queue empty\n5. size():
+   - Return number of elements`,
     example: `queue = Queue()
 queue.enqueue(1)  # [1]
 queue.enqueue(2)  # [1,2]
@@ -1570,19 +1273,7 @@ class Queue:
       "Implementation of a linear data structure where each element points to the next element in the sequence.",
     timeComplexity: "Access: O(n), Insert/Delete at known position: O(1)",
     spaceComplexity: "O(n) for n elements",
-    pseudocode: [
-      "Linked List operations:",
-      "1. append(element):",
-      "   - Add element to end",
-      "2. prepend(element):",
-      "   - Add element to start",
-      "3. delete(element):",
-      "   - Remove first occurrence",
-      "4. insert(element, position):",
-      "   - Insert at specific position",
-      "5. search(element):",
-      "   - Return position of element",
-    ],
+    pseudocode: `Linked List operations:\n1. append(element):\n   - Add element to end\n2. prepend(element):\n   - Add element to start\n3. delete(element):\n   - Remove first occurrence\n4. insert(element, position):\n   - Insert at specific position\n5. search(element):\n   - Return position of element`,
     example: `list = LinkedList()
 list.append(1)    # 1->null
 list.append(2)    # 1->2->null
@@ -1604,16 +1295,16 @@ class LinkedList:
             self.head = new_node
             return
         
-        current = self.head
-        while current.next:
-            current = current.next
+            current = self.head
+            while current.next:
+                current = current.next
         current.next = new_node
     
     def prepend(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
-    
+        
     def delete(self, data):
         if not self.head:
             return
@@ -1625,7 +1316,7 @@ class LinkedList:
         current = self.head
         while current.next:
             if current.next.data == data:
-                current.next = current.next.next
+            current.next = current.next.next
                 return
             current = current.next
     
@@ -1652,19 +1343,8 @@ class LinkedList:
       "Implementation of a linked list where the last element points back to the first element, forming a circle.",
     timeComplexity: "Access: O(n), Insert/Delete at known position: O(1)",
     spaceComplexity: "O(n) for n elements",
-    pseudocode: [
-      "Circular Linked List operations:",
-      "1. append(element):",
-      "   - Add element and point to head",
-      "2. prepend(element):",
-      "   - Add element and update last->next",
-      "3. delete(element):",
-      "   - Remove and maintain circle",
-      "4. insert(element, position):",
-      "   - Insert and maintain circle",
-      "5. traverse():",
-      "   - Visit each node once",
-    ],
+    pseudocode: `Circular Linked List operations:\n1. append(element):\n   - Add element and point to head\n2. prepend(element):\n   - Add element and update last->next\n3. delete(element):\n   - Remove and maintain circle\n4. insert(element, position):\n   - Insert and maintain circle\n5. traverse():
+   - Visit each node once`,
     example: `list = CircularLinkedList()
 list.append(1)    # 1->1
 list.append(2)    # 1->2->1
@@ -1689,7 +1369,7 @@ class CircularLinkedList:
         
         current = self.head
         while current.next != self.head:
-            current = current.next
+        current = current.next
         current.next = new_node
         new_node.next = self.head
     
@@ -1747,21 +1427,21 @@ class CircularLinkedList:
       "Implementation of a data structure that maps keys to values using a hash function, providing constant-time average case operations.",
     timeComplexity: "Average: O(1) for insert/delete/search, Worst: O(n)",
     spaceComplexity: "O(n) for n key-value pairs",
-    pseudocode: [
-      "Hash Table operations:",
-      "1. put(key, value):",
-      "   - Hash key to get index",
-      "   - Handle collisions",
-      "   - Store key-value pair",
-      "2. get(key):",
-      "   - Hash key to get index",
-      "   - Return value if found",
-      "3. remove(key):",
-      "   - Hash key to get index",
-      "   - Remove key-value pair",
-      "4. contains(key):",
-      "   - Check if key exists",
-    ],
+    pseudocode: `
+Hash Table operations:
+1. put(key, value):
+   - Hash key to get index
+   - Handle collisions
+   - Store key-value pair
+2. get(key):
+   - Hash key to get index
+   - Return value if found
+3. remove(key):
+   - Hash key to get index
+   - Remove key-value pair
+4. contains(key):
+   - Check if key exists
+`,
     example: `table = HashTable()
 table.put("name", "John")  # hash("name") = 2
 table.put("age", 30)      # hash("age") = 5
@@ -1811,19 +1491,19 @@ table.remove("name")      # removes entry`,
     timeComplexity:
       "Add vertex/edge: O(1), Remove vertex: O(V+E), Remove edge: O(E)",
     spaceComplexity: "O(V + E) for V vertices and E edges",
-    pseudocode: [
-      "Graph operations:",
-      "1. addVertex(vertex):",
-      "   - Add new vertex to graph",
-      "2. addEdge(v1, v2, weight):",
-      "   - Connect vertices with edge",
-      "3. removeVertex(vertex):",
-      "   - Remove vertex and its edges",
-      "4. removeEdge(v1, v2):",
-      "   - Remove edge between vertices",
-      "5. getNeighbors(vertex):",
-      "   - Get adjacent vertices",
-    ],
+    pseudocode: `
+Graph operations:
+1. addVertex(vertex):
+   - Add new vertex to graph
+2. addEdge(v1, v2, weight):
+   - Connect vertices with edge
+3. removeVertex(vertex):
+   - Remove vertex and its edges
+4. removeEdge(v1, v2):
+   - Remove edge between vertices
+5. getNeighbors(vertex):
+   - Get adjacent vertices
+`,
     example: `graph = Graph()
 graph.addVertex("A")
 graph.addVertex("B")
@@ -1875,19 +1555,19 @@ graph.getNeighbors("B")  # returns ["A", "C"]`,
       "Implementation of a general tree data structure where each node can have multiple children.",
     timeComplexity: "Insert/Delete: O(1) with parent reference, Search: O(n)",
     spaceComplexity: "O(n) for n nodes",
-    pseudocode: [
-      "Tree operations:",
-      "1. addChild(parent, child):",
-      "   - Add child to parent node",
-      "2. removeChild(parent, child):",
-      "   - Remove child from parent",
-      "3. findNode(value):",
-      "   - Find node with value",
-      "4. traverse():",
-      "   - Visit all nodes",
-      "5. getDepth(node):",
-      "   - Get depth of node",
-    ],
+    pseudocode: `
+Tree operations:
+1. addChild(parent, child):
+   - Add child to parent node
+2. removeChild(parent, child):
+   - Remove child from parent
+3. findNode(value):
+   - Find node with value
+4. traverse():
+   - Visit all nodes
+5. getDepth(node):
+   - Get depth of node
+`,
     example: `tree = Tree(1)
 tree.addChild(1, 2)
 tree.addChild(1, 3)
@@ -1956,19 +1636,19 @@ class Tree:
       "Implementation of a binary tree that maintains the BST property: left subtree values are less than node, right subtree values are greater.",
     timeComplexity: "Average: O(log n) for insert/delete/search, Worst: O(n)",
     spaceComplexity: "O(n) for n nodes",
-    pseudocode: [
-      "BST operations:",
-      "1. insert(value):",
-      "   - Add value maintaining BST property",
-      "2. delete(value):",
-      "   - Remove value maintaining BST property",
-      "3. search(value):",
-      "   - Find node with value",
-      "4. min():",
-      "   - Find minimum value",
-      "5. max():",
-      "   - Find maximum value",
-    ],
+    pseudocode: `
+BST operations:
+1. insert(value):
+   - Add value maintaining BST property
+2. delete(value):
+   - Remove value maintaining BST property
+3. search(value):
+   - Find node with value
+4. min():
+   - Find minimum value
+5. max():
+   - Find maximum value
+`,
     example: `bst = BST()
 bst.insert(5)
 bst.insert(3)
@@ -1995,19 +1675,19 @@ class BST:
         if not self.root:
             self.root = Node(value)
             return
-        
+            
         def _insert(node, value):
             if value < node.value:
                 if node.left is None:
                     node.left = Node(value)
-                else:
+            else:
                     _insert(node.left, value)
             else:
                 if node.right is None:
                     node.right = Node(value)
-                else:
+            else:
                     _insert(node.right, value)
-        
+                    
         _insert(self.root, value)
     
     def search(self, value):
@@ -2017,7 +1697,7 @@ class BST:
             if value < node.value:
                 return _search(node.left, value)
             return _search(node.right, value)
-        
+            
         return _search(self.root, value)
     
     def min(self):
@@ -2048,7 +1728,7 @@ class BST:
         def _delete(node, value):
             if not node:
                 return node
-            
+                
             if value < node.value:
                 node.left = _delete(node.left, value)
             elif value > node.value:
@@ -2058,13 +1738,13 @@ class BST:
                     return node.right
                 elif not node.right:
                     return node.left
-                
+                    
                 temp = _min_value_node(node.right)
                 node.value = temp.value
                 node.right = _delete(node.right, temp.value)
-            
+                
             return node
-        
+            
         self.root = _delete(self.root, value)`,
   },
 
@@ -2074,20 +1754,20 @@ class BST:
       "Implementation of a complete binary tree that satisfies the heap property (min-heap or max-heap), commonly used for priority queues.",
     timeComplexity: "Insert/Delete: O(log n), Get Min/Max: O(1)",
     spaceComplexity: "O(n) for n elements",
-    pseudocode: [
-      "Heap operations:",
-      "1. insert(value):",
-      "   - Add to end",
-      "   - Bubble up until heap property satisfied",
-      "2. extractMin/Max():",
-      "   - Remove root",
-      "   - Replace with last element",
-      "   - Bubble down until heap property satisfied",
-      "3. peek():",
-      "   - Return root value",
-      "4. heapify(array):",
-      "   - Convert array to heap",
-    ],
+    pseudocode: `
+Heap operations:
+1. insert(value):
+   - Add to end
+   - Bubble up until heap property satisfied
+2. extractMin/Max():
+   - Remove root
+   - Replace with last element
+   - Bubble down until heap property satisfied
+3. peek():
+   - Return root value
+4. heapify(array):
+   - Convert array to heap
+`,
     example: `heap = MinHeap()
 heap.insert(5)
 heap.insert(3)
@@ -2163,21 +1843,21 @@ heap.insert(1)
       "Implementation of a tree-like data structure for storing and retrieving strings, commonly used for prefix-based operations and autocomplete.",
     timeComplexity: "Insert/Search: O(m) where m is key length",
     spaceComplexity: "O(ALPHABET_SIZE * m * n) for n keys of length m",
-    pseudocode: [
-      "Trie operations:",
-      "1. insert(word):",
-      "   - Add characters as nodes",
-      "   - Mark last node as end of word",
-      "2. search(word):",
-      "   - Follow character path",
-      "   - Check if end of word",
-      "3. startsWith(prefix):",
-      "   - Follow character path",
-      "   - Return true if path exists",
-      "4. delete(word):",
-      "   - Remove word marking",
-      "   - Remove unused nodes",
-    ],
+    pseudocode: `
+Trie operations:
+1. insert(word):
+   - Add characters as nodes
+   - Mark last node as end of word
+2. search(word):
+   - Follow character path
+   - Check if end of word
+3. startsWith(prefix):
+   - Follow character path
+   - Return true if path exists
+4. delete(word):
+   - Remove word marking
+   - Remove unused nodes
+`,
     example: `trie = Trie()
 trie.insert("cat")
 trie.insert("car")
@@ -2258,15 +1938,15 @@ class Trie:
       "A stack that maintains its elements in a strictly increasing or decreasing order, useful for finding the next/previous greater/smaller element.",
     timeComplexity: "O(n) amortized for n elements",
     spaceComplexity: "O(n) for stack",
-    pseudocode: [
-      "Monotonic Stack operations:",
-      "1. For each element:",
-      "   a. While stack not empty and current element breaks monotonicity:",
-      "      - Pop elements",
-      "      - Process popped elements",
-      "   b. Push current element",
-      "2. Process remaining elements in stack",
-    ],
+    pseudocode: `
+Monotonic Stack operations:
+1. For each element:
+   a. While stack not empty and current element breaks monotonicity:
+      - Pop elements
+      - Process popped elements
+   b. Push current element
+2. Process remaining elements in stack
+`,
     example: `Find next greater element:
 Array: [4, 5, 2, 10, 8]
 
@@ -2312,15 +1992,15 @@ def previous_smaller_element(arr):
       "A queue that maintains its elements in a strictly increasing or decreasing order, commonly used for sliding window maximum/minimum problems.",
     timeComplexity: "O(n) for n elements",
     spaceComplexity: "O(k) where k is window size",
-    pseudocode: [
-      "Monotonic Queue operations:",
-      "1. For each element:",
-      "   a. Remove elements outside window",
-      "   b. While queue not empty and current element breaks monotonicity:",
-      "      - Remove from back",
-      "   c. Add current element",
-      "   d. Front of queue is max/min in window",
-    ],
+    pseudocode: `
+Monotonic Queue operations:
+1. For each element:
+   a. Remove elements outside window
+   b. While queue not empty and current element breaks monotonicity:
+      - Remove from back
+   c. Add current element
+   d. Front of queue is max/min in window
+`,
     example: `Find maximum in sliding window of size 3:
 Array: [1, 3, -1, -3, 5, 3, 6, 7]
 
@@ -2384,19 +2064,19 @@ def sliding_window_minimum(arr, k):
       "A technique that uses two pointers to solve array-related problems efficiently, often moving them towards each other or in the same direction.",
     timeComplexity: "Usually O(n)",
     spaceComplexity: "Usually O(1)",
-    pseudocode: [
-      "Two Pointers patterns:",
-      "1. Opposite direction:",
-      "   - left = 0, right = n-1",
-      "   - While left < right:",
-      "     * Process elements",
-      "     * Move pointers based on condition",
-      "2. Same direction:",
-      "   - slow = fast = 0",
-      "   - While fast < n:",
-      "     * Process elements",
-      "     * Move pointers at different speeds",
-    ],
+    pseudocode: `
+Two Pointers patterns:
+1. Opposite direction:
+   - left = 0, right = n-1
+   - While left < right:
+     * Process elements
+     * Move pointers based on condition
+2. Same direction:
+   - slow = fast = 0
+   - While fast < n:
+     * Process elements
+     * Move pointers at different speeds
+`,
     example: `Problem: Two Sum in sorted array
 Array: [2, 7, 11, 15], target = 9
 
@@ -2441,18 +2121,18 @@ def two_pointers_same_direction(arr):
       "A technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.",
     timeComplexity: "Build: O(n), Query: O(1)",
     spaceComplexity: "O(n) for prefix array",
-    pseudocode: [
-      "Prefix Sum operations:",
-      "1. Build prefix array:",
-      "   - prefix[0] = arr[0]",
-      "   - For i from 1 to n-1:",
-      "     * prefix[i] = prefix[i-1] + arr[i]",
-      "2. Range sum query(left, right):",
-      "   - If left == 0:",
-      "     * Return prefix[right]",
-      "   - Else:",
-      "     * Return prefix[right] - prefix[left-1]",
-    ],
+    pseudocode: `
+Prefix Sum operations:
+1. Build prefix array:
+   - prefix[0] = arr[0]
+   - For i from 1 to n-1:
+     * prefix[i] = prefix[i-1] + arr[i]
+2. Range sum query(left, right):
+   - If left == 0:
+     * Return prefix[right]
+   - Else:
+     * Return prefix[right] - prefix[left-1]
+`,
     example: `Array: [1, 2, 3, 4, 5]
 Prefix: [1, 3, 6, 10, 15]
 
@@ -2470,7 +2150,7 @@ prefix[4] - prefix[1] = 15 - 3 = 12
     
     def build_prefix(self, arr):
         self.prefix[0] = arr[0]
-        for i in range(1, len(arr)):
+    for i in range(1, len(arr)):
             self.prefix[i] = self.prefix[i-1] + arr[i]
     
     def range_sum(self, left, right):
@@ -2489,15 +2169,15 @@ prefix[4] - prefix[1] = 15 - 3 = 12
       "A dynamic programming algorithm for finding the maximum subarray sum in a one-dimensional array.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "Kadane's Algorithm steps:",
-      "1. Initialize:",
-      "   - current_sum = max_sum = arr[0]",
-      "2. For each element from index 1:",
-      "   a. current_sum = max(element, current_sum + element)",
-      "   b. max_sum = max(max_sum, current_sum)",
-      "3. Return max_sum",
-    ],
+    pseudocode: `
+Kadane's Algorithm steps:
+1. Initialize:
+   - current_sum = max_sum = arr[0]
+2. For each element from index 1:
+   a. current_sum = max(element, current_sum + element)
+   b. max_sum = max(max_sum, current_sum)
+3. Return max_sum
+`,
     example: `Array: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 
 Steps:
@@ -2553,16 +2233,16 @@ def kadanes_algorithm_simple(arr):
       "Also known as the 'tortoise and hare' algorithm, used to detect cycles in a linked list or array, and find the start of the cycle.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "Floyd's Algorithm steps:",
-      "1. Initialize slow and fast pointers to head",
-      "2. Move slow one step, fast two steps",
-      "3. If they meet, cycle exists",
-      "4. To find cycle start:",
-      "   a. Reset slow to head",
-      "   b. Move both one step until they meet",
-      "   c. Meeting point is cycle start",
-    ],
+    pseudocode: `
+Floyd's Algorithm steps:
+1. Initialize slow and fast pointers to head
+2. Move slow one step, fast two steps
+3. If they meet, cycle exists
+4. To find cycle start:
+   a. Reset slow to head
+   b. Move both one step until they meet
+   c. Meeting point is cycle start
+`,
     example: `Linked List: 1->2->3->4->5->3
 (5 points back to 3)
 
@@ -2641,15 +2321,15 @@ def find_cycle_length(head):
       "A string matching algorithm that uses hashing to find exact string matches or multiple pattern matches efficiently.",
     timeComplexity: "Average: O(n+m), Worst: O(nm)",
     spaceComplexity: "O(1)",
-    pseudocode: [
-      "Rabin-Karp steps:",
-      "1. Calculate hash of pattern",
-      "2. For each m-length substring of text:",
-      "   a. Calculate rolling hash",
-      "   b. If hash matches pattern hash:",
-      "      * Check character by character",
-      "   c. Update rolling hash for next window",
-    ],
+    pseudocode: `
+Rabin-Karp steps:
+1. Calculate hash of pattern
+2. For each m-length substring of text:
+   a. Calculate rolling hash
+   b. If hash matches pattern hash:
+      * Check character by character
+   c. Update rolling hash for next window
+`,
     example: `Text: "AABAACAADAABAAABAA"
 Pattern: "AABA"
 
@@ -2708,15 +2388,15 @@ Window 13: "AABA" (hash=40) - Match at pos 12`,
       "An efficient string matching algorithm that preprocesses the pattern to avoid unnecessary comparisons by utilizing a prefix function.",
     timeComplexity: "O(n + m)",
     spaceComplexity: "O(m) for pattern array",
-    pseudocode: [
-      "KMP steps:",
-      "1. Build LPS (Longest Proper Prefix Suffix) array:",
-      "   - lps[0] = 0",
-      "   - Use two pointers to find matching prefixes",
-      "2. Search pattern:",
-      "   - Use pattern and lps array to skip comparisons",
-      "   - When mismatch occurs, use lps to determine next position",
-    ],
+    pseudocode: `
+KMP steps:
+1. Build LPS (Longest Proper Prefix Suffix) array:
+   - lps[0] = 0
+   - Use two pointers to find matching prefixes
+2. Search pattern:
+   - Use pattern and lps array to skip comparisons
+   - When mismatch occurs, use lps to determine next position
+`,
     example: `Pattern: "ABABCABAB"
 LPS Array: [0,0,1,2,0,1,2,3,4]
 
@@ -2748,8 +2428,8 @@ ABAB -> [0,0,1,2]
             else:
                 lps[i] = 0
                 i += 1
-    return lps
-
+        return lps
+    
 def kmp_search(text, pattern):
     n = len(text)
     m = len(pattern)
@@ -2786,17 +2466,17 @@ def kmp_search(text, pattern):
       "An efficient algorithm to find all palindromic substrings in a string in linear time.",
     timeComplexity: "O(n)",
     spaceComplexity: "O(n)",
-    pseudocode: [
-      "Manacher's steps:",
-      "1. Transform string by adding boundaries:",
-      "   - Insert special char between each char",
-      "   - Add special chars at start and end",
-      "2. For each center position i:",
-      "   a. Use previously computed values if possible",
-      "   b. Expand around center while matches found",
-      "   c. Update right boundary and center",
-      "3. Extract palindrome lengths from array",
-    ],
+    pseudocode: `
+Manacher's steps:
+1. Transform string by adding boundaries:
+   - Insert special char between each char
+   - Add special chars at start and end
+2. For each center position i:
+   a. Use previously computed values if possible
+   b. Expand around center while matches found
+   c. Update right boundary and center
+3. Extract palindrome lengths from array
+`,
     example: `String: "ababa"
 Transform: "#a#b#a#b#a#"
 Centers:   0123456789
@@ -2865,15 +2545,15 @@ def find_palindromes(s):
       "A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).",
     timeComplexity: "O(n + m)",
     spaceComplexity: "O(n + m)",
-    pseudocode: [
-      "Z-Algorithm steps:",
-      "1. Concatenate pattern + special_char + text",
-      "2. Build Z array:",
-      "   - If inside Z-box, use previous values",
-      "   - Otherwise, compare characters",
-      "   - Maintain Z-box [left, right]",
-      "3. Find pattern matches where Z[i] = pattern_length",
-    ],
+    pseudocode: `
+Z-Algorithm steps:
+1. Concatenate pattern + special_char + text
+2. Build Z array:
+   - If inside Z-box, use previous values
+   - Otherwise, compare characters
+   - Maintain Z-box [left, right]
+3. Find pattern matches where Z[i] = pattern_length
+`,
     example: `Pattern: "aab"
 Text: "baabaa"
 Concatenated: "aab$baabaa"
@@ -2938,18 +2618,18 @@ def z_algorithm(text, pattern):
       "A pattern for traversing a 2D matrix iteratively, typically using nested loops to visit each element in a specific order (row-wise or column-wise).",
     timeComplexity: "O(m*n) where m is rows and n is columns",
     spaceComplexity: "O(1) for traversal, O(m*n) if storing results",
-    pseudocode: [
-      "Matrix Traversal steps:",
-      "1. For each row i from 0 to rows-1:",
-      "   For each column j from 0 to cols-1:",
-      "     Process matrix[i][j]",
-      "",
-      "Common variations:",
-      "- Row-wise: outer loop on rows",
-      "- Column-wise: outer loop on columns",
-      "- Different directions: top-down, bottom-up",
-      "- Different starting points",
-    ],
+    pseudocode: `
+Matrix Traversal steps:
+1. For each row i from 0 to rows-1:
+   For each column j from 0 to cols-1:
+     Process matrix[i][j]
+
+Common variations:
+- Row-wise: outer loop on rows
+- Column-wise: outer loop on columns
+- Different directions: top-down, bottom-up
+- Different starting points
+`,
     example: `Matrix:
 [1, 2, 3]
 [4, 5, 6]
@@ -2976,8 +2656,8 @@ def matrix_traversal_columnwise(matrix):
     if not matrix or not matrix[0]:
         return []
     
-    rows = len(matrix)
-    cols = len(matrix[0])
+        rows = len(matrix)
+        cols = len(matrix[0])
     result = []
     
     # Column-wise traversal
@@ -2994,15 +2674,15 @@ def matrix_traversal_columnwise(matrix):
       "A recursive approach to traverse a 2D matrix, which can be particularly useful for problems requiring backtracking or complex traversal patterns.",
     timeComplexity: "O(m*n) where m is rows and n is columns",
     spaceComplexity: "O(m*n) due to recursive call stack",
-    pseudocode: [
-      "Matrix Recursive Traversal steps:",
-      "1. Base case: Check bounds and conditions",
-      "2. Process current cell",
-      "3. Recursive calls for next positions:",
-      "   - Call for next row",
-      "   - Call for next column",
-      "4. Backtrack if needed",
-    ],
+    pseudocode: `
+Matrix Recursive Traversal steps:
+1. Base case: Check bounds and conditions
+2. Process current cell
+3. Recursive calls for next positions:
+   - Call for next row
+   - Call for next column
+4. Backtrack if needed
+`,
     example: `Matrix:
 [1, 2, 3]
 [4, 5, 6]
@@ -3025,7 +2705,7 @@ traverse(0,0) -> 1
     def traverse(row, col):
         # Base case: out of bounds
         if row >= rows or col >= cols:
-            return
+        return
         
         # Process current cell
         result.append(matrix[row][col])
@@ -3048,16 +2728,16 @@ traverse(0,0) -> 1
       "An iterative pattern to traverse a matrix in a spiral order, moving in a clockwise direction from the outer elements to the inner elements.",
     timeComplexity: "O(m*n) where m is rows and n is columns",
     spaceComplexity: "O(1) excluding the result array",
-    pseudocode: [
-      "Spiral Traversal steps:",
-      "1. Initialize boundaries: top, bottom, left, right",
-      "2. While boundaries haven't crossed:",
-      "   a. Traverse right (top row)",
-      "   b. Traverse down (right column)",
-      "   c. Traverse left (bottom row)",
-      "   d. Traverse up (left column)",
-      "   e. Update boundaries inward",
-    ],
+    pseudocode: `
+Spiral Traversal steps:
+1. Initialize boundaries: top, bottom, left, right
+2. While boundaries haven't crossed:
+   a. Traverse right (top row)
+   b. Traverse down (right column)
+   c. Traverse left (bottom row)
+   d. Traverse up (left column)
+   e. Update boundaries inward
+`,
     example: `Matrix:
 [1, 2, 3]
 [4, 5, 6]
@@ -3083,7 +2763,7 @@ Steps:
     bottom = rows - 1
     left = 0
     right = cols - 1
-    
+
     while top <= bottom and left <= right:
         # Traverse right
         for j in range(left, right + 1):
@@ -3116,18 +2796,18 @@ Steps:
       "A recursive approach to traverse a matrix in spiral order, which breaks down the spiral traversal into smaller subproblems.",
     timeComplexity: "O(m*n) where m is rows and n is columns",
     spaceComplexity: "O(min(m,n)) due to recursive call stack",
-    pseudocode: [
-      "Recursive Spiral steps:",
-      "1. Base cases:",
-      "- Empty matrix",
-      "- Single row/column",
-      "2. Process outer layer:",
-      "   - Traverse top row",
-      "   - Traverse right column",
-      "   - Traverse bottom row",
-      "   - Traverse left column",
-      "3. Recursively process inner matrix",
-    ],
+    pseudocode: `
+Recursive Spiral steps:
+1. Base cases:
+   - Empty matrix
+   - Single row/column
+2. Process outer layer:
+   - Traverse top row
+   - Traverse right column
+   - Traverse bottom row
+   - Traverse left column
+3. Recursively process inner matrix
+`,
     example: `Matrix:
 [1, 2, 3]
 [4, 5, 6]
@@ -3189,7 +2869,7 @@ export const patterns = new Map<PatternKey, string>(
     Space Complexity: ${pattern.spaceComplexity}
     
     Pseudocode:
-    ${pattern.pseudocode.join("\n")}
+    ${pattern.pseudocode}
     
     Example:
     ${pattern.example}
