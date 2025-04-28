@@ -1,7 +1,12 @@
 import { Card } from "../ui/card";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { useRef } from "react";
-import { draculaTheme } from "@/components/algorithm-trainer/theme";
+import {
+  draculaTheme,
+  solarizedTheme,
+  lightTheme,
+} from "@/components/algorithm-trainer/theme";
+import { useTheme } from "@/components/ThemeProvider";
 
 interface CodeEditorProps {
   userCode: string;
@@ -10,16 +15,36 @@ interface CodeEditorProps {
 
 export function CodeEditor({ userCode, setUserCode }: CodeEditorProps) {
   const monacoRef = useRef<Monaco | null>(null);
+  const { theme } = useTheme();
 
   const handleEditorDidMount = (_editor: unknown, monaco: Monaco) => {
     monacoRef.current = monaco;
     monaco.editor.defineTheme("dracula", draculaTheme);
-    monaco.editor.setTheme("dracula");
+    monaco.editor.defineTheme("solarized", solarizedTheme);
+    monaco.editor.defineTheme("lightTheme", lightTheme);
+    if (theme === "dracula") {
+      monaco.editor.setTheme("dracula");
+    } else if (theme === "solarized") {
+      monaco.editor.setTheme("solarized");
+    } else {
+      monaco.editor.setTheme("lightTheme");
+    }
   };
 
+  // Update Monaco theme when app theme changes
+  if (monacoRef.current) {
+    if (theme === "dracula") {
+      monacoRef.current.editor.setTheme("dracula");
+    } else if (theme === "solarized") {
+      monacoRef.current.editor.setTheme("solarized");
+    } else {
+      monacoRef.current.editor.setTheme("lightTheme");
+    }
+  }
+
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col">
-      <h2 className="text-base sm:text-lg font-semibold mb-2 text-[#50fa7b] truncate flex-none">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
+      <h2 className="text-base sm:text-lg font-semibold mb-2 text-accent2 truncate flex-none">
         Your Implementation
       </h2>
       <div className="flex-1 overflow-hidden">
@@ -27,7 +52,13 @@ export function CodeEditor({ userCode, setUserCode }: CodeEditorProps) {
           <Editor
             height="100%"
             defaultLanguage="python"
-            theme="dracula"
+            theme={
+              theme === "dracula"
+                ? "dracula"
+                : theme === "solarized"
+                ? "solarized"
+                : "lightTheme"
+            }
             value={userCode}
             onChange={(value: string | undefined) => setUserCode(value || "")}
             onMount={handleEditorDidMount}

@@ -13,6 +13,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useTheme } from "@/components/ThemeProvider";
+import {
+  draculaTheme,
+  solarizedTheme,
+  lightTheme,
+} from "@/components/algorithm-trainer/theme";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;
@@ -29,6 +35,9 @@ export function AnswerCard({
 }: AnswerCardProps) {
   const [showTestData, setShowTestData] = useState(false);
   const [showMonsterHunter, setShowMonsterHunter] = useState(false);
+  const { theme } = useTheme();
+
+  const isLight = theme === "light" || theme === "solarized";
 
   const getCurrentImplementation = (): string => {
     if (showMonsterHunter) {
@@ -44,15 +53,35 @@ export function AnswerCard({
     );
   };
 
+  const handleEditorDidMount = (_editor: unknown, monaco: any) => {
+    monaco.editor.defineTheme("dracula", draculaTheme);
+    monaco.editor.defineTheme("solarized", solarizedTheme);
+    monaco.editor.defineTheme("lightTheme", lightTheme);
+    if (theme === "dracula") {
+      monaco.editor.setTheme("dracula");
+    } else if (theme === "solarized") {
+      monaco.editor.setTheme("solarized");
+    } else {
+      monaco.editor.setTheme("lightTheme");
+    }
+  };
+
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base sm:text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#50fa7b] to-[#8be9fd] truncate">
+        <h2
+          className={
+            "text-base sm:text-lg font-semibold truncate " +
+            (isLight
+              ? "text-main"
+              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+          }
+        >
           Solution
         </h2>
         <Button
           onClick={() => setShowAnswer(!showAnswer)}
-          className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+          className="bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
         >
           {showAnswer ? "Hide Answer" : "Show Answer"}
         </Button>
@@ -61,7 +90,7 @@ export function AnswerCard({
         {showAnswer && (
           <>
             <div className="flex justify-between items-center mb-2 flex-shrink-0">
-              <h3 className="text-base sm:text-lg font-semibold text-[#ff79c6] truncate flex-none">
+              <h3 className="text-base sm:text-lg font-semibold text-accent truncate flex-none">
                 {showTestData ? "Monster Hunter Guide:" : "Implementation:"}
               </h3>
               <div className="flex gap-2">
@@ -72,7 +101,7 @@ export function AnswerCard({
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowMonsterHunter((prev) => !prev)}
-                        className="h-6 px-1.5 text-[#ff79c6] hover:text-[#ff79c6] hover:bg-[#6272a4]/20 text-xs"
+                        className="h-6 px-1.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs"
                       >
                         {showMonsterHunter ? (
                           <>
@@ -104,7 +133,7 @@ export function AnswerCard({
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowTestData((prev) => !prev)}
-                        className="h-6 px-1.5 text-[#ff79c6] hover:text-[#ff79c6] hover:bg-[#6272a4]/20 text-xs"
+                        className="h-6 px-1.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs"
                       >
                         {showTestData ? (
                           <>
@@ -134,7 +163,7 @@ export function AnswerCard({
             <div className="flex-1 flex flex-col min-h-0 w-full rounded-md">
               {showTestData ? (
                 <div className="w-full p-4 overflow-y-auto text-sm">
-                  <pre className="whitespace-pre-wrap text-[#f8f8f2]">
+                  <pre className="whitespace-pre-wrap text-main">
                     {monsterHunterTestData[currentPattern] ??
                       `# Monster Hunter Guide for ${currentPattern}
 # Coming soon! This algorithm will be themed with Monster Hunter examples.`}
@@ -146,7 +175,14 @@ export function AnswerCard({
                     <Editor
                       height="100%"
                       defaultLanguage="python"
-                      theme="dracula"
+                      theme={
+                        theme === "dracula"
+                          ? "dracula"
+                          : theme === "solarized"
+                          ? "solarized"
+                          : "lightTheme"
+                      }
+                      onMount={handleEditorDidMount}
                       value={getCurrentImplementation()}
                       options={{
                         fontSize: 14,

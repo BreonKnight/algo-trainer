@@ -24,6 +24,18 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --pseudocode-gradient: linear-gradient(
+      135deg,
+      rgba(40, 42, 54, 0.95) 0%,
+      rgba(68, 71, 90, 0.95) 50%,
+      rgba(40, 42, 54, 0.95) 100%
+    );
+    --pseudocode-gradient-overlay: linear-gradient(
+      135deg,
+      rgba(189, 147, 249, 0.08) 0%,
+      rgba(80, 250, 123, 0.08) 50%,
+      rgba(255, 121, 198, 0.08) 100%
+    );
   }
 
   .dark {
@@ -136,4 +148,130 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Default (Dracula) Theme */
+:root,
+.theme-dracula {
+  --bg-main: #282a36;
+  --bg-secondary: #44475a;
+  --text-main: #f8f8f2;
+  --text-secondary: #6272a4;
+  --accent: #ff79c6;
+  --accent2: #8be9fd;
+  --accent3: #bd93f9;
+  --border: #6272a4;
+  --error: #ff5555;
+  --success: #50fa7b;
+  --gradient-from: #ff79c6;
+  --gradient-to: #bd93f9;
+  --focus-ring: #ff79c6;
+}
+
+.theme-solarized {
+  --bg-main: #fdf6e3;
+  --bg-secondary: #eee8d5;
+  --text-main: #657b83;
+  --text-secondary: #93a1a1;
+  --accent: #b58900;
+  --accent2: #268bd2;
+  --accent3: #2aa198;
+  --gradient-from: #b58900;
+  --gradient-to: #268bd2;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(253, 246, 227, 0.95) 0%,
+    rgba(238, 232, 213, 0.95) 50%,
+    rgba(253, 246, 227, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(181, 137, 0, 0.08) 0%,
+    rgba(38, 139, 210, 0.08) 50%,
+    rgba(42, 161, 152, 0.08) 100%
+  );
+}
+
+.theme-light {
+  --bg-main: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --text-main: #22223b;
+  --text-secondary: #6272a4;
+  --accent: #6366f1;
+  --accent2: #f59e42;
+  --accent3: #10b981;
+  --gradient-from: #6366f1;
+  --gradient-to: #10b981;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(248, 250, 252, 0.95) 0%,
+    rgba(226, 232, 240, 0.95) 50%,
+    rgba(248, 250, 252, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(245, 158, 66, 0.08) 50%,
+    rgba(16, 185, 129, 0.08) 100%
+  );
+}
+
+body,
+html {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Example usage for Tailwind utility overrides */
+.bg-main {
+  background-color: var(--bg-main) !important;
+}
+.bg-secondary {
+  background-color: var(--bg-secondary) !important;
+}
+.text-main {
+  color: var(--text-main) !important;
+}
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-accent {
+  color: var(--accent) !important;
+}
+.text-accent2 {
+  color: var(--accent2) !important;
+}
+.text-accent3 {
+  color: var(--accent3) !important;
+}
+.bg-accent {
+  background-color: var(--accent) !important;
+}
+.bg-accent2 {
+  background-color: var(--accent2) !important;
+}
+.bg-accent3 {
+  background-color: var(--accent3) !important;
+}
+
+/* Global focus ring and border fix for Dracula and all themes */
+:root,
+.theme-dracula {
+  --focus-ring: #ff79c6;
+  --border: #6272a4;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus-ring) !important;
+  outline-offset: 2px;
+}
+
+/* Override default border color for interactive elements */
+button,
+input,
+select,
+textarea,
+.border,
+.border-solid {
+  border-color: var(--border) !important;
 }

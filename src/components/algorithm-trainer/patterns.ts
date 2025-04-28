@@ -2856,6 +2856,102 @@ Recursive calls:
     return spiral_helper(0, len(matrix) - 1, 
                         0, len(matrix[0]) - 1)`,
   },
+
+  Recursion: {
+    title: "Recursion",
+    description:
+      "A programming technique where a function calls itself to solve a problem by breaking it down into smaller subproblems.",
+    timeComplexity:
+      "Varies based on problem, typically O(2ⁿ) for basic recursion",
+    spaceComplexity: "O(n) for recursion stack depth",
+    pseudocode: `1. Base case:
+   - Define the simplest case that can be solved directly
+   - Return the solution for base case
+
+2. Recursive case:
+   - Break down the problem into smaller subproblems
+   - Call the same function with reduced input
+   - Combine results to solve the original problem`,
+    example: `Factorial calculation using recursion:
+    
+    factorial(5):
+    5 * factorial(4)
+    5 * (4 * factorial(3))
+    5 * (4 * (3 * factorial(2)))
+    5 * (4 * (3 * (2 * factorial(1))))
+    5 * (4 * (3 * (2 * 1)))
+    5 * (4 * (3 * 2))
+    5 * (4 * 6)
+    5 * 24
+    120`,
+    implementation: `def factorial(n):
+    # Base case
+    if n <= 1:
+        return 1
+    
+    # Recursive case
+    return n * factorial(n - 1)`,
+  },
+
+  "Divide and Conquer": {
+    title: "Divide and Conquer",
+    description:
+      "A problem-solving paradigm that breaks down a problem into smaller subproblems, solves them recursively, and combines their solutions to solve the original problem.",
+    timeComplexity:
+      "Typically O(n log n) for most divide and conquer algorithms",
+    spaceComplexity: "O(log n) for recursion stack",
+    pseudocode: `1. Divide:
+   - Break the problem into smaller subproblems
+   - Usually split input into two or more parts
+
+2. Conquer:
+   - Solve the subproblems recursively
+   - Handle base cases directly
+
+3. Combine:
+   - Merge the solutions of subproblems
+   - Construct the final solution`,
+    example: `Merge Sort using Divide and Conquer:
+    
+    Original array: [7, 2, 1, 6, 8, 5, 3, 4]
+    
+    Divide:
+    [7, 2, 1, 6] | [8, 5, 3, 4]
+    [7, 2] | [1, 6] | [8, 5] | [3, 4]
+    [7] | [2] | [1] | [6] | [8] | [5] | [3] | [4]
+    
+    Conquer & Combine:
+    [2, 7] | [1, 6] | [5, 8] | [3, 4]
+    [1, 2, 6, 7] | [3, 4, 5, 8]
+    [1, 2, 3, 4, 5, 6, 7, 8]`,
+    implementation: `def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    # Divide
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    
+    # Combine
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result`,
+  },
 };
 
 // Export the patterns in the original format for backward compatibility

@@ -662,4 +662,24 @@ Expected Output: [0, 1] (indices of materials with values 2 and 7)
 
 # Monster Hunter Tip:
 # Like using a material registry to quickly find complementary materials!`,
+
+  Recursion: `# Monster Hunter Recursion Challenge
+# You are solving problems by breaking them down into smaller subproblems!
+
+# Test Case 1: Factorial Calculation
+Input: 5
+Expected Output: 120
+
+# Monster Hunter Tip:
+# Like breaking down a complex monster hunt into smaller tasks!`,
+
+  "Divide and Conquer": `# Monster Hunter Divide and Conquer Challenge
+# You are breaking down problems into smaller, manageable parts!
+
+# Test Case 1: Merge Sort
+Input: [38, 27, 43, 3, 9, 82, 10]
+Expected Output: [3, 9, 10, 27, 38, 43, 82]
+
+# Monster Hunter Tip:
+# Like dividing a large monster territory into smaller hunting grounds!`,
 };

@@ -55,6 +55,8 @@ export const PATTERN_KEYS = [
   "Matrix Traversal Recursive",
   "Matrix Spiral Traversal",
   "Matrix Spiral Recursive",
+  "Recursion",
+  "Divide and Conquer",
 ] as const;
 
 export type PatternKey = (typeof PATTERN_KEYS)[number];
