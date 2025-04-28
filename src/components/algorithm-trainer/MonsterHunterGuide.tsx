@@ -724,11 +724,13 @@ export function MonsterHunterGuide({
   };
 
   return (
-    <div className={`${styles.pseudocodeContainer} w-full`}>
+    <div
+      className={`${styles.pseudocodeContainer} w-full h-full overflow-hidden`}
+    >
       <div
-        className={`${styles.pseudocodeContent} text-sm sm:text-base w-full`}
+        className={`${styles.pseudocodeContent} text-sm sm:text-base w-full h-full overflow-y-auto`}
       >
-        <div className="space-y-4">
+        <div className="space-y-4 p-2">
           <div>
             <h3 className="text-lg font-semibold text-accent">
               {explanation.title}

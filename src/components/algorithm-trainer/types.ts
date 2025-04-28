@@ -69,4 +69,5 @@ export interface AlgorithmPattern {
   pseudocode: string;
   example: string;
   implementation: string;
+  category: string;
 }

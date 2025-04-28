@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const hash_tablePattern: AlgorithmPattern = {
   title: "Hash Table Implementation",
-  description: "Implementation of a data structure that maps keys to values using a hash function, providing constant-time average case operations.",
+  description:
+    "Implementation of a data structure that maps keys to values using a hash function, providing constant-time average case operations.",
   timeComplexity: "Average: O(1) for insert/delete/search, Worst: O(n)",
+  category: "Data Structures",
   spaceComplexity: "O(n) for n key-value pairs",
   pseudocode: `
 Hash Table operations:
@@ -59,5 +61,5 @@ table.remove("name")      # removes entry`,
     
     def contains(self, key):
         index = self._hash(key)
-        return any(item[0] == key for item in self.table[index])`
+        return any(item[0] == key for item in self.table[index])`,
 };

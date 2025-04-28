@@ -14,6 +14,13 @@ import {
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
 
+// Define the type for pseudocodePatterns
+type PseudocodePatterns = Record<string, string | (() => JSX.Element)>;
+
+// Type assertion for the imported pseudocodePatterns
+const typedPseudocodePatterns =
+  pseudocodePatterns as unknown as PseudocodePatterns;
+
 interface PatternCardProps {
   currentPattern: PatternKey;
   onPatternChange: (pattern: PatternKey) => void;
@@ -172,21 +179,33 @@ export function PatternCard({
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 relative">
+      <div className="flex-1 min-h-0 relative overflow-hidden">
         {isExpanded &&
           (showMonsterGuide ? (
-            <MonsterHunterGuide currentPattern={currentPattern} />
+            <div className="absolute inset-0 overflow-y-auto">
+              <MonsterHunterGuide currentPattern={currentPattern} />
+            </div>
           ) : (
             <div className="absolute inset-0 overflow-y-auto">
               <div className={`${styles.pseudocodeContainer} w-full`}>
                 <div
                   className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main`}
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      pseudocodePatterns.get(currentPattern) ||
-                      "Pseudocode coming soon...",
-                  }}
-                />
+                >
+                  {(() => {
+                    const pseudo = typedPseudocodePatterns[currentPattern];
+                    if (typeof pseudo === "function") {
+                      return pseudo();
+                    } else {
+                      return (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: pseudo || "Pseudocode coming soon...",
+                          }}
+                        />
+                      );
+                    }
+                  })()}
+                </div>
               </div>
             </div>
           ))}

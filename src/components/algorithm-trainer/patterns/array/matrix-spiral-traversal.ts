@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const matrix_spiral_traversalPattern: AlgorithmPattern = {
   title: "Matrix Spiral Traversal",
-  description: "An iterative pattern to traverse a matrix in a spiral order, moving in a clockwise direction from the outer elements to the inner elements.",
+  description:
+    "An iterative pattern to traverse a matrix in a spiral order, moving in a clockwise direction from the outer elements to the inner elements.",
   timeComplexity: "O(m*n) where m is rows and n is columns",
   spaceComplexity: "O(1) excluding the result array",
+  category: "Array",
   pseudocode: `
 Spiral Traversal steps:
 1. Initialize boundaries: top, bottom, left, right
@@ -64,5 +66,5 @@ Steps:
                 result.append(matrix[i][left])
             left += 1
     
-    return result`
+    return result`,
 };

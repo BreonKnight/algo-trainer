@@ -1,4 +1,4 @@
-import { TEST_IDS, TestGroup } from "../hooks/useABTest";
+import { TEST_IDS, TestGroup } from "@/hooks/useABTest";
 
 // Define the analytics events
 export type ABTestEvent =

@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const queue_implementationPattern: AlgorithmPattern = {
   title: "Queue Data Structure Implementation",
-  description: "Implementation of a First-In-First-Out (FIFO) data structure that supports enqueue and dequeue operations.",
+  description:
+    "Implementation of a First-In-First-Out (FIFO) data structure that supports enqueue and dequeue operations.",
   timeComplexity: "Enqueue/Dequeue: O(1)",
+  category: "Data Structures",
   spaceComplexity: "O(n) for n elements",
   pseudocode: `Queue operations:\n1. enqueue(element):\n   - Add element to rear\n2. dequeue():\n   - Remove and return front element\n3. front():\n   - Return front element without removing\n4. isEmpty():\n   - Return true if queue empty\n5. size():
    - Return number of elements`,
@@ -36,5 +38,5 @@ class Queue:
         return len(self.items) == 0
     
     def size(self):
-        return len(self.items)`
+        return len(self.items)`,
 };

@@ -2,7 +2,9 @@ import { AlgorithmPattern } from "../../types";
 
 export const kadanes_algorithmPattern: AlgorithmPattern = {
   title: "Kadane's Algorithm Pattern",
-  description: "A dynamic programming algorithm for finding the maximum subarray sum in a one-dimensional array.",
+  category: "Array",
+  description:
+    "A dynamic programming algorithm for finding the maximum subarray sum in a one-dimensional array.",
   timeComplexity: "O(n)",
   spaceComplexity: "O(1)",
   pseudocode: `
@@ -60,5 +62,5 @@ def kadanes_algorithm_simple(arr):
         current_sum = max(num, current_sum + num)
         max_sum = max(max_sum, current_sum)
     
-    return max_sum`
+    return max_sum`,
 };

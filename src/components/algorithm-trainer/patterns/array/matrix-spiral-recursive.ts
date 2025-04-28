@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const matrix_spiral_recursivePattern: AlgorithmPattern = {
   title: "Matrix Spiral Recursive",
-  description: "A recursive approach to traverse a matrix in spiral order, which breaks down the spiral traversal into smaller subproblems.",
+  description:
+    "A recursive approach to traverse a matrix in spiral order, which breaks down the spiral traversal into smaller subproblems.",
   timeComplexity: "O(m*n) where m is rows and n is columns",
   spaceComplexity: "O(min(m,n)) due to recursive call stack",
+  category: "Array",
   pseudocode: `
 Recursive Spiral steps:
 1. Base cases:
@@ -63,5 +65,5 @@ Recursive calls:
         return result
     
     return spiral_helper(0, len(matrix) - 1, 
-                        0, len(matrix[0]) - 1)`
+                        0, len(matrix[0]) - 1)`,
 };

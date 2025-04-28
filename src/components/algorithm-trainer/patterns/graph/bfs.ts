@@ -53,4 +53,5 @@ graph = {
     6: [5]
 }
 bfs(graph, 1)`,
+  category: "Graph",
 };
