@@ -57,17 +57,17 @@ export function ABTestAdmin() {
         {analytics ? (
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-[#44475a] p-3 rounded-md">
+              <div className="bg-secondary p-3 rounded-md">
                 <h3 className="text-sm text-secondary">Total Events</h3>
                 <p className="text-2xl font-bold">{analytics.totalEvents}</p>
               </div>
-              <div className="bg-[#44475a] p-3 rounded-md">
+              <div className="bg-secondary p-3 rounded-md">
                 <h3 className="text-sm text-secondary">Group A Events</h3>
                 <p className="text-2xl font-bold text-accent">
                   {analytics.groupAEvents}
                 </p>
               </div>
-              <div className="bg-[#44475a] p-3 rounded-md">
+              <div className="bg-secondary p-3 rounded-md">
                 <h3 className="text-sm text-secondary">Group B Events</h3>
                 <p className="text-2xl font-bold text-accent3">
                   {analytics.groupBEvents}
@@ -79,7 +79,7 @@ export function ABTestAdmin() {
               <h3 className="text-lg font-semibold mb-2 text-accent2">
                 Events by Type
               </h3>
-              <div className="bg-[#44475a] p-3 rounded-md">
+              <div className="bg-secondary p-3 rounded-md">
                 <table className="w-full">
                   <thead>
                     <tr className="text-left text-sm text-secondary">
@@ -108,7 +108,7 @@ export function ABTestAdmin() {
               <h3 className="text-lg font-semibold mb-2 text-accent2">
                 Events by Pattern
               </h3>
-              <div className="bg-[#44475a] p-3 rounded-md max-h-60 overflow-y-auto">
+              <div className="bg-secondary p-3 rounded-md max-h-60 overflow-y-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="text-left text-sm text-secondary sticky top-0 bg-secondary">

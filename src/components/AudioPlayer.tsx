@@ -187,114 +187,157 @@ export function Timer() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-1 w-full">
       <div className="text-xs text-secondary font-medium mb-1">
         Timebox Timer
       </div>
-      <div className="flex items-center gap-4">
-        <div className="relative flex items-center justify-center min-w-[80px] min-h-[56px]">
-          {/* Circular Progress Bar */}
-          <svg
-            height={radius * 2}
-            width={radius * 2}
-            className="absolute inset-0 w-full h-full"
-          >
-            <circle
-              stroke="#44475a"
-              fill="transparent"
-              strokeWidth={stroke}
-              r={normalizedRadius}
-              cx={radius}
-              cy={radius}
-            />
-            <circle
-              stroke="url(#timer-gradient)"
-              fill="transparent"
-              strokeWidth={stroke}
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
-              strokeLinecap="round"
-              r={normalizedRadius}
-              cx={radius}
-              cy={radius}
-              style={{ transition: "stroke-dashoffset 0.5s linear" }}
-            />
-            <defs>
-              <linearGradient id="timer-gradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#ff79c6" />
-                <stop offset="100%" stopColor="#8be9fd" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <span className="absolute inset-0 flex items-center justify-center font-mono text-xl text-main">
-            {formatTime(timeLeft)}
-          </span>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+        <div className="flex flex-col items-center w-full sm:w-auto">
+          <div className="flex flex-col items-center justify-center">
+            <span
+              className="mb-4 text-xs text-secondary font-semibold text-center w-full"
+              aria-live="polite"
+            >
+              {isRunning
+                ? "Running"
+                : timeLeft === 0 && totalTime > 0
+                ? "Finished"
+                : "Paused"}
+            </span>
+            <div className="relative flex items-center justify-center w-[56px] h-[56px] mx-auto mb-6">
+              {/* Circular Progress Bar */}
+              <svg
+                height={radius * 2}
+                width={radius * 2}
+                className="absolute inset-0"
+              >
+                <circle
+                  stroke="#44475a"
+                  fill="transparent"
+                  strokeWidth={stroke}
+                  r={normalizedRadius}
+                  cx={radius}
+                  cy={radius}
+                />
+                <circle
+                  stroke="url(#timer-gradient)"
+                  fill="transparent"
+                  strokeWidth={stroke}
+                  strokeDasharray={circumference}
+                  strokeDashoffset={strokeDashoffset}
+                  strokeLinecap="round"
+                  r={normalizedRadius}
+                  cx={radius}
+                  cy={radius}
+                  style={{
+                    transition:
+                      "stroke-dashoffset 0.3s cubic-bezier(0.4,0,0.2,1)",
+                  }}
+                />
+                <defs>
+                  <linearGradient
+                    id="timer-gradient"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#ff79c6" />
+                    <stop offset="100%" stopColor="#8be9fd" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span
+                className="absolute inset-0 flex items-center justify-center font-mono text-xl text-main"
+                aria-live="polite"
+              >
+                {formatTime(timeLeft)}
+              </span>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button
-            onClick={() => startTimer(15)}
-            variant="ghost"
-            size="sm"
-            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
-            disabled={isRunning}
-            title="Set 15 minute timer"
-          >
-            15m
-          </Button>
-          <Button
-            onClick={() => startTimer(30)}
-            variant="ghost"
-            size="sm"
-            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
-            disabled={isRunning}
-            title="Set 30 minute timer"
-          >
-            30m
-          </Button>
-          <Button
-            onClick={() => startTimer(45)}
-            variant="ghost"
-            size="sm"
-            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
-            disabled={isRunning}
-            title="Set 45 minute timer"
-          >
-            45m
-          </Button>
-          <Button
-            onClick={() => startTimer(60)}
-            variant="ghost"
-            size="sm"
-            className="text-xs px-3 h-7 bg-secondary text-main hover:bg-secondary/80 rounded-md"
-            disabled={isRunning}
-            title="Set 1 hour timer"
-          >
-            1h
-          </Button>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            onClick={
-              isRunning
-                ? pauseTimer
-                : () => startTimer(Math.ceil(timeLeft / 60))
-            }
-            variant="ghost"
-            size="sm"
-            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md"
-            title={isRunning ? "Pause timer" : "Start timer"}
-          >
-            {isRunning ? <Pause size={14} /> : <Play size={14} />}
-          </Button>
-          <Button
-            onClick={resetTimer}
-            variant="ghost"
-            size="sm"
-            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md"
-            title="Reset timer"
-          >
-            <RotateCcw size={14} />
-          </Button>
+        <div className="flex flex-col items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={() => startTimer(15)}
+              variant="outline"
+              size="sm"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              disabled={isRunning}
+              title="Set 15 minute timer"
+              aria-label="Set 15 minute timer"
+            >
+              15m
+            </Button>
+            <Button
+              onClick={() => startTimer(30)}
+              variant="outline"
+              size="sm"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              disabled={isRunning}
+              title="Set 30 minute timer"
+              aria-label="Set 30 minute timer"
+            >
+              30m
+            </Button>
+            <Button
+              onClick={() => startTimer(45)}
+              variant="outline"
+              size="sm"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              disabled={isRunning}
+              title="Set 45 minute timer"
+              aria-label="Set 45 minute timer"
+            >
+              45m
+            </Button>
+            <Button
+              onClick={() => startTimer(60)}
+              variant="outline"
+              size="sm"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              disabled={isRunning}
+              title="Set 1 hour timer"
+              aria-label="Set 1 hour timer"
+            >
+              1h
+            </Button>
+          </div>
+          <div className="h-2" />
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col items-center">
+              <Button
+                onClick={
+                  isRunning
+                    ? pauseTimer
+                    : () => startTimer(Math.ceil(timeLeft / 60))
+                }
+                variant="default"
+                size="sm"
+                className="h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform"
+                title={isRunning ? "Pause timer" : "Start timer"}
+                aria-label={isRunning ? "Pause timer" : "Start timer"}
+              >
+                {isRunning ? <Pause size={14} /> : <Play size={14} />}
+              </Button>
+              <span className="text-[10px] text-secondary mt-1">
+                {isRunning ? "Pause" : "Start"}
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Button
+                onClick={resetTimer}
+                variant="ghost"
+                size="sm"
+                className="h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform"
+                title="Reset timer"
+                aria-label="Reset timer"
+              >
+                <RotateCcw size={14} />
+              </Button>
+              <span className="text-[10px] text-secondary mt-1">Reset</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -574,26 +617,43 @@ export function AudioPlayer() {
       <div className="text-xs text-secondary font-medium mb-1">
         Background Music
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full gap-y-2">
         <div className="flex items-center gap-2 flex-shrink-0">
-          <Button
-            onClick={togglePlay}
-            variant="ghost"
-            size="sm"
-            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md flex-shrink-0"
-            title={isPlaying ? "Pause" : "Play"}
-          >
-            {isPlaying ? <Pause size={14} /> : <Play size={14} />}
-          </Button>
-          <Button
-            onClick={playNextVideo}
-            variant="ghost"
-            size="sm"
-            className="h-7 w-7 p-0 bg-secondary text-main hover:bg-secondary/80 rounded-md flex-shrink-0"
-            title="Skip to next song"
-          >
-            <SkipForward size={14} />
-          </Button>
+          <div className="flex flex-col items-center">
+            <Button
+              onClick={togglePlay}
+              variant="ghost"
+              size="sm"
+              className="h-11 w-11 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
+              title={isPlaying ? "Pause" : "Play"}
+              aria-label={
+                isPlaying ? "Pause background music" : "Play background music"
+              }
+            >
+              {isPlaying ? <Pause size={18} /> : <Play size={18} />}
+            </Button>
+            <span className="text-[10px] text-secondary mt-1">
+              {isPlaying ? "Pause" : "Play"}
+            </span>
+            {isPlaying && (
+              <span className="mt-1 animate-pulse text-accent2 text-xs">
+                ● Playing
+              </span>
+            )}
+          </div>
+          <div className="flex flex-col items-center">
+            <Button
+              onClick={playNextVideo}
+              variant="ghost"
+              size="sm"
+              className="h-11 w-11 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
+              title="Skip to next song"
+              aria-label="Skip to next song"
+            >
+              <SkipForward size={18} />
+            </Button>
+            <span className="text-[10px] text-secondary mt-1">Skip</span>
+          </div>
         </div>
         <div className="hidden md:flex items-center gap-2 flex-shrink-0">
           <Volume2 size={14} className="text-secondary flex-shrink-0" />
@@ -605,14 +665,20 @@ export function AudioPlayer() {
             step={1}
             aria-label="Volume"
           >
-            <Slider.Track className="bg-[#44475a] relative grow rounded-full h-[3px]">
-              <Slider.Range className="absolute bg-[#6272a4] rounded-full h-full" />
+            <Slider.Track className="bg-secondary relative grow rounded-full h-[3px]">
+              <Slider.Range className="absolute bg-secondary rounded-full h-full" />
             </Slider.Track>
-            <Slider.Thumb className="block w-3 h-3 bg-[#f8f8f2] rounded-full hover:bg-[#bd93f9] focus:outline-none" />
+            <Slider.Thumb className="block w-3 h-3 bg-main rounded-full hover:bg-accent3 focus:outline-none" />
           </Slider.Root>
         </div>
-        <div className="hidden md:block text-sm text-secondary truncate min-w-0 max-w-[120px] lg:max-w-[150px]">
-          {currentSongName || "Loading..."}
+        <div className="block text-xs md:text-sm text-secondary truncate min-w-0 max-w-[120px] lg:max-w-[150px] w-full text-center md:text-left">
+          <span
+            tabIndex={0}
+            className="focus:outline-none focus:ring-2 focus:ring-accent2/50"
+            title={currentSongName}
+          >
+            {currentSongName || "Loading..."}
+          </span>
         </div>
       </div>
       <div id="youtube-player" className="hidden" />

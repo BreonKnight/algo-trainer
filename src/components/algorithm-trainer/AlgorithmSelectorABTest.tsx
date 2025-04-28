@@ -103,11 +103,11 @@ export function AlgorithmSelectorABTest({
 
   return (
     <Select value={currentPattern} onValueChange={onPatternChange}>
-      <SelectTrigger className="w-full bg-[#282a36] border-[#6272a4] text-[#f8f8f2] hover:bg-[#282a36]/80">
+      <SelectTrigger className="w-full bg-main border-secondary text-main hover:bg-main/80">
         <SelectValue placeholder="Select an algorithm" />
       </SelectTrigger>
       <SelectContent
-        className="bg-[#282a36] border-[#6272a4] text-[#f8f8f2] max-h-[300px] overflow-y-auto w-[var(--radix-select-trigger-width)] p-1"
+        className="bg-main border-secondary text-main max-h-[300px] overflow-y-auto w-[var(--radix-select-trigger-width)] p-1"
         position="popper"
         side="bottom"
         align="start"
@@ -117,14 +117,14 @@ export function AlgorithmSelectorABTest({
       >
         {Object.entries(algorithmCategories).map(([category, algorithms]) => (
           <SelectGroup key={category} className="px-1">
-            <SelectLabel className="text-[#ff79c6] sticky top-0 bg-[#282a36]/80 backdrop-blur-sm py-2 z-10 px-2">
+            <SelectLabel className="text-accent sticky top-0 bg-main/80 backdrop-blur-sm py-2 z-10 px-2">
               {category}
             </SelectLabel>
             {algorithms.map((algorithm) => (
               <SelectItem
                 key={algorithm}
                 value={algorithm}
-                className="text-[#f8f8f2] hover:bg-[#44475a] focus:bg-[#44475a] truncate px-2 py-1.5 rounded-sm cursor-pointer"
+                className="text-main hover:bg-[color:var(--accent3)]/20 focus:bg-[color:var(--accent3)]/20 hover:text-[color:var(--text-selected-dark)] focus:text-[color:var(--text-selected-dark)] data-[state=selected]:bg-[color:var(--accent3)]/40 data-[state=selected]:text-[color:var(--text-selected-dark)] data-[state=selected]:font-bold truncate px-2 py-1.5 rounded-sm cursor-pointer"
               >
                 {algorithm}
               </SelectItem>

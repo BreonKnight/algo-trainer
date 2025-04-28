@@ -36,6 +36,7 @@
       rgba(80, 250, 123, 0.08) 50%,
       rgba(255, 121, 198, 0.08) 100%
     );
+    --text-selected-dark: #282a36;
   }
 
   .dark {
@@ -58,6 +59,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    --text-selected-dark: #282a36;
   }
 }
 
@@ -166,6 +168,7 @@ button:focus-visible {
   --gradient-from: #ff79c6;
   --gradient-to: #bd93f9;
   --focus-ring: #ff79c6;
+  --text-selected-dark: #282a36;
 }
 
 .theme-solarized {
@@ -190,6 +193,7 @@ button:focus-visible {
     rgba(38, 139, 210, 0.08) 50%,
     rgba(42, 161, 152, 0.08) 100%
   );
+  --text-selected-dark: #22223b;
 }
 
 .theme-light {
@@ -202,6 +206,8 @@ button:focus-visible {
   --accent3: #10b981;
   --gradient-from: #6366f1;
   --gradient-to: #10b981;
+  --border: #6272a4;
+  --focus-ring: #6366f1;
   --pseudocode-gradient: linear-gradient(
     135deg,
     rgba(248, 250, 252, 0.95) 0%,
@@ -214,6 +220,7 @@ button:focus-visible {
     rgba(245, 158, 66, 0.08) 50%,
     rgba(16, 185, 129, 0.08) 100%
   );
+  --text-selected-dark: #22223b;
 }
 
 body,
