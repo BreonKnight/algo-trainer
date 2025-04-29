@@ -5,7 +5,14 @@ import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Code, TestTube, Sword, Book } from "lucide-react";
+import {
+  Code,
+  TestTube,
+  Sword,
+  Book,
+  ChevronUp,
+  ChevronDown,
+} from "lucide-react";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
 import {
   Tooltip,
@@ -79,6 +86,8 @@ export function AnswerCard({
   currentPattern,
   showAnswer,
   setShowAnswer,
+  onNextPattern,
+  onPatternChange,
 }: AnswerCardProps) {
   const [showTestData, setShowTestData] = useState(false);
   const [showMonsterHunter, setShowMonsterHunter] = useState(false);
@@ -142,12 +151,14 @@ export function AnswerCard({
         <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
           Solution
         </h2>
-        <Button
-          onClick={() => setShowAnswer(!showAnswer)}
-          className="bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-        >
-          {showAnswer ? "Hide Answer" : "Show Answer"}
-        </Button>
+        <div className="flex items-center gap-2 mr-10 mt-0.5">
+          <Button
+            onClick={() => setShowAnswer(!showAnswer)}
+            className="bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md flex items-center justify-center"
+          >
+            {showAnswer ? "Hide Answer" : "Show Answer"}
+          </Button>
+        </div>
       </div>
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         {showAnswer && (
@@ -229,6 +240,9 @@ export function AnswerCard({
                   <div
                     ref={scrollRef}
                     className="h-full overflow-y-auto text-sm p-4 bg-main/90 rounded-md leading-relaxed"
+                    style={{
+                      minHeight: isDesktop ? "0" : "300px",
+                    }}
                   >
                     <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
                       {(() => {
@@ -262,7 +276,7 @@ export function AnswerCard({
                     className="flex-1 min-h-[300px] overflow-hidden rounded-xl"
                     style={{
                       height: editorHeight,
-                      minHeight: "300px",
+                      minHeight: isDesktop ? "0" : "300px",
                     }}
                   >
                     <Editor
