@@ -165,6 +165,24 @@ export function Timer() {
     }
   };
 
+  const resumeTimer = () => {
+    if (!isRunning && timeLeft > 0) {
+      setIsRunning(true);
+      timerRef.current = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            if (timerRef.current) {
+              clearInterval(timerRef.current);
+            }
+            setIsRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+  };
+
   const resetTimer = () => {
     pauseTimer();
     setTimeLeft(0);
@@ -316,11 +334,7 @@ export function Timer() {
           <div className="flex items-center gap-2">
             <div className="flex flex-col items-center">
               <Button
-                onClick={
-                  isRunning
-                    ? pauseTimer
-                    : () => startTimer(Math.ceil(timeLeft / 60))
-                }
+                onClick={isRunning ? pauseTimer : resumeTimer}
                 variant="default"
                 size="sm"
                 className={`h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ${
