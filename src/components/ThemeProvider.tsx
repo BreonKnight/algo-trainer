@@ -6,7 +6,16 @@ import React, {
   ReactNode,
 } from "react";
 
-const THEMES = ["dracula", "solarized", "light"] as const;
+const THEMES = [
+  "dracula",
+  "solarized",
+  "light",
+  "nord",
+  "snes",
+  "ps2",
+  "re2",
+  "mh",
+] as const;
 type Theme = (typeof THEMES)[number];
 
 interface ThemeContextType {

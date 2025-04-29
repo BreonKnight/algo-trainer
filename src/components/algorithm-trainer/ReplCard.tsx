@@ -20,6 +20,8 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [pyodide, setPyodide] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const { theme } = useTheme();
+  const isLight = theme === "light" || theme === "solarized";
 
   useEffect(() => {
     let mounted = true;
@@ -118,22 +120,16 @@ except Exception as e:
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
       <div className="flex justify-between items-center mb-2">
-        {(() => {
-          const { theme } = useTheme();
-          const isLight = theme === "light" || theme === "solarized";
-          return (
-            <h2
-              className={
-                "text-base sm:text-lg font-semibold truncate " +
-                (isLight
-                  ? "text-main"
-                  : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
-              }
-            >
-              Python REPL
-            </h2>
-          );
-        })()}
+        <h2
+          className={
+            "text-base sm:text-lg font-semibold truncate " +
+            (theme === "nord"
+              ? "text-white"
+              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+          }
+        >
+          Python REPL
+        </h2>
         <TooltipProvider>
           <div className="flex gap-2">
             <Tooltip>
@@ -168,7 +164,13 @@ except Exception as e:
           {error ? (
             <pre className="whitespace-pre-wrap text-accent">{error}</pre>
           ) : (
-            <pre className="whitespace-pre-wrap text-main">
+            <pre
+              className={
+                isLight
+                  ? "whitespace-pre-wrap text-main"
+                  : "whitespace-pre-wrap text-white"
+              }
+            >
               {output ||
                 "You can do it! make sure to run code with a print fn to see output. Make sure to put prints everywhere to debug efficiently."}
             </pre>
