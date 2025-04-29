@@ -26,6 +26,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const isLight = theme === "light" || theme === "solarized";
   const [replHeight, setReplHeight] = useState(300);
   const replRef = useRef<HTMLDivElement>(null);
+  const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
   useEffect(() => {
     let mounted = true;
@@ -264,96 +265,76 @@ except Exception as e:
   };
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col mt-4">
-      <div className="flex justify-between items-center mb-2">
-        <h2
-          className={
-            "text-base sm:text-lg font-semibold truncate " +
-            (theme === "nord"
-              ? "text-white"
-              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
-          }
-        >
-          Python REPL
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+      <div className="flex-none flex justify-between items-center mb-4">
+        <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
+          Output
         </h2>
-        <TooltipProvider>
-          <div className="flex gap-2">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={runCode}
-                  disabled={isLoading || !pyodide}
-                  className="bg-accent2 hover:bg-accent2/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-                >
-                  {isLoading ? "Running..." : "Run Code"}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Run your Python code in the REPL</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={clearOutput}
-                  disabled={isLoading}
-                  className="bg-secondary hover:bg-secondary/80 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-                >
-                  Clear
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Clear the REPL output</TooltipContent>
-            </Tooltip>
-          </div>
-        </TooltipProvider>
-      </div>
-      <div className="font-mono text-base flex-1">
-        <div
-          ref={replRef}
-          className="overflow-y-auto bg-main/90 rounded-md leading-relaxed"
-          style={{ height: replHeight, maxHeight: 500 }}
-        >
-          {error ? (
-            <pre className="whitespace-pre-wrap text-accent font-bold leading-relaxed">
-              {error}
-            </pre>
-          ) : (
-            <pre
-              className={
-                isLight
-                  ? "whitespace-pre-wrap text-main leading-relaxed"
-                  : "whitespace-pre-wrap text-white leading-relaxed"
-              }
-            >
-              {output ||
-                "You can do it! make sure to run code with a print fn to see output. Make sure to put prints everywhere to debug efficiently."}
-            </pre>
-          )}
+        <div className="flex gap-2">
+          <Button
+            onClick={clearOutput}
+            variant="ghost"
+            className="text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+          >
+            Clear
+          </Button>
+          <Button
+            onClick={runCode}
+            disabled={isLoading}
+            className="bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+          >
+            {isLoading ? "Running..." : "Run Code"}
+          </Button>
         </div>
       </div>
-      {/* Vertical resize handle (always visible) */}
-      <div
-        className="w-full h-3 cursor-row-resize flex items-center justify-center group"
-        style={{ userSelect: "none" }}
-        onMouseDown={(e) => {
-          const startY = e.clientY;
-          const startHeight = replRef.current?.offsetHeight || 0;
-          const maxHeight = 500;
-          const onMove = (moveEvent: MouseEvent) => {
-            const delta = moveEvent.clientY - startY;
-            const newHeight = Math.max(
-              120,
-              Math.min(startHeight + delta, maxHeight)
-            );
-            setReplHeight(newHeight);
-          };
-          const onUp = () => {
-            window.removeEventListener("mousemove", onMove);
-            window.removeEventListener("mouseup", onUp);
-          };
-          window.addEventListener("mousemove", onMove);
-          window.addEventListener("mouseup", onUp);
-        }}
-      >
-        <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <div
+          ref={replRef}
+          className="flex-1 min-h-[300px] overflow-hidden rounded-xl bg-main/90"
+          style={{
+            height: isDesktop ? replHeight : "300px",
+            minHeight: "300px",
+          }}
+        >
+          <div className="h-full w-full overflow-auto p-4">
+            <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
+              {error ? (
+                <span className="text-red-500">{error}</span>
+              ) : (
+                <span>
+                  {output || "Run your code to see the output here..."}
+                </span>
+              )}
+            </pre>
+          </div>
+        </div>
+        {/* Vertical resize handle */}
+        <div
+          className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+          style={{ userSelect: "none" }}
+          onMouseDown={(e) => {
+            if (!isDesktop) return;
+            const startY = e.clientY;
+            const startHeight = replRef.current?.offsetHeight || 0;
+            const maxHeight = 800; // Increased max height for REPL
+            const onMove = (moveEvent: MouseEvent) => {
+              const delta = moveEvent.clientY - startY;
+              const newHeight = Math.max(
+                300,
+                Math.min(startHeight + delta, maxHeight)
+              );
+              setReplHeight(newHeight);
+            };
+            const onUp = () => {
+              window.removeEventListener("mousemove", onMove);
+              window.removeEventListener("mouseup", onUp);
+            };
+            window.addEventListener("mousemove", onMove);
+            window.addEventListener("mouseup", onUp);
+          }}
+        >
+          <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+        </div>
       </div>
     </Card>
   );
