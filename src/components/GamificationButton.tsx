@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from "../components/ui/dialog";
 import GamificationService, { UserProgress } from "../lib/gamification";
 import { useTheme } from "./ThemeProvider";
@@ -240,10 +239,23 @@ export function GamificationButton() {
       {/* Floating button in the corner */}
       <Button
         onClick={() => setShowPanel(true)}
-        className={`fixed bottom-4 right-4 ${styles.button} rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 shadow-sm z-50`}
+        className={`fixed bottom-4 right-4 group overflow-hidden ${styles.button} 
+          rounded-full w-14 h-14 flex items-center justify-center transition-all duration-300 
+          hover:scale-110 hover:shadow-xl hover:shadow-accent2/20 
+          active:scale-95 transform-gpu z-50
+          animate-in slide-in-from-bottom-8`}
+        style={{
+          background:
+            "linear-gradient(135deg, var(--accent2) 0%, var(--accent3) 100%)",
+          boxShadow: "0 8px 24px -8px rgba(var(--accent2), 0.3)",
+        }}
         aria-label="View Progress"
       >
-        <Trophy className="w-5 h-5" />
+        <Trophy className="w-6 h-6 text-background transition-transform duration-300 group-hover:rotate-12 relative z-10" />
+        <div
+          className="absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 
+          group-hover:rotate-180 duration-700 transition-transform ease-out"
+        />
       </Button>
 
       {/* Gamification Panel */}

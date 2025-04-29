@@ -1,6 +1,6 @@
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { loadPyodide } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
@@ -24,6 +24,8 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const [error, setError] = useState<string | null>(null);
   const { theme } = useTheme();
   const isLight = theme === "light" || theme === "solarized";
+  const [replHeight, setReplHeight] = useState(300);
+  const replRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -89,7 +91,6 @@ export function ReplCard({ userCode }: ReplCardProps) {
     setOutput("");
 
     const startTime = performance.now();
-    const hasError = false;
 
     try {
       // Create a wrapper to capture print statements and return values
@@ -263,7 +264,7 @@ except Exception as e:
   };
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col mt-4">
       <div className="flex justify-between items-center mb-2">
         <h2
           className={
@@ -304,18 +305,22 @@ except Exception as e:
           </div>
         </TooltipProvider>
       </div>
-      <div className="flex-1 min-h-0 overflow-hidden">
-        <div className="h-full w-full bg-main rounded-md p-4 font-mono text-sm overflow-auto">
+      <div className="font-mono text-base flex-1">
+        <div
+          ref={replRef}
+          className="overflow-y-auto bg-main/90 rounded-md leading-relaxed"
+          style={{ height: replHeight, maxHeight: 500 }}
+        >
           {error ? (
-            <pre className="whitespace-pre-wrap text-accent font-bold">
+            <pre className="whitespace-pre-wrap text-accent font-bold leading-relaxed">
               {error}
             </pre>
           ) : (
             <pre
               className={
                 isLight
-                  ? "whitespace-pre-wrap text-main"
-                  : "whitespace-pre-wrap text-white"
+                  ? "whitespace-pre-wrap text-main leading-relaxed"
+                  : "whitespace-pre-wrap text-white leading-relaxed"
               }
             >
               {output ||
@@ -323,6 +328,32 @@ except Exception as e:
             </pre>
           )}
         </div>
+      </div>
+      {/* Vertical resize handle (always visible) */}
+      <div
+        className="w-full h-3 cursor-row-resize flex items-center justify-center group"
+        style={{ userSelect: "none" }}
+        onMouseDown={(e) => {
+          const startY = e.clientY;
+          const startHeight = replRef.current?.offsetHeight || 0;
+          const maxHeight = 500;
+          const onMove = (moveEvent: MouseEvent) => {
+            const delta = moveEvent.clientY - startY;
+            const newHeight = Math.max(
+              120,
+              Math.min(startHeight + delta, maxHeight)
+            );
+            setReplHeight(newHeight);
+          };
+          const onUp = () => {
+            window.removeEventListener("mousemove", onMove);
+            window.removeEventListener("mouseup", onUp);
+          };
+          window.addEventListener("mousemove", onMove);
+          window.addEventListener("mouseup", onUp);
+        }}
+      >
+        <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
       </div>
     </Card>
   );
