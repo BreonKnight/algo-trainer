@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Trophy } from "lucide-react";
+import { Trophy, BarChart } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -9,6 +9,7 @@ import {
 } from "../components/ui/dialog";
 import GamificationService, { UserProgress } from "../lib/gamification";
 import { useTheme } from "./ThemeProvider";
+import { Link } from "react-router-dom";
 
 const themeStyles = {
   dracula: {
@@ -261,7 +262,7 @@ export function GamificationButton() {
       {/* Gamification Panel */}
       <Dialog open={showPanel} onOpenChange={setShowPanel}>
         <DialogContent
-          className={`max-w-2xl max-h-[80vh] overflow-y-auto !bg-transparent ${styles.dialog}`}
+          className={`max-w-2xl max-h-[80vh] !bg-transparent ${styles.dialog}`}
           style={{
             background: "var(--background)",
             backdropFilter: "blur(12px)",
@@ -273,112 +274,139 @@ export function GamificationButton() {
             </DialogTitle>
           </DialogHeader>
 
-          {/* User Stats Section */}
-          <div className="mb-6">
-            <h3 className={`text-lg font-semibold mb-2 ${styles.text.primary}`}>
-              Your Stats
-            </h3>
-            <div className="grid grid-cols-3 gap-4">
-              {["Level", "Points", "Streak"].map((stat) => (
-                <div key={stat} className={`p-3 rounded-lg ${styles.card}`}>
-                  <div className={`text-sm ${styles.text.secondary}`}>
-                    {stat}
-                  </div>
-                  <div className={`text-2xl font-bold ${styles.text.primary}`}>
-                    {stat === "Level" && userProgress.level}
-                    {stat === "Points" && userProgress.points}
-                    {stat === "Streak" && `${userProgress.streak} days`}
-                  </div>
-                  {stat === "Level" && (
-                    <div className={`text-xs mt-1 ${styles.text.muted}`}>
-                      {userProgress.experience} / 1000 XP
+          <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2">
+            {/* User Stats Section */}
+            <div className="mb-6">
+              <h3
+                className={`text-lg font-semibold mb-2 ${styles.text.primary}`}
+              >
+                Your Stats
+              </h3>
+              <div className="grid grid-cols-3 gap-4">
+                {["Level", "Points", "Streak"].map((stat) => (
+                  <div key={stat} className={`p-3 rounded-lg ${styles.card}`}>
+                    <div className={`text-sm ${styles.text.secondary}`}>
+                      {stat}
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Achievements Section */}
-          <div className="mb-6">
-            <h3 className={`text-lg font-semibold mb-2 ${styles.text.primary}`}>
-              Achievements
-            </h3>
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-              {userProgress.badges.map((badge) => (
-                <div
-                  key={badge.id}
-                  className={`p-3 rounded-lg text-center ${
-                    badge.unlocked ? styles.badge.unlocked : styles.badge.locked
-                  }`}
-                >
-                  <div
-                    className={`text-2xl mb-1 ${
-                      badge.unlocked ? styles.badge.icon : styles.text.secondary
-                    }`}
-                  >
-                    {badge.icon}
+                    <div
+                      className={`text-2xl font-bold ${styles.text.primary}`}
+                    >
+                      {stat === "Level" && userProgress.level}
+                      {stat === "Points" && userProgress.points}
+                      {stat === "Streak" && `${userProgress.streak} days`}
+                    </div>
+                    {stat === "Level" && (
+                      <div className={`text-xs mt-1 ${styles.text.muted}`}>
+                        {userProgress.experience} / 1000 XP
+                      </div>
+                    )}
                   </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Achievements Section */}
+            <div className="mb-6">
+              <h3
+                className={`text-lg font-semibold mb-2 ${styles.text.primary}`}
+              >
+                Achievements
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {userProgress.badges.map((badge) => (
                   <div
-                    className={`text-sm font-medium ${
+                    key={badge.id}
+                    className={`p-3 rounded-lg text-center ${
                       badge.unlocked
-                        ? styles.text.primary
-                        : styles.text.secondary
+                        ? styles.badge.unlocked
+                        : styles.badge.locked
                     }`}
-                  >
-                    {badge.name}
-                  </div>
-                  {!badge.unlocked && (
-                    <div className={`text-xs mt-1 ${styles.text.muted}`}>
-                      {badge.progress}/{badge.maxProgress}
-                    </div>
-                  )}
-                  {badge.unlocked && badge.dateEarned && (
-                    <div className={`text-xs mt-1 ${styles.text.muted}`}>
-                      {new Date(badge.dateEarned).toLocaleDateString()}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Algorithm Progress Section */}
-          <div>
-            <h3 className={`text-lg font-semibold mb-2 ${styles.text.primary}`}>
-              Algorithm Progress
-            </h3>
-            <div className="space-y-2">
-              {userProgress.algorithmProgress.map((algorithm) => (
-                <div key={algorithm.id} className="flex items-center">
-                  <div className={`w-24 text-sm ${styles.text.primary}`}>
-                    {algorithm.name}
-                  </div>
-                  <div
-                    className={`flex-1 h-2 ${styles.progress.bg} rounded-full overflow-hidden`}
                   >
                     <div
-                      className={`h-full ${styles.progress.bar} rounded-full`}
-                      style={{
-                        width: `${
-                          (algorithm.progress / algorithm.maxProgress) * 100
-                        }%`,
-                      }}
-                    ></div>
+                      className={`text-2xl mb-1 ${
+                        badge.unlocked
+                          ? styles.badge.icon
+                          : styles.text.secondary
+                      }`}
+                    >
+                      {badge.icon}
+                    </div>
+                    <div
+                      className={`text-sm font-medium ${
+                        badge.unlocked
+                          ? styles.text.primary
+                          : styles.text.secondary
+                      }`}
+                    >
+                      {badge.name}
+                    </div>
+                    {!badge.unlocked && (
+                      <div className={`text-xs mt-1 ${styles.text.muted}`}>
+                        {badge.progress}/{badge.maxProgress}
+                      </div>
+                    )}
+                    {badge.unlocked && badge.dateEarned && (
+                      <div className={`text-xs mt-1 ${styles.text.muted}`}>
+                        {new Date(badge.dateEarned).toLocaleDateString()}
+                      </div>
+                    )}
                   </div>
-                  <div
-                    className={`w-12 text-right text-sm ${styles.text.secondary}`}
-                  >
-                    {algorithm.progress}/{algorithm.maxProgress}
-                  </div>
-                </div>
-              ))}
-              {userProgress.algorithmProgress.length === 0 && (
-                <div className={`text-center py-4 ${styles.text.muted}`}>
-                  Try some algorithms to track your progress!
-                </div>
-              )}
+                ))}
+              </div>
             </div>
+
+            {/* Algorithm Progress Section */}
+            <div className="mb-6">
+              <h3
+                className={`text-lg font-semibold mb-2 ${styles.text.primary}`}
+              >
+                Algorithm Progress
+              </h3>
+              <div className="space-y-2">
+                {userProgress.algorithmProgress.map((algorithm) => (
+                  <div key={algorithm.id} className="flex items-center">
+                    <div className={`w-24 text-sm ${styles.text.primary}`}>
+                      {algorithm.name}
+                    </div>
+                    <div
+                      className={`flex-1 h-2 ${styles.progress.bg} rounded-full overflow-hidden`}
+                    >
+                      <div
+                        className={`h-full ${styles.progress.bar} rounded-full`}
+                        style={{
+                          width: `${
+                            (algorithm.progress / algorithm.maxProgress) * 100
+                          }%`,
+                        }}
+                      ></div>
+                    </div>
+                    <div
+                      className={`w-12 text-right text-sm ${styles.text.secondary}`}
+                    >
+                      {algorithm.progress}/{algorithm.maxProgress}
+                    </div>
+                  </div>
+                ))}
+                {userProgress.algorithmProgress.length === 0 && (
+                  <div className={`text-center py-4 ${styles.text.muted}`}>
+                    Try some algorithms to track your progress!
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Progress Component Link */}
+          <div className="mt-4 pt-4 border-t border-secondary/20">
+            <Link to="/progress" onClick={() => setShowPanel(false)}>
+              <Button
+                variant="outline"
+                className={`w-full flex items-center justify-center gap-2 ${styles.button}`}
+              >
+                <BarChart className="h-4 w-4" />
+                <span>View Progress Component Examples</span>
+              </Button>
+            </Link>
           </div>
         </DialogContent>
       </Dialog>
