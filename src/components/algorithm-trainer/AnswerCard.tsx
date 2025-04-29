@@ -24,6 +24,7 @@ import {
   re2Theme,
   mhTheme,
 } from "@/lib/theme";
+import { Monaco } from "@monaco-editor/react";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;
@@ -85,11 +86,18 @@ export function AnswerCard({
   const cardRef = useRef<HTMLDivElement>(null);
   const isDesktop = useIsDesktop();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { showTop, showBottom } = useScrollShadows(scrollRef);
-  const [implHeight, setImplHeight] = useState(isDesktop ? 300 : "100%");
+  const [editorHeight, setEditorHeight] = useState<string | number>("300px");
+  const monacoRef = useRef<Monaco | null>(null);
+  const editorRef = useRef<any>(null);
 
+  // Update editor height on mount and resize
   useEffect(() => {
-    setImplHeight(isDesktop ? 300 : "100%");
+    const updateHeight = () => {
+      setEditorHeight(isDesktop ? "100%" : "300px");
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
   }, [isDesktop]);
 
   // Prevent scrolling when showing answer
@@ -105,7 +113,10 @@ export function AnswerCard({
     }
   }, [showAnswer]);
 
-  const handleEditorDidMount = (_editor: unknown, monaco: any) => {
+  // Editor mount
+  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+    monacoRef.current = monaco;
+    editorRef.current = editor;
     monaco.editor.defineTheme("dracula", draculaTheme);
     monaco.editor.defineTheme("solarized", solarizedTheme);
     monaco.editor.defineTheme("light", lightTheme);
@@ -114,8 +125,12 @@ export function AnswerCard({
     monaco.editor.defineTheme("ps2", ps2Theme);
     monaco.editor.defineTheme("re2", re2Theme);
     monaco.editor.defineTheme("mh", mhTheme);
-
     monaco.editor.setTheme(theme);
+
+    // Force layout update
+    setTimeout(() => {
+      editor.layout();
+    }, 100);
   };
 
   return (
@@ -244,10 +259,14 @@ export function AnswerCard({
                 <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
                   <div
                     ref={scrollRef}
-                    className="flex-1 min-h-0 overflow-hidden"
+                    className="flex-1 min-h-[300px] overflow-hidden rounded-xl"
+                    style={{
+                      height: editorHeight,
+                      minHeight: "300px",
+                    }}
                   >
                     <Editor
-                      height="100%"
+                      height={editorHeight}
                       defaultLanguage="python"
                       theme={theme}
                       onMount={handleEditorDidMount}
@@ -321,7 +340,7 @@ export function AnswerCard({
                           120,
                           Math.min(startHeight + delta, maxHeight)
                         );
-                        setImplHeight(newHeight);
+                        setEditorHeight(newHeight);
                       };
                       const onUp = () => {
                         window.removeEventListener("mousemove", onMove);

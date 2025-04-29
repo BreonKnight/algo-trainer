@@ -26,3 +26,24 @@ body {
   scrollbar-width: thin;
   scrollbar-color: var(--accent2, rgba(120, 120, 120, 0.25)) transparent;
 }
+
+/* Monaco Editor Scrollbar Fixes */
+.monaco-scrollable-element.editor-scrollable {
+  border-radius: 0.75rem !important;
+}
+
+.monaco-scrollable-element.editor-scrollable > .monaco-editor-background {
+  border-radius: 0.75rem !important;
+}
+
+.monaco-editor .overflow-guard {
+  border-radius: 0.75rem !important;
+}
+
+/* Ensure editor content is properly contained */
+.monaco-editor,
+.monaco-editor .overflow-guard,
+.monaco-scrollable-element {
+  border-radius: 0.75rem !important;
+  overflow: hidden !important;
+}

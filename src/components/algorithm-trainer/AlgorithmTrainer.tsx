@@ -420,13 +420,13 @@ export default function AlgorithmTrainer() {
             </PanelResizeHandle>
             <Panel minSize={20} defaultSize={30} className="flex flex-col">
               <div
-                className="flex-1 rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary overflow-hidden"
+                className="flex-1 rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary overflow-hidden mb-4"
                 style={{
                   background:
                     "linear-gradient(135deg, var(--bg-secondary), var(--bg-main))",
                 }}
               >
-                <div className="font-mono text-base flex-1">
+                <div className="font-mono text-base flex-1 min-h-0 rounded-xl">
                   <ReplCard userCode={userCode} />
                 </div>
               </div>
