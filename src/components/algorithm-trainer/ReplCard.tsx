@@ -28,6 +28,54 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const replRef = useRef<HTMLDivElement>(null);
   const isDesktop = window.matchMedia("(min-width: 768px)").matches;
 
+  // Theme-specific terminal styles
+  const terminalStyles = {
+    dracula: {
+      bg: "bg-[#282a36]",
+      text: "text-[#f8f8f2]",
+      error: "text-[#ff5555]",
+    },
+    solarized: {
+      bg: "bg-[#002b36]",
+      text: "text-[#839496]",
+      error: "text-[#dc322f]",
+    },
+    light: {
+      bg: "bg-[#f8f8f8]",
+      text: "text-[#2d3748]",
+      error: "text-red-600",
+    },
+    nord: {
+      bg: "bg-[#2e3440]",
+      text: "text-[#d8dee9]",
+      error: "text-[#bf616a]",
+    },
+    snes: {
+      bg: "bg-[#2c2c2c]",
+      text: "text-[#c7c7c7]",
+      error: "text-[#ff6b6b]",
+    },
+    ps2: {
+      bg: "bg-[#1a1a1a]",
+      text: "text-[#e0e0e0]",
+      error: "text-[#ff4757]",
+    },
+    re2: {
+      bg: "bg-[#1e1e1e]",
+      text: "text-[#d4d4d4]",
+      error: "text-[#ff3333]",
+    },
+    mh: {
+      bg: "bg-[#2d2d2d]",
+      text: "text-[#e6e6e6]",
+      error: "text-[#ff6b6b]",
+    },
+  };
+
+  const currentStyle =
+    terminalStyles[theme as keyof typeof terminalStyles] ||
+    terminalStyles.dracula;
+
   useEffect(() => {
     let mounted = true;
 
@@ -290,16 +338,18 @@ except Exception as e:
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         <div
           ref={replRef}
-          className="flex-1 min-h-[300px] overflow-hidden rounded-xl bg-main/90"
+          className={`flex-1 min-h-[300px] overflow-hidden rounded-xl ${currentStyle.bg}`}
           style={{
             height: isDesktop ? replHeight : "300px",
             minHeight: "300px",
           }}
         >
           <div className="h-full w-full overflow-auto p-4">
-            <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
+            <pre
+              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed ${currentStyle.text}`}
+            >
               {error ? (
-                <span className="text-red-500">{error}</span>
+                <span className={currentStyle.error}>{error}</span>
               ) : (
                 <span>
                   {output || "Run your code to see the output here..."}
