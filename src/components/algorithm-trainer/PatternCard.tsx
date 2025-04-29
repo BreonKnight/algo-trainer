@@ -215,7 +215,7 @@ export function PatternCard({
                 className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/90 rounded-xl`}
                 style={{
                   height: isDesktop ? descHeight : "300px",
-                  minHeight: "300px",
+                  minHeight: isDesktop ? "0" : "300px",
                 }}
               >
                 <div className="h-full w-full overflow-y-auto">

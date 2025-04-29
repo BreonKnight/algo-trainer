@@ -173,7 +173,7 @@ export default function AlgorithmTrainer() {
           </span>
         </div>
         {/* Unified Top Bar */}
-        <div className="mx-auto w-full max-w-[90rem] mb-6 flex flex-col md:flex-row items-center justify-between gap-4 rounded-xl shadow-lg p-4 glassy-gradient-bg relative">
+        <div className="mx-auto w-full max-w-[120rem] mb-6 flex flex-col md:flex-row items-center justify-between gap-4 rounded-xl shadow-lg p-4 glassy-gradient-bg relative">
           {/* Glass overlay for extra effect */}
           <div
             style={{
@@ -273,168 +273,9 @@ export default function AlgorithmTrainer() {
             </div>
           </div>
         </div>
-      </TooltipProvider>
-      <div className="flex-1 flex flex-col min-h-0 max-w-[90rem] mx-auto w-full">
-        {/* Desktop Layout */}
-        <div className="hidden md:flex flex-1 min-h-0 flex-col">
-          <PanelGroup direction="vertical" className="flex flex-1">
-            <Panel minSize={50} defaultSize={70} className="flex flex-col">
-              <PanelGroup direction="horizontal" className="flex-1 min-h-0">
-                <Panel minSize={25} defaultSize={30} className="min-w-0">
-                  <div className="h-full rounded-xl shadow-xl p-3 flex flex-col justify-between border border-accent2/30 bg-secondary overflow-hidden">
-                    <PatternCard
-                      currentPattern={currentPattern}
-                      onPatternChange={setCurrentPattern}
-                    />
-                  </div>
-                </Panel>
-                <PanelResizeHandle className="flex items-center justify-center px-0 w-8 cursor-col-resize select-none group">
-                  <div className="w-2 h-4/5 bg-accent2/40 rounded-full flex flex-col items-center justify-center transition-opacity duration-150 group-hover:bg-accent2/70">
-                    {/* Grip SVG */}
-                    <svg
-                      width="8"
-                      height="32"
-                      viewBox="0 0 8 32"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="mx-auto"
-                    >
-                      <circle
-                        cx="4"
-                        cy="6"
-                        r="1.5"
-                        fill="currentColor"
-                        className="text-accent"
-                      />
-                      <circle
-                        cx="4"
-                        cy="16"
-                        r="1.5"
-                        fill="currentColor"
-                        className="text-accent"
-                      />
-                      <circle
-                        cx="4"
-                        cy="26"
-                        r="1.5"
-                        fill="currentColor"
-                        className="text-accent"
-                      />
-                    </svg>
-                  </div>
-                </PanelResizeHandle>
-                <Panel minSize={30} defaultSize={40} className="min-w-0">
-                  <div className="h-full rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary overflow-hidden">
-                    <div className="font-mono text-base flex-1">
-                      <CodeEditor
-                        userCode={userCode}
-                        setUserCode={setUserCode}
-                      />
-                    </div>
-                  </div>
-                </Panel>
-                <PanelResizeHandle className="flex items-center justify-center px-0 w-8 cursor-col-resize select-none group">
-                  <div className="w-2 h-4/5 bg-accent2/40 rounded-full flex flex-col items-center justify-center transition-opacity duration-150 group-hover:bg-accent2/70">
-                    {/* Grip SVG */}
-                    <svg
-                      width="8"
-                      height="32"
-                      viewBox="0 0 8 32"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="mx-auto"
-                    >
-                      <circle
-                        cx="4"
-                        cy="6"
-                        r="1.5"
-                        fill="currentColor"
-                        className="text-accent"
-                      />
-                      <circle
-                        cx="4"
-                        cy="16"
-                        r="1.5"
-                        fill="currentColor"
-                        className="text-accent"
-                      />
-                      <circle
-                        cx="4"
-                        cy="26"
-                        r="1.5"
-                        fill="currentColor"
-                        className="text-accent"
-                      />
-                    </svg>
-                  </div>
-                </PanelResizeHandle>
-                <Panel minSize={25} defaultSize={30} className="min-w-0">
-                  <div className="h-full rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary overflow-hidden">
-                    <div className="h-full flex flex-col min-h-0">
-                      <AnswerCard
-                        currentPattern={currentPattern}
-                        showAnswer={showAnswer}
-                        setShowAnswer={setShowAnswer}
-                        onNextPattern={nextPattern}
-                        onPatternChange={setCurrentPattern}
-                      />
-                    </div>
-                  </div>
-                </Panel>
-              </PanelGroup>
-            </Panel>
-            <PanelResizeHandle className="flex items-center justify-center h-8 cursor-row-resize select-none group">
-              <div className="h-2 w-4/5 bg-accent2/40 rounded-full flex items-center justify-center transition-opacity duration-150 group-hover:bg-accent2/70">
-                {/* Horizontal Grip SVG */}
-                <svg
-                  width="32"
-                  height="8"
-                  viewBox="0 0 32 8"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mx-auto"
-                >
-                  <circle
-                    cx="6"
-                    cy="4"
-                    r="1.5"
-                    fill="currentColor"
-                    className="text-accent"
-                  />
-                  <circle
-                    cx="16"
-                    cy="4"
-                    r="1.5"
-                    fill="currentColor"
-                    className="text-accent"
-                  />
-                  <circle
-                    cx="26"
-                    cy="4"
-                    r="1.5"
-                    fill="currentColor"
-                    className="text-accent"
-                  />
-                </svg>
-              </div>
-            </PanelResizeHandle>
-            <Panel minSize={20} defaultSize={30} className="flex flex-col">
-              <div
-                className="flex-1 rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary overflow-hidden mb-4"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--bg-secondary), var(--bg-main))",
-                }}
-              >
-                <div className="font-mono text-base flex-1 min-h-0 rounded-xl">
-                  <ReplCard userCode={userCode} />
-                </div>
-              </div>
-            </Panel>
-          </PanelGroup>
-        </div>
-        {/* Mobile layout remains unchanged */}
-        <div className="block md:hidden flex-1 min-h-0">
+
+        {/* Main content area */}
+        <div className="mx-auto w-full max-w-[120rem]">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -444,96 +285,95 @@ export default function AlgorithmTrainer() {
               items={panelOrder}
               strategy={verticalListSortingStrategy}
             >
-              {panelOrder.map((panel) => (
-                <SortablePanel key={panel} id={panel}>
-                  {panel === "pattern" && (
-                    <div className="h-full min-h-[220px] max-h-none md:min-h-[500px] md:max-h-[900px] rounded-xl shadow-xl p-3 flex flex-col justify-between border border-accent2/30 bg-secondary">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-semibold text-main text-base">
-                          Pattern
-                        </span>
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 auto-rows-fr">
+                {panelOrder.map((panel) => (
+                  <SortablePanel key={panel} id={panel}>
+                    {panel === "pattern" && (
+                      <div className="relative h-full">
                         <button
-                          onClick={() => setPatternOpen((v) => !v)}
-                          className="p-1 text-main"
+                          onClick={() => setPatternOpen(!patternOpen)}
+                          className="absolute top-[18px] right-2 z-10 p-1.5 rounded-md hover:bg-secondary/20 transition-colors"
                         >
                           {patternOpen ? (
-                            <ChevronUp className="w-5 h-5" />
+                            <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
                           ) : (
-                            <ChevronDown className="w-5 h-5" />
+                            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
                           )}
                         </button>
+                        {patternOpen && (
+                          <div className="h-full">
+                            <PatternCard
+                              currentPattern={currentPattern}
+                              onPatternChange={setCurrentPattern}
+                            />
+                          </div>
+                        )}
                       </div>
-                      {patternOpen && (
-                        <PatternCard
-                          currentPattern={currentPattern}
-                          onPatternChange={setCurrentPattern}
-                        />
-                      )}
-                    </div>
-                  )}
-                  {panel === "editor" && (
-                    <div className="h-full min-h-[220px] max-h-none md:min-h-[500px] md:max-h-[900px] rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-semibold text-main text-base">
-                          Editor
-                        </span>
+                    )}
+                    {panel === "editor" && (
+                      <div className="relative h-full">
                         <button
-                          onClick={() => setEditorOpen((v) => !v)}
-                          className="p-1 text-main"
+                          onClick={() => setEditorOpen(!editorOpen)}
+                          className="absolute top-[18px] right-2 z-10 p-1.5 rounded-md hover:bg-secondary/20 transition-colors"
                         >
                           {editorOpen ? (
-                            <ChevronUp className="w-5 h-5" />
+                            <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
                           ) : (
-                            <ChevronDown className="w-5 h-5" />
+                            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
                           )}
                         </button>
+                        {editorOpen && (
+                          <div className="h-full">
+                            <CodeEditor
+                              userCode={userCode}
+                              setUserCode={setUserCode}
+                              onRunCode={() => {}}
+                              onShowAnswer={() => setShowAnswer(!showAnswer)}
+                              onNextPattern={nextPattern}
+                              onPrevPattern={previousPattern}
+                            />
+                          </div>
+                        )}
                       </div>
-                      {editorOpen && (
-                        <div className="font-mono text-base flex-1">
-                          <CodeEditor
-                            userCode={userCode}
-                            setUserCode={setUserCode}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  {panel === "answer" && (
-                    <div className="h-full min-h-[220px] max-h-none md:min-h-[500px] md:max-h-[900px] rounded-xl shadow-xl p-3 flex flex-col border border-accent2/30 bg-secondary">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-semibold text-main text-base">
-                          Answer
-                        </span>
+                    )}
+                    {panel === "answer" && (
+                      <div className="relative h-full">
                         <button
-                          onClick={() => setAnswerOpen((v) => !v)}
-                          className="p-1 text-main"
+                          onClick={() => setAnswerOpen(!answerOpen)}
+                          className="absolute top-[18px] right-2 z-10 p-1.5 rounded-md hover:bg-secondary/20 transition-colors"
                         >
                           {answerOpen ? (
-                            <ChevronUp className="w-5 h-5" />
+                            <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
                           ) : (
-                            <ChevronDown className="w-5 h-5" />
+                            <ChevronDown className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
                           )}
                         </button>
+                        {answerOpen && (
+                          <div className="h-full">
+                            <AnswerCard
+                              currentPattern={currentPattern}
+                              showAnswer={showAnswer}
+                              setShowAnswer={setShowAnswer}
+                              onNextPattern={nextPattern}
+                              onPatternChange={setCurrentPattern}
+                            />
+                          </div>
+                        )}
                       </div>
-                      {answerOpen && (
-                        <div className="h-full flex flex-col min-h-0">
-                          <AnswerCard
-                            currentPattern={currentPattern}
-                            showAnswer={showAnswer}
-                            setShowAnswer={setShowAnswer}
-                            onNextPattern={nextPattern}
-                            onPatternChange={setCurrentPattern}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </SortablePanel>
-              ))}
+                    )}
+                  </SortablePanel>
+                ))}
+              </div>
             </SortableContext>
           </DndContext>
+          <div className="mt-4">
+            <ReplCard userCode={userCode} />
+          </div>
+          <div className="fixed bottom-4 right-4">
+            <GamificationButton />
+          </div>
         </div>
-      </div>
+      </TooltipProvider>
       <div className="mt-4 text-center text-sm text-secondary flex-none">
         Created by{" "}
         <a
@@ -545,9 +385,6 @@ export default function AlgorithmTrainer() {
           Breon
         </a>
       </div>
-
-      {/* Add the GamificationButton */}
-      <GamificationButton />
     </div>
   );
 }

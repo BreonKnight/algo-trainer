@@ -233,7 +233,7 @@ export function CodeEditor({
           className="flex-1 min-h-[300px] overflow-hidden rounded-xl"
           style={{
             height: isDesktop ? "100%" : "300px",
-            minHeight: "300px",
+            minHeight: isDesktop ? "0" : "300px",
           }}
         >
           <Editor
