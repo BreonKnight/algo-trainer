@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
 import { AudioPlayer, Timer } from "../AudioPlayer";
 import { PatternCard } from "./PatternCard";
@@ -16,6 +16,8 @@ import {
   TooltipProvider,
 } from "../ui/tooltip";
 import { useTheme } from "../ThemeProvider";
+import { GamificationButton } from "../GamificationButton";
+import GamificationService from "../../lib/gamification";
 
 // interface TestCase {
 //   input: string;
@@ -64,6 +66,14 @@ export default function AlgorithmTrainer() {
       setUserCode("");
     }
   };
+
+  // Track algorithm pattern changes
+  useEffect(() => {
+    if (currentPattern) {
+      const gamificationService = GamificationService.getInstance();
+      gamificationService.recordAlgorithmAttempt(currentPattern, true);
+    }
+  }, [currentPattern]);
 
   return (
     <div className="container w-full mx-auto p-2 min-h-screen flex flex-col bg-main relative">
@@ -263,6 +273,9 @@ export default function AlgorithmTrainer() {
           Breon
         </a>
       </div>
+
+      {/* Add the GamificationButton */}
+      <GamificationButton />
     </div>
   );
 }

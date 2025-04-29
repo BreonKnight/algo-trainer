@@ -43,48 +43,65 @@
 .pseudocodeContent {
   position: relative;
   z-index: 3;
-  color: #f8f8f2;
+  color: var(--pseudocode-text);
   line-height: 1.4;
   white-space: pre-wrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: var(--pseudocode-text-shadow);
+}
+
+/* Style for algorithm metadata (time, space, usage) */
+.pseudocodeContent strong,
+.pseudocodeContent b {
+  color: var(--pseudocode-metadata);
+  font-weight: 700;
+  text-shadow: var(--pseudocode-metadata-shadow);
+}
+
+/* Style for algorithm type (e.g., "Sorting Algorithm") */
+.pseudocodeContent em,
+.pseudocodeContent i {
+  color: var(--pseudocode-type);
+  font-style: normal;
+  font-weight: 600;
+  text-shadow: var(--pseudocode-type-shadow);
 }
 
 .pseudocodeContent code {
-  color: #50fa7b;
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.2);
+  color: var(--pseudocode-code);
+  text-shadow: var(--pseudocode-code-shadow);
 }
 
 .pseudocodeContent .keyword {
-  color: #ff79c6;
-  text-shadow: 0 0 8px rgba(255, 121, 198, 0.2);
+  color: var(--pseudocode-keyword);
+  text-shadow: var(--pseudocode-keyword-shadow);
 }
 
 .pseudocodeContent .function {
-  color: #50fa7b;
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.2);
+  color: var(--pseudocode-function);
+  text-shadow: var(--pseudocode-function-shadow);
 }
 
 .pseudocodeContent .string {
-  color: #f1fa8c;
-  text-shadow: 0 0 8px rgba(241, 250, 140, 0.2);
+  color: var(--pseudocode-string);
+  text-shadow: var(--pseudocode-string-shadow);
 }
 
 .pseudocodeContent .number {
-  color: #bd93f9;
-  text-shadow: 0 0 8px rgba(189, 147, 249, 0.2);
+  color: var(--pseudocode-number);
+  text-shadow: var(--pseudocode-number-shadow);
 }
 
 .pseudocodeContent .comment {
-  color: #6272a4;
+  color: var(--pseudocode-comment);
   font-style: italic;
 }
 
 .pseudocodeContent h1 {
-  color: #ff79c6;
+  color: var(--pseudocode-heading);
   margin-bottom: 0.5rem;
   font-size: 1.1em;
   font-weight: 600;
-  text-shadow: 0 0 12px rgba(255, 121, 198, 0.4);
+  text-shadow: var(--pseudocode-heading-shadow);
   letter-spacing: 0.5px;
 }
 
@@ -114,8 +131,8 @@
   content: "▸";
   position: absolute;
   left: -1rem;
-  color: #50fa7b;
-  text-shadow: 0 0 8px rgba(80, 250, 123, 0.4);
+  color: var(--pseudocode-bullet);
+  text-shadow: var(--pseudocode-bullet-shadow);
   transition: transform 0.2s ease;
 }
 
@@ -125,7 +142,19 @@
 
 .pseudocodeContent li li::before {
   content: "◆";
-  color: #bd93f9;
+  color: var(--pseudocode-sub-bullet);
   font-size: 0.8em;
-  text-shadow: 0 0 8px rgba(189, 147, 249, 0.4);
+  text-shadow: var(--pseudocode-sub-bullet-shadow);
+}
+
+/* Add styles for the metadata text */
+.pseudocodeContainer .text-secondary {
+  color: var(--pseudocode-metadata) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+.pseudocodeContainer .text-accent {
+  color: var(--pseudocode-heading) !important;
+  font-weight: 700 !important;
 }
