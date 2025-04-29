@@ -78,7 +78,6 @@ export function AnswerCard({
       );
     }
     const val = algorithmPatterns[currentPattern];
-    console.log("algorithmPatterns[currentPattern]:", val);
     if (typeof val === "string") {
       return val;
     }
