@@ -110,10 +110,22 @@ export function PatternCard({
   const { theme } = useTheme();
   const [descHeight, setDescHeight] = useState(300);
   const descRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     setDescHeight(300);
   }, [currentPattern]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
@@ -197,29 +209,34 @@ export function PatternCard({
               <MonsterHunterGuide currentPattern={currentPattern} />
             </div>
           ) : (
-            <div className="h-full flex flex-col">
+            <div className="h-full flex flex-col overflow-hidden">
               <div
                 ref={descRef}
-                className={`${styles.pseudocodeContainer} flex-1 min-h-0 w-full bg-main/90 rounded leading-relaxed overflow-y-auto`}
-                style={{ maxHeight: descHeight }}
+                className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/90 rounded-xl`}
+                style={{
+                  height: isDesktop ? descHeight : "300px",
+                  minHeight: "300px",
+                }}
               >
-                <div
-                  className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed`}
-                >
-                  {(() => {
-                    const pseudo = typedPseudocodePatterns[currentPattern];
-                    if (typeof pseudo === "function") {
-                      return pseudo();
-                    } else {
-                      return (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: pseudo || "Pseudocode coming soon...",
-                          }}
-                        />
-                      );
-                    }
-                  })()}
+                <div className="h-full w-full overflow-y-auto">
+                  <div
+                    className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed p-4`}
+                  >
+                    {(() => {
+                      const pseudo = typedPseudocodePatterns[currentPattern];
+                      if (typeof pseudo === "function") {
+                        return pseudo();
+                      } else {
+                        return (
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: pseudo || "Pseudocode coming soon...",
+                            }}
+                          />
+                        );
+                      }
+                    })()}
+                  </div>
                 </div>
               </div>
               {/* Vertical resize handle */}
@@ -227,13 +244,14 @@ export function PatternCard({
                 className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
                 style={{ userSelect: "none" }}
                 onMouseDown={(e) => {
+                  if (!isDesktop) return;
                   const startY = e.clientY;
                   const startHeight = descRef.current?.offsetHeight || 0;
-                  const maxHeight = 500;
+                  const maxHeight = 800; // Increased max height
                   const onMove = (moveEvent: MouseEvent) => {
                     const delta = moveEvent.clientY - startY;
                     const newHeight = Math.max(
-                      120,
+                      300,
                       Math.min(startHeight + delta, maxHeight)
                     );
                     setDescHeight(newHeight);
