@@ -46,4 +46,5 @@ def heapify(arr, n, i):
         heapify(arr, i, 0)
     
     return arr`,
+  category: "Sorting",
 };

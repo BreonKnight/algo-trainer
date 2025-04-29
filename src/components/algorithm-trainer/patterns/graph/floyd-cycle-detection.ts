@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const floyd_cycle_detectionPattern: AlgorithmPattern = {
   title: "Floyd's Cycle Detection Algorithm",
-  description: "Also known as the 'tortoise and hare' algorithm, used to detect cycles in a linked list or array, and find the start of the cycle.",
+  description:
+    "Also known as the 'tortoise and hare' algorithm, used to detect cycles in a linked list or array, and find the start of the cycle.",
   timeComplexity: "O(n)",
   spaceComplexity: "O(1)",
+  category: "Graph Algorithms",
   pseudocode: `
 Floyd's Algorithm steps:
 1. Initialize slow and fast pointers to head
@@ -84,5 +86,5 @@ def find_cycle_length(head):
         length += 1
         fast = fast.next
     
-    return length`
+    return length`,
 };

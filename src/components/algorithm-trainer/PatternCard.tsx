@@ -13,6 +13,14 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
+import { useTheme } from "@/components/ThemeProvider";
+
+// Define the type for pseudocodePatterns
+type PseudocodePatterns = Record<string, string | (() => JSX.Element)>;
+
+// Type assertion for the imported pseudocodePatterns
+const typedPseudocodePatterns =
+  pseudocodePatterns as unknown as PseudocodePatterns;
 
 interface PatternCardProps {
   currentPattern: PatternKey;
@@ -59,6 +67,7 @@ const patternCategories: Record<string, string[]> = {
     "Trie",
     "Hash Table",
     "Graph",
+    "Tree",
   ],
   "Dynamic Programming": [
     "Dynamic Programming",
@@ -92,14 +101,14 @@ const getPatternCategory = (pattern: string): string => {
 // Get color for a category
 const getCategoryColor = (category: string): string => {
   const colors: Record<string, string> = {
-    Sorting: "text-[#ff79c6]",
-    Searching: "text-[#50fa7b]",
-    "Graph Algorithms": "text-[#8be9fd]",
-    "String Algorithms": "text-[#bd93f9]",
-    "Data Structures": "text-[#ffb86c]",
-    "Dynamic Programming": "text-[#ff5555]",
-    Techniques: "text-[#f1fa8c]",
-    Other: "text-[#6272a4]",
+    Sorting: "text-accent",
+    Searching: "text-accent2",
+    "Graph Algorithms": "text-accent2",
+    "String Algorithms": "text-accent3",
+    "Data Structures": "text-accent",
+    "Dynamic Programming": "text-accent",
+    Techniques: "text-accent3",
+    Other: "text-secondary",
   };
   return colors[category] || colors["Other"];
 };
@@ -112,19 +121,35 @@ export function PatternCard({
   const [isExpanded, setIsExpanded] = useState(true);
   const category = getPatternCategory(currentPattern);
   const categoryColor = getCategoryColor(category);
+  const { theme } = useTheme();
+  const isLight = theme === "light" || theme === "solarized";
 
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
+      <div className="mb-2">
+        <h2
+          className={`text-base sm:text-lg font-semibold truncate flex-none ${
+            theme === "nord"
+              ? "text-white"
+              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+          }`}
+          style={
+            theme === "nord"
+              ? undefined
+              : {
+                  backgroundImage:
+                    "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                }
+          }
+        >
+          {currentPattern}
+        </h2>
+        <span className={theme === "nord" ? "text-white/70" : "text-secondary"}>
+          {category}
+        </span>
+      </div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <div className="flex flex-col">
-            <h2
-              className={`text-base sm:text-lg font-semibold ${categoryColor} truncate flex-none`}
-            >
-              {currentPattern}
-            </h2>
-            <span className="text-xs text-[#6272a4]">{category}</span>
-          </div>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -132,7 +157,7 @@ export function PatternCard({
                   variant="ghost"
                   size="default"
                   onClick={() => setShowMonsterGuide(!showMonsterGuide)}
-                  className="text-[#ff79c6] hover:text-[#ff79c6] hover:bg-[#6272a4]/20 p-2"
+                  className="text-accent hover:text-accent hover:bg-secondary/20 p-2"
                 >
                   {showMonsterGuide ? (
                     <Book className="w-6 h-6" />
@@ -150,7 +175,7 @@ export function PatternCard({
             variant="ghost"
             size="default"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-[#6272a4] hover:text-[#6272a4] hover:bg-[#6272a4]/20 p-2"
+            className="text-secondary hover:text-secondary hover:bg-secondary/20 p-2"
           >
             {isExpanded ? (
               <ChevronUp className="w-6 h-6" />
@@ -167,21 +192,33 @@ export function PatternCard({
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 relative">
+      <div className="flex-1 min-h-0 relative overflow-hidden">
         {isExpanded &&
           (showMonsterGuide ? (
-            <MonsterHunterGuide currentPattern={currentPattern} />
+            <div className="absolute inset-0 overflow-y-auto">
+              <MonsterHunterGuide currentPattern={currentPattern} />
+            </div>
           ) : (
             <div className="absolute inset-0 overflow-y-auto">
               <div className={`${styles.pseudocodeContainer} w-full`}>
                 <div
-                  className={`${styles.pseudocodeContent} text-sm sm:text-base w-full`}
-                  dangerouslySetInnerHTML={{
-                    __html:
-                      pseudocodePatterns.get(currentPattern) ||
-                      "Pseudocode coming soon...",
-                  }}
-                />
+                  className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main`}
+                >
+                  {(() => {
+                    const pseudo = typedPseudocodePatterns[currentPattern];
+                    if (typeof pseudo === "function") {
+                      return pseudo();
+                    } else {
+                      return (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: pseudo || "Pseudocode coming soon...",
+                          }}
+                        />
+                      );
+                    }
+                  })()}
+                </div>
               </div>
             </div>
           ))}

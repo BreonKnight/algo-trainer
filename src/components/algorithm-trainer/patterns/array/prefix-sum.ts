@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const prefix_sumPattern: AlgorithmPattern = {
   title: "Prefix Sum Pattern",
-  description: "A technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.",
+  description:
+    "A technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.",
   timeComplexity: "Build: O(n), Query: O(1)",
   spaceComplexity: "O(n) for prefix array",
+  category: "Array",
   pseudocode: `
 Prefix Sum operations:
 1. Build prefix array:
@@ -44,5 +46,5 @@ prefix[4] - prefix[1] = 15 - 3 = 12
     
     def range_average(self, left, right):
         sum_range = self.range_sum(left, right)
-        return sum_range / (right - left + 1)`
+        return sum_range / (right - left + 1)`,
 };

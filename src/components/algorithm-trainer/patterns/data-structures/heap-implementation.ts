@@ -2,7 +2,9 @@ import { AlgorithmPattern } from "../../types";
 
 export const heap_implementationPattern: AlgorithmPattern = {
   title: "Binary Heap Implementation",
-  description: "Implementation of a complete binary tree that satisfies the heap property (min-heap or max-heap), commonly used for priority queues.",
+  category: "Data Structures",
+  description:
+    "Implementation of a complete binary tree that satisfies the heap property (min-heap or max-heap), commonly used for priority queues.",
   timeComplexity: "Insert/Delete: O(log n), Get Min/Max: O(1)",
   spaceComplexity: "O(n) for n elements",
   pseudocode: `
@@ -85,5 +87,5 @@ heap.insert(1)
             self._bubbleDown(min_idx)
     
     def peek(self):
-        return self.heap[0] if self.heap else None`
+        return self.heap[0] if self.heap else None`,
 };

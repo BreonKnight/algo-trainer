@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const monotonic_queuePattern: AlgorithmPattern = {
   title: "Monotonic Queue Pattern",
-  description: "A queue that maintains its elements in a strictly increasing or decreasing order, commonly used for sliding window maximum/minimum problems.",
+  description:
+    "A queue that maintains its elements in a strictly increasing or decreasing order, commonly used for sliding window maximum/minimum problems.",
   timeComplexity: "O(n) for n elements",
+  category: "Data Structures",
   spaceComplexity: "O(k) where k is window size",
   pseudocode: `
 Monotonic Queue operations:
@@ -68,5 +70,5 @@ def sliding_window_minimum(arr, k):
         if i >= k - 1:
             result.append(arr[window[0]])
     
-    return result`
+    return result`,
 };

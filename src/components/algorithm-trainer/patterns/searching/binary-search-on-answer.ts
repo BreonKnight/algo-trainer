@@ -2,7 +2,8 @@ import { AlgorithmPattern } from "../../types";
 
 export const binary_search_on_answerPattern: AlgorithmPattern = {
   title: "Binary Search on Answer Algorithm",
-  description: "A problem-solving pattern that uses binary search to find an answer in a range of possible values, typically used when the answer space is monotonic.",
+  description:
+    "A problem-solving pattern that uses binary search to find an answer in a range of possible values, typically used when the answer space is monotonic.",
   timeComplexity: "O(log n) * C, where C is the cost of checking a value",
   spaceComplexity: "O(1)",
   pseudocode: `1. Define check(x) function that returns true if x is valid\n2. Initialize left = min_possible, right = max_possible\n3. While left < right:\n   a. mid = (left + right) // 2\n   b. If check(mid):\n      - right = mid\n   c. Else:\n      - left = mid + 1\n4. Return left`,
@@ -32,5 +33,6 @@ Answer: 4`,
         else:
             left = mid + 1
     
-    return left`
+    return left`,
+  category: "Searching",
 };

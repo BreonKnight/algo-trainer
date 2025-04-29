@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const matrix_traversalPattern: AlgorithmPattern = {
   title: "Matrix Traversal",
-  description: "A pattern for traversing a 2D matrix iteratively, typically using nested loops to visit each element in a specific order (row-wise or column-wise).",
+  description:
+    "A pattern for traversing a 2D matrix iteratively, typically using nested loops to visit each element in a specific order (row-wise or column-wise).",
   timeComplexity: "O(m*n) where m is rows and n is columns",
   spaceComplexity: "O(1) for traversal, O(m*n) if storing results",
+  category: "Array",
   pseudocode: `
 Matrix Traversal steps:
 1. For each row i from 0 to rows-1:
@@ -52,5 +54,5 @@ def matrix_traversal_columnwise(matrix):
         for i in range(rows):
             result.append(matrix[i][j])
     
-    return result`
+    return result`,
 };

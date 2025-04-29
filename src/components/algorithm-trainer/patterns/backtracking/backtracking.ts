@@ -42,4 +42,5 @@ export const backtrackingPattern: AlgorithmPattern = {
         result = []
         backtrack(get_candidates(input), [], result)
         return result`,
+  category: "Backtracking",
 };

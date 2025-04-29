@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const linked_listPattern: AlgorithmPattern = {
   title: "Linked List Implementation",
-  description: "Implementation of a linear data structure where each element points to the next element in the sequence.",
+  description:
+    "Implementation of a linear data structure where each element points to the next element in the sequence.",
   timeComplexity: "Access: O(n), Insert/Delete at known position: O(1)",
+  category: "Data Structures",
   spaceComplexity: "O(n) for n elements",
   pseudocode: `Linked List operations:\n1. append(element):\n   - Add element to end\n2. prepend(element):\n   - Add element to start\n3. delete(element):\n   - Remove first occurrence\n4. insert(element, position):\n   - Insert at specific position\n5. search(element):\n   - Return position of element`,
   example: `list = LinkedList()
@@ -26,10 +28,9 @@ class LinkedList:
         if not self.head:
             self.head = new_node
             return
-        
-            current = self.head
-            while current.next:
-                current = current.next
+        current = self.head
+        while current.next:
+            current = current.next
         current.next = new_node
     
     def prepend(self, data):
@@ -48,7 +49,7 @@ class LinkedList:
         current = self.head
         while current.next:
             if current.next.data == data:
-            current.next = current.next.next
+                current.next = current.next.next
                 return
             current = current.next
     
@@ -66,5 +67,7 @@ class LinkedList:
         
         if current:
             new_node.next = current.next
-            current.next = new_node`
+            current.next = new_node
+}
+`,
 };

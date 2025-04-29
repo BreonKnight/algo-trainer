@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const matrix_traversal_recursivePattern: AlgorithmPattern = {
   title: "Matrix Traversal Recursive",
-  description: "A recursive approach to traverse a 2D matrix, which can be particularly useful for problems requiring backtracking or complex traversal patterns.",
+  description:
+    "A recursive approach to traverse a 2D matrix, which can be particularly useful for problems requiring backtracking or complex traversal patterns.",
   timeComplexity: "O(m*n) where m is rows and n is columns",
   spaceComplexity: "O(m*n) due to recursive call stack",
+  category: "Array",
   pseudocode: `
 Matrix Recursive Traversal steps:
 1. Base case: Check bounds and conditions
@@ -50,5 +52,5 @@ traverse(0,0) -> 1
             traverse(row + 1, 0)
     
     traverse(0, 0)
-    return result`
+    return result`,
 };

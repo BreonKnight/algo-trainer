@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
-import { linearSearchPattern } from "./linear-search";
-import { binarySearchOnAnswerPattern } from "./binary-search-on-answer";
+import { linear_searchPattern } from "./linear-search";
+import { binary_search_on_answerPattern } from "./binary-search-on-answer";
 import { binarySearchPattern } from "./binary-search";
 
 type SearchingPatternKey =
@@ -8,11 +8,10 @@ type SearchingPatternKey =
   | "Linear Search"
   | "Binary Search on Answer";
 
-export const searchingPatterns: Partial<
-  Record<SearchingPatternKey, AlgorithmPattern>
-> = {
-  "Binary Search": binarySearchPattern,
-  "Linear Search": linearSearchPattern,
-  "Binary Search on Answer": binarySearchOnAnswerPattern,
-  // Add other searching patterns here
-};
+export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
+  {
+    "Binary Search": binarySearchPattern,
+    "Linear Search": linear_searchPattern,
+    "Binary Search on Answer": binary_search_on_answerPattern,
+    // Add other searching patterns here
+  };

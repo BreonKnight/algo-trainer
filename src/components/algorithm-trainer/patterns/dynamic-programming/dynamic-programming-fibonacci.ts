@@ -1,8 +1,9 @@
 import { AlgorithmPattern } from "../../types";
 
-export const dynamic_programming_fibonacciPattern: AlgorithmPattern = {
+export const dynamicProgrammingFibonacciPattern: AlgorithmPattern = {
   title: "Dynamic Programming Fibonacci",
-  description: "A classic example of dynamic programming that calculates Fibonacci numbers efficiently by storing previously computed values.",
+  description:
+    "A classic example of dynamic programming that calculates Fibonacci numbers efficiently by storing previously computed values.",
   timeComplexity: "O(n)",
   spaceComplexity: "O(n)",
   pseudocode: `1. Initialize dp array with base cases\n2. For i from 2 to n:\n   a. dp[i] = dp[i-1] + dp[i-2]\n3. Return dp[n]`,
@@ -25,5 +26,6 @@ Result: 5`,
     for i in range(2, n + 1):
         dp[i] = dp[i-1] + dp[i-2]
     
-    return dp[n]`
+    return dp[n]`,
+  category: "Dynamic Programming",
 };

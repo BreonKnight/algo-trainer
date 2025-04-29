@@ -24,6 +24,19 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    --pseudocode-gradient: linear-gradient(
+      135deg,
+      rgba(40, 42, 54, 0.95) 0%,
+      rgba(68, 71, 90, 0.95) 50%,
+      rgba(40, 42, 54, 0.95) 100%
+    );
+    --pseudocode-gradient-overlay: linear-gradient(
+      135deg,
+      rgba(189, 147, 249, 0.08) 0%,
+      rgba(80, 250, 123, 0.08) 50%,
+      rgba(255, 121, 198, 0.08) 100%
+    );
+    --text-selected-dark: #282a36;
   }
 
   .dark {
@@ -46,6 +59,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    --text-selected-dark: #282a36;
   }
 }
 
@@ -136,4 +150,281 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Default (Dracula) Theme */
+:root,
+.theme-dracula {
+  --bg-main: #282a36;
+  --bg-secondary: #44475a;
+  --text-main: #f8f8f2;
+  --text-secondary: #6272a4;
+  --accent: #ff79c6;
+  --accent2: #8be9fd;
+  --accent3: #bd93f9;
+  --border: #6272a4;
+  --error: #ff5555;
+  --success: #50fa7b;
+  --gradient-from: #ff79c6;
+  --gradient-to: #bd93f9;
+  --focus-ring: #ff79c6;
+  --text-selected-dark: #282a36;
+}
+
+.theme-solarized {
+  --bg-main: #fdf6e3;
+  --bg-secondary: #eee8d5;
+  --text-main: #657b83;
+  --text-secondary: #93a1a1;
+  --accent: #b58900;
+  --accent2: #268bd2;
+  --accent3: #2aa198;
+  --gradient-from: #b58900;
+  --gradient-to: #268bd2;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(253, 246, 227, 0.95) 0%,
+    rgba(238, 232, 213, 0.95) 50%,
+    rgba(253, 246, 227, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(181, 137, 0, 0.08) 0%,
+    rgba(38, 139, 210, 0.08) 50%,
+    rgba(42, 161, 152, 0.08) 100%
+  );
+  --text-selected-dark: #22223b;
+}
+
+.theme-light {
+  --bg-main: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --text-main: #22223b;
+  --text-secondary: #6272a4;
+  --accent: #6366f1;
+  --accent2: #f59e42;
+  --accent3: #10b981;
+  --gradient-from: #6366f1;
+  --gradient-to: #10b981;
+  --border: #6272a4;
+  --focus-ring: #6366f1;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(248, 250, 252, 0.95) 0%,
+    rgba(226, 232, 240, 0.95) 50%,
+    rgba(248, 250, 252, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(245, 158, 66, 0.08) 50%,
+    rgba(16, 185, 129, 0.08) 100%
+  );
+  --text-selected-dark: #22223b;
+}
+
+body,
+html {
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Example usage for Tailwind utility overrides */
+.bg-main {
+  background-color: var(--bg-main) !important;
+}
+.bg-secondary {
+  background-color: var(--bg-secondary) !important;
+}
+.text-main {
+  color: var(--text-main) !important;
+}
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+.text-accent {
+  color: var(--accent) !important;
+}
+.text-accent2 {
+  color: var(--accent2) !important;
+}
+.text-accent3 {
+  color: var(--accent3) !important;
+}
+.bg-accent {
+  background-color: var(--accent) !important;
+}
+.bg-accent2 {
+  background-color: var(--accent2) !important;
+}
+.bg-accent3 {
+  background-color: var(--accent3) !important;
+}
+
+/* Global focus ring and border fix for Dracula and all themes */
+:root,
+.theme-dracula {
+  --focus-ring: #ff79c6;
+  --border: #6272a4;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus-ring) !important;
+  outline-offset: 2px;
+}
+
+/* Override default border color for interactive elements */
+button,
+input,
+select,
+textarea,
+.border,
+.border-solid {
+  border-color: var(--border) !important;
+}
+
+.theme-nord {
+  --bg-main: #3e328c; /* GameCube indigo purple */
+  --bg-secondary: #4b3da6; /* Slightly lighter purple */
+  --text-main: #e6e6e6; /* Light text */
+  --text-secondary: #8b8b8b; /* Gray text */
+  --accent: #ff0000; /* Red button */
+  --accent2: #0066ff; /* Blue button */
+  --accent3: #00a800; /* Green button */
+  --border: #5646c0; /* Light purple border */
+  --error: #ff0000; /* Red button */
+  --success: #00a800; /* Green button */
+  --gradient-from: #3e328c; /* GameCube purple */
+  --gradient-to: #5646c0; /* Lighter purple */
+  --focus-ring: #0066ff; /* Blue button */
+  --text-selected-dark: #3e328c;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(62, 50, 140, 0.95) 0%,
+    rgba(75, 61, 166, 0.95) 50%,
+    rgba(62, 50, 140, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(255, 0, 0, 0.08) 0%,
+    rgba(0, 102, 255, 0.08) 50%,
+    rgba(0, 168, 0, 0.08) 100%
+  );
+  --radius: 0.5rem;
+}
+
+.theme-snes {
+  --bg-main: #cfcfcf;
+  --bg-secondary: #bebebe;
+  --text-main: #333333;
+  --text-secondary: #666666;
+  --accent: #ff0000; /* Red button */
+  --accent2: #0000ff; /* Blue button */
+  --accent3: #00b800; /* Green button */
+  --border: #999999;
+  --error: #ff0000; /* Red button */
+  --success: #00b800; /* Green button */
+  --gradient-from: #ff0000; /* Red button */
+  --gradient-to: #0000ff; /* Blue button */
+  --focus-ring: #0000ff; /* Blue button */
+  --text-selected-dark: #333333;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(207, 207, 207, 0.95) 0%,
+    rgba(190, 190, 190, 0.95) 50%,
+    rgba(207, 207, 207, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(255, 0, 0, 0.08) 0%,
+    rgba(0, 0, 255, 0.08) 50%,
+    rgba(0, 184, 0, 0.08) 100%
+  );
+}
+
+.theme-ps2 {
+  --bg-main: #001b4d;
+  --bg-secondary: #002b75;
+  --text-main: #b4c7ff;
+  --text-secondary: #6b88cc;
+  --accent: #4b75ff;
+  --accent2: #00a5ff;
+  --accent3: #2e59ff;
+  --border: #0045b5;
+  --error: #ff4b4b;
+  --success: #00a5ff;
+  --gradient-from: #4b75ff;
+  --gradient-to: #00a5ff;
+  --focus-ring: #4b75ff;
+  --text-selected-dark: #001b4d;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(0, 27, 77, 0.95) 0%,
+    rgba(0, 43, 117, 0.95) 50%,
+    rgba(0, 27, 77, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(75, 117, 255, 0.08) 0%,
+    rgba(0, 165, 255, 0.08) 50%,
+    rgba(46, 89, 255, 0.08) 100%
+  );
+}
+
+.theme-re2 {
+  --bg-main: #0a0a0a; /* Deep black */
+  --bg-secondary: #1a1816; /* Very dark brown/green shadow */
+  --text-main: #e6e0d6; /* Bone/ivory white */
+  --text-secondary: #b0a99f; /* Muted light bone */
+  --accent: #b80000; /* Blood red */
+  --accent2: #e60000; /* Bright blood red */
+  --accent3: #c7a14a; /* Ochre/gold highlight */
+  --border: #3a2c2c; /* Dark brown border */
+  --error: #e60000; /* Bright blood red */
+  --success: #c7a14a; /* Ochre/gold */
+  --gradient-from: #b80000; /* Blood red */
+  --gradient-to: #c7a14a; /* Ochre/gold */
+  --focus-ring: #e60000; /* Bright blood red */
+  --text-selected-dark: #0a0a0a;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(10, 10, 10, 0.95) 0%,
+    rgba(26, 24, 22, 0.95) 50%,
+    rgba(10, 10, 10, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(184, 0, 0, 0.08) 0%,
+    rgba(231, 0, 0, 0.08) 50%,
+    rgba(199, 161, 74, 0.08) 100%
+  );
+}
+
+.theme-mh {
+  --bg-main: #1c2320; /* Deep forest background */
+  --bg-secondary: #2a332d; /* Misty forest green */
+  --text-main: #e8d5a9; /* Warm gold text */
+  --text-secondary: #a89978; /* Muted gold */
+  --accent: #d4b056; /* Monster scales gold */
+  --accent2: #66a355; /* Vibrant grass green */
+  --accent3: #4a7b8c; /* Steel blue armor */
+  --border: #3d4b41; /* Forest shadow */
+  --error: #cc3434; /* Blood red */
+  --success: #7aa364; /* Forest green */
+  --gradient-from: #d4b056; /* Monster scales gold */
+  --gradient-to: #66a355; /* Vibrant grass green */
+  --focus-ring: #4a7b8c; /* Steel blue armor */
+  --text-selected-dark: #1c2320;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(28, 35, 32, 0.95) 0%,
+    rgba(42, 51, 45, 0.95) 50%,
+    rgba(28, 35, 32, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(212, 176, 86, 0.08) 0%,
+    rgba(102, 163, 85, 0.08) 50%,
+    rgba(74, 123, 140, 0.08) 100%
+  );
 }

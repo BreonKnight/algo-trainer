@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const bfs_linked_listPattern: AlgorithmPattern = {
   title: "BFS on Linked List",
-  description: "Application of BFS pattern to process a linked list level by level, useful for operations like finding the middle node or detecting cycles.",
+  description:
+    "Application of BFS pattern to process a linked list level by level, useful for operations like finding the middle node or detecting cycles.",
   timeComplexity: "O(n)",
+  category: "Graph Algorithms",
   spaceComplexity: "O(1) as we process one node at a time",
   pseudocode: `1. Initialize slow and fast pointers\n2. While fast pointer valid:\n   a. Move slow one step\n   b. Move fast two steps\n3. Slow pointer at middle/cycle start`,
   example: `List: 1->2->3->4->5->null
@@ -42,5 +44,5 @@ def has_cycle(head):
         if slow == fast:
             return True
     
-    return False`
+    return False`,
 };

@@ -2,7 +2,8 @@ import { AlgorithmPattern } from "../../types";
 
 export const zalgorithmPattern: AlgorithmPattern = {
   title: "Z-Algorithm",
-  description: "A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).",
+  description:
+    "A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).",
   timeComplexity: "O(n + m)",
   spaceComplexity: "O(n + m)",
   pseudocode: `
@@ -69,5 +70,6 @@ def z_algorithm(text, pattern):
         if z[i] == pattern_length:
             matches.append(i - pattern_length - 1)
     
-    return matches`
+    return matches`,
+  category: "String",
 };

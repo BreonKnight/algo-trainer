@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const dfs_binary_treePattern: AlgorithmPattern = {
   title: "DFS on Binary Tree",
-  description: "Application of DFS to traverse a binary tree, with three main variations: pre-order, in-order, and post-order traversal.",
+  description:
+    "Application of DFS to traverse a binary tree, with three main variations: pre-order, in-order, and post-order traversal.",
   timeComplexity: "O(n)",
+  category: "Graph Algorithms",
   spaceComplexity: "O(h) where h is tree height",
   pseudocode: `Pre-order traversal:\n1. Process root\n2. Traverse left subtree\n3. Traverse right subtree\n\nIn-order traversal:\n1. Traverse left subtree\n2. Process root\n3. Traverse right subtree\n\nPost-order traversal:\n1. Traverse left subtree\n2. Traverse right subtree\n3. Process root`,
   example: `Tree:
@@ -41,5 +43,5 @@ def postorder(root):
         return
     postorder(root.left)  # Left subtree
     postorder(root.right)  # Right subtree
-    print(root.val)  # Process root`
+    print(root.val)  # Process root`,
 };
