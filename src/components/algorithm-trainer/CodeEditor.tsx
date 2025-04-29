@@ -76,7 +76,7 @@ export function CodeEditor({
   const { theme } = useTheme();
   const isDesktop = useIsDesktop();
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { showTop, showBottom } = useScrollShadows(scrollRef);
+  const [editorHeight, setEditorHeight] = useState<string | number>("300px");
 
   // Persistent user code
   useEffect(() => {
@@ -92,14 +92,6 @@ export function CodeEditor({
   const [fontSize, setFontSize] = useState(14);
   const minFont = 12,
     maxFont = 28;
-
-  // Editor height (vertical resize)
-  const [editorHeight, setEditorHeight] = useState<string | number>(
-    isDesktop ? "100%" : 300
-  );
-  useEffect(() => {
-    setEditorHeight(isDesktop ? "100%" : 300);
-  }, [isDesktop]);
 
   // Decorations for error highlighting
   const [decorations, setDecorations] = useState<any[]>([]);
@@ -167,6 +159,16 @@ export function CodeEditor({
     // eslint-disable-next-line
   }, [userCode, onRunCode, onShowAnswer, onNextPattern, onPrevPattern]);
 
+  // Update editor height on mount and resize
+  useEffect(() => {
+    const updateHeight = () => {
+      setEditorHeight(isDesktop ? "100%" : "300px");
+    };
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [isDesktop]);
+
   // Editor mount
   const handleEditorDidMount = (editor: any, monaco: Monaco) => {
     monacoRef.current = monaco;
@@ -181,6 +183,11 @@ export function CodeEditor({
     monaco.editor.defineTheme("mh", mhTheme);
     monaco.editor.setTheme(theme);
     editor.focus();
+
+    // Force layout update
+    setTimeout(() => {
+      editor.layout();
+    }, 100);
   };
 
   return (
@@ -221,9 +228,16 @@ export function CodeEditor({
         </button>
       </div>
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
-        <div ref={scrollRef} className="flex-1 min-h-0 overflow-hidden">
+        <div
+          ref={scrollRef}
+          className="flex-1 min-h-[300px] overflow-hidden rounded-xl"
+          style={{
+            height: isDesktop ? "100%" : "300px",
+            minHeight: "300px",
+          }}
+        >
           <Editor
-            height="100%"
+            height={editorHeight}
             defaultLanguage="python"
             theme={theme}
             value={userCode}
