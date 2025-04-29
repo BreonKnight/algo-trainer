@@ -1976,4 +1976,112 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
         </div>
       </div>
     ),
+    "Divide and Conquer": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Divide and Conquer Pattern
+          </span>
+          <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(n log n) - divide and conquer approach &nbsp;|&nbsp; Space:
+          O(n) - additional array storage &nbsp;|&nbsp; Use: Sorting, Searching,
+          and more
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Divide the problem into smaller sub-problems:
+            </span>{" "}
+            Break the problem into two or more smaller sub-problems
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Solve each sub-problem recursively:
+            </span>{" "}
+            Recursively solve each sub-problem
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Combine solutions:
+            </span>{" "}
+            Combine solutions of sub-problems to solve the original problem
+          </span>
+        </div>
+      </div>
+    ),
+    Recursion: () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Recursion Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(n) - each recursive call &nbsp;|&nbsp; Space: O(n) - call
+          stack storage &nbsp;|&nbsp; Use: Tree traversal, Backtracking,
+          Sorting, Searching
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Base case:</span> Define
+            the condition that stops the recursion
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Recursive case:</span>{" "}
+            Call the function with a smaller problem
+          </span>
+        </div>
+      </div>
+    ),
+    "Dynamic Programming Pattern": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Dynamic Programming Pattern
+          </span>
+          <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(n^2) - nested loops &nbsp;|&nbsp; Space: O(n) - additional
+          array storage &nbsp;|&nbsp; Use: Optimizing repetitive calculations
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize a DP array:
+            </span>{" "}
+            Create an array to store intermediate results
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Fill the DP array:
+            </span>{" "}
+            Iterate through the problem, Calculate optimal solutions
+          </span>
+        </div>
+      </div>
+    ),
   };

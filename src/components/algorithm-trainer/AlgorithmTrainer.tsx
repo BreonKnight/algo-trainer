@@ -31,6 +31,7 @@ export default function AlgorithmTrainer() {
   // const [testCases, setTestCases] = useState<TestCase[]>([]);
   const patternHistoryRef = useRef<PatternKey[]>([]);
   const currentIndexRef = useRef<number>(-1);
+  const theme = useTheme().theme;
 
   const nextPattern = () => {
     const randomIndex = Math.floor(Math.random() * PATTERN_KEYS.length);
@@ -156,7 +157,7 @@ export default function AlgorithmTrainer() {
           </div>
           {/* Right: How to Use (top), Theme (bottom) */}
           <div className="flex flex-col items-end z-10 w-full md:w-auto max-w-md overflow-x-auto">
-            <div className="flex flex-col gap-y-10 p-4 bg-[rgba(40,42,54,0.7)] rounded-xl shadow-md border border-secondary/40 w-full md:w-auto max-w-md">
+            <div className="flex flex-col gap-y-10 p-4 bg-secondary/70 rounded-xl shadow-md border border-secondary/40 w-full md:w-auto max-w-md">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <HelpModal />
@@ -167,7 +168,9 @@ export default function AlgorithmTrainer() {
                 <TooltipTrigger asChild>
                   <button
                     onClick={useTheme().toggleTheme}
-                    className="h-9 px-4 rounded-lg shadow-lg font-semibold bg-secondary border border-accent text-main transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-accent2/50 flex items-center justify-center"
+                    className={`h-9 px-4 rounded-lg shadow-lg font-semibold bg-secondary border border-accent ${
+                      theme === "solarized" ? "text-accent" : "text-main"
+                    } transition-all duration-200 hover:scale-105 focus:ring-2 focus:ring-accent2/50 flex items-center justify-center`}
                     aria-label="Switch theme"
                   >
                     <span className="truncate max-w-[60px] md:max-w-[120px] w-full text-center">
