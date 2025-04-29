@@ -1,8 +1,10 @@
 import { AlgorithmPattern } from "../../types";
 
 export const greedy_fractional_knapsackPattern: AlgorithmPattern = {
+  category: "Greedy Algorithms",
   title: "Greedy Fractional Knapsack",
-  description: "A greedy approach to the knapsack problem where items can be broken into smaller pieces, always choosing the item with the highest value per unit weight.",
+  description:
+    "A greedy approach to the knapsack problem where items can be broken into smaller pieces, always choosing the item with the highest value per unit weight.",
   timeComplexity: "O(n log n)",
   spaceComplexity: "O(1)",
   pseudocode: `1. Calculate value/weight ratio for each item\n2. Sort items by ratio in descending order\n3. For each item:\n   a. If can take whole item:\n      - Take it completely\n   b. Else:\n      - Take fraction that fits\n4. Return total value`,
@@ -34,5 +36,5 @@ Total value: 240`,
             total_value += ratio * remaining
             break
     
-    return total_value`
+    return total_value`,
 };

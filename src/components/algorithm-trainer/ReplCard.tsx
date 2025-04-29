@@ -2,6 +2,14 @@ import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
 import { loadPyodide } from "pyodide";
+import { toast } from "sonner";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "../ui/tooltip";
+import { useTheme } from "../ThemeProvider";
 
 interface ReplCardProps {
   userCode: string;
@@ -12,6 +20,8 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [pyodide, setPyodide] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const { theme } = useTheme();
+  const isLight = theme === "light" || theme === "solarized";
 
   useEffect(() => {
     let mounted = true;
@@ -66,6 +76,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const runCode = async () => {
     if (!pyodide) {
       setOutput("Python environment is not ready yet. Please wait...");
+      toast.error("Python environment is not ready yet. Please wait...");
       return;
     }
 
@@ -92,8 +103,10 @@ except Exception as e:
     print(f"Error: {str(e)}")
 `;
       await pyodide.runPythonAsync(wrappedCode);
+      toast.success("Code ran successfully!");
     } catch (error: any) {
       setError(`Error: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     }
 
     setIsLoading(false);
@@ -105,34 +118,59 @@ except Exception as e:
   };
 
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
       <div className="flex justify-between items-center mb-2">
-        <h2 className="text-base sm:text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#50fa7b] to-[#8be9fd] truncate">
+        <h2
+          className={
+            "text-base sm:text-lg font-semibold truncate " +
+            (theme === "nord"
+              ? "text-white"
+              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+          }
+        >
           Python REPL
         </h2>
-        <div className="flex gap-2">
-          <Button
-            onClick={runCode}
-            disabled={isLoading || !pyodide}
-            className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-          >
-            {isLoading ? "Running..." : "Run Code"}
-          </Button>
-          <Button
-            onClick={clearOutput}
-            disabled={isLoading}
-            className="bg-[#6272a4] hover:bg-[#6272a4]/90 text-[#f8f8f2] text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-          >
-            Clear
-          </Button>
-        </div>
+        <TooltipProvider>
+          <div className="flex gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={runCode}
+                  disabled={isLoading || !pyodide}
+                  className="bg-accent2 hover:bg-accent2/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+                >
+                  {isLoading ? "Running..." : "Run Code"}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Run your Python code in the REPL</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  onClick={clearOutput}
+                  disabled={isLoading}
+                  className="bg-secondary hover:bg-secondary/80 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+                >
+                  Clear
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Clear the REPL output</TooltipContent>
+            </Tooltip>
+          </div>
+        </TooltipProvider>
       </div>
       <div className="flex-1 min-h-0 overflow-hidden">
-        <div className="h-full w-full bg-[#282a36] rounded-md p-4 font-mono text-sm overflow-auto">
+        <div className="h-full w-full bg-main rounded-md p-4 font-mono text-sm overflow-auto">
           {error ? (
-            <pre className="whitespace-pre-wrap text-[#ff5555]">{error}</pre>
+            <pre className="whitespace-pre-wrap text-accent">{error}</pre>
           ) : (
-            <pre className="whitespace-pre-wrap text-[#f8f8f2]">
+            <pre
+              className={
+                isLight
+                  ? "whitespace-pre-wrap text-main"
+                  : "whitespace-pre-wrap text-white"
+              }
+            >
               {output ||
                 "You can do it! make sure to run code with a print fn to see output. Make sure to put prints everywhere to debug efficiently."}
             </pre>

@@ -2,7 +2,8 @@ import { AlgorithmPattern } from "../../types";
 
 export const rabinkarpPattern: AlgorithmPattern = {
   title: "Rabin-Karp String Matching Algorithm",
-  description: "A string matching algorithm that uses hashing to find exact string matches or multiple pattern matches efficiently.",
+  description:
+    "A string matching algorithm that uses hashing to find exact string matches or multiple pattern matches efficiently.",
   timeComplexity: "Average: O(n+m), Worst: O(nm)",
   spaceComplexity: "O(1)",
   pseudocode: `
@@ -63,5 +64,6 @@ Window 13: "AABA" (hash=40) - Match at pos 12`,
             if window_hash < 0:
                 window_hash += q
     
-    return matches`
+    return matches`,
+  category: "String",
 };

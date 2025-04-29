@@ -1,7 +1,17 @@
 import { Card } from "../ui/card";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { useRef } from "react";
-import { draculaTheme } from "@/components/algorithm-trainer/theme";
+import {
+  draculaTheme,
+  solarizedTheme,
+  lightTheme,
+  snesTheme,
+  nordTheme,
+  ps2Theme,
+  re2Theme,
+  mhTheme,
+} from "@/lib/theme";
+import { useTheme } from "@/components/ThemeProvider";
 
 interface CodeEditorProps {
   userCode: string;
@@ -10,16 +20,38 @@ interface CodeEditorProps {
 
 export function CodeEditor({ userCode, setUserCode }: CodeEditorProps) {
   const monacoRef = useRef<Monaco | null>(null);
+  const { theme } = useTheme();
+  const isLight = theme === "light" || theme === "solarized";
 
   const handleEditorDidMount = (_editor: unknown, monaco: Monaco) => {
     monacoRef.current = monaco;
     monaco.editor.defineTheme("dracula", draculaTheme);
-    monaco.editor.setTheme("dracula");
+    monaco.editor.defineTheme("solarized", solarizedTheme);
+    monaco.editor.defineTheme("light", lightTheme);
+    monaco.editor.defineTheme("snes", snesTheme);
+    monaco.editor.defineTheme("nord", nordTheme);
+    monaco.editor.defineTheme("ps2", ps2Theme);
+    monaco.editor.defineTheme("re2", re2Theme);
+    monaco.editor.defineTheme("mh", mhTheme);
+
+    monaco.editor.setTheme(theme);
   };
 
+  // Update Monaco theme when app theme changes
+  if (monacoRef.current) {
+    monacoRef.current.editor.setTheme(theme);
+  }
+
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full h-full flex flex-col">
-      <h2 className="text-base sm:text-lg font-semibold mb-2 text-[#50fa7b] truncate flex-none">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
+      <h2
+        className={
+          "text-base sm:text-lg font-semibold mb-2 truncate flex-none " +
+          (theme === "nord"
+            ? "text-white"
+            : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+        }
+      >
         Your Implementation
       </h2>
       <div className="flex-1 overflow-hidden">
@@ -27,7 +59,7 @@ export function CodeEditor({ userCode, setUserCode }: CodeEditorProps) {
           <Editor
             height="100%"
             defaultLanguage="python"
-            theme="dracula"
+            theme={theme}
             value={userCode}
             onChange={(value: string | undefined) => setUserCode(value || "")}
             onMount={handleEditorDidMount}

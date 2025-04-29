@@ -2,9 +2,11 @@ import { AlgorithmPattern } from "../../types";
 
 export const two_sum_two_pointersPattern: AlgorithmPattern = {
   title: "Two Sum Algorithm (Two Pointers)",
-  description: "A solution to the Two Sum problem using two pointers technique, which requires the array to be sorted.",
+  description:
+    "A solution to the Two Sum problem using two pointers technique, which requires the array to be sorted.",
   timeComplexity: "O(n log n) due to sorting",
   spaceComplexity: "O(1) if modifying input array, O(n) if creating new array",
+  category: "Array",
   pseudocode: `1. Sort the array (if not already sorted)\n2. Initialize left = 0, right = n-1\n3. While left < right:\n   a. sum = arr[left] + arr[right]\n   b. If sum == target:\n      - Return [left, right]\n   c. If sum < target:\n      - left++\n   d. Else:\n      - right--\n4. Return [] if no solution found`,
   example: `arr = [15, 2, 11, 7]
 sorted = [2, 7, 11, 15]
@@ -34,5 +36,5 @@ Found solution: [0, 1]`,
             left += 1
         else:
             right -= 1
-    return []`
+    return []`,
 };

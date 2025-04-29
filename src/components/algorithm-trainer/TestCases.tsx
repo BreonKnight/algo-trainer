@@ -36,24 +36,24 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
   };
 
   return (
-    <Card className="p-4 bg-[#44475a] border-[#6272a4] w-full flex flex-col">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base sm:text-lg font-semibold text-[#50fa7b]">
+    <Card className="p-4 bg-secondary border-secondary w-full h-full flex flex-col overflow-hidden">
+      <div className="flex justify-between items-center mb-4 flex-shrink-0">
+        <h2 className="text-base sm:text-lg font-semibold text-accent3">
           Test Cases
         </h2>
         <Button
           onClick={addTestCase}
-          className="bg-[#50fa7b] hover:bg-[#50fa7b]/90 text-[#282a36] h-8 px-3 flex items-center gap-2"
+          className="bg-accent3 hover:bg-accent3/90 text-main h-8 px-3 flex items-center gap-2"
         >
           <Plus className="w-4 h-4" />
           Add Test Case
         </Button>
       </div>
-      <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2">
+      <div className="space-y-4 overflow-y-auto flex-1 min-h-0 pr-2">
         {testCases.map((testCase, index) => (
           <div key={index} className="flex gap-4 items-start">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-[#f8f8f2] mb-1">
+              <label className="block text-sm font-medium text-main mb-1">
                 Input
               </label>
               <Input
@@ -61,12 +61,12 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   updateTestCase(index, "input", e.target.value)
                 }
-                className="bg-[#282a36] border-[#6272a4] text-[#f8f8f2]"
+                className="bg-main border-secondary text-main"
                 placeholder="Enter input..."
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-[#f8f8f2] mb-1">
+              <label className="block text-sm font-medium text-main mb-1">
                 Expected Output
               </label>
               <Input
@@ -74,7 +74,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   updateTestCase(index, "output", e.target.value)
                 }
-                className="bg-[#282a36] border-[#6272a4] text-[#f8f8f2]"
+                className="bg-main border-secondary text-main"
                 placeholder="Enter expected output..."
               />
             </div>

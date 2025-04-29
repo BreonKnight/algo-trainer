@@ -687,6 +687,30 @@ const monsterHunterExplanations: Record<
       "Maintain sorted order - like ensuring materials are always in order of rarity",
     ],
   },
+  Recursion: {
+    title: "Monster Territory Exploration",
+    description:
+      "Like exploring a monster's territory by breaking it down into smaller areas, Recursion solves problems by breaking them into smaller subproblems.",
+    example:
+      "Imagine exploring a large monster territory by first exploring smaller sections, then combining your findings to understand the entire territory.",
+    tips: [
+      "Define base case - like knowing when to stop exploring a particular area",
+      "Break problem into smaller parts - similar to dividing a territory into manageable sections",
+      "Combine results - like piecing together your findings from different areas",
+    ],
+  },
+  "Divide and Conquer": {
+    title: "Monster Territory Division Strategy",
+    description:
+      "Like dividing a large monster territory into smaller, manageable sections, Divide and Conquer breaks down problems into smaller subproblems.",
+    example:
+      "Imagine facing a massive monster territory by dividing it into smaller regions, conquering each one separately, then combining your knowledge.",
+    tips: [
+      "Divide the problem - like splitting a territory into smaller sections",
+      "Conquer each part - similar to exploring and understanding each section",
+      "Combine the solutions - like merging your knowledge from all sections",
+    ],
+  },
 };
 
 export function MonsterHunterGuide({
@@ -700,32 +724,32 @@ export function MonsterHunterGuide({
   };
 
   return (
-    <div className={`${styles.pseudocodeContainer} w-full`}>
+    <div
+      className={`${styles.pseudocodeContainer} w-full h-full overflow-hidden`}
+    >
       <div
-        className={`${styles.pseudocodeContent} text-sm sm:text-base w-full`}
+        className={`${styles.pseudocodeContent} text-sm sm:text-base w-full h-full overflow-y-auto`}
       >
-        <div className="space-y-4">
+        <div className="space-y-4 p-2">
           <div>
-            <h3 className="text-lg font-semibold text-amber-700">
+            <h3 className="text-lg font-semibold text-accent">
               {explanation.title}
             </h3>
-            <p className="mt-1 text-[#f8f8f2]">{explanation.description}</p>
+            <p className="mt-1 text-main">{explanation.description}</p>
           </div>
 
           <div>
-            <h4 className="text-md font-medium text-amber-600">
+            <h4 className="text-md font-medium text-accent2">
               Hunting Example:
             </h4>
-            <p className="mt-1 italic text-[#f8f8f2]">{explanation.example}</p>
+            <p className="mt-1 italic text-main">{explanation.example}</p>
           </div>
 
           <div>
-            <h4 className="text-md font-medium text-amber-600">
-              Hunter's Tips:
-            </h4>
+            <h4 className="text-md font-medium text-accent2">Hunter's Tips:</h4>
             <ul className="list-disc pl-5 mt-1 space-y-1">
               {explanation.tips.map((tip, index) => (
-                <li key={index} className="text-[#f8f8f2]">
+                <li key={index} className="text-main">
                   {tip}
                 </li>
               ))}

@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const topological_sortPattern: AlgorithmPattern = {
   title: "Topological Sort Algorithm",
-  description: "An algorithm for ordering the vertices of a directed acyclic graph (DAG) such that for every directed edge u->v, vertex u comes before v in the ordering.",
+  description:
+    "An algorithm for ordering the vertices of a directed acyclic graph (DAG) such that for every directed edge u->v, vertex u comes before v in the ordering.",
   timeComplexity: "O(V + E)",
+  category: "Graph Algorithms",
   spaceComplexity: "O(V)",
   pseudocode: `1. Calculate in-degree for each vertex\n2. Add vertices with in-degree 0 to queue\n3. While queue not empty:\n   a. Remove vertex from queue\n   b. Add to result\n   c. Reduce in-degree of neighbors\n   d. If any neighbor's in-degree becomes 0:\n      - Add to queue\n4. If visited all vertices, return result\n   Else, graph has cycle`,
   example: `Graph:
@@ -43,5 +45,5 @@ def topological_sort(graph):
             if in_degree[v] == 0:
                 queue.append(v)
     
-    return result if len(result) == len(graph) else []`
+    return result if len(result) == len(graph) else []`,
 };

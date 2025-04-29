@@ -2,7 +2,8 @@ import { AlgorithmPattern } from "../../types";
 
 export const selection_sortPattern: AlgorithmPattern = {
   title: "Selection Sort Algorithm",
-  description: "A simple sorting algorithm that divides the input into a sorted and unsorted region, repeatedly selecting the smallest element from the unsorted region to add to the sorted region.",
+  description:
+    "A simple sorting algorithm that divides the input into a sorted and unsorted region, repeatedly selecting the smallest element from the unsorted region to add to the sorted region.",
   timeComplexity: "O(n²)",
   spaceComplexity: "O(1)",
   pseudocode: `1. For i from 0 to n-1:\n   a. Find minimum element in unsorted region [i..n-1]\n   b. Swap minimum element with first element of unsorted region\n2. Return sorted array`,
@@ -31,5 +32,6 @@ Fourth pass:
             if arr[j] < arr[min_idx]:
                 min_idx = j
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    return arr`
+    return arr`,
+  category: "Sorting Algorithms",
 };

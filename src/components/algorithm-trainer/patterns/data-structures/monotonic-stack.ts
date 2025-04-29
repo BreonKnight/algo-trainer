@@ -2,8 +2,10 @@ import { AlgorithmPattern } from "../../types";
 
 export const monotonic_stackPattern: AlgorithmPattern = {
   title: "Monotonic Stack Pattern",
-  description: "A stack that maintains its elements in a strictly increasing or decreasing order, useful for finding the next/previous greater/smaller element.",
+  description:
+    "A stack that maintains its elements in a strictly increasing or decreasing order, useful for finding the next/previous greater/smaller element.",
   timeComplexity: "O(n) amortized for n elements",
+  category: "Data Structures",
   spaceComplexity: "O(n) for stack",
   pseudocode: `
 Monotonic Stack operations:
@@ -50,5 +52,5 @@ def previous_smaller_element(arr):
             result[i] = arr[stack[-1]]
         stack.append(i)
     
-    return result`
+    return result`,
 };
