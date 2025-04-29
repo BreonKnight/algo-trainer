@@ -492,18 +492,12 @@ export const AudioPlayer = memo(function AudioPlayer() {
     if (iframeRef.current) {
       try {
         if (isPlaying) {
-          // Pause by loading a blank video
-          iframeRef.current.src = iframeRef.current.src.replace(
-            "&autoplay=1",
-            "&autoplay=0"
-          );
+          // Pause by sending pause command
+          sendCommand("pauseVideo");
           setIsPlaying(false);
         } else {
-          // Play by reloading with autoplay
-          iframeRef.current.src = iframeRef.current.src.replace(
-            "&autoplay=0",
-            "&autoplay=1"
-          );
+          // Play by sending play command
+          sendCommand("playVideo");
           setIsPlaying(true);
         }
       } catch (error) {
@@ -517,11 +511,27 @@ export const AudioPlayer = memo(function AudioPlayer() {
     const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
     const nextVideoId = PLAYLIST[randomIndex];
     if (iframeRef.current) {
-      iframeRef.current.src = createYouTubeEmbedURL(nextVideoId, false);
+      // First set the new video ID and song name
+      setCurrentVideoId(nextVideoId);
+      setCurrentSongName(getSongName(nextVideoId));
+
+      // Create new URL
+      const newUrl = createYouTubeEmbedURL(nextVideoId, true);
+
+      // Add load event listener to the iframe
+      const handleLoad = () => {
+        if (iframeRef.current) {
+          // After iframe loads, update src to trigger autoplay
+          iframeRef.current.src = newUrl;
+          setIsPlaying(true);
+          // Remove the event listener after use
+          iframeRef.current.removeEventListener("load", handleLoad);
+        }
+      };
+
+      iframeRef.current.addEventListener("load", handleLoad);
+      iframeRef.current.src = newUrl;
     }
-    setCurrentVideoId(nextVideoId);
-    setCurrentSongName(getSongName(nextVideoId));
-    setIsPlaying(false);
   }, []);
 
   return (
