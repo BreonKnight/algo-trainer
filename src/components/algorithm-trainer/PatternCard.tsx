@@ -13,6 +13,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
+import { useTheme } from "@/components/ThemeProvider";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, string | (() => JSX.Element)>;
@@ -120,20 +121,32 @@ export function PatternCard({
   const [isExpanded, setIsExpanded] = useState(true);
   const category = getPatternCategory(currentPattern);
   const categoryColor = getCategoryColor(category);
+  const { theme } = useTheme();
+  const isLight = theme === "light" || theme === "solarized";
 
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
       <div className="mb-2">
         <h2
-          className={`text-base sm:text-lg font-semibold truncate flex-none bg-clip-text text-transparent`}
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-          }}
+          className={`text-base sm:text-lg font-semibold truncate flex-none ${
+            theme === "nord"
+              ? "text-white"
+              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+          }`}
+          style={
+            theme === "nord"
+              ? undefined
+              : {
+                  backgroundImage:
+                    "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                }
+          }
         >
           {currentPattern}
         </h2>
-        <span className="text-xs text-secondary">{category}</span>
+        <span className={theme === "nord" ? "text-white/70" : "text-secondary"}>
+          {category}
+        </span>
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
         <div className="flex items-center gap-2 w-full sm:w-auto">

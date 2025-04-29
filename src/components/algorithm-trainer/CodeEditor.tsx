@@ -5,7 +5,12 @@ import {
   draculaTheme,
   solarizedTheme,
   lightTheme,
-} from "@/components/algorithm-trainer/theme";
+  snesTheme,
+  nordTheme,
+  ps2Theme,
+  re2Theme,
+  mhTheme,
+} from "@/lib/theme";
 import { useTheme } from "@/components/ThemeProvider";
 
 interface CodeEditorProps {
@@ -16,35 +21,37 @@ interface CodeEditorProps {
 export function CodeEditor({ userCode, setUserCode }: CodeEditorProps) {
   const monacoRef = useRef<Monaco | null>(null);
   const { theme } = useTheme();
+  const isLight = theme === "light" || theme === "solarized";
 
   const handleEditorDidMount = (_editor: unknown, monaco: Monaco) => {
     monacoRef.current = monaco;
     monaco.editor.defineTheme("dracula", draculaTheme);
     monaco.editor.defineTheme("solarized", solarizedTheme);
-    monaco.editor.defineTheme("lightTheme", lightTheme);
-    if (theme === "dracula") {
-      monaco.editor.setTheme("dracula");
-    } else if (theme === "solarized") {
-      monaco.editor.setTheme("solarized");
-    } else {
-      monaco.editor.setTheme("lightTheme");
-    }
+    monaco.editor.defineTheme("light", lightTheme);
+    monaco.editor.defineTheme("snes", snesTheme);
+    monaco.editor.defineTheme("nord", nordTheme);
+    monaco.editor.defineTheme("ps2", ps2Theme);
+    monaco.editor.defineTheme("re2", re2Theme);
+    monaco.editor.defineTheme("mh", mhTheme);
+
+    monaco.editor.setTheme(theme);
   };
 
   // Update Monaco theme when app theme changes
   if (monacoRef.current) {
-    if (theme === "dracula") {
-      monacoRef.current.editor.setTheme("dracula");
-    } else if (theme === "solarized") {
-      monacoRef.current.editor.setTheme("solarized");
-    } else {
-      monacoRef.current.editor.setTheme("lightTheme");
-    }
+    monacoRef.current.editor.setTheme(theme);
   }
 
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
-      <h2 className="text-base sm:text-lg font-semibold mb-2 text-accent2 truncate flex-none">
+      <h2
+        className={
+          "text-base sm:text-lg font-semibold mb-2 truncate flex-none " +
+          (theme === "nord"
+            ? "text-white"
+            : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+        }
+      >
         Your Implementation
       </h2>
       <div className="flex-1 overflow-hidden">
@@ -52,13 +59,7 @@ export function CodeEditor({ userCode, setUserCode }: CodeEditorProps) {
           <Editor
             height="100%"
             defaultLanguage="python"
-            theme={
-              theme === "dracula"
-                ? "dracula"
-                : theme === "solarized"
-                ? "solarized"
-                : "lightTheme"
-            }
+            theme={theme}
             value={userCode}
             onChange={(value: string | undefined) => setUserCode(value || "")}
             onMount={handleEditorDidMount}

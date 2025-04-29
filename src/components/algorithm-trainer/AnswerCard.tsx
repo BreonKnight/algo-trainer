@@ -18,7 +18,12 @@ import {
   draculaTheme,
   solarizedTheme,
   lightTheme,
-} from "@/components/algorithm-trainer/theme";
+  snesTheme,
+  nordTheme,
+  ps2Theme,
+  re2Theme,
+  mhTheme,
+} from "@/lib/theme";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;
@@ -37,6 +42,8 @@ export function AnswerCard({
   currentPattern,
   showAnswer,
   setShowAnswer,
+  onNextPattern,
+  onPatternChange,
 }: AnswerCardProps) {
   const [showTestData, setShowTestData] = useState(false);
   const [showMonsterHunter, setShowMonsterHunter] = useState(false);
@@ -84,14 +91,14 @@ export function AnswerCard({
   const handleEditorDidMount = (_editor: unknown, monaco: any) => {
     monaco.editor.defineTheme("dracula", draculaTheme);
     monaco.editor.defineTheme("solarized", solarizedTheme);
-    monaco.editor.defineTheme("lightTheme", lightTheme);
-    if (theme === "dracula") {
-      monaco.editor.setTheme("dracula");
-    } else if (theme === "solarized") {
-      monaco.editor.setTheme("solarized");
-    } else {
-      monaco.editor.setTheme("lightTheme");
-    }
+    monaco.editor.defineTheme("light", lightTheme);
+    monaco.editor.defineTheme("snes", snesTheme);
+    monaco.editor.defineTheme("nord", nordTheme);
+    monaco.editor.defineTheme("ps2", ps2Theme);
+    monaco.editor.defineTheme("re2", re2Theme);
+    monaco.editor.defineTheme("mh", mhTheme);
+
+    monaco.editor.setTheme(theme);
   };
 
   return (
@@ -103,8 +110,8 @@ export function AnswerCard({
         <h2
           className={
             "text-base sm:text-lg font-semibold truncate " +
-            (isLight
-              ? "text-main"
+            (theme === "nord"
+              ? "text-white"
               : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
           }
         >
@@ -121,7 +128,14 @@ export function AnswerCard({
         {showAnswer && (
           <>
             <div className="flex justify-between items-center mb-2 flex-shrink-0">
-              <h3 className="text-base sm:text-lg font-semibold text-accent truncate flex">
+              <h3
+                className={
+                  "text-base sm:text-lg font-semibold truncate flex " +
+                  (theme === "nord"
+                    ? "text-white"
+                    : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+                }
+              >
                 {showTestData ? "Monster Hunter Guide:" : "Implementation:"}
               </h3>
               <div className="flex gap-2">
@@ -207,13 +221,7 @@ export function AnswerCard({
                       <Editor
                         height="100%"
                         defaultLanguage="python"
-                        theme={
-                          theme === "dracula"
-                            ? "dracula"
-                            : theme === "solarized"
-                            ? "solarized"
-                            : "lightTheme"
-                        }
+                        theme={theme}
                         onMount={handleEditorDidMount}
                         value={getCurrentImplementation()}
                         options={{
