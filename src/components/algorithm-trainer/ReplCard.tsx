@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { useState, useEffect } from "react";
 import { loadPyodide } from "pyodide";
 import { toast } from "sonner";
+import confetti from "canvas-confetti";
 import {
   Tooltip,
   TooltipTrigger,
@@ -10,6 +11,7 @@ import {
   TooltipProvider,
 } from "../ui/tooltip";
 import { useTheme } from "../ThemeProvider";
+import GamificationService from "../../lib/gamification";
 
 interface ReplCardProps {
   userCode: string;
@@ -76,13 +78,18 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const runCode = async () => {
     if (!pyodide) {
       setOutput("Python environment is not ready yet. Please wait...");
-      toast.error("Python environment is not ready yet. Please wait...");
+      toast.error("Python environment is not ready yet. Please wait...", {
+        duration: 5000,
+      });
       return;
     }
 
     setIsLoading(true);
     setError(null);
     setOutput("");
+
+    const startTime = performance.now();
+    const hasError = false;
 
     try {
       // Create a wrapper to capture print statements and return values
@@ -103,13 +110,151 @@ except Exception as e:
     print(f"Error: {str(e)}")
 `;
       await pyodide.runPythonAsync(wrappedCode);
-      toast.success("Code ran successfully!");
+
+      // Calculate execution time
+      const endTime = performance.now();
+      const executionTime = endTime - startTime;
+
+      // Record code execution in gamification service
+      const gamificationService = GamificationService.getInstance();
+      gamificationService.recordCodeExecution(
+        userCode.split("\n").length, // Lines of code
+        executionTime, // Execution time in ms
+        false // No error
+      );
+
+      toast.success("Code ran successfully!", {
+        duration: 3000,
+      });
+
+      // Trigger confetti animation
+      triggerConfetti();
     } catch (error: any) {
-      setError(`Error: ${error.message}`);
-      toast.error(`Error: ${error.message}`);
+      let errorMessage = error.message;
+      let errorType = "Error";
+
+      // Handle browser-specific errors
+      if (error.message.includes("Pyodide failed to load")) {
+        errorType = "Environment Error";
+        errorMessage =
+          "Failed to load Python environment. Please check your internet connection and refresh the page.";
+      } else if (error.message.includes("out of memory")) {
+        errorType = "Memory Error";
+        errorMessage =
+          "Your code used too much memory. Try optimizing your solution.";
+      } else if (error.message.includes("timeout")) {
+        errorType = "Timeout Error";
+        errorMessage =
+          "Your code took too long to execute. Try optimizing your solution.";
+      } else if (error.message.includes("syntax error")) {
+        errorType = "Syntax Error";
+        errorMessage =
+          error.message.split("SyntaxError:")[1]?.trim() || error.message;
+
+        // Check for common syntax errors and provide helpful suggestions
+        if (errorMessage.includes("sdef")) {
+          errorMessage +=
+            "\n\nSuggestion: Did you mean to use 'def' instead of 'sdef'?";
+        } else if (errorMessage.includes("indent")) {
+          errorMessage +=
+            "\n\nSuggestion: Check your indentation. Python is sensitive to proper indentation.";
+        } else if (errorMessage.includes("colon")) {
+          errorMessage +=
+            "\n\nSuggestion: Make sure you have a colon (:) after your function definition, if statement, or loop.";
+        }
+      } else if (error.message.includes("NameError")) {
+        errorType = "Name Error";
+        errorMessage =
+          error.message.split("NameError:")[1]?.trim() || error.message;
+      } else if (error.message.includes("TypeError")) {
+        errorType = "Type Error";
+        errorMessage =
+          error.message.split("TypeError:")[1]?.trim() || error.message;
+      } else if (error.message.includes("IndentationError")) {
+        errorType = "Indentation Error";
+        errorMessage =
+          error.message.split("IndentationError:")[1]?.trim() || error.message;
+      } else if (error.message.includes("ZeroDivisionError")) {
+        errorType = "Division Error";
+        errorMessage = "Division by zero is not allowed.";
+      }
+
+      const formattedError = `${errorType}: ${errorMessage}`;
+      setError(formattedError);
+      toast.error(formattedError, {
+        duration: 6000,
+      });
+
+      // Record code execution with error in gamification service
+      const endTime = performance.now();
+      const executionTime = endTime - startTime;
+      const gamificationService = GamificationService.getInstance();
+      gamificationService.recordCodeExecution(
+        userCode.split("\n").length, // Lines of code
+        executionTime, // Execution time in ms
+        true // Has error
+      );
     }
 
     setIsLoading(false);
+  };
+
+  // Function to trigger confetti animation
+  const triggerConfetti = () => {
+    // Create a more dynamic confetti animation with multiple bursts
+
+    // First burst - from the left
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { x: 0, y: 0.6 },
+      colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+      ticks: 200,
+    });
+
+    // Second burst - from the right
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { x: 1, y: 0.6 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 200,
+      });
+    }, 100);
+
+    // Third burst - from the bottom center
+    setTimeout(() => {
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { x: 0.5, y: 1 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 250,
+      });
+    }, 200);
+
+    // Fourth burst - a small burst from the top center
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        spread: 40,
+        origin: { x: 0.5, y: 0.3 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 150,
+      });
+    }, 300);
+
+    // Final burst - a large burst from the center
+    setTimeout(() => {
+      confetti({
+        particleCount: 120,
+        spread: 100,
+        origin: { x: 0.5, y: 0.5 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 300,
+      });
+    }, 400);
   };
 
   const clearOutput = () => {
@@ -162,7 +307,9 @@ except Exception as e:
       <div className="flex-1 min-h-0 overflow-hidden">
         <div className="h-full w-full bg-main rounded-md p-4 font-mono text-sm overflow-auto">
           {error ? (
-            <pre className="whitespace-pre-wrap text-accent">{error}</pre>
+            <pre className="whitespace-pre-wrap text-accent font-bold">
+              {error}
+            </pre>
           ) : (
             <pre
               className={

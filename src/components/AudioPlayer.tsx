@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useCallback, memo } from "react";
 import { Button } from "./ui/button";
 import { Play, Pause, Volume2, RotateCcw, SkipForward } from "lucide-react";
 import * as Slider from "@radix-ui/react-slider";
-import { useTheme } from "./ThemeProvider";
 import React from "react";
 
 interface YouTubePlayer {
@@ -132,7 +131,6 @@ export function Timer() {
   const [isRunning, setIsRunning] = useState(false);
   const [totalTime, setTotalTime] = useState<number>(0); // Track total time for progress
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const { theme } = useTheme();
 
   const startTimer = (minutes: number) => {
     if (timerRef.current) {
@@ -436,7 +434,6 @@ export const AudioPlayer = memo(function AudioPlayer() {
   const [currentVideoId, setCurrentVideoId] = useState<string>("");
   const [currentSongName, setCurrentSongName] = useState<string>("");
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-  const { theme } = useTheme();
 
   // Function to send commands to YouTube iframe
   const sendCommand = useCallback((command: string, value?: number) => {
