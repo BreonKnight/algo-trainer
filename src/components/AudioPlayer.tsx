@@ -165,6 +165,24 @@ export function Timer() {
     }
   };
 
+  const resumeTimer = () => {
+    if (!isRunning && timeLeft > 0) {
+      setIsRunning(true);
+      timerRef.current = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            if (timerRef.current) {
+              clearInterval(timerRef.current);
+            }
+            setIsRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+  };
+
   const resetTimer = () => {
     pauseTimer();
     setTimeLeft(0);
@@ -316,11 +334,7 @@ export function Timer() {
           <div className="flex items-center gap-2">
             <div className="flex flex-col items-center">
               <Button
-                onClick={
-                  isRunning
-                    ? pauseTimer
-                    : () => startTimer(Math.ceil(timeLeft / 60))
-                }
+                onClick={isRunning ? pauseTimer : resumeTimer}
                 variant="default"
                 size="sm"
                 className={`h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ${
@@ -492,18 +506,12 @@ export const AudioPlayer = memo(function AudioPlayer() {
     if (iframeRef.current) {
       try {
         if (isPlaying) {
-          // Pause by loading a blank video
-          iframeRef.current.src = iframeRef.current.src.replace(
-            "&autoplay=1",
-            "&autoplay=0"
-          );
+          // Pause by sending pause command
+          sendCommand("pauseVideo");
           setIsPlaying(false);
         } else {
-          // Play by reloading with autoplay
-          iframeRef.current.src = iframeRef.current.src.replace(
-            "&autoplay=0",
-            "&autoplay=1"
-          );
+          // Play by sending play command
+          sendCommand("playVideo");
           setIsPlaying(true);
         }
       } catch (error) {
@@ -517,11 +525,27 @@ export const AudioPlayer = memo(function AudioPlayer() {
     const randomIndex = Math.floor(Math.random() * PLAYLIST.length);
     const nextVideoId = PLAYLIST[randomIndex];
     if (iframeRef.current) {
-      iframeRef.current.src = createYouTubeEmbedURL(nextVideoId, false);
+      // First set the new video ID and song name
+      setCurrentVideoId(nextVideoId);
+      setCurrentSongName(getSongName(nextVideoId));
+
+      // Create new URL
+      const newUrl = createYouTubeEmbedURL(nextVideoId, true);
+
+      // Add load event listener to the iframe
+      const handleLoad = () => {
+        if (iframeRef.current) {
+          // After iframe loads, update src to trigger autoplay
+          iframeRef.current.src = newUrl;
+          setIsPlaying(true);
+          // Remove the event listener after use
+          iframeRef.current.removeEventListener("load", handleLoad);
+        }
+      };
+
+      iframeRef.current.addEventListener("load", handleLoad);
+      iframeRef.current.src = newUrl;
     }
-    setCurrentVideoId(nextVideoId);
-    setCurrentSongName(getSongName(nextVideoId));
-    setIsPlaying(false);
   }, []);
 
   return (
