@@ -1,4 +1,3 @@
-import * as monaco from "monaco-editor";
 import type { editor } from "monaco-editor";
 
 export const draculaTheme: editor.IStandaloneThemeData = {

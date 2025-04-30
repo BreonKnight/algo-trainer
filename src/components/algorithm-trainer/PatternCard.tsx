@@ -52,6 +52,7 @@ const patternCategories: Record<string, string[]> = {
     "Topological Sort",
     "Graph",
     "Floyd Cycle Detection",
+    "Articulation Points",
   ],
   "String Algorithms": [
     "Rabin-Karp",

@@ -5,36 +5,32 @@ import React from "react";
 
 export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
   (_props, ref) => {
+    const { theme } = useTheme();
+
+    const buttonClass = (() => {
+      switch (theme) {
+        case "dracula":
+          return "bg-gradient-to-r from-[#50fa7b] via-[#bd93f9] to-[#ff79c6] text-white";
+        case "light":
+          return "bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 text-black";
+        case "solarized":
+          return "bg-gradient-to-r from-yellow-200 via-orange-200 to-pink-200 text-black";
+        default:
+          return "bg-gradient-to-r from-gray-200 to-gray-400 text-black";
+      }
+    })();
+
     return (
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          {(() => {
-            const { theme } = useTheme();
-            let buttonClass = "";
-            if (theme === "dracula") {
-              buttonClass =
-                "bg-gradient-to-r from-[#50fa7b] via-[#bd93f9] to-[#ff79c6] text-white";
-            } else if (theme === "light") {
-              buttonClass =
-                "bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 text-black";
-            } else if (theme === "solarized") {
-              buttonClass =
-                "bg-gradient-to-r from-yellow-200 via-orange-200 to-pink-200 text-black";
-            } else {
-              buttonClass =
-                "bg-gradient-to-r from-gray-200 to-gray-400 text-black";
-            }
-            return (
-              <Button
-                ref={ref}
-                variant="ghost"
-                size="sm"
-                className={`${buttonClass} font-bold px-4 py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90`}
-              >
-                How to Use :)
-              </Button>
-            );
-          })()}
+          <Button
+            ref={ref}
+            variant="ghost"
+            size="sm"
+            className={`${buttonClass} font-bold px-4 py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90`}
+          >
+            How to Use :)
+          </Button>
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />

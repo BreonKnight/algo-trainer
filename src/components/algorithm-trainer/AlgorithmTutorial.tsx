@@ -1,20 +1,20 @@
 import { useState } from "react";
-import { Card } from "../ui/card";
-import { Button } from "../ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Progress } from "../ui/progress";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 import {
-  Check,
-  Lock,
-  Play,
-  Book,
   Video,
-  FileText,
   Code,
+  FileText,
+  Book,
+  Check,
   Clock,
+  Play,
+  Lock,
 } from "lucide-react";
 import type { PatternKey } from "./types";
-import { cn } from "../../lib/utils";
 
 type Language = "python" | "javascript";
 

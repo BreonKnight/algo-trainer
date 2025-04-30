@@ -43,7 +43,6 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import type { ReactNode } from "react";
 import type { UniqueIdentifier, DragEndEvent } from "@dnd-kit/core";
-import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
 
 // interface TestCase {
 //   input: string;
@@ -272,6 +271,18 @@ export default function AlgorithmTrainer() {
                       onClick={() => setIsNavOpen(false)}
                     >
                       Tutorials
+                    </Link>
+                    <Link
+                      to="/python-techniques"
+                      className={cn(
+                        "block px-4 py-2 text-sm transition-colors font-medium",
+                        theme === "nord"
+                          ? "text-white/90 hover:text-white hover:bg-white/10"
+                          : "text-main hover:bg-secondary/20"
+                      )}
+                      onClick={() => setIsNavOpen(false)}
+                    >
+                      Python Techniques
                     </Link>
                   </div>
                 </div>

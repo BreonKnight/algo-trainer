@@ -37,6 +37,13 @@ export const PATTERN_KEYS = [
   "Circular Linked List",
   "Hash Table",
   "Graph",
+  "Graph Bellman-Ford",
+  "Graph Dijkstra",
+  "Graph Floyd-Warshall",
+  "Graph Kruskal",
+  "Graph Prim",
+  "Graph Articulation Points",
+  "Graph Bridges",
   "Tree",
   "Binary Search Tree",
   "Heap Implementation",
@@ -57,6 +64,7 @@ export const PATTERN_KEYS = [
   "Matrix Spiral Recursive",
   "Recursion",
   "Divide and Conquer",
+  "Articulation Points",
 ] as const;
 
 export type PatternKey = (typeof PATTERN_KEYS)[number];
