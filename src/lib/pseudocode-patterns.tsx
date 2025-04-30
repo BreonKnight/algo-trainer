@@ -2084,4 +2084,199 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
         </div>
       </div>
     ),
+    "Articulation Points": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Articulation Points Pattern
+          </span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V + E) - DFS traversal &nbsp;|&nbsp; Space: O(V) - visited
+          array &nbsp;|&nbsp; Use: Finding critical points in a graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize visited array:
+            </span>{" "}
+            Create an array to track visited nodes
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">DFS traversal:</span>{" "}
+            Visit each node, Track discovery time, Check for articulation points
+          </span>
+        </div>
+      </div>
+    ),
+    "Bellman-Ford": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Bellman-Ford Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V * E) - vertex and edge count &nbsp;|&nbsp; Space: O(V) -
+          distance array &nbsp;|&nbsp; Use: Shortest path in a weighted graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize distance array:
+            </span>{" "}
+            Create an array to store shortest distances
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Relax edges:</span>{" "}
+            Update distances, Check for negative cycles
+          </span>
+        </div>
+      </div>
+    ),
+    Bridges: () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Bridges Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V + E) - DFS traversal &nbsp;|&nbsp; Space: O(V) - visited
+          array &nbsp;|&nbsp; Use: Finding critical edges in a graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize visited array:
+            </span>{" "}
+            Create an array to track visited nodes
+          </span>
+        </div>
+      </div>
+    ),
+    Dijkstra: () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Dijkstra Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V^2) - vertex count &nbsp;|&nbsp; Space: O(V) - distance array
+          &nbsp;|&nbsp; Use: Shortest path in a weighted graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize distance array:
+            </span>{" "}
+            Create an array to store shortest distances
+          </span>
+        </div>
+      </div>
+    ),
+    "Floyd-Warshall": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Floyd-Warshall Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V^3) - vertex count &nbsp;|&nbsp; Space: O(V^2) - distance
+          array &nbsp;|&nbsp; Use: All-pairs shortest path in a weighted graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize distance array:
+            </span>{" "}
+            Create a 2D array to store shortest distances
+          </span>
+        </div>
+      </div>
+    ),
+    Kruskal: () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Kruskal Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(E log E) - edge count &nbsp;|&nbsp; Space: O(V) - parent array
+          &nbsp;|&nbsp; Use: Minimum spanning tree in a weighted graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize parent array:
+            </span>{" "}
+            Create an array to store parent nodes
+          </span>
+        </div>
+      </div>
+    ),
+    Prim: () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Prim Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V^2) - vertex count &nbsp;|&nbsp; Space: O(V) - parent array
+          &nbsp;|&nbsp; Use: Minimum spanning tree in a weighted graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize parent array:
+            </span>{" "}
+            Create an array to store parent nodes
+          </span>
+        </div>
+      </div>
+    ),
+    Kosaraju: () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Kosaraju Pattern</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V + E) - vertex and edge count &nbsp;|&nbsp; Space: O(V) -
+          visited array &nbsp;|&nbsp; Use: Strongly connected components in a
+          graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Initialize visited array:
+            </span>{" "}
+            Create an array to track visited nodes
+          </span>
+        </div>
+      </div>
+    ),
   };

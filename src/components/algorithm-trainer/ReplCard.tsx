@@ -4,12 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { loadPyodide } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "../ui/tooltip";
 import { useTheme } from "../ThemeProvider";
 import GamificationService from "../../lib/gamification";
 import { cn } from "../../lib/utils";
@@ -24,7 +18,6 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const [pyodide, setPyodide] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const { theme } = useTheme();
-  const isLight = theme === "light" || theme === "solarized";
   const [replHeight, setReplHeight] = useState(300);
   const replRef = useRef<HTMLDivElement>(null);
   const isDesktop = window.matchMedia("(min-width: 768px)").matches;

@@ -1,6 +1,6 @@
 import { Card } from "../ui/card";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import {
   draculaTheme,
   solarizedTheme,
@@ -37,31 +37,6 @@ function useIsDesktop() {
 }
 
 // Hook to detect scroll position for shadows
-function useScrollShadows(ref: React.RefObject<HTMLDivElement>) {
-  const [showTop, setShowTop] = useState(false);
-  const [showBottom, setShowBottom] = useState(false);
-
-  const checkShadows = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    setShowTop(el.scrollTop > 0);
-    setShowBottom(el.scrollTop + el.clientHeight < el.scrollHeight - 1);
-  }, [ref]);
-
-  useEffect(() => {
-    checkShadows();
-    const el = ref.current;
-    if (!el) return;
-    el.addEventListener("scroll", checkShadows);
-    window.addEventListener("resize", checkShadows);
-    return () => {
-      el.removeEventListener("scroll", checkShadows);
-      window.removeEventListener("resize", checkShadows);
-    };
-  }, [checkShadows, ref]);
-
-  return { showTop, showBottom };
-}
 
 export function CodeEditor({
   userCode,
