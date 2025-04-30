@@ -3,7 +3,7 @@ import { pseudocodePatterns } from "@/lib/pseudocode-patterns";
 import styles from "@/styles/pseudocode.module.css";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import { Book, Sword, ChevronDown, ChevronUp } from "lucide-react";
 import {
@@ -52,6 +52,7 @@ const patternCategories: Record<string, string[]> = {
     "Topological Sort",
     "Graph",
     "Floyd Cycle Detection",
+    "Articulation Points",
   ],
   "String Algorithms": [
     "Rabin-Karp",
@@ -99,19 +100,6 @@ const getPatternCategory = (pattern: string): string => {
 };
 
 // Get color for a category
-const getCategoryColor = (category: string): string => {
-  const colors: Record<string, string> = {
-    Sorting: "text-accent",
-    Searching: "text-accent2",
-    "Graph Algorithms": "text-accent2",
-    "String Algorithms": "text-accent3",
-    "Data Structures": "text-accent",
-    "Dynamic Programming": "text-accent",
-    Techniques: "text-accent3",
-    Other: "text-secondary",
-  };
-  return colors[category] || colors["Other"];
-};
 
 export function PatternCard({
   currentPattern,
@@ -120,19 +108,36 @@ export function PatternCard({
   const [showMonsterGuide, setShowMonsterGuide] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const category = getPatternCategory(currentPattern);
-  const categoryColor = getCategoryColor(category);
   const { theme } = useTheme();
-  const isLight = theme === "light" || theme === "solarized";
+  const [descHeight, setDescHeight] = useState(300);
+  const descRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setDescHeight(300);
+  }, [currentPattern]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
-      <div className="mb-2">
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+      <div className="flex-none mb-2">
         <h2
-          className={`text-base sm:text-lg font-semibold truncate flex-none ${
-            theme === "nord"
-              ? "text-white"
-              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
-          }`}
+          className={
+            `text-main text-base sm:text-lg md:text-xl font-semibold truncate flex-none leading-relaxed` +
+            (theme === "nord"
+              ? " text-white"
+              : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+          }
           style={
             theme === "nord"
               ? undefined
@@ -144,11 +149,17 @@ export function PatternCard({
         >
           {currentPattern}
         </h2>
-        <span className={theme === "nord" ? "text-white/70" : "text-secondary"}>
+        <span
+          className={
+            theme === "nord"
+              ? "text-white/70"
+              : "text-secondary text-sm sm:text-base"
+          }
+        >
           {category}
         </span>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <TooltipProvider>
             <Tooltip>
@@ -192,33 +203,69 @@ export function PatternCard({
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 relative overflow-hidden">
+      <div className="flex-1 min-h-0 overflow-hidden">
         {isExpanded &&
           (showMonsterGuide ? (
-            <div className="absolute inset-0 overflow-y-auto">
+            <div className="h-full overflow-hidden">
               <MonsterHunterGuide currentPattern={currentPattern} />
             </div>
           ) : (
-            <div className="absolute inset-0 overflow-y-auto">
-              <div className={`${styles.pseudocodeContainer} w-full`}>
-                <div
-                  className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main`}
-                >
-                  {(() => {
-                    const pseudo = typedPseudocodePatterns[currentPattern];
-                    if (typeof pseudo === "function") {
-                      return pseudo();
-                    } else {
-                      return (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: pseudo || "Pseudocode coming soon...",
-                          }}
-                        />
-                      );
-                    }
-                  })()}
+            <div className="h-full flex flex-col overflow-hidden">
+              <div
+                ref={descRef}
+                className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/90 rounded-xl`}
+                style={{
+                  height: isDesktop ? descHeight : "300px",
+                  minHeight: isDesktop ? "0" : "300px",
+                }}
+              >
+                <div className="h-full w-full overflow-y-auto">
+                  <div
+                    className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed p-4`}
+                  >
+                    {(() => {
+                      const pseudo = typedPseudocodePatterns[currentPattern];
+                      if (typeof pseudo === "function") {
+                        return pseudo();
+                      } else {
+                        return (
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: pseudo || "Pseudocode coming soon...",
+                            }}
+                          />
+                        );
+                      }
+                    })()}
+                  </div>
                 </div>
+              </div>
+              {/* Vertical resize handle */}
+              <div
+                className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+                style={{ userSelect: "none" }}
+                onMouseDown={(e) => {
+                  if (!isDesktop) return;
+                  const startY = e.clientY;
+                  const startHeight = descRef.current?.offsetHeight || 0;
+                  const maxHeight = 800; // Increased max height
+                  const onMove = (moveEvent: MouseEvent) => {
+                    const delta = moveEvent.clientY - startY;
+                    const newHeight = Math.max(
+                      300,
+                      Math.min(startHeight + delta, maxHeight)
+                    );
+                    setDescHeight(newHeight);
+                  };
+                  const onUp = () => {
+                    window.removeEventListener("mousemove", onMove);
+                    window.removeEventListener("mouseup", onUp);
+                  };
+                  window.addEventListener("mousemove", onMove);
+                  window.addEventListener("mouseup", onUp);
+                }}
+              >
+                <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
               </div>
             </div>
           ))}
