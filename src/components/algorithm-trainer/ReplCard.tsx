@@ -20,7 +20,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const { theme } = useTheme();
   const [replHeight, setReplHeight] = useState(300);
   const replRef = useRef<HTMLDivElement>(null);
-  const isDesktop = window.matchMedia("(min-width: 768px)").matches;
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // Theme-specific terminal styles
   const terminalStyles = {
