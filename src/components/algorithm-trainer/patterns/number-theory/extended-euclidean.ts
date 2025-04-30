@@ -20,18 +20,60 @@ const result = extendedEuclidean(35, 15);
 // Result will be { gcd: 5, x: 1, y: -2 }
 // Because 35*1 + 15*(-2) = 5
   `,
-  implementation: `
-function extendedEuclidean(a: number, b: number): { gcd: number; x: number; y: number } {
-  if (b === 0) {
-    return { gcd: a, x: 1, y: 0 };
-  }
-  
-  const { gcd, x: x1, y: y1 } = extendedEuclidean(b, a % b);
-  const x = y1;
-  const y = x1 - Math.floor(a / b) * y1;
-  
-  return { gcd, x, y };
-}
-  `,
+  implementation: `def extended_euclidean(a: int, b: int) -> tuple[int, int, int]:
+    """
+    Extended Euclidean Algorithm to find GCD and coefficients.
+    
+    Args:
+        a: First integer
+        b: Second integer
+    
+    Returns:
+        Tuple containing (gcd, x, y) where:
+        - gcd: Greatest common divisor of a and b
+        - x, y: Coefficients such that ax + by = gcd(a, b)
+    """
+    if b == 0:
+        return a, 1, 0
+    
+    gcd, x1, y1 = extended_euclidean(b, a % b)
+    x = y1
+    y = x1 - (a // b) * y1
+    
+    return gcd, x, y
+
+def modular_inverse(a: int, m: int) -> int:
+    """
+    Find the modular multiplicative inverse of a modulo m.
+    
+    Args:
+        a: Integer to find inverse for
+        m: Modulus
+    
+    Returns:
+        Modular inverse of a modulo m
+    Raises:
+        ValueError: If a and m are not coprime
+    """
+    gcd, x, y = extended_euclidean(a, m)
+    if gcd != 1:
+        raise ValueError(f"{a} and {m} are not coprime")
+    return x % m
+
+# Example usage
+a, b = 35, 15
+gcd, x, y = extended_euclidean(a, b)
+print(f"GCD of {a} and {b}: {gcd}")
+print(f"Coefficients: {x} and {y}")
+print(f"Verification: {a}*{x} + {b}*{y} = {a*x + b*y}")
+
+# Find modular inverse
+a, m = 3, 11
+try:
+    inv = modular_inverse(a, m)
+    print(f"Modular inverse of {a} modulo {m}: {inv}")
+    print(f"Verification: {a} * {inv} mod {m} = {(a * inv) % m}")
+except ValueError as e:
+    print(e)`,
   category: "number-theory",
 };

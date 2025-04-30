@@ -49,78 +49,115 @@ const optimizedMonsters = monsterHunterGuide(monsters, strategies);
 console.log(optimizedMonsters);
   `,
   implementation: `
-interface Monster {
-  id: number;
-  health: number;
-  weakness: string;
-  resistance: string;
-}
+class Monster:
+    def __init__(self, id: int, health: int, weakness: str, resistance: str):
+        self.id = id
+        self.health = health
+        self.weakness = weakness
+        self.resistance = resistance
 
-interface Strategy {
-  applies_to: (monster: Monster) => boolean;
-  apply: (monster: Monster) => Monster;
-}
+class Strategy:
+    def __init__(self, applies_to, apply):
+        self.applies_to = applies_to
+        self.apply = apply
 
-function monsterHunterGuide(monsters: Monster[], strategies: Strategy[]): Record<number, Monster> {
-  // Initialize monster data
-  const monsterData: Record<number, Monster> = {};
-  for (const monster of monsters) {
-    monsterData[monster.id] = {
-      ...monster
-    };
-  }
-  
-  // Apply strategies
-  for (const strategy of strategies) {
-    for (const monsterId in monsterData) {
-      if (strategy.applies_to(monsterData[monsterId])) {
-        monsterData[monsterId] = strategy.apply(monsterData[monsterId]);
-      }
+def monster_hunter_guide(monsters: list[Monster], strategies: list[Strategy]) -> dict[int, Monster]:
+    """
+    Optimize monster hunting strategies based on monster weaknesses and resistances.
+    
+    Args:
+        monsters: List of Monster objects
+        strategies: List of Strategy objects to apply
+    
+    Returns:
+        Dictionary mapping monster IDs to optimized Monster objects
+    """
+    # Initialize monster data
+    monster_data = {monster.id: Monster(monster.id, monster.health, monster.weakness, monster.resistance) 
+                   for monster in monsters}
+    
+    # Apply strategies
+    for strategy in strategies:
+        for monster_id, monster in monster_data.items():
+            if strategy.applies_to(monster):
+                monster_data[monster_id] = strategy.apply(monster)
+    
+    return monster_data
+
+def create_elemental_strategy(element: str, multiplier: float) -> Strategy:
+    """
+    Create a strategy that applies to monsters weak to a specific element.
+    
+    Args:
+        element: The element the monster is weak to
+        multiplier: Health multiplier to apply (e.g., 0.8 for 20% damage increase)
+    
+    Returns:
+        Strategy object
+    """
+    return Strategy(
+        applies_to=lambda monster: monster.weakness == element,
+        apply=lambda monster: Monster(monster.id, monster.health * multiplier, 
+                                    monster.weakness, monster.resistance)
+    )
+
+def create_resistance_strategy(element: str, multiplier: float) -> Strategy:
+    """
+    Create a strategy that applies to monsters resistant to a specific element.
+    
+    Args:
+        element: The element the monster is resistant to
+        multiplier: Health multiplier to apply (e.g., 1.2 for 20% damage reduction)
+    
+    Returns:
+        Strategy object
+    """
+    return Strategy(
+        applies_to=lambda monster: monster.resistance == element,
+        apply=lambda monster: Monster(monster.id, monster.health * multiplier, 
+                                    monster.weakness, monster.resistance)
+    )
+
+def get_optimal_strategy(monster: Monster) -> Strategy:
+    """
+    Get the optimal strategy for a monster based on its weaknesses and resistances.
+    
+    Args:
+        monster: The monster to get strategy for
+    
+    Returns:
+        Optimal Strategy object
+    """
+    elemental_strategies = {
+        'fire': create_elemental_strategy('fire', 0.8),
+        'ice': create_elemental_strategy('ice', 0.8),
+        'thunder': create_elemental_strategy('thunder', 0.8)
     }
-  }
-  
-  return monsterData;
-}
+    
+    resistance_strategies = {
+        'water': create_resistance_strategy('water', 1.2),
+        'fire': create_resistance_strategy('fire', 1.2),
+        'ice': create_resistance_strategy('ice', 1.2)
+    }
+    
+    # Return the strategy that gives the best advantage
+    return (elemental_strategies.get(monster.weakness) or 
+            resistance_strategies.get(monster.resistance))
 
-// Helper functions for common strategies
-function createElementalStrategy(element: string, multiplier: number): Strategy {
-  return {
-    applies_to: (monster) => monster.weakness === element,
-    apply: (monster) => ({
-      ...monster,
-      health: monster.health * multiplier
-    })
-  };
-}
+# Example usage
+monsters = [
+    Monster(1, 100, 'fire', 'water'),
+    Monster(2, 150, 'ice', 'fire'),
+    Monster(3, 200, 'thunder', 'ice')
+]
 
-function createResistanceStrategy(element: string, multiplier: number): Strategy {
-  return {
-    applies_to: (monster) => monster.resistance === element,
-    apply: (monster) => ({
-      ...monster,
-      health: monster.health * multiplier
-    })
-  };
-}
+strategies = [
+    create_elemental_strategy('fire', 0.8),
+    create_resistance_strategy('water', 1.2)
+]
 
-// Helper function to get optimal strategy for a monster
-function getOptimalStrategy(monster: Monster): Strategy {
-  const elementalStrategies = {
-    fire: createElementalStrategy('fire', 0.8),
-    ice: createElementalStrategy('ice', 0.8),
-    thunder: createElementalStrategy('thunder', 0.8)
-  };
-  
-  const resistanceStrategies = {
-    water: createResistanceStrategy('water', 1.2),
-    fire: createResistanceStrategy('fire', 1.2),
-    ice: createResistanceStrategy('ice', 1.2)
-  };
-  
-  // Return the strategy that gives the best advantage
-  return elementalStrategies[monster.weakness as keyof typeof elementalStrategies] ||
-         resistanceStrategies[monster.resistance as keyof typeof resistanceStrategies];
-}
+optimized_monsters = monster_hunter_guide(monsters, strategies)
+print(optimized_monsters)
   `,
   category: "monster-hunter",
 };

@@ -27,57 +27,73 @@ export const sieveOfSundaramPattern: AlgorithmPattern = {
             primes.append(2 * i + 1)
     
     return primes`,
-  example: `// Find all primes up to 100
-const primes = sieveOfSundaram(100);
-console.log(primes);
-// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]`,
-  implementation: `function sieveOfSundaram(n: number): number[] {
-  // Calculate limit for the sieve
-  const limit = Math.floor((n - 1) / 2);
-  
-  // Initialize sieve array
-  const sieve: boolean[] = new Array(limit + 1).fill(true);
-  
-  // Mark numbers of the form i + j + 2ij
-  for (let i = 1; i <= limit; i++) {
-    let j = i;
-    while (i + j + 2 * i * j <= limit) {
-      sieve[i + j + 2 * i * j] = false;
-      j++;
-    }
-  }
-  
-  // Generate primes
-  const primes: number[] = [2]; // 2 is the only even prime
-  for (let i = 1; i <= limit; i++) {
-    if (sieve[i]) {
-      primes.push(2 * i + 1);
-    }
-  }
-  
-  return primes;
-}
+  example: `# Find all primes up to 100
+primes = sieve_of_sundaram(100)
+print(primes)
+# [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]`,
+  implementation: `def sieve_of_sundaram(n: int) -> list[int]:
+    """
+    Find all prime numbers up to a given limit using the Sieve of Sundaram algorithm.
+    
+    Args:
+        n: Upper limit to find primes up to
+    
+    Returns:
+        List of prime numbers up to n
+    """
+    # Calculate limit for the sieve
+    limit = (n - 1) // 2
+    
+    # Initialize sieve array
+    sieve = [True] * (limit + 1)
+    
+    # Mark numbers of the form i + j + 2ij
+    for i in range(1, limit + 1):
+        j = i
+        while i + j + 2 * i * j <= limit:
+            sieve[i + j + 2 * i * j] = False
+            j += 1
+    
+    # Generate primes
+    primes = [2]  # 2 is the only even prime
+    for i in range(1, limit + 1):
+        if sieve[i]:
+            primes.append(2 * i + 1)
+    
+    return primes
 
-// Optimized version with early termination
-function sieveOfSundaramOptimized(n: number): number[] {
-  const limit = Math.floor((n - 1) / 2);
-  const sieve: boolean[] = new Array(limit + 1).fill(true);
-  
-  for (let i = 1; i <= limit; i++) {
-    const maxJ = Math.floor((limit - i) / (2 * i + 1));
-    for (let j = i; j <= maxJ; j++) {
-      sieve[i + j + 2 * i * j] = false;
-    }
-  }
-  
-  const primes: number[] = [2];
-  for (let i = 1; i <= limit; i++) {
-    if (sieve[i]) {
-      primes.push(2 * i + 1);
-    }
-  }
-  
-  return primes;
-}`,
+def sieve_of_sundaram_optimized(n: int) -> list[int]:
+    """
+    Optimized version of the Sieve of Sundaram algorithm with early termination.
+    
+    Args:
+        n: Upper limit to find primes up to
+    
+    Returns:
+        List of prime numbers up to n
+    """
+    limit = (n - 1) // 2
+    sieve = [True] * (limit + 1)
+    
+    for i in range(1, limit + 1):
+        max_j = (limit - i) // (2 * i + 1)
+        for j in range(i, max_j + 1):
+            sieve[i + j + 2 * i * j] = False
+    
+    primes = [2]
+    for i in range(1, limit + 1):
+        if sieve[i]:
+            primes.append(2 * i + 1)
+    
+    return primes
+
+# Example usage
+n = 100
+primes = sieve_of_sundaram(n)
+print(f"Primes up to {n}: {primes}")  # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
+# Using optimized version
+optimized_primes = sieve_of_sundaram_optimized(n)
+print(f"Optimized primes up to {n}: {optimized_primes}")`,
   category: "number-theory",
 };

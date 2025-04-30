@@ -49,67 +49,88 @@ function maxFlow(graph, source, sink):
     return flow
   `,
   example: `
-// Example usage:
-const graph = [
-  [0, 16, 13, 0, 0, 0],
-  [0, 0, 10, 12, 0, 0],
-  [0, 4, 0, 0, 14, 0],
-  [0, 0, 9, 0, 0, 20],
-  [0, 0, 0, 7, 0, 4],
-  [0, 0, 0, 0, 0, 0]
-];
-const source = 0;
-const sink = 5;
-const maxFlow = maxFlow(graph, source, sink);
-console.log(maxFlow); // Output: 23
+# Example usage:
+graph = [
+    [0, 16, 13, 0, 0, 0],
+    [0, 0, 10, 12, 0, 0],
+    [0, 4, 0, 0, 14, 0],
+    [0, 0, 9, 0, 0, 20],
+    [0, 0, 0, 7, 0, 4],
+    [0, 0, 0, 0, 0, 0]
+]
+source = 0
+sink = 5
+max_flow = max_flow(graph, source, sink)
+print(max_flow)  # Output: 23
   `,
-  implementation: `
-function maxFlow(graph: number[][], source: number, sink: number): number {
-  let flow = 0;
-  const n = graph.length;
-  
-  while (true) {
-    // Find augmenting path using BFS
-    const parent = new Array(n).fill(-1);
-    const queue = [source];
-    parent[source] = source;
+  implementation: `from typing import List
+import math
+
+def max_flow(graph: List[List[int]], source: int, sink: int) -> int:
+    """
+    Find the maximum flow in a flow network using the Edmonds-Karp algorithm.
     
-    while (queue.length > 0) {
-      const u = queue.shift()!;
-      for (let v = 0; v < n; v++) {
-        if (parent[v] === -1 && graph[u][v] > 0) {
-          parent[v] = u;
-          queue.push(v);
-          if (v === sink) break;
-        }
-      }
-    }
+    Args:
+        graph: Adjacency matrix representing the flow network
+        source: Source node
+        sink: Sink node
     
-    if (parent[sink] === -1) break;
+    Returns:
+        Maximum flow from source to sink
+    """
+    flow = 0
+    n = len(graph)
     
-    // Find minimum residual capacity
-    let pathFlow = Infinity;
-    let v = sink;
-    while (v !== source) {
-      const u = parent[v];
-      pathFlow = Math.min(pathFlow, graph[u][v]);
-      v = u;
-    }
+    while True:
+        # Find augmenting path using BFS
+        parent = [-1] * n
+        queue = [source]
+        parent[source] = source
+        
+        while queue:
+            u = queue.pop(0)
+            for v in range(n):
+                if parent[v] == -1 and graph[u][v] > 0:
+                    parent[v] = u
+                    queue.append(v)
+                    if v == sink:
+                        break
+        
+        if parent[sink] == -1:
+            break
+        
+        # Find minimum residual capacity
+        path_flow = math.inf
+        v = sink
+        while v != source:
+            u = parent[v]
+            path_flow = min(path_flow, graph[u][v])
+            v = u
+        
+        # Update residual capacities
+        v = sink
+        while v != source:
+            u = parent[v]
+            graph[u][v] -= path_flow
+            graph[v][u] += path_flow
+            v = u
+        
+        flow += path_flow
     
-    // Update residual capacities
-    v = sink;
-    while (v !== source) {
-      const u = parent[v];
-      graph[u][v] -= pathFlow;
-      graph[v][u] += pathFlow;
-      v = u;
-    }
-    
-    flow += pathFlow;
-  }
-  
-  return flow;
-}
-  `,
+    return flow
+
+# Example usage
+graph = [
+    [0, 16, 13, 0, 0, 0],
+    [0, 0, 10, 12, 0, 0],
+    [0, 4, 0, 0, 14, 0],
+    [0, 0, 9, 0, 0, 20],
+    [0, 0, 0, 7, 0, 4],
+    [0, 0, 0, 0, 0, 0]
+]
+source = 0
+sink = 5
+max_flow_value = max_flow(graph, source, sink)
+print(f"Maximum flow: {max_flow_value}")  # 23`,
   category: "graph",
 };
