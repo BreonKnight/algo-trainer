@@ -12,6 +12,7 @@ import {
   mhTheme,
 } from "@/lib/theme";
 import { useTheme } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
 
 interface CodeEditorProps {
   userCode: string;
@@ -205,7 +206,10 @@ export function CodeEditor({
       {/* Font size controls and copy button */}
       <div className="flex-none flex items-center gap-2 mb-2">
         <button
-          className="px-2 py-1 rounded bg-accent2/20 hover:bg-accent2/40 text-main text-xs"
+          className={cn(
+            "px-2 py-1 rounded bg-accent2/20 hover:bg-accent2/40 text-xs",
+            theme === "nord" ? "text-white" : "text-background"
+          )}
           onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
           title="Decrease font size (Ctrl+-)"
         >
@@ -213,14 +217,20 @@ export function CodeEditor({
         </button>
         <span className="text-xs text-secondary">{fontSize}px</span>
         <button
-          className="px-2 py-1 rounded bg-accent2/20 hover:bg-accent2/40 text-main text-xs"
+          className={cn(
+            "px-2 py-1 rounded bg-accent2/20 hover:bg-accent2/40 text-xs",
+            theme === "nord" ? "text-white" : "text-background"
+          )}
           onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
           title="Increase font size (Ctrl++)"
         >
           A+
         </button>
         <button
-          className="ml-4 px-2 py-1 rounded bg-accent3/20 hover:bg-accent3/40 text-main text-xs"
+          className={cn(
+            "ml-4 px-2 py-1 rounded bg-accent3/20 hover:bg-accent3/40 text-xs",
+            theme === "nord" ? "text-white" : "text-background"
+          )}
           onClick={() => navigator.clipboard.writeText(userCode)}
           title="Copy code (Ctrl+Shift+C)"
         >
