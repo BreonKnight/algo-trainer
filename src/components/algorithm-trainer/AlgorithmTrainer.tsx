@@ -302,7 +302,10 @@ export default function AlgorithmTrainer() {
                 <TooltipTrigger asChild>
                   <Button
                     onClick={previousPattern}
-                    className="h-9 px-4 text-base bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] hover:from-[var(--gradient-from)] hover:to-[var(--gradient-to)] text-main whitespace-nowrap max-w-[160px] truncate rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 focus:ring-2 focus:ring-accent3/50 active:scale-95"
+                    className={cn(
+                      "h-9 px-4 text-base bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] hover:from-[var(--gradient-from)] hover:to-[var(--gradient-to)] whitespace-nowrap max-w-[160px] truncate rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 focus:ring-2 focus:ring-accent3/50 active:scale-95",
+                      theme === "nord" ? "text-white" : "text-background"
+                    )}
                   >
                     <FaChevronLeft className="inline-block" /> Previous
                   </Button>
@@ -313,7 +316,10 @@ export default function AlgorithmTrainer() {
                 <TooltipTrigger asChild>
                   <Button
                     onClick={nextPattern}
-                    className="h-9 px-4 text-base bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] hover:from-[var(--accent2)] hover:to-[var(--accent3)] text-main whitespace-nowrap max-w-[160px] truncate rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 focus:ring-2 focus:ring-accent/50 active:scale-95"
+                    className={cn(
+                      "h-9 px-4 text-base bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] hover:from-[var(--accent2)] hover:to-[var(--accent3)] whitespace-nowrap max-w-[160px] truncate rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 focus:ring-2 focus:ring-accent/50 active:scale-95",
+                      theme === "nord" ? "text-white" : "text-background"
+                    )}
                   >
                     <FaChevronRight className="inline-block" /> Next
                   </Button>
@@ -324,7 +330,10 @@ export default function AlgorithmTrainer() {
                 <TooltipTrigger asChild>
                   <Button
                     onClick={nextPattern}
-                    className="h-9 px-4 text-base bg-gradient-to-r from-[var(--accent3)] to-[var(--accent2)] hover:from-[var(--gradient-from)] hover:to-[var(--gradient-to)] text-main whitespace-nowrap max-w-[160px] truncate rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 focus:ring-2 focus:ring-accent3/50 active:scale-95"
+                    className={cn(
+                      "h-9 px-4 text-base bg-gradient-to-r from-[var(--accent3)] to-[var(--accent2)] hover:from-[var(--gradient-from)] hover:to-[var(--gradient-to)] whitespace-nowrap max-w-[160px] truncate rounded-lg shadow-lg flex items-center gap-2 transition-all duration-200 focus:ring-2 focus:ring-accent3/50 active:scale-95",
+                      theme === "nord" ? "text-white" : "text-background"
+                    )}
                   >
                     <FaRandom className="inline-block" /> Random
                   </Button>
@@ -345,7 +354,14 @@ export default function AlgorithmTrainer() {
             </div>
             {/* Right: How to Use (top), Theme (bottom) */}
             <div className="flex flex-col items-end z-10 w-full md:w-auto max-w-md overflow-x-auto">
-              <div className="flex flex-col gap-y-10 p-4 bg-secondary/70 rounded-xl shadow-md border border-secondary/40 w-full md:w-auto max-w-md">
+              <div
+                className={cn(
+                  "flex flex-col gap-y-10 p-4 rounded-xl shadow-md border w-full md:w-auto max-w-md",
+                  theme === "nord"
+                    ? "bg-white/10 border-white/20"
+                    : "bg-secondary/20 border-secondary/40"
+                )}
+              >
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <HelpModal />

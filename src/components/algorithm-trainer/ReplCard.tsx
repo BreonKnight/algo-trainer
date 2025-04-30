@@ -12,6 +12,7 @@ import {
 } from "../ui/tooltip";
 import { useTheme } from "../ThemeProvider";
 import GamificationService from "../../lib/gamification";
+import { cn } from "../../lib/utils";
 
 interface ReplCardProps {
   userCode: string;
@@ -322,14 +323,22 @@ except Exception as e:
           <Button
             onClick={clearOutput}
             variant="ghost"
-            className="text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+            className={cn(
+              "text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md",
+              theme === "nord"
+                ? "text-white hover:text-white"
+                : "text-background hover:text-background"
+            )}
           >
             Clear
           </Button>
           <Button
             onClick={runCode}
             disabled={isLoading}
-            className="bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
+            className={cn(
+              "bg-accent3 hover:bg-accent3/90 text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md",
+              theme === "nord" ? "text-white" : "text-background"
+            )}
           >
             {isLoading ? "Running..." : "Run Code"}
           </Button>
