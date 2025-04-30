@@ -1,9 +1,8 @@
 import { AlgorithmPattern } from "../../types";
 
-export const linear_searchPattern: AlgorithmPattern = {
-  title: "Linear Search Algorithm",
-  description:
-    "A simple search algorithm that sequentially checks each element in a list until a match is found or the list is exhausted.",
+export const linearSearchPattern: AlgorithmPattern = {
+  title: "Linear Search",
+  description: "Simple search algorithm for unsorted arrays",
   timeComplexity: "O(n)",
   spaceComplexity: "O(1)",
   pseudocode: `1. For i from 0 to n-1:\n   a. If arr[i] == target:\n      - Return i\n2. Return -1 if not found`,
@@ -19,5 +18,5 @@ Found at index 2!`,
         if arr[i] == target:
             return i
     return -1`,
-  category: "Searching",
+  category: "searching",
 };

@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const circular_linked_listPattern: AlgorithmPattern = {
+export const circularLinkedListPattern: AlgorithmPattern = {
   title: "Circular Linked List Implementation",
   description:
     "Implementation of a linked list where the last element points back to the first element, forming a circle.",

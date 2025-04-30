@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const sliding_windowPattern: AlgorithmPattern = {
+export const slidingWindowPattern: AlgorithmPattern = {
   title: "Sliding Window Pattern",
   description:
     "An algorithmic technique that involves maintaining a subset of elements as a window that slides over the data, typically used for array/string problems involving contiguous sequences.",

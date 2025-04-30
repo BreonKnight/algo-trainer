@@ -1,0 +1,3 @@
+import type { AlgorithmPattern } from "../../types";
+
+// ... existing code ...

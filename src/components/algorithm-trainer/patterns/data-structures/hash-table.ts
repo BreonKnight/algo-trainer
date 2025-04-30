@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const hash_tablePattern: AlgorithmPattern = {
+export const hashTablePattern: AlgorithmPattern = {
   title: "Hash Table Implementation",
   description:
     "Implementation of a data structure that maps keys to values using a hash function, providing constant-time average case operations.",

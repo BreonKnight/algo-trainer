@@ -1,14 +1,12 @@
 import { AlgorithmPattern } from "../../types";
 
 export const arrayPattern: AlgorithmPattern = {
-  title: "Array Algorithm",
-  description:
-    "A collection of algorithms for solving problems involving arrays, which are collections of elements stored in contiguous memory locations.",
-  timeComplexity:
-    "Varies by algorithm, typically O(n) for simple array operations where n is the length of the array",
-  spaceComplexity:
-    "Varies by algorithm, typically O(1) to O(n) for array manipulation algorithms",
+  title: "Array",
+  description: "Array manipulation and operations",
+  timeComplexity: "O(n)",
+  spaceComplexity: "O(1)",
   pseudocode: `1. Identify the array problem type:\n   a. Array traversal (iterating through elements)\n   b. Array manipulation (inserting, deleting, updating elements)\n   c. Array searching (finding elements)\n   d. Array sorting (ordering elements)\n2. Choose the appropriate array algorithm based on the problem\n3. Implement the chosen algorithm\n4. Analyze the time and space complexity of the algorithm`,
   example: `Array: [1, 2, 3, 4, 5]\n\n1. Array Traversal:\n   - Forward: 1, 2, 3, 4, 5\n   - Backward: 5, 4, 3, 2, 1\n\n2. Array Manipulation:\n   - Insert 6 at index 2: [1, 2, 6, 3, 4, 5]\n   - Delete element at index 1: [1, 3, 4, 5]\n   - Update element at index 0 to 10: [10, 2, 3, 4, 5]\n\n3. Array Searching:\n   - Linear search for 3: Found at index 2\n   - Binary search for 4: Found at index 3\n\n4. Array Sorting:\n   - Original: [5, 2, 1, 4, 3]\n   - Sorted: [1, 2, 3, 4, 5]`,
   implementation: `# Array traversal\ndef traverse_array(arr):\n    for i in range(len(arr)):\n        print(arr[i])\n\n# Array manipulation\ndef insert_element(arr, index, element):\n    arr.insert(index, element)\n    return arr\n\ndef delete_element(arr, index):\n    arr.pop(index)\n    return arr\n\ndef update_element(arr, index, element):\n    arr[index] = element\n    return arr\n\n# Array searching\ndef linear_search(arr, target):\n    for i in range(len(arr)):\n        if arr[i] == target:\n            return i\n    return -1\n\ndef binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\n\n# Array sorting\ndef bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(0, n - i - 1):\n            if arr[j] > arr[j + 1]:\n                arr[j], arr[j + 1] = arr[j + 1], arr[j]\n    return arr\n\n# Example usage\narr = [1, 2, 3, 4, 5]\n\nprint("Original array:", arr)\nprint("Traversing array:")\ntraverse_array(arr)\n\nprint("Inserting 6 at index 2:", insert_element(arr.copy(), 2, 6))\nprint("Deleting element at index 1:", delete_element(arr.copy(), 1))\nprint("Updating element at index 0 to 10:", update_element(arr.copy(), 0, 10))\n\nprint("Linear search for 3:", linear_search(arr, 3))\nprint("Binary search for 4:", binary_search(arr, 4))\n\nunsorted_arr = [5, 2, 1, 4, 3]\nprint("Original unsorted array:", unsorted_arr)\nprint("Sorted array:", bubble_sort(unsorted_arr.copy()))\n`,
+  category: "array",
 };

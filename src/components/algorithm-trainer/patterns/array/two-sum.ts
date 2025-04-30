@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const two_sumPattern: AlgorithmPattern = {
+export const twoSumPattern: AlgorithmPattern = {
   title: "Two Sum Algorithm (Brute Force)",
   description:
     "A problem-solving pattern that finds two numbers in an array that sum to a target value using a brute force approach.",

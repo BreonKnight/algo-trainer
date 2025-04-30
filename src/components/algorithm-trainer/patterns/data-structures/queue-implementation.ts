@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const queue_implementationPattern: AlgorithmPattern = {
+export const queueImplementationPattern: AlgorithmPattern = {
   title: "Queue Data Structure Implementation",
   description:
     "Implementation of a First-In-First-Out (FIFO) data structure that supports enqueue and dequeue operations.",

@@ -310,6 +310,29 @@ textarea,
     rgba(0, 102, 255, 0.08) 50%,
     rgba(0, 168, 0, 0.08) 100%
   );
+  --pseudocode-text: #e6e6e6;
+  --pseudocode-metadata: #8b8b8b;
+  --pseudocode-type: #0066ff;
+  --pseudocode-code: #00a800;
+  --pseudocode-keyword: #ff0000;
+  --pseudocode-function: #0066ff;
+  --pseudocode-string: #00a800;
+  --pseudocode-number: #ffe44d;
+  --pseudocode-comment: #8b8b8b;
+  --pseudocode-heading: #ff0000;
+  --pseudocode-bullet: #0066ff;
+  --pseudocode-sub-bullet: #00a800;
+  --pseudocode-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-metadata-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-type-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-code-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-keyword-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-function-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-string-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-number-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-heading-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-bullet-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-sub-bullet-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --radius: 0.5rem;
 }
 

@@ -44,6 +44,7 @@ export const PATTERN_KEYS = [
   "Graph Prim",
   "Graph Articulation Points",
   "Graph Bridges",
+  "Graph Kosaraju",
   "Tree",
   "Binary Search Tree",
   "Heap Implementation",
@@ -65,6 +66,31 @@ export const PATTERN_KEYS = [
   "Recursion",
   "Divide and Conquer",
   "Articulation Points",
+  // Advanced Graph Algorithms
+  "Network Flow",
+  "Strongly Connected Components",
+  "Maximum Bipartite Matching",
+  "A* Search",
+  // Matrix/Grid Algorithms
+  "Matrix Chain Multiplication",
+  "Matrix Exponentiation",
+  "Grid Traversal",
+  // Advanced Dynamic Programming
+  "State Compression DP",
+  "Digit DP",
+  "Tree DP",
+  "Probability DP",
+  // Advanced Searching Techniques
+  "Ternary Search",
+  "Jump Search",
+  "Exponential Search",
+  "Interpolation Search",
+  // Mathematical Algorithms
+  "Extended Euclidean",
+  "Chinese Remainder Theorem",
+  "Sieve of Eratosthenes",
+  "Miller-Rabin",
+  "Fast Fourier Transform",
 ] as const;
 
 export type PatternKey = (typeof PATTERN_KEYS)[number];
@@ -78,4 +104,5 @@ export interface AlgorithmPattern {
   example: string;
   implementation: string;
   category: string;
+  pattern?: string;
 }
