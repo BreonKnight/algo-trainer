@@ -75,7 +75,9 @@ export function CodeEditor({
   // Auto-focus editor
   useEffect(() => {
     if (editorRef.current) {
-      editorRef.current.focus();
+      requestAnimationFrame(() => {
+        editorRef.current.focus();
+      });
     }
   }, [userCode]);
 
