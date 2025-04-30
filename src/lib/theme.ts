@@ -447,3 +447,57 @@ export const mhTheme: editor.IStandaloneThemeData = {
     "editorHint.foreground": "#7AA364", // Forest green
   },
 };
+
+export const kingdomHeartsTheme: editor.IStandaloneThemeData = {
+  base: "vs-dark",
+  inherit: true,
+  rules: [
+    { token: "", foreground: "f8f8ff" }, // Soft white
+    { token: "comment", foreground: "7c6fa0" }, // Muted purple
+    { token: "keyword", foreground: "ffe066" }, // Gold/yellow
+    { token: "string", foreground: "b85c6e" }, // Muted red
+    { token: "number", foreground: "ffe066" }, // Gold/yellow
+    { token: "operator", foreground: "ffe066" }, // Gold/yellow
+    { token: "function", foreground: "6ec6f7" }, // Pastel blue
+    { token: "variable", foreground: "f8f8ff" }, // Soft white
+    { token: "type", foreground: "bfc9d1" }, // Silver/gray
+    { token: "class", foreground: "bfc9d1" }, // Silver/gray
+    { token: "interface", foreground: "bfc9d1" }, // Silver/gray
+    { token: "enum", foreground: "bfc9d1" }, // Silver/gray
+    { token: "constant", foreground: "ffe066" }, // Gold/yellow
+    { token: "parameter", foreground: "b85c6e" }, // Muted red
+    { token: "property", foreground: "6ec6f7" }, // Pastel blue
+    { token: "punctuation", foreground: "f8f8ff" }, // Soft white
+    { token: "delimiter", foreground: "f8f8ff" }, // Soft white
+    { token: "bracket", foreground: "f8f8ff" }, // Soft white
+    { token: "tag", foreground: "ffe066" }, // Gold/yellow
+    { token: "attribute.name", foreground: "6ec6f7" }, // Pastel blue
+    { token: "attribute.value", foreground: "b85c6e" }, // Muted red
+  ],
+  colors: {
+    "editor.background": "#0a1633", // Deep navy blue
+    "editor.foreground": "#f8f8ff", // Soft white
+    "editor.lineHighlightBackground": "#1a2747", // Midnight blue
+    "editor.selectionBackground": "#ffe06633", // Gold/yellow highlight
+    "editor.inactiveSelectionBackground": "#ffe06622",
+    "editorCursor.foreground": "#ffe066",
+    "editorWhitespace.foreground": "#7c6fa080",
+    "editorIndentGuide.background": "#7c6fa080",
+    "editorIndentGuide.activeBackground": "#ffe06680",
+    "editor.selectionHighlightBackground": "#ffe06622",
+    "editor.wordHighlightBackground": "#ffe06622",
+    "editor.wordHighlightStrongBackground": "#bfc9d122",
+    "editorBracketMatch.background": "#ffe06622",
+    "editorBracketMatch.border": "#ffe066",
+    "editor.findMatchBackground": "#b85c6e40",
+    "editor.findMatchHighlightBackground": "#b85c6e20",
+    "editor.findMatchBorder": "#ffe066",
+    "editor.findMatchHighlightBorder": "#ffe06680",
+    "editorOverviewRuler.border": "#1a2747",
+    "editorGutter.background": "#0a1633",
+    "editorError.foreground": "#b85c6e",
+    "editorWarning.foreground": "#ffe066",
+    "editorInfo.foreground": "#6ec6f7",
+    "editorHint.foreground": "#7c6fa0",
+  },
+};

@@ -30,47 +30,75 @@ function maxBipartiteMatching(graph, n, m):
     return result
   `,
   example: `
-// Example usage:
-const graph = [
+# Example usage:
+graph = [
   [0, 1, 1, 0, 0, 0],
   [1, 0, 0, 1, 0, 0],
   [0, 0, 1, 0, 0, 0],
   [0, 0, 1, 1, 0, 0],
   [0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 1]
-];
-const n = 6; // Number of vertices in left set
-const m = 6; // Number of vertices in right set
-const maxMatching = maxBipartiteMatching(graph, n, m);
-console.log(maxMatching); // Output: 5
+]
+n = 6  # Number of vertices in left set
+m = 6  # Number of vertices in right set
+max_matching = max_bipartite_matching(graph, n, m)
+print(max_matching)  # Output: 5
   `,
-  implementation: `
-function maxBipartiteMatching(graph: number[][], n: number, m: number): number {
-  const matchTo = new Array(m).fill(-1);
-  let result = 0;
-  
-  function bpm(u: number, seen: boolean[]): boolean {
-    for (let v = 0; v < m; v++) {
-      if (graph[u][v] && !seen[v]) {
-        seen[v] = true;
-        if (matchTo[v] === -1 || bpm(matchTo[v], seen)) {
-          matchTo[v] = u;
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-  
-  for (let u = 0; u < n; u++) {
-    const seen = new Array(m).fill(false);
-    if (bpm(u, seen)) {
-      result++;
-    }
-  }
-  
-  return result;
-}
-  `,
+  implementation: `from typing import List
+
+def max_bipartite_matching(graph: List[List[int]], n: int, m: int) -> int:
+    """
+    Find the maximum matching in a bipartite graph.
+    
+    Args:
+        graph: Adjacency matrix representing the bipartite graph
+        n: Number of vertices in the left set
+        m: Number of vertices in the right set
+    
+    Returns:
+        Size of the maximum matching
+    """
+    match_to = [-1] * m
+    result = 0
+    
+    def bpm(u: int, seen: List[bool]) -> bool:
+        """
+        A DFS based recursive function that returns true if a matching for vertex u is possible.
+        
+        Args:
+            u: Vertex in the left set
+            seen: Array to keep track of visited vertices in the right set
+        
+        Returns:
+            True if a matching is possible, False otherwise
+        """
+        for v in range(m):
+            if graph[u][v] and not seen[v]:
+                seen[v] = True
+                if match_to[v] == -1 or bpm(match_to[v], seen):
+                    match_to[v] = u
+                    return True
+        return False
+    
+    for u in range(n):
+        seen = [False] * m
+        if bpm(u, seen):
+            result += 1
+    
+    return result
+
+# Example usage
+graph = [
+    [0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1]
+]
+n = 6  # Number of vertices in left set
+m = 6  # Number of vertices in right set
+max_matching = max_bipartite_matching(graph, n, m)
+print(f"Maximum matching size: {max_matching}")  # 5`,
   category: "graph",
 };

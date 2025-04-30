@@ -69,96 +69,108 @@ const path = aStar(start, goal, graph, heuristic);
 console.log(path); // Output: [0, 1, 4, 5] or similar shortest path
   `,
   implementation: `
-interface Node {
-  x: number;
-  y: number;
-}
-
-interface Graph {
-  nodes: Node[];
-  edges: number[][];
-}
-
-function aStar(
-  start: number,
-  goal: number,
-  graph: Graph,
-  heuristic: (a: number, b: number) => number
-): number[] | null {
-  const openSet = new PriorityQueue<number>();
-  openSet.enqueue(start, 0);
-  
-  const cameFrom: { [key: number]: number } = {};
-  const gScore: { [key: number]: number } = { [start]: 0 };
-  const fScore: { [key: number]: number } = { [start]: heuristic(start, goal) };
-  
-  while (!openSet.isEmpty()) {
-    const current = openSet.dequeue()!;
+class PriorityQueue:
+    def __init__(self):
+        self.elements = []
     
-    if (current === goal) {
-      return reconstructPath(cameFrom, current);
-    }
+    def empty(self):
+        return len(self.elements) == 0
     
-    for (const neighbor of getNeighbors(current, graph)) {
-      const tentativeGScore = gScore[current] + getCost(current, neighbor, graph);
-      
-      if (!(neighbor in gScore) || tentativeGScore < gScore[neighbor]) {
-        cameFrom[neighbor] = current;
-        gScore[neighbor] = tentativeGScore;
-        fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, goal);
+    def put(self, item, priority):
+        heapq.heappush(self.elements, (priority, item))
+    
+    def get(self):
+        return heapq.heappop(self.elements)[1]
+
+def heuristic(a, b, graph):
+    """Calculate Euclidean distance between two nodes"""
+    dx = graph.nodes[a].x - graph.nodes[b].x
+    dy = graph.nodes[a].y - graph.nodes[b].y
+    return math.sqrt(dx * dx + dy * dy)
+
+def reconstruct_path(came_from, current):
+    """Reconstruct the path from start to goal"""
+    path = [current]
+    while current in came_from:
+        current = came_from[current]
+        path.append(current)
+    path.reverse()
+    return path
+
+def a_star(start, goal, graph):
+    """
+    A* Search Algorithm
+    
+    Args:
+        start: Starting node index
+        goal: Goal node index
+        graph: Graph object containing nodes and edges
+    
+    Returns:
+        List of node indices representing the shortest path from start to goal
+    """
+    open_set = PriorityQueue()
+    open_set.put(start, 0)
+    
+    came_from = {}
+    g_score = {start: 0}
+    f_score = {start: heuristic(start, goal, graph)}
+    
+    while not open_set.empty():
+        current = open_set.get()
         
-        if (!openSet.contains(neighbor)) {
-          openSet.enqueue(neighbor, fScore[neighbor]);
-        }
-      }
-    }
-  }
-  
-  return null; // No path found
-}
+        if current == goal:
+            return reconstruct_path(came_from, current)
+        
+        for neighbor in graph.neighbors(current):
+            tentative_g_score = g_score[current] + graph.cost(current, neighbor)
+            
+            if neighbor not in g_score or tentative_g_score < g_score[neighbor]:
+                came_from[neighbor] = current
+                g_score[neighbor] = tentative_g_score
+                f_score[neighbor] = g_score[neighbor] + heuristic(neighbor, goal, graph)
+                open_set.put(neighbor, f_score[neighbor])
+    
+    return None  # No path found
 
-function reconstructPath(cameFrom: { [key: number]: number }, current: number): number[] {
-  const path = [current];
-  while (current in cameFrom) {
-    current = cameFrom[current];
-    path.push(current);
-  }
-  return path.reverse();
-}
+# Example usage
+class Graph:
+    def __init__(self):
+        self.nodes = [
+            {'x': 0, 'y': 0},  # A
+            {'x': 1, 'y': 0},  # B
+            {'x': 2, 'y': 0},  # C
+            {'x': 0, 'y': 1},  # D
+            {'x': 1, 'y': 1},  # E
+            {'x': 2, 'y': 1}   # F
+        ]
+        self.edges = [
+            [0, 1], [1, 2], [0, 3], [1, 4],
+            [2, 5], [3, 4], [4, 5]
+        ]
+    
+    def neighbors(self, node):
+        """Get all neighbors of a node"""
+        neighbors = []
+        for edge in self.edges:
+            if edge[0] == node:
+                neighbors.append(edge[1])
+            elif edge[1] == node:
+                neighbors.append(edge[0])
+        return neighbors
+    
+    def cost(self, a, b):
+        """Calculate cost between two nodes (Euclidean distance)"""
+        dx = self.nodes[a]['x'] - self.nodes[b]['x']
+        dy = self.nodes[a]['y'] - self.nodes[b]['y']
+        return math.sqrt(dx * dx + dy * dy)
 
-function getNeighbors(node: number, graph: Graph): number[] {
-  return graph.edges
-    .filter(edge => edge[0] === node || edge[1] === node)
-    .map(edge => edge[0] === node ? edge[1] : edge[0]);
-}
-
-function getCost(a: number, b: number, graph: Graph): number {
-  const dx = graph.nodes[a].x - graph.nodes[b].x;
-  const dy = graph.nodes[a].y - graph.nodes[b].y;
-  return Math.sqrt(dx * dx + dy * dy);
-}
-
-// Priority Queue implementation
-class PriorityQueue<T> {
-  private items: { value: T; priority: number }[] = [];
-  
-  enqueue(value: T, priority: number): void {
-    this.items.push({ value, priority });
-    this.items.sort((a, b) => a.priority - b.priority);
-  }
-  
-  dequeue(): T | undefined {
-    return this.items.shift()?.value;
-  }
-  
-  isEmpty(): boolean {
-    return this.items.length === 0;
-  }
-  
-  contains(value: T): boolean {
-    return this.items.some(item => item.value === value);
-  }
-}
+# Create graph and find path
+graph = Graph()
+start = 0  # A
+goal = 5   # F
+path = a_star(start, goal, graph)
+print(path)  # Output: [0, 1, 4, 5] or similar shortest path
   `,
   category: "graph",
 };

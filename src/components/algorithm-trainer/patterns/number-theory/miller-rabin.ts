@@ -36,61 +36,91 @@ export const millerRabinPattern: AlgorithmPattern = {
             return false
     
     return true`,
-  example: `// Test if 561 is prime (it's a Carmichael number)
-const isPrime = millerRabinTest(561, 5);
-console.log(isPrime); // false
+  example: `# Test if 561 is prime (it's a Carmichael number)
+is_prime = miller_rabin_test(561, 5)
+print(is_prime)  # False
 
-// Test if 104729 is prime (it is)
-const isPrime2 = millerRabinTest(104729, 5);
-console.log(isPrime2); // true`,
-  implementation: `function millerRabinTest(n: number, k: number): boolean {
-  // Handle base cases
-  if (n <= 1 || n === 4) return false;
-  if (n <= 3) return true;
-  
-  // Find d such that n-1 = 2^s * d
-  let d = n - 1;
-  let s = 0;
-  while (d % 2 === 0) {
-    d = Math.floor(d / 2);
-    s++;
-  }
-  
-  // Test k times
-  for (let i = 0; i < k; i++) {
-    const a = 2 + Math.floor(Math.random() * (n - 4));
-    let x = modExp(a, d, n);
-    
-    if (x === 1 || x === n - 1) continue;
-    
-    let found = false;
-    for (let j = 0; j < s - 1; j++) {
-      x = modExp(x, 2, n);
-      if (x === n - 1) {
-        found = true;
-        break;
-      }
-    }
-    
-    if (!found) return false;
-  }
-  
-  return true;
-}
+# Test if 104729 is prime (it is)
+is_prime2 = miller_rabin_test(104729, 5)
+print(is_prime2)  # True`,
+  implementation: `import random
+from typing import List, Tuple
 
-function modExp(base: number, exp: number, mod: number): number {
-  let result = 1;
-  base = base % mod;
-  
-  while (exp > 0) {
-    if (exp % 2 === 1) {
-      result = (result * base) % mod;
-    }
-    exp = Math.floor(exp / 2);
-    base = (base * base) % mod;
-  }
-  
-  return result;
-}`,
+def miller_rabin_test(n: int, k: int) -> bool:
+    """
+    Perform the Miller-Rabin primality test on a number.
+    
+    Args:
+        n: Number to test for primality
+        k: Number of rounds of testing
+    
+    Returns:
+        True if n is probably prime, False if n is definitely composite
+    """
+    # Handle base cases
+    if n <= 1 or n == 4:
+        return False
+    if n <= 3:
+        return True
+    
+    # Find d such that n-1 = 2^s * d
+    d = n - 1
+    s = 0
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+    
+    # Test k times
+    for _ in range(k):
+        a = random.randint(2, n - 2)
+        x = pow(a, d, n)
+        
+        if x == 1 or x == n - 1:
+            continue
+        
+        found = False
+        for _ in range(s - 1):
+            x = pow(x, 2, n)
+            if x == n - 1:
+                found = True
+                break
+        
+        if not found:
+            return False
+    
+    return True
+
+def mod_exp(base: int, exp: int, mod: int) -> int:
+    """
+    Compute (base^exp) % mod efficiently using modular exponentiation.
+    
+    Args:
+        base: Base number
+        exp: Exponent
+        mod: Modulus
+    
+    Returns:
+        (base^exp) % mod
+    """
+    result = 1
+    base = base % mod
+    
+    while exp > 0:
+        if exp % 2 == 1:
+            result = (result * base) % mod
+        exp = exp // 2
+        base = (base * base) % mod
+    
+    return result
+
+# Example usage
+n = 561  # Carmichael number
+k = 5
+is_prime = miller_rabin_test(n, k)
+print(f"Is {n} prime? {is_prime}")  # False
+
+n = 104729  # Known prime
+is_prime = miller_rabin_test(n, k)
+print(f"Is {n} prime? {is_prime}")  # True`,
   category: "number-theory",
 };

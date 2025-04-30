@@ -15,6 +15,7 @@ const THEMES = [
   "ps2",
   "re2",
   "mh",
+  "kingdom-hearts",
 ] as const;
 type Theme = (typeof THEMES)[number];
 

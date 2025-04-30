@@ -1,8 +1,6 @@
 import { Card } from "../ui/card";
-import {
-  pseudocodePatterns,
-  patternNameMapping,
-} from "@/lib/pseudocode-patterns";
+import { pseudocodePatterns } from "@/lib/pseudocode";
+import { patternNameMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import styles from "@/styles/pseudocode.module.css";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
@@ -47,6 +45,11 @@ const patternCategories: Record<string, string[]> = {
     "Linear Search",
     "Two Sum",
     "Two Sum Dict",
+    "Ternary Search",
+    "Jump Search",
+    "Exponential Search",
+    "Interpolation Search",
+    "Fibonacci Search",
   ],
   "Graph Algorithms": [
     "DFS",
@@ -56,12 +59,27 @@ const patternCategories: Record<string, string[]> = {
     "Graph",
     "Floyd Cycle Detection",
     "Articulation Points",
+    "Graph Dijkstra",
+    "Graph Kosaraju",
+    "Network Flow",
+    "Strongly Connected Components",
+    "Graph Articulation Points",
+    "Graph Bridges",
+    "Prim's Algorithm",
+    "Kruskal's Algorithm",
+    "Floyd-Warshall",
+    "Bellman-Ford",
+    "A* Search",
+    "A Star Search",
   ],
   "String Algorithms": [
     "Rabin-Karp",
     "Knuth-Morris-Pratt",
     "Manacher's Algorithm",
-    "Z-Algorithm",
+    "Z Algorithm",
+    "KMP Algorithm",
+    "Suffix Tree",
+    "Suffix Array",
   ],
   "Data Structures": [
     "Linked List",
@@ -72,6 +90,16 @@ const patternCategories: Record<string, string[]> = {
     "Hash Table",
     "Graph",
     "Tree",
+    "Stack Implementation",
+    "Queue Implementation",
+    "Monotonic Stack",
+    "Monotonic Queue",
+    "B Tree",
+    "AVL Tree",
+    "Red Black Tree",
+    "Union Find",
+    "Fenwick Tree",
+    "Segment Tree",
   ],
   "Dynamic Programming": [
     "Dynamic Programming",
@@ -79,6 +107,28 @@ const patternCategories: Record<string, string[]> = {
     "Dynamic Programming Iterative",
     "Dynamic Programming Coin Change",
     "Kadane's Algorithm",
+    "State Compression DP",
+    "Digit DP",
+    "Tree DP",
+    "Probability DP",
+    "Knapsack",
+    "Matrix Chain Multiplication",
+    "Matrix Exponentiation",
+    "Memoization",
+  ],
+  "Tree Algorithms": ["Heavy Light Decomposition", "LCA"],
+  "Matrix Algorithms": [
+    "Matrix Operations",
+    "Matrix Traversal",
+    "Matrix Traversal Recursive",
+    "Matrix Spiral Traversal",
+    "Matrix Spiral Recursive",
+    "Grid Traversal",
+  ],
+  "Number Theory": [
+    "Extended Euclidean",
+    "Chinese Remainder Theorem",
+    "Sieve of Eratosthenes",
   ],
   Techniques: [
     "Greedy",
@@ -87,8 +137,9 @@ const patternCategories: Record<string, string[]> = {
     "Two Pointers",
     "Bit Manipulation",
     "Prefix Sum",
-    "Matrix Traversal",
-    "Matrix Spiral Traversal",
+    "Prefix Sums",
+    "Divide and Conquer",
+    "Quickselect",
   ],
 };
 

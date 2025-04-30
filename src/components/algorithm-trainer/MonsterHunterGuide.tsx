@@ -6,14 +6,16 @@ interface MonsterHunterGuideProps {
 }
 
 // Monster hunter themed explanations for different algorithms
-const monsterHunterExplanations: Record<
-  PatternKey,
-  {
-    title: string;
-    description: string;
-    example: string;
-    tips: string[];
-  }
+const monsterHunterExplanations: Partial<
+  Record<
+    PatternKey,
+    {
+      title: string;
+      description: string;
+      example: string;
+      tips: string[];
+    }
+  >
 > = {
   "Quick Sort": {
     title: "Monster Territory Division",
@@ -207,18 +209,6 @@ const monsterHunterExplanations: Record<
       "Track minimum materials needed - like keeping track of the most efficient combinations",
     ],
   },
-  Greedy: {
-    title: "Monster Hunt Prioritization",
-    description:
-      "Like choosing which monsters to hunt based on immediate rewards, Greedy algorithms make locally optimal choices at each step.",
-    example:
-      "Imagine having limited time to hunt and needing to maximize your material collection - you choose the most valuable hunts first.",
-    tips: [
-      "Make locally optimal choice - like choosing the most valuable hunt available right now",
-      "Don't reconsider previous choices - similar to not going back to hunts you've already decided against",
-      "Hope for global optimum - like trusting that your immediate choices will lead to the best overall result",
-    ],
-  },
   "Greedy Activity Selection": {
     title: "Monster Hunt Scheduling",
     description:
@@ -279,18 +269,6 @@ const monsterHunterExplanations: Record<
       "Update distances to neighbors - like finding shorter paths through the current location",
     ],
   },
-  Backtracking: {
-    title: "Monster Equipment Combination",
-    description:
-      "Like trying different combinations of equipment to find the optimal build, Backtracking systematically explores all possibilities by trying a choice, recursively exploring, and then undoing the choice if it doesn't lead to a solution.",
-    example:
-      "Imagine trying to find the best combination of armor pieces that meets specific requirements, trying different combinations until you find one that works.",
-    tips: [
-      "Try a choice - like selecting a specific armor piece",
-      "Recursively explore - similar to trying different combinations with your current selection",
-      "Undo choice and try another - like removing the current piece and trying a different one",
-    ],
-  },
   "Sliding Window": {
     title: "Monster Behavior Tracking",
     description:
@@ -327,18 +305,6 @@ const monsterHunterExplanations: Record<
       "Remove nodes and update dependencies - like completing upgrades and updating what's available next",
     ],
   },
-  DFS: {
-    title: "Monster Territory Exploration",
-    description:
-      "Like thoroughly exploring a monster's territory, Depth-First Search explores as far as possible along each branch before backtracking.",
-    example:
-      "Imagine tracking a monster through its territory, following each path as far as you can before turning back to explore other paths.",
-    tips: [
-      "Mark vertices as visited - like keeping track of areas you've already explored",
-      "Explore unvisited neighbors - similar to following paths you haven't taken yet",
-      "Backtrack when stuck - like turning back when you reach a dead end",
-    ],
-  },
   "DFS Linked List": {
     title: "Monster Chain Exploration",
     description:
@@ -361,18 +327,6 @@ const monsterHunterExplanations: Record<
       "Process current node - like exploring the current territory",
       "Recursively explore left subtree - similar to following the left branch",
       "Recursively explore right subtree - like following the right branch",
-    ],
-  },
-  BFS: {
-    title: "Monster Territory Level Mapping",
-    description:
-      "Like mapping monster territory levels, Breadth-First Search explores all vertices at the current depth before moving to the next level.",
-    example:
-      "Imagine exploring a monster's territory level by level, checking all areas at the same distance from your starting point before moving further out.",
-    tips: [
-      "Use queue for level order - like keeping track of areas to explore in order",
-      "Process all nodes at current level - similar to exploring all areas at the same distance",
-      "Add unvisited neighbors to queue - like adding connected areas to your exploration list",
     ],
   },
   "BFS Linked List": {
@@ -447,16 +401,16 @@ const monsterHunterExplanations: Record<
       "O(1) average case operations - like quick lookups regardless of guide size",
     ],
   },
-  Graph: {
-    title: "Monster Territory Map",
+  "Floyd-Warshall": {
+    title: "Monster Territory Network",
     description:
-      "Like mapping monster territories and connections, Graph represents a set of vertices connected by edges.",
+      "Like finding the shortest paths between all pairs of hunting grounds, Floyd-Warshall helps us compute shortest paths between all locations.",
     example:
-      "Imagine creating a map of hunting grounds where each location is connected to others by paths, forming a network of interconnected areas.",
+      "Imagine having a complete network of hunting grounds and needing to know the shortest path between any two locations.",
     tips: [
-      "Vertices represent locations - like marking each hunting ground on the map",
-      "Edges represent connections - similar to drawing paths between connected areas",
-      "Can be directed or undirected - like one-way or two-way paths between areas",
+      "Consider all intermediate points - like checking all possible routes through other hunting grounds",
+      "Update distances iteratively - similar to finding better paths through each location",
+      "Handle negative weights - like accounting for difficult terrain",
     ],
   },
   Tree: {
@@ -495,7 +449,7 @@ const monsterHunterExplanations: Record<
       "Extract with bubbling down - like removing the top quest and reorganizing the remaining ones",
     ],
   },
-  Trie: {
+  "Trie Operations": {
     title: "Monster Encyclopedia",
     description:
       "Like creating a prefix tree for monster names, Trie provides efficient string storage and retrieval.",
@@ -591,7 +545,7 @@ const monsterHunterExplanations: Record<
       "Verify matches when hashes match - like confirming the pattern when the signatures match",
     ],
   },
-  "Knuth-Morris-Pratt": {
+  "KMP Algorithm": {
     title: "Monster Attack Pattern",
     description:
       "Like matching complex monster behavior patterns, Knuth-Morris-Pratt provides efficient pattern matching with failure function.",
@@ -615,7 +569,7 @@ const monsterHunterExplanations: Record<
       "Find longest palindrome - like identifying the largest symmetric part of the formation",
     ],
   },
-  "Z-Algorithm": {
+  "Z Algorithm": {
     title: "Monster Pattern Occurrence",
     description:
       "Like finding all pattern occurrences in monster data, Z-Algorithm finds all occurrences of a pattern in a text.",
@@ -687,18 +641,6 @@ const monsterHunterExplanations: Record<
       "Maintain sorted order - like ensuring materials are always in order of rarity",
     ],
   },
-  Recursion: {
-    title: "Monster Territory Exploration",
-    description:
-      "Like exploring a monster's territory by breaking it down into smaller areas, Recursion solves problems by breaking them into smaller subproblems.",
-    example:
-      "Imagine exploring a large monster territory by first exploring smaller sections, then combining your findings to understand the entire territory.",
-    tips: [
-      "Define base case - like knowing when to stop exploring a particular area",
-      "Break problem into smaller parts - similar to dividing a territory into manageable sections",
-      "Combine results - like piecing together your findings from different areas",
-    ],
-  },
   "Divide and Conquer": {
     title: "Monster Territory Division Strategy",
     description:
@@ -711,7 +653,7 @@ const monsterHunterExplanations: Record<
       "Combine the solutions - like merging your knowledge from all sections",
     ],
   },
-  "Matrix Exponentiation": {
+  "Matrix Operations": {
     title: "Monster Power Amplification",
     description:
       "Just like how hunters can amplify their weapon's power through combinations, matrix exponentiation helps us efficiently calculate high powers of matrices. This is like finding the optimal combination of monster parts to create the most powerful weapon!",
@@ -727,7 +669,7 @@ const monsterHunterExplanations: Record<
       "Remember that combining parts in different orders can give different results",
     ],
   },
-  "Extended Euclidean Algorithm": {
+  "Extended Euclidean": {
     title: "Monster Material Combination",
     description:
       "Just like finding the perfect combination of monster materials to create a powerful weapon, the Extended Euclidean Algorithm helps us find the optimal combination of numbers to solve equations. It's like discovering the secret recipe for the ultimate weapon!",
@@ -773,6 +715,210 @@ The theorem helps you find the next day when all three hunts align!`,
       "Prime numbers are the best hunting locations",
       "Systematically eliminate non-prime spots",
       "Use this to find all the best hunting grounds",
+    ],
+  },
+  "Bellman-Ford": {
+    title: "Monster Territory Pathfinding",
+    description:
+      "Like finding the shortest paths between hunting grounds while accounting for negative terrain effects, Bellman-Ford helps us find shortest paths in graphs with negative weights.",
+    example:
+      "Imagine planning routes between hunting grounds where some paths might have negative effects (like stamina drain), and you need to find the most efficient route.",
+    tips: [
+      "Relax edges repeatedly - like checking all possible paths multiple times",
+      "Handle negative weights - similar to accounting for stamina-draining terrain",
+      "Detect negative cycles - like identifying areas that would drain your stamina indefinitely",
+    ],
+  },
+  "Graph Dijkstra": {
+    title: "Monster Territory Navigation",
+    description:
+      "Like finding the shortest paths between hunting grounds, Dijkstra's algorithm helps us find the most efficient routes in a territory.",
+    example:
+      "Imagine having a map of hunting grounds and needing to find the quickest route to each location from your current position.",
+    tips: [
+      "Use priority queue - like keeping track of the most promising routes",
+      "Update distances - similar to finding shorter paths as you explore",
+      "Mark visited locations - like keeping track of areas you've already checked",
+    ],
+  },
+  "Kruskal's Algorithm": {
+    title: "Monster Territory Connection",
+    description:
+      "Like connecting hunting grounds with the minimum total path length, Kruskal's algorithm helps us find the minimum spanning tree of a graph.",
+    example:
+      "Imagine needing to connect all hunting grounds with paths while minimizing the total distance of all paths combined.",
+    tips: [
+      "Sort edges by weight - like organizing paths by their length",
+      "Use union-find - similar to keeping track of connected hunting grounds",
+      "Add edges greedily - like choosing the shortest available path at each step",
+    ],
+  },
+  "Prim's Algorithm": {
+    title: "Monster Territory Expansion",
+    description:
+      "Like expanding your hunting territory efficiently, Prim's algorithm helps us find the minimum spanning tree by growing from a starting point.",
+    example:
+      "Imagine starting from your base camp and gradually expanding your hunting territory by adding the closest unconnected areas.",
+    tips: [
+      "Start from any vertex - like choosing your base camp location",
+      "Use priority queue - similar to keeping track of the closest unconnected areas",
+      "Add minimum weight edges - like connecting to the nearest hunting grounds",
+    ],
+  },
+  "Graph Articulation Points": {
+    title: "Monster Territory Weak Points",
+    description:
+      "Like identifying critical points in a monster's territory, Articulation Points helps us find vertices whose removal would disconnect the graph.",
+    example:
+      "Imagine analyzing a monster's territory to find key locations that, if blocked, would split the territory into disconnected regions.",
+    tips: [
+      "Use DFS - like exploring the territory systematically",
+      "Track discovery times - similar to noting when you discover each location",
+      "Identify critical points - like finding locations that connect multiple regions",
+    ],
+  },
+  "Graph Bridges": {
+    title: "Monster Territory Chokepoints",
+    description:
+      "Like finding critical paths in a monster's territory, Bridges helps us identify edges whose removal would disconnect the graph.",
+    example:
+      "Imagine analyzing a monster's territory to find key paths that, if blocked, would split the territory into disconnected regions.",
+    tips: [
+      "Use DFS - like exploring the territory systematically",
+      "Track discovery times - similar to noting when you discover each path",
+      "Identify critical edges - like finding paths that connect multiple regions",
+    ],
+  },
+  "Graph Kosaraju": {
+    title: "Monster Territory Clusters",
+    description:
+      "Like identifying strongly connected regions in a monster's territory, Kosaraju's algorithm helps us find strongly connected components in a graph.",
+    example:
+      "Imagine analyzing a monster's territory to find groups of locations where you can travel between any two locations in the group.",
+    tips: [
+      "Perform two DFS passes - like exploring the territory in both directions",
+      "Use transpose graph - similar to reversing all paths in the territory",
+      "Identify components - like finding groups of interconnected locations",
+    ],
+  },
+  "Network Flow": {
+    title: "Monster Resource Distribution",
+    description:
+      "Like optimizing the flow of resources through a monster's territory, Network Flow helps us find the maximum flow in a network.",
+    example:
+      "Imagine having a network of resource nodes and paths, and needing to maximize the amount of resources that can flow from source to destination.",
+    tips: [
+      "Use residual graph - like keeping track of available capacity on paths",
+      "Find augmenting paths - similar to identifying paths that can carry more flow",
+      "Update flow iteratively - like increasing flow along the best paths",
+    ],
+  },
+  "Strongly Connected Components": {
+    title: "Monster Territory Groups",
+    description:
+      "Like identifying groups of interconnected locations in a monster's territory, Strongly Connected Components helps us find groups where any location can reach any other.",
+    example:
+      "Imagine analyzing a monster's territory to find groups of locations where you can travel between any two locations in the group in both directions.",
+    tips: [
+      "Use DFS - like exploring the territory systematically",
+      "Track discovery times - similar to noting when you discover each location",
+      "Identify components - like finding groups of interconnected locations",
+    ],
+  },
+  "Maximum Bipartite Matching": {
+    title: "Monster Hunter Assignments",
+    description:
+      "Like matching hunters to monster hunts, Maximum Bipartite Matching helps us find the maximum matching in a bipartite graph.",
+    example:
+      "Imagine having a group of hunters and a set of monster hunts, and needing to assign each hunter to at most one hunt they're qualified for.",
+    tips: [
+      "Use augmenting paths - like finding paths that can improve the matching",
+      "Alternate between matched and unmatched edges - similar to switching assignments",
+      "Find maximum matching - like assigning as many hunters as possible",
+    ],
+  },
+  "A* Search": {
+    title: "Monster Territory Pathfinding",
+    description:
+      "Like finding the most efficient path to a monster while considering terrain, A* Search helps us find the shortest path using heuristics.",
+    example:
+      "Imagine having a map of hunting grounds and needing to find the quickest route to a specific monster, considering both distance and terrain difficulty.",
+    tips: [
+      "Use heuristic function - like estimating distance to the target",
+      "Maintain priority queue - similar to keeping track of promising paths",
+      "Update path costs - like finding better routes as you explore",
+    ],
+  },
+  "State Compression DP": {
+    title: "Monster Equipment States",
+    description:
+      "Like tracking different equipment states efficiently, State Compression DP helps us solve problems with many possible states.",
+    example:
+      "Imagine having different equipment combinations and needing to find the optimal set that meets specific requirements.",
+    tips: [
+      "Use bitmasking - like representing states with binary numbers",
+      "Track state transitions - similar to moving between equipment sets",
+      "Optimize state space - like reducing the number of states to consider",
+    ],
+  },
+  "Digit DP": {
+    title: "Monster Count Tracking",
+    description:
+      "Like counting monsters with specific properties, Digit DP helps us solve problems involving digits and numbers.",
+    example:
+      "Imagine needing to count how many monsters have specific characteristics in their identification numbers.",
+    tips: [
+      "Track digit position - like processing numbers digit by digit",
+      "Use memoization - similar to remembering previous calculations",
+      "Handle constraints - like checking specific digit requirements",
+    ],
+  },
+  "Tree DP": {
+    title: "Monster Territory Tree Analysis",
+    description:
+      "Like analyzing a monster's territory organized as a tree, Tree DP helps us solve problems on tree structures.",
+    example:
+      "Imagine having a tree-like territory where each location connects to others, and needing to find optimal paths or configurations.",
+    tips: [
+      "Process nodes recursively - like exploring the territory from leaves to root",
+      "Combine subtree results - similar to building up solutions from smaller parts",
+      "Handle different cases - like considering different ways to process each location",
+    ],
+  },
+  "Probability DP": {
+    title: "Monster Encounter Chances",
+    description:
+      "Like calculating probabilities of monster encounters, Probability DP helps us solve problems involving probabilities.",
+    example:
+      "Imagine tracking the probability of encountering specific monsters in different areas over time.",
+    tips: [
+      "Track probability states - like keeping track of different possible outcomes",
+      "Update probabilities - similar to adjusting chances based on new information",
+      "Handle multiple events - like considering different encounter scenarios",
+    ],
+  },
+  "Miller-Rabin": {
+    title: "Monster Rarity Verification",
+    description:
+      "Like verifying the rarity of monster materials, Miller-Rabin helps us test if a number is prime.",
+    example:
+      "Imagine needing to verify if a monster material's rarity value is a prime number.",
+    tips: [
+      "Use probabilistic test - like checking multiple bases for primality",
+      "Handle edge cases - similar to dealing with special rarity values",
+      "Verify efficiently - like quickly checking material rarity",
+    ],
+  },
+  "Fast Fourier Transform": {
+    title: "Monster Signal Analysis",
+    description:
+      "Like analyzing monster signals and patterns, FFT helps us efficiently compute the discrete Fourier transform.",
+    example:
+      "Imagine analyzing the frequency patterns of monster calls or movements to identify specific behaviors.",
+    tips: [
+      "Use divide and conquer - like breaking down signals into smaller parts",
+      "Handle complex numbers - similar to processing signal components",
+      "Apply inverse transform - like reconstructing the original signal",
     ],
   },
 };

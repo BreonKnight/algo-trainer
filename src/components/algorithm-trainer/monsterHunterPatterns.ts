@@ -7,7 +7,7 @@ import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4
 // Add matrix exponentiation pattern
 const matrixExponentiationPattern = new Map<PatternKey, string>([
   [
-    "Matrix Exponentiation",
+    "Matrix Operations",
     `# Monster Hunter Matrix Exponentiation Pattern
 # Weapon Power Amplification Strategy
 
