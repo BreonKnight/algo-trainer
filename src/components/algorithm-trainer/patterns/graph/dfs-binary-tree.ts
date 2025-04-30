@@ -3,45 +3,67 @@ import { AlgorithmPattern } from "../../types";
 export const dfs_binary_treePattern: AlgorithmPattern = {
   title: "DFS on Binary Tree",
   description:
-    "Application of DFS to traverse a binary tree, with three main variations: pre-order, in-order, and post-order traversal.",
-  timeComplexity: "O(n)",
-  category: "Graph Algorithms",
-  spaceComplexity: "O(h) where h is tree height",
-  pseudocode: `Pre-order traversal:\n1. Process root\n2. Traverse left subtree\n3. Traverse right subtree\n\nIn-order traversal:\n1. Traverse left subtree\n2. Process root\n3. Traverse right subtree\n\nPost-order traversal:\n1. Traverse left subtree\n2. Traverse right subtree\n3. Process root`,
-  example: `Tree:
+    "Apply Depth-First Search on a binary tree structure to traverse or search through nodes in pre-order, in-order, or post-order.",
+  timeComplexity: "O(N)",
+  spaceComplexity: "O(H) where H is the height of the tree",
+  pseudocode: `1. Initialize visited set and result array
+2. Define DFS function:
+   a. If node is null or visited, return
+   b. Pre-order: Process node before children
+   c. Mark node as visited
+   d. Recursively call DFS on left child
+   e. In-order: Process node between children
+   f. Recursively call DFS on right child
+   g. Post-order: Process node after children
+3. Start DFS from root node`,
+  example: `Binary Tree:
      1
    /   \\
   2     3
- / \\
-4   5
+ / \\   / \\
+4   5 6   7
 
-Pre-order: 1,2,4,5,3
-In-order: 4,2,5,1,3
-Post-order: 4,5,2,3,1`,
+Traversal Orders:
+Pre-order:  [1, 2, 4, 5, 3, 6, 7]
+In-order:   [4, 2, 5, 1, 6, 3, 7]
+Post-order: [4, 5, 2, 6, 7, 3, 1]`,
   implementation: `class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
-def preorder(root):
-    if not root:
-        return
-    print(root.val)  # Process root
-    preorder(root.left)  # Left subtree
-    preorder(root.right)  # Right subtree
-
-def inorder(root):
-    if not root:
-        return
-    inorder(root.left)  # Left subtree
-    print(root.val)  # Process root
-    inorder(root.right)  # Right subtree
-
-def postorder(root):
-    if not root:
-        return
-    postorder(root.left)  # Left subtree
-    postorder(root.right)  # Right subtree
-    print(root.val)  # Process root`,
+def dfs_binary_tree(root):
+    visited = set()
+    preorder = []
+    inorder = []
+    postorder = []
+    
+    def dfs(node):
+        if not node or node in visited:
+            return
+        
+        # Pre-order: Process before children
+        visited.add(node)
+        preorder.append(node.val)
+        
+        # Process left subtree
+        dfs(node.left)
+        
+        # In-order: Process between children
+        inorder.append(node.val)
+        
+        # Process right subtree
+        dfs(node.right)
+        
+        # Post-order: Process after children
+        postorder.append(node.val)
+    
+    dfs(root)
+    return {
+        'preorder': preorder,
+        'inorder': inorder,
+        'postorder': postorder
+    }`,
+  category: "graph",
 };

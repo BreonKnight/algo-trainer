@@ -711,6 +711,70 @@ const monsterHunterExplanations: Record<
       "Combine the solutions - like merging your knowledge from all sections",
     ],
   },
+  "Matrix Exponentiation": {
+    title: "Monster Power Amplification",
+    description:
+      "Just like how hunters can amplify their weapon's power through combinations, matrix exponentiation helps us efficiently calculate high powers of matrices. This is like finding the optimal combination of monster parts to create the most powerful weapon!",
+    example: `Imagine you're crafting a weapon that gets stronger with each monster part combination:
+1. Start with a base weapon (identity matrix)
+2. Combine monster parts (matrix multiplication)
+3. Use the power of 2 to quickly reach higher power levels
+4. The result is your ultimate weapon!`,
+    tips: [
+      "Think of each matrix as a different monster part combination",
+      "The exponent represents how many times you want to combine the parts",
+      "Use the power of 2 to make combinations more efficient",
+      "Remember that combining parts in different orders can give different results",
+    ],
+  },
+  "Extended Euclidean Algorithm": {
+    title: "Monster Material Combination",
+    description:
+      "Just like finding the perfect combination of monster materials to create a powerful weapon, the Extended Euclidean Algorithm helps us find the optimal combination of numbers to solve equations. It's like discovering the secret recipe for the ultimate weapon!",
+    example: `Imagine you're trying to combine two rare monster materials:
+1. You have 35 Rathalos Scales and 15 Nergigante Gems
+2. The algorithm helps you find how to combine them perfectly
+3. The result shows you can make 5 ultimate weapons
+4. Each weapon needs 1 Rathalos Scale and -2 Nergigante Gems`,
+    tips: [
+      "Think of the numbers as different monster materials",
+      "The GCD represents how many ultimate weapons you can make",
+      "The coefficients show how to combine the materials",
+      "Negative coefficients mean you need to trade materials",
+    ],
+  },
+  "Chinese Remainder Theorem": {
+    title: "Monster Quest Scheduling",
+    description:
+      "Like scheduling multiple monster hunts with different time requirements, the Chinese Remainder Theorem helps us find a time that satisfies all the conditions. It's like finding the perfect time slot for all your hunts!",
+    example: `Imagine you have three monster hunts to schedule:
+1. Rathalos hunt every 3 days
+2. Nergigante hunt every 5 days
+3. Teostra hunt every 7 days
+The theorem helps you find the next day when all three hunts align!`,
+    tips: [
+      "Think of each congruence as a monster's hunting pattern",
+      "The solution is the next time all hunts align",
+      "Make sure the hunting patterns don't conflict",
+      "Use this to plan your optimal hunting schedule",
+    ],
+  },
+  "Sieve of Eratosthenes": {
+    title: "Monster Territory Sieving",
+    description:
+      "Like systematically exploring a monster's territory to find all the prime hunting spots, the Sieve of Eratosthenes helps us efficiently find all prime numbers. It's like creating the perfect hunting map!",
+    example: `Imagine exploring a monster's territory:
+1. Start from the first hunting spot
+2. Mark all spots that are multiples of the current spot
+3. Move to the next unmarked spot
+4. The remaining unmarked spots are the prime hunting locations!`,
+    tips: [
+      "Think of numbers as potential hunting spots",
+      "Prime numbers are the best hunting locations",
+      "Systematically eliminate non-prime spots",
+      "Use this to find all the best hunting grounds",
+    ],
+  },
 };
 
 export function MonsterHunterGuide({

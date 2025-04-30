@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const matrix_spiral_traversalPattern: AlgorithmPattern = {
+export const matrixSpiralTraversalPattern: AlgorithmPattern = {
   title: "Matrix Spiral Traversal",
   description:
     "An iterative pattern to traverse a matrix in a spiral order, moving in a clockwise direction from the outer elements to the inner elements.",

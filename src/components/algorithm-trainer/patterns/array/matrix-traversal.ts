@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const matrix_traversalPattern: AlgorithmPattern = {
+export const matrixTraversalPattern: AlgorithmPattern = {
   title: "Matrix Traversal",
   description:
     "A pattern for traversing a 2D matrix iteratively, typically using nested loops to visit each element in a specific order (row-wise or column-wise).",

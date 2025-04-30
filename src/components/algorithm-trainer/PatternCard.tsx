@@ -1,5 +1,8 @@
 import { Card } from "../ui/card";
-import { pseudocodePatterns } from "@/lib/pseudocode-patterns";
+import {
+  pseudocodePatterns,
+  patternNameMapping,
+} from "@/lib/pseudocode-patterns";
 import styles from "@/styles/pseudocode.module.css";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
@@ -128,6 +131,13 @@ export function PatternCard({
     };
   }, []);
 
+  const getPseudocodePattern = (patternName: string) => {
+    const mappedName = patternNameMapping[patternName] || patternName;
+    return typedPseudocodePatterns[mappedName];
+  };
+
+  const pseudo = getPseudocodePattern(currentPattern);
+
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
       <div className="flex-none mb-2">
@@ -224,7 +234,6 @@ export function PatternCard({
                     className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed p-4`}
                   >
                     {(() => {
-                      const pseudo = typedPseudocodePatterns[currentPattern];
                       if (typeof pseudo === "function") {
                         return pseudo();
                       } else {

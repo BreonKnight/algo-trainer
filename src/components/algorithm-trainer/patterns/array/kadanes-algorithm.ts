@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const kadanes_algorithmPattern: AlgorithmPattern = {
+export const kadanesAlgorithmPattern: AlgorithmPattern = {
   title: "Kadane's Algorithm Pattern",
   category: "Array",
   description:

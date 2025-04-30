@@ -12,6 +12,25 @@ interface ReplCardProps {
   userCode: string;
 }
 
+// Custom hook for media query
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    setMatches(mediaQuery.matches);
+
+    const handler = (event: MediaQueryListEvent) => {
+      setMatches(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, [query]);
+
+  return matches;
+}
+
 export function ReplCard({ userCode }: ReplCardProps) {
   const [output, setOutput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);

@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const monotonic_stackPattern: AlgorithmPattern = {
+export const monotonicStackPattern: AlgorithmPattern = {
   title: "Monotonic Stack Pattern",
   description:
     "A stack that maintains its elements in a strictly increasing or decreasing order, useful for finding the next/previous greater/smaller element.",

@@ -682,4 +682,102 @@ Expected Output: [3, 9, 10, 27, 38, 43, 82]
 
 # Monster Hunter Tip:
 # Like dividing a large monster territory into smaller hunting grounds!`,
+
+  "Matrix Exponentiation": `# Monster Hunter Matrix Exponentiation Challenge
+# You are calculating weapon power combinations!
+
+# Test Case 1: Basic Power Combination
+Input: [
+  [1, 1],
+  [1, 0]
+], power = 5
+Expected Output: [
+  [8, 5],
+  [5, 3]
+]
+# This represents the 6th Fibonacci number (8) in the weapon power sequence
+
+# Test Case 2: Advanced Power Combination
+Input: [
+  [2, 1],
+  [1, 1]
+], power = 3
+Expected Output: [
+  [13, 8],
+  [8, 5]
+]
+# This represents a more complex weapon power progression
+
+# Monster Hunter Tip:
+# Think of each matrix as a different weapon upgrade path!`,
+
+  "Extended Euclidean Algorithm": {
+    description: "Find the optimal combination of monster materials",
+    testCases: [
+      {
+        input: { a: 35, b: 15 },
+        expected: { gcd: 5, x: 1, y: -2 },
+        explanation:
+          "With 35 Rathalos Scales and 15 Nergigante Gems, you can make 5 ultimate weapons, each requiring 1 Rathalos Scale and -2 Nergigante Gems (meaning you need to trade 2 gems per weapon).",
+      },
+      {
+        input: { a: 48, b: 18 },
+        expected: { gcd: 6, x: 1, y: -2 },
+        explanation:
+          "With 48 Rathalos Scales and 18 Nergigante Gems, you can make 6 ultimate weapons, each requiring 1 Rathalos Scale and -2 Nergigante Gems.",
+      },
+    ],
+    monsterHunterTip:
+      "Use this algorithm to optimize your material combinations and create the most powerful weapons possible!",
+  },
+  "Chinese Remainder Theorem": {
+    description: "Find the perfect time for all monster hunts",
+    testCases: [
+      {
+        input: {
+          congruences: [
+            { remainder: 2, modulus: 3 },
+            { remainder: 3, modulus: 5 },
+            { remainder: 2, modulus: 7 },
+          ],
+        },
+        expected: { solution: 23 },
+        explanation:
+          "The next time all three monster hunts align is on day 23, when Rathalos (every 3 days), Nergigante (every 5 days), and Teostra (every 7 days) can all be hunted.",
+      },
+      {
+        input: {
+          congruences: [
+            { remainder: 1, modulus: 2 },
+            { remainder: 2, modulus: 3 },
+            { remainder: 3, modulus: 5 },
+          ],
+        },
+        expected: { solution: 23 },
+        explanation:
+          "The next time all three monster hunts align is on day 23, when Rathalos (every 2 days), Nergigante (every 3 days), and Teostra (every 5 days) can all be hunted.",
+      },
+    ],
+    monsterHunterTip:
+      "Use this theorem to plan your hunting schedule and maximize your efficiency!",
+  },
+  "Sieve of Eratosthenes": {
+    description: "Find all prime hunting spots in monster territory",
+    testCases: [
+      {
+        input: { limit: 20 },
+        expected: { primes: [2, 3, 5, 7, 11, 13, 17, 19] },
+        explanation:
+          "These are the prime hunting spots in the first 20 locations of the monster's territory.",
+      },
+      {
+        input: { limit: 30 },
+        expected: { primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29] },
+        explanation:
+          "These are the prime hunting spots in the first 30 locations of the monster's territory.",
+      },
+    ],
+    monsterHunterTip:
+      "Use this sieve to efficiently find all the best hunting locations in a monster's territory!",
+  },
 };

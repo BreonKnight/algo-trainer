@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const stack_implementationPattern: AlgorithmPattern = {
+export const stackImplementationPattern: AlgorithmPattern = {
   title: "Stack Data Structure Implementation",
   description:
     "Implementation of a Last-In-First-Out (LIFO) data structure that supports push and pop operations.",
