@@ -5,3 +5,45 @@
 body {
   @apply min-h-screen bg-gradient-to-br from-[#191a21] via-[#282a36] to-[#44475a];
 }
+
+/* Custom scrollbar for code editor */
+.code-editor-scroll::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+.code-editor-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent2, rgba(120, 120, 120, 0.25));
+  border-radius: 6px;
+}
+.code-editor-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--accent2, rgba(120, 120, 120, 0.45));
+}
+.code-editor-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/* For Firefox */
+.code-editor-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent2, rgba(120, 120, 120, 0.25)) transparent;
+}
+
+/* Monaco Editor Scrollbar Fixes */
+.monaco-scrollable-element.editor-scrollable {
+  border-radius: 0.75rem !important;
+}
+
+.monaco-scrollable-element.editor-scrollable > .monaco-editor-background {
+  border-radius: 0.75rem !important;
+}
+
+.monaco-editor .overflow-guard {
+  border-radius: 0.75rem !important;
+}
+
+/* Ensure editor content is properly contained */
+.monaco-editor,
+.monaco-editor .overflow-guard,
+.monaco-scrollable-element {
+  border-radius: 0.75rem !important;
+  overflow: hidden !important;
+}

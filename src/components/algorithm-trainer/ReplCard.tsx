@@ -1,15 +1,12 @@
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { loadPyodide } from "pyodide";
 import { toast } from "sonner";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "../ui/tooltip";
+import confetti from "canvas-confetti";
 import { useTheme } from "../ThemeProvider";
+import GamificationService from "../../lib/gamification";
+import { cn } from "../../lib/utils";
 
 interface ReplCardProps {
   userCode: string;
@@ -21,7 +18,57 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const [pyodide, setPyodide] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const { theme } = useTheme();
-  const isLight = theme === "light" || theme === "solarized";
+  const [replHeight, setReplHeight] = useState(300);
+  const replRef = useRef<HTMLDivElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  // Theme-specific terminal styles
+  const terminalStyles = {
+    dracula: {
+      bg: "bg-[#282a36]",
+      text: "text-[#f8f8f2]",
+      error: "text-[#ff5555]",
+    },
+    solarized: {
+      bg: "bg-[#002b36]",
+      text: "text-[#839496]",
+      error: "text-[#dc322f]",
+    },
+    light: {
+      bg: "bg-[#f8f8f8]",
+      text: "text-[#2d3748]",
+      error: "text-red-600",
+    },
+    nord: {
+      bg: "bg-[#2e3440]",
+      text: "text-[#d8dee9]",
+      error: "text-[#bf616a]",
+    },
+    snes: {
+      bg: "bg-[#2c2c2c]",
+      text: "text-[#c7c7c7]",
+      error: "text-[#ff6b6b]",
+    },
+    ps2: {
+      bg: "bg-[#1a1a1a]",
+      text: "text-[#e0e0e0]",
+      error: "text-[#ff4757]",
+    },
+    re2: {
+      bg: "bg-[#1e1e1e]",
+      text: "text-[#d4d4d4]",
+      error: "text-[#ff3333]",
+    },
+    mh: {
+      bg: "bg-[#2d2d2d]",
+      text: "text-[#e6e6e6]",
+      error: "text-[#ff6b6b]",
+    },
+  };
+
+  const currentStyle =
+    terminalStyles[theme as keyof typeof terminalStyles] ||
+    terminalStyles.dracula;
 
   useEffect(() => {
     let mounted = true;
@@ -76,13 +123,17 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const runCode = async () => {
     if (!pyodide) {
       setOutput("Python environment is not ready yet. Please wait...");
-      toast.error("Python environment is not ready yet. Please wait...");
+      toast.error("Python environment is not ready yet. Please wait...", {
+        duration: 5000,
+      });
       return;
     }
 
     setIsLoading(true);
     setError(null);
     setOutput("");
+
+    const startTime = performance.now();
 
     try {
       // Create a wrapper to capture print statements and return values
@@ -103,13 +154,151 @@ except Exception as e:
     print(f"Error: {str(e)}")
 `;
       await pyodide.runPythonAsync(wrappedCode);
-      toast.success("Code ran successfully!");
+
+      // Calculate execution time
+      const endTime = performance.now();
+      const executionTime = endTime - startTime;
+
+      // Record code execution in gamification service
+      const gamificationService = GamificationService.getInstance();
+      gamificationService.recordCodeExecution(
+        userCode.split("\n").length, // Lines of code
+        executionTime, // Execution time in ms
+        false // No error
+      );
+
+      toast.success("Code ran successfully!", {
+        duration: 3000,
+      });
+
+      // Trigger confetti animation
+      triggerConfetti();
     } catch (error: any) {
-      setError(`Error: ${error.message}`);
-      toast.error(`Error: ${error.message}`);
+      let errorMessage = error.message;
+      let errorType = "Error";
+
+      // Handle browser-specific errors
+      if (error.message.includes("Pyodide failed to load")) {
+        errorType = "Environment Error";
+        errorMessage =
+          "Failed to load Python environment. Please check your internet connection and refresh the page.";
+      } else if (error.message.includes("out of memory")) {
+        errorType = "Memory Error";
+        errorMessage =
+          "Your code used too much memory. Try optimizing your solution.";
+      } else if (error.message.includes("timeout")) {
+        errorType = "Timeout Error";
+        errorMessage =
+          "Your code took too long to execute. Try optimizing your solution.";
+      } else if (error.message.includes("syntax error")) {
+        errorType = "Syntax Error";
+        errorMessage =
+          error.message.split("SyntaxError:")[1]?.trim() || error.message;
+
+        // Check for common syntax errors and provide helpful suggestions
+        if (errorMessage.includes("sdef")) {
+          errorMessage +=
+            "\n\nSuggestion: Did you mean to use 'def' instead of 'sdef'?";
+        } else if (errorMessage.includes("indent")) {
+          errorMessage +=
+            "\n\nSuggestion: Check your indentation. Python is sensitive to proper indentation.";
+        } else if (errorMessage.includes("colon")) {
+          errorMessage +=
+            "\n\nSuggestion: Make sure you have a colon (:) after your function definition, if statement, or loop.";
+        }
+      } else if (error.message.includes("NameError")) {
+        errorType = "Name Error";
+        errorMessage =
+          error.message.split("NameError:")[1]?.trim() || error.message;
+      } else if (error.message.includes("TypeError")) {
+        errorType = "Type Error";
+        errorMessage =
+          error.message.split("TypeError:")[1]?.trim() || error.message;
+      } else if (error.message.includes("IndentationError")) {
+        errorType = "Indentation Error";
+        errorMessage =
+          error.message.split("IndentationError:")[1]?.trim() || error.message;
+      } else if (error.message.includes("ZeroDivisionError")) {
+        errorType = "Division Error";
+        errorMessage = "Division by zero is not allowed.";
+      }
+
+      const formattedError = `${errorType}: ${errorMessage}`;
+      setError(formattedError);
+      toast.error(formattedError, {
+        duration: 6000,
+      });
+
+      // Record code execution with error in gamification service
+      const endTime = performance.now();
+      const executionTime = endTime - startTime;
+      const gamificationService = GamificationService.getInstance();
+      gamificationService.recordCodeExecution(
+        userCode.split("\n").length, // Lines of code
+        executionTime, // Execution time in ms
+        true // Has error
+      );
     }
 
     setIsLoading(false);
+  };
+
+  // Function to trigger confetti animation
+  const triggerConfetti = () => {
+    // Create a more dynamic confetti animation with multiple bursts
+
+    // First burst - from the left
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { x: 0, y: 0.6 },
+      colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+      ticks: 200,
+    });
+
+    // Second burst - from the right
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        spread: 60,
+        origin: { x: 1, y: 0.6 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 200,
+      });
+    }, 100);
+
+    // Third burst - from the bottom center
+    setTimeout(() => {
+      confetti({
+        particleCount: 100,
+        spread: 80,
+        origin: { x: 0.5, y: 1 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 250,
+      });
+    }, 200);
+
+    // Fourth burst - a small burst from the top center
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        spread: 40,
+        origin: { x: 0.5, y: 0.3 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 150,
+      });
+    }, 300);
+
+    // Final burst - a large burst from the center
+    setTimeout(() => {
+      confetti({
+        particleCount: 120,
+        spread: 100,
+        origin: { x: 0.5, y: 0.5 },
+        colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff"],
+        ticks: 300,
+      });
+    }, 400);
   };
 
   const clearOutput = () => {
@@ -118,63 +307,85 @@ except Exception as e:
   };
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col">
-      <div className="flex justify-between items-center mb-2">
-        <h2
-          className={
-            "text-base sm:text-lg font-semibold truncate " +
-            (theme === "nord"
-              ? "text-white"
-              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
-          }
-        >
-          Python REPL
+    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+      <div className="flex-none flex justify-between items-center mb-4">
+        <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
+          Output
         </h2>
-        <TooltipProvider>
-          <div className="flex gap-2">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={runCode}
-                  disabled={isLoading || !pyodide}
-                  className="bg-accent2 hover:bg-accent2/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-                >
-                  {isLoading ? "Running..." : "Run Code"}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Run your Python code in the REPL</TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={clearOutput}
-                  disabled={isLoading}
-                  className="bg-secondary hover:bg-secondary/80 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md"
-                >
-                  Clear
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Clear the REPL output</TooltipContent>
-            </Tooltip>
-          </div>
-        </TooltipProvider>
+        <div className="flex gap-2">
+          <Button
+            onClick={clearOutput}
+            variant="ghost"
+            className={cn(
+              "text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md",
+              theme === "nord"
+                ? "text-white hover:text-white"
+                : "text-background hover:text-background"
+            )}
+          >
+            Clear
+          </Button>
+          <Button
+            onClick={runCode}
+            disabled={isLoading}
+            className={cn(
+              "bg-accent3 hover:bg-accent3/90 text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md",
+              theme === "nord" ? "text-white" : "text-background"
+            )}
+          >
+            {isLoading ? "Running..." : "Run Code"}
+          </Button>
+        </div>
       </div>
-      <div className="flex-1 min-h-0 overflow-hidden">
-        <div className="h-full w-full bg-main rounded-md p-4 font-mono text-sm overflow-auto">
-          {error ? (
-            <pre className="whitespace-pre-wrap text-accent">{error}</pre>
-          ) : (
+      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+        <div
+          ref={replRef}
+          className={`flex-1 min-h-[300px] overflow-hidden rounded-xl ${currentStyle.bg}`}
+          style={{
+            height: isDesktop ? replHeight : "300px",
+            minHeight: "300px",
+          }}
+        >
+          <div className="h-full w-full overflow-auto p-4">
             <pre
-              className={
-                isLight
-                  ? "whitespace-pre-wrap text-main"
-                  : "whitespace-pre-wrap text-white"
-              }
+              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed ${currentStyle.text}`}
             >
-              {output ||
-                "You can do it! make sure to run code with a print fn to see output. Make sure to put prints everywhere to debug efficiently."}
+              {error ? (
+                <span className={currentStyle.error}>{error}</span>
+              ) : (
+                <span>
+                  {output || "Run your code to see the output here..."}
+                </span>
+              )}
             </pre>
-          )}
+          </div>
+        </div>
+        {/* Vertical resize handle */}
+        <div
+          className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+          style={{ userSelect: "none" }}
+          onMouseDown={(e) => {
+            if (!isDesktop) return;
+            const startY = e.clientY;
+            const startHeight = replRef.current?.offsetHeight || 0;
+            const maxHeight = 800; // Increased max height for REPL
+            const onMove = (moveEvent: MouseEvent) => {
+              const delta = moveEvent.clientY - startY;
+              const newHeight = Math.max(
+                300,
+                Math.min(startHeight + delta, maxHeight)
+              );
+              setReplHeight(newHeight);
+            };
+            const onUp = () => {
+              window.removeEventListener("mousemove", onMove);
+              window.removeEventListener("mouseup", onUp);
+            };
+            window.addEventListener("mousemove", onMove);
+            window.addEventListener("mouseup", onUp);
+          }}
+        >
+          <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
         </div>
       </div>
     </Card>

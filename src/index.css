@@ -106,11 +106,11 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+  margin: 0;
   background: linear-gradient(135deg, #282a36 0%, #1e1f29 50%, #282a36 100%);
   background-attachment: fixed;
 }
@@ -435,4 +435,8 @@ textarea,
 }
 .bg-accent4 {
   background-color: var(--accent4) !important;
+}
+
+#root {
+  width: 100%;
 }
