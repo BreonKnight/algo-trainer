@@ -65,5 +65,5 @@ def dfs_binary_tree(root):
         'inorder': inorder,
         'postorder': postorder
     }`,
-  category: "graph",
+  category: "Graph",
 };

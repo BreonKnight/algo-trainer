@@ -47,5 +47,5 @@ Rotten Vale: -1`,
                 return None  # Negative cycle exists
     
     return distances`,
-  category: "graph",
+  category: "Gsraph",
 };

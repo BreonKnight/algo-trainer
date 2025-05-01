@@ -53,5 +53,5 @@ def prim(graph, start):
                 heappush(edges, (next_weight, to_vertex, next_vertex))
     
     return mst`,
-  category: "graph",
+  category: "Graph",
 };

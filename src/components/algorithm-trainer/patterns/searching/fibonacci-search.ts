@@ -168,5 +168,5 @@ def fibonacci_search_optimized(arr: List[int], target: int) -> int:
         return offset + 1
     
     return -1`,
-  category: "searching",
+  category: "Searching",
 };

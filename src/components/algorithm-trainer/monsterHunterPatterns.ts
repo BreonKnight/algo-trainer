@@ -128,7 +128,7 @@ spectrum = analyze_attack_pattern(attacks)
 // Add Graph Articulation Points pattern
 export const graphArticulationPointsPattern = new Map<PatternKey, string>([
   [
-    "Graph Articulation Points",
+    "Articulation Points" as PatternKey,
     `# Monster Hunter Graph Articulation Points Pattern
 # Critical Monster Territory Analysis
 
@@ -239,7 +239,7 @@ critical_points = analyze_territory_critical_points(territory)
 // Add Dynamic Programming Pattern
 const dynamicProgrammingPattern = new Map<PatternKey, string>([
   [
-    "Dynamic Programming Pattern",
+    "Dynamic Programming" as PatternKey,
     `# Monster Hunter Dynamic Programming Pattern
 # Weapon Upgrade Optimization Strategy
 

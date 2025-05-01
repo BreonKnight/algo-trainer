@@ -76,5 +76,5 @@ def jump_search(arr: List[int], target: int) -> int:
         return prev
     
     return -1  # Target not found`,
-  category: "searching",
+  category: "Searching",
 };

@@ -74,5 +74,5 @@ Articulation Points:
             dfs(i, -1, visited, disc, low, time, ap)
             
     return list(ap)`,
-  category: "graph",
+  category: "Graph",
 };

@@ -1,48 +1,50 @@
-import type { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types";
 
 export const primeFactorizationPattern: AlgorithmPattern = {
   title: "Prime Factorization",
-  description:
-    "An algorithm to decompose a number into its prime factors. It's useful for various number theory problems and cryptography applications.",
-  timeComplexity: "O(√n)",
+  description: "A pattern that decomposes a number into its prime factors.",
+  timeComplexity: "O(sqrt(n))",
   spaceComplexity: "O(log n)",
-  pseudocode: `function primeFactors(n):
-    factors = []
-    
-    # Handle 2 separately
-    while n % 2 == 0:
-        factors.append(2)
-        n = n // 2
-    
-    # Check odd numbers up to sqrt(n)
-    i = 3
-    while i * i <= n:
-        while n % i == 0:
-            factors.append(i)
-            n = n // i
-        i += 2
-    
-    # If n is a prime > 2
-    if n > 2:
-        factors.append(n)
-    
-    return factors`,
-  example: `// Factorize 315
-const factors = primeFactors(315);
-console.log(factors); // [3, 3, 5, 7]
+  category: "Number Theory",
+  pseudocode: `PRIME-FACTORS(n)
+1  factors = []
+2  // Handle even numbers
+3  while n mod 2 == 0
+4      factors.append(2)
+5      n = n / 2
+6  // Check odd numbers up to sqrt(n)
+7  i = 3
+8  while i * i ≤ n
+9      while n mod i == 0
+10         factors.append(i)
+11         n = n / i
+12     i = i + 2
+13 // If n is a prime number > 2
+14 if n > 2
+15     factors.append(n)
+16 return factors
 
-// Factorize 1001
-const factors2 = primeFactors(1001);
-console.log(factors2); // [7, 11, 13]`,
+PRIME-FACTORS-WITH-EXPONENTS(n)
+1  factors = PRIME-FACTORS(n)
+2  result = {}
+3  for factor in factors
+4      result[factor] = result[factor] + 1
+5  return result`,
+  example: `n = 60
+Step 1: 60 ÷ 2 = 30, factors = [2]
+Step 2: 30 ÷ 2 = 15, factors = [2, 2]
+Step 3: 15 ÷ 3 = 5, factors = [2, 2, 3]
+Step 4: 5 ÷ 5 = 1, factors = [2, 2, 3, 5]
+Result: [2, 2, 3, 5]`,
   implementation: `def prime_factors(n: int) -> list[int]:
     """
-    Find the prime factors of a number using trial division.
+    Find the prime factors of a number.
     
     Args:
         n: Number to factorize
     
     Returns:
-        List of prime factors in ascending order
+        List of prime factors
     """
     factors = []
     
@@ -59,90 +61,35 @@ console.log(factors2); // [7, 11, 13]`,
             n = n // i
         i += 2
     
-    # If n is a prime > 2
+    # If n is a prime number > 2
     if n > 2:
         factors.append(n)
     
     return factors
 
-def prime_factors_optimized(n: int, primes: list[int]) -> list[int]:
+def prime_factors_with_exponents(n: int) -> dict[int, int]:
     """
-    Find the prime factors of a number using precomputed primes.
-    
-    Args:
-        n: Number to factorize
-        primes: List of precomputed primes
-    
-    Returns:
-        List of prime factors in ascending order
-    """
-    factors = []
-    
-    for p in primes:
-        if p * p > n:
-            break
-        
-        while n % p == 0:
-            factors.append(p)
-            n = n // p
-    
-    if n > 1:
-        factors.append(n)
-    
-    return factors
-
-def count_prime_factors(n: int) -> dict[int, int]:
-    """
-    Count the occurrences of each prime factor.
+    Find the prime factors of a number with their exponents.
     
     Args:
         n: Number to factorize
     
     Returns:
-        Dictionary mapping prime factors to their counts
+        Dictionary of prime factors and their exponents
     """
     factors = prime_factors(n)
-    counts = {}
+    result = {}
     
-    for p in factors:
-        counts[p] = counts.get(p, 0) + 1
+    for factor in factors:
+        result[factor] = result.get(factor, 0) + 1
     
-    return counts
-
-def get_total_factors(n: int) -> int:
-    """
-    Calculate the total number of factors of a number.
-    
-    Args:
-        n: Number to find factors for
-    
-    Returns:
-        Total number of factors
-    """
-    counts = count_prime_factors(n)
-    total = 1
-    
-    for count in counts.values():
-        total *= (count + 1)
-    
-    return total
+    return result
 
 # Example usage
-n = 315
+n = 60
 factors = prime_factors(n)
-print(f"Prime factors of {n}: {factors}")  # [3, 3, 5, 7]
+print(f"Prime factors of {n}: {factors}")  # [2, 2, 3, 5]
 
-# Using precomputed primes
-primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-optimized_factors = prime_factors_optimized(n, primes)
-print(f"Optimized prime factors of {n}: {optimized_factors}")
-
-# Count prime factors
-counts = count_prime_factors(n)
-print(f"Prime factor counts: {counts}")  # {3: 2, 5: 1, 7: 1}
-
-# Get total number of factors
-total = get_total_factors(n)
-print(f"Total number of factors: {total}")  # 12`,
-  category: "number-theory",
+factors_with_exponents = prime_factors_with_exponents(n)
+print(f"Prime factors with exponents: {factors_with_exponents}")  # {2: 2, 3: 1, 5: 1}`,
 };

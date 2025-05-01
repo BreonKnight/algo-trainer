@@ -1,4 +1,5 @@
 import { Pattern, PatternCategory } from "../types/pattern-management";
+import { algorithmPatterns } from "../../components/algorithm-trainer/patterns";
 
 // In a real application, these would be API calls to your backend
 export const patternManagementService = {
@@ -24,66 +25,39 @@ export const patternManagementService = {
 
   // Get all patterns
   getPatterns: async (): Promise<Pattern[]> => {
-    // Sample patterns for testing
-    return [
-      {
-        id: "1",
-        name: "Binary Search",
-        category: "Searching",
-        timeComplexity: "O(log n)",
-        spaceComplexity: "O(1)",
-        description: "Efficient search algorithm for sorted arrays",
-        monsterHunterContext:
-          "Like finding a specific monster in a sorted list of monsters",
-        example: "Finding a number in a sorted array",
-        process: [
-          "Initialize left and right pointers",
-          "Calculate mid",
-          "Compare and adjust pointers",
-        ],
-        implementation: "function binarySearch(arr, target) { ... }",
-        testCases: [
-          {
-            name: "Basic Test",
-            input: "[1,2,3,4,5], 3",
-            expectedOutput: "2",
-            monsterHunterTip:
-              "Like finding a Rathalos in a sorted list of monsters",
-          },
-        ],
-      },
-      {
-        id: "2",
-        name: "Quick Sort",
-        category: "Sorting",
-        timeComplexity: "O(n log n)",
-        spaceComplexity: "O(log n)",
-        description: "Efficient sorting algorithm using divide and conquer",
-        monsterHunterContext: "Like organizing your monster materials by type",
-        example: "Sorting an array of numbers",
-        process: [
-          "Choose pivot",
-          "Partition array",
-          "Recursively sort subarrays",
-        ],
-        implementation: "function quickSort(arr) { ... }",
-        testCases: [
-          {
-            name: "Basic Test",
-            input: "[5,2,8,1,9]",
-            expectedOutput: "[1,2,5,8,9]",
-            monsterHunterTip: "Like organizing your monster materials by type",
-          },
-        ],
-      },
-    ];
+    // Convert algorithm patterns to Pattern format
+    return Object.entries(algorithmPatterns).map(([title, pattern]) => ({
+      id: title.toLowerCase().replace(/\s+/g, "-"),
+      name: title,
+      category: pattern.category,
+      timeComplexity: pattern.timeComplexity,
+      spaceComplexity: pattern.spaceComplexity,
+      description: pattern.description,
+      monsterHunterContext: pattern.description, // Using description as context for now
+      example: pattern.example,
+      process: pattern.keySteps || [],
+      implementation: pattern.implementation,
+      testCases: [
+        {
+          name: "Basic Test",
+          input: pattern.example,
+          expectedOutput: "Expected output based on example",
+          monsterHunterTip: pattern.description,
+        },
+      ],
+    }));
   },
 
   // Get pattern categories
   getCategories: async (): Promise<PatternCategory[]> => {
-    // TODO: Implement API call to get categories
-    console.log("Getting categories");
-    return [];
+    const patterns = await patternManagementService.getPatterns();
+    const categories = new Set(patterns.map((p) => p.category));
+    return Array.from(categories).map((category) => ({
+      name: category,
+      patterns: patterns
+        .filter((p) => p.category === category)
+        .map((p) => p.id),
+    }));
   },
 
   // Generate pattern files
@@ -136,7 +110,7 @@ export const patternManagementService = {
       if (nameMatches.includes(existingPattern)) continue;
 
       // Calculate similarity between implementations
-      const similarity = calculateStringSimilarity(
+      const similarity = patternManagementService.calculateStringSimilarity(
         pattern.implementation,
         existingPattern.implementation
       );
@@ -184,38 +158,3 @@ export const patternManagementService = {
     return 1 - distance / maxLength;
   },
 };
-
-// Helper function to calculate string similarity
-function calculateStringSimilarity(str1: string, str2: string): number {
-  const len1 = str1.length;
-  const len2 = str2.length;
-  const matrix: number[][] = [];
-
-  // Initialize matrix
-  for (let i = 0; i <= len1; i++) {
-    matrix[i] = [i];
-  }
-  for (let j = 0; j <= len2; j++) {
-    matrix[0][j] = j;
-  }
-
-  // Fill in the matrix
-  for (let i = 1; i <= len1; i++) {
-    for (let j = 1; j <= len2; j++) {
-      if (str1[i - 1] === str2[j - 1]) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1, // substitution
-          matrix[i][j - 1] + 1, // insertion
-          matrix[i - 1][j] + 1 // deletion
-        );
-      }
-    }
-  }
-
-  // Calculate similarity ratio
-  const distance = matrix[len1][len2];
-  const maxLength = Math.max(len1, len2);
-  return 1 - distance / maxLength;
-}

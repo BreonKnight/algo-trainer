@@ -28,13 +28,13 @@ function monsterHunterGuide(monsters, strategies):
   `,
   example: `
 // Example usage:
-const monsters = [
+const monstersPatternPatternPatternPattern = [
   { id: 1, health: 100, weakness: 'fire', resistance: 'water' },
   { id: 2, health: 150, weakness: 'ice', resistance: 'fire' },
   { id: 3, health: 200, weakness: 'thunder', resistance: 'ice' }
 ];
 
-const strategies = [
+const strategiesPatternPatternPatternPattern = [
   {
     applies_to: (monster) => monster.weakness === 'fire',
     apply: (monster) => ({ ...monster, health: monster.health * 0.8 })
@@ -45,7 +45,7 @@ const strategies = [
   }
 ];
 
-const optimizedMonsters = monsterHunterGuide(monsters, strategies);
+const optimizedMonstersPatternPatternPatternPattern = monsterHunterGuide(monsters, strategies);
 console.log(optimizedMonsters);
   `,
   implementation: `

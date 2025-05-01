@@ -114,5 +114,5 @@ p2 = [4, 5, 6]  # 4 + 5x + 6x²
 
 result = multiply_polynomials(p1, p2)
 print(f"Product of polynomials: {result}")  # [4, 13, 28, 27, 18]`,
-  category: "number-theory",
+  category: "Number Theory",
 };

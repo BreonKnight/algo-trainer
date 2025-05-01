@@ -55,5 +55,5 @@ def dijkstra(graph, source):
                 heappush(pq, (distance, neighbor))
     
     return distances`,
-  category: "graph",
+  category: "Graph",
 };

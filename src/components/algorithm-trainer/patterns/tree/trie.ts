@@ -39,7 +39,7 @@ class Trie:
             node = node.children[char]
         return True`,
   example: `// Create a new trie
-const trie = new Trie();
+const triePatternPatternPattern = new Trie();
 
 // Insert words
 trie.insert("apple");
@@ -216,5 +216,5 @@ print(f"Words with prefix 'app': {trie.get_all_words_with_prefix('app')}")  # ['
 trie.delete('app')
 print(f"After deleting 'app': {trie.search('app')}")  # False
 print(f"Words with prefix 'app': {trie.get_all_words_with_prefix('app')}")  # ['apple', 'application']`,
-  category: "tree",
+  category: "Tree",
 };

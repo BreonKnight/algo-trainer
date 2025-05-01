@@ -2292,6 +2292,8 @@ def monster_hunter_merge(left, right):
     
     return slow  # Start of patrol cycle`,
   ],
+
+  ["Prim" as PatternKey, "Prim's Algorithm"],
 ]);
 
 // Export combined patterns

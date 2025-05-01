@@ -43,5 +43,5 @@ Highland      5          2           0`,
                     dist[i][j] = dist[i][k] + dist[k][j]
     
     return dist`,
-  category: "graph",
+  category: "Graph",
 };

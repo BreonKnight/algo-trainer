@@ -7,6 +7,7 @@ import { ternarySearchPattern } from "./ternary-search";
 import { jumpSearchPattern } from "./jump-search";
 import { exponentialSearchPattern } from "./exponential-search";
 import { interpolationSearchPattern } from "./interpolation-search";
+//import { aStarPattern } from "./astar-search";
 
 type SearchingPatternKey =
   | "Binary Search"
@@ -28,5 +29,7 @@ export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
     "Jump Search": jumpSearchPattern,
     "Exponential Search": exponentialSearchPattern,
     "Interpolation Search": interpolationSearchPattern,
+    //"A* Search": aStarPattern,
+
     // Add other searching patterns here
   };
