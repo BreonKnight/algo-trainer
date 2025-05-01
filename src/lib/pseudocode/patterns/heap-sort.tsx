@@ -4,7 +4,7 @@ export const HeapSortPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Heap Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Sorting Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: In-place
@@ -13,39 +13,96 @@ export const HeapSortPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`HEAPSORT(A):
-    BUILD-MAX-HEAP(A)
-    for i = A.length downto 2:
-        exchange A[1] with A[i]
-        A.heap-size = A.heap-size - 1
-        MAX-HEAPIFY(A, 1)
-
-BUILD-MAX-HEAP(A):
-    A.heap-size = A.length
-    for i = ⌊A.length/2⌋ downto 1:
-        MAX-HEAPIFY(A, i)
-
-MAX-HEAPIFY(A, i):
-    l = LEFT(i)
-    r = RIGHT(i)
+        {`// Standard Heap Sort
+HEAP-SORT(A):
+    n = len(A)
     
-    if l ≤ A.heap-size and A[l] > A[i]:
-        largest = l
-    else:
-        largest = i
+    # Build max heap
+    for i = n//2 - 1 downto 0:
+        MAX-HEAPIFY(A, n, i)
     
-    if r ≤ A.heap-size and A[r] > A[largest]:
-        largest = r
+    # Extract elements one by one
+    for i = n-1 downto 0:
+        # Move current root to end
+        swap(A[0], A[i])
+        # Heapify reduced heap
+        MAX-HEAPIFY(A, i, 0)
+
+MAX-HEAPIFY(A, n, i):
+    largest = i
+    left = 2*i + 1
+    right = 2*i + 2
     
-    if largest ≠ i:
-        exchange A[i] with A[largest]
-        MAX-HEAPIFY(A, largest)
+    # Find largest among root and children
+    if left < n and A[left] > A[largest]:
+        largest = left
+    if right < n and A[right] > A[largest]:
+        largest = right
+    
+    # If root is not largest, swap and heapify
+    if largest != i:
+        swap(A[i], A[largest])
+        MAX-HEAPIFY(A, n, largest)
 
-LEFT(i):
-    return 2i
+// Min Heap Sort
+MIN-HEAP-SORT(A):
+    n = len(A)
+    
+    # Build min heap
+    for i = n//2 - 1 downto 0:
+        MIN-HEAPIFY(A, n, i)
+    
+    # Extract elements one by one
+    for i = n-1 downto 0:
+        # Move current root to end
+        swap(A[0], A[i])
+        # Heapify reduced heap
+        MIN-HEAPIFY(A, i, 0)
 
-RIGHT(i):
-    return 2i + 1`}
+MIN-HEAPIFY(A, n, i):
+    smallest = i
+    left = 2*i + 1
+    right = 2*i + 2
+    
+    # Find smallest among root and children
+    if left < n and A[left] < A[smallest]:
+        smallest = left
+    if right < n and A[right] < A[smallest]:
+        smallest = right
+    
+    # If root is not smallest, swap and heapify
+    if smallest != i:
+        swap(A[i], A[smallest])
+        MIN-HEAPIFY(A, n, smallest)
+
+// Heap Sort with Custom Comparator
+HEAP-SORT-COMPARATOR(A, compare):
+    n = len(A)
+    
+    # Build heap with custom comparator
+    for i = n//2 - 1 downto 0:
+        HEAPIFY-COMPARATOR(A, n, i, compare)
+    
+    # Extract elements one by one
+    for i = n-1 downto 0:
+        swap(A[0], A[i])
+        HEAPIFY-COMPARATOR(A, i, 0, compare)
+
+HEAPIFY-COMPARATOR(A, n, i, compare):
+    target = i
+    left = 2*i + 1
+    right = 2*i + 2
+    
+    # Find target using comparator
+    if left < n and compare(A[left], A[target]):
+        target = left
+    if right < n and compare(A[right], A[target]):
+        target = right
+    
+    # If root is not target, swap and heapify
+    if target != i:
+        swap(A[i], A[target])
+        HEAPIFY-COMPARATOR(A, n, target, compare)`}
       </pre>
     </div>
 
@@ -53,54 +110,82 @@ RIGHT(i):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build heap:</span> Convert
-        array into a max-heap
+        <span className="font-semibold text-accent">Build:</span> Construct max
+        heap from array
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Extract max:</span> Remove
-        maximum element and place at end
+        <span className="font-semibold text-accent">Extract:</span> Remove max
+        element and heapify
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Restore heap:</span> Fix
-        heap property after removal
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
         <span className="font-semibold text-accent">Repeat:</span> Continue
-        until heap is empty
+        until array is sorted
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
+      <span className="font-semibold text-accent">
+        Example: Standard Heap Sort
+      </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Input: [5, 2, 9, 3, 7, 6, 1, 8, 4]
+        {`Input: [4, 10, 3, 5, 1]
 
-Build max-heap:
-1. [9, 8, 6, 5, 7, 2, 1, 3, 4]
+Build heap:
+[10, 5, 3, 4, 1]
 
-Sorting steps:
-1. [8, 7, 6, 5, 4, 2, 1, 3, 9]
-2. [7, 5, 6, 3, 4, 2, 1, 8, 9]
-3. [6, 5, 2, 3, 4, 1, 7, 8, 9]
-4. [5, 4, 2, 3, 1, 6, 7, 8, 9]
-5. [4, 3, 2, 1, 5, 6, 7, 8, 9]
-6. [3, 1, 2, 4, 5, 6, 7, 8, 9]
-7. [2, 1, 3, 4, 5, 6, 7, 8, 9]
-8. [1, 2, 3, 4, 5, 6, 7, 8, 9]
+Extract max:
+[5, 4, 3, 1, 10]
+[4, 1, 3, 5, 10]
+[3, 1, 4, 5, 10]
+[1, 3, 4, 5, 10]
 
-Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]`}
+Output: [1, 3, 4, 5, 10]`}
+      </pre>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Min Heap Sort</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Input: [4, 10, 3, 5, 1]
+
+Build heap:
+[1, 4, 3, 5, 10]
+
+Extract min:
+[3, 4, 10, 5, 1]
+[4, 5, 10, 3, 1]
+[5, 10, 4, 3, 1]
+[10, 5, 4, 3, 1]
+
+Output: [10, 5, 4, 3, 1]`}
+      </pre>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Custom Comparator
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Input: ["banana", "apple", "cherry", "date"]
+Comparator: length
+
+Build heap:
+["banana", "date", "cherry", "apple"]
+
+Extract:
+["date", "apple", "cherry", "banana"]
+["cherry", "apple", "date", "banana"]
+["apple", "cherry", "date", "banana"]
+
+Output: ["apple", "cherry", "date", "banana"]`}
       </pre>
     </div>
   </div>

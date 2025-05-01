@@ -4,85 +4,63 @@ export const InsertionSortPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Insertion Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Sorting Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Small datasets or
-      nearly sorted arrays
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array
+      in-place
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`INSERTION-SORT(A):
-    for j = 2 to A.length:
-        key = A[j]
-        // Insert A[j] into the sorted sequence A[1..j-1]
-        i = j - 1
-        while i > 0 and A[i] > key:
-            A[i+1] = A[i]
-            i = i - 1
-        A[i+1] = key`}
+        {`# Insertion Sort: Build sorted array one element at a time
+# Input: Array A[1..n] of n elements
+# Output: Array A sorted in non-decreasing order
+
+INSERTION-SORT(A)
+    n ← length[A]    # Number of elements in array
+    
+    # Start from second element (index 2)
+    for j ← 2 to n do
+        key ← A[j]    # Current element to insert
+        i ← j - 1     # Start comparing with previous element
+        
+        # Move elements greater than key one position ahead
+        while i > 0 and A[i] > key do
+            A[i+1] ← A[i]    # Shift element right
+            i ← i - 1         # Move left
+        end while
+        
+        A[i+1] ← key    # Insert key in correct position
+    end for
+
+# Example:
+# Input: A = [5, 2, 4, 6, 1, 3]
+# Pass 1: [2, 5, 4, 6, 1, 3]  # Insert 2
+# Pass 2: [2, 4, 5, 6, 1, 3]  # Insert 4
+# Pass 3: [2, 4, 5, 6, 1, 3]  # Insert 6
+# Pass 4: [1, 2, 4, 5, 6, 3]  # Insert 1
+# Pass 5: [1, 2, 3, 4, 5, 6]  # Insert 3
+# Output: [1, 2, 3, 4, 5, 6]`}
       </pre>
     </div>
 
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Select:</span> Pick next
-        element to insert
-      </span>
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Shift:</span> Move larger
-        elements right
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Insert:</span> Place element
-        in correct position
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Repeat:</span> Continue
-        until all elements sorted
-      </span>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Input: [5, 2, 9, 3, 7, 6, 1, 8, 4]
-
-First pass (j=2):
-1. key = 2
-2. Shift 5 right: [5, 5, 9, 3, 7, 6, 1, 8, 4]
-3. Insert 2: [2, 5, 9, 3, 7, 6, 1, 8, 4]
-
-Second pass (j=3):
-1. key = 9
-2. No shift needed
-3. Insert 9: [2, 5, 9, 3, 7, 6, 1, 8, 4]
-
-Third pass (j=4):
-1. key = 3
-2. Shift 5,9 right: [2, 5, 9, 9, 7, 6, 1, 8, 4]
-3. Shift 5 right: [2, 5, 5, 9, 7, 6, 1, 8, 4]
-4. Insert 3: [2, 3, 5, 9, 7, 6, 1, 8, 4]
-
-Continue until sorted...
-
-Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]`}
-      </pre>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Select: Current element to insert</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Shift: Elements greater than current element</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Insert: Current element in correct position</span>
+      </div>
     </div>
   </div>
 );

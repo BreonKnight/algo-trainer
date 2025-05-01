@@ -13,50 +13,57 @@ export const GraphPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Create a graph with vertices and edges
-GRAPH-REPRESENTATION(vertices, edges):
-    # Initialize empty adjacency list
-    graph = new dictionary
-    
-    # Add vertices to graph
-    for each vertex in vertices:
-        graph[vertex] = new list
-    
-    # Add edges to graph
-    for each edge (u, v) in edges:
-        # Add v to u's neighbors
-        graph[u].append(v)
-        # For undirected graphs, add u to v's neighbors
-        graph[v].append(u)
-    
-    return graph
+        {`// Graph representation
+GRAPH-REPRESENTATION(V, E):
+    G = new Graph
+    for each v ∈ V:
+        G.adj[v] = []
+    for each (u, v) ∈ E:
+        G.adj[u].append(v)
+        G.adj[v].append(u)  // For undirected graphs
+    return G
 
-// Traverse the graph from a starting vertex
-GRAPH-TRAVERSAL(graph, start_vertex):
-    # Initialize visited set and queue
-    visited = new set
-    queue = new queue
-    # Mark start vertex as visited
-    visited.add(start_vertex)
-    # Add start vertex to queue
-    queue.enqueue(start_vertex)
-    
-    # Process vertices until queue is empty
-    while queue is not empty:
-        # Get next vertex to process
-        current_vertex = queue.dequeue()
-        
-        # Process current vertex
-        process(current_vertex)
-        
-        # Visit all neighbors of current vertex
-        for each neighbor in graph[current_vertex]:
-            # If neighbor hasn't been visited
-            if neighbor not in visited:
-                # Mark neighbor as visited
-                visited.add(neighbor)
-                # Add neighbor to queue
-                queue.enqueue(neighbor)`}
+// Depth-first search
+DFS(G):
+    for each v ∈ G.V:
+        v.color = WHITE
+        v.parent = NIL
+    time = 0
+    for each v ∈ G.V:
+        if v.color = WHITE:
+            DFS-VISIT(G, v)
+
+DFS-VISIT(G, u):
+    time = time + 1
+    u.d = time
+    u.color = GRAY
+    for each v ∈ G.adj[u]:
+        if v.color = WHITE:
+            v.parent = u
+            DFS-VISIT(G, v)
+    u.color = BLACK
+    time = time + 1
+    u.f = time
+
+// Breadth-first search
+BFS(G, s):
+    for each v ∈ G.V:
+        v.color = WHITE
+        v.d = ∞
+        v.parent = NIL
+    s.color = GRAY
+    s.d = 0
+    Q = ∅
+    ENQUEUE(Q, s)
+    while Q ≠ ∅:
+        u = DEQUEUE(Q)
+        for each v ∈ G.adj[u]:
+            if v.color = WHITE:
+                v.color = GRAY
+                v.d = u.d + 1
+                v.parent = u
+                ENQUEUE(Q, v)
+        u.color = BLACK`}
       </pre>
     </div>
 
@@ -64,84 +71,61 @@ GRAPH-TRAVERSAL(graph, start_vertex):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        empty graph structure
+        <span className="font-semibold text-accent">Represent:</span> Create
+        graph structure
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build:</span> Add vertices
-        and edges
+        <span className="font-semibold text-accent">DFS:</span> Depth-first
+        search
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Traverse:</span> Visit
-        vertices in order
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Track:</span> Keep record of
-        visited vertices
+        <span className="font-semibold text-accent">BFS:</span> Breadth-first
+        search
       </span>
     </div>
 
     <div className="mt-4">
       <span className="font-semibold text-accent">
-        Example: Graph Representation
+        Example: Graph Structure
       </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Vertices: [A, B, C, D, E]
-Edges: [(A,B), (A,C), (B,D), (C,D), (D,E)]
+        {`Vertices: [1, 2, 3, 4, 5]
+Edges: [(1,2), (1,3), (2,4), (3,4), (4,5)]
 
 Adjacency List:
-A: [B, C]
-B: [A, D]
-C: [A, D]
-D: [B, C, E]
-E: [D]`}
+1: [2, 3]
+2: [1, 4]
+3: [1, 4]
+4: [2, 3, 5]
+5: [4]`}
       </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Graph Traversal
-      </span>
+      <span className="font-semibold text-accent">Example: DFS Traversal</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Starting from vertex A:
+        {`Starting from vertex 1:
+Discovery order: 1, 2, 4, 3, 5
+Finishing order: 5, 3, 4, 2, 1`}
+      </pre>
+    </div>
 
-Step 1: Visit A
-Queue: [A]
-Visited: {A}
-
-Step 2: Process A's neighbors
-Queue: [B, C]
-Visited: {A, B, C}
-
-Step 3: Process B's neighbors
-Queue: [C, D]
-Visited: {A, B, C, D}
-
-Step 4: Process C's neighbors
-Queue: [D]
-Visited: {A, B, C, D}
-
-Step 5: Process D's neighbors
-Queue: [E]
-Visited: {A, B, C, D, E}
-
-Step 6: Process E's neighbors
-Queue: []
-Visited: {A, B, C, D, E}
-
-Traversal order: A → B → C → D → E`}
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: BFS Traversal</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Starting from vertex 1:
+Level 0: [1]
+Level 1: [2, 3]
+Level 2: [4]
+Level 3: [5]`}
       </pre>
     </div>
   </div>

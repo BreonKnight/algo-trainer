@@ -3,46 +3,109 @@ import { ChevronRight } from "lucide-react";
 export const CircularLinkedListPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">
-        Circular Linked List Template
-      </span>
-      <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
+      <span className="text-accent font-bold">Circular Linked List</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - for traversal &nbsp;|&nbsp; Space: O(n) - for n nodes
-      &nbsp;|&nbsp; Use: Circular data storage
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Circular data
+      structure operations
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Node structure:</span>{" "}
-        Define node with data and next pointer
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`// Node structure
+NODE(key):
+    key ← key
+    next ← null
+
+// Insert at beginning
+CIRCULAR-INSERT-HEAD(L, x):
+    x.next ← x
+    if L.head = null:
+        L.head ← x
+    else:
+        x.next ← L.head
+        last ← L.head
+        while last.next ≠ L.head:
+            last ← last.next
+        last.next ← x
+        L.head ← x
+
+// Insert at end
+CIRCULAR-INSERT-TAIL(L, x):
+    x.next ← x
+    if L.head = null:
+        L.head ← x
+    else:
+        last ← L.head
+        while last.next ≠ L.head:
+            last ← last.next
+        last.next ← x
+        x.next ← L.head
+
+// Delete node
+CIRCULAR-DELETE(L, x):
+    if L.head = null:
+        return
+    if L.head = x and L.head.next = L.head:
+        L.head ← null
+        return
+    if L.head = x:
+        last ← L.head
+        while last.next ≠ L.head:
+            last ← last.next
+        L.head ← L.head.next
+        last.next ← L.head
+        return
+    prev ← L.head
+    while prev.next ≠ L.head and prev.next ≠ x:
+        prev ← prev.next
+    if prev.next = x:
+        prev.next ← prev.next.next
+
+// Traverse list
+CIRCULAR-TRAVERSE(L):
+    if L.head = null:
+        return
+    current ← L.head
+    repeat:
+        print(current.key)
+        current ← current.next
+    until current = L.head
+
+// Example:
+// Input: Operations [INSERT-HEAD(1), INSERT-TAIL(2), INSERT-HEAD(3), DELETE(1)]
+// 
+// After INSERT-HEAD(1):
+//   1 -> 1
+// 
+// After INSERT-TAIL(2):
+//   1 -> 2 -> 1
+// 
+// After INSERT-HEAD(3):
+//   3 -> 1 -> 2 -> 3
+// 
+// After DELETE(1):
+//   3 -> 2 -> 3`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Insert operations:</span>{" "}
-        Handle head and tail insertions
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Delete operations:</span>{" "}
-        Handle head and tail deletions
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Traversal:</span> Iterate
-        through list using next pointers
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Insert: Add node while maintaining circular structure</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Delete: Remove node and update circular links</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Traverse: Visit all nodes in circular order</span>
+      </div>
     </div>
   </div>
 );

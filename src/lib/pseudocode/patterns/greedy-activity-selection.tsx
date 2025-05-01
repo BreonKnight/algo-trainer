@@ -3,44 +3,143 @@ import { ChevronRight } from "lucide-react";
 export const GreedyActivitySelectionPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Activity Selection Template</span>
-      <span className="ml-2 text-xs text-secondary">(Greedy Algorithm)</span>
+      <span className="text-accent font-bold">Activity Selection</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) - sorting activities &nbsp;|&nbsp; Space: O(1) - constant
-      space &nbsp;|&nbsp; Use: Scheduling maximum non-overlapping activities
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Selecting
+      maximum number of non-overlapping activities
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Sort activities:</span> By
-        finish time
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`// Standard Activity Selection
+def activity_selection(activities):
+    # Sort activities by finish time
+    activities.sort(key=lambda x: x[1])
+    
+    selected = []
+    last_finish = 0
+    
+    for activity in activities:
+        start, finish = activity
+        if start >= last_finish:
+            selected.append(activity)
+            last_finish = finish
+    
+    return selected
+
+// Activity Selection with Weights
+def activity_selection_weights(activities):
+    # Sort activities by finish time
+    activities.sort(key=lambda x: x[1])
+    
+    n = len(activities)
+    dp = [0] * n
+    dp[0] = activities[0][2]  # weight
+    
+    for i in range(1, n):
+        # Find last non-conflicting activity
+        last_non_conflict = -1
+        for j in range(i-1, -1, -1):
+            if activities[j][1] <= activities[i][0]:
+                last_non_conflict = j
+                break
+        
+        # Include current activity
+        include = activities[i][2]
+        if last_non_conflict != -1:
+            include += dp[last_non_conflict]
+        
+        # Store maximum of including or excluding
+        dp[i] = max(include, dp[i-1])
+    
+    return dp[n-1]
+
+// Activity Selection with Resource Constraints
+def activity_selection_resources(activities, resources):
+    # Sort activities by finish time
+    activities.sort(key=lambda x: x[1])
+    
+    selected = []
+    resource_available = [0] * resources
+    
+    for activity in activities:
+        start, finish, resource = activity
+        if start >= resource_available[resource]:
+            selected.append(activity)
+            resource_available[resource] = finish
+    
+    return selected
+
+# Examples:
+
+# Standard Activity Selection
+# Input:
+# activities = [
+#     (1, 4),  # (start, finish)
+#     (3, 5),
+#     (0, 6),
+#     (5, 7),
+#     (3, 8),
+#     (5, 9),
+#     (6, 10),
+#     (8, 11),
+#     (8, 12),
+#     (2, 13),
+#     (12, 14)
+# ]
+# Output:
+# selected = [(1, 4), (5, 7), (8, 11), (12, 14)]
+# Total activities: 4
+
+# Activity Selection with Weights
+# Input:
+# activities = [
+#     (1, 4, 2),  # (start, finish, weight)
+#     (3, 5, 4),
+#     (0, 6, 4),
+#     (5, 7, 7),
+#     (3, 8, 2),
+#     (5, 9, 1)
+# ]
+# Output:
+# max_weight = 8  # (1,4,2) + (5,7,7)
+
+# Activity Selection with Resource Constraints
+# Input:
+# activities = [
+#     (1, 4, 0),  # (start, finish, resource)
+#     (3, 5, 1),
+#     (0, 6, 0),
+#     (5, 7, 1),
+#     (3, 8, 0),
+#     (5, 9, 1)
+# ]
+# Output:
+# selected = [(1, 4, 0), (3, 5, 1), (5, 7, 1)]
+# Total activities: 3`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Select first:</span> Add
-        first activity to result
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Check compatibility:</span>{" "}
-        Add activity if start time &gt;= last finish time
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span> List
-        of selected activities
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Sort: Activities by finish time</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>
+          Select: First activity and subsequent non-overlapping activities
+        </span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Update: Track last finish time or resource availability</span>
+      </div>
     </div>
   </div>
 );

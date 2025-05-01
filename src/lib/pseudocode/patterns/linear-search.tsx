@@ -3,44 +3,59 @@ import { ChevronRight } from "lucide-react";
 export const LinearSearchPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Linear Search Template</span>
-      <span className="ml-2 text-xs text-secondary">(Search Algorithm)</span>
+      <span className="text-accent font-bold">Linear Search</span>
+      <span className="ml-2 text-xs text-secondary">(Search)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - worst case &nbsp;|&nbsp; Space: O(1) - constant space
-      &nbsp;|&nbsp; Use: Finding elements in unsorted arrays
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find element in
+      unsorted array
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Start
-        from first element
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`# Linear Search: Find element in unsorted array
+# Input: Array A[1..n], target value x
+# Output: Index of x in A if found, -1 otherwise
+
+Algorithm LINEAR-SEARCH(A, x)
+    for i ← 1 to length[A] do
+        if A[i] = x then
+            return i
+        end if
+    end for
+    return -1
+
+# Example:
+# Input: A = [4, 2, 7, 1, 3], x = 7
+# 
+# Step 1: i = 1, A[1] = 4 ≠ 7
+# Step 2: i = 2, A[2] = 2 ≠ 7
+# Step 3: i = 3, A[3] = 7 = 7
+# 
+# Output: 3`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Iterate array:</span> Check
-        each element sequentially
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Compare elements:</span> If
-        current element matches target, return index
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span> Return
-        -1 if element not found
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize loop through array</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Compare each element with target</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return index if found</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return -1 if not found</span>
+      </div>
     </div>
   </div>
 );

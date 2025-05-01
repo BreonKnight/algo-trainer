@@ -3,44 +3,100 @@ import { ChevronRight } from "lucide-react";
 export const QueueImplementationPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Queue Template</span>
-      <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
+      <span className="text-accent font-bold">Queue Implementation</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) - constant operations &nbsp;|&nbsp; Space: O(n) - array storage
-      &nbsp;|&nbsp; Use: FIFO operations
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO data
+      structure
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        array and front/rear pointers
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`QUEUE-EMPTY(Q)
+    if Q.head = Q.tail
+        then return true
+        else return false
+
+QUEUE-FULL(Q)
+    if Q.head = Q.tail + 1 or (Q.head = 1 and Q.tail = Q.size)
+        then return true
+        else return false
+
+ENQUEUE(Q, x)
+    if QUEUE-FULL(Q)
+        then error "queue overflow"
+    Q[Q.tail] ← x
+    if Q.tail = Q.size
+        then Q.tail ← 1
+        else Q.tail ← Q.tail + 1
+
+DEQUEUE(Q)
+    if QUEUE-EMPTY(Q)
+        then error "queue underflow"
+    x ← Q[Q.head]
+    if Q.head = Q.size
+        then Q.head ← 1
+        else Q.head ← Q.head + 1
+    return x
+
+// Example:
+// Input: Operations [ENQUEUE(10), ENQUEUE(20), DEQUEUE(), ENQUEUE(30), ENQUEUE(40)]
+// 
+// Initial state:
+//   Q = []
+//   Q.head = 1
+//   Q.tail = 1
+// 
+// After ENQUEUE(10):
+//   Q = [10]
+//   Q.head = 1
+//   Q.tail = 2
+// 
+// After ENQUEUE(20):
+//   Q = [10, 20]
+//   Q.head = 1
+//   Q.tail = 3
+// 
+// After DEQUEUE():
+//   Q = [20]
+//   Q.head = 2
+//   Q.tail = 3
+//   Returns: 10
+// 
+// After ENQUEUE(30):
+//   Q = [20, 30]
+//   Q.head = 2
+//   Q.tail = 4
+// 
+// After ENQUEUE(40):
+//   Q = [20, 30, 40]
+//   Q.head = 2
+//   Q.tail = 5
+// 
+// Final state:
+//   Q = [20, 30, 40]
+//   Q.head = 2
+//   Q.tail = 5`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Enqueue:</span> Add element
-        at rear
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Dequeue:</span> Remove
-        element from front
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Peek:</span> Return front
-        element
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: Create array and head/tail pointers</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Enqueue: Add element at tail and update pointer</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Dequeue: Remove element from head and update pointer</span>
+      </div>
     </div>
   </div>
 );

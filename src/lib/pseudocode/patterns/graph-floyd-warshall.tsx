@@ -4,34 +4,87 @@ export const FloydWarshallPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Floyd-Warshall Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V³) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: All-pairs
-      shortest paths in graphs with negative weights
+      Time: O(V³) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Finding all
+      pairs shortest paths in weighted graphs
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`FLOYD-WARSHALL(W):
-    // W is the weight matrix of the graph
-    n = W.rows
-    D⁽⁰⁾ = W
-    for k = 1 to n:
-        D⁽ᵏ⁾ = new n × n matrix
-        for i = 1 to n:
-            for j = 1 to n:
-                D⁽ᵏ⁾[i, j] = min(D⁽ᵏ⁻¹⁾[i, j], D⁽ᵏ⁻¹⁾[i, k] + D⁽ᵏ⁻¹⁾[k, j])
-    return D⁽ⁿ⁾
+        {`// Standard Floyd-Warshall
+FLOYD-WARSHALL(G):
+    # Initialize distance matrix
+    dist = [[∞] * |V| for _ in range(|V|)]
+    for i in range(|V|):
+        dist[i][i] = 0
+    for (u, v, w) in G.E:
+        dist[u][v] = w
+    
+    # Main algorithm
+    for k in range(|V|):
+        for i in range(|V|):
+            for j in range(|V|):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    
+    return dist
 
-PRINT-ALL-PAIRS-SHORTEST-PATH(Π, i, j):
-    if i == j:
-        print i
-    else if Π[i, j] == NIL:
-        print "no path from" i "to" j "exists"
-    else:
-        PRINT-ALL-PAIRS-SHORTEST-PATH(Π, i, Π[i, j])
-        print j`}
+// Floyd-Warshall with Path Reconstruction
+FLOYD-WARSHALL-PATH(G):
+    # Initialize distance and next matrices
+    dist = [[∞] * |V| for _ in range(|V|)]
+    next = [[None] * |V| for _ in range(|V|)]
+    
+    for i in range(|V|):
+        dist[i][i] = 0
+    for (u, v, w) in G.E:
+        dist[u][v] = w
+        next[u][v] = v
+    
+    # Main algorithm
+    for k in range(|V|):
+        for i in range(|V|):
+            for j in range(|V|):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+                    next[i][j] = next[i][k]
+    
+    return dist, next
+
+// Path reconstruction
+RECONSTRUCT-PATH(u, v, next):
+    if next[u][v] is None:
+        return []
+    path = [u]
+    while u != v:
+        u = next[u][v]
+        path.append(u)
+    return path
+
+// Floyd-Warshall with Negative Cycle Detection
+FLOYD-WARSHALL-NEGATIVE(G):
+    # Initialize distance matrix
+    dist = [[∞] * |V| for _ in range(|V|)]
+    for i in range(|V|):
+        dist[i][i] = 0
+    for (u, v, w) in G.E:
+        dist[u][v] = w
+    
+    # Main algorithm
+    for k in range(|V|):
+        for i in range(|V|):
+            for j in range(|V|):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    
+    # Check for negative cycles
+    for i in range(|V|):
+        if dist[i][i] < 0:
+            return "Graph contains negative cycle"
+    
+    return dist`}
       </pre>
     </div>
 
@@ -39,83 +92,100 @@ PRINT-ALL-PAIRS-SHORTEST-PATH(Π, i, j):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set D⁽⁰⁾
-        to the weight matrix
+        <span className="font-semibold text-accent">Initialize:</span> Set up
+        distance matrix
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Iterate:</span> Consider
-        each vertex as intermediate
+        <span className="font-semibold text-accent">Relax:</span> Update
+        distances through intermediate vertices
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Update
-        shortest paths through intermediate vertex
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return:</span> Final
-        distance matrix D⁽ⁿ⁾
+        <span className="font-semibold text-accent">Check:</span> Detect
+        negative cycles if needed
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
+      <span className="font-semibold text-accent">
+        Example: Standard Floyd-Warshall
+      </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
-     A
-    / \
-   2   4
-  /     \
- B       C
-  \     /
-   3   1
-    \ /
-     D
+0 --4-- 1 --1-- 2
+|      /      |
+|     /       |
+2    3        1
+|   /         |
+|  /          |
+3 --5-- 4 --2-- 5
 
-Initial weight matrix:
-    A   B   C   D
-A   0   2   4   ∞
-B   2   0   3   ∞
-C   4   3   0   1
-D   ∞   ∞   1   0
+Initial distance matrix:
+[[0,4,∞,2,∞,∞],
+ [4,0,1,3,∞,∞],
+ [∞,1,0,∞,∞,1],
+ [2,3,∞,0,5,∞],
+ [∞,∞,∞,5,0,2],
+ [∞,∞,1,∞,2,0]]
 
-After iteration k=1 (A):
-    A   B   C   D
-A   0   2   4   ∞
-B   2   0   3   ∞
-C   4   3   0   1
-D   ∞   ∞   1   0
+Final distance matrix:
+[[0,4,5,2,7,6],
+ [4,0,1,3,6,5],
+ [5,1,0,4,3,1],
+ [2,3,4,0,5,6],
+ [7,6,3,5,0,2],
+ [6,5,1,6,2,0]]`}
+      </pre>
+    </div>
 
-After iteration k=2 (B):
-    A   B   C   D
-A   0   2   4   ∞
-B   2   0   3   ∞
-C   4   3   0   1
-D   ∞   ∞   1   0
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Path Reconstruction
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Next matrix:
+[[0,1,1,3,1,1],
+ [0,1,2,3,2,2],
+ [1,1,2,1,5,5],
+ [0,1,1,3,4,1],
+ [3,3,5,3,4,5],
+ [2,2,2,2,4,5]]
 
-After iteration k=3 (C):
-    A   B   C   D
-A   0   2   4   5
-B   2   0   3   4
-C   4   3   0   1
-D   5   4   1   0
+Shortest path from 0 to 5:
+0 → 1 → 2 → 5`}
+      </pre>
+    </div>
 
-After iteration k=4 (D):
-    A   B   C   D
-A   0   2   4   5
-B   2   0   3   4
-C   4   3   0   1
-D   5   4   1   0`}
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Negative Cycle Detection
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Graph with negative cycle:
+0 --4-- 1 --1-- 2
+|      /      |
+|     /       |
+2    3       -4
+|   /         |
+|  /          |
+3 --5-- 4 --2-- 5
+
+After k=2:
+[[0,4,5,2,7,6],
+ [4,0,1,3,6,5],
+ [5,1,0,4,3,-3],
+ [2,3,4,0,5,6],
+ [7,6,3,5,0,2],
+ [6,5,1,6,2,0]]
+
+Negative cycle detected at vertex 2`}
       </pre>
     </div>
   </div>

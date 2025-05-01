@@ -22,9 +22,9 @@ import { GreedyFractionalKnapsackPattern } from "./patterns/greedy-fractional-kn
 import { GreedyJobSchedulingPattern } from "./patterns/greedy-job-scheduling";
 import { GreedyHuffmanCodingPattern } from "./patterns/greedy-huffman-coding";
 import { GreedyDijkstraPattern } from "./patterns/greedy-dijkstra";
-import { DFSLinkedListPattern } from "./patterns/dfs-linked-list";
-import { DFSBinaryTreePattern } from "./patterns/dfs-binary-tree";
-import { BFSLinkedListPattern } from "./patterns/bfs-linked-list";
+import { DfsLinkedListPattern } from "./patterns/dfs-linked-list";
+import { DfsBinaryTreePattern } from "./patterns/dfs-binary-tree";
+import { BfsLinkedListPattern } from "./patterns/bfs-linked-list";
 import { StackImplementationPattern } from "./patterns/stack-implementation";
 import { QueueImplementationPattern } from "./patterns/queue-implementation";
 import { HashTablePattern } from "./patterns/hash-table";
@@ -36,16 +36,16 @@ import { FloydCycleDetectionPattern } from "./patterns/floyd-cycle-detection";
 import { MatrixTraversalPattern } from "./patterns/matrix-traversal";
 import { MatrixTraversalRecursivePattern } from "./patterns/matrix-traversal-recursive";
 import { MatrixSpiralTraversalPattern } from "./patterns/matrix-spiral-traversal";
-import { MatrixSpiralRecursivePattern } from "./patterns/matrix-spiral-recursive";
+import { MatrixSpiralTraversalRecursivePattern } from "./patterns/matrix-spiral-recursive";
 import { TopologicalSortPattern } from "./patterns/topological-sort";
 import { CircularLinkedListPattern } from "./patterns/circular-linked-list";
 import { BinarySearchTreePattern } from "./patterns/binary-search-tree";
 import { TrieOperationsPattern } from "./patterns/trie-operations";
 import { TernarySearchPattern } from "./patterns/ternary-search-algorithm";
-import { JumpSearchPattern } from "./patterns/jump-search-algorithm";
+import { JumpSearchAlgorithmPattern } from "./patterns/jump-search-algorithm";
 import { ExponentialSearchPattern } from "./patterns/exponential-search";
 import { HeapImplementationPattern } from "./patterns/heap-implementation";
-import { TwoSumDictPattern } from "./patterns/two-sum-dict";
+import { TwoSumDictionaryPattern } from "./patterns/two-sum-dict";
 import { LinkedListPattern } from "./patterns/linked-list";
 import { DivideAndConquerPattern } from "./patterns/divide-and-conquer";
 import { ArticulationPointsPattern } from "./patterns/articulation-points";
@@ -55,7 +55,7 @@ import { NetworkFlowPattern } from "./patterns/network-flow";
 import { MaximumBipartiteMatchingPattern } from "./patterns/maximum-bipartite-matching";
 import { ExtendedEuclideanAlgorithmPattern } from "./patterns/extended-euclidean-algorithm";
 import { ChineseRemainderTheoremPattern } from "./patterns/chinese-remainder-theorem";
-import { SieveofEratosthenesPattern } from "./patterns/sieve-of-eratosthenes";
+import { SieveOfEratosthenesPattern } from "./patterns/sieve-of-eratosthenes";
 import { GraphArticulationPointsPattern } from "./patterns/graph-articulation-points";
 import { GraphBridgesPattern } from "./patterns/graph-bridges";
 import { GridTraversalPattern } from "./patterns/grid-traversal";
@@ -77,7 +77,7 @@ import { UnionFindPattern } from "./patterns/union-find";
 import { FenwickTreePattern } from "./patterns/fenwick-tree";
 import { SegmentTreePattern } from "./patterns/segment-tree";
 import { ZAlgorithmPattern } from "./patterns/z-algorithm";
-import { KMPAlgorithmPattern } from "./patterns/kmp-algorithm";
+import { KmpAlgorithmPattern } from "./patterns/kmp-algorithm";
 import { RabinKarpPattern } from "./patterns/rabin-karp";
 import { PrimsAlgorithmPattern } from "./patterns/prims-algorithm";
 import { KruskalsAlgorithmPattern } from "./patterns/kruskals-algorithm";
@@ -125,9 +125,9 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Greedy Job Scheduling": GreedyJobSchedulingPattern,
   "Greedy Huffman Coding": GreedyHuffmanCodingPattern,
   "Greedy Dijkstra": GreedyDijkstraPattern,
-  "DFS Linked List": DFSLinkedListPattern,
-  "DFS Binary Tree": DFSBinaryTreePattern,
-  "BFS Linked List": BFSLinkedListPattern,
+  "DFS Linked List": DfsLinkedListPattern,
+  "DFS Binary Tree": DfsBinaryTreePattern,
+  "BFS Linked List": BfsLinkedListPattern,
   "Stack Implementation": StackImplementationPattern,
   "Queue Implementation": QueueImplementationPattern,
   "Hash Table": HashTablePattern,
@@ -139,23 +139,22 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Matrix Traversal": MatrixTraversalPattern,
   "Matrix Traversal Recursive": MatrixTraversalRecursivePattern,
   "Matrix Spiral Traversal": MatrixSpiralTraversalPattern,
-  "Matrix Spiral Recursive": MatrixSpiralRecursivePattern,
+  "Matrix Spiral Recursive": MatrixSpiralTraversalRecursivePattern,
   "Topological Sort": TopologicalSortPattern,
   "Circular Linked List": CircularLinkedListPattern,
   "Binary Search Tree": BinarySearchTreePattern,
   "Trie Operations": TrieOperationsPattern,
   "Ternary Search": TernarySearchPattern,
-  "Jump Search": JumpSearchPattern,
+  "Jump Search": JumpSearchAlgorithmPattern,
   "Exponential Search": ExponentialSearchPattern,
   "Heap Implementation": HeapImplementationPattern,
-  "Two Sum Dict": TwoSumDictPattern,
+  "Two Sum Dict": TwoSumDictionaryPattern,
   "Linked List": LinkedListPattern,
   "Divide and Conquer": DivideAndConquerPattern,
   "Articulation Points": ArticulationPointsPattern,
   "Graph Dijkstra": DijkstraPattern,
   "Graph Kosaraju": GraphKosarajuPattern,
   "Network Flow": NetworkFlowPattern,
-  "Strongly Connected Components": StronglyConnectedComponentsPattern,
   "Maximum Bipartite Matching": MaximumBipartiteMatchingPattern,
   "A* Search": AStarSearchPattern,
   "Grid Traversal": GridTraversalPattern,
@@ -167,12 +166,13 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Fibonacci Search": FibonacciSearchPattern,
   "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
   "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
-  "Sieve of Eratosthenes": SieveofEratosthenesPattern,
+  "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
   "Graph Articulation Points": GraphArticulationPointsPattern,
   "Graph Bridges": GraphBridgesPattern,
+  "Strongly Connected Components": StronglyConnectedComponentsPattern,
   "Kadane's Algorithm": KadanesAlgorithmPattern,
   "Rabin-Karp": RabinKarpPattern,
-  "KMP Algorithm": KMPAlgorithmPattern,
+  "KMP Algorithm": KmpAlgorithmPattern,
   "Manacher's Algorithm": ManachersAlgorithmPattern,
   "Z Algorithm": ZAlgorithmPattern,
   "Prim's Algorithm": PrimsAlgorithmPattern,
@@ -189,7 +189,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Union Find": UnionFindPattern,
   "Fenwick Tree": FenwickTreePattern,
   "Segment Tree": SegmentTreePattern,
-  "A Star Search": AStarSearchPattern,
   Knapsack: KnapsackPattern,
   "Matrix Operations": MatrixOperationsPattern,
   Memoization: MemoizationPattern,
@@ -203,5 +202,4 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   Tree: TreePattern,
   String: StringPattern,
   Recursion: RecursionPattern,
-  Dijkstra: DijkstraPattern,
 };

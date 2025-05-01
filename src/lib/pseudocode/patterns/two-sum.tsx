@@ -3,44 +3,49 @@ import { ChevronRight } from "lucide-react";
 export const TwoSumPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Two Sum Template</span>
-      <span className="ml-2 text-xs text-secondary">(Array Technique)</span>
+      <span className="text-accent font-bold">Two Sum</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - single pass with hash map &nbsp;|&nbsp; Space: O(n) - for
-      hash map &nbsp;|&nbsp; Use: Finding pairs that sum to target value
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find indices of
+      two numbers that sum to target
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize hash map:</span>{" "}
-        Create map to store seen numbers and their indices
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`TWO-SUM(A, target)
+    let n be the length of A
+    for i ← 1 to n - 1
+        do for j ← i + 1 to n
+            do if A[i] + A[j] = target
+                then return [i, j]
+    return NIL
+
+// Example:
+// Input: A = [2, 7, 11, 15], target = 9
+// 
+// i = 1, j = 2: A[1] + A[2] = 2 + 7 = 9
+// 
+// Output: [1, 2]`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Iterate array:</span> For
-        each number in array:
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Check complement:</span>{" "}
-        Calculate complement (target - current number)
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Find pair:</span> If
-        complement exists in map, return indices, else store current number
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: Set up nested loops for array traversal</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Compare: Check if current pair sums to target</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return: Indices of elements that sum to target</span>
+      </div>
     </div>
   </div>
 );

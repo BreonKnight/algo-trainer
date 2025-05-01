@@ -4,64 +4,52 @@ export const HashTablePattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Hash Table</span>
-      <span className="ml-2 text-xs text-secondary">(Dictionary)</span>
+      <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Fast key-value
-      lookups
+      storage
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Insert key-value pair
-INSERT(T, key, value):
-    h = HASH(key)
-    if T[h] == NIL:
-        T[h] = new Node(key, value)
-    else:
-        // Handle collision with chaining
-        node = T[h]
-        while node.next ≠ NIL:
-            if node.key == key:
-                node.value = value
-                return
-            node = node.next
-        node.next = new Node(key, value)
+        {`// Hash function
+HASH(k, m):
+    return k mod m
+
+// Initialize table
+HASH-TABLE-INIT(T, m):
+    T.size = m
+    T.table = new array[m]
+    for i = 1 to m:
+        T.table[i] = NIL
+
+// Insert key-value pair
+HASH-INSERT(T, k, v):
+    h = HASH(k, T.size)
+    if T.table[h] == NIL:
+        T.table[h] = new list
+    LIST-INSERT(T.table[h], (k, v))
 
 // Search for key
-SEARCH(T, key):
-    h = HASH(key)
-    node = T[h]
-    while node ≠ NIL:
-        if node.key == key:
-            return node.value
-        node = node.next
+HASH-SEARCH(T, k):
+    h = HASH(k, T.size)
+    if T.table[h] == NIL:
+        return NIL
+    for each (key, value) in T.table[h]:
+        if key == k:
+            return value
     return NIL
 
 // Delete key
-DELETE(T, key):
-    h = HASH(key)
-    if T[h] == NIL:
+HASH-DELETE(T, k):
+    h = HASH(k, T.size)
+    if T.table[h] == NIL:
         return
-    if T[h].key == key:
-        T[h] = T[h].next
-        return
-    prev = T[h]
-    node = prev.next
-    while node ≠ NIL:
-        if node.key == key:
-            prev.next = node.next
-            return
-        prev = node
-        node = node.next
-
-// Hash function
-HASH(key):
-    // Simple hash function for demonstration
-    sum = 0
-    for i = 1 to length(key):
-        sum = sum + ASCII(key[i])
-    return sum mod m`}
+    for each (key, value) in T.table[h]:
+        if key == k:
+            LIST-DELETE(T.table[h], (key, value))
+            return`}
       </pre>
     </div>
 
@@ -92,38 +80,24 @@ HASH(key):
 
     <div className="mt-4">
       <span className="font-semibold text-accent">
-        Example: Hash Table Operations
+        Example: Table Operations
       </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Initial table (size 5):
-[0] -> NIL
-[1] -> NIL
-[2] -> NIL
-[3] -> NIL
-[4] -> NIL
-
-After INSERT("apple", 1):
-[0] -> NIL
-[1] -> ("apple", 1) -> NIL
-[2] -> NIL
-[3] -> NIL
-[4] -> NIL
-
-After INSERT("banana", 2):
-[0] -> NIL
-[1] -> ("apple", 1) -> NIL
-[2] -> ("banana", 2) -> NIL
-[3] -> NIL
-[4] -> NIL`}
+        {`Initial table: []
+After HASH-INSERT(5, "five"): [NIL, NIL, NIL, NIL, (5, "five")]
+After HASH-INSERT(12, "twelve"): [NIL, NIL, (12, "twelve"), NIL, (5, "five")]
+After HASH-INSERT(7, "seven"): [NIL, NIL, (12, "twelve"), NIL, (5, "five"), NIL, (7, "seven")]
+After HASH-DELETE(5): [NIL, NIL, (12, "twelve"), NIL, NIL, NIL, (7, "seven")]`}
       </pre>
     </div>
 
     <div className="mt-4">
       <span className="font-semibold text-accent">Example: Search Results</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`SEARCH("apple") -> 1
-SEARCH("banana") -> 2
-SEARCH("orange") -> NIL`}
+        {`HASH-SEARCH(5) -> "five"
+HASH-SEARCH(12) -> "twelve"
+HASH-SEARCH(7) -> "seven"
+HASH-SEARCH(3) -> NIL`}
       </pre>
     </div>
   </div>

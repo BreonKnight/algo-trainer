@@ -15,7 +15,8 @@
     "electron:preview": "npm run build && tsc -p electron && NODE_ENV=production electron .",
     "extract-patterns": "node scripts/extract-patterns.js",
     "create-implementations": "node scripts/create-implementations.js",
-    "split-pseudocode": "tsx scripts/split-pseudocode.ts"
+    "split-pseudocode": "tsx scripts/split-pseudocode.ts",
+    "audit-patterns": "tsx src/lib/pseudocode/scripts/audit-patterns.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

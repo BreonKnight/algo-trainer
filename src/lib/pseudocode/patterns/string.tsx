@@ -13,46 +13,69 @@ export const StringPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Find pattern in text using KMP algorithm
-KMP-MATCHER(text, pattern):
-    # Compute prefix function for pattern
-    prefix = COMPUTE-PREFIX(pattern)
-    n = length of text
-    m = length of pattern
-    q = 0  # Number of characters matched
-    
-    # Search through text
-    for i from 1 to n:
-        # While mismatch, use prefix function
-        while q > 0 and pattern[q + 1] ≠ text[i]:
-            q = prefix[q]
-        
-        # If characters match
-        if pattern[q + 1] == text[i]:
+        {`// Knuth-Morris-Pratt algorithm
+KMP-MATCHER(T, P):
+    n = T.length
+    m = P.length
+    π = COMPUTE-PREFIX-FUNCTION(P)
+    q = 0  // Number of characters matched
+    for i = 1 to n:
+        while q > 0 and P[q + 1] ≠ T[i]:
+            q = π[q]
+        if P[q + 1] = T[i]:
             q = q + 1
-        
-        # If pattern found
-        if q == m:
-            print "Pattern found at position" i - m
-            q = prefix[q]
+        if q = m:
+            print "Pattern occurs with shift" i - m
+            q = π[q]
 
-// Compute prefix function for pattern
-COMPUTE-PREFIX(pattern):
-    m = length of pattern
-    prefix = new array of size m
-    prefix[1] = 0
+COMPUTE-PREFIX-FUNCTION(P):
+    m = P.length
+    let π[1..m] be a new array
+    π[1] = 0
     k = 0
-    
-    for q from 2 to m:
-        while k > 0 and pattern[k + 1] ≠ pattern[q]:
-            k = prefix[k]
-        
-        if pattern[k + 1] == pattern[q]:
+    for q = 2 to m:
+        while k > 0 and P[k + 1] ≠ P[q]:
+            k = π[k]
+        if P[k + 1] = P[q]:
             k = k + 1
-        
-        prefix[q] = k
-    
-    return prefix`}
+        π[q] = k
+    return π
+
+// Longest Common Subsequence
+LCS(X, Y):
+    m = X.length
+    n = Y.length
+    let c[0..m, 0..n] be a new table
+    for i = 0 to m:
+        c[i, 0] = 0
+    for j = 0 to n:
+        c[0, j] = 0
+    for i = 1 to m:
+        for j = 1 to n:
+            if X[i] = Y[j]:
+                c[i, j] = c[i - 1, j - 1] + 1
+            else:
+                c[i, j] = max(c[i - 1, j], c[i, j - 1])
+    return c[m, n]
+
+// Edit Distance
+EDIT-DISTANCE(X, Y):
+    m = X.length
+    n = Y.length
+    let d[0..m, 0..n] be a new table
+    for i = 0 to m:
+        d[i, 0] = i
+    for j = 0 to n:
+        d[0, j] = j
+    for i = 1 to m:
+        for j = 1 to n:
+            if X[i] = Y[j]:
+                d[i, j] = d[i - 1, j - 1]
+            else:
+                d[i, j] = 1 + min(d[i - 1, j],     // Delete
+                                 d[i, j - 1],     // Insert
+                                 d[i - 1, j - 1]) // Replace
+    return d[m, n]`}
       </pre>
     </div>
 
@@ -60,66 +83,53 @@ COMPUTE-PREFIX(pattern):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Preprocess:</span> Compute
-        prefix function
+        <span className="font-semibold text-accent">KMP:</span> Pattern matching
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Match:</span> Search through
-        text
+        <span className="font-semibold text-accent">LCS:</span> Find longest
+        common subsequence
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Shift:</span> Use prefix
-        function on mismatch
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Report:</span> Print match
-        positions
+        <span className="font-semibold text-accent">Edit:</span> Compute edit
+        distance
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Pattern Matching
-      </span>
+      <span className="font-semibold text-accent">Example: KMP Matching</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Text:    A B A B A C A B A B A C A B A B A
-Pattern: A B A B A C A B A
-
-Prefix function:
-[0, 0, 1, 2, 3, 0, 1, 2, 3]
-
-Matches found at positions: 1, 7`}
+        {`Text: "ABABDABACDABABCABAB"
+Pattern: "ABABCABAB"
+Prefix function: [0, 0, 1, 2, 0, 1, 2, 3, 4]
+Matches found at position 10`}
       </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Prefix Function
-      </span>
+      <span className="font-semibold text-accent">Example: LCS</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Pattern: A B A B A C A B A
+        {`X: "ABCBDAB"
+Y: "BDCABA"
+LCS: "BCBA"
+Length: 4`}
+      </pre>
+    </div>
 
-Step 1: prefix[1] = 0
-Step 2: prefix[2] = 0
-Step 3: prefix[3] = 1 (A matches)
-Step 4: prefix[4] = 2 (AB matches)
-Step 5: prefix[5] = 3 (ABA matches)
-Step 6: prefix[6] = 0 (no match)
-Step 7: prefix[7] = 1 (A matches)
-Step 8: prefix[8] = 2 (AB matches)
-Step 9: prefix[9] = 3 (ABA matches)`}
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Edit Distance</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`X: "kitten"
+Y: "sitting"
+Edit distance: 3
+Operations: k→s, e→i, insert g`}
       </pre>
     </div>
   </div>

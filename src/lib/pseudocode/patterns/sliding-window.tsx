@@ -4,108 +4,80 @@ export const SlidingWindowPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Sliding Window</span>
-      <span className="ml-2 text-xs text-secondary">(Search Technique)</span>
+      <span className="ml-2 text-xs text-secondary">(Array)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding subarrays
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find subarrays
       with specific properties
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Find maximum sum of subarray of size k
-SLIDING-WINDOW(array, k):
-    # Initialize window sum and maximum
-    window_sum = 0
-    max_sum = -∞
+        {`# Sliding Window: Find subarrays with specific properties
+# Input: Array A[1..n], window size k
+# Output: Maximum sum of any subarray of size k
+
+Algorithm SLIDING-WINDOW(A, k)
+    n ← length[A]
+    if n < k then
+        return -1
+    end if
     
-    # Calculate initial window sum
-    for i from 1 to k:
-        window_sum = window_sum + array[i]
+    # Compute sum of first window
+    window_sum ← 0
+    for i ← 1 to k do
+        window_sum ← window_sum + A[i]
+    end for
+    max_sum ← window_sum
     
-    # Set initial maximum
-    max_sum = window_sum
+    # Slide window and update sum
+    for i ← k + 1 to n do
+        window_sum ← window_sum + A[i] - A[i - k]
+        max_sum ← max(max_sum, window_sum)
+    end for
     
-    # Slide window through array
-    for i from k + 1 to length of array:
-        # Add new element, remove old element
-        window_sum = window_sum + array[i] - array[i - k]
-        # Update maximum if needed
-        max_sum = max(max_sum, window_sum)
-    
-    return max_sum`}
+    return max_sum
+
+# Example:
+# Input: A = [1, 4, 2, 10, 2, 3, 1, 0, 20], k = 4
+# 
+# Step 1: window_sum = 1 + 4 + 2 + 10 = 17
+#         max_sum = 17
+# Step 2: window_sum = 17 + 2 - 1 = 18
+#         max_sum = 18
+# Step 3: window_sum = 18 + 3 - 4 = 17
+#         max_sum = 18
+# Step 4: window_sum = 17 + 1 - 2 = 16
+#         max_sum = 18
+# Step 5: window_sum = 16 + 0 - 10 = 6
+#         max_sum = 18
+# Step 6: window_sum = 6 + 20 - 2 = 24
+#         max_sum = 24
+# 
+# Output: 24`}
       </pre>
     </div>
 
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set up
-        window and sum
-      </span>
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Calculate:</span> Compute
-        initial window sum
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Slide:</span> Move window
-        one step at a time
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Update:</span> Track maximum
-        sum
-      </span>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Maximum sum of size 3
-      </span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Array: [2, 1, 5, 1, 3, 2]
-
-Step 1: Initial window [2, 1, 5]
-sum = 8, max = 8
-
-Step 2: Slide window [1, 5, 1]
-sum = 7, max = 8
-
-Step 3: Slide window [5, 1, 3]
-sum = 9, max = 9
-
-Step 4: Slide window [1, 3, 2]
-sum = 6, max = 9
-
-Final result: Maximum sum = 9`}
-      </pre>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Window visualization
-      </span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Array: [2, 1, 5, 1, 3, 2]
-
-Window positions:
-[2, 1, 5], 1, 3, 2    sum = 8
-2, [1, 5, 1], 3, 2    sum = 7
-2, 1, [5, 1, 3], 2    sum = 9
-2, 1, 5, [1, 3, 2]    sum = 6`}
-      </pre>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize window sum and maximum sum</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Compute sum of first window</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Slide window and update sum</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Update maximum sum if needed</span>
+      </div>
     </div>
   </div>
 );

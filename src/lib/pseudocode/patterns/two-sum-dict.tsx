@@ -1,46 +1,66 @@
 import { ChevronRight } from "lucide-react";
 
-export const TwoSumDictPattern = () => (
+export const TwoSumDictionaryPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Two Sum Template</span>
-      <span className="ml-2 text-xs text-secondary">(Array Technique)</span>
+      <span className="text-accent font-bold">Two Sum (Dictionary)</span>
+      <span className="ml-2 text-xs text-secondary">(Array)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - single pass &nbsp;|&nbsp; Space: O(n) - hash map
-      &nbsp;|&nbsp; Use: Finding pairs that sum to target
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find pairs that
+      sum to target
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        empty hash map
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`# Two Sum (Dictionary): Find pairs that sum to target
+# Input: Array A[1..n], target value t
+# Output: Indices (i, j) where A[i] + A[j] = t, or (-1, -1) if not found
+
+Algorithm TWO-SUM-DICTIONARY(A, t)
+    # Initialize dictionary to store value-index pairs
+    D ← empty dictionary
+    
+    for i ← 1 to length[A] do
+        complement ← t - A[i]
+        if complement ∈ D then
+            return (D[complement], i)
+        end if
+        D[A[i]] ← i
+    end for
+    
+    return (-1, -1)
+
+# Example:
+# Input: A = [2, 7, 11, 15], t = 9
+# 
+# Step 1: i = 1, A[1] = 2, complement = 7, D = {2: 1}
+# Step 2: i = 2, A[2] = 7, complement = 2 ∈ D, return (1, 2)
+# 
+# Output: (1, 2)`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Iterate:</span> For each
-        element in array
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Check complement:</span>{" "}
-        Look for target - current in map
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Store:</span> Add current
-        element to map
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize empty dictionary</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>For each element, calculate complement</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Check if complement exists in dictionary</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Store current element and index in dictionary</span>
+      </div>
     </div>
   </div>
 );

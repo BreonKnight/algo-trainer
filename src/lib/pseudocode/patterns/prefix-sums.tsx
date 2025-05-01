@@ -3,46 +3,61 @@ import { ChevronRight } from "lucide-react";
 export const PrefixSumsPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Prefix Sums Template</span>
-      <span className="ml-2 text-xs text-secondary">(Array Technique)</span>
+      <span className="text-accent font-bold">Prefix Sums</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - for preprocessing &nbsp;|&nbsp; Space: O(n) - for prefix
-      array &nbsp;|&nbsp; Use: Efficient range sum queries
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Range sum queries
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">
-          Initialize prefix array:
-        </span>{" "}
-        Create array of size n+1
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`PREFIX-SUMS(A)
+    let n be the length of A
+    let prefix[0‥n] be a new array
+    prefix[0] ← 0
+    
+    for i ← 1 to n
+        do prefix[i] ← prefix[i-1] + A[i]
+    
+    return prefix
+
+RANGE-SUM(prefix, l, r)
+    return prefix[r] - prefix[l-1]
+
+// Example:
+// Input: A = [1, 2, 3, 4, 5]
+// 
+// prefix[0] = 0
+// prefix[1] = 0 + 1 = 1
+// prefix[2] = 1 + 2 = 3
+// prefix[3] = 3 + 3 = 6
+// prefix[4] = 6 + 4 = 10
+// prefix[5] = 10 + 5 = 15
+// 
+// Range sum from index 2 to 4:
+// RANGE-SUM(prefix, 2, 4) = prefix[4] - prefix[1] = 10 - 1 = 9
+// 
+// Output: prefix = [0, 1, 3, 6, 10, 15]`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Compute prefix sums:</span>{" "}
-        For each element, add to previous prefix sum
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Query range sums:</span>{" "}
-        Subtract prefix[right+1] - prefix[left]
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Handle updates:</span> For
-        point updates, update all affected prefix sums
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: Create prefix array with size n+1</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Compute: Cumulative sums in prefix array</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Query: Calculate range sums using prefix differences</span>
+      </div>
     </div>
   </div>
 );

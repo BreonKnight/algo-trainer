@@ -6,7 +6,7 @@ export const StronglyConnectedComponentsPattern = () => (
       <span className="text-accent font-bold">
         Strongly Connected Components
       </span>
-      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
@@ -15,35 +15,98 @@ export const StronglyConnectedComponentsPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`STRONGLY-CONNECTED-COMPONENTS(G):
-    // G is a directed graph
-    call DFS(G) to compute finishing times u.f for each vertex u
-    compute Gᵀ
-    call DFS(Gᵀ), but in the main loop of DFS, consider the vertices
-        in order of decreasing u.f (as computed in line 1)
-    output the vertices of each tree in the depth-first forest formed in line 3
-        as a separate strongly connected component
+        {`// Kosaraju's Algorithm
+KOSARAJU-SCC(G):
+    # First DFS pass
+    visited = [False] * |V|
+    order = []
+    for v in V:
+        if not visited[v]:
+            DFS(G, v, visited, order)
+    
+    # Reverse graph
+    G_rev = REVERSE-GRAPH(G)
+    
+    # Second DFS pass
+    visited = [False] * |V|
+    components = []
+    for v in reversed(order):
+        if not visited[v]:
+            component = []
+            DFS(G_rev, v, visited, component)
+            components.append(component)
+    return components
 
-DFS(G):
-    for each vertex u ∈ G.V:
-        u.color = WHITE
-        u.π = NIL
-    time = 0
-    for each vertex u ∈ G.V:
-        if u.color == WHITE:
-            DFS-VISIT(G, u)
+// Tarjan's Algorithm
+TARJAN-SCC(G):
+    index = 0
+    indices = [-1] * |V|
+    low = [-1] * |V|
+    on_stack = [False] * |V|
+    stack = []
+    components = []
+    
+    for v in V:
+        if indices[v] == -1:
+            STRONGLY-CONNECTED(v)
+    return components
 
-DFS-VISIT(G, u):
-    time = time + 1
-    u.d = time
-    u.color = GRAY
-    for each v ∈ G.Adj[u]:
-        if v.color == WHITE:
-            v.π = u
-            DFS-VISIT(G, v)
-    u.color = BLACK
-    time = time + 1
-    u.f = time`}
+STRONGLY-CONNECTED(v):
+    indices[v] = index
+    low[v] = index
+    index = index + 1
+    stack.append(v)
+    on_stack[v] = True
+    
+    for w in G.adj[v]:
+        if indices[w] == -1:
+            STRONGLY-CONNECTED(w)
+            low[v] = min(low[v], low[w])
+        elif on_stack[w]:
+            low[v] = min(low[v], indices[w])
+    
+    if low[v] == indices[v]:
+        component = []
+        while True:
+            w = stack.pop()
+            on_stack[w] = False
+            component.append(w)
+            if w == v:
+                break
+        components.append(component)
+
+// Gabow's Algorithm
+GABOW-SCC(G):
+    index = 0
+    indices = [-1] * |V|
+    path = []
+    components = []
+    
+    for v in V:
+        if indices[v] == -1:
+            GABOW-DFS(v)
+    return components
+
+GABOW-DFS(v):
+    indices[v] = index
+    index = index + 1
+    path.append(v)
+    
+    for w in G.adj[v]:
+        if indices[w] == -1:
+            GABOW-DFS(w)
+        else:
+            while path and indices[path[-1]] > indices[w]:
+                path.pop()
+    
+    if path[-1] == v:
+        component = []
+        while True:
+            w = path.pop()
+            component.append(w)
+            if w == v:
+                break
+        components.append(component)`}
       </pre>
     </div>
 
@@ -51,65 +114,91 @@ DFS-VISIT(G, u):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">First DFS:</span> Compute
-        finishing times
+        <span className="font-semibold text-accent">DFS Pass:</span> Perform
+        depth-first search to get vertex order
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Transpose:</span> Compute
-        the transpose of G
+        <span className="font-semibold text-accent">Reverse:</span> Create
+        reversed graph
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Second DFS:</span> Process
-        vertices in decreasing order of finishing times
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Output:</span> Each DFS tree
-        is a strongly connected component
+        <span className="font-semibold text-accent">Second Pass:</span> Process
+        vertices in reverse order
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
+      <span className="font-semibold text-accent">
+        Example: Kosaraju's Algorithm
+      </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
-     A → B → C
-     ↑   ↓   ↓
-     D ← E ← F
+0 → 1 → 2 → 0
+1 → 3
+3 → 4
+4 → 3
 
-First DFS (finishing times):
-1. A: f=6
-2. B: f=5
-3. C: f=4
-4. D: f=3
-5. E: f=2
-6. F: f=1
+First DFS order: [4, 3, 2, 1, 0]
+Reversed graph:
+0 → 2
+1 → 0
+2 → 1
+3 → 1, 4
+4 → 3
 
-Transpose Graph:
-     A ← B ← C
-     ↓   ↑   ↑
-     D → E → F
+SCCs: [[0, 1, 2], [3, 4]]`}
+      </pre>
+    </div>
 
-Second DFS (in order of decreasing f):
-1. A → D
-2. B → E
-3. C → F
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Tarjan's Algorithm
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Graph:
+0 → 1 → 2 → 0
+1 → 3
+3 → 4
+4 → 3
 
-Strongly Connected Components:
-{A, D}
-{B, E}
-{C, F}`}
+DFS traversal:
+0: indices=[0,-1,-1,-1,-1], low=[0,-1,-1,-1,-1]
+1: indices=[0,1,-1,-1,-1], low=[0,1,-1,-1,-1]
+2: indices=[0,1,2,-1,-1], low=[0,1,0,-1,-1]
+3: indices=[0,1,2,3,-1], low=[0,1,0,3,-1]
+4: indices=[0,1,2,3,4], low=[0,1,0,3,3]
+
+SCCs: [[0, 1, 2], [3, 4]]`}
+      </pre>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Gabow's Algorithm
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Graph:
+0 → 1 → 2 → 0
+1 → 3
+3 → 4
+4 → 3
+
+DFS traversal:
+0: indices=[0,-1,-1,-1,-1], path=[0]
+1: indices=[0,1,-1,-1,-1], path=[0,1]
+2: indices=[0,1,2,-1,-1], path=[0,1,2]
+3: indices=[0,1,2,3,-1], path=[0,1,2,3]
+4: indices=[0,1,2,3,4], path=[0,1,2,3,4]
+
+SCCs: [[0, 1, 2], [3, 4]]`}
       </pre>
     </div>
   </div>

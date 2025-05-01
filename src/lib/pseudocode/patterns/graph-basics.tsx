@@ -13,51 +13,61 @@ export const GraphBasicsPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Create graph from vertices and edges
-CREATE-GRAPH(vertices, edges):
-    # Initialize empty adjacency list
-    graph = new dictionary
-    
-    # Add vertices to graph
-    for each vertex in vertices:
-        graph[vertex] = new list
-    
-    # Add edges to graph
-    for each edge (u, v) in edges:
-        # Add v to u's neighbors
-        graph[u].append(v)
-        # For undirected graphs, add u to v's neighbors
-        graph[v].append(u)
-    
-    return graph
+        {`// Graph representation
+GRAPH-REPRESENTATION(V, E):
+    G = new Graph
+    G.V = V  // Set of vertices
+    G.E = E  // Set of edges
+    G.adj = new Array(V.length + 1)  // Adjacency list
+    for v in V:
+        G.adj[v] = new List
+    for (u, v) in E:
+        G.adj[u].append(v)
+        G.adj[v].append(u)  // For undirected graph
+    return G
 
-// Check if path exists between two vertices
-HAS-PATH(graph, start, end):
-    # Initialize visited set
-    visited = new set
-    
-    # Use DFS to find path
-    return DFS(graph, start, end, visited)
+// Depth-first search
+DFS(G, s):
+    for v in G.V:
+        v.color = WHITE
+        v.parent = NIL
+    time = 0
+    for v in G.V:
+        if v.color = WHITE:
+            DFS-VISIT(G, v)
 
-// Depth-first search helper
-DFS(graph, current, end, visited):
-    # If reached destination
-    if current == end:
-        return true
-    
-    # Mark current vertex as visited
-    visited.add(current)
-    
-    # Try all neighbors
-    for each neighbor in graph[current]:
-        # If neighbor not visited
-        if neighbor not in visited:
-            # Recursively search from neighbor
-            if DFS(graph, neighbor, end, visited):
-                return true
-    
-    # No path found
-    return false`}
+DFS-VISIT(G, u):
+    time = time + 1
+    u.d = time
+    u.color = GRAY
+    for v in G.adj[u]:
+        if v.color = WHITE:
+            v.parent = u
+            DFS-VISIT(G, v)
+    u.color = BLACK
+    time = time + 1
+    u.f = time
+
+// Breadth-first search
+BFS(G, s):
+    for v in G.V:
+        v.color = WHITE
+        v.d = ∞
+        v.parent = NIL
+    s.color = GRAY
+    s.d = 0
+    s.parent = NIL
+    Q = new Queue
+    Q.enqueue(s)
+    while Q is not empty:
+        u = Q.dequeue()
+        for v in G.adj[u]:
+            if v.color = WHITE:
+                v.color = GRAY
+                v.d = u.d + 1
+                v.parent = u
+                Q.enqueue(v)
+        u.color = BLACK`}
       </pre>
     </div>
 
@@ -65,69 +75,60 @@ DFS(graph, current, end, visited):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        empty graph
+        <span className="font-semibold text-accent">Represent:</span> Create
+        graph structure
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build:</span> Add vertices
-        and edges
+        <span className="font-semibold text-accent">DFS:</span> Depth-first
+        search
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Search:</span> Find path
-        between vertices
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Explore:</span> Visit
-        neighbors recursively
+        <span className="font-semibold text-accent">BFS:</span> Breadth-first
+        search
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Graph Creation</span>
+      <span className="font-semibold text-accent">
+        Example: Graph Structure
+      </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Vertices: [A, B, C, D, E]
-Edges: [(A,B), (A,C), (B,D), (C,D), (D,E)]
-
+        {`Vertices: [1, 2, 3, 4, 5]
+Edges: [(1,2), (1,3), (2,4), (3,4), (4,5)]
 Adjacency List:
-A: [B, C]
-B: [A, D]
-C: [A, D]
-D: [B, C, E]
-E: [D]`}
+1: [2, 3]
+2: [1, 4]
+3: [1, 4]
+4: [2, 3, 5]
+5: [4]`}
       </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Path Finding</span>
+      <span className="font-semibold text-accent">Example: DFS Traversal</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Find path from A to E:
+        {`Start from vertex 1:
+Discovery order: 1, 2, 4, 3, 5
+Finishing order: 5, 3, 4, 2, 1`}
+      </pre>
+    </div>
 
-Step 1: Start at A
-Visited: {A}
-
-Step 2: Try B
-Visited: {A, B}
-
-Step 3: Try D
-Visited: {A, B, D}
-
-Step 4: Try E
-Visited: {A, B, D, E}
-Path found: A → B → D → E
-
-Alternative path: A → C → D → E`}
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: BFS Traversal</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Start from vertex 1:
+Level 0: [1]
+Level 1: [2, 3]
+Level 2: [4]
+Level 3: [5]`}
       </pre>
     </div>
   </div>

@@ -1,46 +1,71 @@
 import { ChevronRight } from "lucide-react";
 
-export const MatrixSpiralRecursivePattern = () => (
+export const MatrixSpiralTraversalRecursivePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Spiral Recursive Template</span>
-      <span className="ml-2 text-xs text-secondary">(Matrix Operation)</span>
+      <span className="text-accent font-bold">
+        Matrix Spiral Traversal (Recursive)
+      </span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) - visit each cell &nbsp;|&nbsp; Space: O(n) - recursion stack
-      &nbsp;|&nbsp; Use: Recursive spiral traversal
+      Time: O(mn) &nbsp;|&nbsp; Space: O(mn) &nbsp;|&nbsp; Use: Matrix traversal
+      in spiral order
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Base case:</span> Check if
-        layer is complete
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`// Recursive spiral traversal of matrix
+SPIRAL-TRAVERSE(A, top, bottom, left, right):
+    if top > bottom or left > right:
+        return
+    // Traverse top row
+    for i ← left to right:
+        print A[top, i]
+    // Traverse right column
+    for i ← top + 1 to bottom:
+        print A[i, right]
+    if top < bottom and left < right:
+        // Traverse bottom row
+        for i ← right - 1 downto left:
+            print A[bottom, i]
+        // Traverse left column
+        for i ← bottom - 1 downto top + 1:
+            print A[i, left]
+    // Recursively traverse inner matrix
+    SPIRAL-TRAVERSE(A, top + 1, bottom - 1, left + 1, right - 1)
+
+// Example:
+// Input: A = [
+//   [1, 2, 3, 4],
+//   [5, 6, 7, 8],
+//   [9, 10, 11, 12]
+// ]
+// 
+// Execution:
+// 1. Outer layer: 1, 2, 3, 4, 8, 12, 11, 10, 9, 5
+// 2. Inner layer: 6, 7
+// 
+// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Traverse layer:</span>{" "}
-        Process outer layer
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Recurse:</span> Process
-        inner matrix
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Combine:</span> Merge
-        results
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Base case: Check if traversal is complete</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Traverse: Process outer layer in spiral order</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Recurse: Process inner matrix with updated boundaries</span>
+      </div>
     </div>
   </div>
 );

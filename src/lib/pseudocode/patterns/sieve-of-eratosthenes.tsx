@@ -1,46 +1,83 @@
 import { ChevronRight } from "lucide-react";
 
-export const SieveofEratosthenesPattern = () => (
+export const SieveOfEratosthenesPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Sieve Template</span>
+      <span className="text-accent font-bold">Sieve of Eratosthenes</span>
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log log n) - prime marking &nbsp;|&nbsp; Space: O(n) - boolean
-      array &nbsp;|&nbsp; Use: Finding all primes up to n
+      Time: O(n log log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all
+      primes up to n
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        array of size n+1
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`# Sieve of Eratosthenes: Find all primes up to n
+# Input: Integer n > 1
+# Output: Array of primes ≤ n
+
+Algorithm SIEVE-OF-ERATOSTHENES(n)
+    # Initialize array of booleans
+    is_prime ← array of size n + 1
+    for i ← 2 to n do
+        is_prime[i] ← true
+    end for
+    
+    # Mark multiples of primes
+    for i ← 2 to √n do
+        if is_prime[i] then
+            for j ← i² to n step i do
+                is_prime[j] ← false
+            end for
+        end if
+    end for
+    
+    # Collect primes
+    primes ← empty array
+    for i ← 2 to n do
+        if is_prime[i] then
+            primes.append(i)
+        end if
+    end for
+    
+    return primes
+
+# Example:
+# Input: n = 30
+# 
+# Step 1: is_prime = [F, F, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T]
+# Step 2: i = 2, mark multiples of 2
+#         is_prime = [F, F, T, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F]
+# Step 3: i = 3, mark multiples of 3
+#         is_prime = [F, F, T, T, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F]
+# Step 4: i = 5, mark multiples of 5
+#         is_prime = [F, F, T, T, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F]
+# 
+# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Mark non-primes:</span>{" "}
-        Start from first prime (2)
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Sieve:</span> Mark multiples
-        of each prime
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Collect:</span> Return
-        unmarked numbers
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize array of booleans</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Mark multiples of primes as non-prime</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Collect remaining primes</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return array of primes</span>
+      </div>
     </div>
   </div>
 );

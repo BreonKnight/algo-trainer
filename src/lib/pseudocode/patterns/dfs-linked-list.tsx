@@ -1,47 +1,67 @@
 import { ChevronRight } from "lucide-react";
 
-export const DFSLinkedListPattern = () => (
+export const DfsLinkedListPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">DFS on Linked List Template</span>
-      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+      <span className="text-accent font-bold">DFS on Linked List</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - visit each node once &nbsp;|&nbsp; Space: O(n) - recursion
-      stack &nbsp;|&nbsp; Use: Traversing linked lists with recursive
-      depth-first approach
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked
+      list depth-first
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Base case:</span> Return if
-        node is null
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`// Node structure for linked list
+NODE:
+    key
+    next
+    visited
+
+// DFS on linked list
+DFS-LINKED-LIST(head):
+    if head = NIL:
+        return
+    
+    // Mark current node as visited
+    head.visited ← true
+    process head.key
+    
+    // Recursively visit next node if not visited
+    if head.next ≠ NIL and not head.next.visited:
+        DFS-LINKED-LIST(head.next)
+
+// Example:
+// Input: 1 → 2 → 3 → 4 → 5
+// 
+// Execution:
+// 1. Visit 1, visited = {1}
+// 2. Visit 2, visited = {1,2}
+// 3. Visit 3, visited = {1,2,3}
+// 4. Visit 4, visited = {1,2,3,4}
+// 5. Visit 5, visited = {1,2,3,4,5}
+// 
+// Output: 1, 2, 3, 4, 5`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Process node:</span> Perform
-        operation on current node
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Recursive call:</span> Visit
-        next node
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Backtrack:</span> Handle
-        post-processing if needed
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Visit: Process current node</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Mark: Node as visited</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Recurse: Visit next unvisited node</span>
+      </div>
     </div>
   </div>
 );
