@@ -107,6 +107,7 @@ export const monsterHunterPatternsByCategory = {
     "Extended Euclidean",
     "Chinese Remainder Theorem",
     "Sieve of Eratosthenes",
+    "Miller-Rabin Algorithm",
   ],
 
   "Bit Manipulation": ["Bit Manipulation"],

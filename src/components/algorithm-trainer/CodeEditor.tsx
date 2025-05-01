@@ -1,6 +1,7 @@
 import { Card } from "../ui/card";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { useRef, useEffect, useState } from "react";
+import * as monaco from "monaco-editor";
 import {
   draculaTheme,
   solarizedTheme,
@@ -11,7 +12,7 @@ import {
   re2Theme,
   mhTheme,
 } from "@/lib/theme";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "@/components/useTheme";
 import { cn } from "@/lib/utils";
 
 interface CodeEditorProps {
@@ -48,7 +49,7 @@ export function CodeEditor({
   onPrevPattern,
 }: CodeEditorProps) {
   const monacoRef = useRef<Monaco | null>(null);
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const { theme } = useTheme();
   const isDesktop = useIsDesktop();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -70,13 +71,13 @@ export function CodeEditor({
     maxFont = 28;
 
   // Decorations for error highlighting
-  const [decorations, setDecorations] = useState<any[]>([]);
+  const [decorations, setDecorations] = useState<string[]>([]);
 
   // Auto-focus editor
   useEffect(() => {
     if (editorRef.current) {
       requestAnimationFrame(() => {
-        editorRef.current.focus();
+        editorRef.current?.focus();
       });
     }
   }, [userCode]);
@@ -148,7 +149,10 @@ export function CodeEditor({
   }, [isDesktop]);
 
   // Editor mount
-  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+  const handleEditorDidMount = (
+    editor: monaco.editor.IStandaloneCodeEditor,
+    monaco: Monaco
+  ) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
     monaco.editor.defineTheme("dracula", draculaTheme);

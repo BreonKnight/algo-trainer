@@ -1,19 +1,20 @@
 import { ChevronRight } from "lucide-react";
 
-export const DynamicProgrammingPattern = () => (
-  <div>
-    <div className="mb-2">
-      <span className="text-accent font-bold">Dynamic Programming</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
-    </div>
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimization
-      problems with overlapping subproblems
-    </div>
+export function DynamicProgrammingPattern() {
+  return (
+    <div>
+      <div className="mb-2">
+        <span className="text-accent font-bold">Dynamic Programming</span>
+        <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      </div>
+      <div className="mb-2 text-xs text-secondary">
+        Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimization
+        problems with overlapping subproblems
+      </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Fibonacci
+      <div className="mb-4">
+        <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+          {`// Fibonacci
 FIBONACCI(n):
     if n ≤ 1:
         return n
@@ -61,38 +62,38 @@ MCM(P):
                 if cost < dp[i][j]:
                     dp[i][j] = cost
     return dp[0][n-1]`}
-      </pre>
-    </div>
+        </pre>
+      </div>
 
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Define:</span> State and
-        recurrence relation
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Base
-        cases and boundary conditions
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Compute:</span> Fill DP
-        table in bottom-up manner
-      </span>
-    </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">1.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Define:</span> State and
+          recurrence relation
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">2.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Initialize:</span> Base
+          cases and boundary conditions
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">3.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Compute:</span> Fill DP
+          table in bottom-up manner
+        </span>
+      </div>
 
-    <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Fibonacci</span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`n = 5
+      <div className="mt-4">
+        <span className="font-semibold text-accent">Example: Fibonacci</span>
+        <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+          {`n = 5
 dp = [0, 1, 1, 2, 3, 5]
 F(0) = 0
 F(1) = 1
@@ -100,32 +101,33 @@ F(2) = F(1) + F(0) = 1
 F(3) = F(2) + F(1) = 2
 F(4) = F(3) + F(2) = 3
 F(5) = F(4) + F(3) = 5`}
-      </pre>
-    </div>
+        </pre>
+      </div>
 
-    <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Longest Common Subsequence
-      </span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`X = "ABCBDAB"
+      <div className="mt-4">
+        <span className="font-semibold text-accent">
+          Example: Longest Common Subsequence
+        </span>
+        <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+          {`X = "ABCBDAB"
 Y = "BDCABA"
 dp = [0, 0, 0, 0, 0, 0, 0]
 LCS = "BCBA" or "BDAB"
 Length = 4`}
-      </pre>
-    </div>
+        </pre>
+      </div>
 
-    <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Knapsack</span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`W = [2, 3, 4, 5]
+      <div className="mt-4">
+        <span className="font-semibold text-accent">Example: Knapsack</span>
+        <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+          {`W = [2, 3, 4, 5]
 V = [3, 4, 5, 6]
 C = 5
 dp = [0, 0, 3, 4, 4, 7]
 Selected items: [2, 3]
 Total value: 7`}
-      </pre>
+        </pre>
+      </div>
     </div>
-  </div>
-);
+  );
+}

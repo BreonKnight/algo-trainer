@@ -1,5 +1,3 @@
-import { MonsterHunterTerritory } from "./types";
-
 export interface VisualTemplate {
   before: string;
   after: string;

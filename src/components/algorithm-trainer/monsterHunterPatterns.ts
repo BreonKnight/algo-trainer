@@ -534,4 +534,237 @@ max_resources5 = analyze_resource_flow(territory5, 'Emergency Camp', 'Elder's Re
 #    - Prioritize critical resources
 #    - Maintain supply chain`,
   ],
+  [
+    "Tree DP",
+    `# Monster Hunter Tree DP Challenge
+# You are planning optimal hunting routes through monster territories!
+
+def monster_hunter_tree_dp(tree):
+    """
+    Calculate maximum rewards from monster territories using Tree DP.
+    Time: O(n) where n is number of territories
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like finding the most rewarding path through monster territories
+    - Each territory has a reward value
+    - Can't take adjacent territories (must skip some)
+    - Need to maximize total rewards
+    
+    Example:
+    tree = {
+        "Ancient Forest": {
+            "rewards": 100,
+            "children": ["Wildspire Waste", "Coral Highlands"]
+        },
+        "Wildspire Waste": {
+            "rewards": 80,
+            "children": ["Rotten Vale"]
+        },
+        "Coral Highlands": {
+            "rewards": 90,
+            "children": ["Elder's Recess"]
+        },
+        "Rotten Vale": {
+            "rewards": 70,
+            "children": []
+        },
+        "Elder's Recess": {
+            "rewards": 120,
+            "children": []
+        }
+    }
+    max_rewards = monster_hunter_tree_dp(tree)
+    # Shows maximum rewards achievable
+    """
+    def dfs(territory):
+        if not territory:
+            return 0, 0
+            
+        # Initialize values for current territory
+        include = tree[territory]["rewards"]
+        exclude = 0
+        
+        # Process all child territories
+        for child in tree[territory]["children"]:
+            child_include, child_exclude = dfs(child)
+            # If we include current territory, we must exclude children
+            include += child_exclude
+            # If we exclude current territory, we can choose to include or exclude children
+            exclude += max(child_include, child_exclude)
+            
+        return include, exclude
+    
+    # Start from the root territory
+    root = next(iter(tree))
+    include, exclude = dfs(root)
+    return max(include, exclude)
+
+def analyze_territory_rewards(tree):
+    """
+    Analyze monster territory rewards to find optimal path.
+    
+    Args:
+        tree: Dictionary representing territory structure and rewards
+    
+    Returns:
+        Maximum rewards achievable through optimal territory selection
+    """
+    return monster_hunter_tree_dp(tree)
+
+# Test Case 1: Basic Territory Optimization
+tree1 = {
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Wildspire Waste", "Coral Highlands"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": []
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+max_rewards1 = analyze_territory_rewards(tree1)
+# Expected Output: 290 (100 + 80 + 70 + 40)
+
+# Test Case 2: Complex Territory Network
+tree2 = {
+    "Base Camp": {
+        "rewards": 50,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Coral Highlands"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+max_rewards2 = analyze_territory_rewards(tree2)
+# Expected Output: 340 (50 + 100 + 90 + 120)
+
+# Test Case 3: Multiple Paths with Different Rewards
+tree3 = {
+    "Astera": {
+        "rewards": 60,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Coral Highlands", "Rotten Vale"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+max_rewards3 = analyze_territory_rewards(tree3)
+# Expected Output: 370 (60 + 100 + 90 + 120)
+
+# Test Case 4: Emergency Supply Route
+tree4 = {
+    "Emergency Camp": {
+        "rewards": 100,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 150,
+        "children": ["Coral Highlands"]
+    },
+    "Wildspire Waste": {
+        "rewards": 120,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 180,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 130,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 200,
+        "children": []
+    }
+}
+max_rewards4 = analyze_territory_rewards(tree4)
+# Expected Output: 630 (100 + 150 + 180 + 200)
+
+# Test Case 5: Resource Collection Path
+tree5 = {
+    "Base Camp": {
+        "rewards": 50,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Coral Highlands", "Rotten Vale"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+max_rewards5 = analyze_territory_rewards(tree5)
+# Expected Output: 360 (50 + 100 + 90 + 120)
+
+# Monster Hunter Tip:
+# Like planning the most efficient route through monster territories to maximize rewards!
+# Use Tree DP to:
+# 1. Calculate maximum rewards for each territory
+# 2. Consider both taking and skipping territories
+# 3. Find the optimal path through the territory tree
+# 4. Balance immediate rewards with future opportunities
+# 5. Plan efficient resource collection routes`,
+  ],
 ]);

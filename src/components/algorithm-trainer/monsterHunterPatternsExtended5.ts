@@ -260,4 +260,121 @@ export const monsterHunterPatternsExtended5 = new Map<PatternKey, string>([
     
     return sum(dp[max_turns])`,
   ],
+
+  [
+    "Suffix Array" as PatternKey,
+    `def monster_hunter_suffix_array(monster_attacks):
+    """
+    Create a suffix array for monster attack patterns.
+    Time: O(n log n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like organizing all possible attack sequences
+    - Each suffix represents a possible attack pattern
+    - Helps find repeated attack patterns
+    
+    Example:
+    attacks = "RARFRARF"  # R=Roar, A=Attack, F=Fly
+    Process:
+    1. Generate all suffixes
+    2. Sort suffixes
+    3. Create suffix array
+    """
+    n = len(monster_attacks)
+    suffixes = [(monster_attacks[i:], i) for i in range(n)]
+    suffixes.sort()
+    return [s[1] for s in suffixes]`,
+  ],
+
+  [
+    "Strongly Connected Components" as PatternKey,
+    `def monster_hunter_scc(territory_graph):
+    """
+    Find strongly connected components in monster territories.
+    Time: O(V + E)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like identifying groups of territories where monsters can freely move between any two areas
+    - Each component represents a connected region
+    - Helps understand monster migration patterns
+    
+    Example:
+    territory_graph = {
+        "Ancient Forest": ["Wildspire Waste"],
+        "Wildspire Waste": ["Coral Highlands"],
+        "Coral Highlands": ["Ancient Forest", "Elder's Recess"],
+        "Elder's Recess": ["Rotten Vale"],
+        "Rotten Vale": ["Wildspire Waste"]
+    }
+    
+    Process:
+    1. Perform first DFS to get finish times
+    2. Reverse the graph
+    3. Perform second DFS in reverse order
+    4. Each tree in forest is an SCC
+    """
+    def dfs(node, visited, stack):
+        visited.add(node)
+        for neighbor in territory_graph.get(node, []):
+            if neighbor not in visited:
+                dfs(neighbor, visited, stack)
+        stack.append(node)
+    
+    def reverse_graph(graph):
+        reversed_graph = {}
+        for node in graph:
+            for neighbor in graph[node]:
+                if neighbor not in reversed_graph:
+                    reversed_graph[neighbor] = []
+                reversed_graph[neighbor].append(node)
+        return reversed_graph
+    
+    # First pass
+    visited = set()
+    stack = []
+    for node in territory_graph:
+        if node not in visited:
+            dfs(node, visited, stack)
+    
+    # Second pass on reversed graph
+    reversed_graph = reverse_graph(territory_graph)
+    visited = set()
+    sccs = []
+    
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            component = []
+            dfs(node, visited, component)
+            sccs.append(component)
+    
+    return sccs`,
+  ],
+
+  [
+    "Suffix Tree" as PatternKey,
+    `def monster_hunter_suffix_tree(monster_attacks):
+    """
+    Create a suffix tree for monster attack patterns.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like organizing all possible attack sequences
+    - Each suffix represents a possible attack pattern
+    - Helps find repeated attack patterns
+    
+    Example:
+    attacks = "RARFRARF"  # R=Roar, A=Attack, F=Fly
+    Process:
+    1. Generate all suffixes
+    2. Build suffix tree
+    """
+    n = len(monster_attacks)
+    suffixes = [(monster_attacks[i:], i) for i in range(n)]
+    suffixes.sort()
+    return [s[1] for s in suffixes]`,
+  ],
 ]);

@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import { execSync } from "child_process";
 
 interface PatternConfig {
   name: string;
@@ -105,26 +104,18 @@ export const ${this.patternConfig.name.replace(/\s+/g, "")}Pattern = () => {
     const indexPath = path.join(this.baseDir, "src/lib/pseudocode/index.tsx");
     let content = fs.readFileSync(indexPath, "utf-8");
 
-    // Add import
-    const importStatement = `import { ${this.patternConfig.name.replace(
-      /\s+/g,
-      ""
-    )}Pattern } from "./patterns/${this.patternConfig.name
-      .toLowerCase()
-      .replace(/\s+/g, "-")}";`;
-    content = content.replace(
-      "import {",
-      `import {\n  ${this.patternConfig.name.replace(/\s+/g, "")}Pattern,`
-    );
-
-    // Add to pseudocodePatterns
-    const patternEntry = `  "${
-      this.patternConfig.name
-    }": ${this.patternConfig.name.replace(/\s+/g, "")}Pattern,`;
-    content = content.replace(
-      "export const pseudocodePatterns = {",
-      `export const pseudocodePatterns = {\n${patternEntry}`
-    );
+    // Add import and pattern entry in one go
+    content = content
+      .replace(
+        "import {",
+        `import {\n  ${this.patternConfig.name.replace(/\s+/g, "")}Pattern,`
+      )
+      .replace(
+        "export const pseudocodePatterns = {",
+        `export const pseudocodePatterns = {\n  "${
+          this.patternConfig.name
+        }": ${this.patternConfig.name.replace(/\s+/g, "")}Pattern,`
+      );
 
     fs.writeFileSync(indexPath, content);
   }
@@ -206,30 +197,20 @@ Expected Output: ${this.patternConfig.example.output}
     );
     let content = fs.readFileSync(combinedPath, "utf-8");
 
-    // Add import
-    const importStatement = `import { monsterHunterPatternsExtended${this.getNextExtensionNumber()} } from "./monsterHunterPatternsExtended${this.getNextExtensionNumber()}";`;
-    content = content.replace(
-      "import {",
-      `import {\n  monsterHunterPatternsExtended${this.getNextExtensionNumber()},`
-    );
-
-    // Add to allPatterns
-    const patternEntry = `  ...monsterHunterPatternsExtended${this.getNextExtensionNumber()},`;
-    content = content.replace(
-      "const allPatterns = new Map<PatternKey, string>([",
-      `const allPatterns = new Map<PatternKey, string>([\n${patternEntry}`
-    );
-
-    // Add to category
-    const categoryEntry = `    "${this.patternConfig.name}",`;
-    const categoryRegex = new RegExp(
-      `"${this.patternConfig.category}": \\[`,
-      "g"
-    );
-    content = content.replace(
-      categoryRegex,
-      `"${this.patternConfig.category}": [\n${categoryEntry}`
-    );
+    // Add import, pattern entry, and category in one go
+    content = content
+      .replace(
+        "import {",
+        `import {\n  monsterHunterPatternsExtended${this.getNextExtensionNumber()},`
+      )
+      .replace(
+        "const allPatterns = new Map<PatternKey, string>([",
+        `const allPatterns = new Map<PatternKey, string>([\n  ...monsterHunterPatternsExtended${this.getNextExtensionNumber()},`
+      )
+      .replace(
+        new RegExp(`"${this.patternConfig.category}": \\[`, "g"),
+        `"${this.patternConfig.category}": [\n    "${this.patternConfig.name}",`
+      );
 
     fs.writeFileSync(combinedPath, content);
   }

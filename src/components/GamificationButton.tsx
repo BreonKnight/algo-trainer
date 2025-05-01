@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "../components/ui/dialog";
 import GamificationService, { UserProgress } from "../lib/gamification";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "./useTheme";
 import { Link } from "react-router-dom";
 
 const themeStyles = {

@@ -168,6 +168,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Digit DP": DigitDPPattern,
   "Tree DP": TreeDynamicProgrammingPattern,
   "Probability DP": ProbabilityDPPattern,
+  "Strongly Connected Components": StronglyConnectedComponentsPattern,
   "Interpolation Search": InterpolationSearchPattern,
   "Fibonacci Search": FibonacciSearchPattern,
   "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
@@ -212,4 +213,5 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Z Algorithm": ZAlgorithmPattern,
   "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
   "Fast Fourier Transform": FastFourierTransformPattern,
+  "Kadane's Algorithm": KadanesAlgorithmPattern,
 };

@@ -106,8 +106,8 @@ export const patternNameMapping: Record<string, string> = {
   "Sieve of Eratosthenes": "Sieve of Eratosthenes",
   "Sieve of Atkin": "Sieve of Atkin",
   "Sieve of Sundaram": "Sieve of Sundaram",
-  "Miller-Rabin": "miller-rabin",
-  "Miller-Rabin Primality Test": "miller-rabin-primality-test",
+  "Miller-Rabin": "Miller-Rabin",
+  "Miller-Rabin Algorithm": "Miller-Rabin Algorithm",
   "Fast Fourier Transform": "Fast Fourier Transform",
   "Matrix Exponentiation": "Matrix Exponentiation",
 

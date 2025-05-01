@@ -11,11 +11,17 @@ interface AlgorithmVisualizerProps {
   visualizationType: "sorting" | "graph" | "tree" | "array";
 }
 
+interface VisualizationStep {
+  array: number[];
+  highlightedIndices: number[];
+  description: string;
+}
+
 // Helper function to generate visualization steps based on algorithm
 const generateVisualizationSteps = (
   algorithm: string,
   data: number[]
-): any[] => {
+): VisualizationStep[] => {
   // This is a simplified implementation - in a real app, this would be much more complex
   // and would generate actual steps based on the algorithm's execution
 
@@ -133,7 +139,7 @@ const generateVisualizationSteps = (
 // Helper function to render a step on the canvas
 const renderStep = (
   ctx: CanvasRenderingContext2D,
-  step: any,
+  step: VisualizationStep,
   visualizationType: string
 ) => {
   const { width, height } = ctx.canvas;
@@ -195,7 +201,7 @@ export function AlgorithmVisualizer({
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const [steps, setSteps] = useState<any[]>([]);
+  const [steps, setSteps] = useState<VisualizationStep[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Generate visualization steps based on algorithm

@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 export const MillerRabinPrimalityTestPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Miller-Rabin Primality Test</span>
+      <span className="text-accent font-bold">Miller-Rabin Algorithm</span>
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
@@ -13,7 +13,7 @@ export const MillerRabinPrimalityTestPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Miller-Rabin Primality Test
+        {`# Miller-Rabin Algorithm
 # Input: Integer n > 2, number of rounds k
 # Output: "composite" or "probably prime"
 
