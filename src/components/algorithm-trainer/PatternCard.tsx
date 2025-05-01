@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
-import { useTheme } from "@/components/useTheme";
+import { useTheme } from "@/components/theme-context";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;

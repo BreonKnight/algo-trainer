@@ -20,7 +20,7 @@ import {
   TooltipContent,
   TooltipProvider,
 } from "../ui/tooltip";
-import { useTheme } from "../useTheme";
+import { useTheme } from "../theme-context";
 import { GamificationButton } from "../GamificationButton";
 import GamificationService from "../../lib/gamification";
 import { ChevronDown, ChevronUp } from "lucide-react";
