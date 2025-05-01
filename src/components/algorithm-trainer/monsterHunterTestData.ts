@@ -1382,4 +1382,91 @@ Expected Output: []
 # Like finding critical paths in monster territory that, if blocked,
 # would prevent monsters from moving between different areas!`,
   ],
+  [
+    "Network Flow",
+    `# Monster Hunter Network Flow Challenge
+# You are optimizing resource distribution between territories!
+
+# Test Case 1: Basic Resource Distribution
+Input:
+territory = {
+    'Base Camp': {'Ancient Forest': 10, 'Wildspire Waste': 5},
+    'Ancient Forest': {'Coral Highlands': 7},
+    'Wildspire Waste': {'Rotten Vale': 4},
+    'Coral Highlands': {'Elder's Recess': 6},
+    'Rotten Vale': {'Elder's Recess': 3},
+    'Elder's Recess': {}
+}
+source = 'Base Camp'
+sink = 'Elder's Recess'
+Expected Output: 9 (7 through Ancient Forest + 2 through Wildspire Waste)
+
+# Test Case 2: Multiple Paths with Different Capacities
+Input:
+territory = {
+    'Astera': {'Ancient Forest': 8, 'Wildspire Waste': 6},
+    'Ancient Forest': {'Coral Highlands': 5, 'Rotten Vale': 3},
+    'Wildspire Waste': {'Rotten Vale': 4},
+    'Coral Highlands': {'Elder's Recess': 7},
+    'Rotten Vale': {'Elder's Recess': 6},
+    'Elder's Recess': {}
+}
+source = 'Astera'
+sink = 'Elder's Recess'
+Expected Output: 12 (5 through Ancient Forest + 4 through Wildspire Waste + 3 through Rotten Vale)
+
+# Test Case 3: Complex Network with Multiple Sources
+Input:
+territory = {
+    'Astera': {'Ancient Forest': 10},
+    'Seliana': {'Wildspire Waste': 8},
+    'Ancient Forest': {'Coral Highlands': 7},
+    'Wildspire Waste': {'Rotten Vale': 6},
+    'Coral Highlands': {'Elder's Recess': 5},
+    'Rotten Vale': {'Elder's Recess': 4},
+    'Elder's Recess': {}
+}
+# Create a super source
+territory['Super Source'] = {'Astera': float('inf'), 'Seliana': float('inf')}
+source = 'Super Source'
+sink = 'Elder's Recess'
+Expected Output: 9 (5 through Coral Highlands + 4 through Rotten Vale)
+
+# Test Case 4: Supply Chain Optimization
+Input:
+territory = {
+    'Base Camp': {'Ancient Forest': 15, 'Wildspire Waste': 10},
+    'Ancient Forest': {'Coral Highlands': 12, 'Rotten Vale': 8},
+    'Wildspire Waste': {'Rotten Vale': 7},
+    'Coral Highlands': {'Elder's Recess': 10},
+    'Rotten Vale': {'Elder's Recess': 9},
+    'Elder's Recess': {}
+}
+source = 'Base Camp'
+sink = 'Elder's Recess'
+Expected Output: 19 (10 through Coral Highlands + 9 through Rotten Vale)
+
+# Test Case 5: Emergency Resource Distribution
+Input:
+territory = {
+    'Emergency Camp': {'Ancient Forest': 20, 'Wildspire Waste': 15},
+    'Ancient Forest': {'Coral Highlands': 18},
+    'Wildspire Waste': {'Rotten Vale': 12},
+    'Coral Highlands': {'Elder's Recess': 15},
+    'Rotten Vale': {'Elder's Recess': 10},
+    'Elder's Recess': {}
+}
+source = 'Emergency Camp'
+sink = 'Elder's Recess'
+Expected Output: 25 (15 through Coral Highlands + 10 through Rotten Vale)
+
+# Monster Hunter Tip:
+# Like optimizing your supply lines to ensure maximum resources reach your hunting grounds!
+# Use Network Flow to:
+# 1. Plan efficient resource distribution between territories
+# 2. Find bottlenecks in your supply chain
+# 3. Optimize emergency resource delivery
+# 4. Balance multiple supply routes
+# 5. Maximize resource delivery to critical hunting grounds`,
+  ],
 ]);

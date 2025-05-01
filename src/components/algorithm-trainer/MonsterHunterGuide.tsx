@@ -793,6 +793,25 @@ export const monsterHunterExplanations: Partial<
       "Consider multiple paths - like having backup routes when critical points are blocked",
     ],
   },
+  "Network Flow": {
+    title: "Monster Territory Resource Distribution",
+    description:
+      "Like optimizing the flow of resources through a network of monster territories, Network Flow helps us find the maximum amount of resources that can be transported from a source to a destination while respecting capacity constraints.",
+    example:
+      "Imagine you're managing resources between different hunting grounds. Each territory has a limited capacity for transporting materials, and you need to find the most efficient way to get resources from your base camp to the Elder's Recess. Network Flow helps you calculate the maximum amount of resources that can be transported through this network of territories.",
+    tips: [
+      "Identify source and sink - like determining where resources start and where they need to go",
+      "Consider capacity constraints - similar to respecting the carrying capacity of each territory",
+      "Find augmenting paths - like discovering new routes to increase resource flow",
+      "Use residual networks - like keeping track of available capacity in each direction",
+      "Balance multiple paths - like distributing resources across different routes",
+      "Handle multiple sources - like coordinating resources from different base camps",
+      "Plan for bottlenecks - like identifying and addressing territory capacity limits",
+      "Optimize emergency routes - like having backup paths for critical resource delivery",
+      "Monitor flow efficiency - like tracking how well resources are being distributed",
+      "Consider dynamic changes - like adapting to changing territory conditions",
+    ],
+  },
 };
 
 export function MonsterHunterGuide({
