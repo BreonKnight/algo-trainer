@@ -3,39 +3,87 @@ import { PatternKey } from "./types";
 export const monsterHunterPatternsExtended = new Map<PatternKey, string>([
   [
     "Binary Search" as PatternKey,
-    `def monster_hunter_binary_search(material_list, target_material):
+    `def monster_hunter_binary_search(territories, target_monster):
     """
-    Search for a specific material in a sorted material list.
+    Search for a monster in a sorted list of territories using binary search.
     Time Complexity: O(log n)
     Space Complexity: O(1)
     
     Monster Hunter Context:
-    - Like searching for a specific material in your organized item box
-    - Each check halves the search area
-    - Similar to narrowing down material locations in zones
+    - Territories are sorted by monster difficulty level
+    - Each territory has a unique monster
+    - Need to find the monster's territory efficiently
+    - Like searching through your Hunter's Notes for a specific monster
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show middle territory selection
+    2. Show monster comparison
+    3. Show search area reduction
+    4. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory search game where you can:
+    - Select different monsters to search for
+    - See the search process step by step
+    - Compare different search strategies
+    - Learn about monster difficulty levels
+    
+    Common Mistakes:
+    - Not checking middle territory first
+    - Searching unsorted territories
+    - Incorrect monster difficulty comparison
+    - Forgetting to update search boundaries
+    
+    Optimization Tips:
+    - Always start in the middle territory
+    - Keep territories sorted by difficulty
+    - Use efficient comparison methods
+    - Consider monster behavior patterns
     
     Example:
-    material_list = ["Anjanath Scale", "Diablos Horn", "Nergigante Gem", "Rathalos Ruby"]
-    target = "Nergigante Gem"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Step 1: Check middle (Diablos Horn)
-    - Target is after middle, search right half
+    Step 1: Start in middle territory (Coral Highlands)
+    - Current monster: Tobi-Kadachi
+    - Found target! Return "Coral Highlands"
     
-    Step 2: Check middle of right half (Nergigante Gem)
-    - Found target!
+    Example 2: Finding Nergigante
+    Step 1: Middle territory (Coral Highlands)
+    - Tobi-Kadachi < Nergigante, search right
+    Step 2: Middle of right half (Elder's Recess)
+    - Found Nergigante! Return "Elder's Recess"
+    
+    Example 3: Finding non-existent monster
+    Step 1: Middle territory
+    Step 2: Search appropriate half
+    Step 3: Continue until search space empty
+    Return "Monster not found in any territory"
     """
-    left, right = 0, len(material_list) - 1
+    left = 0
+    right = len(territories) - 1
     
     while left <= right:
         mid = (left + right) // 2
-        if material_list[mid] == target_material:
-            return mid  # Material found!
-        elif material_list[mid] < target_material:
-            left = mid + 1  # Search right half
+        current_monster = territories[mid]["monster"]
+        
+        if current_monster == target_monster:
+            return territories[mid]["name"]  # Found the territory!
+        elif current_monster < target_monster:
+            left = mid + 1  # Search higher difficulty territories
         else:
-            right = mid - 1  # Search left half
+            right = mid - 1  # Search lower difficulty territories
     
-    return -1  # Material not found`,
+    return "Monster not found in any territory"`,
   ],
 
   [

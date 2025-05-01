@@ -385,31 +385,81 @@ def monster_hunter_merge(left, right):
 
   [
     "Linear Search" as PatternKey,
-    `def monster_hunter_linear_search(material_list, target_material):
+    `def monster_hunter_linear_search(territories, target_monster):
     """
-    Search for a specific material in an unsorted list.
+    Search for a monster in a list of territories using linear search.
     Time: O(n)
     Space: O(1)
     
     Monster Hunter Context:
-    - Like searching for a material in your inventory
-    - Check each material one by one
-    - Return position if found
+    - Like searching for a monster in an unexplored territory
+    - Check each area one by one
+    - Useful when territories are not sorted
+    - Similar to exploring a new region for the first time
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show territory exploration order
+    2. Show monster comparison at each step
+    3. Show territory highlight when found
+    4. Show completion when all territories checked
+    
+    Interactive Elements:
+    Try it: Interactive territory exploration game where you can:
+    - Select different monsters to search for
+    - See the exploration process step by step
+    - Compare different exploration strategies
+    - Learn about monster habitats
+    
+    Common Mistakes:
+    - Not checking all territories
+    - Stopping search too early
+    - Incorrect monster identification
+    - Forgetting to record explored territories
+    
+    Optimization Tips:
+    - Keep track of explored territories
+    - Use efficient monster identification
+    - Consider monster behavior patterns
+    - Use appropriate search patterns for different terrains
     
     Example:
-    materials = ["Rathalos Scale", "Monster Bone", "Dragon Gem", "Rathalos Ruby"]
-    target = "Dragon Gem"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Process:
-    1. Check first material
-    2. If not found, check next
-    3. Continue until found or end of list
+    Step 1: Check Ancient Forest
+    - Current monster: Great Jagras
+    - Not found, continue searching
+    
+    Step 2: Check Wildspire Waste
+    - Current monster: Barroth
+    - Not found, continue searching
+    
+    Step 3: Check Coral Highlands
+    - Current monster: Tobi-Kadachi
+    - Found target! Return "Coral Highlands"
+    
+    Example 2: Finding non-existent monster
+    Step 1: Check Ancient Forest
+    Step 2: Check Wildspire Waste
+    Step 3: Check Coral Highlands
+    Step 4: Check Rotten Vale
+    Step 5: Check Elder's Recess
+    Return "Monster not found in any territory"
     """
-    for i, material in enumerate(material_list):
-        if material == target_material:
-            return i
+    for territory in territories:
+        if territory["monster"] == target_monster:
+            return territory["name"]  # Found the territory!
     
-    return -1  # Material not found`,
+    return "Monster not found in any territory"`,
   ],
 
   [
@@ -1935,153 +1985,330 @@ def monster_hunter_merge(left, right):
 
   [
     "Jump Search" as PatternKey,
-    `def monster_hunter_jump_search(monster_list, target):
+    `def monster_hunter_jump_search(territories, target_monster):
     """
-    Search for monster in sorted list using Jump Search.
+    Search for a monster in a sorted list of territories using Jump Search.
     Time: O(√n)
     Space: O(1)
     
     Monster Hunter Context:
-    - Like searching for a specific monster in a territory
-    - List is sorted by monster strength
-    - Jump through list in fixed steps
+    - Like searching for a monster in a large territory
+    - Territories are sorted by monster difficulty
+    - Jump through territories in fixed steps
+    - Similar to scouting a large area in sections
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show initial jump size calculation
+    2. Show territory jumps with step size
+    3. Show block identification
+    4. Show linear search within block
+    5. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory scouting game where you can:
+    - Select different monsters to search for
+    - See the jump search process step by step
+    - Adjust jump size and see its impact
+    - Learn about territory organization
+    
+    Common Mistakes:
+    - Incorrect jump size calculation
+    - Not checking block boundaries
+    - Skipping territories during jumps
+    - Forgetting to search within block
+    
+    Optimization Tips:
+    - Choose optimal jump size based on territory count
+    - Keep track of previous jump position
+    - Use efficient monster identification
+    - Consider territory characteristics
     
     Example:
-    monsters = ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
-    target = "Nergigante"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Process:
-    1. Calculate jump size
-    2. Jump through list
-    3. Linear search in block
+    Step 1: Calculate jump size (√5 ≈ 2)
+    Step 2: Jump to territory 2 (Coral Highlands)
+    - Current monster: Tobi-Kadachi
+    - Found target! Return "Coral Highlands"
+    
+    Example 2: Finding Nergigante
+    Step 1: Jump size = 2
+    Step 2: Jump to territory 2 (Coral Highlands)
+    - Tobi-Kadachi < Nergigante, continue jumping
+    Step 3: Jump to territory 4 (Elder's Recess)
+    - Found Nergigante! Return "Elder's Recess"
     """
-    n = len(monster_list)
+    n = len(territories)
     step = int(math.sqrt(n))
     prev = 0
     
     # Find the block where target might be
-    while monster_list[min(step, n) - 1] < target:
+    while prev < n and territories[prev]["monster"] < target_monster:
         prev = step
         step += int(math.sqrt(n))
         if prev >= n:
-            return -1
+            return "Monster not found in any territory"
     
     # Linear search in the block
-    while monster_list[prev] < target:
+    while territories[prev]["monster"] < target_monster:
         prev += 1
         if prev == min(step, n):
-            return -1
+            return "Monster not found in any territory"
     
-    if monster_list[prev] == target:
-        return prev
-    return -1`,
+    if territories[prev]["monster"] == target_monster:
+        return territories[prev]["name"]
+    return "Monster not found in any territory"`,
   ],
 
   [
     "Exponential Search" as PatternKey,
-    `def monster_hunter_exponential_search(monster_list, target):
+    `def monster_hunter_exponential_search(territories, target_monster):
     """
-    Search for monster in unbounded list using Exponential Search.
+    Search for a monster in a sorted list of territories using Exponential Search.
     Time: O(log i) where i is target position
     Space: O(1)
     
     Monster Hunter Context:
     - Like searching for a monster in an unknown territory
-    - List size is unknown
+    - Territories are sorted by monster difficulty
     - Double search range until target is found
+    - Similar to expanding search radius in unknown areas
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show initial range (1 territory)
+    2. Show range doubling process
+    3. Show binary search within range
+    4. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory exploration game where you can:
+    - Select different monsters to search for
+    - See the exponential search process step by step
+    - Watch the search range expand
+    - Learn about territory discovery
+    
+    Common Mistakes:
+    - Not checking first territory
+    - Incorrect range doubling
+    - Forgetting to update search boundaries
+    - Not handling edge cases
+    
+    Optimization Tips:
+    - Start with small range
+    - Double range efficiently
+    - Use binary search within range
+    - Consider territory characteristics
     
     Example:
-    monsters = ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
-    target = "Nergigante"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Process:
-    1. Find range containing target
-    2. Perform binary search in range
+    Step 1: Check first territory (Ancient Forest)
+    - Great Jagras < Tobi-Kadachi, double range
+    Step 2: Range = 2 territories
+    - Check territory 2 (Wildspire Waste)
+    - Barroth < Tobi-Kadachi, double range
+    Step 3: Range = 4 territories
+    - Binary search in range [0, 3]
+    - Found Tobi-Kadachi in Coral Highlands!
+    
+    Example 2: Finding non-existent monster
+    Step 1: Check first territory
+    Step 2: Double range until covering all territories
+    Step 3: Binary search in full range
+    Return "Monster not found in any territory"
     """
-    if monster_list[0] == target:
-        return 0
+    if territories[0]["monster"] == target_monster:
+        return territories[0]["name"]
     
     i = 1
-    while i < len(monster_list) and monster_list[i] <= target:
+    while i < len(territories) and territories[i]["monster"] <= target_monster:
         i *= 2
     
     # Binary search in the found range
     left = i // 2
-    right = min(i, len(monster_list) - 1)
+    right = min(i, len(territories) - 1)
     
     while left <= right:
         mid = (left + right) // 2
-        if monster_list[mid] == target:
-            return mid
-        elif monster_list[mid] < target:
+        if territories[mid]["monster"] == target_monster:
+            return territories[mid]["name"]
+        elif territories[mid]["monster"] < target_monster:
             left = mid + 1
         else:
             right = mid - 1
     
-    return -1`,
+    return "Monster not found in any territory"`,
   ],
 
   [
     "Interpolation Search" as PatternKey,
-    `def monster_hunter_interpolation_search(monster_list, target):
+    `def monster_hunter_interpolation_search(territories, target_monster):
     """
-    Search for monster in uniformly distributed list using Interpolation Search.
+    Search for a monster in a sorted list of territories using Interpolation Search.
     Time: O(log log n) average, O(n) worst case
     Space: O(1)
     
     Monster Hunter Context:
-    - Like searching for a monster in a territory
-    - List is sorted and uniformly distributed
-    - Estimate target position based on value
+    - Like searching for a monster in a territory with known difficulty distribution
+    - Territories are sorted by monster difficulty
+    - Estimate target position based on difficulty values
+    - Similar to predicting monster location based on terrain difficulty
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters and difficulty levels
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show difficulty value calculation
+    2. Show probe position estimation
+    3. Show territory comparison
+    4. Show search range adjustment
+    5. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory prediction game where you can:
+    - Select different monsters to search for
+    - See the interpolation search process step by step
+    - Watch the probe position estimation
+    - Learn about territory difficulty patterns
+    
+    Common Mistakes:
+    - Not handling non-uniform difficulty distribution
+    - Incorrect probe position calculation
+    - Not updating search boundaries correctly
+    - Forgetting to check edge cases
+    
+    Optimization Tips:
+    - Use accurate difficulty values
+    - Consider territory characteristics
+    - Handle non-uniform distributions
+    - Use efficient comparison methods
     
     Example:
-    monsters = ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
-    target = "Nergigante"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Process:
-    1. Calculate probe position
-    2. Compare with target
-    3. Adjust search range
+    Step 1: Calculate probe position
+    - Target difficulty: 3
+    - Range: [1, 5]
+    - Position = 0 + ((3-1)/(5-1)) * (4-0) ≈ 2
+    Step 2: Check territory 2 (Coral Highlands)
+    - Found Tobi-Kadachi! Return "Coral Highlands"
+    
+    Example 2: Finding Nergigante
+    Step 1: Calculate probe position
+    - Target difficulty: 5
+    - Position = 0 + ((5-1)/(5-1)) * (4-0) = 4
+    Step 2: Check territory 4 (Elder's Recess)
+    - Found Nergigante! Return "Elder's Recess"
     """
     left = 0
-    right = len(monster_list) - 1
+    right = len(territories) - 1
     
-    while left <= right and monster_list[left] <= target <= monster_list[right]:
+    while left <= right and territories[left]["difficulty"] <= target_monster <= territories[right]["difficulty"]:
         # Calculate probe position
-        pos = left + ((right - left) // (ord(monster_list[right][0]) - ord(monster_list[left][0]))) * \
-              (ord(target[0]) - ord(monster_list[left][0]))
+        pos = left + ((target_monster - territories[left]["difficulty"]) * (right - left)) // \
+              (territories[right]["difficulty"] - territories[left]["difficulty"])
         
-        if monster_list[pos] == target:
-            return pos
-        elif monster_list[pos] < target:
+        if territories[pos]["monster"] == target_monster:
+            return territories[pos]["name"]
+        elif territories[pos]["monster"] < target_monster:
             left = pos + 1
         else:
             right = pos - 1
     
-    return -1`,
+    return "Monster not found in any territory"`,
   ],
 
   [
     "Fibonacci Search" as PatternKey,
-    `def monster_hunter_fibonacci_search(monster_list, target):
+    `def monster_hunter_fibonacci_search(territories, target_monster):
     """
-    Search for monster in sorted list using Fibonacci Search.
+    Search for a monster in a sorted list of territories using Fibonacci Search.
     Time: O(log n)
     Space: O(1)
     
     Monster Hunter Context:
-    - Like searching for a monster in a territory
-    - List is sorted
-    - Divide list using Fibonacci numbers
+    - Like searching for a monster in a territory using golden ratio
+    - Territories are sorted by monster difficulty
+    - Divide search space using Fibonacci numbers
+    - Similar to following natural patterns in monster distribution
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show Fibonacci number generation
+    2. Show search space division
+    3. Show territory comparison
+    4. Show search range adjustment
+    5. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory exploration game where you can:
+    - Select different monsters to search for
+    - See the Fibonacci search process step by step
+    - Watch the golden ratio division
+    - Learn about natural search patterns
+    
+    Common Mistakes:
+    - Incorrect Fibonacci number calculation
+    - Not handling edge cases
+    - Incorrect search space division
+    - Forgetting to update Fibonacci numbers
+    
+    Optimization Tips:
+    - Use efficient Fibonacci calculation
+    - Consider territory characteristics
+    - Handle edge cases properly
+    - Use appropriate comparison methods
     
     Example:
-    monsters = ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
-    target = "Nergigante"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Process:
-    1. Initialize Fibonacci numbers
-    2. Find smallest Fibonacci number >= n
-    3. Compare and update search range
+    Step 1: Generate Fibonacci numbers up to 5
+    - Fib = [0, 1, 1, 2, 3, 5]
+    Step 2: Find smallest Fib >= 5 (5)
+    Step 3: Compare with territory at offset + Fib[4] (3)
+    - Found Tobi-Kadachi! Return "Coral Highlands"
+    
+    Example 2: Finding Nergigante
+    Step 1: Generate Fibonacci numbers
+    Step 2: Find appropriate Fibonacci number
+    Step 3: Compare and adjust search space
+    Step 4: Found Nergigante in Elder's Recess!
     """
     def fibonacci_numbers(n):
         fib = [0, 1]
@@ -2089,7 +2316,7 @@ def monster_hunter_merge(left, right):
             fib.append(fib[-1] + fib[-2])
         return fib
     
-    n = len(monster_list)
+    n = len(territories)
     fib = fibonacci_numbers(n)
     
     offset = -1
@@ -2098,18 +2325,18 @@ def monster_hunter_merge(left, right):
     while k > 1:
         i = min(offset + fib[k-2], n-1)
         
-        if monster_list[i] < target:
+        if territories[i]["monster"] < target_monster:
             k -= 1
             offset = i
-        elif monster_list[i] > target:
+        elif territories[i]["monster"] > target_monster:
             k -= 2
         else:
-            return i
+            return territories[i]["name"]
     
-    if k == 1 and monster_list[offset + 1] == target:
-        return offset + 1
+    if k == 1 and territories[offset + 1]["monster"] == target_monster:
+        return territories[offset + 1]["name"]
     
-    return -1`,
+    return "Monster not found in any territory"`,
   ],
 ]);
 

@@ -74,7 +74,7 @@ const algorithmCategories = {
   ],
   "String Algorithms": [
     "Rabin-Karp",
-    "Knuth-Morris-Pratt",
+    "KMP Algorithm",
     "Manacher's Algorithm",
     "Z-Algorithm",
   ],

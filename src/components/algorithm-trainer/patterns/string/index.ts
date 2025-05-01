@@ -7,8 +7,8 @@ import { zalgorithmPattern } from "./z-algorithm";
 
 export const stringPatterns: Partial<Record<string, AlgorithmPattern>> = {
   String: stringPattern,
-  "Z-Algorithm": zalgorithmPattern,
+  "Z Algorithm": zalgorithmPattern,
   "Manacher's Algorithm": manachers_algorithmPattern,
-  "Knuth-Morris-Pratt": knuthmorrisprattPattern,
+  "KMP Algorithm": knuthmorrisprattPattern,
   "Rabin-Karp": rabinkarpPattern,
 };

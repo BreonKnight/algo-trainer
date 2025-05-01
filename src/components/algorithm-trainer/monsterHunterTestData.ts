@@ -100,14 +100,14 @@ Expected Output: 2
   [
     "Binary Search on Answer",
     `# Monster Hunter Binary Search on Answer Challenge
-# You are searching for the minimum number of hunts needed to collect enough materials!
+# You are trying to find the minimum rarity level needed to craft a weapon!
 
-# Test Case 1: Minimum Hunts
-Input: [2, 3, 5, 7], Target: 10
-Expected Output: 2
+# Test Case 1: Basic Search
+Input: min_rarity = 1, max_rarity = 10, target_value = 7
+Expected Output: 7
 
 # Monster Hunter Tip:
-# Like narrowing down the minimum effort needed for your goal!`,
+# Like finding the minimum rarity level needed for a craft!`,
   ],
   [
     "Linear Search",
@@ -313,15 +313,19 @@ Expected Output: [6, 7, 8]
   [
     "Bit Manipulation",
     `# Monster Hunter Bit Manipulation Challenge
-# You are encoding monster status effects!
+# You are tracking monster status effects!
 
 # Test Case 1: Status Effects
-Input: [Poison, Paralysis, Sleep, Stun]
-Encoded: [1, 1, 0, 1]
-Expected Output: 13 (binary: 1101)
+Input: statuses = 0b0000
+Expected Output: {
+    "apply": function to apply status,
+    "remove": function to remove status,
+    "has": function to check status,
+    "toggle": function to toggle status
+}
 
 # Monster Hunter Tip:
-# Like efficiently storing multiple status effects in a single value!`,
+# Like efficiently tracking multiple status effects!`,
   ],
   [
     "Topological Sort",
@@ -574,5 +578,650 @@ Expected Output: [1, 2, 5] (monotonically increasing)
 # Monster Hunter Tip:
 # Like maintaining a stack of monsters with increasing threat!`,
   ],
-  // ... rest of the entries remain unchanged ...
+  [
+    "State Compression DP",
+    `# Monster Hunter State Compression DP Challenge
+# You are optimizing your equipment loadout!
+
+# Test Case 1: Equipment Optimization
+Input: slots = 3, items = [
+    {"name": "Rathalos Helm", "defense": 50, "weight": 2},
+    {"name": "Nergigante Mail", "defense": 60, "weight": 3},
+    {"name": "Teostra Greaves", "defense": 55, "weight": 2}
+]
+Expected Output: 165
+
+# Monster Hunter Tip:
+# Like finding the best equipment combination!`,
+  ],
+  [
+    "Digit DP",
+    `# Monster Hunter Digit DP Challenge
+# You are counting valid material combinations!
+
+# Test Case 1: Material Combinations
+Input: max_rarity = 5, target_sum = 7
+Expected Output: 15
+
+# Monster Hunter Tip:
+# Like counting all possible material combinations!`,
+  ],
+  [
+    "Tree DP",
+    `# Monster Hunter Tree DP Challenge
+# You are planning optimal hunting routes!
+
+# Test Case 1: Territory Optimization
+Input: tree = {
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Wildspire Waste", "Coral Highlands"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    }
+}
+Expected Output: 180
+
+# Monster Hunter Tip:
+# Like finding the most rewarding hunting path!`,
+  ],
+  [
+    "Probability DP",
+    `# Monster Hunter Probability DP Challenge
+# You are calculating survival chances!
+
+# Test Case 1: Survival Probability
+Input: attacks = [
+    {"damage": 30, "probability": 0.3},
+    {"damage": 50, "probability": 0.1},
+    {"damage": 20, "probability": 0.6}
+], max_turns = 3, health = 100
+Expected Output: 0.729
+
+# Monster Hunter Tip:
+# Like calculating your chances of survival!`,
+  ],
+  [
+    "Extended Euclidean" as PatternKey,
+    `# Monster Hunter Extended Euclidean Challenge
+# You are finding optimal resource distribution between hunters!
+
+# Test Case 1: Resource Distribution
+Input: a = 30, b = 45
+Expected Output: (15, -1, 1)  # GCD, x, y coefficients
+
+# Monster Hunter Tip:
+# Like finding the best way to share materials between hunters!`,
+  ],
+  [
+    "Chinese Remainder Theorem" as PatternKey,
+    `# Monster Hunter Chinese Remainder Theorem Challenge
+# You are finding when multiple monster spawns align!
+
+# Test Case 1: Monster Spawn Alignment
+Input: remainders = [2, 3, 2], moduli = [3, 4, 5]
+Expected Output: 47  # Days until all monsters spawn together
+
+# Monster Hunter Tip:
+# Like predicting when all your target monsters will appear!`,
+  ],
+  [
+    "Sieve of Eratosthenes" as PatternKey,
+    `# Monster Hunter Sieve Challenge
+# You are finding all special rarity levels!
+
+# Test Case 1: Prime Rarity Levels
+Input: max_rarity = 20
+Expected Output: [2, 3, 5, 7, 11, 13, 17, 19]
+
+# Monster Hunter Tip:
+# Like identifying all special material rarity levels!`,
+  ],
+  [
+    "Heavy Light Decomposition" as PatternKey,
+    `# Monster Hunter Heavy Light Decomposition Challenge
+# You are organizing monster territories into efficient paths!
+
+# Test Case 1: Territory Decomposition
+Input: tree = {
+    "Ancient Forest": {
+        "children": ["Wildspire Waste", "Coral Highlands"],
+        "size": 3
+    },
+    "Wildspire Waste": {
+        "children": ["Rotten Vale"],
+        "size": 2
+    }
+}
+Expected Output: [
+    ["Ancient Forest", "Wildspire Waste", "Rotten Vale"],
+    ["Coral Highlands"]
+]
+
+# Monster Hunter Tip:
+# Like organizing hunting routes for maximum efficiency!`,
+  ],
+  [
+    "LCA" as PatternKey,
+    `# Monster Hunter LCA Challenge
+# You are finding common territory between monsters!
+
+# Test Case 1: Territory Intersection
+Input: tree = {
+    "Ancient Forest": {
+        "children": ["Wildspire Waste", "Coral Highlands"],
+        "depth": 0
+    },
+    "Wildspire Waste": {
+        "children": ["Rotten Vale"],
+        "depth": 1
+    }
+}, monster1 = "Rotten Vale", monster2 = "Coral Highlands"
+Expected Output: "Ancient Forest"
+
+# Monster Hunter Tip:
+# Like finding where two monster paths intersect!`,
+  ],
+  [
+    "Suffix Tree" as PatternKey,
+    `# Monster Hunter Suffix Tree Challenge
+# You are building a tree of monster attack patterns!
+
+# Test Case 1: Attack Pattern Tree
+Input: "RARFRARF"  # R=Roar, A=Attack, F=Fly
+Expected Output: Tree structure with all suffixes
+
+# Monster Hunter Tip:
+# Like organizing all possible attack sequences!`,
+  ],
+  [
+    "Suffix Array" as PatternKey,
+    `# Monster Hunter Suffix Array Challenge
+# You are organizing monster attack patterns!
+
+# Test Case 1: Attack Pattern Array
+Input: "RARFRARF"  # R=Roar, A=Attack, F=Fly
+Expected Output: [7, 5, 3, 1, 6, 4, 2, 0]
+
+# Monster Hunter Tip:
+# Like creating an index of all attack sequences!`,
+  ],
+  [
+    "B Tree" as PatternKey,
+    `# Monster Hunter B Tree Challenge
+# You are organizing a large material database!
+
+# Test Case 1: Material Organization
+Input: order = 3, materials = ["Rathalos Scale", "Rathalos Wing", "Rathalos Plate", "Rathalos Ruby"]
+Expected Output: Balanced B Tree structure
+
+# Monster Hunter Tip:
+# Like organizing a massive collection of materials!`,
+  ],
+  [
+    "AVL Tree" as PatternKey,
+    `# Monster Hunter AVL Tree Challenge
+# You are maintaining a balanced material collection!
+
+# Test Case 1: Material Balance
+Input: [
+    ("Rathalos Scale", 1),
+    ("Rathalos Wing", 3),
+    ("Rathalos Plate", 5),
+    ("Rathalos Ruby", 7)
+]
+Expected Output: Balanced AVL Tree structure
+
+# Monster Hunter Tip:
+# Like keeping your material collection perfectly organized!`,
+  ],
+  [
+    "Red Black Tree" as PatternKey,
+    `# Monster Hunter Red Black Tree Challenge
+# You are organizing materials with color coding!
+
+# Test Case 1: Color Coded Materials
+Input: [
+    ("Rathalos Scale", 1),
+    ("Rathalos Wing", 3),
+    ("Rathalos Plate", 5),
+    ("Rathalos Ruby", 7)
+]
+Expected Output: Balanced Red Black Tree structure
+
+# Monster Hunter Tip:
+# Like organizing materials with a color-coded system!`,
+  ],
+  [
+    "Fenwick Tree" as PatternKey,
+    `# Monster Hunter Fenwick Tree Challenge
+# You are tracking material counts efficiently!
+
+# Test Case 1: Material Counting
+Input: [2, 1, 1, 3, 2, 3, 4, 5, 6, 7, 8, 9]
+Query: Sum of materials 1 to 6
+Expected Output: 18
+
+# Monster Hunter Tip:
+# Like keeping track of your material inventory!`,
+  ],
+  [
+    "Segment Tree" as PatternKey,
+    `# Monster Hunter Segment Tree Challenge
+# You are tracking material ranges!
+
+# Test Case 1: Range Queries
+Input: [1, 3, 5, 7, 9, 11]
+Query: Sum of materials 2 to 5
+Expected Output: 32
+
+# Monster Hunter Tip:
+# Like tracking material quantities in different ranges!`,
+  ],
+  [
+    "Matrix Operations" as PatternKey,
+    `# Monster Hunter Matrix Operations Challenge
+# You are optimizing material transformations!
+
+# Test Case 1: Matrix Chain Multiplication
+Input: [30, 35, 15, 5, 10, 20, 25]
+Expected Output: 15125
+
+# Monster Hunter Tip:
+# Like finding the most efficient way to combine monster materials!`,
+  ],
+  [
+    "Matrix Operations" as PatternKey,
+    `# Monster Hunter Matrix Operations Challenge
+# You are calculating monster evolution over time!
+
+# Test Case 1: Matrix Exponentiation
+Input: [[1, 1], [1, 0]], 5
+Expected Output: [[8, 5], [5, 3]]
+
+# Monster Hunter Tip:
+# Like predicting how a monster will evolve over multiple generations!`,
+  ],
+  [
+    "Matrix Traversal" as PatternKey,
+    `# Monster Hunter Matrix Traversal Challenge
+# You are exploring a monster's territory grid!
+
+# Test Case 1: Territory Exploration
+Input: [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+Expected Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
+
+# Monster Hunter Tip:
+# Like systematically exploring every area of a monster's territory!`,
+  ],
+  [
+    "Matrix Traversal Recursive" as PatternKey,
+    `# Monster Hunter Matrix Traversal Recursive Challenge
+# You are exploring a monster's territory using recursive paths!
+
+# Test Case 1: Recursive Territory Exploration
+Input: [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+Expected Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
+
+# Monster Hunter Tip:
+# Like exploring a territory by following each path to its end before backtracking!`,
+  ],
+  [
+    "Matrix Spiral Traversal" as PatternKey,
+    `# Monster Hunter Matrix Spiral Traversal Challenge
+# You are exploring a monster's territory in a spiral pattern!
+
+# Test Case 1: Spiral Territory Exploration
+Input: [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+Expected Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
+
+# Monster Hunter Tip:
+# Like spiraling around a monster's territory to ensure no area is missed!`,
+  ],
+  [
+    "Matrix Spiral Recursive" as PatternKey,
+    `# Monster Hunter Matrix Spiral Recursive Challenge
+# You are exploring a monster's territory in a recursive spiral pattern!
+
+# Test Case 1: Recursive Spiral Exploration
+Input: [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+Expected Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
+
+# Monster Hunter Tip:
+# Like recursively spiraling through a monster's territory, layer by layer!`,
+  ],
+  [
+    "Prefix Sum",
+    `# Monster Hunter Prefix Sum Challenge
+# You are tracking cumulative damage on a monster!
+
+# Test Case 1: Basic Damage Tracking
+Input: [150, 200, 300, 100, 250]  # Damage per hit
+Expected Output: [150, 350, 650, 750, 1000]  # Cumulative damage
+
+# Test Case 2: Range Query
+Input: [150, 200, 300, 100, 250]
+Query: Total damage between hits 2-4
+Expected Output: 600 (350 + 300 + 100)
+
+# Monster Hunter Tip:
+# Like tracking the total damage dealt to a monster over time!`,
+  ],
+  [
+    "Ternary Search",
+    `# Monster Hunter Ternary Search Challenge
+# You are finding the optimal weapon sharpness level!
+
+# Test Case 1: Sharpness Optimization
+Input: [10, 20, 30, 40, 50]  # Sharpness levels
+Expected Output: 30  # Optimal sharpness level
+
+# Monster Hunter Tip:
+# Like finding the perfect balance between sharpness and durability!`,
+  ],
+  [
+    "Jump Search",
+    `# Monster Hunter Jump Search Challenge
+# You are searching for a monster in a large territory!
+
+# Test Case 1: Monster Location
+Input: ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
+Target: "Nergigante"
+Expected Output: 2
+
+# Monster Hunter Tip:
+# Like jumping through territory sections to find a monster!`,
+  ],
+  [
+    "Exponential Search",
+    `# Monster Hunter Exponential Search Challenge
+# You are searching for a monster in an unknown territory!
+
+# Test Case 1: Monster Location
+Input: ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
+Target: "Nergigante"
+Expected Output: 2
+
+# Monster Hunter Tip:
+# Like expanding your search area exponentially until you find the monster!`,
+  ],
+  [
+    "Interpolation Search",
+    `# Monster Hunter Interpolation Search Challenge
+# You are searching for a monster in a uniformly distributed territory!
+
+# Test Case 1: Monster Location
+Input: ["Anjanath", "Diablos", "Nergigante", "Rathalos", "Teostra"]
+Target: "Nergigante"
+Expected Output: 2
+
+# Monster Hunter Tip:
+# Like estimating where a monster might be based on known patterns!`,
+  ],
+  [
+    "Rabin-Karp",
+    `# Monster Hunter Rabin-Karp Challenge
+# You are searching for monster track patterns!
+
+# Test Case 1: Track Pattern Search
+Input: "RAFRRAFRRAFR"  # R=Roar, A=Attack, F=Fly
+Pattern: "RAFR"
+Expected Output: [0, 4, 8]  # Positions where pattern occurs
+
+# Monster Hunter Tip:
+# Like quickly finding specific monster behavior patterns!`,
+  ],
+  [
+    "KMP Algorithm",
+    `# Monster Hunter KMP Challenge
+# You are matching complex monster attack patterns!
+
+# Test Case 1: Attack Pattern Matching
+Input: "RAFRRAFRRAFR"  # R=Roar, A=Attack, F=Fly
+Pattern: "RAFR"
+Expected Output: [0, 4, 8]  # Positions where pattern occurs
+
+# Monster Hunter Tip:
+# Like efficiently finding attack patterns without backtracking!`,
+  ],
+  [
+    "Manacher's Algorithm",
+    `# Monster Hunter Manacher's Challenge
+# You are finding symmetric monster patterns!
+
+# Test Case 1: Symmetric Pattern
+Input: "RAFARAFAR"  # R=Roar, A=Attack, F=Fly
+Expected Output: "RAFARAFAR"  # Longest symmetric pattern
+
+# Monster Hunter Tip:
+# Like identifying patterns that read the same forwards and backwards!`,
+  ],
+  [
+    "Matrix Traversal",
+    `# Monster Hunter Matrix Traversal Challenge
+# You are exploring hunting grounds systematically!
+
+# Test Case 1: Territory Exploration
+Input: [
+  ['F', 'F', 'C', 'M'],  # F=Forest, C=Cave, M=Mountain
+  ['F', 'C', 'C', 'M'],
+  ['C', 'C', 'M', 'M']
+]
+Expected Output: All zones visited in order
+
+# Monster Hunter Tip:
+# Like systematically exploring every area of a territory!`,
+  ],
+  [
+    "Matrix Spiral Traversal",
+    `# Monster Hunter Matrix Spiral Challenge
+# You are exploring hunting grounds in a spiral pattern!
+
+# Test Case 1: Spiral Exploration
+Input: [
+  ['F', 'F', 'C', 'M'],  # F=Forest, C=Cave, M=Mountain
+  ['F', 'C', 'C', 'M'],
+  ['C', 'C', 'M', 'M']
+]
+Expected Output: All zones visited in spiral order
+
+# Monster Hunter Tip:
+# Like spiraling around a territory to ensure no area is missed!`,
+  ],
+  [
+    "Rotate Matrix",
+    `# Monster Hunter Rotate Matrix Challenge
+# You are rotating your hunting ground map to find optimal attack angles!
+
+# Test Case 1: 90 Degree Rotation
+Input: [
+  ['F', 'F', 'C', 'M'],  # F=Forest, C=Cave, M=Mountain
+  ['F', 'C', 'C', 'M'],
+  ['C', 'C', 'M', 'M']
+]
+Expected Output: [
+  ['C', 'F', 'F'],
+  ['C', 'C', 'F'],
+  ['M', 'C', 'C'],
+  ['M', 'M', 'M']
+]
+
+# Test Case 2: 180 Degree Rotation
+Input: [
+  ['F', 'F', 'C', 'M'],
+  ['F', 'C', 'C', 'M'],
+  ['C', 'C', 'M', 'M']
+]
+Expected Output: [
+  ['M', 'M', 'M', 'C'],
+  ['M', 'C', 'C', 'F'],
+  ['M', 'C', 'F', 'F']
+]
+
+# Monster Hunter Tip:
+# Like rotating your map to find the best approach angle for attacking a monster!`,
+  ],
+  [
+    "A* Search" as PatternKey,
+    `# Monster Hunter A* Search Challenge
+# You are finding the optimal path through a complex hunting ground!
+
+# Test Case 1: Basic Path Finding
+Input:
+Map = [
+  ['S', 'F', 'F', 'M'],  # S=Start, F=Forest, M=Mountain, G=Goal
+  ['F', 'M', 'F', 'F'],
+  ['F', 'F', 'M', 'F'],
+  ['M', 'F', 'F', 'G']
+]
+Terrain Costs = {
+  'F': 1,   # Forest (easy to traverse)
+  'M': 3    # Mountain (difficult to traverse)
+}
+
+Expected Output: [(0,0), (0,1), (1,2), (2,2), (3,2), (3,3)]  # Optimal path coordinates
+
+# Test Case 2: Multiple Paths
+Input:
+Map = [
+  ['S', 'F', 'F', 'F'],
+  ['M', 'M', 'F', 'F'],
+  ['F', 'F', 'F', 'G']
+]
+Terrain Costs = {
+  'F': 1,
+  'M': 5
+}
+
+Expected Output: [(0,0), (0,1), (0,2), (0,3), (1,3), (2,3)]  # Path avoiding mountains
+
+# Test Case 3: Complex Hunting Grounds
+Input:
+Hunting Grounds = {
+    "Base Camp": [("Ancient Forest", 2), ("Wildspire Waste", 3)],
+    "Ancient Forest": [("Coral Highlands", 4)],
+    "Wildspire Waste": [("Rotten Vale", 3)],
+    "Coral Highlands": [("Elder's Recess", 5)],
+    "Rotten Vale": [("Elder's Recess", 4)]
+}
+Start = "Base Camp"
+Target = "Elder's Recess"
+
+Expected Output: ["Base Camp", "Ancient Forest", "Coral Highlands", "Elder's Recess"]
+
+# Monster Hunter Tip:
+# Like finding the most efficient route to a monster, considering terrain difficulty!`,
+  ],
+  [
+    "Bellman-Ford",
+    `# Monster Hunter Bellman-Ford Challenge
+# You are finding the safest paths through monster territories!
+
+# Test Case 1: Basic Path Finding
+Input:
+Territories = ['Base Camp', 'Forest', 'Mountain', 'Nest']
+Paths = [
+  ('Base Camp', 'Forest', 2),    # (from, to, danger_level)
+  ('Forest', 'Mountain', 3),
+  ('Mountain', 'Nest', 1),
+  ('Base Camp', 'Mountain', 6),
+  ('Forest', 'Nest', 5)
+]
+Start = 'Base Camp'
+
+Expected Output: {
+  'Forest': 2,      # Minimum danger to reach Forest
+  'Mountain': 5,    # Minimum danger to reach Mountain
+  'Nest': 6         # Minimum danger to reach Nest
+}
+
+# Test Case 2: Negative Cycles (Dangerous Areas)
+Input:
+Territories = ['Camp', 'Cave', 'Peak', 'Valley']
+Paths = [
+  ('Camp', 'Cave', 4),
+  ('Cave', 'Peak', -2),
+  ('Peak', 'Valley', 3),
+  ('Valley', 'Cave', -6)    # Dangerous cycle!
+]
+Start = 'Camp'
+
+Expected Output: "Unsafe territory detected!"  # Negative cycle warning
+
+# Monster Hunter Tip:
+# Like finding the safest routes through monster territories, even when some areas become more dangerous over time!`,
+  ],
+  [
+    "Strongly Connected Components" as PatternKey,
+    `# Monster Hunter Strongly Connected Components Challenge
+# You are analyzing monster territory connections!
+
+# Test Case 1: Basic Territory Connections
+Input:
+Territories = {
+    "Ancient Forest": ["Wildspire Waste"],
+    "Wildspire Waste": ["Coral Highlands"],
+    "Coral Highlands": ["Ancient Forest", "Elder's Recess"],
+    "Elder's Recess": ["Rotten Vale"],
+    "Rotten Vale": ["Wildspire Waste"]
+}
+
+Expected Output: [
+    ["Ancient Forest", "Wildspire Waste", "Coral Highlands"],
+    ["Elder's Recess"],
+    ["Rotten Vale"]
+]
+
+# Test Case 2: Complex Territory Network
+Input:
+Territories = {
+    "Base Camp": ["Ancient Forest", "Wildspire Waste"],
+    "Ancient Forest": ["Coral Highlands"],
+    "Wildspire Waste": ["Rotten Vale"],
+    "Coral Highlands": ["Elder's Recess"],
+    "Rotten Vale": ["Elder's Recess"],
+    "Elder's Recess": ["Base Camp"]
+}
+
+Expected Output: [
+    ["Base Camp", "Ancient Forest", "Wildspire Waste", "Coral Highlands", "Rotten Vale", "Elder's Recess"]
+]
+
+# Test Case 3: Multiple Independent Territories
+Input:
+Territories = {
+    "Ancient Forest": ["Wildspire Waste"],
+    "Wildspire Waste": ["Ancient Forest"],
+    "Coral Highlands": ["Elder's Recess"],
+    "Elder's Recess": ["Coral Highlands"],
+    "Rotten Vale": []
+}
+
+Expected Output: [
+    ["Ancient Forest", "Wildspire Waste"],
+    ["Coral Highlands", "Elder's Recess"],
+    ["Rotten Vale"]
+]
+
+# Monster Hunter Tip:
+# Like identifying groups of territories where monsters can freely move between any two areas in the group!`,
+  ],
 ]);

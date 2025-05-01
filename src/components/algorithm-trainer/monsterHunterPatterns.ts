@@ -3,6 +3,7 @@ import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended";
 import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2";
 import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3";
 import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4";
+import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
 
 // Add matrix exponentiation pattern
 const matrixExponentiationPattern = new Map<PatternKey, string>([
@@ -52,5 +53,6 @@ export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended2,
   ...monsterHunterPatternsExtended3,
   ...monsterHunterPatternsExtended4,
+  ...monsterHunterPatternsExtended6,
   ...matrixExponentiationPattern,
 ]);
