@@ -1224,4 +1224,162 @@ Expected Output: [
 # Monster Hunter Tip:
 # Like identifying groups of territories where monsters can freely move between any two areas in the group!`,
   ],
+  [
+    "Sieve of Sundaram" as PatternKey,
+    `# Monster Hunter Sieve of Sundaram Challenge
+# You are finding optimal resource gathering points in a territory!
+
+# Test Case 1: Small Territory
+Input: area_size = 10
+Expected Output: [2, 3, 5, 7]
+
+# Test Case 2: Medium Territory
+Input: area_size = 30
+Expected Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+# Test Case 3: Large Territory
+Input: area_size = 50
+Expected Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+
+# Monster Hunter Tip:
+# Like finding the most valuable gathering spots in a territory!`,
+  ],
+  [
+    "Union Find" as PatternKey,
+    `# Monster Hunter Union Find Challenge
+# You are tracking connected monster territories and managing territory connections!
+
+# Test Case 1: Basic Territory Connections
+Input: [
+  ("Ancient Forest", "Wildspire Waste"),
+  ("Wildspire Waste", "Coral Highlands"),
+  ("Rotten Vale", "Elder's Recess")
+]
+Expected Output: {
+  "Ancient Forest": ["Ancient Forest", "Wildspire Waste", "Coral Highlands"],
+  "Rotten Vale": ["Rotten Vale", "Elder's Recess"]
+}
+
+# Test Case 2: Dynamic Territory Connections
+Input: [
+  ("Ancient Forest", "Wildspire Waste"),
+  ("Coral Highlands", "Elder's Recess"),
+  ("Wildspire Waste", "Coral Highlands")
+]
+Expected Output: {
+  "Ancient Forest": ["Ancient Forest", "Wildspire Waste", "Coral Highlands", "Elder's Recess"]
+}
+
+# Test Case 3: Territory Size Tracking
+Input: [
+  ("Ancient Forest", "Wildspire Waste"),
+  ("Coral Highlands", "Elder's Recess"),
+  ("Wildspire Waste", "Coral Highlands")
+]
+Query: Size of territory containing "Ancient Forest"
+Expected Output: 4
+
+# Monster Hunter Tip:
+# Like tracking which monster territories are connected and can be explored together!
+# Use Union Find to efficiently manage territory connections as you discover new paths.
+# This helps in planning efficient hunting routes and understanding monster migration patterns.`,
+  ],
+  [
+    "Miller-Rabin Primality Test" as PatternKey,
+    `# Monster Hunter Miller-Rabin Challenge
+# You are testing if a monster's power level is prime!
+
+# Test Case 1: Prime Power Level
+Input: monster_power = 17, k = 5
+Expected Output: true
+Explanation: 17 is a prime number, so the test should return true
+
+# Test Case 2: Composite Power Level
+Input: monster_power = 15, k = 5
+Expected Output: false
+Explanation: 15 is not a prime number, so the test should return false
+
+# Test Case 3: Small Prime
+Input: monster_power = 2, k = 5
+Expected Output: true
+Explanation: 2 is a prime number, so the test should return true
+
+# Test Case 4: Edge Case
+Input: monster_power = 1, k = 5
+Expected Output: false
+Explanation: 1 is not a prime number, so the test should return false
+
+# Test Case 5: Even Number
+Input: monster_power = 4, k = 5
+Expected Output: false
+Explanation: 4 is not a prime number, so the test should return false
+
+# Monster Hunter Tip:
+# Like testing if a monster's power level is a special prime number!`,
+  ],
+  [
+    "Fast Fourier Transform" as PatternKey,
+    `# Monster Hunter Fast Fourier Transform Challenge
+# You are analyzing monster attack patterns in the frequency domain!
+
+# Test Case 1: Basic Pattern Analysis
+Input: [1, 0, 1, 0, 1, 0, 1, 0]  # Simple repeating attack pattern
+Expected Output: [4, 0, 0, 0, 4, 0, 0, 0]  # Frequency components
+
+# Test Case 2: Complex Pattern Analysis
+Input: [1, 2, 3, 4, 3, 2, 1, 0]  # More complex attack pattern
+Expected Output: Complex frequency components showing pattern structure
+
+# Test Case 3: Real-time Pattern Analysis
+Input: [0.5, 1.0, 0.5, 0.0, -0.5, -1.0, -0.5, 0.0]  # Wave-like attack pattern
+Expected Output: Frequency components showing wave characteristics
+
+# Monster Hunter Tip:
+# Like analyzing monster attack patterns to find their frequency components!
+# This helps you predict when and how a monster will attack based on their pattern's frequency.`,
+  ],
+  [
+    "Graph Articulation Points",
+    `# Monster Hunter Graph Articulation Points Challenge
+# You are finding critical points in monster territory!
+
+# Test Case 1: Basic Territory Analysis
+Input:
+territory = {
+    'Ancient Forest': ['Astera'],
+    'Astera': ['Ancient Forest', 'Wildspire Waste', 'Coral Highlands'],
+    'Wildspire Waste': ['Astera'],
+    'Coral Highlands': ['Astera', 'Rotten Vale'],
+    'Rotten Vale': ['Coral Highlands', 'Elder's Recess'],
+    'Elder's Recess': ['Rotten Vale']
+}
+Expected Output: ['Astera', 'Coral Highlands']
+
+# Test Case 2: Complex Territory Network
+Input:
+territory = {
+    'Base Camp': ['Ancient Forest', 'Wildspire Waste'],
+    'Ancient Forest': ['Base Camp', 'Coral Highlands'],
+    'Wildspire Waste': ['Base Camp', 'Rotten Vale'],
+    'Coral Highlands': ['Ancient Forest', 'Elder's Recess'],
+    'Rotten Vale': ['Wildspire Waste', 'Elder's Recess'],
+    'Elder's Recess': ['Coral Highlands', 'Rotten Vale']
+}
+Expected Output: ['Base Camp', 'Ancient Forest', 'Wildspire Waste', 'Coral Highlands', 'Rotten Vale']
+
+# Test Case 3: Multiple Independent Territories
+Input:
+territory = {
+    'Ancient Forest': ['Wildspire Waste'],
+    'Wildspire Waste': ['Ancient Forest'],
+    'Coral Highlands': ['Elder's Recess'],
+    'Elder's Recess': ['Coral Highlands'],
+    'Rotten Vale': []
+}
+Expected Output: []
+
+# Monster Hunter Tip:
+# Like finding critical paths in monster territory that, if blocked,
+# would prevent monsters from moving between different areas!`,
+  ],
 ]);

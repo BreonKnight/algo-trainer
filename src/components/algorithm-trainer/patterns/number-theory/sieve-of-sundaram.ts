@@ -1,99 +1,111 @@
-import type { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types";
 
 export const sieveOfSundaramPattern: AlgorithmPattern = {
   title: "Sieve of Sundaram",
   description:
-    "An algorithm to find all prime numbers up to a given limit. It's more efficient than the Sieve of Eratosthenes for certain ranges.",
+    "An algorithm to find all prime numbers up to a given limit, optimized for Monster Hunter resource gathering.",
   timeComplexity: "O(n log n)",
   spaceComplexity: "O(n)",
-  pseudocode: `function sieveOfSundaram(n):
-    # Calculate limit for the sieve
-    limit = (n - 1) // 2
+  pseudocode: `# Sieve of Sundaram
+# Input: Integer n > 1
+# Output: Array of primes ≤ n
+
+Algorithm SIEVE-OF-SUNDARAM(n)
+    # Initialize array
+    k ← (n - 1) // 2
+    is_prime ← array of size k + 1
+    for i ← 1 to k do
+        is_prime[i] ← true
+    end for
     
-    # Initialize sieve array
-    sieve = [true] * (limit + 1)
+    # Mark numbers of form i + j + 2ij
+    for i ← 1 to k do
+        j ← i
+        while i + j + 2*i*j ≤ k do
+            is_prime[i + j + 2*i*j] ← false
+            j ← j + 1
+        end while
+    end for
     
-    # Mark numbers of the form i + j + 2ij
-    for i in range(1, limit + 1):
-        j = i
-        while i + j + 2 * i * j <= limit:
-            sieve[i + j + 2 * i * j] = false
-            j += 1
-    
-    # Generate primes
-    primes = [2]  # 2 is the only even prime
-    for i in range(1, limit + 1):
-        if sieve[i]:
-            primes.append(2 * i + 1)
+    # Collect primes
+    primes ← [2]  # 2 is the only even prime
+    for i ← 1 to k do
+        if is_prime[i] then
+            primes.append(2*i + 1)
+        end if
+    end for
     
     return primes`,
-  example: `# Find all primes up to 100
-primes = sieve_of_sundaram(100)
-print(primes)
-# [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]`,
-  implementation: `def sieve_of_sundaram(n: int) -> list[int]:
+  example: `# Find optimal gathering points in a Monster Hunter area
+area_size = 30
+gathering_points = find_optimal_gathering_points(area_size)
+print(f"Optimal gathering points: {gathering_points}")
+# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`,
+  implementation: `def sieve_of_sundaram(n):
     """
-    Find all prime numbers up to a given limit using the Sieve of Sundaram algorithm.
+    Find all prime numbers up to n using the Sieve of Sundaram algorithm.
+    In Monster Hunter context, this helps identify optimal resource gathering patterns.
     
     Args:
-        n: Upper limit to find primes up to
+        n (int): Upper limit for prime numbers
     
     Returns:
-        List of prime numbers up to n
+        list: List of prime numbers up to n
     """
-    # Calculate limit for the sieve
-    limit = (n - 1) // 2
+    if n < 2:
+        return []
     
-    # Initialize sieve array
-    sieve = [True] * (limit + 1)
+    # Initialize array for odd numbers
+    k = (n - 1) // 2
+    is_prime = [True] * (k + 1)
     
-    # Mark numbers of the form i + j + 2ij
-    for i in range(1, limit + 1):
+    # Mark numbers of form i + j + 2ij
+    for i in range(1, k + 1):
         j = i
-        while i + j + 2 * i * j <= limit:
-            sieve[i + j + 2 * i * j] = False
+        while i + j + 2 * i * j <= k:
+            is_prime[i + j + 2 * i * j] = False
             j += 1
     
-    # Generate primes
+    # Collect primes
     primes = [2]  # 2 is the only even prime
-    for i in range(1, limit + 1):
-        if sieve[i]:
+    for i in range(1, k + 1):
+        if is_prime[i]:
             primes.append(2 * i + 1)
     
     return primes
 
-def sieve_of_sundaram_optimized(n: int) -> list[int]:
+def find_optimal_gathering_points(area_size):
     """
-    Optimized version of the Sieve of Sundaram algorithm with early termination.
+    Find optimal gathering points in a Monster Hunter area using prime numbers.
+    Primes represent locations with the highest resource density.
     
     Args:
-        n: Upper limit to find primes up to
+        area_size (int): Size of the area to search
     
     Returns:
-        List of prime numbers up to n
+        list: List of optimal gathering points
     """
-    limit = (n - 1) // 2
-    sieve = [True] * (limit + 1)
-    
-    for i in range(1, limit + 1):
-        max_j = (limit - i) // (2 * i + 1)
-        for j in range(i, max_j + 1):
-            sieve[i + j + 2 * i * j] = False
-    
-    primes = [2]
-    for i in range(1, limit + 1):
-        if sieve[i]:
-            primes.append(2 * i + 1)
-    
+    primes = sieve_of_sundaram(area_size)
     return primes
 
-# Example usage
-n = 100
-primes = sieve_of_sundaram(n)
-print(f"Primes up to {n}: {primes}")  # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-
-# Using optimized version
-optimized_primes = sieve_of_sundaram_optimized(n)
-print(f"Optimized primes up to {n}: {optimized_primes}")`,
+# Example usage:
+# area_size = 30
+# gathering_points = find_optimal_gathering_points(area_size)
+# print(f"Optimal gathering points: {gathering_points}")`,
   category: "number-theory",
+  pattern: `The Sieve of Sundaram algorithm is used to find all prime numbers up to a given limit. 
+In the Monster Hunter context, we use this algorithm to identify optimal resource gathering points in an area.
+
+Key Concepts:
+1. Prime numbers represent locations with the highest resource density
+2. The algorithm efficiently marks non-prime locations
+3. The remaining unmarked locations are optimal gathering points
+
+The algorithm works by:
+1. Initializing an array for odd numbers
+2. Marking numbers of the form i + j + 2ij as non-prime
+3. Collecting the remaining unmarked numbers as primes
+4. Transforming these numbers into actual gathering point coordinates
+
+This implementation helps hunters optimize their resource gathering routes by identifying the most valuable locations in an area.`,
 };

@@ -126,6 +126,7 @@ const patternCategories: Record<string, string[]> = {
     "Extended Euclidean",
     "Chinese Remainder Theorem",
     "Sieve of Eratosthenes",
+    "Fast Fourier Transform",
   ],
   Techniques: [
     "Greedy",

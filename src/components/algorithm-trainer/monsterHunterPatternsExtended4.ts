@@ -1292,99 +1292,6 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Miller-Rabin" as PatternKey,
-    `def monster_hunter_miller_rabin(monster_power, k=5):
-    """
-    Test if a monster's power level is prime using Miller-Rabin primality test.
-    Time: O(k log³ n)
-    Space: O(1)
-    
-    Monster Hunter Context:
-    - Like testing if a monster's power level is a prime number
-    - Useful for identifying special monster variants
-    - Higher accuracy with more test rounds
-    
-    Example:
-    power_level = 17  # Monster's power level
-    k = 5  # Number of test rounds
-    
-    Process:
-    1. Write power_level - 1 as d * 2^s
-    2. Test with random bases
-    3. Check for primality indicators
-    """
-    if monster_power <= 1:
-        return False
-    if monster_power <= 3:
-        return True
-    if monster_power % 2 == 0:
-        return False
-    
-    # Write monster_power - 1 as d * 2^s
-    d = monster_power - 1
-    s = 0
-    while d % 2 == 0:
-        d //= 2
-        s += 1
-    
-    # Test with k rounds
-    for _ in range(k):
-        a = random.randint(2, monster_power - 2)
-        x = pow(a, d, monster_power)
-        
-        if x == 1 or x == monster_power - 1:
-            continue
-        
-        for _ in range(s - 1):
-            x = pow(x, 2, monster_power)
-            if x == monster_power - 1:
-                break
-        else:
-            return False
-    
-    return True`,
-  ],
-
-  [
-    "Fast Fourier Transform" as PatternKey,
-    `def monster_hunter_fft(monster_waves):
-    """
-    Analyze monster sound waves using Fast Fourier Transform.
-    Time: O(n log n)
-    Space: O(n)
-    
-    Monster Hunter Context:
-    - Like analyzing monster roars and sound patterns
-    - Convert time-domain signals to frequency domain
-    - Identify unique monster sound signatures
-    
-    Example:
-    sound_waves = [0, 1, 0, -1, 0, 1, 0, -1]  # Monster roar samples
-    
-    Process:
-    1. Split into even and odd indices
-    2. Recursively compute FFT
-    3. Combine results with twiddle factors
-    """
-    n = len(monster_waves)
-    if n <= 1:
-        return monster_waves
-    
-    # Split into even and odd indices
-    even = monster_hunter_fft(monster_waves[::2])
-    odd = monster_hunter_fft(monster_waves[1::2])
-    
-    # Combine results
-    result = [0] * n
-    for k in range(n // 2):
-        t = cmath.exp(-2j * cmath.pi * k / n) * odd[k]
-        result[k] = even[k] + t
-        result[k + n // 2] = even[k] - t
-    
-    return result`,
-  ],
-
-  [
     "Matrix Chain Multiplication" as PatternKey,
     `def monster_hunter_matrix_chain(weapon_upgrades):
     """
@@ -2337,6 +2244,53 @@ def monster_hunter_merge(left, right):
         return territories[offset + 1]["name"]
     
     return "Monster not found in any territory"`,
+  ],
+
+  [
+    "Floyd Cycle Detection" as PatternKey,
+    `def monster_hunter_floyd_cycle(monster_path):
+    """
+    Detect monster patrol patterns using Floyd's Algorithm.
+    Time: O(n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like finding monster patrol routes
+    - Detect if monster follows circular path
+    - Find start of patrol cycle
+    
+    Example:
+    path = [1, 2, 3, 4, 2]  # Zone numbers
+    1 -> 2 -> 3 -> 4
+         ↑         |
+         +---------+
+    
+    Process:
+    1. Use two scouts (slow and fast)
+    2. If they meet, cycle exists
+    3. Find cycle start point
+    """
+    def get_next_zone(current):
+        return monster_path[current]
+    
+    # Initialize scouts
+    slow = fast = 0
+    
+    # Phase 1: Detect cycle
+    while True:
+        slow = get_next_zone(slow)
+        fast = get_next_zone(get_next_zone(fast))
+        
+        if slow == fast:
+            break
+    
+    # Phase 2: Find cycle start
+    slow = 0
+    while slow != fast:
+        slow = get_next_zone(slow)
+        fast = get_next_zone(fast)
+    
+    return slow  # Start of patrol cycle`,
   ],
 ]);
 
