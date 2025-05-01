@@ -41,7 +41,7 @@ import { TopologicalSortPattern } from "./patterns/topological-sort";
 import { CircularLinkedListPattern } from "./patterns/circular-linked-list";
 import { BinarySearchTreePattern } from "./patterns/binary-search-tree";
 import { TrieOperationsPattern } from "./patterns/trie-operations";
-import { TernarySearchPattern } from "./patterns/ternary-search-algorithm";
+import { TernarySearchAlgorithmPattern } from "./patterns/ternary-search-algorithm";
 import { JumpSearchAlgorithmPattern } from "./patterns/jump-search-algorithm";
 import { ExponentialSearchPattern } from "./patterns/exponential-search";
 import { HeapImplementationPattern } from "./patterns/heap-implementation";
@@ -62,7 +62,7 @@ import { GridTraversalPattern } from "./patterns/grid-traversal";
 import { StateCompressionDPPattern } from "./patterns/state-compression-dp";
 import { DigitDPPattern } from "./patterns/digit-dp";
 import { ProbabilityDPPattern } from "./patterns/probability-dp";
-import { TreeDPPattern } from "./patterns/tree-dp";
+import { TreeDynamicProgrammingPattern } from "./patterns/tree-dp";
 import { StronglyConnectedComponentsPattern } from "./patterns/strongly-connected-components";
 import { InterpolationSearchPattern } from "./patterns/interpolation-search";
 import { FibonacciSearchPattern } from "./patterns/fibonacci-search";
@@ -81,7 +81,7 @@ import { KmpAlgorithmPattern } from "./patterns/kmp-algorithm";
 import { RabinKarpPattern } from "./patterns/rabin-karp";
 import { PrimsAlgorithmPattern } from "./patterns/prims-algorithm";
 import { KruskalsAlgorithmPattern } from "./patterns/kruskals-algorithm";
-import { FloydWarshallPattern } from "./patterns/floyd-warshall";
+import { FloydWarshallPattern } from "./patterns/graph-floyd-warshall";
 import { BellmanFordPattern } from "./patterns/bellman-ford";
 import { ManachersAlgorithmPattern } from "./patterns/manachers-algorithm";
 import { AStarSearchPattern } from "./patterns/a-star-search";
@@ -99,6 +99,8 @@ import { BFSPattern } from "./patterns/bfs";
 import { TreePattern } from "./patterns/tree";
 import { StringPattern } from "./patterns/string";
 import { RecursionPattern } from "./patterns/recursion";
+import { BacktrackingPattern } from "./patterns/backtracking";
+import { GreedyPattern } from "./patterns/greedy";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Dynamic Programming": DynamicProgrammingPattern,
@@ -144,7 +146,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Circular Linked List": CircularLinkedListPattern,
   "Binary Search Tree": BinarySearchTreePattern,
   "Trie Operations": TrieOperationsPattern,
-  "Ternary Search": TernarySearchPattern,
+  "Ternary Search": TernarySearchAlgorithmPattern,
   "Jump Search": JumpSearchAlgorithmPattern,
   "Exponential Search": ExponentialSearchPattern,
   "Heap Implementation": HeapImplementationPattern,
@@ -160,7 +162,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Grid Traversal": GridTraversalPattern,
   "State Compression DP": StateCompressionDPPattern,
   "Digit DP": DigitDPPattern,
-  "Tree DP": TreeDPPattern,
+  "Tree DP": TreeDynamicProgrammingPattern,
   "Probability DP": ProbabilityDPPattern,
   "Interpolation Search": InterpolationSearchPattern,
   "Fibonacci Search": FibonacciSearchPattern,
@@ -176,6 +178,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Manacher's Algorithm": ManachersAlgorithmPattern,
   "Z Algorithm": ZAlgorithmPattern,
   "Prim's Algorithm": PrimsAlgorithmPattern,
+  "Graph Prim": PrimsAlgorithmPattern,
   "Kruskal's Algorithm": KruskalsAlgorithmPattern,
   "Floyd-Warshall": FloydWarshallPattern,
   "Bellman-Ford": BellmanFordPattern,
@@ -202,4 +205,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   Tree: TreePattern,
   String: StringPattern,
   Recursion: RecursionPattern,
+  Backtracking: BacktrackingPattern,
+  Greedy: GreedyPattern,
 };
