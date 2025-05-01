@@ -10,6 +10,7 @@ import { bitManipulationPattern } from "./bit-manipulation";
 import { slidingWindowPattern } from "./sliding-window";
 import { twoSumTwoPointersPattern } from "./two-sum-two-pointers";
 import { twoSumPattern } from "./two-sum";
+import { twoSumDictPattern } from "./two-sum-dict";
 import { rotateMatrixPattern } from "./rotate-matrix";
 
 type ArrayPatternKey =
@@ -23,6 +24,7 @@ type ArrayPatternKey =
   | "Bit Manipulation"
   | "Sliding Window"
   | "Two Sum Two Pointers"
+  | "Two Sum Dict"
   | "Rotate Matrix"
   | "Two Sum";
 
@@ -38,6 +40,7 @@ export const arrayPatterns: Partial<Record<ArrayPatternKey, AlgorithmPattern>> =
     "Bit Manipulation": bitManipulationPattern,
     "Sliding Window": slidingWindowPattern,
     "Two Sum Two Pointers": twoSumTwoPointersPattern,
+    "Two Sum Dict": twoSumDictPattern,
     "Rotate Matrix": rotateMatrixPattern,
     "Two Sum": twoSumPattern,
   };

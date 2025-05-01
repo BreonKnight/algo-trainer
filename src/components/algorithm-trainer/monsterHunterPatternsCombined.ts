@@ -6,6 +6,8 @@ import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4
 import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5";
 import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
 import { monsterHunterPatterns } from "./monsterHunterPatterns";
+import { PATTERN_KEYS } from "./types";
+import { algorithmPatterns } from "./patterns";
 
 // Combine all patterns
 const allPatterns = new Map<PatternKey, string>([
@@ -140,5 +142,49 @@ export const monsterHunterPatternsByCategory = {
   ],
 };
 
+// Verify pattern completeness
+export function verifyPatternCompleteness() {
+  // Check if all patterns have regular implementations
+  const missingRegularPatterns = PATTERN_KEYS.filter(
+    (key) => !algorithmPatterns[key]
+  );
+
+  // Check if all patterns have Monster Hunter implementations
+  const missingMonsterHunterPatterns = PATTERN_KEYS.filter(
+    (key) => !allPatterns.has(key)
+  );
+
+  // Log results
+  console.log("Pattern Verification Results:");
+  console.log("----------------------------");
+
+  if (missingRegularPatterns.length > 0) {
+    console.log("\nMissing Regular Patterns:");
+    missingRegularPatterns.forEach((pattern) => console.log(`- ${pattern}`));
+  } else {
+    console.log("\n✓ All patterns have regular implementations");
+  }
+
+  if (missingMonsterHunterPatterns.length > 0) {
+    console.log("\nMissing Monster Hunter Patterns:");
+    missingMonsterHunterPatterns.forEach((pattern) =>
+      console.log(`- ${pattern}`)
+    );
+  } else {
+    console.log("\n✓ All patterns have Monster Hunter implementations");
+  }
+
+  return {
+    missingRegularPatterns,
+    missingMonsterHunterPatterns,
+    totalPatterns: PATTERN_KEYS.length,
+    regularPatternsCount: Object.keys(algorithmPatterns).length,
+    monsterHunterPatternsCount: allPatterns.size,
+  };
+}
+
 // Export the combined patterns
 export const allMonsterHunterPatterns = allPatterns;
+
+// Run verification if needed
+verifyPatternCompleteness();
