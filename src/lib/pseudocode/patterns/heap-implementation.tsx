@@ -1,0 +1,122 @@
+import { ChevronRight } from "lucide-react";
+
+export const HeapImplementationPattern = () => (
+  <div>
+    <div className="mb-2">
+      <span className="text-accent font-bold">Heap Implementation</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+    </div>
+    <div className="mb-2 text-xs text-secondary">
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Priority queue
+      operations
+    </div>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`// Get parent index
+PARENT(i):
+    return ⌊i/2⌋
+
+// Get left child index
+LEFT(i):
+    return 2i
+
+// Get right child index
+RIGHT(i):
+    return 2i + 1
+
+// Maintain heap property
+MAX-HEAPIFY(A, i):
+    l ← LEFT(i)
+    r ← RIGHT(i)
+    largest ← i
+    if l ≤ A.heap-size and A[l] > A[i]:
+        largest ← l
+    if r ≤ A.heap-size and A[r] > A[largest]:
+        largest ← r
+    if largest ≠ i:
+        exchange A[i] with A[largest]
+        MAX-HEAPIFY(A, largest)
+
+// Build max heap
+BUILD-MAX-HEAP(A):
+    A.heap-size ← A.length
+    for i ← ⌊A.length/2⌋ downto 1:
+        MAX-HEAPIFY(A, i)
+
+// Extract maximum element
+HEAP-EXTRACT-MAX(A):
+    if A.heap-size < 1:
+        error "heap underflow"
+    max ← A[1]
+    A[1] ← A[A.heap-size]
+    A.heap-size ← A.heap-size - 1
+    MAX-HEAPIFY(A, 1)
+    return max
+
+// Increase key value
+HEAP-INCREASE-KEY(A, i, key):
+    if key < A[i]:
+        error "new key is smaller than current key"
+    A[i] ← key
+    while i > 1 and A[PARENT(i)] < A[i]:
+        exchange A[i] with A[PARENT(i)]
+        i ← PARENT(i)
+
+// Insert new element
+MAX-HEAP-INSERT(A, key):
+    A.heap-size ← A.heap-size + 1
+    A[A.heap-size] ← -∞
+    HEAP-INCREASE-KEY(A, A.heap-size, key)
+
+// Example:
+// Input: [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
+// 
+// After BUILD-MAX-HEAP:
+//       16
+//     /    \\
+//   14      10
+//  /  \\    /  \\
+// 8    7  9    3
+// / \\  /
+// 2  4 1
+// 
+// After HEAP-EXTRACT-MAX:
+//       14
+//     /    \\
+//   8       10
+//  / \\     / \\
+// 2   7   9   3
+// / \\
+// 1   4
+// 
+// After MAX-HEAP-INSERT(15):
+//       15
+//     /    \\
+//   14      10
+//  /  \\    /  \\
+// 8    7  9    3
+// / \\  /
+// 2  4 1`}
+      </pre>
+    </div>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
+    </div>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Build: Create max heap from array using heapify</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Extract: Remove and return maximum element</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Insert: Add new element maintaining heap property</span>
+      </div>
+    </div>
+  </div>
+);

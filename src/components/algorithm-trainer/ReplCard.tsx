@@ -1,10 +1,10 @@
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { useState, useEffect, useRef } from "react";
-import { loadPyodide } from "pyodide";
+import { loadPyodide, PyodideInterface } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { useTheme } from "../ThemeProvider";
+import { useTheme } from "../useTheme";
 import GamificationService from "../../lib/gamification";
 import { cn } from "../../lib/utils";
 
@@ -12,10 +12,29 @@ interface ReplCardProps {
   userCode: string;
 }
 
+// Custom hook for media query
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(query);
+    setMatches(mediaQuery.matches);
+
+    const handler = (event: MediaQueryListEvent) => {
+      setMatches(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, [query]);
+
+  return matches;
+}
+
 export function ReplCard({ userCode }: ReplCardProps) {
   const [output, setOutput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const [pyodide, setPyodide] = useState<any>(null);
+  const [pyodide, setPyodide] = useState<PyodideInterface | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { theme } = useTheme();
   const [replHeight, setReplHeight] = useState(300);
@@ -98,11 +117,13 @@ export function ReplCard({ userCode }: ReplCardProps) {
           setPyodide(pyodideInstance);
           setOutput("Python environment ready! You can now run your code.");
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error("Failed to load Pyodide:", error);
         if (mounted) {
           setError(
-            `Failed to initialize Python environment: ${error.message}\nPlease check your internet connection and refresh the page.`
+            `Failed to initialize Python environment: ${
+              error instanceof Error ? error.message : "Unknown error"
+            }\nPlease check your internet connection and refresh the page.`
           );
           setOutput("");
         }
@@ -173,74 +194,35 @@ except Exception as e:
 
       // Trigger confetti animation
       triggerConfetti();
-    } catch (error: any) {
-      let errorMessage = error.message;
+    } catch (error) {
+      let errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
       let errorType = "Error";
 
       // Handle browser-specific errors
-      if (error.message.includes("Pyodide failed to load")) {
-        errorType = "Environment Error";
+      if (errorMessage.includes("Pyodide failed to load")) {
+        errorType = "Initialization Error";
         errorMessage =
-          "Failed to load Python environment. Please check your internet connection and refresh the page.";
-      } else if (error.message.includes("out of memory")) {
-        errorType = "Memory Error";
-        errorMessage =
-          "Your code used too much memory. Try optimizing your solution.";
-      } else if (error.message.includes("timeout")) {
-        errorType = "Timeout Error";
-        errorMessage =
-          "Your code took too long to execute. Try optimizing your solution.";
-      } else if (error.message.includes("syntax error")) {
-        errorType = "Syntax Error";
-        errorMessage =
-          error.message.split("SyntaxError:")[1]?.trim() || error.message;
-
-        // Check for common syntax errors and provide helpful suggestions
-        if (errorMessage.includes("sdef")) {
-          errorMessage +=
-            "\n\nSuggestion: Did you mean to use 'def' instead of 'sdef'?";
-        } else if (errorMessage.includes("indent")) {
-          errorMessage +=
-            "\n\nSuggestion: Check your indentation. Python is sensitive to proper indentation.";
-        } else if (errorMessage.includes("colon")) {
-          errorMessage +=
-            "\n\nSuggestion: Make sure you have a colon (:) after your function definition, if statement, or loop.";
-        }
-      } else if (error.message.includes("NameError")) {
-        errorType = "Name Error";
-        errorMessage =
-          error.message.split("NameError:")[1]?.trim() || error.message;
-      } else if (error.message.includes("TypeError")) {
-        errorType = "Type Error";
-        errorMessage =
-          error.message.split("TypeError:")[1]?.trim() || error.message;
-      } else if (error.message.includes("IndentationError")) {
-        errorType = "Indentation Error";
-        errorMessage =
-          error.message.split("IndentationError:")[1]?.trim() || error.message;
-      } else if (error.message.includes("ZeroDivisionError")) {
-        errorType = "Division Error";
-        errorMessage = "Division by zero is not allowed.";
+          "Failed to load Python environment. Please refresh the page.";
       }
 
-      const formattedError = `${errorType}: ${errorMessage}`;
-      setError(formattedError);
-      toast.error(formattedError, {
-        duration: 6000,
-      });
+      setError(`${errorType}: ${errorMessage}`);
+      setOutput("");
 
-      // Record code execution with error in gamification service
-      const endTime = performance.now();
-      const executionTime = endTime - startTime;
+      // Record error in gamification service
       const gamificationService = GamificationService.getInstance();
       gamificationService.recordCodeExecution(
-        userCode.split("\n").length, // Lines of code
-        executionTime, // Execution time in ms
-        true // Has error
+        userCode.split("\n").length,
+        performance.now() - startTime,
+        true
       );
-    }
 
-    setIsLoading(false);
+      toast.error(`Error: ${errorMessage}`, {
+        duration: 5000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   // Function to trigger confetti animation

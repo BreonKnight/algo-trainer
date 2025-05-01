@@ -1,9 +1,9 @@
 import { AlgorithmPattern } from "../../types";
 
-export const stack_sortPattern: AlgorithmPattern = {
-  title: "Stack Sort Algorithm",
-  description: "A sorting algorithm that uses a stack data structure to sort elements in descending order.",
-  timeComplexity: "O(n²)",
+export const stackSortPattern: AlgorithmPattern = {
+  title: "Stack Sort",
+  description: "Sorting algorithm using stack data structure",
+  timeComplexity: "O(n^2)",
   spaceComplexity: "O(n)",
   pseudocode: `1. Initialize an empty stack\n2. For each element in the input array:\n   a. While stack is not empty and top element > current number:\n      - Pop elements from stack\n   b. Push current number to stack\n3. Return the sorted stack`,
   example: `Input: [5, 2, 8, 1, 9, 3]
@@ -33,5 +33,6 @@ Final result: [9, 3]`,
         while stack and stack[-1] > num:
             stack.pop()
         stack.append(num)
-    return stack`
+    return stack`,
+  category: "sorting",
 };

@@ -9,11 +9,13 @@ import { greedyPatterns } from "./greedy";
 import { backtrackingPatterns } from "./backtracking";
 import { graphPatterns } from "./graph";
 import { treePatterns } from "./tree";
-import { data_structuresPatterns } from "./data-structures";
+import { dataStructurePatterns } from "./data-structures";
 import { stringPatterns } from "./string";
 import { otherPatterns } from "./other";
 import { recursionPatterns } from "./recursion";
 import { divideAndConquerPatterns } from "./divide-and-conquer";
+import { matrixPatterns } from "./matrix";
+import { numberTheoryPatterns } from "./number-theory";
 
 // Combine all patterns
 export const algorithmPatterns: Record<string, AlgorithmPattern> = {
@@ -25,9 +27,15 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
   ...backtrackingPatterns,
   ...graphPatterns,
   ...treePatterns,
-  ...data_structuresPatterns,
+  ...dataStructurePatterns,
   ...stringPatterns,
   ...otherPatterns,
   ...recursionPatterns,
   ...divideAndConquerPatterns,
+  ...matrixPatterns,
+  ...Object.fromEntries(
+    numberTheoryPatterns.map((pattern) => [pattern.title, pattern])
+  ),
 };
+
+export * from "./data-structures/union-find";

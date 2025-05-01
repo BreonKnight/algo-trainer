@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const two_sum_two_pointersPattern: AlgorithmPattern = {
+export const twoSumTwoPointersPattern: AlgorithmPattern = {
   title: "Two Sum Algorithm (Two Pointers)",
   description:
     "A solution to the Two Sum problem using two pointers technique, which requires the array to be sorted.",

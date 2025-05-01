@@ -47,7 +47,7 @@ export const monsterHunterPatternsExtended2 = new Map<PatternKey, string>([
   ],
 
   [
-    "Trie" as PatternKey,
+    "Trie Operations" as PatternKey,
     `class MonsterHunterTrie:
     """
     Trie for organizing monster names and information.

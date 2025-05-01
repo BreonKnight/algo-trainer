@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Progress } from "./ui/progress";
 import { Button } from "./ui/button";
 import {
@@ -11,7 +11,7 @@ import {
 import { Slider } from "./ui/slider";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "./useTheme";
 import { cn } from "@/lib/utils";
 
 export function ProgressView() {

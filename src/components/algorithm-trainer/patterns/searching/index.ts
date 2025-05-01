@@ -1,17 +1,32 @@
 import { AlgorithmPattern } from "../../types";
-import { linear_searchPattern } from "./linear-search";
-import { binary_search_on_answerPattern } from "./binary-search-on-answer";
+import { linearSearchPattern } from "./linear-search";
+import { binarySearchOnAnswerPattern } from "./binary-search-on-answer";
 import { binarySearchPattern } from "./binary-search";
+import { fibonacciSearchPattern } from "./fibonacci-search";
+import { ternarySearchPattern } from "./ternary-search";
+import { jumpSearchPattern } from "./jump-search";
+import { exponentialSearchPattern } from "./exponential-search";
+import { interpolationSearchPattern } from "./interpolation-search";
 
 type SearchingPatternKey =
   | "Binary Search"
   | "Linear Search"
-  | "Binary Search on Answer";
+  | "Binary Search on Answer"
+  | "Fibonacci Search"
+  | "Ternary Search"
+  | "Jump Search"
+  | "Exponential Search"
+  | "Interpolation Search";
 
 export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
   {
     "Binary Search": binarySearchPattern,
-    "Linear Search": linear_searchPattern,
-    "Binary Search on Answer": binary_search_on_answerPattern,
+    "Linear Search": linearSearchPattern,
+    "Binary Search on Answer": binarySearchOnAnswerPattern,
+    "Fibonacci Search": fibonacciSearchPattern,
+    "Ternary Search": ternarySearchPattern,
+    "Jump Search": jumpSearchPattern,
+    "Exponential Search": exponentialSearchPattern,
+    "Interpolation Search": interpolationSearchPattern,
     // Add other searching patterns here
   };

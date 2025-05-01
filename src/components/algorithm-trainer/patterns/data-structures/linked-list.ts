@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const linked_listPattern: AlgorithmPattern = {
+export const linkedListPattern: AlgorithmPattern = {
   title: "Linked List Implementation",
   description:
     "Implementation of a linear data structure where each element points to the next element in the sequence.",

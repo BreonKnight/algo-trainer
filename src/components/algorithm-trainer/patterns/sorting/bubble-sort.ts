@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const bubble_sortPattern: AlgorithmPattern = {
+export const bubbleSortPattern: AlgorithmPattern = {
   title: "Bubble Sort Algorithm",
   description:
     "A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.",

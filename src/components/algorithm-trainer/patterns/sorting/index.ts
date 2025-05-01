@@ -1,11 +1,11 @@
 import { AlgorithmPattern } from "../../types";
-import { insertion_sortPattern } from "./insertion-sort";
-import { selection_sortPattern } from "./selection-sort";
-import { bubble_sortPattern } from "./bubble-sort";
+import { insertionSortPattern } from "./insertion-sort";
+import { selectionSortPattern } from "./selection-sort";
+import { bubbleSortPattern } from "./bubble-sort";
 import { heapsortPattern } from "./heap-sort";
-import { stack_sortPattern } from "./stack-sort";
-import { merge_sortPattern } from "./merge-sort";
-import { quick_sortPattern } from "./quick-sort";
+import { stackSortPattern } from "./stack-sort";
+import { mergeSortPattern } from "./merge-sort";
+import { quickSortPattern } from "./quick-sort";
 
 type SortingPatternKey =
   | "Quick Sort"
@@ -19,11 +19,11 @@ type SortingPatternKey =
 export const sortingPatterns: Partial<
   Record<SortingPatternKey, AlgorithmPattern>
 > = {
-  "Quick Sort": quick_sortPattern,
-  "Merge Sort": merge_sortPattern,
-  "Bubble Sort": bubble_sortPattern,
-  "Insertion Sort": insertion_sortPattern,
-  "Selection Sort": selection_sortPattern,
+  "Quick Sort": quickSortPattern,
+  "Merge Sort": mergeSortPattern,
+  "Bubble Sort": bubbleSortPattern,
+  "Insertion Sort": insertionSortPattern,
+  "Selection Sort": selectionSortPattern,
   "Heap Sort": heapsortPattern,
-  "Stack Sort": stack_sortPattern,
+  "Stack Sort": stackSortPattern,
 };

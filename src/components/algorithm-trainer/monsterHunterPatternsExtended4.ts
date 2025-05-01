@@ -385,31 +385,81 @@ def monster_hunter_merge(left, right):
 
   [
     "Linear Search" as PatternKey,
-    `def monster_hunter_linear_search(material_list, target_material):
+    `def monster_hunter_linear_search(territories, target_monster):
     """
-    Search for a specific material in an unsorted list.
+    Search for a monster in a list of territories using linear search.
     Time: O(n)
     Space: O(1)
     
     Monster Hunter Context:
-    - Like searching for a material in your inventory
-    - Check each material one by one
-    - Return position if found
+    - Like searching for a monster in an unexplored territory
+    - Check each area one by one
+    - Useful when territories are not sorted
+    - Similar to exploring a new region for the first time
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show territory exploration order
+    2. Show monster comparison at each step
+    3. Show territory highlight when found
+    4. Show completion when all territories checked
+    
+    Interactive Elements:
+    Try it: Interactive territory exploration game where you can:
+    - Select different monsters to search for
+    - See the exploration process step by step
+    - Compare different exploration strategies
+    - Learn about monster habitats
+    
+    Common Mistakes:
+    - Not checking all territories
+    - Stopping search too early
+    - Incorrect monster identification
+    - Forgetting to record explored territories
+    
+    Optimization Tips:
+    - Keep track of explored territories
+    - Use efficient monster identification
+    - Consider monster behavior patterns
+    - Use appropriate search patterns for different terrains
     
     Example:
-    materials = ["Rathalos Scale", "Monster Bone", "Dragon Gem", "Rathalos Ruby"]
-    target = "Dragon Gem"
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
     
-    Process:
-    1. Check first material
-    2. If not found, check next
-    3. Continue until found or end of list
+    Step 1: Check Ancient Forest
+    - Current monster: Great Jagras
+    - Not found, continue searching
+    
+    Step 2: Check Wildspire Waste
+    - Current monster: Barroth
+    - Not found, continue searching
+    
+    Step 3: Check Coral Highlands
+    - Current monster: Tobi-Kadachi
+    - Found target! Return "Coral Highlands"
+    
+    Example 2: Finding non-existent monster
+    Step 1: Check Ancient Forest
+    Step 2: Check Wildspire Waste
+    Step 3: Check Coral Highlands
+    Step 4: Check Rotten Vale
+    Step 5: Check Elder's Recess
+    Return "Monster not found in any territory"
     """
-    for i, material in enumerate(material_list):
-        if material == target_material:
-            return i
+    for territory in territories:
+        if territory["monster"] == target_monster:
+            return territory["name"]  # Found the territory!
     
-    return -1  # Material not found`,
+    return "Monster not found in any territory"`,
   ],
 
   [
@@ -1239,6 +1289,1008 @@ def monster_hunter_merge(left, right):
             print(f" -> Zone {current.val}", end="")
         
         print(f" -> Zone {self.head.val}")  # Back to start`,
+  ],
+
+  [
+    "Matrix Chain Multiplication" as PatternKey,
+    `def monster_hunter_matrix_chain(weapon_upgrades):
+    """
+    Optimize weapon upgrade path using Matrix Chain Multiplication.
+    Time: O(n³)
+    Space: O(n²)
+    
+    Monster Hunter Context:
+    - Like finding optimal upgrade path for weapons
+    - Each matrix represents upgrade requirements
+    - Minimize total material cost
+    
+    Example:
+    upgrades = [
+        (10, 20),  # Iron Sword to Steel Sword
+        (20, 30),  # Steel Sword to Rathalos Sword
+        (30, 40)   # Rathalos Sword to Elder Dragon Sword
+    ]
+    
+    Process:
+    1. Build cost table
+    2. Find optimal multiplication order
+    3. Calculate minimum material cost
+    """
+    n = len(weapon_upgrades)
+    # Initialize cost table
+    cost = [[0] * n for _ in range(n)]
+    
+    # Fill cost table
+    for length in range(2, n + 1):
+        for i in range(n - length + 1):
+            j = i + length - 1
+            cost[i][j] = float('inf')
+            for k in range(i, j):
+                current_cost = (cost[i][k] + cost[k + 1][j] +
+                              weapon_upgrades[i][0] * weapon_upgrades[k][1] * weapon_upgrades[j][1])
+                if current_cost < cost[i][j]:
+                    cost[i][j] = current_cost
+    
+    return cost[0][n - 1]`,
+  ],
+
+  [
+    "State Compression DP" as PatternKey,
+    `def monster_hunter_state_compression(monster_states, max_stamina):
+    """
+    Optimize monster hunting strategy using State Compression DP.
+    Time: O(n * 2^m)
+    Space: O(2^m)
+    
+    Monster Hunter Context:
+    - Like planning optimal attack patterns
+    - Each state represents monster's condition
+    - Maximize damage while managing stamina
+    
+    Example:
+    states = [
+        {"damage": 10, "stamina": 2},  # Quick attack
+        {"damage": 20, "stamina": 4},  # Strong attack
+        {"damage": 15, "stamina": 3}   # Combo attack
+    ]
+    max_stamina = 6
+    
+    Process:
+    1. Encode states as bitmask
+    2. Track optimal damage for each state
+    3. Update based on available stamina
+    """
+    n = len(monster_states)
+    dp = [0] * (1 << n)
+    
+    for mask in range(1 << n):
+        current_stamina = 0
+        for i in range(n):
+            if mask & (1 << i):
+                current_stamina += monster_states[i]["stamina"]
+        
+        if current_stamina <= max_stamina:
+            for i in range(n):
+                if not (mask & (1 << i)):
+                    new_mask = mask | (1 << i)
+                    if current_stamina + monster_states[i]["stamina"] <= max_stamina:
+                        dp[new_mask] = max(dp[new_mask], dp[mask] + monster_states[i]["damage"])
+    
+    return max(dp)`,
+  ],
+
+  [
+    "Digit DP" as PatternKey,
+    `def monster_hunter_digit_dp(monster_count, target_digits):
+    """
+    Count special monster variants using Digit DP.
+    Time: O(digits * 10 * states)
+    Space: O(digits * states)
+    
+    Monster Hunter Context:
+    - Like counting rare monster variants
+    - Each digit represents a trait
+    - Find numbers with specific digit patterns
+    
+    Example:
+    count = 1000  # Total monster count
+    target = "13"  # Looking for numbers containing "13"
+    
+    Process:
+    1. Convert number to digits
+    2. Track state of digit matching
+    3. Count valid numbers
+    """
+    def count_special_variants(pos, tight, state, memo):
+        if pos == len(str(monster_count)):
+            return 1 if state == len(target_digits) else 0
+        
+        key = (pos, tight, state)
+        if key in memo:
+            return memo[key]
+        
+        limit = int(str(monster_count)[pos]) if tight else 9
+        total = 0
+        
+        for digit in range(limit + 1):
+            new_tight = tight and (digit == limit)
+            new_state = state
+            
+            if state < len(target_digits) and str(digit) == target_digits[state]:
+                new_state += 1
+            
+            total += count_special_variants(pos + 1, new_tight, new_state, memo)
+        
+        memo[key] = total
+        return total
+    
+    return count_special_variants(0, True, 0, {})`,
+  ],
+
+  [
+    "Tree DP" as PatternKey,
+    `def monster_hunter_tree_dp(monster_tree):
+    """
+    Optimize monster territory control using Tree DP.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like controlling monster territories
+    - Each node represents a territory
+    - Maximize controlled area while minimizing conflicts
+    
+    Example:
+    tree = {
+        "Ancient Forest": ["Wildspire Waste", "Coral Highlands"],
+        "Wildspire Waste": ["Rotten Vale"],
+        "Coral Highlands": ["Elder's Recess"]
+    }
+    
+    Process:
+    1. Traverse tree
+    2. Calculate optimal control for each node
+    3. Combine results from children
+    """
+    def dfs(territory, parent):
+        # dp[0] = not controlled, dp[1] = controlled
+        dp = [0, 1]
+        
+        for child in monster_tree[territory]:
+            if child != parent:
+                child_dp = dfs(child, territory)
+                dp[0] += max(child_dp[0], child_dp[1])
+                dp[1] += child_dp[0]
+        
+        return dp
+    
+    return max(dfs("Ancient Forest", None))`,
+  ],
+
+  [
+    "Probability DP" as PatternKey,
+    `def monster_hunter_probability_dp(monster_attacks, max_turns):
+    """
+    Calculate survival probability using Probability DP.
+    Time: O(turns * states)
+    Space: O(states)
+    
+    Monster Hunter Context:
+    - Like calculating survival chances
+    - Each state represents health and stamina
+    - Track probability of surviving attacks
+    
+    Example:
+    attacks = [
+        {"damage": 20, "probability": 0.3},
+        {"damage": 30, "probability": 0.2},
+        {"damage": 10, "probability": 0.5}
+    ]
+    max_turns = 3
+    
+    Process:
+    1. Initialize probability table
+    2. Update probabilities each turn
+    3. Calculate final survival chance
+    """
+    dp = {0: 1.0}  # Initial state: 100% chance of full health
+    
+    for _ in range(max_turns):
+        new_dp = {}
+        for health, prob in dp.items():
+            for attack in monster_attacks:
+                new_health = max(0, health - attack["damage"])
+                if new_health in new_dp:
+                    new_dp[new_health] += prob * attack["probability"]
+                else:
+                    new_dp[new_health] = prob * attack["probability"]
+        dp = new_dp
+    
+    return sum(prob for health, prob in dp.items() if health > 0)`,
+  ],
+
+  [
+    "Network Flow" as PatternKey,
+    `def monster_hunter_network_flow(territory_network, source, sink):
+    """
+    Optimize monster migration using Network Flow.
+    Time: O(V * E²)
+    Space: O(V + E)
+    
+    Monster Hunter Context:
+    - Like managing monster migration paths
+    - Each edge has capacity (max monsters)
+    - Find maximum flow between territories
+    
+    Example:
+    network = {
+        "Ancient Forest": [("Wildspire Waste", 10), ("Coral Highlands", 15)],
+        "Wildspire Waste": [("Rotten Vale", 20)],
+        "Coral Highlands": [("Elder's Recess", 25)]
+    }
+    source = "Ancient Forest"
+    sink = "Elder's Recess"
+    
+    Process:
+    1. Initialize residual graph
+    2. Find augmenting paths
+    3. Update flow and residual capacities
+    """
+    def bfs(residual, source, sink, parent):
+        visited = {source}
+        queue = [source]
+        
+        while queue:
+            u = queue.pop(0)
+            for v, capacity in residual[u]:
+                if v not in visited and capacity > 0:
+                    visited.add(v)
+                    parent[v] = u
+                    if v == sink:
+                        return True
+                    queue.append(v)
+        return False
+    
+    # Initialize residual graph
+    residual = {territory: [] for territory in territory_network}
+    for u in territory_network:
+        for v, capacity in territory_network[u]:
+            residual[u].append([v, capacity])
+            if v not in residual:
+                residual[v] = []
+            residual[v].append([u, 0])
+    
+    max_flow = 0
+    parent = {}
+    
+    while bfs(residual, source, sink, parent):
+        path_flow = float('inf')
+        v = sink
+        
+        while v != source:
+            u = parent[v]
+            for edge in residual[u]:
+                if edge[0] == v:
+                    path_flow = min(path_flow, edge[1])
+                    break
+            v = u
+        
+        max_flow += path_flow
+        v = sink
+        
+        while v != source:
+            u = parent[v]
+            for edge in residual[u]:
+                if edge[0] == v:
+                    edge[1] -= path_flow
+                    break
+            for edge in residual[v]:
+                if edge[0] == u:
+                    edge[1] += path_flow
+                    break
+            v = u
+    
+    return max_flow`,
+  ],
+
+  [
+    "Maximum Bipartite Matching" as PatternKey,
+    `def monster_hunter_bipartite_matching(hunters, monsters):
+    """
+    Match hunters to monsters using Maximum Bipartite Matching.
+    Time: O(V * E)
+    Space: O(V + E)
+    
+    Monster Hunter Context:
+    - Like assigning hunters to suitable monsters
+    - Each hunter has preferred monster types
+    - Maximize successful hunt assignments
+    
+    Example:
+    hunters = {
+        "Hunter1": ["Rathalos", "Diablos"],
+        "Hunter2": ["Nergigante", "Teostra"],
+        "Hunter3": ["Kushala", "Vaal Hazak"]
+    }
+    monsters = ["Rathalos", "Diablos", "Nergigante", "Teostra", "Kushala", "Vaal Hazak"]
+    
+    Process:
+    1. Build bipartite graph
+    2. Find augmenting paths
+    3. Update matching
+    """
+    def bpm(u, match_to, visited):
+        for v in hunters[u]:
+            if v not in visited:
+                visited.add(v)
+                if match_to[v] == -1 or bpm(match_to[v], match_to, visited):
+                    match_to[v] = u
+                    return True
+        return False
+    
+    match_to = {monster: -1 for monster in monsters}
+    result = 0
+    
+    for hunter in hunters:
+        visited = set()
+        if bpm(hunter, match_to, visited):
+            result += 1
+    
+    return result`,
+  ],
+
+  [
+    "Graph Bellman-Ford" as PatternKey,
+    `def monster_hunter_bellman_ford(territory_graph, start):
+    """
+    Find shortest paths using Bellman-Ford algorithm.
+    Time: O(V * E)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like finding shortest paths between territories
+    - Accounts for negative edge weights (difficult terrain)
+    - Detects negative cycles (impossible paths)
+    
+    Example:
+    graph = {
+        "Ancient Forest": [("Wildspire Waste", 5), ("Coral Highlands", 3)],
+        "Wildspire Waste": [("Rotten Vale", 2)],
+        "Coral Highlands": [("Elder's Recess", 4)]
+    }
+    start = "Ancient Forest"
+    
+    Process:
+    1. Initialize distances
+    2. Relax edges repeatedly
+    3. Check for negative cycles
+    """
+    # Initialize distances
+    distance = {territory: float('inf') for territory in territory_graph}
+    distance[start] = 0
+    
+    # Relax edges
+    for _ in range(len(territory_graph) - 1):
+        for u in territory_graph:
+            for v, weight in territory_graph[u]:
+                if distance[u] + weight < distance[v]:
+                    distance[v] = distance[u] + weight
+    
+    # Check for negative cycles
+    for u in territory_graph:
+        for v, weight in territory_graph[u]:
+            if distance[u] + weight < distance[v]:
+                return None  # Negative cycle detected
+    
+    return distance`,
+  ],
+
+  [
+    "Graph Floyd-Warshall" as PatternKey,
+    `def monster_hunter_floyd_warshall(territory_graph):
+    """
+    Find all-pairs shortest paths using Floyd-Warshall.
+    Time: O(V³)
+    Space: O(V²)
+    
+    Monster Hunter Context:
+    - Like finding shortest paths between all territories
+    - Accounts for all possible routes
+    - Useful for territory planning
+    
+    Example:
+    graph = {
+        "Ancient Forest": [("Wildspire Waste", 5), ("Coral Highlands", 3)],
+        "Wildspire Waste": [("Rotten Vale", 2)],
+        "Coral Highlands": [("Elder's Recess", 4)]
+    }
+    
+    Process:
+    1. Initialize distance matrix
+    2. Update distances through intermediate nodes
+    3. Handle negative cycles
+    """
+    # Get all territories
+    territories = list(territory_graph.keys())
+    n = len(territories)
+    
+    # Initialize distance matrix
+    dist = [[float('inf')] * n for _ in range(n)]
+    for i in range(n):
+        dist[i][i] = 0
+        for neighbor, weight in territory_graph[territories[i]]:
+            j = territories.index(neighbor)
+            dist[i][j] = weight
+    
+    # Floyd-Warshall algorithm
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+    
+    # Check for negative cycles
+    for i in range(n):
+        if dist[i][i] < 0:
+            return None  # Negative cycle detected
+    
+    return dist`,
+  ],
+
+  [
+    "Graph Kruskal" as PatternKey,
+    `def monster_hunter_kruskal(territory_edges):
+    """
+    Find minimum spanning tree using Kruskal's algorithm.
+    Time: O(E log E)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like connecting territories with minimum cost
+    - Each edge represents a path with cost
+    - Find most efficient territory connections
+    
+    Example:
+    edges = [
+        ("Ancient Forest", "Wildspire Waste", 5),
+        ("Ancient Forest", "Coral Highlands", 3),
+        ("Wildspire Waste", "Rotten Vale", 2),
+        ("Coral Highlands", "Elder's Recess", 4)
+    ]
+    
+    Process:
+    1. Sort edges by weight
+    2. Use Union-Find to avoid cycles
+    3. Add edges to MST
+    """
+    def find(parent, i):
+        if parent[i] != i:
+            parent[i] = find(parent, parent[i])
+        return parent[i]
+    
+    def union(parent, rank, x, y):
+        xroot = find(parent, x)
+        yroot = find(parent, y)
+        
+        if rank[xroot] < rank[yroot]:
+            parent[xroot] = yroot
+        elif rank[xroot] > rank[yroot]:
+            parent[yroot] = xroot
+        else:
+            parent[yroot] = xroot
+            rank[xroot] += 1
+    
+    # Sort edges by weight
+    edges = sorted(territory_edges, key=lambda x: x[2])
+    
+    # Initialize Union-Find
+    territories = set()
+    for u, v, _ in edges:
+        territories.add(u)
+        territories.add(v)
+    territories = list(territories)
+    parent = {t: t for t in territories}
+    rank = {t: 0 for t in territories}
+    
+    # Build MST
+    mst = []
+    for u, v, weight in edges:
+        u_idx = territories.index(u)
+        v_idx = territories.index(v)
+        
+        if find(parent, u_idx) != find(parent, v_idx):
+            mst.append((u, v, weight))
+            union(parent, rank, u_idx, v_idx)
+    
+    return mst`,
+  ],
+
+  [
+    "Graph Prim" as PatternKey,
+    `def monster_hunter_prim(territory_graph):
+    """
+    Find minimum spanning tree using Prim's algorithm.
+    Time: O(E log V)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like connecting territories with minimum cost
+    - Each edge represents a path with cost
+    - Find most efficient territory connections
+    
+    Example:
+    graph = {
+        "Ancient Forest": [("Wildspire Waste", 5), ("Coral Highlands", 3)],
+        "Wildspire Waste": [("Rotten Vale", 2)],
+        "Coral Highlands": [("Elder's Recess", 4)]
+    }
+    
+    Process:
+    1. Initialize priority queue
+    2. Add edges from current territory
+    3. Select minimum weight edge
+    """
+    import heapq
+    
+    # Initialize
+    start = next(iter(territory_graph))
+    visited = {start}
+    mst = []
+    edges = []
+    
+    # Add edges from start
+    for neighbor, weight in territory_graph[start]:
+        heapq.heappush(edges, (weight, start, neighbor))
+    
+    # Build MST
+    while edges and len(visited) < len(territory_graph):
+        weight, u, v = heapq.heappop(edges)
+        if v not in visited:
+            visited.add(v)
+            mst.append((u, v, weight))
+            for neighbor, w in territory_graph[v]:
+                if neighbor not in visited:
+                    heapq.heappush(edges, (w, v, neighbor))
+    
+    return mst`,
+  ],
+
+  [
+    "Ternary Search" as PatternKey,
+    `def monster_hunter_ternary_search(monster_territory, left, right):
+    """
+    Find optimal hunting spot using Ternary Search.
+    Time: O(log₃ n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like finding the best hunting spot in a territory
+    - Territory has a single peak of monster activity
+    - Efficiently narrow down the search area
+    
+    Example:
+    territory = [1, 2, 3, 4, 5, 4, 3, 2, 1]  # Monster activity levels
+    left = 0
+    right = len(territory) - 1
+    
+    Process:
+    1. Divide territory into thirds
+    2. Compare middle points
+    3. Narrow search to promising third
+    """
+    while right - left > 1:
+        mid1 = left + (right - left) // 3
+        mid2 = right - (right - left) // 3
+        
+        if monster_territory[mid1] < monster_territory[mid2]:
+            left = mid1
+        else:
+            right = mid2
+    
+    return left if monster_territory[left] > monster_territory[right] else right`,
+  ],
+
+  [
+    "Jump Search" as PatternKey,
+    `def monster_hunter_jump_search(territories, target_monster):
+    """
+    Search for a monster in a sorted list of territories using Jump Search.
+    Time: O(√n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like searching for a monster in a large territory
+    - Territories are sorted by monster difficulty
+    - Jump through territories in fixed steps
+    - Similar to scouting a large area in sections
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show initial jump size calculation
+    2. Show territory jumps with step size
+    3. Show block identification
+    4. Show linear search within block
+    5. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory scouting game where you can:
+    - Select different monsters to search for
+    - See the jump search process step by step
+    - Adjust jump size and see its impact
+    - Learn about territory organization
+    
+    Common Mistakes:
+    - Incorrect jump size calculation
+    - Not checking block boundaries
+    - Skipping territories during jumps
+    - Forgetting to search within block
+    
+    Optimization Tips:
+    - Choose optimal jump size based on territory count
+    - Keep track of previous jump position
+    - Use efficient monster identification
+    - Consider territory characteristics
+    
+    Example:
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
+    
+    Step 1: Calculate jump size (√5 ≈ 2)
+    Step 2: Jump to territory 2 (Coral Highlands)
+    - Current monster: Tobi-Kadachi
+    - Found target! Return "Coral Highlands"
+    
+    Example 2: Finding Nergigante
+    Step 1: Jump size = 2
+    Step 2: Jump to territory 2 (Coral Highlands)
+    - Tobi-Kadachi < Nergigante, continue jumping
+    Step 3: Jump to territory 4 (Elder's Recess)
+    - Found Nergigante! Return "Elder's Recess"
+    """
+    n = len(territories)
+    step = int(math.sqrt(n))
+    prev = 0
+    
+    # Find the block where target might be
+    while prev < n and territories[prev]["monster"] < target_monster:
+        prev = step
+        step += int(math.sqrt(n))
+        if prev >= n:
+            return "Monster not found in any territory"
+    
+    # Linear search in the block
+    while territories[prev]["monster"] < target_monster:
+        prev += 1
+        if prev == min(step, n):
+            return "Monster not found in any territory"
+    
+    if territories[prev]["monster"] == target_monster:
+        return territories[prev]["name"]
+    return "Monster not found in any territory"`,
+  ],
+
+  [
+    "Exponential Search" as PatternKey,
+    `def monster_hunter_exponential_search(territories, target_monster):
+    """
+    Search for a monster in a sorted list of territories using Exponential Search.
+    Time: O(log i) where i is target position
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like searching for a monster in an unknown territory
+    - Territories are sorted by monster difficulty
+    - Double search range until target is found
+    - Similar to expanding search radius in unknown areas
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show initial range (1 territory)
+    2. Show range doubling process
+    3. Show binary search within range
+    4. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory exploration game where you can:
+    - Select different monsters to search for
+    - See the exponential search process step by step
+    - Watch the search range expand
+    - Learn about territory discovery
+    
+    Common Mistakes:
+    - Not checking first territory
+    - Incorrect range doubling
+    - Forgetting to update search boundaries
+    - Not handling edge cases
+    
+    Optimization Tips:
+    - Start with small range
+    - Double range efficiently
+    - Use binary search within range
+    - Consider territory characteristics
+    
+    Example:
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
+    
+    Step 1: Check first territory (Ancient Forest)
+    - Great Jagras < Tobi-Kadachi, double range
+    Step 2: Range = 2 territories
+    - Check territory 2 (Wildspire Waste)
+    - Barroth < Tobi-Kadachi, double range
+    Step 3: Range = 4 territories
+    - Binary search in range [0, 3]
+    - Found Tobi-Kadachi in Coral Highlands!
+    
+    Example 2: Finding non-existent monster
+    Step 1: Check first territory
+    Step 2: Double range until covering all territories
+    Step 3: Binary search in full range
+    Return "Monster not found in any territory"
+    """
+    if territories[0]["monster"] == target_monster:
+        return territories[0]["name"]
+    
+    i = 1
+    while i < len(territories) and territories[i]["monster"] <= target_monster:
+        i *= 2
+    
+    # Binary search in the found range
+    left = i // 2
+    right = min(i, len(territories) - 1)
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if territories[mid]["monster"] == target_monster:
+            return territories[mid]["name"]
+        elif territories[mid]["monster"] < target_monster:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return "Monster not found in any territory"`,
+  ],
+
+  [
+    "Interpolation Search" as PatternKey,
+    `def monster_hunter_interpolation_search(territories, target_monster):
+    """
+    Search for a monster in a sorted list of territories using Interpolation Search.
+    Time: O(log log n) average, O(n) worst case
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like searching for a monster in a territory with known difficulty distribution
+    - Territories are sorted by monster difficulty
+    - Estimate target position based on difficulty values
+    - Similar to predicting monster location based on terrain difficulty
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters and difficulty levels
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show difficulty value calculation
+    2. Show probe position estimation
+    3. Show territory comparison
+    4. Show search range adjustment
+    5. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory prediction game where you can:
+    - Select different monsters to search for
+    - See the interpolation search process step by step
+    - Watch the probe position estimation
+    - Learn about territory difficulty patterns
+    
+    Common Mistakes:
+    - Not handling non-uniform difficulty distribution
+    - Incorrect probe position calculation
+    - Not updating search boundaries correctly
+    - Forgetting to check edge cases
+    
+    Optimization Tips:
+    - Use accurate difficulty values
+    - Consider territory characteristics
+    - Handle non-uniform distributions
+    - Use efficient comparison methods
+    
+    Example:
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
+    
+    Step 1: Calculate probe position
+    - Target difficulty: 3
+    - Range: [1, 5]
+    - Position = 0 + ((3-1)/(5-1)) * (4-0) ≈ 2
+    Step 2: Check territory 2 (Coral Highlands)
+    - Found Tobi-Kadachi! Return "Coral Highlands"
+    
+    Example 2: Finding Nergigante
+    Step 1: Calculate probe position
+    - Target difficulty: 5
+    - Position = 0 + ((5-1)/(5-1)) * (4-0) = 4
+    Step 2: Check territory 4 (Elder's Recess)
+    - Found Nergigante! Return "Elder's Recess"
+    """
+    left = 0
+    right = len(territories) - 1
+    
+    while left <= right and territories[left]["difficulty"] <= target_monster <= territories[right]["difficulty"]:
+        # Calculate probe position
+        pos = left + ((target_monster - territories[left]["difficulty"]) * (right - left)) // \
+              (territories[right]["difficulty"] - territories[left]["difficulty"])
+        
+        if territories[pos]["monster"] == target_monster:
+            return territories[pos]["name"]
+        elif territories[pos]["monster"] < target_monster:
+            left = pos + 1
+        else:
+            right = pos - 1
+    
+    return "Monster not found in any territory"`,
+  ],
+
+  [
+    "Fibonacci Search" as PatternKey,
+    `def monster_hunter_fibonacci_search(territories, target_monster):
+    """
+    Search for a monster in a sorted list of territories using Fibonacci Search.
+    Time: O(log n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like searching for a monster in a territory using golden ratio
+    - Territories are sorted by monster difficulty
+    - Divide search space using Fibonacci numbers
+    - Similar to following natural patterns in monster distribution
+    
+    Visual Representation:
+    Before: Map showing all territories with their monsters
+    After: Map highlighting the found monster's territory
+    Steps:
+    1. Show Fibonacci number generation
+    2. Show search space division
+    3. Show territory comparison
+    4. Show search range adjustment
+    5. Show final territory highlight
+    
+    Interactive Elements:
+    Try it: Interactive territory exploration game where you can:
+    - Select different monsters to search for
+    - See the Fibonacci search process step by step
+    - Watch the golden ratio division
+    - Learn about natural search patterns
+    
+    Common Mistakes:
+    - Incorrect Fibonacci number calculation
+    - Not handling edge cases
+    - Incorrect search space division
+    - Forgetting to update Fibonacci numbers
+    
+    Optimization Tips:
+    - Use efficient Fibonacci calculation
+    - Consider territory characteristics
+    - Handle edge cases properly
+    - Use appropriate comparison methods
+    
+    Example:
+    territories = [
+        {"name": "Ancient Forest", "monster": "Great Jagras", "difficulty": 1},
+        {"name": "Wildspire Waste", "monster": "Barroth", "difficulty": 2},
+        {"name": "Coral Highlands", "monster": "Tobi-Kadachi", "difficulty": 3},
+        {"name": "Rotten Vale", "monster": "Odogaron", "difficulty": 4},
+        {"name": "Elder's Recess", "monster": "Nergigante", "difficulty": 5}
+    ]
+    target_monster = "Tobi-Kadachi"
+    
+    Step 1: Generate Fibonacci numbers up to 5
+    - Fib = [0, 1, 1, 2, 3, 5]
+    Step 2: Find smallest Fib >= 5 (5)
+    Step 3: Compare with territory at offset + Fib[4] (3)
+    - Found Tobi-Kadachi! Return "Coral Highlands"
+    
+    Example 2: Finding Nergigante
+    Step 1: Generate Fibonacci numbers
+    Step 2: Find appropriate Fibonacci number
+    Step 3: Compare and adjust search space
+    Step 4: Found Nergigante in Elder's Recess!
+    """
+    def fibonacci_numbers(n):
+        fib = [0, 1]
+        while fib[-1] < n:
+            fib.append(fib[-1] + fib[-2])
+        return fib
+    
+    n = len(territories)
+    fib = fibonacci_numbers(n)
+    
+    offset = -1
+    k = len(fib) - 1
+    
+    while k > 1:
+        i = min(offset + fib[k-2], n-1)
+        
+        if territories[i]["monster"] < target_monster:
+            k -= 1
+            offset = i
+        elif territories[i]["monster"] > target_monster:
+            k -= 2
+        else:
+            return territories[i]["name"]
+    
+    if k == 1 and territories[offset + 1]["monster"] == target_monster:
+        return territories[offset + 1]["name"]
+    
+    return "Monster not found in any territory"`,
+  ],
+
+  [
+    "Floyd Cycle Detection" as PatternKey,
+    `def monster_hunter_floyd_cycle(monster_path):
+    """
+    Detect monster patrol patterns using Floyd's Algorithm.
+    Time: O(n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like finding monster patrol routes
+    - Detect if monster follows circular path
+    - Find start of patrol cycle
+    
+    Example:
+    path = [1, 2, 3, 4, 2]  # Zone numbers
+    1 -> 2 -> 3 -> 4
+         ↑         |
+         +---------+
+    
+    Process:
+    1. Use two scouts (slow and fast)
+    2. If they meet, cycle exists
+    3. Find cycle start point
+    """
+    def get_next_zone(current):
+        return monster_path[current]
+    
+    # Initialize scouts
+    slow = fast = 0
+    
+    # Phase 1: Detect cycle
+    while True:
+        slow = get_next_zone(slow)
+        fast = get_next_zone(get_next_zone(fast))
+        
+        if slow == fast:
+            break
+    
+    # Phase 2: Find cycle start
+    slow = 0
+    while slow != fast:
+        slow = get_next_zone(slow)
+        fast = get_next_zone(fast)
+    
+    return slow  # Start of patrol cycle`,
   ],
 ]);
 

@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const binary_search_on_answerPattern: AlgorithmPattern = {
+export const binarySearchOnAnswerPattern: AlgorithmPattern = {
   title: "Binary Search on Answer Algorithm",
   description:
     "A problem-solving pattern that uses binary search to find an answer in a range of possible values, typically used when the answer space is monotonic.",

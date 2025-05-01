@@ -910,7 +910,7 @@ export const monsterHunterPatternsExtended3 = new Map<PatternKey, string>([
   ],
 
   [
-    "Trie" as PatternKey,
+    "Trie Operations" as PatternKey,
     `class MonsterHunterTrie:
     """
     Trie for efficient monster name storage and retrieval.

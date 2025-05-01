@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const bit_manipulationPattern: AlgorithmPattern = {
+export const bitManipulationPattern: AlgorithmPattern = {
   title: "Bit Manipulation Pattern",
   description:
     "Techniques for performing operations at the bit level, often used to optimize space usage or perform fast arithmetic operations.",

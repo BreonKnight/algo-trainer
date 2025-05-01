@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const quick_sortPattern: AlgorithmPattern = {
+export const quickSortPattern: AlgorithmPattern = {
   title: "Quick Sort Algorithm",
   description:
     "A divide-and-conquer algorithm that picks a pivot element and partitions the array around it.",

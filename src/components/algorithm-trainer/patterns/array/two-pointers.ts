@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const two_pointersPattern: AlgorithmPattern = {
+export const twoPointersPattern: AlgorithmPattern = {
   title: "Two Pointers Pattern",
   description:
     "A technique that uses two pointers to solve array-related problems efficiently, often moving them towards each other or in the same direction.",

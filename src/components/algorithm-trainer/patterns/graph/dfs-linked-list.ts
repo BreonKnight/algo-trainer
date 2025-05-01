@@ -3,35 +3,45 @@ import { AlgorithmPattern } from "../../types";
 export const dfs_linked_listPattern: AlgorithmPattern = {
   title: "DFS on Linked List",
   description:
-    "Application of DFS pattern to traverse or process a linked list recursively, useful for operations like reversing or finding cycles.",
-  timeComplexity: "O(n)",
-  category: "Graph Algorithms",
-  spaceComplexity: "O(n) for recursion stack",
-  pseudocode: `1. Base case: if node is null, return\n2. Process current node\n3. Recursively call DFS on next node\n4. (Optional) Process node after recursion`,
-  example: `List: 1->2->3->4->null
+    "Apply Depth-First Search on a linked list structure to traverse or search through nodes.",
+  timeComplexity: "O(N)",
+  spaceComplexity: "O(N) for recursion stack",
+  pseudocode: `1. Initialize visited set
+2. Define DFS function:
+   a. If node is null or visited, return
+   b. Process current node
+   c. Mark node as visited
+   d. Recursively call DFS on next node
+3. Start DFS from head node`,
+  example: `Linked List:
+1 -> 2 -> 3 -> 4 -> 5
 
-DFS to print in reverse:
-1. Visit 1, recurse
-2. Visit 2, recurse
-3. Visit 3, recurse
-4. Visit 4, recurse
-5. Print: 4,3,2,1`,
+DFS Process:
+1. Visit 1
+2. Visit 2
+3. Visit 3
+4. Visit 4
+5. Visit 5
+
+Result: [1, 2, 3, 4, 5]`,
   implementation: `class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
-def dfs_linked_list(node):
-    # Base case
-    if not node:
-        return
+def dfs_linked_list(head):
+    visited = set()
+    result = []
     
-    # Process node (pre-order)
-    print(node.val)
+    def dfs(node):
+        if not node or node in visited:
+            return
+        
+        visited.add(node)
+        result.append(node.val)
+        dfs(node.next)
     
-    # Recurse
-    dfs_linked_list(node.next)
-    
-    # Process node (post-order)
-    # print(node.val)  # Uncomment for reverse order`,
+    dfs(head)
+    return result`,
+  category: "graph",
 };

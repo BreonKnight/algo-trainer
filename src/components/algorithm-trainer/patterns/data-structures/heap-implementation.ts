@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const heap_implementationPattern: AlgorithmPattern = {
+export const heapImplementationPattern: AlgorithmPattern = {
   title: "Binary Heap Implementation",
   category: "Data Structures",
   description:
