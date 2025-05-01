@@ -4,111 +4,80 @@ export const BinaryIndexedTreePattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Binary Indexed Tree</span>
-      <span className="ml-2 text-xs text-secondary">(Fenwick Tree)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient
-      prefix sum queries and updates
+      range queries and point updates
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Initialize tree with size n
-INITIALIZE(n):
-    tree = new array of size n + 1
-    for i from 1 to n:
-        tree[i] = 0
+        {`BINARY-INDEXED-TREE(A)
+    let n be the length of A
+    let tree[1‥n] be a new array
+    
+    for i ← 1 to n
+        do tree[i] ← 0
+    
+    for i ← 1 to n
+        do UPDATE(tree, i, A[i])
+    
     return tree
 
-// Get least significant bit
-LSB(x):
-    return x & (-x)
+UPDATE(tree, idx, delta)
+    while idx ≤ n
+        do tree[idx] ← tree[idx] + delta
+            idx ← idx + (idx & -idx)
 
-// Update value at index i
-UPDATE(tree, i, delta):
-    while i <= length of tree:
-        tree[i] = tree[i] + delta
-        i = i + LSB(i)
-
-// Query prefix sum up to index i
-QUERY(tree, i):
-    sum = 0
-    while i > 0:
-        sum = sum + tree[i]
-        i = i - LSB(i)
+QUERY(tree, idx)
+    let sum ← 0
+    while idx > 0
+        do sum ← sum + tree[idx]
+            idx ← idx - (idx & -idx)
     return sum
 
-// Get range sum from l to r
-RANGE-SUM(tree, l, r):
-    return QUERY(tree, r) - QUERY(tree, l - 1)`}
+RANGE-QUERY(tree, l, r)
+    return QUERY(tree, r) - QUERY(tree, l-1)
+
+// Example:
+// Input: A = [1, 3, 5, 7, 9, 11]
+// 
+// Initial tree:
+//   tree = [0, 0, 0, 0, 0, 0]
+// 
+// After updates:
+//   tree = [1, 4, 5, 16, 9, 20]
+// 
+// Query(4):
+//   idx = 4: sum = 16
+//   idx = 0: return 16
+// 
+// Range Query(2,5):
+//   QUERY(5) = 25
+//   QUERY(1) = 1
+//   return 24
+// 
+// Output: Range sum from index 2 to 5 is 24`}
       </pre>
     </div>
 
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        empty tree
-      </span>
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Update:</span> Add delta to
-        index and ancestors
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Query:</span> Sum values
-        from index to root
-      </span>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Tree Operations
-      </span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Initialize tree of size 8:
-tree = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-Update operations:
-UPDATE(tree, 1, 3)  // tree[1] += 3
-UPDATE(tree, 2, 2)  // tree[2] += 2
-UPDATE(tree, 3, 5)  // tree[3] += 5
-UPDATE(tree, 4, 1)  // tree[4] += 1
-
-Final tree state:
-tree = [0, 3, 5, 5, 11, 0, 0, 0, 0]
-
-Query operations:
-QUERY(tree, 4) = 11  // 3 + 2 + 5 + 1
-RANGE-SUM(tree, 2, 4) = 8  // 2 + 5 + 1`}
-      </pre>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Binary Indexing
-      </span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Index  Binary  LSB
-1     0001    1
-2     0010    2
-3     0011    1
-4     0100    4
-5     0101    1
-6     0110    2
-7     0111    1
-8     1000    8
-
-LSB(x) = x & (-x) isolates the rightmost 1-bit`}
-      </pre>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: Create tree array and set all values to 0</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Update: Add value to all affected nodes using LSB</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Query: Compute prefix sums and range queries efficiently</span>
+      </div>
     </div>
   </div>
 );

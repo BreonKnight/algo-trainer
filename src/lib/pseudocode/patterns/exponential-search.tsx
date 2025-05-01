@@ -3,45 +3,85 @@ import { ChevronRight } from "lucide-react";
 export const ExponentialSearchPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Exponential Search Template</span>
-      <span className="ml-2 text-xs text-secondary">(Searching Algorithm)</span>
+      <span className="text-accent font-bold">Exponential Search</span>
+      <span className="ml-2 text-xs text-secondary">(Search)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) - binary search after range &nbsp;|&nbsp; Space: O(1) -
-      constant space &nbsp;|&nbsp; Use: Finding elements in unbounded sorted
-      arrays
+      Time: O(log i) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find element
+      in unbounded sorted array
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Find range:</span> Double
-        index until element found or exceeded
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`# Exponential Search: Find element in unbounded sorted array
+# Input: Sorted array A[1..n], target value x
+# Output: Index of x in A if found, -1 otherwise
+
+Algorithm EXPONENTIAL-SEARCH(A, x)
+    n ← length[A]
+    
+    # If x is at first position
+    if A[1] = x then
+        return 1
+    end if
+    
+    # Find range for binary search
+    i ← 1
+    while i < n and A[i] ≤ x do
+        i ← i * 2
+    end while
+    
+    # Binary search in found range
+    return BINARY-SEARCH(A, i/2, min(i, n), x)
+
+Algorithm BINARY-SEARCH(A, low, high, x)
+    while low ≤ high do
+        mid ← ⌊(low + high)/2⌋
+        if A[mid] = x then
+            return mid
+        else if A[mid] < x then
+            low ← mid + 1
+        else
+            high ← mid - 1
+        end if
+    end while
+    return -1
+
+# Example:
+# Input: A = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], x = 70
+# 
+# Step 1: i = 1, A[1] = 10 ≠ 70
+# Step 2: i = 2, A[2] = 20 ≤ 70
+# Step 3: i = 4, A[4] = 40 ≤ 70
+# Step 4: i = 8, A[8] = 80 > 70
+# Step 5: Binary search in range [4,8]
+#         mid = 6, A[6] = 60 < 70
+#         mid = 7, A[7] = 70 = 70
+# 
+# Output: 7`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Binary search:</span> Search
-        within found range
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Check bounds:</span> Verify
-        element exists in range
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span> Index
-        of element or -1 if not found
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Check if element is at first position</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Find range by exponentially increasing index</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Perform binary search in found range</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return index if found, -1 otherwise</span>
+      </div>
     </div>
   </div>
 );

@@ -3,34 +3,72 @@ import { ChevronRight } from "lucide-react";
 export const InterpolationSearchPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Interpolation Search Template</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm Pattern)</span>
+      <span className="text-accent font-bold">Interpolation Search</span>
+      <span className="ml-2 text-xs text-secondary">(Search)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - depends on implementation &nbsp;|&nbsp;
-      Space: O(n) - depends on implementation &nbsp;|&nbsp;
-      Use: Interpolation Search problems
+      Time: O(log log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find
+      element in uniformly distributed sorted array
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set up data structures
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`# Interpolation Search: Find element in uniformly distributed sorted array
+# Input: Sorted array A[1..n], target value x
+# Output: Index of x in A if found, -1 otherwise
+
+Algorithm INTERPOLATION-SEARCH(A, x)
+    low ← 1
+    high ← length[A]
+    
+    while low ≤ high and x ≥ A[low] and x ≤ A[high] do
+        # Calculate position using interpolation formula
+        pos ← low + ((x - A[low]) * (high - low)) / (A[high] - A[low])
+        
+        if A[pos] = x then
+            return pos
+        end if
+        
+        if A[pos] < x then
+            low ← pos + 1
+        else
+            high ← pos - 1
+        end if
+    end while
+    
+    return -1
+
+# Example:
+# Input: A = [10, 20, 30, 40, 50, 60, 70, 80, 90], x = 50
+# 
+# Step 1: low = 1, high = 9
+#         pos = 1 + ((50-10)*(9-1))/(90-10) = 5
+#         A[5] = 50
+# 
+# Output: 5`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Process:</span> Implement Interpolation Search logic
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return:</span> Return result
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize search boundaries</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Calculate position using interpolation formula</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Adjust boundaries based on comparison</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return index if found, -1 otherwise</span>
+      </div>
     </div>
   </div>
 );

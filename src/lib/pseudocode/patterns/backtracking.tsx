@@ -4,38 +4,59 @@ export const BacktrackingPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Backtracking</span>
-      <span className="ml-2 text-xs text-secondary">(Search Technique)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(2ⁿ) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Finding all
-      possible solutions
+      Time: O(n!) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Exhaustive search
+      with pruning
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Generate all possible combinations
-BACKTRACKING(current, choices, result):
-    # If current solution is complete
-    if is_solution(current):
-        # Add to results
-        result.append(current.copy())
-        return
-    
-    # Try each possible choice
-    for each choice in choices:
-        # If choice is valid
-        if is_valid(choice):
-            # Make choice
-            current.append(choice)
-            # Remove choice from available options
-            choices.remove(choice)
-            
-            # Explore further
-            BACKTRACKING(current, choices, result)
-            
-            # Undo choice (backtrack)
-            current.remove(choice)
-            choices.append(choice)`}
+        {`// N-Queens
+N-QUEENS(n):
+    board = [0] * n
+    return SOLVE-N-QUEENS(board, 0)
+
+SOLVE-N-QUEENS(board, row):
+    if row == n:
+        return true
+    for col from 0 to n-1:
+        if IS-SAFE(board, row, col):
+            board[row] = col
+            if SOLVE-N-QUEENS(board, row+1):
+                return true
+            board[row] = 0
+    return false
+
+// Sudoku
+SUDOKU(board):
+    return SOLVE-SUDOKU(board)
+
+SOLVE-SUDOKU(board):
+    find empty cell (i, j)
+    if no empty cell:
+        return true
+    for num from 1 to 9:
+        if IS-VALID(board, i, j, num):
+            board[i][j] = num
+            if SOLVE-SUDOKU(board):
+                return true
+            board[i][j] = 0
+    return false
+
+// Subset Sum
+SUBSET-SUM(S, target):
+    return SOLVE-SUBSET-SUM(S, 0, target)
+
+SOLVE-SUBSET-SUM(S, i, target):
+    if target == 0:
+        return true
+    if i == length(S) or target < 0:
+        return false
+    if SOLVE-SUBSET-SUM(S, i+1, target-S[i]):
+        return true
+    return SOLVE-SUBSET-SUM(S, i+1, target)`}
       </pre>
     </div>
 
@@ -43,20 +64,12 @@ BACKTRACKING(current, choices, result):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Check:</span> Verify if
-        solution is complete
+        <span className="font-semibold text-accent">Choose:</span> Make a choice
+        at current state
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Choose:</span> Select next
-        valid option
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
         <span className="font-semibold text-accent">Explore:</span> Recursively
@@ -64,86 +77,64 @@ BACKTRACKING(current, choices, result):
       </span>
     </div>
     <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
+      <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
         <span className="font-semibold text-accent">Backtrack:</span> Undo
-        choice and try alternatives
+        choice if it leads to dead end
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Permutations of [1, 2, 3]
-      </span>
+      <span className="font-semibold text-accent">Example: N-Queens</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Step 1: Start with empty current []
-Choices: [1, 2, 3]
-
-Step 2: Choose 1
-Current: [1]
-Choices: [2, 3]
-
-Step 3: Choose 2
-Current: [1, 2]
-Choices: [3]
-
-Step 4: Choose 3
-Current: [1, 2, 3] → Add to results
-Backtrack to [1, 2]
-
-Step 5: Backtrack to [1]
-Choose 3
-Current: [1, 3]
-Choices: [2]
-
-... and so on
-
-Final results:
-[1, 2, 3]
-[1, 3, 2]
-[2, 1, 3]
-[2, 3, 1]
-[3, 1, 2]
-[3, 2, 1]`}
+        {`n = 4
+Board:
+[1, 3, 0, 2]
+[2, 0, 3, 1]
+Q . . .
+. . Q .
+. Q . .
+. . . Q`}
       </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: N-Queens Problem
-      </span>
+      <span className="font-semibold text-accent">Example: Sudoku</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Board size: 4x4
+        {`Input:
+5 3 . . 7 . . . .
+6 . . 1 9 5 . . .
+. 9 8 . . . . 6 .
+8 . . . 6 . . . 3
+4 . . 8 . 3 . . 1
+7 . . . 2 . . . 6
+. 6 . . . . 2 8 .
+. . . 4 1 9 . . 5
+. . . . 8 . . 7 9
 
-Step 1: Place queen in row 1, column 1
-Q . . .
-. . . .
-. . . .
-. . . .
+Solution:
+5 3 4 6 7 8 9 1 2
+6 7 2 1 9 5 3 4 8
+1 9 8 3 4 2 5 6 7
+8 5 9 7 6 1 4 2 3
+4 2 6 8 5 3 7 9 1
+7 1 3 9 2 4 8 5 6
+9 6 1 5 3 7 2 8 4
+2 8 7 4 1 9 6 3 5
+3 4 5 2 8 6 1 7 9`}
+      </pre>
+    </div>
 
-Step 2: Try placing queen in row 2, column 3
-Q . . .
-. . Q .
-. . . .
-. . . .
-
-Step 3: No valid position in row 3
-Backtrack to step 2
-
-Step 4: Try placing queen in row 2, column 4
-Q . . .
-. . . Q
-. . . .
-. . . .
-
-... and so on
-
-Valid solution:
-. Q . .
-. . . Q
-Q . . .
-. . Q .`}
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Subset Sum</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`S = [3, 1, 4, 2]
+target = 6
+Subsets:
+[3, 1, 2]
+[4, 2]
+Total subsets: 2`}
       </pre>
     </div>
   </div>

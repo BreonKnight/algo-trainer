@@ -15,20 +15,43 @@ export const KadanesAlgorithmPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Find maximum sum of any contiguous subarray
-KADANE(array):
-    # Initialize maximum values
-    current_sum = array[1]
-    max_sum = array[1]
-    
-    # Process each element
-    for i from 2 to length of array:
-        # Choose between starting new subarray or continuing current
-        current_sum = max(array[i], current_sum + array[i])
-        # Update maximum sum if needed
-        max_sum = max(max_sum, current_sum)
-    
-    return max_sum`}
+        {`// Find maximum subarray sum
+KADANE(A):
+    max_ending_here = A[1]
+    max_so_far = A[1]
+    for i = 2 to A.length:
+        max_ending_here = max(A[i], max_ending_here + A[i])
+        max_so_far = max(max_so_far, max_ending_here)
+    return max_so_far
+
+// Find maximum subarray sum with indices
+KADANE-WITH-INDICES(A):
+    max_ending_here = A[1]
+    max_so_far = A[1]
+    start = 1
+    end = 1
+    temp_start = 1
+    for i = 2 to A.length:
+        if A[i] > max_ending_here + A[i]:
+            max_ending_here = A[i]
+            temp_start = i
+        else:
+            max_ending_here = max_ending_here + A[i]
+        if max_ending_here > max_so_far:
+            max_so_far = max_ending_here
+            start = temp_start
+            end = i
+    return (max_so_far, start, end)
+
+// Find maximum circular subarray sum
+KADANE-CIRCULAR(A):
+    max_kadane = KADANE(A)
+    max_wrap = 0
+    for i = 1 to A.length:
+        max_wrap = max_wrap + A[i]
+        A[i] = -A[i]
+    max_wrap = max_wrap + KADANE(A)
+    return max(max_kadane, max_wrap)`}
       </pre>
     </div>
 
@@ -36,72 +59,48 @@ KADANE(array):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set
-        current and maximum sums
+        <span className="font-semibold text-accent">Basic:</span> Find maximum
+        subarray sum
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Process:</span> Consider
-        each element
+        <span className="font-semibold text-accent">Indices:</span> Find maximum
+        subarray with indices
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Choose:</span> Start new or
-        continue current subarray
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Update:</span> Track maximum
-        sum found
+        <span className="font-semibold text-accent">Circular:</span> Find
+        maximum circular subarray sum
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Maximum Subarray Sum
-      </span>
+      <span className="font-semibold text-accent">Example: Basic Kadane</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Array: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
-
-Step 1: current = -2, max = -2
-Step 2: current = 1, max = 1
-Step 3: current = -2, max = 1
-Step 4: current = 4, max = 4
-Step 5: current = 3, max = 4
-Step 6: current = 5, max = 5
-Step 7: current = 6, max = 6
-Step 8: current = 1, max = 6
-Step 9: current = 5, max = 6
-
-Maximum subarray sum: 6
-Subarray: [4, -1, 2, 1]`}
+KADANE → 6 (subarray [4, -1, 2, 1])`}
       </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: All Positive Numbers
-      </span>
+      <span className="font-semibold text-accent">Example: With Indices</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Array: [1, 2, 3, 4, 5]
+        {`Array: [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+KADANE-WITH-INDICES → (6, 4, 7) (sum 6 from index 4 to 7)`}
+      </pre>
+    </div>
 
-Step 1: current = 1, max = 1
-Step 2: current = 3, max = 3
-Step 3: current = 6, max = 6
-Step 4: current = 10, max = 10
-Step 5: current = 15, max = 15
-
-Maximum subarray sum: 15
-Subarray: [1, 2, 3, 4, 5]`}
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Circular</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Array: [5, -3, 5]
+KADANE-CIRCULAR → 10 (subarray [5, -3, 5])`}
       </pre>
     </div>
   </div>

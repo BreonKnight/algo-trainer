@@ -3,44 +3,51 @@ import { ChevronRight } from "lucide-react";
 export const DynamicProgrammingIterativePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Iterative DP Template</span>
-      <span className="ml-2 text-xs text-secondary">(Dynamic Programming)</span>
+      <span className="text-accent font-bold">Iterative DP</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - single pass &nbsp;|&nbsp; Space: O(n) - DP array
-      &nbsp;|&nbsp; Use: Solving problems with bottom-up approach
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solving problems
+      with bottom-up approach
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create DP
-        array with base cases
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`ITERATIVE-DP(n)
+    # Initialize DP array with base cases
+    dp[0] ← base_case_0
+    dp[1] ← base_case_1
+    
+    # Fill DP array
+    for i ← 2 to n
+        dp[i] ← compute_from_previous(dp[i-1], dp[i-2])
+    
+    return dp[n]
+
+# Example:
+# Input: n = 5
+# Base cases: dp[0] = 0, dp[1] = 1
+# Compute: dp[i] = dp[i-1] + dp[i-2]
+# Output: dp[5] = 5`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Fill DP:</span> Compute each
-        state from previous states
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Optimize:</span> Use
-        constant space if possible
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span> Final
-        state value
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: DP array with base cases</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Fill: DP array from bottom up</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return: Final state value</span>
+      </div>
     </div>
   </div>
 );

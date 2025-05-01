@@ -3,44 +3,55 @@ import { ChevronRight } from "lucide-react";
 export const DynamicProgrammingFibonacciPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Fibonacci Template</span>
-      <span className="ml-2 text-xs text-secondary">(Dynamic Programming)</span>
+      <span className="text-accent font-bold">Fibonacci</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) - single pass &nbsp;|&nbsp; Space: O(1) - constant space
-      &nbsp;|&nbsp; Use: Computing Fibonacci numbers efficiently
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Computing
+      Fibonacci numbers efficiently
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set first
-        two numbers
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`FIBONACCI(n)
+    # Base cases
+    if n ≤ 1
+        return n
+    
+    # Initialize first two numbers
+    prev ← 0
+    curr ← 1
+    
+    # Compute next numbers
+    for i ← 2 to n
+        next ← prev + curr
+        prev ← curr
+        curr ← next
+    
+    return curr
+
+# Example:
+# Input: n = 6
+# Output: 8  # Sequence: 0, 1, 1, 2, 3, 5, 8`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Iterate:</span> Compute next
-        number from previous two
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Update:</span> Shift
-        previous numbers
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span> nth
-        Fibonacci number
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: First two numbers (0 and 1)</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Compute: Next number from previous two</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return: nth Fibonacci number</span>
+      </div>
     </div>
   </div>
 );

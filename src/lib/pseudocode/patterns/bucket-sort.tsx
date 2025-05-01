@@ -4,31 +4,108 @@ export const BucketSortPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Bucket Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Sorting Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Uniformly
-      distributed floating-point numbers
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Sorting uniformly
+      distributed numbers
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`BUCKET-SORT(A):
-    n = A.length
-    let B[0..n-1] be a new array of empty lists
+        {`// Standard Bucket Sort
+BUCKET-SORT(A):
+    # Initialize buckets
+    n = len(A)
+    buckets = [[] for _ in range(n)]
     
-    // Distribute elements into buckets
-    for i = 1 to n:
-        insert A[i] into B[⌊n * A[i]⌋]
+    # Distribute elements into buckets
+    for x in A:
+        bucket_idx = int(x * n)
+        buckets[bucket_idx].append(x)
     
-    // Sort individual buckets
-    for i = 0 to n-1:
-        sort B[i] using INSERTION-SORT
+    # Sort individual buckets
+    for bucket in buckets:
+        INSERTION-SORT(bucket)
     
-    // Concatenate buckets
-    let result be an empty list
-    for i = 0 to n-1:
-        concatenate B[i] to result
+    # Concatenate buckets
+    result = []
+    for bucket in buckets:
+        result.extend(bucket)
+    
+    return result
+
+// Bucket Sort with Custom Range
+BUCKET-SORT-RANGE(A, min_val, max_val):
+    # Initialize buckets
+    n = len(A)
+    buckets = [[] for _ in range(n)]
+    
+    # Distribute elements into buckets
+    for x in A:
+        bucket_idx = int((x - min_val) / (max_val - min_val) * (n-1))
+        buckets[bucket_idx].append(x)
+    
+    # Sort individual buckets
+    for bucket in buckets:
+        INSERTION-SORT(bucket)
+    
+    # Concatenate buckets
+    result = []
+    for bucket in buckets:
+        result.extend(bucket)
+    
+    return result
+
+// Bucket Sort with Linked Lists
+BUCKET-SORT-LIST(A):
+    # Initialize buckets
+    n = len(A)
+    buckets = [LinkedList() for _ in range(n)]
+    
+    # Distribute elements into buckets
+    for x in A:
+        bucket_idx = int(x * n)
+        buckets[bucket_idx].append(x)
+    
+    # Sort individual buckets
+    for bucket in buckets:
+        bucket.sort()
+    
+    # Concatenate buckets
+    result = []
+    for bucket in buckets:
+        result.extend(bucket.to_list())
+    
+    return result
+
+// Bucket Sort with Counting Sort
+BUCKET-SORT-COUNTING(A):
+    # Initialize buckets
+    n = len(A)
+    buckets = [[] for _ in range(n)]
+    
+    # Distribute elements into buckets
+    for x in A:
+        bucket_idx = int(x * n)
+        buckets[bucket_idx].append(x)
+    
+    # Sort individual buckets using counting sort
+    for bucket in buckets:
+        if bucket:
+            max_val = max(bucket)
+            count = [0] * (max_val + 1)
+            for x in bucket:
+                count[x] += 1
+            sorted_bucket = []
+            for i in range(max_val + 1):
+                sorted_bucket.extend([i] * count[i])
+            bucket[:] = sorted_bucket
+    
+    # Concatenate buckets
+    result = []
+    for bucket in buckets:
+        result.extend(bucket)
     
     return result`}
       </pre>
@@ -58,42 +135,63 @@ export const BucketSortPattern = () => (
         sorted buckets
       </span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return:</span> Return the
-        sorted array
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Standard Bucket Sort
       </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Input: [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+
+Buckets:
+[0.12, 0.17]
+[0.21, 0.23, 0.26]
+[0.39]
+[]
+[0.68]
+[0.72, 0.78]
+[]
+[]
+[]
+[0.94]
+
+Output: [0.12, 0.17, 0.21, 0.23, 0.26, 0.39, 0.68, 0.72, 0.78, 0.94]`}
+      </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
+      <span className="font-semibold text-accent">Example: Custom Range</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Input: A = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+        {`Input: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+Range: [10, 100]
 
-Step 1: Distribute into buckets
-B[0] = [0.17, 0.12]
-B[1] = [0.26, 0.21, 0.23]
-B[2] = [0.39]
-B[3] = []
-B[4] = []
-B[5] = []
-B[6] = [0.68, 0.72]
-B[7] = [0.78]
-B[8] = []
-B[9] = [0.94]
+Buckets:
+[10, 20]
+[30, 40]
+[50, 60]
+[70, 80]
+[90, 100]
 
-Step 2: Sort each bucket
-B[0] = [0.12, 0.17]
-B[1] = [0.21, 0.23, 0.26]
-B[2] = [0.39]
-B[6] = [0.68, 0.72]
-B[7] = [0.78]
-B[9] = [0.94]
+Output: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]`}
+      </pre>
+    </div>
 
-Step 3: Concatenate
-[0.12, 0.17, 0.21, 0.23, 0.26, 0.39, 0.68, 0.72, 0.78, 0.94]
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Counting Sort</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Input: [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
+
+Buckets with counting sort:
+[0.12, 0.17]
+[0.21, 0.23, 0.26]
+[0.39]
+[]
+[0.68]
+[0.72, 0.78]
+[]
+[]
+[]
+[0.94]
 
 Output: [0.12, 0.17, 0.21, 0.23, 0.26, 0.39, 0.68, 0.72, 0.78, 0.94]`}
       </pre>

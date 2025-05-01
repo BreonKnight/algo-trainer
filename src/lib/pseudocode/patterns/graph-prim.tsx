@@ -4,32 +4,89 @@ export const PrimPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Prim's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Minimum
-      spanning tree in weighted undirected graphs
+      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+      minimum spanning tree in weighted graphs
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`PRIM(G, w, r):
-    // G is the graph, w is the weight function, r is the root
-    for each u ∈ G.V:
-        u.key = ∞
-        u.π = NIL
-    r.key = 0
-    Q = G.V
-    while Q ≠ ∅:
-        u = EXTRACT-MIN(Q)
-        for each v ∈ G.Adj[u]:
-            if v ∈ Q and w(u, v) < v.key:
-                v.π = u
-                v.key = w(u, v)
+        {`// Standard Prim's Algorithm
+PRIM(G):
+    # Initialize
+    key = [∞] * |V|
+    parent = [None] * |V|
+    in_mst = [False] * |V|
+    
+    # Start with vertex 0
+    key[0] = 0
+    
+    for _ in range(|V|):
+        # Find minimum key vertex
+        u = min((v for v in range(|V|) if not in_mst[v]), key=lambda v: key[v])
+        in_mst[u] = True
+        
+        # Update keys of adjacent vertices
+        for v in G.adj[u]:
+            if not in_mst[v] and G.weight(u, v) < key[v]:
+                key[v] = G.weight(u, v)
+                parent[v] = u
+    
+    return parent
 
-MST-PRINT(G, r):
-    for each v ∈ G.V - {r}:
-        print "(" v.π ", " v ")"`}
+// Prim's with Priority Queue
+PRIM-PQ(G):
+    # Initialize
+    key = [∞] * |V|
+    parent = [None] * |V|
+    in_mst = [False] * |V|
+    pq = PriorityQueue()
+    
+    # Start with vertex 0
+    key[0] = 0
+    pq.put((0, 0))
+    
+    while not pq.empty():
+        _, u = pq.get()
+        if in_mst[u]:
+            continue
+        
+        in_mst[u] = True
+        for v in G.adj[u]:
+            weight = G.weight(u, v)
+            if not in_mst[v] and weight < key[v]:
+                key[v] = weight
+                parent[v] = u
+                pq.put((weight, v))
+    
+    return parent
+
+// Prim's with Fibonacci Heap
+PRIM-FH(G):
+    # Initialize
+    key = [∞] * |V|
+    parent = [None] * |V|
+    in_mst = [False] * |V|
+    fh = FibonacciHeap()
+    
+    # Start with vertex 0
+    key[0] = 0
+    nodes = [fh.insert(key[v], v) for v in range(|V|)]
+    
+    while not fh.empty():
+        u = fh.extract_min().value
+        in_mst[u] = True
+        
+        for v in G.adj[u]:
+            weight = G.weight(u, v)
+            if not in_mst[v] and weight < key[v]:
+                key[v] = weight
+                parent[v] = u
+                fh.decrease_key(nodes[v], weight)
+    
+    return parent`}
       </pre>
     </div>
 
@@ -37,16 +94,16 @@ MST-PRINT(G, r):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set all
-        keys to infinity
+        <span className="font-semibold text-accent">Initialize:</span> Set up
+        key and parent arrays
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Extract:</span> Select
-        vertex with minimum key
+        <span className="font-semibold text-accent">Select:</span> Choose
+        minimum key vertex
       </span>
     </div>
     <div className="flex items-start mb-1">
@@ -57,41 +114,78 @@ MST-PRINT(G, r):
         of adjacent vertices
       </span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Repeat:</span> Continue
-        until queue is empty
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Standard Prim's
       </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Graph:
+0 --1-- 1 --2-- 2
+|      /      |
+|     /       |
+3    4        5
+|   /         |
+|  /          |
+3 --6-- 4 --7-- 5
+
+Initial state:
+key = [0,∞,∞,∞,∞,∞]
+parent = [None,None,None,None,None,None]
+
+After processing vertex 0:
+key = [0,1,∞,3,∞,∞]
+parent = [None,0,None,0,None,None]
+
+After processing vertex 1:
+key = [0,1,2,3,4,∞]
+parent = [None,0,1,0,1,None]
+
+Final MST edges:
+(0,1), (1,2), (0,3), (2,5), (3,4)
+Total weight: 16`}
+      </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
+      <span className="font-semibold text-accent">Example: Priority Queue</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Graph:
-     A
-    / \
-   2   4
-  /     \
- B       C
-  \     /
-   3   1
-    \ /
-     D
+        {`Priority Queue operations:
+Insert: (0,0)
+Extract: (0,0)
+Insert: (1,1), (3,3)
+Extract: (1,1)
+Insert: (2,2), (4,4)
+Extract: (2,2)
+Insert: (5,5)
+Extract: (3,3)
+Insert: (6,4)
+Extract: (4,4)
+Extract: (5,5)
 
-Starting from A:
-1. A: key = 0, π = NIL
-2. B: key = 2, π = A
-3. C: key = 4, π = A
-4. D: key = 1, π = C
+Final MST edges:
+(0,1), (1,2), (0,3), (2,5), (3,4)`}
+      </pre>
+    </div>
 
-Minimum Spanning Tree:
-(A, B)
-(A, C)
-(C, D)
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Fibonacci Heap</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Fibonacci Heap operations:
+Insert: 0(0), 1(∞), 2(∞), 3(∞), 4(∞), 5(∞)
+Extract: 0
+Decrease: 1(1), 3(3)
+Extract: 1
+Decrease: 2(2), 4(4)
+Extract: 2
+Decrease: 5(5)
+Extract: 3
+Decrease: 4(6)
+Extract: 4
+Extract: 5
 
-Total weight: 7`}
+Final MST edges:
+(0,1), (1,2), (0,3), (2,5), (3,4)`}
       </pre>
     </div>
   </div>

@@ -3,43 +3,56 @@ import { ChevronRight } from "lucide-react";
 export const DynamicProgrammingCoinChangePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Coin Change Template</span>
-      <span className="ml-2 text-xs text-secondary">(Dynamic Programming)</span>
+      <span className="text-accent font-bold">Coin Change</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n*m) - n is amount, m is coins &nbsp;|&nbsp; Space: O(n) - DP
-      array &nbsp;|&nbsp; Use: Finding minimum coins needed for amount
+      Time: O(n*m) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Finding minimum
+      coins needed for amount
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create DP
-        array with infinity
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`COIN-CHANGE(coins, amount)
+    # Initialize DP array with infinity
+    dp[0..amount] ← ∞
+    dp[0] ← 0  # Base case: 0 coins needed for amount 0
+    
+    # Fill DP array
+    for i ← 1 to amount
+        for each coin in coins
+            if coin ≤ i
+                dp[i] ← min(dp[i], dp[i - coin] + 1)
+    
+    if dp[amount] = ∞
+        return -1
+    else
+        return dp[amount]
+
+# Example:
+# Input: coins = [1, 2, 5], amount = 11
+# dp array after filling:
+# [0, 1, 1, 2, 2, 1, 2, 2, 3, 3, 2, 3]
+# Output: 3  # 5 + 5 + 1`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Base case:</span> DP[0] = 0
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Fill DP:</span> For each
-        amount, try all coins
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span>{" "}
-        DP[amount] or -1 if impossible
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: DP array with infinity and base case</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Fill: DP array by trying each coin</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Return: Minimum coins or -1 if impossible</span>
+      </div>
     </div>
   </div>
 );

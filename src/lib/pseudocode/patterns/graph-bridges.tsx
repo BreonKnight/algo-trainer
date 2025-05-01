@@ -3,45 +3,84 @@ import { ChevronRight } from "lucide-react";
 export const GraphBridgesPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Graph Bridges Template</span>
-      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+      <span className="text-accent font-bold">Graph Bridges</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) - DFS traversal &nbsp;|&nbsp; Space: O(V) - for visited and
-      discovery arrays &nbsp;|&nbsp; Use: Finding critical edges in a graph
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find critical
+      edges in graph
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        discovery time array, low time array, visited array, and parent array
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`FIND-BRIDGES(G)
+    let n be the number of vertices in G
+    let disc[1‥n] be a new array
+    let low[1‥n] be a new array
+    let parent[1‥n] be a new array
+    let bridges be a new empty list
+    let time ← 0
+    
+    for each vertex u in G.V
+        do disc[u] ← -1
+            low[u] ← -1
+            parent[u] ← NIL
+    
+    for each vertex u in G.V
+        do if disc[u] = -1
+            then DFS-BRIDGES(G, u, disc, low, parent, bridges, time)
+    
+    return bridges
+
+DFS-BRIDGES(G, u, disc, low, parent, bridges, time)
+    time ← time + 1
+    disc[u] ← time
+    low[u] ← time
+    
+    for each v in G.Adj[u]
+        do if disc[v] = -1
+            then parent[v] ← u
+                DFS-BRIDGES(G, v, disc, low, parent, bridges, time)
+                low[u] ← min(low[u], low[v])
+                if low[v] > disc[u]
+                    then bridges.append((u,v))
+            else if v ≠ parent[u]
+                then low[u] ← min(low[u], disc[v])
+
+// Example:
+// Input: G with edges (1,2), (2,3), (3,4), (4,1), (1,3)
+// 
+// DFS from vertex 1:
+//   disc = [1, 2, 3, 4]
+//   low = [1, 1, 1, 1]
+//   parent = [NIL, 1, 2, 3]
+// 
+// Bridge check:
+//   Edge (2,3): low[3] = 1 > disc[2] = 2? No
+//   Edge (3,4): low[4] = 1 > disc[3] = 3? No
+//   Edge (4,1): low[1] = 1 > disc[4] = 4? No
+//   Edge (1,3): low[3] = 1 > disc[1] = 1? No
+// 
+// Output: [] (no bridges)`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">DFS traversal:</span> For
-        each unvisited node, perform DFS and update discovery and low times
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Check for bridges:</span> If
-        low time of child is greater than discovery time of parent, edge is a
-        bridge
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Update low times:</span>{" "}
-        Propagate low times up the DFS tree
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: Set up discovery and low values</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>DFS: Track discovery time and low values</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Identify: Check conditions for bridge edges</span>
+      </div>
     </div>
   </div>
 );

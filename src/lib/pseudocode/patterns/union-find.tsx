@@ -13,42 +13,34 @@ export const UnionFindPattern = () => (
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Create new set with single element
+        {`// Create new set
 MAKE-SET(x):
-    # Initialize parent and rank
-    parent[x] = x
-    rank[x] = 0
+    x.parent = x
+    x.rank = 0
 
-// Find representative of set containing x
+// Find set representative
 FIND-SET(x):
-    # If x is not the root
-    if x ≠ parent[x]:
-        # Path compression
-        parent[x] = FIND-SET(parent[x])
-    return parent[x]
+    if x ≠ x.parent:
+        x.parent = FIND-SET(x.parent)  // Path compression
+    return x.parent
 
-// Merge sets containing x and y
+// Union two sets
 UNION(x, y):
-    # Find representatives
     x_root = FIND-SET(x)
     y_root = FIND-SET(y)
-    
-    # If already in same set
-    if x_root == y_root:
+    if x_root = y_root:
         return
-    
-    # Union by rank
-    if rank[x_root] < rank[y_root]:
-        parent[x_root] = y_root
-    else if rank[x_root] > rank[y_root]:
-        parent[y_root] = x_root
+    if x_root.rank < y_root.rank:
+        x_root.parent = y_root
+    else if x_root.rank > y_root.rank:
+        y_root.parent = x_root
     else:
-        parent[y_root] = x_root
-        rank[x_root] = rank[x_root] + 1
+        y_root.parent = x_root
+        x_root.rank = x_root.rank + 1
 
-// Check if two elements are in same set
+// Check if elements are in same set
 CONNECTED(x, y):
-    return FIND-SET(x) == FIND-SET(y)`}
+    return FIND-SET(x) = FIND-SET(y)`}
       </pre>
     </div>
 
@@ -56,15 +48,14 @@ CONNECTED(x, y):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Create:</span> Initialize
-        new set
+        <span className="font-semibold text-accent">Make:</span> Create new set
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Find:</span> Locate set
+        <span className="font-semibold text-accent">Find:</span> Find set
         representative
       </span>
     </div>
@@ -75,37 +66,30 @@ CONNECTED(x, y):
         <span className="font-semibold text-accent">Union:</span> Merge two sets
       </span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Check:</span> Test set
-        membership
-      </span>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Initial State</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Elements: [1, 2, 3, 4, 5]
+After MAKE-SET:
+1: {1}
+2: {2}
+3: {3}
+4: {4}
+5: {5}`}
+      </pre>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Set Operations</span>
+      <span className="font-semibold text-accent">
+        Example: Union Operations
+      </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Initial state:
-MAKE-SET(1) → {1}
-MAKE-SET(2) → {2}
-MAKE-SET(3) → {3}
-MAKE-SET(4) → {4}
-
-After UNION(1, 2):
-{1, 2}, {3}, {4}
-
-After UNION(3, 4):
-{1, 2}, {3, 4}
-
-After UNION(2, 3):
-{1, 2, 3, 4}
-
-FIND-SET(1) = 1
-FIND-SET(2) = 1
-FIND-SET(3) = 1
-FIND-SET(4) = 1`}
+        {`UNION(1, 2) → {1, 2}
+UNION(3, 4) → {3, 4}
+UNION(1, 3) → {1, 2, 3, 4}
+CONNECTED(2, 4) → true
+CONNECTED(1, 5) → false`}
       </pre>
     </div>
 
@@ -114,22 +98,19 @@ FIND-SET(4) = 1`}
         Example: Path Compression
       </span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Before path compression:
+        {`Before FIND-SET(4):
 1
- \
-  2
-   \
-    3
-     \
-      4
+|
+2
+|
+3
+|
+4
 
 After FIND-SET(4):
-    1
-   /|\
-  2 3 4
-
-Parent array:
-[1, 1, 1, 1]`}
+  1
+ /|\\
+2 3 4`}
       </pre>
     </div>
   </div>

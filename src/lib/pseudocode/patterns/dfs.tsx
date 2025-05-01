@@ -4,21 +4,22 @@ export const DFSPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Depth-First Search</span>
-      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Topological
-      sort, cycle detection, strongly connected components
+      sort, cycle detection, and strongly connected components
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`DFS(G):
-    for each vertex u ∈ G.V:
+        {`// Standard DFS
+DFS(G):
+    for each vertex u in G.V:
         u.color = WHITE
         u.π = NIL
     time = 0
-    for each vertex u ∈ G.V:
+    for each vertex u in G.V:
         if u.color == WHITE:
             DFS-VISIT(G, u)
 
@@ -26,7 +27,7 @@ DFS-VISIT(G, u):
     time = time + 1
     u.d = time
     u.color = GRAY
-    for each v ∈ G.Adj[u]:
+    for each v in G.adj[u]:
         if v.color == WHITE:
             v.π = u
             DFS-VISIT(G, v)
@@ -34,10 +35,39 @@ DFS-VISIT(G, u):
     time = time + 1
     u.f = time
 
+// Topological Sort
 TOPOLOGICAL-SORT(G):
-    call DFS(G) to compute finishing times v.f for each vertex v
-    as each vertex is finished, insert it onto the front of a linked list
-    return the linked list of vertices`}
+    DFS(G)
+    sort vertices by decreasing finish time
+    return sorted vertices
+
+// Cycle Detection
+HAS-CYCLE(G):
+    for each vertex u in G.V:
+        u.color = WHITE
+    for each vertex u in G.V:
+        if u.color == WHITE:
+            if DFS-CYCLE(G, u):
+                return true
+    return false
+
+DFS-CYCLE(G, u):
+    u.color = GRAY
+    for each v in G.adj[u]:
+        if v.color == WHITE:
+            if DFS-CYCLE(G, v):
+                return true
+        elif v.color == GRAY:
+            return true
+    u.color = BLACK
+    return false
+
+// Strongly Connected Components
+SCC(G):
+    DFS(G)
+    compute G^T
+    DFS(G^T) in order of decreasing finish time
+    return trees in depth-first forest`}
       </pre>
     </div>
 
@@ -46,50 +76,71 @@ TOPOLOGICAL-SORT(G):
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
         <span className="font-semibold text-accent">Initialize:</span> Set all
-        vertices to white
+        vertices to unvisited
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Visit:</span> Recursively
-        explore each unvisited vertex
+        <span className="font-semibold text-accent">Explore:</span> Visit
+        vertices depth-first
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Time:</span> Track discovery
-        and finishing times
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Mark:</span> Mark vertices
-        as visited
+        <span className="font-semibold text-accent">Mark:</span> Track discovery
+        and finish times
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
+      <span className="font-semibold text-accent">Example: Standard DFS</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
     1
-   / \
+   / \\
   2   3
- / \   \
+ / \\   \\
 4   5   6
 
-DFS starting from vertex 1:
+DFS starting from 1:
+Discovery order: 1, 2, 4, 5, 3, 6
+Finish order: 4, 5, 2, 6, 3, 1`}
+      </pre>
+    </div>
 
-Discovery order: 1 → 2 → 4 → 5 → 3 → 6
-Finishing order: 4 → 5 → 2 → 6 → 3 → 1
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Topological Sort
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Graph:
+1 → 2 → 3
+↓   ↓   ↓
+4 → 5 → 6
 
-Tree edges: 1-2, 2-4, 2-5, 1-3, 3-6`}
+Topological order:
+[1, 4, 2, 5, 3, 6]`}
+      </pre>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Strongly Connected Components
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Graph:
+1 → 2 → 3
+↑   ↓   ↓
+4 ← 5 ← 6
+
+SCCs:
+Component 1: [1, 4]
+Component 2: [2, 5, 6]
+Component 3: [3]`}
       </pre>
     </div>
   </div>

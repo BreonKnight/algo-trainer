@@ -1,46 +1,68 @@
 import { ChevronRight } from "lucide-react";
 
-export const JumpSearchPattern = () => (
+export const JumpSearchAlgorithmPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Jump Search Template</span>
-      <span className="ml-2 text-xs text-secondary">(Search Algorithm)</span>
+      <span className="text-accent font-bold">Jump Search</span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(√n) - optimal block size &nbsp;|&nbsp; Space: O(1) - constant
-      space &nbsp;|&nbsp; Use: Searching in sorted arrays
+      Time: O(√n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Search in sorted
+      arrays
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">1.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Calculate block size:</span>{" "}
-        Optimal size is √n
-      </span>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`// Jump search in sorted array
+JUMP-SEARCH(A, x):
+    n ← length[A]
+    step ← ⌊√n⌋
+    prev ← 0
+    // Jump through array
+    while A[min(step, n)] < x:
+        prev ← step
+        step ← step + ⌊√n⌋
+        if prev ≥ n:
+            return -1
+    // Linear search in block
+    while A[prev] < x:
+        prev ← prev + 1
+        if prev = min(step, n):
+            return -1
+    if A[prev] = x:
+        return prev
+    return -1
+
+// Example:
+// Input: A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], x = 7
+// 
+// Execution:
+// 1. step = 3, prev = 0
+// 2. A[3] = 4 < 7: prev = 3, step = 6
+// 3. A[6] = 7 < 7: false
+// 4. Linear search from index 3 to 6
+// 5. Found at index 6
+// 
+// Output: 6`}
+      </pre>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">2.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Jump through array:</span>{" "}
-        Jump by block size until element &gt; target
-      </span>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">3.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Linear search:</span>{" "}
-        Perform linear search in previous block
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return result:</span> Return
-        index if found, -1 if not found
-      </span>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Initialize: Calculate jump step size</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Jump: Skip through array in fixed steps</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Search: Linear search in identified block</span>
+      </div>
     </div>
   </div>
 );

@@ -4,37 +4,63 @@ export const DynamicProgrammingPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Dynamic Programming</span>
-      <span className="ml-2 text-xs text-secondary">
-        (Optimization Technique)
-      </span>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solving problems
-      with overlapping subproblems
+      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimization
+      problems with overlapping subproblems
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Find minimum number of coins needed
-DYNAMIC-PROGRAMMING(coins, amount):
-    # Initialize array to store minimum coins for each amount
-    dp = new array of size amount + 1
-    # Set all values to infinity except dp[0]
-    for i from 1 to amount:
-        dp[i] = ∞
-    dp[0] = 0
-    
-    # For each amount from 1 to target
-    for i from 1 to amount:
-        # Try each coin
-        for each coin in coins:
-            # If coin can be used
-            if coin ≤ i:
-                # Update minimum coins needed
-                dp[i] = min(dp[i], dp[i - coin] + 1)
-    
-    # Return result for target amount
-    return dp[amount]`}
+        {`// Fibonacci
+FIBONACCI(n):
+    if n ≤ 1:
+        return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    for i from 2 to n:
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+
+// Longest Common Subsequence
+LCS(X, Y):
+    m = length(X)
+    n = length(Y)
+    dp = [0] * (n + 1)
+    for i from 1 to m:
+        prev = 0
+        for j from 1 to n:
+            temp = dp[j]
+            if X[i-1] == Y[j-1]:
+                dp[j] = prev + 1
+            else:
+                dp[j] = max(dp[j], dp[j-1])
+            prev = temp
+    return dp[n]
+
+// Knapsack
+KNAPSACK(W, V, C):
+    n = length(W)
+    dp = [0] * (C + 1)
+    for i from 1 to n:
+        for j from C downto W[i-1]:
+            dp[j] = max(dp[j], dp[j-W[i-1]] + V[i-1])
+    return dp[C]
+
+// Matrix Chain Multiplication
+MCM(P):
+    n = length(P) - 1
+    dp = [0] * n
+    for l from 2 to n:
+        for i from 0 to n-l:
+            j = i + l - 1
+            dp[i][j] = ∞
+            for k from i to j-1:
+                cost = dp[i][k] + dp[k+1][j] + P[i]*P[k+1]*P[j+1]
+                if cost < dp[i][j]:
+                    dp[i][j] = cost
+    return dp[0][n-1]`}
       </pre>
     </div>
 
@@ -42,68 +68,63 @@ DYNAMIC-PROGRAMMING(coins, amount):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create DP
-        array
+        <span className="font-semibold text-accent">Define:</span> State and
+        recurrence relation
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Fill:</span> Solve
-        subproblems
+        <span className="font-semibold text-accent">Initialize:</span> Base
+        cases and boundary conditions
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Use previous
-        solutions
-      </span>
-    </div>
-    <div className="flex items-start mb-1">
-      <span className="font-bold text-main mr-2">4.</span>
-      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-      <span>
-        <span className="font-semibold text-accent">Return:</span> Get final
-        result
+        <span className="font-semibold text-accent">Compute:</span> Fill DP
+        table in bottom-up manner
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Coin Change Problem
-      </span>
+      <span className="font-semibold text-accent">Example: Fibonacci</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Coins: [1, 2, 5]
-Target amount: 11
-
-DP array:
-Amount: 0 1 2 3 4 5 6 7 8 9 10 11
-Coins:  0 1 1 2 2 1 2 2 3 3 2  3
-
-Solution:
-Use 5 + 5 + 1 = 11 (3 coins)`}
-      </pre>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Fibonacci Numbers
-      </span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`DP array:
-n:    0 1 2 3 4 5 6 7 8
-F(n): 0 1 1 2 3 5 8 13 21
-
-Calculation:
+        {`n = 5
+dp = [0, 1, 1, 2, 3, 5]
 F(0) = 0
 F(1) = 1
 F(2) = F(1) + F(0) = 1
 F(3) = F(2) + F(1) = 2
 F(4) = F(3) + F(2) = 3
-...`}
+F(5) = F(4) + F(3) = 5`}
+      </pre>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Longest Common Subsequence
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`X = "ABCBDAB"
+Y = "BDCABA"
+dp = [0, 0, 0, 0, 0, 0, 0]
+LCS = "BCBA" or "BDAB"
+Length = 4`}
+      </pre>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Knapsack</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`W = [2, 3, 4, 5]
+V = [3, 4, 5, 6]
+C = 5
+dp = [0, 0, 3, 4, 4, 7]
+Selected items: [2, 3]
+Total value: 7`}
       </pre>
     </div>
   </div>
