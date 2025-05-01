@@ -247,4 +247,291 @@ export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...matrixExponentiationPattern,
   ...fastFourierTransformPattern,
   ...graphArticulationPointsPattern,
+  [
+    "Network Flow",
+    `# Monster Hunter Network Flow Pattern
+# Monster Territory Resource Distribution
+
+# Monster Hunter Guide: Resource Management and Supply Lines
+# =======================================================
+
+# Understanding Resource Flow in Monster Hunter
+# -------------------------------------------
+# In Monster Hunter, efficient resource management is crucial for successful hunts.
+# Network Flow helps you optimize:
+# 1. Material transportation between territories
+# 2. Supply line efficiency
+# 3. Emergency resource distribution
+# 4. Multi-source resource allocation
+
+# Territory Types and Capacities
+# -----------------------------
+# Different territories have different resource capacities:
+# - Base Camp: High capacity (15-20)
+# - Ancient Forest: Medium capacity (7-12)
+# - Wildspire Waste: Medium capacity (6-10)
+# - Coral Highlands: Medium capacity (5-8)
+# - Rotten Vale: Low capacity (3-6)
+# - Elder's Recess: Variable capacity (depends on quest)
+
+# Resource Types and Priorities
+# ---------------------------
+# 1. Essential Resources (Priority 1):
+#    - Potions and healing items
+#    - Ammunition and coatings
+# 2. Combat Resources (Priority 2):
+#    - Traps and bombs
+#    - Status effect items
+# 3. Utility Resources (Priority 3):
+#    - Gathering tools
+#    - Environmental items
+
+# Strategic Planning
+# ----------------
+# 1. Pre-Hunt Preparation:
+#    - Map out resource routes
+#    - Identify critical supply points
+#    - Plan emergency resource distribution
+#
+# 2. During Hunt:
+#    - Monitor resource consumption
+#    - Adjust supply routes as needed
+#    - Maintain backup supply lines
+#
+# 3. Emergency Situations:
+#    - Activate emergency supply routes
+#    - Prioritize critical resources
+#    - Maintain minimum resource levels
+
+# Territory Connection Strategies
+# ----------------------------
+# 1. Direct Routes:
+#    - Fastest but limited capacity
+#    - Good for emergency supplies
+#
+# 2. Multiple Path Routes:
+#    - Higher total capacity
+#    - Better for regular supplies
+#
+# 3. Backup Routes:
+#    - Alternative paths
+#    - Critical for emergency situations
+
+# Resource Distribution Tips
+# -----------------------
+# 1. Always maintain multiple supply routes
+# 2. Keep emergency supply lines ready
+# 3. Balance resource distribution
+# 4. Monitor territory capacities
+# 5. Plan for resource bottlenecks
+
+def max_flow(graph, source, sink):
+    """
+    Find the maximum flow of resources through monster territory.
+    Time: O(VE^2) for Edmonds-Karp
+    Space: O(V^2)
+    
+    Monster Hunter Context:
+    - Like finding maximum resource flow between territories
+    - Optimizing material distribution routes
+    - Managing supply lines between hunting grounds
+    - Planning efficient resource transportation
+    - Balancing supply and demand across territories
+    
+    Example:
+    territory = {
+        'Base Camp': {'Ancient Forest': 10, 'Wildspire Waste': 5},
+        'Ancient Forest': {'Coral Highlands': 7},
+        'Wildspire Waste': {'Rotten Vale': 4},
+        'Coral Highlands': {'Elder's Recess': 6},
+        'Rotten Vale': {'Elder's Recess': 3},
+        'Elder's Recess': {}
+    }
+    max_resources = max_flow(territory, 'Base Camp', 'Elder's Recess')
+    # Shows maximum resources that can reach Elder's Recess
+    """
+    def bfs(graph, s, t, parent):
+        visited = {v: False for v in graph}
+        queue = [s]
+        visited[s] = True
+        
+        while queue:
+            u = queue.pop(0)
+            for v, capacity in graph[u].items():
+                if not visited[v] and capacity > 0:
+                    queue.append(v)
+                    visited[v] = True
+                    parent[v] = u
+                    if v == t:
+                        return True
+        return False
+    
+    parent = {v: -1 for v in graph}
+    max_flow = 0
+    
+    while bfs(graph, source, sink, parent):
+        path_flow = float("inf")
+        s = sink
+        while s != source:
+            path_flow = min(path_flow, graph[parent[s]][s])
+            s = parent[s]
+        
+        max_flow += path_flow
+        
+        v = sink
+        while v != source:
+            u = parent[v]
+            graph[u][v] -= path_flow
+            graph[v][u] = graph[v].get(u, 0) + path_flow
+            v = parent[v]
+    
+    return max_flow
+
+def analyze_resource_flow(territory, source, sink):
+    """
+    Analyze resource flow through monster territory.
+    
+    Args:
+        territory: Dictionary representing territory connections and capacities
+        source: Starting territory
+        sink: Destination territory
+    
+    Returns:
+        Maximum amount of resources that can flow from source to sink
+    """
+    return max_flow(territory, source, sink)
+
+# Test Case 1: Basic Resource Distribution
+territory1 = {
+    'Base Camp': {'Ancient Forest': 10, 'Wildspire Waste': 5},
+    'Ancient Forest': {'Coral Highlands': 7},
+    'Wildspire Waste': {'Rotten Vale': 4},
+    'Coral Highlands': {'Elder's Recess': 6},
+    'Rotten Vale': {'Elder's Recess': 3},
+    'Elder's Recess': {}
+}
+max_resources1 = analyze_resource_flow(territory1, 'Base Camp', 'Elder's Recess')
+# Expected Output: 9 (7 through Ancient Forest + 2 through Wildspire Waste)
+
+# Test Case 2: Multiple Paths with Different Capacities
+territory2 = {
+    'Astera': {'Ancient Forest': 8, 'Wildspire Waste': 6},
+    'Ancient Forest': {'Coral Highlands': 5, 'Rotten Vale': 3},
+    'Wildspire Waste': {'Rotten Vale': 4},
+    'Coral Highlands': {'Elder's Recess': 7},
+    'Rotten Vale': {'Elder's Recess': 6},
+    'Elder's Recess': {}
+}
+max_resources2 = analyze_resource_flow(territory2, 'Astera', 'Elder's Recess')
+# Expected Output: 12 (5 through Ancient Forest + 4 through Wildspire Waste + 3 through Rotten Vale)
+
+# Test Case 3: Complex Network with Multiple Sources
+territory3 = {
+    'Astera': {'Ancient Forest': 10},
+    'Seliana': {'Wildspire Waste': 8},
+    'Ancient Forest': {'Coral Highlands': 7},
+    'Wildspire Waste': {'Rotten Vale': 6},
+    'Coral Highlands': {'Elder's Recess': 5},
+    'Rotten Vale': {'Elder's Recess': 4},
+    'Elder's Recess': {}
+}
+# Create a super source
+territory3['Super Source'] = {'Astera': float('inf'), 'Seliana': float('inf')}
+max_resources3 = analyze_resource_flow(territory3, 'Super Source', 'Elder's Recess')
+# Expected Output: 9 (5 through Coral Highlands + 4 through Rotten Vale)
+
+# Test Case 4: Supply Chain Optimization
+territory4 = {
+    'Base Camp': {'Ancient Forest': 15, 'Wildspire Waste': 10},
+    'Ancient Forest': {'Coral Highlands': 12, 'Rotten Vale': 8},
+    'Wildspire Waste': {'Rotten Vale': 7},
+    'Coral Highlands': {'Elder's Recess': 10},
+    'Rotten Vale': {'Elder's Recess': 9},
+    'Elder's Recess': {}
+}
+max_resources4 = analyze_resource_flow(territory4, 'Base Camp', 'Elder's Recess')
+# Expected Output: 19 (10 through Coral Highlands + 9 through Rotten Vale)
+
+# Test Case 5: Emergency Resource Distribution
+territory5 = {
+    'Emergency Camp': {'Ancient Forest': 20, 'Wildspire Waste': 15},
+    'Ancient Forest': {'Coral Highlands': 18},
+    'Wildspire Waste': {'Rotten Vale': 12},
+    'Coral Highlands': {'Elder's Recess': 15},
+    'Rotten Vale': {'Elder's Recess': 10},
+    'Elder's Recess': {}
+}
+max_resources5 = analyze_resource_flow(territory5, 'Emergency Camp', 'Elder's Recess')
+# Expected Output: 25 (15 through Coral Highlands + 10 through Rotten Vale)
+
+# Monster Hunter Tip:
+# Like optimizing your supply lines to ensure maximum resources reach your hunting grounds!
+# Use Network Flow to:
+# 1. Plan efficient resource distribution between territories
+# 2. Find bottlenecks in your supply chain
+# 3. Optimize emergency resource delivery
+# 4. Balance multiple supply routes
+# 5. Maximize resource delivery to critical hunting grounds
+
+# Advanced Strategies
+# -----------------
+# 1. Territory Management:
+#    - Monitor territory capacities
+#    - Plan resource distribution
+#    - Maintain supply lines
+#
+# 2. Resource Optimization:
+#    - Prioritize critical resources
+#    - Balance supply routes
+#    - Plan for emergencies
+#
+# 3. Emergency Preparedness:
+#    - Maintain backup routes
+#    - Keep emergency supplies
+#    - Monitor resource levels
+
+# Territory-Specific Tips
+# ---------------------
+# 1. Ancient Forest:
+#    - High resource capacity
+#    - Multiple connection points
+#    - Good for main supply line
+#
+# 2. Wildspire Waste:
+#    - Medium resource capacity
+#    - Limited connections
+#    - Good for backup routes
+#
+# 3. Coral Highlands:
+#    - Medium resource capacity
+#    - Strategic location
+#    - Good for distribution hub
+#
+# 4. Rotten Vale:
+#    - Low resource capacity
+#    - Limited connections
+#    - Use for emergency routes
+#
+# 5. Elder's Recess:
+#    - Variable capacity
+#    - Multiple entry points
+#    - Critical for endgame
+
+# Resource Management Checklist
+# --------------------------
+# 1. Pre-Hunt:
+#    - Map supply routes
+#    - Check territory capacities
+#    - Plan resource distribution
+#
+# 2. During Hunt:
+#    - Monitor resource flow
+#    - Adjust supply routes
+#    - Maintain minimum levels
+#
+# 3. Emergency:
+#    - Activate backup routes
+#    - Prioritize critical resources
+#    - Maintain supply chain`,
+  ],
 ]);
