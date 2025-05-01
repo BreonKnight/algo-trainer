@@ -214,8 +214,14 @@ export function AnswerCard({
                       {(() => {
                         if (showMonsterHunter) {
                           // Monster Hunter themed example/test data
-                          if (monsterHunterTestData[currentPattern]) {
-                            return monsterHunterTestData[currentPattern];
+                          const testData =
+                            monsterHunterTestData.get(currentPattern);
+                          console.log(
+                            `Looking for test data for pattern: ${currentPattern}`
+                          );
+                          console.log(`Test data found: ${!!testData}`);
+                          if (testData) {
+                            return testData;
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
                         } else {

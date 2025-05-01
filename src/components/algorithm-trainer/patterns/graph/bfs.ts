@@ -1,7 +1,7 @@
 import { AlgorithmPattern } from "../../types";
 
-export const graphBfsPattern: AlgorithmPattern = {
-  title: "Graph BFS",
+export const bfsPattern: AlgorithmPattern = {
+  title: "BFS",
   description:
     "Breadth-First Search (BFS) is an algorithm for traversing or searching tree or graph data structures. It explores all vertices at the present depth before moving to vertices at the next depth level.",
   timeComplexity: "O(V + E)",

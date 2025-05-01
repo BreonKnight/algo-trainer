@@ -7,7 +7,7 @@ import { primPattern } from "./prim";
 import { articulation_pointsPattern } from "./articulation-points.ts";
 import { bridgesPattern } from "./bridges.ts";
 import { graphDfsPattern } from "./dfs";
-import { graphBfsPattern } from "./bfs";
+import { bfsPattern } from "./bfs";
 import { dfs_linked_listPattern } from "./dfs-linked-list";
 import { dfs_binary_treePattern } from "./dfs-binary-tree";
 import { bfs_linked_listPattern } from "./bfs-linked-list";
@@ -28,7 +28,7 @@ export const graphPatterns: Record<string, AlgorithmPattern> = {
   "Graph Articulation Points": articulation_pointsPattern,
   "Graph Bridges": bridgesPattern,
   DFS: graphDfsPattern,
-  BFS: graphBfsPattern,
+  BFS: bfsPattern,
   "DFS Linked List": dfs_linked_listPattern,
   "DFS Binary Tree": dfs_binary_treePattern,
   "BFS Linked List": bfs_linked_listPattern,
