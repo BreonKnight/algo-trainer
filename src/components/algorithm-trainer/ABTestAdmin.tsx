@@ -2,15 +2,10 @@ import { useState, useEffect } from "react";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { getABTestAnalytics, clearABTestEvents } from "./utils/abTestAnalytics";
-
-export const TEST_IDS = {
-  patternTest: "patternTest",
-  implementationTest: "implementationTest",
-  ALGORITHM_PATTERN_SOURCE: "ALGORITHM_PATTERN_SOURCE",
-};
+import { TEST_IDS, ABTestAnalytics } from "./utils/abTestTypes";
 
 export function ABTestAdmin() {
-  const [analytics, setAnalytics] = useState<any>(null);
+  const [analytics, setAnalytics] = useState<ABTestAnalytics | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {

@@ -17,9 +17,20 @@ interface AlgorithmDebuggerProps {
   initialCode: string;
 }
 
+interface VariableValue {
+  value:
+    | string
+    | number
+    | boolean
+    | null
+    | undefined
+    | (string | number | boolean | null | undefined)[];
+  type: string;
+}
+
 interface DebugStep {
   line: number;
-  variables: Record<string, any>;
+  variables: Record<string, VariableValue>;
   callStack: string[];
   description: string;
 }
@@ -30,13 +41,13 @@ export function AlgorithmDebugger({
 }: AlgorithmDebuggerProps) {
   const [code, setCode] = useState(initialCode);
   const [currentLine, setCurrentLine] = useState(-1);
-  const [variables, setVariables] = useState<Record<string, any>>({});
+  const [variables, setVariables] = useState<Record<string, VariableValue>>({});
   const [callStack, setCallStack] = useState<string[]>([]);
   const [isDebugging, setIsDebugging] = useState(false);
   const [debugSteps, setDebugSteps] = useState<DebugStep[]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [speed, setSpeed] = useState(1);
+  const [speed] = useState(1);
 
   // Parse code and generate debug steps
   const generateDebugSteps = () => {
@@ -53,25 +64,38 @@ export function AlgorithmDebugger({
       steps = [
         {
           line: 1,
-          variables: { arr: [...arr] },
+          variables: {
+            arr: { value: [...arr], type: "array" },
+          },
           callStack: ["main"],
           description: "Initialize array",
         },
         {
           line: 3,
-          variables: { arr: [...arr], i: 0 },
+          variables: {
+            arr: { value: [...arr], type: "array" },
+            i: { value: 0, type: "number" },
+          },
           callStack: ["main"],
           description: "Start outer loop",
         },
         {
           line: 5,
-          variables: { arr: [...arr], i: 0, j: 0 },
+          variables: {
+            arr: { value: [...arr], type: "array" },
+            i: { value: 0, type: "number" },
+            j: { value: 0, type: "number" },
+          },
           callStack: ["main"],
           description: "Start inner loop",
         },
         {
           line: 7,
-          variables: { arr: [...arr], i: 0, j: 0 },
+          variables: {
+            arr: { value: [...arr], type: "array" },
+            i: { value: 0, type: "number" },
+            j: { value: 0, type: "number" },
+          },
           callStack: ["main"],
           description: "Compare elements",
         },
@@ -83,7 +107,11 @@ export function AlgorithmDebugger({
 
       steps.push({
         line: 9,
-        variables: { arr: swappedArr, i: 0, j: 0 },
+        variables: {
+          arr: { value: swappedArr, type: "array" },
+          i: { value: 0, type: "number" },
+          j: { value: 0, type: "number" },
+        },
         callStack: ["main"],
         description: "Swap elements",
       });
@@ -91,7 +119,11 @@ export function AlgorithmDebugger({
       // Add more steps...
       steps.push({
         line: 11,
-        variables: { arr: swappedArr, i: 0, j: 1 },
+        variables: {
+          arr: { value: swappedArr, type: "array" },
+          i: { value: 0, type: "number" },
+          j: { value: 1, type: "number" },
+        },
         callStack: ["main"],
         description: "Continue inner loop",
       });
@@ -100,7 +132,11 @@ export function AlgorithmDebugger({
       const sortedArr = [...arr].sort((a, b) => a - b);
       steps.push({
         line: 15,
-        variables: { arr: sortedArr, i: arr.length - 1, j: arr.length - 1 },
+        variables: {
+          arr: { value: sortedArr, type: "array" },
+          i: { value: arr.length - 1, type: "number" },
+          j: { value: arr.length - 1, type: "number" },
+        },
         callStack: ["main"],
         description: "Array is now sorted",
       });
@@ -112,24 +148,32 @@ export function AlgorithmDebugger({
       steps = [
         {
           line: 1,
-          variables: { arr: [...arr], target },
+          variables: {
+            arr: { value: [...arr], type: "array" },
+            target: { value: target, type: "number" },
+          },
           callStack: ["main"],
           description: "Initialize search parameters",
         },
         {
           line: 3,
-          variables: { arr: [...arr], target, left: 0, right: arr.length - 1 },
+          variables: {
+            arr: { value: [...arr], type: "array" },
+            target: { value: target, type: "number" },
+            left: { value: 0, type: "number" },
+            right: { value: arr.length - 1, type: "number" },
+          },
           callStack: ["main"],
           description: "Set search boundaries",
         },
         {
           line: 5,
           variables: {
-            arr: [...arr],
-            target,
-            left: 0,
-            right: arr.length - 1,
-            mid: 4,
+            arr: { value: [...arr], type: "array" },
+            target: { value: target, type: "number" },
+            left: { value: 0, type: "number" },
+            right: { value: arr.length - 1, type: "number" },
+            mid: { value: 4, type: "number" },
           },
           callStack: ["main"],
           description: "Calculate middle index",
@@ -137,11 +181,11 @@ export function AlgorithmDebugger({
         {
           line: 7,
           variables: {
-            arr: [...arr],
-            target,
-            left: 5,
-            right: arr.length - 1,
-            mid: 4,
+            arr: { value: [...arr], type: "array" },
+            target: { value: target, type: "number" },
+            left: { value: 5, type: "number" },
+            right: { value: arr.length - 1, type: "number" },
+            mid: { value: 4, type: "number" },
           },
           callStack: ["main"],
           description:
@@ -150,11 +194,11 @@ export function AlgorithmDebugger({
         {
           line: 5,
           variables: {
-            arr: [...arr],
-            target,
-            left: 5,
-            right: arr.length - 1,
-            mid: 7,
+            arr: { value: [...arr], type: "array" },
+            target: { value: target, type: "number" },
+            left: { value: 5, type: "number" },
+            right: { value: arr.length - 1, type: "number" },
+            mid: { value: 7, type: "number" },
           },
           callStack: ["main"],
           description: "Calculate new middle index",
@@ -162,11 +206,11 @@ export function AlgorithmDebugger({
         {
           line: 9,
           variables: {
-            arr: [...arr],
-            target,
-            left: 5,
-            right: arr.length - 1,
-            mid: 7,
+            arr: { value: [...arr], type: "array" },
+            target: { value: target, type: "number" },
+            left: { value: 5, type: "number" },
+            right: { value: arr.length - 1, type: "number" },
+            mid: { value: 7, type: "number" },
           },
           callStack: ["main"],
           description: "Target found at index 7",
@@ -177,19 +221,27 @@ export function AlgorithmDebugger({
       steps = [
         {
           line: 1,
-          variables: { input: "example" },
+          variables: {
+            input: { value: "example", type: "string" },
+          },
           callStack: ["main"],
           description: "Initialize algorithm",
         },
         {
           line: 3,
-          variables: { input: "example", result: "processing" },
+          variables: {
+            input: { value: "example", type: "string" },
+            result: { value: "processing", type: "string" },
+          },
           callStack: ["main"],
           description: "Process input",
         },
         {
           line: 5,
-          variables: { input: "example", result: "final result" },
+          variables: {
+            input: { value: "example", type: "string" },
+            result: { value: "final result", type: "string" },
+          },
           callStack: ["main"],
           description: "Algorithm completed",
         },
@@ -245,13 +297,12 @@ export function AlgorithmDebugger({
 
   // Animation loop for auto-stepping
   useEffect(() => {
-    if (!isPlaying || currentStep >= debugSteps.length - 1) return;
-
-    const interval = setInterval(() => {
-      stepForward();
-    }, 1000 / speed);
-
-    return () => clearInterval(interval);
+    if (isPlaying && currentStep < debugSteps.length - 1) {
+      const timer = setTimeout(() => {
+        setCurrentStep((prev) => prev + 1);
+      }, 1000 / speed);
+      return () => clearTimeout(timer);
+    }
   }, [isPlaying, currentStep, debugSteps.length, speed]);
 
   return (
@@ -333,9 +384,9 @@ export function AlgorithmDebugger({
               <div key={key} className="flex justify-between">
                 <span className="text-sm font-mono">{key}:</span>
                 <span className="text-sm font-mono">
-                  {typeof value === "object"
-                    ? JSON.stringify(value)
-                    : String(value)}
+                  {typeof value.value === "object"
+                    ? JSON.stringify(value.value)
+                    : String(value.value)}
                 </span>
               </div>
             ))}

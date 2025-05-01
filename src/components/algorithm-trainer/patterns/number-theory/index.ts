@@ -5,9 +5,8 @@ import { sieveOfEratosthenesPattern } from "./sieve-of-eratosthenes";
 import { primeFactorizationPattern } from "./prime-factorization";
 import { sieveOfSundaramPattern } from "./sieve-of-sundaram";
 import { sieveOfAtkinPattern } from "./sieve-of-atkin";
-import { millerRabinPattern } from "./miller-rabin";
 import { fastFourierTransformPattern } from "./fast-fourier-transform";
-
+import { millerRabinPrimalityTestPattern } from "./miller-rabin-primality-test";
 export const numberTheoryPatterns: AlgorithmPattern[] = [
   extendedEuclideanPattern,
   chineseRemainderTheoremPattern,
@@ -15,7 +14,7 @@ export const numberTheoryPatterns: AlgorithmPattern[] = [
   primeFactorizationPattern,
   sieveOfSundaramPattern,
   sieveOfAtkinPattern,
-  millerRabinPattern,
+  millerRabinPrimalityTestPattern,
   fastFourierTransformPattern,
 ];
 
@@ -25,5 +24,5 @@ export { sieveOfEratosthenesPattern } from "./sieve-of-eratosthenes";
 export { primeFactorizationPattern } from "./prime-factorization";
 export { sieveOfSundaramPattern } from "./sieve-of-sundaram";
 export { sieveOfAtkinPattern } from "./sieve-of-atkin";
-export { millerRabinPattern } from "./miller-rabin";
+export { millerRabinPrimalityTestPattern } from "./miller-rabin-primality-test";
 export { fastFourierTransformPattern } from "./fast-fourier-transform";

@@ -84,10 +84,11 @@ export const PATTERN_KEYS = [
   "Manacher's Algorithm",
   "Z Algorithm",
   "Suffix Array",
+  "Test Data",
   "Suffix Tree",
   "Union Find",
   "Miller-Rabin",
-  "Miller-Rabin Primality Test",
+  "Miller-Rabin Algorithm",
   "Fast Fourier Transform",
   "Matrix Exponentiation",
   "Rotate Matrix",
@@ -105,4 +106,5 @@ export interface AlgorithmPattern {
   implementation: string;
   category: string;
   pattern?: string;
+  keySteps?: string[];
 }

@@ -2,7 +2,7 @@ import { PatternKey } from "./types";
 
 export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
   [
-    "Extended Euclidean" as PatternKey,
+    "Extended Euclidean Algorithm" as PatternKey,
     `def monster_hunter_extended_euclidean(a, b):
     """
     Find optimal resource distribution using Extended Euclidean Algorithm.
@@ -1537,57 +1537,66 @@ def manage_territory_connections(territories, connections):
   ],
 
   [
-    "Miller-Rabin" as PatternKey,
-    `def monster_hunter_miller_rabin(monster_power, k=5):
+    "Miller-Rabin Algorithm" as PatternKey,
+    `def monster_hunter_miller_rabin(material_quality, test_rounds):
     """
-    Test if a monster's power level is prime using Miller-Rabin primality test.
+    Find witnesses to material quality using Miller-Rabin algorithm.
     Time: O(k log³ n)
     Space: O(1)
     
     Monster Hunter Context:
-    - Like testing if a monster's power level is a prime number
-    - Useful for identifying special monster variants
-    - Higher accuracy with more test rounds
+    - Like testing materials for quality flaws
+    - Each witness indicates a specific quality issue
+    - More witnesses mean more confidence in the material's quality
     
     Example:
-    power_level = 17  # Monster's power level
-    k = 5  # Number of test rounds
+    material_quality = 561  # Material quality level
+    test_rounds = 5        # Number of quality tests
     
     Process:
-    1. Write power_level - 1 as d * 2^s
-    2. Test with random bases
-    3. Check for primality indicators
+    1. Check basic quality indicators
+    2. Factor quality level into components
+    3. Test with random quality checks
+    4. Record any quality issues found
     """
-    if monster_power <= 1:
-        return False
-    if monster_power <= 3:
-        return True
-    if monster_power % 2 == 0:
-        return False
+    # Handle edge cases
+    if material_quality <= 1:
+        return []  # Invalid material
+    if material_quality <= 3:
+        return []  # Perfect quality
+    if material_quality % 2 == 0:
+        return [2]  # Even quality is always flawed
     
-    # Write monster_power - 1 as d * 2^s
-    d = monster_power - 1
+    # Factor quality level
+    d = material_quality - 1
     s = 0
     while d % 2 == 0:
         d //= 2
         s += 1
     
-    # Test with k rounds
-    for _ in range(k):
-        a = random.randint(2, monster_power - 2)
-        x = pow(a, d, monster_power)
+    quality_issues = []
+    # Test multiple times
+    for _ in range(test_rounds):
+        test_value = random.randint(2, material_quality - 2)
+        x = pow(test_value, d, material_quality)
         
-        if x == 1 or x == monster_power - 1:
+        if x == 1 or x == material_quality - 1:
             continue
         
+        found_issue = False
         for _ in range(s - 1):
-            x = pow(x, 2, monster_power)
-            if x == monster_power - 1:
+            x = pow(x, 2, material_quality)
+            if x == material_quality - 1:
+                found_issue = True
                 break
-        else:
-            return False
+            if x == 1:
+                quality_issues.append(test_value)
+                break
+        
+        if not found_issue and x != material_quality - 1:
+            quality_issues.append(test_value)
     
-    return True`,
+    return quality_issues`,
   ],
 
   [
@@ -1627,5 +1636,146 @@ def manage_territory_connections(territories, connections):
         result[k + n // 2] = even[k] - t
     
     return result`,
+  ],
+
+  [
+    "Tree DP" as PatternKey,
+    `def monster_hunter_tree_dp(territory_tree):
+    """
+    Find optimal resource gathering path using Tree DP.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like finding the best path to gather resources in a territory
+    - Each node represents a gathering point with resources
+    - Cannot gather from adjacent points (alert monsters)
+    - Find maximum resources while avoiding detection
+    
+    Example:
+    territory_tree = {
+        "value": 5,  # Resources at this point
+        "children": [
+            {
+                "value": 3,
+                "children": [
+                    {"value": 1, "children": []},
+                    {"value": 2, "children": []}
+                ]
+            },
+            {
+                "value": 4,
+                "children": [
+                    {"value": 3, "children": []}
+                ]
+            }
+        ]
+    }
+    
+    Process:
+    1. For each gathering point, decide to gather or skip
+    2. If gather, cannot gather from adjacent points
+    3. If skip, can gather from children
+    4. Find maximum total resources
+    """
+    def dfs(node):
+        if node is None:
+            return (0, 0)
+            
+        # Initialize values for current point
+        gather = node["value"]  # Gather resources at this point
+        skip = 0               # Skip this point
+        
+        for child in node["children"]:
+            child_gather, child_skip = dfs(child)
+            # If we gather here, must skip children
+            gather += child_skip
+            # If we skip here, can choose to gather or skip children
+            skip += max(child_gather, child_skip)
+            
+        return (gather, skip)
+    
+    gather, skip = dfs(territory_tree)
+    return max(gather, skip)
+
+def find_optimal_gathering_path(territory_tree):
+    """
+    Find the optimal path to gather resources while avoiding monster detection.
+    Uses Tree DP to maximize resource collection while respecting adjacency rules.
+    
+    Args:
+        territory_tree (dict): Tree structure representing gathering points
+            value: Amount of resources at this point
+            children: List of connected gathering points
+            
+    Returns:
+        int: Maximum resources that can be gathered
+    """
+    return monster_hunter_tree_dp(territory_tree)
+
+# Example usage:
+# territory_tree = {
+#     "value": 5,
+#     "children": [
+#         {
+#             "value": 3,
+#             "children": [
+#                 {"value": 1, "children": []},
+#                 {"value": 2, "children": []}
+#             ]
+#         },
+#         {
+#             "value": 4,
+#             "children": [
+#                 {"value": 3, "children": []}
+#             ]
+#         }
+#     ]
+# }
+# max_resources = find_optimal_gathering_path(territory_tree)
+# print(f"Maximum resources that can be gathered: {max_resources}")`,
+  ],
+
+  [
+    "Two Pointers" as PatternKey,
+    `def monster_hunter_two_pointers(monster_positions, target_power):
+    """
+    Find two monsters that can combine their power to match target.
+    Time Complexity: O(n)
+    Space Complexity: O(1)
+    
+    Monster Hunter Context:
+    - Like coordinating a pincer attack from two directions
+    - Left pointer starts at weakest monster
+    - Right pointer starts at strongest monster
+    - Move pointers based on current combined power
+    
+    Example:
+    monster_positions = [2, 3, 4, 5, 6, 7, 8, 9]
+    target_power = 10
+    # Returns [0, 7] (monsters at positions 0 and 7 combine to 10)
+    
+    Process:
+    1. Initialize left pointer at start, right at end
+    2. Calculate current combined power
+    3. If sum equals target, return positions
+    4. If sum < target, move left pointer right
+    5. If sum > target, move right pointer left
+    6. Repeat until pointers meet
+    """
+    left = 0
+    right = len(monster_positions) - 1
+    
+    while left < right:
+        current_sum = monster_positions[left] + monster_positions[right]
+        
+        if current_sum == target_power:
+            return [left, right]
+        elif current_sum < target_power:
+            left += 1
+        else:
+            right -= 1
+    
+    return [-1, -1]  # No valid combination found`,
   ],
 ]);

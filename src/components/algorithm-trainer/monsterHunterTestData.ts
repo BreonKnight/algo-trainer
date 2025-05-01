@@ -2,7 +2,7 @@ import { PatternKey } from "./types";
 
 export const monsterHunterTestData = new Map<PatternKey, string>([
   [
-    "Quick Sort",
+    "Quick Sort" as PatternKey,
     `# Monster Hunter Quick Sort Challenge
 # You are organizing your inventory of monster materials!
 
@@ -153,6 +153,29 @@ Expected Output: [1, 3] (indices of materials with values 2 and 8)
 # Like coordinating a pincer attack on a monster from two directions!`,
   ],
   [
+    "Two Pointers" as PatternKey,
+    `# Monster Hunter Two Pointers Challenge
+# You are coordinating a pincer attack on a monster from two directions!
+
+# Test Case 1: Basic Pincer Attack
+Input: [2, 3, 4, 5, 6, 7, 8, 9]  # Monster positions
+Target: 10  # Combined attack power needed
+Expected Output: [0, 7]  # Indices of positions 2 and 8
+
+# Test Case 2: Multiple Valid Attacks
+Input: [1, 2, 3, 4, 5, 6, 7, 8]
+Target: 9
+Expected Output: [0, 7]  # Indices of positions 1 and 8
+
+# Test Case 3: No Valid Attack
+Input: [1, 2, 3, 4, 5]
+Target: 10
+Expected Output: [-1, -1]  # No valid combination
+
+# Monster Hunter Tip:
+# Like coordinating a pincer attack from two directions to maximize damage!`,
+  ],
+  [
     "Dynamic Programming",
     `# Monster Hunter Dynamic Programming Challenge
 # You are optimizing your material farming route!
@@ -206,7 +229,7 @@ Expected Output: 3 (minimum materials needed)
 # Like finding the most efficient combination of materials!`,
   ],
   [
-    "Greedy",
+    "Greedy" as PatternKey,
     `# Monster Hunter Greedy Challenge
 # You are maximizing your material collection during a limited time hunt!
 
@@ -224,7 +247,7 @@ Expected Output: ["Nergigante", "Kirin"]
 # Like choosing which monster to hunt based on time and reward!`,
   ],
   [
-    "Greedy Activity Selection",
+    "Greedy Activity Selection" as PatternKey,
     `# Monster Hunter Greedy Activity Selection
 # You are scheduling non-overlapping hunts!
 
@@ -609,10 +632,11 @@ Expected Output: 15
   [
     "Tree DP",
     `# Monster Hunter Tree DP Challenge
-# You are planning optimal hunting routes!
+# You are planning optimal hunting routes through monster territories!
 
-# Test Case 1: Territory Optimization
-Input: tree = {
+# Test Case 1: Basic Territory Optimization
+Input:
+tree = {
     "Ancient Forest": {
         "rewards": 100,
         "children": ["Wildspire Waste", "Coral Highlands"]
@@ -620,12 +644,150 @@ Input: tree = {
     "Wildspire Waste": {
         "rewards": 80,
         "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": []
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
     }
 }
-Expected Output: 180
+Expected Output: 290 (100 + 80 + 70 + 40)
+
+# Test Case 2: Complex Territory Network
+Input:
+tree = {
+    "Base Camp": {
+        "rewards": 50,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Coral Highlands"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+Expected Output: 340 (50 + 100 + 90 + 120)
+
+# Test Case 3: Multiple Paths with Different Rewards
+Input:
+tree = {
+    "Astera": {
+        "rewards": 60,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Coral Highlands", "Rotten Vale"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+Expected Output: 370 (60 + 100 + 90 + 120)
+
+# Test Case 4: Emergency Supply Route
+Input:
+tree = {
+    "Emergency Camp": {
+        "rewards": 100,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 150,
+        "children": ["Coral Highlands"]
+    },
+    "Wildspire Waste": {
+        "rewards": 120,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 180,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 130,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 200,
+        "children": []
+    }
+}
+Expected Output: 630 (100 + 150 + 180 + 200)
+
+# Test Case 5: Resource Collection Path
+Input:
+tree = {
+    "Base Camp": {
+        "rewards": 50,
+        "children": ["Ancient Forest", "Wildspire Waste"]
+    },
+    "Ancient Forest": {
+        "rewards": 100,
+        "children": ["Coral Highlands", "Rotten Vale"]
+    },
+    "Wildspire Waste": {
+        "rewards": 80,
+        "children": ["Rotten Vale"]
+    },
+    "Coral Highlands": {
+        "rewards": 90,
+        "children": ["Elder's Recess"]
+    },
+    "Rotten Vale": {
+        "rewards": 70,
+        "children": ["Elder's Recess"]
+    },
+    "Elder's Recess": {
+        "rewards": 120,
+        "children": []
+    }
+}
+Expected Output: 360 (50 + 100 + 90 + 120)
 
 # Monster Hunter Tip:
-# Like finding the most rewarding hunting path!`,
+# Like planning the most efficient route through monster territories to maximize rewards!
+# Use Tree DP to:
+# 1. Calculate maximum rewards for each territory
+# 2. Consider both taking and skipping territories
+# 3. Find the optimal path through the territory tree
+# 4. Balance immediate rewards with future opportunities
+# 5. Plan efficient resource collection routes`,
   ],
   [
     "Probability DP",
@@ -1285,37 +1447,24 @@ Expected Output: 4
 # This helps in planning efficient hunting routes and understanding monster migration patterns.`,
   ],
   [
-    "Miller-Rabin Primality Test" as PatternKey,
-    `# Monster Hunter Miller-Rabin Challenge
-# You are testing if a monster's power level is prime!
+    "Miller-Rabin Algorithm" as PatternKey,
+    `# Monster Hunter Miller-Rabin Algorithm Challenge
+# You are testing the quality of materials to identify flaws!
 
-# Test Case 1: Prime Power Level
-Input: monster_power = 17, k = 5
-Expected Output: true
-Explanation: 17 is a prime number, so the test should return true
+# Test Case 1: Perfect Quality Material
+Input: material_quality = 17, test_rounds = 5
+Expected Output: []  # No quality issues found
 
-# Test Case 2: Composite Power Level
-Input: monster_power = 15, k = 5
-Expected Output: false
-Explanation: 15 is not a prime number, so the test should return false
+# Test Case 2: Flawed Material
+Input: material_quality = 561, test_rounds = 5
+Expected Output: [2, 3, ...]  # Multiple quality issues found
 
-# Test Case 3: Small Prime
-Input: monster_power = 2, k = 5
-Expected Output: true
-Explanation: 2 is a prime number, so the test should return true
-
-# Test Case 4: Edge Case
-Input: monster_power = 1, k = 5
-Expected Output: false
-Explanation: 1 is not a prime number, so the test should return false
-
-# Test Case 5: Even Number
-Input: monster_power = 4, k = 5
-Expected Output: false
-Explanation: 4 is not a prime number, so the test should return false
+# Test Case 3: Even Quality Material
+Input: material_quality = 10, test_rounds = 5
+Expected Output: [2]  # Even quality is always flawed
 
 # Monster Hunter Tip:
-# Like testing if a monster's power level is a special prime number!`,
+# Like testing materials for quality flaws! Each witness represents a specific quality issue.`,
   ],
   [
     "Fast Fourier Transform" as PatternKey,
@@ -1469,4 +1618,77 @@ Expected Output: 25 (15 through Coral Highlands + 10 through Rotten Vale)
 # 4. Balance multiple supply routes
 # 5. Maximize resource delivery to critical hunting grounds`,
   ],
-]);
+  [
+    "Graph Floyd-Warshall",
+    `# Monster Hunter Floyd-Warshall Challenge
+# You are finding the shortest paths between all hunting grounds!
+
+# Test Case 1: All Pairs Shortest Path
+Input: [
+  [0, 5, INF, 10],
+  [INF, 0, 3, INF],
+  [INF, INF, 0, 1],
+  [INF, INF, INF, 0]
+]
+Expected Output: [
+  [0, 5, 8, 9],
+  [INF, 0, 3, 4],
+  [INF, INF, 0, 1],
+  [INF, INF, INF, 0]
+]
+
+# Monster Hunter Tip:
+# Like having a complete map of all possible routes between hunting grounds!`,
+  ],
+  [
+    "Graph Bellman-Ford",
+    `# Monster Hunter Bellman-Ford Challenge
+# You are finding the most efficient hunting routes while considering stamina costs!
+
+# Test Case 1: Basic Path Finding
+Input: [
+  {from: 0, to: 1, weight: 4},  # Base camp to Ancient Forest
+  {from: 0, to: 2, weight: 5},  # Base camp to Wildspire Waste
+  {from: 1, to: 2, weight: -2}, # Ancient Forest to Wildspire Waste (stamina shortcut)
+  {from: 1, to: 3, weight: 3},  # Ancient Forest to Coral Highlands
+  {from: 2, to: 3, weight: 1}   # Wildspire Waste to Coral Highlands
+]
+Source: 0
+Expected Output: [0, 4, 2, 3]
+
+# Test Case 2: Negative Cycle Detection
+Input: [
+  {from: 0, to: 1, weight: 1},
+  {from: 1, to: 2, weight: -2},
+  {from: 2, to: 0, weight: 1}
+]
+Source: 0
+Expected Output: "Negative cycle detected"
+
+# Monster Hunter Tip:
+# Like finding routes that might actually restore your stamina!`,
+  ],
+  [
+    "Graph Kruskal",
+    `# Monster Hunter Kruskal Challenge
+# You are finding the minimum spanning tree of a monster territory!
+
+# Test Case 1: Minimum Spanning Tree
+Input: [
+  ['A', 'B', 4],
+  ['A', 'C', 2],
+  ['B', 'C', 5],
+  ['B', 'D', 1],
+  ['C', 'D', 8]
+]
+Expected Output: [
+  ['B', 'D', 1],
+  ['A', 'C', 2],
+  ['A', 'B', 4],
+  ['C', 'D', 8]
+]
+
+# Monster Hunter Tip:
+# Like finding the most efficient way to connect all territories with the least amount of danger!`,
+  ],
+] as unknown as [PatternKey, string][]);

@@ -1,5 +1,3 @@
-import { PatternKey } from "../../types";
-
 export const unionFindPattern = {
   title: "Union Find",
   description:

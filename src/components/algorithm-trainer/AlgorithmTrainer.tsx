@@ -20,7 +20,7 @@ import {
   TooltipContent,
   TooltipProvider,
 } from "../ui/tooltip";
-import { useTheme } from "../ThemeProvider";
+import { useTheme } from "../useTheme";
 import { GamificationButton } from "../GamificationButton";
 import GamificationService from "../../lib/gamification";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -171,10 +171,10 @@ export default function AlgorithmTrainer() {
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
-    if (active.id !== over?.id) {
+    if (over && active.id !== over.id) {
       setPanelOrder((items) => {
         const oldIndex = items.indexOf(active.id as string);
-        const newIndex = items.indexOf(over!.id as string);
+        const newIndex = items.indexOf(over.id as string);
         return arrayMove(items, oldIndex, newIndex);
       });
     }
@@ -462,7 +462,22 @@ export default function AlgorithmTrainer() {
                                 <CodeEditor
                                   userCode={userCode}
                                   setUserCode={setUserCode}
-                                  onRunCode={() => {}}
+                                  onRunCode={() => {
+                                    // Run code in REPL
+                                    const replCard =
+                                      document.querySelector(".repl-card");
+                                    if (replCard) {
+                                      const runButton =
+                                        replCard.querySelector(
+                                          "button[onClick]"
+                                        );
+                                      if (runButton) {
+                                        (
+                                          runButton as HTMLButtonElement
+                                        ).click();
+                                      }
+                                    }
+                                  }}
                                   onShowAnswer={() =>
                                     setShowAnswer(!showAnswer)
                                   }

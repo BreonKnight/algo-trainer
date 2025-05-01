@@ -1,6 +1,6 @@
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
-import Editor from "@monaco-editor/react";
+import Editor, { Monaco } from "@monaco-editor/react";
 import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
@@ -13,7 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "@/components/useTheme";
 import {
   draculaTheme,
   solarizedTheme,
@@ -24,7 +24,7 @@ import {
   re2Theme,
   mhTheme,
 } from "@/lib/theme";
-import { Monaco } from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;
@@ -63,7 +63,7 @@ export function AnswerCard({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [editorHeight, setEditorHeight] = useState<string | number>("300px");
   const monacoRef = useRef<Monaco | null>(null);
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
   // Update editor height on mount and resize
   useEffect(() => {
@@ -89,7 +89,10 @@ export function AnswerCard({
   }, [showAnswer]);
 
   // Editor mount
-  const handleEditorDidMount = (editor: any, monaco: Monaco) => {
+  const handleEditorDidMount = (
+    editor: monaco.editor.IStandaloneCodeEditor,
+    monaco: Monaco
+  ) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
     monaco.editor.defineTheme("dracula", draculaTheme);

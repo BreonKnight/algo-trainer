@@ -3,7 +3,7 @@ import { pseudocodePatterns } from "@/lib/pseudocode";
 import { patternNameMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import styles from "@/styles/pseudocode.module.css";
 import { PatternKey } from "@/components/algorithm-trainer/types";
-import { MonsterHunterGuide } from "./MonsterHunterGuide";
+import MonsterHunterGuide from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import { Book, Sword, ChevronDown, ChevronUp } from "lucide-react";
@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
-import { useTheme } from "@/components/ThemeProvider";
+import { useTheme } from "@/components/useTheme";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;
@@ -379,7 +379,7 @@ export function PatternCard({
         {isExpanded &&
           (showMonsterGuide ? (
             <div className="h-full overflow-hidden">
-              <MonsterHunterGuide currentPattern={currentPattern} />
+              <MonsterHunterGuide pattern={currentPattern} />
             </div>
           ) : (
             <div className="h-full flex flex-col overflow-hidden">
