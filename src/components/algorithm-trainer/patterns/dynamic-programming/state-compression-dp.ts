@@ -3,77 +3,50 @@ import { AlgorithmPattern } from "../../types";
 export const stateCompressionDPPattern: AlgorithmPattern = {
   title: "State Compression DP",
   description:
-    "A dynamic programming technique that uses bit manipulation to represent states efficiently. It's particularly useful when dealing with problems where the state can be represented as a combination of binary choices.",
-  timeComplexity:
-    "O(n * 2^k) where n is the problem size and k is the number of states",
-  spaceComplexity: "O(2^k)",
-  pseudocode: `
-function stateCompressionDP(n, k):
-    # Initialize DP table
-    dp = [[0] * (1 << k) for _ in range(n + 1)]
-    dp[0][0] = 1  # Base case
+    "A dynamic programming technique that reduces space complexity by representing states using bitmasks or other compact representations.",
+  timeComplexity: "O(n * 2^m) where n is problem size and m is state size",
+  spaceComplexity: "O(2^m)",
+  pseudocode: `1. Identify the state representation that can be compressed
+2. Define the compressed state format (e.g., bitmask)
+3. Initialize DP array with compressed states
+4. For each state:
+   a. Unpack the compressed state
+   b. Calculate transitions
+   c. Update the compressed state
+5. Return the solution`,
+  example: `Problem: Traveling Salesman Problem
+State: bitmask representing visited cities
+For 3 cities (A, B, C):
+000: no cities visited
+001: visited A
+010: visited B
+100: visited C
+111: all cities visited`,
+  implementation: `def tsp(distances):
+    n = len(distances)
+    dp = [[float('inf')] * n for _ in range(1 << n)]
+    dp[1][0] = 0  # Start at city 0
     
-    for i in range(1, n + 1):
-        for mask in range(1 << k):
-            # Try all possible transitions
-            for j in range(k):
-                if not (mask & (1 << j)):
-                    new_mask = mask | (1 << j)
-                    dp[i][new_mask] += dp[i-1][mask]
+    for mask in range(1 << n):
+        for last in range(n):
+            if not (mask & (1 << last)):
+                continue
+            for next_city in range(n):
+                if mask & (1 << next_city):
+                    continue
+                new_mask = mask | (1 << next_city)
+                dp[new_mask][next_city] = min(
+                    dp[new_mask][next_city],
+                    dp[mask][last] + distances[last][next_city]
+                )
     
-    return dp[n][(1 << k) - 1]
-  `,
-  example: `
-// Example usage:
-const n = 3;  // Number of elements
-const k = 2;  // Number of states
-const result = stateCompressionDP(n, k);
-console.log(result); // Output: 8 (number of ways to assign states)
-  `,
-  implementation: `
-function stateCompressionDP(n: number, k: number): number {
-  // Initialize DP table
-  const dp: number[][] = Array.from({ length: n + 1 }, () => 
-    Array(1 << k).fill(0)
-  );
-  dp[0][0] = 1;  // Base case
-  
-  for (let i = 1; i <= n; i++) {
-    for (let mask = 0; mask < (1 << k); mask++) {
-      // Try all possible transitions
-      for (let j = 0; j < k; j++) {
-        if (!(mask & (1 << j))) {
-          const newMask = mask | (1 << j);
-          dp[i][newMask] += dp[i-1][mask];
-        }
-      }
-    }
-  }
-  
-  return dp[n][(1 << k) - 1];
-}
-
-// Helper functions for common operations
-function setBit(mask: number, position: number): number {
-  return mask | (1 << position);
-}
-
-function clearBit(mask: number, position: number): number {
-  return mask & ~(1 << position);
-}
-
-function isBitSet(mask: number, position: number): boolean {
-  return (mask & (1 << position)) !== 0;
-}
-
-function countSetBits(mask: number): number {
-  let count = 0;
-  while (mask) {
-    count += mask & 1;
-    mask >>= 1;
-  }
-  return count;
-}
-  `,
-  category: "dynamic-programming",
+    return min(dp[(1 << n) - 1][i] + distances[i][0] for i in range(n))`,
+  category: "Dynamic Programming",
+  keySteps: [
+    "Identify states that can be compressed",
+    "Choose an appropriate compression method (bitmask, etc.)",
+    "Define state transitions in compressed form",
+    "Implement the DP solution with compressed states",
+    "Handle state unpacking and packing efficiently",
+  ],
 };
