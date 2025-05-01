@@ -15,10 +15,10 @@ export const extendedEuclideanPattern: AlgorithmPattern = {
 4. Return (gcd, x, y)
   `,
   example: `
-// Find GCD and coefficients for 35 and 15
-const result = extendedEuclidean(35, 15);
-// Result will be { gcd: 5, x: 1, y: -2 }
-// Because 35*1 + 15*(-2) = 5
+# Find GCD and coefficients for 35 and 15
+result = extended_euclidean(35, 15)
+# Result will be (5, 1, -2)
+# Because 35*1 + 15*(-2) = 5
   `,
   implementation: `def extended_euclidean(a: int, b: int) -> tuple[int, int, int]:
     """

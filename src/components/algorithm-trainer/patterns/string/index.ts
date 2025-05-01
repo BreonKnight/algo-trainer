@@ -6,7 +6,7 @@ import { stringPattern } from "./string";
 import { zalgorithmPattern } from "./z-algorithm";
 
 export const stringPatterns: Partial<Record<string, AlgorithmPattern>> = {
-  String: stringPattern,
+  "String Operations": stringPattern,
   "Z Algorithm": zalgorithmPattern,
   "Manacher's Algorithm": manachers_algorithmPattern,
   "KMP Algorithm": knuthmorrisprattPattern,

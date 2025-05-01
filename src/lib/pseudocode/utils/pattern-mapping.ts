@@ -98,6 +98,17 @@ export const patternNameMapping: Record<string, string> = {
   "Matrix Spiral Recursive": "Matrix Spiral Recursive",
   "Rotate Matrix": "Matrix Operations",
 
+  // Number Theory
+  "Extended Euclidean": "Extended Euclidean",
+  "Extended Euclidean Algorithm": "Extended Euclidean",
+  "Chinese Remainder Theorem": "chinese-remainder-theorem",
+  "Miller-Rabin": "miller-rabin",
+  "Fast Fourier Transform": "fast-fourier-transform",
+  "Sieve of Sundaram": "sieve-of-sundaram",
+  "Prime Factorization": "prime-factorization",
+  "Sieve of Atkin": "sieve-of-atkin",
+  "Sieve of Eratosthenes": "sieve-of-eratosthenes",
+
   // Other Algorithms
   "Sliding Window": "Sliding Window",
   "Bit Manipulation": "Bit Manipulation",
@@ -107,9 +118,6 @@ export const patternNameMapping: Record<string, string> = {
   "Union Find": "Union Find",
   Quickselect: "Quickselect",
   Memoization: "Memoization",
-  "Sieve of Eratosthenes": "Sieve of Eratosthenes",
-  "Extended Euclidean": "Extended Euclidean",
-  "Chinese Remainder Theorem": "Chinese Remainder Theorem",
   Backtracking: "Backtracking",
   Greedy: "Greedy",
 
