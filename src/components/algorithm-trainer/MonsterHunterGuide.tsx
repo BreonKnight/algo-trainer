@@ -6,7 +6,7 @@ interface MonsterHunterGuideProps {
 }
 
 // Monster hunter themed explanations for different algorithms
-const monsterHunterExplanations: Partial<
+export const monsterHunterExplanations: Partial<
   Record<
     PatternKey,
     {
@@ -553,422 +553,6 @@ const monsterHunterExplanations: Partial<
       "Handle stack operations - like pushing and popping materials as needed",
     ],
   },
-  String: {
-    title: "Monster Hunter's Journal",
-    description:
-      "Like keeping detailed records of monster encounters and behaviors, String operations help us manipulate and analyze sequences of characters, from simple concatenation to complex pattern matching.",
-    example:
-      "Imagine maintaining a hunter's journal where you record monster sightings, behaviors, and patterns. You can combine different entries, search for specific information, or analyze patterns in monster behavior, like a hunter carefully documenting and studying their prey.",
-    tips: [
-      "Handle character sequences - like recording detailed monster observations",
-      "Use string operations - similar to combining or modifying journal entries",
-      "Implement pattern matching - like identifying recurring monster behaviors",
-      "Consider string manipulation - like updating or reorganizing your records",
-      "Work with substrings - like focusing on specific parts of your observations",
-    ],
-  },
-  "Heap Implementation": {
-    title: "Monster Priority Queue",
-    description:
-      "Like organizing your hunting targets by priority, Heap Implementation helps us maintain a collection of elements where the highest (or lowest) priority element is always at the top, allowing for efficient access and updates.",
-    example:
-      "Imagine having a list of monsters to hunt, where each monster has a different priority based on its threat level or reward. You can quickly access the most important monster to hunt next, and when you add new monsters or complete hunts, the list automatically reorganizes to keep the highest priority monster at the top.",
-    tips: [
-      "Maintain heap property - like ensuring the most important monster is always at the top",
-      "Use array representation - similar to keeping your monster list in an organized format",
-      "Implement heapify operations - like reorganizing the list when priorities change",
-      "Handle insertions and deletions - like adding new monsters or removing hunted ones",
-      "Support priority updates - like adjusting monster priorities as situations change",
-    ],
-  },
-  "Grid Traversal": {
-    title: "Monster Territory Grid Search",
-    description:
-      "Like systematically searching a monster's territory divided into a grid, Grid Traversal helps us explore each cell of a grid while handling obstacles and finding paths between locations.",
-    example:
-      "Imagine searching for a monster in a territory divided into squares. You can move up, down, left, or right, carefully exploring each square while avoiding obstacles like rocks or rivers, like a hunter methodically searching through a grid of hunting grounds.",
-    tips: [
-      "Define movement directions - like deciding which directions you can move in the grid",
-      "Handle obstacles - similar to avoiding impassable terrain",
-      "Track visited cells - like marking which areas you've already searched",
-      "Use BFS or DFS - like choosing between exploring nearby areas first or following paths to their end",
-      "Find shortest paths - like determining the quickest route to the monster",
-    ],
-  },
-  Backtracking: {
-    title: "Monster Territory Path Exploration",
-    description:
-      "Like exploring different paths in a monster's territory and backtracking when you hit a dead end, Backtracking helps us systematically try different solutions and undo choices that don't lead to a valid solution.",
-    example:
-      "Imagine exploring a monster's territory with multiple paths. You try one path, and if it leads to a dead end, you backtrack to the last decision point and try a different path. This is like systematically trying all possible routes until you find the one that leads to the monster.",
-    tips: [
-      "Try each possible choice - like exploring each available path",
-      "Backtrack when stuck - similar to returning to the last decision point when you hit a dead end",
-      "Mark visited paths - like keeping track of which routes you've already tried",
-      "Undo choices that don't work - like retracing your steps when a path doesn't lead to the monster",
-      "Find all valid solutions - like exploring until you've found all possible routes to the monster",
-    ],
-  },
-  "Rotate Matrix": {
-    title: "Monster Territory Map Rotation",
-    description:
-      "Like rotating your monster territory map to view it from different angles, Rotate Matrix helps us transform a matrix by rotating its elements 90 degrees clockwise or counterclockwise.",
-    example:
-      "Imagine having a map of monster territories and needing to view it from different angles. You can rotate the map 90 degrees to get a different perspective, like turning your map to see the territory from a new direction.",
-    tips: [
-      "Transpose the matrix - like flipping the map diagonally",
-      "Reverse rows or columns - similar to adjusting the orientation of the map",
-      "Handle in-place rotation - like rotating the map without creating a new copy",
-      "Consider rotation direction - like choosing whether to rotate clockwise or counterclockwise",
-      "Process elements in layers - like rotating the map section by section",
-    ],
-  },
-  "Matrix Traversal": {
-    title: "Monster Territory Grid Exploration",
-    description:
-      "Like systematically exploring a monster's territory organized in a grid, Matrix Traversal helps us visit all elements of a matrix in a structured way, either row by row, column by column, or in a specific pattern.",
-    example:
-      "Imagine exploring a monster's territory that's divided into a grid of areas. You can explore it row by row, moving from left to right, or column by column, moving from top to bottom, ensuring you don't miss any area in your search.",
-    tips: [
-      "Choose traversal direction - like deciding whether to explore rows or columns first",
-      "Use nested loops - similar to systematically checking each area in the grid",
-      "Track current position - like keeping track of which area you're currently exploring",
-      "Handle boundaries - like knowing when you've reached the edge of the territory",
-      "Process each element - like thoroughly exploring each area of the grid",
-    ],
-  },
-  "Matrix Traversal Recursive": {
-    title: "Monster Territory Recursive Exploration",
-    description:
-      "Like exploring a monster's territory by breaking it down into smaller sections and exploring each section recursively, Matrix Traversal Recursive helps us visit all elements of a matrix using recursive calls.",
-    example:
-      "Imagine exploring a monster's territory by dividing it into quadrants. You explore the first quadrant, then recursively explore each sub-quadrant, continuing this process until you've thoroughly searched the entire territory, like systematically breaking down a large area into smaller, more manageable sections.",
-    tips: [
-      "Define base case - like knowing when an area is small enough to explore directly",
-      "Break into subproblems - similar to dividing the territory into smaller sections",
-      "Recursively explore each section - like having a team explore each sub-area",
-      "Combine results - like merging findings from different sections",
-      "Handle boundaries - like knowing when you've reached the edge of a section",
-    ],
-  },
-  "Matrix Spiral Traversal": {
-    title: "Monster Territory Spiral Exploration",
-    description:
-      "Like exploring a monster's territory in a spiral pattern, starting from the outer edges and moving inward, Matrix Spiral Traversal helps us visit all elements of a matrix in a spiral order.",
-    example:
-      "Imagine exploring a monster's territory by starting at the outer edge and moving in a spiral pattern towards the center. You move along the edges, then turn inward, continuing this pattern until you've explored the entire territory, like following a spiral path to the center.",
-    tips: [
-      "Track boundaries - like keeping track of the edges of your current exploration area",
-      "Move in layers - similar to exploring one complete ring at a time",
-      "Update boundaries after each layer - like adjusting your search area as you move inward",
-      "Handle direction changes - like knowing when to turn inward after completing a side",
-      "Process elements in order - like systematically exploring each area of the territory",
-    ],
-  },
-  "Matrix Spiral Recursive": {
-    title: "Monster Territory Spiral Search",
-    description:
-      "Like searching a monster's territory in a spiral pattern, starting from the outer edges and moving inward, Matrix Spiral Recursive helps us traverse a matrix in a spiral order using recursion.",
-    example:
-      "Imagine searching a monster's territory by starting at the outer edge and moving in a spiral pattern towards the center. Each time you complete a full circle, you move inward and repeat the process, like peeling layers of an onion to find the monster at the center.",
-    tips: [
-      "Define spiral layers - like identifying the boundaries of each search ring",
-      "Process outer layer first - similar to searching the perimeter before moving inward",
-      "Recursively handle inner layers - like repeating the spiral search for smaller areas",
-      "Track current layer boundaries - like keeping track of your search progress",
-      "Handle base case for center - like knowing when you've reached the innermost area",
-    ],
-  },
-  "Matrix Chain Multiplication": {
-    title: "Monster Equipment Crafting Chain",
-    description:
-      "Like optimizing the order of crafting multiple pieces of equipment to minimize resource usage, Matrix Chain Multiplication helps us find the most efficient way to multiply a sequence of matrices.",
-    example:
-      "Imagine you need to craft several pieces of equipment in sequence, where each piece requires materials from the previous one. The order in which you craft them affects the total resources needed. This is like finding the most efficient way to combine multiple crafting steps to minimize material waste.",
-    tips: [
-      "Find optimal parenthesization - like determining the best order to craft equipment",
-      "Use dynamic programming - similar to building up knowledge of optimal crafting sequences",
-      "Store intermediate results - like keeping track of resource costs for different crafting orders",
-      "Consider all possible splits - like evaluating different ways to group crafting steps",
-      "Build solution from smaller subproblems - like starting with small equipment sets and expanding",
-    ],
-  },
-  "Divide and Conquer": {
-    title: "Monster Territory Division",
-    description:
-      "Like dividing a large monster territory into smaller, more manageable sections, Divide and Conquer breaks down complex problems into smaller subproblems that are easier to solve.",
-    example:
-      "Imagine having a vast monster territory to explore. Instead of trying to search the entire area at once, you divide it into smaller sections, explore each section thoroughly, and then combine your findings to understand the whole territory.",
-    tips: [
-      "Divide problem into subproblems - like splitting the territory into smaller areas",
-      "Conquer each subproblem - similar to exploring each section thoroughly",
-      "Combine solutions - like merging your findings from each section",
-      "Use recursion - similar to repeating the process for each subsection",
-      "Base case for smallest problems - like knowing when a section is small enough to explore directly",
-    ],
-  },
-  Graph: {
-    title: "Monster Territory Map",
-    description:
-      "Like creating a map of interconnected hunting grounds, a Graph represents a collection of connected locations where each location can be connected to multiple others.",
-    example:
-      "Imagine having a map of hunting grounds where each ground is connected to others by paths. Some grounds might have many connections (like central hubs), while others might have just a few (like remote outposts).",
-    tips: [
-      "Vertices represent locations - like marking each hunting ground on your map",
-      "Edges represent connections - similar to drawing paths between connected grounds",
-      "Directed edges show one-way paths - like marking paths that can only be traveled in one direction",
-      "Weighted edges show path difficulty - like noting how difficult each path is to traverse",
-      "Use adjacency list or matrix - like keeping track of connections in your map",
-    ],
-  },
-  "Graph Dijkstra": {
-    title: "Monster Territory Pathfinding",
-    description:
-      "Like finding the shortest path from your base camp to any hunting ground, Dijkstra's algorithm helps us find the shortest paths from a single source to all other locations.",
-    example:
-      "Imagine starting from your base camp and needing to find the quickest route to any hunting ground in the territory. This is like having a map that shows you the fastest way to reach any location from your starting point, considering the terrain and obstacles.",
-    tips: [
-      "Use priority queue - like keeping track of the closest unvisited locations",
-      "Update distances when finding shorter paths - similar to discovering better routes to hunting grounds",
-      "Mark visited locations - like keeping track of areas you've already explored",
-      "Consider edge weights - like accounting for terrain difficulty and travel time",
-      "Find shortest paths to all locations - like creating a complete route map from your base",
-    ],
-  },
-  "Graph Bellman-Ford": {
-    title: "Monster Territory Pathfinding",
-    description:
-      "Like finding the shortest paths between hunting grounds while accounting for negative terrain effects, Bellman-Ford helps us find shortest paths in graphs with negative weights.",
-    example:
-      "Imagine planning routes between hunting grounds where some paths might have negative effects (like stamina drain), and you need to find the most efficient route. This is like finding the best path even when some routes might temporarily reduce your stamina but lead to better overall outcomes.",
-    tips: [
-      "Relax edges repeatedly - like checking all possible paths multiple times",
-      "Handle negative weights - similar to accounting for stamina-draining terrain",
-      "Detect negative cycles - like identifying areas that would drain your stamina indefinitely",
-      "Update distances iteratively - similar to finding better paths through each location",
-      "Consider all possible paths - like exploring every potential route between hunting grounds",
-    ],
-  },
-  "Graph Prim": {
-    title: "Monster Territory Expansion",
-    description:
-      "Like expanding your hunting territory efficiently, Prim's algorithm helps us find the minimum spanning tree by growing from a starting point.",
-    example:
-      "Imagine starting from your base camp and gradually expanding your hunting territory by adding the closest unconnected areas, ensuring you always take the shortest path to connect new areas.",
-    tips: [
-      "Start from any vertex - like choosing your base camp location",
-      "Use priority queue - similar to keeping track of the closest unconnected areas",
-      "Add minimum weight edges - like connecting to the nearest hunting grounds",
-      "Maintain visited set - like keeping track of areas you've already connected",
-      "Grow tree one edge at a time - similar to expanding your territory step by step",
-    ],
-  },
-  "Graph Articulation Points": {
-    title: "Monster Territory Weak Points",
-    description:
-      "Like identifying critical points in a monster's territory, Articulation Points helps us find vertices whose removal would disconnect the graph.",
-    example:
-      "Imagine analyzing a monster's territory to find key locations that, if blocked, would split the territory into disconnected regions.",
-    tips: [
-      "Use DFS - like exploring the territory systematically",
-      "Track discovery times - similar to noting when you discover each location",
-      "Identify critical points - like finding locations that connect multiple regions",
-    ],
-  },
-  "Graph Bridges": {
-    title: "Monster Territory Chokepoints",
-    description:
-      "Like finding critical paths in a monster's territory, Bridges helps us identify edges whose removal would disconnect the graph.",
-    example:
-      "Imagine analyzing a monster's territory to find key paths that, if blocked, would split the territory into disconnected regions.",
-    tips: [
-      "Use DFS - like exploring the territory systematically",
-      "Track discovery times - similar to noting when you discover each path",
-      "Identify critical edges - like finding paths that connect multiple regions",
-    ],
-  },
-  "Graph Kosaraju": {
-    title: "Monster Territory Clusters",
-    description:
-      "Like identifying strongly connected regions in a monster's territory, Kosaraju's algorithm helps us find strongly connected components in a graph.",
-    example:
-      "Imagine analyzing a monster's territory to find groups of locations where you can travel between any two locations in the group.",
-    tips: [
-      "Perform two DFS passes - like exploring the territory in both directions",
-      "Use transpose graph - similar to reversing all paths in the territory",
-      "Identify components - like finding groups of interconnected locations",
-    ],
-  },
-  "Network Flow": {
-    title: "Monster Resource Distribution",
-    description:
-      "Like optimizing the flow of resources through a monster's territory, Network Flow helps us find the maximum flow in a network.",
-    example:
-      "Imagine having a network of resource nodes and paths, and needing to maximize the amount of resources that can flow from source to destination.",
-    tips: [
-      "Use residual graph - like keeping track of available capacity on paths",
-      "Find augmenting paths - similar to identifying paths that can carry more flow",
-      "Update flow iteratively - like increasing flow along the best paths",
-    ],
-  },
-  "Strongly Connected Components": {
-    title: "Monster Territory Groups",
-    description:
-      "Like identifying groups of interconnected locations in a monster's territory, Strongly Connected Components helps us find groups where any location can reach any other.",
-    example:
-      "Imagine analyzing a monster's territory to find groups of locations where you can travel between any two locations in the group in both directions.",
-    tips: [
-      "Use DFS - like exploring the territory systematically",
-      "Track discovery times - similar to noting when you discover each location",
-      "Identify components - like finding groups of interconnected locations",
-    ],
-  },
-  "Maximum Bipartite Matching": {
-    title: "Monster Hunter Assignments",
-    description:
-      "Like matching hunters to monster hunts, Maximum Bipartite Matching helps us find the maximum matching in a bipartite graph.",
-    example:
-      "Imagine having a group of hunters and a set of monster hunts, and needing to assign each hunter to at most one hunt they're qualified for.",
-    tips: [
-      "Use augmenting paths - like finding paths that can improve the matching",
-      "Alternate between matched and unmatched edges - similar to switching assignments",
-      "Find maximum matching - like assigning as many hunters as possible",
-    ],
-  },
-  "A* Search": {
-    title: "Monster Territory Pathfinding",
-    description:
-      "Like finding the most efficient path to a monster while considering terrain, A* Search helps us find the shortest path using heuristics.",
-    example:
-      "Imagine having a map of hunting grounds and needing to find the quickest route to a specific monster, considering both distance and terrain difficulty.",
-    tips: [
-      "Use heuristic function - like estimating distance to the target",
-      "Maintain priority queue - similar to keeping track of promising paths",
-      "Update path costs - like finding better routes as you explore",
-    ],
-  },
-  "State Compression DP": {
-    title: "Monster Equipment States",
-    description:
-      "Like tracking different equipment states efficiently, State Compression DP helps us solve problems with many possible states.",
-    example:
-      "Imagine having different equipment combinations and needing to find the optimal set that meets specific requirements.",
-    tips: [
-      "Use bitmasking - like representing states with binary numbers",
-      "Track state transitions - similar to moving between equipment sets",
-      "Optimize state space - like reducing the number of states to consider",
-    ],
-  },
-  "Digit DP": {
-    title: "Monster Count Tracking",
-    description:
-      "Like counting monsters with specific properties, Digit DP helps us solve problems involving digits and numbers.",
-    example:
-      "Imagine needing to count how many monsters have specific characteristics in their identification numbers.",
-    tips: [
-      "Track digit position - like processing numbers digit by digit",
-      "Use memoization - similar to remembering previous calculations",
-      "Handle constraints - like checking specific digit requirements",
-    ],
-  },
-  "Tree DP": {
-    title: "Monster Territory Tree Analysis",
-    description:
-      "Like analyzing a monster's territory organized as a tree, Tree DP helps us solve problems on tree structures.",
-    example:
-      "Imagine having a tree-like territory where each location connects to others, and needing to find optimal paths or configurations.",
-    tips: [
-      "Process nodes recursively - like exploring the territory from leaves to root",
-      "Combine subtree results - similar to building up solutions from smaller parts",
-      "Handle different cases - like considering different ways to process each location",
-    ],
-  },
-  "Probability DP": {
-    title: "Monster Encounter Risk Assessment",
-    description:
-      "Like calculating the probabilities of different monster encounters and their outcomes, Probability DP helps us solve problems involving uncertain events by breaking them down into smaller subproblems and considering the likelihood of each possible outcome. It's like a hunter who carefully assesses the risks and rewards of different hunting strategies, taking into account the probability of various monster behaviors and environmental factors.",
-    example:
-      "Imagine you're planning a series of monster hunts where each encounter has different possible outcomes. You need to calculate the probability of successfully completing all hunts while considering factors like monster behavior patterns, weather conditions, and equipment durability. Probability DP helps you make informed decisions by calculating the likelihood of success for each possible strategy, like a hunter who weighs the risks and rewards of different approaches.",
-    tips: [
-      "Consider all possible states - like accounting for different monster behaviors and environmental conditions",
-      "Calculate transition probabilities - similar to determining the likelihood of different outcomes",
-      "Store intermediate results - like keeping track of success probabilities for different scenarios",
-      "Handle dependent events - similar to considering how one hunt's outcome affects the next",
-      "Optimize expected outcomes - like choosing the strategy with the highest probability of success",
-    ],
-  },
-  "Miller-Rabin": {
-    title: "Monster Rarity Verification",
-    description:
-      "Like verifying the rarity of monster materials, Miller-Rabin helps us test if a number is prime.",
-    example:
-      "Imagine needing to verify if a monster material's rarity value is a prime number.",
-    tips: [
-      "Use probabilistic test - like checking multiple bases for primality",
-      "Handle edge cases - similar to dealing with special rarity values",
-      "Verify efficiently - like quickly checking material rarity",
-    ],
-  },
-  "Fast Fourier Transform": {
-    title: "Monster Signal Analysis",
-    description:
-      "Like analyzing monster signals and patterns, FFT helps us efficiently compute the discrete Fourier transform.",
-    example:
-      "Imagine analyzing the frequency patterns of monster calls or movements to identify specific behaviors.",
-    tips: [
-      "Use divide and conquer - like breaking down signals into smaller parts",
-      "Handle complex numbers - similar to processing signal components",
-      "Apply inverse transform - like reconstructing the original signal",
-    ],
-  },
-  "Heavy Light Decomposition": {
-    title: "Monster Territory Organization",
-    description:
-      "Like organizing a monster's territory into heavy and light paths for efficient traversal, Heavy Light Decomposition helps us break down a tree into chains for efficient operations.",
-    example: `Imagine organizing a monster's territory:
-1. Identify the main paths (heavy edges)
-2. Break down side paths (light edges)
-3. Create efficient traversal routes
-4. Use this to quickly navigate the territory`,
-    tips: [
-      "Think of heavy edges as main hunting routes",
-      "Light edges are side paths and shortcuts",
-      "Use this to optimize territory exploration",
-      "Apply to path queries and updates",
-    ],
-  },
-  Lca: {
-    title: "Monster Territory Ancestry",
-    description:
-      "Like finding the common ancestor of two monster territories, LCA helps us find the lowest common ancestor in a tree structure.",
-    example: `Imagine tracking monster territories:
-1. Two hunters are in different territories
-2. Find their closest common territory
-3. Use this to plan meeting points
-4. Optimize territory exploration`,
-    tips: [
-      "Think of territories as nodes in a tree",
-      "Find the closest common territory",
-      "Use this for efficient path planning",
-      "Apply to territory navigation",
-    ],
-  },
-  "Suffix Tree": {
-    title: "Monster Attack Pattern Tree",
-    description:
-      "Like building a tree of all possible monster attack patterns, Suffix Tree helps us efficiently store and search for patterns in a string.",
-    example: `Imagine analyzing monster attacks:
-1. Build a tree of all attack sequences
-2. Each path represents a possible attack pattern
-3. Quickly find matching patterns
-4. Use this to predict monster behavior`,
-    tips: [
-      "Think of each node as an attack state",
-      "Edges represent possible next moves",
-      "Use this to predict monster patterns",
-      "Apply to attack pattern matching",
-    ],
-  },
   "Suffix Array": {
     title: "Monster Attack Pattern Array",
     description:
@@ -985,252 +569,74 @@ const monsterHunterExplanations: Partial<
       "Apply to pattern matching",
     ],
   },
-  "B Tree": {
-    title: "Monster Material Database",
+  "Extended Euclidean Algorithm": {
+    title: "Monster Resource Division",
     description:
-      "Like organizing a large database of monster materials, B Tree helps us efficiently store and retrieve data in a balanced tree structure.",
-    example: `Imagine organizing monster materials:
-1. Create a balanced tree structure
-2. Each node contains multiple materials
-3. Maintain balance for efficient access
-4. Use this for quick material lookup`,
-    tips: [
-      "Think of each node as a material category",
-      "Maintain balance for efficiency",
-      "Use this for large material databases",
-      "Apply to material organization",
-    ],
-  },
-  "Avl Tree": {
-    title: "Monster Material Balance",
-    description:
-      "Like maintaining a balanced collection of monster materials, AVL Tree helps us keep a balanced binary search tree.",
-    example: `Imagine organizing monster materials:
-1. Create a balanced binary tree
-2. Each node represents a material
-3. Maintain balance through rotations
-4. Use this for efficient material access`,
-    tips: [
-      "Think of each node as a material",
-      "Maintain balance through rotations",
-      "Use this for efficient searching",
-      "Apply to material organization",
-    ],
-  },
-  "Red Black Tree": {
-    title: "Monster Material Organization",
-    description:
-      "Like organizing materials with color coding, Red Black Tree helps us maintain a balanced binary search tree with color properties.",
-    example: `Imagine organizing monster materials:
-1. Create a balanced tree with color coding
-2. Each node has a color property
-3. Maintain balance through color rules
-4. Use this for efficient material access`,
-    tips: [
-      "Think of colors as material categories",
-      "Maintain balance through color rules",
-      "Use this for efficient searching",
-      "Apply to material organization",
-    ],
-  },
-  "Fenwick Tree": {
-    title: "Monster Material Counting",
-    description:
-      "Like tracking material counts efficiently, Fenwick Tree helps us perform prefix sum operations in logarithmic time.",
-    example: `Imagine tracking monster materials:
-1. Create a tree for efficient counting
-2. Each node tracks a range of materials
-3. Quickly calculate material totals
-4. Use this for inventory management`,
-    tips: [
-      "Think of each node as a material range",
-      "Use binary indexing for efficiency",
-      "Apply to range sum queries",
-      "Use for material tracking",
-    ],
-  },
-  "Segment Tree": {
-    title: "Monster Material Range Queries",
-    description:
-      "Like performing range queries on monster materials, Segment Tree helps us efficiently answer range queries and updates.",
-    example: `Imagine querying monster materials:
-1. Create a tree for range operations
-2. Each node represents a material range
-3. Quickly perform range queries
-4. Use this for material analysis`,
-    tips: [
-      "Think of each node as a material range",
-      "Use for range queries and updates",
-      "Apply to material analysis",
-      "Use for efficient operations",
-    ],
-  },
-  "Prefix Sums": {
-    title: "Monster Material Accumulation",
-    description:
-      "Like keeping track of accumulated monster materials in your inventory, Prefix Sums help us efficiently calculate the sum of elements in any range of an array.",
+      "Like finding the optimal way to divide monster resources between hunters, the Extended Euclidean algorithm helps us find integer solutions to equations of the form ax + by = gcd(a,b). It's like a hunter who needs to distribute resources fairly while ensuring no resources are wasted.",
     example:
-      "Imagine having a series of monster hunts where you collect materials. You want to quickly know how many materials you've collected between any two hunts without recounting everything each time.",
+      "Imagine you have two types of monster materials, and you need to find a way to combine them in specific quantities to create a perfect crafting recipe. The Extended Euclidean algorithm helps you find the exact amounts of each material needed, like a hunter who carefully calculates the optimal combination of resources for their equipment.",
     tips: [
-      "Precompute cumulative sums - like keeping a running total of your materials",
-      "Calculate range sums in O(1) - similar to quickly finding how many materials you got between two hunts",
-      "Update individual elements - like adding new materials to your inventory",
-      "Handle multiple dimensions - like tracking different types of materials separately",
-      "Use for efficient range queries - like quickly checking material counts for any period",
+      "Find greatest common divisor - like determining the largest amount that can be evenly divided",
+      "Calculate coefficients - similar to finding the exact quantities needed for each material",
+      "Handle special cases - like dealing with materials that can't be combined",
+      "Use recursion - like breaking down the problem into smaller resource divisions",
+      "Find all solutions - like exploring different ways to combine the materials",
     ],
   },
-  "KMP Algorithm": {
-    title: "Monster Pattern Recognition",
+  "Chinese Remainder Theorem": {
+    title: "Monster Quest Synchronization",
     description:
-      "Like recognizing monster attack patterns to predict their next moves, the KMP Algorithm helps us efficiently find patterns in text by using precomputed information about the pattern itself.",
+      "Like coordinating multiple monster hunts that have different time requirements, the Chinese Remainder Theorem helps us find a number that satisfies multiple congruence conditions. It's like a hunter who needs to schedule multiple quests with different time constraints.",
     example:
-      "Imagine studying a monster's attack sequence. Instead of starting over each time you see a partial match, you use your knowledge of the pattern to skip ahead, like a hunter who recognizes the beginning of a familiar attack pattern and knows exactly where to look for the next move.",
+      "Imagine you have three monster hunts: one that repeats every 3 days, another every 5 days, and a third every 7 days. You want to find the next day when all three hunts will occur simultaneously. The Chinese Remainder Theorem helps you calculate this, like a hunter who plans their schedule to maximize efficiency.",
     tips: [
-      "Build prefix table - like creating a guide of known attack patterns",
-      "Skip unnecessary comparisons - similar to not rechecking parts of the pattern you already know",
-      "Use pattern knowledge - like leveraging your understanding of the monster's moves",
-      "Handle partial matches - like recognizing when an attack sequence might be starting",
-      "Linear time complexity - like efficiently tracking the monster's patterns",
+      "Break down into smaller problems - like handling each hunt's schedule separately",
+      "Find common solutions - similar to identifying overlapping time slots",
+      "Handle non-coprime moduli - like dealing with quests that have related time constraints",
+      "Use modular arithmetic - like calculating with time cycles",
+      "Verify solutions - like double-checking your schedule works for all hunts",
     ],
   },
-  "Matrix Exponentiation": {
-    title: "Monster Power Amplification",
+  "Sieve of Eratosthenes": {
+    title: "Monster Territory Sieving",
     description:
-      "Like calculating monster evolution over time, Matrix Exponentiation helps us efficiently compute high powers of matrices.",
-    example: `Imagine tracking monster evolution:
-1. Each matrix represents a state change
-2. Calculate evolution over time
-3. Find final state efficiently
-4. Use this for power prediction`,
-    tips: [
-      "Think of matrices as state changes",
-      "Use binary exponentiation",
-      "Apply to power calculations",
-      "Use for efficient computation",
-    ],
-  },
-  Tree: {
-    title: "Monster Species Hierarchy",
-    description:
-      "Like organizing monster species in a hierarchy, Tree provides a hierarchical data structure with a root and branches.",
+      "Like systematically eliminating areas where monsters cannot be found, the Sieve of Eratosthenes helps us find all prime numbers up to a given limit by eliminating their multiples. It's like a hunter who marks off areas where they know monsters won't appear.",
     example:
-      "Imagine organizing monsters by their species and subspecies, where each species can have multiple subspecies, forming a branching structure.",
+      "Imagine you're exploring a large territory and want to find all the prime monster habitats. You start by marking off areas that are multiples of 2, then 3, then 5, and so on. The remaining unmarked areas are the prime habitats, like a hunter who systematically eliminates impossible locations to find the best hunting grounds.",
     tips: [
-      "Root at top - like starting with the most general monster category",
-      "Nodes can have children - similar to species having subspecies",
-      "No cycles - like ensuring the hierarchy doesn't loop back on itself",
+      "Start with the smallest prime - like beginning with the most basic hunting area",
+      "Mark off multiples - similar to eliminating areas that are multiples of known locations",
+      "Move to next unmarked number - like exploring new areas systematically",
+      "Optimize by stopping at square root - like knowing when you've checked enough areas",
+      "Use boolean array for efficiency - like keeping a clear map of checked locations",
     ],
   },
-  "Z Algorithm": {
-    title: "Monster Territory Pattern Matching",
+  "Sieve of Atkin": {
+    title: "Advanced Monster Territory Sieving",
     description:
-      "Like efficiently finding patterns in a monster's territory, the Z Algorithm helps us find all occurrences of a pattern in a text by using a Z-array to store the length of the longest substring starting from each position that matches the prefix.",
+      "Like using advanced techniques to identify prime monster habitats, the Sieve of Atkin is a modern algorithm for finding all prime numbers up to a given limit. It's like a hunter who uses sophisticated methods to identify the best hunting grounds.",
     example:
-      "Imagine tracking a monster's movement patterns through its territory. You can quickly identify where the same pattern of movement repeats by comparing each position with the beginning of the territory, like a hunter who recognizes familiar movement sequences to predict the monster's next location.",
+      "Imagine you're exploring a vast territory and want to find all prime monster habitats using advanced techniques. The Sieve of Atkin helps you identify these areas by considering quadratic forms and modular arithmetic, like a hunter who uses sophisticated tracking methods to find the most valuable hunting grounds.",
     tips: [
-      "Build Z-array - like creating a map of pattern matches",
-      "Compare with prefix - similar to checking if current movements match the start",
-      "Use previous results - like leveraging known pattern matches",
-      "Handle edge cases - like dealing with pattern boundaries",
-      "Linear time complexity - like efficiently tracking the monster's patterns",
+      "Use quadratic forms - like applying advanced tracking patterns",
+      "Consider modular arithmetic - similar to using time-based patterns",
+      "Mark potential primes - like identifying promising hunting areas",
+      "Filter out non-primes - similar to eliminating false leads",
+      "Optimize with wheel factorization - like using specialized tools for efficiency",
     ],
   },
-  "Manacher's Algorithm": {
-    title: "Monster Territory Symmetry Detection",
+  "Sieve of Sundaram": {
+    title: "Monster Territory Exclusion",
     description:
-      "Like identifying symmetrical patterns in a monster's territory, Manacher's Algorithm helps us find the longest palindromic substring by efficiently expanding around each center point while using previously computed information to avoid redundant checks.",
+      "Like systematically excluding areas where monsters cannot be found, the Sieve of Sundaram helps us find all prime numbers by eliminating numbers of the form i + j + 2ij. It's like a hunter who uses a specific pattern to identify areas that can be safely ignored.",
     example:
-      "Imagine tracking a monster's movement patterns through its territory. You notice that some of its paths form perfect mirror images - like a monster that moves in a symmetrical pattern. Manacher's Algorithm helps you quickly identify these symmetrical patterns by checking each point as a potential center of symmetry, while using your knowledge of previous symmetrical patterns to speed up the search.",
+      "Imagine you're exploring a territory and want to find prime monster habitats. The Sieve of Sundaram helps you identify these by marking off areas that follow a specific pattern (i + j + 2ij), like a hunter who uses a systematic approach to eliminate impossible locations and focus on promising areas.",
     tips: [
-      "Use center expansion - like checking each point as a potential center of symmetry",
-      "Leverage mirror properties - similar to using known symmetrical patterns to predict new ones",
-      "Maintain palindrome boundaries - like keeping track of the largest symmetrical area found",
-      "Handle even and odd lengths - like detecting both simple and complex symmetrical patterns",
-      "Linear time complexity - like efficiently scanning the monster's territory for patterns",
-    ],
-  },
-  Greedy: {
-    title: "Monster Hunting Strategy",
-    description:
-      "Like making tactical decisions during a hunt, the Greedy algorithm makes locally optimal choices at each step, hoping to find a global optimum. It's like a hunter who makes the best immediate decision at each moment, such as choosing the most valuable monster to hunt next or the most efficient path to take.",
-    example:
-      "Imagine you're a monster hunter with limited time and resources. At each decision point, you choose the most immediately beneficial option - like hunting the monster that gives the most valuable materials right now, or taking the path that leads to the nearest resource node. While this might not always lead to the absolute best outcome, it often provides a good solution quickly.",
-    tips: [
-      "Make locally optimal choices - like always choosing the most valuable immediate target",
-      "Don't reconsider past decisions - similar to not second-guessing your hunting choices",
-      "Consider constraints - like working within your stamina and resource limits",
-      "Evaluate immediate benefits - like assessing the value of each potential hunt",
-      "Balance speed and quality - like finding a good solution quickly rather than the perfect one slowly",
-    ],
-  },
-  "Dynamic Programming Pattern": {
-    title: "Monster Territory Planning",
-    description:
-      "Like planning the most efficient route through a monster's territory, Dynamic Programming Pattern helps us solve complex problems by breaking them into smaller subproblems and storing their solutions to avoid redundant calculations. It's like a hunter who carefully plans each step of their journey, remembering the best paths they've discovered to optimize their overall route.",
-    example:
-      "Imagine you're planning a series of monster hunts across different territories. Instead of recalculating the best path from scratch each time, you remember the optimal routes you've already discovered. When you reach a new area, you can combine your knowledge of previous paths with the current situation to make the best decision, like a hunter who builds up their knowledge of the territory piece by piece.",
-    tips: [
-      "Break down complex problems - like dividing a large territory into manageable sections",
-      "Store intermediate results - similar to keeping a map of known optimal paths",
-      "Build up solutions - like combining knowledge of smaller areas to plan larger routes",
-      "Avoid redundant calculations - similar to not re-exploring areas you already know well",
-      "Consider all possible states - like planning for different monster behaviors and terrain conditions",
-    ],
-  },
-  "Trie Operations": {
-    title: "Monster Territory Knowledge Tree",
-    description:
-      "Like organizing your knowledge of monster territories in a branching structure, Trie Operations help us efficiently store and search for strings by building a tree where each node represents a character and paths represent complete words. It's like a hunter who organizes their knowledge of monster locations in a way that makes it easy to find specific information quickly.",
-    example:
-      "Imagine you're keeping track of different monster territories and their characteristics. You organize this information in a tree structure where each branch represents a different aspect (like location, type, or behavior). When you need to find information about a specific monster, you can follow the branches that match its characteristics, like a hunter who can quickly navigate their knowledge base to find relevant information.",
-    tips: [
-      "Build character-based trees - like organizing monster information by categories",
-      "Share common prefixes - similar to grouping monsters with similar characteristics",
-      "Efficient prefix searches - like quickly finding all monsters in a specific area",
-      "Handle word completions - similar to suggesting possible monster types based on partial information",
-      "Optimize space usage - like efficiently storing information about many monsters",
-    ],
-  },
-  "Monotonic Queue": {
-    title: "Monster Territory Priority Line",
-    description:
-      "Like maintaining an ordered line of monster hunting priorities, a Monotonic Queue keeps elements in a strictly increasing or decreasing order. It's like a hunter who organizes their targets based on importance, always keeping the most significant monster at the front of their attention while removing less important ones from consideration.",
-    example:
-      "Imagine you're tracking multiple monsters in a territory, each with different threat levels. You maintain a list where monsters are always ordered by their threat level, and you can quickly access the most dangerous monster. As new monsters appear or existing ones change their threat level, you update your list while maintaining the order, like a hunter who constantly re-evaluates their priorities based on the current situation.",
-    tips: [
-      "Maintain strict order - like keeping monsters sorted by their threat level",
-      "Remove outdated elements - similar to dropping monsters that are no longer relevant",
-      "Access front element quickly - like immediately knowing which monster to focus on",
-      "Handle sliding windows - similar to tracking monsters within a specific area",
-      "Optimize for specific operations - like efficiently finding the most dangerous monster in a region",
-    ],
-  },
-  "Matrix Operations": {
-    title: "Monster Territory Matrix",
-    description:
-      "Like organizing and analyzing a monster's territory using a grid system, Matrix Operations help us perform various transformations and calculations on two-dimensional data. It's like a hunter who uses a grid map to track monster movements, analyze territory patterns, and plan efficient hunting routes.",
-    example:
-      "Imagine you have a detailed map of a monster's territory divided into a grid. Each cell contains information about the terrain, monster presence, or resource availability. Matrix Operations help you rotate the map to view it from different angles, combine information from different areas, or transform the data to reveal hidden patterns, like a hunter who uses different map orientations to plan their approach.",
-    tips: [
-      "Understand matrix dimensions - like knowing the size and shape of the monster's territory",
-      "Master basic operations - similar to learning how to navigate and analyze the territory",
-      "Use transformations - like rotating or flipping the map to gain new perspectives",
-      "Combine matrices - similar to merging information from different areas of the territory",
-      "Apply matrix properties - like using mathematical relationships to predict monster movements",
-    ],
-  },
-  "Rabin-Karp": {
-    title: "Monster Pattern Hash Tracking",
-    description:
-      "Like efficiently tracking monster movement patterns using a unique identifier system, the Rabin-Karp algorithm helps us find patterns in text by using hash values to quickly compare sequences. It's like a hunter who assigns unique codes to different monster movement patterns, allowing them to quickly identify when a familiar pattern appears in a new location.",
-    example:
-      "Imagine you're tracking a monster's movement through its territory. Instead of comparing each step of its path directly, you create a unique code (hash) for each segment of its movement. When you see a new movement pattern, you can quickly check if its code matches any known patterns, like a hunter who can instantly recognize familiar movement sequences even when they appear in different parts of the territory.",
-    tips: [
-      "Use rolling hash - like updating the pattern code as the monster moves",
-      "Handle hash collisions - similar to double-checking when patterns seem similar",
-      "Compare patterns efficiently - like quickly identifying familiar movement sequences",
-      "Choose good hash function - like creating unique and reliable pattern codes",
-      "Update hash incrementally - similar to tracking the monster's path step by step",
+      "Use the formula i + j + 2ij - like following a specific tracking pattern",
+      "Mark off composite numbers - similar to eliminating known non-habitat areas",
+      "Consider the range carefully - like knowing the boundaries of your search",
+      "Transform results to get primes - like converting your findings to actual habitat locations",
+      "Optimize with proper indexing - like efficiently organizing your search pattern",
     ],
   },
 };

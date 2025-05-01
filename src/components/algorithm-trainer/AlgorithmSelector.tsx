@@ -39,6 +39,12 @@ const getCategoryFromKey = (key: string): string => {
   )
     return "String Algorithms";
   if (key.includes("Matrix")) return "Matrix Operations";
+  if (
+    key.includes("Extended Euclidean") ||
+    key.includes("Chinese Remainder") ||
+    key.includes("Sieve")
+  )
+    return "Number Theory";
   return "Other Algorithms";
 };
 

@@ -15,6 +15,7 @@ import { otherPatterns } from "./other";
 import { recursionPatterns } from "./recursion";
 import { divideAndConquerPatterns } from "./divide-and-conquer";
 import { matrixPatterns } from "./matrix";
+import { numberTheoryPatterns } from "./number-theory";
 
 // Combine all patterns
 export const algorithmPatterns: Record<string, AlgorithmPattern> = {
@@ -32,4 +33,7 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
   ...recursionPatterns,
   ...divideAndConquerPatterns,
   ...matrixPatterns,
+  ...Object.fromEntries(
+    numberTheoryPatterns.map((pattern) => [pattern.title, pattern])
+  ),
 };
