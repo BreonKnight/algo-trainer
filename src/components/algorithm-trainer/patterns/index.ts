@@ -37,3 +37,5 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
     numberTheoryPatterns.map((pattern) => [pattern.title, pattern])
   ),
 };
+
+export * from "./data-structures/union-find";

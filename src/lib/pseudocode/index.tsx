@@ -56,6 +56,8 @@ import { MaximumBipartiteMatchingPattern } from "./patterns/maximum-bipartite-ma
 import { ExtendedEuclideanAlgorithmPattern } from "./patterns/extended-euclidean-algorithm";
 import { ChineseRemainderTheoremPattern } from "./patterns/chinese-remainder-theorem";
 import { SieveOfEratosthenesPattern } from "./patterns/sieve-of-eratosthenes";
+import { SieveOfAtkinPattern } from "./patterns/sieve-of-atkin";
+import { SieveOfSundaramPattern } from "./patterns/sieve-of-sundaram";
 import { GraphArticulationPointsPattern } from "./patterns/graph-articulation-points";
 import { GraphBridgesPattern } from "./patterns/graph-bridges";
 import { GridTraversalPattern } from "./patterns/grid-traversal";
@@ -101,6 +103,8 @@ import { StringPattern } from "./patterns/string";
 import { RecursionPattern } from "./patterns/recursion";
 import { BacktrackingPattern } from "./patterns/backtracking";
 import { GreedyPattern } from "./patterns/greedy";
+import { MillerRabinPrimalityTestPattern } from "./patterns/miller-rabin-primality-test";
+import { FastFourierTransformPattern } from "./patterns/fast-fourier-transform";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Dynamic Programming": DynamicProgrammingPattern,
@@ -169,6 +173,8 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
   "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
   "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
+  "Sieve of Atkin": SieveOfAtkinPattern,
+  "Sieve of Sundaram": SieveOfSundaramPattern,
   "Graph Articulation Points": GraphArticulationPointsPattern,
   "Graph Bridges": GraphBridgesPattern,
   "Graph Prim": PrimsAlgorithmPattern,
@@ -204,4 +210,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "KMP Algorithm": KmpAlgorithmPattern,
   "Manacher's Algorithm": ManachersAlgorithmPattern,
   "Z Algorithm": ZAlgorithmPattern,
+  "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
+  "Fast Fourier Transform": FastFourierTransformPattern,
 };

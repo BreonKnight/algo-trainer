@@ -5,6 +5,7 @@ import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3
 import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4";
 import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5";
 import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
+import { monsterHunterPatterns } from "./monsterHunterPatterns";
 
 // Combine all patterns
 const allPatterns = new Map<PatternKey, string>([
@@ -14,6 +15,7 @@ const allPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended4,
   ...monsterHunterPatternsExtended5,
   ...monsterHunterPatternsExtended6,
+  ...monsterHunterPatterns,
 ]);
 
 // Organize patterns by category

@@ -747,4 +747,885 @@ export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
     
     return -1  # Monster not found`,
   ],
+
+  [
+    "Sieve of Sundaram" as PatternKey,
+    `def monster_hunter_sieve_sundaram(area_size):
+    """
+    Find optimal resource gathering points using Sieve of Sundaram.
+    Time: O(n log n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like finding optimal gathering points in a territory
+    - Each point represents a resource-rich location
+    - Primes indicate the most valuable spots
+    
+    Example:
+    area_size = 30
+    
+    Process:
+    1. Initialize array for odd numbers
+    2. Mark non-prime locations
+    3. Collect optimal gathering points
+    """
+    if area_size < 2:
+        return []
+    
+    # Initialize array for odd numbers
+    k = (area_size - 1) // 2
+    is_prime = [True] * (k + 1)
+    
+    # Mark non-prime locations
+    for i in range(1, k + 1):
+        j = i
+        while i + j + 2 * i * j <= k:
+            is_prime[i + j + 2 * i * j] = False
+            j += 1
+    
+    # Collect optimal gathering points
+    gathering_points = [2]  # 2 is always a prime gathering point
+    for i in range(1, k + 1):
+        if is_prime[i]:
+            gathering_points.append(2 * i + 1)
+    
+    return gathering_points
+
+def find_resource_rich_locations(area_size):
+    """
+    Find the most resource-rich locations in a Monster Hunter area.
+    Uses Sieve of Sundaram to identify optimal gathering points.
+    
+    Args:
+        area_size (int): Size of the area to search
+        
+    Returns:
+        list: List of optimal gathering points
+    """
+    return monster_hunter_sieve_sundaram(area_size)
+
+# Example usage:
+# area_size = 30
+# gathering_points = find_resource_rich_locations(area_size)
+# print(f"Optimal gathering points: {gathering_points}")`,
+  ],
+
+  [
+    "Monotonic Stack" as PatternKey,
+    `def monster_hunter_monotonic_stack(monster_heights):
+    """
+    Track increasing monster threat levels using Monotonic Stack.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like tracking increasing monster threat levels
+    - Each monster has a height/threat level
+    - Find the next taller monster for each position
+    
+    Example:
+    monster_heights = [3, 1, 4, 2, 5]
+    # Represents threat levels of monsters in a territory
+    
+    Process:
+    1. Initialize empty stack
+    2. For each monster, pop smaller monsters
+    3. Record next taller monster
+    4. Push current monster
+    """
+    stack = []
+    result = [-1] * len(monster_heights)
+    
+    for i in range(len(monster_heights)):
+        # Pop monsters with lower threat levels
+        while stack and monster_heights[stack[-1]] < monster_heights[i]:
+            result[stack.pop()] = i
+        stack.append(i)
+    
+    return result
+
+def find_next_taller_monster(monster_heights):
+    """
+    Find the next taller monster for each position in a territory.
+    Uses Monotonic Stack to efficiently track threat levels.
+    
+    Args:
+        monster_heights (list): List of monster threat levels
+        
+    Returns:
+        list: Indices of next taller monsters
+    """
+    return monster_hunter_monotonic_stack(monster_heights)
+
+# Example usage:
+# monster_heights = [3, 1, 4, 2, 5]
+# next_taller = find_next_taller_monster(monster_heights)
+# print(f"Next taller monster indices: {next_taller}")`,
+  ],
+
+  [
+    "Graph Dijkstra" as PatternKey,
+    `def monster_hunter_dijkstra(hunting_grounds, start_camp):
+    """
+    Find shortest paths between hunting grounds using Dijkstra's algorithm.
+    Time: O((V + E) log V)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like finding the most efficient routes between hunting grounds
+    - Each path has a difficulty level (weight)
+    - Find the quickest way to reach each location
+    
+    Example:
+    hunting_grounds = {
+        "Base Camp": [("Ancient Forest", 2), ("Wildspire Waste", 3)],
+        "Ancient Forest": [("Coral Highlands", 4)],
+        "Wildspire Waste": [("Rotten Vale", 3)],
+        "Coral Highlands": [("Elder's Recess", 5)],
+        "Rotten Vale": [("Elder's Recess", 4)]
+    }
+    start = "Base Camp"
+    
+    Process:
+    1. Initialize distances to infinity
+    2. Use priority queue to track next location
+    3. Update distances when shorter path found
+    4. Return shortest paths to all locations
+    """
+    from heapq import heappush, heappop
+    
+    # Initialize distances
+    distances = {location: float('inf') for location in hunting_grounds}
+    distances[start_camp] = 0
+    previous = {location: None for location in hunting_grounds}
+    
+    # Priority queue for next location to visit
+    priority_queue = [(0, start_camp)]
+    
+    while priority_queue:
+        current_distance, current_location = heappop(priority_queue)
+        
+        # Skip if we've found a better path already
+        if current_distance > distances[current_location]:
+            continue
+        
+        # Check all neighboring locations
+        for neighbor, difficulty in hunting_grounds[current_location]:
+            distance = current_distance + difficulty
+            
+            # If we found a shorter path, update it
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                previous[neighbor] = current_location
+                heappush(priority_queue, (distance, neighbor))
+    
+    return distances, previous
+
+def find_optimal_hunting_route(hunting_grounds, start_camp, target_location):
+    """
+    Find the most efficient route to a target hunting ground.
+    Uses Dijkstra's algorithm to find the shortest path.
+    
+    Args:
+        hunting_grounds (dict): Map of locations and their connections
+        start_camp (str): Starting location
+        target_location (str): Destination to reach
+        
+    Returns:
+        tuple: (total_difficulty, path)
+    """
+    distances, previous = monster_hunter_dijkstra(hunting_grounds, start_camp)
+    
+    # Reconstruct path
+    path = []
+    current = target_location
+    while current is not None:
+        path.append(current)
+        current = previous[current]
+    path.reverse()
+    
+    return distances[target_location], path
+
+# Example usage:
+# hunting_grounds = {
+#     "Base Camp": [("Ancient Forest", 2), ("Wildspire Waste", 3)],
+#     "Ancient Forest": [("Coral Highlands", 4)],
+#     "Wildspire Waste": [("Rotten Vale", 3)],
+#     "Coral Highlands": [("Elder's Recess", 5)],
+#     "Rotten Vale": [("Elder's Recess", 4)]
+# }
+# difficulty, path = find_optimal_hunting_route(hunting_grounds, "Base Camp", "Elder's Recess")
+# print(f"Total difficulty: {difficulty}")
+# print(f"Path: {' -> '.join(path)}")`,
+  ],
+
+  [
+    "Sieve of Atkin" as PatternKey,
+    `def monster_hunter_sieve_atkin(territory_size):
+    """
+    Find all prime monster habitats using Sieve of Atkin.
+    Time: O(n / log log n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like finding all prime monster habitats in a territory
+    - Uses advanced mathematical patterns
+    - More efficient than traditional sieving methods
+    
+    Example:
+    territory_size = 30
+    
+    Process:
+    1. Initialize sieve array
+    2. Mark potential primes using quadratic forms
+    3. Filter out non-primes
+    4. Return list of prime habitats
+    """
+    if territory_size < 2:
+        return []
+    
+    # Initialize sieve array
+    sieve = [False] * (territory_size + 1)
+    
+    # Mark potential primes using quadratic forms
+    for x in range(1, int(territory_size ** 0.5) + 1):
+        for y in range(1, int(territory_size ** 0.5) + 1):
+            # First quadratic form: 4x² + y²
+            n = 4 * x * x + y * y
+            if n <= territory_size and (n % 12 == 1 or n % 12 == 5):
+                sieve[n] = not sieve[n]
+            
+            # Second quadratic form: 3x² + y²
+            n = 3 * x * x + y * y
+            if n <= territory_size and n % 12 == 7:
+                sieve[n] = not sieve[n]
+            
+            # Third quadratic form: 3x² - y²
+            n = 3 * x * x - y * y
+            if x > y and n <= territory_size and n % 12 == 11:
+                sieve[n] = not sieve[n]
+    
+    # Mark squares of primes as non-prime
+    for x in range(5, int(territory_size ** 0.5) + 1):
+        if sieve[x]:
+            for y in range(x * x, territory_size + 1, x * x):
+                sieve[y] = False
+    
+    # Collect prime habitats
+    prime_habitats = [2, 3]
+    for x in range(5, territory_size + 1):
+        if sieve[x]:
+            prime_habitats.append(x)
+    
+    return prime_habitats
+
+def find_advanced_monster_habitats(territory_size):
+    """
+    Find all prime monster habitats in a territory using Sieve of Atkin.
+    This is an advanced method for identifying the most valuable hunting grounds.
+    
+    Args:
+        territory_size (int): Size of the territory to search
+        
+    Returns:
+        list: List of prime monster habitats
+    """
+    return monster_hunter_sieve_atkin(territory_size)
+
+# Example usage:
+# territory_size = 30
+# habitats = find_advanced_monster_habitats(territory_size)
+# print(f"Prime monster habitats: {habitats}")`,
+  ],
+
+  [
+    "Grid Traversal" as PatternKey,
+    `def monster_hunter_grid_traversal(territory_grid, start_pos):
+    """
+    Explore monster territory using grid traversal.
+    Time: O(rows * cols)
+    Space: O(rows * cols)
+    
+    Monster Hunter Context:
+    - Like exploring a monster's territory grid by grid
+    - Each cell may contain resources, obstacles, or monsters
+    - Find optimal paths and explore efficiently
+    
+    Example:
+    territory_grid = [
+        ['.', '.', '#', '.'],
+        ['.', '#', '.', '.'],
+        ['.', '.', '.', '#'],
+        ['.', '#', '.', '.']
+    ]
+    start_pos = (0, 0)
+    # . = empty, # = obstacle
+    
+    Process:
+    1. Initialize visited grid
+    2. Use BFS/DFS to explore
+    3. Mark visited cells
+    4. Handle obstacles
+    """
+    from collections import deque
+    
+    rows = len(territory_grid)
+    cols = len(territory_grid[0])
+    
+    # Define movement directions (4-way)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # Initialize visited grid
+    visited = [[False for _ in range(cols)] for _ in range(rows)]
+    
+    # BFS queue
+    queue = deque([start_pos])
+    visited[start_pos[0]][start_pos[1]] = True
+    
+    # Store exploration path
+    exploration_path = []
+    
+    while queue:
+        current_pos = queue.popleft()
+        exploration_path.append(current_pos)
+        
+        # Explore all directions
+        for dr, dc in directions:
+            new_row = current_pos[0] + dr
+            new_col = current_pos[1] + dc
+            
+            # Check if new position is valid
+            if (0 <= new_row < rows and 
+                0 <= new_col < cols and 
+                not visited[new_row][new_col] and 
+                territory_grid[new_row][new_col] != '#'):
+                
+                visited[new_row][new_col] = True
+                queue.append((new_row, new_col))
+    
+    return exploration_path
+
+def find_shortest_path_to_monster(territory_grid, start_pos, monster_pos):
+    """
+    Find the shortest path to a monster in the territory.
+    Uses BFS for optimal path finding.
+    
+    Args:
+        territory_grid (list): 2D grid representing the territory
+        start_pos (tuple): Starting position (row, col)
+        monster_pos (tuple): Monster's position (row, col)
+        
+    Returns:
+        list: List of positions forming the shortest path
+    """
+    from collections import deque
+    
+    rows = len(territory_grid)
+    cols = len(territory_grid[0])
+    
+    # Define movement directions (4-way)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # Initialize visited and parent grids
+    visited = [[False for _ in range(cols)] for _ in range(rows)]
+    parent = [[None for _ in range(cols)] for _ in range(rows)]
+    
+    # BFS queue
+    queue = deque([start_pos])
+    visited[start_pos[0]][start_pos[1]] = True
+    
+    # BFS to find monster
+    while queue:
+        current_pos = queue.popleft()
+        
+        # Found the monster
+        if current_pos == monster_pos:
+            # Reconstruct path
+            path = []
+            while current_pos is not None:
+                path.append(current_pos)
+                current_pos = parent[current_pos[0]][current_pos[1]]
+            return path[::-1]
+        
+        # Explore all directions
+        for dr, dc in directions:
+            new_row = current_pos[0] + dr
+            new_col = current_pos[1] + dc
+            
+            # Check if new position is valid
+            if (0 <= new_row < rows and 
+                0 <= new_col < cols and 
+                not visited[new_row][new_col] and 
+                territory_grid[new_row][new_col] != '#'):
+                
+                visited[new_row][new_col] = True
+                parent[new_row][new_col] = current_pos
+                queue.append((new_row, new_col))
+    
+    return []  # No path found
+
+# Example usage:
+# territory_grid = [
+#     ['.', '.', '#', '.'],
+#     ['.', '#', '.', '.'],
+#     ['.', '.', '.', '#'],
+#     ['.', '#', '.', '.']
+# ]
+# start_pos = (0, 0)
+# monster_pos = (3, 3)
+# path = find_shortest_path_to_monster(territory_grid, start_pos, monster_pos)
+# print(f"Shortest path to monster: {path}")`,
+  ],
+
+  [
+    "Matrix Spiral Traversal" as PatternKey,
+    `def monster_hunter_spiral_search(territory_grid):
+    """
+    Search monster territory in a spiral pattern.
+    Time: O(rows * cols)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like searching a monster's territory in a spiral pattern
+    - Start from center and move outward
+    - Systematically explore every area
+    
+    Example:
+    territory_grid = [
+        ['R', 'R', 'M', 'R'],
+        ['R', 'C', 'R', 'R'],
+        ['R', 'R', 'R', 'M'],
+        ['R', 'R', 'R', 'R']
+    ]
+    # R = Resource, M = Monster, C = Center
+    
+    Process:
+    1. Start from center
+    2. Move in spiral pattern
+    3. Collect resources and note monster locations
+    """
+    if not territory_grid or not territory_grid[0]:
+        return []
+    
+    rows = len(territory_grid)
+    cols = len(territory_grid[0])
+    
+    # Find center position
+    center_row = rows // 2
+    center_col = cols // 2
+    
+    # Initialize boundaries
+    top = center_row
+    bottom = center_row
+    left = center_col
+    right = center_col
+    
+    # Store exploration path
+    exploration_path = []
+    resources_found = []
+    monsters_found = []
+    
+    # Start from center
+    exploration_path.append((center_row, center_col))
+    if territory_grid[center_row][center_col] == 'R':
+        resources_found.append((center_row, center_col))
+    elif territory_grid[center_row][center_col] == 'M':
+        monsters_found.append((center_row, center_col))
+    
+    # Spiral outward
+    while top >= 0 or bottom < rows or left >= 0 or right < cols:
+        # Move right
+        if right < cols:
+            for col in range(left + 1, right + 1):
+                if 0 <= center_row < rows and 0 <= col < cols:
+                    exploration_path.append((center_row, col))
+                    if territory_grid[center_row][col] == 'R':
+                        resources_found.append((center_row, col))
+                    elif territory_grid[center_row][col] == 'M':
+                        monsters_found.append((center_row, col))
+            right += 1
+        
+        # Move down
+        if bottom < rows:
+            for row in range(top + 1, bottom + 1):
+                if 0 <= row < rows and 0 <= right - 1 < cols:
+                    exploration_path.append((row, right - 1))
+                    if territory_grid[row][right - 1] == 'R':
+                        resources_found.append((row, right - 1))
+                    elif territory_grid[row][right - 1] == 'M':
+                        monsters_found.append((row, right - 1))
+            bottom += 1
+        
+        # Move left
+        if left >= 0:
+            for col in range(right - 2, left - 1, -1):
+                if 0 <= bottom - 1 < rows and 0 <= col < cols:
+                    exploration_path.append((bottom - 1, col))
+                    if territory_grid[bottom - 1][col] == 'R':
+                        resources_found.append((bottom - 1, col))
+                    elif territory_grid[bottom - 1][col] == 'M':
+                        monsters_found.append((bottom - 1, col))
+            left -= 1
+        
+        # Move up
+        if top >= 0:
+            for row in range(bottom - 2, top - 1, -1):
+                if 0 <= row < rows and 0 <= left + 1 < cols:
+                    exploration_path.append((row, left + 1))
+                    if territory_grid[row][left + 1] == 'R':
+                        resources_found.append((row, left + 1))
+                    elif territory_grid[row][left + 1] == 'M':
+                        monsters_found.append((row, left + 1))
+            top -= 1
+    
+    return {
+        'exploration_path': exploration_path,
+        'resources_found': resources_found,
+        'monsters_found': monsters_found
+    }
+
+def search_territory_spiral(territory_grid):
+    """
+    Search a monster territory in a spiral pattern, starting from the center.
+    Collects resources and notes monster locations along the way.
+    
+    Args:
+        territory_grid (list): 2D grid representing the territory
+            'R' = Resource
+            'M' = Monster
+            'C' = Center (starting point)
+            '.' = Empty space
+        
+    Returns:
+        dict: Contains exploration path, found resources, and found monsters
+    """
+    return monster_hunter_spiral_search(territory_grid)
+
+# Example usage:
+# territory_grid = [
+#     ['R', 'R', 'M', 'R'],
+#     ['R', 'C', 'R', 'R'],
+#     ['R', 'R', 'R', 'M'],
+#     ['R', 'R', 'R', 'R']
+# ]
+# result = search_territory_spiral(territory_grid)
+# print(f"Exploration path: {result['exploration_path']}")
+# print(f"Resources found: {result['resources_found']}")
+# print(f"Monsters found: {result['monsters_found']}")`,
+  ],
+
+  [
+    "Matrix Traversal" as PatternKey,
+    `def monster_hunter_matrix_traversal(territory_grid, traversal_type='row'):
+    """
+    Traverse monster territory in different patterns.
+    Time: O(rows * cols)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like searching a monster's territory in different patterns
+    - Can traverse row by row, column by column, or diagonally
+    - Useful for different hunting strategies
+    
+    Example:
+    territory_grid = [
+        ['R', 'M', 'R', '.'],
+        ['.', 'R', '.', 'M'],
+        ['R', '.', 'M', 'R'],
+        ['.', 'R', '.', '.']
+    ]
+    # R = Resource, M = Monster, . = Empty
+    
+    Process:
+    1. Choose traversal pattern
+    2. Visit each cell systematically
+    3. Collect information about resources and monsters
+    """
+    if not territory_grid or not territory_grid[0]:
+        return []
+    
+    rows = len(territory_grid)
+    cols = len(territory_grid[0])
+    
+    # Store exploration results
+    exploration_path = []
+    resources_found = []
+    monsters_found = []
+    
+    if traversal_type == 'row':
+        # Row-wise traversal
+        for row in range(rows):
+            for col in range(cols):
+                pos = (row, col)
+                exploration_path.append(pos)
+                if territory_grid[row][col] == 'R':
+                    resources_found.append(pos)
+                elif territory_grid[row][col] == 'M':
+                    monsters_found.append(pos)
+    
+    elif traversal_type == 'column':
+        # Column-wise traversal
+        for col in range(cols):
+            for row in range(rows):
+                pos = (row, col)
+                exploration_path.append(pos)
+                if territory_grid[row][col] == 'R':
+                    resources_found.append(pos)
+                elif territory_grid[row][col] == 'M':
+                    monsters_found.append(pos)
+    
+    elif traversal_type == 'diagonal':
+        # Diagonal traversal
+        for sum_diag in range(rows + cols - 1):
+            if sum_diag < rows:
+                row = sum_diag
+                col = 0
+            else:
+                row = rows - 1
+                col = sum_diag - rows + 1
+            
+            while row >= 0 and col < cols:
+                pos = (row, col)
+                exploration_path.append(pos)
+                if territory_grid[row][col] == 'R':
+                    resources_found.append(pos)
+                elif territory_grid[row][col] == 'M':
+                    monsters_found.append(pos)
+                row -= 1
+                col += 1
+    
+    return {
+        'exploration_path': exploration_path,
+        'resources_found': resources_found,
+        'monsters_found': monsters_found,
+        'traversal_type': traversal_type
+    }
+
+def search_territory_systematic(territory_grid, traversal_type='row'):
+    """
+    Search a monster territory using systematic traversal patterns.
+    
+    Args:
+        territory_grid (list): 2D grid representing the territory
+            'R' = Resource
+            'M' = Monster
+            '.' = Empty space
+        traversal_type (str): Type of traversal to use
+            'row' = Row-wise traversal
+            'column' = Column-wise traversal
+            'diagonal' = Diagonal traversal
+    
+    Returns:
+        dict: Contains exploration path, found resources, and found monsters
+    """
+    return monster_hunter_matrix_traversal(territory_grid, traversal_type)
+
+# Example usage:
+# territory_grid = [
+#     ['R', 'M', 'R', '.'],
+#     ['.', 'R', '.', 'M'],
+#     ['R', '.', 'M', 'R'],
+#     ['.', 'R', '.', '.']
+# ]
+# 
+# # Row-wise search
+# row_result = search_territory_systematic(territory_grid, 'row')
+# print(f"Row-wise exploration: {row_result['exploration_path']}")
+# 
+# # Column-wise search
+# col_result = search_territory_systematic(territory_grid, 'column')
+# print(f"Column-wise exploration: {col_result['exploration_path']}")
+# 
+# # Diagonal search
+# diag_result = search_territory_systematic(territory_grid, 'diagonal')
+# print(f"Diagonal exploration: {diag_result['exploration_path']}")`,
+  ],
+
+  [
+    "Union Find" as PatternKey,
+    `class MonsterHunterUnionFind:
+    """
+    Track connections between monster territories using Union Find.
+    Time: O(α(n)) per operation (amortized)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like tracking which territories are connected
+    - Each territory has a parent territory
+    - Path compression and union by rank for efficiency
+    
+    Example:
+    territories = ["Ancient Forest", "Wildspire Waste", "Coral Highlands"]
+    # Initially, each territory is its own group
+    
+    Process:
+    1. Initialize each territory as its own group
+    2. Connect territories as paths are discovered
+    3. Use path compression for efficient queries
+    """
+    def __init__(self, territories):
+        self.parent = {territory: territory for territory in territories}
+        self.rank = {territory: 0 for territory in territories}
+    
+    def find(self, territory):
+        """
+        Find the root territory of a given territory.
+        Uses path compression for efficiency.
+        """
+        if self.parent[territory] != territory:
+            self.parent[territory] = self.find(self.parent[territory])
+        return self.parent[territory]
+    
+    def union(self, territory1, territory2):
+        """
+        Connect two territories.
+        Uses union by rank for efficiency.
+        """
+        root1 = self.find(territory1)
+        root2 = self.find(territory2)
+        
+        if root1 == root2:
+            return  # Already connected
+        
+        # Union by rank
+        if self.rank[root1] < self.rank[root2]:
+            self.parent[root1] = root2
+        elif self.rank[root1] > self.rank[root2]:
+            self.parent[root2] = root1
+        else:
+            self.parent[root2] = root1
+            self.rank[root1] += 1
+    
+    def are_connected(self, territory1, territory2):
+        """
+        Check if two territories are connected.
+        """
+        return self.find(territory1) == self.find(territory2)
+
+def manage_territory_connections(territories, connections):
+    """
+    Manage connections between monster territories using Union Find.
+    
+    Args:
+        territories (list): List of territory names
+        connections (list): List of tuples (territory1, territory2) representing discovered paths
+    
+    Returns:
+        MonsterHunterUnionFind: Union Find structure with all connections
+    """
+    uf = MonsterHunterUnionFind(territories)
+    
+    for territory1, territory2 in connections:
+        uf.union(territory1, territory2)
+    
+    return uf
+
+# Example usage:
+# territories = ["Ancient Forest", "Wildspire Waste", "Coral Highlands", "Rotten Vale"]
+# connections = [
+#     ("Ancient Forest", "Wildspire Waste"),
+#     ("Coral Highlands", "Rotten Vale"),
+#     ("Wildspire Waste", "Rotten Vale")
+# ]
+# 
+# uf = manage_territory_connections(territories, connections)
+# 
+# # Check connections
+# print(uf.are_connected("Ancient Forest", "Rotten Vale"))  # True
+# print(uf.are_connected("Ancient Forest", "Coral Highlands"))  # True
+# print(uf.are_connected("Coral Highlands", "Wildspire Waste"))  # True`,
+  ],
+
+  [
+    "Miller-Rabin" as PatternKey,
+    `def monster_hunter_miller_rabin(monster_power, k=5):
+    """
+    Test if a monster's power level is prime using Miller-Rabin primality test.
+    Time: O(k log³ n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like testing if a monster's power level is a prime number
+    - Useful for identifying special monster variants
+    - Higher accuracy with more test rounds
+    
+    Example:
+    power_level = 17  # Monster's power level
+    k = 5  # Number of test rounds
+    
+    Process:
+    1. Write power_level - 1 as d * 2^s
+    2. Test with random bases
+    3. Check for primality indicators
+    """
+    if monster_power <= 1:
+        return False
+    if monster_power <= 3:
+        return True
+    if monster_power % 2 == 0:
+        return False
+    
+    # Write monster_power - 1 as d * 2^s
+    d = monster_power - 1
+    s = 0
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+    
+    # Test with k rounds
+    for _ in range(k):
+        a = random.randint(2, monster_power - 2)
+        x = pow(a, d, monster_power)
+        
+        if x == 1 or x == monster_power - 1:
+            continue
+        
+        for _ in range(s - 1):
+            x = pow(x, 2, monster_power)
+            if x == monster_power - 1:
+                break
+        else:
+            return False
+    
+    return True`,
+  ],
+
+  [
+    "Fast Fourier Transform" as PatternKey,
+    `def monster_hunter_fft(monster_waves):
+    """
+    Analyze monster sound waves using Fast Fourier Transform.
+    Time: O(n log n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like analyzing monster roars and sound patterns
+    - Convert time-domain signals to frequency domain
+    - Identify unique monster sound signatures
+    
+    Example:
+    sound_waves = [0, 1, 0, -1, 0, 1, 0, -1]  # Monster roar samples
+    
+    Process:
+    1. Split into even and odd indices
+    2. Recursively compute FFT
+    3. Combine results with twiddle factors
+    """
+    n = len(monster_waves)
+    if n <= 1:
+        return monster_waves
+    
+    # Split into even and odd indices
+    even = monster_hunter_fft(monster_waves[::2])
+    odd = monster_hunter_fft(monster_waves[1::2])
+    
+    # Combine results
+    result = [0] * n
+    for k in range(n // 2):
+        t = cmath.exp(-2j * cmath.pi * k / n) * odd[k]
+        result[k] = even[k] + t
+        result[k + n // 2] = even[k] - t
+    
+    return result`,
+  ],
 ]);

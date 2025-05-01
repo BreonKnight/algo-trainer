@@ -334,12 +334,13 @@ export const monsterHunterExplanations: Partial<
     description:
       "Like exploring a monster's territory by following each path to its end before backtracking, DFS explores as far as possible along each branch before backtracking.",
     example:
-      "Imagine exploring a monster's territory where you follow each path completely to its end before returning to explore other paths, like following a trail until you reach a dead end before trying another route.",
+      "Imagine you need to explore every corner of a monster's territory. DFS helps you explore each path completely before moving to the next, like a hunter who thoroughly searches each area before moving on.",
     tips: [
-      "Mark visited nodes - like keeping track of areas you've already explored",
-      "Explore each path completely - similar to following a trail until you can't go further",
-      "Backtrack when path ends - like returning to the last decision point when you reach a dead end",
-      "Use recursion or stack - like keeping track of your exploration path",
+      "Use recursion or a stack - like keeping track of where you've been",
+      "Mark visited nodes - like leaving markers in explored areas",
+      "Handle cycles - like dealing with circular paths in the territory",
+      "Consider memory usage - like managing your exploration supplies",
+      "Use for path finding - like finding routes through the territory",
     ],
   },
   "BFS Linked List": {
@@ -637,6 +638,159 @@ export const monsterHunterExplanations: Partial<
       "Consider the range carefully - like knowing the boundaries of your search",
       "Transform results to get primes - like converting your findings to actual habitat locations",
       "Optimize with proper indexing - like efficiently organizing your search pattern",
+    ],
+  },
+  "Monotonic Stack": {
+    title: "Monster Threat Level Tracking",
+    description:
+      "Like tracking increasing monster threat levels in a territory, Monotonic Stack maintains a sequence of elements in strictly increasing or decreasing order.",
+    example:
+      "Imagine walking through a monster territory and keeping track of the threat levels - you only remember the most threatening monsters you've seen, removing any less threatening ones from your memory.",
+    tips: [
+      "Maintain increasing order - like keeping track of only the most threatening monsters you've encountered",
+      "Remove smaller elements - similar to forgetting about less threatening monsters when you find a more threatening one",
+      "Track next greater element - like noting which monster is more threatening than the current one",
+      "Use for efficient lookups - similar to quickly finding the next more threatening monster in the area",
+    ],
+  },
+  "Graph Dijkstra": {
+    title: "Monster Territory Pathfinding",
+    description:
+      "Like finding the shortest path between hunting grounds while considering terrain difficulty, Dijkstra's algorithm helps us find the shortest paths from a starting point to all other points in a graph.",
+    example:
+      "Imagine you're trying to find the quickest route between different hunting grounds, where each path has a different difficulty level. Dijkstra's algorithm helps you find the most efficient path, like a hunter who needs to reach their target while conserving stamina.",
+    tips: [
+      "Use priority queue - like keeping track of the most promising paths to explore next",
+      "Update distances - similar to finding shorter paths through each location",
+      "Mark visited nodes - like keeping track of areas you've already explored",
+      "Consider edge weights - like accounting for terrain difficulty in your path",
+      "Find shortest paths to all nodes - like planning routes to multiple hunting grounds",
+    ],
+  },
+  "Graph Kosaraju": {
+    title: "Monster Territory Strongholds",
+    description:
+      "Like identifying strongly connected monster territories where each area is reachable from every other area, Kosaraju's algorithm helps us find strongly connected components in a graph.",
+    example:
+      "Imagine a network of monster territories where some areas are interconnected through various paths. Kosaraju's algorithm helps you identify groups of territories where monsters can move freely between any two points within the group, like finding natural strongholds or domains of different monster species.",
+    tips: [
+      "Perform DFS on original graph - like exploring all possible paths in the territory",
+      "Reverse the graph - similar to considering all possible return paths",
+      "Perform DFS on reversed graph - like verifying connectivity in both directions",
+      "Identify strongly connected components - like finding natural monster domains",
+      "Use for territory analysis - similar to understanding monster movement patterns",
+    ],
+  },
+  "Grid Traversal": {
+    title: "Monster Territory Exploration",
+    description:
+      "Like systematically exploring a monster's territory grid by grid, Grid Traversal helps us visit every cell in a 2D grid while avoiding obstacles and finding optimal paths.",
+    example:
+      "Imagine exploring a monster's territory divided into a grid, where each cell might contain resources, obstacles, or monsters. Grid Traversal helps you systematically explore each cell, like a hunter carefully mapping out every part of the territory.",
+    tips: [
+      "Use BFS for shortest path - like finding the quickest route to a monster",
+      "Use DFS for complete exploration - similar to thoroughly searching every corner",
+      "Mark visited cells - like keeping track of areas you've already explored",
+      "Handle obstacles - similar to navigating around terrain features",
+      "Consider different movement patterns - like moving in 4 or 8 directions",
+    ],
+  },
+  "Matrix Spiral Traversal": {
+    title: "Monster Territory Spiral Search",
+    description:
+      "Like searching a monster's territory in a spiral pattern, starting from the center and moving outward, Matrix Spiral Traversal helps us visit all elements in a 2D matrix in a spiral order.",
+    example:
+      "Imagine starting from the center of a monster's territory and searching outward in a spiral pattern, like a hunter systematically expanding their search radius while maintaining a consistent pattern.",
+    tips: [
+      "Start from center - like beginning your search at the heart of the territory",
+      "Move in layers - similar to expanding your search radius gradually",
+      "Handle different directions - like adjusting your search pattern based on terrain",
+      "Track boundaries - similar to keeping track of explored areas",
+      "Consider edge cases - like dealing with territories of different shapes",
+    ],
+  },
+  "Matrix Traversal": {
+    title: "Monster Territory Systematic Search",
+    description:
+      "Like systematically searching a monster's territory row by row or column by column, Matrix Traversal helps us visit all elements in a 2D matrix in an organized pattern.",
+    example:
+      "Imagine searching a monster's territory methodically, either row by row or column by column, like a hunter who needs to ensure they've checked every possible location in a systematic way.",
+    tips: [
+      "Choose traversal direction - like deciding whether to search rows or columns first",
+      "Handle different patterns - similar to adapting your search based on terrain",
+      "Track visited locations - like marking areas you've already explored",
+      "Consider traversal order - similar to planning the most efficient search path",
+      "Use for pattern recognition - like identifying monster movement patterns",
+    ],
+  },
+  "Union Find": {
+    title: "Monster Territory Connections",
+    description:
+      "Like tracking which monster territories are connected and merging them when paths are discovered, Union Find helps us efficiently manage and query connected components in a graph.",
+    example:
+      "Imagine you're exploring a network of monster territories. As you discover new paths between territories, you need to keep track of which areas are connected. Union Find helps you quickly determine if two territories are connected and efficiently merge them when you find a new path.",
+    tips: [
+      "Use path compression - like remembering shortcuts between territories",
+      "Implement union by rank - similar to connecting territories through their main hubs",
+      "Find connected components - like identifying groups of interconnected territories",
+      "Handle dynamic connections - like updating territory connections as you explore",
+      "Optimize for quick queries - like quickly checking if two territories are connected",
+    ],
+  },
+  "Rabin-Karp": {
+    title: "Monster Track Pattern Matching",
+    description:
+      "Like efficiently searching for specific monster track patterns in a large territory, Rabin-Karp uses hashing to quickly find matching patterns.",
+    example:
+      "Imagine you're tracking a monster's movement through its footprints. Instead of checking each footprint one by one, you can use a special code (hash) to quickly identify matching patterns of footprints.",
+    tips: [
+      "Use rolling hash - like creating a unique code for each section of monster tracks",
+      "Compare hash values first - similar to quickly checking if two track patterns might match",
+      "Verify matches - like double-checking the actual footprints when the codes match",
+      "Handle hash collisions - similar to dealing with similar-looking but different track patterns",
+      "Optimize hash calculation - like efficiently updating the track pattern code as you move",
+    ],
+  },
+  "Miller-Rabin Primality Test": {
+    title: "Monster Power Level Primality Test",
+    description:
+      "Like testing if a monster's power level is a special prime number, the Miller-Rabin primality test helps determine if a number is probably prime.",
+    example:
+      "Imagine you need to verify if a monster's power level is a special prime number. The Miller-Rabin test helps you determine this with high probability, like checking if a monster has a unique power signature.",
+    tips: [
+      "Use multiple test rounds - like checking multiple aspects of a monster's power",
+      "Handle small numbers separately - like special cases for weaker monsters",
+      "Use random bases - like testing different aspects of the monster's power",
+      "Consider performance - like balancing accuracy with testing time",
+      "Use for large numbers - like testing powerful elder dragons",
+    ],
+  },
+  "Fast Fourier Transform": {
+    title: "Monster Attack Pattern Analysis",
+    description:
+      "Like analyzing a monster's attack patterns in the frequency domain to predict its next moves, the Fast Fourier Transform helps us understand periodic patterns in data.",
+    example:
+      "Imagine you're fighting a monster that has a repeating attack pattern. By analyzing the frequency components of its attacks, you can predict when it will use certain moves, like a hunter who studies a monster's behavior to anticipate its next attack.",
+    tips: [
+      "Convert time-domain to frequency-domain - like analyzing attack patterns instead of individual attacks",
+      "Identify dominant frequencies - similar to finding the most common attack patterns",
+      "Use for pattern prediction - like anticipating a monster's next move",
+      "Handle complex patterns - like dealing with multiple overlapping attack sequences",
+      "Consider inverse transform - like converting frequency analysis back to time predictions",
+    ],
+  },
+  "Graph Articulation Points": {
+    title: "Monster Territory Critical Points",
+    description:
+      "Like identifying critical areas in a monster's territory that, if blocked or destroyed, would split the territory into disconnected regions. These points are crucial for strategic monster hunting and territory control.",
+    example:
+      "Imagine you're analyzing a monster's territory map. The articulation points are like key bridges or paths that, if blocked, would prevent the monster from moving between different areas. For example, Astera is a critical point that connects multiple hunting grounds - if it's blocked, hunters would need to take much longer routes to reach different areas.",
+    tips: [
+      "Identify critical connection points - like finding the most important paths in monster territory",
+      "Consider territory connectivity - similar to understanding how different areas are linked",
+      "Plan strategic blockades - like setting up traps at critical points",
+      "Use for territory control - like controlling monster movement patterns",
+      "Consider multiple paths - like having backup routes when critical points are blocked",
     ],
   },
 };

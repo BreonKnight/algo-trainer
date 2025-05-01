@@ -76,6 +76,7 @@ export const patternNameMapping: Record<string, string> = {
   "Trie Operations": "Trie Operations",
   Trie: "Trie Operations",
   "Heap Implementation": "Heap Implementation",
+  "Union Find": "Union Find",
 
   // Tree Algorithms
   Tree: "Tree",
@@ -101,13 +102,14 @@ export const patternNameMapping: Record<string, string> = {
   // Number Theory
   "Extended Euclidean": "Extended Euclidean",
   "Extended Euclidean Algorithm": "Extended Euclidean",
-  "Chinese Remainder Theorem": "chinese-remainder-theorem",
+  "Chinese Remainder Theorem": "Chinese Remainder Theorem",
+  "Sieve of Eratosthenes": "Sieve of Eratosthenes",
+  "Sieve of Atkin": "Sieve of Atkin",
+  "Sieve of Sundaram": "Sieve of Sundaram",
   "Miller-Rabin": "miller-rabin",
-  "Fast Fourier Transform": "fast-fourier-transform",
-  "Sieve of Sundaram": "sieve-of-sundaram",
-  "Prime Factorization": "prime-factorization",
-  "Sieve of Atkin": "sieve-of-atkin",
-  "Sieve of Eratosthenes": "sieve-of-eratosthenes",
+  "Miller-Rabin Primality Test": "miller-rabin-primality-test",
+  "Fast Fourier Transform": "Fast Fourier Transform",
+  "Matrix Exponentiation": "Matrix Exponentiation",
 
   // Other Algorithms
   "Sliding Window": "Sliding Window",
@@ -115,7 +117,6 @@ export const patternNameMapping: Record<string, string> = {
   "Prefix Sum": "Prefix Sum",
   "Floyd Cycle Detection": "Floyd Cycle Detection",
   "Divide and Conquer": "Divide and Conquer",
-  "Union Find": "Union Find",
   Quickselect: "Quickselect",
   Memoization: "Memoization",
   Backtracking: "Backtracking",
