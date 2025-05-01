@@ -1,66 +1,33 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import { useEffect, useState } from "react";
+import { Theme, THEMES } from "./theme-constants";
+import { ThemeContext } from "./theme-context";
 
-const THEMES = [
-  "dracula",
-  "solarized",
-  "light",
-  "nord",
-  "snes",
-  "ps2",
-  "re2",
-  "mh",
-] as const;
-type Theme = (typeof THEMES)[number];
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return (savedTheme as Theme) || "dracula";
+  });
 
-interface ThemeContextType {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dracula");
-
-  useEffect(() => {
-    const stored = localStorage.getItem("algo-theme");
-    if (stored && THEMES.includes(stored as Theme)) {
-      setThemeState(stored as Theme);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.remove(
-      ...THEMES.map((t) => `theme-${t}`)
-    );
-    document.documentElement.classList.add(`theme-${theme}`);
-    localStorage.setItem("algo-theme", theme);
-  }, [theme]);
-
-  const setTheme = (t: Theme) => setThemeState(t);
   const toggleTheme = () => {
-    setThemeState((prev) => {
-      const idx = THEMES.indexOf(prev);
-      return THEMES[(idx + 1) % THEMES.length];
-    });
+    const currentIndex = THEMES.indexOf(theme);
+    const nextIndex = (currentIndex + 1) % THEMES.length;
+    setTheme(THEMES[nextIndex]);
   };
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    // Remove all theme classes
+    THEMES.forEach((t) => {
+      document.documentElement.classList.remove(`theme-${t}`);
+    });
+    // Add the current theme class
+    document.documentElement.classList.add(`theme-${theme}`);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
-}
-
-export function useTheme() {
-  const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be used within a ThemeProvider");
-  return ctx;
 }

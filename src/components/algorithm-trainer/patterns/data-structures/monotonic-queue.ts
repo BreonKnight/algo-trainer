@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const monotonic_queuePattern: AlgorithmPattern = {
+export const monotonicQueuePattern: AlgorithmPattern = {
   title: "Monotonic Queue Pattern",
   description:
     "A queue that maintains its elements in a strictly increasing or decreasing order, commonly used for sliding window maximum/minimum problems.",

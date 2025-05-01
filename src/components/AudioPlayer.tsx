@@ -483,17 +483,18 @@ export const AudioPlayer = memo(function AudioPlayer() {
 
   // Set initial volume when iframe loads
   useEffect(() => {
+    const iframe = iframeRef.current;
     const handleIframeLoad = () => {
       sendCommand("setVolume", volume);
     };
 
-    if (iframeRef.current) {
-      iframeRef.current.addEventListener("load", handleIframeLoad);
+    if (iframe) {
+      iframe.addEventListener("load", handleIframeLoad);
     }
 
     return () => {
-      if (iframeRef.current) {
-        iframeRef.current.removeEventListener("load", handleIframeLoad);
+      if (iframe) {
+        iframe.removeEventListener("load", handleIframeLoad);
       }
     };
   }, [sendCommand, volume]);

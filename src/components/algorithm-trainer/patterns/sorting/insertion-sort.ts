@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const insertion_sortPattern: AlgorithmPattern = {
+export const insertionSortPattern: AlgorithmPattern = {
   title: "Insertion Sort Algorithm",
   description:
     "A simple sorting algorithm that builds the final sorted array one item at a time, by repeatedly inserting a new element into the sorted portion of the array.",

@@ -310,6 +310,29 @@ textarea,
     rgba(0, 102, 255, 0.08) 50%,
     rgba(0, 168, 0, 0.08) 100%
   );
+  --pseudocode-text: #e6e6e6;
+  --pseudocode-metadata: #8b8b8b;
+  --pseudocode-type: #0066ff;
+  --pseudocode-code: #00a800;
+  --pseudocode-keyword: #ff0000;
+  --pseudocode-function: #0066ff;
+  --pseudocode-string: #00a800;
+  --pseudocode-number: #ffe44d;
+  --pseudocode-comment: #8b8b8b;
+  --pseudocode-heading: #ff0000;
+  --pseudocode-bullet: #0066ff;
+  --pseudocode-sub-bullet: #00a800;
+  --pseudocode-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-metadata-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-type-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-code-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-keyword-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-function-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-string-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-number-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-heading-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-bullet-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --pseudocode-sub-bullet-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --radius: 0.5rem;
 }
 
@@ -439,4 +462,33 @@ textarea,
 
 #root {
   width: 100%;
+}
+
+.theme-kingdom-hearts {
+  --bg-main: #0a1633; /* Deep navy blue */
+  --bg-secondary: #1a2747; /* Midnight blue */
+  --text-main: #f8f8ff; /* Soft white */
+  --text-secondary: #7c6fa0; /* Muted purple */
+  --accent: #ffe066; /* Gold/yellow */
+  --accent2: #b85c6e; /* Muted red */
+  --accent3: #6ec6f7; /* Pastel blue */
+  --border: #bfc9d1; /* Silver/gray */
+  --error: #b85c6e; /* Muted red */
+  --success: #ffe066; /* Gold/yellow */
+  --gradient-from: #ffe066; /* Gold/yellow */
+  --gradient-to: #b85c6e; /* Muted red */
+  --focus-ring: #6ec6f7; /* Pastel blue */
+  --text-selected-dark: #0a1633;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(10, 22, 51, 0.95) 0%,
+    rgba(26, 39, 71, 0.95) 50%,
+    rgba(10, 22, 51, 0.95) 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(255, 224, 102, 0.08) 0%,
+    rgba(184, 92, 110, 0.08) 50%,
+    rgba(110, 198, 247, 0.08) 100%
+  );
 }

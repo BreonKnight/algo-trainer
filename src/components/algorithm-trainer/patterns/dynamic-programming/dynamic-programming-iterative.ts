@@ -1,31 +1,47 @@
 import { AlgorithmPattern } from "../../types";
 
 export const dynamicProgrammingIterativePattern: AlgorithmPattern = {
-  title: "Dynamic Programming Iterative (Bottom-up)",
+  title: "Dynamic Programming Iterative",
   description:
-    "A bottom-up approach to dynamic programming that builds the solution iteratively from smaller subproblems to larger ones.",
-  timeComplexity: "Varies by problem",
-  spaceComplexity: "Often O(n) or O(n²)",
-  pseudocode: `1. Initialize dp array/table\n2. Fill base cases\n3. Iterate through states in order:\n   a. For each state, compute value from previous states\n4. Return final state value`,
-  example: `Problem: Longest Increasing Subsequence
+    "A bottom-up approach to dynamic programming that solves problems by building solutions iteratively from smaller subproblems.",
+  timeComplexity: "O(n)",
+  spaceComplexity: "O(n) or O(1) with optimization",
+  pseudocode: `1. Initialize the DP table/array with base cases
+2. For each state from smallest to largest:
+   a. Calculate the current state using previously computed states
+   b. Store the result in the DP table
+3. Return the solution for the target state`,
+  example: `Problem: Climbing stairs (n steps)
+State: dp[i] = ways to reach step i
+Base cases: dp[0] = 1, dp[1] = 1
+Recurrence: dp[i] = dp[i-1] + dp[i-2]
 
-arr = [10, 9, 2, 5, 3, 7, 101, 18]
-dp[i] = length of LIS ending at i
+For n = 3:
+dp = [1, 1, 2, 3]
+Result: 3 ways to climb 3 steps`,
+  implementation: `def climb_stairs(n):
+    if n <= 1:
+        return 1
+    dp = [0] * (n + 1)
+    dp[0] = dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
 
-dp = [1, 1, 1, 2, 2, 3, 4, 4]
-Result: 4`,
-  implementation: `def longest_increasing_subsequence(arr):
-    if not arr:
-        return 0
-    
-    n = len(arr)
-    dp = [1] * n
-    
-    for i in range(1, n):
-        for j in range(i):
-            if arr[i] > arr[j]:
-                dp[i] = max(dp[i], dp[j] + 1)
-    
-    return max(dp)`,
+# Space-optimized version
+def climb_stairs_optimized(n):
+    if n <= 1:
+        return 1
+    prev, curr = 1, 1
+    for _ in range(2, n + 1):
+        prev, curr = curr, prev + curr
+    return curr`,
   category: "Dynamic Programming",
+  keySteps: [
+    "Identify the problem's states and transitions",
+    "Define base cases for smallest subproblems",
+    "Determine the order of state computation",
+    "Implement the iterative solution",
+    "Optimize space complexity if possible",
+  ],
 };

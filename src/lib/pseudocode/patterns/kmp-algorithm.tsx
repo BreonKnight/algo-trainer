@@ -1,0 +1,88 @@
+import { ChevronRight } from "lucide-react";
+
+export const KmpAlgorithmPattern = () => (
+  <div>
+    <div className="mb-2">
+      <span className="text-accent font-bold">KMP Algorithm</span>
+      <span className="ml-2 text-xs text-secondary">(String)</span>
+    </div>
+    <div className="mb-2 text-xs text-secondary">
+      Time: O(n + m) &nbsp;|&nbsp; Space: O(m) &nbsp;|&nbsp; Use: Pattern
+      matching in strings
+    </div>
+
+    <div className="mb-4">
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
+        {`# KMP Algorithm: Pattern matching in strings
+# Input: Text T[1..n], Pattern P[1..m]
+# Output: All starting positions where P occurs in T
+
+Algorithm KMP-MATCHER(T, P)
+    n ← length[T]
+    m ← length[P]
+    
+    # Compute prefix function
+    π ← COMPUTE-PREFIX-FUNCTION(P)
+    
+    q ← 0  # Number of characters matched
+    for i ← 1 to n do
+        while q > 0 and P[q + 1] ≠ T[i] do
+            q ← π[q]
+        end while
+        if P[q + 1] = T[i] then
+            q ← q + 1
+        end if
+        if q = m then
+            print "Pattern occurs at position" i - m
+            q ← π[q]
+        end if
+    end for
+
+Algorithm COMPUTE-PREFIX-FUNCTION(P)
+    m ← length[P]
+    π[1] ← 0
+    k ← 0
+    for q ← 2 to m do
+        while k > 0 and P[k + 1] ≠ P[q] do
+            k ← π[k]
+        end while
+        if P[k + 1] = P[q] then
+            k ← k + 1
+        end if
+        π[q] ← k
+    end for
+    return π
+
+# Example:
+# Input: T = "ABABDABACDABABCABAB", P = "ABABCABAB"
+# 
+# Step 1: π = [0, 0, 1, 2, 0, 1, 2, 3, 4]
+# Step 2: Match at position 10
+# 
+# Output: Pattern occurs at position 10`}
+      </pre>
+    </div>
+
+    <div className="mb-2">
+      <span className="text-accent font-bold">Key Steps:</span>
+    </div>
+    <div className="mb-2 text-sm">
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Compute prefix function for pattern</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Match pattern against text using prefix function</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Skip unnecessary comparisons using prefix function</span>
+      </div>
+      <div className="flex items-center">
+        <ChevronRight className="h-4 w-4 text-accent" />
+        <span>Report all occurrences of pattern</span>
+      </div>
+    </div>
+  </div>
+);

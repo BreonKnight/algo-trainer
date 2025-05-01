@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const matrix_traversal_recursivePattern: AlgorithmPattern = {
+export const matrixTraversalRecursivePattern: AlgorithmPattern = {
   title: "Matrix Traversal Recursive",
   description:
     "A recursive approach to traverse a 2D matrix, which can be particularly useful for problems requiring backtracking or complex traversal patterns.",

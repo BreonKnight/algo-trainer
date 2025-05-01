@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const selection_sortPattern: AlgorithmPattern = {
+export const selectionSortPattern: AlgorithmPattern = {
   title: "Selection Sort Algorithm",
   description:
     "A simple sorting algorithm that divides the input into a sorted and unsorted region, repeatedly selecting the smallest element from the unsorted region to add to the sorted region.",

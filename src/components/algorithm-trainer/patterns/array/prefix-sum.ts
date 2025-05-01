@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const prefix_sumPattern: AlgorithmPattern = {
+export const prefixSumPattern: AlgorithmPattern = {
   title: "Prefix Sum Pattern",
   description:
     "A technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.",

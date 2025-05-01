@@ -1,9 +1,8 @@
 import { AlgorithmPattern } from "../../types";
 
 export const binarySearchPattern: AlgorithmPattern = {
-  title: "Binary Search Algorithm",
-  description:
-    "An efficient search algorithm that finds the position of a target value within a sorted array by repeatedly dividing the search interval in half.",
+  title: "Binary Search",
+  description: "Efficient search algorithm for sorted arrays",
   timeComplexity: "O(log n)",
   spaceComplexity: "O(1)",
   pseudocode: `1. Initialize left = 0, right = length - 1\n2. While left <= right:\n   a. mid = (left + right) // 2\n   b. If arr[mid] == target:\n      - Return mid\n   c. If arr[mid] < target:\n      - left = mid + 1\n   d. Else:\n      - right = mid - 1\n3. Return -1 if not found`,
@@ -34,5 +33,5 @@ Not found!`,
             right = mid - 1
     
     return -1`,
-  category: "Searching",
+  category: "searching",
 };

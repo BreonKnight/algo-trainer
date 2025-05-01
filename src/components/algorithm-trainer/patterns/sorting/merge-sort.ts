@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const merge_sortPattern: AlgorithmPattern = {
+export const mergeSortPattern: AlgorithmPattern = {
   title: "Merge Sort Algorithm",
   description:
     "A divide-and-conquer algorithm that recursively breaks down a problem into smaller, more manageable subproblems until they become simple enough to solve directly.",

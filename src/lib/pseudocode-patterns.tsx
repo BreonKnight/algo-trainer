@@ -1337,22 +1337,35 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
       <div>
         <div className="mb-2">
           <span className="text-accent font-bold">Rabin-Karp Algorithm</span>
-          <span className="ml-2 text-xs text-secondary">
-            (String Algorithm)
-          </span>
+          <span className="ml-2 text-xs text-secondary">(String Matching)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(n+m) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Pattern
-          matching with rolling hash
+          Time: O(n + m) average, O(n*m) worst &nbsp;|&nbsp; Space: O(1)
+          &nbsp;|&nbsp; Use: Pattern matching with rolling hash
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Preprocessing:</span>{" "}
+            Calculate pattern hash and first window hash, Set up rolling hash
+            parameters
+          </span>
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">2.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">
-              For each window in text:
-            </span>{" "}
-            Calculate window hash, If hashes match:
+            <span className="font-semibold text-accent">Rolling hash:</span> For
+            each window: Update hash by removing first char and adding last char
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Hash comparison:</span>{" "}
+            If hashes match: Verify actual string match to avoid false positives
           </span>
         </div>
       </div>
@@ -1363,30 +1376,38 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
           <span className="text-accent font-bold">
             Knuth-Morris-Pratt Algorithm
           </span>
-          <span className="ml-2 text-xs text-secondary">
-            (String Algorithm)
-          </span>
+          <span className="ml-2 text-xs text-secondary">(String Matching)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(n+m) &nbsp;|&nbsp; Space: O(m) &nbsp;|&nbsp; Use: Efficient
-          string pattern matching
+          Time: O(n + m) &nbsp;|&nbsp; Space: O(m) &nbsp;|&nbsp; Use: Pattern
+          matching with failure function
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
             <span className="font-semibold text-accent">
-              Build failure function:
+              Build failure array:
             </span>{" "}
-            Compute partial match table, Track prefix matches
+            For each position i: Find longest proper prefix that is also suffix
           </span>
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">2.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">Search pattern:</span>{" "}
-            Use failure function, Skip unnecessary comparisons
+            <span className="font-semibold text-accent">Pattern matching:</span>{" "}
+            Use failure array to skip unnecessary comparisons
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Handle mismatches:
+            </span>{" "}
+            When mismatch occurs: Use failure array to determine next position
           </span>
         </div>
       </div>
@@ -1396,27 +1417,37 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
         <div className="mb-2">
           <span className="text-accent font-bold">Manacher's Algorithm</span>
           <span className="ml-2 text-xs text-secondary">
-            (String Algorithm)
+            (Palindrome Finding)
           </span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Finding all
-          palindromic substrings
+          Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Finding
+          longest palindromic substring
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">Transform string:</span>{" "}
-            Add special characters
+            <span className="font-semibold text-accent">Preprocessing:</span>{" "}
+            Transform string by adding special characters, Initialize palindrome
+            lengths array
           </span>
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">2.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">For each center:</span>{" "}
-            Expand palindrome, Use previous results, Update radius array
+            <span className="font-semibold text-accent">Center expansion:</span>{" "}
+            For each center: Expand while characters match, Update palindrome
+            lengths
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Optimization:</span> Use
+            previously computed values to avoid redundant comparisons
           </span>
         </div>
       </div>
@@ -1425,30 +1456,35 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
       <div>
         <div className="mb-2">
           <span className="text-accent font-bold">Z-Algorithm</span>
-          <span className="ml-2 text-xs text-secondary">
-            (String Algorithm)
-          </span>
+          <span className="ml-2 text-xs text-secondary">(String Matching)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
           Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Pattern
-          matching, string preprocessing
+          matching and string similarity
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
             <span className="font-semibold text-accent">Build Z-array:</span>{" "}
-            Track matching prefixes, Use Z-box technique
+            For each position i: Find longest prefix that matches substring
+            starting at i
           </span>
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">2.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">
-              For each position:
-            </span>{" "}
-            Extend match if possible, Use previous results
+            <span className="font-semibold text-accent">Optimization:</span> Use
+            previously computed values to avoid redundant comparisons
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Pattern matching:</span>{" "}
+            Use Z-array to find all occurrences of pattern in text
           </span>
         </div>
       </div>
@@ -1790,36 +1826,236 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
       <div>
         <div className="mb-2">
           <span className="text-accent font-bold">
-            Binary Search Tree Implementation
+            Binary Search Tree Operations
           </span>
-          <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
+          <span className="ml-2 text-xs text-secondary">
+            (Tree Data Structure)
+          </span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Ordered data
-          storage
+          Time: O(h) average, O(n) worst &nbsp;|&nbsp; Space: O(1) for
+          operations, O(n) for tree &nbsp;|&nbsp; Use: Ordered data storage and
+          retrieval
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">insert(data):</span>{" "}
-            Compare with current, Go left if smaller, Go right if larger
+            <span className="font-semibold text-accent">Insert:</span> Compare
+            with root, Recursively insert in left/right subtree, Maintain
+            balance if needed
           </span>
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">2.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">delete(data):</span>{" "}
-            Find node, Handle leaf/1-child/2-child
+            <span className="font-semibold text-accent">Delete:</span> Find
+            node, Handle leaf/one-child/two-child cases, Update parent pointers
           </span>
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">3.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">search(data):</span>{" "}
+            <span className="font-semibold text-accent">Search:</span> Compare
+            with root, Recursively search in left/right subtree
           </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">4.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Traversal:</span>{" "}
+            Inorder (sorted), Preorder (root first), Postorder (root last)
+          </span>
+        </div>
+      </div>
+    ),
+    "Trie Operations": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Trie (Prefix Tree) Operations
+          </span>
+          <span className="ml-2 text-xs text-secondary">
+            (Tree Data Structure)
+          </span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(m) for operations &nbsp;|&nbsp; Space: O(ALPHABET_SIZE * m *
+          n) &nbsp;|&nbsp; Use: String operations, prefix matching
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Insert:</span> For each
+            character: Create node if needed, Move to next node, Mark end of
+            word
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Search:</span> Follow
+            path for each character, Check if word ends at last node
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Prefix search:</span>{" "}
+            Follow path for prefix, Return all words in subtree
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">4.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Delete:</span> Find
+            node, Remove end marker, Delete unused nodes bottom-up
+          </span>
+        </div>
+      </div>
+    ),
+    "Ternary Search Algorithm": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Ternary Search</span>
+          <span className="ml-2 text-xs text-secondary">
+            (Searching Algorithm)
+          </span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(log₃ n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding
+          maximum/minimum in unimodal function
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Divide:</span> Split
+            range into three parts
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Compare:</span> Evaluate
+            function at two points
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Update:</span> Eliminate
+            one-third of range
+          </span>
+        </div>
+        <div>
+          <h3 className="font-semibold">Variants:</h3>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>Real-valued function optimization</li>
+            <li>2D ternary search</li>
+            <li>Parallel ternary search</li>
+          </ol>
+        </div>
+      </div>
+    ),
+    "Jump Search Algorithm": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Jump Search</span>
+          <span className="ml-2 text-xs text-secondary">
+            (Searching Algorithm)
+          </span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(√n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Searching in
+          sorted arrays
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Jump size:</span>{" "}
+            Calculate optimal jump size (√n)
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Jump:</span> Jump fixed
+            steps ahead until element is found or exceeded
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Linear search:</span>{" "}
+            Search linearly in the found block
+          </span>
+        </div>
+        <div>
+          <h3 className="font-semibold">Variants:</h3>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>Variable jump size</li>
+            <li>Block jump search</li>
+            <li>Bidirectional jump search</li>
+          </ol>
+        </div>
+      </div>
+    ),
+    "Exponential Search": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Exponential Search</span>
+          <span className="ml-2 text-xs text-secondary">
+            (Searching Algorithm)
+          </span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Searching
+          in unbounded arrays
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Find range:</span>{" "}
+            Double index until element is exceeded
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Binary search:</span>{" "}
+            Perform binary search in found range
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Return:</span> Return
+            found index or -1
+          </span>
+        </div>
+        <div>
+          <h3 className="font-semibold">Variants:</h3>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>Galloping search</li>
+            <li>Strided exponential search</li>
+            <li>Double exponential search</li>
+          </ol>
         </div>
       </div>
     ),
@@ -2166,26 +2402,92 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
             Create an array to track visited nodes
           </span>
         </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">DFS traversal:</span>{" "}
+            Track discovery time and low values
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Check conditions:</span>{" "}
+            Edge (u,v) is bridge if low[v] {">"} discovery[u]
+          </span>
+        </div>
       </div>
     ),
-    Dijkstra: () => (
+    "Graph Dijkstra": () => (
       <div>
         <div className="mb-2">
-          <span className="text-accent font-bold">Dijkstra Pattern</span>
+          <span className="text-accent font-bold">Dijkstra's Algorithm</span>
           <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(V^2) - vertex count &nbsp;|&nbsp; Space: O(V) - distance array
-          &nbsp;|&nbsp; Use: Shortest path in a weighted graph
+          Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use:
+          Finding shortest paths in weighted graphs
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">
-              Initialize distance array:
-            </span>{" "}
-            Create an array to store shortest distances
+            <span className="font-semibold text-accent">Initialize:</span> Set
+            distance[source] = 0, others = ∞
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Priority queue:</span>{" "}
+            Add all vertices with their distances
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Process vertices:</span>{" "}
+            Extract min, relax edges, update distances
+          </span>
+        </div>
+      </div>
+    ),
+    "Graph Kosaraju": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Kosaraju's Algorithm</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V+E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+          strongly connected components
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">First DFS:</span>{" "}
+            Perform DFS on original graph, record finish times
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Reverse graph:</span>{" "}
+            Create transpose of the graph
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Second DFS:</span>{" "}
+            Process vertices in reverse order of finish times
           </span>
         </div>
       </div>
@@ -2197,17 +2499,33 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
           <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(V^3) - vertex count &nbsp;|&nbsp; Space: O(V^2) - distance
-          array &nbsp;|&nbsp; Use: All-pairs shortest path in a weighted graph
+          Time: O(V³) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Finding all
+          pairs shortest paths
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
+            <span className="font-semibold text-accent">Initialize:</span>{" "}
+            Create distance matrix with direct edges
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Relax paths:</span> For
+            each intermediate vertex, update distances
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
             <span className="font-semibold text-accent">
-              Initialize distance array:
+              Check negative cycles:
             </span>{" "}
-            Create a 2D array to store shortest distances
+            If any diagonal entry is negative, negative cycle exists
           </span>
         </div>
       </div>
@@ -2219,17 +2537,31 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
           <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(E log E) - edge count &nbsp;|&nbsp; Space: O(V) - parent array
-          &nbsp;|&nbsp; Use: Minimum spanning tree in a weighted graph
+          Time: O(E log E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+          minimum spanning tree
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">
-              Initialize parent array:
-            </span>{" "}
-            Create an array to store parent nodes
+            <span className="font-semibold text-accent">Initialize:</span> Sort
+            edges by weight, create disjoint set
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Process edges:</span>{" "}
+            For each edge in sorted order
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Union-Find:</span> If
+            edge connects different sets, add to MST
           </span>
         </div>
       </div>
@@ -2241,17 +2573,31 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
           <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(V^2) - vertex count &nbsp;|&nbsp; Space: O(V) - parent array
-          &nbsp;|&nbsp; Use: Minimum spanning tree in a weighted graph
+          Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use:
+          Finding minimum spanning tree
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">
-              Initialize parent array:
-            </span>{" "}
-            Create an array to store parent nodes
+            <span className="font-semibold text-accent">Initialize:</span> Start
+            with any vertex, set key[source] = 0
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Priority queue:</span>{" "}
+            Add all vertices with their keys
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Process vertices:</span>{" "}
+            Extract min, update keys of neighbors
           </span>
         </div>
       </div>
@@ -2259,22 +2605,432 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
     Kosaraju: () => (
       <div>
         <div className="mb-2">
-          <span className="text-accent font-bold">Kosaraju Pattern</span>
+          <span className="text-accent font-bold">Kosaraju's Algorithm</span>
           <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">
-          Time: O(V + E) - vertex and edge count &nbsp;|&nbsp; Space: O(V) -
-          visited array &nbsp;|&nbsp; Use: Strongly connected components in a
-          graph
+          Time: O(V+E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+          strongly connected components
         </div>
         <div className="flex items-start mb-1">
           <span className="font-bold text-main mr-2">1.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
+            <span className="font-semibold text-accent">First DFS:</span>{" "}
+            Perform DFS on original graph, record finish times
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Reverse graph:</span>{" "}
+            Create transpose of the graph
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Second DFS:</span>{" "}
+            Process vertices in reverse order of finish times
+          </span>
+        </div>
+      </div>
+    ),
+    "Graph Bellman-Ford": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Bellman-Ford Algorithm</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+          shortest paths with negative weights
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Initialize:</span> Set
+            distance[source] = 0, others = ∞
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Relax edges:</span> For
+            V-1 times, relax all edges
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
             <span className="font-semibold text-accent">
-              Initialize visited array:
+              Check negative cycles:
             </span>{" "}
-            Create an array to track visited nodes
+            If any edge can be relaxed further, negative cycle exists
+          </span>
+        </div>
+      </div>
+    ),
+    "Network Flow": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Network Flow</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V * E²) &nbsp;|&nbsp; Space: O(V + E) &nbsp;|&nbsp; Use:
+          Maximum flow in a network
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Initialize:</span>{" "}
+            Create residual graph with forward and backward edges
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Find path:</span> Use
+            BFS/DFS to find augmenting path
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Update flow:</span>{" "}
+            Update residual capacities along path
+          </span>
+        </div>
+        <div>
+          <h3 className="font-semibold">Variants:</h3>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>Dinic's Algorithm: O(V² * E)</li>
+            <li>Push-Relabel: O(V² * √E)</li>
+            <li>Min-Cost Max-Flow</li>
+          </ol>
+        </div>
+      </div>
+    ),
+    "Maximum Bipartite Matching": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Maximum Bipartite Matching
+          </span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V * E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Maximum
+          matching in bipartite graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Initialize:</span>{" "}
+            Create empty matching
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Find path:</span> Use
+            DFS to find augmenting path
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Update:</span> Flip
+            edges along augmenting path
+          </span>
+        </div>
+        <div>
+          <h3 className="font-semibold">Variants:</h3>
+          <ol className="list-decimal list-inside space-y-2">
+            <li>Hopcroft-Karp: O(√V * E)</li>
+            <li>Hungarian Algorithm: O(V³)</li>
+            <li>Online Bipartite Matching</li>
+          </ol>
+        </div>
+      </div>
+    ),
+    "Extended Euclidean Algorithm": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Extended Euclidean Algorithm
+          </span>
+          <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(log min(a,b)) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use:
+          Finding GCD and coefficients
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Base case:</span> If b =
+            0, return (a, 1, 0)
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Recursive step:</span>{" "}
+            Compute (g, x, y) for (b, a mod b)
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">
+              Update coefficients:
+            </span>{" "}
+            Return (g, y, x - (a/b)*y)
+          </span>
+        </div>
+      </div>
+    ),
+    "Chinese Remainder Theorem": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">
+            Chinese Remainder Theorem
+          </span>
+          <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(n log M) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Solving
+          simultaneous congruences
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Compute product:</span>{" "}
+            M = product of all moduli
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Partial products:</span>{" "}
+            For each modulus, compute M/mi
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Modular inverses:</span>{" "}
+            Find inverse of M/mi modulo mi
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">4.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Combine results:</span>{" "}
+            Sum (ai * (M/mi) * inv(M/mi)) mod M
+          </span>
+        </div>
+      </div>
+    ),
+    "Sieve of Eratosthenes": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Sieve of Eratosthenes</span>
+          <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(n log log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use:
+          Finding all primes up to n
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Initialize:</span>{" "}
+            Create boolean array of size n+1
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Mark non-primes:</span>{" "}
+            For each i from 2 to sqrt(n), mark multiples of i
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Collect primes:</span>{" "}
+            All unmarked numbers are prime
+          </span>
+        </div>
+      </div>
+    ),
+    "Graph Articulation Points": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Articulation Points</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+          critical nodes in a graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">DFS setup:</span>{" "}
+            Initialize discovery and low arrays
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">DFS traversal:</span>{" "}
+            Track discovery time and low values
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Check conditions:</span>{" "}
+            Root with multiple children or node with child's low {">"}=
+            discovery time
+          </span>
+        </div>
+      </div>
+    ),
+    "Graph Bridges": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Bridges</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+          critical edges in a graph
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">DFS setup:</span>{" "}
+            Initialize discovery and low arrays
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">DFS traversal:</span>{" "}
+            Track discovery time and low values
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Check conditions:</span>{" "}
+            Edge (u,v) is bridge if low[v] {">"} discovery[u]
+          </span>
+        </div>
+      </div>
+    ),
+    "A* Search": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">A* Search</span>
+          <span className="ml-2 text-xs text-secondary">
+            (Search Algorithm)
+          </span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(b^d) &nbsp;|&nbsp; Space: O(b^d) &nbsp;|&nbsp; Use: Finding
+          optimal path in weighted graphs
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Initialize:</span> Set
+            g(n) = 0, h(n) = heuristic estimate
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Priority queue:</span>{" "}
+            Add start node with f(n) = g(n) + h(n)
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Expand nodes:</span>{" "}
+            Process node with lowest f(n), update neighbors
+          </span>
+        </div>
+      </div>
+    ),
+    "Grid Traversal": () => (
+      <div>
+        <div className="mb-2">
+          <span className="text-accent font-bold">Grid Traversal</span>
+          <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
+        </div>
+        <div className="mb-2 text-xs text-secondary">
+          Time: O(n * m) &nbsp;|&nbsp; Space: O(n * m) &nbsp;|&nbsp; Use:
+          Exploring 2D grid
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">1.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Initialize:</span> Set
+            up visited array and queue
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">2.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">BFS/DFS:</span> Process
+            cells in order, mark visited
+          </span>
+        </div>
+        <div className="flex items-start mb-1">
+          <span className="font-bold text-main mr-2">3.</span>
+          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+          <span>
+            <span className="font-semibold text-accent">Neighbors:</span> Check
+            all 4/8 directions, handle boundaries
           </span>
         </div>
       </div>
