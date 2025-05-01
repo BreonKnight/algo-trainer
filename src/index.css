@@ -37,6 +37,8 @@
       rgba(255, 121, 198, 0.08) 100%
     );
     --text-selected-dark: #282a36;
+    --bg-background: var(--bg-main);
+    --text-main: var(--text-main);
   }
 
   .dark {
@@ -491,4 +493,21 @@ textarea,
     rgba(184, 92, 110, 0.08) 50%,
     rgba(110, 198, 247, 0.08) 100%
   );
+}
+
+/* Add these utility classes for background and text colors */
+.bg-background {
+  background-color: var(--bg-background) !important;
+}
+
+.bg-background\/95 {
+  background-color: color-mix(
+    in srgb,
+    var(--bg-background) 95%,
+    transparent
+  ) !important;
+}
+
+.text-main {
+  color: var(--text-main) !important;
 }

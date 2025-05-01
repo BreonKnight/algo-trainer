@@ -11,7 +11,7 @@ import {
 import { Slider } from "./ui/slider";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { useTheme } from "./useTheme";
+import { useTheme } from "./theme-context";
 import { cn } from "@/lib/utils";
 
 export function ProgressView() {
