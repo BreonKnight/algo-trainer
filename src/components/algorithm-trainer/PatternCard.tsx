@@ -2,8 +2,7 @@ import { Card } from "../ui/card";
 import { pseudocodePatterns } from "@/lib/pseudocode";
 import { patternNameMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import styles from "@/styles/pseudocode.module.css";
-import { PatternKey } from "@/components/algorithm-trainer/types";
-import MonsterHunterGuide from "./MonsterHunterGuide";
+import { MonsterHunterGuide } from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import { Book, Sword, ChevronDown, ChevronUp } from "lucide-react";
@@ -15,6 +14,7 @@ import {
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
 import { useTheme } from "@/components/theme-context";
+import { PatternKey } from "./types";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;
@@ -22,197 +22,99 @@ type PseudocodePatterns = Record<string, () => JSX.Element>;
 // Type assertion for the imported pseudocodePatterns
 const typedPseudocodePatterns = pseudocodePatterns as PseudocodePatterns;
 
+// Get category for a pattern
+const getPatternCategory = (pattern: PatternKey): string => {
+  // Define category mapping based on pattern name patterns
+  if (pattern.includes("Sort")) return "Sorting";
+  if (pattern.includes("Search")) return "Searching";
+  if (
+    pattern.includes("Graph") ||
+    pattern === "BFS" ||
+    pattern === "DFS" ||
+    pattern === "Kruskal" ||
+    pattern === "Prim" ||
+    pattern === "Bellman-Ford" ||
+    pattern === "Floyd-Warshall" ||
+    pattern === "A* Search" ||
+    pattern === "Network Flow" ||
+    pattern === "Maximum Bipartite Matching" ||
+    pattern === "Topological Sort" ||
+    pattern === "Articulation Points"
+  ) {
+    return "Graph Algorithms";
+  }
+  if (
+    pattern.includes("Tree") ||
+    pattern === "Suffix Tree" ||
+    pattern === "Suffix Array"
+  ) {
+    return "String Algorithms";
+  }
+  if (
+    pattern.includes("DP") ||
+    pattern === "Kadane's Algorithm" ||
+    pattern.includes("Matrix Chain") ||
+    pattern.includes("Matrix Exponentiation")
+  ) {
+    return "Dynamic Programming";
+  }
+  if (
+    pattern.includes("Matrix") ||
+    pattern === "Grid Traversal" ||
+    pattern === "Rotate Matrix"
+  ) {
+    return "Matrix Algorithms";
+  }
+  if (
+    pattern === "Extended Euclidean" ||
+    pattern === "Chinese Remainder Theorem" ||
+    pattern === "Sieve of Eratosthenes" ||
+    pattern === "Prime Factorization" ||
+    pattern === "Miller-Rabin Primality Test"
+  ) {
+    return "Number Theory";
+  }
+  if (
+    pattern === "Greedy" ||
+    pattern.includes("Greedy") ||
+    pattern === "Backtracking" ||
+    pattern === "Divide and Conquer" ||
+    pattern === "Recursion" ||
+    pattern === "Bit Manipulation" ||
+    pattern === "Prefix Sum"
+  ) {
+    return "Techniques";
+  }
+  if (
+    pattern === "B Tree" ||
+    pattern === "AVL Tree" ||
+    pattern === "Red Black Tree" ||
+    pattern === "Fenwick Tree" ||
+    pattern === "Segment Tree" ||
+    pattern === "Union Find" ||
+    pattern === "Monotonic Queue" ||
+    pattern === "Monotonic Stack" ||
+    pattern === "Queue Implementation" ||
+    pattern === "Stack Implementation" ||
+    pattern === "Circular Linked List" ||
+    pattern === "Hash Table" ||
+    pattern === "Heap Implementation" ||
+    pattern === "Linked List"
+  ) {
+    return "Data Structures";
+  }
+  return "Other";
+};
+
 interface PatternCardProps {
   currentPattern: PatternKey;
   onPatternChange: (pattern: PatternKey) => void;
 }
 
-// Pattern category mapping
-const patternCategories: Record<string, string[]> = {
-  Sorting: [
-    "Quick Sort",
-    "Heap Sort",
-    "Bubble Sort",
-    "Selection Sort",
-    "Insertion Sort",
-    "Merge Sort",
-    "Stack Sort",
-  ],
-  Searching: [
-    "Binary Search",
-    "Binary Search on Answer",
-    "Linear Search",
-    "Two Sum",
-    "Two Sum Dict",
-    "Ternary Search",
-    "Jump Search",
-    "Exponential Search",
-    "Interpolation Search",
-    "Fibonacci Search",
-  ],
-  "Graph Algorithms": [
-    "DFS",
-    "BFS",
-    "Dijkstra",
-    "Topological Sort",
-    "Graph",
-    "Floyd Cycle Detection",
-    "Articulation Points",
-    "Graph Dijkstra",
-    "Graph Kosaraju",
-    "Network Flow",
-    "Strongly Connected Components",
-    "Graph Articulation Points",
-    "Graph Bridges",
-    "Graph Prim",
-    "Graph Kruskal",
-    "Floyd-Warshall",
-    "Bellman-Ford",
-    "A* Search",
-  ],
-  "String Algorithms": [
-    "Rabin-Karp",
-    "KMP Algorithm",
-    "Manacher's Algorithm",
-    "Z Algorithm",
-    "Suffix Tree",
-    "Suffix Array",
-  ],
-  "Data Structures": [
-    "Linked List",
-    "Circular Linked List",
-    "Binary Search Tree",
-    "Heap Implementation",
-    "Trie",
-    "Hash Table",
-    "Graph",
-    "Tree",
-    "Stack Implementation",
-    "Queue Implementation",
-    "Monotonic Stack",
-    "Monotonic Queue",
-    "B Tree",
-    "AVL Tree",
-    "Red Black Tree",
-    "Union Find",
-    "Fenwick Tree",
-    "Segment Tree",
-  ],
-  "Dynamic Programming": [
-    "Dynamic Programming",
-    "Dynamic Programming Fibonacci",
-    "Dynamic Programming Iterative",
-    "Dynamic Programming Coin Change",
-    "Kadane's Algorithm",
-    "State Compression DP",
-    "Digit DP",
-    "Tree DP",
-    "Probability DP",
-    "Knapsack",
-    "Matrix Chain Multiplication",
-    "Matrix Exponentiation",
-    "Memoization",
-  ],
-  "Tree Algorithms": ["Heavy Light Decomposition", "LCA"],
-  "Matrix Algorithms": [
-    "Matrix Operations",
-    "Matrix Traversal",
-    "Matrix Traversal Recursive",
-    "Matrix Spiral Traversal",
-    "Matrix Spiral Recursive",
-    "Grid Traversal",
-  ],
-  "Number Theory": [
-    "Extended Euclidean",
-    "Chinese Remainder Theorem",
-    "Sieve of Eratosthenes",
-    "Fast Fourier Transform",
-  ],
-  Techniques: [
-    "Greedy",
-    "Backtracking",
-    "Sliding Window",
-    "Two Pointers",
-    "Bit Manipulation",
-    "Prefix Sum",
-    "Prefix Sums",
-    "Divide and Conquer",
-    "Quickselect",
-  ],
-};
-
-// Get category for a pattern
-const getPatternCategory = (pattern: string): string => {
-  for (const [category, patterns] of Object.entries(patternCategories)) {
-    if (patterns.includes(pattern)) {
-      return category;
-    }
-  }
-  return "Other";
-};
-
-// Get color for a category
-
-// Debug function to check pattern matching
-const debugPatternMatching = () => {
-  console.group("🔍 Pattern Matching Debug");
-
-  // Get all patterns from categories
-  const allPatternCategories = Object.values(patternCategories).flat();
-  console.log("📋 All patterns from categories:", allPatternCategories);
-
-  // Get all patterns from pseudocodePatterns
-  const allPseudocodePatterns = Object.keys(pseudocodePatterns);
-  console.log("🎯 All patterns in pseudocodePatterns:", allPseudocodePatterns);
-
-  // Get all patterns from patternNameMapping
-  const allMappedPatterns = Object.keys(patternNameMapping);
-  console.log("🗺️ All patterns in patternNameMapping:", allMappedPatterns);
-
-  // Check for patterns in categories but missing in pseudocodePatterns
-  const missingPseudocode = allPatternCategories.filter(
-    (pattern) => !pseudocodePatterns[patternNameMapping[pattern] || pattern]
-  );
-  console.log("❌ Patterns missing pseudocode:", missingPseudocode);
-
-  // Check for patterns in categories but missing in mapping
-  const missingMapping = allPatternCategories.filter(
-    (pattern) => !patternNameMapping[pattern]
-  );
-  console.log("⚠️ Patterns missing mapping:", missingMapping);
-
-  // Check for unused pseudocode patterns
-  const unusedPseudocode = allPseudocodePatterns.filter(
-    (pattern) =>
-      !allPatternCategories.includes(pattern) &&
-      !Object.values(patternNameMapping).includes(pattern)
-  );
-  console.log("🚫 Unused pseudocode patterns:", unusedPseudocode);
-
-  // Check patterns by category
-  console.group("📊 Pattern Counts by Category");
-  Object.entries(patternCategories).forEach(([category, patterns]) => {
-    const missing = patterns.filter(
-      (pattern) => !pseudocodePatterns[patternNameMapping[pattern] || pattern]
-    );
-    console.log(
-      `${category}: ${patterns.length} patterns, ${missing.length} missing`
-    );
-    if (missing.length > 0) {
-      console.log(`  Missing: ${missing.join(", ")}`);
-    }
-  });
-  console.groupEnd();
-
-  console.groupEnd();
-};
-
 export function PatternCard({
   currentPattern,
   onPatternChange,
 }: PatternCardProps) {
-  console.log("PatternCard rendered with pattern:", currentPattern);
-
   const [showMonsterGuide, setShowMonsterGuide] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
   const category = getPatternCategory(currentPattern);
@@ -236,69 +138,36 @@ export function PatternCard({
     };
   }, []);
 
-  useEffect(() => {
-    debugPatternMatching();
-  }, []);
-
   const getPseudocodePattern = (patternName: string) => {
-    console.log("=== Pattern Loading Debug ===");
-    console.log("Input pattern name:", patternName);
-
-    // Log all available patterns
-    console.log("Available patterns:", Object.keys(typedPseudocodePatterns));
-
     // First try to get the pattern directly
     const directPattern = typedPseudocodePatterns[patternName];
-    console.log("Direct pattern lookup:", {
-      patternName,
-      found: !!directPattern,
-      pattern: directPattern,
-    });
     if (directPattern) {
       return directPattern;
     }
 
     // If not found, try to map the name
     const mappedName = patternNameMapping[patternName];
-    console.log("Pattern mapping lookup:", {
-      patternName,
-      mappedName,
-      found: !!mappedName,
-    });
-
     if (mappedName) {
-      const mappedPattern = typedPseudocodePatterns[mappedName];
-      console.log("Mapped pattern lookup:", {
-        mappedName,
-        found: !!mappedPattern,
-        pattern: mappedPattern,
-      });
-      return mappedPattern;
+      return typedPseudocodePatterns[mappedName];
     }
 
     // If still not found, try to find a pattern with a similar name
     const similarPattern = Object.keys(typedPseudocodePatterns).find(
       (key) => key.toLowerCase() === patternName.toLowerCase()
     );
-    console.log("Similar pattern search:", {
-      patternName,
-      found: !!similarPattern,
-      similarPattern,
-    });
     if (similarPattern) {
       return typedPseudocodePatterns[similarPattern];
     }
 
-    console.log("No pattern found for:", patternName);
+    // Log pattern lookup failure
+    console.warn(`Pattern lookup failed for: ${patternName}`);
+    console.log("Available patterns:", Object.keys(typedPseudocodePatterns));
+    console.log("Pattern name mapping:", patternNameMapping);
+
     return null;
   };
 
   const pseudo = getPseudocodePattern(currentPattern);
-  console.log("Final result:", {
-    currentPattern,
-    found: !!pseudo,
-    pseudo,
-  });
 
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
@@ -379,7 +248,7 @@ export function PatternCard({
         {isExpanded &&
           (showMonsterGuide ? (
             <div className="h-full overflow-hidden">
-              <MonsterHunterGuide pattern={currentPattern} />
+              <MonsterHunterGuide currentPattern={currentPattern} />
             </div>
           ) : (
             <div className="h-full flex flex-col overflow-hidden">

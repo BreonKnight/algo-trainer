@@ -1778,4 +1778,61 @@ def find_optimal_gathering_path(territory_tree):
     
     return [-1, -1]  # No valid combination found`,
   ],
+
+  [
+    "Null Pattern" as PatternKey,
+    `def monster_hunter_null_pattern(input_data):
+    """
+    Sometimes, the best strategy is to do nothing!
+    Time: O(1)
+    Space: O(1)
+
+    Monster Hunter Context:
+    - Like leaving your loot untouched when it's already perfect
+    - Sometimes, the optimal move is to not change anything
+    - Useful for identity operations, constant returns, or empty actions
+
+    Example:
+    input_data = [1, 2, 3, 4, 5]
+    # No transformation needed
+    output = input_data
+
+    Process:
+    1. Check if any action is needed
+    2. If not, return input as is
+    3. If a constant is needed, return the constant
+    4. If an empty operation, do nothing
+    """
+    return input_data  # or return a constant, or do nothing
+    `,
+  ],
+
+  [
+    "Test Data" as PatternKey,
+    `def monster_hunter_test_data():
+    """
+    Generate test data to verify your hunting strategies!
+    Time: O(n) for generating n test cases
+    Space: O(n)
+
+    Monster Hunter Context:
+    - Like stress-testing your gear before a big hunt
+    - Generate edge cases, large inventories, and random scenarios
+    - Ensure your hunting strategy works in all situations
+
+    Example:
+    # Edge Case: Empty Inventory
+    test_case_1 = []
+    # Large Inventory
+    test_case_2 = [random.randint(1, 1000) for _ in range(1000)]
+
+    Process:
+    1. Define the types of test cases needed
+    2. Generate edge cases (empty, single, max size)
+    3. Generate random and performance cases
+    4. Use test data to validate your algorithms
+    """
+    return [[], [random.randint(1, 1000) for _ in range(1000)]]
+    `,
+  ],
 ]);

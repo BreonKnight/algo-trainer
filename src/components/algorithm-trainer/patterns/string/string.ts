@@ -1,7 +1,7 @@
 import { AlgorithmPattern } from "../../types";
 
 export const stringPattern: AlgorithmPattern = {
-  title: "String Algorithm",
+  title: "String",
   description:
     "A collection of algorithms for solving problems involving strings, which are sequences of characters.",
   timeComplexity:

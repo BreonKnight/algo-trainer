@@ -118,5 +118,5 @@ def find_in_unbounded_array(arr: List[int], target: int) -> int:
     
     # Now we have a range where target might be present
     return exponential_search(arr, target)`,
-  category: "searching",
+  category: "Searching",
 };

@@ -105,6 +105,7 @@ import { BacktrackingPattern } from "./patterns/backtracking";
 import { GreedyPattern } from "./patterns/greedy";
 import { MillerRabinPrimalityTestPattern } from "./patterns/miller-rabin-primality-test";
 import { FastFourierTransformPattern } from "./patterns/fast-fourier-transform";
+import { NullPattern } from "./patterns/null-pattern";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Dynamic Programming": DynamicProgrammingPattern,
@@ -214,4 +215,5 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
   "Fast Fourier Transform": FastFourierTransformPattern,
   "Kadane's Algorithm": KadanesAlgorithmPattern,
+  "Null Pattern": NullPattern,
 };

@@ -149,5 +149,5 @@ def validateTestData(data: Dict[str, Any]) -> bool:
         return False
     
     return True`,
-  category: "searching",
+  category: "Searching",
 };

@@ -47,7 +47,7 @@ function createMonsterHunterPattern(patternName, algorithm):
   `,
   example: `
 // Example: Binary Search as Monster Territory Search
-const binarySearchPattern = createMonsterHunterPattern('Binary Search', {
+const binarySearchPatternPatternPatternPatternPattern = createMonsterHunterPattern('Binary Search', {
     scenario: 'Searching for a monster in a sorted list of territories',
     monster: 'A specific monster type (e.g., Rathalos)',
     objective: 'Find the monster's territory efficiently',
@@ -146,7 +146,7 @@ function createMonsterHunterPattern(
 }
 
 // Example: Dynamic Programming as Monster Hunting Strategy
-const dynamicProgrammingPattern = createMonsterHunterPattern('Dynamic Programming', {
+const dynamicProgrammingPatternPatternPatternPatternPattern = createMonsterHunterPattern('Dynamic Programming', {
     scenario: 'Planning optimal monster hunting routes',
     monster: 'Multiple monsters with different rewards',
     objective: 'Maximize total rewards within time limit',

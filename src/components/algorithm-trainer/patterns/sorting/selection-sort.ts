@@ -33,5 +33,5 @@ Fourth pass:
                 min_idx = j
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
     return arr`,
-  category: "Sorting Algorithms",
+  category: "Sorting",
 };

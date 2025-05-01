@@ -37,7 +37,7 @@ function generateTestData():
   `,
   example: `
 // Example usage:
-const testData = generateTestData();
+const testDataPatternPatternPatternPattern = generateTestData();
 console.log(testData.basic);    // Basic monster configurations
 console.log(testData.advanced); // Advanced monster configurations
 console.log(testData.edge);     // Edge case configurations
@@ -92,7 +92,7 @@ function generateTestData(): TestData {
 
 // Helper function to generate random test data
 function generateRandomTestData(count: number): TestData {
-  const elements = ['fire', 'ice', 'thunder', 'water', 'dragon'];
+  const elementsPatternPatternPatternPattern = ['fire', 'ice', 'thunder', 'water', 'dragon'];
   
   const basicMonsters: BasicMonster[] = Array.from({ length: count }, () => ({
     time: Math.floor(Math.random() * 10) + 1,

@@ -80,5 +80,5 @@ graph = {
     'D': ['C']
 }
 print(topological_sort(graph))  # ['A', 'B', 'D', 'C']`,
-  category: "graph",
+  category: "Graph",
 };

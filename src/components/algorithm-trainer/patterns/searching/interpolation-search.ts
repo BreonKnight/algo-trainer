@@ -81,5 +81,5 @@ def interpolation_search(arr: List[int], target: int) -> int:
             right = pos - 1
     
     return -1  # Target not found`,
-  category: "searching",
+  category: "Searching",
 };

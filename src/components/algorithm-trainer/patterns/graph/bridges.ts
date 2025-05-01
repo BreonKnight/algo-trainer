@@ -65,5 +65,5 @@ Bridges (Critical Paths):
             dfs(i, -1, visited, disc, low, time, bridges)
             
     return bridges`,
-  category: "graph",
+  category: "Graph",
 };

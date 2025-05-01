@@ -66,5 +66,5 @@ def kruskal(graph):
             mst.append((u, v, weight))
     
     return mst`,
-  category: "graph",
+  category: "Graph",
 };

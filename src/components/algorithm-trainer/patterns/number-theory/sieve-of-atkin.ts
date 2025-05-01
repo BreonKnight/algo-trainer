@@ -42,7 +42,7 @@ export const sieveOfAtkinPattern: AlgorithmPattern = {
     primes = [i for i, is_prime in enumerate(sieve) if is_prime]
     return primes`,
   example: `// Find all primes up to 100
-const primes = sieveOfAtkin(100);
+const primesPatternPatternPatternPattern = sieveOfAtkin(100);
 console.log(primes);
 // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]`,
   implementation: `def sieve_of_atkin(n: int) -> list[int]:
@@ -154,5 +154,5 @@ print(f"Primes up to {n}: {primes}")  # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31,
 # Using optimized version
 optimized_primes = sieve_of_atkin_optimized(n)
 print(f"Optimized primes up to {n}: {optimized_primes}")`,
-  category: "number-theory",
+  category: "Number Theory",
 };

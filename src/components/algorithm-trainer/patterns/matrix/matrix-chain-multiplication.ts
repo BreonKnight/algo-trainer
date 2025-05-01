@@ -22,7 +22,7 @@ export const matrixChainMultiplicationPattern: AlgorithmPattern = {
                     s[i][j] = k
     
     return m, s`,
-  example: `const dimensions = [10, 30, 5, 60];
+  example: `const dimensionsPatternPatternPatternPattern = [10, 30, 5, 60];
 const [m, s] = matrixChainOrder(dimensions);
 // m[0][2] = 4500 (minimum multiplications)
 // s[0][2] = 1 (optimal split)`,
@@ -77,5 +77,5 @@ dimensions = [10, 30, 5, 60]
 m, s = matrix_chain_order(dimensions)
 print(f"Minimum number of multiplications: {m[0][2]}")
 print(f"Optimal parenthesization: {print_optimal_parenthesization(s, 0, 2)}")`,
-  category: "matrix",
+  category: "Matrix",
 };

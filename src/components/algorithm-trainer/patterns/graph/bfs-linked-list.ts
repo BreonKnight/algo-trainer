@@ -53,5 +53,5 @@ def bfs_linked_list(head):
             queue.append(node.next)
     
     return result`,
-  category: "graph",
+  category: "Graph",
 };

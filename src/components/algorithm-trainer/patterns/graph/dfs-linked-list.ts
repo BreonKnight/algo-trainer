@@ -43,5 +43,5 @@ def dfs_linked_list(head):
     
     dfs(head)
     return result`,
-  category: "graph",
+  category: "Graph",
 };

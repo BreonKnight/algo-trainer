@@ -14,11 +14,11 @@ export const matrixExponentiationPattern: AlgorithmPattern = {
         matrix = multiply(matrix, matrix)
         power = power // 2
     return result`,
-  example: `const matrix = [
+  example: `const matrixPatternPatternPatternPattern = [
   [1, 1],
   [1, 0]
 ];
-const result = matrixPower(matrix, 5);
+const resultPatternPatternPatternPattern = matrixPower(matrix, 5);
 // [[8, 5], [5, 3]] (5th Fibonacci number)`,
   implementation: `def matrix_power(matrix: list[list[int]], power: int) -> list[list[int]]:
     """
@@ -83,5 +83,5 @@ matrix = [
 ]
 result = matrix_power(matrix, 5)
 print(f"Matrix raised to power 5: {result}")  # [[8, 5], [5, 3]] (5th Fibonacci number)`,
-  category: "matrix",
+  category: "Matrix",
 };
