@@ -1,6 +1,6 @@
 import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
-import { ChevronDown, Search, X, Star } from "lucide-react";
+import { ChevronDown, Search, Star } from "lucide-react";
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 
@@ -118,16 +118,16 @@ export function AlgorithmSelector({
 
   // Handle keyboard shortcuts
   useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
+    function handleKeyDown(event: globalThis.KeyboardEvent) {
       if (event.key === "/" && !isDropdownOpen) {
         event.preventDefault();
         setIsDropdownOpen(true);
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown as any);
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown as any);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isDropdownOpen]);
 
@@ -244,7 +244,10 @@ export function AlgorithmSelector({
       >
         <div className="flex items-center gap-2">
           {currentPattern ? (
-            <span className="truncate max-w-[200px]" title={currentPattern}>
+            <span
+              className="truncate max-w-[200px] sm:max-w-[300px]"
+              title={currentPattern}
+            >
               {currentPattern}
             </span>
           ) : (
@@ -262,14 +265,23 @@ export function AlgorithmSelector({
         createPortal(
           <div
             ref={dropdownContentRef}
-            className="absolute z-50 w-full mt-1 bg-main border border-secondary text-main max-h-[400px] overflow-y-auto min-w-[300px] p-2 rounded-md shadow-lg animate-fadeIn"
+            className="fixed sm:absolute z-50 w-[calc(100vw-2rem)] sm:w-full mt-1 bg-main border border-secondary text-main max-h-[60vh] sm:max-h-[400px] overflow-y-auto min-w-[300px] p-2 rounded-md shadow-lg animate-fadeIn"
             style={{
-              left: dropdownRef.current?.getBoundingClientRect().left ?? 0,
+              left:
+                window.innerWidth < 640
+                  ? "1rem"
+                  : dropdownRef.current?.getBoundingClientRect().left ?? 0,
               top:
-                (dropdownRef.current?.getBoundingClientRect().bottom ?? 0) +
-                window.scrollY,
-              position: "absolute",
-              width: dropdownRef.current?.offsetWidth ?? "auto",
+                window.innerWidth < 640
+                  ? "50%"
+                  : (dropdownRef.current?.getBoundingClientRect().bottom ?? 0) +
+                    window.scrollY,
+              transform: window.innerWidth < 640 ? "translateY(-50%)" : "none",
+              position: window.innerWidth < 640 ? "fixed" : "absolute",
+              width:
+                window.innerWidth < 640
+                  ? "calc(100vw - 2rem)"
+                  : dropdownRef.current?.offsetWidth ?? "auto",
             }}
             role="listbox"
             id="algorithm-list"
@@ -287,22 +299,6 @@ export function AlgorithmSelector({
                   role="searchbox"
                   aria-label="Search algorithms"
                 />
-                {searchQuery && (
-                  <button
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 text-secondary hover:text-main bg-gradient-to-r from-accent/20 to-accent2/20 hover:from-accent/40 hover:to-accent2/40 rounded-full p-1 transition-all duration-200 flex items-center justify-center"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setSearchQuery("");
-                      if (searchInputRef.current) {
-                        searchInputRef.current.focus();
-                      }
-                    }}
-                    aria-label="Clear search"
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
-                )}
               </div>
             </div>
 
@@ -338,7 +334,7 @@ export function AlgorithmSelector({
                           tabIndex={0}
                         >
                           <span
-                            className="block overflow-hidden text-ellipsis whitespace-nowrap"
+                            className="block overflow-hidden text-ellipsis whitespace-nowrap max-w-[80%]"
                             title={algorithm}
                           >
                             {highlightMatch(algorithm, searchQuery)}
