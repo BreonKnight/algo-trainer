@@ -68,6 +68,8 @@ export const monsterHunterPatternsByCategory = {
     "Maximum Bipartite Matching",
     "A* Search",
     "Grid Traversal",
+    "Graph Kruskal" as PatternKey,
+    "Prim" as PatternKey,
   ],
 
   Strings: [
@@ -151,7 +153,7 @@ export function verifyPatternCompleteness() {
 
   // Check if all patterns have Monster Hunter implementations
   const missingMonsterHunterPatterns = PATTERN_KEYS.filter(
-    (key) => !allPatterns.has(key)
+    (key) => !allPatterns.has(key as PatternKey)
   );
 
   // Log results

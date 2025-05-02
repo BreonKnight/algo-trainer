@@ -4,5 +4,5 @@ import { divideAndConquerPattern } from "./divide-and-conquer";
 export const divideAndConquerPatterns: Partial<
   Record<string, AlgorithmPattern>
 > = {
-  "Divide and Conquer": divideAndConquerPattern,
+  "Divide And Conquer": divideAndConquerPattern,
 };

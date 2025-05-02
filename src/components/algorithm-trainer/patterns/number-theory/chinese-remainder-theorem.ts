@@ -75,5 +75,5 @@ remainders = [2, 3, 2]  # x ≡ 2 mod 3, x ≡ 3 mod 5, x ≡ 2 mod 7
 moduli = [3, 5, 7]
 result = chinese_remainder_theorem(remainders, moduli)
 print(f"Solution: {result}")  # 23`,
-  category: "number-theory",
+  category: "Number Theory",
 };

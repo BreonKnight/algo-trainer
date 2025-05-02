@@ -5,7 +5,7 @@ export interface VisualTemplate {
   interactiveElements: string[];
 }
 
-export const searchAlgorithmTemplates = {
+export const searchAlgorithmTemplatesPatternPatternPatternPattern = {
   binarySearch: {
     before: `Map showing all territories with their monsters and difficulty levels:
     [Ancient Forest (1)] [Wildspire Waste (2)] [Coral Highlands (3)] [Rotten Vale (4)] [Elder's Recess (5)]`,

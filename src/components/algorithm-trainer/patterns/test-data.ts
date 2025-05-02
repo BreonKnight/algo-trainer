@@ -1,6 +1,6 @@
 import { PatternKey } from "../types";
 
-export const testDataPattern = {
+export const testDataPatternPatternPatternPattern = {
   title: "Test Data",
   description: "Generate and manage test cases for algorithm verification",
   timeComplexity: "O(n) for generation, O(1) for access",
@@ -165,7 +165,7 @@ export const testDataPattern = {
   ],
 };
 
-export const testDataPatterns = new Map<PatternKey, string>([
+export const testDataPatternsPatternPatternPattern = new Map<PatternKey, string>([
   [
     "Test Data" as PatternKey,
     `class TestDataGenerator:

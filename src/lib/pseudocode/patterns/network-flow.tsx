@@ -7,49 +7,56 @@ export const NetworkFlowPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V·E²) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Find maximum
-      flow in network
+      Time: O(V²E) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Find maximum
+      flow in a network
     </div>
 
     <div className="mb-4">
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
         {`FORD-FULKERSON(G, s, t)
-    let f[1‥V][1‥V] be a new array
-    for each edge (u,v) ∈ G.E
-        do f[u][v] ← 0
-            f[v][u] ← 0
-    
-    while there exists a path p from s to t in residual network Gf
-        do let cf(p) ← min{cf(u,v) : (u,v) is in p}
-            for each edge (u,v) in p
-                do f[u][v] ← f[u][v] + cf(p)
-                    f[v][u] ← -f[u][v]
-    
-    return f
+1  for each edge (u,v) ∈ G.E
+2      (u,v).f = 0
+3  while there exists a path p from s to t in residual network Gf
+4      cf(p) = min{cf(u,v) : (u,v) is in p}
+5      for each edge (u,v) in p
+6          if (u,v) ∈ E
+7              (u,v).f = (u,v).f + cf(p)
+8          else
+9              (v,u).f = (v,u).f - cf(p)
+
+EDMONDS-KARP(G, s, t)
+1  for each edge (u,v) ∈ G.E
+2      (u,v).f = 0
+3  while there exists a path p from s to t in residual network Gf
+4      cf(p) = min{cf(u,v) : (u,v) is in p}
+5      for each edge (u,v) in p
+6          if (u,v) ∈ E
+7              (u,v).f = (u,v).f + cf(p)
+8          else
+9              (v,u).f = (v,u).f - cf(p)
+
+DINIC(G, s, t)
+1  for each edge (u,v) ∈ G.E
+2      (u,v).f = 0
+3  while BFS(Gf, s, t) finds a path
+4      while DFS(Gf, s, t, ∞) finds a blocking flow
+5          for each edge (u,v) in blocking flow
+6              if (u,v) ∈ E
+7                  (u,v).f = (u,v).f + cf(p)
+8              else
+9                  (v,u).f = (v,u).f - cf(p)
 
 // Example:
-// Input: G = (V,E), s = 1, t = 4
+// Input: G = (V, E) where
+// V = {s, a, b, c, d, t}
+// E = {(s,a,10), (s,b,5), (a,b,2), (a,c,5), (b,c,8), (b,d,4), (c,t,7), (d,t,10)}
 // 
-// Initial flow:
-//   f[1][2] = 0, f[2][1] = 0
-//   f[1][3] = 0, f[3][1] = 0
-//   f[2][3] = 0, f[3][2] = 0
-//   f[2][4] = 0, f[4][2] = 0
-//   f[3][4] = 0, f[4][3] = 0
+// Step 1: Initial flow = 0
+// Step 2: Find augmenting path s->a->c->t with flow 5
+// Step 3: Find augmenting path s->b->d->t with flow 4
+// Step 4: Find augmenting path s->a->b->c->t with flow 2
 // 
-// First augmenting path: 1 → 2 → 4
-//   cf(p) = min{10, 8} = 8
-//   Update flows:
-//     f[1][2] = 8, f[2][1] = -8
-//     f[2][4] = 8, f[4][2] = -8
-// 
-// Second augmenting path: 1 → 3 → 4
-//   cf(p) = min{5, 10} = 5
-//   Update flows:
-//     f[1][3] = 5, f[3][1] = -5
-//     f[3][4] = 5, f[4][3] = -5
-// 
-// Output: Maximum flow = 13`}
+// Final flow: 11`}
       </pre>
     </div>
 
@@ -59,7 +66,7 @@ export const NetworkFlowPattern = () => (
     <div className="mb-2 text-sm">
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Initialize: Set all flows to zero</span>
+        <span>Initialize: Set all flows to 0</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
@@ -67,7 +74,7 @@ export const NetworkFlowPattern = () => (
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Update: Flow along augmenting path</span>
+        <span>Update: Flow along the path</span>
       </div>
     </div>
   </div>

@@ -34,5 +34,5 @@ Final result: [9, 3]`,
             stack.pop()
         stack.append(num)
     return stack`,
-  category: "sorting",
+  category: "Sorting",
 };

@@ -35,12 +35,12 @@ export const gridTraversalPattern: AlgorithmPattern = {
             left += 1
     
     return result`,
-  example: `const grid = [
+  example: `const gridPatternPatternPatternPattern = [
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 9]
 ];
-const result = spiralTraversal(grid);
+const resultPatternPatternPatternPattern = spiralTraversal(grid);
 // [1, 2, 3, 6, 9, 8, 7, 4, 5]`,
   implementation: `def spiral_traversal(grid: list[list[int]]) -> list[int]:
     """
@@ -149,5 +149,5 @@ grid = [
 print(f"Spiral traversal: {spiral_traversal(grid)}")  # [1, 2, 3, 6, 9, 8, 7, 4, 5]
 print(f"Diagonal traversal: {diagonal_traversal(grid)}")  # [1, 2, 4, 7, 5, 3, 6, 8, 9]
 print(f"Zigzag traversal: {zigzag_traversal(grid)}")  # [1, 2, 3, 6, 5, 4, 7, 8, 9]`,
-  category: "matrix",
+  category: "Matrix",
 };

@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../types";
+import { AlgorithmPattern, PatternKey } from "../types";
 
 // Import all pattern categories
 import { sortingPatterns } from "./sorting";
@@ -39,3 +39,15 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
 };
 
 export * from "./data-structures/union-find";
+
+// DEBUG: List patterns missing Monster Hunter guides
+import { monsterHunterExplanations } from "../monsterHunterExplanations";
+
+export function logPatternsMissingMonsterHunterGuides() {
+  const allPatternKeys = Object.keys(algorithmPatterns);
+  const missingPatterns = allPatternKeys.filter(
+    (key) => !monsterHunterExplanations[key as PatternKey]
+  );
+  console.log("Patterns missing Monster Hunter guides:", missingPatterns);
+  return missingPatterns;
+}

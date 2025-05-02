@@ -65,5 +65,5 @@ SCCs: [1,2,6,7], [3,4,5,8]`,
             sccs.append(scc)
 
     return sccs`,
-  category: "graph",
+  category: "Graph",
 };

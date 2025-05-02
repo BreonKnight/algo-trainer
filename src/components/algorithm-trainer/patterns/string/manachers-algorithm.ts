@@ -6,7 +6,7 @@ export const manachers_algorithmPattern: AlgorithmPattern = {
     "An efficient algorithm to find all palindromic substrings in a string in linear time.",
   timeComplexity: "O(n)",
   spaceComplexity: "O(n)",
-  category: "String Algorithms",
+  category: "String",
   pseudocode: `
 Manacher's steps:
 1. Transform string by adding boundaries:

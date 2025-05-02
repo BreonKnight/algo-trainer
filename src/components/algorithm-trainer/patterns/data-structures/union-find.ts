@@ -109,7 +109,7 @@ print(uf.get_size(0))  # 4 (elements 0, 1, 2, 3)
 
 # Get all sets
 print(uf.get_sets())  # [[0, 1, 2, 3], [4]]`,
-  category: "data-structures",
+  category: "Data Structures",
   pattern: "Union Find",
   explanation: `The Union Find data structure, also known as Disjoint Set Union (DSU), is used to efficiently manage and query connected components in a graph. It supports two main operations:
 

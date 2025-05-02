@@ -12,7 +12,7 @@ export const stringPatterns: Partial<Record<string, AlgorithmPattern>> = {
   "Z Algorithm": zalgorithmPattern,
   "Manacher's Algorithm": manachers_algorithmPattern,
   "KMP Algorithm": knuthmorrisprattPattern,
-  "Rabin-Karp": rabinkarpPattern,
+  "Rabin Karp": rabinkarpPattern,
   "Suffix Array": suffixArrayPattern,
   "Suffix Tree": suffixTreePattern,
 };
