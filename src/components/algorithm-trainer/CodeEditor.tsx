@@ -12,7 +12,7 @@ import {
   re2Theme,
   mhTheme,
 } from "@/lib/theme";
-import { useTheme } from "@/components/theme-context";
+import { useTheme } from "@/components/theme/theme-context";
 import { cn } from "@/lib/utils";
 
 interface CodeEditorProps {

@@ -1,4 +1,4 @@
-import { useTheme } from "@/components/theme-context";
+import { useTheme } from "@/components/theme/theme-context";
 import { cn } from "../../lib/utils";
 import { Highlight, type PrismTheme } from "prism-react-renderer";
 import { Link } from "react-router-dom";

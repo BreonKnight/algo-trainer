@@ -13,7 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useTheme } from "@/components/theme-context";
+import { useTheme } from "@/components/theme/theme-context";
 import {
   draculaTheme,
   solarizedTheme,

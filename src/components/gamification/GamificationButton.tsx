@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { Trophy, BarChart } from "lucide-react";
-import { Button } from "./ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "../components/ui/dialog";
-import GamificationService, { UserProgress } from "../lib/gamification";
-import { useTheme } from "./theme-context";
+import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import GamificationService, {
+  UserProgress,
+  Badge,
+  AlgorithmProgress,
+} from "../../lib/gamification";
+import { useTheme } from "../theme/theme-context";
 import { Link } from "react-router-dom";
 
 const themeStyles = {
@@ -313,7 +312,7 @@ export function GamificationButton() {
                 Achievements
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {userProgress.badges.map((badge) => (
+                {userProgress.badges.map((badge: Badge) => (
                   <div
                     key={badge.id}
                     className={`p-3 rounded-lg text-center ${
@@ -363,30 +362,32 @@ export function GamificationButton() {
                 Algorithm Progress
               </h3>
               <div className="space-y-2">
-                {userProgress.algorithmProgress.map((algorithm) => (
-                  <div key={algorithm.id} className="flex items-center">
-                    <div className={`w-24 text-sm ${styles.text.primary}`}>
-                      {algorithm.name}
-                    </div>
-                    <div
-                      className={`flex-1 h-2 ${styles.progress.bg} rounded-full overflow-hidden`}
-                    >
+                {userProgress.algorithmProgress.map(
+                  (algorithm: AlgorithmProgress) => (
+                    <div key={algorithm.id} className="flex items-center">
+                      <div className={`w-24 text-sm ${styles.text.primary}`}>
+                        {algorithm.name}
+                      </div>
                       <div
-                        className={`h-full ${styles.progress.bar} rounded-full`}
-                        style={{
-                          width: `${
-                            (algorithm.progress / algorithm.maxProgress) * 100
-                          }%`,
-                        }}
-                      ></div>
+                        className={`flex-1 h-2 ${styles.progress.bg} rounded-full overflow-hidden`}
+                      >
+                        <div
+                          className={`h-full ${styles.progress.bar} rounded-full`}
+                          style={{
+                            width: `${
+                              (algorithm.progress / algorithm.maxProgress) * 100
+                            }%`,
+                          }}
+                        ></div>
+                      </div>
+                      <div
+                        className={`w-12 text-right text-sm ${styles.text.secondary}`}
+                      >
+                        {algorithm.progress}/{algorithm.maxProgress}
+                      </div>
                     </div>
-                    <div
-                      className={`w-12 text-right text-sm ${styles.text.secondary}`}
-                    >
-                      {algorithm.progress}/{algorithm.maxProgress}
-                    </div>
-                  </div>
-                ))}
+                  )
+                )}
                 {userProgress.algorithmProgress.length === 0 && (
                   <div className={`text-center py-4 ${styles.text.muted}`}>
                     Try some algorithms to track your progress!

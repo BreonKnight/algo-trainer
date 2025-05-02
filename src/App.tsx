@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
-import { ProgressView } from "./components/ProgressView";
+import { ProgressView } from "./components/progress/ProgressView";
 import { TutorialView } from "./components/tutorials/TutorialView";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "./components/ThemeProvider";
-import { useTheme } from "./components/theme-context";
+import { useTheme } from "./components/theme/theme-context";
 import PatternManagement from "./components/admin/PatternManagement";
 import "./App.css";
 
