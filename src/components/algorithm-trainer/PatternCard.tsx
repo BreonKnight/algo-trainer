@@ -15,6 +15,8 @@ import {
 import { AlgorithmSelector } from "./AlgorithmSelector";
 import { useTheme } from "@/components/theme/theme-context";
 import { PatternKey } from "./types";
+import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
+import { categoryColors } from "@/lib/patterns";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;
@@ -24,96 +26,27 @@ const typedPseudocodePatterns = pseudocodePatterns as PseudocodePatterns;
 
 // Get category for a pattern
 const getPatternCategory = (pattern: PatternKey): string => {
-  // Define category mapping based on pattern name patterns
-  if (pattern.includes("Sort")) return "Sorting";
-  if (pattern.includes("Search")) return "Searching";
-  if (
-    pattern.includes("Graph") ||
-    pattern === "BFS" ||
-    pattern === "DFS" ||
-    pattern === "Kruskal" ||
-    pattern === "Prim" ||
-    pattern === "Bellman-Ford" ||
-    pattern === "Floyd-Warshall" ||
-    pattern === "A* Search" ||
-    pattern === "Network Flow" ||
-    pattern === "Maximum Bipartite Matching" ||
-    pattern === "Topological Sort" ||
-    pattern === "Articulation Points"
-  ) {
-    return "Graph Algorithms";
+  // Find the category that contains this pattern
+  for (const [category, patterns] of Object.entries(
+    monsterHunterPatternsByCategory
+  )) {
+    if (patterns.includes(pattern)) {
+      return category;
+    }
   }
-  if (
-    pattern.includes("Tree") ||
-    pattern === "Suffix Tree" ||
-    pattern === "Suffix Array"
-  ) {
-    return "String Algorithms";
-  }
-  if (
-    pattern.includes("DP") ||
-    pattern === "Kadane's Algorithm" ||
-    pattern.includes("Matrix Chain") ||
-    pattern.includes("Matrix Exponentiation")
-  ) {
-    return "Dynamic Programming";
-  }
-  if (
-    pattern.includes("Matrix") ||
-    pattern === "Grid Traversal" ||
-    pattern === "Rotate Matrix"
-  ) {
-    return "Matrix Algorithms";
-  }
-  if (
-    pattern === "Extended Euclidean" ||
-    pattern === "Chinese Remainder Theorem" ||
-    pattern === "Sieve of Eratosthenes" ||
-    pattern === "Prime Factorization" ||
-    pattern === "Miller-Rabin Primality Test"
-  ) {
-    return "Number Theory";
-  }
-  if (
-    pattern === "Greedy" ||
-    pattern.includes("Greedy") ||
-    pattern === "Backtracking" ||
-    pattern === "Divide and Conquer" ||
-    pattern === "Recursion" ||
-    pattern === "Bit Manipulation" ||
-    pattern === "Prefix Sum"
-  ) {
-    return "Techniques";
-  }
-  if (
-    pattern === "B Tree" ||
-    pattern === "AVL Tree" ||
-    pattern === "Red Black Tree" ||
-    pattern === "Fenwick Tree" ||
-    pattern === "Segment Tree" ||
-    pattern === "Union Find" ||
-    pattern === "Monotonic Queue" ||
-    pattern === "Monotonic Stack" ||
-    pattern === "Queue Implementation" ||
-    pattern === "Stack Implementation" ||
-    pattern === "Circular Linked List" ||
-    pattern === "Hash Table" ||
-    pattern === "Heap Implementation" ||
-    pattern === "Linked List"
-  ) {
-    return "Data Structures";
-  }
-  return "Other";
+  return "Unknown"; // Fallback category if pattern not found
 };
 
 interface PatternCardProps {
   currentPattern: PatternKey;
   onPatternChange: (pattern: PatternKey) => void;
+  patternNumber?: number;
 }
 
 export function PatternCard({
   currentPattern,
   onPatternChange,
+  patternNumber,
 }: PatternCardProps) {
   const [showMonsterGuide, setShowMonsterGuide] = useState(false);
   const [isExpanded, setIsExpanded] = useState(true);
@@ -196,13 +129,12 @@ export function PatternCard({
               {currentPattern}
             </h2>
             <span
-              className={
-                theme === "nord"
-                  ? "text-white/70 text-xs sm:text-sm md:text-base font-medium"
-                  : "text-secondary/80 text-xs sm:text-sm md:text-base font-medium"
-              }
+              className={`${
+                categoryColors[category as keyof typeof categoryColors] ||
+                "text-secondary/80"
+              } text-xs sm:text-sm md:text-base font-medium`}
             >
-              {category}
+              {category} {patternNumber !== undefined && `#${patternNumber}`}
             </span>
           </div>
         </div>

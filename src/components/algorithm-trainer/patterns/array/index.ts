@@ -12,7 +12,7 @@ import { twoSumTwoPointersPattern } from "./two-sum-two-pointers";
 import { twoSumPattern } from "./two-sum";
 import { twoSumDictPattern } from "./two-sum-dict";
 import { rotateMatrixPattern } from "./rotate-matrix";
-
+import { prefixSumsPattern } from "./prefix-sums";
 type ArrayPatternKey =
   | "Matrix Spiral Recursive"
   | "Matrix Spiral Traversal"
@@ -26,7 +26,8 @@ type ArrayPatternKey =
   | "Two Sum Two Pointers"
   | "Two Sum Dict"
   | "Rotate Matrix"
-  | "Two Sum";
+  | "Two Sum"
+  | "Prefix Sums";
 
 export const arrayPatterns: Partial<Record<ArrayPatternKey, AlgorithmPattern>> =
   {
@@ -43,4 +44,5 @@ export const arrayPatterns: Partial<Record<ArrayPatternKey, AlgorithmPattern>> =
     "Two Sum Dict": twoSumDictPattern,
     "Rotate Matrix": rotateMatrixPattern,
     "Two Sum": twoSumPattern,
+    "Prefix Sums": prefixSumsPattern,
   };

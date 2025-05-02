@@ -16,7 +16,6 @@ export const patternNameMapping: Record<string, string> = {
   "Jump Search": "Jump Search",
   "Exponential Search": "Exponential Search",
   "Interpolation Search": "Interpolation Search",
-  "Fibonacci Search": "Fibonacci Search",
 
   // Two Sum Variations
   "Two Sum": "Two Sum",
@@ -69,7 +68,7 @@ export const patternNameMapping: Record<string, string> = {
   "Binary Search Tree": "Binary Search Tree",
   "AVL Tree": "AVL Tree",
   "B Tree": "B Tree",
-  "Red Black Tree": "Red Black Tree",
+  "Red-Black Tree": "Red-Black Tree",
   "Fenwick Tree": "Fenwick Tree",
   "Segment Tree": "Segment Tree",
   "Trie Operations": "Trie Operations",
@@ -98,12 +97,10 @@ export const patternNameMapping: Record<string, string> = {
 
   // Number Theory
   "Extended Euclidean": "Extended Euclidean",
-  "Extended Euclidean Algorithm": "Extended Euclidean",
   "Chinese Remainder Theorem": "Chinese Remainder Theorem",
   "Sieve of Eratosthenes": "Sieve of Eratosthenes",
   "Sieve of Atkin": "Sieve of Atkin",
   "Sieve of Sundaram": "Sieve of Sundaram",
-  "Miller-Rabin": "Miller-Rabin",
   "Miller-Rabin Algorithm": "Miller-Rabin Algorithm",
 
   // Other Algorithms

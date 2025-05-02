@@ -1,7 +1,7 @@
 import type { AlgorithmPattern } from "../../types";
 
 export const extendedEuclideanPattern: AlgorithmPattern = {
-  title: "Extended Euclidean Algorithm",
+  title: "Extended Euclidean",
   description:
     "An extension of the Euclidean algorithm that computes the greatest common divisor (GCD) of two integers and finds integers x and y such that ax + by = gcd(a, b).",
   timeComplexity: "O(log min(a, b))",

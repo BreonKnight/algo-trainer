@@ -302,7 +302,7 @@ export const monsterHunterPatternsExtended3 = new Map<PatternKey, string>([
   ],
 
   [
-    "Z-Algorithm" as PatternKey,
+    "Z Algorithm" as PatternKey,
     `def monster_hunter_z_algorithm(monster_pattern, behavior_log):
     """
     Pattern matching in monster behavior using Z-Algorithm.

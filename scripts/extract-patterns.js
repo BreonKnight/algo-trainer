@@ -82,7 +82,7 @@ const patternDirectories = {
   "Rabin-Karp": "string",
   "KMP Algorithm": "string",
   "Manacher's Algorithm": "string",
-  "Z-Algorithm": "string",
+  "Z Algorithm": "string",
 };
 
 // Read the patterns file

@@ -13,6 +13,10 @@ import "./App.css";
 import { checkMissingPatterns } from "./components/algorithm-trainer/monsterHunterExplanations";
 import AlgorithmComparisonPage from "./app/algorithm-comparison/AlgorithmComparisonPage";
 import HomePage from "./app/HomePage";
+import {
+  checkPatternFiles,
+  logPatternCheckResults,
+} from "./lib/utils/pattern-checker";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -118,7 +122,9 @@ function AppContent() {
 function App() {
   useEffect(() => {
     if (import.meta.env.DEV) {
-      checkMissingPatterns();
+      checkPatternFiles().then((results) => {
+        logPatternCheckResults(results);
+      });
     }
   }, []);
 

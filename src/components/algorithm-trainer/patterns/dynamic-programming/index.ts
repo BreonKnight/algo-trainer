@@ -1,33 +1,40 @@
 import { AlgorithmPattern } from "../../types";
-import { dynamicProgrammingPattern } from "./dynamic-programming";
+import { digitDPPattern } from "./digit-dp";
+import { dynamicProgrammingCoinChangePattern } from "./dynamic-programming-coin-change";
 import { dynamicProgrammingFibonacciPattern } from "./dynamic-programming-fibonacci";
 import { dynamicProgrammingIterativePattern } from "./dynamic-programming-iterative";
-import { stateCompressionDPPattern } from "./state-compression-dp";
-import { digitDPPattern } from "./digit-dp";
-import { treeDPPattern } from "./tree-dp";
+import { dynamicProgrammingPattern } from "./dynamic-programming-pattern";
+import { dynamicProgrammingPattern as dpPattern } from "./dynamic-programming";
+import { fibonacciDpPattern } from "./fibonacci";
 import { probabilityDPPattern } from "./probability-dp";
-import { dynamicProgrammingCoinChangePattern } from "./dynamic-programming-coin-change";
-
+import { stateCompressionDPPattern } from "./state-compression-dp";
+import { treeDPPattern } from "./tree-dp";
+import { memoizationPattern } from "./memoization";
 type DynamicProgrammingPatternKey =
-  | "Dynamic Programming"
+  | "Digit DP"
+  | "Dynamic Programming Coin Change"
   | "Dynamic Programming Fibonacci"
   | "Dynamic Programming Iterative"
-  | "Dynamic Programming Coin Change"
+  | "Dynamic Programming Pattern"
+  | "Dynamic Programming"
+  | "Fibonacci"
+  | "Probability DP"
   | "State Compression DP"
-  | "Digit DP"
   | "Tree DP"
-  | "Probability DP";
+  | "Memoization";
 
 export const dynamicProgrammingPatterns: Partial<
   Record<DynamicProgrammingPatternKey, AlgorithmPattern>
 > = {
+  "Digit DP": digitDPPattern,
+  "Dynamic Programming Coin Change": dynamicProgrammingCoinChangePattern,
   "Dynamic Programming Fibonacci": dynamicProgrammingFibonacciPattern,
   "Dynamic Programming Iterative": dynamicProgrammingIterativePattern,
-  "Dynamic Programming Coin Change": dynamicProgrammingCoinChangePattern,
-  "Dynamic Programming": dynamicProgrammingPattern,
-  "State Compression DP": stateCompressionDPPattern,
-  "Digit DP": digitDPPattern,
-  "Tree DP": treeDPPattern,
+  "Dynamic Programming Pattern": dynamicProgrammingPattern,
+  "Dynamic Programming": dpPattern,
+  Fibonacci: fibonacciDpPattern,
   "Probability DP": probabilityDPPattern,
-  // Add other dynamic programming patterns here
+  "State Compression DP": stateCompressionDPPattern,
+  "Tree DP": treeDPPattern,
+  Memoization: memoizationPattern,
 };

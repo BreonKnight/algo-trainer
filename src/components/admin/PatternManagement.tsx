@@ -273,16 +273,14 @@ const PatternManagement: React.FC = () => {
     return issues;
   };
 
+  // Add debug information update effect
   useEffect(() => {
     if (debugMode) {
       // Get all pattern keys from the patterns array
       const patternKeys = patterns.map((p) => p.name);
 
-      // Get pattern mapping from the pattern-mapping.ts file
-      const patternMapping = patternNameMapping;
-
       // Get pattern categories and their counts
-      const patternCategories = {
+      const categories = {
         "Sorting Algorithms": patternKeys.filter((key) => key.includes("Sort"))
           .length,
         "Searching Algorithms": patternKeys.filter((key) =>
@@ -358,18 +356,18 @@ const PatternManagement: React.FC = () => {
         duplicates: findDuplicatePatterns(patterns),
         incompletePatterns: findIncompletePatterns(patterns),
         namingIssues: validatePatternNames(patterns),
-        categoryIssues: validatePatternCategories(patterns, patternCategories),
+        categoryIssues: validatePatternCategories(patterns, categories),
         orderIssues: validateComponentOrder(patterns, originalOrder),
       };
 
       setDebugInfo({
         patternKeys,
-        patternMapping,
-        patternCategories,
+        patternMapping: patternNameMapping,
+        patternCategories: categories,
         validationResults,
       });
     }
-  }, [debugMode, patterns, originalOrder]);
+  }, [debugMode, patterns, findDuplicatePatterns, originalOrder]);
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
@@ -511,8 +509,23 @@ const PatternManagement: React.FC = () => {
   const validatePattern = (pattern: Pattern): string[] => {
     const errors: string[] = [];
 
+    // Debug log for pattern mapping
+    console.log("Pattern Mapping Debug:", {
+      patternName: pattern.name,
+      patternMapping: debugInfo.patternMapping[pattern.name],
+      patternCategories: debugInfo.patternCategories,
+      allPatterns: patterns.map((p) => p.name),
+    });
+
     // Check if pattern name exists in pattern types
-    if (!debugInfo.patternCategories[pattern.name]) {
+    const categoryKeys = Object.keys(debugInfo.patternCategories);
+    const patternExists = categoryKeys.some(
+      (category) =>
+        debugInfo.patternCategories[category] > 0 &&
+        patterns.some((p) => p.name === pattern.name)
+    );
+
+    if (!patternExists) {
       errors.push(`Pattern name "${pattern.name}" is not a valid pattern type`);
     }
 
@@ -1106,6 +1119,60 @@ const PatternManagement: React.FC = () => {
     }
   };
 
+  // Add function to fix pattern mappings
+  const fixPatternMappings = async () => {
+    try {
+      // Get current patterns
+      const currentPatterns = patterns.map((p) => p.name);
+
+      // Create new mapping object
+      const newMapping: Record<string, string> = {};
+
+      // Add existing mappings
+      Object.entries(patternNameMapping).forEach(([key, value]) => {
+        if (currentPatterns.includes(key)) {
+          newMapping[key] = value;
+        }
+      });
+
+      // Add missing patterns with default mapping
+      currentPatterns.forEach((pattern) => {
+        if (!newMapping[pattern]) {
+          newMapping[pattern] = pattern;
+        }
+      });
+
+      // Write to file
+      const fileContent = `export const patternNameMapping: Record<string, string> = ${JSON.stringify(
+        newMapping,
+        null,
+        2
+      )};`;
+
+      // Create a blob with the file content
+      const blob = new Blob([fileContent], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+
+      // Create a download link
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "pattern-mapping.ts";
+
+      // Trigger the download
+      document.body.appendChild(a);
+      a.click();
+
+      // Cleanup
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast.success("Pattern mappings updated successfully!");
+    } catch (error) {
+      console.error("Error updating pattern mappings:", error);
+      toast.error("Failed to update pattern mappings");
+    }
+  };
+
   return (
     <div className={themeClasses.container}>
       <div className="flex justify-between items-center mb-6">
@@ -1119,6 +1186,16 @@ const PatternManagement: React.FC = () => {
           >
             {debugMode ? "Debug Mode: ON" : "Debug Mode: OFF"}
           </button>
+          {debugMode && (
+            <button
+              onClick={fixPatternMappings}
+              className={`${themeClasses.button.secondary} ${
+                debugMode ? "bg-green-500" : ""
+              }`}
+            >
+              {debugMode ? "Fix Pattern Mappings" : "Fix Pattern Mappings"}
+            </button>
+          )}
           <div className={themeClasses.actionButtons}>
             <button
               onClick={() => setActiveTab("form")}

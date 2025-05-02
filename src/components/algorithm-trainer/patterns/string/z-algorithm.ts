@@ -1,13 +1,13 @@
 import { AlgorithmPattern } from "../../types";
 
 export const zalgorithmPattern: AlgorithmPattern = {
-  title: "Z-Algorithm",
+  title: "Z Algorithm",
   description:
     "A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).",
   timeComplexity: "O(n + m)",
   spaceComplexity: "O(n + m)",
   pseudocode: `
-Z-Algorithm steps:
+Z Algorithm steps:
 1. Concatenate pattern + special_char + text
 2. Build Z array:
    - If inside Z-box, use previous values

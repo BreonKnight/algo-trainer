@@ -8,6 +8,7 @@ import { linkedListPattern } from "./linked-list";
 import { queueImplementationPattern } from "./queue-implementation";
 import { stackImplementationPattern } from "./stack-implementation";
 import { unionFindPattern } from "./union-find";
+import { redBlackTreePattern } from "./red-black-tree";
 
 type DataStructurePatternKey =
   | "Monotonic Queue"
@@ -18,7 +19,8 @@ type DataStructurePatternKey =
   | "Linked List"
   | "Queue Implementation"
   | "Stack Implementation"
-  | "Union Find";
+  | "Union Find"
+  | "Red-Black Tree";
 
 export const dataStructurePatterns: Partial<
   Record<DataStructurePatternKey, AlgorithmPattern>
@@ -32,4 +34,5 @@ export const dataStructurePatterns: Partial<
   "Queue Implementation": queueImplementationPattern,
   "Stack Implementation": stackImplementationPattern,
   "Union Find": unionFindPattern,
+  "Red-Black Tree": redBlackTreePattern,
 };

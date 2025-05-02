@@ -5,6 +5,7 @@ import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3
 import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4";
 import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5";
 import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
+import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7";
 import { monsterHunterPatterns } from "./monsterHunterPatterns";
 import { PATTERN_KEYS } from "./types";
 import { algorithmPatterns } from "./patterns";
@@ -17,6 +18,7 @@ const allPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended4,
   ...monsterHunterPatternsExtended5,
   ...monsterHunterPatternsExtended6,
+  ...monsterHunterPatternsExtended7,
   ...monsterHunterPatterns,
 ]);
 
@@ -31,7 +33,7 @@ export const monsterHunterPatternsByCategory = {
     "Jump Search",
     "Exponential Search",
     "Interpolation Search",
-    "Fibonacci Search",
+    "Quickselect",
   ],
 
   Sorting: [
@@ -51,7 +53,7 @@ export const monsterHunterPatternsByCategory = {
     "Tree DP",
     "B Tree",
     "AVL Tree",
-    "Red Black Tree",
+    "Red-Black Tree",
     "Fenwick Tree",
     "Segment Tree",
   ],
@@ -111,7 +113,7 @@ export const monsterHunterPatternsByCategory = {
     "Extended Euclidean",
     "Chinese Remainder Theorem",
     "Sieve of Eratosthenes",
-    "Miller-Rabin Algorithm",
+    "Miller-Rabin Primality Test",
   ],
 
   "Bit Manipulation": ["Bit Manipulation"],
