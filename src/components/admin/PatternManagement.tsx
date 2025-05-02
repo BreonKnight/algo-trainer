@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Pattern,
   PatternFormData,
@@ -17,6 +17,7 @@ import {
   DroppableProvided,
   DraggableProvided,
 } from "react-beautiful-dnd";
+import { patternNameMapping } from "../../lib/pseudocode/utils/pattern-mapping";
 
 type FormStep =
   | "basic"
@@ -26,6 +27,14 @@ type FormStep =
   | "preview";
 
 type SortField = "name" | "category" | "timeComplexity" | "spaceComplexity";
+type SortOrder = "asc" | "desc";
+
+// Add new types for advanced filtering
+type FilterOption = {
+  field: string;
+  value: string;
+  operator: "equals" | "contains" | "startsWith" | "endsWith";
+};
 
 const PatternManagement: React.FC = () => {
   const {} = useTheme();
@@ -33,6 +42,32 @@ const PatternManagement: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState<"form" | "list">("form");
+  const [debugMode, setDebugMode] = useState(false);
+  const [debugInfo, setDebugInfo] = useState<{
+    patternKeys: string[];
+    patternMapping: Record<string, string>;
+    patternCategories: Record<string, number>;
+    validationResults: {
+      duplicates: Array<{
+        pattern1: string;
+        pattern2: string;
+        similarity: number;
+      }>;
+      incompletePatterns: string[];
+      namingIssues: Array<{ pattern: string; issue: string }>;
+      categoryIssues: Array<{ pattern: string; issue: string }>;
+    };
+  }>({
+    patternKeys: [],
+    patternMapping: {},
+    patternCategories: {},
+    validationResults: {
+      duplicates: [],
+      incompletePatterns: [],
+      namingIssues: [],
+      categoryIssues: [],
+    },
+  });
   const [formData, setFormData] = useState<PatternFormData>({
     name: "",
     category: "",
@@ -63,6 +98,18 @@ const PatternManagement: React.FC = () => {
   const [selectedPatterns, setSelectedPatterns] = useState<Set<string>>(
     new Set()
   );
+  const [activeFilters, setActiveFilters] = useState<FilterOption[]>([]);
+  const [sortConfig, setSortConfig] = useState<{
+    field: SortField;
+    order: SortOrder;
+  }>({ field: "name", order: "asc" });
+  const [savedViews, setSavedViews] = useState<
+    {
+      name: string;
+      filters: FilterOption[];
+      sortConfig: { field: SortField; order: SortOrder };
+    }[]
+  >([]);
 
   // Load existing patterns on component mount
   useEffect(() => {
@@ -79,6 +126,256 @@ const PatternManagement: React.FC = () => {
     };
     loadPatterns();
   }, []);
+
+  // Add debug information gathering
+  useEffect(() => {
+    if (debugMode) {
+      // Get all pattern keys from the patterns array
+      const patternKeys = patterns.map((p) => p.name);
+
+      // Get pattern mapping from the pattern-mapping.ts file
+      const patternMapping = patternNameMapping;
+
+      // Get pattern categories and their counts
+      const patternCategories = {
+        "Sorting Algorithms": patternKeys.filter((key) => key.includes("Sort"))
+          .length,
+        "Searching Algorithms": patternKeys.filter((key) =>
+          key.includes("Search")
+        ).length,
+        "Graph Algorithms": patternKeys.filter(
+          (key) =>
+            key.includes("Graph") ||
+            key === "BFS" ||
+            key === "DFS" ||
+            key === "Kruskal" ||
+            key === "Prim" ||
+            key === "Bellman-Ford" ||
+            key === "Floyd-Warshall" ||
+            key === "A* Search" ||
+            key === "Network Flow" ||
+            key === "Maximum Bipartite Matching" ||
+            key === "Topological Sort" ||
+            key === "Articulation Points"
+        ).length,
+        "Dynamic Programming": patternKeys.filter(
+          (key) =>
+            key.includes("DP") ||
+            key === "Kadane's Algorithm" ||
+            key.includes("Matrix Chain") ||
+            key.includes("Matrix Exponentiation")
+        ).length,
+        "Matrix Algorithms": patternKeys.filter(
+          (key) =>
+            key.includes("Matrix") ||
+            key === "Grid Traversal" ||
+            key === "Rotate Matrix"
+        ).length,
+        "Number Theory": patternKeys.filter(
+          (key) =>
+            key === "Extended Euclidean" ||
+            key === "Chinese Remainder Theorem" ||
+            key === "Sieve of Eratosthenes" ||
+            key === "Prime Factorization" ||
+            key === "Miller-Rabin Primality Test"
+        ).length,
+        Techniques: patternKeys.filter(
+          (key) =>
+            key === "Greedy" ||
+            key.includes("Greedy") ||
+            key === "Backtracking" ||
+            key === "Divide and Conquer" ||
+            key === "Recursion" ||
+            key === "Bit Manipulation" ||
+            key === "Prefix Sum"
+        ).length,
+        "Data Structures": patternKeys.filter(
+          (key) =>
+            key.includes("Tree") ||
+            key.includes("Stack") ||
+            key.includes("Queue") ||
+            key.includes("List") ||
+            key.includes("Heap") ||
+            key.includes("Hash")
+        ).length,
+        "String Algorithms": patternKeys.filter(
+          (key) =>
+            key.includes("String") ||
+            key === "Suffix Tree" ||
+            key === "Suffix Array" ||
+            key.includes("KMP") ||
+            key.includes("Rabin-Karp")
+        ).length,
+      };
+
+      // Run validation checks
+      const validationResults = {
+        duplicates: findDuplicatePatterns(patterns),
+        incompletePatterns: findIncompletePatterns(patterns),
+        namingIssues: validatePatternNames(patterns),
+        categoryIssues: validatePatternCategories(patterns),
+      };
+
+      setDebugInfo({
+        patternKeys,
+        patternMapping,
+        patternCategories,
+        validationResults,
+      });
+    }
+  }, [debugMode, patterns]);
+
+  // Validation helper functions
+  const findDuplicatePatterns = (
+    patterns: Pattern[]
+  ): Array<{
+    pattern1: string;
+    pattern2: string;
+    similarity: number;
+  }> => {
+    const duplicates: Array<{
+      pattern1: string;
+      pattern2: string;
+      similarity: number;
+    }> = [];
+
+    for (let i = 0; i < patterns.length; i++) {
+      for (let j = i + 1; j < patterns.length; j++) {
+        const nameSimilarity = calculateStringSimilarity(
+          patterns[i].name,
+          patterns[j].name
+        );
+        const descSimilarity = calculateStringSimilarity(
+          patterns[i].description,
+          patterns[j].description
+        );
+
+        // Calculate weighted similarity
+        const similarity =
+          nameSimilarity * 0.6 + // Name similarity is more important
+          descSimilarity * 0.4; // Description similarity is less important
+
+        if (similarity > 0.7) {
+          // 70% similarity threshold
+          duplicates.push({
+            pattern1: patterns[i].name,
+            pattern2: patterns[j].name,
+            similarity: Math.round(similarity * 100),
+          });
+        }
+      }
+    }
+
+    // Sort by total similarity
+    return duplicates.sort((a, b) => b.similarity - a.similarity);
+  };
+
+  const findIncompletePatterns = (patterns: Pattern[]): string[] => {
+    return patterns
+      .filter(
+        (pattern) =>
+          !pattern.name ||
+          !pattern.category ||
+          !pattern.description ||
+          !pattern.implementation ||
+          pattern.testCases.length === 0
+      )
+      .map((pattern) => pattern.name);
+  };
+
+  const validatePatternNames = (
+    patterns: Pattern[]
+  ): Array<{ pattern: string; issue: string }> => {
+    const issues: Array<{ pattern: string; issue: string }> = [];
+
+    patterns.forEach((pattern) => {
+      if (!pattern.name) {
+        issues.push({
+          pattern: "Unnamed Pattern",
+          issue: "Pattern has no name",
+        });
+        return;
+      }
+
+      if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
+        issues.push({
+          pattern: pattern.name,
+          issue:
+            "Name should start with capital letter and contain only letters and spaces",
+        });
+      }
+
+      if (pattern.name.length > 50) {
+        issues.push({
+          pattern: pattern.name,
+          issue: "Name is too long (max 50 characters)",
+        });
+      }
+    });
+
+    return issues;
+  };
+
+  const validatePatternCategories = (
+    patterns: Pattern[]
+  ): Array<{ pattern: string; issue: string }> => {
+    const validCategories = Object.keys(debugInfo.patternCategories);
+    return patterns
+      .filter(
+        (pattern) =>
+          !validCategories.some((category) => pattern.category === category)
+      )
+      .map((pattern) => ({
+        pattern: pattern.name,
+        issue: `Invalid category: ${pattern.category}`,
+      }));
+  };
+
+  const calculateSimilarity = (
+    pattern1: Pattern,
+    pattern2: Pattern
+  ): number => {
+    // Simple similarity calculation based on name and description
+    const nameSimilarity = calculateStringSimilarity(
+      pattern1.name,
+      pattern2.name
+    );
+    const descSimilarity = calculateStringSimilarity(
+      pattern1.description,
+      pattern2.description
+    );
+    return (nameSimilarity + descSimilarity) / 2;
+  };
+
+  const calculateStringSimilarity = (str1: string, str2: string): number => {
+    if (!str1 || !str2) return 0;
+    const longer = str1.length > str2.length ? str1 : str2;
+    const shorter = str1.length > str2.length ? str2 : str1;
+    const longerLength = longer.length;
+    if (longerLength === 0) return 1.0;
+    return (longerLength - editDistance(longer, shorter)) / longerLength;
+  };
+
+  const editDistance = (s1: string, s2: string): number => {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+    const costs = [];
+    for (let i = 0; i <= s1.length; i++) {
+      let lastValue = i;
+      for (let j = 0; j <= s2.length; j++) {
+        if (i === 0) costs[j] = j;
+        else if (j > 0) {
+          let newValue = costs[j - 1];
+          if (s1.charAt(i - 1) !== s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+      if (i > 0) costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
+  };
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
@@ -217,6 +514,34 @@ const PatternManagement: React.FC = () => {
     }
   };
 
+  const validatePattern = (pattern: Pattern): string[] => {
+    const errors: string[] = [];
+
+    // Check if pattern name exists in pattern types
+    if (!debugInfo.patternCategories[pattern.name]) {
+      errors.push(`Pattern name "${pattern.name}" is not a valid pattern type`);
+    }
+
+    // Check if pattern name exists in pattern mapping
+    if (!debugInfo.patternMapping[pattern.name]) {
+      errors.push(
+        `Pattern name "${pattern.name}" is not mapped in pattern-mapping.ts`
+      );
+    }
+
+    // Check for duplicate pattern names
+    const duplicateCount = patterns.filter(
+      (p) => p.name === pattern.name
+    ).length;
+    if (duplicateCount > 1) {
+      errors.push(
+        `Pattern name "${pattern.name}" appears ${duplicateCount} times in the patterns array`
+      );
+    }
+
+    return errors;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -228,12 +553,31 @@ const PatternManagement: React.FC = () => {
     try {
       setIsLoading(true);
 
+      const newPattern: Pattern = {
+        id: Date.now().toString(),
+        ...formData,
+      };
+
+      // Validate pattern
+      const validationErrors = validatePattern(newPattern);
+      if (validationErrors.length > 0) {
+        toast.error(
+          <div>
+            <p className="font-bold">Pattern validation failed:</p>
+            <ul className="list-disc pl-4">
+              {validationErrors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>,
+          { duration: 5000 }
+        );
+        return;
+      }
+
       // Check for duplicates before saving
       const { exactMatches, similarMatches } =
-        await patternManagementService.checkForDuplicates(
-          { id: "", ...formData },
-          patterns
-        );
+        await patternManagementService.checkForDuplicates(newPattern, patterns);
 
       if (exactMatches.length > 0) {
         toast.error("An exact duplicate of this pattern already exists!");
@@ -246,11 +590,6 @@ const PatternManagement: React.FC = () => {
         );
         if (!proceed) return;
       }
-
-      const newPattern: Pattern = {
-        id: Date.now().toString(),
-        ...formData,
-      };
 
       // Save to backend
       await patternManagementService.savePattern(newPattern);
@@ -530,56 +869,575 @@ const PatternManagement: React.FC = () => {
     reader.readAsText(file);
   };
 
-  const sortedAndFilteredPatterns = patterns
-    .filter((pattern) => {
-      const matchesSearch =
-        (pattern.name?.toLowerCase() ?? "").includes(
-          searchQuery.toLowerCase()
-        ) ||
-        (pattern.category?.toLowerCase() ?? "").includes(
-          searchQuery.toLowerCase()
-        ) ||
-        (pattern.description?.toLowerCase() ?? "").includes(
-          searchQuery.toLowerCase()
-        );
-      const matchesCategory =
-        selectedCategory === "all" || pattern.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    })
-    .sort((a, b) => {
-      const aValue = a[sortBy];
-      const bValue = b[sortBy];
-      const modifier = sortOrder === "asc" ? 1 : -1;
-      return String(aValue).localeCompare(String(bValue)) * modifier;
+  // Add new functions for filtering and sorting
+  const addFilter = (filter: FilterOption) => {
+    setActiveFilters((prev) => [...prev, filter]);
+  };
+
+  const removeFilter = (index: number) => {
+    setActiveFilters((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const applyFilters = (patterns: Pattern[]) => {
+    return patterns.filter((pattern) => {
+      return activeFilters.every((filter) => {
+        const value =
+          pattern[filter.field as keyof Pattern]?.toString().toLowerCase() ||
+          "";
+        const filterValue = filter.value.toLowerCase();
+
+        switch (filter.operator) {
+          case "equals":
+            return value === filterValue;
+          case "contains":
+            return value.includes(filterValue);
+          case "startsWith":
+            return value.startsWith(filterValue);
+          case "endsWith":
+            return value.endsWith(filterValue);
+          default:
+            return true;
+        }
+      });
     });
+  };
+
+  const saveCurrentView = (name: string) => {
+    setSavedViews((prev) => [
+      ...prev,
+      {
+        name,
+        filters: [...activeFilters],
+        sortConfig: { ...sortConfig },
+      },
+    ]);
+  };
+
+  const loadSavedView = (index: number) => {
+    const view = savedViews[index];
+    setActiveFilters(view.filters);
+    setSortConfig(view.sortConfig);
+  };
+
+  // Update the sortedAndFilteredPatterns calculation
+  const sortedAndFilteredPatterns = useMemo(() => {
+    let filtered = applyFilters(patterns);
+
+    return filtered.sort((a, b) => {
+      const aValue = a[sortConfig.field];
+      const bValue = b[sortConfig.field];
+      const modifier = sortConfig.order === "asc" ? 1 : -1;
+
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return aValue.localeCompare(bValue) * modifier;
+      }
+      return 0;
+    });
+  }, [patterns, activeFilters, sortConfig]);
+
+  const PatternListItem: React.FC<{ pattern: Pattern }> = ({ pattern }) => {
+    const validationErrors = validatePattern(pattern);
+    const hasErrors = validationErrors.length > 0;
+
+    return (
+      <div className={themeClasses.patternListItem}>
+        <div className={themeClasses.patternCard}>
+          <div className={themeClasses.patternHeader}>
+            <div className="flex items-center gap-4">
+              <input
+                type="checkbox"
+                checked={selectedPatterns.has(pattern.id)}
+                onChange={() => togglePatternSelection(pattern.id)}
+                className={themeClasses.checkbox}
+              />
+              <div>
+                <h3
+                  className={`${themeClasses.patternListTitle} ${
+                    hasErrors ? "text-red-500" : ""
+                  }`}
+                >
+                  {pattern.name}
+                </h3>
+                {hasErrors && (
+                  <div className="mt-1 text-sm text-red-500">
+                    <ul className="list-disc pl-4">
+                      {validationErrors.map((error, index) => (
+                        <li key={index}>{error}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <p className={themeClasses.patternListMeta}>
+                  Category: {pattern.category}
+                </p>
+                <p className={themeClasses.patternListMeta}>
+                  Time: {pattern.timeComplexity} | Space:{" "}
+                  {pattern.spaceComplexity}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className={themeClasses.patternListActions}>
+            <button
+              onClick={() => handleCopyPattern(pattern)}
+              className={themeClasses.button.secondary}
+            >
+              Copy
+            </button>
+            <button
+              onClick={() => handleEditPattern(pattern)}
+              className={themeClasses.button.primary}
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDeletePattern(pattern.id)}
+              className={themeClasses.button.danger}
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => togglePatternExpansion(pattern.id)}
+              className={themeClasses.button.secondary}
+            >
+              {expandedPatterns.has(pattern.id) ? "Collapse" : "Expand"}
+            </button>
+          </div>
+          {expandedPatterns.has(pattern.id) && (
+            <div className={themeClasses.patternContent}>
+              <p className="text-gray-700 dark:text-gray-300">
+                {pattern.description}
+              </p>
+              <div className={themeClasses.grid}>
+                <div className={themeClasses.patternSection}>
+                  <h4 className={themeClasses.heading3}>Process Steps</h4>
+                  <ul className="space-y-2">
+                    {pattern.process.map((step, index) => (
+                      <li key={index} className={themeClasses.processStep}>
+                        <span className={themeClasses.processStepBullet}>
+                          •
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className={themeClasses.patternSection}>
+                  <h4 className={themeClasses.heading3}>Test Cases</h4>
+                  <ul className="space-y-3">
+                    {pattern.testCases.map((testCase, index) => (
+                      <li key={index} className={themeClasses.testCaseCard}>
+                        <p className="font-medium text-gray-900 dark:text-white">
+                          {testCase.name}
+                        </p>
+                        <div className={themeClasses.patternSubsection}>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Input: {testCase.input}
+                          </p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Expected Output: {testCase.expectedOutput}
+                          </p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Tip: {testCase.monsterHunterTip}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className={themeClasses.patternSection}>
+                <h4 className={themeClasses.heading3}>Implementation</h4>
+                <div className={themeClasses.codeBlock}>
+                  <SyntaxHighlighter
+                    language="typescript"
+                    style={vscDarkPlus}
+                    customStyle={{
+                      margin: 0,
+                      borderRadius: "0.5rem",
+                      padding: "1rem",
+                    }}
+                  >
+                    {pattern.implementation}
+                  </SyntaxHighlighter>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  // Add this function to handle file writing
+  const writePatternsToFile = async (patterns: Pattern[]) => {
+    try {
+      // Create a blob with the patterns data
+      const blob = new Blob([JSON.stringify(patterns, null, 2)], {
+        type: "application/json",
+      });
+
+      // Create a download link
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "patterns.json";
+
+      // Trigger the download
+      document.body.appendChild(a);
+      a.click();
+
+      // Cleanup
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast.success("Patterns exported successfully!");
+    } catch (error) {
+      console.error("Error writing patterns to file:", error);
+      toast.error("Failed to export patterns");
+    }
+  };
 
   return (
     <div className={themeClasses.container}>
       <div className="flex justify-between items-center mb-6">
         <h1 className={themeClasses.heading}>Pattern Management</h1>
-        <div className={themeClasses.actionButtons}>
+        <div className="flex gap-4">
           <button
-            onClick={() => setActiveTab("form")}
-            className={`${themeClasses.tabButton} ${
-              activeTab === "form"
-                ? themeClasses.activeTab
-                : themeClasses.inactiveTab
+            onClick={() => setDebugMode(!debugMode)}
+            className={`${themeClasses.button.secondary} ${
+              debugMode ? "bg-yellow-500" : ""
             }`}
           >
-            Add/Edit Pattern
+            {debugMode ? "Debug Mode: ON" : "Debug Mode: OFF"}
           </button>
-          <button
-            onClick={() => setActiveTab("list")}
-            className={`${themeClasses.tabButton} ${
-              activeTab === "list"
-                ? themeClasses.activeTab
-                : themeClasses.inactiveTab
-            }`}
-          >
-            View Patterns
-          </button>
+          <div className={themeClasses.actionButtons}>
+            <button
+              onClick={() => setActiveTab("form")}
+              className={`${themeClasses.tabButton} ${
+                activeTab === "form"
+                  ? themeClasses.activeTab
+                  : themeClasses.inactiveTab
+              }`}
+            >
+              Add/Edit Pattern
+            </button>
+            <button
+              onClick={() => setActiveTab("list")}
+              className={`${themeClasses.tabButton} ${
+                activeTab === "list"
+                  ? themeClasses.activeTab
+                  : themeClasses.inactiveTab
+              }`}
+            >
+              View Patterns
+            </button>
+          </div>
         </div>
       </div>
+
+      {debugMode && (
+        <div className="mb-6 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              Debug Information
+            </h3>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => writePatternsToFile(patterns)}
+                className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+              >
+                Export Patterns
+              </button>
+              <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                Debug Mode
+              </span>
+              <button
+                onClick={() => setDebugMode(false)}
+                className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+              <div className="flex items-center gap-2 mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-blue-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM8.03 8l-1 4h2.938l1-4H8.031z" />
+                </svg>
+                <h4 className="font-medium text-gray-900 dark:text-white">
+                  Pattern Keys
+                </h4>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 overflow-auto max-h-48">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Pattern Keys
+                </div>
+                <div className="space-y-1">
+                  {debugInfo.patternKeys.map((key, index) => (
+                    <div
+                      key={index}
+                      className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded text-blue-600 dark:text-blue-400"
+                    >
+                      {key}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+              <div className="flex items-center gap-2 mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-purple-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <h4 className="font-medium text-gray-900 dark:text-white">
+                  Pattern Mapping
+                </h4>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 overflow-auto max-h-48">
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Pattern Key
+                  </div>
+                  <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Mapped Name
+                  </div>
+                </div>
+                <div className="mt-2 space-y-1">
+                  {Object.entries(debugInfo.patternMapping).map(
+                    ([key, value], index) => (
+                      <div
+                        key={index}
+                        className="grid grid-cols-2 gap-2 text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                      >
+                        <div className="text-blue-600 dark:text-blue-400 font-medium">
+                          {key}
+                        </div>
+                        <div className="text-gray-700 dark:text-gray-300">
+                          {value}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+              <div className="flex items-center gap-2 mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-green-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <h4 className="font-medium text-gray-900 dark:text-white">
+                  Pattern Categories
+                </h4>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 overflow-auto max-h-48">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Pattern Categories
+                </div>
+                <div className="space-y-1">
+                  {Object.entries(debugInfo.patternCategories).map(
+                    ([category, count], index) => (
+                      <div
+                        key={index}
+                        className="flex justify-between items-center text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                      >
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {category}
+                        </span>
+                        <span className="text-blue-600 dark:text-blue-400 font-medium">
+                          {count}
+                        </span>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl">
+              <div className="flex items-center gap-2 mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-green-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <h4 className="font-medium text-gray-900 dark:text-white">
+                  Pattern Validation Tools
+                </h4>
+              </div>
+
+              {/* Duplicate Patterns */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Duplicate Patterns (
+                  {debugInfo.validationResults.duplicates.length})
+                </div>
+                <div className="space-y-2">
+                  {debugInfo.validationResults.duplicates.map(
+                    (duplicate, index) => (
+                      <div
+                        key={index}
+                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                      >
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-700 dark:text-gray-300">
+                            {duplicate.pattern1} ↔ {duplicate.pattern2}
+                          </span>
+                          <span
+                            className={`${
+                              duplicate.similarity > 80
+                                ? "text-red-500"
+                                : "text-yellow-500"
+                            } font-medium`}
+                          >
+                            {duplicate.similarity}% similar
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* Incomplete Patterns */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Incomplete Patterns (
+                  {debugInfo.validationResults.incompletePatterns.length})
+                </div>
+                <div className="space-y-1">
+                  {debugInfo.validationResults.incompletePatterns.map(
+                    (pattern, index) => (
+                      <div
+                        key={index}
+                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded text-red-500 dark:text-red-400"
+                      >
+                        {pattern}
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* Naming Issues */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Naming Issues (
+                  {debugInfo.validationResults.namingIssues.length})
+                </div>
+                <div className="space-y-2">
+                  {debugInfo.validationResults.namingIssues.map(
+                    (issue, index) => (
+                      <div
+                        key={index}
+                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                      >
+                        <div className="text-gray-700 dark:text-gray-300">
+                          {issue.pattern}
+                        </div>
+                        <div className="text-red-500 dark:text-red-400 text-xs mt-1">
+                          {issue.issue}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* Category Issues */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Category Issues (
+                  {debugInfo.validationResults.categoryIssues.length})
+                </div>
+                <div className="space-y-2">
+                  {debugInfo.validationResults.categoryIssues.map(
+                    (issue, index) => (
+                      <div
+                        key={index}
+                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                      >
+                        <div className="text-gray-700 dark:text-gray-300">
+                          {issue.pattern}
+                        </div>
+                        <div className="text-red-500 dark:text-red-400 text-xs mt-1">
+                          {issue.issue}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>
+                Debug information is updated in real-time as patterns change
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {activeTab === "form" ? (
         <>
@@ -1184,6 +2042,185 @@ const PatternManagement: React.FC = () => {
             </div>
           </div>
 
+          {/* Add Filter Controls */}
+          <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Advanced Filters
+              </h3>
+              <button
+                onClick={() => setActiveFilters([])}
+                className="px-3 py-1 text-sm text-red-500 hover:text-red-600"
+              >
+                Clear All
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {activeFilters.map((filter, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <select
+                    value={filter.field}
+                    onChange={(e) => {
+                      const newFilters = [...activeFilters];
+                      newFilters[index].field = e.target.value;
+                      setActiveFilters(newFilters);
+                    }}
+                    className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
+                  >
+                    <option value="name">Name</option>
+                    <option value="category">Category</option>
+                    <option value="timeComplexity">Time Complexity</option>
+                    <option value="spaceComplexity">Space Complexity</option>
+                  </select>
+
+                  <select
+                    value={filter.operator}
+                    onChange={(e) => {
+                      const newFilters = [...activeFilters];
+                      newFilters[index].operator = e.target
+                        .value as FilterOption["operator"];
+                      setActiveFilters(newFilters);
+                    }}
+                    className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
+                  >
+                    <option value="equals">Equals</option>
+                    <option value="contains">Contains</option>
+                    <option value="startsWith">Starts With</option>
+                    <option value="endsWith">Ends With</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    value={filter.value}
+                    onChange={(e) => {
+                      const newFilters = [...activeFilters];
+                      newFilters[index].value = e.target.value;
+                      setActiveFilters(newFilters);
+                    }}
+                    className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600 flex-1"
+                    placeholder="Enter value..."
+                  />
+
+                  <button
+                    onClick={() => removeFilter(index)}
+                    className="p-1 text-red-500 hover:text-red-600"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+
+              <button
+                onClick={() =>
+                  addFilter({ field: "name", value: "", operator: "contains" })
+                }
+                className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
+              >
+                Add Filter
+              </button>
+            </div>
+          </div>
+
+          {/* Add Sort Controls */}
+          <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Sort Configuration
+              </h3>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <select
+                value={sortConfig.field}
+                onChange={(e) =>
+                  setSortConfig((prev) => ({
+                    ...prev,
+                    field: e.target.value as SortField,
+                  }))
+                }
+                className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
+              >
+                <option value="name">Name</option>
+                <option value="category">Category</option>
+                <option value="timeComplexity">Time Complexity</option>
+                <option value="spaceComplexity">Space Complexity</option>
+              </select>
+
+              <select
+                value={sortConfig.order}
+                onChange={(e) =>
+                  setSortConfig((prev) => ({
+                    ...prev,
+                    order: e.target.value as SortOrder,
+                  }))
+                }
+                className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
+              >
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Add Saved Views */}
+          <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Saved Views
+              </h3>
+            </div>
+
+            <div className="space-y-2">
+              {savedViews.map((view, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {view.name}
+                  </span>
+                  <button
+                    onClick={() => loadSavedView(index)}
+                    className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    Load
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSavedViews((prev) =>
+                        prev.filter((_, i) => i !== index)
+                      );
+                    }}
+                    className="p-1 text-red-500 hover:text-red-600"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+
+              <div className="flex items-center gap-2 mt-4">
+                <input
+                  type="text"
+                  id="viewName"
+                  placeholder="View name..."
+                  className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
+                />
+                <button
+                  onClick={() => {
+                    const input = document.getElementById(
+                      "viewName"
+                    ) as HTMLInputElement;
+                    if (input.value) {
+                      saveCurrentView(input.value);
+                      input.value = "";
+                    }
+                  }}
+                  className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
+                >
+                  Save Current View
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Patterns List Section */}
           <div className={themeClasses.patternList + " mt-8"}>
             {isLoading ? (
@@ -1211,137 +2248,7 @@ const PatternManagement: React.FC = () => {
               </div>
             ) : (
               sortedAndFilteredPatterns.map((pattern) => (
-                <div key={pattern.id} className={themeClasses.patternListItem}>
-                  <div className={themeClasses.patternCard}>
-                    <div className={themeClasses.patternHeader}>
-                      <div className="flex items-center gap-4">
-                        <input
-                          type="checkbox"
-                          checked={selectedPatterns.has(pattern.id)}
-                          onChange={() => togglePatternSelection(pattern.id)}
-                          className={themeClasses.checkbox}
-                        />
-                        <div>
-                          <h3 className={themeClasses.patternListTitle}>
-                            {pattern.name}
-                          </h3>
-                          <p className={themeClasses.patternListMeta}>
-                            Category: {pattern.category}
-                          </p>
-                          <p className={themeClasses.patternListMeta}>
-                            Time: {pattern.timeComplexity} | Space:{" "}
-                            {pattern.spaceComplexity}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={themeClasses.patternListActions}>
-                      <button
-                        onClick={() => handleCopyPattern(pattern)}
-                        className={themeClasses.button.secondary}
-                      >
-                        Copy
-                      </button>
-                      <button
-                        onClick={() => handleEditPattern(pattern)}
-                        className={themeClasses.button.primary}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDeletePattern(pattern.id)}
-                        className={themeClasses.button.danger}
-                      >
-                        Delete
-                      </button>
-                      <button
-                        onClick={() => togglePatternExpansion(pattern.id)}
-                        className={themeClasses.button.secondary}
-                      >
-                        {expandedPatterns.has(pattern.id)
-                          ? "Collapse"
-                          : "Expand"}
-                      </button>
-                    </div>
-                    {expandedPatterns.has(pattern.id) && (
-                      <div className={themeClasses.patternContent}>
-                        <p className="text-gray-700 dark:text-gray-300">
-                          {pattern.description}
-                        </p>
-                        <div className={themeClasses.grid}>
-                          <div className={themeClasses.patternSection}>
-                            <h4 className={themeClasses.heading3}>
-                              Process Steps
-                            </h4>
-                            <ul className="space-y-2">
-                              {pattern.process.map((step, index) => (
-                                <li
-                                  key={index}
-                                  className={themeClasses.processStep}
-                                >
-                                  <span
-                                    className={themeClasses.processStepBullet}
-                                  >
-                                    •
-                                  </span>
-                                  <span>{step}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className={themeClasses.patternSection}>
-                            <h4 className={themeClasses.heading3}>
-                              Test Cases
-                            </h4>
-                            <ul className="space-y-3">
-                              {pattern.testCases.map((testCase, index) => (
-                                <li
-                                  key={index}
-                                  className={themeClasses.testCaseCard}
-                                >
-                                  <p className="font-medium text-gray-900 dark:text-white">
-                                    {testCase.name}
-                                  </p>
-                                  <div
-                                    className={themeClasses.patternSubsection}
-                                  >
-                                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                                      Input: {testCase.input}
-                                    </p>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                                      Expected Output: {testCase.expectedOutput}
-                                    </p>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                                      Tip: {testCase.monsterHunterTip}
-                                    </p>
-                                  </div>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                        <div className={themeClasses.patternSection}>
-                          <h4 className={themeClasses.heading3}>
-                            Implementation
-                          </h4>
-                          <div className={themeClasses.codeBlock}>
-                            <SyntaxHighlighter
-                              language="typescript"
-                              style={vscDarkPlus}
-                              customStyle={{
-                                margin: 0,
-                                borderRadius: "0.5rem",
-                                padding: "1rem",
-                              }}
-                            >
-                              {pattern.implementation}
-                            </SyntaxHighlighter>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <PatternListItem key={pattern.id} pattern={pattern} />
               ))
             )}
           </div>
