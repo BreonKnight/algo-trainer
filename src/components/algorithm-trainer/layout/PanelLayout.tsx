@@ -145,11 +145,7 @@ export function PanelLayout({
           strategy={verticalListSortingStrategy}
         >
           <div
-            className="grid grid-cols-1 xl:grid-cols-3 gap-4 w-full"
-            style={{
-              gridTemplateColumns:
-                "minmax(300px, 400px) minmax(400px, 1fr) minmax(300px, 400px)",
-            }}
+            className="flex flex-col gap-4 w-full"
             ref={(el) => {
               if (el) {
                 validatePanelSizes(el.clientWidth);
@@ -161,9 +157,7 @@ export function PanelLayout({
                 <div
                   className="h-[549px] w-full"
                   style={{
-                    minWidth: `${
-                      MIN_PANEL_WIDTH[panel as keyof typeof MIN_PANEL_WIDTH]
-                    }px`,
+                    minWidth: "100%",
                     maxWidth: "100%",
                     width: "100%",
                   }}

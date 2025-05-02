@@ -28,6 +28,7 @@ export function SortablePanel({ id, children }: SortablePanelProps) {
     zIndex: isDragging ? 50 : "auto",
     touchAction: "none",
     position: "relative" as const,
+    width: "100%",
   };
   return (
     <div
@@ -38,7 +39,8 @@ export function SortablePanel({ id, children }: SortablePanelProps) {
         "group relative",
         "hover:ring-2 hover:ring-accent/50",
         "transition-all duration-200",
-        "isolate"
+        "isolate",
+        "w-full"
       )}
     >
       {/* Drag handle for both mobile and desktop */}
@@ -46,10 +48,11 @@ export function SortablePanel({ id, children }: SortablePanelProps) {
         {...listeners}
         className={cn(
           "absolute -left-2 top-1/2 -translate-y-1/2",
-          "p-1.5 rounded-full cursor-grab",
-          "opacity-0 group-hover:opacity-100 transition-opacity",
+          "p-1.5 rounded-full cursor-grab active:cursor-grabbing",
+          "opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity",
           "hover:bg-secondary/20",
           "z-10",
+          "touch-manipulation",
           theme === "nord" ? "text-white/70" : "text-secondary"
         )}
       >

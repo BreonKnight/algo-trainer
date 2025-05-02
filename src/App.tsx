@@ -1,14 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
+import { Routes, Route, Link } from "react-router-dom";
 import { ProgressView } from "./components/progress/ProgressView";
 import { TutorialView } from "./components/tutorials/TutorialView";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
+import { AlgorithmVisualizer } from "./components/algorithm-trainer";
+import { PatternKey } from "./components/algorithm-trainer/types";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { useTheme } from "./components/theme/theme-context";
 import PatternManagement from "./components/admin/PatternManagement";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import { checkMissingPatterns } from "./components/algorithm-trainer/monsterHunterExplanations";
+import AlgorithmComparisonPage from "./app/algorithm-comparison/AlgorithmComparisonPage";
+import HomePage from "./app/HomePage";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -35,6 +39,8 @@ function AppContent() {
   const linkClasses = isDarkTheme
     ? "text-sm hover:text-main/80"
     : "text-sm hover:text-accent-foreground/80";
+
+  const algorithms: PatternKey[] = ["Bubble Sort", "Quick Sort"];
 
   return (
     <div className="min-h-screen w-full bg-main">
@@ -81,10 +87,25 @@ function AppContent() {
       )}
 
       <Routes>
-        <Route path="/" element={<AlgorithmTrainer />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/progress" element={<ProgressView />} />
         <Route path="/tutorials" element={<TutorialView />} />
         <Route path="/python-techniques" element={<PythonTechniques />} />
+        <Route
+          path="/visualizer"
+          element={
+            <div className="container mx-auto p-4">
+              <AlgorithmVisualizer
+                algorithm="Bubble Sort"
+                visualizationType="sorting"
+              />
+            </div>
+          }
+        />
+        <Route
+          path="/algorithm-comparison"
+          element={<AlgorithmComparisonPage />}
+        />
         {import.meta.env.DEV && (
           <Route path="/admin/patterns" element={<PatternManagement />} />
         )}
@@ -95,11 +116,15 @@ function AppContent() {
 }
 
 function App() {
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      checkMissingPatterns();
+    }
+  }, []);
+
   return (
     <ThemeProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <AppContent />
     </ThemeProvider>
   );
 }
