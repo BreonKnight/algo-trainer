@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyHuffmanCodingPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyHuffmanCodingPattern = () => (
       compression
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Huffman Coding
+    <PseudocodeDisplay code={`// Standard Huffman Coding
 class Node:
     def __init__(self, symbol=None, freq=0, left=None, right=None):
         self.symbol = symbol
@@ -78,9 +77,7 @@ def build_canonical_codes(lengths):
         code += 1
         prev_length = length
     
-    return codes`}
-      </pre>
-    </div>
+    return codes`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

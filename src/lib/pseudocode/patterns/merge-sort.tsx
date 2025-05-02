@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MergeSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MergeSortPattern = () => (
       sorting of arrays
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Main merge sort function
+    <PseudocodeDisplay code={`// Main merge sort function
 MERGE-SORT(array, start, end):
     # If array has more than one element
     if start < end:
@@ -58,9 +57,7 @@ MERGE(array, start, middle, end):
             i = i + 1
         else:
             array[k] = right[j]
-            j = j + 1`}
-      </pre>
-    </div>
+            j = j + 1`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StackImplementationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const StackImplementationPattern = () => (
       structure
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`STACK-EMPTY(S)
+    <PseudocodeDisplay code={`STACK-EMPTY(S)
     if S.top = 0
         then return true
         else return false
@@ -60,9 +59,7 @@ POP(S)
 // 
 // Final state:
 //   S = [10, 30, 40]
-//   S.top = 3`}
-      </pre>
-    </div>
+//   S.top = 3`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

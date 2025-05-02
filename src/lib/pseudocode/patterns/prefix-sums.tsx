@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const PrefixSumsPattern = () => (
   <div>
@@ -10,9 +11,7 @@ export const PrefixSumsPattern = () => (
       Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Range sum queries
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`PREFIX-SUMS(A)
+    <PseudocodeDisplay code={`PREFIX-SUMS(A)
     let n be the length of A
     let prefix[0‥n] be a new array
     prefix[0] ← 0
@@ -38,9 +37,7 @@ RANGE-SUM(prefix, l, r)
 // Range sum from index 2 to 4:
 // RANGE-SUM(prefix, 2, 4) = prefix[4] - prefix[1] = 10 - 1 = 9
 // 
-// Output: prefix = [0, 1, 3, 6, 10, 15]`}
-      </pre>
-    </div>
+// Output: prefix = [0, 1, 3, 6, 10, 15]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

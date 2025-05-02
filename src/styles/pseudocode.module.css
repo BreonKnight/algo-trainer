@@ -3,7 +3,7 @@
   margin-bottom: 1rem;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.875rem;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 0.75rem;
   overflow: hidden;
   background: var(--pseudocode-gradient);
@@ -44,9 +44,153 @@
   position: relative;
   z-index: 3;
   color: var(--pseudocode-text);
-  line-height: 1.4;
+  line-height: 1.6;
   white-space: pre-wrap;
   text-shadow: var(--pseudocode-text-shadow);
+}
+
+/* Algorithm title and metadata */
+.pseudocodeContent .algorithm-title {
+  color: var(--pseudocode-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.pseudocodeContent .algorithm-type {
+  color: var(--pseudocode-type);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.pseudocodeContent .algorithm-meta {
+  color: var(--pseudocode-metadata);
+  font-size: 0.75rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+/* Syntax highlighting */
+.pseudocodeContent .keyword {
+  color: var(--pseudocode-keyword);
+  font-weight: 700;
+  text-shadow: var(--pseudocode-keyword-shadow);
+}
+
+.pseudocodeContent .function {
+  color: var(--pseudocode-function);
+  font-weight: 600;
+  text-shadow: var(--pseudocode-function-shadow);
+}
+
+.pseudocodeContent .variable {
+  color: var(--pseudocode-variable);
+  font-style: italic;
+}
+
+.pseudocodeContent .string {
+  color: var(--pseudocode-string);
+  text-shadow: var(--pseudocode-string-shadow);
+}
+
+.pseudocodeContent .number {
+  color: var(--pseudocode-number);
+  font-weight: 600;
+  text-shadow: var(--pseudocode-number-shadow);
+}
+
+.pseudocodeContent .operator {
+  color: var(--pseudocode-operator);
+  font-weight: 600;
+}
+
+.pseudocodeContent .comment {
+  color: var(--pseudocode-comment);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.pseudocodeContent .control-flow {
+  color: var(--pseudocode-control);
+  font-weight: 700;
+}
+
+.pseudocodeContent .data-structure {
+  color: var(--pseudocode-structure);
+  font-weight: 600;
+}
+
+/* Step numbers and indicators */
+.pseudocodeContent .step-number {
+  color: var(--pseudocode-step);
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.pseudocodeContent .step-indicator {
+  color: var(--pseudocode-indicator);
+  margin-right: 0.5rem;
+}
+
+/* Lists and indentation */
+.pseudocodeContent ul {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.pseudocodeContent li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pseudocodeContent li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--pseudocode-indicator);
+  font-weight: 700;
+}
+
+/* Nested content */
+.pseudocodeContent .nested {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--pseudocode-indicator);
+  opacity: 0.8;
+}
+
+/* Hover effects */
+.pseudocodeContent li:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.25rem;
+}
+
+.pseudocodeContent .highlight {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .pseudocodeContainer {
+    padding: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .pseudocodeContent li {
+    padding-left: 1.25rem;
+  }
+
+  .pseudocodeContent .nested {
+    margin-left: 1rem;
+  }
 }
 
 /* Style for algorithm metadata (time, space, usage) */
@@ -71,31 +215,6 @@
   text-shadow: var(--pseudocode-code-shadow);
 }
 
-.pseudocodeContent .keyword {
-  color: var(--pseudocode-keyword);
-  text-shadow: var(--pseudocode-keyword-shadow);
-}
-
-.pseudocodeContent .function {
-  color: var(--pseudocode-function);
-  text-shadow: var(--pseudocode-function-shadow);
-}
-
-.pseudocodeContent .string {
-  color: var(--pseudocode-string);
-  text-shadow: var(--pseudocode-string-shadow);
-}
-
-.pseudocodeContent .number {
-  color: var(--pseudocode-number);
-  text-shadow: var(--pseudocode-number-shadow);
-}
-
-.pseudocodeContent .comment {
-  color: var(--pseudocode-comment);
-  font-style: italic;
-}
-
 .pseudocodeContent h1 {
   color: var(--pseudocode-heading);
   margin-bottom: 0.5rem;
@@ -105,39 +224,10 @@
   letter-spacing: 0.5px;
 }
 
-.pseudocodeContent ul {
-  list-style-type: none;
-  padding-left: 1rem;
-  margin: 0;
-}
-
 .pseudocodeContent ul ul {
   margin-top: 0;
   padding-left: 1rem;
   opacity: 0.9;
-}
-
-.pseudocodeContent li {
-  margin: 0.25rem 0;
-  position: relative;
-  transition: transform 0.2s ease;
-}
-
-.pseudocodeContent li:hover {
-  transform: translateX(4px);
-}
-
-.pseudocodeContent li::before {
-  content: "▸";
-  position: absolute;
-  left: -1rem;
-  color: var(--pseudocode-bullet);
-  text-shadow: var(--pseudocode-bullet-shadow);
-  transition: transform 0.2s ease;
-}
-
-.pseudocodeContent li:hover::before {
-  transform: scale(1.2);
 }
 
 .pseudocodeContent li li::before {

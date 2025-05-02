@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixSpiralTraversalPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MatrixSpiralTraversalPattern = () => (
       in spiral order
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`SPIRAL-TRAVERSE(A)
+    <PseudocodeDisplay code={`SPIRAL-TRAVERSE(A)
     let m, n be the dimensions of A
     let result[1‥m·n] be a new array
     let top ← 1, bottom ← m
@@ -56,9 +55,7 @@ export const MatrixSpiralTraversalPattern = () => (
 // 4. Left column: 5
 // 5. Middle: 6, 7
 // 
-// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`}
-      </pre>
-    </div>
+// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const CircularLinkedListPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const CircularLinkedListPattern = () => (
       structure operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Node structure
+    <PseudocodeDisplay code={`// Node structure
 NODE(key):
     key ← key
     next ← null
@@ -86,9 +85,7 @@ CIRCULAR-TRAVERSE(L):
 //   3 -> 1 -> 2 -> 3
 // 
 // After DELETE(1):
-//   3 -> 2 -> 3`}
-      </pre>
-    </div>
+//   3 -> 2 -> 3`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

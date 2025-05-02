@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DijkstraPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DijkstraPattern = () => (
       Single-source shortest paths in weighted graphs
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Dijkstra
+    <PseudocodeDisplay code={`// Standard Dijkstra
 DIJKSTRA(G, w, s):
     INITIALIZE-SINGLE-SOURCE(G, s)
     S = ∅
@@ -57,9 +56,7 @@ GET-PATH(prev, s, t):
     while u ≠ NIL:
         path.append(u)
         u = prev[u]
-    return reverse(path)`}
-      </pre>
-    </div>
+    return reverse(path)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

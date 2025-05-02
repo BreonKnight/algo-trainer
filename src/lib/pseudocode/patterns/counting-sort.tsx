@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const CountingSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const CountingSortPattern = () => (
       integers with small range
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Counting Sort
+    <PseudocodeDisplay code={`// Standard Counting Sort
 COUNTING-SORT(A):
     # Find maximum value
     max_val = max(A)
@@ -114,9 +113,7 @@ COUNTING-SORT-RADIX(A, exp):
     
     # Copy output to A
     for i in range(n):
-        A[i] = output[i]`}
-      </pre>
-    </div>
+        A[i] = output[i]`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

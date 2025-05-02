@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixSpiralTraversalRecursivePattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const MatrixSpiralTraversalRecursivePattern = () => (
       in spiral order
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Recursive spiral traversal of matrix
+    <PseudocodeDisplay code={`// Recursive spiral traversal of matrix
 SPIRAL-TRAVERSE(A, top, bottom, left, right):
     if top > bottom or left > right:
         return
@@ -46,9 +45,7 @@ SPIRAL-TRAVERSE(A, top, bottom, left, right):
 // 1. Outer layer: 1, 2, 3, 4, 8, 12, 11, 10, 9, 5
 // 2. Inner layer: 6, 7
 // 
-// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`}
-      </pre>
-    </div>
+// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TriePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TriePattern = () => (
       storage and search
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Trie node structure
+    <PseudocodeDisplay code={`// Trie node structure
 TRIE-NODE:
     children[1..26]  // Array of child nodes
     is_end          // Marks end of word
@@ -77,9 +76,7 @@ TRIE-COUNT-PREFIX(root, prefix):
 // 1. Search "app" → true
 // 2. Search "ban" → false
 // 3. Count prefix "ap" → 2
-// 4. Count prefix "ba" → 2`}
-      </pre>
-    </div>
+// 4. Count prefix "ba" → 2`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

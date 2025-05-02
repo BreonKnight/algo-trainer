@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const ProbabilityDPPattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const ProbabilityDPPattern = () => (
       probability of events
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`PROBABILITY-DP(n, k, p)
+    <PseudocodeDisplay code={`PROBABILITY-DP(n, k, p)
     let dp[0‥n][0‥k] be a new array
     for i ← 0 to n
         do for j ← 0 to k
@@ -54,9 +53,7 @@ CALC-PROB(n, k, p, dp)
 //   CALC-PROB(0,0) = 1
 //   CALC-PROB(0,-1) = 0
 // 
-// Output: Probability of exactly 2 successes in 3 trials`}
-      </pre>
-    </div>
+// Output: Probability of exactly 2 successes in 3 trials`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

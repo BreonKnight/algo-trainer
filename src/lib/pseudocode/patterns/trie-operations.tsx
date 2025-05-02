@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TrieOperationsPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TrieOperationsPattern = () => (
       Use: String prefix operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Node structure
+    <PseudocodeDisplay code={`// Node structure
 NODE:
     children[ALPHABET_SIZE]
     isEndOfWord
@@ -117,9 +116,7 @@ TRIE-DELETE-HELPER(node, word, depth):
 //     |
 //     l
 //     |
-//     e (end)`}
-      </pre>
-    </div>
+//     e (end)`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

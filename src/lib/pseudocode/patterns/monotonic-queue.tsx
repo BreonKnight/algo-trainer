@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MonotonicQueuePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MonotonicQueuePattern = () => (
       maximum/minimum
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`SLIDING-WINDOW-MAXIMUM(A, k)
+    <PseudocodeDisplay code={`SLIDING-WINDOW-MAXIMUM(A, k)
     let n be the length of A
     let result[1‥n-k+1] be a new array
     let Q be a new empty deque
@@ -62,9 +61,7 @@ export const MonotonicQueuePattern = () => (
 //   Q = [8]
 //   result[6] = 7
 // 
-// Output: [3, 3, 5, 5, 6, 7]`}
-      </pre>
-    </div>
+// Output: [3, 3, 5, 5, 6, 7]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

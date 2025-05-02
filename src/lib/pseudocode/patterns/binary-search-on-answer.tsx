@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BinarySearchOnAnswerPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BinarySearchOnAnswerPattern = () => (
       value in search space
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Binary search on answer with predicate function
+    <PseudocodeDisplay code={`// Binary search on answer with predicate function
 BINARY-SEARCH-ANSWER(low, high, predicate):
     while low < high:
         mid ← ⌊(low + high) / 2⌋
@@ -52,9 +51,7 @@ SHIP-PACKAGES(weights, D):
 // 6. mid = 13: days = 6 > 5
 // 7. mid = 14: days = 5 ≤ 5
 // 
-// Output: 15`}
-      </pre>
-    </div>
+// Output: 15`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

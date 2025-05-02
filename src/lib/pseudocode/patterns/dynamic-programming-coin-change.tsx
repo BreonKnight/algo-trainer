@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DynamicProgrammingCoinChangePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DynamicProgrammingCoinChangePattern = () => (
       coins needed for amount
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`COIN-CHANGE(coins, amount)
+    <PseudocodeDisplay code={`COIN-CHANGE(coins, amount)
     # Initialize DP array with infinity
     dp[0..amount] ← ∞
     dp[0] ← 0  # Base case: 0 coins needed for amount 0
@@ -33,9 +32,7 @@ export const DynamicProgrammingCoinChangePattern = () => (
 # Input: coins = [1, 2, 5], amount = 11
 # dp array after filling:
 # [0, 1, 1, 2, 2, 1, 2, 2, 3, 3, 2, 3]
-# Output: 3  # 5 + 5 + 1`}
-      </pre>
-    </div>
+# Output: 3  # 5 + 5 + 1`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

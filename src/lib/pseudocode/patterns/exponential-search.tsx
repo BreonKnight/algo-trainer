@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const ExponentialSearchPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const ExponentialSearchPattern = () => (
       in unbounded sorted array
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Exponential Search: Find element in unbounded sorted array
+    <PseudocodeDisplay code={`# Exponential Search: Find element in unbounded sorted array
 # Input: Sorted array A[1..n], target value x
 # Output: Index of x in A if found, -1 otherwise
 
@@ -58,9 +57,7 @@ Algorithm BINARY-SEARCH(A, low, high, x)
 #         mid = 6, A[6] = 60 < 70
 #         mid = 7, A[7] = 70 = 70
 # 
-# Output: 7`}
-      </pre>
-    </div>
+# Output: 7`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

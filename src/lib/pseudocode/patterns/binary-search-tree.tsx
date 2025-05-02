@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BinarySearchTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BinarySearchTreePattern = () => (
       and insertion
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Binary search tree node structure
+    <PseudocodeDisplay code={`// Binary search tree node structure
 BST-NODE:
     key
     left
@@ -87,9 +86,7 @@ TRANSPLANT(T, u, v):
 //      /   \\
 //     3     7
 //    / \\   / \\
-//   2   4 6   8`}
-      </pre>
-    </div>
+//   2   4 6   8`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

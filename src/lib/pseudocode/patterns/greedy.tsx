@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyPattern = () => (
       optimal choices
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Activity Selection
+    <PseudocodeDisplay code={`// Activity Selection
 ACTIVITY-SELECTION(S):
     sort S by finish time
     A = [S[0]]
@@ -62,9 +61,7 @@ DIJKSTRA(G, s):
             if dist[v] > dist[u] + G.weight(u, v):
                 dist[v] = dist[u] + G.weight(u, v)
                 prev[v] = u
-    return (dist, prev)`}
-      </pre>
-    </div>
+    return (dist, prev)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

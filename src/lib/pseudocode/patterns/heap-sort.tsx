@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const HeapSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const HeapSortPattern = () => (
       sorting with guaranteed performance
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Heap Sort
+    <PseudocodeDisplay code={`// Standard Heap Sort
 HEAP-SORT(A):
     n = len(A)
     
@@ -102,9 +101,7 @@ HEAPIFY-COMPARATOR(A, n, i, compare):
     # If root is not target, swap and heapify
     if target != i:
         swap(A[i], A[target])
-        HEAPIFY-COMPARATOR(A, n, target, compare)`}
-      </pre>
-    </div>
+        HEAPIFY-COMPARATOR(A, n, target, compare)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

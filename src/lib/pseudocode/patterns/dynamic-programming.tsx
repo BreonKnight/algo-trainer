@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export function DynamicProgrammingPattern() {
   return (
@@ -12,9 +13,7 @@ export function DynamicProgrammingPattern() {
         problems with overlapping subproblems
       </div>
 
-      <div className="mb-4">
-        <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-          {`// Fibonacci
+      <PseudocodeDisplay code={`// Fibonacci
 FIBONACCI(n):
     if n ≤ 1:
         return n
@@ -61,9 +60,7 @@ MCM(P):
                 cost = dp[i][k] + dp[k+1][j] + P[i]*P[k+1]*P[j+1]
                 if cost < dp[i][j]:
                     dp[i][j] = cost
-    return dp[0][n-1]`}
-        </pre>
-      </div>
+    return dp[0][n-1]`} />
 
       <div className="flex items-start mb-1">
         <span className="font-bold text-main mr-2">1.</span>

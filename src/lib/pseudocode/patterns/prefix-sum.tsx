@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const PrefixSumPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const PrefixSumPattern = () => (
       sum queries
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Prefix Sum
+    <PseudocodeDisplay code={`// Standard Prefix Sum
 PREFIX-SUM(A):
     n = len(A)
     prefix = [0] * (n + 1)
@@ -67,9 +66,7 @@ PREFIX-SUM-BIT(A):
     for i in range(n):
         update(i+1, A[i])
     
-    return bit`}
-      </pre>
-    </div>
+    return bit`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BfsLinkedListPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BfsLinkedListPattern = () => (
       list level by level
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Node structure for linked list
+    <PseudocodeDisplay code={`// Node structure for linked list
 NODE:
     key
     next
@@ -48,9 +47,7 @@ BFS-LINKED-LIST(head):
 // 4. Q = [4], visited = {1,2,3,4}
 // 5. Q = [5], visited = {1,2,3,4,5}
 // 
-// Output: 1, 2, 3, 4, 5`}
-      </pre>
-    </div>
+// Output: 1, 2, 3, 4, 5`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

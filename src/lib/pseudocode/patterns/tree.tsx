@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TreePattern = () => (
       operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Tree node structure
+    <PseudocodeDisplay code={`// Tree node structure
 TREE-NODE:
     key
     left
@@ -58,9 +57,7 @@ TREE-SEARCH(x, k):
 // 
 // Inorder: 1, 2, 3, 4, 5, 6, 7
 // Preorder: 4, 2, 1, 3, 6, 5, 7
-// Postorder: 1, 3, 2, 5, 7, 6, 4`}
-      </pre>
-    </div>
+// Postorder: 1, 3, 2, 5, 7, 6, 4`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

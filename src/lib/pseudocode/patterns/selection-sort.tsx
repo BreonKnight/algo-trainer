@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const SelectionSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const SelectionSortPattern = () => (
       in-place
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`SELECTION-SORT(A)
+    <PseudocodeDisplay code={`SELECTION-SORT(A)
     n ← length[A]
     
     for i ← 1 to n-1
@@ -34,9 +33,7 @@ export const SelectionSortPattern = () => (
 # [1, 2, 3, 6, 5, 4]  # 3 is selected
 # [1, 2, 3, 4, 5, 6]  # 4 is selected
 # [1, 2, 3, 4, 5, 6]  # 5 is selected
-# Output: [1, 2, 3, 4, 5, 6]`}
-      </pre>
-    </div>
+# Output: [1, 2, 3, 4, 5, 6]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

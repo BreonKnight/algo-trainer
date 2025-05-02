@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const NullPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const NullPattern = () => (
       of value
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`NULL-PATTERN()
+    <PseudocodeDisplay code={`NULL-PATTERN()
 1  return NIL
 
 HANDLE-NULL(value)
@@ -26,9 +25,7 @@ HANDLE-NULL(value)
 // Output: NIL
 // 
 // Input: value = 5
-// Output: 10`}
-      </pre>
-    </div>
+// Output: 10`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

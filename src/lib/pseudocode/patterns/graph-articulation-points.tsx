@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GraphArticulationPointsPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GraphArticulationPointsPattern = () => (
       vertices in graph
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`FIND-ARTICULATION-POINTS(G)
+    <PseudocodeDisplay code={`FIND-ARTICULATION-POINTS(G)
     let n be the number of vertices in G
     let disc[1‥n] be a new array
     let low[1‥n] be a new array
@@ -66,9 +65,7 @@ DFS-AP(G, u, disc, low, parent, ap, time)
 //   Vertex 3: FALSE
 //   Vertex 4: FALSE
 // 
-// Output: [TRUE, FALSE, FALSE, FALSE]`}
-      </pre>
-    </div>
+// Output: [TRUE, FALSE, FALSE, FALSE]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BucketSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BucketSortPattern = () => (
       distributed numbers
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Bucket Sort
+    <PseudocodeDisplay code={`// Standard Bucket Sort
 BUCKET-SORT(A):
     # Initialize buckets
     n = len(A)
@@ -107,9 +106,7 @@ BUCKET-SORT-COUNTING(A):
     for bucket in buckets:
         result.extend(bucket)
     
-    return result`}
-      </pre>
-    </div>
+    return result`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

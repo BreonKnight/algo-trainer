@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DigitDPPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DigitDPPattern = () => (
       numbers with digit constraints
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`DIGIT-DP(n, k)
+    <PseudocodeDisplay code={`DIGIT-DP(n, k)
     let digits[1‥d] be a new array
     let i ← 1
     while n > 0
@@ -65,9 +64,7 @@ COUNT-DIGITS(digits, pos, sum, tight, leading_zero)
 // 
 // ... (continues for all digits)
 // 
-// Output: Number of numbers ≤ 123 with digit sum = 6`}
-      </pre>
-    </div>
+// Output: Number of numbers ≤ 123 with digit sum = 6`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

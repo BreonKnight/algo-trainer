@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GraphImplementationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GraphImplementationPattern = () => (
       representation and traversal
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Adjacency list representation
+    <PseudocodeDisplay code={`// Adjacency list representation
 GRAPH-ADJ-LIST(V, E):
     n ← length[V]
     Adj[1..n] ← empty lists
@@ -90,9 +89,7 @@ BFS(G, s):
 // 1 0 1 0 1
 // 2 1 0 1 0
 // 3 0 1 0 1
-// 4 1 0 1 0`}
-      </pre>
-    </div>
+// 4 1 0 1 0`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyFractionalKnapsackPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyFractionalKnapsackPattern = () => (
       value with weight constraints
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Fractional Knapsack
+    <PseudocodeDisplay code={`// Standard Fractional Knapsack
 class Item:
     def __init__(self, value, weight):
         self.value = value
@@ -78,9 +77,7 @@ def constrained_knapsack(items, capacity, max_items):
             total_value += item.value * fraction
             break
     
-    return total_value`}
-      </pre>
-    </div>
+    return total_value`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

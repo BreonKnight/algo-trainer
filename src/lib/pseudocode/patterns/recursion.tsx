@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const RecursionPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const RecursionPattern = () => (
       into smaller subproblems
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Factorial
+    <PseudocodeDisplay code={`// Factorial
 FACTORIAL(n):
     if n ≤ 1:
         return 1
@@ -60,9 +59,7 @@ QUICK-SORT(A, l, r):
         return
     p = PARTITION(A, l, r)
     QUICK-SORT(A, l, p-1)
-    QUICK-SORT(A, p+1, r)`}
-      </pre>
-    </div>
+    QUICK-SORT(A, p+1, r)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

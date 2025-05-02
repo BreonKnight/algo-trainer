@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyHungarianPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyHungarianPattern = () => (
       problem
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Hungarian algorithm for assignment problem
+    <PseudocodeDisplay code={`// Hungarian algorithm for assignment problem
 HUNGARIAN(C):
     n ← rows[C]
     // Step 1: Subtract row minima
@@ -72,9 +71,7 @@ HUNGARIAN(C):
 // ]
 // 
 // Step 3: Find matching
-// Output: {(1,1), (2,2), (3,3)}`}
-      </pre>
-    </div>
+// Output: {(1,1), (2,2), (3,3)}`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

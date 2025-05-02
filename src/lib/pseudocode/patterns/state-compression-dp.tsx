@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StateCompressionDPPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const StateCompressionDPPattern = () => (
       problems with state represented as bits
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# State Compression DP: Solve problems with state represented as bits
+    <PseudocodeDisplay code={`# State Compression DP: Solve problems with state represented as bits
 # Input: Grid G[1..n][1..m]
 # Output: Maximum value achievable
 
@@ -91,9 +90,7 @@ Algorithm STATE-COMPRESSION-DP(G)
 # Step 4: Process third row
 #         curr = [0, 7, 8, 15, -∞, -∞, -∞, -∞]
 # 
-# Output: 15`}
-      </pre>
-    </div>
+# Output: 15`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

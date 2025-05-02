@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StronglyConnectedComponentsPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const StronglyConnectedComponentsPattern = () => (
       territories where monsters can freely move between any two areas
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Monster Territory Clusters: Find groups of interconnected monster territories
+    <PseudocodeDisplay code={`# Monster Territory Clusters: Find groups of interconnected monster territories
 # Input: G = (V, E) - directed graph of monster territories and migration paths
 # Output: List of territory clusters where monsters can freely move between any two areas
 
@@ -90,9 +89,7 @@ Algorithm REVERSE-MIGRATION-PATHS(graph)
 #   ["Ancient Forest", "Wildspire Waste", "Coral Highlands"],
 #   ["Elder's Recess"],
 #   ["Rotten Vale"]
-# ]`}
-      </pre>
-    </div>
+# ]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Hunter's Strategy:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const SegmentTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const SegmentTreePattern = () => (
       and updates
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Segment Tree
+    <PseudocodeDisplay code={`// Standard Segment Tree
 class SegmentTree:
     def __init__(self, data):
         self.n = len(data)
@@ -114,9 +113,7 @@ class PersistentSegmentTree:
             pos //= 2
             new_root[pos] = new_root[2*pos] + new_root[2*pos+1]
         self.versions.append(new_root)
-        return len(self.versions) - 1`}
-      </pre>
-    </div>
+        return len(self.versions) - 1`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

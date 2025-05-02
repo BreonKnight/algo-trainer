@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const SieveOfSundaramPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const SieveOfSundaramPattern = () => (
       primes up to n
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Sieve of Sundaram
+    <PseudocodeDisplay code={`# Sieve of Sundaram
 # Input: Integer n > 1
 # Output: Array of primes ≤ n
 
@@ -59,9 +58,7 @@ Algorithm SIEVE-OF-SUNDARAM(n)
 # Step 3: Collect primes
 #         primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 # 
-# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`}
-      </pre>
-    </div>
+# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TreeImplementationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TreeImplementationPattern = () => (
       representation and traversal
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Binary tree node structure
+    <PseudocodeDisplay code={`// Binary tree node structure
 TREE-NODE(key):
     node ← new object
     node.key ← key
@@ -89,9 +88,7 @@ TREE-SUCCESSOR(x):
 // 
 // Inorder traversal: 1 2 3 4 5 6 7
 // Preorder traversal: 4 2 1 3 6 5 7
-// Postorder traversal: 1 3 2 5 7 6 4`}
-      </pre>
-    </div>
+// Postorder traversal: 1 3 2 5 7 6 4`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

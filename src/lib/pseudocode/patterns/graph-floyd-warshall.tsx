@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const FloydWarshallPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const FloydWarshallPattern = () => (
       pairs shortest paths in weighted graphs
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Floyd-Warshall
+    <PseudocodeDisplay code={`// Standard Floyd-Warshall
 FLOYD-WARSHALL(G):
     # Initialize distance matrix
     dist = [[∞] * |V| for _ in range(|V|)]
@@ -84,9 +83,7 @@ FLOYD-WARSHALL-NEGATIVE(G):
         if dist[i][i] < 0:
             return "Graph contains negative cycle"
     
-    return dist`}
-      </pre>
-    </div>
+    return dist`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const PrimeFactorizationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const PrimeFactorizationPattern = () => (
       number into prime factors
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`PRIME-FACTORS(n)
+    <PseudocodeDisplay code={`PRIME-FACTORS(n)
 1  factors = []
 2  // Handle even numbers
 3  while n mod 2 == 0
@@ -37,9 +36,7 @@ export const PrimeFactorizationPattern = () => (
 // Step 2: 30 ÷ 2 = 15, factors = [2, 2]
 // Step 3: 15 ÷ 3 = 5, factors = [2, 2, 3]
 // Step 4: 5 ÷ 5 = 1, factors = [2, 2, 3, 5]
-// Output: [2, 2, 3, 5]`}
-      </pre>
-    </div>
+// Output: [2, 2, 3, 5]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

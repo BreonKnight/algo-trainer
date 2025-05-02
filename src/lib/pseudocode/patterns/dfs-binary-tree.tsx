@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DfsBinaryTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DfsBinaryTreePattern = () => (
       tree in depth-first order
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# DFS Binary Tree: Traverse binary tree in depth-first order
+    <PseudocodeDisplay code={`# DFS Binary Tree: Traverse binary tree in depth-first order
 # Input: Binary tree T with root node
 # Output: List of nodes in DFS order
 
@@ -58,9 +57,7 @@ Algorithm DFS-BINARY-TREE(T)
 # Step 6: Pop 3, Push 6
 # Step 7: Pop 6
 # 
-# Output: [1, 2, 4, 5, 3, 6]`}
-      </pre>
-    </div>
+# Output: [1, 2, 4, 5, 3, 6]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

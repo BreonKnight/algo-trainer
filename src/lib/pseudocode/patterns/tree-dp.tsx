@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TreeDynamicProgrammingPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TreeDynamicProgrammingPattern = () => (
       problems with overlapping subproblems
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Tree Dynamic Programming: Solve tree problems with overlapping subproblems
+    <PseudocodeDisplay code={`# Tree Dynamic Programming: Solve tree problems with overlapping subproblems
 # Input: Root node r of a tree
 # Output: Optimal solution value for the tree
 
@@ -66,9 +65,7 @@ Algorithm TREE-DP(r)
 #   exclude = DFS(4) + DFS(5) = 4 + 5 = 9
 #   memo[3] = max(7, 9) = 9
 # 
-# Output: 9`}
-      </pre>
-    </div>
+# Output: 9`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

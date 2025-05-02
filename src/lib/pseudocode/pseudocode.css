@@ -1,0 +1,37 @@
+/* Base styles */
+pre[class*="language-"] {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Syntax highlighting */
+.token.comment {
+  color: var(--text-secondary) !important;
+}
+
+.token.keyword {
+  color: var(--accent) !important;
+}
+
+.token.function,
+.token.string,
+.token.number,
+.token.operator,
+.token.punctuation,
+.token.boolean,
+.token.selector,
+.token.property,
+.token.atrule,
+.token.attr-value,
+.token.attr-name,
+.token.entity,
+.token.url,
+.token.control,
+.token.directive,
+.token.unit,
+.token.statement,
+.token.regex,
+.token.placeholder,
+.token.variable {
+  color: var(--text-color) !important;
+}

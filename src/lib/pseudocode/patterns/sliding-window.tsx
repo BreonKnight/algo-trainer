@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const SlidingWindowPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const SlidingWindowPattern = () => (
       with specific properties
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Sliding Window: Find subarrays with specific properties
+    <PseudocodeDisplay code={`# Sliding Window: Find subarrays with specific properties
 # Input: Array A[1..n], window size k
 # Output: Maximum sum of any subarray of size k
 
@@ -54,9 +53,7 @@ Algorithm SLIDING-WINDOW(A, k)
 # Step 6: window_sum = 6 + 20 - 2 = 24
 #         max_sum = 24
 # 
-# Output: 24`}
-      </pre>
-    </div>
+# Output: 24`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

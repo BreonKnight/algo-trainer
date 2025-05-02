@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StringPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const StringPattern = () => (
       processing and pattern matching
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Knuth-Morris-Pratt algorithm
+    <PseudocodeDisplay code={`// Knuth-Morris-Pratt algorithm
 KMP-MATCHER(T, P):
     n = T.length
     m = P.length
@@ -75,9 +74,7 @@ EDIT-DISTANCE(X, Y):
                 d[i, j] = 1 + min(d[i - 1, j],     // Delete
                                  d[i, j - 1],     // Insert
                                  d[i - 1, j - 1]) // Replace
-    return d[m, n]`}
-      </pre>
-    </div>
+    return d[m, n]`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

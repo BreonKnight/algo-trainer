@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyFordFulkersonPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyFordFulkersonPattern = () => (
       maximum flow in networks
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Ford-Fulkerson
+    <PseudocodeDisplay code={`// Standard Ford-Fulkerson
 def ford_fulkerson(graph, source, sink):
     # Initialize residual graph and max flow
     residual = {u: {v: graph[u][v] for v in graph[u]} 
@@ -172,9 +171,7 @@ def ford_fulkerson_multiple(graph, sources, sinks):
         
         max_flow += path_flow
     
-    return max_flow`}
-      </pre>
-    </div>
+    return max_flow`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
