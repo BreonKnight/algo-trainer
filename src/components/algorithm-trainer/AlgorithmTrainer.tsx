@@ -7,6 +7,7 @@ import { TopBar } from "./layout/TopBar";
 import { PanelLayout } from "./layout/PanelLayout";
 import { PatternControls } from "./layout/PatternControls";
 import { usePatternManager } from "./hooks/usePatternManager";
+import { PATTERN_KEYS } from "@/lib/patterns";
 
 export default function AlgorithmTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -60,6 +61,8 @@ export default function AlgorithmTrainer() {
               onPreviousPattern={previousPattern}
               onNextPattern={nextPattern}
               onRandomPattern={nextPattern}
+              currentPattern={selectedPattern}
+              totalPatterns={PATTERN_KEYS.length}
             />
           </div>
         </TooltipProvider>

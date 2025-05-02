@@ -2,6 +2,9 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { ReactNode } from "react";
 import type { UniqueIdentifier } from "@dnd-kit/core";
+import { GripVertical } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useTheme } from "../../theme/theme-context";
 
 interface SortablePanelProps {
   id: UniqueIdentifier;
@@ -9,6 +12,7 @@ interface SortablePanelProps {
 }
 
 export function SortablePanel({ id, children }: SortablePanelProps) {
+  const { theme } = useTheme();
   const {
     attributes,
     listeners,
@@ -21,17 +25,35 @@ export function SortablePanel({ id, children }: SortablePanelProps) {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.7 : 1,
-    zIndex: isDragging ? 50 : 1,
+    zIndex: isDragging ? 50 : "auto",
     touchAction: "none",
+    position: "relative" as const,
   };
   return (
-    <div ref={setNodeRef} style={style} {...attributes} className="">
-      {/* Drag handle only on mobile */}
-      <div className="md:hidden flex items-center cursor-grab select-none mb-1">
-        <span {...listeners} className="mr-2 text-main text-xl">
-          ☰
-        </span>
-        <span className="text-xs text-secondary">Drag to reorder</span>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      className={cn(
+        "group relative",
+        "hover:ring-2 hover:ring-accent/50",
+        "transition-all duration-200",
+        "isolate"
+      )}
+    >
+      {/* Drag handle for both mobile and desktop */}
+      <div
+        {...listeners}
+        className={cn(
+          "absolute -left-2 top-1/2 -translate-y-1/2",
+          "p-1.5 rounded-full cursor-grab",
+          "opacity-0 group-hover:opacity-100 transition-opacity",
+          "hover:bg-secondary/20",
+          "z-10",
+          theme === "nord" ? "text-white/70" : "text-secondary"
+        )}
+      >
+        <GripVertical className="h-4 w-4" />
       </div>
       {children}
     </div>

@@ -9,7 +9,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { ChevronDown, ChevronUp, LayoutGrid } from "lucide-react";
+import { ChevronDown, ChevronUp, LayoutGridIcon } from "lucide-react";
 import { PatternCard } from "../PatternCard";
 import { CodeEditor } from "../CodeEditor";
 import { AnswerCard } from "../AnswerCard";
@@ -23,6 +23,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
+import { useTheme } from "../../theme/theme-context";
+import { cn } from "@/lib/utils";
 
 interface PanelLayoutProps {
   selectedPattern: PatternKey;
@@ -35,9 +37,12 @@ interface PanelLayoutProps {
 }
 
 const PRESET_LAYOUTS = {
-  "Code Focus": ["editor", "pattern", "answer"],
-  "Pattern Focus": ["pattern", "editor", "answer"],
-  "Answer Focus": ["answer", "editor", "pattern"],
+  "Pattern First": ["pattern", "editor", "answer"],
+  "Editor First": ["editor", "pattern", "answer"],
+  "Pattern Middle": ["editor", "pattern", "answer"],
+  "Editor Middle": ["pattern", "editor", "answer"],
+  "Answer First": ["answer", "pattern", "editor"],
+  "Answer Middle": ["pattern", "answer", "editor"],
 };
 
 export function PanelLayout({
@@ -49,6 +54,7 @@ export function PanelLayout({
   setShowAnswer,
   onNextPattern,
 }: PanelLayoutProps) {
+  const { theme } = useTheme();
   const {
     panelOrder,
     patternOpen,
@@ -80,15 +86,49 @@ export function PanelLayout({
       <div className="flex justify-end mb-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" className="gap-2">
-              <LayoutGrid className="h-4 w-4" />
-              Layout
+            <Button
+              variant="ghost"
+              size="sm"
+              className={cn(
+                "gap-2 transition-all duration-200",
+                theme === "nord"
+                  ? "text-white/90 hover:text-white hover:bg-white/10"
+                  : "text-secondary hover:text-main hover:bg-secondary/20"
+              )}
+            >
+              <LayoutGridIcon
+                className={cn(
+                  "h-4 w-4 transition-transform duration-200",
+                  theme === "nord" ? "text-white/90" : "text-secondary"
+                )}
+              />
+              <span className="text-sm font-medium">Layout</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent
+            className={cn(
+              "min-w-[200px]",
+              theme === "nord" ? "bg-nord0 border-nord3" : "bg-background"
+            )}
+          >
             {Object.entries(PRESET_LAYOUTS).map(([name, layout]) => (
-              <DropdownMenuItem key={name} onClick={() => setLayout(layout)}>
-                {name}
+              <DropdownMenuItem
+                key={name}
+                onClick={() => setLayout(layout)}
+                className={cn(
+                  "cursor-pointer transition-colors",
+                  "flex items-center justify-between",
+                  theme === "nord"
+                    ? "text-white/90 hover:text-white hover:bg-white/10"
+                    : "text-secondary hover:text-main hover:bg-secondary/20",
+                  JSON.stringify(layout) === JSON.stringify(panelOrder) &&
+                    "bg-accent/10"
+                )}
+              >
+                <span>{name}</span>
+                <span className="text-xs opacity-70">
+                  {layout.map((p) => p[0]).join(" → ")}
+                </span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
