@@ -407,7 +407,7 @@ export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
   ],
 
   [
-    "Red Black Tree" as PatternKey,
+    "Red-Black Tree" as PatternKey,
     `class MonsterHunterRedBlackTree:
     """
     Red-Black Tree for material organization with color coding.
@@ -1537,7 +1537,7 @@ def manage_territory_connections(territories, connections):
   ],
 
   [
-    "Miller-Rabin Algorithm" as PatternKey,
+    "Miller-Rabin Primality Test" as PatternKey,
     `def monster_hunter_miller_rabin(material_quality, test_rounds):
     """
     Find witnesses to material quality using Miller-Rabin algorithm.
@@ -1834,5 +1834,176 @@ def find_optimal_gathering_path(territory_tree):
     """
     return [[], [random.randint(1, 1000) for _ in range(1000)]]
     `,
+  ],
+
+  [
+    "Quickselect" as PatternKey,
+    `def monster_hunter_quickselect(monster_territory, k):
+    """
+    Find the k-th strongest monster in a territory using Quickselect.
+    Time: O(n) average, O(n²) worst case
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like finding the k-th strongest monster in a territory
+    - Each monster has a power level
+    - Find the monster that would be in position k if sorted
+    - Much faster than sorting all monsters first
+    
+    Example:
+    monster_territory = [5, 3, 8, 2, 7, 1, 9, 4, 6]
+    k = 4  # Find the 4th strongest monster
+    
+    Process:
+    1. Choose a pivot monster (randomly to avoid worst case)
+    2. Partition territory around pivot
+    3. Recursively search in relevant partition
+    4. Use median-of-medians for guaranteed linear time
+    """
+    def partition(left, right, pivot_idx):
+        # Move pivot to end
+        pivot_power = monster_territory[pivot_idx]
+        monster_territory[pivot_idx], monster_territory[right] = monster_territory[right], monster_territory[pivot_idx]
+        
+        # Partition around pivot
+        store_idx = left
+        for i in range(left, right):
+            if monster_territory[i] < pivot_power:
+                monster_territory[store_idx], monster_territory[i] = monster_territory[i], monster_territory[store_idx]
+                store_idx += 1
+        
+        # Move pivot to final position
+        monster_territory[right], monster_territory[store_idx] = monster_territory[store_idx], monster_territory[right]
+        return store_idx
+    
+    def select(left, right, k_smallest):
+        if left == right:
+            return monster_territory[left]
+        
+        # Choose random pivot
+        pivot_idx = random.randint(left, right)
+        
+        # Partition and get pivot position
+        pivot_idx = partition(left, right, pivot_idx)
+        
+        # Found the k-th smallest
+        if k_smallest == pivot_idx:
+            return monster_territory[k_smallest]
+        # Search in left partition
+        elif k_smallest < pivot_idx:
+            return select(left, pivot_idx - 1, k_smallest)
+        # Search in right partition
+        else:
+            return select(pivot_idx + 1, right, k_smallest)
+    
+    return select(0, len(monster_territory) - 1, k - 1)
+
+def find_kth_strongest_monster(monster_territory, k):
+    """
+    Find the k-th strongest monster in a territory using Quickselect.
+    This is much faster than sorting all monsters first!
+    
+    Args:
+        monster_territory (list): List of monster power levels
+        k (int): Position to find (1-based)
+        
+    Returns:
+        int: Power level of the k-th strongest monster
+    """
+    return monster_hunter_quickselect(monster_territory, k)
+
+# Example usage:
+# monster_territory = [5, 3, 8, 2, 7, 1, 9, 4, 6]
+# k = 4  # Find the 4th strongest monster
+# kth_monster = find_kth_strongest_monster(monster_territory, k)
+# print(f"The {k}th strongest monster has power level: {kth_monster}")`,
+  ],
+
+  [
+    "Prefix Sums" as PatternKey,
+    `def monster_hunter_prefix_sums(monster_territory):
+    """
+    Calculate prefix sums of monster territories for efficient range queries.
+    Time: O(n) for initialization, O(1) for queries
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like tracking cumulative resources across territories
+    - Each monster territory has a power level
+    - Use prefix sums to quickly calculate total power in any territory range
+    - Essential for efficient resource planning and territory management
+    
+    Example:
+    monster_territory = [3, 1, 4, 2, 5]  # Power levels of monsters
+    # Prefix sums = [3, 4, 8, 10, 15]
+    # Query: Total power from territory 1 to 3
+    # Answer: prefix_sums[3] - prefix_sums[0] = 10 - 3 = 7
+    
+    Process:
+    1. Initialize prefix sums array
+    2. Calculate cumulative sums
+    3. Use prefix sums for range queries
+    """
+    n = len(monster_territory)
+    prefix_sums = [0] * (n + 1)
+    
+    # Calculate prefix sums
+    for i in range(n):
+        prefix_sums[i + 1] = prefix_sums[i] + monster_territory[i]
+    
+    def query_range(start, end):
+        """
+        Get total power in territory range [start, end] (inclusive).
+        Time: O(1)
+        """
+        if start < 0 or end >= n or start > end:
+            return 0
+        return prefix_sums[end + 1] - prefix_sums[start]
+    
+    def update_power(index, new_power):
+        """
+        Update power level of a territory and maintain prefix sums.
+        Time: O(n)
+        """
+        if index < 0 or index >= n:
+            return
+        diff = new_power - monster_territory[index]
+        monster_territory[index] = new_power
+        for i in range(index + 1, n + 1):
+            prefix_sums[i] += diff
+    
+    return {
+        "prefix_sums": prefix_sums,
+        "query_range": query_range,
+        "update_power": update_power
+    }
+
+def manage_territory_power(monster_territory):
+    """
+    Manage monster territory power levels using prefix sums.
+    Provides efficient range queries and updates.
+    
+    Args:
+        monster_territory (list): List of monster power levels
+        
+    Returns:
+        dict: Contains prefix sums and query/update functions
+    """
+    return monster_hunter_prefix_sums(monster_territory)
+
+# Example usage:
+# territory = [3, 1, 4, 2, 5]
+# manager = manage_territory_power(territory)
+# 
+# # Query total power in range [1, 3]
+# total_power = manager["query_range"](1, 3)
+# print(f"Total power in range [1, 3]: {total_power}")
+# 
+# # Update power at index 2
+# manager["update_power"](2, 6)
+# 
+# # Query again after update
+# new_total = manager["query_range"](1, 3)
+# print(f"Total power after update: {new_total}")`,
   ],
 ]);

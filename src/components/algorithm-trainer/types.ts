@@ -1,5 +1,5 @@
 import { algorithmPatterns } from "./patterns";
-export const PATTERN_KEYS = Object.keys(algorithmPatterns);
+export const PATTERN_KEYS = Object.keys(algorithmPatterns) as PatternKey[];
 
 export type PatternKey =
   | "Quick Sort"
@@ -23,7 +23,6 @@ export type PatternKey =
   | "KMP Algorithm"
   | "Ternary Search"
   | "Exponential Search"
-  | "Fibonacci Search"
   | "Interpolation Search"
   | "Jump Search"
   | "Manacher's Algorithm"
@@ -37,7 +36,7 @@ export type PatternKey =
   | "Suffix Array"
   | "B Tree"
   | "AVL Tree"
-  | "Red Black Tree"
+  | "Red-Black Tree"
   | "Fenwick Tree"
   | "Segment Tree"
   | "Activity Selection"
@@ -48,8 +47,10 @@ export type PatternKey =
   | "Chinese Remainder Theorem"
   | "Extended Euclidean"
   | "Grid Traversal"
+  | "Dynamic Programming Pattern"
   | "Matrix Chain Multiplication"
   | "Matrix Exponentiation"
+  | "Matrix Operations"
   | "Floyd-Warshall"
   | "Kruskal"
   | "Prim"
@@ -69,7 +70,6 @@ export type PatternKey =
   | "Linked List"
   | "Fast Fourier Transform"
   | "Job Scheduling"
-  | "Fractional Knapsack"
   | "Recursion"
   | "Divide and Conquer"
   | "Backtracking"
@@ -80,6 +80,7 @@ export type PatternKey =
   | "Matrix Spiral Traversal"
   | "Matrix Traversal"
   | "Prefix Sum"
+  | "Prefix Sums"
   | "Rotate Matrix"
   | "Bit Manipulation"
   | "Stack Sort"
@@ -113,9 +114,13 @@ export type PatternKey =
   | "Z Algorithm"
   | "Rabin Karp"
   | "Divide And Conquer"
-  | "Extended Euclidean Algorithm"
+  | "Extended Euclidean"
   | "Sieve of Sundaram"
-  | "Sieve of Atkin";
+  | "Sieve of Atkin"
+  | "Quickselect"
+  | "Heavy Light Decomposition"
+  | "Memoization"
+  | "Graph Bridges";
 
 export interface AlgorithmPattern {
   title: string;

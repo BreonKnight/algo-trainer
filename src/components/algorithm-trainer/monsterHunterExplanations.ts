@@ -11,6 +11,37 @@ export const monsterHunterExplanations: Partial<
     }
   >
 > = {
+  "Dynamic Programming Pattern": {
+    title: "Monster Territory Dynamic Solver",
+    description:
+      "Like a monster hunter solving problems by breaking them down into smaller subproblems, Dynamic Programming Pattern solves problems by storing and reusing solutions to subproblems.",
+    example:
+      "Imagine you need to solve a complex problem by breaking it down into smaller subproblems - Dynamic Programming Pattern helps you do this efficiently by storing and reusing solutions to avoid redundant calculations.",
+    tips: [
+      "Break down problems into smaller subproblems",
+      "Store solutions to subproblems in a table or cache",
+      "Reuse solutions to avoid redundant calculations",
+      "Consider both top-down (memoization) and bottom-up approaches",
+      "Use it for optimization problems with overlapping subproblems",
+      "Identify optimal substructure in your problem",
+      "Define clear base cases for your subproblems",
+      "Consider space optimization when possible",
+    ],
+  },
+  Quickselect: {
+    title: "Monster Territory Quick Selector",
+    description:
+      "Like a monster hunter quickly finding the k-th strongest monster in a territory, Quickselect efficiently finds the k-th smallest element in an unsorted list.",
+    example:
+      "Imagine you need to find the 5th strongest monster in a territory - Quickselect helps you do this without having to sort all the monsters first, making it much faster than a full sort.",
+    tips: [
+      "Choose a good pivot - like selecting a strategic monster to divide the territory",
+      "Partition around pivot - similar to organizing monsters based on their strength relative to the pivot",
+      "Recursively search in relevant partition - like focusing only on the part of the territory that contains your target",
+      "Use random pivot selection - like randomly choosing a monster to avoid worst-case scenarios",
+      "Consider median-of-medians - like using a more sophisticated strategy for guaranteed linear time performance",
+    ],
+  },
   "Quick Sort": {
     title: "Monster Territory Division",
     description:
@@ -273,20 +304,6 @@ export const monsterHunterExplanations: Partial<
       "Be careful with overflow when doubling the range",
     ],
   },
-  "Fibonacci Search": {
-    title: "Monster Territory Golden Division",
-    description:
-      "Like a monster hunter using the golden ratio to divide their search area, Fibonacci Search uses Fibonacci numbers to divide the search space efficiently.",
-    example:
-      "Imagine searching for a monster in a territory and want to divide the area using the golden ratio - Fibonacci Search helps you find the target using this natural division.",
-    tips: [
-      "Use Fibonacci numbers to divide the search space",
-      "Handle both smaller and larger subarrays",
-      "Consider using it for arrays with expensive comparisons",
-      "Use it when binary search is too expensive",
-      "Maintain the Fibonacci sequence properties",
-    ],
-  },
   "Interpolation Search": {
     title: "Monster Territory Estimation",
     description:
@@ -483,10 +500,10 @@ export const monsterHunterExplanations: Partial<
       "Use it for maintaining balanced monster territory hierarchies",
     ],
   },
-  "Red Black Tree": {
+  "Red-Black Tree": {
     title: "Monster Territory Color-Balanced Tree",
     description:
-      "Like a monster hunter using color coding to maintain territory balance, Red Black Tree is a self-balancing binary search tree that uses color properties to maintain balance.",
+      "Like a monster hunter using color coding to maintain territory balance, Red-Black Tree is a self-balancing binary search tree that uses color properties to maintain balance.",
     example:
       "Imagine organizing monster territories using a color-coded system that ensures the tree stays balanced, allowing efficient operations regardless of the order of insertions and deletions.",
     tips: [
@@ -932,20 +949,6 @@ export const monsterHunterExplanations: Partial<
       "Use it for optimal monster hunting scheduling",
     ],
   },
-  "Fractional Knapsack": {
-    title: "Monster Territory Resource Packer",
-    description:
-      "Like a monster hunter packing their bag with the most valuable resources, Fractional Knapsack finds the maximum value that can be obtained by selecting fractional amounts of items.",
-    example:
-      "Imagine you need to pack your hunting bag with monster materials - Fractional Knapsack helps you maximize the value while staying within weight limits.",
-    tips: [
-      "Sort items by value-to-weight ratio",
-      "Take items in decreasing order of ratio",
-      "Consider taking fractional amounts of items",
-      "Handle both 0-1 and fractional knapsack problems",
-      "Use it for optimal resource packing",
-    ],
-  },
   Recursion: {
     title: "Monster Territory Recursive Explorer",
     description:
@@ -1267,17 +1270,17 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Dynamic Programming Fibonacci": {
-    title: "Monster Territory Fibonacci Calculator",
+    title: "Monster Territory Growth Calculator",
     description:
-      "Like a monster hunter calculating the number of possible paths in a territory using Fibonacci numbers, Dynamic Programming Fibonacci efficiently calculates Fibonacci numbers using dynamic programming.",
+      "Like tracking the exponential growth of monster populations in a territory, the Fibonacci sequence represents a pattern of growth where each number is the sum of the two preceding ones.",
     example:
-      "Imagine you need to calculate the number of possible paths a monster can take through a territory - Dynamic Programming Fibonacci helps you do this efficiently.",
+      "Imagine a monster territory where each generation's population is the sum of the previous two generations. Starting with 0 and 1 monsters, the population grows: 0, 1, 1, 2, 3, 5, 8, 13...",
     tips: [
-      "Use memoization to store intermediate results",
-      "Consider both top-down and bottom-up approaches",
-      "Handle large numbers carefully",
-      "Use it for efficient Fibonacci calculations",
-      "Consider using it for path counting problems",
+      "Understand the base cases (0 and 1)",
+      "Use dynamic programming to store and reuse previously calculated values",
+      "Can be implemented recursively or iteratively",
+      "Iterative approach is more efficient for larger numbers",
+      "Watch out for integer overflow with large Fibonacci numbers",
     ],
   },
   "Dynamic Programming Iterative": {
@@ -1532,20 +1535,6 @@ export const monsterHunterExplanations: Partial<
       "Use it for efficient territory analysis",
     ],
   },
-  "Extended Euclidean Algorithm": {
-    title: "Monster Territory GCD Extender",
-    description:
-      "Like a monster hunter finding the greatest common divisor and its coefficients, Extended Euclidean algorithm finds integers x and y such that ax + by = gcd(a,b).",
-    example:
-      "Imagine you need to find the largest common territory that can be divided between two monster groups - Extended Euclidean helps you find this and how to divide it.",
-    tips: [
-      "Use recursion or iteration for implementation",
-      "Handle negative numbers carefully",
-      "Consider using it for modular inverses",
-      "Use it for solving linear Diophantine equations",
-      "Optimize for your specific problem size",
-    ],
-  },
   "Sieve of Sundaram": {
     title: "Monster Territory Prime Sieve",
     description:
@@ -1563,29 +1552,97 @@ export const monsterHunterExplanations: Partial<
   "Sieve of Atkin": {
     title: "Monster Territory Prime Sieve",
     description:
-      "Like a monster hunter filtering out non-prime monster territories, the Sieve of Atkin efficiently finds all prime numbers up to a given limit.",
+      "Like a monster hunter using an advanced sieve to find all prime monsters in a territory, the Sieve of Atkin efficiently finds all prime numbers up to a given limit.",
     example:
-      "Imagine you have a list of monster territories numbered from 2 to n, and you want to identify which territories are prime (have special properties). The Sieve of Atkin helps you efficiently mark non-prime territories.",
+      "Imagine you need to find all prime monsters in a territory - the Sieve of Atkin helps you do this more efficiently than traditional sieving methods.",
     tips: [
-      "Start with the first prime number (2)",
-      "Mark all multiples of each prime as non-prime",
-      "Move to the next unmarked number",
-      "Continue until you've processed all numbers up to n",
-      "Use it for identifying special monster territories",
+      "Use quadratic forms - like using special patterns to identify prime monsters",
+      "Mark non-primes - similar to marking monsters that are definitely not prime",
+      "Consider wheel factorization - like using a more sophisticated approach to skip obvious non-primes",
+      "Optimize memory usage - similar to efficiently tracking which monsters have been checked",
+      "Use bit manipulation - like using compact representations to save space",
     ],
   },
   "Null Pattern": {
-    title: "Monster Hunter's Empty Hand",
+    title: "Monster Territory Null Handler",
     description:
-      "Like a monster hunter who knows when to do nothing, the null pattern represents the absence of action or value. Sometimes the best strategy is to recognize when no action is needed!",
+      "Like a monster hunter knowing when to do nothing, the Null Pattern handles cases where no action is required.",
     example:
-      "Imagine you're tracking a monster that's already perfectly positioned for capture - sometimes the best move is to do nothing and let the situation remain unchanged.",
+      "Imagine encountering a situation where taking any action would be worse than doing nothing - the Null Pattern helps you recognize and handle these cases gracefully.",
     tips: [
-      "Recognize when no action is needed",
-      "Use null values to represent absence",
       "Handle null cases gracefully",
       "Consider when doing nothing is the optimal solution",
       "Document why no action is required",
+    ],
+  },
+  "Heavy Light Decomposition": {
+    title: "Monster Territory Route Optimizer",
+    description:
+      "Like a monster hunter organizing territories into efficient hunting routes, Heavy Light Decomposition breaks down a complex territory network into optimized chains for quick navigation.",
+    example:
+      "Imagine you need to quickly find the best route between any two monster territories in a vast network - Heavy Light Decomposition helps you organize the territories into efficient chains, making path queries much faster.",
+    tips: [
+      "Identify heavy paths - like finding the most frequently traveled routes between territories",
+      "Build chains - similar to organizing territories into efficient hunting circuits",
+      "Use segment trees - like maintaining quick access to territory information along each chain",
+      "Query paths efficiently - similar to finding the optimal route between any two territories",
+      "Consider territory sizes - like accounting for the importance of each territory in the network",
+    ],
+  },
+  "Prefix Sums": {
+    title: "Monster Territory Resource Tracker",
+    description:
+      "Like a monster hunter keeping track of cumulative resources across territories, Prefix Sums efficiently calculates the sum of elements in any subarray.",
+    example:
+      "Imagine you need to quickly calculate the total resources in any range of monster territories - Prefix Sums helps you answer these range sum queries efficiently by precomputing cumulative sums.",
+    tips: [
+      "Precompute prefix sums in O(n) time - like creating a running total of resources across territories",
+      "Answer range queries in O(1) time - similar to instantly knowing the total resources between any two territories",
+      "Initialize with an extra element at index 0 - like starting with an empty territory",
+      "Use prefix differences for range sums - similar to calculating the resources in a specific territory range",
+      "Consider using it for efficient resource tracking across monster territories",
+    ],
+  },
+  Memoization: {
+    title: "Monster Territory Memoization",
+    description:
+      "Like a monster hunter using a memoization table to store and reuse results of expensive function calls, Memoization efficiently solves problems by storing and reusing results of previous computations.",
+    example:
+      "Imagine you need to solve a problem that has overlapping subproblems - Memoization helps you store and reuse the results of these subproblems, avoiding redundant calculations.",
+    tips: [
+      "Identify overlapping subproblems",
+      "Store results of expensive computations",
+      "Reuse stored results instead of recalculating",
+      "Use it for efficient problem solving",
+      "Consider using it for optimization problems",
+    ],
+  },
+  "Matrix Operations": {
+    title: "Monster Territory Matrix Navigator",
+    description:
+      "Like a master monster hunter navigating through complex territories, Matrix Operations provide a comprehensive toolkit for territory mapping and analysis. Each matrix cell represents a different territory or region, and the various traversal methods and operations help you efficiently explore and manipulate these territories. Whether you're tracking monster movements, mapping resource distributions, or analyzing territory patterns, these operations give you the flexibility to process data in multiple ways.",
+    example:
+      "Imagine you're mapping out a vast monster territory:\n" +
+      "1. Row-major traversal: Like systematically scanning each row of the territory from left to right, checking each territory's resources and monster populations\n" +
+      "2. Column-major traversal: Like analyzing vertical migration patterns, checking how monsters move between territories at different elevations\n" +
+      "3. Diagonal traversal: Like following monster tracks that cut across the territory diagonally, useful for tracking rare monster migration patterns\n" +
+      "4. Spiral traversal: Like circling the territory from the outer edges inward, perfect for establishing territory boundaries and defense perimeters\n" +
+      "5. Matrix rotation: Like rotating your territory map to view it from different angles, helping identify patterns that might be hidden in the default orientation\n" +
+      "6. Matrix multiplication: Like combining different territory maps to create a comprehensive view of monster interactions and resource distributions\n" +
+      "7. Matrix transpose: Like reorganizing your territory data to view relationships between territories in a different way, revealing hidden connections",
+    tips: [
+      "Use row-major traversal for systematic territory scanning and resource inventory",
+      "Employ column-major traversal when analyzing vertical migration patterns and elevation-based monster distributions",
+      "Diagonal traversal helps track cross-territory monster movements and identify rare migration paths",
+      "Spiral traversal is essential for establishing territory boundaries and defense perimeters",
+      "Matrix rotation helps view territory from different perspectives, revealing patterns that might be hidden in the default orientation",
+      "Matrix multiplication combines multiple territory data sets to analyze monster interactions and resource distributions",
+      "Transpose operations help reorganize territory data efficiently, revealing new insights about territory relationships",
+      "Consider time and space complexity when processing large territories - O(n²) for most operations",
+      "Use matrix initialization to create new territory maps with default values for resources or monster populations",
+      "Combine different traversal methods to create comprehensive territory analysis strategies",
+      "Remember that each operation has specific use cases - choose the right one for your hunting strategy",
+      "Document your territory maps and operations for future reference and strategy planning",
     ],
   },
 };

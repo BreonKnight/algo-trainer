@@ -1,69 +1,13 @@
 import { PatternKey } from "./types";
-import { algorithmPatterns } from "./patterns/index";
+import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
 import { ChevronDown, Search, Star } from "lucide-react";
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 
-// Helper function to determine category from pattern key
-const getCategoryFromKey = (key: string): string => {
-  if (key === "Recursion") return "Recursion";
-  if (key === "Divide and Conquer") return "Divide and Conquer";
-  if (key.includes("Sort")) return "Sorting Algorithms";
-  if (key.includes("Search")) return "Search Algorithms";
-  if (key.includes("Dynamic Programming")) return "Dynamic Programming";
-  if (key.includes("Greedy")) return "Greedy Algorithms";
-  if (key.includes("DFS") || key.includes("BFS") || key.includes("Graph"))
-    return "Graph Algorithms";
-  if (key.includes("Tree") || key.includes("BST")) return "Tree Algorithms";
-  if (
-    key.includes("Stack") ||
-    key.includes("Queue") ||
-    key.includes("List") ||
-    key.includes("Hash") ||
-    key.includes("Trie")
-  )
-    return "Data Structures";
-  if (
-    key.includes("Two Sum") ||
-    key.includes("Window") ||
-    key.includes("Pointers") ||
-    key.includes("Prefix") ||
-    key.includes("Kadane")
-  )
-    return "Array Techniques";
-  if (
-    key.includes("Rabin") ||
-    key.includes("Knuth") ||
-    key.includes("Manacher") ||
-    key.includes("Z-Algorithm")
-  )
-    return "String Algorithms";
-  if (key.includes("Matrix")) return "Matrix Operations";
-  if (
-    key.includes("Extended Euclidean") ||
-    key.includes("Chinese Remainder") ||
-    key.includes("Sieve")
-  )
-    return "Number Theory";
-  return "Other Algorithms";
-};
-
 // Group patterns by their category
 const getPatternCategories = () => {
-  const categories: Record<string, string[]> = {};
-
-  Object.keys(algorithmPatterns).forEach((key) => {
-    const category = getCategoryFromKey(key);
-    if (!categories[category]) {
-      categories[category] = [];
-    }
-    categories[category].push(key);
-  });
-
-  // Sort categories alphabetically
-  return Object.fromEntries(
-    Object.entries(categories).sort(([a], [b]) => a.localeCompare(b))
-  );
+  // Use the predefined categories from monsterHunterPatternsByCategory
+  return monsterHunterPatternsByCategory;
 };
 
 interface AlgorithmSelectorProps {

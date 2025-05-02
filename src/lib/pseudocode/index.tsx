@@ -67,7 +67,6 @@ import { ProbabilityDPPattern } from "./patterns/probability-dp";
 import { TreeDynamicProgrammingPattern } from "./patterns/tree-dp";
 import { StronglyConnectedComponentsPattern } from "./patterns/strongly-connected-components";
 import { InterpolationSearchPattern } from "./patterns/interpolation-search";
-import { FibonacciSearchPattern } from "./patterns/fibonacci-search";
 import { HeavyLightDecompositionPattern } from "./patterns/heavy-light-decomposition";
 import { LCAPattern } from "./patterns/lca";
 import { SuffixTreePattern } from "./patterns/suffix-tree";
@@ -88,7 +87,6 @@ import { BellmanFordPattern } from "./patterns/bellman-ford";
 import { ManachersAlgorithmPattern } from "./patterns/manachers-algorithm";
 import { AStarSearchPattern } from "./patterns/a-star-search";
 import { KadanesAlgorithmPattern } from "./patterns/kadanes-algorithm";
-import { KnapsackPattern } from "./patterns/knapsack";
 import { MatrixOperationsPattern } from "./patterns/matrix-operations";
 import { MemoizationPattern } from "./patterns/memoization";
 import { PrefixSumsPattern } from "./patterns/prefix-sums";
@@ -171,7 +169,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Probability DP": ProbabilityDPPattern,
   "Strongly Connected Components": StronglyConnectedComponentsPattern,
   "Interpolation Search": InterpolationSearchPattern,
-  "Fibonacci Search": FibonacciSearchPattern,
   "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
   "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
   "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
@@ -189,11 +186,10 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Suffix Array": SuffixArrayPattern,
   "B Tree": BTreePattern,
   "AVL Tree": AVLTreePattern,
-  "Red Black Tree": RedBlackTreePattern,
+  "Red-Black Tree": RedBlackTreePattern,
   "Union Find": UnionFindPattern,
   "Fenwick Tree": FenwickTreePattern,
   "Segment Tree": SegmentTreePattern,
-  Knapsack: KnapsackPattern,
   "Matrix Operations": MatrixOperationsPattern,
   Memoization: MemoizationPattern,
   "Prefix Sums": PrefixSumsPattern,

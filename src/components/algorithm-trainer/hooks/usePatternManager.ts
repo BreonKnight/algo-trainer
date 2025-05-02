@@ -1,27 +1,34 @@
 import { useState, useRef, useEffect } from "react";
 import { PatternKey, PATTERN_KEYS } from "../types";
 import GamificationService from "../../../lib/gamification";
+import { monsterHunterPatternsByCategory } from "../monsterHunterPatternsCombined";
+
+// Get all patterns in predefined order
+const getOrderedPatterns = () => {
+  return Object.values(monsterHunterPatternsByCategory).flat();
+};
 
 export function usePatternManager() {
+  const orderedPatterns = getOrderedPatterns();
   const [selectedPattern, setSelectedPattern] = useState<PatternKey>(() => {
     const savedPattern = localStorage.getItem("selectedPattern");
-    return savedPattern && PATTERN_KEYS.includes(savedPattern as PatternKey)
+    return savedPattern && orderedPatterns.includes(savedPattern as PatternKey)
       ? (savedPattern as PatternKey)
-      : (PATTERN_KEYS[0] as PatternKey);
+      : (orderedPatterns[0] as PatternKey);
   });
   const patternHistoryRef = useRef<PatternKey[]>([]);
   const currentIndexRef = useRef<number>(-1);
 
   const handlePatternChange = (pattern: PatternKey) => {
-    if (PATTERN_KEYS.includes(pattern)) {
+    if (orderedPatterns.includes(pattern)) {
       setSelectedPattern(pattern);
       localStorage.setItem("selectedPattern", pattern);
     }
   };
 
   const nextPattern = () => {
-    const randomIndex = Math.floor(Math.random() * PATTERN_KEYS.length);
-    const nextPattern = PATTERN_KEYS[randomIndex] as PatternKey;
+    const randomIndex = Math.floor(Math.random() * orderedPatterns.length);
+    const nextPattern = orderedPatterns[randomIndex] as PatternKey;
 
     if (selectedPattern !== nextPattern) {
       if (currentIndexRef.current < patternHistoryRef.current.length - 1) {

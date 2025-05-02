@@ -1433,10 +1433,10 @@ export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
         </div>
       </div>
     ),
-    "Z-Algorithm": () => (
+    "Z Algorithm": () => (
       <div>
         <div className="mb-2">
-          <span className="text-accent font-bold">Z-Algorithm</span>
+          <span className="text-accent font-bold">Z Algorithm</span>
           <span className="ml-2 text-xs text-secondary">(String Matching)</span>
         </div>
         <div className="mb-2 text-xs text-secondary">

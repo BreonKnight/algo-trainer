@@ -308,6 +308,25 @@ export const monsterHunterPatternsExtended2 = new Map<PatternKey, string>([
                 return item[1]
         return None`,
   ],
+  [
+    "Memoization" as PatternKey,
+    `class MonsterHunterMemoization:
+    """
+    Memoization for caching expensive function calls.
+    Operations: O(1) average
+    Space: O(n)
+    """
+    def __init__(self):
+        self.cache = {}
+    
+    def fibonacci(self, n):
+        if n in self.cache:
+            return self.cache[n]
+        if n <= 1:
+            return n
+        self.cache[n] = self.fibonacci(n-1) + self.fibonacci(n-2)
+        return self.cache[n]`,
+  ],
 ]);
 
 // Export combined patterns

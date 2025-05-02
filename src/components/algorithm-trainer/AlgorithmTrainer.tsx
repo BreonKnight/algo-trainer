@@ -7,7 +7,8 @@ import { TopBar } from "./layout/TopBar";
 import { PanelLayout } from "./layout/PanelLayout";
 import { PatternControls } from "./layout/PatternControls";
 import { usePatternManager } from "./hooks/usePatternManager";
-import { PATTERN_KEYS } from "@/lib/patterns";
+import { PATTERN_KEYS } from "./types";
+import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
 
 export default function AlgorithmTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -15,6 +16,24 @@ export default function AlgorithmTrainer() {
 
   const { selectedPattern, handlePatternChange, nextPattern, previousPattern } =
     usePatternManager();
+
+  // Calculate pattern number based on predefined order
+  const getPatternNumber = (pattern: string) => {
+    let count = 0;
+    for (const category of Object.values(monsterHunterPatternsByCategory)) {
+      if (category.includes(pattern)) {
+        return count + category.indexOf(pattern) + 1;
+      }
+      count += category.length;
+    }
+    return 0; // Return 0 if pattern not found in predefined order
+  };
+
+  const patternNumber = getPatternNumber(selectedPattern);
+  const totalPatterns = Object.values(monsterHunterPatternsByCategory).reduce(
+    (sum, category) => sum + category.length,
+    0
+  );
 
   return (
     <div className="flex justify-center w-full">
@@ -32,7 +51,7 @@ export default function AlgorithmTrainer() {
               Algorithm Trainer
             </h1>
             <span className="text-xs font-semibold text-accent2 mt-1">
-              Pattern {selectedPattern} of {selectedPattern}
+              Pattern {patternNumber} of {totalPatterns}
             </span>
 
             <NavigationBar />
@@ -53,6 +72,7 @@ export default function AlgorithmTrainer() {
               showAnswer={showAnswer}
               setShowAnswer={setShowAnswer}
               onNextPattern={nextPattern}
+              patternNumber={patternNumber}
             />
             <div className="mt-4">
               <ReplCard userCode={userCode} />
@@ -62,7 +82,7 @@ export default function AlgorithmTrainer() {
               onNextPattern={nextPattern}
               onRandomPattern={nextPattern}
               currentPattern={selectedPattern}
-              totalPatterns={PATTERN_KEYS.length}
+              totalPatterns={totalPatterns}
             />
           </div>
         </TooltipProvider>

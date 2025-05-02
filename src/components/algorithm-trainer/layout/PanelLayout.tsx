@@ -34,6 +34,7 @@ interface PanelLayoutProps {
   showAnswer: boolean;
   setShowAnswer: (show: boolean) => void;
   onNextPattern: () => void;
+  patternNumber?: number;
 }
 
 const PRESET_LAYOUTS = {
@@ -53,6 +54,7 @@ export function PanelLayout({
   showAnswer,
   setShowAnswer,
   onNextPattern,
+  patternNumber,
 }: PanelLayoutProps) {
   const { theme } = useTheme();
   const {
@@ -179,6 +181,7 @@ export function PanelLayout({
                           <PatternCard
                             currentPattern={selectedPattern}
                             onPatternChange={onPatternChange}
+                            patternNumber={patternNumber}
                           />
                         </div>
                       )}
