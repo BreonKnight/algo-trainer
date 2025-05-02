@@ -1959,7 +1959,9 @@ const PatternManagement: React.FC = () => {
                   onChange={(e) => setSelectedCategory(e.target.value)}
                   className={themeClasses.input}
                 >
-                  <option value="all">All Categories</option>
+                  <option key="all" value="all">
+                    All Categories
+                  </option>
                   {categories.map((category) => (
                     <option key={category} value={category}>
                       {category}
@@ -1971,12 +1973,16 @@ const PatternManagement: React.FC = () => {
                   onChange={(e) => setSortBy(e.target.value as SortField)}
                   className={themeClasses.input}
                 >
-                  <option value="name">Sort by Name</option>
-                  <option value="category">Sort by Category</option>
-                  <option value="timeComplexity">
+                  <option key="name" value="name">
+                    Sort by Name
+                  </option>
+                  <option key="category" value="category">
+                    Sort by Category
+                  </option>
+                  <option key="timeComplexity" value="timeComplexity">
                     Sort by Time Complexity
                   </option>
-                  <option value="spaceComplexity">
+                  <option key="spaceComplexity" value="spaceComplexity">
                     Sort by Space Complexity
                   </option>
                 </select>
@@ -2047,16 +2053,33 @@ const PatternManagement: React.FC = () => {
                     }}
                     className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
                   >
-                    <option value="name">Name</option>
-                    <option value="category">Category</option>
-                    <option value="timeComplexity">Time Complexity</option>
-                    <option value="spaceComplexity">Space Complexity</option>
-                    <option value="description">Description</option>
-                    <option value="monsterHunterContext">
+                    <option key="name" value="name">
+                      Name
+                    </option>
+                    <option key="category" value="category">
+                      Category
+                    </option>
+                    <option key="timeComplexity" value="timeComplexity">
+                      Time Complexity
+                    </option>
+                    <option key="spaceComplexity" value="spaceComplexity">
+                      Space Complexity
+                    </option>
+                    <option key="description" value="description">
+                      Description
+                    </option>
+                    <option
+                      key="monsterHunterContext"
+                      value="monsterHunterContext"
+                    >
                       Monster Hunter Context
                     </option>
-                    <option value="example">Example</option>
-                    <option value="implementation">Implementation</option>
+                    <option key="example" value="example">
+                      Example
+                    </option>
+                    <option key="implementation" value="implementation">
+                      Implementation
+                    </option>
                   </select>
 
                   <select
@@ -2069,10 +2092,18 @@ const PatternManagement: React.FC = () => {
                     }}
                     className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
                   >
-                    <option value="equals">Equals</option>
-                    <option value="contains">Contains</option>
-                    <option value="startsWith">Starts With</option>
-                    <option value="endsWith">Ends With</option>
+                    <option key="equals" value="equals">
+                      Equals
+                    </option>
+                    <option key="contains" value="contains">
+                      Contains
+                    </option>
+                    <option key="startsWith" value="startsWith">
+                      Starts With
+                    </option>
+                    <option key="endsWith" value="endsWith">
+                      Ends With
+                    </option>
                   </select>
 
                   <input
@@ -2126,10 +2157,18 @@ const PatternManagement: React.FC = () => {
                 }
                 className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
               >
-                <option value="name">Name</option>
-                <option value="category">Category</option>
-                <option value="timeComplexity">Time Complexity</option>
-                <option value="spaceComplexity">Space Complexity</option>
+                <option key="name" value="name">
+                  Name
+                </option>
+                <option key="category" value="category">
+                  Category
+                </option>
+                <option key="timeComplexity" value="timeComplexity">
+                  Time Complexity
+                </option>
+                <option key="spaceComplexity" value="spaceComplexity">
+                  Space Complexity
+                </option>
               </select>
 
               <select
@@ -2142,8 +2181,12 @@ const PatternManagement: React.FC = () => {
                 }
                 className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
               >
-                <option value="asc">Ascending</option>
-                <option value="desc">Descending</option>
+                <option key="asc" value="asc">
+                  Ascending
+                </option>
+                <option key="desc" value="desc">
+                  Descending
+                </option>
               </select>
             </div>
           </div>
