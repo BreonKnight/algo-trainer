@@ -239,15 +239,15 @@ export function GamificationButton() {
       {/* Floating button in the corner */}
       <Button
         onClick={() => setShowPanel(true)}
-        className={`fixed bottom-4 right-4 group overflow-hidden ${styles.button} 
+        className={`group overflow-hidden ${styles.button} 
           rounded-full w-14 h-14 flex items-center justify-center transition-all duration-300 
           hover:scale-110 hover:shadow-xl hover:shadow-accent2/20 
-          active:scale-95 transform-gpu z-50
+          active:scale-95 transform-gpu z-[9999]
           animate-in slide-in-from-bottom-8`}
         style={{
           background:
-            "linear-gradient(135deg, var(--accent2) 0%, var(--accent3) 100%)",
-          boxShadow: "0 8px 24px -8px rgba(var(--accent2), 0.3)",
+            "linear-gradient(135deg, rgba(var(--accent2), 0.7) 0%, rgba(var(--accent3), 0.7) 100%)",
+          boxShadow: "0 8px 24px -8px rgba(var(--accent2), 0.2)",
         }}
         aria-label="View Progress"
       >
@@ -261,41 +261,57 @@ export function GamificationButton() {
       {/* Gamification Panel */}
       <Dialog open={showPanel} onOpenChange={setShowPanel}>
         <DialogContent
-          className={`max-w-2xl max-h-[80vh] !bg-transparent ${styles.dialog}`}
+          className={`max-w-2xl max-h-[80vh] ${styles.dialog}`}
           style={{
-            background: "var(--background)",
+            background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(12px)",
+            animation: "modalSlideIn 0.3s ease-out",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
           }}
         >
           <DialogHeader className={`${styles.header} pb-4`}>
-            <DialogTitle className={`text-xl font-bold ${styles.title}`}>
+            <DialogTitle
+              className={`text-2xl font-bold ${styles.title} tracking-tight`}
+            >
               Your Progress
             </DialogTitle>
           </DialogHeader>
 
-          <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2">
+          <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2 custom-scrollbar">
             {/* User Stats Section */}
-            <div className="mb-6">
+            <div className="mb-8">
               <h3
-                className={`text-lg font-semibold mb-2 ${styles.text.primary}`}
+                className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}
               >
                 Your Stats
               </h3>
               <div className="grid grid-cols-3 gap-4">
                 {["Level", "Points", "Streak"].map((stat) => (
-                  <div key={stat} className={`p-3 rounded-lg ${styles.card}`}>
-                    <div className={`text-sm ${styles.text.secondary}`}>
+                  <div
+                    key={stat}
+                    className={`p-4 rounded-xl backdrop-blur-md bg-white/5 border border-white/10
+                      transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:bg-white/10`}
+                    style={{
+                      boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                    }}
+                  >
+                    <div
+                      className={`text-sm font-medium ${styles.text.secondary} tracking-wide`}
+                    >
                       {stat}
                     </div>
                     <div
-                      className={`text-2xl font-bold ${styles.text.primary}`}
+                      className={`text-3xl font-bold ${styles.text.primary} mt-1`}
                     >
                       {stat === "Level" && userProgress.level}
                       {stat === "Points" && userProgress.points}
                       {stat === "Streak" && `${userProgress.streak} days`}
                     </div>
                     {stat === "Level" && (
-                      <div className={`text-xs mt-1 ${styles.text.muted}`}>
+                      <div
+                        className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}
+                      >
                         {userProgress.experience} / 1000 XP
                       </div>
                     )}
@@ -305,47 +321,53 @@ export function GamificationButton() {
             </div>
 
             {/* Achievements Section */}
-            <div className="mb-6">
+            <div className="mb-8">
               <h3
-                className={`text-lg font-semibold mb-2 ${styles.text.primary}`}
+                className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}
               >
                 Achievements
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {userProgress.badges.map((badge: Badge) => (
                   <div
                     key={badge.id}
-                    className={`p-3 rounded-lg text-center ${
-                      badge.unlocked
-                        ? styles.badge.unlocked
-                        : styles.badge.locked
-                    }`}
+                    className={`p-4 rounded-xl text-center backdrop-blur-md bg-white/5 border border-white/10
+                      transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:bg-white/10
+                      ${
+                        badge.unlocked
+                          ? "border-accent2/40"
+                          : "border-secondary/40"
+                      }`}
+                    style={{
+                      boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                    }}
                   >
                     <div
-                      className={`text-2xl mb-1 ${
-                        badge.unlocked
-                          ? styles.badge.icon
-                          : styles.text.secondary
-                      }`}
+                      className={`text-3xl mb-2 transition-transform duration-300 hover:scale-110
+                        ${
+                          badge.unlocked
+                            ? styles.badge.icon
+                            : styles.text.secondary
+                        }`}
                     >
                       {badge.icon}
                     </div>
                     <div
-                      className={`text-sm font-medium ${
-                        badge.unlocked
-                          ? styles.text.primary
-                          : styles.text.secondary
-                      }`}
+                      className={`text-sm font-medium ${styles.text.primary} tracking-wide`}
                     >
                       {badge.name}
                     </div>
                     {!badge.unlocked && (
-                      <div className={`text-xs mt-1 ${styles.text.muted}`}>
+                      <div
+                        className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}
+                      >
                         {badge.progress}/{badge.maxProgress}
                       </div>
                     )}
                     {badge.unlocked && badge.dateEarned && (
-                      <div className={`text-xs mt-1 ${styles.text.muted}`}>
+                      <div
+                        className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}
+                      >
                         {new Date(badge.dateEarned).toLocaleDateString()}
                       </div>
                     )}
@@ -357,22 +379,27 @@ export function GamificationButton() {
             {/* Algorithm Progress Section */}
             <div className="mb-6">
               <h3
-                className={`text-lg font-semibold mb-2 ${styles.text.primary}`}
+                className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}
               >
                 Algorithm Progress
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {userProgress.algorithmProgress.map(
                   (algorithm: AlgorithmProgress) => (
-                    <div key={algorithm.id} className="flex items-center">
-                      <div className={`w-24 text-sm ${styles.text.primary}`}>
+                    <div key={algorithm.id} className="flex items-center gap-4">
+                      <div
+                        className={`w-24 text-sm ${styles.text.primary} tracking-wide`}
+                      >
                         {algorithm.name}
                       </div>
                       <div
-                        className={`flex-1 h-2 ${styles.progress.bg} rounded-full overflow-hidden`}
+                        className={`flex-1 h-2.5 backdrop-blur-md bg-white/5 rounded-full overflow-hidden border border-white/10`}
+                        style={{
+                          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                        }}
                       >
                         <div
-                          className={`h-full ${styles.progress.bar} rounded-full`}
+                          className={`h-full ${styles.progress.bar} rounded-full transition-all duration-500`}
                           style={{
                             width: `${
                               (algorithm.progress / algorithm.maxProgress) * 100
@@ -381,7 +408,7 @@ export function GamificationButton() {
                         ></div>
                       </div>
                       <div
-                        className={`w-12 text-right text-sm ${styles.text.secondary}`}
+                        className={`w-12 text-right text-sm ${styles.text.secondary} tracking-wide`}
                       >
                         {algorithm.progress}/{algorithm.maxProgress}
                       </div>
@@ -389,7 +416,9 @@ export function GamificationButton() {
                   )
                 )}
                 {userProgress.algorithmProgress.length === 0 && (
-                  <div className={`text-center py-4 ${styles.text.muted}`}>
+                  <div
+                    className={`text-center py-6 ${styles.text.muted} tracking-wide`}
+                  >
                     Try some algorithms to track your progress!
                   </div>
                 )}
@@ -398,14 +427,20 @@ export function GamificationButton() {
           </div>
 
           {/* Progress Component Link */}
-          <div className="mt-4 pt-4 border-t border-secondary/20">
+          <div className="mt-6 pt-4 border-t border-white/10">
             <Link to="/progress" onClick={() => setShowPanel(false)}>
               <Button
                 variant="outline"
-                className={`w-full flex items-center justify-center gap-2 ${styles.button}`}
+                className={`w-full flex items-center justify-center gap-2 backdrop-blur-md bg-white/5 border border-white/10
+                  transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:bg-white/10`}
+                style={{
+                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                }}
               >
                 <BarChart className="h-4 w-4" />
-                <span>View Progress Component Examples</span>
+                <span className="tracking-wide">
+                  View Progress Component Examples
+                </span>
               </Button>
             </Link>
           </div>
