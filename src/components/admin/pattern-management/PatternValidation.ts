@@ -127,3 +127,34 @@ export const validatePatternCategories = (
       issue: `Invalid category: ${pattern.category}`,
     }));
 };
+
+export const validateComponentOrder = (
+  patterns: Pattern[],
+  originalOrder: string[]
+): Array<{ pattern: string; issue: string }> => {
+  const issues: Array<{ pattern: string; issue: string }> = [];
+  const currentOrder = patterns.map((p) => p.id);
+
+  // Check if the order has been tampered with
+  if (currentOrder.length !== originalOrder.length) {
+    issues.push({
+      pattern: "System",
+      issue:
+        "Component order has been tampered with - number of components changed",
+    });
+    return issues;
+  }
+
+  // Verify each component's position
+  currentOrder.forEach((id, index) => {
+    if (id !== originalOrder[index]) {
+      const pattern = patterns.find((p) => p.id === id);
+      issues.push({
+        pattern: pattern?.name || "Unknown",
+        issue: `Component order mismatch at position ${index + 1}`,
+      });
+    }
+  });
+
+  return issues;
+};

@@ -17,6 +17,13 @@ import {
   DraggableProvided,
 } from "react-beautiful-dnd";
 import { patternNameMapping } from "../../lib/pseudocode/utils/pattern-mapping";
+import {
+  findDuplicatePatterns,
+  findIncompletePatterns,
+  validatePatternNames,
+  validatePatternCategories,
+  validateComponentOrder,
+} from "./pattern-management/PatternValidation";
 
 type FormStep =
   | "basic"
@@ -35,28 +42,33 @@ type FilterOption = {
   operator: "equals" | "contains" | "startsWith" | "endsWith";
 };
 
+// Fix the debug info type
+interface DebugInfo {
+  patternKeys: string[];
+  patternMapping: Record<string, string>;
+  patternCategories: Record<string, number>;
+  validationResults: {
+    duplicates: Array<{
+      pattern1: string;
+      pattern2: string;
+      similarity: number;
+    }>;
+    incompletePatterns: string[];
+    namingIssues: Array<{ pattern: string; issue: string }>;
+    categoryIssues: Array<{ pattern: string; issue: string }>;
+    orderIssues: Array<{ pattern: string; issue: string }>;
+  };
+}
+
 const PatternManagement: React.FC = () => {
   // Removed unused useTheme destructure
   const [patterns, setPatterns] = useState<Pattern[]>([]);
+  const [originalOrder, setOriginalOrder] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState<"form" | "list">("form");
   const [debugMode, setDebugMode] = useState(false);
-  const [debugInfo, setDebugInfo] = useState<{
-    patternKeys: string[];
-    patternMapping: Record<string, string>;
-    patternCategories: Record<string, number>;
-    validationResults: {
-      duplicates: Array<{
-        pattern1: string;
-        pattern2: string;
-        similarity: number;
-      }>;
-      incompletePatterns: string[];
-      namingIssues: Array<{ pattern: string; issue: string }>;
-      categoryIssues: Array<{ pattern: string; issue: string }>;
-    };
-  }>({
+  const [debugInfo, setDebugInfo] = useState<DebugInfo>({
     patternKeys: [],
     patternMapping: {},
     patternCategories: {},
@@ -65,6 +77,7 @@ const PatternManagement: React.FC = () => {
       incompletePatterns: [],
       namingIssues: [],
       categoryIssues: [],
+      orderIssues: [],
     },
   });
   const [formData, setFormData] = useState<PatternFormData>({
@@ -111,13 +124,14 @@ const PatternManagement: React.FC = () => {
   >([]);
 
   // Load existing patterns on component mount
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadPatterns = async () => {
       try {
         setIsLoading(true);
         const existingPatterns = await patternManagementService.getPatterns();
         setPatterns(existingPatterns);
+        // Store the original order of components
+        setOriginalOrder(existingPatterns.map((p) => p.id));
       } catch (error) {
         toast.error("Failed to load patterns");
       } finally {
@@ -345,6 +359,7 @@ const PatternManagement: React.FC = () => {
         incompletePatterns: findIncompletePatterns(patterns),
         namingIssues: validatePatternNames(patterns),
         categoryIssues: validatePatternCategories(patterns, patternCategories),
+        orderIssues: validateComponentOrder(patterns, originalOrder),
       };
 
       setDebugInfo({
@@ -354,7 +369,7 @@ const PatternManagement: React.FC = () => {
         validationResults,
       });
     }
-  }, [debugMode, patterns, findDuplicatePatterns]);
+  }, [debugMode, patterns, originalOrder]);
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
@@ -728,6 +743,7 @@ const PatternManagement: React.FC = () => {
     if (!result.destination) return;
     if (result.source.index === result.destination.index) return;
 
+    let newPatterns;
     if (result.type === "process") {
       const items = Array.from(formData.process);
       const [reorderedItem] = items.splice(result.source.index, 1);
@@ -738,6 +754,19 @@ const PatternManagement: React.FC = () => {
       const [reorderedItem] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reorderedItem);
       setFormData((prev) => ({ ...prev, testCases: items }));
+    } else {
+      // Handle pattern reordering
+      newPatterns = Array.from(patterns);
+      const [reorderedItem] = newPatterns.splice(result.source.index, 1);
+      newPatterns.splice(result.destination.index, 0, reorderedItem);
+      setPatterns(newPatterns);
+
+      // Validate the new order
+      const orderIssues = validateComponentOrder(newPatterns, originalOrder);
+      if (orderIssues.length > 0) {
+        toast.error("Component order validation failed. Reverting changes.");
+        setPatterns(patterns); // Revert changes
+      }
     }
   };
 
@@ -1377,6 +1406,31 @@ const PatternManagement: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   {debugInfo.validationResults.categoryIssues.map(
+                    (issue, index) => (
+                      <div
+                        key={index}
+                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                      >
+                        <div className="text-gray-700 dark:text-gray-300">
+                          {issue.pattern}
+                        </div>
+                        <div className="text-red-500 dark:text-red-400 text-xs mt-1">
+                          {issue.issue}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* Order Issues */}
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+                  Order Issues ({debugInfo.validationResults.orderIssues.length}
+                  )
+                </div>
+                <div className="space-y-2">
+                  {debugInfo.validationResults.orderIssues.map(
                     (issue, index) => (
                       <div
                         key={index}
