@@ -5,6 +5,7 @@ import { ReplCard } from "./ReplCard";
 import { NavigationBar } from "./layout/NavigationBar";
 import { TopBar } from "./layout/TopBar";
 import { PanelLayout } from "./layout/PanelLayout";
+import { PatternControls } from "./layout/PatternControls";
 import { usePatternManager } from "./hooks/usePatternManager";
 
 export default function AlgorithmTrainer() {
@@ -36,11 +37,7 @@ export default function AlgorithmTrainer() {
             <NavigationBar />
           </div>
 
-          <TopBar
-            onPreviousPattern={previousPattern}
-            onNextPattern={nextPattern}
-            onRandomPattern={nextPattern}
-          />
+          <TopBar />
 
           {/* Main content area */}
           <div className="w-full flex-1">
@@ -59,6 +56,11 @@ export default function AlgorithmTrainer() {
             <div className="fixed bottom-4 right-4">
               <GamificationButton />
             </div>
+            <PatternControls
+              onPreviousPattern={previousPattern}
+              onNextPattern={nextPattern}
+              onRandomPattern={nextPattern}
+            />
           </div>
         </TooltipProvider>
         <div className="mt-4 text-center text-sm text-secondary flex-none">

@@ -171,7 +171,7 @@ export function PatternCard({
 
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
-      <div className="flex-none mb-2">
+      <div className="flex-none">
         <h2
           className={
             `text-main text-base sm:text-lg md:text-xl font-semibold truncate flex-none leading-relaxed` +
@@ -200,7 +200,7 @@ export function PatternCard({
           {category}
         </span>
       </div>
-      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-2">
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <TooltipProvider>
             <Tooltip>
