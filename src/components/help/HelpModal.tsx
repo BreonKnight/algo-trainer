@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Button } from "./ui/button";
-import { useTheme } from "@/components/theme-context";
+import { Button } from "../ui/button";
+import { useTheme } from "@/components/theme/theme-context";
 import React from "react";
 
 export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(

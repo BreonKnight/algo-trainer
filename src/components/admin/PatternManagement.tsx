@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import {
   Pattern,
   PatternFormData,
   TestCase,
 } from "../../lib/types/pattern-management";
 import { patternManagementService } from "../../lib/services/pattern-management";
-import { useTheme } from "../../components/theme-context";
 import { toast } from "react-hot-toast";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -31,13 +30,13 @@ type SortOrder = "asc" | "desc";
 
 // Add new types for advanced filtering
 type FilterOption = {
-  field: string;
+  field: keyof Pattern;
   value: string;
   operator: "equals" | "contains" | "startsWith" | "endsWith";
 };
 
 const PatternManagement: React.FC = () => {
-  const {} = useTheme();
+  // Removed unused useTheme destructure
   const [patterns, setPatterns] = useState<Pattern[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
@@ -112,6 +111,7 @@ const PatternManagement: React.FC = () => {
   >([]);
 
   // Load existing patterns on component mount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const loadPatterns = async () => {
       try {
@@ -127,7 +127,138 @@ const PatternManagement: React.FC = () => {
     loadPatterns();
   }, []);
 
-  // Add debug information gathering
+  // Validation helper functions
+  const editDistance = (s1: string, s2: string): number => {
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+    const costs = [];
+    for (let i = 0; i <= s1.length; i++) {
+      let lastValue = i;
+      for (let j = 0; j <= s2.length; j++) {
+        if (i === 0) costs[j] = j;
+        else if (j > 0) {
+          let newValue = costs[j - 1];
+          if (s1.charAt(i - 1) !== s2.charAt(j - 1))
+            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+          costs[j - 1] = lastValue;
+          lastValue = newValue;
+        }
+      }
+      if (i > 0) costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
+  };
+
+  const calculateStringSimilarity = useCallback(
+    (str1: string, str2: string): number => {
+      if (!str1 || !str2) return 0;
+      const longer = str1.length > str2.length ? str1 : str2;
+      const shorter = str1.length > str2.length ? str2 : str1;
+      const longerLength = longer.length;
+      if (longerLength === 0) return 1.0;
+      return (longerLength - editDistance(longer, shorter)) / longerLength;
+    },
+    []
+  );
+
+  const findDuplicatePatterns = useCallback(
+    (patterns: Pattern[]) => {
+      const duplicates: Array<{
+        pattern1: string;
+        pattern2: string;
+        similarity: number;
+      }> = [];
+
+      for (let i = 0; i < patterns.length; i++) {
+        for (let j = i + 1; j < patterns.length; j++) {
+          const nameSimilarity = calculateStringSimilarity(
+            patterns[i].name,
+            patterns[j].name
+          );
+          const descSimilarity = calculateStringSimilarity(
+            patterns[i].description,
+            patterns[j].description
+          );
+
+          const similarity = nameSimilarity * 0.6 + descSimilarity * 0.4;
+
+          if (similarity > 0.7) {
+            duplicates.push({
+              pattern1: patterns[i].name,
+              pattern2: patterns[j].name,
+              similarity: Math.round(similarity * 100),
+            });
+          }
+        }
+      }
+
+      return duplicates.sort((a, b) => b.similarity - a.similarity);
+    },
+    [calculateStringSimilarity]
+  );
+
+  const validatePatternCategories = (
+    patterns: Pattern[],
+    patternCategories: Record<string, number>
+  ) => {
+    const validCategories = Object.keys(patternCategories);
+    return patterns
+      .filter(
+        (pattern) =>
+          !validCategories.some((category) => pattern.category === category)
+      )
+      .map((pattern) => ({
+        pattern: pattern.name,
+        issue: `Invalid category: ${pattern.category}`,
+      }));
+  };
+
+  const findIncompletePatterns = (patterns: Pattern[]): string[] => {
+    return patterns
+      .filter(
+        (pattern) =>
+          !pattern.name ||
+          !pattern.category ||
+          !pattern.description ||
+          !pattern.implementation ||
+          pattern.testCases.length === 0
+      )
+      .map((pattern) => pattern.name);
+  };
+
+  const validatePatternNames = (
+    patterns: Pattern[]
+  ): Array<{ pattern: string; issue: string }> => {
+    const issues: Array<{ pattern: string; issue: string }> = [];
+
+    patterns.forEach((pattern) => {
+      if (!pattern.name) {
+        issues.push({
+          pattern: "Unnamed Pattern",
+          issue: "Pattern has no name",
+        });
+        return;
+      }
+
+      if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
+        issues.push({
+          pattern: pattern.name,
+          issue:
+            "Name should start with capital letter and contain only letters and spaces",
+        });
+      }
+
+      if (pattern.name.length > 50) {
+        issues.push({
+          pattern: pattern.name,
+          issue: "Name is too long (max 50 characters)",
+        });
+      }
+    });
+
+    return issues;
+  };
+
   useEffect(() => {
     if (debugMode) {
       // Get all pattern keys from the patterns array
@@ -213,7 +344,7 @@ const PatternManagement: React.FC = () => {
         duplicates: findDuplicatePatterns(patterns),
         incompletePatterns: findIncompletePatterns(patterns),
         namingIssues: validatePatternNames(patterns),
-        categoryIssues: validatePatternCategories(patterns),
+        categoryIssues: validatePatternCategories(patterns, patternCategories),
       };
 
       setDebugInfo({
@@ -223,159 +354,7 @@ const PatternManagement: React.FC = () => {
         validationResults,
       });
     }
-  }, [debugMode, patterns]);
-
-  // Validation helper functions
-  const findDuplicatePatterns = (
-    patterns: Pattern[]
-  ): Array<{
-    pattern1: string;
-    pattern2: string;
-    similarity: number;
-  }> => {
-    const duplicates: Array<{
-      pattern1: string;
-      pattern2: string;
-      similarity: number;
-    }> = [];
-
-    for (let i = 0; i < patterns.length; i++) {
-      for (let j = i + 1; j < patterns.length; j++) {
-        const nameSimilarity = calculateStringSimilarity(
-          patterns[i].name,
-          patterns[j].name
-        );
-        const descSimilarity = calculateStringSimilarity(
-          patterns[i].description,
-          patterns[j].description
-        );
-
-        // Calculate weighted similarity
-        const similarity =
-          nameSimilarity * 0.6 + // Name similarity is more important
-          descSimilarity * 0.4; // Description similarity is less important
-
-        if (similarity > 0.7) {
-          // 70% similarity threshold
-          duplicates.push({
-            pattern1: patterns[i].name,
-            pattern2: patterns[j].name,
-            similarity: Math.round(similarity * 100),
-          });
-        }
-      }
-    }
-
-    // Sort by total similarity
-    return duplicates.sort((a, b) => b.similarity - a.similarity);
-  };
-
-  const findIncompletePatterns = (patterns: Pattern[]): string[] => {
-    return patterns
-      .filter(
-        (pattern) =>
-          !pattern.name ||
-          !pattern.category ||
-          !pattern.description ||
-          !pattern.implementation ||
-          pattern.testCases.length === 0
-      )
-      .map((pattern) => pattern.name);
-  };
-
-  const validatePatternNames = (
-    patterns: Pattern[]
-  ): Array<{ pattern: string; issue: string }> => {
-    const issues: Array<{ pattern: string; issue: string }> = [];
-
-    patterns.forEach((pattern) => {
-      if (!pattern.name) {
-        issues.push({
-          pattern: "Unnamed Pattern",
-          issue: "Pattern has no name",
-        });
-        return;
-      }
-
-      if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
-        issues.push({
-          pattern: pattern.name,
-          issue:
-            "Name should start with capital letter and contain only letters and spaces",
-        });
-      }
-
-      if (pattern.name.length > 50) {
-        issues.push({
-          pattern: pattern.name,
-          issue: "Name is too long (max 50 characters)",
-        });
-      }
-    });
-
-    return issues;
-  };
-
-  const validatePatternCategories = (
-    patterns: Pattern[]
-  ): Array<{ pattern: string; issue: string }> => {
-    const validCategories = Object.keys(debugInfo.patternCategories);
-    return patterns
-      .filter(
-        (pattern) =>
-          !validCategories.some((category) => pattern.category === category)
-      )
-      .map((pattern) => ({
-        pattern: pattern.name,
-        issue: `Invalid category: ${pattern.category}`,
-      }));
-  };
-
-  const calculateSimilarity = (
-    pattern1: Pattern,
-    pattern2: Pattern
-  ): number => {
-    // Simple similarity calculation based on name and description
-    const nameSimilarity = calculateStringSimilarity(
-      pattern1.name,
-      pattern2.name
-    );
-    const descSimilarity = calculateStringSimilarity(
-      pattern1.description,
-      pattern2.description
-    );
-    return (nameSimilarity + descSimilarity) / 2;
-  };
-
-  const calculateStringSimilarity = (str1: string, str2: string): number => {
-    if (!str1 || !str2) return 0;
-    const longer = str1.length > str2.length ? str1 : str2;
-    const shorter = str1.length > str2.length ? str2 : str1;
-    const longerLength = longer.length;
-    if (longerLength === 0) return 1.0;
-    return (longerLength - editDistance(longer, shorter)) / longerLength;
-  };
-
-  const editDistance = (s1: string, s2: string): number => {
-    s1 = s1.toLowerCase();
-    s2 = s2.toLowerCase();
-    const costs = [];
-    for (let i = 0; i <= s1.length; i++) {
-      let lastValue = i;
-      for (let j = 0; j <= s2.length; j++) {
-        if (i === 0) costs[j] = j;
-        else if (j > 0) {
-          let newValue = costs[j - 1];
-          if (s1.charAt(i - 1) !== s2.charAt(j - 1))
-            newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
-          costs[j - 1] = lastValue;
-          lastValue = newValue;
-        }
-      }
-      if (i > 0) costs[s2.length] = lastValue;
-    }
-    return costs[s2.length];
-  };
+  }, [debugMode, patterns, findDuplicatePatterns]);
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
@@ -412,7 +391,7 @@ const PatternManagement: React.FC = () => {
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  ): void => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
@@ -603,7 +582,7 @@ const PatternManagement: React.FC = () => {
     }
   };
 
-  const handleDeletePattern = async (patternId: string) => {
+  const handleDeletePattern = async (patternId: string): Promise<void> => {
     if (window.confirm("Are you sure you want to delete this pattern?")) {
       try {
         setIsLoading(true);
@@ -618,7 +597,7 @@ const PatternManagement: React.FC = () => {
     }
   };
 
-  const handleEditPattern = (pattern: Pattern) => {
+  const handleEditPattern = (pattern: Pattern): void => {
     if (
       window.confirm(
         "Are you sure you want to edit this pattern? Current form data will be lost."
@@ -630,7 +609,7 @@ const PatternManagement: React.FC = () => {
     }
   };
 
-  const handleCopyPattern = (pattern: Pattern) => {
+  const handleCopyPattern = (pattern: Pattern): void => {
     setFormData({
       ...pattern,
       name: `${pattern.name} (Copy)`,
@@ -762,7 +741,7 @@ const PatternManagement: React.FC = () => {
     }
   };
 
-  const togglePatternExpansion = (patternId: string) => {
+  const togglePatternExpansion = (patternId: string): void => {
     setExpandedPatterns((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(patternId)) {
@@ -774,7 +753,7 @@ const PatternManagement: React.FC = () => {
     });
   };
 
-  const togglePatternSelection = (patternId: string) => {
+  const togglePatternSelection = (patternId: string): void => {
     setSelectedPatterns((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(patternId)) {
@@ -786,7 +765,7 @@ const PatternManagement: React.FC = () => {
     });
   };
 
-  const handleBulkDelete = async () => {
+  const handleBulkDelete = async (): Promise<void> => {
     if (selectedPatterns.size === 0) return;
 
     if (
@@ -814,7 +793,7 @@ const PatternManagement: React.FC = () => {
     }
   };
 
-  const handleExportPatterns = () => {
+  const handleExportPatterns = (): void => {
     const patternsToExport = patterns.filter((p) => selectedPatterns.has(p.id));
     const dataStr = JSON.stringify(patternsToExport, null, 2);
     const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(
@@ -828,7 +807,9 @@ const PatternManagement: React.FC = () => {
     linkElement.click();
   };
 
-  const handleImportPatterns = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImportPatterns = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -870,39 +851,15 @@ const PatternManagement: React.FC = () => {
   };
 
   // Add new functions for filtering and sorting
-  const addFilter = (filter: FilterOption) => {
+  const addFilter = (filter: FilterOption): void => {
     setActiveFilters((prev) => [...prev, filter]);
   };
 
-  const removeFilter = (index: number) => {
+  const removeFilter = (index: number): void => {
     setActiveFilters((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const applyFilters = (patterns: Pattern[]) => {
-    return patterns.filter((pattern) => {
-      return activeFilters.every((filter) => {
-        const value =
-          pattern[filter.field as keyof Pattern]?.toString().toLowerCase() ||
-          "";
-        const filterValue = filter.value.toLowerCase();
-
-        switch (filter.operator) {
-          case "equals":
-            return value === filterValue;
-          case "contains":
-            return value.includes(filterValue);
-          case "startsWith":
-            return value.startsWith(filterValue);
-          case "endsWith":
-            return value.endsWith(filterValue);
-          default:
-            return true;
-        }
-      });
-    });
-  };
-
-  const saveCurrentView = (name: string) => {
+  const saveCurrentView = (name: string): void => {
     setSavedViews((prev) => [
       ...prev,
       {
@@ -913,7 +870,7 @@ const PatternManagement: React.FC = () => {
     ]);
   };
 
-  const loadSavedView = (index: number) => {
+  const loadSavedView = (index: number): void => {
     const view = savedViews[index];
     setActiveFilters(view.filters);
     setSortConfig(view.sortConfig);
@@ -921,6 +878,28 @@ const PatternManagement: React.FC = () => {
 
   // Update the sortedAndFilteredPatterns calculation
   const sortedAndFilteredPatterns = useMemo(() => {
+    const applyFilters = (patterns: Pattern[]) => {
+      return patterns.filter((pattern) => {
+        return activeFilters.every((filter) => {
+          const value = pattern[filter.field]?.toString().toLowerCase() || "";
+          const filterValue = filter.value.toLowerCase();
+
+          switch (filter.operator) {
+            case "equals":
+              return value === filterValue;
+            case "contains":
+              return value.includes(filterValue);
+            case "startsWith":
+              return value.startsWith(filterValue);
+            case "endsWith":
+              return value.endsWith(filterValue);
+            default:
+              return true;
+          }
+        });
+      });
+    };
+
     let filtered = applyFilters(patterns);
 
     return filtered.sort((a, b) => {
@@ -2063,7 +2042,7 @@ const PatternManagement: React.FC = () => {
                     value={filter.field}
                     onChange={(e) => {
                       const newFilters = [...activeFilters];
-                      newFilters[index].field = e.target.value;
+                      newFilters[index].field = e.target.value as keyof Pattern;
                       setActiveFilters(newFilters);
                     }}
                     className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
@@ -2072,6 +2051,12 @@ const PatternManagement: React.FC = () => {
                     <option value="category">Category</option>
                     <option value="timeComplexity">Time Complexity</option>
                     <option value="spaceComplexity">Space Complexity</option>
+                    <option value="description">Description</option>
+                    <option value="monsterHunterContext">
+                      Monster Hunter Context
+                    </option>
+                    <option value="example">Example</option>
+                    <option value="implementation">Implementation</option>
                   </select>
 
                   <select

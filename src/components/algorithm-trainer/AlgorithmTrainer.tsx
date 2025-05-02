@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "../ui/button";
-import { AudioPlayer, Timer } from "../AudioPlayer";
+import { AudioPlayer, Timer } from "../audio/AudioPlayer";
 import { PatternCard } from "./PatternCard";
 import { CodeEditor } from "./CodeEditor";
 // import { TestCases } from "./TestCases";
 import { AnswerCard } from "./AnswerCard";
 import { ReplCard } from "./ReplCard";
 import { PatternKey, PATTERN_KEYS } from "./types";
-import { HelpModal } from "../HelpModal";
+import { HelpModal } from "../help/HelpModal";
 import {
   FaRandom,
   FaChevronRight,
@@ -20,9 +20,8 @@ import {
   TooltipContent,
   TooltipProvider,
 } from "../ui/tooltip";
-import { useTheme } from "../theme-context";
-import { GamificationButton } from "../GamificationButton";
-import GamificationService from "../../lib/gamification";
+import { useTheme } from "../theme/theme-context";
+import { GamificationButton } from "../gamification/GamificationButton";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -43,6 +42,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import type { ReactNode } from "react";
 import type { UniqueIdentifier, DragEndEvent } from "@dnd-kit/core";
+import GamificationService from "../../lib/gamification";
 
 // interface TestCase {
 //   input: string;
@@ -91,9 +91,12 @@ function SortablePanel({
 }
 
 export default function AlgorithmTrainer() {
-  const [currentPattern, setCurrentPattern] = useState<PatternKey>(
-    PATTERN_KEYS[0]
-  );
+  const [selectedPattern, setSelectedPattern] = useState<PatternKey>(() => {
+    const savedPattern = localStorage.getItem("selectedPattern");
+    return savedPattern && PATTERN_KEYS.includes(savedPattern as PatternKey)
+      ? (savedPattern as PatternKey)
+      : (PATTERN_KEYS[0] as PatternKey);
+  });
   const [showAnswer, setShowAnswer] = useState(false);
   const [userCode, setUserCode] = useState("");
   // const [testCases, setTestCases] = useState<TestCase[]>([]);
@@ -108,22 +111,28 @@ export default function AlgorithmTrainer() {
   const navRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  const handlePatternChange = (pattern: PatternKey) => {
+    if (PATTERN_KEYS.includes(pattern)) {
+      setSelectedPattern(pattern);
+      localStorage.setItem("selectedPattern", pattern);
+    }
+  };
+
   const nextPattern = () => {
     const randomIndex = Math.floor(Math.random() * PATTERN_KEYS.length);
-    const nextPattern = PATTERN_KEYS[randomIndex];
+    const nextPattern = PATTERN_KEYS[randomIndex] as PatternKey;
 
-    if (currentPattern !== nextPattern) {
+    if (selectedPattern !== nextPattern) {
       if (currentIndexRef.current < patternHistoryRef.current.length - 1) {
         patternHistoryRef.current = patternHistoryRef.current.slice(
           0,
           currentIndexRef.current + 1
         );
       }
-
       patternHistoryRef.current.push(nextPattern);
       currentIndexRef.current = patternHistoryRef.current.length - 1;
 
-      setCurrentPattern(nextPattern);
+      handlePatternChange(nextPattern);
       setShowAnswer(false);
       setUserCode("");
     }
@@ -132,9 +141,10 @@ export default function AlgorithmTrainer() {
   const previousPattern = () => {
     if (currentIndexRef.current > 0) {
       currentIndexRef.current--;
-      const previousPattern =
-        patternHistoryRef.current[currentIndexRef.current];
-      setCurrentPattern(previousPattern);
+      const previousPattern = patternHistoryRef.current[
+        currentIndexRef.current
+      ] as PatternKey;
+      handlePatternChange(previousPattern);
       setShowAnswer(false);
       setUserCode("");
     }
@@ -142,11 +152,11 @@ export default function AlgorithmTrainer() {
 
   // Track algorithm pattern changes
   useEffect(() => {
-    if (currentPattern) {
+    if (selectedPattern) {
       const gamificationService = GamificationService.getInstance();
-      gamificationService.recordAlgorithmAttempt(currentPattern, true);
+      gamificationService.recordAlgorithmAttempt(selectedPattern, true);
     }
-  }, [currentPattern]);
+  }, [selectedPattern]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -196,7 +206,7 @@ export default function AlgorithmTrainer() {
               Algorithm Trainer
             </h1>
             <span className="text-xs font-semibold text-accent2 mt-1">
-              Pattern {PATTERN_KEYS.indexOf(currentPattern) + 1} of{" "}
+              Pattern {PATTERN_KEYS.indexOf(selectedPattern) + 1} of{" "}
               {PATTERN_KEYS.length}
             </span>
 
@@ -438,8 +448,8 @@ export default function AlgorithmTrainer() {
                             {patternOpen && (
                               <div className="h-full">
                                 <PatternCard
-                                  currentPattern={currentPattern}
-                                  onPatternChange={setCurrentPattern}
+                                  currentPattern={selectedPattern}
+                                  onPatternChange={handlePatternChange}
                                 />
                               </div>
                             )}
@@ -503,11 +513,11 @@ export default function AlgorithmTrainer() {
                             {answerOpen && (
                               <div className="h-full">
                                 <AnswerCard
-                                  currentPattern={currentPattern}
+                                  currentPattern={selectedPattern}
                                   showAnswer={showAnswer}
                                   setShowAnswer={setShowAnswer}
                                   onNextPattern={nextPattern}
-                                  onPatternChange={setCurrentPattern}
+                                  onPatternChange={handlePatternChange}
                                 />
                               </div>
                             )}

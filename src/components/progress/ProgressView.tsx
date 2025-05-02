@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { Progress } from "./ui/progress";
-import { Button } from "./ui/button";
+import { Progress } from "../ui/progress";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Slider } from "./ui/slider";
+} from "../ui/card";
+import { Slider } from "../ui/slider";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { useTheme } from "./theme-context";
+import { useTheme } from "../theme/theme-context";
 import { cn } from "@/lib/utils";
 
 export function ProgressView() {
