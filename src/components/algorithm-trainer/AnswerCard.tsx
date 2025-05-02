@@ -166,12 +166,12 @@ export function AnswerCard({
                         {showMonsterHunter ? (
                           <>
                             <Book className="h-3.5 w-3.5 mr-1" />
-                            <span>Regular</span>
+                            <span className="hidden sm:inline">Regular</span>
                           </>
                         ) : (
                           <>
                             <Sword className="h-3.5 w-3.5 mr-1" />
-                            <span>Hunter</span>
+                            <span className="hidden sm:inline">Hunter</span>
                           </>
                         )}
                       </Button>
@@ -201,12 +201,12 @@ export function AnswerCard({
                         {showTestData ? (
                           <>
                             <Code className="h-3.5 w-3.5 mr-1" />
-                            <span>Code</span>
+                            <span className="hidden sm:inline">Code</span>
                           </>
                         ) : (
                           <>
                             <TestTube className="h-3.5 w-3.5 mr-1" />
-                            <span>Guide</span>
+                            <span className="hidden sm:inline">Guide</span>
                           </>
                         )}
                       </Button>
