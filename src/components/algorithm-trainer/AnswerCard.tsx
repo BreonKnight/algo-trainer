@@ -5,7 +5,7 @@ import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { useState, useRef, useEffect } from "react";
-import { Code, TestTube, Sword, Book } from "lucide-react";
+import { Code, TestTube, Sword, Book, Copy, Check } from "lucide-react";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
 import {
   Tooltip,
@@ -25,6 +25,7 @@ import {
   mhTheme,
 } from "@/lib/theme";
 import * as monaco from "monaco-editor";
+import { cn } from "@/lib/utils";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;
@@ -57,6 +58,7 @@ export function AnswerCard({
 }: AnswerCardProps) {
   const [showTestData, setShowTestData] = useState(false);
   const [showMonsterHunter, setShowMonsterHunter] = useState(false);
+  const [copied, setCopied] = useState(false);
   const { theme } = useTheme();
   const cardRef = useRef<HTMLDivElement>(null);
   const isDesktop = useIsDesktop();
@@ -111,19 +113,31 @@ export function AnswerCard({
     }, 100);
   };
 
+  const handleCopyCode = () => {
+    if (editorRef.current) {
+      const code = editorRef.current.getValue();
+      navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   return (
     <Card
       className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden"
       ref={cardRef}
     >
-      <div className="flex-none flex justify-between items-center">
-        <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
-          Solution
-        </h2>
-        <div className="flex items-center gap-2 mr-10 mt-0.5">
+      <div className="flex-none flex justify-between items-center mb-4">
+        <div className="flex items-center gap-4">
+          <h2 className="text-main text-lg sm:text-xl md:text-2xl font-semibold truncate leading-relaxed">
+            Solution
+          </h2>
           <Button
             onClick={() => setShowAnswer(!showAnswer)}
-            className="bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md flex items-center justify-center"
+            className={cn(
+              "bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-9 px-4 rounded-md flex items-center justify-center transition-all",
+              showAnswer && "ring-2 ring-accent3/50"
+            )}
           >
             {showAnswer ? "Hide Answer" : "Show Answer"}
           </Button>
@@ -132,7 +146,7 @@ export function AnswerCard({
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         {showAnswer && (
           <>
-            <div className="flex-none flex justify-between items-center mt-2">
+            <div className="flex-none flex justify-between items-center mb-3">
               <h3 className="text-main text-base sm:text-lg font-semibold truncate flex leading-relaxed">
                 {showTestData ? "Monster Hunter Guide:" : "Implementation:"}
               </h3>
@@ -144,16 +158,19 @@ export function AnswerCard({
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowMonsterHunter((prev) => !prev)}
-                        className="h-6 px-1.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs"
+                        className={cn(
+                          "h-8 px-2.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs transition-all",
+                          showMonsterHunter && "bg-secondary/20"
+                        )}
                       >
                         {showMonsterHunter ? (
                           <>
-                            <Book className="h-3.5 w-3.5 mr-0.5" />
+                            <Book className="h-3.5 w-3.5 mr-1" />
                             <span>Regular</span>
                           </>
                         ) : (
                           <>
-                            <Sword className="h-3.5 w-3.5 mr-0.5" />
+                            <Sword className="h-3.5 w-3.5 mr-1" />
                             <span>Hunter</span>
                           </>
                         )}
@@ -176,16 +193,19 @@ export function AnswerCard({
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowTestData((prev) => !prev)}
-                        className="h-6 px-1.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs"
+                        className={cn(
+                          "h-8 px-2.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs transition-all",
+                          showTestData && "bg-secondary/20"
+                        )}
                       >
                         {showTestData ? (
                           <>
-                            <Code className="h-3.5 w-3.5 mr-0.5" />
+                            <Code className="h-3.5 w-3.5 mr-1" />
                             <span>Code</span>
                           </>
                         ) : (
                           <>
-                            <TestTube className="h-3.5 w-3.5 mr-0.5" />
+                            <TestTube className="h-3.5 w-3.5 mr-1" />
                             <span>Guide</span>
                           </>
                         )}
@@ -216,19 +236,13 @@ export function AnswerCard({
                     <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
                       {(() => {
                         if (showMonsterHunter) {
-                          // Monster Hunter themed example/test data
                           const testData =
                             monsterHunterTestData.get(currentPattern);
-                          console.log(
-                            `Looking for test data for pattern: ${currentPattern}`
-                          );
-                          console.log(`Test data found: ${!!testData}`);
                           if (testData) {
                             return testData;
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
                         } else {
-                          // Regular example/test data
                           const val = algorithmPatterns[currentPattern];
                           if (
                             val &&
@@ -246,6 +260,35 @@ export function AnswerCard({
                 </div>
               ) : (
                 <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+                  <div className="flex justify-end mb-2">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={handleCopyCode}
+                            className="h-8 px-2.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs transition-all"
+                          >
+                            {copied ? (
+                              <>
+                                <Check className="h-3.5 w-3.5 mr-1" />
+                                <span>Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-3.5 w-3.5 mr-1" />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Copy code to clipboard</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
                   <div
                     ref={scrollRef}
                     className="flex-1 min-h-[300px] overflow-hidden rounded-xl"
@@ -261,7 +304,6 @@ export function AnswerCard({
                       onMount={handleEditorDidMount}
                       value={(() => {
                         if (showMonsterHunter) {
-                          // Monster Hunter themed Python implementation
                           const val = monsterHunterPatterns.get(currentPattern);
                           if (
                             val &&
@@ -276,7 +318,6 @@ export function AnswerCard({
                           }
                           return `# Monster Hunter Python implementation for ${currentPattern}\n# Coming soon!`;
                         } else {
-                          // Regular Python implementation
                           const val = algorithmPatterns[currentPattern];
                           if (typeof val === "string") {
                             return val;
@@ -316,7 +357,7 @@ export function AnswerCard({
                   </div>
                   {/* Vertical resize handle */}
                   <div
-                    className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+                    className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group"
                     style={{ userSelect: "none" }}
                     onMouseDown={(e) => {
                       if (!isDesktop) return;
@@ -339,7 +380,7 @@ export function AnswerCard({
                       window.addEventListener("mouseup", onUp);
                     }}
                   >
-                    <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+                    <div className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 transition-all" />
                   </div>
                 </div>
               )}
