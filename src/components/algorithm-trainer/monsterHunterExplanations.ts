@@ -1618,5 +1618,5 @@ export function checkMissingPatterns() {
   return [];
 }
 
-// Run the check when the file is loaded
-checkMissingPatterns();
+// Remove the immediate execution
+// checkMissingPatterns();

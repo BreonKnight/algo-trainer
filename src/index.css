@@ -37,8 +37,10 @@
       rgba(255, 121, 198, 0.08) 100%
     );
     --text-selected-dark: #282a36;
-    --bg-background: var(--bg-main);
-    --text-main: var(--text-main);
+    --bg-main: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --text-main: #111827;
+    --text-secondary: #4b5563;
   }
 
   .dark {
@@ -61,7 +63,10 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --text-selected-dark: #282a36;
+    --bg-main: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-main: #ffffff;
+    --text-secondary: #a1a1aa;
   }
 }
 

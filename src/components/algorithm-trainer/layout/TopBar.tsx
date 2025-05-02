@@ -1,5 +1,6 @@
 import { Button } from "../../ui/button";
-import { AudioPlayer, Timer } from "../../audio/AudioPlayer";
+import { AudioPlayer } from "../../audio/AudioPlayer";
+import { Timer } from "../../timer/Timer";
 import { HelpModal } from "../../help/HelpModal";
 import {
   Sun,
@@ -50,25 +51,32 @@ export function TopBar({ className }: TopBarProps) {
   return (
     <div
       className={cn(
-        "w-full mb-4 sm:mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 rounded-xl shadow-lg p-3 sm:p-4 glassy-gradient-bg relative",
+        "w-full mb-4 sm:mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 rounded-xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),0_-8px_16px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),0_-8px_16px_-2px_rgba(0,0,0,0.4)] p-3 sm:p-4 glassy-gradient-bg relative",
         className
       )}
     >
       {/* Left: Timer & AudioPlayer */}
-      <div className="flex items-center gap-3 sm:gap-4">
-        <Timer />
-        <AudioPlayer />
+      <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+          <Timer />
+          <AudioPlayer />
+        </div>
+        <div className="sm:hidden w-full">
+          <HelpModal />
+        </div>
       </div>
 
       {/* Right: Help & Theme Toggle */}
-      <div className="flex items-center gap-2">
-        <HelpModal />
+      <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="hidden sm:block">
+          <HelpModal />
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               className={cn(
-                "h-9 px-3 gap-2 rounded-lg transition-all duration-300",
+                "h-9 px-3 gap-2 rounded-lg transition-all duration-300 w-full sm:w-auto",
                 theme === "light" || theme === "solarized"
                   ? "bg-accent/10 hover:bg-accent/20 text-accent"
                   : "bg-accent2/10 hover:bg-accent2/20 text-accent2"

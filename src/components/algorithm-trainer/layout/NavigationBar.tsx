@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaChartLine, FaBook, FaPython } from "react-icons/fa";
+import { FaChartLine, FaBook, FaPython, FaCode } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useTheme } from "../../theme/theme-context";
 
@@ -12,12 +12,15 @@ export function NavigationBar({ className }: NavigationBarProps) {
 
   return (
     <nav
-      className={cn("flex items-center justify-center gap-6 mt-4", className)}
+      className={cn(
+        "flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 mt-4 w-full px-4",
+        className
+      )}
     >
       <Link
         to="/progress"
         className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-lg transition-colors",
+          "flex items-center gap-2 px-4 py-3 sm:py-2 rounded-lg transition-colors w-full sm:w-auto justify-center",
           theme === "nord"
             ? "text-white/90 hover:text-white hover:bg-white/10"
             : "text-main hover:bg-secondary/20"
@@ -29,7 +32,7 @@ export function NavigationBar({ className }: NavigationBarProps) {
       <Link
         to="/tutorials"
         className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-lg transition-colors",
+          "flex items-center gap-2 px-4 py-3 sm:py-2 rounded-lg transition-colors w-full sm:w-auto justify-center",
           theme === "nord"
             ? "text-white/90 hover:text-white hover:bg-white/10"
             : "text-main hover:bg-secondary/20"
@@ -41,7 +44,7 @@ export function NavigationBar({ className }: NavigationBarProps) {
       <Link
         to="/python-techniques"
         className={cn(
-          "flex items-center gap-2 px-4 py-2 rounded-lg transition-colors",
+          "flex items-center gap-2 px-4 py-3 sm:py-2 rounded-lg transition-colors w-full sm:w-auto justify-center",
           theme === "nord"
             ? "text-white/90 hover:text-white hover:bg-white/10"
             : "text-main hover:bg-secondary/20"
@@ -49,6 +52,18 @@ export function NavigationBar({ className }: NavigationBarProps) {
       >
         <FaPython className="h-4 w-4" />
         <span className="text-sm font-medium">Python</span>
+      </Link>
+      <Link
+        to="/visualizer"
+        className={cn(
+          "flex items-center gap-2 px-4 py-3 sm:py-2 rounded-lg transition-colors w-full sm:w-auto justify-center",
+          theme === "nord"
+            ? "text-white/90 hover:text-white hover:bg-white/10"
+            : "text-main hover:bg-secondary/20"
+        )}
+      >
+        <FaCode className="h-4 w-4" />
+        <span className="text-sm font-medium">Visualizer</span>
       </Link>
     </nav>
   );
