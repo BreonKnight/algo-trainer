@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const LCAPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const LCAPattern = () => (
       Use: Find LCA in tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`LCA-PREPROCESS(T)
+    <PseudocodeDisplay code={`LCA-PREPROCESS(T)
     let n be the number of vertices in T
     let depth[1‥n] be a new array
     let up[1‥n][0‥log n] be a new array
@@ -66,9 +65,7 @@ LCA-QUERY(u, v, depth, up)
 // Query: LCA(4,6)
 //   Step 1: Bring 4 to depth 2
 //   Step 2: Binary search for LCA
-//   Output: 1`}
-      </pre>
-    </div>
+//   Output: 1`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const PrimsAlgorithmPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const PrimsAlgorithmPattern = () => (
       spanning tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Prim's algorithm for minimum spanning tree
+    <PseudocodeDisplay code={`// Prim's algorithm for minimum spanning tree
 PRIM(G, w, r):
     for each u ∈ G.V:
         key[u] ← ∞
@@ -41,9 +40,7 @@ PRIM(G, w, r):
 // 5. Extract 4: key = [0, 2, 1, 4, 6], π = [NIL, 1, 2, 2, 3]
 // 6. Extract 5: key = [0, 2, 1, 4, 6], π = [NIL, 1, 2, 2, 3]
 // 
-// Output: MST edges = {(1,2), (2,3), (2,4), (3,5)}`}
-      </pre>
-    </div>
+// Output: MST edges = {(1,2), (2,3), (2,4), (3,5)}`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import React from "react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 import { ChevronRight } from "lucide-react";
 
 export const MillerRabinPattern = () => {
@@ -13,9 +14,7 @@ export const MillerRabinPattern = () => {
         Probabilistic primality test
       </div>
 
-      <div className="mb-4">
-        <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-          {`# Miller-Rabin Algorithm
+      <PseudocodeDisplay code={`# Miller-Rabin Algorithm
 # Input: Integer n > 2, number of rounds k
 # Output: List of witnesses to compositeness
 
@@ -63,9 +62,7 @@ Algorithm MILLER-RABIN(n, k)
         end if
     end for
     
-    return witnesses`}
-        </pre>
-      </div>
+    return witnesses`} />
 
       <div className="mb-2">
         <span className="text-accent font-bold">Key Steps:</span>

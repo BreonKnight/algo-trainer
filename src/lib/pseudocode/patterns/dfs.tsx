@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DFSPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DFSPattern = () => (
       sort, cycle detection, and strongly connected components
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard DFS
+    <PseudocodeDisplay code={`// Standard DFS
 DFS(G):
     for each vertex u in G.V:
         u.color = WHITE
@@ -67,9 +66,7 @@ SCC(G):
     DFS(G)
     compute G^T
     DFS(G^T) in order of decreasing finish time
-    return trees in depth-first forest`}
-      </pre>
-    </div>
+    return trees in depth-first forest`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

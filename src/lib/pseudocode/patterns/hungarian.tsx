@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const HungarianPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const HungarianPattern = () => (
       problem
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`HUNGARIAN(C)
+    <PseudocodeDisplay code={`HUNGARIAN(C)
 1  n = C.rows
 2  // Step 1: Subtract row minima
 3  for i = 1 to n
@@ -85,9 +84,7 @@ export const HungarianPattern = () => (
 // Step 3: Find complete matching
 //         Matching: {(1,2), (2,1), (3,3)}
 // 
-// Final assignment: [(1,2), (2,1), (3,3)]`}
-      </pre>
-    </div>
+// Final assignment: [(1,2), (2,1), (3,3)]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

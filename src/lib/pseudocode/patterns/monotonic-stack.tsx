@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MonotonicStackPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MonotonicStackPattern = () => (
       greater/smaller element
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Next greater element
+    <PseudocodeDisplay code={`// Next greater element
 NEXT-GREATER-ELEMENT(A):
     n ← length[A]
     S ← empty stack
@@ -66,9 +65,7 @@ PREVIOUS-SMALLER-ELEMENT(A):
 //   i = 3: S = [2, 3], result = [5, -1, -1, -1, -1]
 //   i = 4: S = [4], result = [5, 10, 10, -1, -1]
 //   i = 5: S = [4, 5], result = [5, 10, 10, -1, -1]
-//   Final result: [5, 10, 10, -1, -1]`}
-      </pre>
-    </div>
+//   Final result: [5, 10, 10, -1, -1]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -37,6 +37,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^10.16.4",
+    "glob": "^11.0.2",
     "lucide-react": "^0.294.0",
     "prism-react-renderer": "^2.4.1",
     "pyodide": "^0.27.5",

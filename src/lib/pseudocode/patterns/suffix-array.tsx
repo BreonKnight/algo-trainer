@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const SuffixArrayPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const SuffixArrayPattern = () => (
       string operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Suffix Array: Efficient string operations
+    <PseudocodeDisplay code={`# Suffix Array: Efficient string operations
 # Input: String S[1..n]
 # Output: Suffix array SA[1..n] where SA[i] is starting index of i-th smallest suffix
 
@@ -83,9 +82,7 @@ Algorithm SUFFIX-ARRAY(S)
 # Step 4: Sort by first 4 characters
 #         SA = [6, 4, 2, 1, 3, 5]
 # 
-# Output: [6, 4, 2, 1, 3, 5]`}
-      </pre>
-    </div>
+# Output: [6, 4, 2, 1, 3, 5]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

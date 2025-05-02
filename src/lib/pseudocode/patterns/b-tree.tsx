@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BTreePattern = () => (
       balanced search tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`B-TREE-INSERT(T, k)
+    <PseudocodeDisplay code={`B-TREE-INSERT(T, k)
     let r ← T.root
     if r.n = 2t - 1
         then s ← ALLOCATE-NODE()
@@ -89,9 +88,7 @@ B-TREE-SPLIT-CHILD(x, i)
 //    /    |    \
 // [20]  [60]  [80,90]
 // /  \  /  \
-// [10][30][50]`}
-      </pre>
-    </div>
+// [10][30][50]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

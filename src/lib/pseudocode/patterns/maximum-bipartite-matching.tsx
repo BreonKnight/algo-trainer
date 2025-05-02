@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MaximumBipartiteMatchingPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MaximumBipartiteMatchingPattern = () => (
       matching in bipartite graph
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Maximum bipartite matching using Ford-Fulkerson
+    <PseudocodeDisplay code={`// Maximum bipartite matching using Ford-Fulkerson
 MAX-BIPARTITE-MATCHING(G):
     // G is a bipartite graph with partitions L and R
     // Add source s and sink t
@@ -51,9 +50,7 @@ FORD-FULKERSON(G, s, t):
 //    - s→2→5→t
 //    - s→3→6→t
 // 
-// Output: Matching = {(1,4), (2,5), (3,6)}`}
-      </pre>
-    </div>
+// Output: Matching = {(1,4), (2,5), (3,6)}`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

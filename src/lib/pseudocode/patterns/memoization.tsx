@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MemoizationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MemoizationPattern = () => (
       results to avoid redundant calculations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Memoization: Store computed results to avoid redundant calculations
+    <PseudocodeDisplay code={`# Memoization: Store computed results to avoid redundant calculations
 # Input: Function f with parameters, memoization table
 # Output: Result of function with parameters
 
@@ -52,9 +51,7 @@ Algorithm MEMOIZED-FIBONACCI(n)
 #         (((1 + 0) + 1) + (1 + 0)) + ((1 + 0) + 1)
 #         memo = [0, 1, 1, 2, 3, 5]
 # 
-# Output: 5`}
-      </pre>
-    </div>
+# Output: 5`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DivideAndConquerPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DivideAndConquerPattern = () => (
       problems into smaller subproblems
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Merge Sort
+    <PseudocodeDisplay code={`// Merge Sort
 MERGE-SORT(A, l, r):
     if l ≥ r:
         return
@@ -57,9 +56,7 @@ STRASSEN(A, B):
     C12 = P1 + P2
     C21 = P3 + P4
     C22 = P5 + P1 - P3 - P7
-    return combine C11, C12, C21, C22`}
-      </pre>
-    </div>
+    return combine C11, C12, C21, C22`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

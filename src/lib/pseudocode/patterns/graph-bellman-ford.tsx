@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BellmanFordPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BellmanFordPattern = () => (
       single-source shortest paths with negative weights
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Bellman-Ford
+    <PseudocodeDisplay code={`// Standard Bellman-Ford
 BELLMAN-FORD(G, s):
     # Initialize
     dist = [∞] * |V|
@@ -88,9 +87,7 @@ BELLMAN-FORD-EARLY(G, s):
         if dist[u] + w < dist[v]:
             return "Graph contains negative cycle"
     
-    return dist, parent`}
-      </pre>
-    </div>
+    return dist, parent`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

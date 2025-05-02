@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const ManachersAlgorithmPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const ManachersAlgorithmPattern = () => (
       palindromic substring
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Manacher's Algorithm: Find longest palindromic substring
+    <PseudocodeDisplay code={`# Manacher's Algorithm: Find longest palindromic substring
 # Input: String S[1..n]
 # Output: Longest palindromic substring in S
 
@@ -69,9 +68,7 @@ Algorithm MANACHER(S)
 # Step 2: P = [0, 1, 0, 3, 0, 1, 0, 1, 0, 1, 0]
 # Step 3: max_len = 3, center = 4
 # 
-# Output: "bab"`}
-      </pre>
-    </div>
+# Output: "bab"`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

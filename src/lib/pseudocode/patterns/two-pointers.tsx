@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TwoPointersPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TwoPointersPattern = () => (
       subarrays that satisfy certain conditions
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Two sum
+    <PseudocodeDisplay code={`// Two sum
 TWO-SUM(A, target):
     left = 0
     right = A.length - 1
@@ -75,9 +74,7 @@ THREE-SUM(A, target):
                 left += 1
             else:
                 right -= 1
-    return result`}
-      </pre>
-    </div>
+    return result`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

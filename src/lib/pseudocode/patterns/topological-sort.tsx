@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TopologicalSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TopologicalSortPattern = () => (
       ordering of vertices in a DAG
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Topological Sort: Linear ordering of vertices in a DAG
+    <PseudocodeDisplay code={`# Topological Sort: Linear ordering of vertices in a DAG
 # Input: Directed Acyclic Graph G = (V, E)
 # Output: Topological ordering of vertices
 
@@ -61,9 +60,7 @@ Algorithm TOPOLOGICAL-SORT(G)
 #   discovery[5] = 4, finish[5] = 5
 #   discovery[3] = 8, finish[3] = 9
 # 
-# Output: [1, 3, 2, 4, 5]`}
-      </pre>
-    </div>
+# Output: [1, 3, 2, 4, 5]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

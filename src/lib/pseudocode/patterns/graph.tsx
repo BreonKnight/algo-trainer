@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GraphPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GraphPattern = () => (
       relationships between objects
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Graph representation
+    <PseudocodeDisplay code={`// Graph representation
 GRAPH-REPRESENTATION(V, E):
     G = new Graph
     for each v ∈ V:
@@ -63,9 +62,7 @@ BFS(G, s):
                 v.d = u.d + 1
                 v.parent = u
                 ENQUEUE(Q, v)
-        u.color = BLACK`}
-      </pre>
-    </div>
+        u.color = BLACK`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

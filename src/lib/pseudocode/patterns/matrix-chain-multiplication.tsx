@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixChainMultiplicationPattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const MatrixChainMultiplicationPattern = () => (
       matrix multiplication order
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Find minimum number of scalar multiplications
+    <PseudocodeDisplay code={`// Find minimum number of scalar multiplications
 MATRIX-CHAIN-ORDER(p):
     n = length of p - 1
     # Initialize tables for costs and splits
@@ -50,9 +49,7 @@ PRINT-OPTIMAL-PARENS(s, i, j):
         print "("
         PRINT-OPTIMAL-PARENS(s, i, s[i][j])
         PRINT-OPTIMAL-PARENS(s, s[i][j] + 1, j)
-        print ")"`}
-      </pre>
-    </div>
+        print ")"`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyJobSchedulingPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyJobSchedulingPattern = () => (
       jobs to maximize profit or minimize completion time
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Job Scheduling
+    <PseudocodeDisplay code={`// Standard Job Scheduling
 def job_scheduling(jobs):
     # Sort jobs by finish time
     jobs.sort(key=lambda x: x[1])
@@ -100,9 +99,7 @@ def job_scheduling_weights(jobs):
 #     (3, 1, 15)
 # ]
 # Output:
-# total_profit = 186`}
-      </pre>
-    </div>
+# total_profit = 186`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const AVLTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const AVLTreePattern = () => (
       binary search tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`AVL-INSERT(T, z)
+    <PseudocodeDisplay code={`AVL-INSERT(T, z)
     let y ← null
     let x ← T.root
     
@@ -118,9 +117,7 @@ LEFT-ROTATE(T, x)
 //        /  \
 //      20    40
 //     /  \    \
-//   10   25   50`}
-      </pre>
-    </div>
+//   10   25   50`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -3,72 +3,53 @@ import { ChevronRight } from "lucide-react";
 export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
   {
     "Dynamic Programming": () => (
-      <div>
-        <div className="mb-2">
-          <span className="text-accent font-bold">
-            Dynamic Programming Template
-          </span>
-          <span className="ml-2 text-xs text-secondary">
-            (Algorithm Paradigm)
-          </span>
-        </div>
-        <div className="mb-2 text-xs text-secondary">
-          Time: O(n * m) - depends on state space dimensions &nbsp;|&nbsp;
-          Space: O(n * m) - for memoization table &nbsp;|&nbsp; Use:
-          Optimization problems with overlapping subproblems
-        </div>
-        <div className="flex items-start mb-1">
-          <span className="font-bold text-main mr-2">1.</span>
-          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-          <span>
-            <span className="font-semibold text-accent">
-              Define state parameters:
-            </span>{" "}
-            Identify subproblem dimensions, choose state representation
-          </span>
-        </div>
-        <div className="flex items-start mb-1">
-          <span className="font-bold text-main mr-2">2.</span>
-          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-          <span>
-            <span className="font-semibold text-accent">
-              Create memoization structure:
-            </span>{" "}
-            Initialize memo table/map, match dimensions to state
-          </span>
-        </div>
-        <div className="flex items-start mb-1">
-          <span className="font-bold text-main mr-2">3.</span>
-          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-          <span>
-            <span className="font-semibold text-accent">
-              Handle base cases:
-            </span>{" "}
-            Identify smallest subproblems, set their values directly
-          </span>
-        </div>
-        <div className="flex items-start mb-1">
-          <span className="font-bold text-main mr-2">4.</span>
-          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-          <span>
-            <span className="font-semibold text-accent">
-              Define recurrence relation:
-            </span>{" "}
-            Try all possible choices, take minimum/maximum, store result in memo
-          </span>
-        </div>
-        <div className="flex items-start mb-1">
-          <span className="font-bold text-main mr-2">5.</span>
-          <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
-          <span>
-            <span className="font-semibold text-accent">
-              Return optimal answer
-            </span>
-          </span>
-        </div>
+      <div className="pseudocode">
+        <span className="algorithm-title">Dynamic Programming Template</span>
+        <span className="algorithm-type">Algorithm Paradigm</span>
+        <span className="algorithm-meta">
+          Time: O(n * m) - depends on state space dimensions | Space: O(n * m) -
+          for memoization table | Use: Optimization problems with overlapping
+          subproblems
+        </span>
+        <ul>
+          <li>
+            <span className="step-number">1.</span>
+            <span className="keyword">Define state parameters:</span>
+            <span className="variable">
+              Identify subproblem dimensions
+            </span>,{" "}
+            <span className="function">choose state representation</span>
+          </li>
+          <li>
+            <span className="step-number">2.</span>
+            <span className="keyword">Create memoization structure:</span>
+            <span className="function">Initialize memo table/map</span>,{" "}
+            <span className="variable">match dimensions to state</span>
+          </li>
+          <li>
+            <span className="step-number">3.</span>
+            <span className="keyword">Handle base cases:</span>
+            <span className="function">
+              Identify smallest subproblems
+            </span>, <span className="variable">set their values directly</span>
+          </li>
+          <li>
+            <span className="step-number">4.</span>
+            <span className="keyword">Implement recurrence relation:</span>
+            <span className="function">
+              Define transition between states
+            </span>, <span className="variable">use memoized values</span>
+          </li>
+          <li>
+            <span className="step-number">5.</span>
+            <span className="keyword">Return final solution:</span>
+            <span className="function">
+              Extract answer from memo table
+            </span>, <span className="variable">handle edge cases</span>
+          </li>
+        </ul>
       </div>
     ),
-
     Greedy: () => (
       <div>
         <div className="mb-2">

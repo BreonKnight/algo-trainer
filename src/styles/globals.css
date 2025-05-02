@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Pseudocode Syntax Highlighting Colors */
+  --pseudocode-text: #f8f8f2;
+  --pseudocode-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  --pseudocode-heading: #ff79c6;
+  --pseudocode-type: #bd93f9;
+  --pseudocode-metadata: #6272a4;
+
+  --pseudocode-keyword: #ff79c6;
+  --pseudocode-keyword-shadow: 0 1px 2px rgba(255, 121, 198, 0.2);
+
+  --pseudocode-function: #50fa7b;
+  --pseudocode-function-shadow: 0 1px 2px rgba(80, 250, 123, 0.2);
+
+  --pseudocode-variable: #8be9fd;
+  --pseudocode-string: #f1fa8c;
+  --pseudocode-string-shadow: 0 1px 2px rgba(241, 250, 140, 0.2);
+
+  --pseudocode-number: #bd93f9;
+  --pseudocode-number-shadow: 0 1px 2px rgba(189, 147, 249, 0.2);
+
+  --pseudocode-operator: #ff79c6;
+  --pseudocode-comment: #6272a4;
+
+  --pseudocode-control: #ff79c6;
+  --pseudocode-structure: #8be9fd;
+
+  --pseudocode-step: #50fa7b;
+  --pseudocode-indicator: #ff79c6;
+
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    rgba(40, 42, 54, 0.95),
+    rgba(68, 71, 90, 0.95)
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(40, 42, 54, 0.1),
+    rgba(68, 71, 90, 0.1)
+  );
+}
+
 body {
   @apply min-h-screen bg-gradient-to-br from-[#191a21] via-[#282a36] to-[#44475a];
 }

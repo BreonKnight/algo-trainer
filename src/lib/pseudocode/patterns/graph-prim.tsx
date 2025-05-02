@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const PrimPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const PrimPattern = () => (
       minimum spanning tree in weighted graphs
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Prim's Algorithm
+    <PseudocodeDisplay code={`// Standard Prim's Algorithm
 PRIM(G):
     # Initialize
     key = [∞] * |V|
@@ -86,9 +85,7 @@ PRIM-FH(G):
                 parent[v] = u
                 fh.decrease_key(nodes[v], weight)
     
-    return parent`}
-      </pre>
-    </div>
+    return parent`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

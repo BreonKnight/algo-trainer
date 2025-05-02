@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const NetworkFlowPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const NetworkFlowPattern = () => (
       flow in a network
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`FORD-FULKERSON(G, s, t)
+    <PseudocodeDisplay code={`FORD-FULKERSON(G, s, t)
 1  for each edge (u,v) ∈ G.E
 2      (u,v).f = 0
 3  while there exists a path p from s to t in residual network Gf
@@ -56,9 +55,7 @@ DINIC(G, s, t)
 // Step 3: Find augmenting path s->b->d->t with flow 4
 // Step 4: Find augmenting path s->a->b->c->t with flow 2
 // 
-// Final flow: 11`}
-      </pre>
-    </div>
+// Final flow: 11`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

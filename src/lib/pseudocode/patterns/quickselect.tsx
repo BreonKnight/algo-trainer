@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const QuickselectPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const QuickselectPattern = () => (
       Use: Find k-th smallest element
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`QUICKSELECT(A, k)
+    <PseudocodeDisplay code={`QUICKSELECT(A, k)
     return SELECT(A, 1, A.length, k)
 
 SELECT(A, p, r, k)
@@ -45,9 +44,7 @@ PARTITION(A, p, r)
 //   i = 3 - 1 + 1 = 3
 //   k = i, return A[3] = 3
 // 
-// Output: 3`}
-      </pre>
-    </div>
+// Output: 3`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const SuffixTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const SuffixTreePattern = () => (
       operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Suffix tree node structure
+    <PseudocodeDisplay code={`// Suffix tree node structure
 SUFFIX-NODE:
     start
     end
@@ -98,9 +97,7 @@ BUILD-SUFFIX-TREE(S):
 //            |
 //            a
 //            |
-//            $`}
-      </pre>
-    </div>
+//            $`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

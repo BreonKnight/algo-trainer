@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GraphKosarajuPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GraphKosarajuPattern = () => (
       connected components
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`KOSARAJU(G)
+    <PseudocodeDisplay code={`KOSARAJU(G)
     let n be the number of vertices in G
     let visited[1‥n] be a new array
     let order be a new empty stack
@@ -63,9 +62,7 @@ DFS-SECOND(G, u, visited, component)
 //   Component 1: [1, 2, 3]
 //   Component 2: [4, 5, 6]
 // 
-// Output: [[1, 2, 3], [4, 5, 6]]`}
-      </pre>
-    </div>
+// Output: [[1, 2, 3], [4, 5, 6]]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

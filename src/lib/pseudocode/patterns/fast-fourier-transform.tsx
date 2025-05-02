@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const FastFourierTransformPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const FastFourierTransformPattern = () => (
       multiplication
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Fast Fourier Transform
+    <PseudocodeDisplay code={`# Fast Fourier Transform
 # Input: Array a of complex numbers, length n (power of 2)
 # Output: Array y of complex numbers (DFT of a)
 
@@ -78,9 +77,7 @@ Algorithm IFFT(y, n)
 #         y[2] = 4 - 6 = -2
 #         y[3] = -2 - i·(-2) = -2 + 2i
 # 
-# Output: [10, -2-2i, -2, -2+2i]`}
-      </pre>
-    </div>
+# Output: [10, -2-2i, -2, -2+2i]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

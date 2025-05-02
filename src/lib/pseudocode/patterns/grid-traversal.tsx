@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GridTraversalPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GridTraversalPattern = () => (
       and path finding
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`GRID-TRAVERSAL(G)
+    <PseudocodeDisplay code={`GRID-TRAVERSAL(G)
     let m be the number of rows in G
     let n be the number of columns in G
     let visited[1‥m][1‥n] be a new array
@@ -77,9 +76,7 @@ export const GridTraversalPattern = () => (
 //     [1, 2, 3],
 //     [2, 0, 4],
 //     [3, 4, 5]
-//   ]`}
-      </pre>
-    </div>
+//   ]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
