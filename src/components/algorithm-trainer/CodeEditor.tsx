@@ -14,6 +14,13 @@ import {
 } from "@/lib/theme";
 import { useTheme } from "@/components/theme/theme-context";
 import { cn } from "@/lib/utils";
+import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface CodeEditorProps {
   userCode: string;
@@ -54,6 +61,8 @@ export function CodeEditor({
   const isDesktop = useIsDesktop();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [editorHeight, setEditorHeight] = useState<string | number>("300px");
+  const [copied, setCopied] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Persistent user code
   useEffect(() => {
@@ -91,8 +100,12 @@ export function CodeEditor({
             range: new monacoRef.current.Range(errorLine, 1, errorLine, 1),
             options: {
               isWholeLine: true,
-              className: "bg-red-200/60",
+              className: "bg-red-500/20",
               glyphMarginClassName: "bg-red-500",
+              overviewRuler: {
+                color: "rgba(239, 68, 68, 0.5)",
+                position: monaco.editor.OverviewRulerLane.Full,
+              },
             },
           },
         ])
@@ -172,58 +185,144 @@ export function CodeEditor({
     }, 100);
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(userCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+    if (isExpanded) {
+      setEditorHeight("300px");
+    } else {
+      setEditorHeight("500px");
+    }
+  };
+
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
-      <h2
-        className={
-          "text-base sm:text-lg font-semibold mb-2 truncate flex-none " +
-          (theme === "nord"
-            ? "text-white"
-            : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
-        }
-      >
-        Your Implementation
-      </h2>
-      {/* Font size controls and copy button */}
-      <div className="flex-none flex items-center gap-2 mb-2">
-        <button
+      <div className="flex-none flex justify-between items-center mb-3">
+        <h2
           className={cn(
-            "px-2 py-1 rounded bg-accent2/20 hover:bg-accent2/40 text-xs",
-            theme === "nord" ? "text-white" : "text-background"
+            "text-main text-lg sm:text-xl md:text-2xl font-semibold truncate leading-relaxed",
+            theme === "nord"
+              ? "text-white"
+              : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
           )}
-          onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
-          title="Decrease font size (Ctrl+-)"
         >
-          A-
-        </button>
-        <span className="text-xs text-secondary">{fontSize}px</span>
-        <button
-          className={cn(
-            "px-2 py-1 rounded bg-accent2/20 hover:bg-accent2/40 text-xs",
-            theme === "nord" ? "text-white" : "text-background"
-          )}
-          onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
-          title="Increase font size (Ctrl++)"
-        >
-          A+
-        </button>
-        <button
-          className={cn(
-            "ml-4 px-2 py-1 rounded bg-accent3/20 hover:bg-accent3/40 text-xs",
-            theme === "nord" ? "text-white" : "text-background"
-          )}
-          onClick={() => navigator.clipboard.writeText(userCode)}
-          title="Copy code (Ctrl+Shift+C)"
-        >
-          Copy
-        </button>
+          Your Implementation
+        </h2>
       </div>
+
+      {/* Editor controls */}
+      <div className="flex-none flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 bg-accent2/20 rounded-md p-0.5">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    className={cn(
+                      "p-1 rounded hover:bg-accent2/40 transition-colors",
+                      theme === "nord" ? "text-white" : "text-background"
+                    )}
+                    onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
+                  >
+                    <Type className="h-3.5 w-3.5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-xs">Decrease font size (Ctrl+-)</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <span
+              className={cn(
+                "text-xs min-w-[2rem] text-center",
+                theme === "nord" ? "text-white" : "text-background"
+              )}
+            >
+              {fontSize}px
+            </span>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    className={cn(
+                      "p-1 rounded hover:bg-accent2/40 transition-colors",
+                      theme === "nord" ? "text-white" : "text-background"
+                    )}
+                    onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
+                  >
+                    <Type className="h-3.5 w-3.5" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-xs">Increase font size (Ctrl++)</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className={cn(
+                    "p-1 rounded-md hover:bg-accent3/20 transition-colors",
+                    theme === "nord" ? "text-white" : "text-background"
+                  )}
+                  onClick={handleCopy}
+                >
+                  {copied ? (
+                    <Check className="h-3.5 w-3.5" />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">
+                  {copied ? "Copied!" : "Copy code (Ctrl+Shift+C)"}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                className={cn(
+                  "p-1.5 rounded-md hover:bg-accent2/20 transition-colors",
+                  theme === "nord" ? "text-white" : "text-background"
+                )}
+                onClick={toggleExpand}
+              >
+                {isExpanded ? (
+                  <Minimize2 className="h-3.5 w-3.5" />
+                ) : (
+                  <Maximize2 className="h-3.5 w-3.5" />
+                )}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-xs">
+                {isExpanded ? "Minimize" : "Maximize"} editor
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         <div
           ref={scrollRef}
           className="flex-1 min-h-[300px] overflow-hidden rounded-xl"
           style={{
-            height: isDesktop ? "100%" : "300px",
+            height: editorHeight,
             minHeight: isDesktop ? "0" : "300px",
           }}
         >
@@ -257,13 +356,13 @@ export function CodeEditor({
         </div>
         {/* Vertical resize handle */}
         <div
-          className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+          className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group"
           style={{ userSelect: "none" }}
           onMouseDown={(e) => {
             if (!isDesktop) return;
             const startY = e.clientY;
-            const maxHeight = 500;
             const startHeight = scrollRef.current?.offsetHeight || 0;
+            const maxHeight = 500;
             const onMove = (moveEvent: MouseEvent) => {
               const delta = moveEvent.clientY - startY;
               const newHeight = Math.max(
@@ -280,7 +379,7 @@ export function CodeEditor({
             window.addEventListener("mouseup", onUp);
           }}
         >
-          <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+          <div className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 transition-all" />
         </div>
       </div>
     </Card>
