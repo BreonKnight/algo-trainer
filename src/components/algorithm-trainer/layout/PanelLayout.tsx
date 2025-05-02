@@ -145,7 +145,7 @@ export function PanelLayout({
           strategy={verticalListSortingStrategy}
         >
           <div
-            className="flex flex-col gap-4 w-full"
+            className="flex flex-col md:grid md:grid-cols-3 gap-4 w-full"
             ref={(el) => {
               if (el) {
                 validatePanelSizes(el.clientWidth);

@@ -5,7 +5,7 @@ import styles from "@/styles/pseudocode.module.css";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
-import { Book, Sword, ChevronDown, ChevronUp } from "lucide-react";
+import { Book, Sword } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -174,79 +174,69 @@ export function PatternCard({
       className="p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden
       transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
     >
-      <div className="flex-none">
-        <h2
-          className={
-            `text-main text-lg sm:text-xl md:text-2xl font-bold truncate flex-none leading-relaxed mb-1
-            transition-all duration-300 hover:scale-[1.02]` +
-            (theme === "nord"
-              ? " text-white"
-              : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
-          }
-          style={
-            theme === "nord"
-              ? undefined
-              : {
-                  backgroundImage:
-                    "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-                }
-          }
-        >
-          {currentPattern}
-        </h2>
-        <span
-          className={
-            theme === "nord"
-              ? "text-white/70 text-sm sm:text-base font-medium"
-              : "text-secondary/80 text-sm sm:text-base font-medium"
-          }
-        >
-          {category}
-        </span>
-      </div>
-      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-3">
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="default"
-                  onClick={() => setShowMonsterGuide(!showMonsterGuide)}
-                  className="text-accent hover:text-accent hover:bg-secondary/20 p-2 rounded-full
-                    transition-all duration-300 hover:scale-110 hover:shadow-md"
-                >
-                  {showMonsterGuide ? (
-                    <Book className="w-6 h-6" />
-                  ) : (
-                    <Sword className="w-6 h-6" />
-                  )}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
-                {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <Button
-            variant="ghost"
-            size="default"
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="text-secondary hover:text-secondary hover:bg-secondary/20 p-2 rounded-full
-              transition-all duration-300 hover:scale-110 hover:shadow-md"
-          >
-            {isExpanded ? (
-              <ChevronUp className="w-6 h-6" />
-            ) : (
-              <ChevronDown className="w-6 h-6" />
-            )}
-          </Button>
+      <div className="flex-none flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex-1 min-w-0 text-left">
+            <h2
+              className={
+                `text-main text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left` +
+                (theme === "nord"
+                  ? " text-white"
+                  : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+              }
+              style={
+                theme === "nord"
+                  ? undefined
+                  : {
+                      backgroundImage:
+                        "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                    }
+              }
+            >
+              {currentPattern}
+            </h2>
+            <span
+              className={
+                theme === "nord"
+                  ? "text-white/70 text-xs sm:text-sm md:text-base font-medium"
+                  : "text-secondary/80 text-xs sm:text-sm md:text-base font-medium"
+              }
+            >
+              {category}
+            </span>
+          </div>
         </div>
-        <div className="w-full sm:w-auto">
-          <AlgorithmSelector
-            currentPattern={currentPattern}
-            onPatternChange={onPatternChange}
-          />
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="default"
+                    onClick={() => setShowMonsterGuide(!showMonsterGuide)}
+                    className="text-accent hover:text-accent hover:bg-secondary/20 p-2 rounded-full
+                      transition-all duration-300 hover:scale-110 hover:shadow-md"
+                  >
+                    {showMonsterGuide ? (
+                      <Book className="w-6 h-6" />
+                    ) : (
+                      <Sword className="w-6 h-6" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
+                  {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+          <div className="w-full sm:w-auto">
+            <AlgorithmSelector
+              currentPattern={currentPattern}
+              onPatternChange={onPatternChange}
+            />
+          </div>
         </div>
       </div>
 
