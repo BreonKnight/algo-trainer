@@ -269,11 +269,23 @@ export function PatternCard({
                         return pseudo();
                       } else {
                         return (
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: pseudo || "Pseudocode coming soon...",
-                            }}
-                          />
+                          <div className="pseudocode">
+                            <span className="algorithm-title">
+                              {currentPattern}
+                            </span>
+                            <span className="algorithm-type">{category}</span>
+                            <span className="algorithm-meta">
+                              Time: O(n) | Space: O(n) | Use: Algorithm
+                              implementation
+                            </span>
+                            <div className="nested">
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: pseudo || "Pseudocode coming soon...",
+                                }}
+                              />
+                            </div>
+                          </div>
                         );
                       }
                     })()}

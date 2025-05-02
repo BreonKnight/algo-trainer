@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BinarySearchPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BinarySearchPattern = () => (
       sorted arrays
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Binary Search
+    <PseudocodeDisplay code={`// Standard Binary Search
 BINARY-SEARCH(A, x):
     left = 0
     right = n - 1
@@ -77,9 +76,7 @@ ROTATED-SEARCH(A, x):
                 left = mid + 1
             else:
                 right = mid - 1
-    return -1`}
-      </pre>
-    </div>
+    return -1`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

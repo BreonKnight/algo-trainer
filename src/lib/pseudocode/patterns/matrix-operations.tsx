@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixOperationsPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MatrixOperationsPattern = () => (
       multiplication and operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`MATRIX-MULTIPLY(A, B)
+    <PseudocodeDisplay code={`MATRIX-MULTIPLY(A, B)
     let m, n, p be the dimensions of A and B
     let C[1‥m, 1‥p] be a new matrix
     for i ← 1 to m
@@ -65,9 +64,7 @@ MATRIX-ADD(A, B)
 //     [3 4]        [7 8]
 // 
 // Result: [6  8]
-//         [10 12]`}
-      </pre>
-    </div>
+//         [10 12]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

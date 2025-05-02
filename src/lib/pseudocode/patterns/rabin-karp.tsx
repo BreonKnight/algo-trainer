@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const RabinKarpPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const RabinKarpPattern = () => (
       matching with rolling hash
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Rabin-Karp: Pattern matching with rolling hash
+    <PseudocodeDisplay code={`# Rabin-Karp: Pattern matching with rolling hash
 # Input: Text T[1..n], pattern P[1..m]
 # Output: Starting indices where P occurs in T
 
@@ -73,9 +72,7 @@ Algorithm RABIN-KARP(T, P)
 # Step 9: t = hash("R GE") = 71
 #         Match found at index 10
 # 
-# Output: Pattern found at indices 0 and 10`}
-      </pre>
-    </div>
+# Output: Pattern found at indices 0 and 10`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

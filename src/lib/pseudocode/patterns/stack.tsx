@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StackPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const StackPattern = () => (
       (Last-In-First-Out) operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Stack: LIFO (Last-In-First-Out) data structure
+    <PseudocodeDisplay code={`# Stack: LIFO (Last-In-First-Out) data structure
 # Input: Elements to be pushed onto stack
 # Output: Elements popped from stack in reverse order
 
@@ -65,9 +64,7 @@ Algorithm STACK-OPERATIONS
 # Step 5: PEEK(S)
 #         Returns 2
 # 
-# Output: Elements popped in order [3, 2, 1]`}
-      </pre>
-    </div>
+# Output: Elements popped in order [3, 2, 1]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Operations:</span>

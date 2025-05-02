@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const HeavyLightDecompositionPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const HeavyLightDecompositionPattern = () => (
       path queries
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`HLD(G)
+    <PseudocodeDisplay code={`HLD(G)
     let size[1‥n] be a new array
     let parent[1‥n] be a new array
     let depth[1‥n] be a new array
@@ -61,9 +60,7 @@ DFS-HLD(G, u, h)
 //   head = [1, 1, 3, 1, 1, 3]
 //   pos = [1, 2, 4, 3, 5, 6]
 // 
-// Output: Decomposed tree with heavy paths`}
-      </pre>
-    </div>
+// Output: Decomposed tree with heavy paths`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

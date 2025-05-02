@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const LinkedListPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const LinkedListPattern = () => (
       storage with efficient insertions/deletions
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Node structure
+    <PseudocodeDisplay code={`// Node structure
 class Node:
     def __init__(self, data):
         self.data = data
@@ -136,9 +135,7 @@ class CircularLinkedList:
         while last.next != self.head:
             last = last.next
         last.next = new_node
-        new_node.next = self.head`}
-      </pre>
-    </div>
+        new_node.next = self.head`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

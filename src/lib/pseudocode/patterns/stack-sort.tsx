@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StackSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const StackSortPattern = () => (
       operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Sort array using stack operations
+    <PseudocodeDisplay code={`// Sort array using stack operations
 STACK-SORT(A):
     n ← length[A]
     S ← empty stack
@@ -43,9 +42,7 @@ STACK-SORT(A):
 // 5. After fourth iteration: S = [5], T = [1, 2, 3, 4, 6]
 // 6. After fifth iteration: S = [], T = [1, 2, 3, 4, 5, 6]
 // 
-// Output: [1, 2, 3, 4, 5, 6]`}
-      </pre>
-    </div>
+// Output: [1, 2, 3, 4, 5, 6]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

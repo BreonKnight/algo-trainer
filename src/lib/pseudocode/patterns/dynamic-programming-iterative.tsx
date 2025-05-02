@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DynamicProgrammingIterativePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DynamicProgrammingIterativePattern = () => (
       with bottom-up approach
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`ITERATIVE-DP(n)
+    <PseudocodeDisplay code={`ITERATIVE-DP(n)
     # Initialize DP array with base cases
     dp[0] ← base_case_0
     dp[1] ← base_case_1
@@ -28,9 +27,7 @@ export const DynamicProgrammingIterativePattern = () => (
 # Input: n = 5
 # Base cases: dp[0] = 0, dp[1] = 1
 # Compute: dp[i] = dp[i-1] + dp[i-2]
-# Output: dp[5] = 5`}
-      </pre>
-    </div>
+# Output: dp[5] = 5`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

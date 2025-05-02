@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const FenwickTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const FenwickTreePattern = () => (
       prefix sums and point updates
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`FENWICK-TREE(A)
+    <PseudocodeDisplay code={`FENWICK-TREE(A)
     let n be the length of A
     let tree[1‥n] be a new array
     
@@ -55,9 +54,7 @@ QUERY(tree, idx)
 //   idx = 4: sum = 36
 //   idx = 0: return 36
 // 
-// Output: Prefix sums [1, 4, 9, 16, 25, 36]`}
-      </pre>
-    </div>
+// Output: Prefix sums [1, 4, 9, 16, 25, 36]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

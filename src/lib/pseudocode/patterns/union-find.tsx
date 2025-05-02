@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const UnionFindPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const UnionFindPattern = () => (
       disjoint sets
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Create new set
+    <PseudocodeDisplay code={`// Create new set
 MAKE-SET(x):
     x.parent = x
     x.rank = 0
@@ -40,9 +39,7 @@ UNION(x, y):
 
 // Check if elements are in same set
 CONNECTED(x, y):
-    return FIND-SET(x) = FIND-SET(y)`}
-      </pre>
-    </div>
+    return FIND-SET(x) = FIND-SET(y)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

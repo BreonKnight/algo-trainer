@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyKruskalPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyKruskalPattern = () => (
       minimum spanning tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Kruskal's Algorithm
+    <PseudocodeDisplay code={`// Standard Kruskal's Algorithm
 def kruskal(graph):
     # Initialize MST and parent array
     mst = []
@@ -126,9 +125,7 @@ def kruskal_with_edge_limit(graph, max_edges):
         if union(u, v):
             mst.append((u, v, weight))
     
-    return mst`}
-      </pre>
-    </div>
+    return mst`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

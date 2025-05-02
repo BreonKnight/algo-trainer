@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TwoSumTwoPointersPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TwoSumTwoPointersPattern = () => (
       that sum to target
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Two Sum (Two Pointers): Find pairs that sum to target
+    <PseudocodeDisplay code={`# Two Sum (Two Pointers): Find pairs that sum to target
 # Input: Array A[1..n], target value t
 # Output: Indices (i, j) where A[i] + A[j] = t, or (-1, -1) if not found
 
@@ -44,9 +43,7 @@ Algorithm TWO-SUM-TWO-POINTERS(A, t)
 # Step 3: sum = 2 + 11 = 13 > 9, right = 2
 # Step 4: sum = 2 + 7 = 9 = t, return (1, 2)
 # 
-# Output: (1, 2)`}
-      </pre>
-    </div>
+# Output: (1, 2)`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

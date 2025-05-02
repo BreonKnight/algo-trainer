@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TopologicalSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TopologicalSortPattern = () => (
       ordering of vertices in a DAG
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// DFS-based Topological Sort
+    <PseudocodeDisplay code={`// DFS-based Topological Sort
 TOPOLOGICAL-SORT(G):
     visited = [False] * |V|
     order = []
@@ -73,9 +72,7 @@ DFS-CYCLE(G, v, visited, recursion_stack, order):
     
     recursion_stack[v] = False
     order.append(v)
-    return False`}
-      </pre>
-    </div>
+    return False`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

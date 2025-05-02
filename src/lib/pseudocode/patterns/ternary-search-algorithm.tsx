@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TernarySearchAlgorithmPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const TernarySearchAlgorithmPattern = () => (
       maximum/minimum in unimodal function
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Ternary Search: Find maximum/minimum in unimodal function
+    <PseudocodeDisplay code={`# Ternary Search: Find maximum/minimum in unimodal function
 # Input: Array A[1..n], target value t
 # Output: Index of target value, or -1 if not found
 
@@ -50,9 +49,7 @@ Algorithm TERNARY-SEARCH(A, t)
 # Step 2: left = 5, right = 5, mid1 = 5, mid2 = 5
 #         A[5] = 5 = t
 # 
-# Output: 5`}
-      </pre>
-    </div>
+# Output: 5`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

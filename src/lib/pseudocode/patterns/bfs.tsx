@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BFSPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BFSPattern = () => (
       traversal and shortest path in unweighted graphs
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard BFS
+    <PseudocodeDisplay code={`// Standard BFS
 BFS(G, s):
     for each vertex u in G.V - {s}:
         u.color = WHITE
@@ -76,9 +75,7 @@ LEVEL-ORDER(T):
             if u.right ≠ NIL:
                 ENQUEUE(Q, u.right)
         result.append(level)
-    return result`}
-      </pre>
-    </div>
+    return result`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const TwoSumPattern = () => (
   <div>
@@ -11,9 +12,8 @@ export const TwoSumPattern = () => (
       two numbers that sum to target
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`TWO-SUM(A, target)
+    <PseudocodeDisplay
+      code={`TWO-SUM(A, target)
     let n be the length of A
     for i ← 1 to n - 1
         do for j ← i + 1 to n
@@ -27,8 +27,7 @@ export const TwoSumPattern = () => (
 // i = 1, j = 2: A[1] + A[2] = 2 + 7 = 9
 // 
 // Output: [1, 2]`}
-      </pre>
-    </div>
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

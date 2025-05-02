@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BitManipulationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BitManipulationPattern = () => (
       bit-level operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Basic Operations
+    <PseudocodeDisplay code={`// Basic Operations
 AND(x, y):     return x & y
 OR(x, y):      return x | y
 XOR(x, y):     return x ^ y
@@ -53,9 +52,7 @@ ADD(x, y):
         carry = x & y
         x = x ^ y
         y = carry << 1
-    return x`}
-      </pre>
-    </div>
+    return x`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

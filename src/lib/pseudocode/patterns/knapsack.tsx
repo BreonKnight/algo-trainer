@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const KnapsackPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const KnapsackPattern = () => (
       selection with weight constraint
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// 0-1 Knapsack problem
+    <PseudocodeDisplay code={`// 0-1 Knapsack problem
 KNAPSACK(w, v, W):
     n ← length[w]
     // Initialize DP table
@@ -51,9 +50,7 @@ KNAPSACK(w, v, W):
 // 3 0 0 3 4 5 7
 // 4 0 0 3 4 5 7
 // 
-// Output: max_value = 7, items = {1, 2}`}
-      </pre>
-    </div>
+// Output: max_value = 7, items = {1, 2}`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

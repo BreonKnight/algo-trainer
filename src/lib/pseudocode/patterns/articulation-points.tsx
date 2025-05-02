@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const ArticulationPointsPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const ArticulationPointsPattern = () => (
       whose removal increases connected components
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Articulation Points: Find vertices whose removal increases connected components
+    <PseudocodeDisplay code={`# Articulation Points: Find vertices whose removal increases connected components
 # Input: Undirected graph G = (V, E)
 # Output: Set of articulation points
 
@@ -73,9 +72,7 @@ Algorithm DFS-AP(u)
 #         - 1 is root with 2 children
 #         - No other vertices satisfy conditions
 # 
-# Output: {1}`}
-      </pre>
-    </div>
+# Output: {1}`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

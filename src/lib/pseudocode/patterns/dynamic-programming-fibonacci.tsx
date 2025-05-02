@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const DynamicProgrammingFibonacciPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const DynamicProgrammingFibonacciPattern = () => (
       Fibonacci numbers efficiently
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`FIBONACCI(n)
+    <PseudocodeDisplay code={`FIBONACCI(n)
     # Base cases
     if n ≤ 1
         return n
@@ -32,9 +31,7 @@ export const DynamicProgrammingFibonacciPattern = () => (
 
 # Example:
 # Input: n = 6
-# Output: 8  # Sequence: 0, 1, 1, 2, 3, 5, 8`}
-      </pre>
-    </div>
+# Output: 8  # Sequence: 0, 1, 1, 2, 3, 5, 8`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

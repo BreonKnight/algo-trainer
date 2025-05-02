@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const AStarSearchPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const AStarSearchPattern = () => (
       finding with heuristics
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`A-STAR-SEARCH(G, start, goal)
+    <PseudocodeDisplay code={`A-STAR-SEARCH(G, start, goal)
     let openSet be a new priority queue
     let gScore[1‥n] be a new array
     let fScore[1‥n] be a new array
@@ -75,9 +74,7 @@ RECONSTRUCT-PATH(cameFrom, current)
 //   gScore = {A:0, B:4, C:2, D:3, E:5}
 //   fScore = {A:6, B:9, C:5, D:4, E:5}
 // 
-// Final path: A → C → D → E`}
-      </pre>
-    </div>
+// Final path: A → C → D → E`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

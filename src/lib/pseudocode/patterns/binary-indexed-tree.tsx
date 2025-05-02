@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BinaryIndexedTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BinaryIndexedTreePattern = () => (
       range queries and point updates
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`BINARY-INDEXED-TREE(A)
+    <PseudocodeDisplay code={`BINARY-INDEXED-TREE(A)
     let n be the length of A
     let tree[1‥n] be a new array
     
@@ -58,9 +57,7 @@ RANGE-QUERY(tree, l, r)
 //   QUERY(1) = 1
 //   return 24
 // 
-// Output: Range sum from index 2 to 5 is 24`}
-      </pre>
-    </div>
+// Output: Range sum from index 2 to 5 is 24`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

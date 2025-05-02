@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BacktrackingPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BacktrackingPattern = () => (
       with pruning
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// N-Queens
+    <PseudocodeDisplay code={`// N-Queens
 N-QUEENS(n):
     board = [0] * n
     return SOLVE-N-QUEENS(board, 0)
@@ -56,9 +55,7 @@ SOLVE-SUBSET-SUM(S, i, target):
         return false
     if SOLVE-SUBSET-SUM(S, i+1, target-S[i]):
         return true
-    return SOLVE-SUBSET-SUM(S, i+1, target)`}
-      </pre>
-    </div>
+    return SOLVE-SUBSET-SUM(S, i+1, target)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
