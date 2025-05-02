@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixTraversalPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MatrixTraversalPattern = () => (
       matrix in various patterns
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Matrix traversal patterns
+    <PseudocodeDisplay code={`// Matrix traversal patterns
 MATRIX-TRAVERSE(A):
     m ← rows[A]
     n ← columns[A]
@@ -43,9 +42,7 @@ MATRIX-TRAVERSE(A):
 // 
 // Row-wise: 1, 2, 3, 4, 5, 6, 7, 8, 9
 // Column-wise: 1, 4, 7, 2, 5, 8, 3, 6, 9
-// Diagonal: 1, 2, 4, 3, 5, 7, 6, 8, 9`}
-      </pre>
-    </div>
+// Diagonal: 1, 2, 4, 3, 5, 7, 6, 8, 9`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

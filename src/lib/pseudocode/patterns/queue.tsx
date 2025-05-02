@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const QueuePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const QueuePattern = () => (
       (First-In-First-Out) operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Queue
+    <PseudocodeDisplay code={`// Standard Queue
 class Queue:
     def __init__(self):
         self.items = []
@@ -156,9 +155,7 @@ class Deque:
     def peek_rear(self):
         if self.is_empty():
             return None
-        return self.items[-1]`}
-      </pre>
-    </div>
+        return self.items[-1]`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

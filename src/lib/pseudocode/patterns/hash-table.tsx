@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const HashTablePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const HashTablePattern = () => (
       storage
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Hash function
+    <PseudocodeDisplay code={`// Hash function
 HASH(k, m):
     return k mod m
 
@@ -49,9 +48,7 @@ HASH-DELETE(T, k):
     for each (key, value) in T.table[h]:
         if key == k:
             LIST-DELETE(T.table[h], (key, value))
-            return`}
-      </pre>
-    </div>
+            return`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

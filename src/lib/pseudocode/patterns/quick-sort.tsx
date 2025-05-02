@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const QuickSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const QuickSortPattern = () => (
       in-place sorting
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Main quick sort function
+    <PseudocodeDisplay code={`// Main quick sort function
 QUICK-SORT(array, start, end):
     # If array has more than one element
     if start < end:
@@ -43,9 +42,7 @@ PARTITION(array, start, end):
     # Place pivot in correct position
     swap array[smaller_element_pointer + 1] with array[end]
     # Return pivot position
-    return smaller_element_pointer + 1`}
-      </pre>
-    </div>
+    return smaller_element_pointer + 1`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

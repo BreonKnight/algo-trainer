@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GraphBridgesPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GraphBridgesPattern = () => (
       edges in graph
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`FIND-BRIDGES(G)
+    <PseudocodeDisplay code={`FIND-BRIDGES(G)
     let n be the number of vertices in G
     let disc[1‥n] be a new array
     let low[1‥n] be a new array
@@ -61,9 +60,7 @@ DFS-BRIDGES(G, u, disc, low, parent, bridges, time)
 //   Edge (4,1): low[1] = 1 > disc[4] = 4? No
 //   Edge (1,3): low[3] = 1 > disc[1] = 1? No
 // 
-// Output: [] (no bridges)`}
-      </pre>
-    </div>
+// Output: [] (no bridges)`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

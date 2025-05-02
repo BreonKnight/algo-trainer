@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixExponentiationPattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const MatrixExponentiationPattern = () => (
       computation of matrix powers
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Compute matrix power using binary exponentiation
+    <PseudocodeDisplay code={`// Compute matrix power using binary exponentiation
 MATRIX-POWER(matrix, power):
     # Initialize result as identity matrix
     result = IDENTITY-MATRIX(size of matrix)
@@ -49,9 +48,7 @@ MATRIX-MULTIPLY(A, B):
                 sum = sum + A[i][k] * B[k][j]
             result[i][j] = sum
     
-    return result`}
-      </pre>
-    </div>
+    return result`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

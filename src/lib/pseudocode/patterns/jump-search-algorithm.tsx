@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const JumpSearchAlgorithmPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const JumpSearchAlgorithmPattern = () => (
       arrays
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Jump search in sorted array
+    <PseudocodeDisplay code={`// Jump search in sorted array
 JUMP-SEARCH(A, x):
     n ← length[A]
     step ← ⌊√n⌋
@@ -43,9 +42,7 @@ JUMP-SEARCH(A, x):
 // 4. Linear search from index 3 to 6
 // 5. Found at index 6
 // 
-// Output: 6`}
-      </pre>
-    </div>
+// Output: 6`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

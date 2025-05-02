@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const KmpAlgorithmPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const KmpAlgorithmPattern = () => (
       matching in strings
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# KMP Algorithm: Pattern matching in strings
+    <PseudocodeDisplay code={`# KMP Algorithm: Pattern matching in strings
 # Input: Text T[1..n], Pattern P[1..m]
 # Output: All starting positions where P occurs in T
 
@@ -59,9 +58,7 @@ Algorithm COMPUTE-PREFIX-FUNCTION(P)
 # Step 1: π = [0, 0, 1, 2, 0, 1, 2, 3, 4]
 # Step 2: Match at position 10
 # 
-# Output: Pattern occurs at position 10`}
-      </pre>
-    </div>
+# Output: Pattern occurs at position 10`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyEdmondsKarpPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyEdmondsKarpPattern = () => (
       flow in networks
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Edmonds-Karp
+    <PseudocodeDisplay code={`// Standard Edmonds-Karp
 def edmonds_karp(graph, source, sink):
     # Initialize residual graph and max flow
     residual = {u: {v: graph[u][v] for v in graph[u]} 
@@ -158,9 +157,7 @@ def edmonds_karp_vertex_capacities(graph, source, sink, vertex_capacities):
         
         max_flow += path_flow
     
-    return max_flow`}
-      </pre>
-    </div>
+    return max_flow`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

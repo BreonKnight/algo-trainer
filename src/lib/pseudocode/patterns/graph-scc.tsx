@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const StronglyConnectedComponentsPattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const StronglyConnectedComponentsPattern = () => (
       strongly connected components in directed graphs
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Kosaraju's Algorithm
+    <PseudocodeDisplay code={`// Kosaraju's Algorithm
 KOSARAJU-SCC(G):
     # First DFS pass
     visited = [False] * |V|
@@ -106,9 +105,7 @@ GABOW-DFS(v):
             component.append(w)
             if w == v:
                 break
-        components.append(component)`}
-      </pre>
-    </div>
+        components.append(component)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const RedBlackTreePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const RedBlackTreePattern = () => (
       binary search tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`RB-INSERT(T, z)
+    <PseudocodeDisplay code={`RB-INSERT(T, z)
     let y ← null
     let x ← T.root
     
@@ -104,9 +103,7 @@ LEFT-ROTATE(T, x)
 //           /  \
 //        30(B) 50(B)
 //       /
-//    25(R)`}
-      </pre>
-    </div>
+//    25(R)`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

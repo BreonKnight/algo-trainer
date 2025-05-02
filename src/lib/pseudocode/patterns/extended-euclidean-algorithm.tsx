@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const ExtendedEuclideanAlgorithmPattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const ExtendedEuclideanAlgorithmPattern = () => (
       Use: Find GCD and Bézout coefficients
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Extended Euclidean Algorithm
+    <PseudocodeDisplay code={`# Extended Euclidean Algorithm
 # Input: Integers a, b
 # Output: Tuple (d, x, y) where d = gcd(a,b) and ax + by = d
 
@@ -56,9 +55,7 @@ Algorithm EXTENDED-EUCLID(a, b)
 # Output: (6, 1, -1)
 # 
 # Verification:
-# 6 = 30·1 + 18·(-1)`}
-      </pre>
-    </div>
+# 6 = 30·1 + 18·(-1)`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

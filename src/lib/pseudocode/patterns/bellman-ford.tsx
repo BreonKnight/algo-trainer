@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const BellmanFordPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const BellmanFordPattern = () => (
       paths with negative weights
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Bellman-Ford: Find shortest paths with negative weights
+    <PseudocodeDisplay code={`# Bellman-Ford: Find shortest paths with negative weights
 # Input: Weighted directed graph G = (V, E) with weight function w, source vertex s
 # Output: Shortest paths from s to all vertices, or indication of negative cycle
 
@@ -58,9 +57,7 @@ Algorithm BELLMAN-FORD(G, w, s)
 #         d = [0, 4, 3, 4]
 # Step 5: No negative cycle found
 # 
-# Output: d = [0, 4, 3, 4]`}
-      </pre>
-    </div>
+# Output: d = [0, 4, 3, 4]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

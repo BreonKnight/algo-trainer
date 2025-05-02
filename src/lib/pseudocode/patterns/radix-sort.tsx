@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const RadixSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const RadixSortPattern = () => (
       numbers by processing individual digits
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`RADIX-SORT(A)
+    <PseudocodeDisplay code={`RADIX-SORT(A)
 1  // Find maximum number to know number of digits
 2  max_num = max(A)
 3  exp = 1
@@ -58,9 +57,7 @@ COUNTING-SORT(A, exp)
 // 
 // Step 3 (exp=100):
 // Count: [6, 1, 1, 0, 0, 0, 0, 0, 0, 0]
-// Output: [2, 24, 45, 66, 75, 90, 170, 802]`}
-      </pre>
-    </div>
+// Output: [2, 24, 45, 66, 75, 90, 170, 802]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

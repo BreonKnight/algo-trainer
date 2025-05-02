@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const KadanesAlgorithmPattern = () => (
   <div>
@@ -13,9 +14,7 @@ export const KadanesAlgorithmPattern = () => (
       subarray sum
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Find maximum subarray sum
+    <PseudocodeDisplay code={`// Find maximum subarray sum
 KADANE(A):
     max_ending_here = A[1]
     max_so_far = A[1]
@@ -51,9 +50,7 @@ KADANE-CIRCULAR(A):
         max_wrap = max_wrap + A[i]
         A[i] = -A[i]
     max_wrap = max_wrap + KADANE(A)
-    return max(max_kadane, max_wrap)`}
-      </pre>
-    </div>
+    return max(max_kadane, max_wrap)`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

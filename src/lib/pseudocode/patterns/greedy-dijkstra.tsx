@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyDijkstraPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyDijkstraPattern = () => (
       shortest paths from a source
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Dijkstra's Algorithm
+    <PseudocodeDisplay code={`// Standard Dijkstra's Algorithm
 def dijkstra(graph, source):
     # Initialize distances and visited set
     distances = {node: float('inf') for node in graph}
@@ -137,9 +136,7 @@ def bidirectional_dijkstra(graph, source, target):
                     backward_dist[neighbor] = new_dist
                     heapq.heappush(backward_heap, (new_dist, neighbor))
     
-    return min_dist, meeting_node`}
-      </pre>
-    </div>
+    return min_dist, meeting_node`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

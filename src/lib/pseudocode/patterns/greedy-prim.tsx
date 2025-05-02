@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyPrimPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyPrimPattern = () => (
       minimum spanning tree
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Prim's Algorithm
+    <PseudocodeDisplay code={`// Standard Prim's Algorithm
 def prim(graph, start):
     # Initialize MST and visited set
     mst = []
@@ -90,9 +89,7 @@ def prim_with_max_degree(graph, start, max_degree):
                 if neighbor not in visited:
                     heapq.heappush(edges, (weight, v, neighbor))
     
-    return mst`}
-      </pre>
-    </div>
+    return mst`} />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

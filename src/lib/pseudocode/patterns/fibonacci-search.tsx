@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const FibonacciSearchPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const FibonacciSearchPattern = () => (
       in sorted array using Fibonacci numbers
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Fibonacci Search: Find element in sorted array using Fibonacci numbers
+    <PseudocodeDisplay code={`# Fibonacci Search: Find element in sorted array using Fibonacci numbers
 # Input: Sorted array A[1..n], target value x
 # Output: Index of x in A if found, -1 otherwise
 
@@ -71,9 +70,7 @@ Algorithm FIBONACCI-SEARCH(A, x)
 #         fibM = 2, fibM1 = 1, fibM2 = 1
 # Step 6: i = 8, A[8] = 85 = 85
 # 
-# Output: 8`}
-      </pre>
-    </div>
+# Output: 8`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

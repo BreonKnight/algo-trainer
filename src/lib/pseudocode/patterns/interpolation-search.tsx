@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const InterpolationSearchPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const InterpolationSearchPattern = () => (
       element in uniformly distributed sorted array
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Interpolation Search: Find element in uniformly distributed sorted array
+    <PseudocodeDisplay code={`# Interpolation Search: Find element in uniformly distributed sorted array
 # Input: Sorted array A[1..n], target value x
 # Output: Index of x in A if found, -1 otherwise
 
@@ -45,9 +44,7 @@ Algorithm INTERPOLATION-SEARCH(A, x)
 #         pos = 1 + ((50-10)*(9-1))/(90-10) = 5
 #         A[5] = 50
 # 
-# Output: 5`}
-      </pre>
-    </div>
+# Output: 5`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

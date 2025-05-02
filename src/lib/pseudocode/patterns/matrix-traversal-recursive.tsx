@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const MatrixTraversalRecursivePattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const MatrixTraversalRecursivePattern = () => (
       matrix traversal
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`DFS-TRAVERSE(A, i, j, visited)
+    <PseudocodeDisplay code={`DFS-TRAVERSE(A, i, j, visited)
     let m, n be the dimensions of A
     if i < 1 or i > m or j < 1 or j > n or visited[i, j] = TRUE
         then return
@@ -63,9 +62,7 @@ RECURSIVE-TRAVERSE(A)
 // 8. Visit (1,2) = 2
 // 9. Visit (1,3) = 3
 // 
-// Output: [1, 4, 7, 8, 9, 6, 5, 2, 3]`}
-      </pre>
-    </div>
+// Output: [1, 4, 7, 8, 9, 6, 5, 2, 3]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

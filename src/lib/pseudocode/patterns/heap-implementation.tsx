@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const HeapImplementationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const HeapImplementationPattern = () => (
       operations
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Get parent index
+    <PseudocodeDisplay code={`// Get parent index
 PARENT(i):
     return ⌊i/2⌋
 
@@ -97,9 +96,7 @@ MAX-HEAP-INSERT(A, key):
 //  /  \\    /  \\
 // 8    7  9    3
 // / \\  /
-// 2  4 1`}
-      </pre>
-    </div>
+// 2  4 1`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

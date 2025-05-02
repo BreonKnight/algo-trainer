@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const RotateMatrixPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const RotateMatrixPattern = () => (
       degrees
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`ROTATE-CLOCKWISE(A)
+    <PseudocodeDisplay code={`ROTATE-CLOCKWISE(A)
 1  n = A.rows
 2  // Transpose the matrix
 3  for i = 1 to n
@@ -60,9 +59,7 @@ ROTATE-COUNTERCLOCKWISE(A)
 // Step 2: Reverse columns
 //         [[3, 6, 9],
 //          [2, 5, 8],
-//          [1, 4, 7]]`}
-      </pre>
-    </div>
+//          [1, 4, 7]]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

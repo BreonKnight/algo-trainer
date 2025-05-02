@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const LinearSearchPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const LinearSearchPattern = () => (
       unsorted array
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Linear Search: Find element in unsorted array
+    <PseudocodeDisplay code={`# Linear Search: Find element in unsorted array
 # Input: Array A[1..n], target value x
 # Output: Index of x in A if found, -1 otherwise
 
@@ -32,9 +31,7 @@ Algorithm LINEAR-SEARCH(A, x)
 # Step 2: i = 2, A[2] = 2 ≠ 7
 # Step 3: i = 3, A[3] = 7 = 7
 # 
-# Output: 3`}
-      </pre>
-    </div>
+# Output: 3`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const QueueImplementationPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const QueueImplementationPattern = () => (
       structure
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`QUEUE-EMPTY(Q)
+    <PseudocodeDisplay code={`QUEUE-EMPTY(Q)
     if Q.head = Q.tail
         then return true
         else return false
@@ -77,9 +76,7 @@ DEQUEUE(Q)
 // Final state:
 //   Q = [20, 30, 40]
 //   Q.head = 2
-//   Q.tail = 5`}
-      </pre>
-    </div>
+//   Q.tail = 5`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const ChineseRemainderTheoremPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const ChineseRemainderTheoremPattern = () => (
       congruences
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`CRT(a, m)
+    <PseudocodeDisplay code={`CRT(a, m)
     let n be the length of a
     let M ← 1
     for i ← 1 to n
@@ -61,9 +60,7 @@ EXTENDED-EUCLID(a, b)
 // 
 // x = 2·35·2 + 3·21·1 + 2·15·1 = 233
 // 
-// Output: 233 mod 105 = 23`}
-      </pre>
-    </div>
+// Output: 233 mod 105 = 23`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

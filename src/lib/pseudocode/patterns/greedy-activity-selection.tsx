@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const GreedyActivitySelectionPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const GreedyActivitySelectionPattern = () => (
       maximum number of non-overlapping activities
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`// Standard Activity Selection
+    <PseudocodeDisplay code={`// Standard Activity Selection
 def activity_selection(activities):
     # Sort activities by finish time
     activities.sort(key=lambda x: x[1])
@@ -118,9 +117,7 @@ def activity_selection_resources(activities, resources):
 # ]
 # Output:
 # selected = [(1, 4, 0), (3, 5, 1), (5, 7, 1)]
-# Total activities: 3`}
-      </pre>
-    </div>
+# Total activities: 3`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

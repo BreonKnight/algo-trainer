@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const InsertionSortPattern = () => (
   <div>
@@ -11,9 +12,7 @@ export const InsertionSortPattern = () => (
       in-place
     </div>
 
-    <div className="mb-4">
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
-        {`# Insertion Sort: Build sorted array one element at a time
+    <PseudocodeDisplay code={`# Insertion Sort: Build sorted array one element at a time
 # Input: Array A[1..n] of n elements
 # Output: Array A sorted in non-decreasing order
 
@@ -41,9 +40,7 @@ INSERTION-SORT(A)
 # Pass 3: [2, 4, 5, 6, 1, 3]  # Insert 6
 # Pass 4: [1, 2, 4, 5, 6, 3]  # Insert 1
 # Pass 5: [1, 2, 3, 4, 5, 6]  # Insert 3
-# Output: [1, 2, 3, 4, 5, 6]`}
-      </pre>
-    </div>
+# Output: [1, 2, 3, 4, 5, 6]`} />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
