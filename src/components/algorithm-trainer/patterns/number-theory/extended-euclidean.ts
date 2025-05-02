@@ -75,5 +75,5 @@ try:
     print(f"Verification: {a} * {inv} mod {m} = {(a * inv) % m}")
 except ValueError as e:
     print(e)`,
-  category: "number-theory",
+  category: "Number Theory",
 };

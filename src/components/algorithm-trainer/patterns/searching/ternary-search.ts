@@ -32,9 +32,9 @@ export const ternarySearchPattern: AlgorithmPattern = {
             
     return -1  # Target not found`,
   example: `// Example usage
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const target = 5;
-const result = ternarySearch(arr, target);
+const arrPatternPatternPattern = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const targetPatternPatternPattern = 5;
+const resultPatternPatternPattern = ternarySearch(arr, target);
 console.log(result); // 4
 
 // Finding maximum of a unimodal function
@@ -55,8 +55,8 @@ function findMaximum(func, left, right, precision = 1e-6):
   
   while (left <= right) {
     // Calculate two midpoints
-    const mid1 = left + Math.floor((right - left) / 3);
-    const mid2 = right - Math.floor((right - left) / 3);
+    const mid1PatternPatternPattern = left + Math.floor((right - left) / 3);
+    const mid2PatternPatternPattern = right - Math.floor((right - left) / 3);
     
     // Check if target is at either midpoint
     if (arr[mid1] === target) {
@@ -88,8 +88,8 @@ function findMaximum(
   precision: number = 1e-6
 ): number {
   while (right - left > precision) {
-    const mid1 = left + (right - left) / 3;
-    const mid2 = right - (right - left) / 3;
+    const mid1PatternPatternPattern = left + (right - left) / 3;
+    const mid2PatternPatternPattern = right - (right - left) / 3;
     
     if (func(mid1) < func(mid2)) {
       left = mid1;
@@ -100,5 +100,5 @@ function findMaximum(
   
   return (left + right) / 2;
 }`,
-  category: "searching",
+  category: "Searching",
 };

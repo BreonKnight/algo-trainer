@@ -18,5 +18,5 @@ Found at index 2!`,
         if arr[i] == target:
             return i
     return -1`,
-  category: "searching",
+  category: "Searching",
 };

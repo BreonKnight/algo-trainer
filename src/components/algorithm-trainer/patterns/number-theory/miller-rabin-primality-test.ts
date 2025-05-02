@@ -153,7 +153,7 @@ print(f"Is {n} prime? {is_prime}")  # True
 n = 561  # Carmichael number
 is_prime = miller_rabin_test(n, k)
 print(f"Is {n} prime? {is_prime}")  # False`,
-  category: "number-theory",
+  category: "Number Theory",
   keySteps: [
     "Handle edge cases (n ≤ 1, n ≤ 3, even numbers)",
     "Factor n-1 into d·2^s",

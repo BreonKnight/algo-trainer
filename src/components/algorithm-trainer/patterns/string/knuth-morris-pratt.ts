@@ -6,7 +6,7 @@ export const knuthmorrisprattPattern: AlgorithmPattern = {
     "An efficient string matching algorithm that preprocesses the pattern to avoid unnecessary comparisons by utilizing a prefix function.",
   timeComplexity: "O(n + m)",
   spaceComplexity: "O(m) for pattern array",
-  category: "String Algorithms",
+  category: "String",
   pseudocode: `
 KMP steps:
 1. Build LPS (Longest Proper Prefix Suffix) array:

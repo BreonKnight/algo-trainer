@@ -92,7 +92,7 @@ def find_optimal_gathering_points(area_size):
 # area_size = 30
 # gathering_points = find_optimal_gathering_points(area_size)
 # print(f"Optimal gathering points: {gathering_points}")`,
-  category: "number-theory",
+  category: "Number Theory",
   pattern: `The Sieve of Sundaram algorithm is used to find all prime numbers up to a given limit. 
 In the Monster Hunter context, we use this algorithm to identify optimal resource gathering points in an area.
 

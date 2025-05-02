@@ -42,7 +42,7 @@ function reconstruct_path(came_from, current):
   `,
   example: `
 // Example usage:
-const graph = {
+const graphPatternPatternPatternPattern = {
   nodes: [
     {x: 0, y: 0},  // A
     {x: 1, y: 0},  // B
@@ -58,14 +58,14 @@ const graph = {
 };
 
 function heuristic(a: number, b: number): number {
-  const dx = graph.nodes[a].x - graph.nodes[b].x;
-  const dy = graph.nodes[a].y - graph.nodes[b].y;
+  const dxPatternPatternPatternPattern = graph.nodes[a].x - graph.nodes[b].x;
+  const dyPatternPatternPatternPattern = graph.nodes[a].y - graph.nodes[b].y;
   return Math.sqrt(dx * dx + dy * dy);
 }
 
-const start = 0;  // A
-const goal = 5;   // F
-const path = aStar(start, goal, graph, heuristic);
+const startPatternPatternPatternPattern = 0;  // A
+const goalPatternPatternPatternPattern = 5;   // F
+const pathPatternPatternPatternPattern = aStar(start, goal, graph, heuristic);
 console.log(path); // Output: [0, 1, 4, 5] or similar shortest path
   `,
   implementation: `
@@ -172,5 +172,5 @@ goal = 5   # F
 path = a_star(start, goal, graph)
 print(path)  # Output: [0, 1, 4, 5] or similar shortest path
   `,
-  category: "graph",
+  category: "Graph",
 };

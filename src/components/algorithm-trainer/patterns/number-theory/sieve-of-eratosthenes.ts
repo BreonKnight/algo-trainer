@@ -16,7 +16,7 @@ export const sieveOfEratosthenesPattern: AlgorithmPattern = {
   `,
   example: `
 // Find all primes up to 30
-const primes = sieveOfEratosthenes(30);
+const primesPatternPatternPatternPattern = sieveOfEratosthenes(30);
 // Result will be [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
   `,
   implementation: `def sieve_of_eratosthenes(n: int) -> list[int]:
@@ -80,5 +80,5 @@ print(f"Primes up to {n}: {primes}")  # [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 low, high = 100, 200
 range_primes = segmented_sieve(low, high)
 print(f"Primes between {low} and {high}: {range_primes}")`,
-  category: "number-theory",
+  category: "Number Theory",
 };

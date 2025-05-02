@@ -30,13 +30,13 @@ function monsterHunter(monsters, time_limit):
   `,
   example: `
 // Example usage:
-const monsters = [
+const monstersPatternPatternPatternPattern = [
   { time: 2, reward: 10 },
   { time: 3, reward: 15 },
   { time: 5, reward: 20 }
 ];
-const timeLimit = 7;
-const maxReward = monsterHunter(monsters, timeLimit);
+const timeLimitPatternPatternPatternPattern = 7;
+const maxRewardPatternPatternPatternPattern = monsterHunter(monsters, timeLimit);
 console.log(maxReward); // Output: 25 (monsters 0 and 1)
   `,
   implementation: `
@@ -46,7 +46,7 @@ interface Monster {
 }
 
 function monsterHunter(monsters: Monster[], timeLimit: number): number {
-  const n = monsters.length;
+  const nPatternPatternPatternPattern = monsters.length;
   const dp: number[] = new Array(1 << n).fill(0);
   
   for (let mask = 0; mask < (1 << n); mask++) {
@@ -63,8 +63,8 @@ function monsterHunter(monsters: Monster[], timeLimit: number): number {
     
     for (let i = 0; i < n; i++) {
       if (!(mask & (1 << i))) {
-        const newMask = mask | (1 << i);
-        const reward = monsters[i].reward;
+        const newMaskPatternPatternPatternPattern = mask | (1 << i);
+        const rewardPatternPatternPatternPattern = monsters[i].reward;
         dp[newMask] = Math.max(dp[newMask], dp[mask] + reward);
       }
     }
@@ -75,7 +75,7 @@ function monsterHunter(monsters: Monster[], timeLimit: number): number {
 
 // Helper function to get the optimal monster sequence
 function getOptimalSequence(monsters: Monster[], timeLimit: number): Monster[] {
-  const n = monsters.length;
+  const nPatternPatternPatternPattern = monsters.length;
   const dp: number[] = new Array(1 << n).fill(0);
   const prev: number[] = new Array(1 << n).fill(-1);
   
@@ -93,8 +93,8 @@ function getOptimalSequence(monsters: Monster[], timeLimit: number): Monster[] {
     
     for (let i = 0; i < n; i++) {
       if (!(mask & (1 << i))) {
-        const newMask = mask | (1 << i);
-        const reward = monsters[i].reward;
+        const newMaskPatternPatternPatternPattern = mask | (1 << i);
+        const rewardPatternPatternPatternPattern = monsters[i].reward;
         if (dp[newMask] < dp[mask] + reward) {
           dp[newMask] = dp[mask] + reward;
           prev[newMask] = i;
@@ -107,7 +107,7 @@ function getOptimalSequence(monsters: Monster[], timeLimit: number): Monster[] {
   const sequence: Monster[] = [];
   let mask = dp.indexOf(Math.max(...dp));
   while (mask > 0) {
-    const monsterIndex = prev[mask];
+    const monsterIndexPatternPatternPatternPattern = prev[mask];
     sequence.unshift(monsters[monsterIndex]);
     mask ^= (1 << monsterIndex);
   }

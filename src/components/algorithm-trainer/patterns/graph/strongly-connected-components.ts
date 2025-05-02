@@ -138,5 +138,5 @@ graph = [
 ]
 components = kosaraju(graph)
 print(f"Strongly connected components: {components}")  # [[0, 1, 2], [3, 4, 5]]`,
-  category: "graph",
+  category: "Graph",
 };

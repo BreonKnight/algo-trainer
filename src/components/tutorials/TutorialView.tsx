@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
-import { useTheme } from "../useTheme";
+import { useTheme } from "../theme-context";
 import { cn } from "../../lib/utils";
 
 interface Tutorial {

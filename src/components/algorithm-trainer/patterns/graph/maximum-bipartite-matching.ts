@@ -100,5 +100,5 @@ n = 6  # Number of vertices in left set
 m = 6  # Number of vertices in right set
 max_matching = max_bipartite_matching(graph, n, m)
 print(f"Maximum matching size: {max_matching}")  # 5`,
-  category: "graph",
+  category: "Graph",
 };

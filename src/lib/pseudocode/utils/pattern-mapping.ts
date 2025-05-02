@@ -43,7 +43,6 @@ export const patternNameMapping: Record<string, string> = {
 
   // Graph Algorithms
   Graph: "Graph",
-  "Graph Implementation": "Graph Implementation",
   "Graph Dijkstra": "Graph Dijkstra",
   Dijkstra: "Graph Dijkstra",
   "Graph Kosaraju": "Graph Kosaraju",
@@ -53,7 +52,7 @@ export const patternNameMapping: Record<string, string> = {
   "A* Search": "A* Search",
   "Graph Articulation Points": "Graph Articulation Points",
   "Graph Bridges": "Graph Bridges",
-  "Graph Prim": "Prim's Algorithm",
+  Prim: "Prim's Algorithm",
   "Graph Kruskal": "Kruskal's Algorithm",
   "Graph Floyd-Warshall": "Floyd-Warshall",
   "Graph Bellman-Ford": "Bellman-Ford",
@@ -80,8 +79,6 @@ export const patternNameMapping: Record<string, string> = {
 
   // Tree Algorithms
   Tree: "Tree",
-  LCA: "LCA",
-  "Heavy Light Decomposition": "Heavy Light Decomposition",
 
   // String Algorithms
   "Rabin-Karp": "Rabin-Karp",
@@ -108,8 +105,6 @@ export const patternNameMapping: Record<string, string> = {
   "Sieve of Sundaram": "Sieve of Sundaram",
   "Miller-Rabin": "Miller-Rabin",
   "Miller-Rabin Algorithm": "Miller-Rabin Algorithm",
-  "Fast Fourier Transform": "Fast Fourier Transform",
-  "Matrix Exponentiation": "Matrix Exponentiation",
 
   // Other Algorithms
   "Sliding Window": "Sliding Window",
@@ -131,4 +126,8 @@ export const patternNameMapping: Record<string, string> = {
   "Monotonic Stack": "Monotonic Stack",
   "Monotonic Queue": "Monotonic Queue",
   "Two Pointers": "Two Pointers",
+
+  // Special Patterns
+  null: "Null Pattern",
+  "Null Pattern": "Null Pattern",
 };

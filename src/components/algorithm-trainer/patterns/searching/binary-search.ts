@@ -33,5 +33,5 @@ Not found!`,
             right = mid - 1
     
     return -1`,
-  category: "searching",
+  category: "Searching",
 };

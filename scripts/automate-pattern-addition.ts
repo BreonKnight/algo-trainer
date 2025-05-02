@@ -234,7 +234,7 @@ Expected Output: ${this.patternConfig.example.output}
 // Example usage:
 const patternConfig: PatternConfig = {
   name: "Binary Search on Answer",
-  category: "Searching",
+  category: "searching",
   timeComplexity: "O(log n)",
   spaceComplexity: "O(1)",
   monsterHunterContext: [

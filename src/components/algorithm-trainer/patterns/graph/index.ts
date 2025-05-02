@@ -20,11 +20,11 @@ import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching";
 import { aStarSearchPattern } from "./a-star-search";
 
 export const graphPatterns: Record<string, AlgorithmPattern> = {
-  "Graph Bellman-Ford": bellman_fordPattern,
+  "Graph Bellman Ford": bellman_fordPattern,
   "Graph Dijkstra": dijkstraPattern,
-  "Graph Floyd-Warshall": floyd_warshallPattern,
+  "Graph Floyd Warshall": floyd_warshallPattern,
   "Graph Kruskal": kruskalPattern,
-  "Graph Prim": primPattern,
+  Prim: primPattern,
   "Graph Articulation Points": articulation_pointsPattern,
   "Graph Bridges": bridgesPattern,
   DFS: graphDfsPattern,
