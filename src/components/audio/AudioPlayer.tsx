@@ -273,7 +273,7 @@ export function Timer() {
                 </defs>
               </svg>
               <span
-                className="absolute inset-0 flex items-center justify-center font-mono text-xl font-bold text-main bg-secondary/30 rounded-full px-1 shadow-sm"
+                className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-bold text-main bg-secondary/50 rounded-full px-1 shadow-lg ring-2 ring-accent/20 [text-shadow:_0_0_8px_rgba(0,0,0,0.5)]"
                 aria-live="polite"
               >
                 {formatTime(timeLeft)}
@@ -287,7 +287,7 @@ export function Timer() {
               onClick={() => startTimer(15)}
               variant="outline"
               size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
               disabled={isRunning}
               title="Set 15 minute timer"
               aria-label="Set 15 minute timer"
@@ -298,7 +298,7 @@ export function Timer() {
               onClick={() => startTimer(30)}
               variant="outline"
               size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
               disabled={isRunning}
               title="Set 30 minute timer"
               aria-label="Set 30 minute timer"
@@ -309,7 +309,7 @@ export function Timer() {
               onClick={() => startTimer(45)}
               variant="outline"
               size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
               disabled={isRunning}
               title="Set 45 minute timer"
               aria-label="Set 45 minute timer"
@@ -320,7 +320,7 @@ export function Timer() {
               onClick={() => startTimer(60)}
               variant="outline"
               size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md"
+              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
               disabled={isRunning}
               title="Set 1 hour timer"
               aria-label="Set 1 hour timer"
@@ -354,7 +354,7 @@ export function Timer() {
                 onClick={resetTimer}
                 variant="ghost"
                 size="sm"
-                className="h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform"
+                className="h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ring-1 ring-accent/20"
                 title="Reset timer"
                 aria-label="Reset timer"
               >
