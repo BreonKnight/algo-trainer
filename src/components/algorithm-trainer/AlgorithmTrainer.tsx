@@ -42,6 +42,9 @@ export default function AlgorithmTrainer() {
 
           {/* Main content area */}
           <div className="w-full flex-1">
+            <div className="fixed top-4 left-4">
+              <GamificationButton />
+            </div>
             <PanelLayout
               selectedPattern={selectedPattern}
               onPatternChange={handlePatternChange}
@@ -53,9 +56,6 @@ export default function AlgorithmTrainer() {
             />
             <div className="mt-4">
               <ReplCard userCode={userCode} />
-            </div>
-            <div className="fixed bottom-4 right-4">
-              <GamificationButton />
             </div>
             <PatternControls
               onPreviousPattern={previousPattern}

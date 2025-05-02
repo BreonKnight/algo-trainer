@@ -170,11 +170,15 @@ export function PatternCard({
   const pseudo = getPseudocodePattern(currentPattern);
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card
+      className="p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden
+      transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
+    >
       <div className="flex-none">
         <h2
           className={
-            `text-main text-base sm:text-lg md:text-xl font-semibold truncate flex-none leading-relaxed` +
+            `text-main text-lg sm:text-xl md:text-2xl font-bold truncate flex-none leading-relaxed mb-1
+            transition-all duration-300 hover:scale-[1.02]` +
             (theme === "nord"
               ? " text-white"
               : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
@@ -193,14 +197,14 @@ export function PatternCard({
         <span
           className={
             theme === "nord"
-              ? "text-white/70"
-              : "text-secondary text-sm sm:text-base"
+              ? "text-white/70 text-sm sm:text-base font-medium"
+              : "text-secondary/80 text-sm sm:text-base font-medium"
           }
         >
           {category}
         </span>
       </div>
-      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mt-2">
+      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-3">
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <TooltipProvider>
             <Tooltip>
@@ -209,7 +213,8 @@ export function PatternCard({
                   variant="ghost"
                   size="default"
                   onClick={() => setShowMonsterGuide(!showMonsterGuide)}
-                  className="text-accent hover:text-accent hover:bg-secondary/20 p-2"
+                  className="text-accent hover:text-accent hover:bg-secondary/20 p-2 rounded-full
+                    transition-all duration-300 hover:scale-110 hover:shadow-md"
                 >
                   {showMonsterGuide ? (
                     <Book className="w-6 h-6" />
@@ -218,7 +223,7 @@ export function PatternCard({
                   )}
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
                 {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
               </TooltipContent>
             </Tooltip>
@@ -227,7 +232,8 @@ export function PatternCard({
             variant="ghost"
             size="default"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-secondary hover:text-secondary hover:bg-secondary/20 p-2"
+            className="text-secondary hover:text-secondary hover:bg-secondary/20 p-2 rounded-full
+              transition-all duration-300 hover:scale-110 hover:shadow-md"
           >
             {isExpanded ? (
               <ChevronUp className="w-6 h-6" />
@@ -247,20 +253,21 @@ export function PatternCard({
       <div className="flex-1 min-h-0 overflow-hidden">
         {isExpanded &&
           (showMonsterGuide ? (
-            <div className="h-full overflow-hidden">
+            <div className="h-full overflow-hidden rounded-xl bg-main/80 backdrop-blur-sm border border-secondary/20 mt-3">
               <MonsterHunterGuide currentPattern={currentPattern} />
             </div>
           ) : (
             <div className="h-full flex flex-col overflow-hidden">
               <div
                 ref={descRef}
-                className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/90 rounded-xl`}
+                className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20
+                  transition-all duration-300 mt-3`}
                 style={{
                   height: isDesktop ? descHeight : "300px",
                   minHeight: isDesktop ? "0" : "300px",
                 }}
               >
-                <div className="h-full w-full overflow-y-auto">
+                <div className="h-full w-full overflow-y-auto custom-scrollbar">
                   <div
                     className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed p-4`}
                   >
@@ -294,13 +301,13 @@ export function PatternCard({
               </div>
               {/* Vertical resize handle */}
               <div
-                className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+                className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group mt-1"
                 style={{ userSelect: "none" }}
                 onMouseDown={(e) => {
                   if (!isDesktop) return;
                   const startY = e.clientY;
                   const startHeight = descRef.current?.offsetHeight || 0;
-                  const maxHeight = 800; // Increased max height
+                  const maxHeight = 800;
                   const onMove = (moveEvent: MouseEvent) => {
                     const delta = moveEvent.clientY - startY;
                     const newHeight = Math.max(
@@ -317,7 +324,10 @@ export function PatternCard({
                   window.addEventListener("mouseup", onUp);
                 }}
               >
-                <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+                <div
+                  className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 
+                  transition-all duration-300 group-hover:w-24"
+                />
               </div>
             </div>
           ))}
