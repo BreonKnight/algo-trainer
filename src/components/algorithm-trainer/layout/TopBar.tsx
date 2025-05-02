@@ -55,29 +55,29 @@ export function TopBar({ className }: TopBarProps) {
       )}
     >
       {/* Left: Timer & AudioPlayer */}
-      <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto justify-between sm:justify-start">
+      <div className="flex items-center gap-3 sm:gap-4">
         <Timer />
         <AudioPlayer />
       </div>
 
       {/* Right: Help & Theme Toggle */}
-      <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+      <div className="flex items-center gap-2">
         <HelpModal />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               className={cn(
-                "h-9 px-3 gap-2 rounded-lg transition-all duration-300 w-full sm:w-auto",
-                isDarkTheme
-                  ? "bg-accent2/10 hover:bg-accent2/20 text-accent2"
-                  : "bg-accent/10 hover:bg-accent/20 text-accent"
+                "h-9 px-3 gap-2 rounded-lg transition-all duration-300",
+                theme === "light" || theme === "solarized"
+                  ? "bg-accent/10 hover:bg-accent/20 text-accent"
+                  : "bg-accent2/10 hover:bg-accent2/20 text-accent2"
               )}
             >
-              {isDarkTheme ? (
-                <Sun className="h-4 w-4" />
-              ) : (
+              {theme === "light" || theme === "solarized" ? (
                 <Moon className="h-4 w-4" />
+              ) : (
+                <Sun className="h-4 w-4" />
               )}
               <span className="text-sm font-medium hidden sm:inline">
                 {formatThemeName(theme)}
