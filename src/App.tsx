@@ -7,10 +7,12 @@ import { Toaster } from "sonner";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { useTheme } from "./components/theme/theme-context";
 import PatternManagement from "./components/admin/PatternManagement";
+import { useState } from "react";
 import "./App.css";
 
 function AppContent() {
   const { theme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isDarkTheme =
     theme === "dracula" ||
@@ -22,32 +24,61 @@ function AppContent() {
     theme === "mh" ||
     theme === "kingdom-hearts";
 
-  const navClasses = isDarkTheme
-    ? "sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-background/80 border-secondary/20 text-main"
-    : "sticky top-0 z-50 w-full border-b backdrop-blur-sm bg-background/80 border-accent/10 text-accent-foreground";
+  const buttonClasses = isDarkTheme
+    ? "absolute top-4 right-4 z-[100] p-2 rounded-full bg-background/40 backdrop-blur-sm border border-secondary/10 text-main hover:bg-background/60 transition-all"
+    : "absolute top-4 right-4 z-[100] p-2 rounded-full bg-background/40 backdrop-blur-sm border border-accent/5 text-accent-foreground hover:bg-background/60 transition-all";
+
+  const menuClasses = isDarkTheme
+    ? "absolute top-16 right-4 z-[100] p-4 rounded-lg bg-background/40 backdrop-blur-sm border border-secondary/10 text-main flex flex-col space-y-2"
+    : "absolute top-16 right-4 z-[100] p-4 rounded-lg bg-background/40 backdrop-blur-sm border border-accent/5 text-accent-foreground flex flex-col space-y-2";
 
   const linkClasses = isDarkTheme
-    ? "text-lg font-semibold hover:text-main/80"
-    : "text-lg font-semibold hover:text-accent-foreground/80";
+    ? "text-sm hover:text-main/80"
+    : "text-sm hover:text-accent-foreground/80";
 
   return (
     <div className="min-h-screen w-full bg-main">
-      <nav className={navClasses}>
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex space-x-4">
-              <Link to="/" className={linkClasses}>
-                Home
-              </Link>
-              {import.meta.env.DEV && (
-                <Link to="/admin/patterns" className={linkClasses}>
-                  Pattern Management
-                </Link>
-              )}
-            </div>
-          </div>
+      <button
+        className={buttonClasses}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      {isMenuOpen && (
+        <div className={menuClasses}>
+          <Link
+            to="/"
+            className={linkClasses}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+          {import.meta.env.DEV && (
+            <Link
+              to="/admin/patterns"
+              className={linkClasses}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Pattern Management
+            </Link>
+          )}
         </div>
-      </nav>
+      )}
 
       <Routes>
         <Route path="/" element={<AlgorithmTrainer />} />

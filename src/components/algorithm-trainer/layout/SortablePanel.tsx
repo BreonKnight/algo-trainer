@@ -25,12 +25,7 @@ export function SortablePanel({ id, children }: SortablePanelProps) {
     touchAction: "none",
   };
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      className="mb-2 last:mb-0"
-    >
+    <div ref={setNodeRef} style={style} {...attributes} className="">
       {/* Drag handle only on mobile */}
       <div className="md:hidden flex items-center cursor-grab select-none mb-1">
         <span {...listeners} className="mr-2 text-main text-xl">

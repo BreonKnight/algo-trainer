@@ -75,5 +75,6 @@ export function usePanelManager() {
     handleDragEnd,
     validatePanelSizes,
     MIN_PANEL_WIDTH,
+    setPanelOrder,
   };
 }

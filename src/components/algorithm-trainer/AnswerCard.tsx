@@ -116,7 +116,7 @@ export function AnswerCard({
       className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden"
       ref={cardRef}
     >
-      <div className="flex-none flex justify-between items-center mb-4">
+      <div className="flex-none flex justify-between items-center">
         <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
           Solution
         </h2>
@@ -132,7 +132,7 @@ export function AnswerCard({
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         {showAnswer && (
           <>
-            <div className="flex-none flex justify-between items-center mb-2">
+            <div className="flex-none flex justify-between items-center mt-2">
               <h3 className="text-main text-base sm:text-lg font-semibold truncate flex leading-relaxed">
                 {showTestData ? "Monster Hunter Guide:" : "Implementation:"}
               </h3>
