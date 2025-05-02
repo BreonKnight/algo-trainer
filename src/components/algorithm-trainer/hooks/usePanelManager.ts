@@ -40,10 +40,25 @@ export function usePanelManager() {
 
         if (!isValidOrder) {
           toast.error(
-            "Invalid panel arrangement. Please maintain a valid layout."
+            "Invalid panel arrangement. Panels must maintain a logical order (e.g., Pattern → Editor → Answer).",
+            {
+              duration: 3000,
+              icon: "⚠️",
+              style: {
+                background: "#ef4444",
+                color: "#fff",
+              },
+            }
           );
-          return items; // Revert to previous order
+          // Animate back to original position
+          return items;
         }
+
+        // Show success feedback
+        toast.success("Layout updated!", {
+          duration: 2000,
+          icon: "✅",
+        });
 
         return newOrder;
       });
