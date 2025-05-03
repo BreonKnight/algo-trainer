@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { PatternKey, PATTERN_KEYS } from "../types.ts";
+import { PatternKey } from "../types.ts";
 import GamificationService from "../../../lib/gamification";
 import { monsterHunterPatternsByCategory } from "../monsterHunterPatternsCombined";
 

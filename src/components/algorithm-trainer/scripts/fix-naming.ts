@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import { monsterHunterExplanations } from "../monsterHunterExplanations.ts";
 import { fileURLToPath } from "url";
 
 function toKebabCase(str: string): string {
@@ -123,14 +122,14 @@ function fixFileNaming(filePath: string): void {
 }
 
 function fixPatternVariable(content: string): string {
-  return content.replace(/const\s+([a-zA-Z0-9_]+)\s*=/g, (match, varName) => {
+  return content.replace(/const\s+([a-zA-Z0-9_]+)\s*=/g, (_, varName) => {
     const newVarName = toCamelCase(varName) + "Pattern";
     return `const ${newVarName} =`;
   });
 }
 
 function fixPatternKey(content: string): string {
-  return content.replace(/"([^"]+)":/g, (match, key) => {
+  return content.replace(/"([^"]+)":/g, (_, key) => {
     const newKey = toTitleCase(key);
     return `"${newKey}":`;
   });

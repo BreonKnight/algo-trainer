@@ -8,7 +8,7 @@ import { greedyJobSchedulingPattern } from "./greedy-job-scheduling";
 export const greedyPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Huffman Coding": greedyHuffmanCodingPattern,
   "Activity Selection": greedyActivitySelectionPattern,
-  "Greedy Dijkstra": greedyDijkstraPattern,
-  "Greedy Fractional Knapsack": greedyFractionalKnapsackPattern,
+  Greedy: greedyDijkstraPattern,
+  "Fractional Knapsack": greedyFractionalKnapsackPattern,
   "Job Scheduling": greedyJobSchedulingPattern,
 };

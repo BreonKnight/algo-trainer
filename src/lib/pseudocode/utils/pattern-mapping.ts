@@ -136,4 +136,5 @@ export const patternMapping: Record<PatternKey, string> = {
   "Job Scheduling": "Job Scheduling",
   Graph: "Graph",
   "Grid Traversal": "Grid Traversal",
+  Greedy: "Greedy",
 };

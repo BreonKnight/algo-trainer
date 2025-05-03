@@ -7,7 +7,6 @@ import { TopBar } from "./layout/TopBar";
 import { PanelLayout } from "./layout/PanelLayout";
 import { PatternControls } from "./layout/PatternControls";
 import { usePatternManager } from "./hooks/usePatternManager";
-import { PATTERN_KEYS } from "./types";
 import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
 
 export default function AlgorithmTrainer() {
