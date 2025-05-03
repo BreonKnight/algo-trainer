@@ -3,6 +3,7 @@ import { PatternKey } from "./types/pattern-types";
 export const patternMapping: Record<PatternKey, string> = {
   "A* Search": "a-star-search",
   "Activity Selection": "activity-selection",
+  Greedy: "greedy",
   "Articulation Points": "articulation-points",
   "AVL Tree": "avl-tree",
   Backtracking: "backtracking",

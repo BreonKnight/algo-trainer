@@ -20,10 +20,6 @@ import { categoryColors } from "@/lib/patterns";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;
-
-// Type assertion for the imported pseudocodePatterns
-const typedPseudocodePatterns = pseudocodePatterns as PseudocodePatterns;
-
 // Get category for a pattern
 const getPatternCategory = (pattern: PatternKey): string => {
   // Find the category that contains this pattern
@@ -49,7 +45,7 @@ export function PatternCard({
   patternNumber,
 }: PatternCardProps) {
   const [showMonsterGuide, setShowMonsterGuide] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded] = useState(true);
   const category = getPatternCategory(currentPattern);
   const { theme } = useTheme();
   const [descHeight, setDescHeight] = useState(300);
@@ -81,7 +77,8 @@ export function PatternCard({
     }
 
     // If not found, try to map the name
-    const mappedName = patternMapping[patternName];
+    const mappedName =
+      patternMapping[patternName as keyof typeof patternMapping];
     if (mappedName) {
       return typedPseudocodePatterns[mappedName];
     }

@@ -1,4 +1,4 @@
-import { AlgorithmPattern, PatternKey } from "../../types/pattern-types.ts";
+import { AlgorithmPattern } from "../../types/pattern-types.ts";
 import { digitDPPattern } from "./digit-dp.ts";
 import { dynamicProgrammingCoinChangePattern } from "./dynamic-programming-coin-change.ts";
 import { dynamicProgrammingFibonacciPattern } from "./dynamic-programming-fibonacci.ts";

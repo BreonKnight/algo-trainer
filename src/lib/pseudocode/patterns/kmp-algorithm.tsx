@@ -1,6 +1,5 @@
-import React from "react";
 import { ChevronRight } from "lucide-react";
-import { PseudocodeDisplay } from "../components/PseudocodeDisplay";
+import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
 export const KnuthMorrisPrattPattern = () => {
   return (

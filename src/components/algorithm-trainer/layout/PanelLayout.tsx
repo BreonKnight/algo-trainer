@@ -67,7 +67,6 @@ export function PanelLayout({
     setAnswerOpen,
     handleDragEnd,
     validatePanelSizes,
-    MIN_PANEL_WIDTH,
     setPanelOrder,
   } = usePanelManager();
 

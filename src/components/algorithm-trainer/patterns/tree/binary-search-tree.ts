@@ -6,6 +6,7 @@ export const binarySearchTreePattern: AlgorithmPattern = {
     "Implementation of a binary tree that maintains the BST property: left subtree values are less than node, right subtree values are greater.",
   timeComplexity: "Average: O(log n) for insert/delete/search, Worst: O(n)",
   spaceComplexity: "O(n) for n nodes",
+  category: "Tree",
   pseudocode: `
 BST operations:
 1. insert(value):

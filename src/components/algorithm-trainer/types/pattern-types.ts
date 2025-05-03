@@ -37,6 +37,7 @@ export type PatternKey =
   | "Floyd Cycle Detection"
   | "Floyd-Warshall"
   | "Graph"
+  | "Greedy"
   | "Bridges"
   | "Kosaraju"
   | "Kruskal"
@@ -119,7 +120,7 @@ export interface AlgorithmPattern {
   category: string;
   pattern?: string;
   keySteps?: string[];
-  testData: {
+  testData?: {
     input:
       | number[]
       | {

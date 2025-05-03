@@ -17,13 +17,7 @@ import {
   DraggableProvided,
 } from "react-beautiful-dnd";
 import { patternMapping } from "../../lib/pseudocode/utils/pattern-mapping";
-import {
-  findDuplicatePatterns,
-  findIncompletePatterns,
-  validatePatternNames,
-  validatePatternCategories,
-  validateComponentOrder,
-} from "./pattern-management/PatternValidation";
+import { validateComponentOrder } from "./pattern-management/PatternValidation";
 
 type FormStep =
   | "basic"
@@ -211,21 +205,21 @@ const PatternManagement: React.FC = () => {
     [calculateStringSimilarity]
   );
 
-  const validatePatternCategories = (
-    patterns: Pattern[],
-    patternCategories: Record<string, number>
-  ) => {
-    const validCategories = Object.keys(patternCategories);
-    return patterns
-      .filter(
-        (pattern) =>
-          !validCategories.some((category) => pattern.category === category)
-      )
-      .map((pattern) => ({
-        pattern: pattern.name,
-        issue: `Invalid category: ${pattern.category}`,
-      }));
-  };
+  const validatePatternCategories = useCallback(
+    (patterns: Pattern[], patternCategories: Record<string, number>) => {
+      const validCategories = Object.keys(patternCategories);
+      return patterns
+        .filter(
+          (pattern) =>
+            !validCategories.some((category) => pattern.category === category)
+        )
+        .map((pattern) => ({
+          pattern: pattern.name,
+          issue: `Invalid category: ${pattern.category}`,
+        }));
+    },
+    []
+  );
 
   const findIncompletePatterns = (patterns: Pattern[]): string[] => {
     return patterns
@@ -240,48 +234,61 @@ const PatternManagement: React.FC = () => {
       .map((pattern) => pattern.name);
   };
 
-  const validatePatternNames = (
-    patterns: Pattern[]
-  ): Array<{ pattern: string; issue: string }> => {
-    const issues: Array<{ pattern: string; issue: string }> = [];
+  const validatePatternNames = useCallback(
+    (patterns: Pattern[]): Array<{ pattern: string; issue: string }> => {
+      const issues: Array<{ pattern: string; issue: string }> = [];
 
-    patterns.forEach((pattern) => {
-      if (!pattern.name) {
-        issues.push({
-          pattern: "Unnamed Pattern",
-          issue: "Pattern has no name",
-        });
-        return;
-      }
+      patterns.forEach((pattern) => {
+        if (!pattern.name) {
+          issues.push({
+            pattern: "Unnamed Pattern",
+            issue: "Pattern has no name",
+          });
+          return;
+        }
 
-      if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
-        issues.push({
-          pattern: pattern.name,
-          issue:
-            "Name should start with capital letter and contain only letters and spaces",
-        });
-      }
+        if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
+          issues.push({
+            pattern: pattern.name,
+            issue:
+              "Name should start with capital letter and contain only letters and spaces",
+          });
+        }
 
-      if (pattern.name.length > 50) {
-        issues.push({
-          pattern: pattern.name,
-          issue: "Name is too long (max 50 characters)",
-        });
-      }
-    });
+        if (pattern.name.length > 50) {
+          issues.push({
+            pattern: pattern.name,
+            issue: "Name is too long (max 50 characters)",
+          });
+        }
+      });
 
-    return issues;
-  };
+      return issues;
+    },
+    []
+  );
 
-  const validatePatterns = (patterns: Pattern[]) => {
-    return {
-      duplicates: findDuplicatePatterns(patterns),
-      namingIssues: validatePatternNames(patterns),
-      categoryIssues: validatePatternCategories(patterns, debugInfo.patternCategories),
-      orderIssues: validateComponentOrder(patterns, originalOrder),
-      incompletePatterns: findIncompletePatterns(patterns), // Add incompletePatterns
-    };
-  };
+  const validatePatterns = useCallback(
+    (patterns: Pattern[]) => {
+      return {
+        duplicates: findDuplicatePatterns(patterns),
+        namingIssues: validatePatternNames(patterns),
+        categoryIssues: validatePatternCategories(
+          patterns,
+          debugInfo.patternCategories
+        ),
+        orderIssues: validateComponentOrder(patterns, originalOrder),
+        incompletePatterns: findIncompletePatterns(patterns),
+      };
+    },
+    [
+      findDuplicatePatterns,
+      validatePatternNames,
+      validatePatternCategories,
+      debugInfo.patternCategories,
+      originalOrder,
+    ]
+  );
 
   // Add debug information update effect
   useEffect(() => {
@@ -364,7 +371,7 @@ const PatternManagement: React.FC = () => {
       // Run validation checks
       const validationResults = {
         ...validatePatterns(patterns),
-        incompletePatterns: validatePatterns(patterns).incompletePatterns || []
+        incompletePatterns: validatePatterns(patterns).incompletePatterns || [],
       };
 
       setDebugInfo({
@@ -374,7 +381,13 @@ const PatternManagement: React.FC = () => {
         validationResults,
       });
     }
-  }, [debugMode, patterns, findDuplicatePatterns, originalOrder]);
+  }, [
+    debugMode,
+    patterns,
+    findDuplicatePatterns,
+    originalOrder,
+    validatePatterns,
+  ]);
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
