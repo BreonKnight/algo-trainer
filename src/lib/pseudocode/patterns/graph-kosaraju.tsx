@@ -1,18 +1,18 @@
 import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
-export const GraphKosarajuPattern = () => (
-  <div>
-    <div className="mb-2">
+export const KosarajuPattern = () => (
+  <div className="space-y-4">
+    <h2 className="text-2xl font-bold">
       <span className="text-accent font-bold">Kosaraju's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
-    </div>
+    </h2>
     <div className="mb-2 text-xs text-secondary">
       Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find strongly
       connected components
     </div>
 
-    <PseudocodeDisplay code={`KOSARAJU(G)
+    <PseudocodeDisplay
+      code={`KOSARAJU(G)
     let n be the number of vertices in G
     let visited[1‥n] be a new array
     let order be a new empty stack
@@ -62,7 +62,8 @@ DFS-SECOND(G, u, visited, component)
 //   Component 1: [1, 2, 3]
 //   Component 2: [4, 5, 6]
 // 
-// Output: [[1, 2, 3], [4, 5, 6]]`} />
+// Output: [[1, 2, 3], [4, 5, 6]]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

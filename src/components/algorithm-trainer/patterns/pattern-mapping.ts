@@ -1,32 +1,28 @@
-import { PatternKey } from "../../../components/algorithm-trainer/types/pattern-types";
+import { PatternKey } from "../types/pattern-types";
 
-export const patternMapping: Record<PatternKey, string> = {
-  // Sorting Algorithms
+// This mapping ensures consistency between regular patterns and Monster Hunter patterns
+export const patternMapping: Record<string, PatternKey> = {
+  // Sorting Patterns
+  "Radix Sort": "Radix Sort",
   "Quick Sort": "Quick Sort",
   "Merge Sort": "Merge Sort",
-  "Stack Sort": "Stack Sort",
   "Heap Sort": "Heap Sort",
   "Bubble Sort": "Bubble Sort",
   "Selection Sort": "Selection Sort",
   "Insertion Sort": "Insertion Sort",
-  "Radix Sort": "Radix Sort",
+  "Stack Sort": "Stack Sort",
 
-  // Searching Algorithms
+  // Searching Patterns
   "Binary Search": "Binary Search",
-  "Binary Search on Answer": "Binary Search on Answer",
   "Linear Search": "Linear Search",
+  "Binary Search on Answer": "Binary Search on Answer",
   "Ternary Search": "Ternary Search",
   "Jump Search": "Jump Search",
   "Exponential Search": "Exponential Search",
   "Interpolation Search": "Interpolation Search",
   "Fibonacci Search": "Fibonacci Search",
 
-  // Two Sum Variations
-  "Two Sum": "Two Sum",
-  "Two Sum Dict": "Two Sum Dict",
-  "Two Sum Two Pointers": "Two Sum Two Pointers",
-
-  // Dynamic Programming
+  // Dynamic Programming Patterns
   "Dynamic Programming": "Dynamic Programming",
   "Dynamic Programming Pattern": "Dynamic Programming Pattern",
   "Dynamic Programming Fibonacci": "Dynamic Programming Fibonacci",
@@ -37,48 +33,29 @@ export const patternMapping: Record<PatternKey, string> = {
   "Tree DP": "Tree DP",
   "Probability DP": "Probability DP",
 
-  // Greedy Algorithms
-  "Activity Selection": "Activity Selection",
-  "Fractional Knapsack": "Fractional Knapsack",
-  "Huffman Coding": "Huffman Coding",
-
-  // Graph Algorithms
+  // Graph Patterns
   "A* Search": "A* Search",
   "Articulation Points": "Articulation Points",
   "Bellman-Ford": "Bellman-Ford",
-  Bridges: "Bridges",
-  Dijkstra: "Dijkstra",
   "Floyd-Warshall": "Floyd-Warshall",
-  Kosaraju: "Kosaraju",
   Kruskal: "Kruskal",
-  "Network Flow": "Network Flow",
   "Strongly Connected Components": "Strongly Connected Components",
   "Maximum Bipartite Matching": "Maximum Bipartite Matching",
   "Topological Sort": "Topological Sort",
   Prim: "Prim",
+  Kosaraju: "Kosaraju",
 
-  // Data Structures
-  "AVL Tree": "AVL Tree",
+  // Data Structure Patterns
   "B Tree": "B Tree",
-  "Binary Search Tree": "Binary Search Tree",
   "Circular Linked List": "Circular Linked List",
   "Fenwick Tree": "Fenwick Tree",
-  "Hash Table": "Hash Table",
-  "Heap Implementation": "Heap Implementation",
   "Linked List": "Linked List",
-  "Queue Implementation": "Queue Implementation",
-  "Red-Black Tree": "Red-Black Tree",
   "Segment Tree": "Segment Tree",
-  "Stack Implementation": "Stack Implementation",
-  "Trie Operations": "Trie Operations",
   "Union Find": "Union Find",
-
-  // Tree Algorithms
   Tree: "Tree",
   "DFS Binary Tree": "DFS Binary Tree",
-  "Lowest Common Ancestor": "Lowest Common Ancestor",
 
-  // String Algorithms
+  // String Patterns
   "String Operations": "String Operations",
   "Rabin-Karp": "Rabin-Karp",
   "Knuth-Morris-Pratt": "Knuth-Morris-Pratt",
@@ -87,7 +64,7 @@ export const patternMapping: Record<PatternKey, string> = {
   "Suffix Array": "Suffix Array",
   "Suffix Tree": "Suffix Tree",
 
-  // Matrix Operations
+  // Matrix Patterns
   "Matrix Operations": "Matrix Operations",
   "Matrix Traversal": "Matrix Traversal",
   "Matrix Traversal Recursive": "Matrix Traversal Recursive",
@@ -95,42 +72,71 @@ export const patternMapping: Record<PatternKey, string> = {
   "Matrix Spiral Recursive": "Matrix Spiral Recursive",
   "Matrix Chain Multiplication": "Matrix Chain Multiplication",
   "Matrix Exponentiation": "Matrix Exponentiation",
-  "Rotate Matrix": "Matrix Operations",
 
-  // Number Theory
+  // Number Theory Patterns
   "Chinese Remainder Theorem": "Chinese Remainder Theorem",
   "Extended Euclidean": "Extended Euclidean",
   "Fast Fourier Transform": "Fast Fourier Transform",
-  "Miller-Rabin Primality Test": "Miller-Rabin Algorithm",
-  "Prime Factorization": "Prime Factorization",
   "Sieve of Atkin": "Sieve of Atkin",
   "Sieve of Eratosthenes": "Sieve of Eratosthenes",
   "Sieve of Sundaram": "Sieve of Sundaram",
 
-  // Other Algorithms
+  // Other Patterns
   Backtracking: "Backtracking",
   "Bit Manipulation": "Bit Manipulation",
   "Divide and Conquer": "Divide and Conquer",
   "Floyd Cycle Detection": "Floyd Cycle Detection",
-  "Heavy Light Decomposition": "Heavy Light Decomposition",
   "Kadane's Algorithm": "Kadane's Algorithm",
-  Memoization: "Memoization",
-  "Monotonic Queue": "Monotonic Queue",
-  "Monotonic Stack": "Monotonic Stack",
   "Prefix Sum": "Prefix Sum",
-  Quickselect: "Quickselect",
   Recursion: "Recursion",
   "Sliding Window": "Sliding Window",
-  "Test Data": "Test Data",
   "Two Pointers": "Two Pointers",
 
-  // Graph Traversal
+  // Greedy Patterns
+  "Activity Selection": "Activity Selection",
+  "Fractional Knapsack": "Fractional Knapsack",
+  "Huffman Coding": "Huffman Coding",
+  "Job Scheduling": "Job Scheduling",
+
+  // BFS/DFS Patterns
   BFS: "BFS",
   "BFS Linked List": "BFS Linked List",
   DFS: "DFS",
   "DFS Linked List": "DFS Linked List",
-
-  // Special Patterns
-  "Null Pattern": "Null Pattern",
-  "Hungarian Algorithm": "Hungarian Algorithm",
 };
+
+// Function to get the corresponding Monster Hunter pattern key
+export function getMonsterHunterPatternKey(
+  regularPatternKey: string
+): PatternKey | undefined {
+  return patternMapping[regularPatternKey];
+}
+
+// Function to get the corresponding regular pattern key
+export function getRegularPatternKey(
+  monsterHunterPatternKey: PatternKey
+): string | undefined {
+  const entry = Object.entries(patternMapping).find(
+    ([_, value]) => value === monsterHunterPatternKey
+  );
+  return entry ? entry[0] : undefined;
+}
+
+// Function to validate pattern mappings
+export function validatePatternMappings(): {
+  missingRegular: string[];
+  missingMonsterHunter: PatternKey[];
+} {
+  const allPatternKeys = Object.values(patternMapping);
+  const allRegularKeys = Object.keys(patternMapping);
+
+  const missingRegular = allRegularKeys.filter((key) => !patternMapping[key]);
+  const missingMonsterHunter = allPatternKeys.filter(
+    (key) => !Object.values(patternMapping).includes(key)
+  );
+
+  return {
+    missingRegular,
+    missingMonsterHunter,
+  };
+}

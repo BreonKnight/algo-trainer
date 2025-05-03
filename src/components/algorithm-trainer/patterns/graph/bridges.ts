@@ -66,4 +66,20 @@ Bridges (Critical Paths):
             
     return bridges`,
   category: "Graph",
+  testData: [
+    {
+      input: {
+        arr: [0, 1, 2, 3, 4],
+        graph: {
+          0: [1, 2],
+          1: [0, 2],
+          2: [0, 1, 3],
+          3: [2, 4],
+          4: [3],
+        },
+      },
+      expected: 2,
+      description: "Find bridges in a simple graph",
+    },
+  ],
 };

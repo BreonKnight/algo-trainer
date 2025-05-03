@@ -273,6 +273,16 @@ const PatternManagement: React.FC = () => {
     return issues;
   };
 
+  const validatePatterns = (patterns: Pattern[]) => {
+    return {
+      duplicates: findDuplicatePatterns(patterns),
+      namingIssues: validatePatternNames(patterns),
+      categoryIssues: validatePatternCategories(patterns, debugInfo.patternCategories),
+      orderIssues: validateComponentOrder(patterns, originalOrder),
+      incompletePatterns: findIncompletePatterns(patterns), // Add incompletePatterns
+    };
+  };
+
   // Add debug information update effect
   useEffect(() => {
     if (debugMode) {
@@ -353,11 +363,8 @@ const PatternManagement: React.FC = () => {
 
       // Run validation checks
       const validationResults = {
-        duplicates: findDuplicatePatterns(patterns),
-        incompletePatterns: findIncompletePatterns(patterns),
-        namingIssues: validatePatternNames(patterns),
-        categoryIssues: validatePatternCategories(patterns, categories),
-        orderIssues: validateComponentOrder(patterns, originalOrder),
+        ...validatePatterns(patterns),
+        incompletePatterns: validatePatterns(patterns).incompletePatterns || []
       };
 
       setDebugInfo({

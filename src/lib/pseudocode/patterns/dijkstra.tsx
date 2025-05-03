@@ -1,18 +1,18 @@
 import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
-export const GreedyDijkstraPattern = () => (
-  <div>
-    <div className="mb-2">
+export const DijkstraPattern = () => (
+  <div className="space-y-4">
+    <h2 className="text-2xl font-bold">
       <span className="text-accent font-bold">Dijkstra's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
-    </div>
+    </h2>
     <div className="mb-2 text-xs text-secondary">
       Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
       shortest paths from a source
     </div>
 
-    <PseudocodeDisplay code={`// Standard Dijkstra's Algorithm
+    <PseudocodeDisplay
+      code={`// Standard Dijkstra's Algorithm
 def dijkstra(graph, source):
     # Initialize distances and visited set
     distances = {node: float('inf') for node in graph}
@@ -136,7 +136,8 @@ def bidirectional_dijkstra(graph, source, target):
                     backward_dist[neighbor] = new_dist
                     heapq.heappush(backward_heap, (new_dist, neighbor))
     
-    return min_dist, meeting_node`} />
+    return min_dist, meeting_node`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

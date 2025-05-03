@@ -332,18 +332,18 @@ export const monsterHunterExplanations: Partial<
       "Consider both positive and negative monster densities",
     ],
   },
-  "KMP Algorithm": {
+  "Knuth-Morris-Pratt": {
     title: "Knuth-Morris-Pratt Monster Pattern Seeker",
     description:
-      "Like a monster hunter tracking a specific monster's movement pattern, the KMP algorithm efficiently searches for patterns in monster behavior sequences.",
+      "Like a monster hunter tracking a specific monster's movement pattern, the Knuth-Morris-Pratt algorithm efficiently searches for patterns in monster behavior sequences.",
     example:
-      "Imagine trying to find a specific sequence of monster footprints in a long trail - KMP helps you quickly locate the pattern without backtracking through the entire trail.",
+      "When tracking a monster's movement pattern through different territories, the Knuth-Morris-Pratt algorithm helps identify where the pattern matches occur, allowing hunters to predict the monster's next location.",
     tips: [
-      "Build a prefix table to avoid unnecessary comparisons",
-      "Use the prefix table to skip ahead when mismatches occur",
-      "Keep track of the longest prefix that's also a suffix",
-      "Update the pattern position based on the prefix table",
-      "Consider the pattern's structure to optimize the search",
+      "Use the failure function to skip unnecessary comparisons",
+      "Preprocess the pattern to build the failure function",
+      "Apply the algorithm to find all occurrences of the pattern",
+      "Consider using it for monster behavior analysis",
+      "Combine with other string algorithms for complex pattern matching",
     ],
   },
   "Ternary Search": {
@@ -475,7 +475,7 @@ export const monsterHunterExplanations: Partial<
   Tree: {
     title: "Monster Territory Tree Operations",
     description:
-      "A collection of algorithms for working with tree structures, including LCA, Heavy Light Decomposition, and other tree-based operations.",
+      "A collection of algorithms for working with tree structures, including Lowest Common Ancestor, Heavy Light Decomposition, and other tree-based operations.",
     example:
       "Imagine you have a tree representing monster territories and their relationships. Tree Algorithms help you efficiently perform operations like finding common ancestors, decomposing the tree for efficient queries, and more.",
     tips: [

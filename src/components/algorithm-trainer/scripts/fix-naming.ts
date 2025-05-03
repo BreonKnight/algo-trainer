@@ -60,9 +60,9 @@ function toTitleCase(str: string): string {
     "fast fourier transform": "Fast Fourier Transform",
     "job scheduling": "Job Scheduling",
     "fractional knapsack": "Fractional Knapsack",
-    "greedy job scheduling": "Greedy Job Scheduling",
-    "greedy fractional knapsack": "Greedy Fractional Knapsack",
-    graph: "Graph",
+    "hungarian algorithm": "Hungarian Algorithm",
+    "radix sort": "Radix Sort",
+    string: "String",
     "rotate matrix": "Rotate Matrix",
     "bit manipulation": "Bit Manipulation",
   };

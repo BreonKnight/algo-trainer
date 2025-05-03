@@ -1,14 +1,105 @@
 export const PATTERN_KEYS = [
-  "random",
-  "ascending",
-  "descending",
-  "v-shaped",
-  "a-shaped",
-  "mountain",
-  "valley",
-  "random-duplicates",
-  "ascending-duplicates",
-  "descending-duplicates",
+  // Sorting Patterns
+  "Radix Sort",
+  "Quick Sort",
+  "Merge Sort",
+  "Heap Sort",
+  "Bubble Sort",
+  "Selection Sort",
+  "Insertion Sort",
+  "Stack Sort",
+
+  // Searching Patterns
+  "Binary Search",
+  "Linear Search",
+  "Binary Search on Answer",
+  "Ternary Search",
+  "Jump Search",
+  "Exponential Search",
+  "Interpolation Search",
+  "Fibonacci Search",
+
+  // Dynamic Programming Patterns
+  "Dynamic Programming",
+  "Dynamic Programming Pattern",
+  "Dynamic Programming Fibonacci",
+  "Dynamic Programming Iterative",
+  "Dynamic Programming Coin Change",
+  "State Compression DP",
+  "Digit DP",
+  "Tree DP",
+  "Probability DP",
+
+  // Graph Patterns
+  "A* Search",
+  "Articulation Points",
+  "Bellman-Ford",
+  "Floyd-Warshall",
+  "Kruskal",
+  "Strongly Connected Components",
+  "Maximum Bipartite Matching",
+  "Topological Sort",
+  "Prim",
+  "Kosaraju",
+
+  // Data Structure Patterns
+  "B Tree",
+  "Circular Linked List",
+  "Fenwick Tree",
+  "Linked List",
+  "Segment Tree",
+  "Union Find",
+  "Tree",
+  "DFS Binary Tree",
+
+  // String Patterns
+  "String Operations",
+  "Rabin-Karp",
+  "Knuth-Morris-Pratt",
+  "Manacher's Algorithm",
+  "Z Algorithm",
+  "Suffix Array",
+  "Suffix Tree",
+
+  // Matrix Patterns
+  "Matrix Operations",
+  "Matrix Traversal",
+  "Matrix Traversal Recursive",
+  "Matrix Spiral Traversal",
+  "Matrix Spiral Recursive",
+  "Matrix Chain Multiplication",
+  "Matrix Exponentiation",
+
+  // Number Theory Patterns
+  "Chinese Remainder Theorem",
+  "Extended Euclidean",
+  "Fast Fourier Transform",
+  "Sieve of Atkin",
+  "Sieve of Eratosthenes",
+  "Sieve of Sundaram",
+
+  // Other Patterns
+  "Backtracking",
+  "Bit Manipulation",
+  "Divide and Conquer",
+  "Floyd Cycle Detection",
+  "Kadane's Algorithm",
+  "Prefix Sum",
+  "Recursion",
+  "Sliding Window",
+  "Two Pointers",
+
+  // Greedy Patterns
+  "Activity Selection",
+  "Fractional Knapsack",
+  "Huffman Coding",
+  "Job Scheduling",
+
+  // BFS/DFS Patterns
+  "BFS",
+  "BFS Linked List",
+  "DFS",
+  "DFS Linked List",
 ] as const;
 
 export const categoryColors = {
