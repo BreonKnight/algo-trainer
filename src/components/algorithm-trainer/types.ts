@@ -19,6 +19,7 @@ export type PatternKey =
   | "DFS Binary Tree"
   | "DFS Linked List"
   | "Digit DP"
+  | "Dijkstra"
   | "Divide and Conquer"
   | "Dynamic Programming"
   | "Dynamic Programming Coin Change"
@@ -142,6 +143,7 @@ export const PATTERN_KEYS: PatternKey[] = [
   "DFS Binary Tree",
   "DFS Linked List",
   "Digit DP",
+  "Dijkstra",
   "Divide and Conquer",
   "Dynamic Programming",
   "Dynamic Programming Coin Change",

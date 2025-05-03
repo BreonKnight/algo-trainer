@@ -1,9 +1,5 @@
 import { execSync } from "child_process";
-import {
-  PatternKey,
-  AlgorithmPattern,
-} from "../src/components/algorithm-trainer/types.ts";
-import { monsterHunterPatternsExtended4 } from "../src/components/algorithm-trainer/monsterHunterPatternsExtended4.ts";
+import { PatternKey } from "../src/components/algorithm-trainer/types.ts";
 import { algorithmPatterns } from "../src/components/algorithm-trainer/patterns/index.ts";
 import { allMonsterHunterPatterns } from "../src/components/algorithm-trainer/monsterHunterPatternsCombined.ts";
 import { patternMapping } from "../src/lib/pseudocode/utils/pattern-mapping.ts";

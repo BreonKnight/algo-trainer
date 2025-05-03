@@ -87,7 +87,6 @@ export const patternMapping: Record<string, PatternKey> = {
   "Divide and Conquer": "Divide and Conquer",
   "Floyd Cycle Detection": "Floyd Cycle Detection",
   "Kadane's Algorithm": "Kadane's Algorithm",
-  "Prefix Sum": "Prefix Sum",
   Recursion: "Recursion",
   "Sliding Window": "Sliding Window",
   "Two Pointers": "Two Pointers",
@@ -117,7 +116,7 @@ export function getRegularPatternKey(
   monsterHunterPatternKey: PatternKey
 ): string | undefined {
   const entry = Object.entries(patternMapping).find(
-    ([_, value]) => value === monsterHunterPatternKey
+    ([, value]) => value === monsterHunterPatternKey
   );
   return entry ? entry[0] : undefined;
 }

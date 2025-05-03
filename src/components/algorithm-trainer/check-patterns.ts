@@ -1,4 +1,3 @@
-import { PatternKey } from "./types/pattern-types.ts";
 import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
 import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
 import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";

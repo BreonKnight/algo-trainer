@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import { PatternKey } from "./types/pattern-types";
 
 export const patternMapping: Record<PatternKey, string> = {
   "A* Search": "a-star-search",
@@ -36,7 +36,6 @@ export const patternMapping: Record<PatternKey, string> = {
   "Floyd-Warshall": "floyd-warshall",
   "Fractional Knapsack": "fractional-knapsack",
   Graph: "graph",
-  Greedy: "greedy",
   "Grid Traversal": "grid-traversal",
   "Heap Implementation": "heap-implementation",
   "Heap Sort": "heap-sort",
@@ -91,7 +90,6 @@ export const patternMapping: Record<PatternKey, string> = {
   "Stack Implementation": "stack-implementation",
   "Stack Sort": "stack-sort",
   "State Compression DP": "state-compression-dp",
-  String: "string",
   "String Operations": "string-operations",
   "Strongly Connected Components": "strongly-connected-components",
   "Suffix Array": "suffix-array",
@@ -108,4 +106,7 @@ export const patternMapping: Record<PatternKey, string> = {
   "Two Sum Two Pointers": "two-sum-two-pointers",
   "Union Find": "union-find",
   "Z Algorithm": "z-algorithm",
+  Dijkstra: "dijkstra",
+  "Hash Table": "hash-table",
+  Bridges: "bridges",
 };

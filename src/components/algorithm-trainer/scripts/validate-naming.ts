@@ -2,8 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const { fileURLToPath } = require("url");
 import { monsterHunterExplanations } from "../monsterHunterExplanations.ts";
-import { dirname } from "path";
-import { PatternKey } from "../types.js";
 
 interface ValidationResult {
   file: string;
