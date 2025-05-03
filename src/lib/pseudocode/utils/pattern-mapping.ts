@@ -88,7 +88,7 @@ export const patternMapping: Record<PatternKey, string> = {
   "Suffix Array": "Suffix Array",
   "Suffix Tree": "Suffix Tree",
 
-  // Matrix Operations
+  // Matrix Patterns
   "Matrix Operations": "Matrix Operations",
   "Matrix Traversal": "Matrix Traversal",
   "Matrix Traversal Recursive": "Matrix Traversal Recursive",
@@ -96,7 +96,7 @@ export const patternMapping: Record<PatternKey, string> = {
   "Matrix Spiral Recursive": "Matrix Spiral Recursive",
   "Matrix Chain Multiplication": "Matrix Chain Multiplication",
   "Matrix Exponentiation": "Matrix Exponentiation",
-  "Rotate Matrix": "Matrix Operations",
+  "Rotate Matrix": "Rotate Matrix",
 
   // Number Theory
   "Chinese Remainder Theorem": "Chinese Remainder Theorem",
