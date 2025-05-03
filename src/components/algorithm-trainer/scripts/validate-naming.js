@@ -269,6 +269,51 @@ function validatePatternKeys() {
   }
 }
 
-// Run both validations
+function validateMonsterHunterExplanations() {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const explanationsPath = path.join(
+    __dirname,
+    "..",
+    "monsterHunterExplanations.ts"
+  );
+
+  console.log("\nValidating monsterHunterExplanations.ts...\n");
+
+  const content = fs.readFileSync(explanationsPath, "utf-8");
+  const patternKeys = [];
+
+  // Match pattern keys in the object literal, handling both quoted and unquoted keys
+  const matches = content.match(/(?:"([^"]+)"|(\w+)):\s*{\s*title:/g);
+  if (matches) {
+    matches.forEach((match) => {
+      // Extract the key, handling both quoted and unquoted cases
+      const key = match.replace(/:.*/, "").trim().replace(/"/g, "");
+      patternKeys.push(key);
+    });
+  }
+
+  const invalidKeys = patternKeys.filter((key) => !PATTERN_KEYS.includes(key));
+
+  if (invalidKeys.length > 0) {
+    console.log("Invalid pattern keys found in monsterHunterExplanations.ts:");
+    invalidKeys.forEach((key) => {
+      const similar = findSimilarStrings(key, PATTERN_KEYS);
+      console.log(`  - ${key}`);
+      if (similar.length > 0) {
+        console.log(`    Similar patterns found:`);
+        similar.forEach(({ candidate, similarity }) => {
+          console.log(
+            `      ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
+          );
+        });
+      }
+    });
+  } else {
+    console.log("✓ All pattern keys in monsterHunterExplanations.ts are valid");
+  }
+}
+
+// Run all validations
 validatePatternKeys();
 validatePatternMappingAndPseudocode();
+validateMonsterHunterExplanations();
