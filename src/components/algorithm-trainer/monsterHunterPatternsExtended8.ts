@@ -427,6 +427,438 @@ print("Optimal territory connections:", mst)
   ],
 ]);
 
+// Add Divide and Conquer Monster Hunter Pattern
+const divideAndConquerMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "Divide and Conquer",
+    `# Monster Hunter Divide and Conquer Pattern
+# Territory Exploration Strategy
+
+def explore_territory(territory):
+    """
+    Explore territory by dividing it into smaller regions.
+    Time: O(n log n)
+    Space: O(log n)
+    
+    Monster Hunter Context:
+    - Like exploring large territories
+    - Divide into manageable regions
+    - Search for resources and monsters
+    - Combine findings for complete map
+    
+    Example:
+    territory = {
+        'name': 'Ancient Forest',
+        'regions': ['Lower Forest', 'Upper Forest', 'Wildspire Waste'],
+        'resources': ['Herbs', 'Ore', 'Bugs'],
+        'monsters': ['Rathalos', 'Anjanath', 'Tobi-Kadachi']
+    }
+    explored = explore_territory(territory)
+    # Shows complete territory exploration
+    """
+    def explore_region(region):
+        # Base case: small region
+        if len(region) <= 1:
+            return analyze_region(region)
+        
+        # Divide: split region into smaller parts
+        mid = len(region) // 2
+        left = region[:mid]
+        right = region[mid:]
+        
+        # Conquer: explore each part
+        left_explored = explore_region(left)
+        right_explored = explore_region(right)
+        
+        # Combine: merge findings
+        return combine_findings(left_explored, right_explored)
+    
+    return explore_region(territory['regions'])
+
+def analyze_region(region):
+    """Analyze a small region for resources and monsters."""
+    return {
+        'resources': find_resources(region),
+        'monsters': find_monsters(region),
+        'paths': find_paths(region)
+    }
+
+def combine_findings(left, right):
+    """Combine findings from two regions."""
+    return {
+        'resources': left['resources'] + right['resources'],
+        'monsters': left['monsters'] + right['monsters'],
+        'paths': merge_paths(left['paths'], right['paths'])
+    }
+
+# Example usage
+territory = {
+    'name': 'Ancient Forest',
+    'regions': ['Lower Forest', 'Upper Forest', 'Wildspire Waste'],
+    'resources': ['Herbs', 'Ore', 'Bugs'],
+    'monsters': ['Rathalos', 'Anjanath', 'Tobi-Kadachi']
+}
+
+explored = explore_territory(territory)
+print("Territory exploration results:", explored)
+
+# Monster Hunter Tips:
+# 1. Divide large territories into manageable regions
+# 2. Search each region thoroughly
+# 3. Combine findings for complete map
+# 4. Note resource locations
+# 5. Track monster movements`,
+  ],
+]);
+
+// Add Dynamic Programming Pattern Monster Hunter Pattern
+const dynamicProgrammingMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "Dynamic Programming Pattern",
+    `# Monster Hunter Dynamic Programming Pattern
+# Resource Management Strategy
+
+def optimize_resources(resources, capacity):
+    """
+    Optimize resource usage using dynamic programming.
+    Time: O(n * capacity)
+    Space: O(capacity)
+    
+    Monster Hunter Context:
+    - Like managing limited resources
+    - Choose optimal item combinations
+    - Maximize effectiveness
+    - Plan for different scenarios
+    
+    Example:
+    resources = [
+        {'name': 'Potion', 'value': 10, 'weight': 1},
+        {'name': 'Mega Potion', 'value': 20, 'weight': 2},
+        {'name': 'Max Potion', 'value': 30, 'weight': 3}
+    ]
+    capacity = 5
+    optimal = optimize_resources(resources, capacity)
+    # Shows optimal resource combination
+    """
+    n = len(resources)
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+    
+    for i in range(1, n + 1):
+        for w in range(capacity + 1):
+            if resources[i-1]['weight'] <= w:
+                dp[i][w] = max(
+                    dp[i-1][w],
+                    dp[i-1][w-resources[i-1]['weight']] + resources[i-1]['value']
+                )
+            else:
+                dp[i][w] = dp[i-1][w]
+    
+    return dp[n][capacity]
+
+def plan_resource_usage(resources, capacity):
+    """
+    Plan optimal resource usage.
+    
+    Args:
+        resources: List of resources with values and weights
+        capacity: Maximum weight capacity
+    
+    Returns:
+        Maximum value achievable
+    """
+    return optimize_resources(resources, capacity)
+
+# Example usage
+resources = [
+    {'name': 'Potion', 'value': 10, 'weight': 1},
+    {'name': 'Mega Potion', 'value': 20, 'weight': 2},
+    {'name': 'Max Potion', 'value': 30, 'weight': 3}
+]
+capacity = 5
+
+max_value = plan_resource_usage(resources, capacity)
+print("Maximum value achievable:", max_value)
+
+# Monster Hunter Tips:
+# 1. Consider resource value vs weight
+# 2. Plan for different quest types
+# 3. Account for emergency situations
+# 4. Balance healing and buff items
+# 5. Optimize inventory space`,
+  ],
+]);
+
+// Add Fractional Knapsack Monster Hunter Pattern
+const fractionalKnapsackMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "Fractional Knapsack",
+    `# Monster Hunter Fractional Knapsack Pattern
+# Resource Gathering Strategy
+
+def gather_resources(resources, capacity):
+    """
+    Gather resources to maximize value within capacity.
+    Time: O(n log n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like gathering resources with limited space
+    - Choose most valuable resources
+    - Take fractions of items if needed
+    - Optimize resource gathering
+    
+    Example:
+    resources = [
+        {'name': 'Herb', 'value': 5, 'weight': 1},
+        {'name': 'Honey', 'value': 10, 'weight': 2},
+        {'name': 'Mushroom', 'value': 15, 'weight': 3}
+    ]
+    capacity = 5
+    gathered = gather_resources(resources, capacity)
+    # Shows optimal resource gathering
+    """
+    # Calculate value-to-weight ratio
+    for resource in resources:
+        resource['ratio'] = resource['value'] / resource['weight']
+    
+    # Sort by ratio in descending order
+    resources.sort(key=lambda x: x['ratio'], reverse=True)
+    
+    total_value = 0
+    remaining = capacity
+    gathered = []
+    
+    for resource in resources:
+        if remaining >= resource['weight']:
+            # Take whole resource
+            gathered.append((resource['name'], 1.0))
+            total_value += resource['value']
+            remaining -= resource['weight']
+        else:
+            # Take fraction
+            fraction = remaining / resource['weight']
+            gathered.append((resource['name'], fraction))
+            total_value += resource['value'] * fraction
+            break
+    
+    return total_value, gathered
+
+def optimize_gathering(resources, capacity):
+    """
+    Optimize resource gathering strategy.
+    
+    Args:
+        resources: List of resources with values and weights
+        capacity: Maximum weight capacity
+    
+    Returns:
+        Tuple of (total value, list of gathered resources)
+    """
+    return gather_resources(resources, capacity)
+
+# Example usage
+resources = [
+    {'name': 'Herb', 'value': 5, 'weight': 1},
+    {'name': 'Honey', 'value': 10, 'weight': 2},
+    {'name': 'Mushroom', 'value': 15, 'weight': 3}
+]
+capacity = 5
+
+value, gathered = optimize_gathering(resources, capacity)
+print("Total value:", value)
+print("Gathered resources:", gathered)
+
+# Monster Hunter Tips:
+# 1. Prioritize high-value resources
+# 2. Consider resource combinations
+# 3. Account for gathering time
+# 4. Plan for different regions
+# 5. Leave space for rare finds`,
+  ],
+]);
+
+// Add Kosaraju Monster Hunter Pattern
+const kosarajuMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "Kosaraju",
+    `# Monster Hunter Kosaraju Pattern
+# Territory Connection Analysis
+
+def analyze_territory_connections(territories):
+    """
+    Find strongly connected territories.
+    Time: O(V + E)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like analyzing territory connections
+    - Find related monster habitats
+    - Identify resource clusters
+    - Plan exploration routes
+    
+    Example:
+    territories = {
+        'Ancient Forest': ['Wildspire Waste'],
+        'Wildspire Waste': ['Coral Highlands'],
+        'Coral Highlands': ['Ancient Forest', 'Elder\'s Recess'],
+        'Elder\'s Recess': ['Coral Highlands']
+    }
+    clusters = analyze_territory_connections(territories)
+    # Shows connected territory clusters
+    """
+    def dfs_first(territory, visited, order):
+        visited.add(territory)
+        for neighbor in territories[territory]:
+            if neighbor not in visited:
+                dfs_first(neighbor, visited, order)
+        order.append(territory)
+    
+    def dfs_second(territory, visited, cluster):
+        visited.add(territory)
+        cluster.append(territory)
+        for neighbor in reversed_territories[territory]:
+            if neighbor not in visited:
+                dfs_second(neighbor, visited, cluster)
+    
+    # First pass: compute finishing times
+    visited = set()
+    order = []
+    for territory in territories:
+        if territory not in visited:
+            dfs_first(territory, visited, order)
+    
+    # Build reversed graph
+    reversed_territories = {t: [] for t in territories}
+    for territory in territories:
+        for neighbor in territories[territory]:
+            reversed_territories[neighbor].append(territory)
+    
+    # Second pass: find strongly connected components
+    visited = set()
+    clusters = []
+    for territory in reversed(order):
+        if territory not in visited:
+            cluster = []
+            dfs_second(territory, visited, cluster)
+            clusters.append(cluster)
+    
+    return clusters
+
+def find_territory_clusters(territories):
+    """
+    Find clusters of connected territories.
+    
+    Args:
+        territories: Dictionary of territory connections
+    
+    Returns:
+        List of territory clusters
+    """
+    return analyze_territory_connections(territories)
+
+# Example usage
+territories = {
+    'Ancient Forest': ['Wildspire Waste'],
+    'Wildspire Waste': ['Coral Highlands'],
+    'Coral Highlands': ['Ancient Forest', 'Elder\'s Recess'],
+    'Elder\'s Recess': ['Coral Highlands']
+}
+
+clusters = find_territory_clusters(territories)
+print("Territory clusters:", clusters)
+
+# Monster Hunter Tips:
+# 1. Identify connected territories
+# 2. Plan exploration routes
+# 3. Note resource distributions
+# 4. Track monster migration patterns
+# 5. Consider environmental factors`,
+  ],
+]);
+
+// Add String Operations Monster Hunter Pattern
+const stringOperationsMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "String Operations",
+    `# Monster Hunter String Operations Pattern
+# Monster Research Analysis
+
+def analyze_monster_data(monster_data):
+    """
+    Analyze monster research data using string operations.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like analyzing monster research notes
+    - Process monster behavior patterns
+    - Extract useful information
+    - Identify patterns and weaknesses
+    
+    Example:
+    monster_data = {
+        'name': 'Rathalos',
+        'behavior': 'Aggressive when threatened',
+        'weaknesses': 'Thunder, Dragon',
+        'habitat': 'Ancient Forest, Wildspire Waste'
+    }
+    analysis = analyze_monster_data(monster_data)
+    # Shows processed monster information
+    """
+    def process_behavior(behavior):
+        # Extract key behavior patterns
+        patterns = behavior.split(',')
+        return [p.strip() for p in patterns]
+    
+    def process_weaknesses(weaknesses):
+        # Extract elemental weaknesses
+        elements = weaknesses.split(',')
+        return [e.strip() for e in elements]
+    
+    def process_habitat(habitat):
+        # Extract habitat locations
+        locations = habitat.split(',')
+        return [l.strip() for l in locations]
+    
+    return {
+        'name': monster_data['name'],
+        'behavior_patterns': process_behavior(monster_data['behavior']),
+        'elemental_weaknesses': process_weaknesses(monster_data['weaknesses']),
+        'habitat_locations': process_habitat(monster_data['habitat'])
+    }
+
+def research_monster(monster_data):
+    """
+    Process and analyze monster research data.
+    
+    Args:
+        monster_data: Dictionary of monster information
+    
+    Returns:
+        Processed monster research data
+    """
+    return analyze_monster_data(monster_data)
+
+# Example usage
+monster_data = {
+    'name': 'Rathalos',
+    'behavior': 'Aggressive when threatened, Territorial, Hunts during day',
+    'weaknesses': 'Thunder, Dragon, Ice',
+    'habitat': 'Ancient Forest, Wildspire Waste, Elder\'s Recess'
+}
+
+analysis = research_monster(monster_data)
+print("Monster research analysis:", analysis)
+
+# Monster Hunter Tips:
+# 1. Note behavior patterns
+# 2. Track elemental weaknesses
+# 3. Map habitat locations
+# 4. Record attack patterns
+# 5. Document resource drops`,
+  ],
+]);
+
 // Export all patterns
 export const monsterHunterPatternsExtended8 = new Map<PatternKey, string>([
   ...activitySelectionMonsterHunterPattern,
@@ -434,4 +866,9 @@ export const monsterHunterPatternsExtended8 = new Map<PatternKey, string>([
   ...huffmanCodingMonsterHunterPattern,
   ...jobSchedulingMonsterHunterPattern,
   ...kruskalMonsterHunterPattern,
+  ...divideAndConquerMonsterHunterPattern,
+  ...dynamicProgrammingMonsterHunterPattern,
+  ...fractionalKnapsackMonsterHunterPattern,
+  ...kosarajuMonsterHunterPattern,
+  ...stringOperationsMonsterHunterPattern,
 ]);
