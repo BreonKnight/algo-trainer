@@ -19,6 +19,7 @@ import { networkFlowPattern } from "./network-flow";
 import { primPattern } from "./prim";
 import { stronglyConnectedComponentsPattern } from "./strongly-connected-components";
 import { topologicalSortPattern } from "./topological-sort";
+import { hungarianAlgorithmPattern } from "./hungarian-algorithm";
 
 export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Bellman-Ford": bellmanFordPattern,
@@ -41,4 +42,5 @@ export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Strongly Connected Components": stronglyConnectedComponentsPattern,
   "Maximum Bipartite Matching": maximumBipartiteMatchingPattern,
   "A* Search": aStarSearchPattern,
+  "Hungarian Algorithm": hungarianAlgorithmPattern,
 };
