@@ -599,17 +599,17 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Activity Selection": {
-    title: "Monster Territory Activity Planner",
+    title: "Monster Hunter's Greedy Strategy",
     description:
-      "Like a monster hunter selecting the maximum number of non-overlapping activities, Activity Selection finds the maximum size set of mutually compatible activities.",
+      "Like a monster hunter who always chooses the most valuable target at each step, the Greedy algorithm makes locally optimal choices hoping they lead to a globally optimal solution.",
     example:
-      "Imagine you need to select the maximum number of monster hunts that don't overlap in time - Activity Selection helps you find the optimal schedule.",
+      "Imagine you're a monster hunter with limited time. At each step, you choose the most valuable monster you can defeat, hoping this strategy leads to the maximum total value of monsters hunted.",
     tips: [
-      "Sort activities by finish time",
-      "Select the first activity and then the next compatible one",
-      "Use greedy approach for optimal solution",
-      "Handle overlapping activities carefully",
-      "Use it for optimal monster hunting scheduling",
+      "Always choose the most valuable option available at each step",
+      "Consider the value-to-effort ratio of each monster",
+      "Be careful - sometimes the greedy choice might not lead to the best overall outcome",
+      "Use when the problem has optimal substructure and greedy choice property",
+      "Prove the correctness of your greedy strategy if possible",
     ],
   },
   "Huffman Coding": {
@@ -936,17 +936,17 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Job Scheduling": {
-    title: "Monster Territory Scheduler",
+    title: "Monster Hunter's Schedule Optimizer",
     description:
-      "Like a monster hunter scheduling hunting tasks efficiently, Job Scheduling finds the optimal way to schedule tasks with deadlines and profits.",
+      "Like a monster hunter scheduling hunts to maximize rewards, Job Scheduling selects jobs to maximize profit while meeting deadlines.",
     example:
-      "Imagine you need to schedule monster hunts to maximize your rewards while meeting deadlines - Job Scheduling helps you find the optimal schedule.",
+      "Imagine you have a list of monster hunts, each with a deadline and reward. You need to schedule as many hunts as possible to maximize your total reward while meeting all deadlines.",
     tips: [
-      "Sort jobs by deadline or profit",
-      "Use greedy approach for optimal solutions",
-      "Consider using priority queue for scheduling",
-      "Handle overlapping schedules carefully",
-      "Use it for optimal monster hunting scheduling",
+      "Sort hunts by deadline or profit",
+      "Choose the most profitable hunt that fits your schedule",
+      "Keep track of your current time and available slots",
+      "Consider both profit and time requirements",
+      "Use a priority queue to efficiently manage your schedule",
     ],
   },
   Recursion: {
@@ -975,20 +975,6 @@ export const monsterHunterExplanations: Partial<
       "Keep track of the current path",
       "Consider using it for problems with multiple solutions",
       "Use it for exploring all possible monster paths",
-    ],
-  },
-  Greedy: {
-    title: "Monster Hunter's Greedy Strategy",
-    description:
-      "Like a monster hunter who always chooses the most valuable target at each step, the Greedy algorithm makes locally optimal choices hoping they lead to a globally optimal solution.",
-    example:
-      "Imagine you're a monster hunter with limited time. At each step, you choose the most valuable monster you can defeat, hoping this strategy leads to the maximum total value of monsters hunted.",
-    tips: [
-      "Always choose the most valuable option available at each step",
-      "Consider the value-to-effort ratio of each monster",
-      "Be careful - sometimes the greedy choice might not lead to the best overall outcome",
-      "Use when the problem has optimal substructure and greedy choice property",
-      "Prove the correctness of your greedy strategy if possible",
     ],
   },
   "Greedy Job Scheduling": {

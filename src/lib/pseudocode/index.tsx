@@ -27,6 +27,7 @@ import { ExtendedEuclideanAlgorithmPattern } from "./patterns/extended-euclidean
 import { ExponentialSearchPattern } from "./patterns/exponential-search";
 import { FastFourierTransformPattern } from "./patterns/fast-fourier-transform";
 import { FenwickTreePattern } from "./patterns/fenwick-tree";
+import { FibonacciSearchPattern } from "./patterns/fibonacci-search";
 import { FloydCycleDetectionPattern } from "./patterns/floyd-cycle-detection";
 import { FloydWarshallPattern } from "./patterns/graph-floyd-warshall";
 import { BridgesPattern } from "./patterns/graph-bridges";
@@ -67,7 +68,6 @@ import { MonotonicQueuePattern } from "./patterns/monotonic-queue";
 import { MonotonicStackPattern } from "./patterns/monotonic-stack";
 import { NetworkFlowPattern } from "./patterns/network-flow";
 import { NullPattern } from "./patterns/null-pattern";
-import { PrefixSumPattern } from "./patterns/prefix-sum";
 import { PrefixSumsPattern } from "./patterns/prefix-sums";
 import { PrimPattern } from "./patterns/prims-algorithm";
 import { ProbabilityDPPattern } from "./patterns/probability-dp";
@@ -102,6 +102,8 @@ import { TwoSumTwoPointersPattern } from "./patterns/two-sum-two-pointers";
 import { UnionFindPattern } from "./patterns/union-find";
 import { ZAlgorithmPattern } from "./patterns/z-algorithm";
 import { GreedyPattern } from "./patterns/greedy";
+import { HungarianPattern } from "./patterns/hungarian";
+import { RadixSortPattern } from "./patterns/radix-sort";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "A* Search": AStarSearchPattern,
@@ -134,6 +136,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
   "Fast Fourier Transform": FastFourierTransformPattern,
   "Fenwick Tree": FenwickTreePattern,
+  "Fibonacci Search": FibonacciSearchPattern,
   "Floyd Cycle Detection": FloydCycleDetectionPattern,
   "Floyd-Warshall": FloydWarshallPattern,
   "Fractional Knapsack": FractionalKnapsackPattern,
@@ -152,6 +155,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Heap Implementation": HeapImplementationPattern,
   "Heap Sort": HeapSortPattern,
   "Heavy Light Decomposition": HeavyLightDecompositionPattern,
+  "Hungarian Algorithm": HungarianPattern,
   "Job Scheduling": JobSchedulingPattern,
   "Jump Search": JumpSearchAlgorithmPattern,
   "Kadane's Algorithm": KadanesAlgorithmPattern,
@@ -174,7 +178,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Monotonic Stack": MonotonicStackPattern,
   "Network Flow": NetworkFlowPattern,
   "Null Pattern": NullPattern,
-  "Prefix Sum": PrefixSumPattern,
   "Prefix Sums": PrefixSumsPattern,
   Prim: PrimPattern,
   "Prime Factorization": SieveOfEratosthenesPattern,
@@ -182,7 +185,8 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Queue Implementation": QueueImplementationPattern,
   Quickselect: QuickselectPattern,
   "Quick Sort": QuickSortPattern,
-  "Rabin Karp": RabinKarpPattern,
+  "Radix Sort": RadixSortPattern,
+  "Rabin-Karp": RabinKarpPattern,
   "Red-Black Tree": RedBlackTreePattern,
   Recursion: RecursionPattern,
   "Rotate Matrix": MatrixOperationsPattern,
