@@ -10,7 +10,6 @@ import { useTheme } from "./components/theme/theme-context";
 import PatternManagement from "./components/admin/PatternManagement";
 import { useState, useEffect } from "react";
 import "./App.css";
-import { checkMissingPatterns } from "./components/algorithm-trainer/monsterHunterExplanations";
 import AlgorithmComparisonPage from "./app/algorithm-comparison/AlgorithmComparisonPage";
 import HomePage from "./app/HomePage";
 import {
@@ -43,8 +42,6 @@ function AppContent() {
   const linkClasses = isDarkTheme
     ? "text-sm hover:text-main/80"
     : "text-sm hover:text-accent-foreground/80";
-
-  const algorithms: PatternKey[] = ["Bubble Sort", "Quick Sort"];
 
   return (
     <div className="min-h-screen w-full bg-main">

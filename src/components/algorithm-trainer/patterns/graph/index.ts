@@ -1,24 +1,24 @@
-import { AlgorithmPattern, PatternKey } from "../../types/pattern-types.ts";
-import { aStarSearchPattern } from "./a-star-search.ts";
-import { articulationPointsPattern } from "./articulation-points.ts";
-import { bellmanFordPattern } from "./bellman-ford.ts";
-import { bfsPattern } from "./bfs.ts";
-import { bfsLinkedListPattern } from "./bfs-linked-list.ts";
-import { bridgesPattern } from "./bridges.ts";
-import { dfsBinaryTreePattern } from "./dfs-binary-tree.ts";
-import { dfsLinkedListPattern } from "./dfs-linked-list.ts";
-import { graphDfsPattern } from "./dfs.ts";
-import { dijkstraPattern } from "./dijkstra.ts";
-import { floydWarshallPattern } from "./floyd-warshall.ts";
-import { floydCycleDetectionPattern } from "./floyd-cycle-detection.ts";
-import { graphPattern } from "./graph.ts";
-import { kosarajuPattern } from "./kosaraju.ts";
-import { kruskalPattern } from "./kruskal.ts";
-import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching.ts";
-import { networkFlowPattern } from "./network-flow.ts";
-import { primPattern } from "./prim.ts";
-import { stronglyConnectedComponentsPattern } from "./strongly-connected-components.ts";
-import { topologicalSortPattern } from "./topological-sort.ts";
+import { AlgorithmPattern, PatternKey } from "../../types/pattern-types";
+import { aStarSearchPattern } from "./a-star-search";
+import { articulationPointsPattern } from "./articulation-points";
+import { bellmanFordPattern } from "./bellman-ford";
+import { bfsPattern } from "./bfs";
+import { bfsLinkedListPattern } from "./bfs-linked-list";
+import { bridgesPattern } from "./bridges";
+import { dfsBinaryTreePattern } from "./dfs-binary-tree";
+import { dfsLinkedListPattern } from "./dfs-linked-list";
+import { graphDfsPattern } from "./dfs";
+import { dijkstraPattern } from "./dijkstra";
+import { floydWarshallPattern } from "./floyd-warshall";
+import { floydCycleDetectionPattern } from "./floyd-cycle-detection";
+import { graphPattern } from "./graph";
+import { kosarajuPattern } from "./kosaraju";
+import { kruskalPattern } from "./kruskal";
+import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching";
+import { networkFlowPattern } from "./network-flow";
+import { primPattern } from "./prim";
+import { stronglyConnectedComponentsPattern } from "./strongly-connected-components";
+import { topologicalSortPattern } from "./topological-sort";
 
 export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Bellman-Ford": bellmanFordPattern,

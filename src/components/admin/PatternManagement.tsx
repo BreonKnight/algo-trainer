@@ -16,7 +16,7 @@ import {
   DroppableProvided,
   DraggableProvided,
 } from "react-beautiful-dnd";
-import { patternNameMapping } from "../../lib/pseudocode/utils/pattern-mapping";
+import { patternMapping } from "../../lib/pseudocode/utils/pattern-mapping";
 import {
   findDuplicatePatterns,
   findIncompletePatterns,
@@ -362,7 +362,7 @@ const PatternManagement: React.FC = () => {
 
       setDebugInfo({
         patternKeys,
-        patternMapping: patternNameMapping,
+        patternMapping: patternMapping,
         patternCategories: categories,
         validationResults,
       });
@@ -1129,7 +1129,7 @@ const PatternManagement: React.FC = () => {
       const newMapping: Record<string, string> = {};
 
       // Add existing mappings
-      Object.entries(patternNameMapping).forEach(([key, value]) => {
+      Object.entries(patternMapping).forEach(([key, value]) => {
         if (currentPatterns.includes(key)) {
           newMapping[key] = value as string;
         }
@@ -1143,7 +1143,7 @@ const PatternManagement: React.FC = () => {
       });
 
       // Write to file
-      const fileContent = `export const patternNameMapping: Record<string, string> = ${JSON.stringify(
+      const fileContent = `export const patternMapping: Record<string, string> = ${JSON.stringify(
         newMapping,
         null,
         2
