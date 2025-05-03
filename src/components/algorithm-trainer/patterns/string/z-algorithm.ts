@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const zalgorithmPattern: AlgorithmPattern = {
+export const zAlgorithmPattern: AlgorithmPattern = {
   title: "Z Algorithm",
   description:
     "A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).",

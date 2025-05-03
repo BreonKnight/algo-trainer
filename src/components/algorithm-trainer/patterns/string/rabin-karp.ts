@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const rabinkarpPattern: AlgorithmPattern = {
+export const rabinKarpPattern: AlgorithmPattern = {
   title: "Rabin-Karp String Matching Algorithm",
   description:
     "A string matching algorithm that uses hashing to find exact string matches or multiple pattern matches efficiently.",

@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const articulation_pointsPattern: AlgorithmPattern = {
+export const articulationPointsPattern: AlgorithmPattern = {
   title: "Articulation Points Algorithm",
   description:
     "Find vertices in a graph whose removal increases the number of connected components",

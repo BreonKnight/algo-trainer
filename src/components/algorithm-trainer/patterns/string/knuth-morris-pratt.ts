@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const knuthmorrisprattPattern: AlgorithmPattern = {
+export const knuthMorrisPrattPattern: AlgorithmPattern = {
   title: "KMP Algorithm",
   description:
     "An efficient string matching algorithm that preprocesses the pattern to avoid unnecessary comparisons by utilizing a prefix function.",

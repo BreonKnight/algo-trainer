@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const greedy_activity_selectionPattern: AlgorithmPattern = {
+export const greedyActivitySelectionPattern: AlgorithmPattern = {
   title: "Greedy Activity Selection",
   description:
     "A greedy algorithm that selects the maximum number of non-overlapping activities that can be performed by a single person.",
