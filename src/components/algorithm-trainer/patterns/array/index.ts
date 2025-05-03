@@ -1,18 +1,18 @@
-import { AlgorithmPattern } from "../../types";
-import { matrixSpiralRecursivePattern } from "./matrix-spiral-recursive";
-import { matrixSpiralTraversalPattern } from "./matrix-spiral-traversal";
-import { matrixTraversalRecursivePattern } from "./matrix-traversal-recursive";
-import { matrixTraversalPattern } from "./matrix-traversal";
-import { kadanesAlgorithmPattern } from "./kadanes-algorithm";
-import { prefixSumPattern } from "./prefix-sum";
-import { twoPointersPattern } from "./two-pointers";
-import { bitManipulationPattern } from "./bit-manipulation";
-import { slidingWindowPattern } from "./sliding-window";
-import { twoSumTwoPointersPattern } from "./two-sum-two-pointers";
-import { twoSumPattern } from "./two-sum";
-import { twoSumDictPattern } from "./two-sum-dict";
-import { rotateMatrixPattern } from "./rotate-matrix";
-import { prefixSumsPattern } from "./prefix-sums";
+import { AlgorithmPattern } from "../../types.ts";
+import { matrixSpiralRecursivePattern } from "../matrix/matrix-spiral-recursive.ts";
+import { matrixSpiralTraversalPattern } from "../matrix/matrix-spiral-traversal.ts";
+import { matrixTraversalRecursivePattern } from "../matrix/matrix-traversal-recursive.ts";
+import { matrixTraversalPattern } from "../matrix/matrix-traversal.ts";
+import { kadanesAlgorithmPattern } from "./kadanes-algorithm.ts";
+import { prefixSumPattern } from "./prefix-sum.ts";
+import { twoPointersPattern } from "./two-pointers.ts";
+import { bitManipulationPattern } from "./bit-manipulation.ts";
+import { slidingWindowPattern } from "./sliding-window.ts";
+import { twoSumTwoPointersPattern } from "./two-sum-two-pointers.ts";
+import { twoSumPattern } from "./two-sum.ts";
+import { twoSumDictPattern } from "./two-sum-dict.ts";
+import { rotateMatrixPattern } from "../matrix/rotate-matrix.ts";
+import { prefixSumsPattern } from "./prefix-sums.ts";
 type ArrayPatternKey =
   | "Matrix Spiral Recursive"
   | "Matrix Spiral Traversal"

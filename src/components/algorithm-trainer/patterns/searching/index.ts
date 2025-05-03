@@ -29,7 +29,4 @@ export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
     "Exponential Search": exponentialSearchPattern,
     "Interpolation Search": interpolationSearchPattern,
     Quickselect: quickselectPattern,
-    //"A* Search": aStarPattern,
-
-    // Add other searching patterns here
   };

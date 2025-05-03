@@ -1,4 +1,4 @@
-import { PATTERN_KEYS } from "./types";
+import { PATTERN_KEYS } from "./types.ts";
 import { algorithmPatterns } from "./patterns";
 import { allMonsterHunterPatterns } from "./monsterHunterPatternsCombined";
 

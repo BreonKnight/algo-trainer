@@ -1,5 +1,178 @@
 import { ChevronRight } from "lucide-react";
+import { PatternKey } from '../components/algorithm-trainer/types/pattern-types';
 
+export const pseudocodePatterns: Record<PatternKey, () => JSX.Element> = {
+  "Dynamic Programming": () => (
+    <div className="pseudocode">
+      <span className="algorithm-title">Dynamic Programming Template</span>
+      <span className="algorithm-type">Algorithm Paradigm</span>
+      <span className="algorithm-meta">
+        Time: O(n * m) - depends on state space dimensions | Space: O(n * m) -
+        for memoization table | Use: Optimization problems with overlapping
+        subproblems
+      </span>
+      <ul>
+        <li>
+          <span className="step-number">1.</span>
+          <span className="keyword">Define state parameters:</span>
+          <span className="variable">
+            Identify subproblem dimensions
+          </span>,{" "}
+          <span className="function">choose state representation</span>
+        </li>
+        <li>
+          <span className="step-number">2.</span>
+          <span className="keyword">Create memoization structure:</span>
+          <span className="function">Initialize memo table/map</span>,{" "}
+          <span className="variable">match dimensions to state</span>
+        </li>
+        <li>
+          <span className="step-number">3.</span>
+          <span className="keyword">Handle base cases:</span>
+          <span className="function">
+            Identify smallest subproblems
+          </span>, <span className="variable">set their values directly</span>
+        </li>
+        <li>
+          <span className="step-number">4.</span>
+          <span className="keyword">Implement recurrence relation:</span>
+          <span className="function">
+            Define transition between states
+          </span>, <span className="variable">use memoized values</span>
+        </li>
+        <li>
+          <span className="step-number">5.</span>
+          <span className="keyword">Return final solution:</span>
+          <span className="function">
+            Extract answer from memo table
+          </span>, <span className="variable">handle edge cases</span>
+        </li>
+      </ul>
+    </div>
+  ),
+  Greedy: () => (
+    <div>
+      <div className="mb-2">
+        <span className="text-accent font-bold">
+          Greedy Algorithm Template
+        </span>
+        <span className="ml-2 text-xs text-secondary">
+          (Algorithm Paradigm)
+        </span>
+      </div>
+      <div className="mb-2 text-xs text-secondary">
+        Time: O(n) or O(n log n) - typically requires sorting &nbsp;|&nbsp;
+        Space: O(1) - usually constant &nbsp;|&nbsp; Use: Local optimal
+        choices lead to global optimal solution
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">1.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">
+            Initialize solution:
+          </span>{" "}
+          Set up initial state, prepare data structures
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">2.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">
+            While problem not solved:
+          </span>{" "}
+          Choose locally optimal move, update problem state, track current
+          solution
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">3.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Return solution:</span>{" "}
+          Validate final state, return optimal result
+        </span>
+      </div>
+    </div>
+  ),
+  "Binary Search on Answer": () => (
+    <div>
+      <div className="mb-2">
+        <span className="text-accent font-bold">
+          Binary Search on Answer Template
+        </span>
+        <span className="ml-2 text-xs text-secondary">
+          (Search Algorithm)
+        </span>
+      </div>
+      <div className="mb-2 text-xs text-secondary">
+        Time: O(log n) * C - where C is time to check validity &nbsp;|&nbsp;
+        Space: O(1) - constant &nbsp;|&nbsp; Use: Finding optimal value in
+        monotonic search space
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">1.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">
+            Define search space:
+          </span>{" "}
+          Set left and right bounds, Identify valid range
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">2.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">
+            While search space valid:
+          </span>{" "}
+          Calculate mid point, Check if mid is valid:
+        </span>
+      </div>
+    </div>
+  ),
+  "Bit Manipulation": () => (
+    <div>
+      <div className="mb-2">
+        <span className="text-accent font-bold">
+          Bit Manipulation Template
+        </span>
+        <span className="ml-2 text-xs text-secondary">
+          (Algorithm Technique)
+        </span>
+      </div>
+      <div className="mb-2 text-xs text-secondary">
+        Time: O(2^n) - for generating all subsets &nbsp;|&nbsp; Space: O(1) -
+        for bit operations &nbsp;|&nbsp; Use: Optimizing space and time using
+        binary operations
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">1.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Setup:</span> Define n
+          (number of elements), Initialize result variable
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">2.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Generate subsets:</span>{" "}
+          Loop through 0 to 2^n:
+        </span>
+      </div>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">3.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">
+            Process each subset:
+          </span>{" "}
+          Check each bit position, Include if bit is 1, Skip if bit is 0
+        </span>
 export const pseudocodePatterns: Record<string, string | (() => JSX.Element)> =
   {
     "Dynamic Programming": () => (

@@ -1,8 +1,8 @@
-import { AlgorithmPattern } from "../../types";
-import { divideAndConquerPattern } from "./divide-and-conquer";
+import { AlgorithmPattern, PatternKey } from "../../types/pattern-types.ts";
+import { divideAndConquerPattern } from "./divide-and-conquer.ts";
 
 export const divideAndConquerPatterns: Partial<
   Record<string, AlgorithmPattern>
 > = {
-  "Divide And Conquer": divideAndConquerPattern,
+  "Divide and Conquer": divideAndConquerPattern,
 };

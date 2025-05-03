@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const bridgesPattern: AlgorithmPattern = {
-  title: "Graph Bridges",
+  title: "Bridges",
   description: "Find edges in a graph whose removal disconnects the graph",
   timeComplexity: "O(V + E)",
   spaceComplexity: "O(V)",

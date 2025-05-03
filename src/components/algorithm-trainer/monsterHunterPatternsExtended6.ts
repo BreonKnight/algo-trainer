@@ -1,4 +1,4 @@
-import { PatternKey } from "./types";
+import { PatternKey } from "./types.ts";
 
 export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
   [
@@ -864,99 +864,58 @@ def find_next_taller_monster(monster_heights):
   ],
 
   [
-    "Graph Dijkstra" as PatternKey,
-    `def monster_hunter_dijkstra(hunting_grounds, start_camp):
-    """
-    Find shortest paths between hunting grounds using Dijkstra's algorithm.
-    Time: O((V + E) log V)
-    Space: O(V)
-    
-    Monster Hunter Context:
-    - Like finding the most efficient routes between hunting grounds
-    - Each path has a difficulty level (weight)
-    - Find the quickest way to reach each location
-    
-    Example:
-    hunting_grounds = {
-        "Base Camp": [("Ancient Forest", 2), ("Wildspire Waste", 3)],
-        "Ancient Forest": [("Coral Highlands", 4)],
-        "Wildspire Waste": [("Rotten Vale", 3)],
-        "Coral Highlands": [("Elder's Recess", 5)],
-        "Rotten Vale": [("Elder's Recess", 4)]
+    "Dijkstra" as PatternKey,
+    `function find_shortest_paths(territories: number[][], start: number): number[] {
+      const n = territories.length;
+      const dist = Array(n).fill(Infinity);
+      const visited = Array(n).fill(false);
+      dist[start] = 0;
+      
+      for (let i = 0; i < n - 1; i++) {
+        let u = -1;
+        for (let j = 0; j < n; j++) {
+          if (!visited[j] && (u === -1 || dist[j] < dist[u])) {
+            u = j;
+          }
+        }
+        
+        if (u === -1) break;
+        visited[u] = true;
+        
+        for (let v = 0; v < n; v++) {
+          if (territories[u][v] > 0) {
+            dist[v] = Math.min(dist[v], dist[u] + territories[u][v]);
+          }
+        }
+      }
+      
+      return dist;
     }
-    start = "Base Camp"
-    
-    Process:
-    1. Initialize distances to infinity
-    2. Use priority queue to track next location
-    3. Update distances when shorter path found
-    4. Return shortest paths to all locations
-    """
-    from heapq import heappush, heappop
-    
-    # Initialize distances
-    distances = {location: float('inf') for location in hunting_grounds}
-    distances[start_camp] = 0
-    previous = {location: None for location in hunting_grounds}
-    
-    # Priority queue for next location to visit
-    priority_queue = [(0, start_camp)]
-    
-    while priority_queue:
-        current_distance, current_location = heappop(priority_queue)
-        
-        # Skip if we've found a better path already
-        if current_distance > distances[current_location]:
-            continue
-        
-        # Check all neighboring locations
-        for neighbor, difficulty in hunting_grounds[current_location]:
-            distance = current_distance + difficulty
-            
-            # If we found a shorter path, update it
-            if distance < distances[neighbor]:
-                distances[neighbor] = distance
-                previous[neighbor] = current_location
-                heappush(priority_queue, (distance, neighbor))
-    
-    return distances, previous
 
-def find_optimal_hunting_route(hunting_grounds, start_camp, target_location):
-    """
-    Find the most efficient route to a target hunting ground.
-    Uses Dijkstra's algorithm to find the shortest path.
-    
-    Args:
-        hunting_grounds (dict): Map of locations and their connections
-        start_camp (str): Starting location
-        target_location (str): Destination to reach
-        
-    Returns:
-        tuple: (total_difficulty, path)
-    """
-    distances, previous = monster_hunter_dijkstra(hunting_grounds, start_camp)
-    
-    # Reconstruct path
-    path = []
-    current = target_location
-    while current is not None:
-        path.append(current)
-        current = previous[current]
-    path.reverse()
-    
-    return distances[target_location], path
+    // Example usage:
+    const territories = [
+      [0, 4, 0, 0, 0, 0, 0, 8, 0],
+      [4, 0, 8, 0, 0, 0, 0, 11, 0],
+      [0, 8, 0, 7, 0, 4, 0, 0, 2],
+      [0, 0, 7, 0, 9, 14, 0, 0, 0],
+      [0, 0, 0, 9, 0, 10, 0, 0, 0],
+      [0, 0, 4, 14, 10, 0, 2, 0, 0],
+      [0, 0, 0, 0, 0, 2, 0, 1, 6],
+      [8, 11, 0, 0, 0, 0, 1, 0, 7],
+      [0, 0, 2, 0, 0, 0, 6, 7, 0]
+    ];
 
-# Example usage:
-# hunting_grounds = {
-#     "Base Camp": [("Ancient Forest", 2), ("Wildspire Waste", 3)],
-#     "Ancient Forest": [("Coral Highlands", 4)],
-#     "Wildspire Waste": [("Rotten Vale", 3)],
-#     "Coral Highlands": [("Elder's Recess", 5)],
-#     "Rotten Vale": [("Elder's Recess", 4)]
-# }
-# difficulty, path = find_optimal_hunting_route(hunting_grounds, "Base Camp", "Elder's Recess")
-# print(f"Total difficulty: {difficulty}")
-# print(f"Path: {' -> '.join(path)}")`,
+    const start_territory = 0;
+    const shortest_paths = find_shortest_paths(territories, start_territory);
+    console.log(\`Shortest paths from territory \${start_territory}:\`, shortest_paths);
+
+    // Tips:
+    // 1. Use edge weights to represent terrain difficulty
+    // 2. Consider monster presence in path weights
+    // 3. Update paths dynamically as monsters move
+    // 4. Use for efficient resource gathering routes
+    // 5. Plan multiple backup paths
+    `,
   ],
 
   [

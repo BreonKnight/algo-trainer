@@ -1,4 +1,4 @@
-import { PatternKey } from "./types";
+import { PatternKey } from "./types/pattern-types";
 
 export const monsterHunterPatternsExtended4 = new Map<PatternKey, string>([
   [
@@ -2294,6 +2294,85 @@ def monster_hunter_merge(left, right):
   ],
 
   ["Prim" as PatternKey, "Prim's Algorithm"],
+  [
+    "Kruskal",
+    `
+function find_minimum_spanning_tree(territories: number[][]): number[][] {
+  const n = territories.length;
+  const edges: [number, number, number][] = [];
+  const parent = Array(n).fill(0).map((_, i) => i);
+  const rank = Array(n).fill(0);
+  const mst: number[][] = Array(n).fill(0).map(() => Array(n).fill(0));
+  
+  // Collect all edges
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      if (territories[i][j] > 0) {
+        edges.push([i, j, territories[i][j]]);
+      }
+    }
+  }
+  
+  // Sort edges by weight
+  edges.sort((a, b) => a[2] - b[2]);
+  
+  function find(x: number): number {
+    if (parent[x] !== x) {
+      parent[x] = find(parent[x]);
+    }
+    return parent[x];
+  }
+  
+  function union(x: number, y: number): void {
+    const px = find(x);
+    const py = find(y);
+    if (px === py) return;
+    
+    if (rank[px] < rank[py]) {
+      parent[px] = py;
+    } else if (rank[px] > rank[py]) {
+      parent[py] = px;
+    } else {
+      parent[py] = px;
+      rank[px]++;
+    }
+  }
+  
+  // Build MST
+  for (const [u, v, w] of edges) {
+    if (find(u) !== find(v)) {
+      union(u, v);
+      mst[u][v] = mst[v][u] = w;
+    }
+  }
+  
+  return mst;
+}
+
+// Example usage:
+const territories = [
+  [0, 4, 0, 0, 0, 0, 0, 8, 0],
+  [4, 0, 8, 0, 0, 0, 0, 11, 0],
+  [0, 8, 0, 7, 0, 4, 0, 0, 2],
+  [0, 0, 7, 0, 9, 14, 0, 0, 0],
+  [0, 0, 0, 9, 0, 10, 0, 0, 0],
+  [0, 0, 4, 14, 10, 0, 2, 0, 0],
+  [0, 0, 0, 0, 0, 2, 0, 1, 6],
+  [8, 11, 0, 0, 0, 0, 1, 0, 7],
+  [0, 0, 2, 0, 0, 0, 6, 7, 0]
+];
+
+const minimum_spanning_tree = find_minimum_spanning_tree(territories);
+console.log("Minimum spanning tree:", minimum_spanning_tree);
+
+// Tips:
+// 1. Use edge weights to represent path difficulty
+// 2. Consider terrain and monster presence in weights
+// 3. Update paths based on seasonal changes
+// 4. Plan camp locations along MST edges
+// 5. Maintain backup paths for emergencies
+`,
+  ],
 ]);
 
 // Export combined patterns
