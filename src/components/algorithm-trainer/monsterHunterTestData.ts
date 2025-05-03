@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import type { PatternKey } from "./types.ts";
 
 export const monsterHunterTestData = new Map<PatternKey, string>([
   [
@@ -897,5 +897,233 @@ Expected Output: 6
 
 # Monster Hunter Tip:
 # Like quickly finding a monster's pattern in a string!`,
+  ],
+  [
+    "Binary Search" as PatternKey,
+    `# Monster Hunter Binary Search Challenge
+# You are searching for a rare monster material in a sorted inventory!
+
+# Test Case 1: Basic Search
+Input: { materials: ["Bone", "Claw", "Fang", "Gem", "Scale"], target: "Gem" }
+Expected Output: 3
+
+# Monster Hunter Tip:
+# Like quickly finding a rare material in your sorted inventory!`,
+  ],
+  [
+    "Dynamic Programming" as PatternKey,
+    `# Monster Hunter Dynamic Programming Challenge
+# You are planning the most efficient hunting route!
+
+# Test Case 1: Max Reward Path
+Input: { rewards: [2, 7, 9, 3, 1] }
+Expected Output: 12
+
+# Monster Hunter Tip:
+# Like optimizing your hunt for maximum rewards!`,
+  ],
+  [
+    "BFS" as PatternKey,
+    `# Monster Hunter BFS Challenge
+# You are exploring all reachable territories from your base camp!
+
+# Test Case 1: Territory Exploration
+Input: { map: { "Base Camp": ["Forest", "Desert"], "Forest": ["Lake"], "Desert": [], "Lake": [] }, start: "Base Camp" }
+Expected Output: ["Base Camp", "Forest", "Desert", "Lake"]
+
+# Monster Hunter Tip:
+# Like exploring every territory layer by layer!`,
+  ],
+  [
+    "DFS" as PatternKey,
+    `# Monster Hunter DFS Challenge
+# You are tracking a monster deep into the territory!
+
+# Test Case 1: Deepest Path
+Input: { map: { "Base Camp": ["Forest", "Desert"], "Forest": ["Lake"], "Desert": [], "Lake": [] }, start: "Base Camp" }
+Expected Output: ["Base Camp", "Forest", "Lake", "Desert"]
+
+# Monster Hunter Tip:
+# Like following a monster's trail as deep as it goes!`,
+  ],
+  [
+    "Greedy" as PatternKey,
+    `# Monster Hunter Greedy Challenge
+# You are collecting the most valuable loot in the shortest time!
+
+# Test Case 1: Loot Selection
+Input: { loots: [{value: 10, time: 2}, {value: 5, time: 1}, {value: 15, time: 3}], time_limit: 3 }
+Expected Output: 15
+
+# Monster Hunter Tip:
+# Like always picking the shiniest loot first!`,
+  ],
+  [
+    "Sliding Window" as PatternKey,
+    `# Monster Hunter Sliding Window Challenge
+# You are tracking monster activity in a moving territory window!
+
+# Test Case 1: Max Activity Window
+Input: { activity: [1, 3, 2, 5, 4], window: 3 }
+Expected Output: 11
+
+# Monster Hunter Tip:
+# Like watching for monster activity in a specific area!`,
+  ],
+  [
+    "Graph" as PatternKey,
+    `# Monster Hunter Graph Challenge
+# You are mapping out all monster territories and their connections!
+
+# Test Case 1: Territory Map
+Input: { territories: { "A": ["B", "C"], "B": ["D"], "C": [], "D": [] } }
+Expected Output: ["A", "B", "C", "D"]
+
+# Monster Hunter Tip:
+# Like drawing a map of all monster territories!`,
+  ],
+  [
+    "Heap Implementation" as PatternKey,
+    `# Monster Hunter Heap Implementation Challenge
+# You are managing a priority queue of monster hunts!
+
+# Test Case 1: Hunt Priorities
+Input: [5, 3, 8, 1, 7]
+Expected Output: [1, 3, 5, 7, 8]
+
+# Monster Hunter Tip:
+# Like always hunting the most urgent monster first!`,
+  ],
+  [
+    "Stack Implementation" as PatternKey,
+    `# Monster Hunter Stack Implementation Challenge
+# You are tracking your hunting actions in a stack!
+
+# Test Case 1: Action Stack
+Input: ["Track", "Scout", "Attack", "Capture"]
+Expected Output: ["Capture", "Attack", "Scout", "Track"]
+
+# Monster Hunter Tip:
+# Like retracing your steps in reverse order!`,
+  ],
+  [
+    "Queue Implementation" as PatternKey,
+    `# Monster Hunter Queue Implementation Challenge
+# You are managing a queue of monster hunting requests!
+
+# Test Case 1: Hunt Queue
+Input: ["Hunt A", "Hunt B", "Hunt C"]
+Expected Output: ["Hunt A", "Hunt B", "Hunt C"]
+
+# Monster Hunter Tip:
+# Like processing hunting requests in the order they arrive!`,
+  ],
+  [
+    "Hash Table" as PatternKey,
+    `# Monster Hunter Hash Table Challenge
+# You are organizing monster data for quick lookup!
+
+# Test Case 1: Monster Lookup
+Input: { "Rathalos": "Fire", "Nergigante": "Dragon", "Legiana": "Ice" }, search: "Nergigante"
+Expected Output: "Dragon"
+
+# Monster Hunter Tip:
+# Like instantly finding a monster's weakness!`,
+  ],
+  [
+    "Backtracking" as PatternKey,
+    `# Monster Hunter Backtracking Challenge
+# You are finding all possible hunting paths!
+
+# Test Case 1: All Paths
+Input: { map: { "Base Camp": ["Forest", "Desert"], "Forest": ["Lake"], "Desert": [], "Lake": [] }, start: "Base Camp", end: "Lake" }
+Expected Output: [["Base Camp", "Forest", "Lake"]]
+
+# Monster Hunter Tip:
+# Like trying every possible path to catch a monster!`,
+  ],
+  [
+    "Quick Sort" as PatternKey,
+    `# Monster Hunter Quick Sort Challenge
+# You are sorting monster loot by value!
+
+# Test Case 1: Sort Loot
+Input: [12, 4, 5, 3, 8, 7]
+Expected Output: [3, 4, 5, 7, 8, 12]
+
+# Monster Hunter Tip:
+# Like quickly organizing your loot after a hunt!`,
+  ],
+  [
+    "Binary Search on Answer" as PatternKey,
+    `# Monster Hunter Binary Search on Answer Challenge
+# You are finding the minimum stamina needed to hunt all monsters!
+
+# Test Case 1: Min Stamina
+Input: { monsters: [3, 6, 7, 11], hours: 8 }
+Expected Output: 4
+
+# Monster Hunter Tip:
+# Like narrowing down the minimum resources needed for a successful hunt!`,
+  ],
+  [
+    "Bit Manipulation" as PatternKey,
+    `# Monster Hunter Bit Manipulation Challenge
+# You are toggling monster traps using bitwise operations!
+
+# Test Case 1: Trap Toggles
+Input: { traps: 5, toggle: 2 }
+Expected Output: 7
+
+# Monster Hunter Tip:
+# Like flipping switches to set monster traps!`,
+  ],
+  [
+    "State Compression DP" as PatternKey,
+    `# Monster Hunter State Compression DP Challenge
+# You are optimizing hunts with compressed state tracking!
+
+# Test Case 1: Hunt States
+Input: { states: [1, 0, 1, 1], actions: 2 }
+Expected Output: 3
+
+# Monster Hunter Tip:
+# Like compressing your hunting log for efficiency!`,
+  ],
+  [
+    "Digit DP" as PatternKey,
+    `# Monster Hunter Digit DP Challenge
+# You are counting monster numbers with special properties!
+
+# Test Case 1: Count Numbers
+Input: { max: 20, property: "even" }
+Expected Output: 10
+
+# Monster Hunter Tip:
+# Like counting all even-numbered monsters in a range!`,
+  ],
+  [
+    "Extended Euclidean" as PatternKey,
+    `# Monster Hunter Extended Euclidean Challenge
+# You are finding the greatest common divisor of monster strengths!
+
+# Test Case 1: GCD
+Input: { a: 30, b: 20 }
+Expected Output: 10
+
+# Monster Hunter Tip:
+# Like finding the strongest common trait among monsters!`,
+  ],
+  [
+    "Chinese Remainder Theorem" as PatternKey,
+    `# Monster Hunter Chinese Remainder Theorem Challenge
+# You are synchronizing monster hunts across different territories!
+
+# Test Case 1: Synchronize Hunts
+Input: { remainders: [2, 3, 2], moduli: [3, 5, 7] }
+Expected Output: 23
+
+# Monster Hunter Tip:
+# Like coordinating hunts to happen at the perfect time in every territory!`,
   ],
 ]);

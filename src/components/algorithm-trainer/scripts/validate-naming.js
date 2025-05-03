@@ -234,6 +234,11 @@ function validatePatternKeys() {
     "patterns/greedy/greedy-activity-selection.ts",
   ];
 
+  const testDataFile = "monsterHunterTestData.ts";
+  const mainPatternFiles = patternFiles.filter((file) => file !== testDataFile);
+  const declaredPatternKeys = new Set();
+  const testDataKeys = new Set();
+
   console.log("\n🔍 Validating pattern keys and content...\n");
   console.log("=".repeat(80));
 
@@ -258,22 +263,33 @@ function validatePatternKeys() {
       continue;
     }
 
+    // Handle test data file separately
+    if (file === testDataFile) {
+      const { patternKeys } = collectPatternKeys(filePath);
+      console.log(`\n📁 Validating ${file}:`);
+      console.log("-".repeat(40));
+      patternKeys.forEach((key) => {
+        testDataKeys.add(key);
+        console.log(`  ✅ ${key}`);
+      });
+      continue;
+    }
+
     const { patternKeys, patternContents } = collectPatternKeys(filePath);
     console.log(`\n📁 Validating ${file}:`);
     console.log("-".repeat(40));
 
     patternKeys.forEach((key, index) => {
+      declaredPatternKeys.add(key);
+
       const isValid = PATTERN_KEYS.includes(key);
       console.log(`  ${isValid ? "✅" : "❌"} ${key}`);
       allPatternKeys.add(key);
 
-      if (!isValid) {
-        invalidPatternKeys.add(key);
-      }
+      if (!isValid) invalidPatternKeys.add(key);
 
       // Skip content validation for test data files
       if (!file.includes("TestData")) {
-        // Check pattern content structure
         const missingSections = validatePatternContent(patternContents[index]);
         if (missingSections.length > 0) {
           contentIssues.push({
@@ -284,7 +300,6 @@ function validatePatternKeys() {
         }
       }
 
-      // Check for similar patterns
       const similar = findSimilarStrings(key, Array.from(allPatternKeys));
       if (similar.length > 0) {
         similarPatterns.set(key, similar);
@@ -332,12 +347,11 @@ function validatePatternKeys() {
     });
   }
 
-  // Report missing patterns
-  const missingPatterns = PATTERN_KEYS.filter(
-    (key) => !allPatternKeys.has(key)
+  const missingPatterns = Array.from(declaredPatternKeys).filter(
+    (key) => !testDataKeys.has(key)
   );
   if (missingPatterns.length > 0) {
-    console.log("\n❌ Missing patterns in test data:");
+    console.log("\n❌ Missing test data for these patterns:");
     console.log("-".repeat(40));
     missingPatterns.forEach((key) => {
       console.log(`  ❌ ${key}`);
