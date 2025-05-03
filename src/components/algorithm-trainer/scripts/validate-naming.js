@@ -135,7 +135,20 @@ function collectPatternKeys(filePath) {
   const patternKeys = [];
   const patternContents = [];
 
-  // Match pattern keys in Map declarations
+  // Special handling for monsterHunterTestData.ts: scan the whole file for all keys
+  if (filePath.endsWith("monsterHunterTestData.ts")) {
+    // Match all lines like: [ "Some Key" as PatternKey,
+    const keyRegex = /\[\s*"([^"]+)"\s+as PatternKey,/g;
+    let match;
+    while ((match = keyRegex.exec(content)) !== null) {
+      patternKeys.push(match[1]);
+      // Optionally, grab the following string block as content (not used for test data)
+      patternContents.push("");
+    }
+    return { patternKeys, patternContents };
+  }
+
+  // Match pattern keys in Map declarations (for other files)
   const mapMatches = content.match(
     /new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g
   );
