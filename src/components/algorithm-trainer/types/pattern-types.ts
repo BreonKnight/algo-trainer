@@ -120,7 +120,18 @@ export interface AlgorithmPattern {
   pattern?: string;
   keySteps?: string[];
   testData: {
-    input: number[] | { arr: number[]; target?: number; [key: string]: any };
+    input:
+      | number[]
+      | {
+          arr: number[];
+          target?: number;
+          [key: string]:
+            | string
+            | number
+            | number[]
+            | undefined
+            | Record<string, number[]>;
+        };
     expected: number | number[];
     description: string;
   }[];

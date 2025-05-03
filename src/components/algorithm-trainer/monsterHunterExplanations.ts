@@ -977,34 +977,6 @@ export const monsterHunterExplanations: Partial<
       "Use it for exploring all possible monster paths",
     ],
   },
-  "Greedy Job Scheduling": {
-    title: "Monster Hunter's Schedule Optimizer",
-    description:
-      "Like a monster hunter scheduling hunts to maximize rewards, Greedy Job Scheduling selects jobs to maximize profit while meeting deadlines.",
-    example:
-      "Imagine you have a list of monster hunts, each with a deadline and reward. You need to schedule as many hunts as possible to maximize your total reward while meeting all deadlines.",
-    tips: [
-      "Sort hunts by deadline or profit",
-      "Choose the most profitable hunt that fits your schedule",
-      "Keep track of your current time and available slots",
-      "Consider both profit and time requirements",
-      "Use a priority queue to efficiently manage your schedule",
-    ],
-  },
-  "Greedy Fractional Knapsack": {
-    title: "Monster Hunter's Resource Packer",
-    description:
-      "Like a monster hunter packing their bag with the most valuable monster parts, the Fractional Knapsack algorithm maximizes value while staying within weight limits.",
-    example:
-      "Imagine you're hunting monsters and can carry only 50kg of materials. Each monster part has a weight and value. You can take fractions of parts to maximize your total value.",
-    tips: [
-      "Calculate value-to-weight ratio for each monster part",
-      "Sort parts by value-to-weight ratio in descending order",
-      "Take as much as possible of the most valuable parts first",
-      "Consider taking fractions of parts when you can't take the whole thing",
-      "Keep track of remaining capacity and total value",
-    ],
-  },
   Graph: {
     title: "Monster Territory Network",
     description:
@@ -1043,20 +1015,6 @@ export const monsterHunterExplanations: Partial<
       "Consider edge cases like empty matrices",
       "Optimize for the specific traversal pattern required",
       "Use efficient data structures for matrix representation",
-    ],
-  },
-  "Prefix Sum": {
-    title: "Monster Territory Sum Calculator",
-    description:
-      "Like a monster hunter calculating cumulative resources across territories, Prefix Sum efficiently calculates the sum of elements in any subarray.",
-    example:
-      "Imagine you need to quickly calculate the total resources in any range of territories - Prefix Sum helps you answer these range sum queries efficiently.",
-    tips: [
-      "Precompute prefix sums in O(n) time",
-      "Answer range queries in O(1) time",
-      "Handle both 1D and 2D prefix sums",
-      "Consider using it for range sum problems",
-      "Use it for efficient resource calculation",
     ],
   },
   "Rotate Matrix": {
@@ -1283,34 +1241,6 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for tree optimization problems",
     ],
   },
-  "Greedy Activity Selection": {
-    title: "Monster Territory Activity Selector",
-    description:
-      "Like a monster hunter selecting the maximum number of non-overlapping activities, Greedy Activity Selection finds the maximum size set of mutually compatible activities.",
-    example:
-      "Imagine you need to select the maximum number of monster hunts that don't overlap in time - Greedy Activity Selection helps you find the optimal schedule.",
-    tips: [
-      "Sort activities by finish time",
-      "Select the first activity and then the next compatible one",
-      "Use greedy approach for optimal solution",
-      "Handle overlapping activities carefully",
-      "Use it for optimal monster hunting scheduling",
-    ],
-  },
-  "Greedy Huffman Coding": {
-    title: "Monster Territory Code Compressor",
-    description:
-      "Like a monster hunter creating an efficient code for different monster types, Greedy Huffman Coding creates an optimal prefix code for compressing monster-related data.",
-    example:
-      "Imagine you need to create a compact code for different monster types based on their frequency - Greedy Huffman helps you create the most efficient code where common monsters have shorter codes.",
-    tips: [
-      "Build a frequency table for monster types",
-      "Create a priority queue of nodes",
-      "Combine the two least frequent nodes",
-      "Build the tree from bottom up",
-      "Assign codes based on the tree structure",
-    ],
-  },
   "Floyd-Warshall": {
     title: "Monster Territory All-Pairs Pathfinder",
     description:
@@ -1395,7 +1325,7 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for text processing",
     ],
   },
-  "Rabin Karp": {
+  "Rabin-Karp": {
     title: "Monster Territory Pattern Searcher",
     description:
       "Like a monster hunter searching for patterns in monster names and descriptions, Rabin Karp efficiently finds all occurrences of a pattern in a text using hashing.",

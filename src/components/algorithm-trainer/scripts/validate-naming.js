@@ -141,12 +141,29 @@ function collectPatternKeys(filePath) {
   );
   if (mapMatches) {
     mapMatches.forEach((mapContent) => {
-      const keyMatches = mapContent.match(/"([^"]+)" as PatternKey/g);
+      const keyMatches = mapContent.match(/"([^"]+)" as PatternKey,?/g);
       if (keyMatches) {
         keyMatches.forEach((match) => {
-          const key = match.replace(/" as PatternKey/g, "").replace(/"/g, "");
+          const key = match.replace(/" as PatternKey,?/g, "").replace(/"/g, "");
           patternKeys.push(key);
           patternContents.push(mapContent);
+        });
+      }
+    });
+  }
+
+  // Match pattern keys in Record declarations
+  const recordMatches = content.match(
+    /Record<string, AlgorithmPattern> = {([\s\S]*?)}/g
+  );
+  if (recordMatches) {
+    recordMatches.forEach((recordContent) => {
+      const keyMatches = recordContent.match(/"([^"]+)":/g);
+      if (keyMatches) {
+        keyMatches.forEach((match) => {
+          const key = match.replace(/":/g, "").replace(/"/g, "");
+          patternKeys.push(key);
+          patternContents.push(recordContent);
         });
       }
     });
@@ -166,6 +183,14 @@ function checkKeyExistence(key) {
     "monsterHunterPatternsExtended6.ts",
     "monsterHunterPatternsExtended7.ts",
     "monsterHunterPatternsExtended8.ts",
+    "monsterHunterTestData.ts",
+    "patterns/greedy/index.ts",
+    "patterns/divide-and-conquer/index.ts",
+    "patterns/dynamic-programming/index.ts",
+    "patterns/greedy/fractional-knapsack.ts",
+    "patterns/greedy/greedy-huffman-coding.ts",
+    "patterns/greedy/greedy-job-scheduling.ts",
+    "patterns/greedy/greedy-activity-selection.ts",
   ];
 
   for (const file of patternFiles) {
@@ -175,8 +200,9 @@ function checkKeyExistence(key) {
     const content = fs.readFileSync(filePath, "utf-8");
     // Check for both exact matches and potential variations
     if (
-      content.includes(`"${key}"`) ||
-      content.includes(`'${key}'`) ||
+      content.includes(`"${key}" as PatternKey`) ||
+      content.includes(`"${key}" as PatternKey,`) ||
+      content.includes(`"${key}":`) ||
       content.includes(key.replace(/\s+/g, "")) ||
       content.includes(key.toLowerCase())
     ) {
@@ -198,6 +224,14 @@ function validatePatternKeys() {
     "monsterHunterPatternsExtended6.ts",
     "monsterHunterPatternsExtended7.ts",
     "monsterHunterPatternsExtended8.ts",
+    "monsterHunterTestData.ts",
+    "patterns/greedy/index.ts",
+    "patterns/divide-and-conquer/index.ts",
+    "patterns/dynamic-programming/index.ts",
+    "patterns/greedy/fractional-knapsack.ts",
+    "patterns/greedy/greedy-huffman-coding.ts",
+    "patterns/greedy/greedy-job-scheduling.ts",
+    "patterns/greedy/greedy-activity-selection.ts",
   ];
 
   console.log("\n🔍 Validating pattern keys and content...\n");
@@ -221,7 +255,6 @@ function validatePatternKeys() {
   for (const file of patternFiles) {
     const filePath = path.join(__dirname, "..", file);
     if (!fs.existsSync(filePath)) {
-      console.log(`❌ File not found: ${filePath}`);
       continue;
     }
 
@@ -238,14 +271,17 @@ function validatePatternKeys() {
         invalidPatternKeys.add(key);
       }
 
-      // Check pattern content structure
-      const missingSections = validatePatternContent(patternContents[index]);
-      if (missingSections.length > 0) {
-        contentIssues.push({
-          key,
-          file,
-          missingSections,
-        });
+      // Skip content validation for test data files
+      if (!file.includes("TestData")) {
+        // Check pattern content structure
+        const missingSections = validatePatternContent(patternContents[index]);
+        if (missingSections.length > 0) {
+          contentIssues.push({
+            key,
+            file,
+            missingSections,
+          });
+        }
       }
 
       // Check for similar patterns
@@ -296,48 +332,20 @@ function validatePatternKeys() {
     });
   }
 
-  // Check for unused pattern keys
-  const usedKeys = new Set(allPatternKeys);
-  const unusedKeys = PATTERN_KEYS.filter((key) => !usedKeys.has(key));
-
-  if (unusedKeys.length > 0) {
-    console.log("\n📋 Unused Pattern Keys (Not Errors - Just Informational):");
+  // Report missing patterns
+  const missingPatterns = PATTERN_KEYS.filter(
+    (key) => !allPatternKeys.has(key)
+  );
+  if (missingPatterns.length > 0) {
+    console.log("\n❌ Missing patterns in test data:");
     console.log("-".repeat(40));
-    console.log(
-      `Found ${unusedKeys.length} pattern keys in types.ts that are not currently used:`
-    );
-
-    const actuallyUnusedKeys = [];
-    const potentiallyUsedKeys = [];
-
-    unusedKeys.forEach((key) => {
-      if (checkKeyExistence(key)) {
-        potentiallyUsedKeys.push(key);
-      } else {
-        actuallyUnusedKeys.push(key);
-      }
+    missingPatterns.forEach((key) => {
+      console.log(`  ❌ ${key}`);
     });
-
-    if (potentiallyUsedKeys.length > 0) {
-      console.log("\n🔍 Keys that might be used (found in pattern files):");
-      potentiallyUsedKeys.forEach((key) => {
-        console.log(`  🔎 ${key}`);
-      });
-    }
-
-    if (actuallyUnusedKeys.length > 0) {
-      console.log("\n📌 Keys that are definitely not used:");
-      actuallyUnusedKeys.forEach((key) => {
-        console.log(`  📌 ${key}`);
-      });
-    }
-
-    console.log(
-      "\nNote: These are not errors - they are just keys that are defined but not yet implemented."
-    );
   } else {
-    console.log("\n✨ All pattern keys in types.ts are being used ✨");
+    console.log("\n✨ All patterns have test data ✨");
   }
+
   console.log("=".repeat(80));
 }
 
