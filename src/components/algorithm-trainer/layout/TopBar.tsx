@@ -28,6 +28,7 @@ import {
 } from "../../ui/dropdown-menu";
 import { THEMES } from "../../theme/theme-constants";
 import { useState, useEffect } from "react";
+import { MediaCard } from "../../ui/media-card";
 
 interface TopBarProps {
   className?: string;
@@ -110,7 +111,6 @@ function CenterInformaticsWidget() {
 
 export function TopBar({ className }: TopBarProps) {
   const { theme, setTheme } = useTheme();
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const isDarkTheme =
     theme === "dracula" ||
     theme === "solarized" ||
@@ -132,28 +132,29 @@ export function TopBar({ className }: TopBarProps) {
   return (
     <div
       className={cn(
-        "w-full mb-4 sm:mb-6 flex flex-col items-center justify-between gap-3 sm:gap-4 rounded-xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),0_-8px_16px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),0_-8px_16px_-2px_rgba(0,0,0,0.4)] p-3 sm:p-4 relative overflow-hidden",
+        "w-full mb-2 sm:mb-3 flex flex-col items-center justify-between gap-4 sm:gap-6 rounded-xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),0_-8px_16px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),0_-8px_16px_-2px_rgba(0,0,0,0.4)] p-3 sm:p-4 relative overflow-hidden",
         "before:absolute before:inset-0 before:bg-gradient-to-r before:from-accent/5 before:via-transparent before:to-accent2/5 before:opacity-50",
         "after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] after:opacity-20",
         className
       )}
     >
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-accent2 to-accent opacity-50" />
-      <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-2 relative z-10">
+      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-accent via-accent2 to-accent opacity-50" />
+      <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
         {/* Left: Informatics Widget */}
-        <div className="flex items-center min-w-0 sm:min-w-[200px] justify-start w-full sm:w-auto mb-2 sm:mb-0">
+        <div className="flex-1 min-w-[260px] max-w-sm">
           <CenterInformaticsWidget />
         </div>
         {/* Center: Timer & AudioPlayer */}
-        <div className="flex-1 flex justify-center w-full sm:w-auto mb-2 sm:mb-0">
-          <div className="flex flex-row items-center bg-background/70 dark:bg-accent2/10 rounded-lg px-3 py-2 gap-2 shadow-sm border border-accent/10 min-w-[320px] mx-auto">
+        <div className="flex-1 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 min-w-[260px] max-w-2xl">
+          <MediaCard className="w-full sm:w-auto">
             <Timer />
-            <div className="hidden sm:block w-px h-8 bg-accent/20 mx-2" />
-            <AudioPlayer onPlayStateChange={setIsMusicPlaying} />
-          </div>
+          </MediaCard>
+          <MediaCard className="w-full sm:w-auto">
+            <AudioPlayer />
+          </MediaCard>
         </div>
         {/* Right: Help & Theme Toggle */}
-        <div className="flex items-center gap-2 min-w-0 sm:min-w-[220px] justify-end w-full sm:w-auto">
+        <div className="flex-1 flex items-center justify-end gap-2 min-w-[260px] max-w-sm">
           <HelpModal />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

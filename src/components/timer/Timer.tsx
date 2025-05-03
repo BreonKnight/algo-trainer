@@ -72,8 +72,8 @@ export function Timer() {
   };
 
   // Circular progress bar calculations
-  const radius = 28;
-  const stroke = 5;
+  const radius = 20;
+  const stroke = 4;
   const normalizedRadius = radius - stroke / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const progress = totalTime > 0 ? timeLeft / totalTime : 0;
@@ -88,15 +88,15 @@ export function Timer() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-1 w-full">
-      <div className="text-xs text-secondary font-medium mb-1">
+    <div className="flex flex-col items-center gap-0.5 w-full min-w-0 px-2 py-1 sm:px-3 sm:py-2">
+      <div className="text-[10px] text-secondary font-medium mb-0.5">
         Timebox Timer
       </div>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
-        <div className="flex flex-col items-center w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-y-3 sm:gap-x-4 w-full min-w-0">
+        <div className="flex flex-col items-center flex-shrink-0 min-w-[60px] mb-2 sm:mb-0">
           <div className="flex flex-col items-center justify-center">
             <span
-              className="mb-4 px-3 py-1 rounded-full bg-accent/20 text-accent font-bold text-xs text-center w-full shadow-sm"
+              className="mb-2 px-2 py-0.5 rounded-full bg-accent/20 text-accent font-bold text-[10px] text-center w-full shadow-sm"
               aria-live="polite"
             >
               {isRunning
@@ -105,7 +105,7 @@ export function Timer() {
                 ? "Finished"
                 : "Paused"}
             </span>
-            <div className="relative flex items-center justify-center w-[56px] h-[56px] mx-auto mb-6">
+            <div className="relative flex items-center justify-center w-[40px] h-[40px] mx-auto mb-3">
               {/* Circular Progress Bar */}
               <svg
                 height={radius * 2}
@@ -149,7 +149,7 @@ export function Timer() {
                 </defs>
               </svg>
               <span
-                className="absolute inset-0 flex items-center justify-center font-mono text-2xl font-bold text-main bg-secondary/50 rounded-full px-1 shadow-lg ring-2 ring-accent/20 [text-shadow:_0_0_8px_rgba(0,0,0,0.5)]"
+                className="absolute inset-0 flex items-center justify-center font-mono text-lg font-bold text-main bg-secondary/50 rounded-full px-1 shadow-lg ring-2 ring-accent/20 [text-shadow:_0_0_8px_rgba(0,0,0,0.5)]"
                 aria-live="polite"
               >
                 {formatTime(timeLeft)}
@@ -157,15 +157,15 @@ export function Timer() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col items-center gap-y-2 flex-1 w-full min-w-0">
+          <div className="flex items-center gap-1">
             {[15, 30, 45, 60].map((min) => (
               <Button
                 key={min}
                 onClick={() => startTimer(min)}
                 variant={totalTime / 60 === min ? "default" : "outline"}
                 size="sm"
-                className={`text-xs px-3 h-7 min-w-[44px] rounded-md ring-1 ring-accent/20 transition-all duration-150
+                className={`text-[10px] px-2 h-6 min-w-[36px] rounded-md ring-1 ring-accent/20 transition-all duration-150
                   ${
                     totalTime / 60 === min
                       ? "bg-accent text-accent-foreground shadow-lg scale-105"
@@ -182,14 +182,14 @@ export function Timer() {
               </Button>
             ))}
           </div>
-          <div className="h-2" />
-          <div className="flex items-center gap-2">
+          <div className="h-1" />
+          <div className="flex items-center gap-1">
             <div className="flex flex-col items-center">
               <Button
                 onClick={isRunning ? pauseTimer : resumeTimer}
                 variant="default"
                 size="sm"
-                className={`h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform duration-200 flex items-center justify-center ${
+                className={`h-6 w-6 min-w-[36px] min-h-[36px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform duration-200 flex items-center justify-center ${
                   isRunning || (!isRunning && timeLeft > 0)
                     ? "ring-2 ring-accent shadow-lg"
                     : ""
@@ -199,13 +199,13 @@ export function Timer() {
               >
                 <span className="transition-transform duration-200 ease-in-out transform group-hover:scale-110">
                   {isRunning ? (
-                    <Pause size={18} className="transition-all duration-200" />
+                    <Pause size={14} className="transition-all duration-200" />
                   ) : (
-                    <Play size={18} className="transition-all duration-200" />
+                    <Play size={14} className="transition-all duration-200" />
                   )}
                 </span>
               </Button>
-              <span className="text-[10px] text-secondary mt-1">
+              <span className="text-[8px] text-secondary mt-0.5">
                 {isRunning ? "Pause" : "Start"}
               </span>
             </div>
@@ -214,13 +214,13 @@ export function Timer() {
                 onClick={resetTimer}
                 variant="ghost"
                 size="sm"
-                className="h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ring-1 ring-accent/20"
+                className="h-6 w-6 min-w-[36px] min-h-[36px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ring-1 ring-accent/20"
                 title="Reset timer"
                 aria-label="Reset timer"
               >
-                <RotateCcw size={14} />
+                <RotateCcw size={12} />
               </Button>
-              <span className="text-[10px] text-secondary mt-1">Reset</span>
+              <span className="text-[8px] text-secondary mt-0.5">Reset</span>
             </div>
           </div>
         </div>

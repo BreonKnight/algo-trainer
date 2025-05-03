@@ -5,7 +5,6 @@ import {
   Typography,
   Button,
   Box,
-  LinearProgress,
   Chip,
 } from "@mui/material";
 import {
@@ -96,15 +95,20 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
           </Typography>
           <Chip
             label={difficulty}
-            color={getDifficultyColor(difficulty) as any}
+            color={
+              getDifficultyColor(difficulty) as
+                | "success"
+                | "warning"
+                | "error"
+                | "default"
+            }
             size="small"
           />
         </Box>
-
+        how do we
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
           {description}
         </Typography>
-
         <Box
           sx={{
             display: "flex",
@@ -157,7 +161,6 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
             </Button>
           </Box>
         </Box>
-
         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
           <Button variant="outlined" startIcon={<Lightbulb />} onClick={onHint}>
             Hint
