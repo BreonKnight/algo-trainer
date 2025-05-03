@@ -46,6 +46,7 @@ export type PatternKey =
   | "Heap Implementation"
   | "Heap Sort"
   | "Heavy Light Decomposition"
+  | "Hungarian Algorithm"
   | "Insertion Sort"
   | "Interpolation Search"
   | "Jump Search"

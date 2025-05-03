@@ -56,6 +56,7 @@ export const patternMapping: Record<PatternKey, string> = {
   "Maximum Bipartite Matching": "Maximum Bipartite Matching",
   "Topological Sort": "Topological Sort",
   Prim: "Prim",
+  "Hungarian Algorithm": "Hungarian Algorithm",
 
   // Data Structures
   "AVL Tree": "AVL Tree",
@@ -101,7 +102,7 @@ export const patternMapping: Record<PatternKey, string> = {
   "Chinese Remainder Theorem": "Chinese Remainder Theorem",
   "Extended Euclidean": "Extended Euclidean",
   "Fast Fourier Transform": "Fast Fourier Transform",
-  "Miller-Rabin Primality Test": "Miller-Rabin Algorithm",
+  "Miller-Rabin Primality Test": "Miller-Rabin Primality Test",
   "Prime Factorization": "Prime Factorization",
   "Sieve of Atkin": "Sieve of Atkin",
   "Sieve of Eratosthenes": "Sieve of Eratosthenes",
@@ -132,5 +133,7 @@ export const patternMapping: Record<PatternKey, string> = {
 
   // Special Patterns
   "Null Pattern": "Null Pattern",
-  "Hungarian Algorithm": "Hungarian Algorithm",
+  "Job Scheduling": "Job Scheduling",
+  Graph: "Graph",
+  "Grid Traversal": "Grid Traversal",
 };

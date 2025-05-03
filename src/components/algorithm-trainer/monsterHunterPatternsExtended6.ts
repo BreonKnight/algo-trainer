@@ -1499,7 +1499,7 @@ def manage_territory_connections(territories, connections):
     "Miller-Rabin Primality Test" as PatternKey,
     `def monster_hunter_miller_rabin(material_quality, test_rounds):
     """
-    Find witnesses to material quality using Miller-Rabin algorithm.
+    Find witnesses to material quality using Miller-Rabin Primality Test.
     Time: O(k log³ n)
     Space: O(1)
     
