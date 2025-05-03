@@ -729,4 +729,106 @@ Expected Output: [105, 60]
 # Monster Hunter Tip:
 # Like tracking cumulative damage dealt to monsters!`,
   ],
+  [
+    "Lowest Common Ancestor" as PatternKey,
+    `# Monster Hunter Lowest Common Ancestor Challenge
+# You are finding the lowest common ancestor of two nodes in a binary tree!
+
+# Test Case 1: Basic Ancestor Search
+Input: {
+    "tree": {
+        "root": {
+            "value": 3,
+            "left": {
+                "value": 5,
+                "left": {
+                    "value": 6
+                },
+                "right": {
+                    "value": 2,
+                    "left": {
+                        "value": 7
+                    },
+                    "right": {
+                        "value": 4
+                    }
+                }
+            },
+            "right": {
+                "value": 1,
+                "left": {
+                    "value": 0
+                },
+                "right": {
+                    "value": 8
+                }
+            }
+        },
+        "p": 5,
+        "q": 4
+    }
+}
+Expected Output: 5
+
+# Test Case 2: Complex Ancestor Search
+Input: {
+    "tree": {
+        "root": {
+            "value": 3,
+            "left": {
+                "value": 5,
+                "left": {
+                    "value": 6
+                },
+                "right": {
+                    "value": 2,
+                    "left": {
+                        "value": 7
+                    },
+                    "right": {
+                        "value": 4
+                    }
+                }
+            },
+            "right": {
+                "value": 1,
+                "left": {
+                    "value": 0
+                },
+                "right": {
+                    "value": 8
+                }
+            }
+        },
+        "p": 5,
+        "q": 1
+    }
+}
+Expected Output: 3
+
+# Monster Hunter Tip:
+# Like finding the lowest common ancestor in a binary tree to ensure efficient hunting!`,
+  ],
+  [
+    "Rabin-Karp" as PatternKey,
+    `# Monster Hunter Rabin-Karp Challenge
+# You are searching for a pattern in a text using the Rabin-Karp algorithm!
+
+# Test Case 1: Basic Pattern Search
+Input: {
+    "text": "abracadabra",
+    "pattern": "abra"
+}
+Expected Output: 0
+
+# Test Case 2: Complex Pattern Search
+Input: {
+    "text": "abracadabra",
+    "pattern": "dab"
+}
+Expected Output: 4
+
+# Monster Hunter Tip:
+# Like efficiently searching for a pattern in a text using the Rabin-Karp algorithm!`,
+  ],
 ]);

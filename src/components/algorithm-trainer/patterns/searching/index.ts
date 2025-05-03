@@ -7,6 +7,7 @@ import { jumpSearchPattern } from "./jump-search";
 import { exponentialSearchPattern } from "./exponential-search";
 import { interpolationSearchPattern } from "./interpolation-search";
 import { quickselectPattern } from "./quickselect";
+import { fibonacciSearchPattern } from "./fibonacci-search";
 //import { aStarPattern } from "./astar-search";
 
 type SearchingPatternKey =
@@ -17,7 +18,8 @@ type SearchingPatternKey =
   | "Jump Search"
   | "Exponential Search"
   | "Interpolation Search"
-  | "Quickselect";
+  | "Quickselect"
+  | "Fibonacci Search";
 
 export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
   {
@@ -29,4 +31,5 @@ export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
     "Exponential Search": exponentialSearchPattern,
     "Interpolation Search": interpolationSearchPattern,
     Quickselect: quickselectPattern,
+    "Fibonacci Search": fibonacciSearchPattern,
   };

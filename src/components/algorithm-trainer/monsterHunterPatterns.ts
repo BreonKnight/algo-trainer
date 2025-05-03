@@ -1,12 +1,12 @@
-import { PatternKey } from "./types/pattern-types";
-import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended";
-import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2";
-import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3";
-import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4";
-import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5";
-import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
-import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7";
-import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8";
+import { PatternKey } from "./types.ts";
+import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
+import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
+import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";
+import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4.ts";
+import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5.ts";
+import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
+import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
+import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8.ts";
 
 // Add matrix exponentiation pattern
 const matrixExponentiationPattern = new Map<PatternKey, string>([

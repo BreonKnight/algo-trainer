@@ -1,6 +1,10 @@
 export type PatternKey =
   | "A* Search"
   | "Activity Selection"
+  | "Dijkstra"
+  | "Fractional Knapsack"
+  | "Huffman Coding"
+  | "Job Scheduling"
   | "Articulation Points"
   | "AVL Tree"
   | "Backtracking"
@@ -29,32 +33,25 @@ export type PatternKey =
   | "Extended Euclidean"
   | "Fast Fourier Transform"
   | "Fenwick Tree"
+  | "Fibonacci Search"
   | "Floyd Cycle Detection"
   | "Floyd-Warshall"
   | "Graph"
-  | "Dijkstra"
   | "Bridges"
   | "Kosaraju"
   | "Kruskal"
-  | "Strongly Connected Components"
-  | "Greedy"
-  | "Greedy Activity Selection"
-  | "Greedy Dijkstra"
-  | "Greedy Fractional Knapsack"
-  | "Greedy Huffman Coding"
-  | "Greedy Job Scheduling"
+  | "Prim"
   | "Grid Traversal"
   | "Hash Table"
   | "Heap Implementation"
   | "Heap Sort"
   | "Heavy Light Decomposition"
-  | "Huffman Coding"
   | "Insertion Sort"
   | "Interpolation Search"
-  | "Job Scheduling"
   | "Jump Search"
   | "Kadane's Algorithm"
-  | "KMP Algorithm"
+  | "Knuth-Morris-Pratt"
+  | "Lowest Common Ancestor"
   | "Linear Search"
   | "Linked List"
   | "Manacher's Algorithm"
@@ -75,13 +72,13 @@ export type PatternKey =
   | "Null Pattern"
   | "Prefix Sum"
   | "Prefix Sums"
-  | "Prim"
   | "Prime Factorization"
   | "Probability DP"
   | "Queue Implementation"
   | "Quickselect"
   | "Quick Sort"
-  | "Rabin Karp"
+  | "Rabin-Karp"
+  | "Radix Sort"
   | "Red-Black Tree"
   | "Recursion"
   | "Rotate Matrix"
@@ -94,6 +91,7 @@ export type PatternKey =
   | "Stack Implementation"
   | "Stack Sort"
   | "State Compression DP"
+  | "Strongly Connected Components"
   | "String Operations"
   | "Suffix Array"
   | "Suffix Tree"
@@ -121,4 +119,10 @@ export interface AlgorithmPattern {
   category: string;
   pattern?: string;
   keySteps?: string[];
+  testData: {
+    input: number[] | { arr: number[]; target?: number; [key: string]: any };
+    expected: number | number[];
+    description: string;
+  }[];
+  explanation?: string;
 }

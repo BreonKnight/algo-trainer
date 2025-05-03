@@ -3,7 +3,6 @@ import { ProgressView } from "./components/progress/ProgressView";
 import { TutorialView } from "./components/tutorials/TutorialView";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
 import { AlgorithmVisualizer } from "./components/algorithm-trainer";
-import { PatternKey } from "./components/algorithm-trainer/types";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { useTheme } from "./components/theme/theme-context";

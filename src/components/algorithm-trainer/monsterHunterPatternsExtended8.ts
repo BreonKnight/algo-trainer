@@ -1,4 +1,4 @@
-import { PatternKey } from "./types/pattern-types.ts";
+import { PatternKey } from "./types.ts";
 
 // Add Activity Selection Monster Hunter Pattern
 const activitySelectionMonsterHunterPattern = new Map<PatternKey, string>([

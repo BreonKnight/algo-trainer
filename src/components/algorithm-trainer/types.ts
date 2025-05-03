@@ -29,38 +29,29 @@ export type PatternKey =
   | "Extended Euclidean"
   | "Fast Fourier Transform"
   | "Fenwick Tree"
+  | "Fibonacci Search"
   | "Floyd Cycle Detection"
   | "Floyd-Warshall"
+  | "Fractional Knapsack"
   | "Graph"
-  | "Articulation Points"
-  | "Bellman-Ford"
-  | "Bridges"
-  | "Dijkstra"
-  | "Floyd-Warshall"
-  | "Kosaraju"
-  | "Kruskal"
-  | "Strongly Connected Components"
   | "Greedy"
-  | "Greedy Activity Selection"
-  | "Greedy Dijkstra"
-  | "Greedy Fractional Knapsack"
-  | "Greedy Huffman Coding"
-  | "Greedy Job Scheduling"
   | "Grid Traversal"
-  | "Hash Table"
   | "Heap Implementation"
   | "Heap Sort"
   | "Heavy Light Decomposition"
   | "Huffman Coding"
+  | "Hungarian Algorithm"
   | "Insertion Sort"
   | "Interpolation Search"
   | "Job Scheduling"
   | "Jump Search"
   | "Kadane's Algorithm"
-  | "KMP Algorithm"
+  | "Knuth-Morris-Pratt"
+  | "Kosaraju"
   | "Kruskal"
   | "Linear Search"
   | "Linked List"
+  | "Lowest Common Ancestor"
   | "Manacher's Algorithm"
   | "Matrix Chain Multiplication"
   | "Matrix Exponentiation"
@@ -85,7 +76,8 @@ export type PatternKey =
   | "Queue Implementation"
   | "Quickselect"
   | "Quick Sort"
-  | "Rabin Karp"
+  | "Rabin-Karp"
+  | "Radix Sort"
   | "Red-Black Tree"
   | "Recursion"
   | "Rotate Matrix"
@@ -98,6 +90,7 @@ export type PatternKey =
   | "Stack Implementation"
   | "Stack Sort"
   | "State Compression DP"
+  | "String"
   | "String Operations"
   | "Strongly Connected Components"
   | "Suffix Array"
@@ -159,38 +152,29 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Extended Euclidean",
   "Fast Fourier Transform",
   "Fenwick Tree",
+  "Fibonacci Search",
   "Floyd Cycle Detection",
   "Floyd-Warshall",
+  "Fractional Knapsack",
   "Graph",
-  "Articulation Points",
-  "Bellman-Ford",
-  "Bridges",
-  "Dijkstra",
-  "Floyd-Warshall",
-  "Kosaraju",
-  "Kruskal",
-  "Strongly Connected Components",
   "Greedy",
-  "Greedy Activity Selection",
-  "Greedy Dijkstra",
-  "Greedy Fractional Knapsack",
-  "Greedy Huffman Coding",
-  "Greedy Job Scheduling",
   "Grid Traversal",
-  "Hash Table",
   "Heap Implementation",
   "Heap Sort",
   "Heavy Light Decomposition",
   "Huffman Coding",
+  "Hungarian Algorithm",
   "Insertion Sort",
   "Interpolation Search",
   "Job Scheduling",
   "Jump Search",
   "Kadane's Algorithm",
-  "KMP Algorithm",
+  "Knuth-Morris-Pratt",
+  "Kosaraju",
   "Kruskal",
   "Linear Search",
   "Linked List",
+  "Lowest Common Ancestor",
   "Manacher's Algorithm",
   "Matrix Chain Multiplication",
   "Matrix Exponentiation",
@@ -215,7 +199,8 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Queue Implementation",
   "Quickselect",
   "Quick Sort",
-  "Rabin Karp",
+  "Rabin-Karp",
+  "Radix Sort",
   "Red-Black Tree",
   "Recursion",
   "Rotate Matrix",
@@ -228,6 +213,7 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Stack Implementation",
   "Stack Sort",
   "State Compression DP",
+  "String",
   "String Operations",
   "Strongly Connected Components",
   "Suffix Array",

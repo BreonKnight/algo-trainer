@@ -2,7 +2,7 @@ import { PatternKey } from "./types.ts";
 
 export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
   [
-    "Extended Euclidean Algorithm" as PatternKey,
+    "Extended Euclidean" as PatternKey,
     `def monster_hunter_extended_euclidean(a, b):
     """
     Find optimal resource distribution using Extended Euclidean Algorithm.
@@ -181,7 +181,7 @@ export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
   ],
 
   [
-    "LCA" as PatternKey,
+    "Lowest Common Ancestor" as PatternKey,
     `def monster_hunter_lca(monster_tree, monster1, monster2):
     """
     Find lowest common ancestor of two monsters.
