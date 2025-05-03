@@ -1,6 +1,6 @@
 import { Card } from "../ui/card";
 import { pseudocodePatterns } from "@/lib/pseudocode";
-import { patternNameMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import styles from "@/styles/pseudocode.module.css";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
@@ -71,31 +71,24 @@ export function PatternCard({
     };
   }, []);
 
-  const getPseudocodePattern = (patternName: string) => {
-    // First try to get the pattern directly
-    const directPattern = typedPseudocodePatterns[patternName];
-    if (directPattern) {
-      return directPattern;
+  const getPseudocodePattern = (patternName: PatternKey) => {
+    const typedPseudocodePatterns = pseudocodePatterns as PseudocodePatterns;
+
+    // First try direct lookup
+    const pattern = typedPseudocodePatterns[patternName];
+    if (pattern) {
+      return pattern;
     }
 
     // If not found, try to map the name
-    const mappedName = patternNameMapping[patternName];
+    const mappedName = patternMapping[patternName];
     if (mappedName) {
       return typedPseudocodePatterns[mappedName];
     }
 
-    // If still not found, try to find a pattern with a similar name
-    const similarPattern = Object.keys(typedPseudocodePatterns).find(
-      (key) => key.toLowerCase() === patternName.toLowerCase()
-    );
-    if (similarPattern) {
-      return typedPseudocodePatterns[similarPattern];
-    }
-
-    // Log pattern lookup failure
     console.warn(`Pattern lookup failed for: ${patternName}`);
     console.log("Available patterns:", Object.keys(typedPseudocodePatterns));
-    console.log("Pattern name mapping:", patternNameMapping);
+    console.log("Pattern name mapping:", patternMapping);
 
     return null;
   };
