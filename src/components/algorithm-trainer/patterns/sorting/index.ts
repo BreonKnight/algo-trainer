@@ -6,6 +6,7 @@ import { heapsortPattern } from "./heap-sort";
 import { stackSortPattern } from "./stack-sort";
 import { mergeSortPattern } from "./merge-sort";
 import { quickSortPattern } from "./quick-sort";
+import { radixSortPattern } from "./radix-sort";
 
 type SortingPatternKey =
   | "Quick Sort"
@@ -14,7 +15,8 @@ type SortingPatternKey =
   | "Insertion Sort"
   | "Selection Sort"
   | "Heap Sort"
-  | "Stack Sort";
+  | "Stack Sort"
+  | "Radix Sort";
 
 export const sortingPatterns: Partial<
   Record<SortingPatternKey, AlgorithmPattern>
@@ -26,4 +28,5 @@ export const sortingPatterns: Partial<
   "Selection Sort": selectionSortPattern,
   "Heap Sort": heapsortPattern,
   "Stack Sort": stackSortPattern,
+  "Radix Sort": radixSortPattern,
 };
