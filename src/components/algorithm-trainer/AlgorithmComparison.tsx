@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AlgorithmVisualizer } from "./AlgorithmVisualizer";
 import { PatternKey } from "./types";
-import { Card } from "../ui/card";
+import { Card } from "../ui/Card";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";

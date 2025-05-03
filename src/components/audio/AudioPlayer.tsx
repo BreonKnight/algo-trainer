@@ -316,98 +316,80 @@ export const AudioPlayer = memo(function AudioPlayer({
 
   return (
     <AudioPlayerErrorBoundary>
-      <div className="flex flex-col items-center gap-1 w-full min-w-0">
-        <div className="text-xs text-secondary font-medium mb-1">
+      <div className="bg-white dark:bg-background rounded-xl shadow-lg border border-accent/20 p-4 max-w-xs mx-auto flex flex-col items-center w-full">
+        <div className="text-[10px] text-secondary font-medium mb-0.5">
           Background Music
         </div>
-        <div className="flex flex-col items-center justify-between w-full gap-4 px-2 min-w-0">
-          {/* Left section - Controls */}
-          <div className="flex flex-col items-center gap-3 w-full">
-            <div className="flex items-center gap-3">
-              <div className="relative flex flex-col items-center">
-                <Button
-                  onClick={togglePlay}
-                  variant="ghost"
-                  size="sm"
-                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200 group"
-                  title={isPlaying ? "Pause" : "Play"}
-                  aria-label={
-                    isPlaying
-                      ? "Pause background music"
-                      : "Play background music"
-                  }
-                >
-                  <span className="transition-transform duration-200 ease-in-out transform group-hover:scale-110">
-                    {isPlaying ? (
-                      <Pause
-                        size={20}
-                        className="transition-all duration-200"
-                      />
-                    ) : (
-                      <Play size={20} className="transition-all duration-200" />
-                    )}
-                  </span>
-                </Button>
-                {isPlaying && (
-                  <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 flex items-center gap-1 text-accent2 text-[10px] font-normal bg-[rgba(40,42,54,0.95)] px-1.5 py-0.5 rounded-full shadow-md pointer-events-none whitespace-nowrap border border-secondary/20">
-                    <span className="text-[12px] leading-none text-accent">
-                      •
-                    </span>
-                    Playing
-                  </span>
+        <div className="flex flex-row gap-4 justify-center mb-1 mt-2">
+          <div className="relative flex flex-col items-center">
+            <Button
+              onClick={togglePlay}
+              variant="ghost"
+              size="sm"
+              className="h-8 w-8 min-w-[32px] min-h-[32px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200 group"
+              title={isPlaying ? "Pause" : "Play"}
+              aria-label={
+                isPlaying ? "Pause background music" : "Play background music"
+              }
+            >
+              <span className="transition-transform duration-200 ease-in-out transform group-hover:scale-110">
+                {isPlaying ? (
+                  <Pause size={16} className="transition-all duration-200" />
+                ) : (
+                  <Play size={16} className="transition-all duration-200" />
                 )}
-              </div>
-              <div className="relative">
-                <Button
-                  onClick={playNextVideo}
-                  variant="ghost"
-                  size="sm"
-                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200"
-                  title="Skip to next song"
-                  aria-label="Skip to next song"
-                >
-                  <SkipForward size={20} />
-                </Button>
-              </div>
-            </div>
-            {/* Visualizer removed from here */}
-            <div className="flex items-center gap-3 -mt-3">
-              <span className="text-[10px] text-secondary text-center w-10">
-                {isPlaying ? "Pause" : "Play"}
               </span>
-              <span className="text-[10px] text-secondary text-center w-10">
-                Skip
+            </Button>
+            {isPlaying && (
+              <span className="mt-1 flex items-center gap-1 text-accent2 text-[10px] font-normal bg-[rgba(40,42,54,0.95)] px-1 py-0.5 rounded-full shadow-md pointer-events-none whitespace-nowrap border border-secondary/20">
+                <span className="text-[12px] leading-none text-accent">•</span>
+                Playing
               </span>
-            </div>
+            )}
           </div>
-
-          {/* Middle section - Volume and Song Info */}
-          <div className="flex flex-col items-center gap-4 w-full">
-            <div className="flex items-center gap-2 w-full justify-center">
-              <Volume2 size={14} className="text-accent flex-shrink-0" />
-              <Slider.Root
-                className="relative flex items-center select-none touch-none w-[100px] h-5 flex-shrink-0"
-                value={[volume]}
-                onValueChange={handleVolumeChange}
-                max={100}
-                step={1}
-                aria-label="Volume"
-              >
-                <Slider.Track className="bg-secondary/70 relative grow rounded-full h-[4px]">
-                  <Slider.Range className="absolute bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] rounded-full h-full" />
-                </Slider.Track>
-                <Slider.Thumb className="block w-4 h-4 bg-accent rounded-full hover:bg-accent2 focus:outline-none shadow-md ring-2 ring-accent/50 transition-all duration-200 hover:scale-110 active:scale-95" />
-              </Slider.Root>
-            </div>
-            <div className="text-xs text-secondary truncate w-full text-center">
-              <span
-                tabIndex={0}
-                className="focus:outline-none focus:ring-2 focus:ring-accent2/50 px-2 py-1 rounded-md inline-block truncate w-full"
-                title={currentSongName}
-              >
-                {currentSongName || "Loading..."}
-              </span>
-            </div>
+          <div className="relative flex flex-col items-center">
+            <Button
+              onClick={playNextVideo}
+              variant="ghost"
+              size="sm"
+              className="h-8 w-8 min-w-[32px] min-h-[32px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200"
+              title="Skip to next song"
+              aria-label="Skip to next song"
+            >
+              <SkipForward size={16} />
+            </Button>
+          </div>
+        </div>
+        <div className="flex flex-row gap-4 justify-center mb-4">
+          <span className="text-xs text-secondary text-center w-12">Play</span>
+          <span className="text-xs text-secondary text-center w-12">Skip</span>
+        </div>
+        {/* Volume and song info below */}
+        <div className="flex flex-col items-center gap-2 w-full">
+          <div className="flex items-center gap-1 w-full justify-center">
+            <Volume2 size={12} className="text-accent flex-shrink-0" />
+            <Slider.Root
+              className="relative flex items-center select-none touch-none w-[80px] h-4 flex-shrink-0"
+              value={[volume]}
+              onValueChange={handleVolumeChange}
+              max={100}
+              step={1}
+              aria-label="Volume"
+            >
+              <Slider.Track className="bg-secondary/70 relative grow rounded-full h-[3px]">
+                <Slider.Range className="absolute bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] rounded-full h-full" />
+              </Slider.Track>
+              <Slider.Thumb className="block w-3 h-3 bg-accent rounded-full hover:bg-accent2 focus:outline-none shadow-md ring-2 ring-accent/50 transition-all duration-200 hover:scale-110 active:scale-95" />
+            </Slider.Root>
+          </div>
+          <div className="text-[10px] text-secondary truncate w-full text-center">
+            <span
+              tabIndex={0}
+              className="focus:outline-none focus:ring-2 focus:ring-accent2/50 px-1 py-0.5 rounded-md inline-block truncate w-full"
+              title={currentSongName}
+            >
+              {currentSongName || "Loading..."}
+            </span>
           </div>
         </div>
         <iframe
