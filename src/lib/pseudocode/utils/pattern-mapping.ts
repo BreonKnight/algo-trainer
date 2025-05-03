@@ -117,7 +117,7 @@ export const patternMapping: Record<PatternKey, string> = {
   Memoization: "Memoization",
   "Monotonic Queue": "Monotonic Queue",
   "Monotonic Stack": "Monotonic Stack",
-  "Prefix Sum": "Prefix Sum",
+  "Prefix Sums": "Prefix Sums",
   Quickselect: "Quickselect",
   Recursion: "Recursion",
   "Sliding Window": "Sliding Window",

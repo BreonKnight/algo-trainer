@@ -165,7 +165,7 @@ export const monsterHunterExplanations: Partial<
       "Use for priority queues",
     ],
   },
-  "KMP Algorithm": {
+  "Knuth-Morris-Pratt": {
     title: "Monster Pattern Tracker",
     description:
       "Efficiently find specific monster behavior patterns in long sequences of monster movements or actions.",
@@ -207,7 +207,7 @@ export const monsterHunterExplanations: Partial<
       "Use for subsequence problems",
     ],
   },
-  "Prefix Sum": {
+  "Prefix Sums": {
     title: "Cumulative Monster Stats",
     description:
       "Calculate running totals of monster statistics to enable quick range queries.",

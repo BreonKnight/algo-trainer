@@ -210,7 +210,6 @@ export const monsterHunterPatternsByCategory = {
   Utility: [
     "Two Pointers",
     "Sliding Window",
-    "Prefix Sum",
     "Prefix Sums",
     "Floyd Cycle Detection",
     "Memoization",

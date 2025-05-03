@@ -704,30 +704,23 @@ Expected Output: [1, 3]
   [
     "Prefix Sums" as PatternKey,
     `# Monster Hunter Prefix Sums Challenge
-# You are tracking cumulative monster damage!
 
-# Test Case 1: Basic Damage Tracking
+# Test Case 1: Basic Prefix Sums
+Input: [3, 1, 4, 2, 5]
+Expected Output: [0, 3, 4, 8, 10, 15]
+
+# Test Case 2: Range Sum Query
 Input: {
-    "damage_values": [10, 20, 30, 40, 50],
+    "array": [3, 1, 4, 2, 5],
     "queries": [
-        {"start": 0, "end": 2},
-        {"start": 1, "end": 4}
+        {"left": 1, "right": 3},  # Sum from index 1 to 3
+        {"left": 2, "right": 4}   # Sum from index 2 to 4
     ]
 }
-Expected Output: [60, 140]
-
-# Test Case 2: Complex Damage Tracking
-Input: {
-    "damage_values": [5, 10, 15, 20, 25, 30],
-    "queries": [
-        {"start": 0, "end": 5},
-        {"start": 2, "end": 4}
-    ]
-}
-Expected Output: [105, 60]
+Expected Output: [7, 11]  # First query: 1 + 4 + 2 = 7, Second query: 4 + 2 + 5 = 11
 
 # Monster Hunter Tip:
-# Like tracking cumulative damage dealt to monsters!`,
+# Like tracking cumulative resources across territories for quick range queries!`,
   ],
   [
     "Lowest Common Ancestor" as PatternKey,

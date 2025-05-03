@@ -1,13 +1,30 @@
-import { PatternKey } from "../src/components/algorithm-trainer/types/pattern-types";
-import { algorithmPatterns } from "../src/components/algorithm-trainer/patterns";
-import { allMonsterHunterPatterns } from "../src/components/algorithm-trainer/monsterHunterPatternsCombined";
-import { patternMapping } from "../src/lib/pseudocode/utils/pattern-mapping";
-import { monsterHunterTestData } from "../src/components/algorithm-trainer/monsterHunterTestData";
-import { monsterHunterExplanations } from "../src/components/algorithm-trainer/monsterHunterExplanations";
+import { execSync } from "child_process";
+import {
+  PatternKey,
+  AlgorithmPattern,
+} from "../src/components/algorithm-trainer/types.ts";
+import { monsterHunterPatternsExtended4 } from "../src/components/algorithm-trainer/monsterHunterPatternsExtended4.ts";
+import { algorithmPatterns } from "../src/components/algorithm-trainer/patterns/index.ts";
+import { allMonsterHunterPatterns } from "../src/components/algorithm-trainer/monsterHunterPatternsCombined.ts";
+import { patternMapping } from "../src/lib/pseudocode/utils/pattern-mapping.ts";
+import { monsterHunterTestData } from "../src/components/algorithm-trainer/monsterHunterTestData.ts";
+import { monsterHunterExplanations } from "../src/components/algorithm-trainer/monsterHunterExplanations.ts";
 
-function findSimilarPatterns(
-  patternKeys: PatternKey[]
-): Record<string, string[]> {
+try {
+  console.log("Running pattern checks...\n");
+  execSync("npx ts-node src/components/algorithm-trainer/check-patterns.ts", {
+    stdio: "inherit",
+    env: {
+      ...process.env,
+      TS_NODE_COMPILER_OPTIONS: '{"module":"commonjs"}',
+    },
+  });
+} catch (error) {
+  console.error("Error running pattern checks:", error);
+  process.exit(1);
+}
+
+function findSimilarPatterns(patternKeys: string[]): Record<string, string[]> {
   const similarPatterns: Record<string, string[]> = {};
 
   // Helper function to normalize pattern names for comparison
@@ -85,42 +102,38 @@ function checkPatternMapping() {
 
   // Check if all patterns have regular implementations
   const missingRegularPatterns = patternKeys.filter(
-    (key: PatternKey) => !algorithmPatterns[key]
+    (key) => !algorithmPatterns[key]
   );
 
   // Check if all patterns have Monster Hunter implementations
   const missingMonsterHunterPatterns = patternKeys.filter(
-    (key: PatternKey) => !allMonsterHunterPatterns.has(key)
+    (key) => !allMonsterHunterPatterns.has(key)
   );
 
   // Check if all patterns have test data
   const missingTestData = patternKeys.filter(
-    (key: PatternKey) => !monsterHunterTestData.has(key)
+    (key) => !monsterHunterTestData.has(key)
   );
 
   // Check if all patterns have explanations
   const missingExplanations = patternKeys.filter(
-    (key: PatternKey) => !monsterHunterExplanations[key]
+    (key) => !(key in monsterHunterExplanations)
   );
 
   // Check if all patterns have mapping entries
-  const missingMappings = patternKeys.filter(
-    (key: PatternKey) => !patternMapping[key]
-  );
+  const missingMappings = patternKeys.filter((key) => !(key in patternMapping));
 
   // Log results
   if (missingRegularPatterns.length > 0) {
     console.log("Missing Regular Patterns:");
-    missingRegularPatterns.forEach((pattern: PatternKey) =>
-      console.log(`- ${pattern}`)
-    );
+    missingRegularPatterns.forEach((pattern) => console.log(`- ${pattern}`));
   } else {
     console.log("✓ All patterns have regular implementations");
   }
 
   if (missingMonsterHunterPatterns.length > 0) {
     console.log("\nMissing Monster Hunter Patterns:");
-    missingMonsterHunterPatterns.forEach((pattern: PatternKey) =>
+    missingMonsterHunterPatterns.forEach((pattern) =>
       console.log(`- ${pattern}`)
     );
   } else {
@@ -129,27 +142,21 @@ function checkPatternMapping() {
 
   if (missingTestData.length > 0) {
     console.log("\nMissing Test Data:");
-    missingTestData.forEach((pattern: PatternKey) =>
-      console.log(`- ${pattern}`)
-    );
+    missingTestData.forEach((pattern) => console.log(`- ${pattern}`));
   } else {
     console.log("\n✓ All patterns have test data");
   }
 
   if (missingExplanations.length > 0) {
     console.log("\nMissing Explanations:");
-    missingExplanations.forEach((pattern: PatternKey) =>
-      console.log(`- ${pattern}`)
-    );
+    missingExplanations.forEach((pattern) => console.log(`- ${pattern}`));
   } else {
     console.log("\n✓ All patterns have explanations");
   }
 
   if (missingMappings.length > 0) {
     console.log("\nMissing Pattern Mappings:");
-    missingMappings.forEach((pattern: PatternKey) =>
-      console.log(`- ${pattern}`)
-    );
+    missingMappings.forEach((pattern) => console.log(`- ${pattern}`));
   } else {
     console.log("\n✓ All patterns have mapping entries");
   }
@@ -165,7 +172,7 @@ function checkPatternMapping() {
   ) as PatternKey[];
   const mappingKeys = Object.keys(patternMapping) as PatternKey[];
 
-  const allKeys = new Set<PatternKey>([
+  const allKeys = new Set([
     ...regularPatternKeys,
     ...monsterHunterPatternKeys,
     ...testDataKeys,
@@ -182,8 +189,8 @@ function checkPatternMapping() {
   console.log(`- Total Unique Patterns: ${allKeys.size}`);
 
   // Check for patterns that exist in one place but not others
-  const inconsistencies: Partial<Record<PatternKey, string[]>> = {};
-  allKeys.forEach((key: PatternKey) => {
+  const inconsistencies: Record<string, string[]> = {};
+  allKeys.forEach((key) => {
     const missingIn: string[] = [];
     if (!regularPatternKeys.includes(key)) missingIn.push("Regular Patterns");
     if (!monsterHunterPatternKeys.includes(key))
@@ -208,7 +215,7 @@ function checkPatternMapping() {
   }
 
   // Check for similar patterns
-  const similarPatterns = findSimilarPatterns(patternKeys);
+  const similarPatterns = findSimilarPatterns([...allKeys]);
 
   if (Object.keys(similarPatterns).length > 0) {
     console.log("\nSimilar Patterns Found:");
