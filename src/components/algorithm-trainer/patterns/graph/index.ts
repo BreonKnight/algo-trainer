@@ -1,39 +1,41 @@
-import { AlgorithmPattern, PatternKey } from "../../types";
-import { bellmanFordPattern } from "./bellman-ford";
-import { dijkstraPattern } from "./dijkstra";
-import { floydWarshallPattern } from "./floyd-warshall";
-import { kruskalPattern } from "./kruskal";
-import { primPattern } from "./prim";
-import { articulationPointsPattern } from "./articulation-points";
-import { bridgesPattern } from "./bridges";
-import { graphDfsPattern } from "./dfs";
-import { bfsPattern } from "./bfs";
-import { dfsLinkedListPattern } from "./dfs-linked-list";
-import { dfsBinaryTreePattern } from "./dfs-binary-tree";
-import { bfsLinkedListPattern } from "./bfs-linked-list";
-import { graphPattern } from "./graph";
-import { kosarajuPattern } from "./kosaraju";
-import { topologicalSortPattern } from "./topological-sort";
-import { networkFlowPattern } from "./network-flow";
-import { stronglyConnectedComponentsPattern } from "./strongly-connected-components";
-import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching";
-import { aStarSearchPattern } from "./a-star-search";
+import { AlgorithmPattern, PatternKey } from "../../types/pattern-types.ts";
+import { aStarSearchPattern } from "./a-star-search.ts";
+import { articulationPointsPattern } from "./articulation-points.ts";
+import { bellmanFordPattern } from "./bellman-ford.ts";
+import { bfsPattern } from "./bfs.ts";
+import { bfsLinkedListPattern } from "./bfs-linked-list.ts";
+import { bridgesPattern } from "./bridges.ts";
+import { dfsBinaryTreePattern } from "./dfs-binary-tree.ts";
+import { dfsLinkedListPattern } from "./dfs-linked-list.ts";
+import { graphDfsPattern } from "./dfs.ts";
+import { dijkstraPattern } from "./dijkstra.ts";
+import { floydWarshallPattern } from "./floyd-warshall.ts";
+import { floydCycleDetectionPattern } from "./floyd-cycle-detection.ts";
+import { graphPattern } from "./graph.ts";
+import { kosarajuPattern } from "./kosaraju.ts";
+import { kruskalPattern } from "./kruskal.ts";
+import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching.ts";
+import { networkFlowPattern } from "./network-flow.ts";
+import { primPattern } from "./prim.ts";
+import { stronglyConnectedComponentsPattern } from "./strongly-connected-components.ts";
+import { topologicalSortPattern } from "./topological-sort.ts";
 
 export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
-  "Graph Bellman Ford": bellmanFordPattern,
-  "Graph Dijkstra": dijkstraPattern,
-  "Graph Floyd Warshall": floydWarshallPattern,
-  "Graph Kruskal": kruskalPattern,
+  "Bellman-Ford": bellmanFordPattern,
+  Dijkstra: dijkstraPattern,
+  "Floyd-Warshall": floydWarshallPattern,
+  "Floyd Cycle Detection": floydCycleDetectionPattern,
+  Kruskal: kruskalPattern,
   Prim: primPattern,
-  "Graph Articulation Points": articulationPointsPattern,
-  "Graph Bridges": bridgesPattern,
+  "Articulation Points": articulationPointsPattern,
+  Bridges: bridgesPattern,
   DFS: graphDfsPattern,
   BFS: bfsPattern,
   "DFS Linked List": dfsLinkedListPattern,
   "DFS Binary Tree": dfsBinaryTreePattern,
   "BFS Linked List": bfsLinkedListPattern,
   Graph: graphPattern,
-  "Graph Kosaraju": kosarajuPattern,
+  Kosaraju: kosarajuPattern,
   "Topological Sort": topologicalSortPattern,
   "Network Flow": networkFlowPattern,
   "Strongly Connected Components": stronglyConnectedComponentsPattern,

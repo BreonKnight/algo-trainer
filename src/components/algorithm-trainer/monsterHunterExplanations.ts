@@ -1,4 +1,4 @@
-import { PatternKey, PATTERN_KEYS } from "./types";
+import { PatternKey } from "./types/pattern-types";
 
 export const monsterHunterExplanations: Partial<
   Record<
@@ -11,6 +11,146 @@ export const monsterHunterExplanations: Partial<
     }
   >
 > = {
+  Dijkstra: {
+    title: "Monster Territory Pathfinder",
+    description:
+      "Find the shortest paths between hunting grounds, considering terrain difficulty and monster presence.",
+    example:
+      "Given a map of hunting grounds with weighted paths representing difficulty, find the safest route to reach a specific monster.",
+    tips: [
+      "Consider terrain difficulty as edge weights",
+      "Account for monster presence in path weights",
+      "Update paths dynamically as monsters move",
+      "Use for efficient resource gathering routes",
+      "Plan multiple backup paths",
+    ],
+  },
+  Kosaraju: {
+    title: "Monster Territory Connectivity Analyzer",
+    description:
+      "Identify strongly connected regions in the hunting grounds to understand monster movement patterns.",
+    example:
+      "Given a map of monster territories with directed paths, find groups of areas where monsters can freely move between.",
+    tips: [
+      "Use for understanding monster migration patterns",
+      "Identify isolated hunting zones",
+      "Plan efficient hunting routes",
+      "Consider seasonal changes in connectivity",
+      "Map monster territory boundaries",
+    ],
+  },
+  "Articulation Points": {
+    title: "Monster Territory Critical Point Finder",
+    description:
+      "Identify critical checkpoints in the hunting grounds that, if blocked, would separate different regions.",
+    example:
+      "Given a map of connected hunting zones, find areas that are crucial for maintaining access between regions.",
+    tips: [
+      "Use to identify vulnerable chokepoints",
+      "Plan backup routes around critical points",
+      "Consider establishing camps near critical areas",
+      "Monitor monster activity at these points",
+      "Maintain alternative paths through these areas",
+    ],
+  },
+  Bridges: {
+    title: "Monster Territory Bridge Finder",
+    description:
+      "Find critical paths between hunting zones that, if blocked, would disconnect regions.",
+    example:
+      "Given a map of hunting grounds, identify paths that are the only connection between certain areas.",
+    tips: [
+      "Use to identify vulnerable paths",
+      "Plan alternate routes around bridges",
+      "Consider environmental hazards",
+      "Monitor monster movement through bridges",
+      "Maintain awareness of seasonal changes",
+    ],
+  },
+  Kruskal: {
+    title: "Monster Territory Network Optimizer",
+    description:
+      "Create an optimal network of paths connecting all hunting grounds while minimizing total path difficulty.",
+    example:
+      "Given a map of hunting zones with weighted connections, find the easiest way to connect all areas.",
+    tips: [
+      "Use for establishing efficient supply routes",
+      "Consider terrain difficulty in weights",
+      "Plan camp locations along optimal paths",
+      "Account for seasonal changes",
+      "Maintain backup connections",
+    ],
+  },
+  "Strongly Connected Components": {
+    title: "Monster Territory Group Analyzer",
+    description:
+      "Find groups of hunting grounds where monsters can freely move between all areas in the group.",
+    example:
+      "Given a map with directed monster paths, identify clusters of areas with complete internal access.",
+    tips: [
+      "Use for understanding monster territories",
+      "Plan hunting strategies for each group",
+      "Consider seasonal migration patterns",
+      "Map monster breeding grounds",
+      "Track territory changes over time",
+    ],
+  },
+  "Floyd-Warshall": {
+    title: "Monster Territory All-Pairs Path Finder",
+    description:
+      "Find the shortest paths between all pairs of territories, creating a complete distance matrix for efficient route planning.",
+    example:
+      "Given a map of territories with weighted connections, find the shortest paths between every pair of locations.",
+    tips: [
+      "Use for comprehensive route planning",
+      "Consider terrain difficulty in path weights",
+      "Update paths when discovering shortcuts",
+      "Account for seasonal changes in distances",
+      "Plan backup routes between all locations",
+    ],
+  },
+  "Bellman-Ford": {
+    title: "Monster Territory Negative Pathfinder",
+    description:
+      "Find the shortest paths through territories with negative weights, like areas that speed up or slow down movement.",
+    example:
+      "Given a map of territories with both positive and negative path weights, find the optimal route from your base to any location.",
+    tips: [
+      "Consider negative weights as speed boosts",
+      "Check for negative cycles that could trap you",
+      "Use for planning routes with environmental effects",
+      "Account for monster presence affecting path weights",
+      "Plan backup routes in case of negative cycles",
+    ],
+  },
+  "String Operations": {
+    title: "Monster Territory String Operations",
+    description:
+      "Like a monster hunter manipulating strings of monster names and descriptions, String Operations provides efficient string manipulation and pattern matching.",
+    example:
+      "Imagine you need to manipulate strings of monster names and descriptions - String Operations helps you do this efficiently.",
+    tips: [
+      "Use appropriate string operations",
+      "Consider using regular expressions",
+      "Handle edge cases like empty strings",
+      "Use it for efficient string manipulation",
+      "Consider using it for pattern matching",
+    ],
+  },
+  "Divide and Conquer": {
+    title: "Divide and Conquer",
+    description:
+      "Like a monster hunter dividing a large territory into smaller, manageable parts, Divide and Conquer solves problems by breaking them into smaller subproblems and combining their solutions.",
+    example:
+      "Imagine you need to analyze a large monster territory - Divide and Conquer helps you break it into smaller areas, solve each area independently, and combine the results.",
+    tips: [
+      "Break the problem into smaller subproblems",
+      "Solve each subproblem independently",
+      "Combine solutions to solve the original problem",
+      "Consider using it for problems that can be divided",
+      "Use it for efficient territory analysis",
+    ],
+  },
   "Dynamic Programming Pattern": {
     title: "Monster Territory Dynamic Solver",
     description:
@@ -233,7 +373,7 @@ export const monsterHunterExplanations: Partial<
       "Choose an appropriate heuristic for your hunting terrain",
     ],
   },
-  "Graph Dijkstra": {
+  Dijkstra: {
     title: "Monster Hunter's Pathfinder",
     description:
       "Like a monster hunter finding the safest path through dangerous territory, Dijkstra's algorithm finds the shortest path from a starting point to all other points.",
@@ -345,7 +485,7 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for pattern matching in monster territories",
     ],
   },
-  "Graph SCC": {
+  "Strongly Connected Components": {
     title: "Monster Territory Strongholds",
     description:
       "Like identifying groups of monster territories that are strongly connected, Strongly Connected Components (SCC) finds groups of vertices where every vertex is reachable from every other vertex.",
@@ -682,17 +822,17 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Floyd-Warshall": {
-    title: "Monster Territory All-Pairs Pathfinder",
+    title: "Monster Territory All-Pairs Path Finder",
     description:
-      "Like a monster hunter finding the shortest paths between all pairs of territories, Floyd-Warshall finds the shortest paths between all pairs of vertices in a graph.",
+      "Find the shortest paths between all pairs of territories, creating a complete distance matrix for efficient route planning.",
     example:
-      "Imagine you need to know the shortest path between every pair of monster territories in your map - Floyd-Warshall helps you create a complete distance matrix for all possible routes.",
+      "Given a map of territories with weighted connections, find the shortest paths between every pair of locations.",
     tips: [
-      "Initialize the distance matrix with direct edges",
-      "Consider each node as an intermediate point",
-      "Update distances when you find better paths through intermediates",
-      "Handle negative weights carefully",
-      "Use it when you need all-pairs shortest paths",
+      "Use for comprehensive route planning",
+      "Consider terrain difficulty in path weights",
+      "Update paths when discovering shortcuts",
+      "Account for seasonal changes in distances",
+      "Plan backup routes between all locations",
     ],
   },
   Kruskal: {
@@ -724,7 +864,7 @@ export const monsterHunterExplanations: Partial<
       "Consider using Prim for dense graphs",
     ],
   },
-  "Graph Kosaraju": {
+  Kosaraju: {
     title: "Monster Hunter's Strong Component Finder",
     description:
       "Like a monster hunter identifying strongly connected groups of territories, Kosaraju's algorithm finds strongly connected components in a directed graph.",
@@ -741,15 +881,15 @@ export const monsterHunterExplanations: Partial<
   "Bellman-Ford": {
     title: "Monster Territory Negative Pathfinder",
     description:
-      "Like a monster hunter finding the safest path through territories with negative dangers, Bellman-Ford can handle negative weights and detect negative cycles.",
+      "Find the shortest paths through territories with negative weights, like areas that speed up or slow down movement.",
     example:
-      "Imagine some territories have negative danger values (safe havens) while others are dangerous - Bellman-Ford helps you find the safest path even when some routes actually reduce your total danger.",
+      "Given a map of territories with both positive and negative path weights, find the optimal route from your base to any location.",
     tips: [
-      "Relax all edges repeatedly",
-      "Check for negative cycles after V-1 iterations",
-      "Update distances when you find better paths",
-      "Consider using Bellman-Ford when negative weights are possible",
-      "Use it for detecting arbitrage opportunities in monster trading",
+      "Consider negative weights as speed boosts",
+      "Check for negative cycles that could trap you",
+      "Use for planning routes with environmental effects",
+      "Account for monster presence affecting path weights",
+      "Plan backup routes in case of negative cycles",
     ],
   },
   BFS: {
@@ -778,20 +918,6 @@ export const monsterHunterExplanations: Partial<
       "Backtrack when you reach a dead end",
       "Consider using DFS for topological sorting or cycle detection",
       "Be mindful of stack depth in recursive implementations",
-    ],
-  },
-  "Articulation Points": {
-    title: "Monster Territory Critical Point Finder",
-    description:
-      "Like a monster hunter identifying critical territories that connect different regions, Articulation Points finds nodes whose removal would disconnect the graph.",
-    example:
-      "Imagine identifying which territories are crucial for monster migration - if these territories are blocked, different groups of monsters would be isolated from each other.",
-    tips: [
-      "Use DFS to track discovery times",
-      "Keep track of the lowest reachable ancestor",
-      "A node is an articulation point if it has a child with no back edge",
-      "The root is special - it's an articulation point if it has more than one child",
-      "Use it to identify critical points in monster migration routes",
     ],
   },
   "Union Find": {
@@ -963,7 +1089,7 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Divide and Conquer": {
-    title: "Monster Territory Divider",
+    title: "Divide and Conquer",
     description:
       "Like a monster hunter dividing a large territory into smaller, manageable parts, Divide and Conquer solves problems by breaking them into smaller subproblems and combining their solutions.",
     example:
@@ -1198,7 +1324,7 @@ export const monsterHunterExplanations: Partial<
       "Use it for efficient searching and sorting",
     ],
   },
-  "Graph Bridges": {
+  Bridges: {
     title: "Monster Territory Graph Bridges",
     description:
       "Finding critical edges in a graph whose removal increases the number of connected components. Like identifying key monster relationships that, if broken, would split the monster community.",
@@ -1212,7 +1338,7 @@ export const monsterHunterExplanations: Partial<
       "Handle edge cases like multiple components",
     ],
   },
-  "Graph Kruskal": {
+  Kruskal: {
     title: "Monster Territory Greedy Kruskal",
     description:
       "A greedy algorithm for finding minimum spanning trees. Like connecting monster habitats with the minimum total distance.",
@@ -1226,18 +1352,18 @@ export const monsterHunterExplanations: Partial<
       "Handle edge cases like disconnected graph",
     ],
   },
-  String: {
+  "String Operations": {
     title: "Monster Territory String Operations",
     description:
-      "A collection of algorithms for working with strings, including pattern matching, string manipulation, and text processing.",
+      "Like a monster hunter manipulating strings of monster names and descriptions, String Operations provides efficient string manipulation and pattern matching.",
     example:
-      "Imagine you have a string representing a monster's name or territory description. String algorithms help you efficiently perform operations like searching, matching, and transforming these strings.",
+      "Imagine you need to manipulate strings of monster names and descriptions - String Operations helps you do this efficiently.",
     tips: [
-      "Understand string properties and operations",
-      "Use appropriate algorithms based on the task",
-      "Consider edge cases like empty strings",
-      "Optimize for the specific string operations required",
-      "Use efficient data structures for string representation",
+      "Use appropriate string operations",
+      "Consider using regular expressions",
+      "Handle edge cases like empty strings",
+      "Use it for efficient string manipulation",
+      "Consider using it for pattern matching",
     ],
   },
   "Matrix Spiral Recursive": {
@@ -1380,7 +1506,7 @@ export const monsterHunterExplanations: Partial<
       "Use it for efficient path finding",
     ],
   },
-  "Graph Bellman Ford": {
+  "Bellman-Ford": {
     title: "Monster Territory Negative Pathfinder",
     description:
       "Like a monster hunter finding the shortest path through a territory with negative weights, Graph Bellman Ford finds the shortest path from a starting point to all other points.",
@@ -1394,7 +1520,7 @@ export const monsterHunterExplanations: Partial<
       "Use it for efficient path finding",
     ],
   },
-  "Graph Floyd Warshall": {
+  "Floyd-Warshall": {
     title: "Monster Territory All-Pairs Pathfinder",
     description:
       "Like a monster hunter finding the shortest paths between all pairs of territories, Graph Floyd Warshall finds the shortest paths between all pairs of vertices in a graph.",
@@ -1408,10 +1534,10 @@ export const monsterHunterExplanations: Partial<
       "Use it when you need all-pairs shortest paths",
     ],
   },
-  "Graph Articulation Points": {
-    title: "Monster Territory Critical Point Finder",
+  "Articulation Points": {
+    title: "Monster Territory Articulation Points",
     description:
-      "Like a monster hunter identifying critical territories that connect different regions, Graph Articulation Points finds nodes whose removal would disconnect the graph.",
+      "Like a monster hunter identifying critical territories that connect different regions, Articulation Points finds nodes whose removal would disconnect the graph.",
     example:
       "Imagine identifying which territories are crucial for monster migration - if these territories are blocked, different groups of monsters would be isolated from each other.",
     tips: [
@@ -1520,8 +1646,8 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for text processing",
     ],
   },
-  "Divide And Conquer": {
-    title: "Monster Territory Divider",
+  "Divide and Conquer": {
+    title: "Divide and Conquer",
     description:
       "Like a monster hunter dividing a large territory into smaller, manageable parts, Divide and Conquer solves problems by breaking them into smaller subproblems and combining their solutions.",
     example:

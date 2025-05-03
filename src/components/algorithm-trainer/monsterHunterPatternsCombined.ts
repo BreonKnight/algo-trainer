@@ -1,14 +1,13 @@
-import { PatternKey } from "./types";
-import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended";
-import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2";
-import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3";
-import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4";
-import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5";
-import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
-import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7";
-import { monsterHunterPatterns } from "./monsterHunterPatterns";
-import { PATTERN_KEYS } from "./types";
-import { algorithmPatterns } from "./patterns";
+import { PatternKey, PATTERN_KEYS } from "./types.ts";
+import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
+import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
+import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";
+import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4.ts";
+import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5.ts";
+import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
+import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
+import { monsterHunterPatterns } from "./monsterHunterPatterns.ts";
+import { algorithmPatterns } from "./patterns/index.ts";
 
 // Combine all patterns
 const allPatterns = new Map<PatternKey, string>([
@@ -62,7 +61,6 @@ export const monsterHunterPatternsByCategory = {
     "Graph",
     "Graph Dijkstra",
     "Graph Kosaraju",
-    "Graph Prim",
     "Graph Articulation Points",
     "Graph Bridges",
     "Strongly Connected Components",
@@ -70,18 +68,18 @@ export const monsterHunterPatternsByCategory = {
     "Maximum Bipartite Matching",
     "A* Search",
     "Grid Traversal",
-    "Graph Kruskal" as PatternKey,
-    "Prim" as PatternKey,
+    "Graph Kruskal",
+    "Prim",
   ],
 
   Strings: [
     "String",
-    "Rabin-Karp",
-    "KMP Algorithm",
-    "Manacher's Algorithm",
     "Z Algorithm",
-    "Suffix Tree",
+    "Manacher's Algorithm",
+    "KMP Algorithm",
+    "Rabin Karp",
     "Suffix Array",
+    "Suffix Tree",
   ],
 
   // Advanced Algorithms
@@ -119,7 +117,7 @@ export const monsterHunterPatternsByCategory = {
   "Bit Manipulation": ["Bit Manipulation"],
 
   // Tree Algorithms
-  "Tree Algorithms": ["LCA", "Heavy Light Decomposition"],
+  "Tree Algorithms": ["Heavy Light Decomposition"],
 
   // Matrix Operations
   "Matrix Operations": [
@@ -141,21 +139,20 @@ export const monsterHunterPatternsByCategory = {
     "Floyd Cycle Detection",
     "Memoization",
     "Quickselect",
-    "Knapsack",
     "Union Find",
   ],
 };
 
 // Verify pattern completeness
 export function verifyPatternCompleteness() {
-  // Check if all patterns have regular implementations
-  const missingRegularPatterns = PATTERN_KEYS.filter(
-    (key) => !algorithmPatterns[key]
-  );
+  const missingRegularPatterns = PATTERN_KEYS.filter((key: PatternKey) => {
+    return !algorithmPatterns[key];
+  });
 
-  // Check if all patterns have Monster Hunter implementations
   const missingMonsterHunterPatterns = PATTERN_KEYS.filter(
-    (key) => !allPatterns.has(key as PatternKey)
+    (key: PatternKey) => {
+      return !allPatterns.has(key);
+    }
   );
 
   // Log results
@@ -190,5 +187,60 @@ export function verifyPatternCompleteness() {
 // Export the combined patterns
 export const allMonsterHunterPatterns = allPatterns;
 
-// Run verification if needed
-verifyPatternCompleteness();
+// Check for inconsistencies between pattern keys
+const regularPatternKeys = Object.keys(algorithmPatterns);
+const monsterHunterPatternKeys = Array.from(allPatterns.keys());
+
+// Find patterns that exist in regular implementations but not in Monster Hunter patterns
+const missingInMonsterHunter = regularPatternKeys.filter(
+  (pattern: string) => !monsterHunterPatternKeys.includes(pattern as PatternKey)
+);
+
+// Find patterns that exist in Monster Hunter patterns but not in regular implementations
+const missingInRegular = monsterHunterPatternKeys.filter(
+  (pattern: PatternKey) => !regularPatternKeys.includes(pattern)
+);
+
+// Find patterns with different names
+const differentNames = regularPatternKeys.filter((pattern: string) => {
+  const monsterHunterPattern = monsterHunterPatternKeys.find(
+    (mhPattern: PatternKey) => mhPattern.toLowerCase() === pattern.toLowerCase()
+  );
+  return monsterHunterPattern && monsterHunterPattern !== pattern;
+});
+
+// Log results
+console.log("Pattern Inconsistency Check Results:");
+console.log("----------------------------------");
+
+if (missingInMonsterHunter.length > 0) {
+  console.log("\nPatterns missing in Monster Hunter implementations:");
+  missingInMonsterHunter.forEach((pattern) => console.log(`- ${pattern}`));
+}
+
+if (missingInRegular.length > 0) {
+  console.log("\nPatterns missing in regular implementations:");
+  missingInRegular.forEach((pattern) => console.log(`- ${pattern}`));
+}
+
+if (differentNames.length > 0) {
+  console.log("\nPatterns with different names:");
+  differentNames.forEach((pattern) => {
+    const monsterHunterPattern = monsterHunterPatternKeys.find(
+      (mhPattern) => mhPattern.toLowerCase() === pattern.toLowerCase()
+    );
+    console.log(
+      `- Regular: "${pattern}" vs Monster Hunter: "${monsterHunterPattern}"`
+    );
+  });
+}
+
+console.log("\nSummary:");
+console.log("--------");
+console.log(`Total regular patterns: ${regularPatternKeys.length}`);
+console.log(
+  `Total Monster Hunter patterns: ${monsterHunterPatternKeys.length}`
+);
+console.log(`Missing in regular: ${missingInRegular.length}`);
+console.log(`Missing in Monster Hunter: ${missingInMonsterHunter.length}`);
+console.log(`Different names: ${differentNames.length}`);

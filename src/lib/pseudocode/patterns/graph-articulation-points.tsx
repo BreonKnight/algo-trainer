@@ -4,15 +4,16 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const GraphArticulationPointsPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Graph Articulation Points</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-accent font-bold">Articulation Points</span>
+      <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find critical
       vertices in graph
     </div>
 
-    <PseudocodeDisplay code={`FIND-ARTICULATION-POINTS(G)
+    <PseudocodeDisplay
+      code={`FIND-ARTICULATION-POINTS(G)
     let n be the number of vertices in G
     let disc[1‥n] be a new array
     let low[1‥n] be a new array
@@ -65,7 +66,8 @@ DFS-AP(G, u, disc, low, parent, ap, time)
 //   Vertex 3: FALSE
 //   Vertex 4: FALSE
 // 
-// Output: [TRUE, FALSE, FALSE, FALSE]`} />
+// Output: [TRUE, FALSE, FALSE, FALSE]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

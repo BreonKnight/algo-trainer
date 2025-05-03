@@ -1,29 +1,20 @@
-import { AlgorithmPattern } from "../../types";
-import { monotonicQueuePattern } from "./monotonic-queue";
-import { monotonicStackPattern } from "./monotonic-stack";
-import { heapImplementationPattern } from "./heap-implementation";
-import { hashTablePattern } from "./hash-table";
-import { circularLinkedListPattern } from "./circular-linked-list";
-import { linkedListPattern } from "./linked-list";
-import { queueImplementationPattern } from "./queue-implementation";
-import { stackImplementationPattern } from "./stack-implementation";
-import { unionFindPattern } from "./union-find";
-import { redBlackTreePattern } from "./red-black-tree";
-
-type DataStructurePatternKey =
-  | "Monotonic Queue"
-  | "Monotonic Stack"
-  | "Heap Implementation"
-  | "Hash Table"
-  | "Circular Linked List"
-  | "Linked List"
-  | "Queue Implementation"
-  | "Stack Implementation"
-  | "Union Find"
-  | "Red-Black Tree";
+import { AlgorithmPattern, PatternKey } from "../../types/pattern-types.ts";
+import { monotonicQueuePattern } from "./monotonic-queue.ts";
+import { monotonicStackPattern } from "./monotonic-stack.ts";
+import { heapImplementationPattern } from "./heap-implementation.ts";
+import { hashTablePattern } from "./hash-table.ts";
+import { circularLinkedListPattern } from "./circular-linked-list.ts";
+import { linkedListPattern } from "./linked-list.ts";
+import { queueImplementationPattern } from "./queue-implementation.ts";
+import { stackImplementationPattern } from "./stack-implementation.ts";
+import { unionFindPattern } from "./union-find.ts";
+import { redBlackTreePattern } from "./red-black-tree.ts";
+import { bTreePattern } from "./b-tree.ts";
+import { fenwickTreePattern } from "./fenwick-tree.ts";
+import { segmentTreePattern } from "./segment-tree.ts";
 
 export const dataStructurePatterns: Partial<
-  Record<DataStructurePatternKey, AlgorithmPattern>
+  Record<PatternKey, AlgorithmPattern>
 > = {
   "Monotonic Queue": monotonicQueuePattern,
   "Monotonic Stack": monotonicStackPattern,
@@ -35,4 +26,7 @@ export const dataStructurePatterns: Partial<
   "Stack Implementation": stackImplementationPattern,
   "Union Find": unionFindPattern,
   "Red-Black Tree": redBlackTreePattern,
+  "B Tree": bTreePattern,
+  "Fenwick Tree": fenwickTreePattern,
+  "Segment Tree": segmentTreePattern,
 };

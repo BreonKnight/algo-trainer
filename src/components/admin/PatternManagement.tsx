@@ -1131,7 +1131,7 @@ const PatternManagement: React.FC = () => {
       // Add existing mappings
       Object.entries(patternNameMapping).forEach(([key, value]) => {
         if (currentPatterns.includes(key)) {
-          newMapping[key] = value;
+          newMapping[key] = value as string;
         }
       });
 

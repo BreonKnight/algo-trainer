@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const kosarajuPattern: AlgorithmPattern = {
-  title: "Kosaraju's Algorithm",
+  title: "Kosaraju",
   description: "Find strongly connected components in a directed graph",
   timeComplexity: "O(V + E)",
   spaceComplexity: "O(V)",
