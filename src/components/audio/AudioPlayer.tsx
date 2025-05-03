@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback, memo } from "react";
 import { Button } from "../ui/button";
-import { Play, Pause, Volume2, RotateCcw, SkipForward } from "lucide-react";
+import { Play, Pause, Volume2, SkipForward } from "lucide-react";
 import * as Slider from "@radix-ui/react-slider";
 import React from "react";
 
