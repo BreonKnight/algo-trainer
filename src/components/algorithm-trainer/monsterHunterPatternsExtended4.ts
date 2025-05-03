@@ -2373,6 +2373,35 @@ console.log("Minimum spanning tree:", minimum_spanning_tree);
 // 5. Maintain backup paths for emergencies
 `,
   ],
+
+  [
+    "Prefix Sums" as PatternKey,
+    `def monster_hunter_prefix_sums(territories):
+    """
+    Calculate prefix sums of monster territories for efficient range queries.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like tracking cumulative resources across territories
+    - Each territory has a resource count
+    - Quickly calculate total resources in any range
+    
+    Example:
+    territories = [3, 1, 4, 2, 5]  # Resource counts
+    
+    Process:
+    1. Initialize prefix sums array
+    2. Calculate cumulative sums
+    3. Use prefix sums for range queries
+    
+    # Prefix sums = [3, 4, 8, 10, 15]
+    """
+    prefix = [0] * (len(territories) + 1)
+    for i in range(len(territories)):
+        prefix[i + 1] = prefix[i] + territories[i]
+    return prefix`,
+  ],
 ]);
 
 // Export combined patterns
@@ -2838,9 +2867,9 @@ export const allMonsterHunterPatterns = new Map([
 ],
 
 [
-  "Kmp Algorithm" as PatternKey,
+  "Knuth-Morris-Pratt" as PatternKey,
   `def monster_hunter_kmp_algorithm():
-    """Monster Hunter themed pseudocode for Kmp Algorithm"""
+    """Monster Hunter themed pseudocode for Knuth-Morris-Pratt"""
     pass
   `,
 ],

@@ -1478,17 +1478,17 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Prefix Sums": {
-    title: "Monster Territory Resource Tracker",
+    title: "Prefix Sums (Monster Hunter Guide)",
     description:
       "Like a monster hunter keeping track of cumulative resources across territories, Prefix Sums efficiently calculates the sum of elements in any subarray.",
     example:
       "Imagine you need to quickly calculate the total resources in any range of monster territories - Prefix Sums helps you answer these range sum queries efficiently by precomputing cumulative sums.",
     tips: [
       "Precompute prefix sums in O(n) time - like creating a running total of resources across territories",
-      "Answer range queries in O(1) time - similar to instantly knowing the total resources between any two territories",
-      "Initialize with an extra element at index 0 - like starting with an empty territory",
-      "Use prefix differences for range sums - similar to calculating the resources in a specific territory range",
-      "Consider using it for efficient resource tracking across monster territories",
+      "Use prefix sums for efficient range queries - similar to quickly calculating total resources in any territory range",
+      "Consider both 1D and 2D prefix sums - like tracking resources across linear territories or grid-based territories",
+      "Handle updates efficiently - like maintaining accurate resource counts when territories change",
+      "Use for optimization problems - similar to finding optimal resource allocation strategies",
     ],
   },
   Memoization: {

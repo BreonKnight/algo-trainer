@@ -36,6 +36,7 @@ export type PatternKey =
   | "Graph"
   | "Greedy"
   | "Grid Traversal"
+  | "Hash Table"
   | "Heap Implementation"
   | "Heap Sort"
   | "Heavy Light Decomposition"
@@ -68,7 +69,6 @@ export type PatternKey =
   | "Monotonic Stack"
   | "Network Flow"
   | "Null Pattern"
-  | "Prefix Sum"
   | "Prefix Sums"
   | "Prim"
   | "Prime Factorization"
@@ -159,6 +159,7 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Graph",
   "Greedy",
   "Grid Traversal",
+  "Hash Table",
   "Heap Implementation",
   "Heap Sort",
   "Heavy Light Decomposition",
@@ -191,7 +192,6 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Monotonic Stack",
   "Network Flow",
   "Null Pattern",
-  "Prefix Sum",
   "Prefix Sums",
   "Prim",
   "Prime Factorization",

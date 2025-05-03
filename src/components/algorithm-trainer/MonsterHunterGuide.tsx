@@ -558,8 +558,8 @@ export function MonsterHunterGuide({
     tips: ["More monster hunting tips coming soon!"],
   },
 
-  "Kmp Algorithm": {
-    title: "Kmp Algorithm (Monster Hunter Guide)",
+  "Knuth-Morris-Pratt": {
+    title: "Knuth-Morris-Pratt (Monster Hunter Guide)",
     description: "No monster hunting guide available for this algorithm yet.",
     example: "Check back later for a monster-themed explanation!",
     tips: ["More monster hunting tips coming soon!"],

@@ -70,7 +70,6 @@ export type PatternKey =
   | "Monotonic Stack"
   | "Network Flow"
   | "Null Pattern"
-  | "Prefix Sum"
   | "Prefix Sums"
   | "Prime Factorization"
   | "Probability DP"

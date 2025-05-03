@@ -46,7 +46,7 @@ import { InsertionSortPattern } from "./patterns/insertion-sort";
 import { InterpolationSearchPattern } from "./patterns/interpolation-search";
 import { JumpSearchAlgorithmPattern } from "./patterns/jump-search-algorithm";
 import { KadanesAlgorithmPattern } from "./patterns/kadanes-algorithm";
-import { KmpAlgorithmPattern } from "./patterns/kmp-algorithm";
+import { KnuthMorrisPrattPattern } from "./patterns/kmp-algorithm";
 import { KruskalPattern } from "./patterns/greedy-kruskal";
 import { LCAPattern } from "./patterns/lca";
 import { LinearSearchPattern } from "./patterns/linear-search";
@@ -155,7 +155,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Job Scheduling": JobSchedulingPattern,
   "Jump Search": JumpSearchAlgorithmPattern,
   "Kadane's Algorithm": KadanesAlgorithmPattern,
-  "KMP Algorithm": KmpAlgorithmPattern,
+  "Knuth-Morris-Pratt": KnuthMorrisPrattPattern,
   "Linear Search": LinearSearchPattern,
   "Linked List": LinkedListPattern,
   "Manacher's Algorithm": ManachersAlgorithmPattern,

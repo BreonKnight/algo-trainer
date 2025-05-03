@@ -1,18 +1,19 @@
+import React from "react";
 import { ChevronRight } from "lucide-react";
-import { PseudocodeDisplay } from "../PseudocodeDisplay";
+import { PseudocodeDisplay } from "../components/PseudocodeDisplay";
 
-export const KmpAlgorithmPattern = () => (
-  <div>
-    <div className="mb-2">
-      <span className="text-accent font-bold">KMP Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(String)</span>
-    </div>
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(n + m) &nbsp;|&nbsp; Space: O(m) &nbsp;|&nbsp; Use: Pattern
-      matching in strings
-    </div>
-
-    <PseudocodeDisplay code={`# KMP Algorithm: Pattern matching in strings
+export const KnuthMorrisPrattPattern = () => {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-2xl font-bold">
+        <span className="text-accent font-bold">Knuth-Morris-Pratt</span>
+      </h2>
+      <p className="text-gray-600">
+        A linear time pattern matching algorithm that uses a preprocessed
+        pattern to skip unnecessary comparisons.
+      </p>
+      <PseudocodeDisplay
+        code={`# Knuth-Morris-Pratt: Pattern matching in strings
 # Input: Text T[1..n], Pattern P[1..m]
 # Output: All starting positions where P occurs in T
 
@@ -58,28 +59,30 @@ Algorithm COMPUTE-PREFIX-FUNCTION(P)
 # Step 1: π = [0, 0, 1, 2, 0, 1, 2, 3, 4]
 # Step 2: Match at position 10
 # 
-# Output: Pattern occurs at position 10`} />
+# Output: Pattern occurs at position 10`}
+      />
 
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+      <div className="mb-2">
+        <span className="text-accent font-bold">Key Steps:</span>
+      </div>
+      <div className="mb-2 text-sm">
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Compute prefix function for pattern</span>
+        </div>
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Match pattern against text using prefix function</span>
+        </div>
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Skip unnecessary comparisons using prefix function</span>
+        </div>
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Report all occurrences of pattern</span>
+        </div>
+      </div>
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Compute prefix function for pattern</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Match pattern against text using prefix function</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Skip unnecessary comparisons using prefix function</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Report all occurrences of pattern</span>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
