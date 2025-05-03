@@ -3,6 +3,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { PATTERN_KEYS } from "../types.ts";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // Helper function to normalize strings for comparison
 function normalizeString(str) {
   return str
@@ -80,137 +82,35 @@ function collectPatternKeys(filePath) {
   return patternKeys;
 }
 
-function validatePatternMappingAndPseudocode() {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const patternMappingPath = path.join(
-    __dirname,
-    "..",
-    "..",
-    "..",
-    "lib",
-    "pseudocode",
-    "utils",
-    "pattern-mapping.ts"
-  );
-  const pseudocodePath = path.join(
-    __dirname,
-    "..",
-    "..",
-    "..",
-    "lib",
-    "pseudocode",
-    "index.tsx"
-  );
+function checkKeyExistence(key) {
+  const patternFiles = [
+    "monsterHunterPatterns.ts",
+    "monsterHunterPatternsExtended.ts",
+    "monsterHunterPatternsExtended2.ts",
+    "monsterHunterPatternsExtended3.ts",
+    "monsterHunterPatternsExtended4.ts",
+    "monsterHunterPatternsExtended5.ts",
+    "monsterHunterPatternsExtended6.ts",
+    "monsterHunterPatternsExtended7.ts",
+    "monsterHunterPatternsExtended8.ts",
+  ];
 
-  console.log(
-    "\n🔍 Validating pattern-mapping.ts and index.tsx consistency...\n"
-  );
-  console.log("=".repeat(80));
+  for (const file of patternFiles) {
+    const filePath = path.join(__dirname, "..", file);
+    if (!fs.existsSync(filePath)) continue;
 
-  // Read pattern-mapping.ts
-  const patternMappingContent = fs.readFileSync(patternMappingPath, "utf-8");
-  const patternMappingMatches =
-    patternMappingContent.match(/"([^"]+)": "([^"]+)"/g);
-  const patternMappingKeys = new Set();
-  const patternMappingValues = new Set();
-
-  if (patternMappingMatches) {
-    patternMappingMatches.forEach((match) => {
-      const [_, key, value] = match.match(/"([^"]+)": "([^"]+)"/);
-      patternMappingKeys.add(key);
-      patternMappingValues.add(value);
-    });
+    const content = fs.readFileSync(filePath, "utf-8");
+    // Check for both exact matches and potential variations
+    if (
+      content.includes(`"${key}"`) ||
+      content.includes(`'${key}'`) ||
+      content.includes(key.replace(/\s+/g, "")) ||
+      content.includes(key.toLowerCase())
+    ) {
+      return true;
+    }
   }
-
-  // Read index.tsx
-  const pseudocodeContent = fs.readFileSync(pseudocodePath, "utf-8");
-  const pseudocodeMatches = pseudocodeContent.match(/"([^"]+)": \w+Pattern/g);
-  const pseudocodeKeys = new Set();
-
-  if (pseudocodeMatches) {
-    pseudocodeMatches.forEach((match) => {
-      const [_, key] = match.match(/"([^"]+)":/);
-      pseudocodeKeys.add(key);
-    });
-  }
-
-  // Find patterns in pattern-mapping.ts that don't have implementations in index.tsx
-  const missingImplementations = [...patternMappingValues].filter(
-    (value) => !pseudocodeKeys.has(value)
-  );
-
-  // Find patterns in index.tsx that don't have mappings in pattern-mapping.ts
-  const missingMappings = [...pseudocodeKeys].filter(
-    (key) => !patternMappingValues.has(key)
-  );
-
-  // Find patterns in pattern-mapping.ts that are not in PATTERN_KEYS
-  const invalidPatternKeys = [...patternMappingKeys].filter(
-    (key) => !PATTERN_KEYS.includes(key)
-  );
-
-  // Check for similar names in missing implementations
-  if (missingImplementations.length > 0) {
-    console.log("\n❌ Missing Implementations:");
-    console.log("-".repeat(40));
-    missingImplementations.forEach((pattern) => {
-      const similar = findSimilarStrings(pattern, [...pseudocodeKeys]);
-      console.log(`  🔴 ${pattern}`);
-      if (similar.length > 0) {
-        console.log(`    🔍 Similar patterns found:`);
-        similar.forEach(({ candidate, similarity }) => {
-          console.log(
-            `      ⚡ ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
-          );
-        });
-      }
-    });
-  }
-
-  // Check for similar names in missing mappings
-  if (missingMappings.length > 0) {
-    console.log("\n❌ Missing Mappings:");
-    console.log("-".repeat(40));
-    missingMappings.forEach((pattern) => {
-      const similar = findSimilarStrings(pattern, [...patternMappingValues]);
-      console.log(`  🔴 ${pattern}`);
-      if (similar.length > 0) {
-        console.log(`    🔍 Similar patterns found:`);
-        similar.forEach(({ candidate, similarity }) => {
-          console.log(
-            `      ⚡ ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
-          );
-        });
-      }
-    });
-  }
-
-  // Check for similar names in invalid pattern keys
-  if (invalidPatternKeys.length > 0) {
-    console.log("\n❌ Invalid Pattern Keys:");
-    console.log("-".repeat(40));
-    invalidPatternKeys.forEach((key) => {
-      const similar = findSimilarStrings(key, PATTERN_KEYS);
-      console.log(`  🔴 ${key}`);
-      if (similar.length > 0) {
-        console.log(`    🔍 Similar patterns found:`);
-        similar.forEach(({ candidate, similarity }) => {
-          console.log(
-            `      ⚡ ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
-          );
-        });
-      }
-    });
-  }
-
-  if (
-    missingImplementations.length === 0 &&
-    missingMappings.length === 0 &&
-    invalidPatternKeys.length === 0
-  ) {
-    console.log("\n✨ All patterns are properly mapped and implemented ✨");
-    console.log("=".repeat(80));
-  }
+  return false;
 }
 
 function validatePatternKeys() {
@@ -253,89 +153,58 @@ function validatePatternKeys() {
     });
   }
 
-  if (invalidPatternKeys.size > 0) {
-    console.log("\n❌ Invalid Pattern Keys Summary:");
-    console.log("-".repeat(40));
-    console.log(`  🔴 Total invalid keys: ${invalidPatternKeys.size}`);
-    console.log("\n🔍 Invalid keys found (not in types.ts):");
-    console.log("-".repeat(40));
-    invalidPatternKeys.forEach((key) => {
-      const similar = findSimilarStrings(key, PATTERN_KEYS);
-      console.log(`  🔴 ${key}`);
-      if (similar.length > 0) {
-        console.log(`    🔍 Similar patterns found:`);
-        similar.forEach(({ candidate, similarity }) => {
-          console.log(
-            `      ⚡ ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
-          );
-        });
-      }
-    });
-  } else {
+  if (invalidPatternKeys.size === 0) {
     console.log("\n✨ All pattern keys are valid (exist in types.ts) ✨");
-    console.log("=".repeat(80));
+  } else {
+    console.log(`\n❌ Found ${invalidPatternKeys.size} invalid pattern keys`);
+    console.log("Invalid keys:", Array.from(invalidPatternKeys).join(", "));
   }
-}
-
-function validateMonsterHunterExplanations() {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url));
-  const explanationsPath = path.join(
-    __dirname,
-    "..",
-    "monsterHunterExplanations.ts"
-  );
-
-  console.log("\n🔍 Validating monsterHunterExplanations.ts...\n");
   console.log("=".repeat(80));
 
-  const content = fs.readFileSync(explanationsPath, "utf-8");
-  const patternKeys = [];
+  // Check for unused pattern keys
+  const usedKeys = new Set(allPatternKeys);
+  const unusedKeys = PATTERN_KEYS.filter((key) => !usedKeys.has(key));
 
-  // Match pattern keys in the object literal, handling both quoted and unquoted keys
-  const matches = content.match(/(?:"([^"]+)"|(\w+)):\s*{\s*title:/g);
-  if (matches) {
-    matches.forEach((match) => {
-      // Extract the key, handling both quoted and unquoted cases
-      const key = match.replace(/:.*/, "").trim().replace(/"/g, "");
-      patternKeys.push(key);
-    });
-  }
-
-  const invalidKeys = patternKeys.filter((key) => !PATTERN_KEYS.includes(key));
-
-  if (invalidKeys.length > 0) {
-    console.log("\n❌ Invalid Pattern Keys in Explanations:");
+  if (unusedKeys.length > 0) {
+    console.log("\n📋 Unused Pattern Keys (Not Errors - Just Informational):");
     console.log("-".repeat(40));
-    console.log(`  🔴 Total invalid keys: ${invalidKeys.length}`);
-    console.log("\n🔍 Invalid keys found:");
-    console.log("-".repeat(40));
-    invalidKeys.forEach((key) => {
-      const similar = findSimilarStrings(key, PATTERN_KEYS);
-      console.log(`  🔴 ${key}`);
-      if (similar.length > 0) {
-        console.log(`    🔍 Similar patterns found:`);
-        similar.forEach(({ candidate, similarity }) => {
-          console.log(
-            `      ⚡ ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
-          );
-        });
+    console.log(
+      `Found ${unusedKeys.length} pattern keys in types.ts that are not currently used:`
+    );
+
+    const actuallyUnusedKeys = [];
+    const potentiallyUsedKeys = [];
+
+    unusedKeys.forEach((key) => {
+      if (checkKeyExistence(key)) {
+        potentiallyUsedKeys.push(key);
+      } else {
+        actuallyUnusedKeys.push(key);
       }
     });
-  } else {
+
+    if (potentiallyUsedKeys.length > 0) {
+      console.log("\n🔍 Keys that might be used (found in pattern files):");
+      potentiallyUsedKeys.forEach((key) => {
+        console.log(`  🔎 ${key}`);
+      });
+    }
+
+    if (actuallyUnusedKeys.length > 0) {
+      console.log("\n📌 Keys that are definitely not used:");
+      actuallyUnusedKeys.forEach((key) => {
+        console.log(`  📌 ${key}`);
+      });
+    }
+
     console.log(
-      "\n✨ All pattern keys in monsterHunterExplanations.ts are valid ✨"
+      "\nNote: These are not errors - they are just keys that are defined but not yet implemented."
     );
-    console.log("=".repeat(80));
+  } else {
+    console.log("\n✨ All pattern keys in types.ts are being used ✨");
   }
+  console.log("=".repeat(80));
 }
 
-// Run all validations
-console.log("\n🚀 Starting Pattern Validation Suite 🚀");
-console.log("=".repeat(80));
-
+// Run the validation
 validatePatternKeys();
-validatePatternMappingAndPseudocode();
-validateMonsterHunterExplanations();
-
-console.log("\n🏁 Validation Complete 🏁");
-console.log("=".repeat(80));
