@@ -183,8 +183,15 @@ const createYouTubeEmbedURL = (
   }`;
 };
 
+// Add prop type for onPlayStateChange
+interface AudioPlayerProps {
+  onPlayStateChange?: (isPlaying: boolean) => void;
+}
+
 // Memoized AudioPlayer component
-export const AudioPlayer = memo(function AudioPlayer() {
+export const AudioPlayer = memo(function AudioPlayer({
+  onPlayStateChange,
+}: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(50);
   const [currentVideoId, setCurrentVideoId] = useState<string>("");
@@ -255,6 +262,11 @@ export const AudioPlayer = memo(function AudioPlayer() {
     };
   }, [sendCommand, volume]);
 
+  // Notify parent when play state changes
+  useEffect(() => {
+    if (onPlayStateChange) onPlayStateChange(isPlaying);
+  }, [isPlaying, onPlayStateChange]);
+
   const togglePlay = () => {
     console.log("Play button clicked, current state:", isPlaying);
     if (iframeRef.current) {
@@ -317,7 +329,7 @@ export const AudioPlayer = memo(function AudioPlayer() {
                   onClick={togglePlay}
                   variant="ghost"
                   size="sm"
-                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
+                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200 group"
                   title={isPlaying ? "Pause" : "Play"}
                   aria-label={
                     isPlaying
@@ -325,7 +337,16 @@ export const AudioPlayer = memo(function AudioPlayer() {
                       : "Play background music"
                   }
                 >
-                  {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                  <span className="transition-transform duration-200 ease-in-out transform group-hover:scale-110">
+                    {isPlaying ? (
+                      <Pause
+                        size={20}
+                        className="transition-all duration-200"
+                      />
+                    ) : (
+                      <Play size={20} className="transition-all duration-200" />
+                    )}
+                  </span>
                 </Button>
                 {isPlaying && (
                   <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 flex items-center gap-1 text-accent2 text-[10px] font-normal bg-[rgba(40,42,54,0.95)] px-1.5 py-0.5 rounded-full shadow-md pointer-events-none whitespace-nowrap border border-secondary/20">
@@ -341,14 +362,15 @@ export const AudioPlayer = memo(function AudioPlayer() {
                   onClick={playNextVideo}
                   variant="ghost"
                   size="sm"
-                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform"
+                  className="h-10 w-10 min-w-[40px] min-h-[40px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200"
                   title="Skip to next song"
                   aria-label="Skip to next song"
                 >
-                  <SkipForward size={16} />
+                  <SkipForward size={20} />
                 </Button>
               </div>
             </div>
+            {/* Visualizer removed from here */}
             <div className="flex items-center gap-3 -mt-3">
               <span className="text-[10px] text-secondary text-center w-10">
                 {isPlaying ? "Pause" : "Play"}
@@ -374,7 +396,7 @@ export const AudioPlayer = memo(function AudioPlayer() {
                 <Slider.Track className="bg-secondary/70 relative grow rounded-full h-[4px]">
                   <Slider.Range className="absolute bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] rounded-full h-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-4 h-4 bg-accent rounded-full hover:bg-accent2 focus:outline-none shadow-md ring-2 ring-accent/50" />
+                <Slider.Thumb className="block w-4 h-4 bg-accent rounded-full hover:bg-accent2 focus:outline-none shadow-md ring-2 ring-accent/50 transition-all duration-200 hover:scale-110 active:scale-95" />
               </Slider.Root>
             </div>
             <div className="text-xs text-secondary truncate w-full text-center">

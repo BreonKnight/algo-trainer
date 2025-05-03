@@ -159,50 +159,28 @@ export function Timer() {
         </div>
         <div className="flex flex-col items-center gap-3">
           <div className="flex items-center gap-2">
-            <Button
-              onClick={() => startTimer(15)}
-              variant="outline"
-              size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
-              disabled={isRunning}
-              title="Set 15 minute timer"
-              aria-label="Set 15 minute timer"
-            >
-              15m
-            </Button>
-            <Button
-              onClick={() => startTimer(30)}
-              variant="outline"
-              size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
-              disabled={isRunning}
-              title="Set 30 minute timer"
-              aria-label="Set 30 minute timer"
-            >
-              30m
-            </Button>
-            <Button
-              onClick={() => startTimer(45)}
-              variant="outline"
-              size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
-              disabled={isRunning}
-              title="Set 45 minute timer"
-              aria-label="Set 45 minute timer"
-            >
-              45m
-            </Button>
-            <Button
-              onClick={() => startTimer(60)}
-              variant="outline"
-              size="sm"
-              className="text-xs px-3 h-7 min-w-[44px] bg-secondary text-main hover:bg-secondary/80 rounded-md ring-1 ring-accent/20"
-              disabled={isRunning}
-              title="Set 1 hour timer"
-              aria-label="Set 1 hour timer"
-            >
-              1h
-            </Button>
+            {[15, 30, 45, 60].map((min) => (
+              <Button
+                key={min}
+                onClick={() => startTimer(min)}
+                variant={totalTime / 60 === min ? "default" : "outline"}
+                size="sm"
+                className={`text-xs px-3 h-7 min-w-[44px] rounded-md ring-1 ring-accent/20 transition-all duration-150
+                  ${
+                    totalTime / 60 === min
+                      ? "bg-accent text-accent-foreground shadow-lg scale-105"
+                      : "bg-secondary text-main hover:bg-accent/10 hover:scale-105 focus:ring-2 focus:ring-accent/40"
+                  }
+                  active:scale-95`}
+                disabled={isRunning}
+                title={`Set ${min === 60 ? "1 hour" : min + " minute"} timer`}
+                aria-label={`Set ${
+                  min === 60 ? "1 hour" : min + " minute"
+                } timer`}
+              >
+                {min === 60 ? "1h" : `${min}m`}
+              </Button>
+            ))}
           </div>
           <div className="h-2" />
           <div className="flex items-center gap-2">
@@ -211,7 +189,7 @@ export function Timer() {
                 onClick={isRunning ? pauseTimer : resumeTimer}
                 variant="default"
                 size="sm"
-                className={`h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ${
+                className={`h-7 w-7 min-w-[44px] min-h-[44px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform duration-200 flex items-center justify-center ${
                   isRunning || (!isRunning && timeLeft > 0)
                     ? "ring-2 ring-accent shadow-lg"
                     : ""
@@ -219,7 +197,13 @@ export function Timer() {
                 title={isRunning ? "Pause timer" : "Start timer"}
                 aria-label={isRunning ? "Pause timer" : "Start timer"}
               >
-                {isRunning ? <Pause size={14} /> : <Play size={14} />}
+                <span className="transition-transform duration-200 ease-in-out transform group-hover:scale-110">
+                  {isRunning ? (
+                    <Pause size={18} className="transition-all duration-200" />
+                  ) : (
+                    <Play size={18} className="transition-all duration-200" />
+                  )}
+                </span>
               </Button>
               <span className="text-[10px] text-secondary mt-1">
                 {isRunning ? "Pause" : "Start"}
