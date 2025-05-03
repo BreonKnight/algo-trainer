@@ -16,16 +16,15 @@ export const monsterHunterExplanations: Partial<
     description:
       "Like a monster hunter solving problems by breaking them down into smaller subproblems, Dynamic Programming Pattern solves problems by storing and reusing solutions to subproblems.",
     example:
-      "Imagine you need to solve a complex problem by breaking it down into smaller subproblems - Dynamic Programming Pattern helps you do this efficiently by storing and reusing solutions to avoid redundant calculations.",
+      "Imagine solving a complex monster territory challenge by breaking it down into smaller, manageable tasks. Dynamic Programming helps you optimize resource allocation and population growth strategies.",
     tips: [
-      "Break down problems into smaller subproblems",
-      "Store solutions to subproblems in a table or cache",
-      "Reuse solutions to avoid redundant calculations",
+      "Break down complex monster territory challenges into smaller subproblems",
+      "Store and reuse solutions to avoid redundant calculations",
+      "Optimize resource allocation across different territory segments",
       "Consider both top-down (memoization) and bottom-up approaches",
-      "Use it for optimization problems with overlapping subproblems",
-      "Identify optimal substructure in your problem",
-      "Define clear base cases for your subproblems",
-      "Consider space optimization when possible",
+      "Identify optimal strategies for monster population growth",
+      "Define clear base cases for territory management",
+      "Minimize computational complexity",
     ],
   },
   Quickselect: {
@@ -1090,15 +1089,15 @@ export const monsterHunterExplanations: Partial<
   "Rotate Matrix": {
     title: "Monster Hunter's Map Rotator",
     description:
-      "Like a monster hunter rotating their territory map to view it from different angles, Rotate Matrix transforms a matrix by rotating it 90 degrees.",
+      "Like a monster hunter rotating their territory map to view it from different strategic angles, Rotate Matrix transforms a matrix by rotating it 90 degrees.",
     example:
-      "Imagine you need to view your monster territory map from different perspectives - Rotate Matrix helps you transform the map while preserving all the relationships between locations.",
+      "Imagine analyzing a monster territory from multiple perspectives by rotating the map. This technique helps in understanding terrain, monster distribution, and strategic positioning.",
     tips: [
-      "Transpose the matrix first",
-      "Reverse rows for clockwise rotation",
-      "Reverse columns for counterclockwise rotation",
-      "Handle different matrix sizes",
-      "Consider in-place rotation for efficiency",
+      "Transpose the matrix to swap row and column indices",
+      "Reverse each row to complete the 90-degree rotation",
+      "Optimize spatial analysis of monster territories",
+      "Use for tactical terrain mapping",
+      "Explore different strategic viewpoints",
     ],
   },
   "Bit Manipulation": {

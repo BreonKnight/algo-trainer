@@ -1,8 +1,9 @@
 import { AlgorithmPattern } from "../../types";
 
-export const binary_search_treePattern: AlgorithmPattern = {
+export const binarySearchTreePattern: AlgorithmPattern = {
   title: "Binary Search Tree Implementation",
-  description: "Implementation of a binary tree that maintains the BST property: left subtree values are less than node, right subtree values are greater.",
+  description:
+    "Implementation of a binary tree that maintains the BST property: left subtree values are less than node, right subtree values are greater.",
   timeComplexity: "Average: O(log n) for insert/delete/search, Worst: O(n)",
   spaceComplexity: "O(n) for n nodes",
   pseudocode: `
@@ -114,5 +115,5 @@ class BST:
                 
             return node
             
-        self.root = _delete(self.root, value)`
+        self.root = _delete(self.root, value)`,
 };

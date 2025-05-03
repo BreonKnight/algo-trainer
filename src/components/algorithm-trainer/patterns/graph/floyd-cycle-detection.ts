@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const floyd_cycle_detectionPattern: AlgorithmPattern = {
+export const floydCycleDetectionPattern: AlgorithmPattern = {
   title: "Floyd's Cycle Detection Algorithm",
   description:
     "Also known as the 'tortoise and hare' algorithm, used to detect cycles in a linked list or array, and find the start of the cycle.",

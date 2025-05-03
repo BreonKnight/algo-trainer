@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const greedy_dijkstraPattern: AlgorithmPattern = {
+export const greedyDijkstraPattern: AlgorithmPattern = {
   title: "Greedy Dijkstra's Algorithm",
   description:
     "A greedy algorithm that finds the shortest path from a source vertex to all other vertices in a weighted graph.",

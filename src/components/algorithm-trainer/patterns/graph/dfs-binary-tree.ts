@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const dfs_binary_treePattern: AlgorithmPattern = {
+export const dfsBinaryTreePattern: AlgorithmPattern = {
   title: "DFS on Binary Tree",
   description:
     "Apply Depth-First Search on a binary tree structure to traverse or search through nodes in pre-order, in-order, or post-order.",
