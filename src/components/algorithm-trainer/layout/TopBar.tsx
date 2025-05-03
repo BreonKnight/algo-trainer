@@ -76,22 +76,22 @@ function CenterInformaticsWidget() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="flex items-center gap-4 px-3 py-2 sm:px-6 sm:py-4 rounded-lg bg-background/90 border-2 border-accent/30 shadow-lg w-full max-w-full sm:min-w-[320px] sm:max-w-[400px] transition-transform duration-200 hover:scale-[1.025] group cursor-pointer">
-        <div className="flex flex-col items-center justify-center w-10 h-10 rounded-full bg-accent/20 shadow animate-pulse-slow">
+    <div className="flex items-center justify-center w-full">
+      <div className="flex items-center gap-2 sm:gap-4 px-2 sm:px-4 py-2 rounded-lg bg-background/90 border-2 border-accent/30 shadow-lg w-full transition-transform duration-200 hover:scale-[1.025] group cursor-pointer">
+        <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent/20 shadow animate-pulse-slow">
           {showTip ? (
-            <Lightbulb className="w-6 h-6 text-yellow-400 drop-shadow" />
+            <Lightbulb className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400 drop-shadow" />
           ) : (
-            <Info className="w-6 h-6 text-blue-400 drop-shadow" />
+            <Info className="w-4 h-4 sm:w-6 sm:h-6 text-blue-400 drop-shadow" />
           )}
         </div>
-        <div className="h-10 w-px bg-accent/10 rounded-full mx-2" />
+        <div className="h-8 sm:h-10 w-px bg-accent/10 rounded-full mx-1 sm:mx-2" />
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-base text-accent mb-1 tracking-wide">
+          <div className="font-bold text-sm sm:text-base text-accent mb-0.5 sm:mb-1 tracking-wide">
             {showTip ? "Tip of the Day" : "Fun Informatics"}
           </div>
           <div
-            className="text-sm text-main/90 leading-snug"
+            className="text-xs sm:text-sm text-main/90 leading-snug line-clamp-2"
             title={showTip ? TIPS[tipIdx] : FACTS[factIdx]}
           >
             {showTip ? TIPS[tipIdx] : FACTS[factIdx]}
@@ -99,10 +99,10 @@ function CenterInformaticsWidget() {
         </div>
         <button
           onClick={handleNext}
-          className="ml-3 p-2 rounded-full hover:bg-accent/20 transition-colors shadow border border-accent/10"
+          className="ml-2 p-1.5 sm:p-2 rounded-full hover:bg-accent/20 transition-colors shadow border border-accent/10"
           title="Next tip or fact"
         >
-          <RefreshCw className="w-5 h-5 text-accent group-hover:rotate-90 transition-transform duration-300" />
+          <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 text-accent group-hover:rotate-90 transition-transform duration-300" />
         </button>
       </div>
     </div>
@@ -161,7 +161,7 @@ export function TopBar({ className }: TopBarProps) {
               <Button
                 variant="ghost"
                 className={cn(
-                  "h-9 px-3 gap-2 rounded-lg transition-all duration-300 group",
+                  "h-8 sm:h-9 px-2 sm:px-3 gap-1.5 sm:gap-2 rounded-lg transition-all duration-300 group",
                   theme === "light" || theme === "solarized"
                     ? "bg-accent/10 hover:bg-accent/20 text-accent"
                     : "bg-accent2/10 hover:bg-accent2/20 text-accent2",
@@ -169,19 +169,19 @@ export function TopBar({ className }: TopBarProps) {
                 )}
               >
                 {theme === "light" || theme === "solarized" ? (
-                  <Moon className="h-4 w-4 group-hover:animate-pulse" />
+                  <Moon className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:animate-pulse" />
                 ) : (
-                  <Sun className="h-4 w-4 group-hover:animate-pulse" />
+                  <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:animate-pulse" />
                 )}
-                <span className="text-sm font-medium sm:inline">
+                <span className="text-xs sm:text-sm font-medium sm:inline">
                   {formatThemeName(theme)}
                 </span>
-                <ChevronDown className="h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" />
+                <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4 opacity-50 group-hover:opacity-100 transition-opacity" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               className={cn(
-                "min-w-[200px] p-2 max-h-[80vh] overflow-y-auto",
+                "min-w-[180px] sm:min-w-[200px] p-1.5 sm:p-2 max-h-[80vh] overflow-y-auto",
                 isDarkTheme
                   ? "bg-background/95 border-accent2/20"
                   : "bg-background/95 border-accent/20"
@@ -194,7 +194,7 @@ export function TopBar({ className }: TopBarProps) {
                   key={t}
                   onClick={() => setTheme(t)}
                   className={cn(
-                    "flex items-center gap-2 cursor-pointer rounded-md px-2 py-1.5 text-sm transition-all duration-150 border-l-4 border-transparent",
+                    "flex items-center gap-1.5 sm:gap-2 cursor-pointer rounded-md px-1.5 sm:px-2 py-1 sm:py-1.5 text-xs sm:text-sm transition-all duration-150 border-l-4 border-transparent",
                     t === theme
                       ? isDarkTheme
                         ? "bg-accent2/20 text-accent2 border-l-accent2/80 shadow-md"
@@ -203,30 +203,32 @@ export function TopBar({ className }: TopBarProps) {
                   )}
                 >
                   {t === "kingdom-hearts" ? (
-                    <Heart className="h-4 w-4 text-pink-500" />
+                    <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-pink-500" />
                   ) : t === "re2" ? (
-                    <Skull className="h-4 w-4 text-red-500" />
+                    <Skull className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-red-500" />
                   ) : t === "mh" ? (
-                    <Flame className="h-4 w-4 text-orange-500" />
+                    <Flame className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-orange-500" />
                   ) : t === "ps2" ? (
-                    <Gamepad2 className="h-4 w-4 text-blue-500" />
+                    <Gamepad2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-500" />
                   ) : t === "nord" ? (
-                    <Snowflake className="h-4 w-4 text-cyan-500" />
+                    <Snowflake className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-cyan-500" />
                   ) : t === "snes" ? (
-                    <Star className="h-4 w-4 text-yellow-500" />
+                    <Star className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-yellow-500" />
                   ) : t === "dracula" ? (
-                    <Droplet className="h-4 w-4 text-purple-500" />
+                    <Droplet className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-purple-500" />
                   ) : t === "solarized" ? (
-                    <Sun className="h-4 w-4" />
+                    <Sun className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   ) : (
-                    <Moon className="h-4 w-4" />
+                    <Moon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   )}
                   <span className="flex-1">{formatThemeName(t)}</span>
                   {t === theme && (
-                    <Check className="h-4 w-4 text-accent2 ml-2" />
+                    <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent2 ml-1.5 sm:ml-2" />
                   )}
                   {t === theme && (
-                    <span className="ml-auto text-xs opacity-50">Current</span>
+                    <span className="ml-auto text-[10px] sm:text-xs opacity-50">
+                      Current
+                    </span>
                   )}
                 </DropdownMenuItem>
               ))}
