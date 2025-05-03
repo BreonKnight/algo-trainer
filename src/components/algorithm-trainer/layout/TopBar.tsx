@@ -51,46 +51,47 @@ export function TopBar({ className }: TopBarProps) {
   return (
     <div
       className={cn(
-        "w-full mb-4 sm:mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 rounded-xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),0_-8px_16px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),0_-8px_16px_-2px_rgba(0,0,0,0.4)] p-3 sm:p-4 glassy-gradient-bg relative",
+        "w-full mb-4 sm:mb-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 rounded-xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.2),0_-8px_16px_-2px_rgba(0,0,0,0.2)] dark:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4),0_-8px_16px_-2px_rgba(0,0,0,0.4)] p-3 sm:p-4 relative overflow-hidden",
+        "before:absolute before:inset-0 before:bg-gradient-to-r before:from-accent/5 before:via-transparent before:to-accent2/5 before:opacity-50",
+        "after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] after:opacity-20",
         className
       )}
     >
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent via-accent2 to-accent opacity-50" />
+
       {/* Left: Timer & AudioPlayer */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
-        <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-2 w-full sm:w-auto relative z-10">
+        <div className="flex flex-row items-center bg-background/70 dark:bg-accent2/10 rounded-lg px-3 py-2 gap-2 shadow-sm border border-accent/10">
           <Timer />
+          <div className="hidden sm:block w-px h-8 bg-accent/20 mx-2" />
           <AudioPlayer />
-        </div>
-        <div className="sm:hidden w-full">
-          <HelpModal />
         </div>
       </div>
 
       {/* Right: Help & Theme Toggle */}
-      <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
-        <div className="hidden sm:block">
-          <HelpModal />
-        </div>
+      <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end relative z-10">
+        <HelpModal />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               className={cn(
-                "h-9 px-3 gap-2 rounded-lg transition-all duration-300 w-full sm:w-auto",
+                "h-9 px-3 gap-2 rounded-lg transition-all duration-300 group",
                 theme === "light" || theme === "solarized"
                   ? "bg-accent/10 hover:bg-accent/20 text-accent"
-                  : "bg-accent2/10 hover:bg-accent2/20 text-accent2"
+                  : "bg-accent2/10 hover:bg-accent2/20 text-accent2",
+                "hover:scale-105 hover:shadow-lg"
               )}
             >
               {theme === "light" || theme === "solarized" ? (
-                <Moon className="h-4 w-4" />
+                <Moon className="h-4 w-4 group-hover:animate-pulse" />
               ) : (
-                <Sun className="h-4 w-4" />
+                <Sun className="h-4 w-4 group-hover:animate-pulse" />
               )}
-              <span className="text-sm font-medium hidden sm:inline">
+              <span className="text-sm font-medium sm:inline">
                 {formatThemeName(theme)}
               </span>
-              <ChevronDown className="h-4 w-4 opacity-50" />
+              <ChevronDown className="h-4 w-4 opacity-50 group-hover:opacity-100 transition-opacity" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -144,6 +145,8 @@ export function TopBar({ className }: TopBarProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      <div className="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-accent/10 to-transparent rounded-full blur-xl" />
     </div>
   );
 }
