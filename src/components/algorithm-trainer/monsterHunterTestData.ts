@@ -301,7 +301,7 @@ Expected Output: "Rathalos Wing"
   ],
   [
     "Trie Operations" as PatternKey,
-    `# Monster Hunter Trie Challenge
+    `# Monster Hunter Trie Operations Challenge
 # You are organizing monster names and information!
 
 # Test Case 1: Basic Insertion and Search
@@ -313,16 +313,6 @@ Input: {
     ]
 }
 Expected Output: {"weakness": "Flash", "habitat": "Ancient Forest"}
-
-# Test Case 2: Prefix Search
-Input: {
-    "operations": [
-        {"type": "insert", "name": "Rathalos", "info": {"weakness": "Flash", "habitat": "Ancient Forest"}},
-        {"type": "insert", "name": "Rathian", "info": {"weakness": "Poison", "habitat": "Wildspire Waste"}},
-        {"type": "prefix_search", "prefix": "Rath"}
-    ]
-}
-Expected Output: ["Rathalos", "Rathian"]
 
 # Monster Hunter Tip:
 # Like having a quick reference guide for monster information!`,
@@ -406,167 +396,68 @@ for i, test in enumerate(test_cases, 1):
     print(f'Passed: {sorted(map(sorted, result)) == sorted(map(sorted, expected))}\\n')`,
   ],
   [
-    "Monotonic Queue" as PatternKey,
-    `# Monster Hunter Monotonic Queue Challenge
-# You are tracking monster strength levels!
+    "Matrix Spiral Recursive" as PatternKey,
+    `# Monster Hunter Matrix Spiral Recursive Challenge
+# You are traversing a territory map in spiral order (recursively)!
 
-# Test Case 1: Basic Strength Tracking
-Input: {
-    "strength_levels": [1, 3, -1, -3, 5, 3, 6, 7],
-    "window_size": 3
-}
-Expected Output: [3, 3, 5, 5, 6, 7]
-
-# Test Case 2: Complex Strength Tracking
-Input: {
-    "strength_levels": [4, 2, 1, 3, 5, 2, 4, 6],
-    "window_size": 4
-}
-Expected Output: [4, 3, 5, 5, 6]
+# Test Case 1: Basic Spiral Traversal
+Input: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+Expected Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
 
 # Monster Hunter Tip:
-# Like tracking the strongest monsters in a sliding window!`,
+# Like circling a monster's lair inwards!`,
   ],
   [
-    "Monotonic Stack" as PatternKey,
-    `# Monster Hunter Monotonic Stack Challenge
-# You are tracking monster strength levels!
+    "Matrix Spiral Traversal" as PatternKey,
+    `# Monster Hunter Matrix Spiral Traversal Challenge
+# You are traversing a territory map in spiral order!
 
-# Test Case 1: Basic Strength Tracking
-Input: [1, 3, -1, -3, 5, 3, 6, 7]
-Expected Output: [7, 6, 5, 3, 1]
-
-# Test Case 2: Complex Strength Tracking
-Input: [4, 2, 1, 3, 5, 2, 4, 6]
-Expected Output: [6, 5, 4, 2, 1]
+# Test Case 1: Basic Spiral Traversal
+Input: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+Expected Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
 
 # Monster Hunter Tip:
-# Like tracking the strongest monsters in a stack!`,
+# Like circling a monster's lair!`,
   ],
   [
-    "Heap Implementation" as PatternKey,
-    `# Monster Hunter Heap Challenge
-# You are managing quest priorities!
+    "Matrix Traversal" as PatternKey,
+    `# Monster Hunter Matrix Traversal Challenge
+# You are traversing a monster territory map!
 
-# Test Case 1: Basic Quest Management
-Input: {
-    "operations": [
-        {"type": "insert", "quest": "Hunt Rathalos", "urgency": 3},
-        {"type": "insert", "quest": "Hunt Nergigante", "urgency": 5},
-        {"type": "insert", "quest": "Hunt Diablos", "urgency": 2},
-        {"type": "extract_max"}
-    ]
-}
-Expected Output: {"quest": "Hunt Nergigante", "urgency": 5}
-
-# Test Case 2: Complex Quest Management
-Input: {
-    "operations": [
-        {"type": "insert", "quest": "Hunt Rathalos", "urgency": 3},
-        {"type": "insert", "quest": "Hunt Nergigante", "urgency": 5},
-        {"type": "insert", "quest": "Hunt Diablos", "urgency": 2},
-        {"type": "extract_max"},
-        {"type": "insert", "quest": "Hunt Teostra", "urgency": 4},
-        {"type": "extract_max"}
-    ]
-}
-Expected Output: {"quest": "Hunt Teostra", "urgency": 4}
+# Test Case 1: Basic Traversal
+Input: [[1, 2], [3, 4]]
+Expected Output: [1, 2, 3, 4]
 
 # Monster Hunter Tip:
-# Like managing your quest board by priority!`,
+# Like exploring every part of a territory!`,
   ],
   [
-    "Stack Implementation" as PatternKey,
-    `# Monster Hunter Stack Challenge
-# You are managing your item loadout!
+    "Matrix Traversal Recursive" as PatternKey,
+    `# Monster Hunter Matrix Traversal Recursive Challenge
+# You are recursively traversing a monster territory map!
 
-# Test Case 1: Basic Item Management
-Input: {
-    "operations": [
-        {"type": "push", "item": "Mega Potion"},
-        {"type": "push", "item": "First Aid Med"},
-        {"type": "push", "item": "Antidote"},
-        {"type": "pop"}
-    ]
-}
-Expected Output: "Antidote"
-
-# Test Case 2: Complex Item Management
-Input: {
-    "operations": [
-        {"type": "push", "item": "Mega Potion"},
-        {"type": "push", "item": "First Aid Med"},
-        {"type": "pop"},
-        {"type": "push", "item": "Ration"},
-        {"type": "pop"},
-        {"type": "peek"}
-    ]
-}
-Expected Output: "Mega Potion"
+# Test Case 1: Basic Recursive Traversal
+Input: [[1, 2], [3, 4]]
+Expected Output: [1, 2, 3, 4]
 
 # Monster Hunter Tip:
-# Like managing your item pouch in the heat of battle!`,
+# Like exploring every part of a territory using recursion!`,
   ],
   [
-    "Queue Implementation" as PatternKey,
-    `# Monster Hunter Queue Challenge
-# You are managing hunt requests!
+    "Maximum Bipartite Matching" as PatternKey,
+    `# Monster Hunter Maximum Bipartite Matching Challenge
+# You are assigning hunters to monsters for maximum efficiency!
 
-# Test Case 1: Basic Request Management
+# Test Case 1: Basic Matching
 Input: {
-    "operations": [
-        {"type": "enqueue", "quest": "Hunt Rathalos"},
-        {"type": "enqueue", "quest": "Hunt Diablos"},
-        {"type": "enqueue", "quest": "Hunt Nergigante"},
-        {"type": "dequeue"}
-    ]
+    "hunters": ["A", "B"],
+    "monsters": ["X", "Y"],
+    "edges": [["A", "X"], ["A", "Y"], ["B", "Y"]]
 }
-Expected Output: "Hunt Rathalos"
-
-# Test Case 2: Complex Request Management
-Input: {
-    "operations": [
-        {"type": "enqueue", "quest": "Hunt Rathalos"},
-        {"type": "enqueue", "quest": "Hunt Diablos"},
-        {"type": "dequeue"},
-        {"type": "enqueue", "quest": "Hunt Teostra"},
-        {"type": "dequeue"},
-        {"type": "peek"}
-    ]
-}
-Expected Output: "Hunt Teostra"
+Expected Output: [["A", "X"], ["B", "Y"]]
 
 # Monster Hunter Tip:
-# Like managing the quest board in order of arrival!`,
-  ],
-  [
-    "Hash Table" as PatternKey,
-    `# Monster Hunter Hash Table Challenge
-# You are creating a monster field guide!
-
-# Test Case 1: Basic Monster Info
-Input: {
-    "operations": [
-        {"type": "put", "monster": "Rathalos", "info": {"weakness": ["Flash", "Dragon"], "materials": ["Scale", "Ruby", "Wing"]}},
-        {"type": "put", "monster": "Nergigante", "info": {"weakness": ["Thunder", "Dragon"], "materials": ["Spike", "Gem", "Horn"]}},
-        {"type": "get", "monster": "Rathalos"}
-    ]
-}
-Expected Output: {"weakness": ["Flash", "Dragon"], "materials": ["Scale", "Ruby", "Wing"]}
-
-# Test Case 2: Complex Monster Info
-Input: {
-    "operations": [
-        {"type": "put", "monster": "Rathalos", "info": {"weakness": ["Flash", "Dragon"], "materials": ["Scale", "Ruby", "Wing"]}},
-        {"type": "put", "monster": "Nergigante", "info": {"weakness": ["Thunder", "Dragon"], "materials": ["Spike", "Gem", "Horn"]}},
-        {"type": "put", "monster": "Teostra", "info": {"weakness": ["Water", "Dragon"], "materials": ["Scale", "Gem", "Wing"]}},
-        {"type": "get", "monster": "Teostra"}
-    ]
-}
-Expected Output: {"weakness": ["Water", "Dragon"], "materials": ["Scale", "Gem", "Wing"]}
-
-# Monster Hunter Tip:
-# Like having instant access to monster information in your field guide!`,
+# Like pairing hunters and monsters for the best results!`,
   ],
   [
     "Memoization" as PatternKey,
@@ -588,22 +479,6 @@ Expected Output: 120
 # Like remembering the most effective strategies for each monster!`,
   ],
   [
-    "Quick Sort" as PatternKey,
-    `# Monster Hunter Quick Sort Challenge
-# You are organizing monster materials by rarity!
-
-# Test Case 1: Basic Sort
-Input: [5, 3, 8, 2, 7, 1, 9, 4, 6]
-Expected Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-# Test Case 2: Duplicate Rarities
-Input: [5, 3, 8, 2, 7, 1, 9, 4, 6, 5, 3]
-Expected Output: [1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 9]
-
-# Monster Hunter Tip:
-# Like quickly organizing your material box by rarity!`,
-  ],
-  [
     "Merge Sort" as PatternKey,
     `# Monster Hunter Merge Sort Challenge
 # You are organizing monster territories by size!
@@ -612,28 +487,341 @@ Expected Output: [1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 9]
 Input: [5, 3, 8, 2, 7, 1, 9, 4, 6]
 Expected Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-# Test Case 2: Large Territory List
-Input: [5, 3, 8, 2, 7, 1, 9, 4, 6, 10, 12, 11, 13, 15, 14]
-Expected Output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-
 # Monster Hunter Tip:
 # Like efficiently organizing your territory map by size!`,
   ],
   [
-    "Heap Sort" as PatternKey,
-    `# Monster Hunter Heap Sort Challenge
-# You are organizing monster quests by difficulty!
+    "Monotonic Queue" as PatternKey,
+    `# Monster Hunter Monotonic Queue Challenge
+# You are tracking monster strength levels!
 
-# Test Case 1: Basic Sort
-Input: [5, 3, 8, 2, 7, 1, 9, 4, 6]
-Expected Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-# Test Case 2: Complex Sort
-Input: [15, 3, 8, 2, 7, 1, 9, 4, 6, 10, 12, 11, 13, 14]
-Expected Output: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+# Test Case 1: Basic Strength Tracking
+Input: {
+    "strength_levels": [1, 3, -1, -3, 5, 3, 6, 7],
+    "window_size": 3
+}
+Expected Output: [3, 3, 5, 5, 6, 7]
 
 # Monster Hunter Tip:
-# Like organizing your quest board by difficulty level!`,
+# Like tracking the strongest monsters in a sliding window!`,
+  ],
+  [
+    "Monotonic Stack" as PatternKey,
+    `# Monster Hunter Monotonic Stack Challenge
+# You are tracking monster strength levels!
+
+# Test Case 1: Basic Strength Tracking
+Input: [1, 3, -1, -3, 5, 3, 6, 7]
+Expected Output: [7, 6, 5, 3, 1]
+
+# Monster Hunter Tip:
+# Like tracking the strongest monsters in a stack!`,
+  ],
+  [
+    "Prefix Sums" as PatternKey,
+    `# Monster Hunter Prefix Sums Challenge
+# You are tracking cumulative resources across territories!
+
+# Test Case 1: Basic Prefix Sums
+Input: [3, 1, 4, 2, 5]
+Expected Output: [0, 3, 4, 8, 10, 15]
+
+# Monster Hunter Tip:
+# Like tracking cumulative resources for quick range queries!`,
+  ],
+  [
+    "Prim" as PatternKey,
+    `# Monster Hunter Prim Challenge
+# You are building the minimum cost network of monster camps!
+
+# Test Case 1: Basic MST
+Input: {
+    "edges": [
+        {"from": "A", "to": "B", "weight": 1},
+        {"from": "B", "to": "C", "weight": 2},
+        {"from": "A", "to": "C", "weight": 3}
+    ]
+}
+Expected Output: 3
+
+# Monster Hunter Tip:
+# Like connecting all camps with the least cost!`,
+  ],
+  [
+    "Probability DP" as PatternKey,
+    `# Monster Hunter Probability DP Challenge
+# You are calculating the probability of a successful hunt!
+
+# Test Case 1: Basic Probability
+Input: {
+    "success_chance": [0.5, 0.7, 0.8]
+}
+Expected Output: 0.28
+
+# Monster Hunter Tip:
+# Like stacking the odds in your favor!`,
+  ],
+  [
+    "Rabin-Karp" as PatternKey,
+    `# Monster Hunter Rabin-Karp Challenge
+# You are searching for a pattern in a monster's roar!
+
+# Test Case 1: Basic Pattern Search
+Input: {
+    "text": "abracadabra",
+    "pattern": "abra"
+}
+Expected Output: 0
+
+# Monster Hunter Tip:
+# Like quickly finding a pattern in a monster's roar!`,
+  ],
+  [
+    "Recursion" as PatternKey,
+    `# Monster Hunter Recursion Challenge
+# You are solving a hunt with recursive strategies!
+
+# Test Case 1: Basic Recursion
+Input: 5
+Expected Output: 120
+
+# Monster Hunter Tip:
+# Like breaking down a big hunt into smaller recursive steps!`,
+  ],
+  [
+    "Segment Tree" as PatternKey,
+    `# Monster Hunter Segment Tree Challenge
+# You are managing monster territory queries efficiently!
+
+# Test Case 1: Basic Range Query
+Input: [1, 3, 5, 7, 9, 11], query: [1, 3]
+Expected Output: 15
+
+# Monster Hunter Tip:
+# Like quickly answering questions about monster territories!`,
+  ],
+  [
+    "Selection Sort" as PatternKey,
+    `# Monster Hunter Selection Sort Challenge
+# You are selecting the rarest monster materials!
+
+# Test Case 1: Basic Sort
+Input: [64, 25, 12, 22, 11]
+Expected Output: [11, 12, 22, 25, 64]
+
+# Monster Hunter Tip:
+# Like picking the rarest materials one by one!`,
+  ],
+  [
+    "Sieve of Atkin" as PatternKey,
+    `# Monster Hunter Sieve of Atkin Challenge
+# You are finding all prime monster strengths up to a limit!
+
+# Test Case 1: Basic Sieve
+Input: 20
+Expected Output: [2, 3, 5, 7, 11, 13, 17, 19]
+
+# Monster Hunter Tip:
+# Like filtering out non-prime monster strengths!`,
+  ],
+  [
+    "Sieve of Eratosthenes" as PatternKey,
+    `# Monster Hunter Sieve of Eratosthenes Challenge
+# You are finding all prime monster strengths up to a limit!
+
+# Test Case 1: Basic Sieve
+Input: 20
+Expected Output: [2, 3, 5, 7, 11, 13, 17, 19]
+
+# Monster Hunter Tip:
+# Like filtering out non-prime monster strengths!`,
+  ],
+  [
+    "Sieve of Sundaram" as PatternKey,
+    `# Monster Hunter Sieve of Sundaram Challenge
+# You are finding all prime monster strengths up to a limit!
+
+# Test Case 1: Basic Sieve
+Input: 20
+Expected Output: [2, 3, 5, 7, 11, 13, 17, 19]
+
+# Monster Hunter Tip:
+# Like filtering out non-prime monster strengths!`,
+  ],
+  [
+    "Stack Sort" as PatternKey,
+    `# Monster Hunter Stack Sort Challenge
+# You are sorting monster items using stacks!
+
+# Test Case 1: Basic Stack Sort
+Input: [34, 3, 31, 98, 92, 23]
+Expected Output: [3, 23, 31, 34, 92, 98]
+
+# Monster Hunter Tip:
+# Like using stacks to organize your monster items!`,
+  ],
+  [
+    "String" as PatternKey,
+    `# Monster Hunter String Challenge
+# You are manipulating monster names and descriptions!
+
+# Test Case 1: Basic String Reverse
+Input: "Rathalos"
+Expected Output: "solahthaR"
+
+# Monster Hunter Tip:
+# Like reversing a monster's name for a secret code!`,
+  ],
+  [
+    "String Operations" as PatternKey,
+    `# Monster Hunter String Operations Challenge
+# You are performing operations on monster names!
+
+# Test Case 1: Basic Concatenation
+Input: ["Rathalos", "Nergigante"]
+Expected Output: "RathalosNergigante"
+
+# Monster Hunter Tip:
+# Like combining monster names for a new species!`,
+  ],
+  [
+    "Strongly Connected Components" as PatternKey,
+    `# Monster Hunter Strongly Connected Components Challenge
+# You are finding groups of territories where monsters can move freely!
+
+# Test Case 1: Basic SCC
+Input: {
+    "territories": {
+        "A": ["B"],
+        "B": ["C"],
+        "C": ["A"],
+        "D": ["E"],
+        "E": ["F"],
+        "F": ["D"]
+    }
+}
+Expected Output: [["A", "B", "C"], ["D", "E", "F"]]
+
+# Monster Hunter Tip:
+# Like finding clusters of territories with free movement!`,
+  ],
+  [
+    "Suffix Array" as PatternKey,
+    `# Monster Hunter Suffix Array Challenge
+# You are indexing monster names for fast lookup!
+
+# Test Case 1: Basic Suffix Array
+Input: "banana"
+Expected Output: [5, 3, 1, 0, 4, 2]
+
+# Monster Hunter Tip:
+# Like creating a quick index for monster names!`,
+  ],
+  [
+    "Suffix Tree" as PatternKey,
+    `# Monster Hunter Suffix Tree Challenge
+# You are building a tree of monster name suffixes!
+
+# Test Case 1: Basic Suffix Tree
+Input: "banana"
+Expected Output: "Tree with all suffixes of 'banana'"
+
+# Monster Hunter Tip:
+# Like mapping all possible endings of a monster's name!`,
+  ],
+  [
+    "Ternary Search" as PatternKey,
+    `# Monster Hunter Ternary Search Challenge
+# You are searching for the optimal monster hunting spot!
+
+# Test Case 1: Basic Ternary Search
+Input: [1, 2, 3, 4, 5, 6, 7, 8, 9], target: 7
+Expected Output: 6
+
+# Monster Hunter Tip:
+# Like narrowing down the best spot to hunt!`,
+  ],
+  [
+    "Test Data" as PatternKey,
+    `# Monster Hunter Test Data Challenge
+# You are testing your monster hunting strategies!
+
+# Test Case 1: Basic Test
+Input: [1, 2, 3]
+Expected Output: [1, 2, 3]
+
+# Monster Hunter Tip:
+# Like running a test hunt before the real thing!`,
+  ],
+  [
+    "Topological Sort" as PatternKey,
+    `# Monster Hunter Topological Sort Challenge
+# You are ordering monster hunts based on prerequisites!
+
+# Test Case 1: Basic Topological Sort
+Input: {
+    "quests": [
+        {"name": "Hunt A", "prerequisites": []},
+        {"name": "Hunt B", "prerequisites": ["Hunt A"]},
+        {"name": "Hunt C", "prerequisites": ["Hunt B"]}
+    ]
+}
+Expected Output: ["Hunt A", "Hunt B", "Hunt C"]
+
+# Monster Hunter Tip:
+# Like planning your hunts in the right order!`,
+  ],
+  [
+    "Tree" as PatternKey,
+    `# Monster Hunter Tree Challenge
+# You are organizing monster territories in a tree structure!
+
+# Test Case 1: Basic Tree Traversal
+Input: {
+    "tree": {
+        "value": "Base Camp",
+        "children": [
+            {"value": "Ancient Forest"},
+            {"value": "Wildspire Waste"}
+        ]
+    }
+}
+Expected Output: ["Base Camp", "Ancient Forest", "Wildspire Waste"]
+
+# Monster Hunter Tip:
+# Like exploring all branches of monster territories!`,
+  ],
+  [
+    "Tree DP" as PatternKey,
+    `# Monster Hunter Tree DP Challenge
+# You are optimizing hunts on a tree of monster territories!
+
+# Test Case 1: Basic Tree DP
+Input: {
+    "tree": {
+        "value": 1,
+        "children": [
+            {"value": 2},
+            {"value": 3}
+        ]
+    }
+}
+Expected Output: 4
+
+# Monster Hunter Tip:
+# Like using dynamic programming to optimize tree hunts!`,
+  ],
+  [
+    "Two Pointers" as PatternKey,
+    `# Monster Hunter Two Pointers Challenge
+# You are finding pairs of monsters that meet a certain criteria!
+
+# Test Case 1: Basic Two Pointers
+Input: [1, 2, 3, 4, 5, 6], target: 7
+Expected Output: [[0, 5], [1, 4], [2, 3]]
+
+# Monster Hunter Tip:
+# Like using two hunters to find the perfect pair!`,
   ],
   [
     "Two Sum" as PatternKey,
@@ -646,35 +834,6 @@ Input: {
     "target": 9
 }
 Expected Output: [0, 1]
-
-# Test Case 2: Complex Material Pair
-Input: {
-    "materials": [3, 2, 4, 6, 8],
-    "target": 10
-}
-Expected Output: [1, 3]
-
-# Monster Hunter Tip:
-# Like finding the right combination of materials for weapon crafting!`,
-  ],
-  [
-    "Two Sum Two Pointers" as PatternKey,
-    `# Monster Hunter Two Sum Two Pointers Challenge
-# You are finding pairs of materials that combine to make a weapon!
-
-# Test Case 1: Basic Material Pair
-Input: {
-    "materials": [2, 7, 11, 15],
-    "target": 9
-}
-Expected Output: [0, 1]
-
-# Test Case 2: Complex Material Pair
-Input: {
-    "materials": [3, 2, 4, 6, 8],
-    "target": 10
-}
-Expected Output: [1, 3]
 
 # Monster Hunter Tip:
 # Like finding the right combination of materials for weapon crafting!`,
@@ -691,137 +850,52 @@ Input: {
 }
 Expected Output: [0, 1]
 
-# Test Case 2: Complex Material Pair
+# Monster Hunter Tip:
+# Like finding the right combination of materials for weapon crafting!`,
+  ],
+  [
+    "Two Sum Two Pointers" as PatternKey,
+    `# Monster Hunter Two Sum Two Pointers Challenge
+# You are finding pairs of materials that combine to make a weapon!
+
+# Test Case 1: Basic Material Pair
 Input: {
-    "materials": [3, 2, 4, 6, 8],
-    "target": 10
+    "materials": [2, 7, 11, 15],
+    "target": 9
 }
-Expected Output: [1, 3]
+Expected Output: [0, 1]
 
 # Monster Hunter Tip:
 # Like finding the right combination of materials for weapon crafting!`,
   ],
   [
-    "Prefix Sums" as PatternKey,
-    `# Monster Hunter Prefix Sums Challenge
+    "Union Find" as PatternKey,
+    `# Monster Hunter Union Find Challenge
+# You are grouping monster territories into connected components!
 
-# Test Case 1: Basic Prefix Sums
-Input: [3, 1, 4, 2, 5]
-Expected Output: [0, 3, 4, 8, 10, 15]
-
-# Test Case 2: Range Sum Query
+# Test Case 1: Basic Union Find
 Input: {
-    "array": [3, 1, 4, 2, 5],
-    "queries": [
-        {"left": 1, "right": 3},  # Sum from index 1 to 3
-        {"left": 2, "right": 4}   # Sum from index 2 to 4
-    ]
+    "territories": ["A", "B", "C", "D"],
+    "connections": [["A", "B"], ["C", "D"]]
 }
-Expected Output: [7, 11]  # First query: 1 + 4 + 2 = 7, Second query: 4 + 2 + 5 = 11
+Expected Output: [["A", "B"], ["C", "D"]]
 
 # Monster Hunter Tip:
-# Like tracking cumulative resources across territories for quick range queries!`,
+# Like grouping territories that are connected!`,
   ],
   [
-    "Lowest Common Ancestor" as PatternKey,
-    `# Monster Hunter Lowest Common Ancestor Challenge
-# You are finding the lowest common ancestor of two nodes in a binary tree!
+    "Z Algorithm" as PatternKey,
+    `# Monster Hunter Z Algorithm Challenge
+# You are searching for a monster pattern in a string!
 
-# Test Case 1: Basic Ancestor Search
+# Test Case 1: Basic Z Algorithm
 Input: {
-    "tree": {
-        "root": {
-            "value": 3,
-            "left": {
-                "value": 5,
-                "left": {
-                    "value": 6
-                },
-                "right": {
-                    "value": 2,
-                    "left": {
-                        "value": 7
-                    },
-                    "right": {
-                        "value": 4
-                    }
-                }
-            },
-            "right": {
-                "value": 1,
-                "left": {
-                    "value": 0
-                },
-                "right": {
-                    "value": 8
-                }
-            }
-        },
-        "p": 5,
-        "q": 4
-    }
+    "text": "abxabcabcaby",
+    "pattern": "abcaby"
 }
-Expected Output: 5
-
-# Test Case 2: Complex Ancestor Search
-Input: {
-    "tree": {
-        "root": {
-            "value": 3,
-            "left": {
-                "value": 5,
-                "left": {
-                    "value": 6
-                },
-                "right": {
-                    "value": 2,
-                    "left": {
-                        "value": 7
-                    },
-                    "right": {
-                        "value": 4
-                    }
-                }
-            },
-            "right": {
-                "value": 1,
-                "left": {
-                    "value": 0
-                },
-                "right": {
-                    "value": 8
-                }
-            }
-        },
-        "p": 5,
-        "q": 1
-    }
-}
-Expected Output: 3
+Expected Output: 6
 
 # Monster Hunter Tip:
-# Like finding the lowest common ancestor in a binary tree to ensure efficient hunting!`,
-  ],
-  [
-    "Rabin-Karp" as PatternKey,
-    `# Monster Hunter Rabin-Karp Challenge
-# You are searching for a pattern in a text using the Rabin-Karp algorithm!
-
-# Test Case 1: Basic Pattern Search
-Input: {
-    "text": "abracadabra",
-    "pattern": "abra"
-}
-Expected Output: 0
-
-# Test Case 2: Complex Pattern Search
-Input: {
-    "text": "abracadabra",
-    "pattern": "dab"
-}
-Expected Output: 4
-
-# Monster Hunter Tip:
-# Like efficiently searching for a pattern in a text using the Rabin-Karp algorithm!`,
+# Like quickly finding a monster's pattern in a string!`,
   ],
 ]);
