@@ -70,7 +70,6 @@ export const patternMapping: Record<PatternKey, string> = {
   "Monotonic Stack": "monotonic-stack",
   "Network Flow": "network-flow",
   "Null Pattern": "null-pattern",
-  "Prefix Sum": "prefix-sum",
   "Prefix Sums": "prefix-sums",
   Prim: "prim",
   "Prime Factorization": "prime-factorization",
