@@ -59,9 +59,81 @@ function levenshteinDistance(a, b) {
   return matrix[b.length][a.length];
 }
 
+// Validate pattern content structure
+function validatePatternContent(content) {
+  const requiredSections = ["Monster Hunter Context", "Example:"];
+
+  // Check for all formats of time complexity
+  const hasTimeComplexity =
+    content.includes("Time Complexity:") ||
+    content.includes("Operations:") ||
+    content.includes("Time complexity:") ||
+    content.includes("Time:") ||
+    content.includes("Time complexity");
+
+  // Check for all formats of space complexity
+  const hasSpaceComplexity =
+    content.includes("Space Complexity:") ||
+    content.includes("Space:") ||
+    content.includes("Space complexity:") ||
+    content.includes("Space:") ||
+    content.includes("Space complexity");
+
+  const missingSections = requiredSections.filter(
+    (section) => !content.includes(section)
+  );
+
+  if (!hasTimeComplexity) {
+    missingSections.push("Time Complexity");
+  }
+  if (!hasSpaceComplexity) {
+    missingSections.push("Space Complexity");
+  }
+
+  return missingSections;
+}
+
+// Check for duplicate patterns
+function findDuplicatePatterns(patternFiles) {
+  const patternContents = new Map();
+  const duplicates = [];
+
+  for (const file of patternFiles) {
+    const filePath = path.join(__dirname, "..", file);
+    if (!fs.existsSync(filePath)) continue;
+
+    const content = fs.readFileSync(filePath, "utf-8");
+    const patternMatches = content.match(
+      /new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g
+    );
+
+    if (patternMatches) {
+      patternMatches.forEach((match) => {
+        const keyMatch = match.match(/"([^"]+)" as PatternKey/);
+        if (keyMatch) {
+          const key = keyMatch[1];
+          const patternContent = match;
+
+          if (patternContents.has(key)) {
+            duplicates.push({
+              key,
+              files: [patternContents.get(key), file],
+            });
+          } else {
+            patternContents.set(key, file);
+          }
+        }
+      });
+    }
+  }
+
+  return duplicates;
+}
+
 function collectPatternKeys(filePath) {
   const content = fs.readFileSync(filePath, "utf-8");
   const patternKeys = [];
+  const patternContents = [];
 
   // Match pattern keys in Map declarations
   const mapMatches = content.match(
@@ -74,12 +146,13 @@ function collectPatternKeys(filePath) {
         keyMatches.forEach((match) => {
           const key = match.replace(/" as PatternKey/g, "").replace(/"/g, "");
           patternKeys.push(key);
+          patternContents.push(mapContent);
         });
       }
     });
   }
 
-  return patternKeys;
+  return { patternKeys, patternContents };
 }
 
 function checkKeyExistence(key) {
@@ -127,11 +200,23 @@ function validatePatternKeys() {
     "monsterHunterPatternsExtended8.ts",
   ];
 
-  console.log("\n🔍 Validating pattern keys...\n");
+  console.log("\n🔍 Validating pattern keys and content...\n");
   console.log("=".repeat(80));
 
   const allPatternKeys = new Set();
   const invalidPatternKeys = new Set();
+  const contentIssues = [];
+  const similarPatterns = new Map();
+
+  // Check for duplicates first
+  const duplicates = findDuplicatePatterns(patternFiles);
+  if (duplicates.length > 0) {
+    console.log("\n❌ Found duplicate patterns:");
+    console.log("-".repeat(40));
+    duplicates.forEach(({ key, files }) => {
+      console.log(`  🔄 ${key} appears in: ${files.join(", ")}`);
+    });
+  }
 
   for (const file of patternFiles) {
     const filePath = path.join(__dirname, "..", file);
@@ -140,26 +225,76 @@ function validatePatternKeys() {
       continue;
     }
 
-    const patternKeys = collectPatternKeys(filePath);
-    console.log(`\n📁 Pattern keys found in ${file}:`);
+    const { patternKeys, patternContents } = collectPatternKeys(filePath);
+    console.log(`\n📁 Validating ${file}:`);
     console.log("-".repeat(40));
-    patternKeys.forEach((key) => {
+
+    patternKeys.forEach((key, index) => {
       const isValid = PATTERN_KEYS.includes(key);
       console.log(`  ${isValid ? "✅" : "❌"} ${key}`);
       allPatternKeys.add(key);
+
       if (!isValid) {
         invalidPatternKeys.add(key);
+      }
+
+      // Check pattern content structure
+      const missingSections = validatePatternContent(patternContents[index]);
+      if (missingSections.length > 0) {
+        contentIssues.push({
+          key,
+          file,
+          missingSections,
+        });
+      }
+
+      // Check for similar patterns
+      const similar = findSimilarStrings(key, Array.from(allPatternKeys));
+      if (similar.length > 0) {
+        similarPatterns.set(key, similar);
       }
     });
   }
 
-  if (invalidPatternKeys.size === 0) {
-    console.log("\n✨ All pattern keys are valid (exist in types.ts) ✨");
-  } else {
+  // Report invalid keys
+  if (invalidPatternKeys.size > 0) {
     console.log(`\n❌ Found ${invalidPatternKeys.size} invalid pattern keys`);
     console.log("Invalid keys:", Array.from(invalidPatternKeys).join(", "));
+  } else {
+    console.log("\n✨ All pattern keys are valid (exist in types.ts) ✨");
   }
-  console.log("=".repeat(80));
+
+  // Report content issues
+  if (contentIssues.length > 0) {
+    console.log("\n⚠️ Pattern content issues:");
+    console.log("-".repeat(40));
+    contentIssues.forEach(({ key, file, missingSections }) => {
+      console.log(
+        `  ❌ ${key} in ${file} is missing sections: ${missingSections.join(
+          ", "
+        )}`
+      );
+    });
+    console.log("\nNote: Each pattern should include:");
+    console.log("  - Time Complexity (or Time: or Operations:)");
+    console.log("  - Space Complexity (or Space:)");
+    console.log("  - Monster Hunter Context");
+    console.log("  - Example with visual representation");
+  }
+
+  // Report similar patterns
+  if (similarPatterns.size > 0) {
+    console.log("\n🔍 Similar pattern names found:");
+    console.log("-".repeat(40));
+    similarPatterns.forEach((similar, key) => {
+      console.log(`  🔎 ${key} is similar to:`);
+      similar.forEach(({ candidate, similarity }) => {
+        console.log(
+          `    - ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
+        );
+      });
+    });
+  }
 
   // Check for unused pattern keys
   const usedKeys = new Set(allPatternKeys);
