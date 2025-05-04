@@ -20,17 +20,17 @@ MATRIX-CHAIN-ORDER(p):
     # Initialize tables for costs and splits
     m = new n × n table
     s = new n × n table
-    
+
     # Cost is zero when multiplying one matrix
     for i from 1 to n:
         m[i][i] = 0
-    
+
     # Consider chains of increasing length
     for l from 2 to n:
         for i from 1 to n - l + 1:
             j = i + l - 1
             m[i][j] = ∞
-            
+
             # Try all possible split points
             for k from i to j - 1:
                 # Compute cost of this split
@@ -38,7 +38,7 @@ MATRIX-CHAIN-ORDER(p):
                 if cost < m[i][j]:
                     m[i][j] = cost
                     s[i][j] = k
-    
+
     return m and s
 
 // Print optimal parenthesization

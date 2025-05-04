@@ -33,7 +33,7 @@ STACK-SORT(A):
 
 // Example:
 // Input: A = [5, 2, 4, 6, 1, 3]
-// 
+//
 // Execution:
 // 1. Initial push: S = [5, 2, 4, 6, 1, 3], T = []
 // 2. After first iteration: S = [5, 2, 4, 6], T = [1, 3]
@@ -41,7 +41,7 @@ STACK-SORT(A):
 // 4. After third iteration: S = [5, 2], T = [1, 3, 4, 6]
 // 5. After fourth iteration: S = [5], T = [1, 2, 3, 4, 6]
 // 6. After fifth iteration: S = [], T = [1, 2, 3, 4, 5, 6]
-// 
+//
 // Output: [1, 2, 3, 4, 5, 6]`} />
 
     <div className="mb-2">

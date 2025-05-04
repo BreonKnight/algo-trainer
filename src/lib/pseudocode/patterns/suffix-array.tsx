@@ -23,10 +23,10 @@ Algorithm SUFFIX-ARRAY(S)
     for i ← 1 to n do
         SA[i] ← i
     end for
-    
+
     # Sort suffixes based on first character
     sort SA using S[SA[i]] as key
-    
+
     # Sort suffixes based on increasing length
     for k ← 1 to n do
         # Create equivalence classes
@@ -39,13 +39,13 @@ Algorithm SUFFIX-ARRAY(S)
                 rank[SA[i]] ← rank[SA[i-1]] + 1
             end if
         end for
-        
+
         # Sort suffixes based on first 2^k characters
         temp ← array of size n
         for i ← 1 to n do
             temp[i] ← SA[i]
         end for
-        
+
         for i ← 1 to n do
             SA[i] ← temp[i]
             if SA[i] > k then
@@ -54,7 +54,7 @@ Algorithm SUFFIX-ARRAY(S)
                 SA[i] ← SA[i] + n - k
             end if
         end for
-        
+
         # Update equivalence classes
         new_rank ← array of size n
         new_rank[SA[1]] ← 0
@@ -68,12 +68,12 @@ Algorithm SUFFIX-ARRAY(S)
         end for
         rank ← new_rank
     end for
-    
+
     return SA
 
 # Example:
 # Input: S = "banana"
-# 
+#
 # Step 1: SA = [1, 2, 3, 4, 5, 6]
 # Step 2: Sort by first character
 #         SA = [2, 1, 3, 5, 4, 6]
@@ -81,7 +81,7 @@ Algorithm SUFFIX-ARRAY(S)
 #         SA = [2, 1, 3, 5, 4, 6]
 # Step 4: Sort by first 4 characters
 #         SA = [6, 4, 2, 1, 3, 5]
-# 
+#
 # Output: [6, 4, 2, 1, 3, 5]`} />
 
     <div className="mb-2">

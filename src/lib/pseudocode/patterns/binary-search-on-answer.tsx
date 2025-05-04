@@ -41,7 +41,7 @@ SHIP-PACKAGES(weights, D):
 
 // Example:
 // Input: weights = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], D = 5
-// 
+//
 // Execution:
 // 1. low = 10, high = 55
 // 2. mid = 32: days = 3 ≤ 5
@@ -50,7 +50,7 @@ SHIP-PACKAGES(weights, D):
 // 5. mid = 12: days = 6 > 5
 // 6. mid = 13: days = 6 > 5
 // 7. mid = 14: days = 5 ≤ 5
-// 
+//
 // Output: 15`} />
 
     <div className="mb-2">

@@ -21,13 +21,13 @@ Algorithm KRUSKAL(G)
     for each vertex v in V do
         MAKE-SET(v)
     end for
-    
+
     # Sort edges by weight
     sort E by weight in non-decreasing order
-    
+
     # Initialize result
     A ← empty set
-    
+
     # Process edges in order
     for each edge (u, v) in E do
         if FIND-SET(u) ≠ FIND-SET(v) then
@@ -35,17 +35,17 @@ Algorithm KRUSKAL(G)
             UNION(u, v)
         end if
     end for
-    
+
     return A
 
 # Example:
 # Input: G = (V, E) where
 # V = {a, b, c, d}
 # E = {(a,b,1), (a,c,4), (a,d,3), (b,c,2), (b,d,5), (c,d,6)}
-# 
+#
 # Step 1: Sort edges: (a,b,1), (b,c,2), (a,d,3), (a,c,4), (b,d,5), (c,d,6)
 # Step 2: Add (a,b), (b,c), (a,d)
-# 
+#
 # Output: {(a,b), (b,c), (a,d)}`}
     />
 

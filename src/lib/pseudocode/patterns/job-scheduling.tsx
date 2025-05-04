@@ -32,16 +32,16 @@ export const JobSchedulingPattern = () => (
 //   {start: 6, finish: 19, profit: 100},
 //   {start: 2, finish: 100, profit: 200}
 // ]
-// 
+//
 // Step 1: Sort by finish time
 //         [{1,2,50}, {3,5,20}, {6,19,100}, {2,100,200}]
-// 
+//
 // Step 2: Select jobs
 //         Select job 1 (1-2)
 //         Skip job 2 (overlaps)
 //         Select job 3 (6-19)
 //         Skip job 4 (overlaps)
-// 
+//
 // Output: [{1,2,50}, {6,19,100}]`}
     />
 

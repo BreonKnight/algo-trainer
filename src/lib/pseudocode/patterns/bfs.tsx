@@ -12,70 +12,72 @@ export const BFSPattern = () => (
       traversal and shortest path in unweighted graphs
     </div>
 
-    <PseudocodeDisplay code={`// Standard BFS
+    <PseudocodeDisplay
+      code={`// Standard BFS
 BFS(G, s):
-    for each vertex u in G.V - {s}:
-        u.color = WHITE
-        u.d = ∞
-        u.π = NIL
-    s.color = GRAY
-    s.d = 0
-    s.π = NIL
-    Q = ∅
-    ENQUEUE(Q, s)
-    while Q ≠ ∅:
-        u = DEQUEUE(Q)
-        for each v in G.adj[u]:
-            if v.color == WHITE:
-                v.color = GRAY
-                v.d = u.d + 1
-                v.π = u
-                ENQUEUE(Q, v)
-        u.color = BLACK
+  for each vertex u in G.V - {s}:
+    u.color = WHITE
+    u.d = ∞
+    u.π = NIL
+  s.color = GRAY
+  s.d = 0
+  s.π = NIL
+  Q = ∅
+  ENQUEUE(Q, s)
+  while Q ≠ ∅:
+    u = DEQUEUE(Q)
+    for each v in G.adj[u]:
+      if v.color == WHITE:
+        v.color = GRAY
+        v.d = u.d + 1
+        v.π = u
+        ENQUEUE(Q, v)
+    u.color = BLACK
 
 // Shortest Path
 SHORTEST-PATH(G, s, t):
-    BFS(G, s)
-    if t.d == ∞:
-        return NIL
-    path = []
-    u = t
-    while u ≠ NIL:
-        path.append(u)
-        u = u.π
-    return reverse(path)
+  BFS(G, s)
+  if t.d == ∞:
+    return NIL
+  path = []
+  u = t
+  while u ≠ NIL:
+    path.append(u)
+    u = u.π
+  return reverse(path)
 
 // Connected Components
 CONNECTED-COMPONENTS(G):
-    for each vertex u in G.V:
-        u.color = WHITE
-        u.π = NIL
-    cc = 0
-    for each vertex u in G.V:
-        if u.color == WHITE:
-            cc += 1
-            BFS-VISIT(G, u, cc)
-    return cc
+  for each vertex u in G.V:
+    u.color = WHITE
+    u.π = NIL
+  cc = 0
+  for each vertex u in G.V:
+    if u.color == WHITE:
+      cc += 1
+      BFS-VISIT(G, u, cc)
+  return cc
 
 // Level Order Traversal
 LEVEL-ORDER(T):
-    if T.root == NIL:
-        return []
-    Q = ∅
-    ENQUEUE(Q, T.root)
-    result = []
-    while Q ≠ ∅:
-        level_size = Q.size
-        level = []
-        for i from 1 to level_size:
-            u = DEQUEUE(Q)
-            level.append(u.key)
-            if u.left ≠ NIL:
-                ENQUEUE(Q, u.left)
-            if u.right ≠ NIL:
-                ENQUEUE(Q, u.right)
-        result.append(level)
-    return result`} />
+  if T.root == NIL:
+    return []
+  Q = ∅
+  ENQUEUE(Q, T.root)
+  result = []
+  while Q ≠ ∅:
+    level_size = Q.size
+    level = []
+    for i from 1 to level_size:
+      u = DEQUEUE(Q)
+      level.append(u.key)
+      if u.left ≠ NIL:
+        ENQUEUE(Q, u.left)
+      if u.right ≠ NIL:
+        ENQUEUE(Q, u.right)
+    result.append(level)
+  return result`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

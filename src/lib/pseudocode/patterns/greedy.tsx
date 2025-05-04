@@ -15,54 +15,54 @@ export const GreedyPattern = () => (
     <PseudocodeDisplay
       code={`// Activity Selection
 ACTIVITY-SELECTION(S):
-    sort S by finish time
-    A = [S[0]]
-    last = 0
-    for i from 1 to n-1:
-        if S[i].start ≥ S[last].finish:
-            A.append(S[i])
-            last = i
-    return A
+  sort S by finish time
+  A = [S[0]]
+  last = 0
+  for i from 1 to n-1:
+    if S[i].start ≥ S[last].finish:
+      A.append(S[i])
+      last = i
+  return A
 
 // Fractional Knapsack
 KNAPSACK(W, V, C):
-    sort items by value/weight ratio
-    total = 0
-    for i from 0 to n-1:
-        if C ≥ W[i]:
-            total += V[i]
-            C -= W[i]
-        else:
-            total += (C/W[i]) * V[i]
-            break
-    return total
+  sort items by value/weight ratio
+  total = 0
+  for i from 0 to n-1:
+    if C ≥ W[i]:
+      total += V[i]
+      C -= W[i]
+    else:
+      total += (C/W[i]) * V[i]
+      break
+  return total
 
 // Huffman Coding
 HUFFMAN(C):
-    Q = priority queue of C
-    for i from 1 to n-1:
-        x = EXTRACT-MIN(Q)
-        y = EXTRACT-MIN(Q)
-        z = new node
-        z.left = x
-        z.right = y
-        z.freq = x.freq + y.freq
-        INSERT(Q, z)
-    return EXTRACT-MIN(Q)
+  Q = priority queue of C
+  for i from 1 to n-1:
+    x = EXTRACT-MIN(Q)
+    y = EXTRACT-MIN(Q)
+    z = new node
+    z.left = x
+    z.right = y
+    z.freq = x.freq + y.freq
+    INSERT(Q, z)
+  return EXTRACT-MIN(Q)
 
 // Dijkstra's Algorithm
 DIJKSTRA(G, s):
-    dist = [∞] * n
-    prev = [NIL] * n
-    dist[s] = 0
-    Q = priority queue of all vertices
-    while Q is not empty:
-        u = EXTRACT-MIN(Q)
-        for each v in G.adj[u]:
-            if dist[v] > dist[u] + G.weight(u, v):
-                dist[v] = dist[u] + G.weight(u, v)
-                prev[v] = u
-    return (dist, prev)`}
+  dist = [∞] * n
+  prev = [NIL] * n
+  dist[s] = 0
+  Q = priority queue of all vertices
+  while Q is not empty:
+    u = EXTRACT-MIN(Q)
+    for each v in G.adj[u]:
+      if dist[v] > dist[u] + G.weight(u, v):
+        dist[v] = dist[u] + G.weight(u, v)
+        prev[v] = u
+  return (dist, prev)`}
     />
 
     <div className="flex items-start mb-1">

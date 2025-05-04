@@ -15,16 +15,16 @@ export const DynamicProgrammingPatternTemplate = () => (
     <PseudocodeDisplay code={`DP-PATTERN(n)
     # Define state and dependencies
     state ← array[n+1]
-    
+
     # Initialize base cases
     state[0] ← base_case_0
     state[1] ← base_case_1
-    
+
     # Fill DP table
     for i ← 2 to n
         # Compute state from previous states
         state[i] ← compute_state(state[i-1], state[i-2])
-    
+
     return state[n]
 
 # Example:

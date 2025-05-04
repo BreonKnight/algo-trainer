@@ -17,27 +17,27 @@ export const ActivitySelectionPattern = () => (
 def activity_selection(activities):
     # Sort activities by finish time
     activities.sort(key=lambda x: x[1])
-    
+
     selected = []
     last_finish = 0
-    
+
     for activity in activities:
         start, finish = activity
         if start >= last_finish:
             selected.append(activity)
             last_finish = finish
-    
+
     return selected
 
 // Activity Selection with Weights
 def activity_selection_weights(activities):
     # Sort activities by finish time
     activities.sort(key=lambda x: x[1])
-    
+
     n = len(activities)
     dp = [0] * n
     dp[0] = activities[0][2]  # weight
-    
+
     for i in range(1, n):
         # Find last non-conflicting activity
         last_non_conflict = -1
@@ -45,31 +45,31 @@ def activity_selection_weights(activities):
             if activities[j][1] <= activities[i][0]:
                 last_non_conflict = j
                 break
-        
+
         # Include current activity
         include = activities[i][2]
         if last_non_conflict != -1:
             include += dp[last_non_conflict]
-        
+
         # Store maximum of including or excluding
         dp[i] = max(include, dp[i-1])
-    
+
     return dp[n-1]
 
 // Activity Selection with Resource Constraints
 def activity_selection_resources(activities, resources):
     # Sort activities by finish time
     activities.sort(key=lambda x: x[1])
-    
+
     selected = []
     resource_available = [0] * resources
-    
+
     for activity in activities:
         start, finish, resource = activity
         if start >= resource_available[resource]:
             selected.append(activity)
             resource_available[resource] = finish
-    
+
     return selected
 
 # Examples:

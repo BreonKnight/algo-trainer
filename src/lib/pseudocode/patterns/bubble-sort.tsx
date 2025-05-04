@@ -18,7 +18,7 @@ export const BubbleSortPattern = () => (
 
 BUBBLE-SORT(A)
     n ← length[A]    # Number of elements in array
-    
+
     # Outer loop: n-1 passes needed
     for i ← 1 to n-1 do
         # Inner loop: compare adjacent elements

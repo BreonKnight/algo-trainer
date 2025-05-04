@@ -16,17 +16,17 @@ export const MatrixTraversalPattern = () => (
 MATRIX-TRAVERSE(A):
     m ← rows[A]
     n ← columns[A]
-    
+
     // Row-wise traversal
     for i ← 1 to m:
         for j ← 1 to n:
             process A[i, j]
-    
+
     // Column-wise traversal
     for j ← 1 to n:
         for i ← 1 to m:
             process A[i, j]
-    
+
     // Diagonal traversal
     for d ← 1 to m + n - 1:
         for i ← max(1, d - n + 1) to min(d, m):
@@ -39,7 +39,7 @@ MATRIX-TRAVERSE(A):
 //   [4, 5, 6],
 //   [7, 8, 9]
 // ]
-// 
+//
 // Row-wise: 1, 2, 3, 4, 5, 6, 7, 8, 9
 // Column-wise: 1, 4, 7, 2, 5, 8, 3, 6, 9
 // Diagonal: 1, 2, 4, 3, 5, 7, 6, 8, 9`} />

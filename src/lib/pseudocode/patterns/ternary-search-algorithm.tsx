@@ -19,12 +19,12 @@ export const TernarySearchAlgorithmPattern = () => (
 Algorithm TERNARY-SEARCH(A, t)
     left ← 1
     right ← length[A]
-    
+
     while left ≤ right do
         # Divide range into three parts
         mid1 ← left + (right - left) / 3
         mid2 ← right - (right - left) / 3
-        
+
         if A[mid1] = t then
             return mid1
         else if A[mid2] = t then
@@ -38,17 +38,17 @@ Algorithm TERNARY-SEARCH(A, t)
             right ← mid2 - 1
         end if
     end while
-    
+
     return -1
 
 # Example:
 # Input: A = [1, 2, 3, 4, 5, 6, 7, 8, 9], t = 5
-# 
+#
 # Step 1: left = 1, right = 9, mid1 = 4, mid2 = 6
 #         A[4] = 4 < 5, A[6] = 6 > 5
 # Step 2: left = 5, right = 5, mid1 = 5, mid2 = 5
 #         A[5] = 5 = t
-# 
+#
 # Output: 5`} />
 
     <div className="mb-2">

@@ -24,37 +24,37 @@ COUNTING-SORT(A, exp)
 1  n = A.length
 2  output = [0] * n
 3  count = [0] * 10
-4  
+4
 5  // Store count of occurrences
 6  for i = 0 to n-1
 7      index = (A[i]/exp) % 10
 8      count[index] += 1
-9  
+9
 10 // Change count[i] to position of digit i in output
 11 for i = 1 to 9
 12     count[i] += count[i-1]
-13 
+13
 14 // Build output array
 15 for i = n-1 downto 0
 16     index = (A[i]/exp) % 10
 17     output[count[index]-1] = A[i]
 18     count[index] -= 1
-19 
+19
 20 // Copy output to A
 21 for i = 0 to n-1
 22     A[i] = output[i]
 
 // Example:
 // Input: A = [170, 45, 75, 90, 802, 24, 2, 66]
-// 
+//
 // Step 1 (exp=1):
 // Count: [2, 0, 2, 0, 1, 2, 2, 0, 0, 1]
 // Output: [170, 90, 802, 2, 24, 45, 75, 66]
-// 
+//
 // Step 2 (exp=10):
 // Count: [2, 2, 2, 0, 1, 1, 0, 0, 0, 0]
 // Output: [802, 2, 24, 45, 66, 170, 75, 90]
-// 
+//
 // Step 3 (exp=100):
 // Count: [6, 1, 1, 0, 0, 0, 0, 0, 0, 0]
 // Output: [2, 24, 45, 66, 75, 90, 170, 802]`} />

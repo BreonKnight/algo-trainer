@@ -75,7 +75,7 @@ TRIE-DELETE-HELPER(node, word, depth):
 
 // Example:
 // Input: Operations [INSERT("apple"), INSERT("app"), SEARCH("apple"), DELETE("app")]
-// 
+//
 // After INSERT("apple"):
 //    root
 //     |
@@ -88,7 +88,7 @@ TRIE-DELETE-HELPER(node, word, depth):
 //     l
 //     |
 //     e (end)
-// 
+//
 // After INSERT("app"):
 //    root
 //     |
@@ -101,10 +101,10 @@ TRIE-DELETE-HELPER(node, word, depth):
 //     l
 //     |
 //     e (end)
-// 
+//
 // SEARCH("apple") → true
 // SEARCH("app") → true
-// 
+//
 // After DELETE("app"):
 //    root
 //     |

@@ -13,54 +13,56 @@ export function DynamicProgrammingPattern() {
         problems with overlapping subproblems
       </div>
 
-      <PseudocodeDisplay code={`// Fibonacci
+      <PseudocodeDisplay
+        code={`// Fibonacci
 FIBONACCI(n):
-    if n ≤ 1:
-        return n
-    dp = [0] * (n + 1)
-    dp[1] = 1
-    for i from 2 to n:
-        dp[i] = dp[i-1] + dp[i-2]
-    return dp[n]
+  if n ≤ 1:
+    return n
+  dp = [0] * (n + 1)
+  dp[1] = 1
+  for i from 2 to n:
+    dp[i] = dp[i-1] + dp[i-2]
+  return dp[n]
 
 // Longest Common Subsequence
 LCS(X, Y):
-    m = length(X)
-    n = length(Y)
-    dp = [0] * (n + 1)
-    for i from 1 to m:
-        prev = 0
-        for j from 1 to n:
-            temp = dp[j]
-            if X[i-1] == Y[j-1]:
-                dp[j] = prev + 1
-            else:
-                dp[j] = max(dp[j], dp[j-1])
-            prev = temp
-    return dp[n]
+  m = length(X)
+  n = length(Y)
+  dp = [0] * (n + 1)
+  for i from 1 to m:
+    prev = 0
+    for j from 1 to n:
+      temp = dp[j]
+      if X[i-1] == Y[j-1]:
+        dp[j] = prev + 1
+      else:
+        dp[j] = max(dp[j], dp[j-1])
+      prev = temp
+  return dp[n]
 
 // Knapsack
 KNAPSACK(W, V, C):
-    n = length(W)
-    dp = [0] * (C + 1)
-    for i from 1 to n:
-        for j from C downto W[i-1]:
-            dp[j] = max(dp[j], dp[j-W[i-1]] + V[i-1])
-    return dp[C]
+  n = length(W)
+  dp = [0] * (C + 1)
+  for i from 1 to n:
+    for j from C downto W[i-1]:
+      dp[j] = max(dp[j], dp[j-W[i-1]] + V[i-1])
+  return dp[C]
 
 // Matrix Chain Multiplication
 MCM(P):
-    n = length(P) - 1
-    dp = [0] * n
-    for l from 2 to n:
-        for i from 0 to n-l:
-            j = i + l - 1
-            dp[i][j] = ∞
-            for k from i to j-1:
-                cost = dp[i][k] + dp[k+1][j] + P[i]*P[k+1]*P[j+1]
-                if cost < dp[i][j]:
-                    dp[i][j] = cost
-    return dp[0][n-1]`} />
+  n = length(P) - 1
+  dp = [0] * n
+  for l from 2 to n:
+    for i from 0 to n-l:
+      j = i + l - 1
+      dp[i][j] = ∞
+      for k from i to j-1:
+        cost = dp[i][k] + dp[k+1][j] + P[i]*P[k+1]*P[j+1]
+        if cost < dp[i][j]:
+          dp[i][j] = cost
+  return dp[0][n-1]`}
+      />
 
       <div className="flex items-start mb-1">
         <span className="font-bold text-main mr-2">1.</span>

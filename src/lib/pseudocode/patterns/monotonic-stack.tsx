@@ -58,7 +58,7 @@ PREVIOUS-SMALLER-ELEMENT(A):
 
 // Example:
 // Input: A = [4, 5, 2, 10, 8]
-// 
+//
 // NEXT-GREATER-ELEMENT(A):
 //   i = 1: S = [1], result = [-1, -1, -1, -1, -1]
 //   i = 2: S = [2], result = [5, -1, -1, -1, -1]

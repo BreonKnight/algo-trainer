@@ -18,18 +18,18 @@ export const ExponentialSearchPattern = () => (
 
 Algorithm EXPONENTIAL-SEARCH(A, x)
     n ← length[A]
-    
+
     # If x is at first position
     if A[1] = x then
         return 1
     end if
-    
+
     # Find range for binary search
     i ← 1
     while i < n and A[i] ≤ x do
         i ← i * 2
     end while
-    
+
     # Binary search in found range
     return BINARY-SEARCH(A, i/2, min(i, n), x)
 
@@ -48,7 +48,7 @@ Algorithm BINARY-SEARCH(A, low, high, x)
 
 # Example:
 # Input: A = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100], x = 70
-# 
+#
 # Step 1: i = 1, A[1] = 10 ≠ 70
 # Step 2: i = 2, A[2] = 20 ≤ 70
 # Step 3: i = 4, A[4] = 40 ≤ 70
@@ -56,7 +56,7 @@ Algorithm BINARY-SEARCH(A, low, high, x)
 # Step 5: Binary search in range [4,8]
 #         mid = 6, A[6] = 60 < 70
 #         mid = 7, A[7] = 70 = 70
-# 
+#
 # Output: 7`} />
 
     <div className="mb-2">

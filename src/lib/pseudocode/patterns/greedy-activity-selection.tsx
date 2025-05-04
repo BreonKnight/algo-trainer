@@ -26,7 +26,7 @@ export const GreedyActivitySelectionPattern = () => (
 // Example:
 // Input: s = [1, 3, 0, 5, 8, 5]  // Start times
 //        f = [2, 4, 6, 7, 9, 9]  // Finish times
-// 
+//
 // Step 1: Sort activities by finish time
 //         a₁: (1,2)
 //         a₂: (3,4)
@@ -34,7 +34,7 @@ export const GreedyActivitySelectionPattern = () => (
 //         a₄: (5,7)
 //         a₅: (8,9)
 //         a₆: (5,9)
-// 
+//
 // Step 2: Select activities
 //         Select a₁ (1-2)
 //         Skip a₃ (overlaps)
@@ -42,7 +42,7 @@ export const GreedyActivitySelectionPattern = () => (
 //         Skip a₆ (overlaps)
 //         Select a₄ (5-7)
 //         Select a₅ (8-9)
-// 
+//
 // Output: {a₁, a₂, a₄, a₅}`}
     />
 

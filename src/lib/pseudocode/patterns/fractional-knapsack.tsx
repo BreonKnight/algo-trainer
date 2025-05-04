@@ -30,15 +30,15 @@ export const FractionalKnapsackPattern = () => (
 // Input: W = 50
 //        w = [10, 20, 30]
 //        v = [60, 100, 120]
-// 
+//
 // Step 1: Sort items by value/weight ratio
 //        [6, 5, 4]
-// 
+//
 // Step 2: Take items in order
 //        Take all of item 1 (10 units)
 //        Take all of item 2 (20 units)
 //        Take 20/30 of item 3
-// 
+//
 // Output: [1, 1, 0.666...]`}
     />
 

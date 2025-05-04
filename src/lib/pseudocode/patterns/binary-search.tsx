@@ -12,71 +12,73 @@ export const BinarySearchPattern = () => (
       sorted arrays
     </div>
 
-    <PseudocodeDisplay code={`// Standard Binary Search
+    <PseudocodeDisplay
+      code={`// Standard Binary Search
 BINARY-SEARCH(A, x):
-    left = 0
-    right = n - 1
-    while left ≤ right:
-        mid = floor((left + right) / 2)
-        if A[mid] == x:
-            return mid
-        if A[mid] < x:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return -1
+  left = 0
+  right = n - 1
+  while left ≤ right:
+    mid = floor((left + right) / 2)
+    if A[mid] == x:
+      return mid
+    if A[mid] < x:
+      left = mid + 1
+    else:
+      right = mid - 1
+  return -1
 
 // First Occurrence
 FIRST-OCCURRENCE(A, x):
-    left = 0
-    right = n - 1
-    result = -1
-    while left ≤ right:
-        mid = floor((left + right) / 2)
-        if A[mid] == x:
-            result = mid
-            right = mid - 1
-        elif A[mid] < x:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return result
+  left = 0
+  right = n - 1
+  result = -1
+  while left ≤ right:
+    mid = floor((left + right) / 2)
+    if A[mid] == x:
+      result = mid
+      right = mid - 1
+    elif A[mid] < x:
+      left = mid + 1
+    else:
+      right = mid - 1
+  return result
 
 // Last Occurrence
 LAST-OCCURRENCE(A, x):
-    left = 0
-    right = n - 1
-    result = -1
-    while left ≤ right:
-        mid = floor((left + right) / 2)
-        if A[mid] == x:
-            result = mid
-            left = mid + 1
-        elif A[mid] < x:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return result
+  left = 0
+  right = n - 1
+  result = -1
+  while left ≤ right:
+    mid = floor((left + right) / 2)
+    if A[mid] == x:
+      result = mid
+      left = mid + 1
+    elif A[mid] < x:
+      left = mid + 1
+    else:
+      right = mid - 1
+  return result
 
 // Rotated Array Search
 ROTATED-SEARCH(A, x):
-    left = 0
-    right = n - 1
-    while left ≤ right:
-        mid = floor((left + right) / 2)
-        if A[mid] == x:
-            return mid
-        if A[left] ≤ A[mid]:
-            if A[left] ≤ x < A[mid]:
-                right = mid - 1
-            else:
-                left = mid + 1
-        else:
-            if A[mid] < x ≤ A[right]:
-                left = mid + 1
-            else:
-                right = mid - 1
-    return -1`} />
+  left = 0
+  right = n - 1
+  while left ≤ right:
+    mid = floor((left + right) / 2)
+    if A[mid] == x:
+      return mid
+    if A[left] ≤ A[mid]:
+      if A[left] ≤ x < A[mid]:
+        right = mid - 1
+      else:
+        left = mid + 1
+    else:
+      if A[mid] < x ≤ A[right]:
+        left = mid + 1
+      else:
+        right = mid - 1
+  return -1`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

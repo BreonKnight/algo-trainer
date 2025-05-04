@@ -23,18 +23,18 @@ class Node:
 def build_huffman_tree(frequencies):
     # Create leaf nodes
     nodes = [Node(symbol, freq) for symbol, freq in frequencies.items()]
-    
+
     # Build tree
     while len(nodes) > 1:
         # Get two nodes with minimum frequency
         nodes.sort(key=lambda x: x.freq)
         left = nodes.pop(0)
         right = nodes.pop(0)
-        
+
         # Create new internal node
         internal = Node(freq=left.freq + right.freq, left=left, right=right)
         nodes.append(internal)
-    
+
     return nodes[0]
 
 def build_codes(node, prefix="", codes={}):
@@ -64,19 +64,19 @@ def update_tree(node):
 def build_canonical_codes(lengths):
     # Sort symbols by code length
     symbols = sorted(lengths.items(), key=lambda x: (x[1], x[0]))
-    
+
     # Generate canonical codes
     code = 0
     prev_length = 0
     codes = {}
-    
+
     for symbol, length in symbols:
         if length > prev_length:
             code <<= (length - prev_length)
         codes[symbol] = format(code, f'0{length}b')
         code += 1
         prev_length = length
-    
+
     return codes`} />
 
     <div className="flex items-start mb-1">

@@ -19,19 +19,19 @@ MATRIX-POWER(matrix, power):
     # Initialize result as identity matrix
     result = IDENTITY-MATRIX(size of matrix)
     current = matrix
-    
+
     # Process each bit of power
     while power > 0:
         # If current bit is set
         if power mod 2 == 1:
             # Multiply result by current matrix
             result = MATRIX-MULTIPLY(result, current)
-        
+
         # Square current matrix
         current = MATRIX-MULTIPLY(current, current)
         # Move to next bit
         power = power / 2
-    
+
     return result
 
 // Multiply two matrices
@@ -39,7 +39,7 @@ MATRIX-MULTIPLY(A, B):
     n = number of rows in A
     m = number of columns in B
     result = new n × m matrix
-    
+
     # Compute each element
     for i from 1 to n:
         for j from 1 to m:
@@ -47,7 +47,7 @@ MATRIX-MULTIPLY(A, B):
             for k from 1 to number of columns in A:
                 sum = sum + A[i][k] * B[k][j]
             result[i][j] = sum
-    
+
     return result`} />
 
     <div className="flex items-start mb-1">

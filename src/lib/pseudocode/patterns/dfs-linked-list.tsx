@@ -22,25 +22,25 @@ NODE:
 DFS-LINKED-LIST(head):
     if head = NIL:
         return
-    
+
     // Mark current node as visited
     head.visited ← true
     process head.key
-    
+
     // Recursively visit next node if not visited
     if head.next ≠ NIL and not head.next.visited:
         DFS-LINKED-LIST(head.next)
 
 // Example:
 // Input: 1 → 2 → 3 → 4 → 5
-// 
+//
 // Execution:
 // 1. Visit 1, visited = {1}
 // 2. Visit 2, visited = {1,2}
 // 3. Visit 3, visited = {1,2,3}
 // 4. Visit 4, visited = {1,2,3,4}
 // 5. Visit 5, visited = {1,2,3,4,5}
-// 
+//
 // Output: 1, 2, 3, 4, 5`} />
 
     <div className="mb-2">

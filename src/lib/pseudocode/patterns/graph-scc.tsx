@@ -22,10 +22,10 @@ KOSARAJU-SCC(G):
     for v in V:
         if not visited[v]:
             DFS(G, v, visited, order)
-    
+
     # Reverse graph
     G_rev = REVERSE-GRAPH(G)
-    
+
     # Second DFS pass
     visited = [False] * |V|
     components = []
@@ -44,7 +44,7 @@ TARJAN-SCC(G):
     on_stack = [False] * |V|
     stack = []
     components = []
-    
+
     for v in V:
         if indices[v] == -1:
             STRONGLY-CONNECTED(v)
@@ -56,14 +56,14 @@ STRONGLY-CONNECTED(v):
     index = index + 1
     stack.append(v)
     on_stack[v] = True
-    
+
     for w in G.adj[v]:
         if indices[w] == -1:
             STRONGLY-CONNECTED(w)
             low[v] = min(low[v], low[w])
         elif on_stack[w]:
             low[v] = min(low[v], indices[w])
-    
+
     if low[v] == indices[v]:
         component = []
         while True:
@@ -80,7 +80,7 @@ GABOW-SCC(G):
     indices = [-1] * |V|
     path = []
     components = []
-    
+
     for v in V:
         if indices[v] == -1:
             GABOW-DFS(v)
@@ -90,14 +90,14 @@ GABOW-DFS(v):
     indices[v] = index
     index = index + 1
     path.append(v)
-    
+
     for w in G.adj[v]:
         if indices[w] == -1:
             GABOW-DFS(w)
         else:
             while path and indices[path[-1]] > indices[w]:
                 path.pop()
-    
+
     if path[-1] == v:
         component = []
         while True:

@@ -12,54 +12,56 @@ export const RecursionPattern = () => (
       into smaller subproblems
     </div>
 
-    <PseudocodeDisplay code={`// Factorial
+    <PseudocodeDisplay
+      code={`// Factorial
 FACTORIAL(n):
-    if n ≤ 1:
-        return 1
-    return n * FACTORIAL(n-1)
+  if n ≤ 1:
+    return 1
+  return n * FACTORIAL(n-1)
 
 // Fibonacci
 FIBONACCI(n):
-    if n ≤ 1:
-        return n
-    return FIBONACCI(n-1) + FIBONACCI(n-2)
+  if n ≤ 1:
+    return n
+  return FIBONACCI(n-1) + FIBONACCI(n-2)
 
 // Tower of Hanoi
 HANOI(n, source, target, auxiliary):
-    if n == 1:
-        move disk from source to target
-        return
-    HANOI(n-1, source, auxiliary, target)
+  if n == 1:
     move disk from source to target
-    HANOI(n-1, auxiliary, target, source)
+    return
+  HANOI(n-1, source, auxiliary, target)
+  move disk from source to target
+  HANOI(n-1, auxiliary, target, source)
 
 // Binary Search
 BINARY-SEARCH(A, l, r, x):
-    if l > r:
-        return -1
-    mid = floor((l + r) / 2)
-    if A[mid] == x:
-        return mid
-    if A[mid] > x:
-        return BINARY-SEARCH(A, l, mid-1, x)
-    return BINARY-SEARCH(A, mid+1, r, x)
+  if l > r:
+    return -1
+  mid = floor((l + r) / 2)
+  if A[mid] == x:
+    return mid
+  if A[mid] > x:
+    return BINARY-SEARCH(A, l, mid-1, x)
+  return BINARY-SEARCH(A, mid+1, r, x)
 
 // Merge Sort
 MERGE-SORT(A, l, r):
-    if l ≥ r:
-        return
-    mid = floor((l + r) / 2)
-    MERGE-SORT(A, l, mid)
-    MERGE-SORT(A, mid+1, r)
-    MERGE(A, l, mid, r)
+  if l ≥ r:
+    return
+  mid = floor((l + r) / 2)
+  MERGE-SORT(A, l, mid)
+  MERGE-SORT(A, mid+1, r)
+  MERGE(A, l, mid, r)
 
 // Quick Sort
 QUICK-SORT(A, l, r):
-    if l ≥ r:
-        return
-    p = PARTITION(A, l, r)
-    QUICK-SORT(A, l, p-1)
-    QUICK-SORT(A, p+1, r)`} />
+  if l ≥ r:
+    return
+  p = PARTITION(A, l, r)
+  QUICK-SORT(A, l, p-1)
+  QUICK-SORT(A, p+1, r)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

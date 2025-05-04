@@ -18,18 +18,18 @@ def kruskal(graph):
     mst = []
     parent = {node: node for node in graph}
     rank = {node: 0 for node in graph}
-    
+
     # Sort edges by weight
-    edges = [(weight, u, v) 
-             for u in graph 
+    edges = [(weight, u, v)
+             for u in graph
              for v, weight in graph[u].items()]
     edges.sort()
-    
+
     def find(u):
         if parent[u] != u:
             parent[u] = find(parent[u])
         return parent[u]
-    
+
     def union(u, v):
         u_root = find(u)
         v_root = find(v)
@@ -42,12 +42,12 @@ def kruskal(graph):
             if rank[u_root] == rank[v_root]:
                 rank[v_root] += 1
         return True
-    
+
     # Process edges
     for weight, u, v in edges:
         if union(u, v):
             mst.append((u, v, weight))
-    
+
     return mst
 
 // Kruskal's with Maximum Degree
@@ -56,17 +56,17 @@ def kruskal_with_max_degree(graph, max_degree):
     parent = {node: node for node in graph}
     rank = {node: 0 for node in graph}
     degree = {node: 0 for node in graph}
-    
-    edges = [(weight, u, v) 
-             for u in graph 
+
+    edges = [(weight, u, v)
+             for u in graph
              for v, weight in graph[u].items()]
     edges.sort()
-    
+
     def find(u):
         if parent[u] != u:
             parent[u] = find(parent[u])
         return parent[u]
-    
+
     def union(u, v):
         if degree[u] >= max_degree or degree[v] >= max_degree:
             return False
@@ -83,11 +83,11 @@ def kruskal_with_max_degree(graph, max_degree):
         degree[u] += 1
         degree[v] += 1
         return True
-    
+
     for weight, u, v in edges:
         if union(u, v):
             mst.append((u, v, weight))
-    
+
     return mst
 
 // Kruskal's with Edge Limit
@@ -95,17 +95,17 @@ def kruskal_with_edge_limit(graph, max_edges):
     mst = []
     parent = {node: node for node in graph}
     rank = {node: 0 for node in graph}
-    
-    edges = [(weight, u, v) 
-             for u in graph 
+
+    edges = [(weight, u, v)
+             for u in graph
              for v, weight in graph[u].items()]
     edges.sort()
-    
+
     def find(u):
         if parent[u] != u:
             parent[u] = find(parent[u])
         return parent[u]
-    
+
     def union(u, v):
         u_root = find(u)
         v_root = find(v)
@@ -118,13 +118,13 @@ def kruskal_with_edge_limit(graph, max_edges):
             if rank[u_root] == rank[v_root]:
                 rank[v_root] += 1
         return True
-    
+
     for weight, u, v in edges:
         if len(mst) >= max_edges:
             break
         if union(u, v):
             mst.append((u, v, weight))
-    
+
     return mst`}
     />
 

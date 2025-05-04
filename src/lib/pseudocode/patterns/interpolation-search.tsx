@@ -19,31 +19,31 @@ export const InterpolationSearchPattern = () => (
 Algorithm INTERPOLATION-SEARCH(A, x)
     low ← 1
     high ← length[A]
-    
+
     while low ≤ high and x ≥ A[low] and x ≤ A[high] do
         # Calculate position using interpolation formula
         pos ← low + ((x - A[low]) * (high - low)) / (A[high] - A[low])
-        
+
         if A[pos] = x then
             return pos
         end if
-        
+
         if A[pos] < x then
             low ← pos + 1
         else
             high ← pos - 1
         end if
     end while
-    
+
     return -1
 
 # Example:
 # Input: A = [10, 20, 30, 40, 50, 60, 70, 80, 90], x = 50
-# 
+#
 # Step 1: low = 1, high = 9
 #         pos = 1 + ((50-10)*(9-1))/(90-10) = 5
 #         A[5] = 50
-# 
+#
 # Output: 5`} />
 
     <div className="mb-2">

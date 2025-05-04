@@ -47,18 +47,22 @@ export function AlgorithmSelector({
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        !dropdownRef.current?.contains(event.target as Node) &&
-        !dropdownContentRef.current?.contains(event.target as Node)
+        dropdownRef.current &&
+        dropdownContentRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        !dropdownContentRef.current.contains(event.target as Node)
       ) {
         setIsDropdownOpen(false);
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isDropdownOpen]);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -181,7 +185,10 @@ export function AlgorithmSelector({
     >
       <div
         className="w-full bg-main border border-secondary text-main hover:bg-main/80 rounded-md shadow-md transition-all duration-200 flex items-center justify-between p-2 cursor-pointer group"
-        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsDropdownOpen(!isDropdownOpen);
+        }}
         role="button"
         tabIndex={0}
         aria-label="Select algorithm"
@@ -209,7 +216,7 @@ export function AlgorithmSelector({
         createPortal(
           <div
             ref={dropdownContentRef}
-            className="fixed sm:absolute z-50 w-[calc(100vw-2rem)] sm:w-full mt-1 bg-main border border-secondary text-main max-h-[60vh] sm:max-h-[400px] overflow-y-auto min-w-[300px] p-2 rounded-md shadow-lg animate-fadeIn"
+            className="fixed sm:absolute z-[100] w-[calc(100vw-2rem)] sm:w-full mt-1 bg-main border border-secondary text-main max-h-[60vh] sm:max-h-[400px] overflow-y-auto min-w-[300px] p-2 rounded-md shadow-lg animate-fadeIn"
             style={{
               left:
                 window.innerWidth < 640
@@ -229,6 +236,7 @@ export function AlgorithmSelector({
             }}
             role="listbox"
             id="algorithm-list"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 bg-main z-20 pb-2">
               <div className="relative">

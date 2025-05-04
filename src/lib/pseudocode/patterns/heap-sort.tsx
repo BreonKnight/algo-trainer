@@ -15,11 +15,11 @@ export const HeapSortPattern = () => (
     <PseudocodeDisplay code={`// Standard Heap Sort
 HEAP-SORT(A):
     n = len(A)
-    
+
     # Build max heap
     for i = n//2 - 1 downto 0:
         MAX-HEAPIFY(A, n, i)
-    
+
     # Extract elements one by one
     for i = n-1 downto 0:
         # Move current root to end
@@ -31,13 +31,13 @@ MAX-HEAPIFY(A, n, i):
     largest = i
     left = 2*i + 1
     right = 2*i + 2
-    
+
     # Find largest among root and children
     if left < n and A[left] > A[largest]:
         largest = left
     if right < n and A[right] > A[largest]:
         largest = right
-    
+
     # If root is not largest, swap and heapify
     if largest != i:
         swap(A[i], A[largest])
@@ -46,11 +46,11 @@ MAX-HEAPIFY(A, n, i):
 // Min Heap Sort
 MIN-HEAP-SORT(A):
     n = len(A)
-    
+
     # Build min heap
     for i = n//2 - 1 downto 0:
         MIN-HEAPIFY(A, n, i)
-    
+
     # Extract elements one by one
     for i = n-1 downto 0:
         # Move current root to end
@@ -62,13 +62,13 @@ MIN-HEAPIFY(A, n, i):
     smallest = i
     left = 2*i + 1
     right = 2*i + 2
-    
+
     # Find smallest among root and children
     if left < n and A[left] < A[smallest]:
         smallest = left
     if right < n and A[right] < A[smallest]:
         smallest = right
-    
+
     # If root is not smallest, swap and heapify
     if smallest != i:
         swap(A[i], A[smallest])
@@ -77,11 +77,11 @@ MIN-HEAPIFY(A, n, i):
 // Heap Sort with Custom Comparator
 HEAP-SORT-COMPARATOR(A, compare):
     n = len(A)
-    
+
     # Build heap with custom comparator
     for i = n//2 - 1 downto 0:
         HEAPIFY-COMPARATOR(A, n, i, compare)
-    
+
     # Extract elements one by one
     for i = n-1 downto 0:
         swap(A[0], A[i])
@@ -91,13 +91,13 @@ HEAPIFY-COMPARATOR(A, n, i, compare):
     target = i
     left = 2*i + 1
     right = 2*i + 2
-    
+
     # Find target using comparator
     if left < n and compare(A[left], A[target]):
         target = left
     if right < n and compare(A[right], A[target]):
         target = right
-    
+
     # If root is not target, swap and heapify
     if target != i:
         swap(A[i], A[target])

@@ -21,7 +21,7 @@ class SegmentTree:
             self.size *= 2
         self.tree = [0] * (2 * self.size)
         self.build(data)
-    
+
     def build(self, data):
         # Fill leaves
         for i in range(self.n):
@@ -29,14 +29,14 @@ class SegmentTree:
         # Build internal nodes
         for i in range(self.size - 1, 0, -1):
             self.tree[i] = self.tree[2*i] + self.tree[2*i+1]
-    
+
     def update(self, pos, value):
         pos += self.size
         self.tree[pos] = value
         while pos > 1:
             pos //= 2
             self.tree[pos] = self.tree[2*pos] + self.tree[2*pos+1]
-    
+
     def query(self, l, r):
         res = 0
         l += self.size
@@ -62,7 +62,7 @@ class LazySegmentTree:
         self.tree = [0] * (2 * self.size)
         self.lazy = [0] * (2 * self.size)
         self.build(data)
-    
+
     def push(self, node, node_l, node_r):
         if self.lazy[node] != 0:
             self.tree[node] += self.lazy[node] * (node_r - node_l + 1)
@@ -70,10 +70,10 @@ class LazySegmentTree:
                 self.lazy[2*node] += self.lazy[node]
                 self.lazy[2*node+1] += self.lazy[node]
             self.lazy[node] = 0
-    
+
     def range_update(self, l, r, val):
         self._range_update(1, 0, self.size-1, l, r, val)
-    
+
     def _range_update(self, node, node_l, node_r, l, r, val):
         self.push(node, node_l, node_r)
         if r < node_l or l > node_r:
@@ -96,7 +96,7 @@ class PersistentSegmentTree:
             self.size *= 2
         self.versions = []
         self.build(data)
-    
+
     def build(self, data):
         root = [0] * (2 * self.size)
         for i in range(self.n):
@@ -104,7 +104,7 @@ class PersistentSegmentTree:
         for i in range(self.size - 1, 0, -1):
             root[i] = root[2*i] + root[2*i+1]
         self.versions.append(root)
-    
+
     def update(self, version, pos, value):
         new_root = self.versions[version].copy()
         pos += self.size

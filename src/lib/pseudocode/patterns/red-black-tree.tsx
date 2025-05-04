@@ -15,20 +15,20 @@ export const RedBlackTreePattern = () => (
     <PseudocodeDisplay code={`RB-INSERT(T, z)
     let y ← null
     let x ← T.root
-    
+
     while x ≠ null
         do y ← x
            if z.key < x.key
                then x ← x.left
                else x ← x.right
-    
+
     z.p ← y
     if y = null
         then T.root ← z
         else if z.key < y.key
             then y.left ← z
             else y.right ← z
-    
+
     z.left ← null
     z.right ← null
     z.color ← RED
@@ -68,34 +68,34 @@ LEFT-ROTATE(T, x)
 
 // Example:
 // Input: Insert keys [10, 20, 30, 40, 50, 25]
-// 
+//
 // Insert 10:
 //   Tree: 10(B)
-// 
+//
 // Insert 20:
 //   Tree: 10(B)
 //         \
 //         20(R)
-// 
+//
 // Insert 30:
 //   Tree: 20(B)
 //        /  \
 //     10(R) 30(R)
-// 
+//
 // Insert 40:
 //   Tree: 20(B)
 //        /  \
 //     10(B) 30(B)
 //             \
 //            40(R)
-// 
+//
 // Insert 50:
 //   Tree: 20(B)
 //        /  \
 //     10(B) 40(B)
 //           /  \
 //        30(R) 50(R)
-// 
+//
 // Insert 25:
 //   Tree: 20(B)
 //        /  \

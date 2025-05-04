@@ -41,7 +41,7 @@ FORD-FULKERSON(G, s, t):
 // Input: G = (L ∪ R, E), where
 // L = {1, 2, 3}, R = {4, 5, 6}
 // E = {(1,4), (1,5), (2,5), (3,4), (3,6)}
-// 
+//
 // Execution:
 // 1. Add source s and sink t
 // 2. Add edges: (s,1), (s,2), (s,3), (4,t), (5,t), (6,t)
@@ -49,7 +49,7 @@ FORD-FULKERSON(G, s, t):
 //    - s→1→4→t
 //    - s→2→5→t
 //    - s→3→6→t
-// 
+//
 // Output: Matching = {(1,4), (2,5), (3,6)}`} />
 
     <div className="mb-2">

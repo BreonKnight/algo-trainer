@@ -12,61 +12,63 @@ export const DFSPattern = () => (
       sort, cycle detection, and strongly connected components
     </div>
 
-    <PseudocodeDisplay code={`// Standard DFS
+    <PseudocodeDisplay
+      code={`// Standard DFS
 DFS(G):
-    for each vertex u in G.V:
-        u.color = WHITE
-        u.π = NIL
-    time = 0
-    for each vertex u in G.V:
-        if u.color == WHITE:
-            DFS-VISIT(G, u)
+  for each vertex u in G.V:
+    u.color = WHITE
+    u.π = NIL
+  time = 0
+  for each vertex u in G.V:
+    if u.color == WHITE:
+      DFS-VISIT(G, u)
 
 DFS-VISIT(G, u):
-    time = time + 1
-    u.d = time
-    u.color = GRAY
-    for each v in G.adj[u]:
-        if v.color == WHITE:
-            v.π = u
-            DFS-VISIT(G, v)
-    u.color = BLACK
-    time = time + 1
-    u.f = time
+  time = time + 1
+  u.d = time
+  u.color = GRAY
+  for each v in G.adj[u]:
+    if v.color == WHITE:
+      v.π = u
+      DFS-VISIT(G, v)
+  u.color = BLACK
+  time = time + 1
+  u.f = time
 
 // Topological Sort
 TOPOLOGICAL-SORT(G):
-    DFS(G)
-    sort vertices by decreasing finish time
-    return sorted vertices
+  DFS(G)
+  sort vertices by decreasing finish time
+  return sorted vertices
 
 // Cycle Detection
 HAS-CYCLE(G):
-    for each vertex u in G.V:
-        u.color = WHITE
-    for each vertex u in G.V:
-        if u.color == WHITE:
-            if DFS-CYCLE(G, u):
-                return true
-    return false
+  for each vertex u in G.V:
+    u.color = WHITE
+  for each vertex u in G.V:
+    if u.color == WHITE:
+      if DFS-CYCLE(G, u):
+        return true
+  return false
 
 DFS-CYCLE(G, u):
-    u.color = GRAY
-    for each v in G.adj[u]:
-        if v.color == WHITE:
-            if DFS-CYCLE(G, v):
-                return true
-        elif v.color == GRAY:
-            return true
-    u.color = BLACK
-    return false
+  u.color = GRAY
+  for each v in G.adj[u]:
+    if v.color == WHITE:
+      if DFS-CYCLE(G, v):
+        return true
+    elif v.color == GRAY:
+      return true
+  u.color = BLACK
+  return false
 
 // Strongly Connected Components
 SCC(G):
-    DFS(G)
-    compute G^T
-    DFS(G^T) in order of decreasing finish time
-    return trees in depth-first forest`} />
+  DFS(G)
+  compute G^T
+  DFS(G^T) in order of decreasing finish time
+  return trees in depth-first forest`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

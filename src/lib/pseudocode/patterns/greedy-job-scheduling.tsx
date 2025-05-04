@@ -16,26 +16,26 @@ export const GreedyJobSchedulingPattern = () => (
 def job_scheduling(jobs):
     # Sort jobs by finish time
     jobs.sort(key=lambda x: x[1])
-    
+
     selected = []
     last_finish = 0
-    
+
     for job in jobs:
         start, finish, profit = job
         if start >= last_finish:
             selected.append(job)
             last_finish = finish
-    
+
     return selected
 
 // Job Scheduling with Deadlines
 def job_scheduling_deadlines(jobs):
     # Sort jobs by profit in descending order
     jobs.sort(key=lambda x: x[2], reverse=True)
-    
+
     max_deadline = max(job[1] for job in jobs)
     schedule = [None] * (max_deadline + 1)
-    
+
     for job in jobs:
         start, deadline, profit = job
         # Find latest available slot
@@ -43,22 +43,22 @@ def job_scheduling_deadlines(jobs):
             if schedule[slot] is None:
                 schedule[slot] = job
                 break
-    
+
     return [job for job in schedule if job is not None]
 
 // Job Scheduling with Weights
 def job_scheduling_weights(jobs):
     # Sort jobs by profit/weight ratio
     jobs.sort(key=lambda x: x[2]/x[1], reverse=True)
-    
+
     current_time = 0
     total_profit = 0
-    
+
     for job in jobs:
         duration, weight, profit = job
         current_time += duration
         total_profit += profit
-    
+
     return total_profit
 
 # Examples:
