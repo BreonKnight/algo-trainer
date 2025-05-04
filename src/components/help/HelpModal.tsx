@@ -21,8 +21,6 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
       }
     })();
 
-    const isDarkTheme = theme === "dracula";
-
     return (
       <Dialog.Root>
         <Dialog.Trigger asChild>
