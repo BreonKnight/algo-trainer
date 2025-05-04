@@ -12,6 +12,7 @@ export type PatternKey =
   | "Binary Search Tree"
   | "Bit Manipulation"
   | "B Tree"
+  | "Bridges"
   | "Bubble Sort"
   | "Chinese Remainder Theorem"
   | "Circular Linked List"

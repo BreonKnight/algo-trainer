@@ -859,6 +859,192 @@ print("Monster research analysis:", analysis)
   ],
 ]);
 
+// Add Bridges Monster Hunter Pattern
+const bridgesMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "Bridges",
+    `# Monster Hunter Bridges Pattern
+# Critical Territory Path Analysis
+
+def find_critical_paths(territories):
+    """
+    Find critical paths between territories that are essential for connectivity.
+    Time: O(V + E)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like finding essential migration paths
+    - Identify critical resource routes
+    - Plan for territory defense
+    - Optimize patrol routes
+    
+    Example:
+    territories = {
+        'Ancient Forest': ['Wildspire Waste', 'Coral Highlands'],
+        'Wildspire Waste': ['Ancient Forest', 'Rotten Vale'],
+        'Coral Highlands': ['Ancient Forest', 'Elder\'s Recess'],
+        'Rotten Vale': ['Wildspire Waste', 'Elder\'s Recess'],
+        'Elder\'s Recess': ['Coral Highlands', 'Rotten Vale']
+    }
+    critical_paths = find_critical_paths(territories)
+    # Shows essential territory connections
+    """
+    def dfs(territory, parent, visited, disc, low, bridges):
+        nonlocal time
+        visited.add(territory)
+        disc[territory] = low[territory] = time
+        time += 1
+        
+        for neighbor in territories[territory]:
+            if neighbor == parent:
+                continue
+                
+            if neighbor not in visited:
+                dfs(neighbor, territory, visited, disc, low, bridges)
+                low[territory] = min(low[territory], low[neighbor])
+                
+                if low[neighbor] > disc[territory]:
+                    bridges.append((territory, neighbor))
+            else:
+                low[territory] = min(low[territory], disc[neighbor])
+    
+    visited = set()
+    disc = {}
+    low = {}
+    bridges = []
+    time = 0
+    
+    for territory in territories:
+        if territory not in visited:
+            dfs(territory, None, visited, disc, low, bridges)
+    
+    return bridges
+
+def analyze_territory_connectivity(territories):
+    """
+    Analyze territory connectivity to find critical paths.
+    
+    Args:
+        territories: Dictionary of territory connections
+    
+    Returns:
+        List of critical paths (bridges)
+    """
+    return find_critical_paths(territories)
+
+# Example usage
+territories = {
+    'Ancient Forest': ['Wildspire Waste', 'Coral Highlands'],
+    'Wildspire Waste': ['Ancient Forest', 'Rotten Vale'],
+    'Coral Highlands': ['Ancient Forest', 'Elder\'s Recess'],
+    'Rotten Vale': ['Wildspire Waste', 'Elder\'s Recess'],
+    'Elder\'s Recess': ['Coral Highlands', 'Rotten Vale']
+}
+
+critical_paths = analyze_territory_connectivity(territories)
+print("Critical territory paths:", critical_paths)
+
+# Monster Hunter Tips:
+# 1. Protect critical migration paths
+# 2. Monitor resource flow along bridges
+# 3. Plan defense strategies
+# 4. Consider alternative routes
+# 5. Track monster movement patterns`,
+  ],
+]);
+
+// Add Lowest Common Ancestor Pattern
+const lowestCommonAncestorPattern = new Map<PatternKey, string>([
+  [
+    "Lowest Common Ancestor",
+    `# Lowest Common Ancestor Pattern
+# Tree Node Ancestry Analysis
+
+def find_lca(root, p, q):
+    """
+    Find the lowest common ancestor of two nodes in a binary tree.
+    Time: O(n)
+    Space: O(h) where h is the height of the tree
+    
+    Example:
+    tree = {
+        'val': 3,
+        'left': {
+            'val': 5,
+            'left': {'val': 6},
+            'right': {
+                'val': 2,
+                'left': {'val': 7},
+                'right': {'val': 4}
+            }
+        },
+        'right': {
+            'val': 1,
+            'left': {'val': 0},
+            'right': {'val': 8}
+        }
+    }
+    lca = find_lca(tree, 5, 1)
+    # Returns node with value 3
+    """
+    if not root:
+        return None
+        
+    if root.val == p or root.val == q:
+        return root
+        
+    left = find_lca(root.left, p, q)
+    right = find_lca(root.right, p, q)
+    
+    if left and right:
+        return root
+    return left if left else right
+
+def find_lowest_common_ancestor(root, node1, node2):
+    """
+    Find the lowest common ancestor of two nodes in a binary tree.
+    
+    Args:
+        root: Root node of the binary tree
+        node1: First node value
+        node2: Second node value
+    
+    Returns:
+        The lowest common ancestor node
+    """
+    return find_lca(root, node1, node2)
+
+# Example usage
+tree = {
+    'val': 3,
+    'left': {
+        'val': 5,
+        'left': {'val': 6},
+        'right': {
+            'val': 2,
+            'left': {'val': 7},
+            'right': {'val': 4}
+        }
+    },
+    'right': {
+        'val': 1,
+        'left': {'val': 0},
+        'right': {'val': 8}
+    }
+}
+
+lca = find_lowest_common_ancestor(tree, 5, 1)
+print("Lowest Common Ancestor:", lca['val'] if lca else None)
+
+# Algorithm Tips:
+# 1. Use post-order traversal
+# 2. Return node if it matches either target
+# 3. If both subtrees return nodes, current node is LCA
+# 4. If only one subtree returns node, propagate it up
+# 5. Handle case where nodes don't exist in tree`,
+  ],
+]);
+
 // Export all patterns
 export const monsterHunterPatternsExtended8 = new Map<PatternKey, string>([
   ...activitySelectionMonsterHunterPattern,
@@ -871,4 +1057,6 @@ export const monsterHunterPatternsExtended8 = new Map<PatternKey, string>([
   ...fractionalKnapsackMonsterHunterPattern,
   ...kosarajuMonsterHunterPattern,
   ...stringOperationsMonsterHunterPattern,
+  ...bridgesMonsterHunterPattern,
+  ...lowestCommonAncestorPattern,
 ]);
