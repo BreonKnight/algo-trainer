@@ -11,7 +11,6 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
-import { NavigationBar } from "./layout/NavigationBar";
 
 const CodeBlock = ({ code }: { code: string }) => {
   const { theme: appTheme } = useTheme();
@@ -685,14 +684,9 @@ strongest = heapq.nlargest(2, monsters)  # First 2 strongest`,
                   "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
               }}
             >
-              Algorithm Trainer
-            </Link>
-            <h1 className="text-xl font-semibold text-accent2">
               Python Techniques
-            </h1>
-
+            </Link>
             {/* Navigation Bar */}
-            <NavigationBar />
 
             {/* Navigation Hamburger */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 z-50">

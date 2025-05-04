@@ -236,6 +236,24 @@ export function AlgorithmVisualizer({
   const startTimeRef = useRef<number>(0);
   const lastUpdateTimeRef = useRef<number>(0);
 
+  // Initialize canvas
+  useEffect(() => {
+    if (!canvasRef.current || !containerRef.current) return;
+
+    const ctx = canvasRef.current.getContext("2d");
+    if (!ctx) return;
+
+    const containerWidth = containerRef.current.clientWidth;
+    const containerHeight = containerRef.current.clientHeight;
+
+    canvasRef.current.width = containerWidth;
+    canvasRef.current.height = containerHeight;
+
+    // Set initial background
+    ctx.fillStyle = theme === "nord" ? "#2E3440" : "#f8fafc";
+    ctx.fillRect(0, 0, containerWidth, containerHeight);
+  }, [theme]);
+
   // Generate visualization steps based on algorithm
   useEffect(() => {
     const newSteps = generateVisualizationSteps(algorithm, data);
@@ -261,7 +279,7 @@ export function AlgorithmVisualizer({
   // Animation loop
   useEffect(() => {
     if (!isPlaying || currentStep >= steps.length - 1) {
-      if (currentStep === steps.length - 1 && onComplete) {
+      if (currentStep === steps.length - 1 && onComplete && steps.length > 0) {
         const finalMetrics = {
           ...steps[steps.length - 1].metrics!,
           time: Number((performance.now() - startTimeRef.current).toFixed(1)),
@@ -284,8 +302,7 @@ export function AlgorithmVisualizer({
           (currentTime - startTimeRef.current).toFixed(1)
         );
 
-        // Update metrics for the current step
-        if (onMetricsUpdate) {
+        if (onMetricsUpdate && steps[nextStep]?.metrics) {
           const currentMetrics = {
             ...steps[nextStep].metrics!,
             time: elapsedTime,
@@ -338,15 +355,17 @@ export function AlgorithmVisualizer({
   return (
     <Card
       className={cn(
-        "p-4 h-full",
-        theme === "nord" ? "bg-nord-0" : "bg-slate-50"
+        "p-4 transition-colors duration-200",
+        theme === "nord"
+          ? "bg-nord-0 border-nord-3"
+          : "bg-slate-50 border-slate-200"
       )}
     >
-      <div className="flex flex-col h-full gap-4">
+      <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <h3
             className={cn(
-              "text-lg font-semibold",
+              "text-lg font-semibold transition-colors duration-200",
               theme === "nord" ? "text-nord-4" : "text-slate-900"
             )}
           >
@@ -362,6 +381,7 @@ export function AlgorithmVisualizer({
               }}
               disabled={currentStep === 0}
               className={cn(
+                "transition-colors duration-200",
                 theme === "nord"
                   ? "text-nord-4 hover:bg-nord-1 border-nord-3"
                   : "text-slate-900 hover:bg-slate-100 border-slate-200"
@@ -373,11 +393,11 @@ export function AlgorithmVisualizer({
           </div>
         </div>
 
-        <div className="flex-1 min-h-[400px]" ref={containerRef}>
+        <div className="flex-1 h-[500px]" ref={containerRef}>
           <canvas
             ref={canvasRef}
             className={cn(
-              "w-full h-full border rounded-lg",
+              "w-full h-full border rounded-lg transition-colors duration-200",
               theme === "nord" ? "border-nord-3" : "border-slate-200"
             )}
           />
@@ -391,6 +411,7 @@ export function AlgorithmVisualizer({
               onClick={() => setCurrentStep(0)}
               disabled={currentStep === 0}
               className={cn(
+                "transition-colors duration-200",
                 theme === "nord"
                   ? "text-nord-4 hover:bg-nord-1 border-nord-3"
                   : "text-slate-900 hover:bg-slate-100 border-slate-200"
@@ -404,6 +425,7 @@ export function AlgorithmVisualizer({
               onClick={() => setCurrentStep((prev) => Math.max(0, prev - 1))}
               disabled={currentStep === 0}
               className={cn(
+                "transition-colors duration-200",
                 theme === "nord"
                   ? "text-nord-4 hover:bg-nord-1 border-nord-3"
                   : "text-slate-900 hover:bg-slate-100 border-slate-200"
@@ -416,6 +438,7 @@ export function AlgorithmVisualizer({
               size="icon"
               onClick={() => setIsPlaying(!isPlaying)}
               className={cn(
+                "transition-colors duration-200",
                 theme === "nord"
                   ? "text-nord-4 hover:bg-nord-1 border-nord-3"
                   : "text-slate-900 hover:bg-slate-100 border-slate-200"
@@ -435,6 +458,7 @@ export function AlgorithmVisualizer({
               }
               disabled={currentStep === steps.length - 1}
               className={cn(
+                "transition-colors duration-200",
                 theme === "nord"
                   ? "text-nord-4 hover:bg-nord-1 border-nord-3"
                   : "text-slate-900 hover:bg-slate-100 border-slate-200"
@@ -447,7 +471,7 @@ export function AlgorithmVisualizer({
           <div className="flex items-center gap-2">
             <span
               className={cn(
-                "text-sm",
+                "text-sm transition-colors duration-200",
                 theme === "nord" ? "text-nord-4" : "text-slate-900"
               )}
             >
@@ -463,7 +487,7 @@ export function AlgorithmVisualizer({
             />
             <span
               className={cn(
-                "text-sm",
+                "text-sm transition-colors duration-200",
                 theme === "nord" ? "text-nord-4" : "text-slate-900"
               )}
             >
@@ -474,7 +498,7 @@ export function AlgorithmVisualizer({
           <div className="flex items-center gap-2">
             <span
               className={cn(
-                "text-sm",
+                "text-sm transition-colors duration-200",
                 theme === "nord" ? "text-nord-4" : "text-slate-900"
               )}
             >
@@ -490,7 +514,7 @@ export function AlgorithmVisualizer({
             />
             <span
               className={cn(
-                "text-sm",
+                "text-sm transition-colors duration-200",
                 theme === "nord" ? "text-nord-4" : "text-slate-900"
               )}
             >
@@ -501,7 +525,7 @@ export function AlgorithmVisualizer({
           {steps.length > 0 && (
             <div
               className={cn(
-                "text-sm text-center p-2 rounded-md",
+                "text-sm text-center p-2 rounded-md transition-colors duration-200",
                 theme === "nord"
                   ? "bg-nord-1 text-nord-4"
                   : "bg-slate-100 text-slate-900"
