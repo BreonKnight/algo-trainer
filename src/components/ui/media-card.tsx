@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 export function MediaCard({
   children,
@@ -9,7 +10,10 @@ export function MediaCard({
 }) {
   return (
     <div
-      className={`bg-white dark:bg-background rounded-2xl shadow-xl border-2 border-accent/30 p-6 ${className}`}
+      className={cn(
+        "bg-background rounded-2xl shadow-xl border-2 border-accent/30 p-6",
+        className
+      )}
     >
       {children}
     </div>

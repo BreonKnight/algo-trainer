@@ -2,6 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
 import { useTheme } from "@/components/theme/theme-context";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
   (_props, ref) => {
@@ -20,6 +21,8 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
       }
     })();
 
+    const isDarkTheme = theme === "dracula";
+
     return (
       <Dialog.Root>
         <Dialog.Trigger asChild>
@@ -27,9 +30,14 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
             ref={ref}
             variant="ghost"
             size="sm"
-            className={`${buttonClass} font-bold text-xs sm:text-sm md:text-base px-2 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90 truncate max-w-[100px] sm:max-w-[140px]`}
+            className={cn(
+              buttonClass,
+              "font-bold text-xs sm:text-sm md:text-base px-2 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90 truncate max-w-[100px] sm:max-w-[140px]"
+            )}
           >
-            How to Use :)
+            <span className="text-xs sm:text-sm md:text-base font-bold">
+              How to Use :)
+            </span>
           </Button>
         </Dialog.Trigger>
         <Dialog.Portal>
