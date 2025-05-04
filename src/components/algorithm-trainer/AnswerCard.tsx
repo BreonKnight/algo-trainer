@@ -4,7 +4,7 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import {
   Code,
   TestTube,
@@ -132,22 +132,68 @@ export function AnswerCard({
     }
   };
 
-  const handleLanguageToggle = () => {
-    setCurrentLanguage(currentLanguage === "python" ? "javascript" : "python");
-    if (editorRef.current && monacoRef.current) {
-      const model = editorRef.current.getModel();
-      if (model) {
-        monacoRef.current.editor.setModelLanguage(
-          model,
-          currentLanguage === "python" ? "javascript" : "python"
-        );
-        // Force a refresh of the editor
-        editorRef.current.updateOptions({});
-        // Trigger a layout update
-        setTimeout(() => {
-          editorRef.current?.layout();
-        }, 0);
+  // Memoize the transformed code
+  const transformedCode = useMemo(() => {
+    try {
+      if (showMonsterHunter) {
+        const val = monsterHunterPatterns.get(currentPattern);
+        if (val && typeof val === "object" && "implementation" in val) {
+          const implementation = (val as { implementation: string })
+            .implementation;
+          return currentLanguage === "python"
+            ? implementation
+            : toggleLanguage(implementation, "python").code;
+        }
+        if (typeof val === "string") {
+          return currentLanguage === "python"
+            ? val
+            : toggleLanguage(val, "python").code;
+        }
+        return `# Monster Hunter ${
+          currentLanguage === "python" ? "Python" : "JavaScript"
+        } implementation for ${currentPattern}\n# Coming soon!`;
+      } else {
+        const val = algorithmPatterns[currentPattern];
+        if (typeof val === "string") {
+          return currentLanguage === "python"
+            ? val
+            : toggleLanguage(val, "python").code;
+        }
+        if (val && typeof val === "object" && "implementation" in val) {
+          const implementation = (val as { implementation: string })
+            .implementation;
+          return currentLanguage === "python"
+            ? implementation
+            : toggleLanguage(implementation, "python").code;
+        }
+        return `# ${
+          currentLanguage === "python" ? "Python" : "JavaScript"
+        } implementation for ${currentPattern}\n# Coming soon!`;
       }
+    } catch (error) {
+      console.error("Error transforming code:", error);
+      return `# Error transforming code to ${currentLanguage}. Please try again.`;
+    }
+  }, [currentPattern, currentLanguage, showMonsterHunter]);
+
+  const handleLanguageToggle = () => {
+    try {
+      const newLanguage =
+        currentLanguage === "python" ? "javascript" : "python";
+      setCurrentLanguage(newLanguage);
+      if (editorRef.current && monacoRef.current) {
+        const model = editorRef.current.getModel();
+        if (model) {
+          monacoRef.current.editor.setModelLanguage(model, newLanguage);
+          editorRef.current.updateOptions({});
+          setTimeout(() => {
+            editorRef.current?.layout();
+          }, 0);
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling language:", error);
+      // Optionally show a user-friendly error message
     }
   };
 
@@ -191,8 +237,14 @@ export function AnswerCard({
                           "h-8 px-2.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs transition-all",
                           currentLanguage === "javascript" && "bg-secondary/20"
                         )}
+                        aria-label={`Switch to ${currentLanguage === "python" ? "JavaScript" : "Python"} implementation`}
+                        role="switch"
+                        aria-checked={currentLanguage === "javascript"}
                       >
-                        <Languages className="h-3.5 w-3.5 mr-1" />
+                        <Languages
+                          className="h-3.5 w-3.5 mr-1"
+                          aria-hidden="true"
+                        />
                         <span className="hidden sm:inline">
                           {currentLanguage === "python"
                             ? "Python"
@@ -359,57 +411,7 @@ export function AnswerCard({
                       defaultLanguage={currentLanguage}
                       theme={theme}
                       onMount={handleEditorDidMount}
-                      value={(() => {
-                        if (showMonsterHunter) {
-                          const val = monsterHunterPatterns.get(currentPattern);
-                          if (
-                            val &&
-                            typeof val === "object" &&
-                            "implementation" in val
-                          ) {
-                            const implementation = (
-                              val as { implementation: string }
-                            ).implementation;
-                            return currentLanguage === "python"
-                              ? implementation
-                              : toggleLanguage(implementation, "python").code;
-                          }
-                          if (typeof val === "string") {
-                            return currentLanguage === "python"
-                              ? val
-                              : toggleLanguage(val, "python").code;
-                          }
-                          return `# Monster Hunter ${
-                            currentLanguage === "python"
-                              ? "Python"
-                              : "JavaScript"
-                          } implementation for ${currentPattern}\n# Coming soon!`;
-                        } else {
-                          const val = algorithmPatterns[currentPattern];
-                          if (typeof val === "string") {
-                            return currentLanguage === "python"
-                              ? val
-                              : toggleLanguage(val, "python").code;
-                          }
-                          if (
-                            val &&
-                            typeof val === "object" &&
-                            "implementation" in val
-                          ) {
-                            const implementation = (
-                              val as { implementation: string }
-                            ).implementation;
-                            return currentLanguage === "python"
-                              ? implementation
-                              : toggleLanguage(implementation, "python").code;
-                          }
-                          return `# ${
-                            currentLanguage === "python"
-                              ? "Python"
-                              : "JavaScript"
-                          } implementation for ${currentPattern}\n# Coming soon!`;
-                        }
-                      })()}
+                      value={transformedCode}
                       options={{
                         fontSize: 14,
                         minimap: { enabled: false },
