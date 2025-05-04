@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { TooltipProvider } from "../ui/tooltip";
-import { GamificationButton } from "../gamification/GamificationButton";
 import { ReplCard } from "./ReplCard";
-import { NavigationBar } from "./layout/NavigationBar";
 import { PanelLayout } from "./layout/PanelLayout";
 import { PatternControls } from "./layout/PatternControls";
 import { usePatternManager } from "./hooks/usePatternManager";

@@ -14,11 +14,11 @@ import {
   Play,
   Lock,
 } from "lucide-react";
-import type { PatternKey } from "./types";
+import type { PatternKey } from "@/components/tutorials/types";
 
 type Language = "python" | "javascript";
 
-interface Tutorial {
+export interface Tutorial {
   id: string;
   title: string;
   description: string;
@@ -33,7 +33,7 @@ interface Tutorial {
   quiz: QuizQuestion[];
 }
 
-interface QuizQuestion {
+export interface QuizQuestion {
   id: string;
   question: string;
   options: string[];
@@ -50,6 +50,8 @@ export function AlgorithmTutorial({
   algorithm,
   tutorials,
 }: AlgorithmTutorialProps) {
+  console.log("AlgorithmTutorial props:", { algorithm, tutorials });
+
   const [activeTab, setActiveTab] = useState("overview");
   const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(null);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
@@ -58,7 +60,7 @@ export function AlgorithmTutorial({
 
   // Calculate progress through tutorials
   const calculateProgress = () => {
-    if (!tutorials.length) return 0;
+    if (!tutorials?.length) return 0;
     const completed = tutorials.filter(
       (t) => localStorage.getItem(`tutorial-${t.id}`) === "completed"
     ).length;
@@ -94,138 +96,25 @@ export function AlgorithmTutorial({
     );
   };
 
-  // Generate mock tutorials if none provided
-  const mockTutorials: Tutorial[] =
-    tutorials.length > 0
-      ? tutorials
-      : [
-          {
-            id: "intro",
-            title: "Introduction to " + algorithm,
-            description:
-              "Learn the basics of " + algorithm + " and its applications.",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            difficulty: "beginner",
-            duration: 10,
-            prerequisites: [],
-            implementations: {
-              python: `def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x < pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
-    return quick_sort(left) + middle + quick_sort(right)`,
-              javascript: `const quickSort = (arr) => {
-  if (arr.length <= 1) return arr;
-  
-  const pivot = arr[Math.floor(arr.length / 2)];
-  const left = arr.filter(x => x < pivot);
-  const middle = arr.filter(x => x === pivot);
-  const right = arr.filter(x => x > pivot);
-  
-  return [...quickSort(left), ...middle, ...quickSort(right)];
-};`,
-            },
-            quiz: [
-              {
-                id: "q1",
-                question: "What is the time complexity of " + algorithm + "?",
-                options: ["O(n)", "O(n log n)", "O(n²)", "O(1)"],
-                correctAnswer: 1,
-                explanation:
-                  "The time complexity of " +
-                  algorithm +
-                  " is O(n log n) in the average case.",
-              },
-              {
-                id: "q2",
-                question:
-                  "Which data structure is best suited for " + algorithm + "?",
-                options: ["Array", "Linked List", "Tree", "Graph"],
-                correctAnswer: 0,
-                explanation:
-                  "Arrays are the most efficient data structure for " +
-                  algorithm +
-                  ".",
-              },
-            ],
-          },
-          {
-            id: "advanced",
-            title: "Advanced " + algorithm + " Techniques",
-            description:
-              "Master advanced techniques and optimizations for " +
-              algorithm +
-              ".",
-            videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            difficulty: "advanced",
-            duration: 15,
-            prerequisites: ["intro"],
-            implementations: {
-              python: `def optimized_quick_sort(arr, low=0, high=None):
-    if high is None:
-        high = len(arr) - 1
-    
-    def partition(low, high):
-        pivot = arr[high]
-        i = low - 1
-        for j in range(low, high):
-            if arr[j] <= pivot:
-                i += 1
-                arr[i], arr[j] = arr[j], arr[i]
-        arr[i + 1], arr[high] = arr[high], arr[i + 1]
-        return i + 1
-    
-    if low < high:
-        pi = partition(low, high)
-        optimized_quick_sort(arr, low, pi - 1)
-        optimized_quick_sort(arr, pi + 1, high)
-    return arr`,
-              javascript: `const optimizedQuickSort = (arr, low = 0, high = arr.length - 1) => {
-  const partition = (low, high) => {
-    const pivot = arr[high];
-    let i = low - 1;
-    
-    for (let j = low; j < high; j++) {
-      if (arr[j] <= pivot) {
-        i++;
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-    }
-    
-    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-    return i + 1;
-  };
-  
-  if (low < high) {
-    const pi = partition(low, high);
-    optimizedQuickSort(arr, low, pi - 1);
-    optimizedQuickSort(arr, pi + 1, high);
+  if (!tutorials || tutorials.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center p-8 text-center">
+        <h2 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]">
+          No Tutorials Available
+        </h2>
+        <p className="text-secondary mb-4">
+          There are no tutorials available for {algorithm} at this time.
+        </p>
+        <Button
+          variant="outline"
+          onClick={() => window.history.back()}
+          className="bg-secondary/10 hover:bg-secondary/20"
+        >
+          Go Back
+        </Button>
+      </div>
+    );
   }
-  
-  return arr;
-};`,
-            },
-            quiz: [
-              {
-                id: "q1",
-                question:
-                  "How can you optimize " + algorithm + " for large datasets?",
-                options: [
-                  "Use recursion",
-                  "Use iteration",
-                  "Use parallel processing",
-                  "Use a different algorithm",
-                ],
-                correctAnswer: 2,
-                explanation:
-                  "Parallel processing can significantly improve performance for large datasets.",
-              },
-            ],
-          },
-        ];
 
   return (
     <div className="flex flex-col gap-6">
@@ -235,28 +124,31 @@ export function AlgorithmTutorial({
             {algorithm} Tutorials
           </h2>
           <div className="flex items-center gap-2">
-            <TabsList className="bg-secondary/20 p-1 rounded-lg">
-              <TabsTrigger
-                value="python"
-                onClick={() => setSelectedLanguage("python")}
-                className={cn(
-                  "data-[state=active]:bg-accent2/20",
-                  selectedLanguage === "python" && "bg-accent2/20"
-                )}
-              >
-                Python
-              </TabsTrigger>
-              <TabsTrigger
-                value="javascript"
-                onClick={() => setSelectedLanguage("javascript")}
-                className={cn(
-                  "data-[state=active]:bg-accent2/20",
-                  selectedLanguage === "javascript" && "bg-accent2/20"
-                )}
-              >
-                JavaScript
-              </TabsTrigger>
-            </TabsList>
+            <Tabs
+              defaultValue="python"
+              onValueChange={(value) => setSelectedLanguage(value as Language)}
+            >
+              <TabsList className="bg-secondary/20 p-1 rounded-lg">
+                <TabsTrigger
+                  value="python"
+                  className={cn(
+                    "data-[state=active]:bg-accent2/20",
+                    selectedLanguage === "python" && "bg-accent2/20"
+                  )}
+                >
+                  Python
+                </TabsTrigger>
+                <TabsTrigger
+                  value="javascript"
+                  className={cn(
+                    "data-[state=active]:bg-accent2/20",
+                    selectedLanguage === "javascript" && "bg-accent2/20"
+                  )}
+                >
+                  JavaScript
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
         </div>
         <div className="flex items-center gap-3 bg-secondary/20 p-2 rounded-xl backdrop-blur-sm">
@@ -269,7 +161,12 @@ export function AlgorithmTutorial({
       </div>
 
       {currentTutorial ? (
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        <Tabs
+          defaultValue="video"
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="w-full"
+        >
           <TabsList className="w-full justify-start gap-2 bg-secondary/20 p-1 rounded-xl">
             <TabsTrigger
               value="video"
@@ -330,7 +227,7 @@ export function AlgorithmTutorial({
           <TabsContent value="implementation" className="mt-6">
             <Card className="p-6 bg-secondary/10 border-secondary/20 backdrop-blur-sm">
               <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)]">
-                {algorithm} Implementation
+                {currentTutorial.title} Implementation
               </h3>
               <div className="prose prose-sm dark:prose-invert max-w-none mb-6">
                 <pre className="language-{selectedLanguage} rounded-lg p-4 bg-secondary/20">
@@ -446,8 +343,8 @@ export function AlgorithmTutorial({
                       Related Videos
                     </h4>
                     <ul className="list-disc list-inside space-y-2 text-secondary">
-                      <li>Advanced {algorithm} Techniques</li>
-                      <li>{algorithm} Optimization Strategies</li>
+                      <li>Advanced {currentTutorial.title} Techniques</li>
+                      <li>{currentTutorial.title} Optimization Strategies</li>
                     </ul>
                   </div>
                 </div>
@@ -457,7 +354,7 @@ export function AlgorithmTutorial({
         </Tabs>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockTutorials.map((tutorial) => (
+          {tutorials.map((tutorial) => (
             <Card
               key={tutorial.id}
               className="p-6 bg-secondary/10 border-secondary/20 backdrop-blur-sm hover:shadow-lg transition-all duration-300 group"
