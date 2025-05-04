@@ -3,7 +3,7 @@
   margin-bottom: 1rem;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.875rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 0.75rem;
   overflow: hidden;
   background: var(--pseudocode-gradient);
@@ -47,6 +47,7 @@
   line-height: 1.6;
   white-space: pre-wrap;
   text-shadow: var(--pseudocode-text-shadow);
+  padding-left: 0;
 }
 
 /* Algorithm title and metadata */
@@ -56,6 +57,7 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   display: block;
+  padding-left: 0;
 }
 
 .pseudocodeContent .algorithm-type {
@@ -138,14 +140,15 @@
 /* Lists and indentation */
 .pseudocodeContent ul {
   list-style-type: none;
-  padding-left: 1.5rem;
+  padding-left: 0;
   margin: 0.5rem 0;
 }
 
 .pseudocodeContent li {
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 0;
   margin-bottom: 0.5rem;
+  text-indent: 0;
 }
 
 .pseudocodeContent li::before {
@@ -154,13 +157,14 @@
   left: 0;
   color: var(--pseudocode-indicator);
   font-weight: 700;
+  margin-right: 0.5rem;
 }
 
 /* Nested content */
 .pseudocodeContent .nested {
-  margin-left: 1.5rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--pseudocode-indicator);
+  margin-left: 0;
+  padding-left: 0;
+  border-left: none;
   opacity: 0.8;
 }
 
@@ -180,16 +184,16 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .pseudocodeContainer {
-    padding: 1rem;
+    padding: 0.75rem;
     font-size: 0.8125rem;
   }
 
   .pseudocodeContent li {
-    padding-left: 1.25rem;
+    padding-left: 0;
   }
 
   .pseudocodeContent .nested {
-    margin-left: 1rem;
+    margin-left: 0;
   }
 }
 

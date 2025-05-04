@@ -5,7 +5,7 @@ import styles from "@/styles/pseudocode.module.css";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
-import { Book, Sword } from "lucide-react";
+import { Book, Sword, X } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -54,6 +54,18 @@ export function PatternCard({
   const descRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // Prevent scrolling of main content when card is expanded
+  useEffect(() => {
+    if (isExpanded) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isExpanded]);
 
   // Add escape key handler
   useEffect(() => {
@@ -133,8 +145,8 @@ export function PatternCard({
                   className={cn(
                     "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left",
                     isExpanded
-                      ? "text-2xl sm:text-3xl md:text-4xl"
-                      : "text-base sm:text-lg md:text-xl lg:text-2xl",
+                      ? "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
+                      : "text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
                     theme === "nord"
                       ? " text-white"
                       : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
@@ -154,13 +166,21 @@ export function PatternCard({
                   className={cn(
                     categoryColors[category as keyof typeof categoryColors] ||
                       "text-secondary/80",
-                    "text-xs sm:text-sm md:text-base font-medium"
+                    "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium"
                   )}
                 >
                   {category}{" "}
                   {patternNumber !== undefined && `#${patternNumber}`}
                 </span>
               </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsExpanded(false)}
+                className="text-secondary hover:text-main hover:bg-secondary/20 p-2 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-md"
+              >
+                <X className="w-5 h-5" />
+              </Button>
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
               <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -206,15 +226,19 @@ export function PatternCard({
               <div className="h-full flex flex-col overflow-hidden">
                 <div
                   ref={descRef}
-                  className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3 p-6 text-lg leading-relaxed`}
+                  className={`${
+                    styles.pseudocodeContainer
+                  } flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3 ${
+                    isExpanded ? "!p-2" : ""
+                  }`}
                   style={{
-                    height: "100%",
-                    minHeight: 0,
+                    height: isDesktop ? descHeight : "300px",
+                    minHeight: isDesktop ? "0" : "300px",
                   }}
                 >
                   <div className="h-full w-full overflow-y-auto custom-scrollbar">
                     <div
-                      className={`${styles.pseudocodeContent} w-full text-main p-0 text-lg leading-relaxed`}
+                      className={`${styles.pseudocodeContent} w-full text-main leading-relaxed p-2 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl`}
                     >
                       {(() => {
                         if (typeof pseudo === "function") {
@@ -266,8 +290,8 @@ export function PatternCard({
               className={cn(
                 "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left",
                 isExpanded
-                  ? "text-2xl sm:text-3xl md:text-4xl"
-                  : "text-base sm:text-lg md:text-xl lg:text-2xl",
+                  ? "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
+                  : "text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
                 theme === "nord"
                   ? " text-white"
                   : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
@@ -287,7 +311,7 @@ export function PatternCard({
               className={cn(
                 categoryColors[category as keyof typeof categoryColors] ||
                   "text-secondary/80",
-                "text-xs sm:text-sm md:text-base font-medium"
+                "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium"
               )}
             >
               {category} {patternNumber !== undefined && `#${patternNumber}`}
@@ -336,8 +360,7 @@ export function PatternCard({
           <div className="h-full flex flex-col overflow-hidden">
             <div
               ref={descRef}
-              className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20
-                    transition-all duration-300 mt-3`}
+              className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3`}
               style={{
                 height: isDesktop ? descHeight : "300px",
                 minHeight: isDesktop ? "0" : "300px",
@@ -345,7 +368,7 @@ export function PatternCard({
             >
               <div className="h-full w-full overflow-y-auto custom-scrollbar">
                 <div
-                  className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed p-4`}
+                  className={`${styles.pseudocodeContent} w-full text-main leading-relaxed p-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl`}
                 >
                   {(() => {
                     if (typeof pseudo === "function") {
