@@ -32,6 +32,11 @@ const PYTHON_TO_JS_RULES = {
   pass: "",
   // Comments
   "#\\s*(.+)": "// $1",
+  // heapq imports and functions
+  "from\\s+heapq\\s+import\\s+heappush,\\s+heappop":
+    "// Using array as min-heap with push/pop",
+  "heappush\\(([^,]+),\\s*([^)]+)\\)": "$1.push($2); $1.sort((a, b) => a - b)",
+  "heappop\\(([^)]+)\\)": "$1.shift()",
 };
 
 // JavaScript to Python conversion rules
@@ -115,6 +120,12 @@ const JS_TO_PYTHON_RULES = {
   "([^\\s]+)\\s*\\?\\s*([^\\s]+)\\s*:\\s*([^\\s]+)": "$2 if $1 else $3",
   // Comments
   "//\\s*(.+)": "# $1",
+  // Min-heap operations to heapq
+  "//\\s*Using\\s+array\\s+as\\s+min-heap\\s+with\\s+push/pop":
+    "from heapq import heappush, heappop",
+  "\\.push\\(([^)]+)\\);\\s*\\1\\.sort\\(\\s*\\(a,\\s*b\\)\\s*=>\\s*a\\s*-\\s*b\\)":
+    "heappush($1, $2)",
+  "\\.shift\\(\\)": "heappop()",
 };
 
 export function convertPythonToJavaScript(code: string): string {
