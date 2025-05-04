@@ -19,7 +19,6 @@
     "audit-patterns": "tsx src/lib/pseudocode/scripts/audit-patterns.ts",
     "validate-naming": "tsx src/components/algorithm-trainer/scripts/validate-naming.ts",
     "fix-naming": "tsx src/components/algorithm-trainer/scripts/fix-naming.ts",
-    "start": "next start",
     "check-patterns": "ts-node src/components/algorithm-trainer/check-patterns.ts"
   },
   "dependencies": {
@@ -44,7 +43,7 @@
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^10.16.4",
+    "framer-motion": "^10.18.0",
     "glob": "^11.0.2",
     "lucide-react": "^0.294.0",
     "next": "^15.3.1",

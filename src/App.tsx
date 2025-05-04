@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import AlgorithmComparisonPage from "./app/algorithm-comparison/AlgorithmComparisonPage";
 import HomePage from "./app/HomePage";
+import AlgorithmLearning from "./components/AlgorithmLearning/AlgorithmLearning";
 import {
   checkPatternFiles,
   logPatternCheckResults,
@@ -44,26 +45,28 @@ function AppContent() {
 
   return (
     <div className="min-h-screen w-full bg-main">
-      <button
-        className={buttonClasses}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {import.meta.env.DEV && (
+        <button
+          className={buttonClasses}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      )}
 
       {isMenuOpen && (
         <div className={menuClasses}>
@@ -106,6 +109,7 @@ function AppContent() {
           path="/algorithm-comparison"
           element={<AlgorithmComparisonPage />}
         />
+        <Route path="/algorithm-learning" element={<AlgorithmLearning />} />
         {import.meta.env.DEV && (
           <Route path="/admin/patterns" element={<PatternManagement />} />
         )}
