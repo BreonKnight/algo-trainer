@@ -15,13 +15,13 @@ export const BinaryIndexedTreePattern = () => (
     <PseudocodeDisplay code={`BINARY-INDEXED-TREE(A)
     let n be the length of A
     let tree[1‥n] be a new array
-    
+
     for i ← 1 to n
         do tree[i] ← 0
-    
+
     for i ← 1 to n
         do UPDATE(tree, i, A[i])
-    
+
     return tree
 
 UPDATE(tree, idx, delta)
@@ -41,22 +41,22 @@ RANGE-QUERY(tree, l, r)
 
 // Example:
 // Input: A = [1, 3, 5, 7, 9, 11]
-// 
+//
 // Initial tree:
 //   tree = [0, 0, 0, 0, 0, 0]
-// 
+//
 // After updates:
 //   tree = [1, 4, 5, 16, 9, 20]
-// 
+//
 // Query(4):
 //   idx = 4: sum = 16
 //   idx = 0: return 16
-// 
+//
 // Range Query(2,5):
 //   QUERY(5) = 25
 //   QUERY(1) = 1
 //   return 24
-// 
+//
 // Output: Range sum from index 2 to 5 is 24`} />
 
     <div className="mb-2">

@@ -21,7 +21,7 @@ Algorithm TWO-SUM-TWO-POINTERS(A, t)
     A ← SORT(A)
     left ← 1
     right ← length[A]
-    
+
     while left < right do
         sum ← A[left] + A[right]
         if sum = t then
@@ -32,17 +32,17 @@ Algorithm TWO-SUM-TWO-POINTERS(A, t)
             right ← right - 1
         end if
     end while
-    
+
     return (-1, -1)
 
 # Example:
 # Input: A = [2, 7, 11, 15], t = 9
-# 
+#
 # Step 1: A = [2, 7, 11, 15], left = 1, right = 4
 # Step 2: sum = 2 + 15 = 17 > 9, right = 3
 # Step 3: sum = 2 + 11 = 13 > 9, right = 2
 # Step 4: sum = 2 + 7 = 9 = t, return (1, 2)
-# 
+#
 # Output: (1, 2)`} />
 
     <div className="mb-2">

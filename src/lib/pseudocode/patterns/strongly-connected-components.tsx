@@ -72,19 +72,19 @@ Algorithm REVERSE-MIGRATION-PATHS(graph)
 #   Elder's Recess → Rotten Vale,
 #   Rotten Vale → Wildspire Waste
 # }
-# 
+#
 # First DFS pass:
 # Ancient Forest: explored first
 # Wildspire Waste: explored second
 # Coral Highlands: explored third
 # Elder's Recess: explored fourth
 # Rotten Vale: explored last
-# 
+#
 # Second DFS pass on reverse graph:
 # Cluster 1: {Ancient Forest, Wildspire Waste, Coral Highlands}
 # Cluster 2: {Elder's Recess}
 # Cluster 3: {Rotten Vale}
-# 
+#
 # Output: [
 #   ["Ancient Forest", "Wildspire Waste", "Coral Highlands"],
 #   ["Elder's Recess"],

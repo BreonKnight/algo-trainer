@@ -16,13 +16,13 @@ export const DynamicProgrammingCoinChangePattern = () => (
     # Initialize DP array with infinity
     dp[0..amount] ← ∞
     dp[0] ← 0  # Base case: 0 coins needed for amount 0
-    
+
     # Fill DP array
     for i ← 1 to amount
         for each coin in coins
             if coin ≤ i
                 dp[i] ← min(dp[i], dp[i - coin] + 1)
-    
+
     if dp[amount] = ∞
         return -1
     else

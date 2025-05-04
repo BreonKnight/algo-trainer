@@ -20,12 +20,12 @@ Algorithm STACK-OPERATIONS
     # Initialize empty stack
     S ← empty array
     top ← 0
-    
+
     # Push element x onto stack
     Algorithm PUSH(S, x)
         top ← top + 1
         S[top] ← x
-    
+
     # Pop element from stack
     Algorithm POP(S)
         if top = 0 then
@@ -34,7 +34,7 @@ Algorithm STACK-OPERATIONS
         x ← S[top]
         top ← top - 1
         return x
-    
+
     # Check if stack is empty
     Algorithm STACK-EMPTY(S)
         if top = 0 then
@@ -42,7 +42,7 @@ Algorithm STACK-OPERATIONS
         else
             return false
         end if
-    
+
     # Peek at top element
     Algorithm PEEK(S)
         if top = 0 then
@@ -52,7 +52,7 @@ Algorithm STACK-OPERATIONS
 
 # Example:
 # Input: Push sequence [1, 2, 3]
-# 
+#
 # Step 1: PUSH(S, 1)
 #         S = [1], top = 1
 # Step 2: PUSH(S, 2)
@@ -63,7 +63,7 @@ Algorithm STACK-OPERATIONS
 #         Returns 3, S = [1, 2], top = 2
 # Step 5: PEEK(S)
 #         Returns 2
-# 
+#
 # Output: Elements popped in order [3, 2, 1]`} />
 
     <div className="mb-2">

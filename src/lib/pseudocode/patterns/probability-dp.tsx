@@ -30,29 +30,29 @@ CALC-PROB(n, k, p, dp)
         then return 0
     if dp[n][k] ≠ -1
         then return dp[n][k]
-    
+
     let prob ← p · CALC-PROB(n-1, k-1, p, dp) + (1-p) · CALC-PROB(n-1, k, p, dp)
     dp[n][k] ← prob
     return prob
 
 // Example:
 // Input: n = 3, k = 2, p = 0.5
-// 
+//
 // Initial call: n = 3, k = 2
-// 
+//
 // For n = 3:
 //   prob = 0.5·CALC-PROB(2,1) + 0.5·CALC-PROB(2,2)
-// 
+//
 // For n = 2:
 //   prob = 0.5·CALC-PROB(1,0) + 0.5·CALC-PROB(1,1)
-// 
+//
 // For n = 1:
 //   prob = 0.5·CALC-PROB(0,-1) + 0.5·CALC-PROB(0,0)
-// 
+//
 // Base cases:
 //   CALC-PROB(0,0) = 1
 //   CALC-PROB(0,-1) = 0
-// 
+//
 // Output: Probability of exactly 2 successes in 3 trials`} />
 
     <div className="mb-2">

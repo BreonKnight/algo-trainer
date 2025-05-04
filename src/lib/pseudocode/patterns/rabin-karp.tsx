@@ -22,7 +22,7 @@ Algorithm RABIN-KARP(T, P)
     d ← 256  # Number of characters in alphabet
     q ← 101  # Prime number for hash
     h ← d^(m-1) mod q
-    
+
     # Compute hash of pattern and first window
     p ← 0
     t ← 0
@@ -30,7 +30,7 @@ Algorithm RABIN-KARP(T, P)
         p ← (d * p + P[i]) mod q
         t ← (d * t + T[i]) mod q
     end for
-    
+
     # Slide pattern over text
     for s ← 0 to n - m do
         if p = t then
@@ -46,7 +46,7 @@ Algorithm RABIN-KARP(T, P)
                 print "Pattern found at index" s
             end if
         end if
-        
+
         # Compute hash for next window
         if s < n - m then
             t ← (d * (t - T[s + 1] * h) + T[s + m + 1]) mod q
@@ -58,7 +58,7 @@ Algorithm RABIN-KARP(T, P)
 
 # Example:
 # Input: T = "GEEKS FOR GEEKS", P = "GEEK"
-# 
+#
 # Step 1: p = hash("GEEK") = 71
 #         t = hash("GEEK") = 71
 #         Match found at index 0
@@ -71,7 +71,7 @@ Algorithm RABIN-KARP(T, P)
 # Step 8: t = hash("OR G") = 79
 # Step 9: t = hash("R GE") = 71
 #         Match found at index 10
-# 
+#
 # Output: Pattern found at indices 0 and 10`} />
 
     <div className="mb-2">

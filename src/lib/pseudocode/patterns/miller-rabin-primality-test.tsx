@@ -25,7 +25,7 @@ Algorithm MILLER-RABIN-PRIMALITY-TEST(n, k)
         return "prime"
     if n mod 2 = 0 then
         return "composite"
-    
+
     # Write n-1 as d·2^s
     d ← n - 1
     s ← 0
@@ -33,7 +33,7 @@ Algorithm MILLER-RABIN-PRIMALITY-TEST(n, k)
         d ← d / 2
         s ← s + 1
     end while
-    
+
     # Test k times
     for i ← 1 to k do
         a ← random integer in [2, n-2]
@@ -41,7 +41,7 @@ Algorithm MILLER-RABIN-PRIMALITY-TEST(n, k)
         if x = 1 or x = n-1 then
             continue
         end if
-        
+
         for j ← 1 to s-1 do
             x ← x² mod n
             if x = n-1 then
@@ -51,35 +51,35 @@ Algorithm MILLER-RABIN-PRIMALITY-TEST(n, k)
                 return "composite"
             end if
         end for
-        
+
         if x ≠ n-1 then
             return "composite"
         end if
     end for
-    
+
     return "probably prime"
 
 # Example:
 # Input: n = 17, k = 5
-# 
+#
 # Step 1: n-1 = 16 = 1·2^4
 #         d = 1, s = 4
-# 
+#
 # Round 1: a = 2
 #          x = 2^1 mod 17 = 2
 #          x² mod 17 = 4
 #          x² mod 17 = 16 = n-1
 #          continue
-# 
+#
 # Round 2: a = 3
 #          x = 3^1 mod 17 = 3
 #          x² mod 17 = 9
 #          x² mod 17 = 13
 #          x² mod 17 = 16 = n-1
 #          continue
-# 
+#
 # ... (3 more rounds)
-# 
+#
 # Output: "probably prime"`}
     />
 

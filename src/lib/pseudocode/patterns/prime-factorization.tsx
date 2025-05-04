@@ -12,23 +12,24 @@ export const PrimeFactorizationPattern = () => (
       number into prime factors
     </div>
 
-    <PseudocodeDisplay code={`PRIME-FACTORS(n)
-1  factors = []
-2  // Handle even numbers
-3  while n mod 2 == 0
-4      factors.append(2)
-5      n = n / 2
-6  // Check odd numbers up to sqrt(n)
-7  i = 3
-8  while i * i <= n
-9      while n mod i == 0
-10         factors.append(i)
-11         n = n / i
-12     i = i + 2
-13 // If n is a prime number > 2
-14 if n > 2
-15     factors.append(n)
-16 return factors
+    <PseudocodeDisplay
+      code={`PRIME-FACTORS(n)
+  factors = []
+  // Handle even numbers
+  while n mod 2 == 0
+    factors.append(2)
+    n = n / 2
+  // Check odd numbers up to sqrt(n)
+  i = 3
+  while i * i <= n
+    while n mod i == 0
+      factors.append(i)
+      n = n / i
+    i = i + 2
+  // If n is a prime number > 2
+  if n > 2
+    factors.append(n)
+  return factors
 
 // Example:
 // Input: n = 60
@@ -36,7 +37,8 @@ export const PrimeFactorizationPattern = () => (
 // Step 2: 30 ÷ 2 = 15, factors = [2, 2]
 // Step 3: 15 ÷ 3 = 5, factors = [2, 2, 3]
 // Step 4: 5 ÷ 5 = 1, factors = [2, 2, 3, 5]
-// Output: [2, 2, 3, 5]`} />
+// Output: [2, 2, 3, 5]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

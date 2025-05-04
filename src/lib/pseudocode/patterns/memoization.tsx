@@ -22,26 +22,26 @@ Algorithm MEMOIZED-FIBONACCI(n)
     for i ← 0 to n do
         memo[i] ← -1
     end for
-    
+
     # Helper function with memoization
     function FIB(n)
         if n ≤ 1 then
             return n
         end if
-        
+
         if memo[n] ≠ -1 then
             return memo[n]
         end if
-        
+
         memo[n] ← FIB(n - 1) + FIB(n - 2)
         return memo[n]
     end function
-    
+
     return FIB(n)
 
 # Example:
 # Input: n = 5
-# 
+#
 # Step 1: memo = [-1, -1, -1, -1, -1, -1]
 # Step 2: FIB(5)
 #         FIB(4) + FIB(3)
@@ -50,7 +50,7 @@ Algorithm MEMOIZED-FIBONACCI(n)
 #         (((FIB(1) + FIB(0)) + 1) + (1 + 0)) + ((1 + 0) + 1)
 #         (((1 + 0) + 1) + (1 + 0)) + ((1 + 0) + 1)
 #         memo = [0, 1, 1, 2, 3, 5]
-# 
+#
 # Output: 5`} />
 
     <div className="mb-2">

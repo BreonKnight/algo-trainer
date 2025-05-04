@@ -29,7 +29,7 @@ PARTITION(array, start, end):
     pivot = array[end]
     # Initialize pointer for elements less than pivot
     smaller_element_pointer = start - 1
-    
+
     # Move through the array
     for current_element from start to end - 1:
         # If current element is less than pivot
@@ -38,7 +38,7 @@ PARTITION(array, start, end):
             smaller_element_pointer = smaller_element_pointer + 1
             # Swap current element with element at pointer
             swap array[smaller_element_pointer] with array[current_element]
-    
+
     # Place pivot in correct position
     swap array[smaller_element_pointer + 1] with array[end]
     # Return pivot position

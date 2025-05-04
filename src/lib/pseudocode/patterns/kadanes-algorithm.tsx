@@ -14,43 +14,45 @@ export const KadanesAlgorithmPattern = () => (
       subarray sum
     </div>
 
-    <PseudocodeDisplay code={`// Find maximum subarray sum
+    <PseudocodeDisplay
+      code={`// Find maximum subarray sum
 KADANE(A):
-    max_ending_here = A[1]
-    max_so_far = A[1]
-    for i = 2 to A.length:
-        max_ending_here = max(A[i], max_ending_here + A[i])
-        max_so_far = max(max_so_far, max_ending_here)
-    return max_so_far
+  max_ending_here = A[1]
+  max_so_far = A[1]
+  for i = 2 to A.length:
+    max_ending_here = max(A[i], max_ending_here + A[i])
+    max_so_far = max(max_so_far, max_ending_here)
+  return max_so_far
 
 // Find maximum subarray sum with indices
 KADANE-WITH-INDICES(A):
-    max_ending_here = A[1]
-    max_so_far = A[1]
-    start = 1
-    end = 1
-    temp_start = 1
-    for i = 2 to A.length:
-        if A[i] > max_ending_here + A[i]:
-            max_ending_here = A[i]
-            temp_start = i
-        else:
-            max_ending_here = max_ending_here + A[i]
-        if max_ending_here > max_so_far:
-            max_so_far = max_ending_here
-            start = temp_start
-            end = i
-    return (max_so_far, start, end)
+  max_ending_here = A[1]
+  max_so_far = A[1]
+  start = 1
+  end = 1
+  temp_start = 1
+  for i = 2 to A.length:
+    if A[i] > max_ending_here + A[i]:
+      max_ending_here = A[i]
+      temp_start = i
+    else:
+      max_ending_here = max_ending_here + A[i]
+    if max_ending_here > max_so_far:
+      max_so_far = max_ending_here
+      start = temp_start
+      end = i
+  return (max_so_far, start, end)
 
 // Find maximum circular subarray sum
 KADANE-CIRCULAR(A):
-    max_kadane = KADANE(A)
-    max_wrap = 0
-    for i = 1 to A.length:
-        max_wrap = max_wrap + A[i]
-        A[i] = -A[i]
-    max_wrap = max_wrap + KADANE(A)
-    return max(max_kadane, max_wrap)`} />
+  max_kadane = KADANE(A)
+  max_wrap = 0
+  for i = 1 to A.length:
+    max_wrap = max_wrap + A[i]
+    A[i] = -A[i]
+  max_wrap = max_wrap + KADANE(A)
+  return max(max_kadane, max_wrap)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -41,38 +41,38 @@ DEQUEUE(Q)
 
 // Example:
 // Input: Operations [ENQUEUE(10), ENQUEUE(20), DEQUEUE(), ENQUEUE(30), ENQUEUE(40)]
-// 
+//
 // Initial state:
 //   Q = []
 //   Q.head = 1
 //   Q.tail = 1
-// 
+//
 // After ENQUEUE(10):
 //   Q = [10]
 //   Q.head = 1
 //   Q.tail = 2
-// 
+//
 // After ENQUEUE(20):
 //   Q = [10, 20]
 //   Q.head = 1
 //   Q.tail = 3
-// 
+//
 // After DEQUEUE():
 //   Q = [20]
 //   Q.head = 2
 //   Q.tail = 3
 //   Returns: 10
-// 
+//
 // After ENQUEUE(30):
 //   Q = [20, 30]
 //   Q.head = 2
 //   Q.tail = 4
-// 
+//
 // After ENQUEUE(40):
 //   Q = [20, 30, 40]
 //   Q.head = 2
 //   Q.tail = 5
-// 
+//
 // Final state:
 //   Q = [20, 30, 40]
 //   Q.head = 2

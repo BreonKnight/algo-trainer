@@ -70,7 +70,7 @@ MAX-HEAP-INSERT(A, key):
 
 // Example:
 // Input: [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
-// 
+//
 // After BUILD-MAX-HEAP:
 //       16
 //     /    \\
@@ -79,7 +79,7 @@ MAX-HEAP-INSERT(A, key):
 // 8    7  9    3
 // / \\  /
 // 2  4 1
-// 
+//
 // After HEAP-EXTRACT-MAX:
 //       14
 //     /    \\
@@ -88,7 +88,7 @@ MAX-HEAP-INSERT(A, key):
 // 2   7   9   3
 // / \\
 // 1   4
-// 
+//
 // After MAX-HEAP-INSERT(15):
 //       15
 //     /    \\

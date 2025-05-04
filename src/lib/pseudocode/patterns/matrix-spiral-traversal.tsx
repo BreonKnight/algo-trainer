@@ -18,24 +18,24 @@ export const MatrixSpiralTraversalPattern = () => (
     let top ← 1, bottom ← m
     let left ← 1, right ← n
     let idx ← 1
-    
+
     while top ≤ bottom and left ≤ right
         do for i ← left to right
             do result[idx] ← A[top, i]
                 idx ← idx + 1
             top ← top + 1
-            
+
             for i ← top to bottom
                 do result[idx] ← A[i, right]
                     idx ← idx + 1
                 right ← right - 1
-                
+
                 if top ≤ bottom
                     then for i ← right downto left
                         do result[idx] ← A[bottom, i]
                             idx ← idx + 1
                         bottom ← bottom - 1
-                        
+
                         if left ≤ right
                             then for i ← bottom downto top
                                 do result[idx] ← A[i, left]
@@ -47,14 +47,14 @@ export const MatrixSpiralTraversalPattern = () => (
 // Input: A = [1  2  3  4]
 //            [5  6  7  8]
 //            [9 10 11 12]
-// 
+//
 // Traversal order:
 // 1. Top row: 1, 2, 3, 4
 // 2. Right column: 8, 12
 // 3. Bottom row: 11, 10, 9
 // 4. Left column: 5
 // 5. Middle: 6, 7
-// 
+//
 // Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`} />
 
     <div className="mb-2">

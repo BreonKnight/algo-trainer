@@ -23,7 +23,7 @@ Algorithm SIEVE-OF-SUNDARAM(n)
     for i ← 1 to k do
         is_prime[i] ← true
     end for
-    
+
     # Mark numbers of form i + j + 2ij
     for i ← 1 to k do
         j ← i
@@ -32,7 +32,7 @@ Algorithm SIEVE-OF-SUNDARAM(n)
             j ← j + 1
         end while
     end for
-    
+
     # Collect primes
     primes ← [2]  # 2 is the only even prime
     for i ← 1 to k do
@@ -40,24 +40,24 @@ Algorithm SIEVE-OF-SUNDARAM(n)
             primes.append(2*i + 1)
         end if
     end for
-    
+
     return primes
 
 # Example:
 # Input: n = 30
-# 
+#
 # Step 1: k = (30 - 1) // 2 = 14
 #         is_prime = [T, T, T, T, T, T, T, T, T, T, T, T, T, T, T]
-# 
+#
 # Step 2: Mark numbers
 #         i = 1: mark 4, 7, 10, 13
 #         i = 2: mark 7, 12
 #         i = 3: mark 10
 #         i = 4: mark 13
-# 
+#
 # Step 3: Collect primes
 #         primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-# 
+#
 # Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`} />
 
     <div className="mb-2">

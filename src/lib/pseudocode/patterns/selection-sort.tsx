@@ -14,14 +14,14 @@ export const SelectionSortPattern = () => (
 
     <PseudocodeDisplay code={`SELECTION-SORT(A)
     n ← length[A]
-    
+
     for i ← 1 to n-1
         # Find minimum in unsorted part
         min_idx ← i
         for j ← i+1 to n
             if A[j] < A[min_idx]
                 min_idx ← j
-        
+
         # Swap with first unsorted element
         swap A[i] and A[min_idx]
 

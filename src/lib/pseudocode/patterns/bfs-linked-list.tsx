@@ -12,7 +12,8 @@ export const BfsLinkedListPattern = () => (
       list level by level
     </div>
 
-    <PseudocodeDisplay code={`// Node structure for linked list
+    <PseudocodeDisplay
+      code={`// Node structure for linked list
 NODE:
     key
     next
@@ -22,16 +23,16 @@ NODE:
 BFS-LINKED-LIST(head):
     if head = NIL:
         return
-    
+
     // Initialize queue and mark head as visited
     Q ← ∅
     ENQUEUE(Q, head)
     head.visited ← true
-    
+
     while Q ≠ ∅:
         u ← DEQUEUE(Q)
         process u.key
-        
+
         // Process next node if not visited
         if u.next ≠ NIL and not u.next.visited:
             u.next.visited ← true
@@ -39,15 +40,16 @@ BFS-LINKED-LIST(head):
 
 // Example:
 // Input: 1 → 2 → 3 → 4 → 5
-// 
+//
 // Execution:
 // 1. Q = [1], visited = {1}
 // 2. Q = [2], visited = {1,2}
 // 3. Q = [3], visited = {1,2,3}
 // 4. Q = [4], visited = {1,2,3,4}
 // 5. Q = [5], visited = {1,2,3,4,5}
-// 
-// Output: 1, 2, 3, 4, 5`} />
+//
+// Output: 1, 2, 3, 4, 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

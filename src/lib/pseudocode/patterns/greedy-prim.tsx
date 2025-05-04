@@ -17,26 +17,26 @@ def prim(graph, start):
     # Initialize MST and visited set
     mst = []
     visited = {start}
-    
+
     # Priority queue for edges
     import heapq
-    edges = [(weight, start, neighbor) 
+    edges = [(weight, start, neighbor)
              for neighbor, weight in graph[start].items()]
     heapq.heapify(edges)
-    
+
     while edges and len(visited) < len(graph):
         # Get minimum weight edge
         weight, u, v = heapq.heappop(edges)
-        
+
         if v not in visited:
             visited.add(v)
             mst.append((u, v, weight))
-            
+
             # Add new edges to queue
             for neighbor, weight in graph[v].items():
                 if neighbor not in visited:
                     heapq.heappush(edges, (weight, v, neighbor))
-    
+
     return mst
 
 // Prim's with Early Exit
@@ -44,25 +44,25 @@ def prim_with_max_weight(graph, start, max_weight):
     mst = []
     visited = {start}
     total_weight = 0
-    
-    edges = [(weight, start, neighbor) 
+
+    edges = [(weight, start, neighbor)
              for neighbor, weight in graph[start].items()]
     heapq.heapify(edges)
-    
+
     while edges and len(visited) < len(graph):
         weight, u, v = heapq.heappop(edges)
-        
+
         if v not in visited and total_weight + weight <= max_weight:
             visited.add(v)
             mst.append((u, v, weight))
             total_weight += weight
-            
+
             for neighbor, weight in graph[v].items():
                 if neighbor not in visited:
                     heapq.heappush(edges, (weight, v, neighbor))
         elif total_weight + weight > max_weight:
             break
-    
+
     return mst, total_weight
 
 // Prim's with Maximum Degree
@@ -71,24 +71,24 @@ def prim_with_max_degree(graph, start, max_degree):
     visited = {start}
     degree = {node: 0 for node in graph}
     degree[start] = 0
-    
-    edges = [(weight, start, neighbor) 
+
+    edges = [(weight, start, neighbor)
              for neighbor, weight in graph[start].items()]
     heapq.heapify(edges)
-    
+
     while edges and len(visited) < len(graph):
         weight, u, v = heapq.heappop(edges)
-        
+
         if v not in visited and degree[u] < max_degree and degree[v] < max_degree:
             visited.add(v)
             mst.append((u, v, weight))
             degree[u] += 1
             degree[v] += 1
-            
+
             for neighbor, weight in graph[v].items():
                 if neighbor not in visited:
                     heapq.heappush(edges, (weight, v, neighbor))
-    
+
     return mst`} />
 
     <div className="flex items-start mb-1">

@@ -17,13 +17,13 @@ export const ChineseRemainderTheoremPattern = () => (
     let M ← 1
     for i ← 1 to n
         do M ← M · m[i]
-    
+
     let x ← 0
     for i ← 1 to n
         do let Mi ← M / m[i]
             let yi ← MODULAR-INVERSE(Mi, m[i])
             x ← x + a[i] · Mi · yi
-    
+
     return x mod M
 
 MODULAR-INVERSE(a, m)
@@ -43,23 +43,23 @@ EXTENDED-EUCLID(a, b)
 
 // Example:
 // Input: a = [2, 3, 2], m = [3, 5, 7]
-// 
+//
 // M = 3·5·7 = 105
-// 
+//
 // For i = 1:
 //   M₁ = 105/3 = 35
 //   y₁ = 2 (inverse of 35 mod 3)
-// 
+//
 // For i = 2:
 //   M₂ = 105/5 = 21
 //   y₂ = 1 (inverse of 21 mod 5)
-// 
+//
 // For i = 3:
 //   M₃ = 105/7 = 15
 //   y₃ = 1 (inverse of 15 mod 7)
-// 
+//
 // x = 2·35·2 + 3·21·1 + 2·15·1 = 233
-// 
+//
 // Output: 233 mod 105 = 23`} />
 
     <div className="mb-2">

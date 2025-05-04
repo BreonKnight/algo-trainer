@@ -12,61 +12,63 @@ export const HeapPattern = () => (
       implementation
     </div>
 
-    <PseudocodeDisplay code={`// Get parent index
+    <PseudocodeDisplay
+      code={`// Get parent index
 PARENT(i):
-    return ⌊i/2⌋
+  return ⌊i/2⌋
 
 // Get left child index
 LEFT(i):
-    return 2i
+  return 2i
 
 // Get right child index
 RIGHT(i):
-    return 2i + 1
+  return 2i + 1
 
 // Maintain heap property
 MAX-HEAPIFY(A, i):
-    l = LEFT(i)
-    r = RIGHT(i)
-    largest = i
-    if l ≤ A.heap-size and A[l] > A[i]:
-        largest = l
-    if r ≤ A.heap-size and A[r] > A[largest]:
-        largest = r
-    if largest ≠ i:
-        exchange A[i] with A[largest]
-        MAX-HEAPIFY(A, largest)
+  l = LEFT(i)
+  r = RIGHT(i)
+  largest = i
+  if l ≤ A.heap-size and A[l] > A[i]:
+    largest = l
+  if r ≤ A.heap-size and A[r] > A[largest]:
+    largest = r
+  if largest ≠ i:
+    exchange A[i] with A[largest]
+    MAX-HEAPIFY(A, largest)
 
 // Build max heap
 BUILD-MAX-HEAP(A):
-    A.heap-size = A.length
-    for i = ⌊A.length/2⌋ downto 1:
-        MAX-HEAPIFY(A, i)
+  A.heap-size = A.length
+  for i = ⌊A.length/2⌋ downto 1:
+    MAX-HEAPIFY(A, i)
 
 // Extract maximum element
 HEAP-EXTRACT-MAX(A):
-    if A.heap-size < 1:
-        error "heap underflow"
-    max = A[1]
-    A[1] = A[A.heap-size]
-    A.heap-size = A.heap-size - 1
-    MAX-HEAPIFY(A, 1)
-    return max
+  if A.heap-size < 1:
+    error "heap underflow"
+  max = A[1]
+  A[1] = A[A.heap-size]
+  A.heap-size = A.heap-size - 1
+  MAX-HEAPIFY(A, 1)
+  return max
 
 // Increase key value
 HEAP-INCREASE-KEY(A, i, key):
-    if key < A[i]:
-        error "new key is smaller than current key"
-    A[i] = key
-    while i > 1 and A[PARENT(i)] < A[i]:
-        exchange A[i] with A[PARENT(i)]
-        i = PARENT(i)
+  if key < A[i]:
+    error "new key is smaller than current key"
+  A[i] = key
+  while i > 1 and A[PARENT(i)] < A[i]:
+    exchange A[i] with A[PARENT(i)]
+    i = PARENT(i)
 
 // Insert new element
 MAX-HEAP-INSERT(A, key):
-    A.heap-size = A.heap-size + 1
-    A[A.heap-size] = -∞
-    HEAP-INCREASE-KEY(A, A.heap-size, key)`} />
+  A.heap-size = A.heap-size + 1
+  A[A.heap-size] = -∞
+  HEAP-INCREASE-KEY(A, A.heap-size, key)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

@@ -25,7 +25,7 @@ Algorithm STATE-COMPRESSION-DP(G)
         dp[i] ← -∞
     end for
     dp[0] ← 0
-    
+
     # Process each row
     for i ← 1 to n do
         # Initialize current row's DP
@@ -33,13 +33,13 @@ Algorithm STATE-COMPRESSION-DP(G)
         for j ← 0 to 2^m - 1 do
             curr[j] ← -∞
         end for
-        
+
         # Try all possible states
         for prev ← 0 to 2^m - 1 do
             if dp[prev] = -∞ then
                 continue
             end if
-            
+
             # Try all possible current states
             for curr_state ← 0 to 2^m - 1 do
                 # Check if current state is valid
@@ -56,7 +56,7 @@ Algorithm STATE-COMPRESSION-DP(G)
                         end if
                     end if
                 end for
-                
+
                 if valid then
                     # Calculate value for current state
                     value ← 0
@@ -65,23 +65,23 @@ Algorithm STATE-COMPRESSION-DP(G)
                             value ← value + G[i][j+1]
                         end if
                     end for
-                    
+
                     # Update DP
                     curr[curr_state] ← max(curr[curr_state], dp[prev] + value)
                 end if
             end for
         end for
-        
+
         dp ← curr
     end for
-    
+
     return max(dp)
 
 # Example:
 # Input: G = [[1, 2, 3],
 #             [4, 5, 6],
 #             [7, 8, 9]]
-# 
+#
 # Step 1: dp = [0, -∞, -∞, -∞, -∞, -∞, -∞, -∞]
 # Step 2: Process first row
 #         curr = [0, 1, 2, 3, -∞, -∞, -∞, -∞]
@@ -89,7 +89,7 @@ Algorithm STATE-COMPRESSION-DP(G)
 #         curr = [0, 4, 5, 9, -∞, -∞, -∞, -∞]
 # Step 4: Process third row
 #         curr = [0, 7, 8, 15, -∞, -∞, -∞, -∞]
-# 
+#
 # Output: 15`} />
 
     <div className="mb-2">

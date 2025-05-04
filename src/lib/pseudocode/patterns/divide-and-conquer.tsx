@@ -12,51 +12,53 @@ export const DivideAndConquerPattern = () => (
       problems into smaller subproblems
     </div>
 
-    <PseudocodeDisplay code={`// Merge Sort
+    <PseudocodeDisplay
+      code={`// Merge Sort
 MERGE-SORT(A, l, r):
-    if l ≥ r:
-        return
-    mid = floor((l + r) / 2)
-    MERGE-SORT(A, l, mid)
-    MERGE-SORT(A, mid+1, r)
-    MERGE(A, l, mid, r)
+  if l ≥ r:
+    return
+  mid = floor((l + r) / 2)
+  MERGE-SORT(A, l, mid)
+  MERGE-SORT(A, mid+1, r)
+  MERGE(A, l, mid, r)
 
 // Quick Sort
 QUICK-SORT(A, l, r):
-    if l ≥ r:
-        return
-    p = PARTITION(A, l, r)
-    QUICK-SORT(A, l, p-1)
-    QUICK-SORT(A, p+1, r)
+  if l ≥ r:
+    return
+  p = PARTITION(A, l, r)
+  QUICK-SORT(A, l, p-1)
+  QUICK-SORT(A, p+1, r)
 
 // Binary Search
 BINARY-SEARCH(A, l, r, x):
-    if l > r:
-        return -1
-    mid = floor((l + r) / 2)
-    if A[mid] == x:
-        return mid
-    if A[mid] > x:
-        return BINARY-SEARCH(A, l, mid-1, x)
-    return BINARY-SEARCH(A, mid+1, r, x)
+  if l > r:
+    return -1
+  mid = floor((l + r) / 2)
+  if A[mid] == x:
+    return mid
+  if A[mid] > x:
+    return BINARY-SEARCH(A, l, mid-1, x)
+  return BINARY-SEARCH(A, mid+1, r, x)
 
 // Strassen's Matrix Multiplication
 STRASSEN(A, B):
-    if A is 1x1:
-        return A * B
-    split A and B into 4 submatrices
-    P1 = STRASSEN(A11, B12 - B22)
-    P2 = STRASSEN(A11 + A12, B22)
-    P3 = STRASSEN(A21 + A22, B11)
-    P4 = STRASSEN(A22, B21 - B11)
-    P5 = STRASSEN(A11 + A22, B11 + B22)
-    P6 = STRASSEN(A12 - A22, B21 + B22)
-    P7 = STRASSEN(A11 - A21, B11 + B12)
-    C11 = P5 + P4 - P2 + P6
-    C12 = P1 + P2
-    C21 = P3 + P4
-    C22 = P5 + P1 - P3 - P7
-    return combine C11, C12, C21, C22`} />
+  if A is 1x1:
+    return A * B
+  split A and B into 4 submatrices
+  P1 = STRASSEN(A11, B12 - B22)
+  P2 = STRASSEN(A11 + A12, B22)
+  P3 = STRASSEN(A21 + A22, B11)
+  P4 = STRASSEN(A22, B21 - B11)
+  P5 = STRASSEN(A11 + A22, B11 + B22)
+  P6 = STRASSEN(A12 - A22, B21 + B22)
+  P7 = STRASSEN(A11 - A21, B11 + B12)
+  C11 = P5 + P4 - P2 + P6
+  C12 = P1 + P2
+  C21 = P3 + P4
+  C22 = P5 + P1 - P3 - P7
+  return combine C11, C12, C21, C22`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
