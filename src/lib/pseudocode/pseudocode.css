@@ -38,10 +38,10 @@ pre[class*="language-"] {
 
 .theme-dracula .pseudocode-mono,
 .theme-nord .pseudocode-mono {
-  background: #23272e !important;
+  color: #e5e7eb !important;
 }
 .theme-light .pseudocode-mono {
-  background: #f8fafc !important;
+  color: #23272e !important;
 }
 .pseudocode-mono {
   background: var(--pseudocode-bg, #23272e) !important;

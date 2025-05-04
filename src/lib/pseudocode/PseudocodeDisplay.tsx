@@ -1,5 +1,8 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+  vscDarkPlus,
+  vs,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./pseudocode.css";
 import { useTheme } from "@/components/theme/theme-context";
 
@@ -12,6 +15,7 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
   const isDark = ["dracula", "nord"].includes(theme);
   const backgroundColor = isDark ? "#23272e" : "#f8fafc";
   const textColor = isDark ? "#e5e7eb" : "#23272e";
+  const syntaxStyle = isDark ? vscDarkPlus : vs;
 
   return (
     <div
@@ -24,7 +28,7 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
     >
       <SyntaxHighlighter
         language="python"
-        style={vscDarkPlus}
+        style={syntaxStyle}
         customStyle={{
           backgroundColor: "var(--pseudocode-bg)",
           color: textColor,
