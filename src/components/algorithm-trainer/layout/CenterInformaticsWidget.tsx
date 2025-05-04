@@ -45,21 +45,21 @@ export function CenterInformaticsWidget() {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="flex items-center gap-2 sm:gap-4 px-2 sm:px-4 py-2 rounded-lg bg-background/90 border-2 border-accent/30 shadow-lg w-full transition-transform duration-200 hover:scale-[1.025] group cursor-pointer">
-        <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-accent/20 shadow animate-pulse-slow">
+      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-4 px-1.5 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 rounded-lg bg-background/90 border-2 border-accent/30 shadow-lg w-full transition-transform duration-200 hover:scale-[1.025] group cursor-pointer">
+        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-accent/20 shadow animate-pulse-slow">
           {showTip ? (
-            <Lightbulb className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-400 drop-shadow" />
+            <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-6 md:h-6 text-yellow-400 drop-shadow" />
           ) : (
-            <Info className="w-4 h-4 sm:w-6 sm:h-6 text-blue-400 drop-shadow" />
+            <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-6 md:h-6 text-blue-400 drop-shadow" />
           )}
         </div>
-        <div className="h-8 sm:h-10 w-px bg-accent/10 rounded-full mx-1 sm:mx-2" />
+        <div className="h-7 sm:h-8 md:h-10 w-px bg-accent/10 rounded-full mx-1 sm:mx-1.5 md:mx-2" />
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-sm sm:text-base text-accent mb-0.5 sm:mb-1 tracking-wide">
+          <div className="font-bold text-xs sm:text-sm md:text-base text-accent mb-0.5 sm:mb-1 tracking-wide">
             {showTip ? "Tip of the Day" : "Fun Informatics"}
           </div>
           <div
-            className="text-xs sm:text-sm text-main/90 leading-snug line-clamp-2"
+            className="text-[10px] sm:text-xs md:text-sm text-main/90 leading-snug line-clamp-2"
             title={showTip ? TIPS[tipIdx] : FACTS[factIdx]}
           >
             {showTip ? TIPS[tipIdx] : FACTS[factIdx]}
@@ -67,10 +67,10 @@ export function CenterInformaticsWidget() {
         </div>
         <button
           onClick={handleNext}
-          className="ml-2 p-1.5 sm:p-2 rounded-full hover:bg-accent/20 transition-colors shadow border border-accent/10"
+          className="ml-1.5 sm:ml-2 p-1 sm:p-1.5 md:p-2 rounded-full hover:bg-accent/20 transition-colors shadow border border-accent/10"
           title="Next tip or fact"
         >
-          <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 text-accent group-hover:rotate-90 transition-transform duration-300" />
+          <RefreshCw className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-accent group-hover:rotate-90 transition-transform duration-300" />
         </button>
       </div>
     </div>

@@ -27,7 +27,7 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
             ref={ref}
             variant="ghost"
             size="sm"
-            className={`${buttonClass} font-bold px-4 py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90`}
+            className={`${buttonClass} font-bold text-xs sm:text-sm md:text-base px-2 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90 truncate max-w-[100px] sm:max-w-[140px]`}
           >
             How to Use :)
           </Button>
