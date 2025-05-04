@@ -299,4 +299,151 @@ export const monsterHunterPatternsExtended7 = new Map<PatternKey, string>([
     
     return factors`,
   ],
+  [
+    "Bellman-Ford" as PatternKey,
+    `def monster_hunter_bellman_ford(territory_graph, start_camp):
+    """
+    Find shortest paths through territories with negative weights.
+    Time: O(VE)
+    Space: O(V)
+    
+    Monster Hunter Context:
+    - Like finding optimal routes through dangerous territories
+    - Negative weights represent speed boosts or shortcuts
+    - Helps plan efficient hunting routes
+    
+    Example:
+    territory_graph = {
+        "Base Camp": {"Ancient Forest": 3, "Wildspire Waste": -2},
+        "Ancient Forest": {"Coral Highlands": 4},
+        "Wildspire Waste": {"Rotten Vale": -1},
+        "Coral Highlands": {"Elder's Recess": 2},
+        "Rotten Vale": {"Elder's Recess": 3},
+        "Elder's Recess": {}
+    }
+    
+    Process:
+    1. Initialize distances from start
+    2. Relax all edges V-1 times
+    3. Check for negative cycles
+    """
+    # Initialize distances
+    distances = {territory: float('inf') for territory in territory_graph}
+    distances[start_camp] = 0
+    
+    # Relax edges V-1 times
+    for _ in range(len(territory_graph) - 1):
+        for u in territory_graph:
+            for v in territory_graph[u]:
+                if distances[u] + territory_graph[u][v] < distances[v]:
+                    distances[v] = distances[u] + territory_graph[u][v]
+    
+    # Check for negative cycles
+    for u in territory_graph:
+        for v in territory_graph[u]:
+            if distances[u] + territory_graph[u][v] < distances[v]:
+                return "Negative cycle detected! Cannot find shortest paths."
+    
+    return distances`,
+  ],
+  [
+    "Linked List" as PatternKey,
+    `class MonsterTerritory:
+    def __init__(self, name, next_territory=None):
+        self.name = name
+        self.next = next_territory
+
+class MonsterTerritoryList:
+    """
+    Manage a chain of connected monster territories.
+    Time: O(n) for traversal, O(1) for insertion/deletion at head
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like tracking a sequence of connected territories
+    - Each territory points to the next in the chain
+    - Helps plan hunting routes and territory exploration
+    
+    Example:
+    territories = MonsterTerritoryList()
+    territories.add("Ancient Forest")
+    territories.add("Wildspire Waste")
+    territories.add("Coral Highlands")
+    """
+    def __init__(self):
+        self.head = None
+    
+    def add(self, territory_name):
+        """Add new territory at the beginning of the chain."""
+        new_territory = MonsterTerritory(territory_name, self.head)
+        self.head = new_territory
+    
+    def remove(self, territory_name):
+        """Remove a territory from the chain."""
+        if not self.head:
+            return
+        
+        if self.head.name == territory_name:
+            self.head = self.head.next
+            return
+        
+        current = self.head
+        while current.next:
+            if current.next.name == territory_name:
+                current.next = current.next.next
+                return
+            current = current.next
+    
+    def traverse(self):
+        """Visit all territories in the chain."""
+        current = self.head
+        while current:
+            print(f"Visiting {current.name}")
+            current = current.next`,
+  ],
+  [
+    "Recursion" as PatternKey,
+    `def monster_hunter_recursive_exploration(territory, visited=None):
+    """
+    Explore monster territories using recursion.
+    Time: O(V + E)
+    Space: O(V) for recursion stack
+    
+    Monster Hunter Context:
+    - Like exploring territories by following paths until dead ends
+    - Each recursive call represents a deeper exploration
+    - Helps map out complex territory networks
+    
+    Example:
+    territory = {
+        "Base Camp": ["Ancient Forest", "Wildspire Waste"],
+        "Ancient Forest": ["Coral Highlands"],
+        "Wildspire Waste": ["Rotten Vale"],
+        "Coral Highlands": ["Elder's Recess"],
+        "Rotten Vale": ["Elder's Recess"],
+        "Elder's Recess": []
+    }
+    
+    Process:
+    1. Mark current territory as visited
+    2. Explore each connected territory recursively
+    3. Backtrack when all paths are explored
+    """
+    if visited is None:
+        visited = set()
+    
+    # Base case: already visited or no more territories
+    if territory in visited:
+        return
+    
+    # Mark current territory as visited
+    visited.add(territory)
+    print(f"Exploring {territory}")
+    
+    # Recursive case: explore connected territories
+    for connected_territory in territory_graph[territory]:
+        monster_hunter_recursive_exploration(connected_territory, visited)
+    
+    return visited`,
+  ],
 ]);
