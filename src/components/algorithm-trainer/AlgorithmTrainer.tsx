@@ -39,30 +39,11 @@ export default function AlgorithmTrainer() {
       <div className="w-full max-w-[100rem] px-6">
         <TooltipProvider>
           {/* Title and Pattern Count */}
-          <div className="flex flex-col items-center justify-center mt-6 mb-2 relative w-full">
-            <h1
-              className="text-2xl font-extrabold text-transparent bg-clip-text text-center animate-gradient-x drop-shadow-lg tracking-tight select-none"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-              }}
-            >
-              Algorithm Trainer
-            </h1>
-            <span className="text-xs font-semibold text-accent2 mt-1">
-              Pattern {patternNumber} of {totalPatterns}
-            </span>
-
-            <NavigationBar />
-          </div>
 
           <TopBar />
 
           {/* Main content area */}
           <div className="w-full flex-1">
-            <div className="fixed top-4 left-4">
-              <GamificationButton />
-            </div>
             <PanelLayout
               selectedPattern={selectedPattern}
               onPatternChange={handlePatternChange}
