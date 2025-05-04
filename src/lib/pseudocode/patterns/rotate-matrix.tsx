@@ -40,7 +40,7 @@ ROTATE-COUNTERCLOCKWISE(A)
 // Input: A = [[1, 2, 3],
 //             [4, 5, 6],
 //             [7, 8, 9]]
-// 
+//
 // Clockwise rotation:
 // Step 1: Transpose
 //         [[1, 4, 7],
@@ -50,7 +50,7 @@ ROTATE-COUNTERCLOCKWISE(A)
 //         [[7, 4, 1],
 //          [8, 5, 2],
 //          [9, 6, 3]]
-// 
+//
 // Counterclockwise rotation:
 // Step 1: Transpose
 //         [[1, 4, 7],

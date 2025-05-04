@@ -22,7 +22,7 @@ Algorithm Z-ALGORITHM(S)
     Z[1] ← n
     L ← 1
     R ← 1
-    
+
     for i ← 2 to n do
         if i > R then
             # Case 1: i outside current Z-box
@@ -49,14 +49,14 @@ Algorithm Z-ALGORITHM(S)
 
 # Example:
 # Input: S = "aabxaabxcaabxaabxay"
-# 
+#
 # Step 1: Initialize Z[1] = 19 (length of S)
 # Step 2: i=2, outside Z-box, find Z[2] = 1
 # Step 3: i=3, outside Z-box, find Z[3] = 0
 # Step 4: i=4, outside Z-box, find Z[4] = 0
 # Step 5: i=5, outside Z-box, find Z[5] = 4
 # ... continue until i=19
-# 
+#
 # Output: Z = [19, 1, 0, 0, 4, 1, 0, 0, 0, 8, 1, 0, 0, 5, 1, 0, 0, 1, 0]`} />
 
     <div className="mb-2">

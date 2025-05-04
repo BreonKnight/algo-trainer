@@ -15,58 +15,58 @@ export const FloydCycleDetectionPattern = () => (
     <PseudocodeDisplay code={`FLOYD-CYCLE-DETECTION(head)
     let slow ← head
     let fast ← head
-    
+
     while fast ≠ null and fast.next ≠ null
         do slow ← slow.next
            fast ← fast.next.next
            if slow = fast
                then return true
-    
+
     return false
 
 FIND-CYCLE-START(head)
     let slow ← head
     let fast ← head
-    
+
     while fast ≠ null and fast.next ≠ null
         do slow ← slow.next
            fast ← fast.next.next
            if slow = fast
                then break
-    
+
     if fast = null or fast.next = null
         then return null
-    
+
     slow ← head
     while slow ≠ fast
         do slow ← slow.next
            fast ← fast.next
-    
+
     return slow
 
 // Example:
 // Input: 1 → 2 → 3 → 4 → 5 → 3 (cycle back to 3)
-// 
+//
 // Initial state:
 //   slow = 1, fast = 1
-// 
+//
 // First iteration:
 //   slow = 2, fast = 3
-// 
+//
 // Second iteration:
 //   slow = 3, fast = 5
-// 
+//
 // Third iteration:
 //   slow = 4, fast = 3
-// 
+//
 // Fourth iteration:
 //   slow = 5, fast = 5 (cycle detected)
-// 
+//
 // Finding cycle start:
 //   slow = 1, fast = 5
 //   slow = 2, fast = 3
 //   slow = 3, fast = 3 (cycle start found)
-// 
+//
 // Output: Cycle exists, starts at node 3`} />
 
     <div className="mb-2">

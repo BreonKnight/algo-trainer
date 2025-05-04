@@ -17,25 +17,25 @@ export const KosarajuPattern = () => (
     let visited[1‥n] be a new array
     let order be a new empty stack
     let components be a new empty list
-    
+
     for each vertex u in G.V
         do visited[u] ← FALSE
-    
+
     for each vertex u in G.V
         do if not visited[u]
             then DFS-FIRST(G, u, visited, order)
-    
+
     let G^T be the transpose of G
     for each vertex u in G.V
         do visited[u] ← FALSE
-    
+
     while order is not empty
         do let u ← order.pop()
             if not visited[u]
                 then let component be a new empty list
                     DFS-SECOND(G^T, u, visited, component)
                     components.append(component)
-    
+
     return components
 
 DFS-FIRST(G, u, visited, order)
@@ -54,14 +54,14 @@ DFS-SECOND(G, u, visited, component)
 
 // Example:
 // Input: G with edges (1,2), (2,3), (3,1), (2,4), (4,5), (5,6), (6,4)
-// 
+//
 // First DFS:
 //   Order: [3, 2, 1, 6, 5, 4]
-// 
+//
 // Second DFS on G^T:
 //   Component 1: [1, 2, 3]
 //   Component 2: [4, 5, 6]
-// 
+//
 // Output: [[1, 2, 3], [4, 5, 6]]`}
     />
 

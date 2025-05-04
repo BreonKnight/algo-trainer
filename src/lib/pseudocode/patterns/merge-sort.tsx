@@ -18,7 +18,7 @@ MERGE-SORT(array, start, end):
     if start < end:
         # Find middle point
         middle = floor of (start + end) / 2
-        
+
         # Sort left half
         MERGE-SORT(array, start, middle)
         # Sort right half
@@ -31,26 +31,26 @@ MERGE(array, start, middle, end):
     # Calculate sizes of left and right arrays
     left_size = middle - start + 1
     right_size = end - middle
-    
+
     # Create temporary arrays
     left = new array of size left_size + 1
     right = new array of size right_size + 1
-    
+
     # Copy data to temporary arrays
     for i from 1 to left_size:
         left[i] = array[start + i - 1]
-    
+
     for j from 1 to right_size:
         right[j] = array[middle + j]
-    
+
     # Add sentinel values
     left[left_size + 1] = infinity
     right[right_size + 1] = infinity
-    
+
     # Merge the temporary arrays
     i = 1
     j = 1
-    
+
     for k from start to end:
         if left[i] ≤ right[j]:
             array[k] = left[i]

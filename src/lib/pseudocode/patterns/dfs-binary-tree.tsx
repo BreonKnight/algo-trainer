@@ -20,25 +20,25 @@ Algorithm DFS-BINARY-TREE(T)
     if T.root = NIL then
         return empty list
     end if
-    
+
     result ← empty list
     stack ← empty stack
     stack.push(T.root)
-    
+
     while stack is not empty do
         node ← stack.pop()
         result.append(node.value)
-        
+
         # Push right child first so left is processed first
         if node.right ≠ NIL then
             stack.push(node.right)
         end if
-        
+
         if node.left ≠ NIL then
             stack.push(node.left)
         end if
     end while
-    
+
     return result
 
 # Example:
@@ -48,7 +48,7 @@ Algorithm DFS-BINARY-TREE(T)
 #      2   3
 #     / \   \
 #    4   5   6
-# 
+#
 # Step 1: Push 1
 # Step 2: Pop 1, Push 3, Push 2
 # Step 3: Pop 2, Push 5, Push 4
@@ -56,7 +56,7 @@ Algorithm DFS-BINARY-TREE(T)
 # Step 5: Pop 5
 # Step 6: Pop 3, Push 6
 # Step 7: Pop 6
-# 
+#
 # Output: [1, 2, 4, 5, 3, 6]`} />
 
     <div className="mb-2">

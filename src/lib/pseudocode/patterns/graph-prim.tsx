@@ -18,21 +18,21 @@ PRIM(G):
     key = [∞] * |V|
     parent = [None] * |V|
     in_mst = [False] * |V|
-    
+
     # Start with vertex 0
     key[0] = 0
-    
+
     for _ in range(|V|):
         # Find minimum key vertex
         u = min((v for v in range(|V|) if not in_mst[v]), key=lambda v: key[v])
         in_mst[u] = True
-        
+
         # Update keys of adjacent vertices
         for v in G.adj[u]:
             if not in_mst[v] and G.weight(u, v) < key[v]:
                 key[v] = G.weight(u, v)
                 parent[v] = u
-    
+
     return parent
 
 // Prim's with Priority Queue
@@ -42,16 +42,16 @@ PRIM-PQ(G):
     parent = [None] * |V|
     in_mst = [False] * |V|
     pq = PriorityQueue()
-    
+
     # Start with vertex 0
     key[0] = 0
     pq.put((0, 0))
-    
+
     while not pq.empty():
         _, u = pq.get()
         if in_mst[u]:
             continue
-        
+
         in_mst[u] = True
         for v in G.adj[u]:
             weight = G.weight(u, v)
@@ -59,7 +59,7 @@ PRIM-PQ(G):
                 key[v] = weight
                 parent[v] = u
                 pq.put((weight, v))
-    
+
     return parent
 
 // Prim's with Fibonacci Heap
@@ -69,22 +69,22 @@ PRIM-FH(G):
     parent = [None] * |V|
     in_mst = [False] * |V|
     fh = FibonacciHeap()
-    
+
     # Start with vertex 0
     key[0] = 0
     nodes = [fh.insert(key[v], v) for v in range(|V|)]
-    
+
     while not fh.empty():
         u = fh.extract_min().value
         in_mst[u] = True
-        
+
         for v in G.adj[u]:
             weight = G.weight(u, v)
             if not in_mst[v] and weight < key[v]:
                 key[v] = weight
                 parent[v] = u
                 fh.decrease_key(nodes[v], weight)
-    
+
     return parent`} />
 
     <div className="flex items-start mb-1">

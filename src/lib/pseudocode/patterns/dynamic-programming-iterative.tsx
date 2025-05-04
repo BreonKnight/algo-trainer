@@ -16,11 +16,11 @@ export const DynamicProgrammingIterativePattern = () => (
     # Initialize DP array with base cases
     dp[0] ← base_case_0
     dp[1] ← base_case_1
-    
+
     # Fill DP array
     for i ← 2 to n
         dp[i] ← compute_from_previous(dp[i-1], dp[i-2])
-    
+
     return dp[n]
 
 # Example:

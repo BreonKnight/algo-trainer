@@ -38,12 +38,12 @@ PARTITION(A, p, r)
 
 // Example:
 // Input: A = [3, 2, 1, 5, 4], k = 3
-// 
+//
 // First call: p = 1, r = 5, k = 3
 //   q = 3 (after PARTITION)
 //   i = 3 - 1 + 1 = 3
 //   k = i, return A[3] = 3
-// 
+//
 // Output: 3`} />
 
     <div className="mb-2">

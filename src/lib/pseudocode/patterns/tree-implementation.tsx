@@ -78,14 +78,14 @@ TREE-SUCCESSOR(x):
 
 // Example:
 // Input: Binary tree with keys [4, 2, 6, 1, 3, 5, 7]
-// 
+//
 // Tree structure:
 //       4
 //     /   \\
 //    2     6
 //   / \\   / \\
 //  1   3 5   7
-// 
+//
 // Inorder traversal: 1 2 3 4 5 6 7
 // Preorder traversal: 4 2 1 3 6 5 7
 // Postorder traversal: 1 3 2 5 7 6 4`} />

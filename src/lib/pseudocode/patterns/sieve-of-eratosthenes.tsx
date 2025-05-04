@@ -22,7 +22,7 @@ Algorithm SIEVE-OF-ERATOSTHENES(n)
     for i ← 2 to n do
         is_prime[i] ← true
     end for
-    
+
     # Mark multiples of primes
     for i ← 2 to √n do
         if is_prime[i] then
@@ -31,7 +31,7 @@ Algorithm SIEVE-OF-ERATOSTHENES(n)
             end for
         end if
     end for
-    
+
     # Collect primes
     primes ← empty array
     for i ← 2 to n do
@@ -39,12 +39,12 @@ Algorithm SIEVE-OF-ERATOSTHENES(n)
             primes.append(i)
         end if
     end for
-    
+
     return primes
 
 # Example:
 # Input: n = 30
-# 
+#
 # Step 1: is_prime = [F, F, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T]
 # Step 2: i = 2, mark multiples of 2
 #         is_prime = [F, F, T, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F, T, F]
@@ -52,7 +52,7 @@ Algorithm SIEVE-OF-ERATOSTHENES(n)
 #         is_prime = [F, F, T, T, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F]
 # Step 4: i = 5, mark multiples of 5
 #         is_prime = [F, F, T, T, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F]
-# 
+#
 # Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`} />
 
     <div className="mb-2">

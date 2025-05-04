@@ -19,13 +19,13 @@ export const HungarianPattern = () => (
 4      row_min = min(C[i][j] for j = 1 to n)
 5      for j = 1 to n
 6          C[i][j] = C[i][j] - row_min
-7  
+7
 8  // Step 2: Subtract column minima
 9  for j = 1 to n
 10     col_min = min(C[i][j] for i = 1 to n)
 11     for i = 1 to n
 12         C[i][j] = C[i][j] - col_min
-13 
+13
 14 // Step 3: Cover all zeros with minimum lines
 15 while true
 16     // Find minimum uncovered value
@@ -34,7 +34,7 @@ export const HungarianPattern = () => (
 19         for j = 1 to n
 20             if not covered[i] and not covered[j]
 21                 min_val = min(min_val, C[i][j])
-22 
+22
 23     // Subtract from uncovered rows, add to covered columns
 24     for i = 1 to n
 25         for j = 1 to n
@@ -42,12 +42,12 @@ export const HungarianPattern = () => (
 27                 C[i][j] = C[i][j] - min_val
 28             else if covered[i] and covered[j]
 29                 C[i][j] = C[i][j] + min_val
-30 
+30
 31     // Try to find complete matching
 32     matching = FIND-MATCHING(C)
 33     if size(matching) == n
 34         return matching
-35 
+35
 36 FIND-MATCHING(C)
 37     n = C.rows
 38     matching = {}
@@ -56,7 +56,7 @@ export const HungarianPattern = () => (
 41         if DFS(i, visited, matching)
 42             continue
 43     return matching
-44 
+44
 45 DFS(u, visited, matching)
 46     for v = 1 to n
 47         if not visited[v] and C[u][v] == 0
@@ -70,20 +70,20 @@ export const HungarianPattern = () => (
 // Input: C = [[5, 2, 3],
 //             [2, 4, 6],
 //             [3, 6, 8]]
-// 
+//
 // Step 1: Subtract row minima
 //         [[3, 0, 1],
 //          [0, 2, 4],
 //          [0, 3, 5]]
-// 
+//
 // Step 2: Subtract column minima
 //         [[3, 0, 0],
 //          [0, 2, 3],
 //          [0, 3, 4]]
-// 
+//
 // Step 3: Find complete matching
 //         Matching: {(1,2), (2,1), (3,3)}
-// 
+//
 // Final assignment: [(1,2), (2,1), (3,3)]`} />
 
     <div className="mb-2">

@@ -12,51 +12,53 @@ export const DijkstraPattern = () => (
       Single-source shortest paths in weighted graphs
     </div>
 
-    <PseudocodeDisplay code={`// Standard Dijkstra
+    <PseudocodeDisplay
+      code={`// Standard Dijkstra
 DIJKSTRA(G, w, s):
-    INITIALIZE-SINGLE-SOURCE(G, s)
-    S = ∅
-    Q = G.V
-    while Q ≠ ∅:
-        u = EXTRACT-MIN(Q)
-        S = S ∪ {u}
-        for each v in G.adj[u]:
-            RELAX(u, v, w)
+  INITIALIZE-SINGLE-SOURCE(G, s)
+  S = ∅
+  Q = G.V
+  while Q ≠ ∅:
+    u = EXTRACT-MIN(Q)
+    S = S ∪ {u}
+    for each v in G.adj[u]:
+      RELAX(u, v, w)
 
 INITIALIZE-SINGLE-SOURCE(G, s):
-    for each vertex v in G.V:
-        v.d = ∞
-        v.π = NIL
-    s.d = 0
+  for each vertex v in G.V:
+    v.d = ∞
+    v.π = NIL
+  s.d = 0
 
 RELAX(u, v, w):
-    if v.d > u.d + w(u, v):
-        v.d = u.d + w(u, v)
-        v.π = u
+  if v.d > u.d + w(u, v):
+    v.d = u.d + w(u, v)
+    v.π = u
 
 // Priority Queue Implementation
 DIJKSTRA-PQ(G, w, s):
-    dist = [∞] * n
-    prev = [NIL] * n
-    dist[s] = 0
-    Q = priority queue of (vertex, distance)
-    while Q is not empty:
-        u = EXTRACT-MIN(Q)
-        for each v in G.adj[u]:
-            if dist[v] > dist[u] + w(u, v):
-                dist[v] = dist[u] + w(u, v)
-                prev[v] = u
-                DECREASE-KEY(Q, v, dist[v])
-    return (dist, prev)
+  dist = [∞] * n
+  prev = [NIL] * n
+  dist[s] = 0
+  Q = priority queue of (vertex, distance)
+  while Q is not empty:
+    u = EXTRACT-MIN(Q)
+    for each v in G.adj[u]:
+      if dist[v] > dist[u] + w(u, v):
+        dist[v] = dist[u] + w(u, v)
+        prev[v] = u
+        DECREASE-KEY(Q, v, dist[v])
+  return (dist, prev)
 
 // Path Reconstruction
 GET-PATH(prev, s, t):
-    path = []
-    u = t
-    while u ≠ NIL:
-        path.append(u)
-        u = prev[u]
-    return reverse(path)`} />
+  path = []
+  u = t
+  while u ≠ NIL:
+    path.append(u)
+    u = prev[u]
+  return reverse(path)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

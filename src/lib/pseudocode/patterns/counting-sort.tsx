@@ -17,24 +17,24 @@ COUNTING-SORT(A):
     # Find maximum value
     max_val = max(A)
     n = len(A)
-    
+
     # Initialize count array
     count = [0] * (max_val + 1)
     output = [0] * n
-    
+
     # Store count of each element
     for x in A:
         count[x] += 1
-    
+
     # Change count[i] to position of element
     for i in range(1, max_val + 1):
         count[i] += count[i-1]
-    
+
     # Build output array
     for i in range(n-1, -1, -1):
         output[count[A[i]]-1] = A[i]
         count[A[i]] -= 1
-    
+
     return output
 
 // Counting Sort with Negative Numbers
@@ -44,24 +44,24 @@ COUNTING-SORT-NEGATIVE(A):
     max_val = max(A)
     range_val = max_val - min_val + 1
     n = len(A)
-    
+
     # Initialize count array
     count = [0] * range_val
     output = [0] * n
-    
+
     # Store count of each element
     for x in A:
         count[x - min_val] += 1
-    
+
     # Change count[i] to position of element
     for i in range(1, range_val):
         count[i] += count[i-1]
-    
+
     # Build output array
     for i in range(n-1, -1, -1):
         output[count[A[i] - min_val]-1] = A[i]
         count[A[i] - min_val] -= 1
-    
+
     return output
 
 // Counting Sort with Objects
@@ -69,25 +69,25 @@ COUNTING-SORT-OBJECTS(A, key_func):
     # Find maximum key value
     max_key = max(key_func(x) for x in A)
     n = len(A)
-    
+
     # Initialize count array
     count = [0] * (max_key + 1)
     output = [None] * n
-    
+
     # Store count of each key
     for x in A:
         count[key_func(x)] += 1
-    
+
     # Change count[i] to position of element
     for i in range(1, max_key + 1):
         count[i] += count[i-1]
-    
+
     # Build output array
     for i in range(n-1, -1, -1):
         key = key_func(A[i])
         output[count[key]-1] = A[i]
         count[key] -= 1
-    
+
     return output
 
 // Counting Sort with Radix
@@ -95,22 +95,22 @@ COUNTING-SORT-RADIX(A, exp):
     n = len(A)
     output = [0] * n
     count = [0] * 10
-    
+
     # Store count of occurrences
     for i in range(n):
         index = (A[i] // exp) % 10
         count[index] += 1
-    
+
     # Change count[i] to position of digit
     for i in range(1, 10):
         count[i] += count[i-1]
-    
+
     # Build output array
     for i in range(n-1, -1, -1):
         index = (A[i] // exp) % 10
         output[count[index]-1] = A[i]
         count[index] -= 1
-    
+
     # Copy output to A
     for i in range(n):
         A[i] = output[i]`} />

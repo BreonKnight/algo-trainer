@@ -31,32 +31,32 @@ POP(S)
 
 // Example:
 // Input: Operations [PUSH(10), PUSH(20), POP(), PUSH(30), PUSH(40)]
-// 
+//
 // Initial state:
 //   S = []
 //   S.top = 0
-// 
+//
 // After PUSH(10):
 //   S = [10]
 //   S.top = 1
-// 
+//
 // After PUSH(20):
 //   S = [10, 20]
 //   S.top = 2
-// 
+//
 // After POP():
 //   S = [10]
 //   S.top = 1
 //   Returns: 20
-// 
+//
 // After PUSH(30):
 //   S = [10, 30]
 //   S.top = 2
-// 
+//
 // After PUSH(40):
 //   S = [10, 30, 40]
 //   S.top = 3
-// 
+//
 // Final state:
 //   S = [10, 30, 40]
 //   S.top = 3`} />

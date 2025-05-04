@@ -12,7 +12,8 @@ export const BitManipulationPattern = () => (
       bit-level operations
     </div>
 
-    <PseudocodeDisplay code={`// Basic Operations
+    <PseudocodeDisplay
+      code={`// Basic Operations
 AND(x, y):     return x & y
 OR(x, y):      return x | y
 XOR(x, y):     return x ^ y
@@ -22,37 +23,38 @@ RIGHT-SHIFT(x, n): return x >> n
 
 // Count Set Bits
 COUNT-BITS(x):
-    count = 0
-    while x > 0:
-        count += x & 1
-        x = x >> 1
-    return count
+  count = 0
+  while x > 0:
+    count += x & 1
+    x = x >> 1
+  return count
 
 // Check Power of Two
 IS-POWER-OF-TWO(x):
-    return x > 0 and (x & (x - 1)) == 0
+  return x > 0 and (x & (x - 1)) == 0
 
 // Find Single Number
 SINGLE-NUMBER(A):
-    result = 0
-    for num in A:
-        result ^= num
-    return result
+  result = 0
+  for num in A:
+    result ^= num
+  return result
 
 // Swap Without Temp
 SWAP(x, y):
-    x = x ^ y
-    y = x ^ y
-    x = x ^ y
-    return (x, y)
+  x = x ^ y
+  y = x ^ y
+  x = x ^ y
+  return (x, y)
 
 // Add Without Plus
 ADD(x, y):
-    while y != 0:
-        carry = x & y
-        x = x ^ y
-        y = carry << 1
-    return x`} />
+  while y != 0:
+    carry = x & y
+    x = x ^ y
+    y = carry << 1
+  return x`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

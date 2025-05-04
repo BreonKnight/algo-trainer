@@ -23,7 +23,7 @@ HANDLE-NULL(value)
 // Example:
 // Input: value = NIL
 // Output: NIL
-// 
+//
 // Input: value = 5
 // Output: 10`} />
 

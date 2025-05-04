@@ -16,16 +16,16 @@ export const MatrixTraversalRecursivePattern = () => (
     let m, n be the dimensions of A
     if i < 1 or i > m or j < 1 or j > n or visited[i, j] = TRUE
         then return
-    
+
     visited[i, j] ← TRUE
     result ← A[i, j]
-    
+
     // Visit adjacent cells
     DFS-TRAVERSE(A, i-1, j, visited)    // Up
     DFS-TRAVERSE(A, i+1, j, visited)    // Down
     DFS-TRAVERSE(A, i, j-1, visited)    // Left
     DFS-TRAVERSE(A, i, j+1, visited)    // Right
-    
+
     return result
 
 RECURSIVE-TRAVERSE(A)
@@ -33,24 +33,24 @@ RECURSIVE-TRAVERSE(A)
     let visited[1‥m, 1‥n] be a new array
     let result[1‥m·n] be a new array
     let idx ← 1
-    
+
     for i ← 1 to m
         do for j ← 1 to n
             do visited[i, j] ← FALSE
-    
+
     for i ← 1 to m
         do for j ← 1 to n
             do if visited[i, j] = FALSE
                 then result[idx] ← DFS-TRAVERSE(A, i, j, visited)
                     idx ← idx + 1
-    
+
     return result
 
 // Example:
 // Input: A = [1 2 3]
 //            [4 5 6]
 //            [7 8 9]
-// 
+//
 // Starting from (1,1):
 // 1. Visit (1,1) = 1
 // 2. Visit (2,1) = 4
@@ -61,7 +61,7 @@ RECURSIVE-TRAVERSE(A)
 // 7. Visit (2,2) = 5
 // 8. Visit (1,2) = 2
 // 9. Visit (1,3) = 3
-// 
+//
 // Output: [1, 4, 7, 8, 9, 6, 5, 2, 3]`} />
 
     <div className="mb-2">

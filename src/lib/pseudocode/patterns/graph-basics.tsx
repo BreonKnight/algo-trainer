@@ -12,61 +12,63 @@ export const GraphBasicsPattern = () => (
       relationships between objects
     </div>
 
-    <PseudocodeDisplay code={`// Graph representation
+    <PseudocodeDisplay
+      code={`// Graph representation
 GRAPH-REPRESENTATION(V, E):
-    G = new Graph
-    G.V = V  // Set of vertices
-    G.E = E  // Set of edges
-    G.adj = new Array(V.length + 1)  // Adjacency list
-    for v in V:
-        G.adj[v] = new List
-    for (u, v) in E:
-        G.adj[u].append(v)
-        G.adj[v].append(u)  // For undirected graph
-    return G
+  G = new Graph
+  G.V = V  // Set of vertices
+  G.E = E  // Set of edges
+  G.adj = new Array(V.length + 1)  // Adjacency list
+  for v in V:
+    G.adj[v] = new List
+  for (u, v) in E:
+    G.adj[u].append(v)
+    G.adj[v].append(u)  // For undirected graph
+  return G
 
 // Depth-first search
 DFS(G, s):
-    for v in G.V:
-        v.color = WHITE
-        v.parent = NIL
-    time = 0
-    for v in G.V:
-        if v.color = WHITE:
-            DFS-VISIT(G, v)
+  for v in G.V:
+    v.color = WHITE
+    v.parent = NIL
+  time = 0
+  for v in G.V:
+    if v.color = WHITE:
+      DFS-VISIT(G, v)
 
 DFS-VISIT(G, u):
-    time = time + 1
-    u.d = time
-    u.color = GRAY
-    for v in G.adj[u]:
-        if v.color = WHITE:
-            v.parent = u
-            DFS-VISIT(G, v)
-    u.color = BLACK
-    time = time + 1
-    u.f = time
+  time = time + 1
+  u.d = time
+  u.color = GRAY
+  for v in G.adj[u]:
+    if v.color = WHITE:
+      v.parent = u
+      DFS-VISIT(G, v)
+  u.color = BLACK
+  time = time + 1
+  u.f = time
 
 // Breadth-first search
 BFS(G, s):
-    for v in G.V:
-        v.color = WHITE
-        v.d = ∞
-        v.parent = NIL
-    s.color = GRAY
-    s.d = 0
-    s.parent = NIL
-    Q = new Queue
-    Q.enqueue(s)
-    while Q is not empty:
-        u = Q.dequeue()
-        for v in G.adj[u]:
-            if v.color = WHITE:
-                v.color = GRAY
-                v.d = u.d + 1
-                v.parent = u
-                Q.enqueue(v)
-        u.color = BLACK`} />
+  for v in G.V:
+    v.color = WHITE
+    v.d = ∞
+    v.parent = NIL
+  s.color = GRAY
+  s.d = 0
+  s.parent = NIL
+  Q = new Queue
+  Q.enqueue(s)
+  while Q is not empty:
+    u = Q.dequeue()
+    for v in G.adj[u]:
+      if v.color = WHITE:
+        v.color = GRAY
+        v.d = u.d + 1
+        v.parent = u
+        Q.enqueue(v)
+    u.color = BLACK`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

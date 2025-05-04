@@ -15,15 +15,15 @@ export const GreedyDinicPattern = () => (
     <PseudocodeDisplay code={`// Standard Dinic's Algorithm
 def dinic(graph, source, sink):
     # Initialize residual graph and max flow
-    residual = {u: {v: graph[u][v] for v in graph[u]} 
+    residual = {u: {v: graph[u][v] for v in graph[u]}
                 for u in graph}
     max_flow = 0
-    
+
     def bfs():
         # Build level graph using BFS
         level = {source: 0}
         queue = [source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -33,11 +33,11 @@ def dinic(graph, source, sink):
                         return level
                     queue.append(v)
         return None
-    
+
     def dfs(u, flow):
         if u == sink:
             return flow
-        
+
         for v in residual[u]:
             if level[v] == level[u] + 1 and residual[u][v] > 0:
                 path_flow = dfs(v, min(flow, residual[u][v]))
@@ -46,19 +46,19 @@ def dinic(graph, source, sink):
                     residual[v][u] += path_flow
                     return path_flow
         return 0
-    
+
     # Find blocking flows
     while True:
         level = bfs()
         if not level:
             break
-        
+
         while True:
             flow = dfs(source, float('inf'))
             if flow == 0:
                 break
             max_flow += flow
-    
+
     return max_flow`} />
 
     <div className="mb-2">

@@ -21,25 +21,25 @@ Algorithm SLIDING-WINDOW(A, k)
     if n < k then
         return -1
     end if
-    
+
     # Compute sum of first window
     window_sum ← 0
     for i ← 1 to k do
         window_sum ← window_sum + A[i]
     end for
     max_sum ← window_sum
-    
+
     # Slide window and update sum
     for i ← k + 1 to n do
         window_sum ← window_sum + A[i] - A[i - k]
         max_sum ← max(max_sum, window_sum)
     end for
-    
+
     return max_sum
 
 # Example:
 # Input: A = [1, 4, 2, 10, 2, 3, 1, 0, 20], k = 4
-# 
+#
 # Step 1: window_sum = 1 + 4 + 2 + 10 = 17
 #         max_sum = 17
 # Step 2: window_sum = 17 + 2 - 1 = 18
@@ -52,7 +52,7 @@ Algorithm SLIDING-WINDOW(A, k)
 #         max_sum = 18
 # Step 6: window_sum = 6 + 20 - 2 = 24
 #         max_sum = 24
-# 
+#
 # Output: 24`} />
 
     <div className="mb-2">

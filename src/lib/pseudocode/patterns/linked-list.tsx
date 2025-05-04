@@ -22,13 +22,13 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head = None
-    
+
     # Insert at beginning
     def insert_at_beginning(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
-    
+
     # Insert at end
     def insert_at_end(self, data):
         new_node = Node(data)
@@ -39,7 +39,7 @@ class LinkedList:
         while last.next:
             last = last.next
         last.next = new_node
-    
+
     # Delete node
     def delete_node(self, key):
         temp = self.head
@@ -51,7 +51,7 @@ class LinkedList:
                 temp.next = temp.next.next
                 return
             temp = temp.next
-    
+
     # Search node
     def search(self, key):
         current = self.head
@@ -66,7 +66,7 @@ class DoublyLinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-    
+
     # Insert at beginning
     def insert_at_beginning(self, data):
         new_node = Node(data)
@@ -77,7 +77,7 @@ class DoublyLinkedList:
         new_node.next = self.head
         self.head.prev = new_node
         self.head = new_node
-    
+
     # Insert at end
     def insert_at_end(self, data):
         new_node = Node(data)
@@ -88,7 +88,7 @@ class DoublyLinkedList:
         self.tail.next = new_node
         new_node.prev = self.tail
         self.tail = new_node
-    
+
     # Delete node
     def delete_node(self, key):
         current = self.head
@@ -109,7 +109,7 @@ class DoublyLinkedList:
 class CircularLinkedList:
     def __init__(self):
         self.head = None
-    
+
     # Insert at beginning
     def insert_at_beginning(self, data):
         new_node = Node(data)
@@ -123,7 +123,7 @@ class CircularLinkedList:
         new_node.next = self.head
         last.next = new_node
         self.head = new_node
-    
+
     # Insert at end
     def insert_at_end(self, data):
         new_node = Node(data)

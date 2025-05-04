@@ -16,25 +16,25 @@ export const QueuePattern = () => (
 class Queue:
     def __init__(self):
         self.items = []
-    
+
     # Enqueue (add to rear)
     def enqueue(self, item):
         self.items.append(item)
-    
+
     # Dequeue (remove from front)
     def dequeue(self):
         if self.is_empty():
             return None
         return self.items.pop(0)
-    
+
     # Check if empty
     def is_empty(self):
         return len(self.items) == 0
-    
+
     # Get size
     def size(self):
         return len(self.items)
-    
+
     # Peek front
     def peek(self):
         if self.is_empty():
@@ -49,7 +49,7 @@ class CircularQueue:
         self.front = 0
         self.rear = -1
         self.size = 0
-    
+
     # Enqueue
     def enqueue(self, item):
         if self.is_full():
@@ -58,7 +58,7 @@ class CircularQueue:
         self.items[self.rear] = item
         self.size += 1
         return True
-    
+
     # Dequeue
     def dequeue(self):
         if self.is_empty():
@@ -67,15 +67,15 @@ class CircularQueue:
         self.front = (self.front + 1) % self.capacity
         self.size -= 1
         return item
-    
+
     # Check if empty
     def is_empty(self):
         return self.size == 0
-    
+
     # Check if full
     def is_full(self):
         return self.size == self.capacity
-    
+
     # Peek front
     def peek(self):
         if self.is_empty():
@@ -86,26 +86,26 @@ class CircularQueue:
 class PriorityQueue:
     def __init__(self):
         self.items = []
-    
+
     # Enqueue with priority
     def enqueue(self, item, priority):
         self.items.append((item, priority))
         self.items.sort(key=lambda x: x[1])
-    
+
     # Dequeue highest priority
     def dequeue(self):
         if self.is_empty():
             return None
         return self.items.pop(0)[0]
-    
+
     # Check if empty
     def is_empty(self):
         return len(self.items) == 0
-    
+
     # Get size
     def size(self):
         return len(self.items)
-    
+
     # Peek highest priority
     def peek(self):
         if self.is_empty():
@@ -116,41 +116,41 @@ class PriorityQueue:
 class Deque:
     def __init__(self):
         self.items = []
-    
+
     # Add to front
     def add_front(self, item):
         self.items.insert(0, item)
-    
+
     # Add to rear
     def add_rear(self, item):
         self.items.append(item)
-    
+
     # Remove from front
     def remove_front(self):
         if self.is_empty():
             return None
         return self.items.pop(0)
-    
+
     # Remove from rear
     def remove_rear(self):
         if self.is_empty():
             return None
         return self.items.pop()
-    
+
     # Check if empty
     def is_empty(self):
         return len(self.items) == 0
-    
+
     # Get size
     def size(self):
         return len(self.items)
-    
+
     # Peek front
     def peek_front(self):
         if self.is_empty():
             return None
         return self.items[0]
-    
+
     # Peek rear
     def peek_rear(self):
         if self.is_empty():

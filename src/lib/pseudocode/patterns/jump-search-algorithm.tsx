@@ -34,14 +34,14 @@ JUMP-SEARCH(A, x):
 
 // Example:
 // Input: A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], x = 7
-// 
+//
 // Execution:
 // 1. step = 3, prev = 0
 // 2. A[3] = 4 < 7: prev = 3, step = 6
 // 3. A[6] = 7 < 7: false
 // 4. Linear search from index 3 to 6
 // 5. Found at index 6
-// 
+//
 // Output: 6`} />
 
     <div className="mb-2">

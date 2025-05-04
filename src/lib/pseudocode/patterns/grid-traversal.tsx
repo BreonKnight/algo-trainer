@@ -17,17 +17,17 @@ export const GridTraversalPattern = () => (
     let n be the number of columns in G
     let visited[1‥m][1‥n] be a new array
     let result[1‥m][1‥n] be a new array
-    
+
     for i ← 1 to m
         do for j ← 1 to n
             do visited[i][j] ← false
                result[i][j] ← 0
-    
+
     let queue be a new empty queue
     queue.enqueue((1,1))
     visited[1][1] ← true
     result[1][1] ← 1
-    
+
     while queue is not empty
         do (i,j) ← queue.dequeue()
            for each (di,dj) in [(0,1), (1,0), (0,-1), (-1,0)]
@@ -37,7 +37,7 @@ export const GridTraversalPattern = () => (
                       then visited[ni][nj] ← true
                            result[ni][nj] ← result[i][j] + 1
                            queue.enqueue((ni,nj))
-    
+
     return result
 
 // Example:
@@ -46,7 +46,7 @@ export const GridTraversalPattern = () => (
 //   [1, 0, 1],
 //   [1, 1, 1]
 // ]
-// 
+//
 // Initial state:
 //   visited = [
 //     [true, false, false],
@@ -58,7 +58,7 @@ export const GridTraversalPattern = () => (
 //     [0, 0, 0],
 //     [0, 0, 0]
 //   ]
-// 
+//
 // After first iteration:
 //   visited = [
 //     [true, true, false],
@@ -70,7 +70,7 @@ export const GridTraversalPattern = () => (
 //     [2, 0, 0],
 //     [0, 0, 0]
 //   ]
-// 
+//
 // Final result:
 //   [
 //     [1, 2, 3],

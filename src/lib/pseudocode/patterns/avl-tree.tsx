@@ -15,24 +15,24 @@ export const AVLTreePattern = () => (
     <PseudocodeDisplay code={`AVL-INSERT(T, z)
     let y ← null
     let x ← T.root
-    
+
     while x ≠ null
         do y ← x
            if z.key < x.key
                then x ← x.left
                else x ← x.right
-    
+
     z.p ← y
     if y = null
         then T.root ← z
         else if z.key < y.key
             then y.left ← z
             else y.right ← z
-    
+
     z.left ← null
     z.right ← null
     z.height ← 1
-    
+
     AVL-BALANCE(T, z)
 
 AVL-BALANCE(T, z)
@@ -84,34 +84,34 @@ LEFT-ROTATE(T, x)
 
 // Example:
 // Input: Insert keys [10, 20, 30, 40, 50, 25]
-// 
+//
 // Insert 10:
 //   Tree: 10
-// 
+//
 // Insert 20:
 //   Tree: 10
 //         \
 //         20
-// 
+//
 // Insert 30:
 //   Tree: 20
 //        /  \
 //      10    30
-// 
+//
 // Insert 40:
 //   Tree: 20
 //        /  \
 //      10    30
 //             \
 //             40
-// 
+//
 // Insert 50:
 //   Tree: 20
 //        /  \
 //      10    40
 //           /  \
 //         30    50
-// 
+//
 // Insert 25:
 //   Tree: 30
 //        /  \

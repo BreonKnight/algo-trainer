@@ -49,12 +49,12 @@ DINIC(G, s, t)
 // Input: G = (V, E) where
 // V = {s, a, b, c, d, t}
 // E = {(s,a,10), (s,b,5), (a,b,2), (a,c,5), (b,c,8), (b,d,4), (c,t,7), (d,t,10)}
-// 
+//
 // Step 1: Initial flow = 0
 // Step 2: Find augmenting path s->a->c->t with flow 5
 // Step 3: Find augmenting path s->b->d->t with flow 4
 // Step 4: Find augmenting path s->a->b->c->t with flow 2
-// 
+//
 // Final flow: 11`} />
 
     <div className="mb-2">

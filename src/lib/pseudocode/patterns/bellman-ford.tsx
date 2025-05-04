@@ -23,7 +23,7 @@ Algorithm BELLMAN-FORD(G, w, s)
         π[v] ← NIL
     end for
     d[s] ← 0
-    
+
     # Relax edges |V| - 1 times
     for i ← 1 to |V| - 1 do
         for each edge (u, v) in E do
@@ -33,20 +33,20 @@ Algorithm BELLMAN-FORD(G, w, s)
             end if
         end for
     end for
-    
+
     # Check for negative cycles
     for each edge (u, v) in E do
         if d[v] > d[u] + w(u, v) then
             return "Graph contains negative cycle"
         end if
     end for
-    
+
     return d, π
 
 # Example:
 # Input: G with V = {s,a,b,c} and edges:
 # (s,a,4), (s,b,5), (a,b,-1), (a,c,2), (b,c,1)
-# 
+#
 # Step 1: Initial distances
 #         d = [0, ∞, ∞, ∞]
 # Step 2: After first relaxation
@@ -56,7 +56,7 @@ Algorithm BELLMAN-FORD(G, w, s)
 # Step 4: After third relaxation
 #         d = [0, 4, 3, 4]
 # Step 5: No negative cycle found
-# 
+#
 # Output: d = [0, 4, 3, 4]`} />
 
     <div className="mb-2">
