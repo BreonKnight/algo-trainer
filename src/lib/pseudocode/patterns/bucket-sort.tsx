@@ -17,21 +17,21 @@ BUCKET-SORT(A):
     # Initialize buckets
     n = len(A)
     buckets = [[] for _ in range(n)]
-    
+
     # Distribute elements into buckets
     for x in A:
         bucket_idx = int(x * n)
         buckets[bucket_idx].append(x)
-    
+
     # Sort individual buckets
     for bucket in buckets:
         INSERTION-SORT(bucket)
-    
+
     # Concatenate buckets
     result = []
     for bucket in buckets:
         result.extend(bucket)
-    
+
     return result
 
 // Bucket Sort with Custom Range
@@ -39,21 +39,21 @@ BUCKET-SORT-RANGE(A, min_val, max_val):
     # Initialize buckets
     n = len(A)
     buckets = [[] for _ in range(n)]
-    
+
     # Distribute elements into buckets
     for x in A:
         bucket_idx = int((x - min_val) / (max_val - min_val) * (n-1))
         buckets[bucket_idx].append(x)
-    
+
     # Sort individual buckets
     for bucket in buckets:
         INSERTION-SORT(bucket)
-    
+
     # Concatenate buckets
     result = []
     for bucket in buckets:
         result.extend(bucket)
-    
+
     return result
 
 // Bucket Sort with Linked Lists
@@ -61,21 +61,21 @@ BUCKET-SORT-LIST(A):
     # Initialize buckets
     n = len(A)
     buckets = [LinkedList() for _ in range(n)]
-    
+
     # Distribute elements into buckets
     for x in A:
         bucket_idx = int(x * n)
         buckets[bucket_idx].append(x)
-    
+
     # Sort individual buckets
     for bucket in buckets:
         bucket.sort()
-    
+
     # Concatenate buckets
     result = []
     for bucket in buckets:
         result.extend(bucket.to_list())
-    
+
     return result
 
 // Bucket Sort with Counting Sort
@@ -83,12 +83,12 @@ BUCKET-SORT-COUNTING(A):
     # Initialize buckets
     n = len(A)
     buckets = [[] for _ in range(n)]
-    
+
     # Distribute elements into buckets
     for x in A:
         bucket_idx = int(x * n)
         buckets[bucket_idx].append(x)
-    
+
     # Sort individual buckets using counting sort
     for bucket in buckets:
         if bucket:
@@ -100,12 +100,12 @@ BUCKET-SORT-COUNTING(A):
             for i in range(max_val + 1):
                 sorted_bucket.extend([i] * count[i])
             bucket[:] = sorted_bucket
-    
+
     # Concatenate buckets
     result = []
     for bucket in buckets:
         result.extend(bucket)
-    
+
     return result`} />
 
     <div className="flex items-start mb-1">

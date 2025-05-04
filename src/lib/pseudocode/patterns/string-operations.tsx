@@ -17,40 +17,40 @@ export const StringOperationsPattern = () => (
     <PseudocodeDisplay
       code={`// Common String Operations
 CONCATENATE(s1, s2):
-    return s1 + s2
+  return s1 + s2
 
 SUBSTRING(s, start, end):
-    return s[start..end]
+  return s[start..end]
 
 CHAR_AT(s, index):
-    return s[index]
+  return s[index]
 
 LENGTH(s):
-    return s.length
+  return s.length
 
 COMPARE(s1, s2):
-    return s1 == s2
+  return s1 == s2
 
 FIND(s, pattern):
-    return s.indexOf(pattern)
+  return s.indexOf(pattern)
 
 REPLACE(s, old, new):
-    return s.replace(old, new)
+  return s.replace(old, new)
 
 SPLIT(s, delimiter):
-    return s.split(delimiter)
+  return s.split(delimiter)
 
 JOIN(arr, delimiter):
-    return arr.join(delimiter)
+  return arr.join(delimiter)
 
 TRIM(s):
-    return s.trim()
+  return s.trim()
 
 TO_UPPER(s):
-    return s.toUpperCase()
+  return s.toUpperCase()
 
 TO_LOWER(s):
-    return s.toLowerCase()`}
+  return s.toLowerCase()`}
     />
 
     <div className="flex items-start mb-1">

@@ -26,11 +26,11 @@ Algorithm LINEAR-SEARCH(A, x)
 
 # Example:
 # Input: A = [4, 2, 7, 1, 3], x = 7
-# 
+#
 # Step 1: i = 1, A[1] = 4 ≠ 7
 # Step 2: i = 2, A[2] = 2 ≠ 7
 # Step 3: i = 3, A[3] = 7 = 7
-# 
+#
 # Output: 3`} />
 
     <div className="mb-2">

@@ -19,23 +19,23 @@ export const BridgesPattern = () => (
     let parent[1‥n] be a new array
     let bridges be a new empty list
     let time ← 0
-    
+
     for each vertex u in G.V
         do disc[u] ← -1
             low[u] ← -1
             parent[u] ← NIL
-    
+
     for each vertex u in G.V
         do if disc[u] = -1
             then DFS-BRIDGES(G, u, disc, low, parent, bridges, time)
-    
+
     return bridges
 
 DFS-BRIDGES(G, u, disc, low, parent, bridges, time)
     time ← time + 1
     disc[u] ← time
     low[u] ← time
-    
+
     for each v in G.Adj[u]
         do if disc[v] = -1
             then parent[v] ← u
@@ -48,18 +48,18 @@ DFS-BRIDGES(G, u, disc, low, parent, bridges, time)
 
 // Example:
 // Input: G with edges (1,2), (2,3), (3,4), (4,1), (1,3)
-// 
+//
 // DFS from vertex 1:
 //   disc = [1, 2, 3, 4]
 //   low = [1, 1, 1, 1]
 //   parent = [NIL, 1, 2, 3]
-// 
+//
 // Bridge check:
 //   Edge (2,3): low[3] = 1 > disc[2] = 2? No
 //   Edge (3,4): low[4] = 1 > disc[3] = 3? No
 //   Edge (4,1): low[1] = 1 > disc[4] = 4? No
 //   Edge (1,3): low[3] = 1 > disc[1] = 1? No
-// 
+//
 // Output: [] (no bridges)`}
     />
 

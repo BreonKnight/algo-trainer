@@ -18,19 +18,19 @@ BELLMAN-FORD(G, s):
     dist = [∞] * |V|
     parent = [None] * |V|
     dist[s] = 0
-    
+
     # Relax edges |V|-1 times
     for i in range(|V|-1):
         for (u, v, w) in G.E:
             if dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
                 parent[v] = u
-    
+
     # Check for negative cycles
     for (u, v, w) in G.E:
         if dist[u] + w < dist[v]:
             return "Graph contains negative cycle"
-    
+
     return dist, parent
 
 // Bellman-Ford with Path Reconstruction
@@ -39,19 +39,19 @@ BELLMAN-FORD-PATH(G, s):
     dist = [∞] * |V|
     parent = [None] * |V|
     dist[s] = 0
-    
+
     # Relax edges |V|-1 times
     for i in range(|V|-1):
         for (u, v, w) in G.E:
             if dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
                 parent[v] = u
-    
+
     # Check for negative cycles
     for (u, v, w) in G.E:
         if dist[u] + w < dist[v]:
             return "Graph contains negative cycle"
-    
+
     return dist, parent
 
 // Path reconstruction
@@ -70,7 +70,7 @@ BELLMAN-FORD-EARLY(G, s):
     dist = [∞] * |V|
     parent = [None] * |V|
     dist[s] = 0
-    
+
     # Relax edges until no improvement
     for i in range(|V|-1):
         improved = False
@@ -81,12 +81,12 @@ BELLMAN-FORD-EARLY(G, s):
                 improved = True
         if not improved:
             break
-    
+
     # Check for negative cycles
     for (u, v, w) in G.E:
         if dist[u] + w < dist[v]:
             return "Graph contains negative cycle"
-    
+
     return dist, parent`} />
 
     <div className="flex items-start mb-1">

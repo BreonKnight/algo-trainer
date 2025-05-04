@@ -30,40 +30,40 @@ COUNT-DIGITS(digits, pos, sum, tight, leading_zero)
                 else return 0
     if dp[pos][sum][tight] ≠ -1
         then return dp[pos][sum][tight]
-    
+
     let limit ← if tight then digits[pos] else 9
     let count ← 0
-    
+
     for i ← 0 to limit
         do let new_tight ← tight and (i = limit)
             let new_leading ← leading_zero and (i = 0)
             let new_sum ← sum - i
             if new_sum ≥ 0
                 then count ← count + COUNT-DIGITS(digits, pos-1, new_sum, new_tight, new_leading)
-    
+
     dp[pos][sum][tight] ← count
     return count
 
 // Example:
 // Input: n = 123, k = 6
-// 
+//
 // digits = [3, 2, 1]
 // d = 3
-// 
+//
 // Initial call: pos = 3, sum = 6, tight = TRUE, leading_zero = TRUE
-// 
+//
 // For i = 0:
 //   new_tight = FALSE, new_leading = TRUE
 //   new_sum = 6
 //   Recursive call with pos = 2
-// 
+//
 // For i = 1:
 //   new_tight = TRUE, new_leading = FALSE
 //   new_sum = 5
 //   Recursive call with pos = 2
-// 
+//
 // ... (continues for all digits)
-// 
+//
 // Output: Number of numbers ≤ 123 with digit sum = 6`} />
 
     <div className="mb-2">

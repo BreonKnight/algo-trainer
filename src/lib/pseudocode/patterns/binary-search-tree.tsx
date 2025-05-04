@@ -80,7 +80,7 @@ TRANSPLANT(T, u, v):
 // 5. Insert 4
 // 6. Insert 6
 // 7. Insert 8
-// 
+//
 // Resulting tree:
 //        5
 //      /   \\

@@ -74,16 +74,16 @@ CIRCULAR-TRAVERSE(L):
 
 // Example:
 // Input: Operations [INSERT-HEAD(1), INSERT-TAIL(2), INSERT-HEAD(3), DELETE(1)]
-// 
+//
 // After INSERT-HEAD(1):
 //   1 -> 1
-// 
+//
 // After INSERT-TAIL(2):
 //   1 -> 2 -> 1
-// 
+//
 // After INSERT-HEAD(3):
 //   3 -> 1 -> 2 -> 3
-// 
+//
 // After DELETE(1):
 //   3 -> 2 -> 3`} />
 

@@ -19,10 +19,10 @@ export const KnuthMorrisPrattPattern = () => {
 Algorithm KMP-MATCHER(T, P)
     n ← length[T]
     m ← length[P]
-    
+
     # Compute prefix function
     π ← COMPUTE-PREFIX-FUNCTION(P)
-    
+
     q ← 0  # Number of characters matched
     for i ← 1 to n do
         while q > 0 and P[q + 1] ≠ T[i] do
@@ -54,10 +54,10 @@ Algorithm COMPUTE-PREFIX-FUNCTION(P)
 
 # Example:
 # Input: T = "ABABDABACDABABCABAB", P = "ABABCABAB"
-# 
+#
 # Step 1: π = [0, 0, 1, 2, 0, 1, 2, 3, 4]
 # Step 2: Match at position 10
-# 
+#
 # Output: Pattern occurs at position 10`}
       />
 

@@ -18,20 +18,20 @@ def dijkstra(graph, source):
     distances = {node: float('inf') for node in graph}
     distances[source] = 0
     visited = set()
-    
+
     # Priority queue for unvisited nodes
     import heapq
     heap = [(0, source)]
-    
+
     while heap:
         # Get node with minimum distance
         current_dist, current = heapq.heappop(heap)
-        
+
         if current in visited:
             continue
-        
+
         visited.add(current)
-        
+
         # Update distances for neighbors
         for neighbor, weight in graph[current].items():
             if neighbor not in visited:
@@ -39,7 +39,7 @@ def dijkstra(graph, source):
                 if new_dist < distances[neighbor]:
                     distances[neighbor] = new_dist
                     heapq.heappush(heap, (new_dist, neighbor))
-    
+
     return distances
 
 // Dijkstra with Path Reconstruction
@@ -48,20 +48,20 @@ def dijkstra_with_path(graph, source, target):
     distances[source] = 0
     previous = {node: None for node in graph}
     visited = set()
-    
+
     heap = [(0, source)]
-    
+
     while heap:
         current_dist, current = heapq.heappop(heap)
-        
+
         if current == target:
             break
-        
+
         if current in visited:
             continue
-        
+
         visited.add(current)
-        
+
         for neighbor, weight in graph[current].items():
             if neighbor not in visited:
                 new_dist = current_dist + weight
@@ -69,7 +69,7 @@ def dijkstra_with_path(graph, source, target):
                     distances[neighbor] = new_dist
                     previous[neighbor] = current
                     heapq.heappush(heap, (new_dist, neighbor))
-    
+
     # Reconstruct path
     path = []
     current = target
@@ -77,7 +77,7 @@ def dijkstra_with_path(graph, source, target):
         path.append(current)
         current = previous[current]
     path.reverse()
-    
+
     return distances[target], path
 
 // Bidirectional Dijkstra
@@ -87,55 +87,55 @@ def bidirectional_dijkstra(graph, source, target):
     backward_dist = {node: float('inf') for node in graph}
     forward_dist[source] = 0
     backward_dist[target] = 0
-    
+
     forward_visited = set()
     backward_visited = set()
-    
+
     forward_heap = [(0, source)]
     backward_heap = [(0, target)]
-    
+
     min_dist = float('inf')
     meeting_node = None
-    
+
     while forward_heap and backward_heap:
         # Forward step
         current_dist, current = heapq.heappop(forward_heap)
         if current in forward_visited:
             continue
         forward_visited.add(current)
-        
+
         if current in backward_visited:
             total_dist = current_dist + backward_dist[current]
             if total_dist < min_dist:
                 min_dist = total_dist
                 meeting_node = current
-        
+
         for neighbor, weight in graph[current].items():
             if neighbor not in forward_visited:
                 new_dist = current_dist + weight
                 if new_dist < forward_dist[neighbor]:
                     forward_dist[neighbor] = new_dist
                     heapq.heappush(forward_heap, (new_dist, neighbor))
-        
+
         # Backward step
         current_dist, current = heapq.heappop(backward_heap)
         if current in backward_visited:
             continue
         backward_visited.add(current)
-        
+
         if current in forward_visited:
             total_dist = current_dist + forward_dist[current]
             if total_dist < min_dist:
                 min_dist = total_dist
                 meeting_node = current
-        
+
         for neighbor, weight in graph[current].items():
             if neighbor not in backward_visited:
                 new_dist = current_dist + weight
                 if new_dist < backward_dist[neighbor]:
                     backward_dist[neighbor] = new_dist
                     heapq.heappush(backward_heap, (new_dist, neighbor))
-    
+
     return min_dist, meeting_node`}
     />
 

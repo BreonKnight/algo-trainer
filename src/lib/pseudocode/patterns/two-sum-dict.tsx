@@ -19,7 +19,7 @@ export const TwoSumDictionaryPattern = () => (
 Algorithm TWO-SUM-DICTIONARY(A, t)
     # Initialize dictionary to store value-index pairs
     D ← empty dictionary
-    
+
     for i ← 1 to length[A] do
         complement ← t - A[i]
         if complement ∈ D then
@@ -27,15 +27,15 @@ Algorithm TWO-SUM-DICTIONARY(A, t)
         end if
         D[A[i]] ← i
     end for
-    
+
     return (-1, -1)
 
 # Example:
 # Input: A = [2, 7, 11, 15], t = 9
-# 
+#
 # Step 1: i = 1, A[1] = 2, complement = 7, D = {2: 1}
 # Step 2: i = 2, A[2] = 7, complement = 2 ∈ D, return (1, 2)
-# 
+#
 # Output: (1, 2)`} />
 
     <div className="mb-2">

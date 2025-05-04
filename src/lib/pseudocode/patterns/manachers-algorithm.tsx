@@ -20,33 +20,33 @@ Algorithm MANACHER(S)
     # Transform string to handle even-length palindromes
     T ← "#" + S[1] + "#" + S[2] + "#" + ... + S[n] + "#"
     n' ← length[T]
-    
+
     # Initialize arrays
     P ← array of size n' filled with 0
     C ← 1
     R ← 1
-    
+
     for i ← 2 to n' do
         # Mirror position
         i_mirror ← 2 * C - i
-        
+
         # If i is within current right boundary
         if i < R then
             P[i] ← min(R - i, P[i_mirror])
         end if
-        
+
         # Expand around center
         while T[i + P[i] + 1] = T[i - P[i] - 1] do
             P[i] ← P[i] + 1
         end while
-        
+
         # Update center and right boundary if needed
         if i + P[i] > R then
             C ← i
             R ← i + P[i]
         end if
     end for
-    
+
     # Find maximum length and center
     max_len ← 0
     center ← 0
@@ -56,18 +56,18 @@ Algorithm MANACHER(S)
             center ← i
         end if
     end for
-    
+
     # Extract and return longest palindrome
     start ← (center - max_len) / 2
     return S[start..start + max_len - 1]
 
 # Example:
 # Input: S = "babad"
-# 
+#
 # Step 1: T = "#b#a#b#a#d#"
 # Step 2: P = [0, 1, 0, 3, 0, 1, 0, 1, 0, 1, 0]
 # Step 3: max_len = 3, center = 4
-# 
+#
 # Output: "bab"`} />
 
     <div className="mb-2">

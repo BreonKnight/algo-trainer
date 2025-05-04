@@ -20,27 +20,27 @@ HUNGARIAN(C):
         row_min ← min(C[i, 1..n])
         for j ← 1 to n:
             C[i, j] ← C[i, j] - row_min
-    
+
     // Step 2: Subtract column minima
     for j ← 1 to n:
         col_min ← min(C[1..n, j])
         for i ← 1 to n:
             C[i, j] ← C[i, j] - col_min
-    
+
     // Step 3: Find minimum number of lines
     while true:
         // Find maximum matching
         matching ← FIND-MAX-MATCHING(C)
         if size(matching) = n:
             return matching
-        
+
         // Find minimum uncovered value
         min_val ← ∞
         for i ← 1 to n:
             for j ← 1 to n:
                 if not covered[i] and not covered[j]:
                     min_val ← min(min_val, C[i, j])
-        
+
         // Update matrix
         for i ← 1 to n:
             for j ← 1 to n:
@@ -55,21 +55,21 @@ HUNGARIAN(C):
 //   [2, 4, 7],
 //   [3, 5, 8]
 // ]
-// 
+//
 // Step 1: Subtract row minima
 // [
 //   [0, 2, 3],
 //   [0, 2, 5],
 //   [0, 2, 5]
 // ]
-// 
+//
 // Step 2: Subtract column minima
 // [
 //   [0, 0, 0],
 //   [0, 0, 2],
 //   [0, 0, 2]
 // ]
-// 
+//
 // Step 3: Find matching
 // Output: {(1,1), (2,2), (3,3)}`} />
 

@@ -12,57 +12,59 @@ export const GraphPattern = () => (
       relationships between objects
     </div>
 
-    <PseudocodeDisplay code={`// Graph representation
+    <PseudocodeDisplay
+      code={`// Graph representation
 GRAPH-REPRESENTATION(V, E):
-    G = new Graph
-    for each v ∈ V:
-        G.adj[v] = []
-    for each (u, v) ∈ E:
-        G.adj[u].append(v)
-        G.adj[v].append(u)  // For undirected graphs
-    return G
+  G = new Graph
+  for each v ∈ V:
+    G.adj[v] = []
+  for each (u, v) ∈ E:
+    G.adj[u].append(v)
+    G.adj[v].append(u)  // For undirected graphs
+  return G
 
 // Depth-first search
 DFS(G):
-    for each v ∈ G.V:
-        v.color = WHITE
-        v.parent = NIL
-    time = 0
-    for each v ∈ G.V:
-        if v.color = WHITE:
-            DFS-VISIT(G, v)
+  for each v ∈ G.V:
+    v.color = WHITE
+    v.parent = NIL
+  time = 0
+  for each v ∈ G.V:
+    if v.color = WHITE:
+      DFS-VISIT(G, v)
 
 DFS-VISIT(G, u):
-    time = time + 1
-    u.d = time
-    u.color = GRAY
-    for each v ∈ G.adj[u]:
-        if v.color = WHITE:
-            v.parent = u
-            DFS-VISIT(G, v)
-    u.color = BLACK
-    time = time + 1
-    u.f = time
+  time = time + 1
+  u.d = time
+  u.color = GRAY
+  for each v in G.adj[u]:
+    if v.color == WHITE:
+      v.parent = u
+      DFS-VISIT(G, v)
+  u.color = BLACK
+  time = time + 1
+  u.f = time
 
 // Breadth-first search
 BFS(G, s):
-    for each v ∈ G.V:
-        v.color = WHITE
-        v.d = ∞
-        v.parent = NIL
-    s.color = GRAY
-    s.d = 0
-    Q = ∅
-    ENQUEUE(Q, s)
-    while Q ≠ ∅:
-        u = DEQUEUE(Q)
-        for each v ∈ G.adj[u]:
-            if v.color = WHITE:
-                v.color = GRAY
-                v.d = u.d + 1
-                v.parent = u
-                ENQUEUE(Q, v)
-        u.color = BLACK`} />
+  for each v ∈ G.V:
+    v.color = WHITE
+    v.d = ∞
+    v.parent = NIL
+  s.color = GRAY
+  s.d = 0
+  Q = ∅
+  ENQUEUE(Q, s)
+  while Q ≠ ∅:
+    u = DEQUEUE(Q)
+    for each v in G.adj[u]:
+      if v.color == WHITE:
+        v.color = GRAY
+        v.d = u.d + 1
+        v.parent = u
+        ENQUEUE(Q, v)
+    u.color = BLACK`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

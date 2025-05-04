@@ -12,43 +12,45 @@ export const HashTablePattern = () => (
       storage
     </div>
 
-    <PseudocodeDisplay code={`// Hash function
+    <PseudocodeDisplay
+      code={`// Hash function
 HASH(k, m):
-    return k mod m
+  return k mod m
 
 // Initialize table
 HASH-TABLE-INIT(T, m):
-    T.size = m
-    T.table = new array[m]
-    for i = 1 to m:
-        T.table[i] = NIL
+  T.size = m
+  T.table = new array[m]
+  for i = 1 to m:
+    T.table[i] = NIL
 
 // Insert key-value pair
 HASH-INSERT(T, k, v):
-    h = HASH(k, T.size)
-    if T.table[h] == NIL:
-        T.table[h] = new list
-    LIST-INSERT(T.table[h], (k, v))
+  h = HASH(k, T.size)
+  if T.table[h] == NIL:
+    T.table[h] = new list
+  LIST-INSERT(T.table[h], (k, v))
 
 // Search for key
 HASH-SEARCH(T, k):
-    h = HASH(k, T.size)
-    if T.table[h] == NIL:
-        return NIL
-    for each (key, value) in T.table[h]:
-        if key == k:
-            return value
+  h = HASH(k, T.size)
+  if T.table[h] == NIL:
     return NIL
+  for each (key, value) in T.table[h]:
+    if key == k:
+      return value
+  return NIL
 
 // Delete key
 HASH-DELETE(T, k):
-    h = HASH(k, T.size)
-    if T.table[h] == NIL:
-        return
-    for each (key, value) in T.table[h]:
-        if key == k:
-            LIST-DELETE(T.table[h], (key, value))
-            return`} />
+  h = HASH(k, T.size)
+  if T.table[h] == NIL:
+    return
+  for each (key, value) in T.table[h]:
+    if key == k:
+      LIST-DELETE(T.table[h], (key, value))
+      return`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

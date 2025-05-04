@@ -20,14 +20,14 @@ FLOYD-WARSHALL(G):
         dist[i][i] = 0
     for (u, v, w) in G.E:
         dist[u][v] = w
-    
+
     # Main algorithm
     for k in range(|V|):
         for i in range(|V|):
             for j in range(|V|):
                 if dist[i][k] + dist[k][j] < dist[i][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
-    
+
     return dist
 
 // Floyd-Warshall with Path Reconstruction
@@ -35,13 +35,13 @@ FLOYD-WARSHALL-PATH(G):
     # Initialize distance and next matrices
     dist = [[∞] * |V| for _ in range(|V|)]
     next = [[None] * |V| for _ in range(|V|)]
-    
+
     for i in range(|V|):
         dist[i][i] = 0
     for (u, v, w) in G.E:
         dist[u][v] = w
         next[u][v] = v
-    
+
     # Main algorithm
     for k in range(|V|):
         for i in range(|V|):
@@ -49,7 +49,7 @@ FLOYD-WARSHALL-PATH(G):
                 if dist[i][k] + dist[k][j] < dist[i][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
                     next[i][j] = next[i][k]
-    
+
     return dist, next
 
 // Path reconstruction
@@ -70,19 +70,19 @@ FLOYD-WARSHALL-NEGATIVE(G):
         dist[i][i] = 0
     for (u, v, w) in G.E:
         dist[u][v] = w
-    
+
     # Main algorithm
     for k in range(|V|):
         for i in range(|V|):
             for j in range(|V|):
                 if dist[i][k] + dist[k][j] < dist[i][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
-    
+
     # Check for negative cycles
     for i in range(|V|):
         if dist[i][i] < 0:
             return "Graph contains negative cycle"
-    
+
     return dist`} />
 
     <div className="flex items-start mb-1">

@@ -18,18 +18,18 @@ export const InsertionSortPattern = () => (
 
 INSERTION-SORT(A)
     n ← length[A]    # Number of elements in array
-    
+
     # Start from second element (index 2)
     for j ← 2 to n do
         key ← A[j]    # Current element to insert
         i ← j - 1     # Start comparing with previous element
-        
+
         # Move elements greater than key one position ahead
         while i > 0 and A[i] > key do
             A[i+1] ← A[i]    # Shift element right
             i ← i - 1         # Move left
         end while
-        
+
         A[i+1] ← key    # Insert key in correct position
     end for
 

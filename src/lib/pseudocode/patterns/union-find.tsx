@@ -12,7 +12,8 @@ export const UnionFindPattern = () => (
       disjoint sets
     </div>
 
-    <PseudocodeDisplay code={`// Create new set
+    <PseudocodeDisplay
+      code={`// Create new set
 MAKE-SET(x):
     x.parent = x
     x.rank = 0
@@ -39,7 +40,8 @@ UNION(x, y):
 
 // Check if elements are in same set
 CONNECTED(x, y):
-    return FIND-SET(x) = FIND-SET(y)`} />
+    return FIND-SET(x) = FIND-SET(y)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

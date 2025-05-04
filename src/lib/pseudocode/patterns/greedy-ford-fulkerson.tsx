@@ -15,15 +15,15 @@ export const GreedyFordFulkersonPattern = () => (
     <PseudocodeDisplay code={`// Standard Ford-Fulkerson
 def ford_fulkerson(graph, source, sink):
     # Initialize residual graph and max flow
-    residual = {u: {v: graph[u][v] for v in graph[u]} 
+    residual = {u: {v: graph[u][v] for v in graph[u]}
                 for u in graph}
     max_flow = 0
-    
+
     def bfs():
         # Find augmenting path using BFS
         parent = {source: None}
         queue = [source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -33,13 +33,13 @@ def ford_fulkerson(graph, source, sink):
                         return parent
                     queue.append(v)
         return None
-    
+
     # Find and process augmenting paths
     while True:
         parent = bfs()
         if not parent:
             break
-        
+
         # Find minimum residual capacity
         path_flow = float('inf')
         v = sink
@@ -47,7 +47,7 @@ def ford_fulkerson(graph, source, sink):
             u = parent[v]
             path_flow = min(path_flow, residual[u][v])
             v = u
-        
+
         # Update residual capacities
         v = sink
         while v != source:
@@ -55,31 +55,31 @@ def ford_fulkerson(graph, source, sink):
             residual[u][v] -= path_flow
             residual[v][u] += path_flow
             v = u
-        
+
         max_flow += path_flow
-    
+
     return max_flow
 
 // Ford-Fulkerson with Capacity Scaling
 def ford_fulkerson_capacity_scaling(graph, source, sink):
-    residual = {u: {v: graph[u][v] for v in graph[u]} 
+    residual = {u: {v: graph[u][v] for v in graph[u]}
                 for u in graph}
     max_flow = 0
-    
+
     # Find maximum capacity
-    max_capacity = max(graph[u][v] 
-                      for u in graph 
+    max_capacity = max(graph[u][v]
+                      for u in graph
                       for v in graph[u])
-    
+
     # Start with largest power of 2
     delta = 1
     while delta * 2 <= max_capacity:
         delta *= 2
-    
+
     def bfs(delta):
         parent = {source: None}
         queue = [source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -89,31 +89,31 @@ def ford_fulkerson_capacity_scaling(graph, source, sink):
                         return parent
                     queue.append(v)
         return None
-    
+
     while delta >= 1:
         while True:
             parent = bfs(delta)
             if not parent:
                 break
-            
+
             path_flow = float('inf')
             v = sink
             while v != source:
                 u = parent[v]
                 path_flow = min(path_flow, residual[u][v])
                 v = u
-            
+
             v = sink
             while v != source:
                 u = parent[v]
                 residual[u][v] -= path_flow
                 residual[v][u] += path_flow
                 v = u
-            
+
             max_flow += path_flow
-        
+
         delta //= 2
-    
+
     return max_flow
 
 // Ford-Fulkerson with Multiple Sources/Sinks
@@ -121,25 +121,25 @@ def ford_fulkerson_multiple(graph, sources, sinks):
     # Add super source and super sink
     super_source = 'S'
     super_sink = 'T'
-    
+
     # Initialize residual graph
-    residual = {u: {v: graph[u][v] for v in graph[u]} 
+    residual = {u: {v: graph[u][v] for v in graph[u]}
                 for u in graph}
     residual[super_source] = {s: float('inf') for s in sources}
     residual[super_sink] = {}
-    
+
     for u in graph:
         if u not in residual:
             residual[u] = {}
         if u in sinks:
             residual[u][super_sink] = float('inf')
-    
+
     max_flow = 0
-    
+
     def bfs():
         parent = {super_source: None}
         queue = [super_source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -149,28 +149,28 @@ def ford_fulkerson_multiple(graph, sources, sinks):
                         return parent
                     queue.append(v)
         return None
-    
+
     while True:
         parent = bfs()
         if not parent:
             break
-        
+
         path_flow = float('inf')
         v = super_sink
         while v != super_source:
             u = parent[v]
             path_flow = min(path_flow, residual[u][v])
             v = u
-        
+
         v = super_sink
         while v != super_source:
             u = parent[v]
             residual[u][v] -= path_flow
             residual[v][u] += path_flow
             v = u
-        
+
         max_flow += path_flow
-    
+
     return max_flow`} />
 
     <div className="flex items-start mb-1">

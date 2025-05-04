@@ -18,21 +18,21 @@ def prim(graph):
     mst = []
     visited = set()
     heap = [(0, None, next(iter(graph)))]  # (weight, parent, vertex)
-    
+
     while heap:
         weight, parent, u = heapq.heappop(heap)
         if u in visited:
             continue
-        
+
         visited.add(u)
         if parent is not None:
             mst.append((parent, u, weight))
-        
+
         # Add adjacent vertices to heap
         for v, w in graph[u].items():
             if v not in visited:
                 heapq.heappush(heap, (w, u, v))
-    
+
     return mst
 
 // Prim's with Priority Queue
@@ -40,20 +40,20 @@ def prim_pq(graph):
     mst = []
     visited = set()
     heap = [(0, None, next(iter(graph)))]
-    
+
     while heap:
         weight, parent, u = heapq.heappop(heap)
         if u in visited:
             continue
-        
+
         visited.add(u)
         if parent is not None:
             mst.append((parent, u, weight))
-        
+
         for v, w in graph[u].items():
             if v not in visited:
                 heapq.heappush(heap, (w, u, v))
-    
+
     return mst
 
 // Prim's with Fibonacci Heap
@@ -62,18 +62,18 @@ def prim_fh(graph):
     visited = set()
     heap = FibonacciHeap()
     heap.insert(next(iter(graph)), 0)
-    
+
     while not heap.is_empty():
         u = heap.extract_min()
         visited.add(u)
-        
+
         for v, w in graph[u].items():
             if v not in visited:
                 if v not in heap:
                     heap.insert(v, w)
                 elif w < heap.get_key(v):
                     heap.decrease_key(v, w)
-    
+
     return mst`}
     />
 

@@ -12,50 +12,52 @@ export const BacktrackingPattern = () => (
       with pruning
     </div>
 
-    <PseudocodeDisplay code={`// N-Queens
+    <PseudocodeDisplay
+      code={`// N-Queens
 N-QUEENS(n):
-    board = [0] * n
-    return SOLVE-N-QUEENS(board, 0)
+  board = [0] * n
+  return SOLVE-N-QUEENS(board, 0)
 
 SOLVE-N-QUEENS(board, row):
-    if row == n:
+  if row == n:
+    return true
+  for col from 0 to n-1:
+    if IS-SAFE(board, row, col):
+      board[row] = col
+      if SOLVE-N-QUEENS(board, row+1):
         return true
-    for col from 0 to n-1:
-        if IS-SAFE(board, row, col):
-            board[row] = col
-            if SOLVE-N-QUEENS(board, row+1):
-                return true
-            board[row] = 0
-    return false
+      board[row] = 0
+  return false
 
 // Sudoku
 SUDOKU(board):
-    return SOLVE-SUDOKU(board)
+  return SOLVE-SUDOKU(board)
 
 SOLVE-SUDOKU(board):
-    find empty cell (i, j)
-    if no empty cell:
+  find empty cell (i, j)
+  if no empty cell:
+    return true
+  for num from 1 to 9:
+    if IS-VALID(board, i, j, num):
+      board[i][j] = num
+      if SOLVE-SUDOKU(board):
         return true
-    for num from 1 to 9:
-        if IS-VALID(board, i, j, num):
-            board[i][j] = num
-            if SOLVE-SUDOKU(board):
-                return true
-            board[i][j] = 0
-    return false
+      board[i][j] = 0
+  return false
 
 // Subset Sum
 SUBSET-SUM(S, target):
-    return SOLVE-SUBSET-SUM(S, 0, target)
+  return SOLVE-SUBSET-SUM(S, 0, target)
 
 SOLVE-SUBSET-SUM(S, i, target):
-    if target == 0:
-        return true
-    if i == length(S) or target < 0:
-        return false
-    if SOLVE-SUBSET-SUM(S, i+1, target-S[i]):
-        return true
-    return SOLVE-SUBSET-SUM(S, i+1, target)`} />
+  if target == 0:
+    return true
+  if i == length(S) or target < 0:
+    return false
+  if SOLVE-SUBSET-SUM(S, i+1, target-S[i]):
+    return true
+  return SOLVE-SUBSET-SUM(S, i+1, target)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>

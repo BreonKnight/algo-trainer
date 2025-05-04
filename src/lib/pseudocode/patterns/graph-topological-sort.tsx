@@ -27,12 +27,12 @@ KAHN-TOPOLOGICAL-SORT(G):
     for v in V:
         for u in G.adj[v]:
             in_degree[u] += 1
-    
+
     queue = []
     for v in V:
         if in_degree[v] == 0:
             queue.append(v)
-    
+
     order = []
     while queue:
         v = queue.pop(0)
@@ -41,7 +41,7 @@ KAHN-TOPOLOGICAL-SORT(G):
             in_degree[u] -= 1
             if in_degree[u] == 0:
                 queue.append(u)
-    
+
     if len(order) != |V|:
         return "Graph has a cycle"
     return order
@@ -51,25 +51,25 @@ TOPOLOGICAL-SORT-CYCLE(G):
     visited = [False] * |V|
     recursion_stack = [False] * |V|
     order = []
-    
+
     for v in V:
         if not visited[v]:
             if DFS-CYCLE(G, v, visited, recursion_stack, order):
                 return "Graph has a cycle"
-    
+
     return reversed(order)
 
 DFS-CYCLE(G, v, visited, recursion_stack, order):
     visited[v] = True
     recursion_stack[v] = True
-    
+
     for u in G.adj[v]:
         if not visited[u]:
             if DFS-CYCLE(G, u, visited, recursion_stack, order):
                 return True
         elif recursion_stack[u]:
             return True
-    
+
     recursion_stack[v] = False
     order.append(v)
     return False`} />

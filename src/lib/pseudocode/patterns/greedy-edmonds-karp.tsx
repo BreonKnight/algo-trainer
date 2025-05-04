@@ -15,15 +15,15 @@ export const GreedyEdmondsKarpPattern = () => (
     <PseudocodeDisplay code={`// Standard Edmonds-Karp
 def edmonds_karp(graph, source, sink):
     # Initialize residual graph and max flow
-    residual = {u: {v: graph[u][v] for v in graph[u]} 
+    residual = {u: {v: graph[u][v] for v in graph[u]}
                 for u in graph}
     max_flow = 0
-    
+
     def bfs():
         # Find shortest augmenting path using BFS
         parent = {source: None}
         queue = [source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -33,13 +33,13 @@ def edmonds_karp(graph, source, sink):
                         return parent
                     queue.append(v)
         return None
-    
+
     # Find and process augmenting paths
     while True:
         parent = bfs()
         if not parent:
             break
-        
+
         # Find minimum residual capacity
         path_flow = float('inf')
         v = sink
@@ -47,7 +47,7 @@ def edmonds_karp(graph, source, sink):
             u = parent[v]
             path_flow = min(path_flow, residual[u][v])
             v = u
-        
+
         # Update residual capacities
         v = sink
         while v != source:
@@ -55,21 +55,21 @@ def edmonds_karp(graph, source, sink):
             residual[u][v] -= path_flow
             residual[v][u] += path_flow
             v = u
-        
+
         max_flow += path_flow
-    
+
     return max_flow
 
 // Edmonds-Karp with Edge Capacities
 def edmonds_karp_edge_capacities(graph, source, sink, min_capacity):
-    residual = {u: {v: graph[u][v] for v in graph[u]} 
+    residual = {u: {v: graph[u][v] for v in graph[u]}
                 for u in graph}
     max_flow = 0
-    
+
     def bfs():
         parent = {source: None}
         queue = [source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -79,28 +79,28 @@ def edmonds_karp_edge_capacities(graph, source, sink, min_capacity):
                         return parent
                     queue.append(v)
         return None
-    
+
     while True:
         parent = bfs()
         if not parent:
             break
-        
+
         path_flow = float('inf')
         v = sink
         while v != source:
             u = parent[v]
             path_flow = min(path_flow, residual[u][v])
             v = u
-        
+
         v = sink
         while v != source:
             u = parent[v]
             residual[u][v] -= path_flow
             residual[v][u] += path_flow
             v = u
-        
+
         max_flow += path_flow
-    
+
     return max_flow
 
 // Edmonds-Karp with Vertex Capacities
@@ -110,22 +110,22 @@ def edmonds_karp_vertex_capacities(graph, source, sink, vertex_capacities):
     for u in graph:
         residual[f"{u}_in"] = {f"{u}_out": vertex_capacities[u]}
         residual[f"{u}_out"] = {}
-    
+
     # Add original edges
     for u in graph:
         for v in graph[u]:
             residual[f"{u}_out"][f"{v}_in"] = graph[u][v]
-    
+
     # Add source and sink
     residual[source] = {f"{source}_in": float('inf')}
     residual[f"{sink}_out"] = {sink: float('inf')}
-    
+
     max_flow = 0
-    
+
     def bfs():
         parent = {source: None}
         queue = [source]
-        
+
         while queue:
             u = queue.pop(0)
             for v in residual[u]:
@@ -135,28 +135,28 @@ def edmonds_karp_vertex_capacities(graph, source, sink, vertex_capacities):
                         return parent
                     queue.append(v)
         return None
-    
+
     while True:
         parent = bfs()
         if not parent:
             break
-        
+
         path_flow = float('inf')
         v = sink
         while v != source:
             u = parent[v]
             path_flow = min(path_flow, residual[u][v])
             v = u
-        
+
         v = sink
         while v != source:
             u = parent[v]
             residual[u][v] -= path_flow
             residual[v][u] += path_flow
             v = u
-        
+
         max_flow += path_flow
-    
+
     return max_flow`} />
 
     <div className="flex items-start mb-1">

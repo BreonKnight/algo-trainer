@@ -58,7 +58,7 @@ TRIE-COUNT-PREFIX(root, prefix):
 
 // Example:
 // Input: words = ["apple", "app", "banana", "ball"]
-// 
+//
 // Trie Structure:
 //         (root)
 //        /      \\
@@ -71,7 +71,7 @@ TRIE-COUNT-PREFIX(root, prefix):
 // l       l        l
 // |       |        |
 // e       e        e
-// 
+//
 // Operations:
 // 1. Search "app" → true
 // 2. Search "ban" → false

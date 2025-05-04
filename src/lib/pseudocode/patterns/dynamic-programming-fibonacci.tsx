@@ -12,26 +12,28 @@ export const DynamicProgrammingFibonacciPattern = () => (
       Fibonacci numbers efficiently
     </div>
 
-    <PseudocodeDisplay code={`FIBONACCI(n)
+    <PseudocodeDisplay
+      code={`FIBONACCI(n)
     # Base cases
     if n ≤ 1
         return n
-    
+
     # Initialize first two numbers
     prev ← 0
     curr ← 1
-    
+
     # Compute next numbers
     for i ← 2 to n
         next ← prev + curr
         prev ← curr
         curr ← next
-    
+
     return curr
 
 # Example:
 # Input: n = 6
-# Output: 8  # Sequence: 0, 1, 1, 2, 3, 5, 8`} />
+# Output: 8  # Sequence: 0, 1, 1, 2, 3, 5, 8`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -33,25 +33,25 @@ export const HuffmanCodingPattern = () => (
 //   {char: 'e', freq: 9},
 //   {char: 'f', freq: 5}
 // ]
-// 
+//
 // Step 1: Create leaf nodes
 //         [a:45, b:13, c:12, d:16, e:9, f:5]
-// 
+//
 // Step 2: Combine f(5) and e(9) → 14
 //         [a:45, b:13, c:12, d:16, fe:14]
-// 
+//
 // Step 3: Combine c(12) and b(13) → 25
 //         [a:45, d:16, fe:14, cb:25]
-// 
+//
 // Step 4: Combine fe(14) and d(16) → 30
 //         [a:45, cb:25, fed:30]
-// 
+//
 // Step 5: Combine cb(25) and fed(30) → 55
 //         [a:45, cbfed:55]
-// 
+//
 // Step 6: Combine a(45) and cbfed(55) → 100
 //         [acbfed:100]
-// 
+//
 // Output: Huffman codes
 // a: 0
 // b: 101
