@@ -9,7 +9,9 @@ interface MonsterHunterGuideProps {
 export function MonsterHunterGuide({
   currentPattern,
 }: MonsterHunterGuideProps) {
-  const explanation = monsterHunterExplanations[currentPattern] || {
+  const explanation = monsterHunterExplanations[
+    currentPattern as keyof typeof monsterHunterExplanations
+  ] || {
     title: "Monster Hunter Guide",
     description: "No monster hunting guide available for this algorithm yet.",
     example: "Check back later for a monster-themed explanation!",
@@ -41,7 +43,7 @@ export function MonsterHunterGuide({
           <div>
             <h4 className="text-md font-medium text-accent2">Hunter's Tips:</h4>
             <ul className="list-disc pl-5 mt-1 space-y-1">
-              {explanation.tips.map((tip, index) => (
+              {explanation.tips.map((tip: string, index: number) => (
                 <li key={index} className="text-main">
                   {tip}
                 </li>

@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const greedy_job_schedulingPattern: AlgorithmPattern = {
+export const greedyJobSchedulingPattern: AlgorithmPattern = {
   title: "Greedy Job Scheduling",
   description:
     "A greedy algorithm that schedules jobs to minimize completion time or maximize profit, typically sorting jobs by duration or profit/time ratio.",

@@ -1,18 +1,18 @@
 import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
-export const KruskalsAlgorithmPattern = () => (
-  <div>
-    <div className="mb-2">
+export const KruskalPattern = () => (
+  <div className="space-y-4">
+    <h2 className="text-2xl font-bold">
       <span className="text-accent font-bold">Kruskal's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Graph)</span>
-    </div>
+    </h2>
     <div className="mb-2 text-xs text-secondary">
       Time: O(E log E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find minimum
       spanning tree
     </div>
 
-    <PseudocodeDisplay code={`# Kruskal's Algorithm: Find minimum spanning tree
+    <PseudocodeDisplay
+      code={`# Kruskal's Algorithm: Find minimum spanning tree
 # Input: Graph G = (V, E) with edge weights
 # Output: Set of edges forming minimum spanning tree
 
@@ -46,7 +46,8 @@ Algorithm KRUSKAL(G)
 # Step 1: Sort edges: (a,b,1), (b,c,2), (a,d,3), (a,c,4), (b,d,5), (c,d,6)
 # Step 2: Add (a,b), (b,c), (a,d)
 # 
-# Output: {(a,b), (b,c), (a,d)}`} />
+# Output: {(a,b), (b,c), (a,d)}`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

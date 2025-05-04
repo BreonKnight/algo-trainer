@@ -1,4 +1,4 @@
-import { PatternKey } from "./types";
+import { PatternKey } from "./types.ts";
 
 export const monsterHunterPatternsExtended5 = new Map<PatternKey, string>([
   [
@@ -376,5 +376,115 @@ export const monsterHunterPatternsExtended5 = new Map<PatternKey, string>([
     suffixes = [(monster_attacks[i:], i) for i in range(n)]
     suffixes.sort()
     return [s[1] for s in suffixes]`,
+  ],
+  [
+    "Matrix Operations" as PatternKey,
+    `def monster_hunter_matrix_operations(matrix1, matrix2, operations):
+    """
+    Comprehensive matrix operations for monster territory mapping and analysis.
+    Time: O(n^2) for most operations
+    Space: O(n^2)
+    
+    Monster Hunter Context:
+    - Each matrix cell represents a different monster territory
+    - Different traversal methods help explore territories systematically
+    - Operations help analyze monster movements and resource distributions
+    - Matrix transformations help view territories from different perspectives
+    """
+    def add_matrices(m1, m2):
+        """Combine two territory maps by adding their resources."""
+        return [[m1[i][j] + m2[i][j] for j in range(len(m1[0]))] for i in range(len(m1))]
+    
+    def transpose(matrix):
+        """Create the transpose of a territory map."""
+        return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
+    
+    def rotate_90_clockwise(matrix):
+        """Rotate territory map 90 degrees clockwise."""
+        n = len(matrix)
+        # First transpose
+        for i in range(n):
+            for j in range(i, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        # Then reverse each row
+        for i in range(n):
+            matrix[i] = matrix[i][::-1]
+        return matrix
+    
+    def multiply_matrices(m1, m2):
+        """Multiply two territory maps."""
+        if len(m1[0]) != len(m2):
+            raise ValueError("Incompatible territory dimensions")
+        
+        result = [[0 for _ in range(len(m2[0]))] for _ in range(len(m1))]
+        
+        for i in range(len(m1)):
+            for j in range(len(m2[0])):
+                for k in range(len(m2)):
+                    result[i][j] += m1[i][k] * m2[k][j]
+        
+        return result
+    
+    def spiral_traversal(matrix):
+        """Traverse territory in a spiral pattern from outer to inner."""
+        result = []
+        top, bottom = 0, len(matrix) - 1
+        left, right = 0, len(matrix[0]) - 1
+        
+        while top <= bottom and left <= right:
+            # Top row
+            for j in range(left, right + 1):
+                result.append(matrix[top][j])
+            top += 1
+            
+            # Right column
+            for i in range(top, bottom + 1):
+                result.append(matrix[i][right])
+            right -= 1
+            
+            if top <= bottom:
+                # Bottom row
+                for j in range(right, left - 1, -1):
+                    result.append(matrix[bottom][j])
+                bottom -= 1
+            
+            if left <= right:
+                # Left column
+                for i in range(bottom, top - 1, -1):
+                    result.append(matrix[i][left])
+                left += 1
+        
+        return result
+    
+    def diagonal_traversal(matrix):
+        """Traverse territory diagonally from top-left to bottom-right."""
+        result = []
+        n = len(matrix)
+        # Upper diagonals
+        for d in range(n):
+            for i in range(d + 1):
+                result.append(matrix[i][d-i])
+        # Lower diagonals
+        for d in range(1, n):
+            for i in range(d, n):
+                result.append(matrix[i][n-1-(i-d)])
+        return result
+    
+    result = {}
+    for op in operations:
+        if op["type"] == "add":
+            result["add"] = add_matrices(matrix1, matrix2)
+        elif op["type"] == "transpose":
+            result["transpose"] = transpose(matrix1)
+        elif op["type"] == "rotate_90_clockwise":
+            result["rotate_90_clockwise"] = rotate_90_clockwise(matrix1.copy())
+        elif op["type"] == "multiply":
+            result["multiply"] = multiply_matrices(matrix1, matrix2)
+        elif op["type"] == "spiral_traversal":
+            result["spiral_traversal"] = spiral_traversal(matrix1)
+        elif op["type"] == "diagonal_traversal":
+            result["diagonal_traversal"] = diagonal_traversal(matrix1)
+    
+    return result`,
   ],
 ]);

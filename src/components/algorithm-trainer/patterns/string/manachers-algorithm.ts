@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const manachers_algorithmPattern: AlgorithmPattern = {
+export const manachersAlgorithmPattern: AlgorithmPattern = {
   title: "Manacher's Algorithm",
   description:
     "An efficient algorithm to find all palindromic substrings in a string in linear time.",

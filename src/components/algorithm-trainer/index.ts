@@ -5,3 +5,4 @@ export * from "./AnswerCard";
 export * from "./types";
 export * from "./patterns";
 export * from "./MonsterHunterGuide";
+export * from "./AlgorithmVisualizer";

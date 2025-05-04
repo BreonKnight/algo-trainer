@@ -4,7 +4,7 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const MillerRabinPrimalityTestPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Miller-Rabin Algorithm</span>
+      <span className="text-accent font-bold">Miller-Rabin Primality Test</span>
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
@@ -12,7 +12,8 @@ export const MillerRabinPrimalityTestPattern = () => (
       Probabilistic primality test
     </div>
 
-    <PseudocodeDisplay code={`# Miller-Rabin Algorithm
+    <PseudocodeDisplay
+      code={`# Miller-Rabin Primality Test
 # Input: Integer n > 2, number of rounds k
 # Output: "composite" or "probably prime"
 
@@ -79,7 +80,8 @@ Algorithm MILLER-RABIN-PRIMALITY-TEST(n, k)
 # 
 # ... (3 more rounds)
 # 
-# Output: "probably prime"`} />
+# Output: "probably prime"`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

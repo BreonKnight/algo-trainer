@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const bfs_linked_listPattern: AlgorithmPattern = {
+export const bfsLinkedListPattern: AlgorithmPattern = {
   title: "BFS on Linked List",
   description:
     "Apply Breadth-First Search on a linked list structure to traverse or search through nodes level by level.",

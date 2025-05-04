@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const topological_sortPattern: AlgorithmPattern = {
+export const topologicalSortPattern: AlgorithmPattern = {
   title: "Topological Sort",
   description:
     "Algorithm for ordering vertices in a directed acyclic graph (DAG) such that for each directed edge u->v, vertex u comes before v in the ordering.",

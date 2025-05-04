@@ -15,4 +15,9 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
   },
+  // server: {
+  //   headers: {
+  //     "Content-Type": "application/javascript",
+  //   },
+  // },
 });

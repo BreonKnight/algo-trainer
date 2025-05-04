@@ -5,7 +5,7 @@ export interface VisualTemplate {
   interactiveElements: string[];
 }
 
-export const searchAlgorithmTemplatesPatternPatternPatternPattern = {
+export const searchAlgorithmTemplates: Record<string, VisualTemplate> = {
   binarySearch: {
     before: `Map showing all territories with their monsters and difficulty levels:
     [Ancient Forest (1)] [Wildspire Waste (2)] [Coral Highlands (3)] [Rotten Vale (4)] [Elder's Recess (5)]`,
@@ -204,9 +204,7 @@ export const visualSteps: Record<string, VisualStep[]> = {
 };
 
 export function getVisualTemplate(algorithm: string): VisualTemplate {
-  return searchAlgorithmTemplates[
-    algorithm as keyof typeof searchAlgorithmTemplates
-  ];
+  return searchAlgorithmTemplates[algorithm];
 }
 
 export function getInteractiveElements(

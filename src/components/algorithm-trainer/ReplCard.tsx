@@ -1,10 +1,10 @@
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { useState, useEffect, useRef } from "react";
 import { loadPyodide, PyodideInterface } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { useTheme } from "../theme-context";
+import { useTheme } from "../theme/theme-context";
 import GamificationService from "../../lib/gamification";
 import { cn } from "../../lib/utils";
 

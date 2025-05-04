@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const floyd_warshallPattern: AlgorithmPattern = {
+export const floydWarshallPattern: AlgorithmPattern = {
   title: "Floyd-Warshall Algorithm",
   description:
     "Find shortest paths between all pairs of vertices in a weighted graph",

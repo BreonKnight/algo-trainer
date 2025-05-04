@@ -1,67 +1,127 @@
 import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
-export const PrimsAlgorithmPattern = () => (
-  <div>
-    <div className="mb-2">
+export const PrimPattern = () => (
+  <div className="space-y-4">
+    <h2 className="text-2xl font-bold">
       <span className="text-accent font-bold">Prim's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
-    </div>
+    </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Minimum
-      spanning tree
+      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
+      minimum spanning tree
     </div>
 
-    <PseudocodeDisplay code={`// Prim's algorithm for minimum spanning tree
-PRIM(G, w, r):
-    for each u ∈ G.V:
-        key[u] ← ∞
-        π[u] ← NIL
-    key[r] ← 0
-    Q ← G.V
-    while Q ≠ ∅:
-        u ← EXTRACT-MIN(Q)
-        for each v ∈ G.Adj[u]:
-            if v ∈ Q and w(u, v) < key[v]:
-                π[v] ← u
-                key[v] ← w(u, v)
+    <PseudocodeDisplay
+      code={`// Standard Prim's Algorithm
+def prim(graph):
+    # Initialize MST and priority queue
+    mst = []
+    visited = set()
+    heap = [(0, None, next(iter(graph)))]  # (weight, parent, vertex)
+    
+    while heap:
+        weight, parent, u = heapq.heappop(heap)
+        if u in visited:
+            continue
+        
+        visited.add(u)
+        if parent is not None:
+            mst.append((parent, u, weight))
+        
+        # Add adjacent vertices to heap
+        for v, w in graph[u].items():
+            if v not in visited:
+                heapq.heappush(heap, (w, u, v))
+    
+    return mst
 
-// Example:
-// Input: G = (V, E), where
-// V = {1, 2, 3, 4, 5}
-// E = {(1,2,2), (1,3,3), (2,3,1), (2,4,4), (3,4,5), (3,5,6), (4,5,7)}
-// r = 1
-// 
-// Execution:
-// 1. Initialize: key = [0, ∞, ∞, ∞, ∞], π = [NIL, NIL, NIL, NIL, NIL]
-// 2. Extract 1: key = [0, 2, 3, ∞, ∞], π = [NIL, 1, 1, NIL, NIL]
-// 3. Extract 2: key = [0, 2, 1, 4, ∞], π = [NIL, 1, 2, 2, NIL]
-// 4. Extract 3: key = [0, 2, 1, 4, 6], π = [NIL, 1, 2, 2, 3]
-// 5. Extract 4: key = [0, 2, 1, 4, 6], π = [NIL, 1, 2, 2, 3]
-// 6. Extract 5: key = [0, 2, 1, 4, 6], π = [NIL, 1, 2, 2, 3]
-// 
-// Output: MST edges = {(1,2), (2,3), (2,4), (3,5)}`} />
+// Prim's with Priority Queue
+def prim_pq(graph):
+    mst = []
+    visited = set()
+    heap = [(0, None, next(iter(graph)))]
+    
+    while heap:
+        weight, parent, u = heapq.heappop(heap)
+        if u in visited:
+            continue
+        
+        visited.add(u)
+        if parent is not None:
+            mst.append((parent, u, weight))
+        
+        for v, w in graph[u].items():
+            if v not in visited:
+                heapq.heappush(heap, (w, u, v))
+    
+    return mst
 
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+// Prim's with Fibonacci Heap
+def prim_fh(graph):
+    mst = []
+    visited = set()
+    heap = FibonacciHeap()
+    heap.insert(next(iter(graph)), 0)
+    
+    while not heap.is_empty():
+        u = heap.extract_min()
+        visited.add(u)
+        
+        for v, w in graph[u].items():
+            if v not in visited:
+                if v not in heap:
+                    heap.insert(v, w)
+                elif w < heap.get_key(v):
+                    heap.decrease_key(v, w)
+    
+    return mst`}
+    />
+
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">1.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Initialize:</span> MST,
+        visited set, and priority queue
+      </span>
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Initialize: Set all keys to infinity and predecessors to NIL
-        </span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Process: Extract minimum key vertex and update adjacent vertices
-        </span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Build: Construct MST using predecessor pointers</span>
-      </div>
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">2.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Process:</span> Extract
+        minimum weight edge
+      </span>
+    </div>
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">3.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Update:</span> Add adjacent
+        vertices to queue
+      </span>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">
+        Example: Standard Prim's
+      </span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Input Graph:
+A -> B(2), D(6)
+B -> A(2), C(3), D(8), E(5)
+C -> B(3), E(7)
+D -> A(6), B(8), E(9)
+E -> B(5), C(7), D(9)
+
+MST:
+A-B (2)
+B-C (3)
+B-E (5)
+A-D (6)
+
+Total Weight: 16`}
+      </pre>
     </div>
   </div>
 );

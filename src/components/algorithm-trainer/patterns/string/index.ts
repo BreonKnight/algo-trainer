@@ -1,18 +1,18 @@
-import { AlgorithmPattern } from "../../types";
-import { manachers_algorithmPattern } from "./manachers-algorithm";
-import { knuthmorrisprattPattern } from "./knuth-morris-pratt";
-import { rabinkarpPattern } from "./rabin-karp";
-import { stringPattern } from "./string";
-import { zalgorithmPattern } from "./z-algorithm";
+import { AlgorithmPattern, PatternKey } from "../../types";
+import { manachersAlgorithmPattern } from "./manachers-algorithm";
+import { knuthMorrisPrattPattern } from "./knuth-morris-pratt";
+import { rabinKarpPattern } from "./rabin-karp";
+import { stringOperationsPattern } from "./string-operations";
+import { zAlgorithmPattern } from "./z-algorithm";
 import { suffixArrayPattern } from "./suffix-array";
 import { suffixTreePattern } from "./suffix-tree";
 
-export const stringPatterns: Partial<Record<string, AlgorithmPattern>> = {
-  "String Operations": stringPattern,
-  "Z Algorithm": zalgorithmPattern,
-  "Manacher's Algorithm": manachers_algorithmPattern,
-  "KMP Algorithm": knuthmorrisprattPattern,
-  "Rabin Karp": rabinkarpPattern,
+export const stringPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
+  "String Operations": stringOperationsPattern,
+  "Z Algorithm": zAlgorithmPattern,
+  "Manacher's Algorithm": manachersAlgorithmPattern,
+  "Knuth-Morris-Pratt": knuthMorrisPrattPattern,
+  "Rabin-Karp": rabinKarpPattern,
   "Suffix Array": suffixArrayPattern,
   "Suffix Tree": suffixTreePattern,
 };
