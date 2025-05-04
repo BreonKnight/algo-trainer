@@ -8,6 +8,7 @@
       "difficulty": "beginner",
       "duration": 15,
       "prerequisites": [],
+      "pseudocode": "# Bubble Sort: Repeatedly swap adjacent elements if they are in wrong order\n# Input: Array A[1..n] of n elements\n# Output: Array A sorted in non-decreasing order\n\nBUBBLE-SORT(A)\n    n ← length[A]    # Number of elements in array\n\n    # Outer loop: n-1 passes needed\n    for i ← 1 to n-1 do\n        # Inner loop: compare adjacent elements\n        for j ← 1 to n-i do\n            # Swap if elements are in wrong order\n            if A[j] > A[j+1] then\n                # Exchange A[j] and A[j+1]\n                temp ← A[j]\n                A[j] ← A[j+1]\n                A[j+1] ← temp\n            end if\n        end for\n    end for\n\n# Example:\n# Input: A = [5, 2, 4, 6, 1, 3]\n# Pass 1: [2, 4, 5, 1, 3, 6]  # 6 bubbles to end\n# Pass 2: [2, 4, 1, 3, 5, 6]  # 5 bubbles to end\n# Pass 3: [2, 1, 3, 4, 5, 6]  # 4 bubbles to end\n# Pass 4: [1, 2, 3, 4, 5, 6]  # 3 bubbles to end\n# Pass 5: [1, 2, 3, 4, 5, 6]  # 2 bubbles to end\n# Output: [1, 2, 3, 4, 5, 6]",
       "implementations": {
         "python": "def bubble_sort(input):\n    # Implementation of Bubble Sort\n    pass",
         "javascript": "function bubble_sort(input) {\n    // Implementation of Bubble Sort\n}"
@@ -62,9 +63,8 @@
       "videoUrl": "https://www.youtube.com/embed/Hoixgm4-P4M",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "bubble-sort"
-      ],
+      "prerequisites": ["bubble-sort"],
+      "pseudocode": "# Quick Sort: Divide and conquer sorting algorithm\n# Input: Array A[p..r] of elements\n# Output: Array A sorted in non-decreasing order\n\nQUICKSORT(A, p, r)\n    if p < r\n        then q ← PARTITION(A, p, r)\n            QUICKSORT(A, p, q - 1)\n            QUICKSORT(A, q + 1, r)\n\nPARTITION(A, p, r)\n    x ← A[r]    # Choose pivot\n    i ← p - 1   # Index of smaller element\n\n    for j ← p to r - 1\n        do if A[j] ≤ x\n            then i ← i + 1\n                exchange A[i] with A[j]\n    exchange A[i + 1] with A[r]\n    return i + 1\n\n# Example:\n# Input: A = [3, 7, 8, 5, 2, 1, 9, 5, 4]\n# Pivot = 4\n#\n# First partition:\n# [3, 2, 1, 4, 8, 7, 9, 5, 5]\n#           ↑\n# Recursively sort left and right subarrays:\n# Left:  [3, 2, 1]\n# Right: [8, 7, 9, 5, 5]\n#\n# Final result: [1, 2, 3, 4, 5, 5, 7, 8, 9]",
       "implementations": {
         "python": "def quick_sort(input):\n    # Implementation of Quick Sort\n    pass",
         "javascript": "function quick_sort(input) {\n    // Implementation of Quick Sort\n}"
@@ -119,9 +119,7 @@
       "videoUrl": "https://www.youtube.com/embed/4VqmGXwpLqc",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "quick-sort"
-      ],
+      "prerequisites": ["quick-sort"],
       "implementations": {
         "python": "def merge_sort(input):\n    # Implementation of Merge Sort\n    pass",
         "javascript": "function merge_sort(input) {\n    // Implementation of Merge Sort\n}"
@@ -950,10 +948,7 @@
       "videoUrl": "https://www.youtube.com/embed/oDqjPvD54Ss",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def breadth_first_search(input):\n    # Implementation of Breadth-First Search\n    pass",
         "javascript": "function breadth_first_search(input) {\n    // Implementation of Breadth-First Search\n}"
@@ -1008,10 +1003,7 @@
       "videoUrl": "https://www.youtube.com/embed/7fujbpJ0LB4",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def depth_first_search(input):\n    # Implementation of Depth-First Search\n    pass",
         "javascript": "function depth_first_search(input) {\n    // Implementation of Depth-First Search\n}"
@@ -1066,10 +1058,7 @@
       "videoUrl": "https://www.youtube.com/embed/pVfj6mxhdMw",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def dijkstra_s_algorithm(input):\n    # Implementation of Dijkstra's Algorithm\n    pass",
         "javascript": "function dijkstra_s_algorithm(input) {\n    // Implementation of Dijkstra's Algorithm\n}"
@@ -1124,10 +1113,7 @@
       "videoUrl": "https://www.youtube.com/embed/obWXjtg0L64",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def bellman_ford_algorithm(input):\n    # Implementation of Bellman-Ford Algorithm\n    pass",
         "javascript": "function bellman_ford_algorithm(input) {\n    // Implementation of Bellman-Ford Algorithm\n}"
@@ -1182,10 +1168,7 @@
       "videoUrl": "https://www.youtube.com/embed/4OQeCuLYj-4",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def floyd_warshall_algorithm(input):\n    # Implementation of Floyd-Warshall Algorithm\n    pass",
         "javascript": "function floyd_warshall_algorithm(input) {\n    // Implementation of Floyd-Warshall Algorithm\n}"
@@ -1240,10 +1223,7 @@
       "videoUrl": "https://www.youtube.com/embed/JZBQLXgSGfs",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def kruskal_s_algorithm(input):\n    # Implementation of Kruskal's Algorithm\n    pass",
         "javascript": "function kruskal_s_algorithm(input) {\n    // Implementation of Kruskal's Algorithm\n}"
@@ -1298,10 +1278,7 @@
       "videoUrl": "https://www.youtube.com/embed/cplfcGZmX7I",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def prim_s_algorithm(input):\n    # Implementation of Prim's Algorithm\n    pass",
         "javascript": "function prim_s_algorithm(input) {\n    // Implementation of Prim's Algorithm\n}"
@@ -1356,10 +1333,7 @@
       "videoUrl": "https://www.youtube.com/embed/ddTC4Zovtbc",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def topological_sort(input):\n    # Implementation of Topological Sort\n    pass",
         "javascript": "function topological_sort(input) {\n    // Implementation of Topological Sort\n}"
@@ -1414,10 +1388,7 @@
       "videoUrl": "https://www.youtube.com/embed/R6uoSjZ2imo",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def kosaraju_s_algorithm(input):\n    # Implementation of Kosaraju's Algorithm\n    pass",
         "javascript": "function kosaraju_s_algorithm(input) {\n    // Implementation of Kosaraju's Algorithm\n}"
@@ -1472,10 +1443,7 @@
       "videoUrl": "https://www.youtube.com/embed/wUgWX0nc4NY",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def tarjan_s_algorithm(input):\n    # Implementation of Tarjan's Algorithm\n    pass",
         "javascript": "function tarjan_s_algorithm(input) {\n    // Implementation of Tarjan's Algorithm\n}"
@@ -1530,10 +1498,7 @@
       "videoUrl": "https://www.youtube.com/embed/2FFq2_je7Lg",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def articulation_points(input):\n    # Implementation of Articulation Points\n    pass",
         "javascript": "function articulation_points(input) {\n    // Implementation of Articulation Points\n}"
@@ -1588,10 +1553,7 @@
       "videoUrl": "https://www.youtube.com/embed/Rhxs4kqIjQs",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def bridges(input):\n    # Implementation of Bridges\n    pass",
         "javascript": "function bridges(input) {\n    // Implementation of Bridges\n}"
@@ -1646,10 +1608,7 @@
       "videoUrl": "https://www.youtube.com/embed/R6uoSjZ2imo",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def strongly_connected_components(input):\n    # Implementation of Strongly Connected Components\n    pass",
         "javascript": "function strongly_connected_components(input) {\n    // Implementation of Strongly Connected Components\n}"
@@ -1704,10 +1663,7 @@
       "videoUrl": "https://www.youtube.com/embed/2FFq2_je7Lg",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def biconnected_components(input):\n    # Implementation of Biconnected Components\n    pass",
         "javascript": "function biconnected_components(input) {\n    // Implementation of Biconnected Components\n}"
@@ -1762,10 +1718,7 @@
       "videoUrl": "https://www.youtube.com/embed/8MpoO2zV2q4",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def eulerian_path(input):\n    # Implementation of Eulerian Path\n    pass",
         "javascript": "function eulerian_path(input) {\n    // Implementation of Eulerian Path\n}"
@@ -1820,10 +1773,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def hamiltonian_path(input):\n    # Implementation of Hamiltonian Path\n    pass",
         "javascript": "function hamiltonian_path(input) {\n    // Implementation of Hamiltonian Path\n}"
@@ -1878,10 +1828,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def johnson_s_algorithm(input):\n    # Implementation of Johnson's Algorithm\n    pass",
         "javascript": "function johnson_s_algorithm(input) {\n    // Implementation of Johnson's Algorithm\n}"
@@ -1936,10 +1883,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def ford_fulkerson_algorithm(input):\n    # Implementation of Ford-Fulkerson Algorithm\n    pass",
         "javascript": "function ford_fulkerson_algorithm(input) {\n    // Implementation of Ford-Fulkerson Algorithm\n}"
@@ -1994,10 +1938,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def edmonds_karp_algorithm(input):\n    # Implementation of Edmonds-Karp Algorithm\n    pass",
         "javascript": "function edmonds_karp_algorithm(input) {\n    // Implementation of Edmonds-Karp Algorithm\n}"
@@ -2052,10 +1993,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def dinic_s_algorithm(input):\n    # Implementation of Dinic's Algorithm\n    pass",
         "javascript": "function dinic_s_algorithm(input) {\n    // Implementation of Dinic's Algorithm\n}"
@@ -2110,10 +2048,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def push_relabel_algorithm(input):\n    # Implementation of Push-Relabel Algorithm\n    pass",
         "javascript": "function push_relabel_algorithm(input) {\n    // Implementation of Push-Relabel Algorithm\n}"
@@ -2168,10 +2103,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def hopcroft_karp_algorithm(input):\n    # Implementation of Hopcroft-Karp Algorithm\n    pass",
         "javascript": "function hopcroft_karp_algorithm(input) {\n    // Implementation of Hopcroft-Karp Algorithm\n}"
@@ -2226,10 +2158,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def kuhn_s_algorithm(input):\n    # Implementation of Kuhn's Algorithm\n    pass",
         "javascript": "function kuhn_s_algorithm(input) {\n    // Implementation of Kuhn's Algorithm\n}"
@@ -2284,10 +2213,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def hungarian_algorithm(input):\n    # Implementation of Hungarian Algorithm\n    pass",
         "javascript": "function hungarian_algorithm(input) {\n    // Implementation of Hungarian Algorithm\n}"
@@ -2342,10 +2268,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
-      "prerequisites": [
-        "breadth-first-search",
-        "depth-first-search"
-      ],
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
         "python": "def gale_shapley_algorithm(input):\n    # Implementation of Gale-Shapley Algorithm\n    pass",
         "javascript": "function gale_shapley_algorithm(input) {\n    // Implementation of Gale-Shapley Algorithm\n}"
@@ -2402,9 +2325,7 @@
       "videoUrl": "https://www.youtube.com/embed/8LusJS5-AGo",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def knapsack_problem(input):\n    # Implementation of Knapsack Problem\n    pass",
         "javascript": "function knapsack_problem(input) {\n    // Implementation of Knapsack Problem\n}"
@@ -2459,9 +2380,7 @@
       "videoUrl": "https://www.youtube.com/embed/ASoaQq66oQI",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def longest_common_subsequence(input):\n    # Implementation of Longest Common Subsequence\n    pass",
         "javascript": "function longest_common_subsequence(input) {\n    // Implementation of Longest Common Subsequence\n}"
@@ -2516,9 +2435,7 @@
       "videoUrl": "https://www.youtube.com/embed/fV-TF4OvZpk",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def longest_increasing_subsequence(input):\n    # Implementation of Longest Increasing Subsequence\n    pass",
         "javascript": "function longest_increasing_subsequence(input) {\n    // Implementation of Longest Increasing Subsequence\n}"
@@ -2573,9 +2490,7 @@
       "videoUrl": "https://www.youtube.com/embed/prmezH63EZU",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def matrix_chain_multiplication(input):\n    # Implementation of Matrix Chain Multiplication\n    pass",
         "javascript": "function matrix_chain_multiplication(input) {\n    // Implementation of Matrix Chain Multiplication\n}"
@@ -2630,9 +2545,7 @@
       "videoUrl": "https://www.youtube.com/embed/H9bfqozjoqs",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def coin_change_problem(input):\n    # Implementation of Coin Change Problem\n    pass",
         "javascript": "function coin_change_problem(input) {\n    // Implementation of Coin Change Problem\n}"
@@ -2687,9 +2600,7 @@
       "videoUrl": "https://www.youtube.com/embed/We3YDTzNXEk",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def edit_distance(input):\n    # Implementation of Edit Distance\n    pass",
         "javascript": "function edit_distance(input) {\n    // Implementation of Edit Distance\n}"
@@ -2744,9 +2655,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def rod_cutting(input):\n    # Implementation of Rod Cutting\n    pass",
         "javascript": "function rod_cutting(input) {\n    // Implementation of Rod Cutting\n}"
@@ -2801,9 +2710,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def subset_sum_problem(input):\n    # Implementation of Subset Sum Problem\n    pass",
         "javascript": "function subset_sum_problem(input) {\n    // Implementation of Subset Sum Problem\n}"
@@ -2858,9 +2765,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def partition_problem(input):\n    # Implementation of Partition Problem\n    pass",
         "javascript": "function partition_problem(input) {\n    // Implementation of Partition Problem\n}"
@@ -2915,9 +2820,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def word_break_problem(input):\n    # Implementation of Word Break Problem\n    pass",
         "javascript": "function word_break_problem(input) {\n    // Implementation of Word Break Problem\n}"
@@ -2972,9 +2875,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def palindrome_partitioning(input):\n    # Implementation of Palindrome Partitioning\n    pass",
         "javascript": "function palindrome_partitioning(input) {\n    // Implementation of Palindrome Partitioning\n}"
@@ -3029,9 +2930,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def optimal_binary_search_tree(input):\n    # Implementation of Optimal Binary Search Tree\n    pass",
         "javascript": "function optimal_binary_search_tree(input) {\n    // Implementation of Optimal Binary Search Tree\n}"
@@ -3086,9 +2985,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def activity_selection(input):\n    # Implementation of Activity Selection\n    pass",
         "javascript": "function activity_selection(input) {\n    // Implementation of Activity Selection\n}"
@@ -3143,9 +3040,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def job_sequencing_problem(input):\n    # Implementation of Job Sequencing Problem\n    pass",
         "javascript": "function job_sequencing_problem(input) {\n    // Implementation of Job Sequencing Problem\n}"
@@ -3200,9 +3095,7 @@
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "advanced",
       "duration": 35,
-      "prerequisites": [
-        "knapsack-problem"
-      ],
+      "prerequisites": ["knapsack-problem"],
       "implementations": {
         "python": "def fractional_knapsack(input):\n    # Implementation of Fractional Knapsack\n    pass",
         "javascript": "function fractional_knapsack(input) {\n    // Implementation of Fractional Knapsack\n}"

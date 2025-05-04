@@ -1,4 +1,4 @@
-import { Routes, Route, useParams, Navigate } from "react-router-dom";
+import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
 import { ProgressView } from "./components/progress/ProgressView";
 import { AlgorithmTutorial } from "./components/tutorials/AlgorithmTutorial";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
@@ -173,9 +173,10 @@ function TutorialList() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {categoryTutorials.map((tutorial) => (
-              <div
+              <Link
                 key={tutorial.id}
-                className="p-4 border rounded-lg hover:shadow-md transition-shadow"
+                to={`/tutorials/${encodeURIComponent(tutorial.title)}`}
+                className="block p-4 border rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-medium">{tutorial.title}</h3>
                 <p className="text-sm text-gray-600 mt-2">
@@ -185,14 +186,9 @@ function TutorialList() {
                   <span className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800">
                     {tutorial.difficulty}
                   </span>
-                  <a
-                    href={`/tutorials/${encodeURIComponent(tutorial.title)}`}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    View Tutorial
-                  </a>
+                  <span className="text-blue-600">View Tutorial</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
