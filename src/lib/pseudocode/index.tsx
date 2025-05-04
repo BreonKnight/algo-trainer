@@ -86,7 +86,7 @@ import { SlidingWindowPattern } from "./patterns/sliding-window";
 import { StackImplementationPattern } from "./patterns/stack-implementation";
 import { StackSortPattern } from "./patterns/stack-sort";
 import { StateCompressionDPPattern } from "./patterns/state-compression-dp";
-import { StringPattern } from "./patterns/string";
+import { StringOperationsPattern } from "./patterns/string-operations";
 import { StronglyConnectedComponentsPattern } from "./patterns/strongly-connected-components";
 import { SuffixArrayPattern } from "./patterns/suffix-array";
 import { SuffixTreePattern } from "./patterns/suffix-tree";
@@ -199,7 +199,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Stack Implementation": StackImplementationPattern,
   "Stack Sort": StackSortPattern,
   "State Compression DP": StateCompressionDPPattern,
-  "String Operations": StringPattern,
+  "String Operations": StringOperationsPattern,
   "Suffix Array": SuffixArrayPattern,
   "Suffix Tree": SuffixTreePattern,
   "Lowest Common Ancestor": LCAPattern,

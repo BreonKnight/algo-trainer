@@ -91,7 +91,6 @@ export type PatternKey =
   | "Stack Implementation"
   | "Stack Sort"
   | "State Compression DP"
-  | "String"
   | "String Operations"
   | "Strongly Connected Components"
   | "Suffix Array"
@@ -215,7 +214,6 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Stack Implementation",
   "Stack Sort",
   "State Compression DP",
-  "String",
   "String Operations",
   "Strongly Connected Components",
   "Suffix Array",

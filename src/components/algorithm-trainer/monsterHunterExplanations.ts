@@ -1449,6 +1449,90 @@ export const monsterHunterExplanations: Partial<
       "Document your territory maps and operations for future reference and strategy planning",
     ],
   },
+  "Fibonacci Search": {
+    title: "Monster Territory Fibonacci Explorer",
+    description:
+      "Like a monster hunter using the Fibonacci sequence to efficiently search through territories, Fibonacci Search divides the search space using Fibonacci numbers to find targets quickly.",
+    example:
+      "Imagine searching for a rare monster in a vast territory - Fibonacci Search helps you divide the territory into sections based on the Fibonacci sequence, allowing you to quickly narrow down the search area.",
+    tips: [
+      "Use Fibonacci numbers to divide the search space",
+      "Compare the target with the element at the current Fibonacci position",
+      "Eliminate one-third of the search space in each step",
+      "Consider using it for unbounded or infinite arrays",
+      "Use it when binary search is not suitable",
+    ],
+  },
+  "Fractional Knapsack": {
+    title: "Monster Hunter's Resource Packer",
+    description:
+      "Like a monster hunter maximizing the value of their limited inventory space, Fractional Knapsack helps you select the most valuable combination of items when you can take fractions of items.",
+    example:
+      "Imagine you have limited space in your inventory and need to choose which monster parts to take - Fractional Knapsack helps you maximize the total value by allowing you to take fractions of valuable items.",
+    tips: [
+      "Sort items by value-to-weight ratio",
+      "Take as much as possible of the most valuable items first",
+      "Consider taking fractions of items when space is limited",
+      "Use it for resource optimization problems",
+      "Consider both value and weight constraints",
+    ],
+  },
+  Greedy: {
+    title: "Monster Hunter's Greedy Strategy",
+    description:
+      "Like a monster hunter who always chooses the most valuable target at each step, the Greedy algorithm makes locally optimal choices hoping they lead to a globally optimal solution.",
+    example:
+      "Imagine you're a monster hunter with limited time. At each step, you choose the most valuable monster you can defeat, hoping this strategy leads to the maximum total value of monsters hunted.",
+    tips: [
+      "Always choose the most valuable option available at each step",
+      "Consider the value-to-effort ratio of each monster",
+      "Be careful - sometimes the greedy choice might not lead to the best overall outcome",
+      "Use when the problem has optimal substructure and greedy choice property",
+      "Prove the correctness of your greedy strategy if possible",
+    ],
+  },
+  "Hungarian Algorithm": {
+    title: "Monster Hunter's Perfect Match Finder",
+    description:
+      "Like a monster hunter matching hunters to their ideal monster targets, the Hungarian Algorithm finds the optimal assignment of tasks to workers with minimum total cost.",
+    example:
+      "Imagine you need to assign each hunter to their most suitable monster type - the Hungarian Algorithm helps you find the optimal assignment where each hunter gets their best match.",
+    tips: [
+      "Create a cost matrix for all possible assignments",
+      "Use row and column reductions to simplify the matrix",
+      "Find the minimum number of lines to cover all zeros",
+      "Adjust the matrix and repeat until optimal assignment is found",
+      "Use it for optimal resource allocation in monster hunting",
+    ],
+  },
+  "Lowest Common Ancestor": {
+    title: "Monster Territory Ancestor Finder",
+    description:
+      "Like a monster hunter finding the common ancestor territory of two monster species, Lowest Common Ancestor helps you find the most recent common ancestor of two nodes in a tree.",
+    example:
+      "Imagine you have a tree representing the evolution of different monster species - LCA helps you find the most recent common ancestor of any two species, helping understand their relationship.",
+    tips: [
+      "Use binary lifting for efficient queries",
+      "Consider using Euler tour and RMQ for another efficient approach",
+      "Handle different tree structures appropriately",
+      "Use it for understanding monster evolution relationships",
+      "Consider using it for path queries in monster territory trees",
+    ],
+  },
+  "Radix Sort": {
+    title: "Monster Territory Digit Sorter",
+    description:
+      "Like a monster hunter organizing monsters by their unique identifiers digit by digit, Radix Sort sorts numbers by processing individual digits from least significant to most significant.",
+    example:
+      "Imagine you need to sort monster IDs that are composed of multiple digits - Radix Sort helps you organize them by looking at each digit position separately, starting from the rightmost digit.",
+    tips: [
+      "Use counting sort as a stable subroutine",
+      "Process digits from least significant to most significant",
+      "Handle negative numbers by separating positive and negative parts",
+      "Consider using it for sorting large numbers or strings",
+      "Use it when you need a stable sorting algorithm",
+    ],
+  },
 };
 
 // Add debug logging
