@@ -86,10 +86,9 @@ function TutorialRoute() {
 
         // Find tutorials in this category that match the algorithm name
         const matchingTutorials = categoryTutorials.filter((tutorial) => {
-          const isMatch =
-            tutorial.title.toLowerCase() === algorithm.toLowerCase();
+          const isMatch = tutorial.id === algorithm;
           console.log(
-            `Comparing "${tutorial.title}" with "${algorithm}": ${isMatch}`
+            `Comparing "${tutorial.id}" with "${algorithm}": ${isMatch}`
           );
           return isMatch;
         });
@@ -175,7 +174,7 @@ function TutorialList() {
             {categoryTutorials.map((tutorial) => (
               <Link
                 key={tutorial.id}
-                to={`/tutorials/${encodeURIComponent(tutorial.title)}`}
+                to={`/tutorials/${tutorial.id}`}
                 className="block p-4 border rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-medium">{tutorial.title}</h3>

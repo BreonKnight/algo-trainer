@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import type { PatternKey } from "@/components/tutorials/types";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
-
+import { Link } from "react-router-dom";
 type Language = "python" | "javascript";
 
 export interface Tutorial {
@@ -55,7 +55,7 @@ export function AlgorithmTutorial({
 }: AlgorithmTutorialProps) {
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("video");
   const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(
     tutorials[0] || null
   );
@@ -94,10 +94,10 @@ export function AlgorithmTutorial({
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center">
         <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] tracking-tight">
-          No Tutorials Available
+          No Tutorial Available
         </h2>
         <p className="text-secondary mb-8 text-lg leading-relaxed max-w-md">
-          There are no tutorials available for {algorithm} at this time.
+          There are no tutorial available for {algorithm} at this time.
         </p>
         <Button
           variant="outline"
@@ -119,7 +119,7 @@ export function AlgorithmTutorial({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
         <div className="flex flex-col gap-4">
           <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] tracking-tight">
-            {algorithm} Tutorials
+            {currentTutorial?.title || algorithm} Tutorial
           </h2>
           <div className="flex items-center gap-6">
             <Tabs
@@ -178,7 +178,18 @@ export function AlgorithmTutorial({
                 className="flex items-center gap-3 text-secondary text-base"
               >
                 <div className="h-2 w-2 rounded-full bg-accent2" />
-                {tutorials.find((t) => t.id === prereq)?.title || prereq}
+                <Link to={`/tutorials/${prereq}`}>
+                  {tutorials.find((t) => t.id === prereq)?.title ||
+                    prereq
+                      .replace(/-/g, " ")
+                      .split(/\s+/)
+                      .map(
+                        (word) =>
+                          word.charAt(0).toUpperCase() +
+                          word.slice(1).toLowerCase()
+                      )
+                      .join(" ")}
+                </Link>
               </li>
             ))}
           </ul>
