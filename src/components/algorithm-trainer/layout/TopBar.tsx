@@ -50,9 +50,19 @@ function SortableItem({ id, children }: SortableItemProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative group">
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={cn("relative group", isDragging && "shadow-lg scale-105")}
+    >
       <button
-        className="absolute -left-6 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-accent/10 transition-all duration-200 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100"
+        className={cn(
+          "absolute -left-6 top-1/2 -translate-y-1/2 p-1.5 rounded-full",
+          "hover:bg-accent/10 transition-all duration-200",
+          "cursor-grab active:cursor-grabbing",
+          "opacity-0 group-hover:opacity-100",
+          "focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-accent/20"
+        )}
         {...attributes}
         {...listeners}
       >
@@ -72,7 +82,11 @@ export function TopBar({ className }: TopBarProps) {
   ]);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -95,7 +109,7 @@ export function TopBar({ className }: TopBarProps) {
     <div
       className={cn(
         "w-full mb-2 sm:mb-3 rounded-xl bg-background/95 p-3 sm:p-4 relative",
-        "shadow-md border border-border/50",
+        "shadow-md border border-border/50 backdrop-blur-sm",
         className
       )}
     >
@@ -110,7 +124,9 @@ export function TopBar({ className }: TopBarProps) {
             {items.map((item) => (
               <SortableItem key={item.id} id={item.id}>
                 <div className="w-full flex justify-center">
-                  <MediaCard className="w-full">{item.component}</MediaCard>
+                  <MediaCard className="w-full hover:shadow-lg transition-shadow duration-200">
+                    {item.component}
+                  </MediaCard>
                 </div>
               </SortableItem>
             ))}
