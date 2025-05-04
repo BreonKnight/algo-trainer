@@ -105,7 +105,7 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
             size="small"
           />
         </Box>
-        how do we
+        
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
           {description}
         </Typography>
