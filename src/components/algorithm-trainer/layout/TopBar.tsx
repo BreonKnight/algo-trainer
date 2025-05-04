@@ -22,8 +22,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { GripVertical, ChevronUp, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { GripVertical } from "lucide-react";
 
 interface TopBarProps {
   className?: string;
@@ -71,7 +70,6 @@ export function TopBar({ className }: TopBarProps) {
     { id: "audio", component: <AudioPlayer /> },
     { id: "controls", component: <RightControls /> },
   ]);
-  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -97,37 +95,22 @@ export function TopBar({ className }: TopBarProps) {
     <div
       className={cn(
         "w-full mb-2 sm:mb-3 rounded-xl bg-background/95 p-3 sm:p-4 relative",
-        "shadow-md border border-border/50 transition-all duration-300",
-        isCollapsed ? "w-0 p-0 overflow-hidden" : "w-full",
+        "shadow-md border border-border/50",
         className
       )}
     >
       <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-accent via-accent2 to-accent opacity-50 z-10" />
-      <Button
-        variant="ghost"
-        size="sm"
-        className="absolute top-2 right-2 p-1 h-auto"
-        onClick={() => setIsCollapsed(!isCollapsed)}
-      >
-        {isCollapsed ? (
-          <ChevronDown className="w-4 h-4 rotate-90" />
-        ) : (
-          <ChevronUp className="w-4 h-4 rotate-90" />
-        )}
-      </Button>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <div className="flex flex-row gap-4 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
             {items.map((item) => (
               <SortableItem key={item.id} id={item.id}>
                 <div className="w-full flex justify-center">
-                  <MediaCard className="w-full max-w-md">
-                    {item.component}
-                  </MediaCard>
+                  <MediaCard className="w-full">{item.component}</MediaCard>
                 </div>
               </SortableItem>
             ))}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { additionalConcepts } from "./concepts";
-import { NavigationBar } from "../algorithm-trainer/layout/NavigationBar";
 import {
   FaScroll,
   FaBook,
@@ -231,8 +230,6 @@ const AlgorithmLearning: React.FC = () => {
         >
           Monster Hunter Algorithm Academy
         </motion.h1>
-
-        <NavigationBar />
 
         {/* Control Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
