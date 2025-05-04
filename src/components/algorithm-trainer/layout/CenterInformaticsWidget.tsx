@@ -74,11 +74,11 @@ export function CenterInformaticsWidget() {
         </div>
         <div className="h-7 sm:h-8 md:h-10 w-px bg-accent/10 rounded-full mx-1 sm:mx-1.5 md:mx-2" />
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-xs sm:text-sm md:text-base text-accent mb-0.5 sm:mb-1 tracking-wide">
+          <div className="font-bold text-[10px] sm:text-xs md:text-sm text-accent mb-0.5 sm:mb-1 tracking-wide">
             {showTip ? "Tip of the Day" : "Fun Informatics"}
           </div>
           <div
-            className="text-xs sm:text-sm md:text-base text-card-foreground leading-snug"
+            className="text-[10px] sm:text-xs md:text-sm text-card-foreground leading-snug line-clamp-8 overflow-hidden"
             title={showTip ? TIPS[tipIdx] : FACTS[factIdx]}
           >
             {showTip ? TIPS[tipIdx] : FACTS[factIdx]}
