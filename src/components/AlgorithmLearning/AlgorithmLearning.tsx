@@ -12,6 +12,8 @@ import {
   FaChevronUp,
   FaSearch,
 } from "react-icons/fa";
+import { useTheme } from "../theme/theme-context";
+import { cn } from "@/lib/utils";
 
 export interface Concept {
   id: number;
@@ -155,6 +157,7 @@ const CLRS_SYMBOLS = [
 ];
 
 const AlgorithmLearning: React.FC = () => {
+  const { theme } = useTheme();
   const [currentConcept, setCurrentConcept] = useState<number>(0);
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const [showQuestBoard, setShowQuestBoard] = useState<boolean>(false);
@@ -207,12 +210,24 @@ const AlgorithmLearning: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white p-8 font-sans">
+    <div
+      className={cn(
+        "min-h-screen p-8 font-sans",
+        theme === "light" || theme === "solarized"
+          ? "bg-gradient-to-b from-background via-background/95 to-background text-foreground"
+          : "bg-gradient-to-b from-background via-background/95 to-background text-foreground"
+      )}
+    >
       <div className="max-w-4xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-5xl font-bold mb-8 text-center text-yellow-400 font-display tracking-tight"
+          className={cn(
+            "text-5xl font-bold mb-8 text-center font-display tracking-tight",
+            theme === "light" || theme === "solarized"
+              ? "text-accent"
+              : "text-accent2"
+          )}
         >
           Monster Hunter Algorithm Academy
         </motion.h1>
@@ -225,7 +240,12 @@ const AlgorithmLearning: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowQuestBoard(!showQuestBoard)}
-            className="px-6 py-3 bg-yellow-600/80 rounded-lg hover:bg-yellow-600 transition-colors font-medium tracking-wide flex items-center justify-center gap-2"
+            className={cn(
+              "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
+              theme === "light" || theme === "solarized"
+                ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+            )}
           >
             <FaScroll className="h-5 w-5" />
             {showQuestBoard ? "Close Quest Board" : "Open Quest Board"}
@@ -240,7 +260,12 @@ const AlgorithmLearning: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowSymbols(!showSymbols)}
-            className="px-6 py-3 bg-blue-600/80 rounded-lg hover:bg-blue-600 transition-colors font-medium tracking-wide flex items-center justify-center gap-2"
+            className={cn(
+              "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
+              theme === "light" || theme === "solarized"
+                ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+            )}
           >
             <FaCalculator className="h-5 w-5" />
             CLRS Symbols
@@ -259,20 +284,37 @@ const AlgorithmLearning: React.FC = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-2xl border border-gray-700/50 mb-8"
+              className={cn(
+                "rounded-xl p-6 shadow-2xl border mb-8",
+                theme === "light" || theme === "solarized"
+                  ? "bg-background/95 backdrop-blur-sm border-accent/20"
+                  : "bg-background/95 backdrop-blur-sm border-accent2/20"
+              )}
             >
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                <h2 className="text-2xl font-semibold text-blue-300 font-display tracking-wide">
+                <h2
+                  className={cn(
+                    "text-2xl font-semibold font-display tracking-wide",
+                    theme === "light" || theme === "solarized"
+                      ? "text-accent"
+                      : "text-accent2"
+                  )}
+                >
                   CLRS Mathematical Notation
                 </h2>
                 <div className="relative w-full sm:w-64">
                   <input
                     type="text"
                     placeholder="Search symbols..."
-                    className="w-full px-4 py-2 bg-gray-700/50 rounded-lg border border-gray-600/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={cn(
+                      "w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-background/50 border-accent/20 text-foreground placeholder-foreground/50 focus:ring-accent"
+                        : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
+                    )}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
-                  <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50" />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -290,20 +332,53 @@ const AlgorithmLearning: React.FC = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="bg-gray-700/50 p-4 rounded-lg border border-gray-600/30 hover:bg-gray-700/70 transition-colors"
+                    className={cn(
+                      "p-4 rounded-lg border hover:transition-colors",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-background/50 border-accent/10 hover:bg-background/70"
+                        : "bg-background/50 border-accent2/10 hover:bg-background/70"
+                    )}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="text-2xl font-mono text-blue-300 mt-1">
+                      <span
+                        className={cn(
+                          "text-2xl font-mono mt-1",
+                          theme === "light" || theme === "solarized"
+                            ? "text-accent"
+                            : "text-accent2"
+                        )}
+                      >
                         {symbol.symbol}
                       </span>
                       <div className="flex-1">
-                        <h3 className="font-medium text-blue-200">
+                        <h3
+                          className={cn(
+                            "font-medium",
+                            theme === "light" || theme === "solarized"
+                              ? "text-accent"
+                              : "text-accent2"
+                          )}
+                        >
                           {symbol.name}
                         </h3>
-                        <p className="text-sm text-gray-300 mt-1">
+                        <p
+                          className={cn(
+                            "text-sm mt-1",
+                            theme === "light" || theme === "solarized"
+                              ? "text-foreground/80"
+                              : "text-foreground/80"
+                          )}
+                        >
                           {symbol.description}
                         </p>
-                        <p className="text-sm text-gray-400 mt-1 font-mono">
+                        <p
+                          className={cn(
+                            "text-sm mt-1 font-mono",
+                            theme === "light" || theme === "solarized"
+                              ? "text-foreground/60"
+                              : "text-foreground/60"
+                          )}
+                        >
                           {symbol.example}
                         </p>
                       </div>
@@ -322,10 +397,22 @@ const AlgorithmLearning: React.FC = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-2xl border border-gray-700/50 mb-8"
+              className={cn(
+                "rounded-xl p-6 shadow-2xl border mb-8",
+                theme === "light" || theme === "solarized"
+                  ? "bg-background/95 backdrop-blur-sm border-accent/20"
+                  : "bg-background/95 backdrop-blur-sm border-accent2/20"
+              )}
             >
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                <h2 className="text-2xl font-semibold text-yellow-300 font-display tracking-wide">
+                <h2
+                  className={cn(
+                    "text-2xl font-semibold font-display tracking-wide",
+                    theme === "light" || theme === "solarized"
+                      ? "text-accent"
+                      : "text-accent2"
+                  )}
+                >
                   Available Quests
                 </h2>
                 <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -333,13 +420,23 @@ const AlgorithmLearning: React.FC = () => {
                     <input
                       type="text"
                       placeholder="Search quests..."
-                      className="w-full px-4 py-2 bg-gray-700/50 rounded-lg border border-gray-600/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                      className={cn(
+                        "w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
+                        theme === "light" || theme === "solarized"
+                          ? "bg-background/50 border-accent/20 text-foreground placeholder-foreground/50 focus:ring-accent"
+                          : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
+                      )}
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50" />
                   </div>
                   <select
-                    className="px-4 py-2 bg-gray-700/50 rounded-lg border border-gray-600/30 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    className={cn(
+                      "px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-background/50 border-accent/20 text-foreground focus:ring-accent"
+                        : "bg-background/50 border-accent2/20 text-foreground focus:ring-accent2"
+                    )}
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                   >
@@ -358,20 +455,46 @@ const AlgorithmLearning: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => selectConcept(concept.id)}
-                    className={`p-4 rounded-lg transition-colors flex items-start gap-3 ${
+                    className={cn(
+                      "p-4 rounded-lg transition-colors flex items-start gap-3",
                       currentConcept === concept.id - 1
-                        ? "bg-yellow-600/80 hover:bg-yellow-600"
-                        : "bg-gray-700/50 hover:bg-gray-700"
-                    }`}
+                        ? theme === "light" || theme === "solarized"
+                          ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                          : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                        : theme === "light" || theme === "solarized"
+                        ? "bg-background/50 hover:bg-background/70"
+                        : "bg-background/50 hover:bg-background/70"
+                    )}
                   >
-                    <div className="text-yellow-300 mt-1">
+                    <div
+                      className={cn(
+                        "mt-1",
+                        theme === "light" || theme === "solarized"
+                          ? "text-accent"
+                          : "text-accent2"
+                      )}
+                    >
                       {getCategoryIcon(concept.category)}
                     </div>
                     <div className="flex-1 text-left">
-                      <h3 className="font-medium text-yellow-200">
+                      <h3
+                        className={cn(
+                          "font-medium",
+                          theme === "light" || theme === "solarized"
+                            ? "text-accent"
+                            : "text-accent2"
+                        )}
+                      >
                         {concept.title}
                       </h3>
-                      <p className="text-sm text-gray-300 mt-1">
+                      <p
+                        className={cn(
+                          "text-sm mt-1",
+                          theme === "light" || theme === "solarized"
+                            ? "text-foreground/80"
+                            : "text-foreground/80"
+                        )}
+                      >
                         {concept.category}
                       </p>
                     </div>
@@ -387,28 +510,66 @@ const AlgorithmLearning: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-8 shadow-2xl border border-gray-700/50"
+          className={cn(
+            "rounded-xl p-8 shadow-2xl border",
+            theme === "light" || theme === "solarized"
+              ? "bg-background/95 backdrop-blur-sm border-accent/20"
+              : "bg-background/95 backdrop-blur-sm border-accent2/20"
+          )}
         >
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-3xl font-semibold mb-6 text-yellow-300 font-display tracking-wide text-left"
+            className={cn(
+              "text-3xl font-semibold mb-6 font-display tracking-wide text-left",
+              theme === "light" || theme === "solarized"
+                ? "text-accent"
+                : "text-accent2"
+            )}
           >
             {allConcepts[currentConcept].title}
           </motion.h2>
 
           <div className="mb-6 text-left">
-            <span className="inline-block bg-blue-600/80 text-sm px-4 py-2 rounded-full font-medium tracking-wide">
+            <span
+              className={cn(
+                "inline-block text-sm px-4 py-2 rounded-full font-medium tracking-wide",
+                theme === "light" || theme === "solarized"
+                  ? "bg-accent/20 text-accent"
+                  : "bg-accent2/20 text-accent2"
+              )}
+            >
               {allConcepts[currentConcept].category}
             </span>
           </div>
 
           <div className="space-y-6">
-            <div className="bg-gray-700/50 p-6 rounded-xl border border-gray-600/30">
-              <h3 className="text-xl font-medium text-yellow-200 mb-3 font-display tracking-wide text-left">
+            <div
+              className={cn(
+                "p-6 rounded-xl border",
+                theme === "light" || theme === "solarized"
+                  ? "bg-background/50 border-accent/10"
+                  : "bg-background/50 border-accent2/10"
+              )}
+            >
+              <h3
+                className={cn(
+                  "text-xl font-medium mb-3 font-display tracking-wide text-left",
+                  theme === "light" || theme === "solarized"
+                    ? "text-accent"
+                    : "text-accent2"
+                )}
+              >
                 Monster Hunter Example
               </h3>
-              <p className="text-gray-100 leading-relaxed font-sans text-left">
+              <p
+                className={cn(
+                  "leading-relaxed font-sans text-left",
+                  theme === "light" || theme === "solarized"
+                    ? "text-foreground/90"
+                    : "text-foreground/90"
+                )}
+              >
                 {allConcepts[currentConcept].monsterHunterExample}
               </p>
             </div>
@@ -418,12 +579,31 @@ const AlgorithmLearning: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gray-700/50 p-6 rounded-xl border border-gray-600/30"
+                  className={cn(
+                    "p-6 rounded-xl border",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-background/50 border-accent/10"
+                      : "bg-background/50 border-accent2/10"
+                  )}
                 >
-                  <h3 className="text-xl font-medium text-yellow-200 mb-3 font-display tracking-wide text-left">
+                  <h3
+                    className={cn(
+                      "text-xl font-medium mb-3 font-display tracking-wide text-left",
+                      theme === "light" || theme === "solarized"
+                        ? "text-accent"
+                        : "text-accent2"
+                    )}
+                  >
                     CLRS Explanation
                   </h3>
-                  <p className="text-gray-100 leading-relaxed font-sans text-left">
+                  <p
+                    className={cn(
+                      "leading-relaxed font-sans text-left",
+                      theme === "light" || theme === "solarized"
+                        ? "text-foreground/90"
+                        : "text-foreground/90"
+                    )}
+                  >
                     {allConcepts[currentConcept].clrsExplanation}
                   </p>
                 </motion.div>
@@ -431,13 +611,39 @@ const AlgorithmLearning: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gray-700/50 p-6 rounded-xl border border-gray-600/30"
+                  className={cn(
+                    "p-6 rounded-xl border",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-background/50 border-accent/10"
+                      : "bg-background/50 border-accent2/10"
+                  )}
                 >
-                  <h3 className="text-xl font-medium text-yellow-200 mb-3 font-display tracking-wide text-left">
+                  <h3
+                    className={cn(
+                      "text-xl font-medium mb-3 font-display tracking-wide text-left",
+                      theme === "light" || theme === "solarized"
+                        ? "text-accent"
+                        : "text-accent2"
+                    )}
+                  >
                     Mathematical Notation
                   </h3>
-                  <div className="bg-gray-800/50 p-4 rounded-lg border border-gray-600/20">
-                    <p className="font-mono text-gray-100 leading-relaxed whitespace-pre-wrap text-left">
+                  <div
+                    className={cn(
+                      "p-4 rounded-lg border",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-background/70 border-accent/5"
+                        : "bg-background/70 border-accent2/5"
+                    )}
+                  >
+                    <p
+                      className={cn(
+                        "font-mono leading-relaxed whitespace-pre-wrap text-left",
+                        theme === "light" || theme === "solarized"
+                          ? "text-foreground/90"
+                          : "text-foreground/90"
+                      )}
+                    >
                       {allConcepts[currentConcept].mathematicalNotation}
                     </p>
                   </div>
@@ -451,7 +657,12 @@ const AlgorithmLearning: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={prevConcept}
-              className="w-full sm:w-auto px-6 py-3 bg-blue-600/80 rounded-lg hover:bg-blue-600 transition-colors font-medium tracking-wide"
+              className={cn(
+                "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
+                theme === "light" || theme === "solarized"
+                  ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                  : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+              )}
             >
               Previous
             </motion.button>
@@ -460,7 +671,12 @@ const AlgorithmLearning: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowDetails(!showDetails)}
-              className="w-full sm:w-auto px-6 py-3 bg-green-600/80 rounded-lg hover:bg-green-600 transition-colors font-medium tracking-wide"
+              className={cn(
+                "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
+                theme === "light" || theme === "solarized"
+                  ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                  : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+              )}
             >
               {showDetails ? "Hide Details" : "Show Details"}
             </motion.button>
@@ -469,7 +685,12 @@ const AlgorithmLearning: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={nextConcept}
-              className="w-full sm:w-auto px-6 py-3 bg-blue-600/80 rounded-lg hover:bg-blue-600 transition-colors font-medium tracking-wide"
+              className={cn(
+                "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
+                theme === "light" || theme === "solarized"
+                  ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                  : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+              )}
             >
               Next
             </motion.button>
