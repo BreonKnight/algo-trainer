@@ -35,3 +35,14 @@ pre[class*="language-"] {
 .token.variable {
   color: var(--text-color) !important;
 }
+
+.theme-dracula .pseudocode-mono,
+.theme-nord .pseudocode-mono {
+  background: #23272e !important;
+}
+.theme-light .pseudocode-mono {
+  background: #f8fafc !important;
+}
+.pseudocode-mono {
+  background: var(--pseudocode-bg, #23272e) !important;
+}
