@@ -26,15 +26,6 @@ import { Progress } from "../../ui/progress";
 
 export function RightControls() {
   const { theme, setTheme } = useTheme();
-  const isDarkTheme =
-    theme === "dracula" ||
-    theme === "solarized" ||
-    theme === "nord" ||
-    theme === "snes" ||
-    theme === "ps2" ||
-    theme === "re2" ||
-    theme === "mh" ||
-    theme === "kingdom-hearts";
 
   // Format theme name for display
   const formatThemeName = (themeName: string) => {
