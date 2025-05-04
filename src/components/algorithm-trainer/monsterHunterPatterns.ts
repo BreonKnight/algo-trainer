@@ -1,10 +1,12 @@
-import { PatternKey } from "./types";
-import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended";
-import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2";
-import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3";
-import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4";
-import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5";
-import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6";
+import { PatternKey } from "./types.ts";
+import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
+import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
+import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";
+import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4.ts";
+import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5.ts";
+import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
+import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
+import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8.ts";
 
 // Add matrix exponentiation pattern
 const matrixExponentiationPattern = new Map<PatternKey, string>([
@@ -13,38 +15,49 @@ const matrixExponentiationPattern = new Map<PatternKey, string>([
     `# Monster Hunter Matrix Exponentiation Pattern
 # Weapon Power Amplification Strategy
 
-def matrix_multiply(a, b):
-    # Combine two weapon power matrices
-    n = len(a)
-    result = [[0] * n for _ in range(n)]
-    for i in range(n):
-        for j in range(n):
-            for k in range(n):
-                result[i][j] += a[i][k] * b[k][j]
-    return result
+function multiply_matrices(a: number[][], b: number[][]): number[][] {
+  const n = a.length;
+  const result = Array(n).fill(0).map(() => Array(n).fill(0));
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      for (let k = 0; k < n; k++) {
+        result[i][j] += a[i][k] * b[k][j];
+      }
+    }
+  }
+  return result;
+}
 
-def matrix_exponentiation(matrix, power):
-    # Amplify weapon power efficiently
-    n = len(matrix)
-    result = [[1 if i == j else 0 for j in range(n)] for i in range(n)]
-    base = [row[:] for row in matrix]
-    
-    while power > 0:
-        if power % 2 == 1:
-            result = matrix_multiply(result, base)
-        base = matrix_multiply(base, base)
-        power //= 2
-    
-    return result
+function amplify_weapon_power(base_power: number, amplification: number): number {
+  // Represent weapon power progression as matrix exponentiation
+  const matrix = [[1, 1], [1, 0]];
+  let result = [[1, 0], [0, 1]]; // Identity matrix
+  let power = amplification;
+  
+  while (power > 0) {
+    if (power % 2 === 1) {
+      result = multiply_matrices(result, matrix);
+    }
+    matrix = multiply_matrices(matrix, matrix);
+    power = Math.floor(power / 2);
+  }
+  
+  return result[0][0] * base_power;
+}
 
-# Example: Calculate weapon power progression
-matrix = [
-    [1, 1],
-    [1, 0]
-]
-power = 5
-result = matrix_exponentiation(matrix, power)
-# Result shows the weapon's power at different stages`,
+// Example usage:
+const base_power = 100;
+const amplification = 5;
+const amplified_power = amplify_weapon_power(base_power, amplification);
+console.log(\`Weapon power after amplification: \${amplified_power}\`);
+
+// Tips:
+// 1. Use matrix exponentiation for efficient power progression
+// 2. Consider weapon upgrade paths as matrix transformations
+// 3. Optimize amplification sequences for maximum power gain
+// 4. Use identity matrix for base case
+// 5. Apply binary exponentiation for logarithmic time complexity
+`,
   ],
 ]);
 
@@ -55,852 +68,108 @@ export const fastFourierTransformPattern = new Map<PatternKey, string>([
     `# Monster Hunter Fast Fourier Transform Pattern
 # Monster Attack Pattern Analysis
 
-def fft(a, invert=False):
-    """
-    Compute the Fast Fourier Transform of a sequence.
-    Time: O(n log n)
-    Space: O(n)
-    
-    Monster Hunter Context:
-    - Like analyzing monster attack patterns
-    - Convert time-domain attacks to frequency domain
-    - Helps predict future attack patterns
-    
-    Example:
-    attacks = [1, 0, 1, 0, 1, 0, 1, 0]  # Simple repeating pattern
-    frequencies = fft(attacks)
-    # Shows dominant frequencies in attack pattern
-    """
-    n = len(a)
-    if n == 1:
-        return a
-    
-    # Split into even and odd
-    a0 = [a[2*i] for i in range(n//2)]
-    a1 = [a[2*i+1] for i in range(n//2)]
-    
-    # Recursive calls
-    y0 = fft(a0, invert)
-    y1 = fft(a1, invert)
-    
-    # Combine results
-    y = [0] * n
-    w = 1
-    wn = exp(2j * pi / n * (-1 if invert else 1))
-    
-    for k in range(n//2):
-        t = w * y1[k]
-        y[k] = y0[k] + t
-        y[k + n//2] = y0[k] - t
-        w *= wn
-    
-    return y
+function fft(sequence: number[]): number[] {
+  const n = sequence.length;
+  if (n === 1) return sequence;
+  
+  const even = fft(sequence.filter((_, i) => i % 2 === 0));
+  const odd = fft(sequence.filter((_, i) => i % 2 === 1));
+  
+  const result = Array(n).fill(0);
+  for (let k = 0; k < n / 2; k++) {
+    const t = Math.exp(-2 * Math.PI * k / n) * odd[k];
+    result[k] = even[k] + t;
+    result[k + n/2] = even[k] - t;
+  }
+  
+  return result;
+}
 
-def analyze_attack_pattern(attacks):
-    """
-    Analyze monster attack patterns using FFT.
-    
-    Args:
-        attacks: List of attack strengths over time
-    
-    Returns:
-        Frequency components showing pattern structure
-    """
-    # Pad to next power of 2
-    n = 1 << (len(attacks) - 1).bit_length()
-    padded = attacks + [0] * (n - len(attacks))
-    
-    # Compute FFT
-    frequencies = fft(padded)
-    
-    # Get magnitude spectrum
-    spectrum = [abs(x) for x in frequencies]
-    
-    return spectrum
+// Example usage:
+const attack_pattern = [1, 0, -1, 0, 1, 0, -1, 0]; // Simple repeating pattern
+const frequency_analysis = fft(attack_pattern);
+console.log(\`Frequency analysis of attack pattern: \${frequency_analysis}\`);
 
-# Example usage
-attacks = [1, 0, 1, 0, 1, 0, 1, 0]  # Simple repeating pattern
-spectrum = analyze_attack_pattern(attacks)
-# Shows dominant frequencies in attack pattern`,
+// Tips:
+// 1. Use FFT to analyze monster attack patterns
+// 2. Identify periodic patterns in monster movements
+// 3. Convert time-domain signals to frequency domain
+// 4. Use complex numbers for phase information
+// 5. Apply inverse FFT for pattern synthesis
+`,
   ],
 ]);
 
-// Add Graph Articulation Points pattern
-export const graphArticulationPointsPattern = new Map<PatternKey, string>([
+// Add Articulation Points pattern
+export const articulationPointsMonsterHunterPattern = new Map<
+  PatternKey,
+  string
+>([
   [
-    "Articulation Points" as PatternKey,
-    `# Monster Hunter Graph Articulation Points Pattern
-# Critical Monster Territory Analysis
+    "Articulation Points",
+    `# Monster Hunter Articulation Points Pattern
+# Critical Territory Junction Analysis
 
-def find_articulation_points(graph):
-    """
-    Find critical points in monster territory that, if removed,
-    would disconnect the territory into multiple parts.
-    Time: O(V + E)
-    Space: O(V)
+function find_articulation_points(territories: number[][]): number[] {
+  const n = territories.length;
+  const visited = Array(n).fill(false);
+  const disc = Array(n).fill(0);
+  const low = Array(n).fill(0);
+  const parent = Array(n).fill(-1);
+  const ap = Array(n).fill(false);
+  let time = 0;
+  
+  function dfs(u: number): void {
+    visited[u] = true;
+    disc[u] = low[u] = ++time;
+    let children = 0;
     
-    Monster Hunter Context:
-    - Like finding critical paths in monster territory
-    - Identify key areas that connect different regions
-    - Helps plan strategic monster hunting routes
-    
-    Example:
-    territory = {
-        'Ancient Forest': ['Astera'],
-        'Astera': ['Ancient Forest', 'Wildspire Waste', 'Coral Highlands'],
-        'Wildspire Waste': ['Astera'],
-        'Coral Highlands': ['Astera', 'Rotten Vale'],
-        'Rotten Vale': ['Coral Highlands', 'Elder's Recess'],
-        'Elder's Recess': ['Rotten Vale']
+    for (const v of territories[u]) {
+      if (!visited[v]) {
+        children++;
+        parent[v] = u;
+        dfs(v);
+        low[u] = Math.min(low[u], low[v]);
+        
+        if (parent[u] === -1 && children > 1) ap[u] = true;
+        if (parent[u] !== -1 && low[v] >= disc[u]) ap[u] = true;
+      } else if (v !== parent[u]) {
+        low[u] = Math.min(low[u], disc[v]);
+      }
     }
-    critical_points = find_articulation_points(territory)
-    # Shows Astera and Coral Highlands as critical points
-    """
-    def dfs(u, parent, visited, disc, low, time, ap):
-        # Count children in DFS tree
-        children = 0
-        
-        # Mark current node as visited
-        visited[u] = True
-        
-        # Initialize discovery time and low value
-        disc[u] = low[u] = time[0]
-        time[0] += 1
-        
-        # Go through all vertices adjacent to this
-        for v in graph[u]:
-            # If v is not visited yet, then make it a child of u
-            # in DFS tree and recur for it
-            if not visited[v]:
-                children += 1
-                dfs(v, u, visited, disc, low, time, ap)
-                
-                # Check if the subtree rooted with v has a connection to
-                # one of the ancestors of u
-                low[u] = min(low[u], low[v])
-                
-                # u is an articulation point in following cases:
-                # (1) u is root of DFS tree and has two or more children
-                if parent == -1 and children > 1:
-                    ap.add(u)
-                    
-                # (2) If u is not root and low value of one of its child
-                # is more than discovery value of u
-                if parent != -1 and low[v] >= disc[u]:
-                    ap.add(u)
-                    
-            # Update low value of u for parent function calls
-            elif v != parent:
-                low[u] = min(low[u], disc[v])
-    
-    # Initialize variables
-    visited = {v: False for v in graph}
-    disc = {v: float("inf") for v in graph}
-    low = {v: float("inf") for v in graph}
-    time = [0]
-    ap = set()
-    
-    # Call the recursive helper function to find articulation points
-    # in DFS tree rooted with vertex 'i'
-    for i in graph:
-        if not visited[i]:
-            dfs(i, -1, visited, disc, low, time, ap)
-            
-    return list(ap)
-
-def analyze_territory_critical_points(territory):
-    """
-    Analyze monster territory to find critical connection points.
-    
-    Args:
-        territory: Dictionary representing monster territory connections
-    
-    Returns:
-        List of critical points that connect different regions
-    """
-    critical_points = find_articulation_points(territory)
-    return critical_points
-
-# Example usage
-territory = {
-    'Ancient Forest': ['Astera'],
-    'Astera': ['Ancient Forest', 'Wildspire Waste', 'Coral Highlands'],
-    'Wildspire Waste': ['Astera'],
-    'Coral Highlands': ['Astera', 'Rotten Vale'],
-    'Rotten Vale': ['Coral Highlands', 'Elder's Recess'],
-    'Elder's Recess': ['Rotten Vale']
-}
-
-critical_points = analyze_territory_critical_points(territory)
-# Shows Astera and Coral Highlands as critical points`,
-  ],
-]);
-
-// Add Dynamic Programming Pattern
-const dynamicProgrammingPattern = new Map<PatternKey, string>([
-  [
-    "Dynamic Programming" as PatternKey,
-    `# Monster Hunter Dynamic Programming Pattern
-# Weapon Upgrade Optimization Strategy
-
-def optimize_weapon_upgrades(costs, values, capacity):
-    """
-    Optimize weapon upgrades using dynamic programming.
-    Time: O(n * capacity)
-    Space: O(capacity)
-    
-    Monster Hunter Context:
-    - Like choosing optimal weapon upgrades
-    - Each upgrade has a cost and value
-    - Limited upgrade capacity
-    - Maximize total weapon power
-    
-    Example:
-    costs = [2, 3, 4, 5]  # Upgrade costs
-    values = [3, 4, 5, 6]  # Upgrade values
-    capacity = 7  # Maximum upgrade capacity
-    max_power = optimize_weapon_upgrades(costs, values, capacity)
-    # Shows maximum weapon power achievable
-    """
-    n = len(costs)
-    dp = [0] * (capacity + 1)
-    
-    for i in range(n):
-        for j in range(capacity, costs[i] - 1, -1):
-            dp[j] = max(dp[j], dp[j - costs[i]] + values[i])
-    
-    return dp[capacity]
-
-def analyze_weapon_upgrades(upgrades, capacity):
-    """
-    Analyze weapon upgrade options to find optimal combination.
-    
-    Args:
-        upgrades: List of tuples (cost, value) for each upgrade
-        capacity: Maximum upgrade capacity
-    
-    Returns:
-        Maximum weapon power achievable
-    """
-    costs = [u[0] for u in upgrades]
-    values = [u[1] for u in upgrades]
-    return optimize_weapon_upgrades(costs, values, capacity)
-
-// Test Case 1: Basic Weapon Upgrades
-upgrades1 = [(2, 3), (3, 4), (4, 5), (5, 6)]
-capacity1 = 7
-max_power1 = analyze_weapon_upgrades(upgrades1, capacity1)
-// Expected Output: 7 (3 + 4)
-
-// Test Case 2: Advanced Weapon Upgrades
-upgrades2 = [(3, 5), (4, 6), (5, 7), (6, 8)]
-capacity2 = 10
-max_power2 = analyze_weapon_upgrades(upgrades2, capacity2)
-// Expected Output: 13 (5 + 8)
-
-// Test Case 3: Multiple Upgrade Paths
-upgrades3 = [(2, 4), (3, 5), (4, 6), (5, 7)]
-capacity3 = 8
-max_power3 = analyze_weapon_upgrades(upgrades3, capacity3)
-// Expected Output: 11 (4 + 7)
-
-// Monster Hunter Tip:
-// Like choosing the best weapon upgrades within your resource limits!
-// Use Dynamic Programming to:
-// 1. Calculate maximum weapon power for each upgrade capacity
-// 2. Consider both taking and skipping upgrades
-// 3. Find the optimal combination of upgrades
-// 4. Balance immediate power with future potential
-// 5. Plan efficient resource allocation`,
-  ],
-]);
-
-// Add Linked List Pattern
-const linkedListPattern = new Map<PatternKey, string>([
-  [
-    "Linked List",
-    `# Monster Hunter Linked List Pattern
-# Monster Territory Connection Management
-
-class TerritoryNode:
-    def __init__(self, name, resources):
-        self.name = name
-        self.resources = resources
-        self.next = None
-
-class TerritoryList:
-    def __init__(self):
-        self.head = None
-    
-    def add_territory(self, name, resources):
-        """
-        Add a new territory to the hunting route.
-        Time: O(n)
-        Space: O(1)
-        
-        Monster Hunter Context:
-        - Like adding new hunting grounds to your route
-        - Each territory has resources and connections
-        - Maintain efficient hunting path
-        - Track resource availability
-        """
-        new_territory = TerritoryNode(name, resources)
-        if not self.head:
-            self.head = new_territory
-        else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = new_territory
-    
-    def remove_territory(self, name):
-        """
-        Remove a territory from the hunting route.
-        Time: O(n)
-        Space: O(1)
-        """
-        if not self.head:
-            return
-        
-        if self.head.name == name:
-            self.head = self.head.next
-            return
-        
-        current = self.head
-        while current.next:
-            if current.next.name == name:
-                current.next = current.next.next
-                return
-            current = current.next
-    
-    def find_territory(self, name):
-        """
-        Find a territory in the hunting route.
-        Time: O(n)
-        Space: O(1)
-        """
-        current = self.head
-        while current:
-            if current.name == name:
-                return current
-            current = current.next
-        return None
-    
-    def total_resources(self):
-        """
-        Calculate total resources in hunting route.
-        Time: O(n)
-        Space: O(1)
-        """
-        total = 0
-        current = self.head
-        while current:
-            total += current.resources
-            current = current.next
-        return total
-
-def analyze_hunting_route(territories):
-    """
-    Analyze hunting route efficiency.
-    
-    Args:
-        territories: List of tuples (name, resources) for each territory
-    
-    Returns:
-        TerritoryList object representing the hunting route
-    """
-    route = TerritoryList()
-    for name, resources in territories:
-        route.add_territory(name, resources)
-    return route
-
-// Test Case 1: Basic Hunting Route
-territories1 = [
-    ("Ancient Forest", 100),
-    ("Wildspire Waste", 80),
-    ("Coral Highlands", 90)
-]
-route1 = analyze_hunting_route(territories1)
-total1 = route1.total_resources()
-// Expected Output: 270
-
-// Test Case 2: Complex Hunting Route
-territories2 = [
-    ("Astera", 50),
-    ("Ancient Forest", 100),
-    ("Wildspire Waste", 80),
-    ("Coral Highlands", 90),
-    ("Rotten Vale", 70)
-]
-route2 = analyze_hunting_route(territories2)
-route2.remove_territory("Wildspire Waste")
-total2 = route2.total_resources()
-// Expected Output: 310
-
-// Monster Hunter Tip:
-// Like managing your hunting route through different territories!
-// Use Linked Lists to:
-// 1. Track territory connections
-// 2. Manage resource distribution
-// 3. Plan efficient hunting paths
-// 4. Update territory status
-// 5. Calculate total resources`,
-  ],
-]);
-
-// Add Extended Euclidean Pattern
-const extendedEuclideanPattern = new Map<PatternKey, string>([
-  [
-    "Extended Euclidean",
-    `# Monster Hunter Extended Euclidean Pattern
-# Resource Distribution Optimization
-
-def extended_gcd(a, b):
-    """
-    Find the greatest common divisor and coefficients.
-    Time: O(log min(a, b))
-    Space: O(1)
-    
-    Monster Hunter Context:
-    - Like finding optimal resource distribution
-    - Calculate resource sharing ratios
-    - Determine minimum resource requirements
-    - Optimize resource allocation
-    
-    Example:
-    a = 30  # First resource type
-    b = 42  # Second resource type
-    gcd, x, y = extended_gcd(a, b)
-    # Shows how to combine resources optimally
-    """
-    if a == 0:
-        return b, 0, 1
-    gcd, x1, y1 = extended_gcd(b % a, a)
-    x = y1 - (b // a) * x1
-    y = x1
-    return gcd, x, y
-
-def optimize_resource_distribution(resource1, resource2):
-    """
-    Optimize resource distribution between two types.
-    
-    Args:
-        resource1: Amount of first resource
-        resource2: Amount of second resource
-    
-    Returns:
-        Tuple of (gcd, x, y) where:
-        - gcd is the greatest common divisor
-        - x and y are coefficients for optimal distribution
-    """
-    return extended_gcd(resource1, resource2)
-
-// Test Case 1: Basic Resource Distribution
-resource1_1 = 30
-resource2_1 = 42
-gcd1, x1, y1 = optimize_resource_distribution(resource1_1, resource2_1)
-// Expected Output: (6, -3, 2)  # 6 = -3*30 + 2*42
-
-// Test Case 2: Complex Resource Distribution
-resource1_2 = 56
-resource2_2 = 72
-gcd2, x2, y2 = optimize_resource_distribution(resource1_2, resource2_2)
-// Expected Output: (8, -5, 4)  # 8 = -5*56 + 4*72
-
-// Test Case 3: Large Resource Distribution
-resource1_3 = 120
-resource2_3 = 168
-gcd3, x3, y3 = optimize_resource_distribution(resource1_3, resource2_3)
-// Expected Output: (24, -3, 2)  # 24 = -3*120 + 2*168
-
-// Monster Hunter Tip:
-// Like finding the optimal way to combine different resources!
-// Use Extended Euclidean to:
-// 1. Calculate resource sharing ratios
-// 2. Find minimum resource requirements
-// 3. Optimize resource distribution
-// 4. Determine resource combinations
-// 5. Plan efficient resource allocation`,
-  ],
-]);
-
-// Add Bellman-Ford Pattern
-const bellmanFordPattern = new Map<PatternKey, string>([
-  [
-    "Bellman-Ford",
-    `# Monster Hunter Bellman-Ford Pattern
-# Monster Territory Path Optimization
-
-def bellman_ford(graph, start):
-    """
-    Find shortest paths from start to all territories.
-    Time: O(VE)
-    Space: O(V)
-    
-    Monster Hunter Context:
-    - Like finding optimal paths through monster territories
-    - Handle negative resource costs
-    - Detect resource loops
-    - Plan efficient hunting routes
-    
-    Example:
-    territory = {
-        'Astera': {'Ancient Forest': 2, 'Wildspire Waste': 4},
-        'Ancient Forest': {'Coral Highlands': 3},
-        'Wildspire Waste': {'Rotten Vale': -1},
-        'Coral Highlands': {'Elder's Recess': 2},
-        'Rotten Vale': {'Elder's Recess': 1},
-        'Elder's Recess': {}
+  }
+  
+  for (let i = 0; i < n; i++) {
+    if (!visited[i]) {
+      dfs(i);
     }
-    distances = bellman_ford(territory, 'Astera')
-    # Shows shortest path to each territory
-    """
-    # Initialize distances
-    distances = {v: float('inf') for v in graph}
-    distances[start] = 0
-    
-    # Relax edges V-1 times
-    for _ in range(len(graph) - 1):
-        for u in graph:
-            for v, w in graph[u].items():
-                if distances[u] + w < distances[v]:
-                    distances[v] = distances[u] + w
-    
-    # Check for negative cycles
-    for u in graph:
-        for v, w in graph[u].items():
-            if distances[u] + w < distances[v]:
-                return None  # Negative cycle detected
-    
-    return distances
-
-def analyze_territory_paths(territory, start):
-    """
-    Analyze territory paths for optimal hunting routes.
-    
-    Args:
-        territory: Dictionary representing territory connections and costs
-        start: Starting territory
-    
-    Returns:
-        Dictionary of shortest distances to each territory
-    """
-    return bellman_ford(territory, start)
-
-// Test Case 1: Basic Territory Network
-territory1 = {
-    'Astera': {'Ancient Forest': 2, 'Wildspire Waste': 4},
-    'Ancient Forest': {'Coral Highlands': 3},
-    'Wildspire Waste': {'Rotten Vale': -1},
-    'Coral Highlands': {'Elder's Recess': 2},
-    'Rotten Vale': {'Elder's Recess': 1},
-    'Elder's Recess': {}
+  }
+  
+  return ap.map((is_ap, i) => is_ap ? i : -1).filter(i => i !== -1);
 }
-distances1 = analyze_territory_paths(territory1, 'Astera')
-// Expected Output: {'Astera': 0, 'Ancient Forest': 2, 'Wildspire Waste': 4,
-//                  'Coral Highlands': 5, 'Rotten Vale': 3, 'Elder's Recess': 4}
 
-// Test Case 2: Complex Territory Network
-territory2 = {
-    'Base Camp': {'Ancient Forest': 3, 'Wildspire Waste': 5},
-    'Ancient Forest': {'Coral Highlands': 2, 'Rotten Vale': 4},
-    'Wildspire Waste': {'Rotten Vale': -2},
-    'Coral Highlands': {'Elder's Recess': 3},
-    'Rotten Vale': {'Elder's Recess': 2},
-    'Elder's Recess': {}
-}
-distances2 = analyze_territory_paths(territory2, 'Base Camp')
-// Expected Output: {'Base Camp': 0, 'Ancient Forest': 3, 'Wildspire Waste': 5,
-//                  'Coral Highlands': 5, 'Rotten Vale': 3, 'Elder's Recess': 5}
+// Example usage:
+const territory_connections = [
+  [1, 2],
+  [0, 2, 3],
+  [0, 1],
+  [1, 4],
+  [3]
+];
+const critical_junctions = find_articulation_points(territory_connections);
+console.log(\`Critical territory junctions: \${critical_junctions}\`);
 
-// Test Case 3: Emergency Supply Route
-territory3 = {
-    'Emergency Camp': {'Ancient Forest': 1, 'Wildspire Waste': 2},
-    'Ancient Forest': {'Coral Highlands': 1},
-    'Wildspire Waste': {'Rotten Vale': -1},
-    'Coral Highlands': {'Elder's Recess': 2},
-    'Rotten Vale': {'Elder's Recess': 1},
-    'Elder's Recess': {}
-}
-distances3 = analyze_territory_paths(territory3, 'Emergency Camp')
-// Expected Output: {'Emergency Camp': 0, 'Ancient Forest': 1, 'Wildspire Waste': 2,
-//                  'Coral Highlands': 2, 'Rotten Vale': 1, 'Elder's Recess': 2}
-
-// Monster Hunter Tip:
-// Like finding the most efficient path through monster territories!
-// Use Bellman-Ford to:
-// 1. Find shortest paths to all territories
-// 2. Handle negative resource costs
-// 3. Detect resource loops
-// 4. Plan efficient hunting routes
-// 5. Optimize territory traversal`,
+// Tips:
+// 1. Identify critical territory junctions
+// 2. Plan backup routes around articulation points
+// 3. Use DFS to find vulnerable connections
+// 4. Track discovery time and low values
+// 5. Consider multiple connected components
+`,
   ],
 ]);
 
-// Add Divide and Conquer Pattern
-const divideAndConquerPattern = new Map<PatternKey, string>([
-  [
-    "Divide and Conquer",
-    `# Monster Hunter Divide and Conquer Pattern
-# Monster Territory Analysis Strategy
-
-def analyze_territory(territory):
-    """
-    Analyze monster territory using divide and conquer.
-    Time: O(n log n)
-    Space: O(log n)
-    
-    Monster Hunter Context:
-    - Like analyzing large monster territories
-    - Break down complex hunting grounds
-    - Identify key resource locations
-    - Plan efficient hunting strategies
-    
-    Example:
-    territory = [
-        {'name': 'Ancient Forest', 'resources': 100},
-        {'name': 'Wildspire Waste', 'resources': 80},
-        {'name': 'Coral Highlands', 'resources': 90},
-        {'name': 'Rotten Vale', 'resources': 70},
-        {'name': 'Elder's Recess', 'resources': 120}
-    ]
-    result = analyze_territory(territory)
-    # Shows optimal resource distribution
-    """
-    if len(territory) <= 1:
-        return territory
-    
-    # Divide
-    mid = len(territory) // 2
-    left = analyze_territory(territory[:mid])
-    right = analyze_territory(territory[mid:])
-    
-    # Conquer
-    return merge_territories(left, right)
-
-def merge_territories(left, right):
-    """
-    Merge two territory analyses.
-    
-    Args:
-        left: Left territory analysis
-        right: Right territory analysis
-    
-    Returns:
-        Merged territory analysis
-    """
-    result = []
-    i = j = 0
-    
-    while i < len(left) and j < len(right):
-        if left[i]['resources'] >= right[j]['resources']:
-            result.append(left[i])
-            i += 1
-        else:
-            result.append(right[j])
-            j += 1
-    
-    result.extend(left[i:])
-    result.extend(right[j:])
-    return result
-
-def optimize_hunting_strategy(territory):
-    """
-    Optimize hunting strategy using divide and conquer.
-    
-    Args:
-        territory: List of territory dictionaries with name and resources
-    
-    Returns:
-        Sorted list of territories by resource value
-    """
-    return analyze_territory(territory)
-
-// Test Case 1: Basic Territory Analysis
-territory1 = [
-    {'name': 'Ancient Forest', 'resources': 100},
-    {'name': 'Wildspire Waste', 'resources': 80},
-    {'name': 'Coral Highlands', 'resources': 90}
-]
-result1 = optimize_hunting_strategy(territory1)
-// Expected Output: [{'name': 'Ancient Forest', 'resources': 100},
-//                  {'name': 'Coral Highlands', 'resources': 90},
-//                  {'name': 'Wildspire Waste', 'resources': 80}]
-
-// Test Case 2: Complex Territory Analysis
-territory2 = [
-    {'name': 'Astera', 'resources': 50},
-    {'name': 'Ancient Forest', 'resources': 100},
-    {'name': 'Wildspire Waste', 'resources': 80},
-    {'name': 'Coral Highlands', 'resources': 90},
-    {'name': 'Rotten Vale', 'resources': 70}
-]
-result2 = optimize_hunting_strategy(territory2)
-// Expected Output: [{'name': 'Ancient Forest', 'resources': 100},
-//                  {'name': 'Coral Highlands', 'resources': 90},
-//                  {'name': 'Wildspire Waste', 'resources': 80},
-//                  {'name': 'Rotten Vale', 'resources': 70},
-//                  {'name': 'Astera', 'resources': 50}]
-
-// Test Case 3: Large Territory Analysis
-territory3 = [
-    {'name': 'Emergency Camp', 'resources': 200},
-    {'name': 'Ancient Forest', 'resources': 150},
-    {'name': 'Wildspire Waste', 'resources': 120},
-    {'name': 'Coral Highlands', 'resources': 180},
-    {'name': 'Rotten Vale', 'resources': 130},
-    {'name': 'Elder's Recess', 'resources': 250}
-]
-result3 = optimize_hunting_strategy(territory3)
-// Expected Output: [{'name': 'Elder's Recess', 'resources': 250},
-//                  {'name': 'Emergency Camp', 'resources': 200},
-//                  {'name': 'Coral Highlands', 'resources': 180},
-//                  {'name': 'Ancient Forest', 'resources': 150},
-//                  {'name': 'Rotten Vale', 'resources': 130},
-//                  {'name': 'Wildspire Waste', 'resources': 120}]
-
-// Monster Hunter Tip:
-// Like breaking down complex hunting grounds into manageable parts!
-// Use Divide and Conquer to:
-// 1. Analyze large territories efficiently
-// 2. Identify key resource locations
-// 3. Plan optimal hunting routes
-// 4. Balance resource distribution
-// 5. Optimize hunting strategies`,
-  ],
-]);
-
-// Add Graph Kosaraju Pattern
-const graphKosarajuPattern = new Map<PatternKey, string>([
-  [
-    "Graph Kosaraju",
-    `# Monster Hunter Graph Kosaraju Pattern
-# Monster Territory Strongly Connected Components
-
-def kosaraju(graph):
-    """
-    Find strongly connected components in monster territory.
-    Time: O(V + E)
-    Space: O(V)
-    
-    Monster Hunter Context:
-    - Like finding interconnected monster territories
-    - Identify territory clusters
-    - Plan efficient hunting routes
-    - Optimize resource distribution
-    
-    Example:
-    territory = {
-        'Astera': ['Ancient Forest'],
-        'Ancient Forest': ['Coral Highlands'],
-        'Coral Highlands': ['Astera', 'Rotten Vale'],
-        'Wildspire Waste': ['Rotten Vale'],
-        'Rotten Vale': ['Elder's Recess'],
-        'Elder's Recess': ['Wildspire Waste']
-    }
-    components = kosaraju(territory)
-    # Shows strongly connected territory groups
-    """
-    def dfs(u, visited, stack):
-        visited.add(u)
-        for v in graph.get(u, []):
-            if v not in visited:
-                dfs(v, visited, stack)
-        stack.append(u)
-    
-    def reverse_graph():
-        reversed_graph = {}
-        for u in graph:
-            for v in graph[u]:
-                if v not in reversed_graph:
-                    reversed_graph[v] = []
-                reversed_graph[v].append(u)
-        return reversed_graph
-    
-    # First pass: fill stack
-    visited = set()
-    stack = []
-    for u in graph:
-        if u not in visited:
-            dfs(u, visited, stack)
-    
-    # Second pass: find components
-    reversed_graph = reverse_graph()
-    visited = set()
-    components = []
-    
-    while stack:
-        u = stack.pop()
-        if u not in visited:
-            component = []
-            dfs(u, visited, component)
-            components.append(component)
-    
-    return components
-
-def analyze_territory_connections(territory):
-    """
-    Analyze territory connections to find strongly connected components.
-    
-    Args:
-        territory: Dictionary representing territory connections
-    
-    Returns:
-        List of strongly connected territory groups
-    """
-    return kosaraju(territory)
-
-// Test Case 1: Basic Territory Network
-territory1 = {
-    'Astera': ['Ancient Forest'],
-    'Ancient Forest': ['Coral Highlands'],
-    'Coral Highlands': ['Astera', 'Rotten Vale'],
-    'Wildspire Waste': ['Rotten Vale'],
-    'Rotten Vale': ['Elder's Recess'],
-    'Elder's Recess': ['Wildspire Waste']
-}
-components1 = analyze_territory_connections(territory1)
-// Expected Output: [['Astera', 'Ancient Forest', 'Coral Highlands'],
-//                  ['Wildspire Waste', 'Rotten Vale', 'Elder's Recess']]
-
-// Test Case 2: Complex Territory Network
-territory2 = {
-    'Base Camp': ['Ancient Forest', 'Wildspire Waste'],
-    'Ancient Forest': ['Coral Highlands'],
-    'Wildspire Waste': ['Rotten Vale'],
-    'Coral Highlands': ['Base Camp', 'Elder's Recess'],
-    'Rotten Vale': ['Elder's Recess'],
-    'Elder's Recess': ['Base Camp']
-}
-components2 = analyze_territory_connections(territory2)
-// Expected Output: [['Base Camp', 'Ancient Forest', 'Coral Highlands',
-//                   'Wildspire Waste', 'Rotten Vale', 'Elder's Recess']]
-
-// Test Case 3: Multiple Territory Clusters
-territory3 = {
-    'Emergency Camp': ['Ancient Forest'],
-    'Ancient Forest': ['Coral Highlands'],
-    'Coral Highlands': ['Emergency Camp'],
-    'Wildspire Waste': ['Rotten Vale'],
-    'Rotten Vale': ['Elder's Recess'],
-    'Elder's Recess': ['Wildspire Waste']
-}
-components3 = analyze_territory_connections(territory3)
-// Expected Output: [['Emergency Camp', 'Ancient Forest', 'Coral Highlands'],
-//                  ['Wildspire Waste', 'Rotten Vale', 'Elder's Recess']]
-
-// Monster Hunter Tip:
-// Like finding groups of interconnected monster territories!
-// Use Kosaraju's algorithm to:
-// 1. Identify territory clusters
-// 2. Plan efficient hunting routes
-// 3. Optimize resource distribution
-// 4. Analyze territory connections
-// 5. Plan strategic hunting grounds`,
-  ],
-]);
-
-// Combine all patterns into a single Map
+// Export all patterns
 export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended,
   ...monsterHunterPatternsExtended2,
@@ -908,533 +177,9 @@ export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended4,
   ...monsterHunterPatternsExtended5,
   ...monsterHunterPatternsExtended6,
+  ...monsterHunterPatternsExtended7,
+  ...monsterHunterPatternsExtended8,
   ...matrixExponentiationPattern,
   ...fastFourierTransformPattern,
-  ...graphArticulationPointsPattern,
-  ...dynamicProgrammingPattern,
-  ...linkedListPattern,
-  ...extendedEuclideanPattern,
-  ...bellmanFordPattern,
-  ...divideAndConquerPattern,
-  ...graphKosarajuPattern,
-  [
-    "Network Flow",
-    `# Monster Hunter Network Flow Pattern
-# Monster Territory Resource Distribution
-
-# Monster Hunter Guide: Resource Management and Supply Lines
-# =======================================================
-
-# Understanding Resource Flow in Monster Hunter
-# -------------------------------------------
-# In Monster Hunter, efficient resource management is crucial for successful hunts.
-# Network Flow helps you optimize:
-# 1. Material transportation between territories
-# 2. Supply line efficiency
-# 3. Emergency resource distribution
-# 4. Multi-source resource allocation
-
-# Territory Types and Capacities
-# -----------------------------
-# Different territories have different resource capacities:
-# - Base Camp: High capacity (15-20)
-# - Ancient Forest: Medium capacity (7-12)
-# - Wildspire Waste: Medium capacity (6-10)
-# - Coral Highlands: Medium capacity (5-8)
-# - Rotten Vale: Low capacity (3-6)
-# - Elder's Recess: Variable capacity (depends on quest)
-
-# Resource Types and Priorities
-# ---------------------------
-# 1. Essential Resources (Priority 1):
-#    - Potions and healing items
-#    - Ammunition and coatings
-# 2. Combat Resources (Priority 2):
-#    - Traps and bombs
-#    - Status effect items
-# 3. Utility Resources (Priority 3):
-#    - Gathering tools
-#    - Environmental items
-
-# Strategic Planning
-# ----------------
-# 1. Pre-Hunt Preparation:
-#    - Map out resource routes
-#    - Identify critical supply points
-#    - Plan emergency resource distribution
-#
-# 2. During Hunt:
-#    - Monitor resource consumption
-#    - Adjust supply routes as needed
-#    - Maintain backup supply lines
-#
-# 3. Emergency Situations:
-#    - Activate emergency supply routes
-#    - Prioritize critical resources
-#    - Maintain minimum resource levels
-
-# Territory Connection Strategies
-# ----------------------------
-# 1. Direct Routes:
-#    - Fastest but limited capacity
-#    - Good for emergency supplies
-#
-# 2. Multiple Path Routes:
-#    - Higher total capacity
-#    - Better for regular supplies
-#
-# 3. Backup Routes:
-#    - Alternative paths
-#    - Critical for emergency situations
-
-# Resource Distribution Tips
-# -----------------------
-# 1. Always maintain multiple supply routes
-# 2. Keep emergency supply lines ready
-# 3. Balance resource distribution
-# 4. Monitor territory capacities
-# 5. Plan for resource bottlenecks
-
-def max_flow(graph, source, sink):
-    """
-    Find the maximum flow of resources through monster territory.
-    Time: O(VE^2) for Edmonds-Karp
-    Space: O(V^2)
-    
-    Monster Hunter Context:
-    - Like finding maximum resource flow between territories
-    - Optimizing material distribution routes
-    - Managing supply lines between hunting grounds
-    - Planning efficient resource transportation
-    - Balancing supply and demand across territories
-    
-    Example:
-    territory = {
-        'Base Camp': {'Ancient Forest': 10, 'Wildspire Waste': 5},
-        'Ancient Forest': {'Coral Highlands': 7},
-        'Wildspire Waste': {'Rotten Vale': 4},
-        'Coral Highlands': {'Elder's Recess': 6},
-        'Rotten Vale': {'Elder's Recess': 3},
-        'Elder's Recess': {}
-    }
-    max_resources = max_flow(territory, 'Base Camp', 'Elder's Recess')
-    # Shows maximum resources that can reach Elder's Recess
-    """
-    def bfs(graph, s, t, parent):
-        visited = {v: False for v in graph}
-        queue = [s]
-        visited[s] = True
-        
-        while queue:
-            u = queue.pop(0)
-            for v, capacity in graph[u].items():
-                if not visited[v] and capacity > 0:
-                    queue.append(v)
-                    visited[v] = True
-                    parent[v] = u
-                    if v == t:
-                        return True
-        return False
-    
-    parent = {v: -1 for v in graph}
-    max_flow = 0
-    
-    while bfs(graph, source, sink, parent):
-        path_flow = float("inf")
-        s = sink
-        while s != source:
-            path_flow = min(path_flow, graph[parent[s]][s])
-            s = parent[s]
-        
-        max_flow += path_flow
-        
-        v = sink
-        while v != source:
-            u = parent[v]
-            graph[u][v] -= path_flow
-            graph[v][u] = graph[v].get(u, 0) + path_flow
-            v = parent[v]
-    
-    return max_flow
-
-def analyze_resource_flow(territory, source, sink):
-    """
-    Analyze resource flow through monster territory.
-    
-    Args:
-        territory: Dictionary representing territory connections and capacities
-        source: Starting territory
-        sink: Destination territory
-    
-    Returns:
-        Maximum amount of resources that can flow from source to sink
-    """
-    return max_flow(territory, source, sink)
-
-// Test Case 1: Basic Resource Distribution
-territory1 = {
-    'Base Camp': {'Ancient Forest': 10, 'Wildspire Waste': 5},
-    'Ancient Forest': {'Coral Highlands': 7},
-    'Wildspire Waste': {'Rotten Vale': 4},
-    'Coral Highlands': {'Elder's Recess': 6},
-    'Rotten Vale': {'Elder's Recess': 3},
-    'Elder's Recess': {}
-}
-max_resources1 = analyze_resource_flow(territory1, 'Base Camp', 'Elder's Recess')
-// Expected Output: 9 (7 through Ancient Forest + 2 through Wildspire Waste)
-
-// Test Case 2: Multiple Paths with Different Capacities
-territory2 = {
-    'Astera': {'Ancient Forest': 8, 'Wildspire Waste': 6},
-    'Ancient Forest': {'Coral Highlands': 5, 'Rotten Vale': 3},
-    'Wildspire Waste': {'Rotten Vale': 4},
-    'Coral Highlands': {'Elder's Recess': 7},
-    'Rotten Vale': {'Elder's Recess': 6},
-    'Elder's Recess': {}
-}
-max_resources2 = analyze_resource_flow(territory2, 'Astera', 'Elder's Recess')
-// Expected Output: 12 (5 through Ancient Forest + 4 through Wildspire Waste + 3 through Rotten Vale)
-
-// Test Case 3: Complex Network with Multiple Sources
-territory3 = {
-    'Astera': {'Ancient Forest': 10},
-    'Seliana': {'Wildspire Waste': 8},
-    'Ancient Forest': {'Coral Highlands': 7},
-    'Wildspire Waste': {'Rotten Vale': 6},
-    'Coral Highlands': {'Elder's Recess': 5},
-    'Rotten Vale': {'Elder's Recess': 4},
-    'Elder's Recess': {}
-}
-// Create a super source
-territory3['Super Source'] = {'Astera': float('inf'), 'Seliana': float('inf')}
-max_resources3 = analyze_resource_flow(territory3, 'Super Source', 'Elder's Recess')
-// Expected Output: 9 (5 through Coral Highlands + 4 through Rotten Vale)
-
-// Test Case 4: Supply Chain Optimization
-territory4 = {
-    'Base Camp': {'Ancient Forest': 15, 'Wildspire Waste': 10},
-    'Ancient Forest': {'Coral Highlands': 12, 'Rotten Vale': 8},
-    'Wildspire Waste': {'Rotten Vale': 7},
-    'Coral Highlands': {'Elder's Recess': 10},
-    'Rotten Vale': {'Elder's Recess': 9},
-    'Elder's Recess': {}
-}
-max_resources4 = analyze_resource_flow(territory4, 'Base Camp', 'Elder's Recess')
-// Expected Output: 19 (10 through Coral Highlands + 9 through Rotten Vale)
-
-// Test Case 5: Emergency Resource Distribution
-territory5 = {
-    'Emergency Camp': {'Ancient Forest': 20, 'Wildspire Waste': 15},
-    'Ancient Forest': {'Coral Highlands': 18},
-    'Wildspire Waste': {'Rotten Vale': 12},
-    'Coral Highlands': {'Elder's Recess': 15},
-    'Rotten Vale': {'Elder's Recess': 10},
-    'Elder's Recess': {}
-}
-max_resources5 = analyze_resource_flow(territory5, 'Emergency Camp', 'Elder's Recess')
-// Expected Output: 25 (15 through Coral Highlands + 10 through Rotten Vale)
-
-// Monster Hunter Tip:
-// Like optimizing your supply lines to ensure maximum resources reach your hunting grounds!
-// Use Network Flow to:
-// 1. Plan efficient resource distribution between territories
-// 2. Find bottlenecks in your supply chain
-// 3. Optimize emergency resource delivery
-// 4. Balance multiple supply routes
-// 5. Maximize resource delivery to critical hunting grounds
-
-// Advanced Strategies
-// -----------------
-// 1. Territory Management:
-//    - Monitor territory capacities
-//    - Plan resource distribution
-//    - Maintain supply lines
-//
-// 2. Resource Optimization:
-//    - Prioritize critical resources
-//    - Balance supply routes
-//    - Plan for emergencies
-//
-// 3. Emergency Preparedness:
-//    - Maintain backup routes
-//    - Keep emergency supplies
-//    - Monitor resource levels
-
-// Territory-Specific Tips
-// ---------------------
-// 1. Ancient Forest:
-//    - High resource capacity
-//    - Multiple connection points
-//    - Good for main supply line
-//
-// 2. Wildspire Waste:
-//    - Medium resource capacity
-//    - Limited connections
-//    - Good for backup routes
-//
-// 3. Coral Highlands:
-//    - Medium resource capacity
-//    - Strategic location
-//    - Good for distribution hub
-//
-// 4. Rotten Vale:
-//    - Low resource capacity
-//    - Limited connections
-//    - Use for emergency routes
-//
-// 5. Elder's Recess:
-//    - Variable capacity
-//    - Multiple entry points
-//    - Critical for endgame
-
-// Resource Management Checklist
-// --------------------------
-// 1. Pre-Hunt:
-//    - Map supply routes
-//    - Check territory capacities
-//    - Plan resource distribution
-//
-// 2. During Hunt:
-//    - Monitor resource flow
-//    - Adjust supply routes
-//    - Maintain minimum levels
-//
-// 3. Emergency:
-//    - Activate backup routes
-//    - Prioritize critical resources
-//    - Maintain supply chain`,
-  ],
-  [
-    "Tree DP",
-    `# Monster Hunter Tree DP Challenge
-# You are planning optimal hunting routes through monster territories!
-
-def monster_hunter_tree_dp(tree):
-    """
-    Calculate maximum rewards from monster territories using Tree DP.
-    Time: O(n) where n is number of territories
-    Space: O(n)
-    
-    Monster Hunter Context:
-    - Like finding the most rewarding path through monster territories
-    - Each territory has a reward value
-    - Can't take adjacent territories (must skip some)
-    - Need to maximize total rewards
-    
-    Example:
-    tree = {
-        "Ancient Forest": {
-            "rewards": 100,
-            "children": ["Wildspire Waste", "Coral Highlands"]
-        },
-        "Wildspire Waste": {
-            "rewards": 80,
-            "children": ["Rotten Vale"]
-        },
-        "Coral Highlands": {
-            "rewards": 90,
-            "children": ["Elder's Recess"]
-        },
-        "Rotten Vale": {
-            "rewards": 70,
-            "children": []
-        },
-        "Elder's Recess": {
-            "rewards": 120,
-            "children": []
-        }
-    }
-    max_rewards = monster_hunter_tree_dp(tree)
-    # Shows maximum rewards achievable
-    """
-    def dfs(territory):
-        if not territory:
-            return 0, 0
-            
-        # Initialize values for current territory
-        include = tree[territory]["rewards"]
-        exclude = 0
-        
-        # Process all child territories
-        for child in tree[territory]["children"]:
-            child_include, child_exclude = dfs(child)
-            # If we include current territory, we must exclude children
-            include += child_exclude
-            # If we exclude current territory, we can choose to include or exclude children
-            exclude += max(child_include, child_exclude)
-            
-        return include, exclude
-    
-    # Start from the root territory
-    root = next(iter(tree))
-    include, exclude = dfs(root)
-    return max(include, exclude)
-
-def analyze_territory_rewards(tree):
-    """
-    Analyze monster territory rewards to find optimal path.
-    
-    Args:
-        tree: Dictionary representing territory structure and rewards
-    
-    Returns:
-        Maximum rewards achievable through optimal territory selection
-    """
-    return monster_hunter_tree_dp(tree)
-
-// Test Case 1: Basic Territory Optimization
-tree1 = {
-    "Ancient Forest": {
-        "rewards": 100,
-        "children": ["Wildspire Waste", "Coral Highlands"]
-    },
-    "Wildspire Waste": {
-        "rewards": 80,
-        "children": ["Rotten Vale"]
-    },
-    "Coral Highlands": {
-        "rewards": 90,
-        "children": ["Elder's Recess"]
-    },
-    "Rotten Vale": {
-        "rewards": 70,
-        "children": []
-    },
-    "Elder's Recess": {
-        "rewards": 120,
-        "children": []
-    }
-}
-max_rewards1 = analyze_territory_rewards(tree1)
-// Expected Output: 290 (100 + 80 + 70 + 40)
-
-// Test Case 2: Complex Territory Network
-tree2 = {
-    "Base Camp": {
-        "rewards": 50,
-        "children": ["Ancient Forest", "Wildspire Waste"]
-    },
-    "Ancient Forest": {
-        "rewards": 100,
-        "children": ["Coral Highlands"]
-    },
-    "Wildspire Waste": {
-        "rewards": 80,
-        "children": ["Rotten Vale"]
-    },
-    "Coral Highlands": {
-        "rewards": 90,
-        "children": ["Elder's Recess"]
-    },
-    "Rotten Vale": {
-        "rewards": 70,
-        "children": ["Elder's Recess"]
-    },
-    "Elder's Recess": {
-        "rewards": 120,
-        "children": []
-    }
-}
-max_rewards2 = analyze_territory_rewards(tree2)
-// Expected Output: 340 (50 + 100 + 90 + 120)
-
-// Test Case 3: Multiple Paths with Different Rewards
-tree3 = {
-    "Astera": {
-        "rewards": 60,
-        "children": ["Ancient Forest", "Wildspire Waste"]
-    },
-    "Ancient Forest": {
-        "rewards": 100,
-        "children": ["Coral Highlands", "Rotten Vale"]
-    },
-    "Wildspire Waste": {
-        "rewards": 80,
-        "children": ["Rotten Vale"]
-    },
-    "Coral Highlands": {
-        "rewards": 90,
-        "children": ["Elder's Recess"]
-    },
-    "Rotten Vale": {
-        "rewards": 70,
-        "children": ["Elder's Recess"]
-    },
-    "Elder's Recess": {
-        "rewards": 120,
-        "children": []
-    }
-}
-max_rewards3 = analyze_territory_rewards(tree3)
-// Expected Output: 370 (60 + 100 + 90 + 120)
-
-// Test Case 4: Emergency Supply Route
-tree4 = {
-    "Emergency Camp": {
-        "rewards": 100,
-        "children": ["Ancient Forest", "Wildspire Waste"]
-    },
-    "Ancient Forest": {
-        "rewards": 150,
-        "children": ["Coral Highlands"]
-    },
-    "Wildspire Waste": {
-        "rewards": 120,
-        "children": ["Rotten Vale"]
-    },
-    "Coral Highlands": {
-        "rewards": 180,
-        "children": ["Elder's Recess"]
-    },
-    "Rotten Vale": {
-        "rewards": 130,
-        "children": ["Elder's Recess"]
-    },
-    "Elder's Recess": {
-        "rewards": 200,
-        "children": []
-    }
-}
-max_rewards4 = analyze_territory_rewards(tree4)
-// Expected Output: 630 (100 + 150 + 180 + 200)
-
-// Test Case 5: Resource Collection Path
-tree5 = {
-    "Base Camp": {
-        "rewards": 50,
-        "children": ["Ancient Forest", "Wildspire Waste"]
-    },
-    "Ancient Forest": {
-        "rewards": 100,
-        "children": ["Coral Highlands", "Rotten Vale"]
-    },
-    "Wildspire Waste": {
-        "rewards": 80,
-        "children": ["Rotten Vale"]
-    },
-    "Coral Highlands": {
-        "rewards": 90,
-        "children": ["Elder's Recess"]
-    },
-    "Rotten Vale": {
-        "rewards": 70,
-        "children": ["Elder's Recess"]
-    },
-    "Elder's Recess": {
-        "rewards": 120,
-        "children": []
-    }
-}
-max_rewards5 = analyze_territory_rewards(tree5)
-// Expected Output: 360 (50 + 100 + 90 + 120)
-
-// Monster Hunter Tip:
-// Like planning the most efficient route through monster territories to maximize rewards!
-// Use Tree DP to:
-// 1. Calculate maximum rewards for each territory
-// 2. Consider both taking and skipping territories
-// 3. Find the optimal path through the territory tree
-// 4. Balance immediate rewards with future opportunities
-// 5. Plan efficient resource collection routes`,
-  ],
+  ...articulationPointsMonsterHunterPattern,
 ]);

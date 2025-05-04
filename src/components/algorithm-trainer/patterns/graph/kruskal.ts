@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const kruskalPattern: AlgorithmPattern = {
-  title: "Kruskal's Algorithm",
+  title: "Kruskal",
   description: "Find a minimum spanning tree in a weighted undirected graph",
   timeComplexity: "O(E log E)",
   spaceComplexity: "O(V)",

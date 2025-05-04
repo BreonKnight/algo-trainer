@@ -1,11 +1,11 @@
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { pseudocodePatterns } from "@/lib/pseudocode";
-import { patternNameMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import styles from "@/styles/pseudocode.module.css";
 import { MonsterHunterGuide } from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
-import { Book, Sword, ChevronDown, ChevronUp } from "lucide-react";
+import { Book, Sword } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -13,110 +13,39 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
-import { useTheme } from "@/components/theme-context";
+import { useTheme } from "@/components/theme/theme-context";
 import { PatternKey } from "./types";
+import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
+import { categoryColors } from "@/lib/patterns";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;
-
-// Type assertion for the imported pseudocodePatterns
-const typedPseudocodePatterns = pseudocodePatterns as PseudocodePatterns;
-
 // Get category for a pattern
 const getPatternCategory = (pattern: PatternKey): string => {
-  // Define category mapping based on pattern name patterns
-  if (pattern.includes("Sort")) return "Sorting";
-  if (pattern.includes("Search")) return "Searching";
-  if (
-    pattern.includes("Graph") ||
-    pattern === "BFS" ||
-    pattern === "DFS" ||
-    pattern === "Kruskal" ||
-    pattern === "Prim" ||
-    pattern === "Bellman-Ford" ||
-    pattern === "Floyd-Warshall" ||
-    pattern === "A* Search" ||
-    pattern === "Network Flow" ||
-    pattern === "Maximum Bipartite Matching" ||
-    pattern === "Topological Sort" ||
-    pattern === "Articulation Points"
-  ) {
-    return "Graph Algorithms";
+  // Find the category that contains this pattern
+  for (const [category, patterns] of Object.entries(
+    monsterHunterPatternsByCategory
+  )) {
+    if (patterns.includes(pattern)) {
+      return category;
+    }
   }
-  if (
-    pattern.includes("Tree") ||
-    pattern === "Suffix Tree" ||
-    pattern === "Suffix Array"
-  ) {
-    return "String Algorithms";
-  }
-  if (
-    pattern.includes("DP") ||
-    pattern === "Kadane's Algorithm" ||
-    pattern.includes("Matrix Chain") ||
-    pattern.includes("Matrix Exponentiation")
-  ) {
-    return "Dynamic Programming";
-  }
-  if (
-    pattern.includes("Matrix") ||
-    pattern === "Grid Traversal" ||
-    pattern === "Rotate Matrix"
-  ) {
-    return "Matrix Algorithms";
-  }
-  if (
-    pattern === "Extended Euclidean" ||
-    pattern === "Chinese Remainder Theorem" ||
-    pattern === "Sieve of Eratosthenes" ||
-    pattern === "Prime Factorization" ||
-    pattern === "Miller-Rabin Primality Test"
-  ) {
-    return "Number Theory";
-  }
-  if (
-    pattern === "Greedy" ||
-    pattern.includes("Greedy") ||
-    pattern === "Backtracking" ||
-    pattern === "Divide and Conquer" ||
-    pattern === "Recursion" ||
-    pattern === "Bit Manipulation" ||
-    pattern === "Prefix Sum"
-  ) {
-    return "Techniques";
-  }
-  if (
-    pattern === "B Tree" ||
-    pattern === "AVL Tree" ||
-    pattern === "Red Black Tree" ||
-    pattern === "Fenwick Tree" ||
-    pattern === "Segment Tree" ||
-    pattern === "Union Find" ||
-    pattern === "Monotonic Queue" ||
-    pattern === "Monotonic Stack" ||
-    pattern === "Queue Implementation" ||
-    pattern === "Stack Implementation" ||
-    pattern === "Circular Linked List" ||
-    pattern === "Hash Table" ||
-    pattern === "Heap Implementation" ||
-    pattern === "Linked List"
-  ) {
-    return "Data Structures";
-  }
-  return "Other";
+  return "Unknown"; // Fallback category if pattern not found
 };
 
 interface PatternCardProps {
   currentPattern: PatternKey;
   onPatternChange: (pattern: PatternKey) => void;
+  patternNumber?: number;
 }
 
 export function PatternCard({
   currentPattern,
   onPatternChange,
+  patternNumber,
 }: PatternCardProps) {
   const [showMonsterGuide, setShowMonsterGuide] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded] = useState(true);
   const category = getPatternCategory(currentPattern);
   const { theme } = useTheme();
   const [descHeight, setDescHeight] = useState(300);
@@ -138,31 +67,25 @@ export function PatternCard({
     };
   }, []);
 
-  const getPseudocodePattern = (patternName: string) => {
-    // First try to get the pattern directly
-    const directPattern = typedPseudocodePatterns[patternName];
-    if (directPattern) {
-      return directPattern;
+  const getPseudocodePattern = (patternName: PatternKey) => {
+    const typedPseudocodePatterns = pseudocodePatterns as PseudocodePatterns;
+
+    // First try direct lookup
+    const pattern = typedPseudocodePatterns[patternName];
+    if (pattern) {
+      return pattern;
     }
 
     // If not found, try to map the name
-    const mappedName = patternNameMapping[patternName];
+    const mappedName =
+      patternMapping[patternName as keyof typeof patternMapping];
     if (mappedName) {
       return typedPseudocodePatterns[mappedName];
     }
 
-    // If still not found, try to find a pattern with a similar name
-    const similarPattern = Object.keys(typedPseudocodePatterns).find(
-      (key) => key.toLowerCase() === patternName.toLowerCase()
-    );
-    if (similarPattern) {
-      return typedPseudocodePatterns[similarPattern];
-    }
-
-    // Log pattern lookup failure
     console.warn(`Pattern lookup failed for: ${patternName}`);
     console.log("Available patterns:", Object.keys(typedPseudocodePatterns));
-    console.log("Pattern name mapping:", patternNameMapping);
+    console.log("Pattern name mapping:", patternMapping);
 
     return null;
   };
@@ -170,97 +93,93 @@ export function PatternCard({
   const pseudo = getPseudocodePattern(currentPattern);
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
-      <div className="flex-none mb-2">
-        <h2
-          className={
-            `text-main text-base sm:text-lg md:text-xl font-semibold truncate flex-none leading-relaxed` +
-            (theme === "nord"
-              ? " text-white"
-              : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
-          }
-          style={
-            theme === "nord"
-              ? undefined
-              : {
-                  backgroundImage:
-                    "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-                }
-          }
-        >
-          {currentPattern}
-        </h2>
-        <span
-          className={
-            theme === "nord"
-              ? "text-white/70"
-              : "text-secondary text-sm sm:text-base"
-          }
-        >
-          {category}
-        </span>
-      </div>
-      <div className="flex-none flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="default"
-                  onClick={() => setShowMonsterGuide(!showMonsterGuide)}
-                  className="text-accent hover:text-accent hover:bg-secondary/20 p-2"
-                >
-                  {showMonsterGuide ? (
-                    <Book className="w-6 h-6" />
-                  ) : (
-                    <Sword className="w-6 h-6" />
-                  )}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <Button
-            variant="ghost"
-            size="default"
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="text-secondary hover:text-secondary hover:bg-secondary/20 p-2"
-          >
-            {isExpanded ? (
-              <ChevronUp className="w-6 h-6" />
-            ) : (
-              <ChevronDown className="w-6 h-6" />
-            )}
-          </Button>
+    <Card
+      className="p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden
+      transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
+    >
+      <div className="flex-none flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex-1 min-w-0 text-left">
+            <h2
+              className={
+                `text-main text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left` +
+                (theme === "nord"
+                  ? " text-white"
+                  : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]")
+              }
+              style={
+                theme === "nord"
+                  ? undefined
+                  : {
+                      backgroundImage:
+                        "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                    }
+              }
+            >
+              {currentPattern}
+            </h2>
+            <span
+              className={`${
+                categoryColors[category as keyof typeof categoryColors] ||
+                "text-secondary/80"
+              } text-xs sm:text-sm md:text-base font-medium`}
+            >
+              {category} {patternNumber !== undefined && `#${patternNumber}`}
+            </span>
+          </div>
         </div>
-        <div className="w-full sm:w-auto">
-          <AlgorithmSelector
-            currentPattern={currentPattern}
-            onPatternChange={onPatternChange}
-          />
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="default"
+                    onClick={() => setShowMonsterGuide(!showMonsterGuide)}
+                    className="text-accent hover:text-accent hover:bg-secondary/20 p-2 rounded-full
+                      transition-all duration-300 hover:scale-110 hover:shadow-md"
+                  >
+                    {showMonsterGuide ? (
+                      <Book className="w-6 h-6" />
+                    ) : (
+                      <Sword className="w-6 h-6" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
+                  {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+          <div className="w-full sm:w-auto">
+            <AlgorithmSelector
+              currentPattern={currentPattern}
+              onPatternChange={onPatternChange}
+            />
+          </div>
         </div>
       </div>
 
       <div className="flex-1 min-h-0 overflow-hidden">
         {isExpanded &&
           (showMonsterGuide ? (
-            <div className="h-full overflow-hidden">
+            <div className="h-full overflow-hidden rounded-xl bg-main/80 backdrop-blur-sm border border-secondary/20 mt-3">
               <MonsterHunterGuide currentPattern={currentPattern} />
             </div>
           ) : (
             <div className="h-full flex flex-col overflow-hidden">
               <div
                 ref={descRef}
-                className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/90 rounded-xl`}
+                className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20
+                  transition-all duration-300 mt-3`}
                 style={{
                   height: isDesktop ? descHeight : "300px",
                   minHeight: isDesktop ? "0" : "300px",
                 }}
               >
-                <div className="h-full w-full overflow-y-auto">
+                <div className="h-full w-full overflow-y-auto custom-scrollbar">
                   <div
                     className={`${styles.pseudocodeContent} text-sm sm:text-base w-full text-main leading-relaxed p-4`}
                   >
@@ -294,13 +213,13 @@ export function PatternCard({
               </div>
               {/* Vertical resize handle */}
               <div
-                className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
+                className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group mt-1"
                 style={{ userSelect: "none" }}
                 onMouseDown={(e) => {
                   if (!isDesktop) return;
                   const startY = e.clientY;
                   const startHeight = descRef.current?.offsetHeight || 0;
-                  const maxHeight = 800; // Increased max height
+                  const maxHeight = 800;
                   const onMove = (moveEvent: MouseEvent) => {
                     const delta = moveEvent.clientY - startY;
                     const newHeight = Math.max(
@@ -317,7 +236,10 @@ export function PatternCard({
                   window.addEventListener("mouseup", onUp);
                 }}
               >
-                <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+                <div
+                  className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 
+                  transition-all duration-300 group-hover:w-24"
+                />
               </div>
             </div>
           ))}

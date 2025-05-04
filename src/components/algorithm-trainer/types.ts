@@ -1,121 +1,112 @@
-import { algorithmPatterns } from "./patterns";
-export const PATTERN_KEYS = Object.keys(algorithmPatterns);
-
 export type PatternKey =
-  | "Quick Sort"
-  | "Merge Sort"
-  | "Heap Sort"
-  | "Bubble Sort"
-  | "Selection Sort"
-  | "Insertion Sort"
-  | "Binary Search"
-  | "Binary Search on Answer"
-  | "Linear Search"
-  | "Sliding Window"
-  | "Two Pointers"
-  | "Floyd Cycle Detection"
-  | "Topological Sort"
-  | "Null Pattern"
-  | "Test Data"
   | "A* Search"
-  | "Graph Dijkstra"
-  | "Kadane's Algorithm"
-  | "KMP Algorithm"
-  | "Ternary Search"
-  | "Exponential Search"
-  | "Fibonacci Search"
-  | "Interpolation Search"
-  | "Jump Search"
-  | "Manacher's Algorithm"
-  | "Network Flow"
-  | "Maximum Bipartite Matching"
-  | "State Compression DP"
-  | "Digit DP"
-  | "Tree DP"
-  | "Probability DP"
-  | "Suffix Tree"
-  | "Suffix Array"
-  | "B Tree"
-  | "AVL Tree"
-  | "Red Black Tree"
-  | "Fenwick Tree"
-  | "Segment Tree"
   | "Activity Selection"
-  | "Huffman Coding"
-  | "Miller-Rabin Primality Test"
-  | "Prime Factorization"
-  | "Sieve of Eratosthenes"
-  | "Chinese Remainder Theorem"
-  | "Extended Euclidean"
-  | "Grid Traversal"
-  | "Matrix Chain Multiplication"
-  | "Matrix Exponentiation"
-  | "Floyd-Warshall"
-  | "Kruskal"
-  | "Prim"
-  | "Graph Kosaraju"
+  | "Articulation Points"
+  | "AVL Tree"
+  | "Backtracking"
   | "Bellman-Ford"
   | "BFS"
-  | "DFS"
-  | "Articulation Points"
-  | "Union Find"
-  | "Monotonic Queue"
-  | "Monotonic Stack"
-  | "Queue Implementation"
-  | "Stack Implementation"
-  | "Circular Linked List"
-  | "Hash Table"
-  | "Heap Implementation"
-  | "Linked List"
-  | "Fast Fourier Transform"
-  | "Job Scheduling"
-  | "Fractional Knapsack"
-  | "Recursion"
-  | "Divide and Conquer"
-  | "Backtracking"
-  | "Greedy"
-  | "Greedy Job Scheduling"
-  | "Greedy Fractional Knapsack"
-  | "Graph"
-  | "Matrix Spiral Traversal"
-  | "Matrix Traversal"
-  | "Prefix Sum"
-  | "Rotate Matrix"
-  | "Bit Manipulation"
-  | "Stack Sort"
-  | "Two Sum"
-  | "Two Sum Two Pointers"
-  | "Two Sum Dict"
-  | "Trie Operations"
+  | "BFS Linked List"
+  | "Binary Search"
+  | "Binary Search on Answer"
   | "Binary Search Tree"
-  | "Graph Bridges"
-  | "Graph SCC"
-  | "Graph Kruskal"
-  | "Tree"
-  | "String"
-  | "Matrix Spiral Recursive"
-  | "Matrix Traversal Recursive"
+  | "Bit Manipulation"
+  | "B Tree"
+  | "Bubble Sort"
+  | "Chinese Remainder Theorem"
+  | "Circular Linked List"
+  | "DFS"
+  | "DFS Binary Tree"
+  | "DFS Linked List"
+  | "Digit DP"
+  | "Dijkstra"
+  | "Divide and Conquer"
+  | "Dynamic Programming"
+  | "Dynamic Programming Coin Change"
   | "Dynamic Programming Fibonacci"
   | "Dynamic Programming Iterative"
-  | "Dynamic Programming Coin Change"
-  | "Dynamic Programming"
-  | "Greedy Activity Selection"
-  | "Greedy Huffman Coding"
-  | "Greedy Dijkstra"
-  | "Graph Bellman Ford"
-  | "Graph Floyd Warshall"
-  | "Graph Articulation Points"
-  | "DFS Linked List"
-  | "DFS Binary Tree"
-  | "BFS Linked List"
-  | "Strongly Connected Components"
-  | "String Operations"
-  | "Z Algorithm"
-  | "Rabin Karp"
-  | "Divide And Conquer"
-  | "Extended Euclidean Algorithm"
+  | "Dynamic Programming Pattern"
+  | "Exponential Search"
+  | "Extended Euclidean"
+  | "Fast Fourier Transform"
+  | "Fenwick Tree"
+  | "Fibonacci Search"
+  | "Floyd Cycle Detection"
+  | "Floyd-Warshall"
+  | "Fractional Knapsack"
+  | "Graph"
+  | "Greedy"
+  | "Grid Traversal"
+  | "Hash Table"
+  | "Heap Implementation"
+  | "Heap Sort"
+  | "Heavy Light Decomposition"
+  | "Huffman Coding"
+  | "Hungarian Algorithm"
+  | "Insertion Sort"
+  | "Interpolation Search"
+  | "Job Scheduling"
+  | "Jump Search"
+  | "Kadane's Algorithm"
+  | "Knuth-Morris-Pratt"
+  | "Kosaraju"
+  | "Kruskal"
+  | "Linear Search"
+  | "Linked List"
+  | "Lowest Common Ancestor"
+  | "Manacher's Algorithm"
+  | "Matrix Chain Multiplication"
+  | "Matrix Exponentiation"
+  | "Matrix Operations"
+  | "Matrix Spiral Recursive"
+  | "Matrix Spiral Traversal"
+  | "Matrix Traversal"
+  | "Matrix Traversal Recursive"
+  | "Maximum Bipartite Matching"
+  | "Memoization"
+  | "Merge Sort"
+  | "Miller-Rabin Primality Test"
+  | "Monotonic Queue"
+  | "Monotonic Stack"
+  | "Network Flow"
+  | "Null Pattern"
+  | "Prefix Sums"
+  | "Prim"
+  | "Prime Factorization"
+  | "Probability DP"
+  | "Queue Implementation"
+  | "Quickselect"
+  | "Quick Sort"
+  | "Rabin-Karp"
+  | "Radix Sort"
+  | "Red-Black Tree"
+  | "Recursion"
+  | "Rotate Matrix"
+  | "Segment Tree"
+  | "Selection Sort"
+  | "Sieve of Atkin"
+  | "Sieve of Eratosthenes"
   | "Sieve of Sundaram"
-  | "Sieve of Atkin";
+  | "Sliding Window"
+  | "Stack Implementation"
+  | "Stack Sort"
+  | "State Compression DP"
+  | "String Operations"
+  | "Strongly Connected Components"
+  | "Suffix Array"
+  | "Suffix Tree"
+  | "Ternary Search"
+  | "Test Data"
+  | "Topological Sort"
+  | "Tree"
+  | "Tree DP"
+  | "Trie Operations"
+  | "Two Pointers"
+  | "Two Sum"
+  | "Two Sum Dict"
+  | "Two Sum Two Pointers"
+  | "Union Find"
+  | "Z Algorithm";
 
 export interface AlgorithmPattern {
   title: string;
@@ -129,3 +120,114 @@ export interface AlgorithmPattern {
   pattern?: string;
   keySteps?: string[];
 }
+
+export const PATTERN_KEYS: PatternKey[] = [
+  "A* Search",
+  "Activity Selection",
+  "Articulation Points",
+  "AVL Tree",
+  "Backtracking",
+  "Bellman-Ford",
+  "BFS",
+  "BFS Linked List",
+  "Binary Search",
+  "Binary Search on Answer",
+  "Binary Search Tree",
+  "Bit Manipulation",
+  "B Tree",
+  "Bubble Sort",
+  "Chinese Remainder Theorem",
+  "Circular Linked List",
+  "DFS",
+  "DFS Binary Tree",
+  "DFS Linked List",
+  "Digit DP",
+  "Dijkstra",
+  "Divide and Conquer",
+  "Dynamic Programming",
+  "Dynamic Programming Coin Change",
+  "Dynamic Programming Fibonacci",
+  "Dynamic Programming Iterative",
+  "Dynamic Programming Pattern",
+  "Exponential Search",
+  "Extended Euclidean",
+  "Fast Fourier Transform",
+  "Fenwick Tree",
+  "Fibonacci Search",
+  "Floyd Cycle Detection",
+  "Floyd-Warshall",
+  "Fractional Knapsack",
+  "Graph",
+  "Greedy",
+  "Grid Traversal",
+  "Hash Table",
+  "Heap Implementation",
+  "Heap Sort",
+  "Heavy Light Decomposition",
+  "Huffman Coding",
+  "Hungarian Algorithm",
+  "Insertion Sort",
+  "Interpolation Search",
+  "Job Scheduling",
+  "Jump Search",
+  "Kadane's Algorithm",
+  "Knuth-Morris-Pratt",
+  "Kosaraju",
+  "Kruskal",
+  "Linear Search",
+  "Linked List",
+  "Lowest Common Ancestor",
+  "Manacher's Algorithm",
+  "Matrix Chain Multiplication",
+  "Matrix Exponentiation",
+  "Matrix Operations",
+  "Matrix Spiral Recursive",
+  "Matrix Spiral Traversal",
+  "Matrix Traversal",
+  "Matrix Traversal Recursive",
+  "Maximum Bipartite Matching",
+  "Memoization",
+  "Merge Sort",
+  "Miller-Rabin Primality Test",
+  "Monotonic Queue",
+  "Monotonic Stack",
+  "Network Flow",
+  "Null Pattern",
+  "Prefix Sums",
+  "Prim",
+  "Prime Factorization",
+  "Probability DP",
+  "Queue Implementation",
+  "Quickselect",
+  "Quick Sort",
+  "Rabin-Karp",
+  "Radix Sort",
+  "Red-Black Tree",
+  "Recursion",
+  "Rotate Matrix",
+  "Segment Tree",
+  "Selection Sort",
+  "Sieve of Atkin",
+  "Sieve of Eratosthenes",
+  "Sieve of Sundaram",
+  "Sliding Window",
+  "Stack Implementation",
+  "Stack Sort",
+  "State Compression DP",
+  "String Operations",
+  "Strongly Connected Components",
+  "Suffix Array",
+  "Suffix Tree",
+  "Ternary Search",
+  "Test Data",
+  "Topological Sort",
+  "Tree",
+  "Tree DP",
+  "Trie Operations",
+  "Two Pointers",
+  "Two Sum",
+  "Two Sum Dict",
+  "Two Sum Two Pointers",
+  "Union Find",
+  "Z Algorithm",
+];

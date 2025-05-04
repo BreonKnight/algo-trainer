@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const greedy_fractional_knapsackPattern: AlgorithmPattern = {
+export const greedyFractionalKnapsackPattern: AlgorithmPattern = {
   category: "Greedy Algorithms",
   title: "Greedy Fractional Knapsack",
   description:

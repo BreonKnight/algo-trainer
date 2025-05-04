@@ -1,41 +1,41 @@
-import { AlgorithmPattern, PatternKey } from "../types";
+import { AlgorithmPattern, PatternKey } from "../types/pattern-types";
 
 // Import all pattern categories
-import { sortingPatterns } from "./sorting";
-import { searchingPatterns } from "./searching";
-import { arrayPatterns } from "./array";
-import { dynamicProgrammingPatterns } from "./dynamic-programming";
-import { greedyPatterns } from "./greedy";
-import { backtrackingPatterns } from "./backtracking";
-import { graphPatterns } from "./graph";
-import { treePatterns } from "./tree";
-import { dataStructurePatterns } from "./data-structures";
-import { stringPatterns } from "./string";
-import { otherPatterns } from "./other";
-import { recursionPatterns } from "./recursion";
-import { divideAndConquerPatterns } from "./divide-and-conquer";
-import { matrixPatterns } from "./matrix";
-import { numberTheoryPatterns } from "./number-theory";
+import { arrayPatterns } from "./array/index";
+import { backtrackingPatterns } from "./backtracking/index";
+import { dataStructurePatterns } from "./data-structures/index";
+import { divideAndConquerPatterns } from "./divide-and-conquer/index";
+import { dynamicProgrammingPatterns } from "./dynamic-programming/index";
+import { graphPatterns } from "./graph/index";
+import { greedyPatterns } from "./greedy/index";
+import { matrixPatterns } from "./matrix/index";
+import { numberTheoryPatterns } from "./number-theory/index";
+import { otherPatterns } from "./other/index";
+import { recursionPatterns } from "./recursion/index";
+import { searchingPatterns } from "./searching/index";
+import { sortingPatterns } from "./sorting/index";
+import { stringPatterns } from "./string/index";
+import { treePatterns } from "./tree/index";
 
 // Combine all patterns
 export const algorithmPatterns: Record<string, AlgorithmPattern> = {
-  ...sortingPatterns,
-  ...searchingPatterns,
   ...arrayPatterns,
-  ...dynamicProgrammingPatterns,
-  ...greedyPatterns,
   ...backtrackingPatterns,
-  ...graphPatterns,
-  ...treePatterns,
   ...dataStructurePatterns,
-  ...stringPatterns,
-  ...otherPatterns,
-  ...recursionPatterns,
   ...divideAndConquerPatterns,
+  ...dynamicProgrammingPatterns,
+  ...graphPatterns,
+  ...greedyPatterns,
   ...matrixPatterns,
   ...Object.fromEntries(
     numberTheoryPatterns.map((pattern) => [pattern.title, pattern])
   ),
+  ...otherPatterns,
+  ...recursionPatterns,
+  ...searchingPatterns,
+  ...sortingPatterns,
+  ...stringPatterns,
+  ...treePatterns,
 };
 
 export * from "./data-structures/union-find";

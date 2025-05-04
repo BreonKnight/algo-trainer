@@ -1,3 +1,0 @@
-import { useTheme } from "../theme-context";
-
-// ... existing code ...

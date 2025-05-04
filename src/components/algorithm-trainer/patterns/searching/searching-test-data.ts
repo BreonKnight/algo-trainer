@@ -11,14 +11,16 @@ export const searchingTestDataPattern: AlgorithmPattern = {
     basic_arrays = [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],  # Small sorted array
         [1, 3, 5, 7, 9, 11, 13, 15],  # Small sorted array with gaps
-        [2, 4, 6, 8, 10, 12, 14, 16]  # Small sorted array with even numbers
+        [2, 4, 6, 8, 10, 12, 14, 16],  # Small sorted array with even numbers
+        [10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100]  # Array for Fibonacci Search
     ]
     
     # Large test cases
     large_arrays = [
         [i for i in range(1, 1001)],  # Large sorted array
         [i for i in range(1, 1001, 2)],  # Large sorted array with gaps
-        [i for i in range(2, 1001, 2)]  # Large sorted array with even numbers
+        [i for i in range(2, 1001, 2)],  # Large sorted array with even numbers
+        [i * 10 for i in range(1, 1001)]  # Large array with gaps of 10
     ]
     
     # Edge cases
@@ -26,14 +28,15 @@ export const searchingTestDataPattern: AlgorithmPattern = {
         [],  # Empty array
         [1],  # Single element
         [1, 1, 1, 1, 1],  # All elements same
-        [1, 2, 3, 4, 5, 5, 5, 6, 7, 8]  # Duplicate elements
+        [1, 2, 3, 4, 5, 5, 5, 6, 7, 8],  # Duplicate elements
+        [10]  # Single element for Fibonacci Search
     ]
     
     # Target values for testing
     targets = {
-        'exists': [5, 500, 1, 8],
-        'not_exists': [0, 1001, -1, 10],
-        'edge': [1, 1000, 5, 8]
+        'exists': [5, 500, 1, 8, 85],  # Added 85 for Fibonacci Search
+        'not_exists': [0, 1001, -1, 10, 99],  # Added 99 for Fibonacci Search
+        'edge': [1, 1000, 5, 8, 10]  # Added 10 for Fibonacci Search
     }
     
     return {
@@ -61,14 +64,16 @@ def generateTestData() -> Dict[str, Any]:
     basic_arrays = [
         [1, 2, 3, 4, 5, 6, 7, 8, 9],  # Small sorted array
         [1, 3, 5, 7, 9, 11, 13, 15],  # Small sorted array with gaps
-        [2, 4, 6, 8, 10, 12, 14, 16]  # Small sorted array with even numbers
+        [2, 4, 6, 8, 10, 12, 14, 16],  # Small sorted array with even numbers
+        [10, 22, 35, 40, 45, 50, 80, 82, 85, 90, 100]  # Array for Fibonacci Search
     ]
     
     # Large test cases
     large_arrays = [
         [i for i in range(1, 1001)],  # Large sorted array
         [i for i in range(1, 1001, 2)],  # Large sorted array with gaps
-        [i for i in range(2, 1001, 2)]  # Large sorted array with even numbers
+        [i for i in range(2, 1001, 2)],  # Large sorted array with even numbers
+        [i * 10 for i in range(1, 1001)]  # Large array with gaps of 10
     ]
     
     # Edge cases
@@ -76,14 +81,15 @@ def generateTestData() -> Dict[str, Any]:
         [],  # Empty array
         [1],  # Single element
         [1, 1, 1, 1, 1],  # All elements same
-        [1, 2, 3, 4, 5, 5, 5, 6, 7, 8]  # Duplicate elements
+        [1, 2, 3, 4, 5, 5, 5, 6, 7, 8],  # Duplicate elements
+        [10]  # Single element for Fibonacci Search
     ]
     
     # Target values for testing
     targets = {
-        'exists': [5, 500, 1, 8],
-        'not_exists': [0, 1001, -1, 10],
-        'edge': [1, 1000, 5, 8]
+        'exists': [5, 500, 1, 8, 85],  # Added 85 for Fibonacci Search
+        'not_exists': [0, 1001, -1, 10, 99],  # Added 99 for Fibonacci Search
+        'edge': [1, 1000, 5, 8, 10]  # Added 10 for Fibonacci Search
     }
     
     return {

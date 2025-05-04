@@ -76,7 +76,7 @@ const algorithmCategories = {
     "Rabin-Karp",
     "KMP Algorithm",
     "Manacher's Algorithm",
-    "Z-Algorithm",
+    "Z Algorithm",
   ],
   "Matrix Operations": [
     "Matrix Traversal",

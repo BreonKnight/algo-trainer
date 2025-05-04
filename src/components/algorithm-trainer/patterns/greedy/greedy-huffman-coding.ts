@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const greedy_huffman_codingPattern: AlgorithmPattern = {
+export const greedyHuffmanCodingPattern: AlgorithmPattern = {
   title: "Greedy Huffman Coding Algorithm",
   description:
     "A greedy algorithm used for data compression, which builds a Huffman tree to assign variable-length codes to characters based on their frequencies.",

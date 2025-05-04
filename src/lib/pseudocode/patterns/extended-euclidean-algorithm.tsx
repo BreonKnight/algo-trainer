@@ -4,9 +4,7 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const ExtendedEuclideanAlgorithmPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">
-        Extended Euclidean Algorithm
-      </span>
+      <span className="text-accent font-bold">Extended Euclidean</span>
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
@@ -14,7 +12,8 @@ export const ExtendedEuclideanAlgorithmPattern = () => (
       Use: Find GCD and Bézout coefficients
     </div>
 
-    <PseudocodeDisplay code={`# Extended Euclidean Algorithm
+    <PseudocodeDisplay
+      code={`# Extended Euclidean Algorithm
 # Input: Integers a, b
 # Output: Tuple (d, x, y) where d = gcd(a,b) and ax + by = d
 
@@ -55,7 +54,8 @@ Algorithm EXTENDED-EUCLID(a, b)
 # Output: (6, 1, -1)
 # 
 # Verification:
-# 6 = 30·1 + 18·(-1)`} />
+# 6 = 30·1 + 18·(-1)`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

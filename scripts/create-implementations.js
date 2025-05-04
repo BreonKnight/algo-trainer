@@ -147,7 +147,7 @@ const patternDirectories = {
 
   // String algorithms
   "Rabin-Karp": "string",
-  "KMP Algorithm": "string",
+  "Knuth-Morris-Pratt": "string",
   "Manacher's Algorithm": "string",
   "Z-Algorithm": "string",
 };

@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const bridgesPattern: AlgorithmPattern = {
-  title: "Bridge Finding Algorithm",
+  title: "Bridges",
   description: "Find edges in a graph whose removal disconnects the graph",
   timeComplexity: "O(V + E)",
   spaceComplexity: "O(V)",
@@ -66,4 +66,20 @@ Bridges (Critical Paths):
             
     return bridges`,
   category: "Graph",
+  testData: [
+    {
+      input: {
+        arr: [0, 1, 2, 3, 4],
+        graph: {
+          0: [1, 2],
+          1: [0, 2],
+          2: [0, 1, 3],
+          3: [2, 4],
+          4: [3],
+        },
+      },
+      expected: 2,
+      description: "Find bridges in a simple graph",
+    },
+  ],
 };

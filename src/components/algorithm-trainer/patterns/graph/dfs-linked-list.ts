@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const dfs_linked_listPattern: AlgorithmPattern = {
+export const dfsLinkedListPattern: AlgorithmPattern = {
   title: "DFS on Linked List",
   description:
     "Apply Depth-First Search on a linked list structure to traverse or search through nodes.",

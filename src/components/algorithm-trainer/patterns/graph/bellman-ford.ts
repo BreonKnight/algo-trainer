@@ -1,6 +1,6 @@
 import { AlgorithmPattern } from "../../types";
 
-export const bellman_fordPattern: AlgorithmPattern = {
+export const bellmanFordPattern: AlgorithmPattern = {
   title: "Bellman-Ford Algorithm",
   description:
     "Find shortest paths from a source vertex to all other vertices, even with negative edge weights",

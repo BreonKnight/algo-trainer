@@ -1,80 +1,104 @@
 import { AlgorithmPattern } from "../../types";
 
-export const knuthmorrisprattPattern: AlgorithmPattern = {
-  title: "KMP Algorithm",
+export const knuthMorrisPrattPattern: AlgorithmPattern = {
+  title: "Knuth-Morris-Pratt",
   description:
-    "An efficient string matching algorithm that preprocesses the pattern to avoid unnecessary comparisons by utilizing a prefix function.",
-  timeComplexity: "O(n + m)",
-  spaceComplexity: "O(m) for pattern array",
+    "A string matching algorithm that uses pattern preprocessing to achieve linear time complexity. It builds a prefix table (lps array) to avoid unnecessary character comparisons by utilizing information about the pattern itself.",
+  timeComplexity: "O(n + m) where n is text length and m is pattern length",
+  spaceComplexity: "O(m)",
   category: "String",
   pseudocode: `
-KMP steps:
-1. Build LPS (Longest Proper Prefix Suffix) array:
-   - lps[0] = 0
-   - Use two pointers to find matching prefixes
-2. Search pattern:
-   - Use pattern and lps array to skip comparisons
-   - When mismatch occurs, use lps to determine next position
-`,
-  example: `Pattern: "ABABCABAB"
-LPS Array: [0,0,1,2,0,1,2,3,4]
+1. Preprocess pattern to create lps array:
+   a. Initialize lps[0] = 0, len = 0, i = 1
+   b. While i < pattern length:
+      - If pattern[i] == pattern[len]:
+         * len += 1, lps[i] = len, i += 1
+      - Else:
+         * If len != 0: len = lps[len-1]
+         * Else: lps[i] = 0, i += 1
 
-Text: "ABABDABABCABAB"
-Pattern matches at index 6
+2. Search pattern in text:
+   a. Initialize i = 0, j = 0
+   b. While i < text length:
+      - If text[i] == pattern[j]:
+         * i += 1, j += 1
+      - If j == pattern length:
+         * Pattern found at i-j
+         * j = lps[j-1]
+      - Else if i < text length and text[i] != pattern[j]:
+         * If j != 0: j = lps[j-1]
+         * Else: i += 1
+  `,
+  example: `Input:
+Text: "ABABDABACDABABCABAB"
+Pattern: "ABABCABAB"
 
-Building LPS:
-A -> [0]
-AB -> [0,0]
-ABA -> [0,0,1]
-ABAB -> [0,0,1,2]
-...`,
+Step 1: Build lps array
+Pattern: A B A B C A B A B
+lps:     [0,0,1,2,0,1,2,3,4]
+
+Step 2: Search pattern
+- Start at i=0, j=0
+- Match until j=4 (ABAB)
+- Mismatch at C vs D
+- j = lps[3] = 2
+- Continue matching
+- Found pattern at index 10`,
   implementation: `def compute_lps(pattern):
-    m = len(pattern)
-    lps = [0] * m
-    length = 0  # length of previous longest prefix suffix
-    
-    # lps[0] is always 0
+    lps = [0] * len(pattern)
+    length = 0  # length of the previous longest prefix suffix
     i = 1
-    while i < m:
+    
+    while i < len(pattern):
         if pattern[i] == pattern[length]:
             length += 1
             lps[i] = length
             i += 1
         else:
             if length != 0:
-                # Use lps of previous character
                 length = lps[length - 1]
             else:
                 lps[i] = 0
                 i += 1
-        return lps
     
+    return lps
+
 def kmp_search(text, pattern):
-    n = len(text)
-    m = len(pattern)
-    matches = []
+    if not pattern or not text:
+        return -1
     
-    if m == 0:
-        return matches
-    
-    # Compute LPS array
     lps = compute_lps(pattern)
-    
     i = 0  # index for text
     j = 0  # index for pattern
-    while i < n:
+    
+    while i < len(text):
         if pattern[j] == text[i]:
             i += 1
             j += 1
-        
-        if j == m:
-            matches.append(i - j)
-            j = lps[j - 1]
-        elif i < n and pattern[j] != text[i]:
+            
+            if j == len(pattern):
+                return i - j  # Pattern found
+        else:
             if j != 0:
                 j = lps[j - 1]
             else:
                 i += 1
     
-    return matches`,
+    return -1  # Pattern not found
+
+# Example usage
+text = "ABABDABACDABABCABAB"
+pattern = "ABABCABAB"
+result = kmp_search(text, pattern)
+if result != -1:
+    print(f"Pattern found at index {result}")
+else:
+    print("Pattern not found")`,
+  keySteps: [
+    "Preprocess pattern to build longest prefix suffix array",
+    "Initialize indices for text and pattern",
+    "Compare characters and update indices",
+    "Use lps array to skip unnecessary comparisons",
+    "Return position of first match or -1 if not found",
+  ],
 };

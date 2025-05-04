@@ -1,183 +1,236 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const hungarianAlgorithmPattern: AlgorithmPattern = {
   title: "Hungarian Algorithm",
   description:
-    "An algorithm for solving the assignment problem, which finds the optimal assignment of tasks to workers with minimum cost.",
+    "An algorithm for solving the assignment problem in polynomial time. It finds the minimum cost matching in a bipartite graph where each edge has a non-negative cost.",
   timeComplexity: "O(n³)",
   spaceComplexity: "O(n²)",
   category: "Graph",
-  pseudocode: `HUNGARIAN-ALGORITHM(cost_matrix)
-1  n = cost_matrix.rows
-2  // Step 1: Subtract row minima
-3  for i = 1 to n
-4      min_val = min(cost_matrix[i])
-5      for j = 1 to n
-6          cost_matrix[i][j] = cost_matrix[i][j] - min_val
-7  // Step 2: Subtract column minima
-8  for j = 1 to n
-9      min_val = min(cost_matrix[i][j] for i = 1 to n)
-10     for i = 1 to n
-11         cost_matrix[i][j] = cost_matrix[i][j] - min_val
-12 // Step 3: Find initial assignment
-13 assignment = [-1] * n
-14 row_covered = [False] * n
-15 col_covered = [False] * n
-16 while True
-17     // Find uncovered zero
-18     i, j = FIND-ZERO(cost_matrix, row_covered, col_covered)
-19     if i == -1
-20         break
-21     // Star the zero
-22     assignment[j] = i
-23     row_covered[i] = True
-24     col_covered[j] = True
-25     // If all rows are covered, we're done
-26     if all(row_covered)
-27         break
-28     // Find minimum uncovered value
-29     min_val = ∞
-30     for i = 1 to n
-31         if not row_covered[i]
-32             for j = 1 to n
-33                 if not col_covered[j]
-34                     min_val = min(min_val, cost_matrix[i][j])
-35     // Adjust matrix
-36     for i = 1 to n
-37         if row_covered[i]
-38             for j = 1 to n
-39                 cost_matrix[i][j] = cost_matrix[i][j] + min_val
-40         if not col_covered[j]
-41             for i = 1 to n
-42                 cost_matrix[i][j] = cost_matrix[i][j] - min_val
-43 // Calculate total cost
-44 total_cost = 0
-45 for j = 1 to n
-46     i = assignment[j]
-47     total_cost = total_cost + cost_matrix[i][j]
-48 return total_cost, assignment
+  pseudocode: `
+1. Subtract the smallest element in each row from all elements in that row
+2. Subtract the smallest element in each column from all elements in that column
+3. Cover all zeros with minimum number of lines
+4. If number of lines equals n, we have optimal assignment
+5. Else:
+   a. Find smallest uncovered element
+   b. Subtract it from all uncovered elements
+   c. Add it to all elements covered by two lines
+   d. Go back to step 3
+  `,
+  example: `Input cost matrix:
+[
+  [250, 400, 350],
+  [400, 600, 350],
+  [200, 400, 250]
+]
 
-FIND-ZERO(cost_matrix, row_covered, col_covered)
-1  for i = 1 to cost_matrix.rows
-2      for j = 1 to cost_matrix.cols
-3          if cost_matrix[i][j] == 0 and not row_covered[i] and not col_covered[j]
-4              return i, j
-5  return -1, -1`,
-  example: `Cost matrix:
-[3, 5, 7]
-[2, 4, 6]
-[3, 5, 8]
+Step 1: Subtract row minimums
+[
+  [0, 150, 100],
+  [50, 250, 0],
+  [0, 200, 50]
+]
 
-Optimal assignment:
-Worker 1 -> Task 2 (cost 2)
-Worker 2 -> Task 1 (cost 2)
-Worker 3 -> Task 3 (cost 3)
-Total cost: 7`,
-  implementation: `def hungarian_algorithm(cost_matrix: list[list[int]]) -> tuple[int, list[int]]:
-    """
-    Solve the assignment problem using the Hungarian algorithm.
-    
-    Args:
-        cost_matrix: n x n matrix of costs
-    
-    Returns:
-        Tuple containing:
-        - Minimum total cost
-        - List of assignments (worker -> task)
-    """
+Step 2: Subtract column minimums
+[
+  [0, 0, 100],
+  [50, 100, 0],
+  [0, 50, 50]
+]
+
+Step 3: Cover zeros with minimum lines
+Lines: 2 (less than n=3)
+
+Step 4: Find minimum uncovered element (50)
+Adjust matrix:
+[
+  [0, 0, 150],
+  [0, 50, 0],
+  [0, 0, 50]
+]
+
+Final assignment:
+Worker 1 -> Job 2
+Worker 2 -> Job 3
+Worker 3 -> Job 1
+Total cost: 950`,
+  implementation: `def hungarian_algorithm(cost_matrix):
     n = len(cost_matrix)
     
-    # Step 1: Subtract row minima
+    # Step 1: Subtract row minimums
     for i in range(n):
         min_val = min(cost_matrix[i])
         for j in range(n):
             cost_matrix[i][j] -= min_val
     
-    # Step 2: Subtract column minima
+    # Step 2: Subtract column minimums
     for j in range(n):
         min_val = min(cost_matrix[i][j] for i in range(n))
         for i in range(n):
             cost_matrix[i][j] -= min_val
     
-    # Step 3: Find initial assignment
-    assignment = [-1] * n
-    row_covered = [False] * n
-    col_covered = [False] * n
-    
-    def find_zero() -> tuple[int, int]:
+    # Step 3: Cover zeros with minimum lines
+    while True:
+        # Find minimum number of lines to cover all zeros
+        lines = cover_zeros(cost_matrix)
+        if len(lines) == n:
+            break
+        
+        # Find minimum uncovered element
+        min_uncovered = float('inf')
         for i in range(n):
             for j in range(n):
-                if cost_matrix[i][j] == 0 and not row_covered[i] and not col_covered[j]:
-                    return i, j
-        return -1, -1
-    
-    def find_star_in_row(row: int) -> int:
-        for j in range(n):
-            if assignment[j] == row:
-                return j
-        return -1
-    
-    def find_star_in_col(col: int) -> int:
-        for i in range(n):
-            if assignment[col] == i:
-                return i
-        return -1
-    
-    def find_prime_in_row(row: int) -> int:
-        for j in range(n):
-            if cost_matrix[row][j] == 0 and not col_covered[j]:
-                return j
-        return -1
-    
-    # Main loop
-    while True:
-        # Find uncovered zero
-        i, j = find_zero()
-        if i == -1:
-            break
-        
-        # Star the zero
-        assignment[j] = i
-        row_covered[i] = True
-        col_covered[j] = True
-        
-        # If all rows are covered, we're done
-        if all(row_covered):
-            break
-        
-        # Find minimum uncovered value
-        min_val = float('inf')
-        for i in range(n):
-            if not row_covered[i]:
-                for j in range(n):
-                    if not col_covered[j]:
-                        min_val = min(min_val, cost_matrix[i][j])
+                if not is_covered(i, j, lines):
+                    min_uncovered = min(min_uncovered, cost_matrix[i][j])
         
         # Adjust matrix
         for i in range(n):
-            if row_covered[i]:
-                for j in range(n):
-                    cost_matrix[i][j] += min_val
-            if not col_covered[j]:
-                for i in range(n):
-                    cost_matrix[i][j] -= min_val
+            for j in range(n):
+                if not is_covered(i, j, lines):
+                    cost_matrix[i][j] -= min_uncovered
+                elif is_double_covered(i, j, lines):
+                    cost_matrix[i][j] += min_uncovered
     
-    # Calculate total cost
-    total_cost = 0
-    for j in range(n):
-        i = assignment[j]
-        total_cost += cost_matrix[i][j]
+    # Find optimal assignment
+    assignment = find_assignment(cost_matrix)
+    return assignment
+
+def cover_zeros(matrix):
+    n = len(matrix)
+    lines = []
     
-    return total_cost, assignment
+    # Try to cover with minimum lines
+    while True:
+        # Find row or column with most zeros
+        max_zeros = -1
+        max_index = -1
+        is_row = True
+        
+        # Check rows
+        for i in range(n):
+            zeros = sum(1 for j in range(n) if matrix[i][j] == 0)
+            if zeros > max_zeros:
+                max_zeros = zeros
+                max_index = i
+        
+        # Check columns
+        for j in range(n):
+            zeros = sum(1 for i in range(n) if matrix[i][j] == 0)
+            if zeros > max_zeros:
+                max_zeros = zeros
+                max_index = j
+                is_row = False
+        
+        if max_zeros == 0:
+            break
+        
+        if is_row:
+            lines.append(('row', max_index))
+        else:
+            lines.append(('col', max_index))
+    
+    return lines
+
+def is_covered(i, j, lines):
+    return any(line[0] == 'row' and line[1] == i or line[0] == 'col' and line[1] == j for line in lines)
+
+def is_double_covered(i, j, lines):
+    return sum(1 for line in lines if (line[0] == 'row' and line[1] == i) or (line[0] == 'col' and line[1] == j)) == 2
+
+def find_assignment(matrix):
+    n = len(matrix)
+    assignment = [-1] * n
+    
+    # Find zeros and assign
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] == 0 and assignment[j] == -1:
+                assignment[j] = i
+                break
+    
+    return assignment
 
 # Example usage
 cost_matrix = [
-    [3, 5, 7],
-    [2, 4, 6],
-    [3, 5, 8]
+    [250, 400, 350],
+    [400, 600, 350],
+    [200, 400, 250]
 ]
+assignment = hungarian_algorithm(cost_matrix)
+print("Assignment:", assignment)  # Output: [2, 0, 1]`,
+  keySteps: [
+    "Subtract row minimums from each row",
+    "Subtract column minimums from each column",
+    "Cover all zeros with minimum number of lines",
+    "Adjust matrix if number of lines is less than n",
+    "Find optimal assignment from final matrix",
+  ],
+  testData: [
+    {
+      input: [250, 400, 350, 400, 600, 350, 200, 400, 250],
+      expected: [2, 0, 1],
+      description: "Basic 3x3 cost matrix",
+    },
+    {
+      input: [10, 19, 8, 15, 10, 18, 7, 17, 13, 16, 9, 14, 12, 19, 8, 18],
+      expected: [2, 1, 0, 3],
+      description: "4x4 cost matrix",
+    },
+    {
+      input: [1, 1, 1, 1],
+      expected: [0, 1],
+      description: "All equal costs",
+    },
+  ],
+  explanation: `
+The Hungarian Algorithm is a combinatorial optimization algorithm that solves the assignment problem in polynomial time. It works by transforming the cost matrix through a series of operations to find the optimal assignment.
 
-total_cost, assignment = hungarian_algorithm(cost_matrix)
-print(f"Minimum total cost: {total_cost}")
-print(f"Assignments: {assignment}")`,
+Key Concepts:
+1. Cost Matrix Transformation:
+   - Subtract row minimums to create at least one zero in each row
+   - Subtract column minimums to create at least one zero in each column
+   - These operations preserve the optimal assignment
+
+2. Zero Covering:
+   - Cover all zeros with minimum number of lines (rows or columns)
+   - If number of lines equals matrix size, optimal assignment exists
+   - Otherwise, adjust matrix and repeat
+
+3. Matrix Adjustment:
+   - Find minimum uncovered element
+   - Subtract it from all uncovered elements
+   - Add it to elements covered by two lines
+   - This creates new zeros while preserving optimality
+
+4. Assignment:
+   - Once optimal matrix is found, assign workers to jobs
+   - Each assignment corresponds to a zero in the final matrix
+   - Total cost is minimized
+
+Time Complexity: O(n³)
+- Each iteration takes O(n²) time
+- Number of iterations is O(n)
+- Overall complexity is O(n³)
+
+Space Complexity: O(n²)
+- Need to store the cost matrix
+- Additional O(n) space for lines and assignments
+
+Advantages:
+- Guaranteed to find optimal solution
+- Polynomial time complexity
+- Works for any cost matrix with non-negative entries
+
+Limitations:
+- Requires square matrix
+- All costs must be non-negative
+- Not suitable for very large matrices due to cubic time complexity
+
+Use Cases:
+- Job assignment problems
+- Resource allocation
+- Matching problems in bipartite graphs
+- Any problem that can be modeled as an assignment problem
+  `,
 };

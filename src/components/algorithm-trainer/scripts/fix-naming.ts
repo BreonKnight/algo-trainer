@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import { monsterHunterExplanations } from "../monsterHunterExplanations.ts";
 import { fileURLToPath } from "url";
 
 function toKebabCase(str: string): string {
@@ -28,7 +27,7 @@ function toTitleCase(str: string): string {
     "a* search": "A* Search",
     "manacher's algorithm": "Manacher's Algorithm",
     "binary search on answer": "Binary Search on Answer",
-    "kmp algorithm": "KMP Algorithm",
+    "knuth-morris-pratt": "Knuth-Morris-Pratt",
     "rabin-karp": "Rabin-Karp",
     "a star": "A* Search",
     "bellman-ford": "Bellman-Ford",
@@ -36,7 +35,8 @@ function toTitleCase(str: string): string {
     "hopcroft-karp": "Hopcroft-Karp",
     "suffix array": "Suffix Array",
     "suffix tree": "Suffix Tree",
-    "prefix sum": "Prefix Sum",
+    "prefix sum": "Prefix Sums",
+    "prefix sums": "Prefix Sums",
     "matrix chain multiplication": "Matrix Chain Multiplication",
     "matrix exponentiation": "Matrix Exponentiation",
     "matrix spiral traversal": "Matrix Spiral Traversal",
@@ -60,9 +60,9 @@ function toTitleCase(str: string): string {
     "fast fourier transform": "Fast Fourier Transform",
     "job scheduling": "Job Scheduling",
     "fractional knapsack": "Fractional Knapsack",
-    "greedy job scheduling": "Greedy Job Scheduling",
-    "greedy fractional knapsack": "Greedy Fractional Knapsack",
-    graph: "Graph",
+    "hungarian algorithm": "Hungarian Algorithm",
+    "radix sort": "Radix Sort",
+    string: "String",
     "rotate matrix": "Rotate Matrix",
     "bit manipulation": "Bit Manipulation",
   };
@@ -122,14 +122,14 @@ function fixFileNaming(filePath: string): void {
 }
 
 function fixPatternVariable(content: string): string {
-  return content.replace(/const\s+([a-zA-Z0-9_]+)\s*=/g, (match, varName) => {
+  return content.replace(/const\s+([a-zA-Z0-9_]+)\s*=/g, (_, varName) => {
     const newVarName = toCamelCase(varName) + "Pattern";
     return `const ${newVarName} =`;
   });
 }
 
 function fixPatternKey(content: string): string {
-  return content.replace(/"([^"]+)":/g, (match, key) => {
+  return content.replace(/"([^"]+)":/g, (_, key) => {
     const newKey = toTitleCase(key);
     return `"${newKey}":`;
   });
