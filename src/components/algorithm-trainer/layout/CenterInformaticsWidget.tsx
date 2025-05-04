@@ -7,6 +7,20 @@ const TIPS = [
   "Greedy algorithms don't always give the optimal solution.",
   "Divide and conquer is a powerful technique for sorting and searching.",
   "Hash maps are great for quick lookups.",
+  "Dynamic programming is a powerful technique for solving problems with overlapping subproblems.",
+  "Graphs are a powerful way to represent relationships between objects.",
+  "Trees are a type of graph that are acyclic and connected.",
+  "Binary trees are a type of tree where each node has at most two children.",
+  "Binary search trees are a type of binary tree where the left child is less than the parent and the right child is greater than the parent.",
+  "Heaps are a type of binary tree where the parent is greater than the children.",
+  "Graphs are a powerful way to represent relationships between objects.",
+  "String matching algorithms are a powerful way to find patterns in strings.",
+  "Two Sums is a common interview question.",
+  "Sliding windows are a powerful technique for finding patterns in arrays.",
+  "Breadth-first search is a powerful technique for searching graphs.",
+  "Depth-first search is a powerful technique for searching graphs.",
+  "Topological sorting is a powerful technique for sorting graphs.",
+  "Minimum spanning trees are a powerful technique for finding the minimum cost way to connect all the nodes in a graph.",
 ];
 
 const FACTS = [
@@ -15,6 +29,11 @@ const FACTS = [
   "The first computer bug was an actual moth found in a relay.",
   "The Big-O notation describes the upper bound of an algorithm's running time.",
   "Merge sort was invented by John von Neumann in 1945.",
+  "The word 'algorithm' comes from the Persian mathematician Al-Khwarizmi.",
+  "Algorithms were invested by a woman named Hypatia of Alexandria in 420 AD.",
+  "Africas mathamtician Al-Khwarizmi is the root of the word 'algorithm'.",
+  "Pythagoras is credited with the first algorithm.",
+  "You learn from repetition, not from success.",
 ];
 
 export function CenterInformaticsWidget() {

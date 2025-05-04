@@ -73,10 +73,7 @@ export function RightControls() {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className={cn(
-              "min-w-[160px] sm:min-w-[180px] md:min-w-[200px] p-1 sm:p-1.5 md:p-2 max-h-[80vh] overflow-y-auto",
-              isDarkTheme
-                ? "bg-background/80 backdrop-blur-md border-accent2/20"
-                : "bg-background/80 backdrop-blur-md border-accent/20"
+              "backdrop-blur-md min-w-[160px] sm:min-w-[180px] md:min-w-[200px] p-1 sm:p-1.5 md:p-2 max-h-[80vh] overflow-y-auto bg-popover border border-border text-popover-foreground"
             )}
             side="bottom"
             align="end"
@@ -88,10 +85,8 @@ export function RightControls() {
                 className={cn(
                   "flex items-center gap-1 sm:gap-1.5 md:gap-2 cursor-pointer rounded-md px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 md:py-1.5 text-[10px] sm:text-xs md:text-sm transition-all duration-150 border-l-4 border-transparent",
                   t === theme
-                    ? isDarkTheme
-                      ? "bg-accent2/20 text-accent2 border-l-accent2/80 shadow-md"
-                      : "bg-accent/20 text-accent border-l-accent/80 shadow-md"
-                    : "hover:bg-accent/10 hover:border-l-accent/40 focus:bg-accent/10 focus:border-l-accent/60"
+                    ? "bg-accent text-foreground border-l-accent shadow-md"
+                    : "hover:bg-accent hover:text-foreground focus:bg-accent focus:text-foreground"
                 )}
               >
                 {t === "kingdom-hearts" ? (

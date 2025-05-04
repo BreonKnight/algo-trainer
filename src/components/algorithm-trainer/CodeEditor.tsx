@@ -1,4 +1,4 @@
-import { Card } from "../ui/card";
+import { Card } from "../ui/Card";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { useRef, useEffect, useState } from "react";
 import * as monaco from "monaco-editor";

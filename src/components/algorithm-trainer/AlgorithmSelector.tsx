@@ -267,7 +267,7 @@ export function AlgorithmSelector({
                         <div
                           key={algorithm}
                           ref={(el) => (itemRefs.current[index] = el)}
-                          className={`text-main hover:bg-[color:var(--accent3)]/20 focus:bg-[color:var(--accent3)]/20 hover:text-[color:var(--text-selected-dark)] focus:text-[color:var(--text-selected-dark)] data-[state=selected]:bg-[color:var(--accent3)]/40 data-[state=selected]:text-[color:var(--text-selected-dark)] data-[state=selected]:font-bold px-2 py-1.5 rounded-sm cursor-pointer transition-colors duration-150 flex items-center justify-between ${
+                          className={`text-main hover:bg-[color:var(--accent3)]/20 focus:bg-[color:var(--accent3)]/20 hover:text-[color:var(--text-selected-dark)] focus:text-[color:var(--text-selected-dark)] data-[state=selected]:bg-[color:var(--accent3)]/40 data-[state=selected]:text-[color:var(--text-selected-dark)] data-[state=selected]:font-bold data-[state=selected]:border-l-4 data-[state=selected]:border-accent2 data-[state=selected]:pl-1.5 px-2 py-1.5 rounded-sm cursor-pointer transition-all duration-200 ease-in-out transform hover:scale-[1.02] flex items-center justify-between ${
                             activeIndex === index
                               ? "bg-[color:var(--accent3)]/20"
                               : ""
