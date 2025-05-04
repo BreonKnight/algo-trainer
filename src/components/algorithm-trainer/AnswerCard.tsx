@@ -1,4 +1,4 @@
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { PatternKey } from "./types";

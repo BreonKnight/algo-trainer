@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { getABTestAnalytics, clearABTestEvents } from "./utils/abTestAnalytics";
 import { TEST_IDS, ABTestAnalytics } from "./utils/abTestTypes";

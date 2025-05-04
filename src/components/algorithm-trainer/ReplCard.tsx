@@ -1,4 +1,4 @@
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { useState, useEffect, useRef } from "react";
 import { loadPyodide, PyodideInterface } from "pyodide";
