@@ -3,7 +3,6 @@ import { TooltipProvider } from "../ui/tooltip";
 import { GamificationButton } from "../gamification/GamificationButton";
 import { ReplCard } from "./ReplCard";
 import { NavigationBar } from "./layout/NavigationBar";
-import { TopBar } from "./layout/TopBar";
 import { PanelLayout } from "./layout/PanelLayout";
 import { PatternControls } from "./layout/PatternControls";
 import { usePatternManager } from "./hooks/usePatternManager";
@@ -38,10 +37,6 @@ export default function AlgorithmTrainer() {
     <div className="flex justify-center w-full">
       <div className="w-full max-w-[100rem] px-6">
         <TooltipProvider>
-          {/* Title and Pattern Count */}
-
-          <TopBar />
-
           {/* Main content area */}
           <div className="w-full flex-1">
             <PanelLayout

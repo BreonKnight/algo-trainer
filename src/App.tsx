@@ -17,6 +17,7 @@ import {
   logPatternCheckResults,
 } from "./lib/utils/pattern-checker";
 import { Navigation } from "./components/ui/navigation";
+import { TopBar } from "./components/algorithm-trainer/layout/TopBar";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -24,34 +25,36 @@ function AppContent() {
   return (
     <div className="min-h-screen w-full bg-main">
       <Navigation />
-
-      <main className="pt-16">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/progress" element={<ProgressView />} />
-          <Route path="/tutorials" element={<TutorialView />} />
-          <Route path="/python-techniques" element={<PythonTechniques />} />
-          <Route
-            path="/visualizer"
-            element={
-              <div className="container mx-auto p-4">
-                <AlgorithmVisualizer
-                  algorithm="Bubble Sort"
-                  visualizationType="sorting"
-                />
-              </div>
-            }
-          />
-          <Route
-            path="/algorithm-comparison"
-            element={<AlgorithmComparisonPage />}
-          />
-          <Route path="/algorithm-learning" element={<AlgorithmLearning />} />
-          {import.meta.env.DEV && (
-            <Route path="/admin/patterns" element={<PatternManagement />} />
-          )}
-        </Routes>
-      </main>
+      <div className="pt-16">
+        <TopBar />
+        <main className="pt-4">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/progress" element={<ProgressView />} />
+            <Route path="/tutorials" element={<TutorialView />} />
+            <Route path="/python-techniques" element={<PythonTechniques />} />
+            <Route
+              path="/visualizer"
+              element={
+                <div className="container mx-auto p-4">
+                  <AlgorithmVisualizer
+                    algorithm="Bubble Sort"
+                    visualizationType="sorting"
+                  />
+                </div>
+              }
+            />
+            <Route
+              path="/algorithm-comparison"
+              element={<AlgorithmComparisonPage />}
+            />
+            <Route path="/algorithm-learning" element={<AlgorithmLearning />} />
+            {import.meta.env.DEV && (
+              <Route path="/admin/patterns" element={<PatternManagement />} />
+            )}
+          </Routes>
+        </main>
+      </div>
 
       <Toaster position="top-center" richColors theme="dark" />
     </div>
