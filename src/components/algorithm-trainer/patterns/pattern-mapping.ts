@@ -50,6 +50,7 @@ export const patternMapping: Record<string, PatternKey> = {
   "Circular Linked List": "Circular Linked List",
   "Fenwick Tree": "Fenwick Tree",
   "Linked List": "Linked List",
+  "Lowest Common Ancestor": "Lowest Common Ancestor",
   "Segment Tree": "Segment Tree",
   "Union Find": "Union Find",
   Tree: "Tree",
