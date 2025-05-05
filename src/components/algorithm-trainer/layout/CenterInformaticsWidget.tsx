@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { Lightbulb, Info, RefreshCw } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Lightbulb, Info, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const TIPS = [
   "Use two pointers for many array problems.",
@@ -40,18 +41,41 @@ export function CenterInformaticsWidget() {
   const [showTip, setShowTip] = useState(true);
   const [tipIdx, setTipIdx] = useState(0);
   const [factIdx, setFactIdx] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showFade, setShowFade] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShowTip((prev) => !prev);
-      if (showTip) {
-        setFactIdx((i) => (i + 1) % FACTS.length);
-      } else {
-        setTipIdx((i) => (i + 1) % TIPS.length);
+    if (!isHovered) {
+      const interval = setInterval(() => {
+        setShowTip((prev) => !prev);
+        if (showTip) {
+          setFactIdx((i) => (i + 1) % FACTS.length);
+        } else {
+          setTipIdx((i) => (i + 1) % TIPS.length);
+        }
+      }, 8000);
+      return () => clearInterval(interval);
+    }
+    // Check scrollability on mount and when tip/fact changes
+    const checkScroll = () => {
+      const el = scrollRef.current;
+      if (el) {
+        setShowFade(
+          el.scrollHeight > el.clientHeight && el.scrollTop + el.clientHeight < el.scrollHeight - 1
+        );
       }
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [showTip]);
+    };
+    checkScroll();
+    if (scrollRef.current) {
+      scrollRef.current.addEventListener("scroll", checkScroll);
+    }
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.removeEventListener("scroll", checkScroll);
+      }
+    };
+  }, [showTip, isHovered]);
 
   const handleNext = () => {
     setShowTip((prev) => !prev);
@@ -62,36 +86,91 @@ export function CenterInformaticsWidget() {
     }
   };
 
+  const handlePrevious = () => {
+    setShowTip((prev) => !prev);
+    if (showTip) {
+      setFactIdx((i) => (i - 1 + FACTS.length) % FACTS.length);
+    } else {
+      setTipIdx((i) => (i - 1 + TIPS.length) % TIPS.length);
+    }
+  };
+
   return (
-    <div className="flex items-center justify-center w-full">
-      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-4 px-1.5 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-2.5 rounded-lg bg-card border-2 border-accent/30 shadow-lg w-full transition-transform duration-200 hover:scale-[1.025] group cursor-pointer">
-        <div className="flex-shrink-0 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-accent/20 shadow animate-pulse-slow">
-          {showTip ? (
-            <Lightbulb className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-6 md:h-6 text-accent" />
-          ) : (
-            <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-6 md:h-6 text-accent2" />
-          )}
+    <div
+      className="flex items-center justify-center w-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        className="relative flex items-center gap-3 px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border border-border shadow-lg w-full max-w-md transition-all duration-300 hover:shadow-xl hover:border-border/80"
+        whileHover={{ scale: 1.01 }}
+      >
+        <div className="flex-shrink-0">
+          <div className="w-9 h-9 rounded-full bg-primary/30 flex items-center justify-center shadow-inner">
+            {showTip ? (
+              <Lightbulb className="w-5 h-5 text-primary-foreground" />
+            ) : (
+              <Info className="w-5 h-5 text-primary-foreground" />
+            )}
+          </div>
         </div>
-        <div className="h-7 sm:h-8 md:h-10 w-px bg-accent/10 rounded-full mx-1 sm:mx-1.5 md:mx-2" />
-        <div className="flex-1 min-w-0">
-          <div className="font-bold text-[10px] sm:text-xs md:text-sm text-accent mb-0.5 sm:mb-1 tracking-wide">
-            {showTip ? "Tip of the Day" : "Fun Informatics"}
+
+        <div className="flex-1 min-w-0 flex flex-col justify-center">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-base font-bold text-foreground">
+              {showTip ? "Algorithm Tip" : "Fun Fact"}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {showTip ? `${tipIdx + 1}/${TIPS.length}` : `${factIdx + 1}/${FACTS.length}`}
+            </span>
           </div>
           <div
-            className="text-[10px] sm:text-xs md:text-sm text-card-foreground leading-snug line-clamp-8 overflow-hidden"
-            title={showTip ? TIPS[tipIdx] : FACTS[factIdx]}
+            ref={scrollRef}
+            className="relative max-h-20 min-h-[2.5rem] overflow-y-auto scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent pr-1 group"
           >
-            {showTip ? TIPS[tipIdx] : FACTS[factIdx]}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={showTip ? `tip-${tipIdx}` : `fact-${factIdx}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="text-sm text-foreground leading-snug whitespace-pre-line break-words"
+              >
+                {showTip ? TIPS[tipIdx] : FACTS[factIdx]}
+              </motion.div>
+            </AnimatePresence>
+            {/* Fade gradient for scroll hint */}
+            {showFade && (
+              <div
+                className="pointer-events-none absolute left-0 right-0 bottom-0 h-3 bg-gradient-to-t from-card/40 to-transparent"
+                aria-hidden="true"
+              />
+            )}
           </div>
         </div>
-        <button
-          onClick={handleNext}
-          className="ml-1.5 sm:ml-2 p-1 sm:p-1.5 md:p-2 rounded-full hover:bg-accent/20 transition-colors shadow border border-accent/10"
-          title="Next tip or fact"
-        >
-          <RefreshCw className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-accent group-hover:rotate-90 transition-transform duration-300" />
-        </button>
-      </div>
+
+        <div className="flex flex-col gap-2 ml-2">
+          <button
+            onClick={handlePrevious}
+            className="p-1.5 rounded-full hover:bg-muted/50 transition-colors border border-border"
+            title="Previous"
+            style={{ width: 28, height: 28 }}
+          >
+            <ChevronLeft className="w-4 h-4 text-muted-foreground" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="p-1.5 rounded-full hover:bg-muted/50 transition-colors border border-border"
+            title="Next"
+            style={{ width: 28, height: 28 }}
+          >
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </button>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/20 to-transparent rounded-b-xl" />
+      </motion.div>
     </div>
   );
 }
