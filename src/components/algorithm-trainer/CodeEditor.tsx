@@ -14,9 +14,8 @@ import {
 } from "@/lib/theme";
 import { useTheme } from "@/components/theme/theme-context";
 import { cn } from "@/lib/utils";
-import { Copy, Check, Type, Maximize2, Minimize2, Languages } from "lucide-react";
+import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { toggleLanguage, Language } from "@/lib/code-transformer";
 
 interface CodeEditorProps {
   userCode: string;
@@ -58,7 +57,6 @@ export function CodeEditor({
   const [editorHeight, setEditorHeight] = useState<string | number>("300px");
   const [copied, setCopied] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState<Language>("python");
 
   // Persistent user code
   useEffect(() => {
@@ -193,24 +191,6 @@ export function CodeEditor({
     }
   };
 
-  const handleLanguageToggle = () => {
-    const { code, language } = toggleLanguage(userCode, currentLanguage);
-    setUserCode(code);
-    setCurrentLanguage(language);
-    if (editorRef.current && monacoRef.current) {
-      const model = editorRef.current.getModel();
-      if (model) {
-        monacoRef.current.editor.setModelLanguage(model, language);
-        // Force a refresh of the editor
-        editorRef.current.updateOptions({});
-        // Trigger a layout update
-        setTimeout(() => {
-          editorRef.current?.layout();
-        }, 0);
-      }
-    }
-  };
-
   return (
     <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
       <div className="flex-none flex justify-between items-center mb-3">
@@ -233,17 +213,17 @@ export function CodeEditor({
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
-                  onClick={handleLanguageToggle}
                   className={cn(
                     "p-1 rounded-md hover:bg-accent3/20 transition-colors",
                     theme === "nord" ? "text-white" : "text-background"
                   )}
+                  onClick={handleCopy}
                 >
-                  <Languages className="h-3.5 w-3.5" />
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                 </button>
               </TooltipTrigger>
               <TooltipContent>
-                <p className="text-xs">Toggle between Python and JavaScript</p>
+                <p className="text-xs">{copied ? "Copied!" : "Copy code (Ctrl+Shift+C)"}</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -294,25 +274,6 @@ export function CodeEditor({
               </Tooltip>
             </TooltipProvider>
           </div>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  className={cn(
-                    "p-1 rounded-md hover:bg-accent3/20 transition-colors",
-                    theme === "nord" ? "text-white" : "text-background"
-                  )}
-                  onClick={handleCopy}
-                >
-                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                </button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-xs">{copied ? "Copied!" : "Copy code (Ctrl+Shift+C)"}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
         </div>
 
         <TooltipProvider>
@@ -350,7 +311,7 @@ export function CodeEditor({
         >
           <Editor
             height={editorHeight}
-            defaultLanguage={currentLanguage}
+            defaultLanguage="python"
             theme={theme}
             value={userCode}
             onChange={(value: string | undefined) => setUserCode(value || "")}
