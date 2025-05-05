@@ -7,8 +7,7 @@ export const BridgesPattern = () => (
       <span className="text-accent font-bold">Bridges</span>
     </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find critical
-      edges in graph
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find critical edges in graph
     </div>
 
     <PseudocodeDisplay

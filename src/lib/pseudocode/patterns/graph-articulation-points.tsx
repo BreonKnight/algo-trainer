@@ -8,8 +8,7 @@ export const GraphArticulationPointsPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Graph Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find critical
-      vertices in graph
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find critical vertices in graph
     </div>
 
     <PseudocodeDisplay

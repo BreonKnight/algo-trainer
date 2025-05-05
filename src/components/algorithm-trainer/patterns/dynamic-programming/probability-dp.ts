@@ -4,8 +4,7 @@ export const probabilityDPPattern: AlgorithmPattern = {
   title: "Probability DP",
   description:
     "A dynamic programming technique for solving probability problems by breaking them down into smaller subproblems and combining their probabilities.",
-  timeComplexity:
-    "O(n * m) where n is number of states and m is number of transitions",
+  timeComplexity: "O(n * m) where n is number of states and m is number of transitions",
   spaceComplexity: "O(n)",
   pseudocode: `1. Define the probability state space
 2. Initialize probability distribution

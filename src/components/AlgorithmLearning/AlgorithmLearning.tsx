@@ -138,8 +138,7 @@ const CLRS_SYMBOLS = [
     symbol: "|",
     name: "Such that",
     description: "Used in set builder notation to specify conditions",
-    example:
-      "{x | x > 0} means 'the set of all x such that x is greater than 0'",
+    example: "{x | x > 0} means 'the set of all x such that x is greater than 0'",
   },
   {
     symbol: "≡",
@@ -170,9 +169,7 @@ const AlgorithmLearning: React.FC = () => {
   };
 
   const prevConcept = () => {
-    setCurrentConcept(
-      (prev) => (prev - 1 + allConcepts.length) % allConcepts.length
-    );
+    setCurrentConcept((prev) => (prev - 1 + allConcepts.length) % allConcepts.length);
     setShowDetails(false);
   };
 
@@ -195,16 +192,12 @@ const AlgorithmLearning: React.FC = () => {
     }
   };
 
-  const categories = [
-    "All",
-    ...new Set(allConcepts.map((concept) => concept.category)),
-  ];
+  const categories = ["All", ...new Set(allConcepts.map((concept) => concept.category))];
   const filteredConcepts = allConcepts.filter((concept) => {
     const matchesSearch =
       concept.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       concept.category.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || concept.category === selectedCategory;
+    const matchesCategory = selectedCategory === "All" || concept.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -223,9 +216,7 @@ const AlgorithmLearning: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className={cn(
             "text-5xl font-bold mb-8 text-center font-display tracking-tight",
-            theme === "light" || theme === "solarized"
-              ? "text-accent"
-              : "text-accent2"
+            theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
           )}
         >
           Monster Hunter Algorithm Academy
@@ -292,9 +283,7 @@ const AlgorithmLearning: React.FC = () => {
                 <h2
                   className={cn(
                     "text-2xl font-semibold font-display tracking-wide",
-                    theme === "light" || theme === "solarized"
-                      ? "text-accent"
-                      : "text-accent2"
+                    theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
                   )}
                 >
                   CLRS Mathematical Notation
@@ -317,12 +306,8 @@ const AlgorithmLearning: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {CLRS_SYMBOLS.filter(
                   (symbol) =>
-                    symbol.name
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase()) ||
-                    symbol.description
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase())
+                    symbol.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    symbol.description.toLowerCase().includes(searchQuery.toLowerCase())
                 ).map((symbol, index) => (
                   <motion.div
                     key={index}
@@ -405,9 +390,7 @@ const AlgorithmLearning: React.FC = () => {
                 <h2
                   className={cn(
                     "text-2xl font-semibold font-display tracking-wide",
-                    theme === "light" || theme === "solarized"
-                      ? "text-accent"
-                      : "text-accent2"
+                    theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
                   )}
                 >
                   Available Quests
@@ -459,16 +442,14 @@ const AlgorithmLearning: React.FC = () => {
                           ? "bg-accent/20 hover:bg-accent/30 text-accent"
                           : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
                         : theme === "light" || theme === "solarized"
-                        ? "bg-background/50 hover:bg-background/70"
-                        : "bg-background/50 hover:bg-background/70"
+                          ? "bg-background/50 hover:bg-background/70"
+                          : "bg-background/50 hover:bg-background/70"
                     )}
                   >
                     <div
                       className={cn(
                         "mt-1",
-                        theme === "light" || theme === "solarized"
-                          ? "text-accent"
-                          : "text-accent2"
+                        theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
                       )}
                     >
                       {getCategoryIcon(concept.category)}
@@ -519,9 +500,7 @@ const AlgorithmLearning: React.FC = () => {
             animate={{ opacity: 1 }}
             className={cn(
               "text-3xl font-semibold mb-6 font-display tracking-wide text-left",
-              theme === "light" || theme === "solarized"
-                ? "text-accent"
-                : "text-accent2"
+              theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
             )}
           >
             {allConcepts[currentConcept].title}
@@ -552,9 +531,7 @@ const AlgorithmLearning: React.FC = () => {
               <h3
                 className={cn(
                   "text-xl font-medium mb-3 font-display tracking-wide text-left",
-                  theme === "light" || theme === "solarized"
-                    ? "text-accent"
-                    : "text-accent2"
+                  theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
                 )}
               >
                 Monster Hunter Example
@@ -586,9 +563,7 @@ const AlgorithmLearning: React.FC = () => {
                   <h3
                     className={cn(
                       "text-xl font-medium mb-3 font-display tracking-wide text-left",
-                      theme === "light" || theme === "solarized"
-                        ? "text-accent"
-                        : "text-accent2"
+                      theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
                     )}
                   >
                     CLRS Explanation
@@ -618,9 +593,7 @@ const AlgorithmLearning: React.FC = () => {
                   <h3
                     className={cn(
                       "text-xl font-medium mb-3 font-display tracking-wide text-left",
-                      theme === "light" || theme === "solarized"
-                        ? "text-accent"
-                        : "text-accent2"
+                      theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
                     )}
                   >
                     Mathematical Notation

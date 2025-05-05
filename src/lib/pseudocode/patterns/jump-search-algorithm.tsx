@@ -8,11 +8,11 @@ export const JumpSearchAlgorithmPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(√n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Search in sorted
-      arrays
+      Time: O(√n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Search in sorted arrays
     </div>
 
-    <PseudocodeDisplay code={`// Jump search in sorted array
+    <PseudocodeDisplay
+      code={`// Jump search in sorted array
 JUMP-SEARCH(A, x):
     n ← length[A]
     step ← ⌊√n⌋
@@ -42,7 +42,8 @@ JUMP-SEARCH(A, x):
 // 4. Linear search from index 3 to 6
 // 5. Found at index 6
 //
-// Output: 6`} />
+// Output: 6`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

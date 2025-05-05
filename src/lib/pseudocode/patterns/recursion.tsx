@@ -8,8 +8,8 @@ export const RecursionPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Break problems
-      into smaller subproblems
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Break problems into smaller
+      subproblems
     </div>
 
     <PseudocodeDisplay
@@ -67,24 +67,22 @@ QUICK-SORT(A, l, r):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Base Case:</span> Define
-        stopping condition
+        <span className="font-semibold text-accent">Base Case:</span> Define stopping condition
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Recursive Case:</span> Break
-        problem into smaller parts
+        <span className="font-semibold text-accent">Recursive Case:</span> Break problem into
+        smaller parts
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Combine:</span> Merge
-        results from subproblems
+        <span className="font-semibold text-accent">Combine:</span> Merge results from subproblems
       </span>
     </div>
 

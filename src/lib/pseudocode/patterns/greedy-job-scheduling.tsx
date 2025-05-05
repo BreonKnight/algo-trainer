@@ -8,11 +8,12 @@ export const GreedyJobSchedulingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Scheduling
-      jobs to maximize profit or minimize completion time
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Scheduling jobs to maximize
+      profit or minimize completion time
     </div>
 
-    <PseudocodeDisplay code={`// Standard Job Scheduling
+    <PseudocodeDisplay
+      code={`// Standard Job Scheduling
 def job_scheduling(jobs):
     # Sort jobs by finish time
     jobs.sort(key=lambda x: x[1])
@@ -99,7 +100,8 @@ def job_scheduling_weights(jobs):
 #     (3, 1, 15)
 # ]
 # Output:
-# total_profit = 186`} />
+# total_profit = 186`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

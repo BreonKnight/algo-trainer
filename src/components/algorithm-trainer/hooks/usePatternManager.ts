@@ -32,10 +32,7 @@ export function usePatternManager() {
 
     if (selectedPattern !== nextPattern) {
       if (currentIndexRef.current < patternHistoryRef.current.length - 1) {
-        patternHistoryRef.current = patternHistoryRef.current.slice(
-          0,
-          currentIndexRef.current + 1
-        );
+        patternHistoryRef.current = patternHistoryRef.current.slice(0, currentIndexRef.current + 1);
       }
       patternHistoryRef.current.push(nextPattern);
       currentIndexRef.current = patternHistoryRef.current.length - 1;
@@ -47,9 +44,7 @@ export function usePatternManager() {
   const previousPattern = () => {
     if (currentIndexRef.current > 0) {
       currentIndexRef.current--;
-      const previousPattern = patternHistoryRef.current[
-        currentIndexRef.current
-      ] as PatternKey;
+      const previousPattern = patternHistoryRef.current[currentIndexRef.current] as PatternKey;
       handlePatternChange(previousPattern);
     }
   };

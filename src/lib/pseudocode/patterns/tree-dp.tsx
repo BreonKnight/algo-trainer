@@ -8,11 +8,12 @@ export const TreeDynamicProgrammingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Tree)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solve tree
-      problems with overlapping subproblems
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solve tree problems with overlapping
+      subproblems
     </div>
 
-    <PseudocodeDisplay code={`# Tree Dynamic Programming: Solve tree problems with overlapping subproblems
+    <PseudocodeDisplay
+      code={`# Tree Dynamic Programming: Solve tree problems with overlapping subproblems
 # Input: Root node r of a tree
 # Output: Optimal solution value for the tree
 
@@ -65,7 +66,8 @@ Algorithm TREE-DP(r)
 #   exclude = DFS(4) + DFS(5) = 4 + 5 = 9
 #   memo[3] = max(7, 9) = 9
 #
-# Output: 9`} />
+# Output: 9`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

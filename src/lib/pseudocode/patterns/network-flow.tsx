@@ -8,11 +8,11 @@ export const NetworkFlowPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V²E) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Find maximum
-      flow in a network
+      Time: O(V²E) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Find maximum flow in a network
     </div>
 
-    <PseudocodeDisplay code={`FORD-FULKERSON(G, s, t)
+    <PseudocodeDisplay
+      code={`FORD-FULKERSON(G, s, t)
 1  for each edge (u,v) ∈ G.E
 2      (u,v).f = 0
 3  while there exists a path p from s to t in residual network Gf
@@ -55,7 +55,8 @@ DINIC(G, s, t)
 // Step 3: Find augmenting path s->b->d->t with flow 4
 // Step 4: Find augmenting path s->a->b->c->t with flow 2
 //
-// Final flow: 11`} />
+// Final flow: 11`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

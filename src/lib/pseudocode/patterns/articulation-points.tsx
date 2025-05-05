@@ -8,11 +8,12 @@ export const ArticulationPointsPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Graph)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find vertices
-      whose removal increases connected components
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find vertices whose removal
+      increases connected components
     </div>
 
-    <PseudocodeDisplay code={`# Articulation Points: Find vertices whose removal increases connected components
+    <PseudocodeDisplay
+      code={`# Articulation Points: Find vertices whose removal increases connected components
 # Input: Undirected graph G = (V, E)
 # Output: Set of articulation points
 
@@ -72,7 +73,8 @@ Algorithm DFS-AP(u)
 #         - 1 is root with 2 children
 #         - No other vertices satisfy conditions
 #
-# Output: {1}`} />
+# Output: {1}`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

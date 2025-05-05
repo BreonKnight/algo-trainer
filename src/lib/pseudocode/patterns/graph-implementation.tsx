@@ -8,11 +8,11 @@ export const GraphImplementationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V+E) &nbsp;|&nbsp; Space: O(V+E) &nbsp;|&nbsp; Use: Graph
-      representation and traversal
+      Time: O(V+E) &nbsp;|&nbsp; Space: O(V+E) &nbsp;|&nbsp; Use: Graph representation and traversal
     </div>
 
-    <PseudocodeDisplay code={`// Adjacency list representation
+    <PseudocodeDisplay
+      code={`// Adjacency list representation
 GRAPH-ADJ-LIST(V, E):
     n ← length[V]
     Adj[1..n] ← empty lists
@@ -89,7 +89,8 @@ BFS(G, s):
 // 1 0 1 0 1
 // 2 1 0 1 0
 // 3 0 1 0 1
-// 4 1 0 1 0`} />
+// 4 1 0 1 0`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

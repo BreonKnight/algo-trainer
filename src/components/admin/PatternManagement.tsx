@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import {
-  Pattern,
-  PatternFormData,
-  TestCase,
-} from "../../lib/types/pattern-management";
+import { Pattern, PatternFormData, TestCase } from "../../lib/types/pattern-management";
 import { patternManagementService } from "../../lib/services/pattern-management";
 import { toast } from "react-hot-toast";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -19,12 +15,7 @@ import {
 import { patternMapping } from "../../lib/pseudocode/utils/pattern-mapping";
 import { validateComponentOrder } from "./pattern-management/PatternValidation";
 
-type FormStep =
-  | "basic"
-  | "details"
-  | "implementation"
-  | "test-cases"
-  | "preview";
+type FormStep = "basic" | "details" | "implementation" | "test-cases" | "preview";
 
 type SortField = "name" | "category" | "timeComplexity" | "spaceComplexity";
 type SortOrder = "asc" | "desc";
@@ -96,14 +87,10 @@ const PatternManagement: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeStep, setActiveStep] = useState<FormStep>("basic");
-  const [expandedPatterns, setExpandedPatterns] = useState<Set<string>>(
-    new Set()
-  );
+  const [expandedPatterns, setExpandedPatterns] = useState<Set<string>>(new Set());
   const [sortBy, setSortBy] = useState<SortField>("name");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [selectedPatterns, setSelectedPatterns] = useState<Set<string>>(
-    new Set()
-  );
+  const [selectedPatterns, setSelectedPatterns] = useState<Set<string>>(new Set());
   const [activeFilters, setActiveFilters] = useState<FilterOption[]>([]);
   const [sortConfig, setSortConfig] = useState<{
     field: SortField;
@@ -157,17 +144,14 @@ const PatternManagement: React.FC = () => {
     return costs[s2.length];
   };
 
-  const calculateStringSimilarity = useCallback(
-    (str1: string, str2: string): number => {
-      if (!str1 || !str2) return 0;
-      const longer = str1.length > str2.length ? str1 : str2;
-      const shorter = str1.length > str2.length ? str2 : str1;
-      const longerLength = longer.length;
-      if (longerLength === 0) return 1.0;
-      return (longerLength - editDistance(longer, shorter)) / longerLength;
-    },
-    []
-  );
+  const calculateStringSimilarity = useCallback((str1: string, str2: string): number => {
+    if (!str1 || !str2) return 0;
+    const longer = str1.length > str2.length ? str1 : str2;
+    const shorter = str1.length > str2.length ? str2 : str1;
+    const longerLength = longer.length;
+    if (longerLength === 0) return 1.0;
+    return (longerLength - editDistance(longer, shorter)) / longerLength;
+  }, []);
 
   const findDuplicatePatterns = useCallback(
     (patterns: Pattern[]) => {
@@ -179,10 +163,7 @@ const PatternManagement: React.FC = () => {
 
       for (let i = 0; i < patterns.length; i++) {
         for (let j = i + 1; j < patterns.length; j++) {
-          const nameSimilarity = calculateStringSimilarity(
-            patterns[i].name,
-            patterns[j].name
-          );
+          const nameSimilarity = calculateStringSimilarity(patterns[i].name, patterns[j].name);
           const descSimilarity = calculateStringSimilarity(
             patterns[i].description,
             patterns[j].description
@@ -209,10 +190,7 @@ const PatternManagement: React.FC = () => {
     (patterns: Pattern[], patternCategories: Record<string, number>) => {
       const validCategories = Object.keys(patternCategories);
       return patterns
-        .filter(
-          (pattern) =>
-            !validCategories.some((category) => pattern.category === category)
-        )
+        .filter((pattern) => !validCategories.some((category) => pattern.category === category))
         .map((pattern) => ({
           pattern: pattern.name,
           issue: `Invalid category: ${pattern.category}`,
@@ -250,8 +228,7 @@ const PatternManagement: React.FC = () => {
         if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
           issues.push({
             pattern: pattern.name,
-            issue:
-              "Name should start with capital letter and contain only letters and spaces",
+            issue: "Name should start with capital letter and contain only letters and spaces",
           });
         }
 
@@ -273,10 +250,7 @@ const PatternManagement: React.FC = () => {
       return {
         duplicates: findDuplicatePatterns(patterns),
         namingIssues: validatePatternNames(patterns),
-        categoryIssues: validatePatternCategories(
-          patterns,
-          debugInfo.patternCategories
-        ),
+        categoryIssues: validatePatternCategories(patterns, debugInfo.patternCategories),
         orderIssues: validateComponentOrder(patterns, originalOrder),
         incompletePatterns: findIncompletePatterns(patterns),
       };
@@ -298,11 +272,8 @@ const PatternManagement: React.FC = () => {
 
       // Get pattern categories and their counts
       const categories = {
-        "Sorting Algorithms": patternKeys.filter((key) => key.includes("Sort"))
-          .length,
-        "Searching Algorithms": patternKeys.filter((key) =>
-          key.includes("Search")
-        ).length,
+        "Sorting Algorithms": patternKeys.filter((key) => key.includes("Sort")).length,
+        "Searching Algorithms": patternKeys.filter((key) => key.includes("Search")).length,
         "Graph Algorithms": patternKeys.filter(
           (key) =>
             key.includes("Graph") ||
@@ -326,10 +297,7 @@ const PatternManagement: React.FC = () => {
             key.includes("Matrix Exponentiation")
         ).length,
         "Matrix Algorithms": patternKeys.filter(
-          (key) =>
-            key.includes("Matrix") ||
-            key === "Grid Traversal" ||
-            key === "Rotate Matrix"
+          (key) => key.includes("Matrix") || key === "Grid Traversal" || key === "Rotate Matrix"
         ).length,
         "Number Theory": patternKeys.filter(
           (key) =>
@@ -381,30 +349,20 @@ const PatternManagement: React.FC = () => {
         validationResults,
       });
     }
-  }, [
-    debugMode,
-    patterns,
-    findDuplicatePatterns,
-    originalOrder,
-    validatePatterns,
-  ]);
+  }, [debugMode, patterns, findDuplicatePatterns, originalOrder, validatePatterns]);
 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
 
     if (!formData.name.trim()) errors.name = "Pattern name is required";
     if (!formData.category.trim()) errors.category = "Category is required";
-    if (!formData.timeComplexity.trim())
-      errors.timeComplexity = "Time complexity is required";
-    if (!formData.spaceComplexity.trim())
-      errors.spaceComplexity = "Space complexity is required";
-    if (!formData.description.trim())
-      errors.description = "Description is required";
+    if (!formData.timeComplexity.trim()) errors.timeComplexity = "Time complexity is required";
+    if (!formData.spaceComplexity.trim()) errors.spaceComplexity = "Space complexity is required";
+    if (!formData.description.trim()) errors.description = "Description is required";
     if (!formData.monsterHunterContext.trim())
       errors.monsterHunterContext = "Monster Hunter context is required";
     if (!formData.example.trim()) errors.example = "Example is required";
-    if (!formData.implementation.trim())
-      errors.implementation = "Implementation is required";
+    if (!formData.implementation.trim()) errors.implementation = "Implementation is required";
     if (formData.process.some((step) => !step.trim()))
       errors.process = "All process steps must be filled";
     if (
@@ -451,11 +409,7 @@ const PatternManagement: React.FC = () => {
     }
   };
 
-  const handleTestCaseChange = (
-    index: number,
-    field: keyof TestCase,
-    value: string
-  ) => {
+  const handleTestCaseChange = (index: number, field: keyof TestCase, value: string) => {
     const newTestCases = [...formData.testCases];
     newTestCases[index] = { ...newTestCases[index], [field]: value };
     setFormData((prev) => ({ ...prev, testCases: newTestCases }));
@@ -499,9 +453,7 @@ const PatternManagement: React.FC = () => {
 
   const clearForm = () => {
     if (
-      window.confirm(
-        "Are you sure you want to clear the form? All unsaved changes will be lost."
-      )
+      window.confirm("Are you sure you want to clear the form? All unsaved changes will be lost.")
     ) {
       setFormData({
         name: "",
@@ -541,8 +493,7 @@ const PatternManagement: React.FC = () => {
     const categoryKeys = Object.keys(debugInfo.patternCategories);
     const patternExists = categoryKeys.some(
       (category) =>
-        debugInfo.patternCategories[category] > 0 &&
-        patterns.some((p) => p.name === pattern.name)
+        debugInfo.patternCategories[category] > 0 && patterns.some((p) => p.name === pattern.name)
     );
 
     if (!patternExists) {
@@ -551,15 +502,11 @@ const PatternManagement: React.FC = () => {
 
     // Check if pattern name exists in pattern mapping
     if (!debugInfo.patternMapping[pattern.name]) {
-      errors.push(
-        `Pattern name "${pattern.name}" is not mapped in pattern-mapping.ts`
-      );
+      errors.push(`Pattern name "${pattern.name}" is not mapped in pattern-mapping.ts`);
     }
 
     // Check for duplicate pattern names
-    const duplicateCount = patterns.filter(
-      (p) => p.name === pattern.name
-    ).length;
+    const duplicateCount = patterns.filter((p) => p.name === pattern.name).length;
     if (duplicateCount > 1) {
       errors.push(
         `Pattern name "${pattern.name}" appears ${duplicateCount} times in the patterns array`
@@ -603,8 +550,10 @@ const PatternManagement: React.FC = () => {
       }
 
       // Check for duplicates before saving
-      const { exactMatches, similarMatches } =
-        await patternManagementService.checkForDuplicates(newPattern, patterns);
+      const { exactMatches, similarMatches } = await patternManagementService.checkForDuplicates(
+        newPattern,
+        patterns
+      );
 
       if (exactMatches.length > 0) {
         toast.error("An exact duplicate of this pattern already exists!");
@@ -612,9 +561,7 @@ const PatternManagement: React.FC = () => {
       }
 
       if (similarMatches.length > 0) {
-        const proceed = window.confirm(
-          "Similar patterns found. Are you sure you want to proceed?"
-        );
+        const proceed = window.confirm("Similar patterns found. Are you sure you want to proceed?");
         if (!proceed) return;
       }
 
@@ -647,9 +594,7 @@ const PatternManagement: React.FC = () => {
 
   const handleEditPattern = (pattern: Pattern): void => {
     if (
-      window.confirm(
-        "Are you sure you want to edit this pattern? Current form data will be lost."
-      )
+      window.confirm("Are you sure you want to edit this pattern? Current form data will be lost.")
     ) {
       setFormData(pattern);
       setActiveTab("form");
@@ -686,8 +631,7 @@ const PatternManagement: React.FC = () => {
       },
       card: "p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1",
       list: "space-y-4",
-      label:
-        "block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300",
+      label: "block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300",
       section: "mb-6",
       grid: "grid grid-cols-1 md:grid-cols-2 gap-4",
       warning:
@@ -717,8 +661,7 @@ const PatternManagement: React.FC = () => {
       loadingSkeleton:
         "animate-pulse bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 rounded-xl",
       error: "text-sm text-red-500 mt-1",
-      codeBlock:
-        "rounded-xl overflow-hidden my-4 border border-gray-200 dark:border-gray-700",
+      codeBlock: "rounded-xl overflow-hidden my-4 border border-gray-200 dark:border-gray-700",
       codeBlockHeader:
         "bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 px-4 py-2 text-sm font-mono",
       codeBlockContent: "p-4",
@@ -743,8 +686,7 @@ const PatternManagement: React.FC = () => {
       emptyStateTitle:
         "text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mb-2",
       emptyStateText: "text-gray-500 dark:text-gray-400",
-      tabButton:
-        "px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105",
+      tabButton: "px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105",
       activeTab: "bg-gradient-to-r from-blue-600 to-purple-600 text-white",
       inactiveTab:
         "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600",
@@ -830,23 +772,15 @@ const PatternManagement: React.FC = () => {
   const handleBulkDelete = async (): Promise<void> => {
     if (selectedPatterns.size === 0) return;
 
-    if (
-      window.confirm(
-        `Are you sure you want to delete ${selectedPatterns.size} patterns?`
-      )
-    ) {
+    if (window.confirm(`Are you sure you want to delete ${selectedPatterns.size} patterns?`)) {
       try {
         setIsLoading(true);
         await Promise.all(
-          Array.from(selectedPatterns).map((id) =>
-            patternManagementService.deletePattern(id)
-          )
+          Array.from(selectedPatterns).map((id) => patternManagementService.deletePattern(id))
         );
         setPatterns((prev) => prev.filter((p) => !selectedPatterns.has(p.id)));
         setSelectedPatterns(new Set());
-        toast.success(
-          `${selectedPatterns.size} patterns deleted successfully!`
-        );
+        toast.success(`${selectedPatterns.size} patterns deleted successfully!`);
       } catch (error) {
         toast.error("Failed to delete patterns");
       } finally {
@@ -858,9 +792,7 @@ const PatternManagement: React.FC = () => {
   const handleExportPatterns = (): void => {
     const patternsToExport = patterns.filter((p) => selectedPatterns.has(p.id));
     const dataStr = JSON.stringify(patternsToExport, null, 2);
-    const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(
-      dataStr
-    )}`;
+    const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(dataStr)}`;
     const exportFileDefaultName = "patterns.json";
 
     const linkElement = document.createElement("a");
@@ -869,9 +801,7 @@ const PatternManagement: React.FC = () => {
     linkElement.click();
   };
 
-  const handleImportPatterns = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const handleImportPatterns = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -896,13 +826,9 @@ const PatternManagement: React.FC = () => {
         }
 
         setIsLoading(true);
-        await Promise.all(
-          validatedPatterns.map((p) => patternManagementService.savePattern(p))
-        );
+        await Promise.all(validatedPatterns.map((p) => patternManagementService.savePattern(p)));
         setPatterns((prev) => [...prev, ...validatedPatterns]);
-        toast.success(
-          `${validatedPatterns.length} patterns imported successfully!`
-        );
+        toast.success(`${validatedPatterns.length} patterns imported successfully!`);
       } catch (error) {
         toast.error("Failed to import patterns");
       } finally {
@@ -993,9 +919,7 @@ const PatternManagement: React.FC = () => {
               />
               <div>
                 <h3
-                  className={`${themeClasses.patternListTitle} ${
-                    hasErrors ? "text-red-500" : ""
-                  }`}
+                  className={`${themeClasses.patternListTitle} ${hasErrors ? "text-red-500" : ""}`}
                 >
                   {pattern.name}
                 </h3>
@@ -1008,12 +932,9 @@ const PatternManagement: React.FC = () => {
                     </ul>
                   </div>
                 )}
+                <p className={themeClasses.patternListMeta}>Category: {pattern.category}</p>
                 <p className={themeClasses.patternListMeta}>
-                  Category: {pattern.category}
-                </p>
-                <p className={themeClasses.patternListMeta}>
-                  Time: {pattern.timeComplexity} | Space:{" "}
-                  {pattern.spaceComplexity}
+                  Time: {pattern.timeComplexity} | Space: {pattern.spaceComplexity}
                 </p>
               </div>
             </div>
@@ -1046,18 +967,14 @@ const PatternManagement: React.FC = () => {
           </div>
           {expandedPatterns.has(pattern.id) && (
             <div className={themeClasses.patternContent}>
-              <p className="text-gray-700 dark:text-gray-300">
-                {pattern.description}
-              </p>
+              <p className="text-gray-700 dark:text-gray-300">{pattern.description}</p>
               <div className={themeClasses.grid}>
                 <div className={themeClasses.patternSection}>
                   <h4 className={themeClasses.heading3}>Process Steps</h4>
                   <ul className="space-y-2">
                     {pattern.process.map((step, index) => (
                       <li key={index} className={themeClasses.processStep}>
-                        <span className={themeClasses.processStepBullet}>
-                          •
-                        </span>
+                        <span className={themeClasses.processStepBullet}>•</span>
                         <span>{step}</span>
                       </li>
                     ))}
@@ -1068,9 +985,7 @@ const PatternManagement: React.FC = () => {
                   <ul className="space-y-3">
                     {pattern.testCases.map((testCase, index) => (
                       <li key={index} className={themeClasses.testCaseCard}>
-                        <p className="font-medium text-gray-900 dark:text-white">
-                          {testCase.name}
-                        </p>
+                        <p className="font-medium text-gray-900 dark:text-white">{testCase.name}</p>
                         <div className={themeClasses.patternSubsection}>
                           <p className="text-sm text-gray-600 dark:text-gray-400">
                             Input: {testCase.input}
@@ -1200,18 +1115,14 @@ const PatternManagement: React.FC = () => {
         <div className="flex gap-4">
           <button
             onClick={() => setDebugMode(!debugMode)}
-            className={`${themeClasses.button.secondary} ${
-              debugMode ? "bg-yellow-500" : ""
-            }`}
+            className={`${themeClasses.button.secondary} ${debugMode ? "bg-yellow-500" : ""}`}
           >
             {debugMode ? "Debug Mode: ON" : "Debug Mode: OFF"}
           </button>
           {debugMode && (
             <button
               onClick={fixPatternMappings}
-              className={`${themeClasses.button.secondary} ${
-                debugMode ? "bg-green-500" : ""
-              }`}
+              className={`${themeClasses.button.secondary} ${debugMode ? "bg-green-500" : ""}`}
             >
               {debugMode ? "Fix Pattern Mappings" : "Fix Pattern Mappings"}
             </button>
@@ -1220,9 +1131,7 @@ const PatternManagement: React.FC = () => {
             <button
               onClick={() => setActiveTab("form")}
               className={`${themeClasses.tabButton} ${
-                activeTab === "form"
-                  ? themeClasses.activeTab
-                  : themeClasses.inactiveTab
+                activeTab === "form" ? themeClasses.activeTab : themeClasses.inactiveTab
               }`}
             >
               Add/Edit Pattern
@@ -1230,9 +1139,7 @@ const PatternManagement: React.FC = () => {
             <button
               onClick={() => setActiveTab("list")}
               className={`${themeClasses.tabButton} ${
-                activeTab === "list"
-                  ? themeClasses.activeTab
-                  : themeClasses.inactiveTab
+                activeTab === "list" ? themeClasses.activeTab : themeClasses.inactiveTab
               }`}
             >
               View Patterns
@@ -1288,9 +1195,7 @@ const PatternManagement: React.FC = () => {
                 >
                   <path d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM8.03 8l-1 4h2.938l1-4H8.031z" />
                 </svg>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Pattern Keys
-                </h4>
+                <h4 className="font-medium text-gray-900 dark:text-white">Pattern Keys</h4>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 overflow-auto max-h-48">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
@@ -1323,9 +1228,7 @@ const PatternManagement: React.FC = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Pattern Mapping
-                </h4>
+                <h4 className="font-medium text-gray-900 dark:text-white">Pattern Mapping</h4>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 overflow-auto max-h-48">
                 <div className="grid grid-cols-2 gap-2">
@@ -1337,21 +1240,15 @@ const PatternManagement: React.FC = () => {
                   </div>
                 </div>
                 <div className="mt-2 space-y-1">
-                  {Object.entries(debugInfo.patternMapping).map(
-                    ([key, value], index) => (
-                      <div
-                        key={index}
-                        className="grid grid-cols-2 gap-2 text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
-                      >
-                        <div className="text-blue-600 dark:text-blue-400 font-medium">
-                          {key}
-                        </div>
-                        <div className="text-gray-700 dark:text-gray-300">
-                          {value}
-                        </div>
-                      </div>
-                    )
-                  )}
+                  {Object.entries(debugInfo.patternMapping).map(([key, value], index) => (
+                    <div
+                      key={index}
+                      className="grid grid-cols-2 gap-2 text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                    >
+                      <div className="text-blue-600 dark:text-blue-400 font-medium">{key}</div>
+                      <div className="text-gray-700 dark:text-gray-300">{value}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1370,30 +1267,22 @@ const PatternManagement: React.FC = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  Pattern Categories
-                </h4>
+                <h4 className="font-medium text-gray-900 dark:text-white">Pattern Categories</h4>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 overflow-auto max-h-48">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                   Pattern Categories
                 </div>
                 <div className="space-y-1">
-                  {Object.entries(debugInfo.patternCategories).map(
-                    ([category, count], index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
-                      >
-                        <span className="text-gray-700 dark:text-gray-300">
-                          {category}
-                        </span>
-                        <span className="text-blue-600 dark:text-blue-400 font-medium">
-                          {count}
-                        </span>
-                      </div>
-                    )
-                  )}
+                  {Object.entries(debugInfo.patternCategories).map(([category, count], index) => (
+                    <div
+                      key={index}
+                      className="flex justify-between items-center text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                    >
+                      <span className="text-gray-700 dark:text-gray-300">{category}</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-medium">{count}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1420,128 +1309,105 @@ const PatternManagement: React.FC = () => {
               {/* Duplicate Patterns */}
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  Duplicate Patterns (
-                  {debugInfo.validationResults.duplicates.length})
+                  Duplicate Patterns ({debugInfo.validationResults.duplicates.length})
                 </div>
                 <div className="space-y-2">
-                  {debugInfo.validationResults.duplicates.map(
-                    (duplicate, index) => (
-                      <div
-                        key={index}
-                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-700 dark:text-gray-300">
-                            {duplicate.pattern1} ↔ {duplicate.pattern2}
-                          </span>
-                          <span
-                            className={`${
-                              duplicate.similarity > 80
-                                ? "text-red-500"
-                                : "text-yellow-500"
-                            } font-medium`}
-                          >
-                            {duplicate.similarity}% similar
-                          </span>
-                        </div>
+                  {debugInfo.validationResults.duplicates.map((duplicate, index) => (
+                    <div
+                      key={index}
+                      className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-700 dark:text-gray-300">
+                          {duplicate.pattern1} ↔ {duplicate.pattern2}
+                        </span>
+                        <span
+                          className={`${
+                            duplicate.similarity > 80 ? "text-red-500" : "text-yellow-500"
+                          } font-medium`}
+                        >
+                          {duplicate.similarity}% similar
+                        </span>
                       </div>
-                    )
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Incomplete Patterns */}
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  Incomplete Patterns (
-                  {debugInfo.validationResults.incompletePatterns.length})
+                  Incomplete Patterns ({debugInfo.validationResults.incompletePatterns.length})
                 </div>
                 <div className="space-y-1">
-                  {debugInfo.validationResults.incompletePatterns.map(
-                    (pattern, index) => (
-                      <div
-                        key={index}
-                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded text-red-500 dark:text-red-400"
-                      >
-                        {pattern}
-                      </div>
-                    )
-                  )}
+                  {debugInfo.validationResults.incompletePatterns.map((pattern, index) => (
+                    <div
+                      key={index}
+                      className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded text-red-500 dark:text-red-400"
+                    >
+                      {pattern}
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Naming Issues */}
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600 mb-4">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  Naming Issues (
-                  {debugInfo.validationResults.namingIssues.length})
+                  Naming Issues ({debugInfo.validationResults.namingIssues.length})
                 </div>
                 <div className="space-y-2">
-                  {debugInfo.validationResults.namingIssues.map(
-                    (issue, index) => (
-                      <div
-                        key={index}
-                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
-                      >
-                        <div className="text-gray-700 dark:text-gray-300">
-                          {issue.pattern}
-                        </div>
-                        <div className="text-red-500 dark:text-red-400 text-xs mt-1">
-                          {issue.issue}
-                        </div>
+                  {debugInfo.validationResults.namingIssues.map((issue, index) => (
+                    <div
+                      key={index}
+                      className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                    >
+                      <div className="text-gray-700 dark:text-gray-300">{issue.pattern}</div>
+                      <div className="text-red-500 dark:text-red-400 text-xs mt-1">
+                        {issue.issue}
                       </div>
-                    )
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Category Issues */}
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  Category Issues (
-                  {debugInfo.validationResults.categoryIssues.length})
+                  Category Issues ({debugInfo.validationResults.categoryIssues.length})
                 </div>
                 <div className="space-y-2">
-                  {debugInfo.validationResults.categoryIssues.map(
-                    (issue, index) => (
-                      <div
-                        key={index}
-                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
-                      >
-                        <div className="text-gray-700 dark:text-gray-300">
-                          {issue.pattern}
-                        </div>
-                        <div className="text-red-500 dark:text-red-400 text-xs mt-1">
-                          {issue.issue}
-                        </div>
+                  {debugInfo.validationResults.categoryIssues.map((issue, index) => (
+                    <div
+                      key={index}
+                      className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                    >
+                      <div className="text-gray-700 dark:text-gray-300">{issue.pattern}</div>
+                      <div className="text-red-500 dark:text-red-400 text-xs mt-1">
+                        {issue.issue}
                       </div>
-                    )
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Order Issues */}
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
                 <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-                  Order Issues ({debugInfo.validationResults.orderIssues.length}
-                  )
+                  Order Issues ({debugInfo.validationResults.orderIssues.length})
                 </div>
                 <div className="space-y-2">
-                  {debugInfo.validationResults.orderIssues.map(
-                    (issue, index) => (
-                      <div
-                        key={index}
-                        className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
-                      >
-                        <div className="text-gray-700 dark:text-gray-300">
-                          {issue.pattern}
-                        </div>
-                        <div className="text-red-500 dark:text-red-400 text-xs mt-1">
-                          {issue.issue}
-                        </div>
+                  {debugInfo.validationResults.orderIssues.map((issue, index) => (
+                    <div
+                      key={index}
+                      className="text-sm font-mono px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded"
+                    >
+                      <div className="text-gray-700 dark:text-gray-300">{issue.pattern}</div>
+                      <div className="text-red-500 dark:text-red-400 text-xs mt-1">
+                        {issue.issue}
                       </div>
-                    )
-                  )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1561,9 +1427,7 @@ const PatternManagement: React.FC = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span>
-                Debug information is updated in real-time as patterns change
-              </span>
+              <span>Debug information is updated in real-time as patterns change</span>
             </div>
           </div>
         </div>
@@ -1573,27 +1437,19 @@ const PatternManagement: React.FC = () => {
         <>
           {/* Step Navigation */}
           <div className={themeClasses.stepNav}>
-            {(
-              [
-                "basic",
-                "details",
-                "implementation",
-                "test-cases",
-                "preview",
-              ] as FormStep[]
-            ).map((step) => (
-              <button
-                key={step}
-                onClick={() => setActiveStep(step)}
-                className={`${themeClasses.stepButton} ${
-                  activeStep === step
-                    ? themeClasses.activeStep
-                    : themeClasses.inactiveStep
-                }`}
-              >
-                {step.charAt(0).toUpperCase() + step.slice(1).replace("-", " ")}
-              </button>
-            ))}
+            {(["basic", "details", "implementation", "test-cases", "preview"] as FormStep[]).map(
+              (step) => (
+                <button
+                  key={step}
+                  onClick={() => setActiveStep(step)}
+                  className={`${themeClasses.stepButton} ${
+                    activeStep === step ? themeClasses.activeStep : themeClasses.inactiveStep
+                  }`}
+                >
+                  {step.charAt(0).toUpperCase() + step.slice(1).replace("-", " ")}
+                </button>
+              )
+            )}
           </div>
 
           {/* Form Steps */}
@@ -1614,9 +1470,7 @@ const PatternManagement: React.FC = () => {
                         }`}
                         required
                       />
-                      {formErrors.name && (
-                        <p className={themeClasses.error}>{formErrors.name}</p>
-                      )}
+                      {formErrors.name && <p className={themeClasses.error}>{formErrors.name}</p>}
                     </div>
 
                     <div>
@@ -1632,18 +1486,14 @@ const PatternManagement: React.FC = () => {
                         required
                       />
                       {formErrors.category && (
-                        <p className={themeClasses.error}>
-                          {formErrors.category}
-                        </p>
+                        <p className={themeClasses.error}>{formErrors.category}</p>
                       )}
                     </div>
                   </div>
 
                   <div className={themeClasses.grid}>
                     <div>
-                      <label className={themeClasses.label}>
-                        Time Complexity
-                      </label>
+                      <label className={themeClasses.label}>Time Complexity</label>
                       <input
                         type="text"
                         name="timeComplexity"
@@ -1655,16 +1505,12 @@ const PatternManagement: React.FC = () => {
                         required
                       />
                       {formErrors.timeComplexity && (
-                        <p className={themeClasses.error}>
-                          {formErrors.timeComplexity}
-                        </p>
+                        <p className={themeClasses.error}>{formErrors.timeComplexity}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className={themeClasses.label}>
-                        Space Complexity
-                      </label>
+                      <label className={themeClasses.label}>Space Complexity</label>
                       <input
                         type="text"
                         name="spaceComplexity"
@@ -1676,9 +1522,7 @@ const PatternManagement: React.FC = () => {
                         required
                       />
                       {formErrors.spaceComplexity && (
-                        <p className={themeClasses.error}>
-                          {formErrors.spaceComplexity}
-                        </p>
+                        <p className={themeClasses.error}>{formErrors.spaceComplexity}</p>
                       )}
                     </div>
                   </div>
@@ -1700,16 +1544,12 @@ const PatternManagement: React.FC = () => {
                       required
                     />
                     {formErrors.description && (
-                      <p className={themeClasses.error}>
-                        {formErrors.description}
-                      </p>
+                      <p className={themeClasses.error}>{formErrors.description}</p>
                     )}
                   </div>
 
                   <div>
-                    <label className={themeClasses.label}>
-                      Monster Hunter Context
-                    </label>
+                    <label className={themeClasses.label}>Monster Hunter Context</label>
                     <textarea
                       name="monsterHunterContext"
                       value={formData.monsterHunterContext}
@@ -1721,9 +1561,7 @@ const PatternManagement: React.FC = () => {
                       required
                     />
                     {formErrors.monsterHunterContext && (
-                      <p className={themeClasses.error}>
-                        {formErrors.monsterHunterContext}
-                      </p>
+                      <p className={themeClasses.error}>{formErrors.monsterHunterContext}</p>
                     )}
                   </div>
 
@@ -1772,9 +1610,7 @@ const PatternManagement: React.FC = () => {
                       required
                     />
                     {formErrors.implementation && (
-                      <p className={themeClasses.error}>
-                        {formErrors.implementation}
-                      </p>
+                      <p className={themeClasses.error}>{formErrors.implementation}</p>
                     )}
                   </div>
 
@@ -1783,16 +1619,9 @@ const PatternManagement: React.FC = () => {
                     <DragDropContext onDragEnd={handleDragEnd}>
                       <Droppable droppableId="process" type="process">
                         {(provided: DroppableProvided) => (
-                          <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                          >
+                          <div {...provided.droppableProps} ref={provided.innerRef}>
                             {formData.process.map((step, index) => (
-                              <Draggable
-                                key={index}
-                                draggableId={`process-${index}`}
-                                index={index}
-                              >
+                              <Draggable key={index} draggableId={`process-${index}`} index={index}>
                                 {(provided: DraggableProvided) => (
                                   <div
                                     ref={provided.innerRef}
@@ -1800,24 +1629,13 @@ const PatternManagement: React.FC = () => {
                                     {...provided.dragHandleProps}
                                     className={themeClasses.processStep}
                                   >
-                                    <span
-                                      className={themeClasses.processStepBullet}
-                                    >
-                                      •
-                                    </span>
+                                    <span className={themeClasses.processStepBullet}>•</span>
                                     <input
                                       type="text"
                                       value={step}
-                                      onChange={(e) =>
-                                        handleProcessChange(
-                                          index,
-                                          e.target.value
-                                        )
-                                      }
+                                      onChange={(e) => handleProcessChange(index, e.target.value)}
                                       className={`${themeClasses.input} ${
-                                        formErrors.process
-                                          ? "border-red-500"
-                                          : ""
+                                        formErrors.process ? "border-red-500" : ""
                                       }`}
                                       required
                                     />
@@ -1855,16 +1673,9 @@ const PatternManagement: React.FC = () => {
                   <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable droppableId="testCases" type="testCases">
                       {(provided: DroppableProvided) => (
-                        <div
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                        >
+                        <div {...provided.droppableProps} ref={provided.innerRef}>
                           {formData.testCases.map((testCase, index) => (
-                            <Draggable
-                              key={index}
-                              draggableId={`testCase-${index}`}
-                              index={index}
-                            >
+                            <Draggable key={index} draggableId={`testCase-${index}`} index={index}>
                               {(provided: DraggableProvided) => (
                                 <div
                                   ref={provided.innerRef}
@@ -1883,45 +1694,29 @@ const PatternManagement: React.FC = () => {
                                   </div>
                                   <div className={themeClasses.grid}>
                                     <div>
-                                      <label className={themeClasses.label}>
-                                        Name
-                                      </label>
+                                      <label className={themeClasses.label}>Name</label>
                                       <input
                                         type="text"
                                         value={testCase.name}
                                         onChange={(e) =>
-                                          handleTestCaseChange(
-                                            index,
-                                            "name",
-                                            e.target.value
-                                          )
+                                          handleTestCaseChange(index, "name", e.target.value)
                                         }
                                         className={`${themeClasses.input} ${
-                                          formErrors.testCases
-                                            ? "border-red-500"
-                                            : ""
+                                          formErrors.testCases ? "border-red-500" : ""
                                         }`}
                                         required
                                       />
                                     </div>
                                     <div>
-                                      <label className={themeClasses.label}>
-                                        Input
-                                      </label>
+                                      <label className={themeClasses.label}>Input</label>
                                       <input
                                         type="text"
                                         value={testCase.input}
                                         onChange={(e) =>
-                                          handleTestCaseChange(
-                                            index,
-                                            "input",
-                                            e.target.value
-                                          )
+                                          handleTestCaseChange(index, "input", e.target.value)
                                         }
                                         className={`${themeClasses.input} ${
-                                          formErrors.testCases
-                                            ? "border-red-500"
-                                            : ""
+                                          formErrors.testCases ? "border-red-500" : ""
                                         }`}
                                         required
                                       />
@@ -1929,9 +1724,7 @@ const PatternManagement: React.FC = () => {
                                   </div>
                                   <div className={themeClasses.grid}>
                                     <div>
-                                      <label className={themeClasses.label}>
-                                        Expected Output
-                                      </label>
+                                      <label className={themeClasses.label}>Expected Output</label>
                                       <input
                                         type="text"
                                         value={testCase.expectedOutput}
@@ -1943,9 +1736,7 @@ const PatternManagement: React.FC = () => {
                                           )
                                         }
                                         className={`${themeClasses.input} ${
-                                          formErrors.testCases
-                                            ? "border-red-500"
-                                            : ""
+                                          formErrors.testCases ? "border-red-500" : ""
                                         }`}
                                         required
                                       />
@@ -1965,9 +1756,7 @@ const PatternManagement: React.FC = () => {
                                           )
                                         }
                                         className={`${themeClasses.input} ${
-                                          formErrors.testCases
-                                            ? "border-red-500"
-                                            : ""
+                                          formErrors.testCases ? "border-red-500" : ""
                                         }`}
                                         required
                                       />
@@ -1998,12 +1787,9 @@ const PatternManagement: React.FC = () => {
                 <div className="space-y-4">
                   <div className={themeClasses.card}>
                     <h2 className={themeClasses.heading2}>{formData.name}</h2>
+                    <p className={themeClasses.listItem}>Category: {formData.category}</p>
                     <p className={themeClasses.listItem}>
-                      Category: {formData.category}
-                    </p>
-                    <p className={themeClasses.listItem}>
-                      Time: {formData.timeComplexity} | Space:{" "}
-                      {formData.spaceComplexity}
+                      Time: {formData.timeComplexity} | Space: {formData.spaceComplexity}
                     </p>
                     <p className="mt-4">{formData.description}</p>
                     <div className="mt-4">
@@ -2138,9 +1924,7 @@ const PatternManagement: React.FC = () => {
                   </option>
                 </select>
                 <button
-                  onClick={() =>
-                    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
-                  }
+                  onClick={() => setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))}
                   className={themeClasses.button.secondary}
                 >
                   {sortOrder === "asc" ? "↑" : "↓"}
@@ -2169,10 +1953,7 @@ const PatternManagement: React.FC = () => {
                 className="hidden"
                 id="import-patterns"
               />
-              <label
-                htmlFor="import-patterns"
-                className={themeClasses.button.secondary}
-              >
+              <label htmlFor="import-patterns" className={themeClasses.button.secondary}>
                 Import Patterns
               </label>
             </div>
@@ -2219,10 +2000,7 @@ const PatternManagement: React.FC = () => {
                     <option key="description" value="description">
                       Description
                     </option>
-                    <option
-                      key="monsterHunterContext"
-                      value="monsterHunterContext"
-                    >
+                    <option key="monsterHunterContext" value="monsterHunterContext">
                       Monster Hunter Context
                     </option>
                     <option key="example" value="example">
@@ -2237,8 +2015,7 @@ const PatternManagement: React.FC = () => {
                     value={filter.operator}
                     onChange={(e) => {
                       const newFilters = [...activeFilters];
-                      newFilters[index].operator = e.target
-                        .value as FilterOption["operator"];
+                      newFilters[index].operator = e.target.value as FilterOption["operator"];
                       setActiveFilters(newFilters);
                     }}
                     className="px-3 py-1 rounded border border-gray-300 dark:border-gray-600"
@@ -2279,9 +2056,7 @@ const PatternManagement: React.FC = () => {
               ))}
 
               <button
-                onClick={() =>
-                  addFilter({ field: "name", value: "", operator: "contains" })
-                }
+                onClick={() => addFilter({ field: "name", value: "", operator: "contains" })}
                 className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
               >
                 Add Filter
@@ -2345,17 +2120,13 @@ const PatternManagement: React.FC = () => {
           {/* Add Saved Views */}
           <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Saved Views
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Saved Views</h3>
             </div>
 
             <div className="space-y-2">
               {savedViews.map((view, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <span className="text-gray-700 dark:text-gray-300">
-                    {view.name}
-                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">{view.name}</span>
                   <button
                     onClick={() => loadSavedView(index)}
                     className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
@@ -2364,9 +2135,7 @@ const PatternManagement: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setSavedViews((prev) =>
-                        prev.filter((_, i) => i !== index)
-                      );
+                      setSavedViews((prev) => prev.filter((_, i) => i !== index));
                     }}
                     className="p-1 text-red-500 hover:text-red-600"
                   >
@@ -2384,9 +2153,7 @@ const PatternManagement: React.FC = () => {
                 />
                 <button
                   onClick={() => {
-                    const input = document.getElementById(
-                      "viewName"
-                    ) as HTMLInputElement;
+                    const input = document.getElementById("viewName") as HTMLInputElement;
                     if (input.value) {
                       saveCurrentView(input.value);
                       input.value = "";
@@ -2405,25 +2172,16 @@ const PatternManagement: React.FC = () => {
             {isLoading ? (
               <div className="space-y-4">
                 {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className={`${themeClasses.card} ${themeClasses.loadingSkeleton}`}
-                  >
+                  <div key={i} className={`${themeClasses.card} ${themeClasses.loadingSkeleton}`}>
                     <div className="h-6 w-1/4 mb-3"></div>
                     <div className="h-4 w-1/2"></div>
                   </div>
                 ))}
               </div>
             ) : sortedAndFilteredPatterns.length === 0 ? (
-              <div
-                className={`${themeClasses.card} ${themeClasses.emptyState}`}
-              >
-                <h3 className={themeClasses.emptyStateTitle}>
-                  No patterns found
-                </h3>
-                <p className={themeClasses.emptyStateText}>
-                  Try adjusting your search or filters
-                </p>
+              <div className={`${themeClasses.card} ${themeClasses.emptyState}`}>
+                <h3 className={themeClasses.emptyStateTitle}>No patterns found</h3>
+                <p className={themeClasses.emptyStateText}>Try adjusting your search or filters</p>
               </div>
             ) : (
               sortedAndFilteredPatterns.map((pattern) => (

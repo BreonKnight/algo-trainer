@@ -8,11 +8,11 @@ export const TriePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(L) &nbsp;|&nbsp; Space: O(AL) &nbsp;|&nbsp; Use: Efficient string
-      storage and search
+      Time: O(L) &nbsp;|&nbsp; Space: O(AL) &nbsp;|&nbsp; Use: Efficient string storage and search
     </div>
 
-    <PseudocodeDisplay code={`// Trie node structure
+    <PseudocodeDisplay
+      code={`// Trie node structure
 TRIE-NODE:
     children[1..26]  // Array of child nodes
     is_end          // Marks end of word
@@ -76,7 +76,8 @@ TRIE-COUNT-PREFIX(root, prefix):
 // 1. Search "app" → true
 // 2. Search "ban" → false
 // 3. Count prefix "ap" → 2
-// 4. Count prefix "ba" → 2`} />
+// 4. Count prefix "ba" → 2`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -8,11 +8,12 @@ export const TopologicalSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Linear
-      ordering of vertices in a DAG
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Linear ordering of vertices in a
+      DAG
     </div>
 
-    <PseudocodeDisplay code={`// DFS-based Topological Sort
+    <PseudocodeDisplay
+      code={`// DFS-based Topological Sort
 TOPOLOGICAL-SORT(G):
     visited = [False] * |V|
     order = []
@@ -72,37 +73,34 @@ DFS-CYCLE(G, v, visited, recursion_stack, order):
 
     recursion_stack[v] = False
     order.append(v)
-    return False`} />
+    return False`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">DFS:</span> Perform
-        depth-first search
+        <span className="font-semibold text-accent">DFS:</span> Perform depth-first search
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Order:</span> Add vertices
-        to order after processing
+        <span className="font-semibold text-accent">Order:</span> Add vertices to order after
+        processing
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Reverse:</span> Return
-        vertices in reverse order
+        <span className="font-semibold text-accent">Reverse:</span> Return vertices in reverse order
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: DFS-based Topological Sort
-      </span>
+      <span className="font-semibold text-accent">Example: DFS-based Topological Sort</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 → 1 → 2
@@ -122,9 +120,7 @@ Topological order: [5, 4, 3, 2, 1, 0]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Kahn's Algorithm
-      </span>
+      <span className="font-semibold text-accent">Example: Kahn's Algorithm</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 → 1 → 2
@@ -138,9 +134,7 @@ Order: [0, 1, 3, 2, 4, 5]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Cycle Detection
-      </span>
+      <span className="font-semibold text-accent">Example: Cycle Detection</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph with cycle:
 0 → 1 → 2

@@ -8,8 +8,8 @@ export const DFSPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Topological
-      sort, cycle detection, and strongly connected components
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Topological sort, cycle detection,
+      and strongly connected components
     </div>
 
     <PseudocodeDisplay
@@ -74,24 +74,21 @@ SCC(G):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set all
-        vertices to unvisited
+        <span className="font-semibold text-accent">Initialize:</span> Set all vertices to unvisited
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Explore:</span> Visit
-        vertices depth-first
+        <span className="font-semibold text-accent">Explore:</span> Visit vertices depth-first
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Mark:</span> Track discovery
-        and finish times
+        <span className="font-semibold text-accent">Mark:</span> Track discovery and finish times
       </span>
     </div>
 
@@ -112,9 +109,7 @@ Finish order: 4, 5, 2, 6, 3, 1`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Topological Sort
-      </span>
+      <span className="font-semibold text-accent">Example: Topological Sort</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 1 → 2 → 3
@@ -127,9 +122,7 @@ Topological order:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Strongly Connected Components
-      </span>
+      <span className="font-semibold text-accent">Example: Strongly Connected Components</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 1 → 2 → 3

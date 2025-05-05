@@ -8,11 +8,12 @@ export const LinkedListPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Dynamic data
-      storage with efficient insertions/deletions
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Dynamic data storage with efficient
+      insertions/deletions
     </div>
 
-    <PseudocodeDisplay code={`// Node structure
+    <PseudocodeDisplay
+      code={`// Node structure
 class Node:
     def __init__(self, data):
         self.data = data
@@ -135,37 +136,36 @@ class CircularLinkedList:
         while last.next != self.head:
             last = last.next
         last.next = new_node
-        new_node.next = self.head`} />
+        new_node.next = self.head`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Node:</span> Basic building
-        block with data and pointer
+        <span className="font-semibold text-accent">Node:</span> Basic building block with data and
+        pointer
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Operations:</span> Insert,
-        delete, search, traverse
+        <span className="font-semibold text-accent">Operations:</span> Insert, delete, search,
+        traverse
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Variants:</span> Singly,
-        doubly, circular linked lists
+        <span className="font-semibold text-accent">Variants:</span> Singly, doubly, circular linked
+        lists
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Singly Linked List
-      </span>
+      <span className="font-semibold text-accent">Example: Singly Linked List</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Operations:
 Insert 1 at beginning: 1 -> None
@@ -178,9 +178,7 @@ Search 4: Not found`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Doubly Linked List
-      </span>
+      <span className="font-semibold text-accent">Example: Doubly Linked List</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Operations:
 Insert 1 at beginning: None <- 1 -> None
@@ -193,9 +191,7 @@ Traverse backward: 2 <- 3`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Circular Linked List
-      </span>
+      <span className="font-semibold text-accent">Example: Circular Linked List</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Operations:
 Insert 1 at beginning: 1 -> 1

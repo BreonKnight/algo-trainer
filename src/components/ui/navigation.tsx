@@ -2,16 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "./button";
 import { useTheme } from "../theme/theme-context";
 import { cn } from "@/lib/utils";
-import {
-  Home,
-  Book,
-  BarChart,
-  Menu,
-  X,
-  Code2,
-  GraduationCap,
-  Brain,
-} from "lucide-react";
+import { Home, Book, BarChart, Menu, X, Code2, GraduationCap, Brain } from "lucide-react";
 import { useState } from "react";
 import { GamificationButton } from "../gamification/GamificationButton";
 
@@ -143,11 +134,7 @@ export function Navigation() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-foreground hover:bg-accent hover:text-accent-foreground"
               >
-                {isMobileMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>

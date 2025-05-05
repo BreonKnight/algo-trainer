@@ -8,8 +8,7 @@ export const HashTablePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Fast key-value
-      storage
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Fast key-value storage
     </div>
 
     <PseudocodeDisplay
@@ -56,31 +55,26 @@ HASH-DELETE(T, k):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Insert:</span> Add key-value
-        pair
+        <span className="font-semibold text-accent">Insert:</span> Add key-value pair
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Search:</span> Find value by
-        key
+        <span className="font-semibold text-accent">Search:</span> Find value by key
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Delete:</span> Remove
-        key-value pair
+        <span className="font-semibold text-accent">Delete:</span> Remove key-value pair
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Table Operations
-      </span>
+      <span className="font-semibold text-accent">Example: Table Operations</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Initial table: []
 After HASH-INSERT(5, "five"): [NIL, NIL, NIL, NIL, (5, "five")]

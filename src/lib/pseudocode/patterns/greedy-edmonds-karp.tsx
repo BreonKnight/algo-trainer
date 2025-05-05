@@ -8,11 +8,11 @@ export const GreedyEdmondsKarpPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(VE²) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding maximum
-      flow in networks
+      Time: O(VE²) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding maximum flow in networks
     </div>
 
-    <PseudocodeDisplay code={`// Standard Edmonds-Karp
+    <PseudocodeDisplay
+      code={`// Standard Edmonds-Karp
 def edmonds_karp(graph, source, sink):
     # Initialize residual graph and max flow
     residual = {u: {v: graph[u][v] for v in graph[u]}
@@ -157,37 +157,33 @@ def edmonds_karp_vertex_capacities(graph, source, sink, vertex_capacities):
 
         max_flow += path_flow
 
-    return max_flow`} />
+    return max_flow`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Residual
-        graph and max flow
+        <span className="font-semibold text-accent">Initialize:</span> Residual graph and max flow
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Find:</span> Shortest
-        augmenting path using BFS
+        <span className="font-semibold text-accent">Find:</span> Shortest augmenting path using BFS
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Residual
-        capacities and max flow
+        <span className="font-semibold text-accent">Update:</span> Residual capacities and max flow
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Edmonds-Karp
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Edmonds-Karp</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 S -> A(10), B(5)
@@ -203,9 +199,7 @@ Max Flow: 20`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Edge Capacities
-      </span>
+      <span className="font-semibold text-accent">Example: Edge Capacities</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 S -> A(10), B(5)
@@ -222,9 +216,7 @@ Max Flow: 15`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Vertex Capacities
-      </span>
+      <span className="font-semibold text-accent">Example: Vertex Capacities</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 S -> A(10), B(5)

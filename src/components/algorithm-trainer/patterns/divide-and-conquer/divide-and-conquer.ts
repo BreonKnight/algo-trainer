@@ -4,8 +4,7 @@ export const divideAndConquerPattern: AlgorithmPattern = {
   title: "Divide and Conquer",
   description:
     "A problem-solving approach that recursively breaks down a problem into smaller, more manageable subproblems until they become simple enough to solve directly. The solutions to the subproblems are then combined to solve the original problem.",
-  timeComplexity:
-    "Varies by algorithm, typically O(n log n) for sorting and searching algorithms",
+  timeComplexity: "Varies by algorithm, typically O(n log n) for sorting and searching algorithms",
   spaceComplexity:
     "Varies by algorithm, typically O(log n) for recursive algorithms due to the call stack",
   pseudocode: `1. Divide the problem into smaller subproblems\n2. Conquer the subproblems by solving them recursively\n3. Combine the solutions of the subproblems to solve the original problem\n\nBase case: If the problem is small enough, solve it directly\nRecursive case: Divide, conquer, and combine`,

@@ -8,8 +8,8 @@ export const DijkstraPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O((V + E) log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use:
-      Single-source shortest paths in weighted graphs
+      Time: O((V + E) log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Single-source shortest
+      paths in weighted graphs
     </div>
 
     <PseudocodeDisplay
@@ -64,31 +64,28 @@ GET-PATH(prev, s, t):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set all
-        distances to infinity
+        <span className="font-semibold text-accent">Initialize:</span> Set all distances to infinity
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Relax:</span> Update
-        distances through current vertex
+        <span className="font-semibold text-accent">Relax:</span> Update distances through current
+        vertex
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Extract:</span> Select
-        vertex with minimum distance
+        <span className="font-semibold text-accent">Extract:</span> Select vertex with minimum
+        distance
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Dijkstra
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Dijkstra</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
     1
@@ -109,9 +106,7 @@ Distances:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Priority Queue Implementation
-      </span>
+      <span className="font-semibold text-accent">Example: Priority Queue Implementation</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
     1
@@ -132,9 +127,7 @@ Q = []`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Path Reconstruction
-      </span>
+      <span className="font-semibold text-accent">Example: Path Reconstruction</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Shortest path from 1 to 4:
 Path: [1, 2, 4]

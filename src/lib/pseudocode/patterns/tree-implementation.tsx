@@ -8,11 +8,11 @@ export const TreeImplementationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Tree
-      representation and traversal
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Tree representation and traversal
     </div>
 
-    <PseudocodeDisplay code={`// Binary tree node structure
+    <PseudocodeDisplay
+      code={`// Binary tree node structure
 TREE-NODE(key):
     node ← new object
     node.key ← key
@@ -88,7 +88,8 @@ TREE-SUCCESSOR(x):
 //
 // Inorder traversal: 1 2 3 4 5 6 7
 // Preorder traversal: 4 2 1 3 6 5 7
-// Postorder traversal: 1 3 2 5 7 6 4`} />
+// Postorder traversal: 1 3 2 5 7 6 4`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
@@ -96,9 +97,7 @@ TREE-SUCCESSOR(x):
     <div className="mb-2 text-sm">
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Structure: Define node with key, left, right, and parent pointers
-        </span>
+        <span>Structure: Define node with key, left, right, and parent pointers</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
@@ -106,9 +105,7 @@ TREE-SUCCESSOR(x):
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Operations: Search, minimum, maximum, and successor functions
-        </span>
+        <span>Operations: Search, minimum, maximum, and successor functions</span>
       </div>
     </div>
   </div>

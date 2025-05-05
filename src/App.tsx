@@ -15,10 +15,7 @@ import { Toaster } from "sonner";
 import { cn } from "./lib/utils";
 import { useState, useEffect } from "react";
 import "./App.css";
-import {
-  checkPatternFiles,
-  logPatternCheckResults,
-} from "./lib/utils/pattern-checker";
+import { checkPatternFiles, logPatternCheckResults } from "./lib/utils/pattern-checker";
 import type { Tutorial } from "./components/tutorials/AlgorithmTutorial";
 import type { PatternKey } from "./components/tutorials/types";
 import tutorialsData from "./data/tutorials.json";
@@ -70,9 +67,10 @@ function TutorialRoute() {
     console.log("TutorialRoute useEffect triggered with algorithm:", algorithm);
     console.log("Raw tutorials data structure:", {
       categories: Object.keys(tutorialsData),
-      totalTutorials: Object.values(
-        tutorialsData as TutorialsByCategory
-      ).reduce((sum, tutorials) => sum + tutorials.length, 0),
+      totalTutorials: Object.values(tutorialsData as TutorialsByCategory).reduce(
+        (sum, tutorials) => sum + tutorials.length,
+        0
+      ),
     });
 
     // Find the tutorial that matches the algorithm name across all categories
@@ -87,9 +85,7 @@ function TutorialRoute() {
         // Find tutorials in this category that match the algorithm name
         const matchingTutorials = categoryTutorials.filter((tutorial) => {
           const isMatch = tutorial.id === algorithm;
-          console.log(
-            `Comparing "${tutorial.id}" with "${algorithm}": ${isMatch}`
-          );
+          console.log(`Comparing "${tutorial.id}" with "${algorithm}": ${isMatch}`);
           return isMatch;
         });
 
@@ -101,10 +97,7 @@ function TutorialRoute() {
           allTutorials.push(
             ...matchingTutorials.map((tutorial) => ({
               ...tutorial,
-              difficulty: tutorial.difficulty as
-                | "beginner"
-                | "intermediate"
-                | "advanced",
+              difficulty: tutorial.difficulty as "beginner" | "intermediate" | "advanced",
             }))
           );
         }
@@ -131,8 +124,8 @@ function TutorialRoute() {
       <div className="container mx-auto p-8 text-center">
         <h1 className="text-2xl font-bold mb-4">Tutorial Not Found</h1>
         <p className="text-gray-600 mb-6">
-          We couldn't find a tutorial for "{algorithm}". Please check the
-          spelling or browse our available tutorials.
+          We couldn't find a tutorial for "{algorithm}". Please check the spelling or browse our
+          available tutorials.
         </p>
         <a
           href="/tutorials"
@@ -151,12 +144,7 @@ function TutorialRoute() {
     tutorialTitles: tutorials.map((t) => t.title),
   });
 
-  return (
-    <AlgorithmTutorial
-      algorithm={algorithm as PatternKey}
-      tutorials={tutorials}
-    />
-  );
+  return <AlgorithmTutorial algorithm={algorithm as PatternKey} tutorials={tutorials} />;
 }
 
 function TutorialList() {
@@ -167,9 +155,7 @@ function TutorialList() {
       <h1 className="text-2xl font-bold mb-6">Available Tutorials</h1>
       {Object.entries(tutorials).map(([category, categoryTutorials]) => (
         <div key={category} className="mb-8">
-          <h2 className="text-xl font-semibold mb-4 capitalize">
-            {category.replace("-", " ")}
-          </h2>
+          <h2 className="text-xl font-semibold mb-4 capitalize">{category.replace("-", " ")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {categoryTutorials.map((tutorial) => (
               <Link
@@ -178,9 +164,7 @@ function TutorialList() {
                 className="block p-4 border rounded-lg hover:shadow-md transition-shadow"
               >
                 <h3 className="font-medium">{tutorial.title}</h3>
-                <p className="text-sm text-gray-600 mt-2">
-                  {tutorial.description}
-                </p>
+                <p className="text-sm text-gray-600 mt-2">{tutorial.description}</p>
                 <div className="mt-4 flex justify-between items-center">
                   <span className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800">
                     {tutorial.difficulty}
@@ -229,10 +213,7 @@ function AppContent() {
                 </div>
               }
             />
-            <Route
-              path="/algorithm-comparison"
-              element={<AlgorithmComparison />}
-            />
+            <Route path="/algorithm-comparison" element={<AlgorithmComparison />} />
             <Route path="/algorithm-learning" element={<AlgorithmLearning />} />
             {import.meta.env.DEV && (
               <Route path="/admin/patterns" element={<PatternManagement />} />

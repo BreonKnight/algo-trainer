@@ -18,9 +18,7 @@ type SortingPatternKey =
   | "Stack Sort"
   | "Radix Sort";
 
-export const sortingPatterns: Partial<
-  Record<SortingPatternKey, AlgorithmPattern>
-> = {
+export const sortingPatterns: Partial<Record<SortingPatternKey, AlgorithmPattern>> = {
   "Quick Sort": quickSortPattern,
   "Merge Sort": mergeSortPattern,
   "Bubble Sort": bubbleSortPattern,

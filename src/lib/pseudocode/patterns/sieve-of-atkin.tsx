@@ -8,11 +8,11 @@ export const SieveOfAtkinPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n/log log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all
-      primes up to n
+      Time: O(n/log log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all primes up to n
     </div>
 
-    <PseudocodeDisplay code={`# Sieve of Atkin
+    <PseudocodeDisplay
+      code={`# Sieve of Atkin
 # Input: Integer n > 1
 # Output: Array of primes ≤ n
 
@@ -83,7 +83,8 @@ Algorithm SIEVE-OF-ATKIN(n)
 # Step 4: Collect primes
 #         primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 #
-# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`} />
+# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

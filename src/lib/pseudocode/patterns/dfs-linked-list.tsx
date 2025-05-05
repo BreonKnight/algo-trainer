@@ -8,11 +8,11 @@ export const DfsLinkedListPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked
-      list depth-first
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked list depth-first
     </div>
 
-    <PseudocodeDisplay code={`// Node structure for linked list
+    <PseudocodeDisplay
+      code={`// Node structure for linked list
 NODE:
     key
     next
@@ -41,7 +41,8 @@ DFS-LINKED-LIST(head):
 // 4. Visit 4, visited = {1,2,3,4}
 // 5. Visit 5, visited = {1,2,3,4,5}
 //
-// Output: 1, 2, 3, 4, 5`} />
+// Output: 1, 2, 3, 4, 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

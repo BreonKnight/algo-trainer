@@ -8,11 +8,11 @@ export const BubbleSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array
-      in-place
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array in-place
     </div>
 
-    <PseudocodeDisplay code={`# Bubble Sort: Repeatedly swap adjacent elements if they are in wrong order
+    <PseudocodeDisplay
+      code={`# Bubble Sort: Repeatedly swap adjacent elements if they are in wrong order
 # Input: Array A[1..n] of n elements
 # Output: Array A sorted in non-decreasing order
 
@@ -40,7 +40,8 @@ BUBBLE-SORT(A)
 # Pass 3: [2, 1, 3, 4, 5, 6]  # 4 bubbles to end
 # Pass 4: [1, 2, 3, 4, 5, 6]  # 3 bubbles to end
 # Pass 5: [1, 2, 3, 4, 5, 6]  # 2 bubbles to end
-# Output: [1, 2, 3, 4, 5, 6]`} />
+# Output: [1, 2, 3, 4, 5, 6]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -8,11 +8,11 @@ export const AVLTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Self-balancing
-      binary search tree
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Self-balancing binary search tree
     </div>
 
-    <PseudocodeDisplay code={`AVL-INSERT(T, z)
+    <PseudocodeDisplay
+      code={`AVL-INSERT(T, z)
     let y ← null
     let x ← T.root
 
@@ -117,7 +117,8 @@ LEFT-ROTATE(T, x)
 //        /  \
 //      20    40
 //     /  \    \
-//   10   25   50`} />
+//   10   25   50`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

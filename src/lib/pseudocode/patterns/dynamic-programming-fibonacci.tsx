@@ -8,8 +8,8 @@ export const DynamicProgrammingFibonacciPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Computing
-      Fibonacci numbers efficiently
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Computing Fibonacci numbers
+      efficiently
     </div>
 
     <PseudocodeDisplay

@@ -126,12 +126,7 @@ export interface AlgorithmPattern {
       | {
           arr: number[];
           target?: number;
-          [key: string]:
-            | string
-            | number
-            | number[]
-            | undefined
-            | Record<string, number[]>;
+          [key: string]: string | number | number[] | undefined | Record<string, number[]>;
         };
     expected: number | number[];
     description: string;

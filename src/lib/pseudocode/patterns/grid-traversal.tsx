@@ -8,11 +8,11 @@ export const GridTraversalPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(mn) &nbsp;|&nbsp; Space: O(mn) &nbsp;|&nbsp; Use: Matrix traversal
-      and path finding
+      Time: O(mn) &nbsp;|&nbsp; Space: O(mn) &nbsp;|&nbsp; Use: Matrix traversal and path finding
     </div>
 
-    <PseudocodeDisplay code={`GRID-TRAVERSAL(G)
+    <PseudocodeDisplay
+      code={`GRID-TRAVERSAL(G)
     let m be the number of rows in G
     let n be the number of columns in G
     let visited[1‥m][1‥n] be a new array
@@ -76,7 +76,8 @@ export const GridTraversalPattern = () => (
 //     [1, 2, 3],
 //     [2, 0, 4],
 //     [3, 4, 5]
-//   ]`} />
+//   ]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -4,17 +4,16 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const StronglyConnectedComponentsPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">
-        Strongly Connected Components
-      </span>
+      <span className="text-accent font-bold">Strongly Connected Components</span>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      strongly connected components in directed graphs
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding strongly connected
+      components in directed graphs
     </div>
 
-    <PseudocodeDisplay code={`// Kosaraju's Algorithm
+    <PseudocodeDisplay
+      code={`// Kosaraju's Algorithm
 KOSARAJU-SCC(G):
     # First DFS pass
     visited = [False] * |V|
@@ -105,37 +104,35 @@ GABOW-DFS(v):
             component.append(w)
             if w == v:
                 break
-        components.append(component)`} />
+        components.append(component)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">DFS Pass:</span> Perform
-        depth-first search to get vertex order
+        <span className="font-semibold text-accent">DFS Pass:</span> Perform depth-first search to
+        get vertex order
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Reverse:</span> Create
-        reversed graph
+        <span className="font-semibold text-accent">Reverse:</span> Create reversed graph
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Second Pass:</span> Process
-        vertices in reverse order
+        <span className="font-semibold text-accent">Second Pass:</span> Process vertices in reverse
+        order
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Kosaraju's Algorithm
-      </span>
+      <span className="font-semibold text-accent">Example: Kosaraju's Algorithm</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 → 1 → 2 → 0
@@ -156,9 +153,7 @@ SCCs: [[0, 1, 2], [3, 4]]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Tarjan's Algorithm
-      </span>
+      <span className="font-semibold text-accent">Example: Tarjan's Algorithm</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 → 1 → 2 → 0
@@ -178,9 +173,7 @@ SCCs: [[0, 1, 2], [3, 4]]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Gabow's Algorithm
-      </span>
+      <span className="font-semibold text-accent">Example: Gabow's Algorithm</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 → 1 → 2 → 0

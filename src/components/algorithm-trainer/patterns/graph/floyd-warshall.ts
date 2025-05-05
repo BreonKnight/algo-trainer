@@ -2,8 +2,7 @@ import { AlgorithmPattern } from "../../types";
 
 export const floydWarshallPattern: AlgorithmPattern = {
   title: "Floyd-Warshall Algorithm",
-  description:
-    "Find shortest paths between all pairs of vertices in a weighted graph",
+  description: "Find shortest paths between all pairs of vertices in a weighted graph",
   timeComplexity: "O(V³)",
   spaceComplexity: "O(V²)",
   pseudocode: `1. Initialize distance matrix from adjacency matrix

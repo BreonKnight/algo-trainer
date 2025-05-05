@@ -1,20 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Button,
-  Box,
-  Chip,
-} from "@mui/material";
-import {
-  PlayArrow,
-  Refresh,
-  Check,
-  NavigateNext,
-  Lightbulb,
-  Code,
-} from "@mui/icons-material";
+import { Card, CardContent, Typography, Button, Box, Chip } from "@mui/material";
+import { PlayArrow, Refresh, Check, NavigateNext, Lightbulb, Code } from "@mui/icons-material";
 
 interface ProblemCardProps {
   title: string;
@@ -61,9 +47,7 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds
-      .toString()
-      .padStart(2, "0")}`;
+    return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -95,17 +79,11 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
           </Typography>
           <Chip
             label={difficulty}
-            color={
-              getDifficultyColor(difficulty) as
-                | "success"
-                | "warning"
-                | "error"
-                | "default"
-            }
+            color={getDifficultyColor(difficulty) as "success" | "warning" | "error" | "default"}
             size="small"
           />
         </Box>
-        
+
         <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
           {description}
         </Typography>

@@ -8,8 +8,8 @@ export const GreedyActivitySelectionPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Select
-      maximum number of non-overlapping activities
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Select maximum number of
+      non-overlapping activities
     </div>
 
     <PseudocodeDisplay

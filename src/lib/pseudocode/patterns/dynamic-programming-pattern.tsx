@@ -8,11 +8,12 @@ export const DynamicProgrammingPatternTemplate = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm Paradigm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solving problems
-      with overlapping subproblems
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solving problems with overlapping
+      subproblems
     </div>
 
-    <PseudocodeDisplay code={`DP-PATTERN(n)
+    <PseudocodeDisplay
+      code={`DP-PATTERN(n)
     # Define state and dependencies
     state ← array[n+1]
 
@@ -32,7 +33,8 @@ export const DynamicProgrammingPatternTemplate = () => (
 # State: dp[i] represents solution for subproblem of size i
 # Base cases: dp[0] = 0, dp[1] = 1
 # Recurrence: dp[i] = dp[i-1] + dp[i-2]
-# Output: dp[5] = 5`} />
+# Output: dp[5] = 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

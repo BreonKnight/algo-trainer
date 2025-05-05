@@ -8,8 +8,8 @@ export const FractionalKnapsackPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Maximize
-      value while keeping weight under capacity
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Maximize value while keeping
+      weight under capacity
     </div>
 
     <PseudocodeDisplay

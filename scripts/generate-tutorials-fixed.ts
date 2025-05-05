@@ -213,10 +213,7 @@ const videoIds: Record<string, string> = {
   "Huffman Coding": "dQr4w9WgXcQ", // Placeholder
 };
 
-function generateTutorial(
-  algorithm: string,
-  category: AlgorithmCategory
-): Tutorial {
+function generateTutorial(algorithm: string, category: AlgorithmCategory): Tutorial {
   const id = algorithm.toLowerCase().replace(/[^a-z0-9]+/g, "-");
   const difficulty = getDifficulty(algorithm, category);
   const duration = getDuration(difficulty);
@@ -249,18 +246,14 @@ function getDifficulty(
   ) {
     return "beginner";
   }
-  if (
-    category === "searching" &&
-    ["Linear Search", "Binary Search"].includes(algorithm)
-  ) {
+  if (category === "searching" && ["Linear Search", "Binary Search"].includes(algorithm)) {
     return "beginner";
   }
 
   // Most graph algorithms and advanced sorting are intermediate
   if (
     category === "graph" ||
-    (category === "sorting" &&
-      ["Quick Sort", "Merge Sort", "Heap Sort"].includes(algorithm))
+    (category === "sorting" && ["Quick Sort", "Merge Sort", "Heap Sort"].includes(algorithm))
   ) {
     return "intermediate";
   }
@@ -282,10 +275,7 @@ function getDuration(difficulty: string): number {
   }
 }
 
-function getPrerequisites(
-  algorithm: string,
-  category: AlgorithmCategory
-): string[] {
+function getPrerequisites(algorithm: string, category: AlgorithmCategory): string[] {
   const prereqs: string[] = [];
 
   // Add category-specific prerequisites
@@ -309,20 +299,14 @@ function getPrerequisites(
   return prereqs;
 }
 
-function generateDescription(
-  algorithm: string,
-  category: AlgorithmCategory
-): string {
+function generateDescription(algorithm: string, category: AlgorithmCategory): string {
   return `${algorithm} is a ${category} algorithm that ${getAlgorithmPurpose(
     algorithm,
     category
   )}. This tutorial will cover the theory, implementation, and applications of ${algorithm}.`;
 }
 
-function getAlgorithmPurpose(
-  _algorithm: string,
-  category: AlgorithmCategory
-): string {
+function getAlgorithmPurpose(_algorithm: string, category: AlgorithmCategory): string {
   switch (category) {
     case "sorting":
       return "efficiently organizes data in a specific order";
@@ -354,17 +338,12 @@ function generatePythonImplementation(algorithm: string): string {
 
 function generateJavaScriptImplementation(algorithm: string): string {
   // This is a placeholder - in a real implementation, you would have actual implementations
-  return `function ${algorithm
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "_")}(input) {
+  return `function ${algorithm.toLowerCase().replace(/[^a-z0-9]+/g, "_")}(input) {
     // Implementation of ${algorithm}
 }`;
 }
 
-function generateQuiz(
-  algorithm: string,
-  category: AlgorithmCategory
-): QuizQuestion[] {
+function generateQuiz(algorithm: string, category: AlgorithmCategory): QuizQuestion[] {
   return [
     {
       id: "time-complexity",
@@ -436,10 +415,7 @@ function getApplicationOptions(): string[] {
   return options.sort(() => Math.random() - 0.5).slice(0, 4);
 }
 
-function getApplicationExplanation(
-  algorithm: string,
-  category: AlgorithmCategory
-): string {
+function getApplicationExplanation(algorithm: string, category: AlgorithmCategory): string {
   return `${algorithm} is commonly used in ${getApplicationContext(
     category
   )} due to its ${getAlgorithmStrength(algorithm)}.`;
@@ -465,8 +441,7 @@ function getApplicationContext(category: AlgorithmCategory): string {
 }
 
 function getAlgorithmStrength(algorithm: string): string {
-  if (algorithm.includes("Sort"))
-    return "efficient data organization capabilities";
+  if (algorithm.includes("Sort")) return "efficient data organization capabilities";
   if (algorithm.includes("Search")) return "fast search performance";
   return "optimal solution finding capabilities";
 }
@@ -488,11 +463,7 @@ function main() {
   const outputPath = path.join(__dirname, "../src/data/tutorials.json");
   fs.writeFileSync(outputPath, JSON.stringify(tutorials, null, 2));
 
-  console.log(
-    `Generated tutorials for ${
-      Object.values(algorithmList).flat().length
-    } algorithms`
-  );
+  console.log(`Generated tutorials for ${Object.values(algorithmList).flat().length} algorithms`);
   console.log(`Output written to ${outputPath}`);
 }
 

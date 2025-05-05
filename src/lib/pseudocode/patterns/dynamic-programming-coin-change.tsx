@@ -8,11 +8,12 @@ export const DynamicProgrammingCoinChangePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n*m) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Finding minimum
-      coins needed for amount
+      Time: O(n*m) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Finding minimum coins needed for
+      amount
     </div>
 
-    <PseudocodeDisplay code={`COIN-CHANGE(coins, amount)
+    <PseudocodeDisplay
+      code={`COIN-CHANGE(coins, amount)
     # Initialize DP array with infinity
     dp[0..amount] ← ∞
     dp[0] ← 0  # Base case: 0 coins needed for amount 0
@@ -32,7 +33,8 @@ export const DynamicProgrammingCoinChangePattern = () => (
 # Input: coins = [1, 2, 5], amount = 11
 # dp array after filling:
 # [0, 1, 1, 2, 2, 1, 2, 2, 3, 3, 2, 3]
-# Output: 3  # 5 + 5 + 1`} />
+# Output: 3  # 5 + 5 + 1`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

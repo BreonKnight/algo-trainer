@@ -4,17 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import {
-  Video,
-  Code,
-  FileText,
-  Book,
-  Check,
-  Clock,
-  Play,
-  Lock,
-  ArrowLeft,
-} from "lucide-react";
+import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from "lucide-react";
 import type { PatternKey } from "@/components/tutorials/types";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 import { Link } from "react-router-dom";
@@ -49,16 +39,11 @@ interface AlgorithmTutorialProps {
   tutorials: Tutorial[];
 }
 
-export function AlgorithmTutorial({
-  algorithm,
-  tutorials,
-}: AlgorithmTutorialProps) {
+export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialProps) {
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
   const [activeTab, setActiveTab] = useState("video");
-  const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(
-    tutorials[0] || null
-  );
+  const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(tutorials[0] || null);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<Language>("python");
@@ -148,9 +133,7 @@ export function AlgorithmTutorial({
               </TabsList>
             </Tabs>
             <div className="flex items-center gap-4 bg-secondary/20 px-4 py-2 rounded-xl backdrop-blur-sm">
-              <span className="text-sm font-medium text-secondary tracking-wide">
-                Progress
-              </span>
+              <span className="text-sm font-medium text-secondary tracking-wide">Progress</span>
               <Progress value={calculateProgress()} className="w-32 h-2" />
               <span className="text-sm font-medium text-main tracking-wide">
                 {Math.round(calculateProgress())}%
@@ -173,21 +156,14 @@ export function AlgorithmTutorial({
           </p>
           <ul className="space-y-4 mb-8">
             {availability.unmetPrerequisites.map((prereq) => (
-              <li
-                key={prereq}
-                className="flex items-center gap-3 text-secondary text-base"
-              >
+              <li key={prereq} className="flex items-center gap-3 text-secondary text-base">
                 <div className="h-2 w-2 rounded-full bg-accent2" />
                 <Link to={`/tutorials/${prereq}`}>
                   {tutorials.find((t) => t.id === prereq)?.title ||
                     prereq
                       .replace(/-/g, " ")
                       .split(/\s+/)
-                      .map(
-                        (word) =>
-                          word.charAt(0).toUpperCase() +
-                          word.slice(1).toLowerCase()
-                      )
+                      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
                       .join(" ")}
                 </Link>
               </li>
@@ -270,10 +246,7 @@ export function AlgorithmTutorial({
                 </p>
                 <Button
                   onClick={() => {
-                    localStorage.setItem(
-                      `tutorial-${currentTutorial?.id}`,
-                      "completed"
-                    );
+                    localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
                     setCurrentTutorial(null);
                     setActiveTab("overview");
                   }}
@@ -294,9 +267,7 @@ export function AlgorithmTutorial({
                 </h3>
                 {currentTutorial?.pseudocode && (
                   <div className="mb-8">
-                    <h4 className="text-xl font-semibold text-main mb-4">
-                      Pseudocode
-                    </h4>
+                    <h4 className="text-xl font-semibold text-main mb-4">Pseudocode</h4>
                     <PseudocodeDisplay code={currentTutorial.pseudocode} />
                   </div>
                 )}
@@ -309,10 +280,7 @@ export function AlgorithmTutorial({
                 </div>
                 <Button
                   onClick={() => {
-                    localStorage.setItem(
-                      `tutorial-${currentTutorial?.id}`,
-                      "completed"
-                    );
+                    localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
                     setCurrentTutorial(null);
                     setActiveTab("overview");
                   }}
@@ -369,9 +337,7 @@ export function AlgorithmTutorial({
                       {showResults && (
                         <div className="mt-4 p-4 rounded-lg bg-secondary/10 border border-secondary/20">
                           <p className="text-base text-main leading-relaxed">
-                            <span className="font-semibold text-accent2">
-                              Explanation:
-                            </span>{" "}
+                            <span className="font-semibold text-accent2">Explanation:</span>{" "}
                             {question.explanation}
                           </p>
                         </div>
@@ -390,10 +356,7 @@ export function AlgorithmTutorial({
                   <Button
                     className="bg-accent3 hover:bg-accent3/90 text-background gap-2 text-base"
                     onClick={() => {
-                      localStorage.setItem(
-                        `tutorial-${currentTutorial?.id}`,
-                        "completed"
-                      );
+                      localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
                       setCurrentTutorial(null);
                       setActiveTab("overview");
                     }}
@@ -416,9 +379,7 @@ export function AlgorithmTutorial({
                   <div className="flex items-start gap-4 p-6 rounded-lg bg-secondary/10 border border-secondary/20">
                     <Book className="h-6 w-6 mt-1 text-accent2" />
                     <div>
-                      <h4 className="font-semibold text-xl mb-4 tracking-tight">
-                        Further Reading
-                      </h4>
+                      <h4 className="font-semibold text-xl mb-4 tracking-tight">Further Reading</h4>
                       <ul className="space-y-4 text-secondary">
                         <li className="flex items-center gap-3 text-base">
                           <div className="h-2 w-2 rounded-full bg-accent2" />
@@ -434,9 +395,7 @@ export function AlgorithmTutorial({
                   <div className="flex items-start gap-4 p-6 rounded-lg bg-secondary/10 border border-secondary/20">
                     <Play className="h-6 w-6 mt-1 text-accent3" />
                     <div>
-                      <h4 className="font-semibold text-xl mb-4 tracking-tight">
-                        Related Videos
-                      </h4>
+                      <h4 className="font-semibold text-xl mb-4 tracking-tight">Related Videos</h4>
                       <ul className="space-y-4 text-secondary">
                         <li className="flex items-center gap-3 text-base">
                           <div className="h-2 w-2 rounded-full bg-accent3" />

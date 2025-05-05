@@ -43,9 +43,7 @@ function hasPseudocode(content: string): boolean {
 
 // Check if content contains implementation-style code
 function hasImplementationCode(content: string): boolean {
-  return Object.values(implementationIndicators).some((pattern) =>
-    pattern.test(content)
-  );
+  return Object.values(implementationIndicators).some((pattern) => pattern.test(content));
 }
 
 // Check for CLRS-style indicators

@@ -8,11 +8,12 @@ export const TernarySearchAlgorithmPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Array)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log₃ n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find
-      maximum/minimum in unimodal function
+      Time: O(log₃ n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find maximum/minimum in unimodal
+      function
     </div>
 
-    <PseudocodeDisplay code={`# Ternary Search: Find maximum/minimum in unimodal function
+    <PseudocodeDisplay
+      code={`# Ternary Search: Find maximum/minimum in unimodal function
 # Input: Array A[1..n], target value t
 # Output: Index of target value, or -1 if not found
 
@@ -49,7 +50,8 @@ Algorithm TERNARY-SEARCH(A, t)
 # Step 2: left = 5, right = 5, mid1 = 5, mid2 = 5
 #         A[5] = 5 = t
 #
-# Output: 5`} />
+# Output: 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

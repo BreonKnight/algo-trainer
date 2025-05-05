@@ -89,9 +89,7 @@ export const PatternFilters: React.FC<PatternFiltersProps> = ({
             {filter.field === "category" ? (
               <select
                 value={filter.value}
-                onChange={(e) =>
-                  onUpdateFilter(index, { ...filter, value: e.target.value })
-                }
+                onChange={(e) => onUpdateFilter(index, { ...filter, value: e.target.value })}
                 className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               >
                 <option value="">Select a category</option>
@@ -105,9 +103,7 @@ export const PatternFilters: React.FC<PatternFiltersProps> = ({
               <input
                 type="text"
                 value={filter.value}
-                onChange={(e) =>
-                  onUpdateFilter(index, { ...filter, value: e.target.value })
-                }
+                onChange={(e) => onUpdateFilter(index, { ...filter, value: e.target.value })}
                 className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 placeholder="Enter value..."
               />

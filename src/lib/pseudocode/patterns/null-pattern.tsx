@@ -8,11 +8,11 @@ export const NullPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Pattern)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Represent absence
-      of value
+      Time: O(1) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Represent absence of value
     </div>
 
-    <PseudocodeDisplay code={`NULL-PATTERN()
+    <PseudocodeDisplay
+      code={`NULL-PATTERN()
 1  return NIL
 
 HANDLE-NULL(value)
@@ -25,7 +25,8 @@ HANDLE-NULL(value)
 // Output: NIL
 //
 // Input: value = 5
-// Output: 10`} />
+// Output: 10`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

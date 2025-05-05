@@ -1,14 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
-import {
-  Play,
-  Pause,
-  SkipBack,
-  SkipForward,
-  RotateCcw,
-  Bug,
-} from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, RotateCcw, Bug } from "lucide-react";
 import { PatternKey } from "./types";
 import { CodeEditor } from "./CodeEditor";
 
@@ -35,10 +28,7 @@ interface DebugStep {
   description: string;
 }
 
-export function AlgorithmDebugger({
-  algorithm,
-  initialCode,
-}: AlgorithmDebuggerProps) {
+export function AlgorithmDebugger({ algorithm, initialCode }: AlgorithmDebuggerProps) {
   const [code, setCode] = useState(initialCode);
   const [currentLine, setCurrentLine] = useState(-1);
   const [variables, setVariables] = useState<Record<string, VariableValue>>({});
@@ -188,8 +178,7 @@ export function AlgorithmDebugger({
             mid: { value: 4, type: "number" },
           },
           callStack: ["main"],
-          description:
-            "Target is greater than middle element, search right half",
+          description: "Target is greater than middle element, search right half",
         },
         {
           line: 5,
@@ -311,21 +300,11 @@ export function AlgorithmDebugger({
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold">Code</h3>
           <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={startDebugging}
-              disabled={isDebugging}
-            >
+            <Button variant="outline" size="sm" onClick={startDebugging} disabled={isDebugging}>
               <Bug className="h-4 w-4 mr-1" />
               Debug
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={resetDebugging}
-              disabled={!isDebugging}
-            >
+            <Button variant="outline" size="sm" onClick={resetDebugging} disabled={!isDebugging}>
               <RotateCcw className="h-4 w-4 mr-1" />
               Reset
             </Button>
@@ -354,16 +333,8 @@ export function AlgorithmDebugger({
               >
                 <SkipBack className="h-4 w-4" />
               </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setIsPlaying(!isPlaying)}
-              >
-                {isPlaying ? (
-                  <Pause className="h-4 w-4" />
-                ) : (
-                  <Play className="h-4 w-4" />
-                )}
+              <Button variant="outline" size="icon" onClick={() => setIsPlaying(!isPlaying)}>
+                {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
               </Button>
               <Button
                 variant="outline"
@@ -414,9 +385,7 @@ export function AlgorithmDebugger({
                   {currentStep + 1} / {debugSteps.length}
                 </span>
               </div>
-              <div className="text-muted-foreground">
-                {debugSteps[currentStep].description}
-              </div>
+              <div className="text-muted-foreground">{debugSteps[currentStep].description}</div>
             </div>
           </Card>
         )}

@@ -8,11 +8,11 @@ export const CountingSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n+k) &nbsp;|&nbsp; Space: O(n+k) &nbsp;|&nbsp; Use: Sorting
-      integers with small range
+      Time: O(n+k) &nbsp;|&nbsp; Space: O(n+k) &nbsp;|&nbsp; Use: Sorting integers with small range
     </div>
 
-    <PseudocodeDisplay code={`// Standard Counting Sort
+    <PseudocodeDisplay
+      code={`// Standard Counting Sort
 COUNTING-SORT(A):
     # Find maximum value
     max_val = max(A)
@@ -113,37 +113,33 @@ COUNTING-SORT-RADIX(A, exp):
 
     # Copy output to A
     for i in range(n):
-        A[i] = output[i]`} />
+        A[i] = output[i]`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Count:</span> Count
-        occurrences of each element
+        <span className="font-semibold text-accent">Count:</span> Count occurrences of each element
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Cumulate:</span> Compute
-        cumulative counts
+        <span className="font-semibold text-accent">Cumulate:</span> Compute cumulative counts
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Place:</span> Place elements
-        in sorted order
+        <span className="font-semibold text-accent">Place:</span> Place elements in sorted order
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Counting Sort
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Counting Sort</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [4, 2, 2, 8, 3, 3, 1]
 
@@ -158,9 +154,7 @@ Output: [1, 2, 2, 3, 3, 4, 8]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Negative Numbers
-      </span>
+      <span className="font-semibold text-accent">Example: Negative Numbers</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [-5, -10, 0, -3, 8, 5, -1, 10]
 

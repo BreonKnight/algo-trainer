@@ -8,11 +8,11 @@ export const RabinKarpPattern = () => (
       <span className="ml-2 text-xs text-secondary">(String)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n + m) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Pattern
-      matching with rolling hash
+      Time: O(n + m) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Pattern matching with rolling hash
     </div>
 
-    <PseudocodeDisplay code={`# Rabin-Karp: Pattern matching with rolling hash
+    <PseudocodeDisplay
+      code={`# Rabin-Karp: Pattern matching with rolling hash
 # Input: Text T[1..n], pattern P[1..m]
 # Output: Starting indices where P occurs in T
 
@@ -72,7 +72,8 @@ Algorithm RABIN-KARP(T, P)
 # Step 9: t = hash("R GE") = 71
 #         Match found at index 10
 #
-# Output: Pattern found at indices 0 and 10`} />
+# Output: Pattern found at indices 0 and 10`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,14 +1,5 @@
-import {
-  DndContext,
-  closestCenter,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { ChevronDown, ChevronUp, LayoutGridIcon } from "lucide-react";
 import { PatternCard } from "../PatternCard";
 import { CodeEditor } from "../CodeEditor";
@@ -122,29 +113,19 @@ export function PanelLayout({
                   theme === "nord"
                     ? "text-white/90 hover:text-white hover:bg-white/10"
                     : "text-secondary hover:text-main hover:bg-secondary/20",
-                  JSON.stringify(layout) === JSON.stringify(panelOrder) &&
-                    "bg-accent/10"
+                  JSON.stringify(layout) === JSON.stringify(panelOrder) && "bg-accent/10"
                 )}
               >
                 <span>{name}</span>
-                <span className="text-xs opacity-70">
-                  {layout.map((p) => p[0]).join(" → ")}
-                </span>
+                <span className="text-xs opacity-70">{layout.map((p) => p[0]).join(" → ")}</span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext
-          items={panelOrder}
-          strategy={verticalListSortingStrategy}
-        >
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={panelOrder} strategy={verticalListSortingStrategy}>
           <div
             className="flex flex-col md:grid md:grid-cols-3 gap-4 w-full"
             ref={(el) => {
@@ -205,11 +186,9 @@ export function PanelLayout({
                             setUserCode={setUserCode}
                             onRunCode={() => {
                               // Run code in REPL
-                              const replCard =
-                                document.querySelector(".repl-card");
+                              const replCard = document.querySelector(".repl-card");
                               if (replCard) {
-                                const runButton =
-                                  replCard.querySelector("button[onClick]");
+                                const runButton = replCard.querySelector("button[onClick]");
                                 if (runButton) {
                                   (runButton as HTMLButtonElement).click();
                                 }

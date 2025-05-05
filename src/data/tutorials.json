@@ -17,28 +17,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Bubble Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Bubble Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Bubble Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Bubble Sort is O(n) for auxiliary space."
         },
@@ -73,28 +59,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Quick Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Quick Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Quick Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Quick Sort is O(n) for auxiliary space."
         },
@@ -128,28 +100,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Merge Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Merge Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Merge Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Merge Sort is O(n) for auxiliary space."
         },
@@ -183,28 +141,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Insertion Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Insertion Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Insertion Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Insertion Sort is O(n) for auxiliary space."
         },
@@ -238,28 +182,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Selection Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Selection Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Selection Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Selection Sort is O(n) for auxiliary space."
         },
@@ -293,28 +223,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Heap Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Heap Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Heap Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Heap Sort is O(n) for auxiliary space."
         },
@@ -348,28 +264,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Counting Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Counting Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Counting Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Counting Sort is O(n) for auxiliary space."
         },
@@ -403,28 +305,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Radix Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Radix Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Radix Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Radix Sort is O(n) for auxiliary space."
         },
@@ -458,28 +346,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Bucket Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Bucket Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Bucket Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Bucket Sort is O(n) for auxiliary space."
         },
@@ -513,28 +387,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Shell Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Shell Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Shell Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Shell Sort is O(n) for auxiliary space."
         },
@@ -568,28 +428,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Tim Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Tim Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Tim Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Tim Sort is O(n) for auxiliary space."
         },
@@ -625,28 +471,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Binary Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Binary Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Binary Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Binary Search is O(1) as it uses constant space."
         },
@@ -680,28 +512,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Linear Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Linear Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Linear Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Linear Search is O(1) as it uses constant space."
         },
@@ -735,28 +553,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Jump Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Jump Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Jump Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Jump Search is O(1) as it uses constant space."
         },
@@ -790,28 +594,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Interpolation Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Interpolation Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Interpolation Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Interpolation Search is O(1) as it uses constant space."
         },
@@ -845,28 +635,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Exponential Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Exponential Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Exponential Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Exponential Search is O(1) as it uses constant space."
         },
@@ -900,28 +676,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Fibonacci Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Fibonacci Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Fibonacci Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Fibonacci Search is O(1) as it uses constant space."
         },
@@ -957,28 +719,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Breadth-First Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Breadth-First Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Breadth-First Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Breadth-First Search is O(1) as it uses constant space."
         },
@@ -1012,28 +760,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Depth-First Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Depth-First Search is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Depth-First Search?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Depth-First Search is O(1) as it uses constant space."
         },
@@ -1067,28 +801,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Dijkstra's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Dijkstra's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Dijkstra's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Dijkstra's Algorithm is O(n) for storing intermediate results."
         },
@@ -1122,28 +842,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Bellman-Ford Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Bellman-Ford Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Bellman-Ford Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Bellman-Ford Algorithm is O(n) for storing intermediate results."
         },
@@ -1177,28 +883,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Floyd-Warshall Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Floyd-Warshall Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Floyd-Warshall Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Floyd-Warshall Algorithm is O(n) for storing intermediate results."
         },
@@ -1232,28 +924,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Kruskal's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Kruskal's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Kruskal's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Kruskal's Algorithm is O(n) for storing intermediate results."
         },
@@ -1287,28 +965,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Prim's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Prim's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Prim's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Prim's Algorithm is O(n) for storing intermediate results."
         },
@@ -1342,28 +1006,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Topological Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 3,
           "explanation": "The time complexity of Topological Sort is O(n log n) in the average case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Topological Sort?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Topological Sort is O(n) for auxiliary space."
         },
@@ -1397,28 +1047,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Kosaraju's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Kosaraju's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Kosaraju's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Kosaraju's Algorithm is O(n) for storing intermediate results."
         },
@@ -1452,28 +1088,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Tarjan's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Tarjan's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Tarjan's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Tarjan's Algorithm is O(n) for storing intermediate results."
         },
@@ -1507,28 +1129,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Articulation Points?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Articulation Points is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Articulation Points?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Articulation Points is O(n) for storing intermediate results."
         },
@@ -1562,28 +1170,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Bridges?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Bridges is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Bridges?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Bridges is O(n) for storing intermediate results."
         },
@@ -1617,28 +1211,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Strongly Connected Components?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Strongly Connected Components is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Strongly Connected Components?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Strongly Connected Components is O(n) for storing intermediate results."
         },
@@ -1672,28 +1252,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Biconnected Components?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Biconnected Components is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Biconnected Components?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Biconnected Components is O(n) for storing intermediate results."
         },
@@ -1727,28 +1293,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Eulerian Path?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Eulerian Path is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Eulerian Path?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Eulerian Path is O(n) for storing intermediate results."
         },
@@ -1782,28 +1334,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Hamiltonian Path?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Hamiltonian Path is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Hamiltonian Path?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Hamiltonian Path is O(n) for storing intermediate results."
         },
@@ -1837,28 +1375,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Johnson's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Johnson's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Johnson's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Johnson's Algorithm is O(n) for storing intermediate results."
         },
@@ -1892,28 +1416,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Ford-Fulkerson Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Ford-Fulkerson Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Ford-Fulkerson Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Ford-Fulkerson Algorithm is O(n) for storing intermediate results."
         },
@@ -1947,28 +1457,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Edmonds-Karp Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Edmonds-Karp Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Edmonds-Karp Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Edmonds-Karp Algorithm is O(n) for storing intermediate results."
         },
@@ -2002,28 +1498,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Dinic's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Dinic's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Dinic's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Dinic's Algorithm is O(n) for storing intermediate results."
         },
@@ -2057,28 +1539,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Push-Relabel Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Push-Relabel Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Push-Relabel Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Push-Relabel Algorithm is O(n) for storing intermediate results."
         },
@@ -2112,28 +1580,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Hopcroft-Karp Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Hopcroft-Karp Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Hopcroft-Karp Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Hopcroft-Karp Algorithm is O(n) for storing intermediate results."
         },
@@ -2167,28 +1621,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Kuhn's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Kuhn's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Kuhn's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Kuhn's Algorithm is O(n) for storing intermediate results."
         },
@@ -2222,28 +1662,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Hungarian Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Hungarian Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Hungarian Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Hungarian Algorithm is O(n) for storing intermediate results."
         },
@@ -2277,28 +1703,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Gale-Shapley Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Gale-Shapley Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Gale-Shapley Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Gale-Shapley Algorithm is O(n) for storing intermediate results."
         },
@@ -2334,28 +1746,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Knapsack Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Knapsack Problem is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Knapsack Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Knapsack Problem is O(n) for storing intermediate results."
         },
@@ -2389,28 +1787,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Longest Common Subsequence?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Longest Common Subsequence is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Longest Common Subsequence?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Longest Common Subsequence is O(n) for storing intermediate results."
         },
@@ -2444,28 +1828,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Longest Increasing Subsequence?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Longest Increasing Subsequence is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Longest Increasing Subsequence?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Longest Increasing Subsequence is O(n) for storing intermediate results."
         },
@@ -2499,28 +1869,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Matrix Chain Multiplication?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Matrix Chain Multiplication is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Matrix Chain Multiplication?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Matrix Chain Multiplication is O(n) for storing intermediate results."
         },
@@ -2554,28 +1910,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Coin Change Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Coin Change Problem is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Coin Change Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Coin Change Problem is O(n) for storing intermediate results."
         },
@@ -2609,28 +1951,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Edit Distance?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Edit Distance is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Edit Distance?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Edit Distance is O(n) for storing intermediate results."
         },
@@ -2664,28 +1992,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Rod Cutting?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Rod Cutting is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Rod Cutting?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Rod Cutting is O(n) for storing intermediate results."
         },
@@ -2719,28 +2033,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Subset Sum Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Subset Sum Problem is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Subset Sum Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Subset Sum Problem is O(n) for storing intermediate results."
         },
@@ -2774,28 +2074,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Partition Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Partition Problem is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Partition Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Partition Problem is O(n) for storing intermediate results."
         },
@@ -2829,28 +2115,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Word Break Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Word Break Problem is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Word Break Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Word Break Problem is O(n) for storing intermediate results."
         },
@@ -2884,28 +2156,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Palindrome Partitioning?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Palindrome Partitioning is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Palindrome Partitioning?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Palindrome Partitioning is O(n) for storing intermediate results."
         },
@@ -2939,28 +2197,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Optimal Binary Search Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The time complexity of Optimal Binary Search Tree is O(n) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Optimal Binary Search Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 0,
           "explanation": "The space complexity of Optimal Binary Search Tree is O(1) as it uses constant space."
         },
@@ -2994,28 +2238,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Activity Selection?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Activity Selection is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Activity Selection?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Activity Selection is O(n) for storing intermediate results."
         },
@@ -3049,28 +2279,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Job Sequencing Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Job Sequencing Problem is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Job Sequencing Problem?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Job Sequencing Problem is O(n) for storing intermediate results."
         },
@@ -3104,28 +2320,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Fractional Knapsack?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Fractional Knapsack is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Fractional Knapsack?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Fractional Knapsack is O(n) for storing intermediate results."
         },
@@ -3161,28 +2363,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of KMP Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of KMP Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of KMP Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of KMP Algorithm is O(n) for storing intermediate results."
         },
@@ -3216,28 +2404,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Rabin-Karp Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Rabin-Karp Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Rabin-Karp Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Rabin-Karp Algorithm is O(n) for storing intermediate results."
         },
@@ -3271,28 +2445,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Boyer-Moore Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Boyer-Moore Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Boyer-Moore Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Boyer-Moore Algorithm is O(n) for storing intermediate results."
         },
@@ -3326,28 +2486,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Z Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Z Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Z Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Z Algorithm is O(n) for storing intermediate results."
         },
@@ -3381,28 +2527,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Manacher's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Manacher's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Manacher's Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Manacher's Algorithm is O(n) for storing intermediate results."
         },
@@ -3436,28 +2568,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Aho-Corasick Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Aho-Corasick Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Aho-Corasick Algorithm?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Aho-Corasick Algorithm is O(n) for storing intermediate results."
         },
@@ -3491,28 +2609,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Suffix Automaton?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Suffix Automaton is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Suffix Automaton?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Suffix Automaton is O(n) for storing intermediate results."
         },
@@ -3548,28 +2652,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Trie?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Trie is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Trie?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Trie is O(n) for storing intermediate results."
         },
@@ -3603,28 +2693,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Suffix Array?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Suffix Array is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Suffix Array?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Suffix Array is O(n) for storing intermediate results."
         },
@@ -3658,28 +2734,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Suffix Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Suffix Tree is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Suffix Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Suffix Tree is O(n) for storing intermediate results."
         },
@@ -3713,28 +2775,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Fenwick Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Fenwick Tree is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Fenwick Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Fenwick Tree is O(n) for storing intermediate results."
         },
@@ -3768,28 +2816,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Segment Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Segment Tree is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Segment Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Segment Tree is O(n) for storing intermediate results."
         },
@@ -3823,28 +2857,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Binary Indexed Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Binary Indexed Tree is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Binary Indexed Tree?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Binary Indexed Tree is O(n) for storing intermediate results."
         },
@@ -3878,28 +2898,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Sparse Table?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Sparse Table is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Sparse Table?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Sparse Table is O(n) for storing intermediate results."
         },
@@ -3933,28 +2939,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Disjoint Set Union?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Disjoint Set Union is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Disjoint Set Union?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Disjoint Set Union is O(n) for storing intermediate results."
         },
@@ -3988,28 +2980,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Union Find?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Union Find is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Union Find?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Union Find is O(n) for storing intermediate results."
         },
@@ -4043,28 +3021,14 @@
         {
           "id": "time-complexity",
           "question": "What is the time complexity of Huffman Coding?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
           "explanation": "The time complexity of Huffman Coding is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
           "question": "What is the space complexity of Huffman Coding?",
-          "options": [
-            "O(1)",
-            "O(log n)",
-            "O(n)",
-            "O(n log n)",
-            "O(n²)",
-            "O(2ⁿ)"
-          ],
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
           "explanation": "The space complexity of Huffman Coding is O(n) for storing intermediate results."
         },

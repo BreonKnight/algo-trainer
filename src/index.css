@@ -506,11 +506,7 @@ textarea,
 }
 
 .bg-background\/95 {
-  background-color: color-mix(
-    in srgb,
-    var(--bg-background) 95%,
-    transparent
-  ) !important;
+  background-color: color-mix(in srgb, var(--bg-background) 95%, transparent) !important;
 }
 
 .text-main {

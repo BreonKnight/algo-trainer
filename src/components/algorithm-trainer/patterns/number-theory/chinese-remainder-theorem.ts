@@ -4,8 +4,7 @@ export const chineseRemainderTheoremPattern: AlgorithmPattern = {
   title: "Chinese Remainder Theorem",
   description:
     "A theorem that gives a unique solution to simultaneous congruences with pairwise coprime moduli. It's useful for solving systems of linear congruences.",
-  timeComplexity:
-    "O(n log M), where n is the number of congruences and M is the product of moduli",
+  timeComplexity: "O(n log M), where n is the number of congruences and M is the product of moduli",
   spaceComplexity: "O(1)",
   pseudocode: `
 1. Compute product of all moduli: M = m1 * m2 * ... * mn

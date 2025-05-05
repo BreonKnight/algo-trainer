@@ -8,11 +8,11 @@ export const ManachersAlgorithmPattern = () => (
       <span className="ml-2 text-xs text-secondary">(String)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find longest
-      palindromic substring
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find longest palindromic substring
     </div>
 
-    <PseudocodeDisplay code={`# Manacher's Algorithm: Find longest palindromic substring
+    <PseudocodeDisplay
+      code={`# Manacher's Algorithm: Find longest palindromic substring
 # Input: String S[1..n]
 # Output: Longest palindromic substring in S
 
@@ -68,7 +68,8 @@ Algorithm MANACHER(S)
 # Step 2: P = [0, 1, 0, 3, 0, 1, 0, 1, 0, 1, 0]
 # Step 3: max_len = 3, center = 4
 #
-# Output: "bab"`} />
+# Output: "bab"`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

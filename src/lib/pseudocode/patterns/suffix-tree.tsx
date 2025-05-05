@@ -8,11 +8,11 @@ export const SuffixTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient string
-      operations
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient string operations
     </div>
 
-    <PseudocodeDisplay code={`// Suffix tree node structure
+    <PseudocodeDisplay
+      code={`// Suffix tree node structure
 SUFFIX-NODE:
     start
     end
@@ -97,7 +97,8 @@ BUILD-SUFFIX-TREE(S):
 //            |
 //            a
 //            |
-//            $`} />
+//            $`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

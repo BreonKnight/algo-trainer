@@ -8,11 +8,12 @@ export const StateCompressionDPPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Dynamic Programming)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n * 2^m) &nbsp;|&nbsp; Space: O(2^m) &nbsp;|&nbsp; Use: Solve
-      problems with state represented as bits
+      Time: O(n * 2^m) &nbsp;|&nbsp; Space: O(2^m) &nbsp;|&nbsp; Use: Solve problems with state
+      represented as bits
     </div>
 
-    <PseudocodeDisplay code={`# State Compression DP: Solve problems with state represented as bits
+    <PseudocodeDisplay
+      code={`# State Compression DP: Solve problems with state represented as bits
 # Input: Grid G[1..n][1..m]
 # Output: Maximum value achievable
 
@@ -90,7 +91,8 @@ Algorithm STATE-COMPRESSION-DP(G)
 # Step 4: Process third row
 #         curr = [0, 7, 8, 15, -∞, -∞, -∞, -∞]
 #
-# Output: 15`} />
+# Output: 15`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

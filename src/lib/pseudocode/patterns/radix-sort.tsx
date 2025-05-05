@@ -8,11 +8,12 @@ export const RadixSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(d(n+k)) &nbsp;|&nbsp; Space: O(n+k) &nbsp;|&nbsp; Use: Sort
-      numbers by processing individual digits
+      Time: O(d(n+k)) &nbsp;|&nbsp; Space: O(n+k) &nbsp;|&nbsp; Use: Sort numbers by processing
+      individual digits
     </div>
 
-    <PseudocodeDisplay code={`RADIX-SORT(A)
+    <PseudocodeDisplay
+      code={`RADIX-SORT(A)
 1  // Find maximum number to know number of digits
 2  max_num = max(A)
 3  exp = 1
@@ -57,7 +58,8 @@ COUNTING-SORT(A, exp)
 //
 // Step 3 (exp=100):
 // Count: [6, 1, 1, 0, 0, 0, 0, 0, 0, 0]
-// Output: [2, 24, 45, 66, 75, 90, 170, 802]`} />
+// Output: [2, 24, 45, 66, 75, 90, 170, 802]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

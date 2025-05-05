@@ -56,9 +56,7 @@ export function RightControls() {
               ) : (
                 <Sun className="h-4 w-4 mr-2 group-hover:animate-pulse" />
               )}
-              <span className="font-medium truncate max-w-[120px]">
-                {formatThemeName(theme)}
-              </span>
+              <span className="font-medium truncate max-w-[120px]">{formatThemeName(theme)}</span>
               <ChevronDown className="h-4 w-4 ml-2 opacity-50 group-hover:opacity-100 transition-opacity" />
             </Button>
           </DropdownMenuTrigger>
@@ -115,9 +113,7 @@ export function RightControls() {
       </div>
       <div className="w-full mt-3 px-4">
         <Progress value={60} />
-        <div className="text-xs text-muted-foreground text-center mt-1">
-          Session Progress: 60%
-        </div>
+        <div className="text-xs text-muted-foreground text-center mt-1">Session Progress: 60%</div>
       </div>
     </div>
   );

@@ -8,8 +8,7 @@ export const BacktrackingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n!) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Exhaustive search
-      with pruning
+      Time: O(n!) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Exhaustive search with pruning
     </div>
 
     <PseudocodeDisplay
@@ -63,24 +62,22 @@ SOLVE-SUBSET-SUM(S, i, target):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Choose:</span> Make a choice
-        at current state
+        <span className="font-semibold text-accent">Choose:</span> Make a choice at current state
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Explore:</span> Recursively
-        try next choices
+        <span className="font-semibold text-accent">Explore:</span> Recursively try next choices
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Backtrack:</span> Undo
-        choice if it leads to dead end
+        <span className="font-semibold text-accent">Backtrack:</span> Undo choice if it leads to
+        dead end
       </span>
     </div>
 

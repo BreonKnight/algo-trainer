@@ -27,12 +27,7 @@ import {
   Info,
   ChevronRight,
 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { Separator } from "../ui/separator";
 import { sortingPatterns } from "./patterns/sorting";
 import { NavigationBar } from "./layout/NavigationBar";
@@ -64,17 +59,16 @@ export function AlgorithmComparison({
   algorithms = Object.keys(sortingPatterns) as PatternKey[],
 }: AlgorithmComparisonProps) {
   const { theme } = useTheme();
-  const [selectedAlgorithms, setSelectedAlgorithms] = useState<
-    [PatternKey, PatternKey]
-  >([algorithms[0], algorithms[1]]);
+  const [selectedAlgorithms, setSelectedAlgorithms] = useState<[PatternKey, PatternKey]>([
+    algorithms[0],
+    algorithms[1],
+  ]);
   const [data, setData] = useState<number[]>([5, 2, 8, 1, 9, 3, 7, 4, 6]);
   const [arraySize, setArraySize] = useState(10);
   const [minValue, setMinValue] = useState(1);
   const [maxValue, setMaxValue] = useState(100);
   const [isRacing, setIsRacing] = useState(false);
-  const [metrics, setMetrics] = useState<
-    [PerformanceMetrics, PerformanceMetrics]
-  >([
+  const [metrics, setMetrics] = useState<[PerformanceMetrics, PerformanceMetrics]>([
     { comparisons: 0, swaps: 0, time: 0 },
     { comparisons: 0, swaps: 0, time: 0 },
   ]);
@@ -87,9 +81,7 @@ export function AlgorithmComparison({
     setData(newArray);
   };
 
-  const generatePresetPattern = (
-    pattern: "random" | "nearly-sorted" | "reverse-sorted"
-  ) => {
+  const generatePresetPattern = (pattern: "random" | "nearly-sorted" | "reverse-sorted") => {
     let newArray = Array.from(
       { length: arraySize },
       () => Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
@@ -138,10 +130,7 @@ export function AlgorithmComparison({
     setIsRacing(false);
   };
 
-  const handleRaceComplete = (
-    index: number,
-    finalMetrics: PerformanceMetrics
-  ) => {
+  const handleRaceComplete = (index: number, finalMetrics: PerformanceMetrics) => {
     setMetrics((prev) => {
       const newMetrics = [...prev];
       newMetrics[index] = finalMetrics;
@@ -178,9 +167,7 @@ export function AlgorithmComparison({
 
   const buttonClasses = cn(
     "transition-all duration-200 rounded-lg",
-    isDarkTheme
-      ? "hover:bg-accent/20 border-border/50"
-      : "hover:bg-accent/10 border-border"
+    isDarkTheme ? "hover:bg-accent/20 border-border/50" : "hover:bg-accent/10 border-border"
   );
 
   const iconContainerClasses = cn(
@@ -199,28 +186,19 @@ export function AlgorithmComparison({
         <h1
           className="text-2xl font-extrabold text-transparent bg-clip-text text-center animate-gradient-x drop-shadow-lg tracking-tight select-none"
           style={{
-            backgroundImage:
-              "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+            backgroundImage: "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
           }}
         >
           Algorithm Comparison
         </h1>
         <NavigationBar />
       </div>
-      <div
-        className={cn(
-          "flex flex-col gap-8 w-full max-w-7xl px-6 py-12",
-          textClasses
-        )}
-      >
+      <div className={cn("flex flex-col gap-8 w-full max-w-7xl px-6 py-12", textClasses)}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
           <div className="lg:col-span-2 space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card
-                className={cn(
-                  cardClasses,
-                  "hover:scale-[1.02] transition-transform duration-200"
-                )}
+                className={cn(cardClasses, "hover:scale-[1.02] transition-transform duration-200")}
               >
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
@@ -247,88 +225,60 @@ export function AlgorithmComparison({
                   </div>
                   <div className="space-y-6">
                     <div className="space-y-3">
-                      <Label
-                        className={cn("text-sm font-medium", mutedTextClasses)}
-                      >
+                      <Label className={cn("text-sm font-medium", mutedTextClasses)}>
                         Algorithm 1
                       </Label>
                       <Select
                         value={selectedAlgorithms[0]}
                         onValueChange={(value) =>
-                          setSelectedAlgorithms([
-                            value as PatternKey,
-                            selectedAlgorithms[1],
-                          ])
+                          setSelectedAlgorithms([value as PatternKey, selectedAlgorithms[1]])
                         }
                       >
-                        <SelectTrigger
-                          className={cn("w-full h-12", buttonClasses)}
-                        >
+                        <SelectTrigger className={cn("w-full h-12", buttonClasses)}>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {Object.entries(sortingCategories).map(
-                            ([category, algorithms]) => (
-                              <SelectGroup key={category}>
-                                <SelectLabel
-                                  className={cn(
-                                    "text-sm font-medium",
-                                    mutedTextClasses
-                                  )}
-                                >
-                                  {category}
-                                </SelectLabel>
-                                {algorithms.map((algo) => (
-                                  <SelectItem key={algo} value={algo}>
-                                    {algo}
-                                  </SelectItem>
-                                ))}
-                              </SelectGroup>
-                            )
-                          )}
+                          {Object.entries(sortingCategories).map(([category, algorithms]) => (
+                            <SelectGroup key={category}>
+                              <SelectLabel className={cn("text-sm font-medium", mutedTextClasses)}>
+                                {category}
+                              </SelectLabel>
+                              {algorithms.map((algo) => (
+                                <SelectItem key={algo} value={algo}>
+                                  {algo}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-3">
-                      <Label
-                        className={cn("text-sm font-medium", mutedTextClasses)}
-                      >
+                      <Label className={cn("text-sm font-medium", mutedTextClasses)}>
                         Algorithm 2
                       </Label>
                       <Select
                         value={selectedAlgorithms[1]}
                         onValueChange={(value) =>
-                          setSelectedAlgorithms([
-                            selectedAlgorithms[0],
-                            value as PatternKey,
-                          ])
+                          setSelectedAlgorithms([selectedAlgorithms[0], value as PatternKey])
                         }
                       >
-                        <SelectTrigger
-                          className={cn("w-full h-12", buttonClasses)}
-                        >
+                        <SelectTrigger className={cn("w-full h-12", buttonClasses)}>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {Object.entries(sortingCategories).map(
-                            ([category, algorithms]) => (
-                              <SelectGroup key={category}>
-                                <SelectLabel
-                                  className={cn(
-                                    "text-sm font-medium",
-                                    mutedTextClasses
-                                  )}
-                                >
-                                  {category}
-                                </SelectLabel>
-                                {algorithms.map((algo) => (
-                                  <SelectItem key={algo} value={algo}>
-                                    {algo}
-                                  </SelectItem>
-                                ))}
-                              </SelectGroup>
-                            )
-                          )}
+                          {Object.entries(sortingCategories).map(([category, algorithms]) => (
+                            <SelectGroup key={category}>
+                              <SelectLabel className={cn("text-sm font-medium", mutedTextClasses)}>
+                                {category}
+                              </SelectLabel>
+                              {algorithms.map((algo) => (
+                                <SelectItem key={algo} value={algo}>
+                                  {algo}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -337,10 +287,7 @@ export function AlgorithmComparison({
               </Card>
 
               <Card
-                className={cn(
-                  cardClasses,
-                  "hover:scale-[1.02] transition-transform duration-200"
-                )}
+                className={cn(cardClasses, "hover:scale-[1.02] transition-transform duration-200")}
               >
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
@@ -368,12 +315,7 @@ export function AlgorithmComparison({
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 gap-6">
                       <div className="space-y-3">
-                        <Label
-                          className={cn(
-                            "text-sm font-medium",
-                            mutedTextClasses
-                          )}
-                        >
+                        <Label className={cn("text-sm font-medium", mutedTextClasses)}>
                           Array Size
                         </Label>
                         <div className="flex items-center gap-3">
@@ -401,46 +343,31 @@ export function AlgorithmComparison({
                         </div>
                       </div>
                       <div className="space-y-3">
-                        <Label
-                          className={cn(
-                            "text-sm font-medium",
-                            mutedTextClasses
-                          )}
-                        >
+                        <Label className={cn("text-sm font-medium", mutedTextClasses)}>
                           Value Range
                         </Label>
                         <div className="flex gap-3 items-center">
                           <Input
                             type="number"
                             value={minValue}
-                            onChange={(e) =>
-                              setMinValue(parseInt(e.target.value))
-                            }
+                            onChange={(e) => setMinValue(parseInt(e.target.value))}
                             className={cn("w-20 h-10", buttonClasses)}
                           />
-                          <ChevronRight
-                            className={cn("w-4 h-4", mutedTextClasses)}
-                          />
+                          <ChevronRight className={cn("w-4 h-4", mutedTextClasses)} />
                           <Input
                             type="number"
                             value={maxValue}
-                            onChange={(e) =>
-                              setMaxValue(parseInt(e.target.value))
-                            }
+                            onChange={(e) => setMaxValue(parseInt(e.target.value))}
                             className={cn("w-20 h-10", buttonClasses)}
                           />
                         </div>
                       </div>
                     </div>
 
-                    <Separator
-                      className={cn(isDarkTheme ? "bg-border/50" : "bg-border")}
-                    />
+                    <Separator className={cn(isDarkTheme ? "bg-border/50" : "bg-border")} />
 
                     <div className="space-y-3">
-                      <Label
-                        className={cn("text-sm font-medium", mutedTextClasses)}
-                      >
+                      <Label className={cn("text-sm font-medium", mutedTextClasses)}>
                         Array Generation
                       </Label>
                       <div className="flex flex-col sm:flex-row gap-3">
@@ -449,25 +376,17 @@ export function AlgorithmComparison({
                           className={cn("h-10 flex-1", buttonClasses)}
                           variant="outline"
                         >
-                          <RefreshCw
-                            className={cn("w-4 h-4 mr-2", textClasses)}
-                          />
+                          <RefreshCw className={cn("w-4 h-4 mr-2", textClasses)} />
                           Random Array
                         </Button>
                         <Select onValueChange={generatePresetPattern}>
-                          <SelectTrigger
-                            className={cn("h-10 w-[180px]", buttonClasses)}
-                          >
+                          <SelectTrigger className={cn("h-10 w-[180px]", buttonClasses)}>
                             <SelectValue placeholder="Select Pattern" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="random">Random</SelectItem>
-                            <SelectItem value="nearly-sorted">
-                              Nearly Sorted
-                            </SelectItem>
-                            <SelectItem value="reverse-sorted">
-                              Reverse Sorted
-                            </SelectItem>
+                            <SelectItem value="nearly-sorted">Nearly Sorted</SelectItem>
+                            <SelectItem value="reverse-sorted">Reverse Sorted</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -493,10 +412,7 @@ export function AlgorithmComparison({
                   setMetrics((prev) => {
                     const newMetrics = [...prev];
                     newMetrics[0] = metrics;
-                    return newMetrics as [
-                      PerformanceMetrics,
-                      PerformanceMetrics
-                    ];
+                    return newMetrics as [PerformanceMetrics, PerformanceMetrics];
                   });
                 }}
               />
@@ -510,20 +426,14 @@ export function AlgorithmComparison({
                   setMetrics((prev) => {
                     const newMetrics = [...prev];
                     newMetrics[1] = metrics;
-                    return newMetrics as [
-                      PerformanceMetrics,
-                      PerformanceMetrics
-                    ];
+                    return newMetrics as [PerformanceMetrics, PerformanceMetrics];
                   });
                 }}
               />
             </div>
 
             <Card
-              className={cn(
-                cardClasses,
-                "hover:scale-[1.02] transition-transform duration-200"
-              )}
+              className={cn(cardClasses, "hover:scale-[1.02] transition-transform duration-200")}
             >
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
@@ -556,46 +466,27 @@ export function AlgorithmComparison({
                     </h4>
                     <div className="grid grid-cols-3 gap-4">
                       <div className={metricCardClasses}>
-                        <p className={cn("text-sm", mutedTextClasses)}>
-                          Comparisons
-                        </p>
-                        <p
-                          className={cn(
-                            "text-xl font-semibold mt-1",
-                            textClasses
-                          )}
-                        >
+                        <p className={cn("text-sm", mutedTextClasses)}>Comparisons</p>
+                        <p className={cn("text-xl font-semibold mt-1", textClasses)}>
                           {metrics[0].comparisons}
                         </p>
                       </div>
                       <div className={metricCardClasses}>
                         <p className={cn("text-sm", mutedTextClasses)}>Swaps</p>
-                        <p
-                          className={cn(
-                            "text-xl font-semibold mt-1",
-                            textClasses
-                          )}
-                        >
+                        <p className={cn("text-xl font-semibold mt-1", textClasses)}>
                           {metrics[0].swaps}
                         </p>
                       </div>
                       <div className={metricCardClasses}>
                         <p className={cn("text-sm", mutedTextClasses)}>Time</p>
-                        <p
-                          className={cn(
-                            "text-xl font-semibold mt-1",
-                            textClasses
-                          )}
-                        >
+                        <p className={cn("text-xl font-semibold mt-1", textClasses)}>
                           {metrics[0].time.toFixed(1)}ms
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <Separator
-                    className={cn(isDarkTheme ? "bg-border/50" : "bg-border")}
-                  />
+                  <Separator className={cn(isDarkTheme ? "bg-border/50" : "bg-border")} />
 
                   <div className="space-y-4">
                     <h4 className={cn("font-medium text-sm", mutedTextClasses)}>
@@ -603,37 +494,20 @@ export function AlgorithmComparison({
                     </h4>
                     <div className="grid grid-cols-3 gap-4">
                       <div className={metricCardClasses}>
-                        <p className={cn("text-sm", mutedTextClasses)}>
-                          Comparisons
-                        </p>
-                        <p
-                          className={cn(
-                            "text-xl font-semibold mt-1",
-                            textClasses
-                          )}
-                        >
+                        <p className={cn("text-sm", mutedTextClasses)}>Comparisons</p>
+                        <p className={cn("text-xl font-semibold mt-1", textClasses)}>
                           {metrics[1].comparisons}
                         </p>
                       </div>
                       <div className={metricCardClasses}>
                         <p className={cn("text-sm", mutedTextClasses)}>Swaps</p>
-                        <p
-                          className={cn(
-                            "text-xl font-semibold mt-1",
-                            textClasses
-                          )}
-                        >
+                        <p className={cn("text-xl font-semibold mt-1", textClasses)}>
                           {metrics[1].swaps}
                         </p>
                       </div>
                       <div className={metricCardClasses}>
                         <p className={cn("text-sm", mutedTextClasses)}>Time</p>
-                        <p
-                          className={cn(
-                            "text-xl font-semibold mt-1",
-                            textClasses
-                          )}
-                        >
+                        <p className={cn("text-xl font-semibold mt-1", textClasses)}>
                           {metrics[1].time.toFixed(1)}ms
                         </p>
                       </div>

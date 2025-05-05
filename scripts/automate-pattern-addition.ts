@@ -52,10 +52,7 @@ class PatternAutomator {
   }
 
   private updatePatternMapping() {
-    const mappingPath = path.join(
-      this.baseDir,
-      "src/lib/pseudocode/utils/pattern-mapping.ts"
-    );
+    const mappingPath = path.join(this.baseDir, "src/lib/pseudocode/utils/pattern-mapping.ts");
     let content = fs.readFileSync(mappingPath, "utf-8");
 
     // Add new pattern to mapping
@@ -70,9 +67,7 @@ class PatternAutomator {
 
   private createPseudocodeImplementation() {
     const patternDir = path.join(this.baseDir, "src/lib/pseudocode/patterns");
-    const patternFileName = `${this.patternConfig.name
-      .toLowerCase()
-      .replace(/\s+/g, "-")}.tsx`;
+    const patternFileName = `${this.patternConfig.name.toLowerCase().replace(/\s+/g, "-")}.tsx`;
     const patternPath = path.join(patternDir, patternFileName);
 
     const implementation = `import React from 'react';
@@ -88,9 +83,7 @@ export const ${this.patternConfig.name.replace(/\s+/g, "")}Pattern = () => {
           Space: ${this.patternConfig.spaceComplexity}
         </div>
         <div className="algorithm-steps">
-          ${this.patternConfig.process
-            .map((step, i) => `${i + 1}. ${step}`)
-            .join("\n          ")}
+          ${this.patternConfig.process.map((step, i) => `${i + 1}. ${step}`).join("\n          ")}
         </div>
       </div>
     </div>
@@ -106,10 +99,7 @@ export const ${this.patternConfig.name.replace(/\s+/g, "")}Pattern = () => {
 
     // Add import and pattern entry in one go
     content = content
-      .replace(
-        "import {",
-        `import {\n  ${this.patternConfig.name.replace(/\s+/g, "")}Pattern,`
-      )
+      .replace("import {", `import {\n  ${this.patternConfig.name.replace(/\s+/g, "")}Pattern,`)
       .replace(
         "export const pseudocodePatterns = {",
         `export const pseudocodePatterns = {\n  "${
@@ -121,10 +111,7 @@ export const ${this.patternConfig.name.replace(/\s+/g, "")}Pattern = () => {
   }
 
   private createMonsterHunterImplementation() {
-    const monsterHunterDir = path.join(
-      this.baseDir,
-      "src/components/algorithm-trainer"
-    );
+    const monsterHunterDir = path.join(this.baseDir, "src/components/algorithm-trainer");
     const fileName = `monsterHunterPatternsExtended${this.getNextExtensionNumber()}.ts`;
     const filePath = path.join(monsterHunterDir, fileName);
 
@@ -133,26 +120,20 @@ export const ${this.patternConfig.name.replace(/\s+/g, "")}Pattern = () => {
 export const monsterHunterPatternsExtended${this.getNextExtensionNumber()} = new Map<PatternKey, string>([
   [
     "${this.patternConfig.name}" as PatternKey,
-    \`def monster_hunter_${this.patternConfig.name
-      .toLowerCase()
-      .replace(/\s+/g, "_")}(input):
+    \`def monster_hunter_${this.patternConfig.name.toLowerCase().replace(/\s+/g, "_")}(input):
     """
     Time: ${this.patternConfig.timeComplexity}
     Space: ${this.patternConfig.spaceComplexity}
     
     Monster Hunter Context:
-    ${this.patternConfig.monsterHunterContext
-      .map((ctx) => `    - ${ctx}`)
-      .join("\n")}
+    ${this.patternConfig.monsterHunterContext.map((ctx) => `    - ${ctx}`).join("\n")}
     
     Example:
     ${this.patternConfig.example.input}
     ${this.patternConfig.example.output}
     
     Process:
-    ${this.patternConfig.process
-      .map((step, i) => `    ${i + 1}. ${step}`)
-      .join("\n")}
+    ${this.patternConfig.process.map((step, i) => `    ${i + 1}. ${step}`).join("\n")}
     """
     ${this.patternConfig.implementation}
     \`,
@@ -216,17 +197,10 @@ Expected Output: ${this.patternConfig.example.output}
   }
 
   private getNextExtensionNumber(): number {
-    const monsterHunterDir = path.join(
-      this.baseDir,
-      "src/components/algorithm-trainer"
-    );
+    const monsterHunterDir = path.join(this.baseDir, "src/components/algorithm-trainer");
     const files = fs.readdirSync(monsterHunterDir);
-    const patternFiles = files.filter((file) =>
-      file.startsWith("monsterHunterPatternsExtended")
-    );
-    const numbers = patternFiles.map((file) =>
-      parseInt(file.match(/\d+/)?.[0] || "0")
-    );
+    const patternFiles = files.filter((file) => file.startsWith("monsterHunterPatternsExtended"));
+    const numbers = patternFiles.map((file) => parseInt(file.match(/\d+/)?.[0] || "0"));
     return Math.max(...numbers) + 1;
   }
 }

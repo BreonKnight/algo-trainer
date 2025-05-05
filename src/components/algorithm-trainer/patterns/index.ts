@@ -27,9 +27,7 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
   ...graphPatterns,
   ...greedyPatterns,
   ...matrixPatterns,
-  ...Object.fromEntries(
-    numberTheoryPatterns.map((pattern) => [pattern.title, pattern])
-  ),
+  ...Object.fromEntries(numberTheoryPatterns.map((pattern) => [pattern.title, pattern])),
   ...otherPatterns,
   ...recursionPatterns,
   ...searchingPatterns,

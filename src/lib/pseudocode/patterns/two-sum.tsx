@@ -8,8 +8,8 @@ export const TwoSumPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find indices of
-      two numbers that sum to target
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find indices of two numbers that sum
+      to target
     </div>
 
     <PseudocodeDisplay

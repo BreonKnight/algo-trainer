@@ -24,11 +24,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
     onTestCasesChange(newTestCases);
   };
 
-  const updateTestCase = (
-    index: number,
-    field: keyof TestCase,
-    value: string
-  ) => {
+  const updateTestCase = (index: number, field: keyof TestCase, value: string) => {
     const newTestCases = testCases.map((testCase, i) =>
       i === index ? { ...testCase, [field]: value } : testCase
     );
@@ -38,9 +34,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
   return (
     <Card className="p-4 bg-secondary border-secondary w-full h-full flex flex-col overflow-hidden">
       <div className="flex justify-between items-center mb-4 flex-shrink-0">
-        <h2 className="text-base sm:text-lg font-semibold text-accent3">
-          Test Cases
-        </h2>
+        <h2 className="text-base sm:text-lg font-semibold text-accent3">Test Cases</h2>
         <Button
           onClick={addTestCase}
           className="bg-accent3 hover:bg-accent3/90 text-main h-8 px-3 flex items-center gap-2"
@@ -53,9 +47,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
         {testCases.map((testCase, index) => (
           <div key={index} className="flex gap-4 items-start">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-main mb-1">
-                Input
-              </label>
+              <label className="block text-sm font-medium text-main mb-1">Input</label>
               <Input
                 value={testCase.input}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -66,9 +58,7 @@ export function TestCases({ testCases, onTestCasesChange }: TestCasesProps) {
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-main mb-1">
-                Expected Output
-              </label>
+              <label className="block text-sm font-medium text-main mb-1">Expected Output</label>
               <Input
                 value={testCase.output}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>

@@ -8,11 +8,11 @@ export const LCAPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) per query &nbsp;|&nbsp; Space: O(n log n) &nbsp;|&nbsp;
-      Use: Find LCA in tree
+      Time: O(log n) per query &nbsp;|&nbsp; Space: O(n log n) &nbsp;|&nbsp; Use: Find LCA in tree
     </div>
 
-    <PseudocodeDisplay code={`LCA-PREPROCESS(T)
+    <PseudocodeDisplay
+      code={`LCA-PREPROCESS(T)
     let n be the number of vertices in T
     let depth[1‥n] be a new array
     let up[1‥n][0‥log n] be a new array
@@ -65,7 +65,8 @@ LCA-QUERY(u, v, depth, up)
 // Query: LCA(4,6)
 //   Step 1: Bring 4 to depth 2
 //   Step 2: Binary search for LCA
-//   Output: 1`} />
+//   Output: 1`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

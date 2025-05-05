@@ -8,11 +8,11 @@ export const SelectionSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array
-      in-place
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array in-place
     </div>
 
-    <PseudocodeDisplay code={`SELECTION-SORT(A)
+    <PseudocodeDisplay
+      code={`SELECTION-SORT(A)
     n ← length[A]
 
     for i ← 1 to n-1
@@ -33,7 +33,8 @@ export const SelectionSortPattern = () => (
 # [1, 2, 3, 6, 5, 4]  # 3 is selected
 # [1, 2, 3, 4, 5, 6]  # 4 is selected
 # [1, 2, 3, 4, 5, 6]  # 5 is selected
-# Output: [1, 2, 3, 4, 5, 6]`} />
+# Output: [1, 2, 3, 4, 5, 6]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

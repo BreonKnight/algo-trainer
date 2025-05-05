@@ -8,11 +8,12 @@ export const BellmanFordPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Graph)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find shortest
-      paths with negative weights
+      Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find shortest paths with negative
+      weights
     </div>
 
-    <PseudocodeDisplay code={`# Bellman-Ford: Find shortest paths with negative weights
+    <PseudocodeDisplay
+      code={`# Bellman-Ford: Find shortest paths with negative weights
 # Input: Weighted directed graph G = (V, E) with weight function w, source vertex s
 # Output: Shortest paths from s to all vertices, or indication of negative cycle
 
@@ -57,7 +58,8 @@ Algorithm BELLMAN-FORD(G, w, s)
 #         d = [0, 4, 3, 4]
 # Step 5: No negative cycle found
 #
-# Output: d = [0, 4, 3, 4]`} />
+# Output: d = [0, 4, 3, 4]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

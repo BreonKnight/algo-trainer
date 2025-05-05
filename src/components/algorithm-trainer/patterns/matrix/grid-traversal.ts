@@ -2,8 +2,7 @@ import type { AlgorithmPattern } from "../../types";
 
 export const gridTraversalPattern: AlgorithmPattern = {
   title: "Grid Traversal",
-  description:
-    "Traverse a 2D grid using different patterns like spiral, diagonal, or zigzag.",
+  description: "Traverse a 2D grid using different patterns like spiral, diagonal, or zigzag.",
   timeComplexity: "O(n*m)",
   spaceComplexity: "O(1)",
   pseudocode: `function spiralTraversal(grid):

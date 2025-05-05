@@ -5,22 +5,9 @@ import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { useState, useRef, useEffect, useMemo } from "react";
-import {
-  Code,
-  TestTube,
-  Sword,
-  Book,
-  Copy,
-  Check,
-  Languages,
-} from "lucide-react";
+import { Code, TestTube, Sword, Book, Copy, Check, Languages } from "lucide-react";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTheme } from "@/components/theme/theme-context";
 import {
   draculaTheme,
@@ -49,8 +36,7 @@ interface AnswerCardProps {
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    const check = () =>
-      setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+    const check = () => setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -60,11 +46,7 @@ function useIsDesktop() {
 
 // Hook to detect scroll position for shadows
 
-export function AnswerCard({
-  currentPattern,
-  showAnswer,
-  setShowAnswer,
-}: AnswerCardProps) {
+export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: AnswerCardProps) {
   const [showTestData, setShowTestData] = useState(false);
   const [showMonsterHunter, setShowMonsterHunter] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -101,10 +83,7 @@ export function AnswerCard({
   }, [showAnswer]);
 
   // Editor mount
-  const handleEditorDidMount = (
-    editor: monaco.editor.IStandaloneCodeEditor,
-    monaco: Monaco
-  ) => {
+  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
     monaco.editor.defineTheme("dracula", draculaTheme);
@@ -138,16 +117,13 @@ export function AnswerCard({
       if (showMonsterHunter) {
         const val = monsterHunterPatterns.get(currentPattern);
         if (val && typeof val === "object" && "implementation" in val) {
-          const implementation = (val as { implementation: string })
-            .implementation;
+          const implementation = (val as { implementation: string }).implementation;
           return currentLanguage === "python"
             ? implementation
             : toggleLanguage(implementation, "python").code;
         }
         if (typeof val === "string") {
-          return currentLanguage === "python"
-            ? val
-            : toggleLanguage(val, "python").code;
+          return currentLanguage === "python" ? val : toggleLanguage(val, "python").code;
         }
         return `# Monster Hunter ${
           currentLanguage === "python" ? "Python" : "JavaScript"
@@ -155,13 +131,10 @@ export function AnswerCard({
       } else {
         const val = algorithmPatterns[currentPattern];
         if (typeof val === "string") {
-          return currentLanguage === "python"
-            ? val
-            : toggleLanguage(val, "python").code;
+          return currentLanguage === "python" ? val : toggleLanguage(val, "python").code;
         }
         if (val && typeof val === "object" && "implementation" in val) {
-          const implementation = (val as { implementation: string })
-            .implementation;
+          const implementation = (val as { implementation: string }).implementation;
           return currentLanguage === "python"
             ? implementation
             : toggleLanguage(implementation, "python").code;
@@ -178,8 +151,7 @@ export function AnswerCard({
 
   const handleLanguageToggle = () => {
     try {
-      const newLanguage =
-        currentLanguage === "python" ? "javascript" : "python";
+      const newLanguage = currentLanguage === "python" ? "javascript" : "python";
       setCurrentLanguage(newLanguage);
       if (editorRef.current && monacoRef.current) {
         const model = editorRef.current.getModel();
@@ -241,21 +213,14 @@ export function AnswerCard({
                         role="switch"
                         aria-checked={currentLanguage === "javascript"}
                       >
-                        <Languages
-                          className="h-3.5 w-3.5 mr-1"
-                          aria-hidden="true"
-                        />
+                        <Languages className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
                         <span className="hidden sm:inline">
-                          {currentLanguage === "python"
-                            ? "Python"
-                            : "JavaScript"}
+                          {currentLanguage === "python" ? "Python" : "JavaScript"}
                         </span>
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p>
-                        Toggle between Python and JavaScript implementations
-                      </p>
+                      <p>Toggle between Python and JavaScript implementations</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -345,19 +310,14 @@ export function AnswerCard({
                     <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
                       {(() => {
                         if (showMonsterHunter) {
-                          const testData =
-                            monsterHunterTestData.get(currentPattern);
+                          const testData = monsterHunterTestData.get(currentPattern);
                           if (testData) {
                             return testData;
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
                         } else {
                           const val = algorithmPatterns[currentPattern];
-                          if (
-                            val &&
-                            typeof val === "object" &&
-                            "example" in val
-                          ) {
+                          if (val && typeof val === "object" && "example" in val) {
                             const ex = (val as { example?: string }).example;
                             if (ex) return ex;
                           }
@@ -445,10 +405,7 @@ export function AnswerCard({
                       const maxHeight = 500;
                       const onMove = (moveEvent: MouseEvent) => {
                         const delta = moveEvent.clientY - startY;
-                        const newHeight = Math.max(
-                          120,
-                          Math.min(startHeight + delta, maxHeight)
-                        );
+                        const newHeight = Math.max(120, Math.min(startHeight + delta, maxHeight));
                         setEditorHeight(newHeight);
                       };
                       const onUp = () => {
