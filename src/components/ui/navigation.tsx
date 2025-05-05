@@ -79,6 +79,9 @@ export function Navigation() {
 
   const isActive = (path: string) => location.pathname === path;
 
+  const lightThemes = ["light", "solarized"];
+  const blueThemes = ["nord", "ps2"];
+
   return (
     <>
       <style>{styles}</style>
@@ -111,7 +114,13 @@ export function Navigation() {
                       className={cn(
                         "flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors",
                         isActive(item.path)
-                          ? "bg-accent text-accent-foreground"
+                          ? `bg-accent ${
+                              lightThemes.includes(theme)
+                                ? "text-gray-900"
+                                : blueThemes.includes(theme)
+                                  ? "text-white"
+                                  : "text-accent-foreground"
+                            } ring-2 ring-accent-foreground/40 ring-offset-2 ring-offset-background`
                           : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
                       )}
                     >
@@ -154,7 +163,13 @@ export function Navigation() {
                     className={cn(
                       "flex items-center px-3 py-2 rounded-md text-base font-medium transition-colors",
                       isActive(item.path)
-                        ? "bg-accent text-accent-foreground"
+                        ? `bg-accent ${
+                            lightThemes.includes(theme)
+                              ? "text-gray-900"
+                              : blueThemes.includes(theme)
+                                ? "text-white"
+                                : "text-accent-foreground"
+                          } ring-2 ring-accent-foreground/40 ring-offset-2 ring-offset-background`
                         : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
                     )}
                     onClick={() => setIsMobileMenuOpen(false)}
