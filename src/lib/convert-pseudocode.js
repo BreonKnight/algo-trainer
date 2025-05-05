@@ -77,9 +77,7 @@ function convertToJSX(key, content) {
           <span className="font-bold text-main mr-2">${step.number}.</span>
           <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
           <span>
-            <span className="font-semibold text-accent">${escapeJSX(
-              step.title
-            )}</span>{" "}
+            <span className="font-semibold text-accent">${escapeJSX(step.title)}</span>{" "}
             ${escapeJSX(step.details)}
           </span>
         </div>`;

@@ -8,11 +8,11 @@ export const RotateMatrixPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Rotate matrix 90
-      degrees
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Rotate matrix 90 degrees
     </div>
 
-    <PseudocodeDisplay code={`ROTATE-CLOCKWISE(A)
+    <PseudocodeDisplay
+      code={`ROTATE-CLOCKWISE(A)
 1  n = A.rows
 2  // Transpose the matrix
 3  for i = 1 to n
@@ -59,7 +59,8 @@ ROTATE-COUNTERCLOCKWISE(A)
 // Step 2: Reverse columns
 //         [[3, 6, 9],
 //          [2, 5, 8],
-//          [1, 4, 7]]`} />
+//          [1, 4, 7]]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

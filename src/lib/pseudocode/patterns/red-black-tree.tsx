@@ -8,11 +8,11 @@ export const RedBlackTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Self-balancing
-      binary search tree
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Self-balancing binary search tree
     </div>
 
-    <PseudocodeDisplay code={`RB-INSERT(T, z)
+    <PseudocodeDisplay
+      code={`RB-INSERT(T, z)
     let y ← null
     let x ← T.root
 
@@ -103,7 +103,8 @@ LEFT-ROTATE(T, x)
 //           /  \
 //        30(B) 50(B)
 //       /
-//    25(R)`} />
+//    25(R)`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

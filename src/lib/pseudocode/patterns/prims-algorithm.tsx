@@ -7,8 +7,7 @@ export const PrimPattern = () => (
       <span className="text-accent font-bold">Prim's Algorithm</span>
     </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      minimum spanning tree
+      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding minimum spanning tree
     </div>
 
     <PseudocodeDisplay
@@ -81,31 +80,27 @@ def prim_fh(graph):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> MST,
-        visited set, and priority queue
+        <span className="font-semibold text-accent">Initialize:</span> MST, visited set, and
+        priority queue
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Process:</span> Extract
-        minimum weight edge
+        <span className="font-semibold text-accent">Process:</span> Extract minimum weight edge
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Add adjacent
-        vertices to queue
+        <span className="font-semibold text-accent">Update:</span> Add adjacent vertices to queue
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Prim's
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Prim's</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)

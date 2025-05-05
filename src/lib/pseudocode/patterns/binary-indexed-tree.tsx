@@ -8,11 +8,12 @@ export const BinaryIndexedTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient
-      range queries and point updates
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient range queries and point
+      updates
     </div>
 
-    <PseudocodeDisplay code={`BINARY-INDEXED-TREE(A)
+    <PseudocodeDisplay
+      code={`BINARY-INDEXED-TREE(A)
     let n be the length of A
     let tree[1‥n] be a new array
 
@@ -57,7 +58,8 @@ RANGE-QUERY(tree, l, r)
 //   QUERY(1) = 1
 //   return 24
 //
-// Output: Range sum from index 2 to 5 is 24`} />
+// Output: Range sum from index 2 to 5 is 24`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

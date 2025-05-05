@@ -15,10 +15,7 @@ interface AlgorithmSelectorProps {
   onPatternChange: (pattern: PatternKey) => void;
 }
 
-export function AlgorithmSelector({
-  currentPattern,
-  onPatternChange,
-}: AlgorithmSelectorProps) {
+export function AlgorithmSelector({ currentPattern, onPatternChange }: AlgorithmSelectorProps) {
   const algorithmCategories = getPatternCategories();
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -145,9 +142,7 @@ export function AlgorithmSelector({
   const toggleFavorite = (algorithm: string, e: React.MouseEvent) => {
     e.stopPropagation();
     setFavorites((prev) =>
-      prev.includes(algorithm)
-        ? prev.filter((a) => a !== algorithm)
-        : [...prev, algorithm]
+      prev.includes(algorithm) ? prev.filter((a) => a !== algorithm) : [...prev, algorithm]
     );
   };
 
@@ -195,10 +190,7 @@ export function AlgorithmSelector({
       >
         <div className="flex items-center gap-2">
           {currentPattern ? (
-            <span
-              className="truncate max-w-[200px] sm:max-w-[300px]"
-              title={currentPattern}
-            >
+            <span className="truncate max-w-[200px] sm:max-w-[300px]" title={currentPattern}>
               {currentPattern}
             </span>
           ) : (
@@ -221,18 +213,17 @@ export function AlgorithmSelector({
               left:
                 window.innerWidth < 640
                   ? "1rem"
-                  : dropdownRef.current?.getBoundingClientRect().left ?? 0,
+                  : (dropdownRef.current?.getBoundingClientRect().left ?? 0),
               top:
                 window.innerWidth < 640
                   ? "50%"
-                  : (dropdownRef.current?.getBoundingClientRect().bottom ?? 0) +
-                    window.scrollY,
+                  : (dropdownRef.current?.getBoundingClientRect().bottom ?? 0) + window.scrollY,
               transform: window.innerWidth < 640 ? "translateY(-50%)" : "none",
               position: window.innerWidth < 640 ? "fixed" : "absolute",
               width:
                 window.innerWidth < 640
                   ? "calc(100vw - 2rem)"
-                  : dropdownRef.current?.offsetWidth ?? "auto",
+                  : (dropdownRef.current?.offsetWidth ?? "auto"),
             }}
             role="listbox"
             id="algorithm-list"
@@ -264,65 +255,57 @@ export function AlgorithmSelector({
                 <p className="text-sm mt-1">Try a different search term</p>
               </div>
             ) : (
-              Object.entries(filteredCategories).map(
-                ([category, algorithms]) => (
-                  <div key={category} className="px-1 py-1">
-                    <div className="text-accent sticky top-12 bg-main/90 backdrop-blur-sm py-2 z-10 px-2 font-medium border-b border-secondary/30">
-                      {category}
-                    </div>
-                    {algorithms.length > 0 ? (
-                      algorithms.sort().map((algorithm, index) => (
-                        <div
-                          key={algorithm}
-                          ref={(el) => (itemRefs.current[index] = el)}
-                          className={`text-main hover:bg-[color:var(--accent3)]/20 focus:bg-[color:var(--accent3)]/20 hover:text-[color:var(--text-selected-dark)] focus:text-[color:var(--text-selected-dark)] data-[state=selected]:bg-[color:var(--accent3)]/40 data-[state=selected]:text-[color:var(--text-selected-dark)] data-[state=selected]:font-bold data-[state=selected]:border-l-4 data-[state=selected]:border-accent2 data-[state=selected]:pl-1.5 px-2 py-1.5 rounded-sm cursor-pointer transition-all duration-200 ease-in-out transform hover:scale-[1.02] flex items-center justify-between ${
-                            activeIndex === index
-                              ? "bg-[color:var(--accent3)]/20"
-                              : ""
-                          }`}
-                          onClick={() => handleAlgorithmSelect(algorithm)}
-                          role="option"
-                          aria-selected={algorithm === currentPattern}
-                          tabIndex={0}
-                        >
-                          <span
-                            className="block overflow-hidden text-ellipsis whitespace-nowrap max-w-[80%]"
-                            title={algorithm}
-                          >
-                            {highlightMatch(algorithm, searchQuery)}
-                          </span>
-                          <button
-                            onClick={(e) => toggleFavorite(algorithm, e)}
-                            className={`ml-2 p-1 rounded-full transition-colors ${
-                              favorites.includes(algorithm)
-                                ? "text-yellow-500 hover:text-yellow-600"
-                                : "text-secondary hover:text-main"
-                            }`}
-                            aria-label={
-                              favorites.includes(algorithm)
-                                ? "Remove from favorites"
-                                : "Add to favorites"
-                            }
-                          >
-                            <Star
-                              className="h-3.5 w-3.5"
-                              fill={
-                                favorites.includes(algorithm)
-                                  ? "currentColor"
-                                  : "none"
-                              }
-                            />
-                          </button>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-secondary italic px-2 py-1.5 text-sm">
-                        No matches found
-                      </div>
-                    )}
+              Object.entries(filteredCategories).map(([category, algorithms]) => (
+                <div key={category} className="px-1 py-1">
+                  <div className="text-accent sticky top-12 bg-main/90 backdrop-blur-sm py-2 z-10 px-2 font-medium border-b border-secondary/30">
+                    {category}
                   </div>
-                )
-              )
+                  {algorithms.length > 0 ? (
+                    algorithms.sort().map((algorithm, index) => (
+                      <div
+                        key={algorithm}
+                        ref={(el) => (itemRefs.current[index] = el)}
+                        className={`text-main hover:bg-[color:var(--accent3)]/20 focus:bg-[color:var(--accent3)]/20 hover:text-[color:var(--text-selected-dark)] focus:text-[color:var(--text-selected-dark)] data-[state=selected]:bg-[color:var(--accent3)]/40 data-[state=selected]:text-[color:var(--text-selected-dark)] data-[state=selected]:font-bold data-[state=selected]:border-l-4 data-[state=selected]:border-accent2 data-[state=selected]:pl-1.5 px-2 py-1.5 rounded-sm cursor-pointer transition-all duration-200 ease-in-out transform hover:scale-[1.02] flex items-center justify-between ${
+                          activeIndex === index ? "bg-[color:var(--accent3)]/20" : ""
+                        }`}
+                        onClick={() => handleAlgorithmSelect(algorithm)}
+                        role="option"
+                        aria-selected={algorithm === currentPattern}
+                        tabIndex={0}
+                      >
+                        <span
+                          className="block overflow-hidden text-ellipsis whitespace-nowrap max-w-[80%]"
+                          title={algorithm}
+                        >
+                          {highlightMatch(algorithm, searchQuery)}
+                        </span>
+                        <button
+                          onClick={(e) => toggleFavorite(algorithm, e)}
+                          className={`ml-2 p-1 rounded-full transition-colors ${
+                            favorites.includes(algorithm)
+                              ? "text-yellow-500 hover:text-yellow-600"
+                              : "text-secondary hover:text-main"
+                          }`}
+                          aria-label={
+                            favorites.includes(algorithm)
+                              ? "Remove from favorites"
+                              : "Add to favorites"
+                          }
+                        >
+                          <Star
+                            className="h-3.5 w-3.5"
+                            fill={favorites.includes(algorithm) ? "currentColor" : "none"}
+                          />
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-secondary italic px-2 py-1.5 text-sm">
+                      No matches found
+                    </div>
+                  )}
+                </div>
+              ))
             )}
           </div>,
           document.body

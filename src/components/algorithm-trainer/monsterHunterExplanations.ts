@@ -1539,9 +1539,7 @@ export const monsterHunterExplanations: Partial<
 export function getMonsterHunterExplanation(patternKey: PatternKey) {
   const explanation = monsterHunterExplanations[patternKey];
   if (!explanation) {
-    console.warn(
-      `No Monster Hunter explanation found for pattern: ${patternKey}`
-    );
+    console.warn(`No Monster Hunter explanation found for pattern: ${patternKey}`);
     console.log("Available patterns:", Object.keys(monsterHunterExplanations));
   }
   return explanation;
@@ -1554,10 +1552,7 @@ export function checkMissingPatterns() {
   );
 
   if (missingPatterns.length > 0) {
-    console.warn(
-      "Missing Monster Hunter explanations for patterns:",
-      missingPatterns
-    );
+    console.warn("Missing Monster Hunter explanations for patterns:", missingPatterns);
     return missingPatterns;
   }
   return [];

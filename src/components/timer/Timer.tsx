@@ -66,9 +66,7 @@ export function Timer() {
   const formatTime = (totalSeconds: number) => {
     const mins = Math.floor(totalSeconds / 60);
     const secs = totalSeconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   // Circular progress bar calculations
@@ -99,19 +97,11 @@ export function Timer() {
               className="mb-1.5 sm:mb-2 px-1.5 sm:px-2 py-0.5 rounded-full bg-accent/20 text-accent font-bold text-[10px] sm:text-xs text-center w-full shadow-sm"
               aria-live="polite"
             >
-              {isRunning
-                ? "Running"
-                : timeLeft === 0 && totalTime > 0
-                ? "Finished"
-                : "Paused"}
+              {isRunning ? "Running" : timeLeft === 0 && totalTime > 0 ? "Finished" : "Paused"}
             </span>
             <div className="relative flex items-center justify-center w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] mx-auto mb-2 sm:mb-3">
               {/* Circular Progress Bar */}
-              <svg
-                height={radius * 2}
-                width={radius * 2}
-                className="absolute inset-0"
-              >
+              <svg height={radius * 2} width={radius * 2} className="absolute inset-0">
                 <circle
                   stroke="var(--bg-secondary)"
                   fill="transparent"
@@ -131,18 +121,11 @@ export function Timer() {
                   cx={radius}
                   cy={radius}
                   style={{
-                    transition:
-                      "stroke-dashoffset 0.3s cubic-bezier(0.4,0,0.2,1)",
+                    transition: "stroke-dashoffset 0.3s cubic-bezier(0.4,0,0.2,1)",
                   }}
                 />
                 <defs>
-                  <linearGradient
-                    id="timer-gradient"
-                    x1="0"
-                    y1="0"
-                    x2="1"
-                    y2="1"
-                  >
+                  <linearGradient id="timer-gradient" x1="0" y1="0" x2="1" y2="1">
                     <stop offset="0%" stopColor="var(--gradient-from)" />
                     <stop offset="100%" stopColor="var(--gradient-to)" />
                   </linearGradient>
@@ -174,9 +157,7 @@ export function Timer() {
                   active:scale-95`}
                 disabled={isRunning}
                 title={`Set ${min === 60 ? "1 hour" : min + " minute"} timer`}
-                aria-label={`Set ${
-                  min === 60 ? "1 hour" : min + " minute"
-                } timer`}
+                aria-label={`Set ${min === 60 ? "1 hour" : min + " minute"} timer`}
               >
                 {min === 60 ? "1h" : `${min}m`}
               </Button>
@@ -190,9 +171,7 @@ export function Timer() {
                 variant="default"
                 size="sm"
                 className={`h-5 w-5 sm:h-6 sm:w-6 min-w-[32px] sm:min-w-[36px] min-h-[32px] sm:min-h-[36px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform duration-200 flex items-center justify-center ${
-                  isRunning || (!isRunning && timeLeft > 0)
-                    ? "ring-2 ring-accent shadow-lg"
-                    : ""
+                  isRunning || (!isRunning && timeLeft > 0) ? "ring-2 ring-accent shadow-lg" : ""
                 }`}
                 title={isRunning ? "Pause timer" : "Start timer"}
                 aria-label={isRunning ? "Pause timer" : "Start timer"}
@@ -220,9 +199,7 @@ export function Timer() {
               >
                 <RotateCcw size={10} className="sm:size-3" />
               </Button>
-              <span className="text-[8px] sm:text-[10px] text-secondary mt-0.5">
-                Reset
-              </span>
+              <span className="text-[8px] sm:text-[10px] text-secondary mt-0.5">Reset</span>
             </div>
           </div>
         </div>

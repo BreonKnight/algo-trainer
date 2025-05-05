@@ -8,8 +8,8 @@ export const ExtendedEuclideanAlgorithmPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log min(a,b)) &nbsp;|&nbsp; Space: O(log min(a,b)) &nbsp;|&nbsp;
-      Use: Find GCD and Bézout coefficients
+      Time: O(log min(a,b)) &nbsp;|&nbsp; Space: O(log min(a,b)) &nbsp;|&nbsp; Use: Find GCD and
+      Bézout coefficients
     </div>
 
     <PseudocodeDisplay
@@ -90,21 +90,16 @@ Algorithm EXTENDED-EUCLID(a, b)
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
         <span>
-          Description: Finding integer solutions to equations for fair resource
-          distribution
+          Description: Finding integer solutions to equations for fair resource distribution
         </span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Example: Distributing 30 potions and 18 antidotes among hunters
-        </span>
+        <span>Example: Distributing 30 potions and 18 antidotes among hunters</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Tips: Use GCD to find optimal distribution, verify solutions
-        </span>
+        <span>Tips: Use GCD to find optimal distribution, verify solutions</span>
       </div>
     </div>
   </div>

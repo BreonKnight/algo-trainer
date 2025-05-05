@@ -6,9 +6,7 @@ interface MonsterHunterGuideProps {
   currentPattern: PatternKey;
 }
 
-export function MonsterHunterGuide({
-  currentPattern,
-}: MonsterHunterGuideProps) {
+export function MonsterHunterGuide({ currentPattern }: MonsterHunterGuideProps) {
   const explanation = monsterHunterExplanations[
     currentPattern as keyof typeof monsterHunterExplanations
   ] || {
@@ -19,24 +17,18 @@ export function MonsterHunterGuide({
   };
 
   return (
-    <div
-      className={`${styles.pseudocodeContainer} w-full h-full overflow-hidden`}
-    >
+    <div className={`${styles.pseudocodeContainer} w-full h-full overflow-hidden`}>
       <div
         className={`${styles.pseudocodeContent} text-sm sm:text-base w-full h-full overflow-y-auto`}
       >
         <div className="space-y-4 p-2">
           <div>
-            <h3 className="text-lg font-semibold text-accent">
-              {explanation.title}
-            </h3>
+            <h3 className="text-lg font-semibold text-accent">{explanation.title}</h3>
             <p className="mt-1 text-main">{explanation.description}</p>
           </div>
 
           <div>
-            <h4 className="text-md font-medium text-accent2">
-              Hunting Example:
-            </h4>
+            <h4 className="text-md font-medium text-accent2">Hunting Example:</h4>
             <p className="mt-1 italic text-main">{explanation.example}</p>
           </div>
 

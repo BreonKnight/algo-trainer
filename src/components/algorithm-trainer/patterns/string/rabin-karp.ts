@@ -4,8 +4,7 @@ export const rabinKarpPattern: AlgorithmPattern = {
   title: "Rabin-Karp",
   description:
     "A string matching algorithm that uses hashing to find patterns in text. It uses a rolling hash function to efficiently compute hash values for substrings and compares them with the pattern's hash. This approach allows for average-case linear time complexity.",
-  timeComplexity:
-    "Average: O(n + m), Worst: O(nm) where n is text length and m is pattern length",
+  timeComplexity: "Average: O(n + m), Worst: O(nm) where n is text length and m is pattern length",
   spaceComplexity: "O(1)",
   category: "String",
   pseudocode: `

@@ -8,11 +8,11 @@ export const ZAlgorithmPattern = () => (
       <span className="ml-2 text-xs text-secondary">(String)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Pattern matching
-      in string
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Pattern matching in string
     </div>
 
-    <PseudocodeDisplay code={`# Z Algorithm: Pattern matching in string
+    <PseudocodeDisplay
+      code={`# Z Algorithm: Pattern matching in string
 # Input: String S[1..n]
 # Output: Array Z[1..n] where Z[i] is length of longest substring starting at i that is also a prefix
 
@@ -57,7 +57,8 @@ Algorithm Z-ALGORITHM(S)
 # Step 5: i=5, outside Z-box, find Z[5] = 4
 # ... continue until i=19
 #
-# Output: Z = [19, 1, 0, 0, 4, 1, 0, 0, 0, 8, 1, 0, 0, 5, 1, 0, 0, 1, 0]`} />
+# Output: Z = [19, 1, 0, 0, 4, 1, 0, 0, 0, 8, 1, 0, 0, 5, 1, 0, 0, 1, 0]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

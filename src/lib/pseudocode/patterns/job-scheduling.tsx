@@ -8,8 +8,8 @@ export const JobSchedulingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Schedule
-      jobs to minimize completion time
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Schedule jobs to minimize
+      completion time
     </div>
 
     <PseudocodeDisplay

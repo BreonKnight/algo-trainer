@@ -7,8 +7,7 @@ export const KosarajuPattern = () => (
       <span className="text-accent font-bold">Kosaraju's Algorithm</span>
     </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find strongly
-      connected components
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find strongly connected components
     </div>
 
     <PseudocodeDisplay

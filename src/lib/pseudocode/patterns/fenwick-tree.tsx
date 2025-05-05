@@ -8,11 +8,12 @@ export const FenwickTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient
-      prefix sums and point updates
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient prefix sums and point
+      updates
     </div>
 
-    <PseudocodeDisplay code={`FENWICK-TREE(A)
+    <PseudocodeDisplay
+      code={`FENWICK-TREE(A)
     let n be the length of A
     let tree[1‥n] be a new array
 
@@ -54,7 +55,8 @@ QUERY(tree, idx)
 //   idx = 4: sum = 36
 //   idx = 0: return 36
 //
-// Output: Prefix sums [1, 4, 9, 16, 25, 36]`} />
+// Output: Prefix sums [1, 4, 9, 16, 25, 36]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

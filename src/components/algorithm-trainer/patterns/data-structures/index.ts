@@ -13,9 +13,7 @@ import { bTreePattern } from "./b-tree.ts";
 import { fenwickTreePattern } from "./fenwick-tree.ts";
 import { segmentTreePattern } from "./segment-tree.ts";
 
-export const dataStructurePatterns: Partial<
-  Record<PatternKey, AlgorithmPattern>
-> = {
+export const dataStructurePatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Monotonic Queue": monotonicQueuePattern,
   "Monotonic Stack": monotonicStackPattern,
   "Heap Implementation": heapImplementationPattern,

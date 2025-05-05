@@ -8,11 +8,11 @@ export const TwoSumDictionaryPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Array)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find pairs that
-      sum to target
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find pairs that sum to target
     </div>
 
-    <PseudocodeDisplay code={`# Two Sum (Dictionary): Find pairs that sum to target
+    <PseudocodeDisplay
+      code={`# Two Sum (Dictionary): Find pairs that sum to target
 # Input: Array A[1..n], target value t
 # Output: Indices (i, j) where A[i] + A[j] = t, or (-1, -1) if not found
 
@@ -36,7 +36,8 @@ Algorithm TWO-SUM-DICTIONARY(A, t)
 # Step 1: i = 1, A[1] = 2, complement = 7, D = {2: 1}
 # Step 2: i = 2, A[2] = 7, complement = 2 ∈ D, return (1, 2)
 #
-# Output: (1, 2)`} />
+# Output: (1, 2)`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

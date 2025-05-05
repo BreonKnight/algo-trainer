@@ -8,8 +8,8 @@ export const TwoPointersPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding pairs or
-      subarrays that satisfy certain conditions
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding pairs or subarrays that
+      satisfy certain conditions
     </div>
 
     <PseudocodeDisplay
@@ -82,24 +82,23 @@ THREE-SUM(A, target):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set
-        pointers at appropriate positions
+        <span className="font-semibold text-accent">Initialize:</span> Set pointers at appropriate
+        positions
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Move:</span> Adjust pointers
-        based on comparison
+        <span className="font-semibold text-accent">Move:</span> Adjust pointers based on comparison
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Terminate:</span> Stop when
-        pointers meet or cross
+        <span className="font-semibold text-accent">Terminate:</span> Stop when pointers meet or
+        cross
       </span>
     </div>
 
@@ -117,9 +116,7 @@ Result: [0, 1]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Remove Duplicates
-      </span>
+      <span className="font-semibold text-accent">Example: Remove Duplicates</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`A = [1, 1, 2, 2, 2, 3, 4, 4]
 Pointers:
@@ -135,9 +132,7 @@ Result: [1, 2, 3, 4]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Container with Most Water
-      </span>
+      <span className="font-semibold text-accent">Example: Container with Most Water</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 Pointers:

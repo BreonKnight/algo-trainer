@@ -8,11 +8,11 @@ export const BTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Disk-based
-      balanced search tree
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Disk-based balanced search tree
     </div>
 
-    <PseudocodeDisplay code={`B-TREE-INSERT(T, k)
+    <PseudocodeDisplay
+      code={`B-TREE-INSERT(T, k)
     let r ← T.root
     if r.n = 2t - 1
         then s ← ALLOCATE-NODE()
@@ -88,7 +88,8 @@ B-TREE-SPLIT-CHILD(x, i)
 //    /    |    \
 // [20]  [60]  [80,90]
 // /  \  /  \
-// [10][30][50]`} />
+// [10][30][50]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -8,8 +8,8 @@ export const BFSPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Level-order
-      traversal and shortest path in unweighted graphs
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Level-order traversal and shortest
+      path in unweighted graphs
     </div>
 
     <PseudocodeDisplay
@@ -83,24 +83,22 @@ LEVEL-ORDER(T):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set all
-        vertices to unvisited
+        <span className="font-semibold text-accent">Initialize:</span> Set all vertices to unvisited
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Explore:</span> Visit
-        neighbors level by level
+        <span className="font-semibold text-accent">Explore:</span> Visit neighbors level by level
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Mark:</span> Track visited
-        vertices and distances
+        <span className="font-semibold text-accent">Mark:</span> Track visited vertices and
+        distances
       </span>
     </div>
 
@@ -140,9 +138,7 @@ Distance: 2`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Connected Components
-      </span>
+      <span className="font-semibold text-accent">Example: Connected Components</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 1-2-3  4-5  6

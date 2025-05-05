@@ -4,8 +4,7 @@ export const triePattern: AlgorithmPattern = {
   title: "Trie Data Structure",
   description:
     "A tree-like data structure used to store a dynamic set of strings, commonly used for efficient prefix-based operations.",
-  timeComplexity:
-    "O(m) for insertion and search, where m is the length of the string",
+  timeComplexity: "O(m) for insertion and search, where m is the length of the string",
   spaceComplexity: "O(ALPHABET_SIZE * m * n), where n is the number of strings",
   pseudocode: `1. Define a TrieNode class with children and isEndOfWord flag\n2. Insert:\n   a. For each character in the string:\n      - If the character is not in the current node's children, create a new node\n      - Move to the child node\n   b. Mark the last node as the end of a word\n3. Search:\n   a. For each character in the string:\n      - If the character is not in the current node's children, return false\n      - Move to the child node\n   b. Return true if the last node is marked as the end of a word\n4. Delete:\n   a. Recursively delete nodes if they have no children and are not the end of a word\n   b. Mark the last node as not the end of a word`,
   example: `Insert: "cat", "car", "dog"\n\nTrie Structure:\n    root\n   /    \\\n  c      d\n /       \\\na         o\n|         \\\nt          g\n|\nr\n\nSearch: "cat" -> true\nSearch: "car" -> true\nSearch: "dog" -> true\nSearch: "ca" -> false\nSearch: "cats" -> false`,

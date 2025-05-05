@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Slider } from "../ui/slider";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -25,20 +19,14 @@ export function ProgressView() {
           <Button
             variant="ghost"
             size="sm"
-            className={cn(
-              "mr-2",
-              theme === "nord" ? "text-white hover:bg-white/10" : ""
-            )}
+            className={cn("mr-2", theme === "nord" ? "text-white hover:bg-white/10" : "")}
           >
             <ArrowLeft className="h-4 w-4 mr-1" />
             Back
           </Button>
         </Link>
         <h1
-          className={cn(
-            "text-3xl font-bold",
-            theme === "nord" ? "text-white" : "text-foreground"
-          )}
+          className={cn("text-3xl font-bold", theme === "nord" ? "text-white" : "text-foreground")}
         >
           Progress Component Examples
         </h1>
@@ -47,9 +35,7 @@ export function ProgressView() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <Card className={theme === "nord" ? "bg-nord-1 border-nord-4" : ""}>
           <CardHeader>
-            <CardTitle className={theme === "nord" ? "text-white" : ""}>
-              Basic Progress
-            </CardTitle>
+            <CardTitle className={theme === "nord" ? "text-white" : ""}>Basic Progress</CardTitle>
             <CardDescription className={theme === "nord" ? "text-nord-4" : ""}>
               A simple progress bar with a fixed value
             </CardDescription>
@@ -95,9 +81,7 @@ export function ProgressView() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className={theme === "nord" ? "bg-nord-1 border-nord-4" : ""}>
           <CardHeader>
-            <CardTitle className={theme === "nord" ? "text-white" : ""}>
-              Small Progress
-            </CardTitle>
+            <CardTitle className={theme === "nord" ? "text-white" : ""}>Small Progress</CardTitle>
           </CardHeader>
           <CardContent>
             <Progress value={75} className="w-full h-1" />
@@ -106,9 +90,7 @@ export function ProgressView() {
 
         <Card className={theme === "nord" ? "bg-nord-1 border-nord-4" : ""}>
           <CardHeader>
-            <CardTitle className={theme === "nord" ? "text-white" : ""}>
-              Medium Progress
-            </CardTitle>
+            <CardTitle className={theme === "nord" ? "text-white" : ""}>Medium Progress</CardTitle>
           </CardHeader>
           <CardContent>
             <Progress value={60} className="w-full h-2" />
@@ -117,9 +99,7 @@ export function ProgressView() {
 
         <Card className={theme === "nord" ? "bg-nord-1 border-nord-4" : ""}>
           <CardHeader>
-            <CardTitle className={theme === "nord" ? "text-white" : ""}>
-              Large Progress
-            </CardTitle>
+            <CardTitle className={theme === "nord" ? "text-white" : ""}>Large Progress</CardTitle>
           </CardHeader>
           <CardContent>
             <Progress value={45} className="w-full h-4" />

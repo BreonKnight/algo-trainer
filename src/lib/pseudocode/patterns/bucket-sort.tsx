@@ -8,11 +8,11 @@ export const BucketSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Sorting uniformly
-      distributed numbers
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Sorting uniformly distributed numbers
     </div>
 
-    <PseudocodeDisplay code={`// Standard Bucket Sort
+    <PseudocodeDisplay
+      code={`// Standard Bucket Sort
 BUCKET-SORT(A):
     # Initialize buckets
     n = len(A)
@@ -106,37 +106,33 @@ BUCKET-SORT-COUNTING(A):
     for bucket in buckets:
         result.extend(bucket)
 
-    return result`} />
+    return result`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Distribute:</span> Place
-        elements into buckets
+        <span className="font-semibold text-accent">Distribute:</span> Place elements into buckets
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Sort:</span> Sort each
-        bucket individually
+        <span className="font-semibold text-accent">Sort:</span> Sort each bucket individually
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Concatenate:</span> Combine
-        sorted buckets
+        <span className="font-semibold text-accent">Concatenate:</span> Combine sorted buckets
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Bucket Sort
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Bucket Sort</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
 

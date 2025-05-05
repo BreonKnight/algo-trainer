@@ -9,8 +9,8 @@ export function DynamicProgrammingPattern() {
         <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
       </div>
       <div className="mb-2 text-xs text-secondary">
-        Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimization
-        problems with overlapping subproblems
+        Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimization problems with
+        overlapping subproblems
       </div>
 
       <PseudocodeDisplay
@@ -68,24 +68,23 @@ MCM(P):
         <span className="font-bold text-main mr-2">1.</span>
         <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
         <span>
-          <span className="font-semibold text-accent">Define:</span> State and
-          recurrence relation
+          <span className="font-semibold text-accent">Define:</span> State and recurrence relation
         </span>
       </div>
       <div className="flex items-start mb-1">
         <span className="font-bold text-main mr-2">2.</span>
         <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
         <span>
-          <span className="font-semibold text-accent">Initialize:</span> Base
-          cases and boundary conditions
+          <span className="font-semibold text-accent">Initialize:</span> Base cases and boundary
+          conditions
         </span>
       </div>
       <div className="flex items-start mb-1">
         <span className="font-bold text-main mr-2">3.</span>
         <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
         <span>
-          <span className="font-semibold text-accent">Compute:</span> Fill DP
-          table in bottom-up manner
+          <span className="font-semibold text-accent">Compute:</span> Fill DP table in bottom-up
+          manner
         </span>
       </div>
 
@@ -104,9 +103,7 @@ F(5) = F(4) + F(3) = 5`}
       </div>
 
       <div className="mt-4">
-        <span className="font-semibold text-accent">
-          Example: Longest Common Subsequence
-        </span>
+        <span className="font-semibold text-accent">Example: Longest Common Subsequence</span>
         <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
           {`X = "ABCBDAB"
 Y = "BDCABA"

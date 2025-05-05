@@ -8,8 +8,8 @@ export const HuffmanCodingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimal
-      prefix coding for data compression
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Optimal prefix coding for data
+      compression
     </div>
 
     <PseudocodeDisplay

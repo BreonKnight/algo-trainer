@@ -20,8 +20,7 @@ const conventions: Record<string, NamingConvention> = {
   },
   camelCase: {
     pattern: /^[a-z][a-zA-Z0-9]*Pattern$/,
-    description:
-      "Pattern variables should be in camelCase and end with Pattern",
+    description: "Pattern variables should be in camelCase and end with Pattern",
   },
   titleCase: {
     pattern: /^[A-Z][a-zA-Z0-9]*( [A-Z][a-zA-Z0-9]*)*$/,
@@ -34,9 +33,7 @@ function collectPatternKeys(filePath: string): string[] {
   const patternKeys: string[] = [];
 
   // Match pattern keys in Map declarations
-  const mapMatches = content.match(
-    /new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g
-  );
+  const mapMatches = content.match(/new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g);
   if (mapMatches) {
     mapMatches.forEach((mapContent: string) => {
       const keyMatches = mapContent.match(/"([^"]+)" as PatternKey/g);
@@ -90,9 +87,7 @@ function validateFileNaming(filePath: string): ValidationResult {
 
   // Check file name convention
   if (!conventions.kebabCase.pattern.test(fileName)) {
-    issues.push(
-      `File name "${fileName}" does not follow kebab-case convention`
-    );
+    issues.push(`File name "${fileName}" does not follow kebab-case convention`);
   }
 
   // Read file content
@@ -104,9 +99,7 @@ function validateFileNaming(filePath: string): ValidationResult {
     patternVarMatches.forEach((match: string) => {
       const varName = match.replace(/const\s+|\s*=/g, "");
       if (!conventions.camelCase.pattern.test(varName)) {
-        issues.push(
-          `Pattern variable "${varName}" does not follow camelCase convention`
-        );
+        issues.push(`Pattern variable "${varName}" does not follow camelCase convention`);
       }
     });
   }
@@ -118,15 +111,11 @@ function validateFileNaming(filePath: string): ValidationResult {
       keyMatches.forEach((match: string) => {
         const key = match.replace(/"/g, "").replace(":", "");
         if (!conventions.titleCase.pattern.test(key)) {
-          issues.push(
-            `Pattern key "${key}" does not follow Title Case convention`
-          );
+          issues.push(`Pattern key "${key}" does not follow Title Case convention`);
         }
         // Check if key exists in monsterHunterExplanations
         if (!(key in monsterHunterExplanations)) {
-          issues.push(
-            `Pattern key "${key}" not found in monsterHunterExplanations`
-          );
+          issues.push(`Pattern key "${key}" not found in monsterHunterExplanations`);
         }
       });
     }

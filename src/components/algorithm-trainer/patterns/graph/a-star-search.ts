@@ -4,8 +4,7 @@ export const aStarSearchPattern: AlgorithmPattern = {
   title: "A* Search",
   description:
     "A graph algorithm that finds the shortest path between two nodes using a heuristic function to guide the search. It combines the advantages of Dijkstra's algorithm (guaranteed shortest path) with the efficiency of greedy best-first search.",
-  timeComplexity:
-    "O(b^d) where b is the branching factor and d is the depth of the solution",
+  timeComplexity: "O(b^d) where b is the branching factor and d is the depth of the solution",
   spaceComplexity: "O(b^d)",
   pseudocode: `
 function aStar(start, goal, graph, heuristic):

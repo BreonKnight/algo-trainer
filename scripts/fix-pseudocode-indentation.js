@@ -22,9 +22,7 @@ function fixIndentation(code) {
 
   // Remove minIndent from each line, then replace tabs with 2 spaces
   return lines
-    .map((line) =>
-      line.startsWith(" ".repeat(minIndent)) ? line.slice(minIndent) : line
-    )
+    .map((line) => (line.startsWith(" ".repeat(minIndent)) ? line.slice(minIndent) : line))
     .map((line) => line.replace(/\t/g, "  "))
     .join("\n");
 }

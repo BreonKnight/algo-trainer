@@ -8,11 +8,11 @@ export const GreedyDinicPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V²E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding maximum
-      flow in networks
+      Time: O(V²E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding maximum flow in networks
     </div>
 
-    <PseudocodeDisplay code={`// Standard Dinic's Algorithm
+    <PseudocodeDisplay
+      code={`// Standard Dinic's Algorithm
 def dinic(graph, source, sink):
     # Initialize residual graph and max flow
     residual = {u: {v: graph[u][v] for v in graph[u]}
@@ -59,7 +59,8 @@ def dinic(graph, source, sink):
                 break
             max_flow += flow
 
-    return max_flow`} />
+    return max_flow`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

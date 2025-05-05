@@ -8,11 +8,11 @@ export const SegmentTreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Range queries
-      and updates
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Range queries and updates
     </div>
 
-    <PseudocodeDisplay code={`// Standard Segment Tree
+    <PseudocodeDisplay
+      code={`// Standard Segment Tree
 class SegmentTree:
     def __init__(self, data):
         self.n = len(data)
@@ -113,37 +113,33 @@ class PersistentSegmentTree:
             pos //= 2
             new_root[pos] = new_root[2*pos] + new_root[2*pos+1]
         self.versions.append(new_root)
-        return len(self.versions) - 1`} />
+        return len(self.versions) - 1`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build:</span> Construct tree
-        from array
+        <span className="font-semibold text-accent">Build:</span> Construct tree from array
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Query:</span> Get range sum
-        in O(log n)
+        <span className="font-semibold text-accent">Query:</span> Get range sum in O(log n)
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Modify value
-        in O(log n)
+        <span className="font-semibold text-accent">Update:</span> Modify value in O(log n)
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Segment Tree
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Segment Tree</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [1, 3, 5, 7, 9, 11]
 
@@ -167,9 +163,7 @@ Update A[2] = 6:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Lazy Propagation
-      </span>
+      <span className="font-semibold text-accent">Example: Lazy Propagation</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [1, 3, 5, 7, 9, 11]
 
@@ -191,9 +185,7 @@ sum(2,5) = 38`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Persistent Segment Tree
-      </span>
+      <span className="font-semibold text-accent">Example: Persistent Segment Tree</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [1, 3, 5, 7, 9, 11]
 

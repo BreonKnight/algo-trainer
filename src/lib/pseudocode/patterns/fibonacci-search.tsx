@@ -8,8 +8,8 @@ export const FibonacciSearchPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Search in
-      sorted array using Fibonacci numbers
+      Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Search in sorted array using
+      Fibonacci numbers
     </div>
 
     <PseudocodeDisplay
@@ -83,9 +83,7 @@ export const FibonacciSearchPattern = () => (
     <div className="mb-2 text-sm">
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Initialize: Find smallest Fibonacci number {">="} array length
-        </span>
+        <span>Initialize: Find smallest Fibonacci number {">="} array length</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />

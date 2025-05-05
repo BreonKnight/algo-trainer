@@ -4,8 +4,4 @@ export type Pattern = {
   difficulty: "easy" | "medium" | "hard";
 };
 
-export type PatternCategory =
-  | "Sorting"
-  | "Graph"
-  | "Dynamic Programming"
-  | "Greedy";
+export type PatternCategory = "Sorting" | "Graph" | "Dynamic Programming" | "Greedy";

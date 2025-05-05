@@ -8,11 +8,11 @@ export const QueueImplementationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO data
-      structure
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO data structure
     </div>
 
-    <PseudocodeDisplay code={`QUEUE-EMPTY(Q)
+    <PseudocodeDisplay
+      code={`QUEUE-EMPTY(Q)
     if Q.head = Q.tail
         then return true
         else return false
@@ -76,7 +76,8 @@ DEQUEUE(Q)
 // Final state:
 //   Q = [20, 30, 40]
 //   Q.head = 2
-//   Q.tail = 5`} />
+//   Q.tail = 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

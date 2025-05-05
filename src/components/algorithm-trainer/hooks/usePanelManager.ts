@@ -34,8 +34,7 @@ export function usePanelManager() {
 
         // Validate the new order
         const isValidOrder = VALID_PANEL_ORDERS.some(
-          (validOrder) =>
-            JSON.stringify(validOrder) === JSON.stringify(newOrder)
+          (validOrder) => JSON.stringify(validOrder) === JSON.stringify(newOrder)
         );
 
         if (!isValidOrder) {
@@ -66,14 +65,9 @@ export function usePanelManager() {
   }
 
   function validatePanelSizes(containerWidth: number) {
-    const totalMinWidth = Object.values(MIN_PANEL_WIDTH).reduce(
-      (a, b) => a + b,
-      0
-    );
+    const totalMinWidth = Object.values(MIN_PANEL_WIDTH).reduce((a, b) => a + b, 0);
     if (containerWidth < totalMinWidth) {
-      toast.error(
-        "Screen width too small for current layout. Please increase window size."
-      );
+      toast.error("Screen width too small for current layout. Please increase window size.");
       return false;
     }
     return true;

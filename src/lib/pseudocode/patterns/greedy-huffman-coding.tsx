@@ -8,11 +8,11 @@ export const GreedyHuffmanCodingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Data
-      compression
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Data compression
     </div>
 
-    <PseudocodeDisplay code={`// Standard Huffman Coding
+    <PseudocodeDisplay
+      code={`// Standard Huffman Coding
 class Node:
     def __init__(self, symbol=None, freq=0, left=None, right=None):
         self.symbol = symbol
@@ -77,37 +77,33 @@ def build_canonical_codes(lengths):
         code += 1
         prev_length = length
 
-    return codes`} />
+    return codes`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build:</span> Huffman tree
-        from frequencies
+        <span className="font-semibold text-accent">Build:</span> Huffman tree from frequencies
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Generate:</span> Codes by
-        traversing tree
+        <span className="font-semibold text-accent">Generate:</span> Codes by traversing tree
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Encode:</span> Symbols using
-        generated codes
+        <span className="font-semibold text-accent">Encode:</span> Symbols using generated codes
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Huffman
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Huffman</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input:
 Symbols: A, B, C, D, E
@@ -132,9 +128,7 @@ E: 10`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Adaptive Huffman
-      </span>
+      <span className="font-semibold text-accent">Example: Adaptive Huffman</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Stream: A B A C A B A
 
@@ -161,9 +155,7 @@ After C:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Canonical Huffman
-      </span>
+      <span className="font-semibold text-accent">Example: Canonical Huffman</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input:
 Symbols: A, B, C, D, E

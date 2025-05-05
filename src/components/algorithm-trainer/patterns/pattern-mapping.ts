@@ -106,16 +106,12 @@ export const patternMapping: Record<string, PatternKey> = {
 };
 
 // Function to get the corresponding Monster Hunter pattern key
-export function getMonsterHunterPatternKey(
-  regularPatternKey: string
-): PatternKey | undefined {
+export function getMonsterHunterPatternKey(regularPatternKey: string): PatternKey | undefined {
   return patternMapping[regularPatternKey];
 }
 
 // Function to get the corresponding regular pattern key
-export function getRegularPatternKey(
-  monsterHunterPatternKey: PatternKey
-): string | undefined {
+export function getRegularPatternKey(monsterHunterPatternKey: PatternKey): string | undefined {
   const entry = Object.entries(patternMapping).find(
     ([, value]) => value === monsterHunterPatternKey
   );

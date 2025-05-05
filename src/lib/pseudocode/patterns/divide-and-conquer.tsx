@@ -8,8 +8,8 @@ export const DivideAndConquerPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Break
-      problems into smaller subproblems
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Break problems into smaller
+      subproblems
     </div>
 
     <PseudocodeDisplay
@@ -64,24 +64,22 @@ STRASSEN(A, B):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Divide:</span> Break problem
-        into smaller subproblems
+        <span className="font-semibold text-accent">Divide:</span> Break problem into smaller
+        subproblems
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Conquer:</span> Solve
-        subproblems recursively
+        <span className="font-semibold text-accent">Conquer:</span> Solve subproblems recursively
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Combine:</span> Merge
-        solutions of subproblems
+        <span className="font-semibold text-accent">Combine:</span> Merge solutions of subproblems
       </span>
     </div>
 
@@ -118,9 +116,7 @@ Pivot = 43:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Strassen's Matrix Multiplication
-      </span>
+      <span className="font-semibold text-accent">Example: Strassen's Matrix Multiplication</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`A = [[1, 2], [3, 4]]
 B = [[5, 6], [7, 8]]

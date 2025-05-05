@@ -2,8 +2,7 @@ import { AlgorithmPattern } from "../../types";
 
 export const triePattern: AlgorithmPattern = {
   title: "Trie Operations",
-  description:
-    "A tree-like data structure for efficient string operations and prefix matching",
+  description: "A tree-like data structure for efficient string operations and prefix matching",
   timeComplexity: "O(m) for operations where m is the length of the string",
   spaceComplexity: "O(ALPHABET_SIZE * m * n) where n is the number of strings",
   pseudocode: `class TrieNode:

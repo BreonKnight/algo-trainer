@@ -8,11 +8,11 @@ export const TreePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Tree traversal and
-      operations
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Tree traversal and operations
     </div>
 
-    <PseudocodeDisplay code={`// Tree node structure
+    <PseudocodeDisplay
+      code={`// Tree node structure
 TREE-NODE:
     key
     left
@@ -57,7 +57,8 @@ TREE-SEARCH(x, k):
 //
 // Inorder: 1, 2, 3, 4, 5, 6, 7
 // Preorder: 4, 2, 1, 3, 6, 5, 7
-// Postorder: 1, 3, 2, 5, 7, 6, 4`} />
+// Postorder: 1, 3, 2, 5, 7, 6, 4`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  FaChartLine,
-  FaBook,
-  FaPython,
-  FaCode,
-  FaGraduationCap,
-} from "react-icons/fa";
+import { FaChartLine, FaBook, FaPython, FaCode, FaGraduationCap } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useTheme } from "../../theme/theme-context";
 

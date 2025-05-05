@@ -8,11 +8,11 @@ export const GreedyPrimPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      minimum spanning tree
+      Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding minimum spanning tree
     </div>
 
-    <PseudocodeDisplay code={`// Standard Prim's Algorithm
+    <PseudocodeDisplay
+      code={`// Standard Prim's Algorithm
 def prim(graph, start):
     # Initialize MST and visited set
     mst = []
@@ -89,37 +89,34 @@ def prim_with_max_degree(graph, start, max_degree):
                 if neighbor not in visited:
                     heapq.heappush(edges, (weight, v, neighbor))
 
-    return mst`} />
+    return mst`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> MST,
-        visited set, and priority queue
+        <span className="font-semibold text-accent">Initialize:</span> MST, visited set, and
+        priority queue
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Process:</span> Extract
-        minimum weight edge
+        <span className="font-semibold text-accent">Process:</span> Extract minimum weight edge
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Add edge to
-        MST and update queue
+        <span className="font-semibold text-accent">Update:</span> Add edge to MST and update queue
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Prim's
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Prim's</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)
@@ -141,9 +138,7 @@ Total Weight: 16`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Prim's with Max Weight
-      </span>
+      <span className="font-semibold text-accent">Example: Prim's with Max Weight</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)
@@ -165,9 +160,7 @@ Total Weight: 10`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Prim's with Max Degree
-      </span>
+      <span className="font-semibold text-accent">Example: Prim's with Max Degree</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)

@@ -224,11 +224,9 @@ export function verifyPatternCompleteness() {
     return !algorithmPatterns[key];
   });
 
-  const missingMonsterHunterPatterns = PATTERN_KEYS.filter(
-    (key: PatternKey) => {
-      return !allPatterns.has(key);
-    }
-  );
+  const missingMonsterHunterPatterns = PATTERN_KEYS.filter((key: PatternKey) => {
+    return !allPatterns.has(key);
+  });
 
   // Log results
   console.log("Pattern Verification Results:");
@@ -243,9 +241,7 @@ export function verifyPatternCompleteness() {
 
   if (missingMonsterHunterPatterns.length > 0) {
     console.log("\nMissing Monster Hunter Patterns:");
-    missingMonsterHunterPatterns.forEach((pattern) =>
-      console.log(`- ${pattern}`)
-    );
+    missingMonsterHunterPatterns.forEach((pattern) => console.log(`- ${pattern}`));
   } else {
     console.log("\n✓ All patterns have Monster Hunter implementations");
   }
@@ -316,18 +312,14 @@ if (differentNames.length > 0) {
     const monsterHunterPattern = monsterHunterPatternKeys.find(
       (mhPattern) => mhPattern.toLowerCase() === pattern.toLowerCase()
     );
-    console.log(
-      `- Regular: "${pattern}" vs Monster Hunter: "${monsterHunterPattern}"`
-    );
+    console.log(`- Regular: "${pattern}" vs Monster Hunter: "${monsterHunterPattern}"`);
   });
 }
 
 console.log("\nSummary:");
 console.log("--------");
 console.log(`Total regular patterns: ${regularPatternKeys.length}`);
-console.log(
-  `Total Monster Hunter patterns: ${monsterHunterPatternKeys.length}`
-);
+console.log(`Total Monster Hunter patterns: ${monsterHunterPatternKeys.length}`);
 console.log(`Missing in regular: ${missingInRegular.length}`);
 console.log(`Missing in Monster Hunter: ${missingInMonsterHunter.length}`);
 console.log(`Different names: ${differentNames.length}`);

@@ -5,16 +5,15 @@ export const MatrixChainMultiplicationPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Matrix Chain Multiplication</span>
-      <span className="ml-2 text-xs text-secondary">
-        (Optimization Algorithm)
-      </span>
+      <span className="ml-2 text-xs text-secondary">(Optimization Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Finding optimal
-      matrix multiplication order
+      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Finding optimal matrix
+      multiplication order
     </div>
 
-    <PseudocodeDisplay code={`// Find minimum number of scalar multiplications
+    <PseudocodeDisplay
+      code={`// Find minimum number of scalar multiplications
 MATRIX-CHAIN-ORDER(p):
     n = length of p - 1
     # Initialize tables for costs and splits
@@ -49,38 +48,35 @@ PRINT-OPTIMAL-PARENS(s, i, j):
         print "("
         PRINT-OPTIMAL-PARENS(s, i, s[i][j])
         PRINT-OPTIMAL-PARENS(s, s[i][j] + 1, j)
-        print ")"`} />
+        print ")"`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        cost and split tables
+        <span className="font-semibold text-accent">Initialize:</span> Create cost and split tables
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Fill:</span> Compute costs
-        for all chain lengths
+        <span className="font-semibold text-accent">Fill:</span> Compute costs for all chain lengths
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Split:</span> Try all
-        possible split points
+        <span className="font-semibold text-accent">Split:</span> Try all possible split points
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">4.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Print:</span> Show optimal
-        multiplication order
+        <span className="font-semibold text-accent">Print:</span> Show optimal multiplication order
       </span>
     </div>
 

@@ -8,11 +8,12 @@ export const MemoizationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Dynamic Programming)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Store computed
-      results to avoid redundant calculations
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Store computed results to avoid
+      redundant calculations
     </div>
 
-    <PseudocodeDisplay code={`# Memoization: Store computed results to avoid redundant calculations
+    <PseudocodeDisplay
+      code={`# Memoization: Store computed results to avoid redundant calculations
 # Input: Function f with parameters, memoization table
 # Output: Result of function with parameters
 
@@ -51,7 +52,8 @@ Algorithm MEMOIZED-FIBONACCI(n)
 #         (((1 + 0) + 1) + (1 + 0)) + ((1 + 0) + 1)
 #         memo = [0, 1, 1, 2, 3, 5]
 #
-# Output: 5`} />
+# Output: 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -4,8 +4,7 @@ export const monsterHunterGuidePattern: AlgorithmPattern = {
   title: "Monster Hunter Guide",
   description:
     "A comprehensive guide for solving monster hunting problems, including strategies for different types of monsters and optimization techniques.",
-  timeComplexity:
-    "O(n * m) where n is the number of monsters and m is the number of strategies",
+  timeComplexity: "O(n * m) where n is the number of monsters and m is the number of strategies",
   spaceComplexity: "O(n + m)",
   pseudocode: `
 function monsterHunterGuide(monsters, strategies):

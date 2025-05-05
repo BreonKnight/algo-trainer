@@ -2,8 +2,7 @@ import type { AlgorithmPattern } from "../../types";
 
 export const matrixExponentiationPattern: AlgorithmPattern = {
   title: "Matrix Exponentiation",
-  description:
-    "Compute the power of a matrix efficiently using exponentiation by squaring.",
+  description: "Compute the power of a matrix efficiently using exponentiation by squaring.",
   timeComplexity: "O(n³ log k)",
   spaceComplexity: "O(n²)",
   pseudocode: `function matrixPower(matrix, power):

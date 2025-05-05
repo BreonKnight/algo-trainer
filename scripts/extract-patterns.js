@@ -112,10 +112,7 @@ for (let i = 0; i < algorithmPatternsStr.length; i++) {
   const char = algorithmPatternsStr[i];
 
   // Handle string literals
-  if (
-    (char === '"' || char === "'" || char === "`") &&
-    algorithmPatternsStr[i - 1] !== "\\"
-  ) {
+  if ((char === '"' || char === "'" || char === "`") && algorithmPatternsStr[i - 1] !== "\\") {
     if (!inString) {
       inString = true;
       stringChar = char;
@@ -227,10 +224,7 @@ Object.values(patternDirectories).forEach((dir) => {
       indexPath,
       `import { AlgorithmPattern } from "../../types";
 
-export const ${dir.replace(
-        /-/g,
-        "_"
-      )}Patterns: Partial<Record<string, AlgorithmPattern>> = {
+export const ${dir.replace(/-/g, "_")}Patterns: Partial<Record<string, AlgorithmPattern>> = {
   // ${dir} patterns will be added here
 };
 `
@@ -280,10 +274,7 @@ export const ${key
   const importStatement = `import { ${key
     .toLowerCase()
     .replace(/\s+/g, "_")
-    .replace(/[^a-z0-9_]/g, "")}Pattern } from "./${fileName.replace(
-    ".ts",
-    ""
-  )}";\n`;
+    .replace(/[^a-z0-9_]/g, "")}Pattern } from "./${fileName.replace(".ts", "")}";\n`;
 
   if (!indexContent.includes(importStatement)) {
     indexContent = indexContent.replace(
@@ -336,9 +327,7 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
 // Add all directories
 Object.values(patternDirectories).forEach((dir, index, array) => {
   const dirName = dir.replace(/-/g, "_");
-  mainIndexContent += `    ...${dirName}Patterns${
-    index < array.length - 1 ? "," : ""
-  }\n`;
+  mainIndexContent += `    ...${dirName}Patterns${index < array.length - 1 ? "," : ""}\n`;
 });
 
 mainIndexContent += `  }).reduce((acc, [_, patterns]) => ({ ...acc, ...patterns }), {})

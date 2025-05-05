@@ -31,9 +31,7 @@ class PatternTemplateGenerator {
     console.log("Let's create a new pattern template!\n");
 
     const template: PatternTemplate = {
-      name: await this.prompt(
-        'Pattern Name (e.g., "Binary Search on Answer"): '
-      ),
+      name: await this.prompt('Pattern Name (e.g., "Binary Search on Answer"): '),
       category: await this.prompt(
         'Category (e.g., "Searching", "Sorting", "Dynamic Programming"): '
       ),

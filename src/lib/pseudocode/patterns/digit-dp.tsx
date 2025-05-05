@@ -8,11 +8,12 @@ export const DigitDPPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(d·s·t) &nbsp;|&nbsp; Space: O(d·s·t) &nbsp;|&nbsp; Use: Count
-      numbers with digit constraints
+      Time: O(d·s·t) &nbsp;|&nbsp; Space: O(d·s·t) &nbsp;|&nbsp; Use: Count numbers with digit
+      constraints
     </div>
 
-    <PseudocodeDisplay code={`DIGIT-DP(n, k)
+    <PseudocodeDisplay
+      code={`DIGIT-DP(n, k)
     let digits[1‥d] be a new array
     let i ← 1
     while n > 0
@@ -64,7 +65,8 @@ COUNT-DIGITS(digits, pos, sum, tight, leading_zero)
 //
 // ... (continues for all digits)
 //
-// Output: Number of numbers ≤ 123 with digit sum = 6`} />
+// Output: Number of numbers ≤ 123 with digit sum = 6`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
@@ -80,9 +82,7 @@ COUNT-DIGITS(digits, pos, sum, tight, leading_zero)
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Count: Recursively count valid numbers with digit constraints
-        </span>
+        <span>Count: Recursively count valid numbers with digit constraints</span>
       </div>
     </div>
   </div>

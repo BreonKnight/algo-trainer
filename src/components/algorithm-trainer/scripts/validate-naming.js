@@ -24,9 +24,7 @@ function findSimilarStrings(target, candidates, threshold = 0.7) {
 
     // Calculate Levenshtein distance
     const distance = levenshteinDistance(normalizedTarget, normalizedCandidate);
-    const similarity =
-      1 -
-      distance / Math.max(normalizedTarget.length, normalizedCandidate.length);
+    const similarity = 1 - distance / Math.max(normalizedTarget.length, normalizedCandidate.length);
 
     if (similarity >= threshold) {
       similar.push({ candidate, similarity });
@@ -79,9 +77,7 @@ function validatePatternContent(content) {
     content.includes("Space:") ||
     content.includes("Space complexity");
 
-  const missingSections = requiredSections.filter(
-    (section) => !content.includes(section)
-  );
+  const missingSections = requiredSections.filter((section) => !content.includes(section));
 
   if (!hasTimeComplexity) {
     missingSections.push("Time Complexity");
@@ -103,9 +99,7 @@ function findDuplicatePatterns(patternFiles) {
     if (!fs.existsSync(filePath)) continue;
 
     const content = fs.readFileSync(filePath, "utf-8");
-    const patternMatches = content.match(
-      /new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g
-    );
+    const patternMatches = content.match(/new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g);
 
     if (patternMatches) {
       patternMatches.forEach((match) => {
@@ -149,9 +143,7 @@ function collectPatternKeys(filePath) {
   }
 
   // Match pattern keys in Map declarations (for other files)
-  const mapMatches = content.match(
-    /new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g
-  );
+  const mapMatches = content.match(/new Map<PatternKey, string>\(\[([\s\S]*?)\]\)/g);
   if (mapMatches) {
     mapMatches.forEach((mapContent) => {
       const keyMatches = mapContent.match(/"([^"]+)" as PatternKey,?/g);
@@ -166,9 +158,7 @@ function collectPatternKeys(filePath) {
   }
 
   // Match pattern keys in Record declarations
-  const recordMatches = content.match(
-    /Record<string, AlgorithmPattern> = {([\s\S]*?)}/g
-  );
+  const recordMatches = content.match(/Record<string, AlgorithmPattern> = {([\s\S]*?)}/g);
   if (recordMatches) {
     recordMatches.forEach((recordContent) => {
       const keyMatches = recordContent.match(/"([^"]+)":/g);
@@ -333,11 +323,7 @@ function validatePatternKeys() {
     console.log("\n⚠️ Pattern content issues:");
     console.log("-".repeat(40));
     contentIssues.forEach(({ key, file, missingSections }) => {
-      console.log(
-        `  ❌ ${key} in ${file} is missing sections: ${missingSections.join(
-          ", "
-        )}`
-      );
+      console.log(`  ❌ ${key} in ${file} is missing sections: ${missingSections.join(", ")}`);
     });
     console.log("\nNote: Each pattern should include:");
     console.log("  - Time Complexity (or Time: or Operations:)");
@@ -353,16 +339,12 @@ function validatePatternKeys() {
     similarPatterns.forEach((similar, key) => {
       console.log(`  🔎 ${key} is similar to:`);
       similar.forEach(({ candidate, similarity }) => {
-        console.log(
-          `    - ${candidate} (${(similarity * 100).toFixed(1)}% similar)`
-        );
+        console.log(`    - ${candidate} (${(similarity * 100).toFixed(1)}% similar)`);
       });
     });
   }
 
-  const missingPatterns = Array.from(declaredPatternKeys).filter(
-    (key) => !testDataKeys.has(key)
-  );
+  const missingPatterns = Array.from(declaredPatternKeys).filter((key) => !testDataKeys.has(key));
   if (missingPatterns.length > 0) {
     console.log("\n❌ Missing test data for these patterns:");
     console.log("-".repeat(40));

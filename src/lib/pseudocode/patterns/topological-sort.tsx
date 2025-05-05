@@ -8,11 +8,12 @@ export const TopologicalSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Graph)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Linear
-      ordering of vertices in a DAG
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Linear ordering of vertices in a
+      DAG
     </div>
 
-    <PseudocodeDisplay code={`# Topological Sort: Linear ordering of vertices in a DAG
+    <PseudocodeDisplay
+      code={`# Topological Sort: Linear ordering of vertices in a DAG
 # Input: Directed Acyclic Graph G = (V, E)
 # Output: Topological ordering of vertices
 
@@ -60,7 +61,8 @@ Algorithm TOPOLOGICAL-SORT(G)
 #   discovery[5] = 4, finish[5] = 5
 #   discovery[3] = 8, finish[3] = 9
 #
-# Output: [1, 3, 2, 4, 5]`} />
+# Output: [1, 3, 2, 4, 5]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

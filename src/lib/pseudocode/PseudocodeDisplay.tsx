@@ -1,8 +1,5 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  vscDarkPlus,
-  vs,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+import { vscDarkPlus, vs } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./pseudocode.css";
 import { useTheme } from "@/components/theme/theme-context";
 
@@ -36,16 +33,14 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
           borderRadius: "0.5rem",
           fontSize: "0.875rem",
           margin: 0,
-          fontFamily:
-            "JetBrains Mono, Fira Mono, Menlo, Monaco, Consolas, monospace",
+          fontFamily: "JetBrains Mono, Fira Mono, Menlo, Monaco, Consolas, monospace",
           textAlign: "left",
           whiteSpace: "pre",
         }}
         showLineNumbers={true}
         codeTagProps={{
           style: {
-            fontFamily:
-              "JetBrains Mono, Fira Mono, Menlo, Monaco, Consolas, monospace",
+            fontFamily: "JetBrains Mono, Fira Mono, Menlo, Monaco, Consolas, monospace",
             color: textColor,
             textAlign: "left",
             whiteSpace: "pre",

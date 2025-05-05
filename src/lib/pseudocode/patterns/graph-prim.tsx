@@ -8,11 +8,12 @@ export const PrimPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      minimum spanning tree in weighted graphs
+      Time: O(E log V) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding minimum spanning tree in
+      weighted graphs
     </div>
 
-    <PseudocodeDisplay code={`// Standard Prim's Algorithm
+    <PseudocodeDisplay
+      code={`// Standard Prim's Algorithm
 PRIM(G):
     # Initialize
     key = [∞] * |V|
@@ -85,37 +86,33 @@ PRIM-FH(G):
                 parent[v] = u
                 fh.decrease_key(nodes[v], weight)
 
-    return parent`} />
+    return parent`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set up
-        key and parent arrays
+        <span className="font-semibold text-accent">Initialize:</span> Set up key and parent arrays
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Select:</span> Choose
-        minimum key vertex
+        <span className="font-semibold text-accent">Select:</span> Choose minimum key vertex
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Update keys
-        of adjacent vertices
+        <span className="font-semibold text-accent">Update:</span> Update keys of adjacent vertices
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Prim's
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Prim's</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 --1-- 1 --2-- 2

@@ -8,11 +8,11 @@ export const StackImplementationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO data
-      structure
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO data structure
     </div>
 
-    <PseudocodeDisplay code={`STACK-EMPTY(S)
+    <PseudocodeDisplay
+      code={`STACK-EMPTY(S)
     if S.top = 0
         then return true
         else return false
@@ -59,7 +59,8 @@ POP(S)
 //
 // Final state:
 //   S = [10, 30, 40]
-//   S.top = 3`} />
+//   S.top = 3`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

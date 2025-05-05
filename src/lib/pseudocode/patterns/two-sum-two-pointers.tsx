@@ -8,11 +8,11 @@ export const TwoSumTwoPointersPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Array)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find pairs
-      that sum to target
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find pairs that sum to target
     </div>
 
-    <PseudocodeDisplay code={`# Two Sum (Two Pointers): Find pairs that sum to target
+    <PseudocodeDisplay
+      code={`# Two Sum (Two Pointers): Find pairs that sum to target
 # Input: Array A[1..n], target value t
 # Output: Indices (i, j) where A[i] + A[j] = t, or (-1, -1) if not found
 
@@ -43,7 +43,8 @@ Algorithm TWO-SUM-TWO-POINTERS(A, t)
 # Step 3: sum = 2 + 11 = 13 > 9, right = 2
 # Step 4: sum = 2 + 7 = 9 = t, return (1, 2)
 #
-# Output: (1, 2)`} />
+# Output: (1, 2)`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

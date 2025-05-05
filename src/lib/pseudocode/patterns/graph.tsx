@@ -8,8 +8,8 @@ export const GraphPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Representing
-      relationships between objects
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Representing relationships between
+      objects
     </div>
 
     <PseudocodeDisplay
@@ -70,31 +70,26 @@ BFS(G, s):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Represent:</span> Create
-        graph structure
+        <span className="font-semibold text-accent">Represent:</span> Create graph structure
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">DFS:</span> Depth-first
-        search
+        <span className="font-semibold text-accent">DFS:</span> Depth-first search
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">BFS:</span> Breadth-first
-        search
+        <span className="font-semibold text-accent">BFS:</span> Breadth-first search
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Graph Structure
-      </span>
+      <span className="font-semibold text-accent">Example: Graph Structure</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Vertices: [1, 2, 3, 4, 5]
 Edges: [(1,2), (1,3), (2,4), (3,4), (4,5)]

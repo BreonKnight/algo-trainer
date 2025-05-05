@@ -7,8 +7,7 @@ export const KruskalPattern = () => (
       <span className="text-accent font-bold">Kruskal's Algorithm</span>
     </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E log E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      minimum spanning tree
+      Time: O(E log E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding minimum spanning tree
     </div>
 
     <PseudocodeDisplay
@@ -132,8 +131,8 @@ def kruskal_with_edge_limit(graph, max_edges):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> MST,
-        parent array, and rank array
+        <span className="font-semibold text-accent">Initialize:</span> MST, parent array, and rank
+        array
       </span>
     </div>
     <div className="flex items-start mb-1">
@@ -147,15 +146,13 @@ def kruskal_with_edge_limit(graph, max_edges):
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Process:</span> Add edges if
-        they don't form cycles
+        <span className="font-semibold text-accent">Process:</span> Add edges if they don't form
+        cycles
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Kruskal's
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Kruskal's</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)
@@ -184,9 +181,7 @@ Total Weight: 16`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Kruskal's with Max Degree
-      </span>
+      <span className="font-semibold text-accent">Example: Kruskal's with Max Degree</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)
@@ -208,9 +203,7 @@ Total Weight: 18`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Kruskal's with Edge Limit
-      </span>
+      <span className="font-semibold text-accent">Example: Kruskal's with Edge Limit</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(2), D(6)

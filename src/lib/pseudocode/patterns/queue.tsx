@@ -8,11 +8,11 @@ export const QueuePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO
-      (First-In-First-Out) operations
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO (First-In-First-Out) operations
     </div>
 
-    <PseudocodeDisplay code={`// Standard Queue
+    <PseudocodeDisplay
+      code={`// Standard Queue
 class Queue:
     def __init__(self):
         self.items = []
@@ -155,30 +155,28 @@ class Deque:
     def peek_rear(self):
         if self.is_empty():
             return None
-        return self.items[-1]`} />
+        return self.items[-1]`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Enqueue:</span> Add element
-        to rear
+        <span className="font-semibold text-accent">Enqueue:</span> Add element to rear
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Dequeue:</span> Remove
-        element from front
+        <span className="font-semibold text-accent">Dequeue:</span> Remove element from front
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Peek:</span> View front
-        element without removal
+        <span className="font-semibold text-accent">Peek:</span> View front element without removal
       </span>
     </div>
 

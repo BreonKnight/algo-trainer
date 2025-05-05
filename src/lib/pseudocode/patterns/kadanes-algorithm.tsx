@@ -5,13 +5,10 @@ export const KadanesAlgorithmPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Kadane's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">
-        (Optimization Algorithm)
-      </span>
+      <span className="ml-2 text-xs text-secondary">(Optimization Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding maximum
-      subarray sum
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding maximum subarray sum
     </div>
 
     <PseudocodeDisplay
@@ -58,24 +55,23 @@ KADANE-CIRCULAR(A):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Basic:</span> Find maximum
-        subarray sum
+        <span className="font-semibold text-accent">Basic:</span> Find maximum subarray sum
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Indices:</span> Find maximum
-        subarray with indices
+        <span className="font-semibold text-accent">Indices:</span> Find maximum subarray with
+        indices
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Circular:</span> Find
-        maximum circular subarray sum
+        <span className="font-semibold text-accent">Circular:</span> Find maximum circular subarray
+        sum
       </span>
     </div>
 

@@ -101,10 +101,7 @@ console.log(\`Frequency analysis of attack pattern: \${frequency_analysis}\`);
 ]);
 
 // Add Articulation Points pattern
-export const articulationPointsMonsterHunterPattern = new Map<
-  PatternKey,
-  string
->([
+export const articulationPointsMonsterHunterPattern = new Map<PatternKey, string>([
   [
     "Articulation Points",
     `# Monster Hunter Articulation Points Pattern

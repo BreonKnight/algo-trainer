@@ -8,11 +8,12 @@ export const BinarySearchOnAnswerPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log m) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find optimal
-      value in search space
+      Time: O(n log m) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find optimal value in search
+      space
     </div>
 
-    <PseudocodeDisplay code={`// Binary search on answer with predicate function
+    <PseudocodeDisplay
+      code={`// Binary search on answer with predicate function
 BINARY-SEARCH-ANSWER(low, high, predicate):
     while low < high:
         mid ← ⌊(low + high) / 2⌋
@@ -51,7 +52,8 @@ SHIP-PACKAGES(weights, D):
 // 6. mid = 13: days = 6 > 5
 // 7. mid = 14: days = 5 ≤ 5
 //
-// Output: 15`} />
+// Output: 15`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

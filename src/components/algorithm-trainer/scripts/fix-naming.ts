@@ -73,18 +73,7 @@ function toTitleCase(str: string): string {
   }
 
   // Special acronyms that should stay uppercase
-  const acronyms = new Set([
-    "KMP",
-    "BFS",
-    "DFS",
-    "DP",
-    "AVL",
-    "B",
-    "FFT",
-    "LCP",
-    "SCC",
-    "SCCs",
-  ]);
+  const acronyms = new Set(["KMP", "BFS", "DFS", "DP", "AVL", "B", "FFT", "LCP", "SCC", "SCCs"]);
 
   return str
     .replace(/([A-Z])/g, " $1")

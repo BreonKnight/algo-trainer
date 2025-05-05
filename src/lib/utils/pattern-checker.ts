@@ -45,11 +45,7 @@ export async function checkPatternFiles(): Promise<PatternCheckResult> {
       if (!monsterHunterTestData.has(patternKey)) {
         result.missingPatterns.monsterHunterTestData.push(patternKey);
       }
-      if (
-        !monsterHunterExplanations[
-          patternKey as keyof typeof monsterHunterExplanations
-        ]
-      ) {
+      if (!monsterHunterExplanations[patternKey as keyof typeof monsterHunterExplanations]) {
         result.missingPatterns.monsterHunterExplanations.push(patternKey);
       }
       if (!monsterHunterPatterns.has(patternKey)) {

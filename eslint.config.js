@@ -3,6 +3,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import * as tseslint from "@typescript-eslint/eslint-plugin";
 import * as tseslintParser from "@typescript-eslint/parser";
+import prettier from "eslint-plugin-prettier";
 
 export default [
   {
@@ -23,8 +24,10 @@ export default [
       "@typescript-eslint": tseslint,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      prettier: prettier,
     },
     rules: {
+      "prettier/prettier": "error",
       "no-unused-vars": "off",
       "no-undef": "off",
       "@typescript-eslint/no-unused-vars": "warn",
@@ -32,10 +35,7 @@ export default [
       "@typescript-eslint/no-empty-function": "warn",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     },
   },
 ];

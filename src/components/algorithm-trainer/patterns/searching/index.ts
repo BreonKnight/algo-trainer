@@ -21,15 +21,14 @@ type SearchingPatternKey =
   | "Quickselect"
   | "Fibonacci Search";
 
-export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> =
-  {
-    "Binary Search": binarySearchPattern,
-    "Linear Search": linearSearchPattern,
-    "Binary Search on Answer": binarySearchOnAnswerPattern,
-    "Ternary Search": ternarySearchPattern,
-    "Jump Search": jumpSearchPattern,
-    "Exponential Search": exponentialSearchPattern,
-    "Interpolation Search": interpolationSearchPattern,
-    Quickselect: quickselectPattern,
-    "Fibonacci Search": fibonacciSearchPattern,
-  };
+export const searchingPatterns: Record<SearchingPatternKey, AlgorithmPattern> = {
+  "Binary Search": binarySearchPattern,
+  "Linear Search": linearSearchPattern,
+  "Binary Search on Answer": binarySearchOnAnswerPattern,
+  "Ternary Search": ternarySearchPattern,
+  "Jump Search": jumpSearchPattern,
+  "Exponential Search": exponentialSearchPattern,
+  "Interpolation Search": interpolationSearchPattern,
+  Quickselect: quickselectPattern,
+  "Fibonacci Search": fibonacciSearchPattern,
+};

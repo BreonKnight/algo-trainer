@@ -7,8 +7,8 @@ export const DijkstraPattern = () => (
       <span className="text-accent font-bold">Dijkstra's Algorithm</span>
     </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      shortest paths from a source
+      Time: O((V+E)logV) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding shortest paths from a
+      source
     </div>
 
     <PseudocodeDisplay
@@ -95,31 +95,26 @@ BIDIRECTIONAL-DIJKSTRA(G, w, s, t)
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Distances
-        and priority queue
+        <span className="font-semibold text-accent">Initialize:</span> Distances and priority queue
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Process:</span> Extract
-        minimum distance node
+        <span className="font-semibold text-accent">Process:</span> Extract minimum distance node
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Relax:</span> Update
-        distances for neighbors
+        <span className="font-semibold text-accent">Relax:</span> Update distances for neighbors
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Dijkstra
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Dijkstra</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(4), C(2)
@@ -140,9 +135,7 @@ E: 11`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Dijkstra with Path
-      </span>
+      <span className="font-semibold text-accent">Example: Dijkstra with Path</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(4), C(2)
@@ -159,9 +152,7 @@ Distance: 12`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Bidirectional Dijkstra
-      </span>
+      <span className="font-semibold text-accent">Example: Bidirectional Dijkstra</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 A -> B(4), C(2)

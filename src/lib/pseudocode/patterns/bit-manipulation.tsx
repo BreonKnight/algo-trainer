@@ -8,8 +8,7 @@ export const BitManipulationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Efficient
-      bit-level operations
+      Time: O(1) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Efficient bit-level operations
     </div>
 
     <PseudocodeDisplay
@@ -60,31 +59,26 @@ ADD(x, y):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Basic:</span> AND, OR, XOR,
-        NOT operations
+        <span className="font-semibold text-accent">Basic:</span> AND, OR, XOR, NOT operations
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Shift:</span> Left and right
-        bit shifts
+        <span className="font-semibold text-accent">Shift:</span> Left and right bit shifts
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Advanced:</span> Bit
-        counting, power checks
+        <span className="font-semibold text-accent">Advanced:</span> Bit counting, power checks
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Basic Operations
-      </span>
+      <span className="font-semibold text-accent">Example: Basic Operations</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`x = 5 (0101)
 y = 3 (0011)

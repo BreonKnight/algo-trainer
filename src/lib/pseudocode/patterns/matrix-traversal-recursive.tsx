@@ -8,11 +8,11 @@ export const MatrixTraversalRecursivePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(mn) &nbsp;|&nbsp; Space: O(m+n) &nbsp;|&nbsp; Use: Recursive
-      matrix traversal
+      Time: O(mn) &nbsp;|&nbsp; Space: O(m+n) &nbsp;|&nbsp; Use: Recursive matrix traversal
     </div>
 
-    <PseudocodeDisplay code={`DFS-TRAVERSE(A, i, j, visited)
+    <PseudocodeDisplay
+      code={`DFS-TRAVERSE(A, i, j, visited)
     let m, n be the dimensions of A
     if i < 1 or i > m or j < 1 or j > n or visited[i, j] = TRUE
         then return
@@ -62,7 +62,8 @@ RECURSIVE-TRAVERSE(A)
 // 8. Visit (1,2) = 2
 // 9. Visit (1,3) = 3
 //
-// Output: [1, 4, 7, 8, 9, 6, 5, 2, 3]`} />
+// Output: [1, 4, 7, 8, 9, 6, 5, 2, 3]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

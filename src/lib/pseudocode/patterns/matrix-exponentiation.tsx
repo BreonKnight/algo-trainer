@@ -5,16 +5,14 @@ export const MatrixExponentiationPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">Matrix Exponentiation</span>
-      <span className="ml-2 text-xs text-secondary">
-        (Optimization Algorithm)
-      </span>
+      <span className="ml-2 text-xs text-secondary">(Optimization Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Fast
-      computation of matrix powers
+      Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Fast computation of matrix powers
     </div>
 
-    <PseudocodeDisplay code={`// Compute matrix power using binary exponentiation
+    <PseudocodeDisplay
+      code={`// Compute matrix power using binary exponentiation
 MATRIX-POWER(matrix, power):
     # Initialize result as identity matrix
     result = IDENTITY-MATRIX(size of matrix)
@@ -48,38 +46,35 @@ MATRIX-MULTIPLY(A, B):
                 sum = sum + A[i][k] * B[k][j]
             result[i][j] = sum
 
-    return result`} />
+    return result`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set up
-        identity matrix
+        <span className="font-semibold text-accent">Initialize:</span> Set up identity matrix
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Process:</span> Handle each
-        bit of power
+        <span className="font-semibold text-accent">Process:</span> Handle each bit of power
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Multiply:</span> Update
-        result matrix
+        <span className="font-semibold text-accent">Multiply:</span> Update result matrix
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">4.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Square:</span> Prepare for
-        next bit
+        <span className="font-semibold text-accent">Square:</span> Prepare for next bit
       </span>
     </div>
 
@@ -111,9 +106,7 @@ Final result:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Fibonacci Numbers
-      </span>
+      <span className="font-semibold text-accent">Example: Fibonacci Numbers</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Using matrix exponentiation to compute F(n):
 

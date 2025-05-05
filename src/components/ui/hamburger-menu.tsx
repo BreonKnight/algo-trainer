@@ -31,9 +31,7 @@ export function HamburgerMenu() {
         <div
           className={cn(
             "absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 z-10",
-            theme === "nord"
-              ? "bg-nord-0 text-nord-6"
-              : "bg-background text-foreground"
+            theme === "nord" ? "bg-nord-0 text-nord-6" : "bg-background text-foreground"
           )}
         >
           <Link

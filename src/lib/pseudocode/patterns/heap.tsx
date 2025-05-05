@@ -8,8 +8,7 @@ export const HeapPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Priority queue
-      implementation
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Priority queue implementation
     </div>
 
     <PseudocodeDisplay
@@ -74,31 +73,28 @@ MAX-HEAP-INSERT(A, key):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build:</span> Create max
-        heap from array
+        <span className="font-semibold text-accent">Build:</span> Create max heap from array
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Extract:</span> Remove and
-        return maximum element
+        <span className="font-semibold text-accent">Extract:</span> Remove and return maximum
+        element
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Insert:</span> Add new
-        element maintaining heap property
+        <span className="font-semibold text-accent">Insert:</span> Add new element maintaining heap
+        property
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Heap Operations
-      </span>
+      <span className="font-semibold text-accent">Example: Heap Operations</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Initial array: [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
 After BUILD-MAX-HEAP: [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
@@ -108,9 +104,7 @@ After MAX-HEAP-INSERT(15): [15, 14, 10, 8, 7, 9, 3, 2, 1, 4]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Heap Properties
-      </span>
+      <span className="font-semibold text-accent">Example: Heap Properties</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Parent of 2: 1
 Left child of 1: 2

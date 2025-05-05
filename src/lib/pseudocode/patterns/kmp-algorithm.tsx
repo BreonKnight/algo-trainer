@@ -8,8 +8,8 @@ export const KnuthMorrisPrattPattern = () => {
         <span className="text-accent font-bold">Knuth-Morris-Pratt</span>
       </h2>
       <p className="text-gray-600">
-        A linear time pattern matching algorithm that uses a preprocessed
-        pattern to skip unnecessary comparisons.
+        A linear time pattern matching algorithm that uses a preprocessed pattern to skip
+        unnecessary comparisons.
       </p>
       <PseudocodeDisplay
         code={`# Knuth-Morris-Pratt: Pattern matching in strings

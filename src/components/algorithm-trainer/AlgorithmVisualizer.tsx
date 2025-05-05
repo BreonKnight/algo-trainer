@@ -30,10 +30,7 @@ interface PerformanceMetrics {
 }
 
 // Helper function to generate visualization steps based on algorithm
-const generateVisualizationSteps = (
-  algorithm: string,
-  data: number[]
-): VisualizationStep[] => {
+const generateVisualizationSteps = (algorithm: string, data: number[]): VisualizationStep[] => {
   const steps = [];
   const arr = [...data];
   let metrics: PerformanceMetrics = { comparisons: 0, swaps: 0, time: 0 };
@@ -210,11 +207,7 @@ const renderStep = (
     ctx.fillStyle = theme === "nord" ? "#ECEFF4" : "#1e293b";
     ctx.font = "16px sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(
-      `${visualizationType} visualization coming soon`,
-      width / 2,
-      height / 2
-    );
+    ctx.fillText(`${visualizationType} visualization coming soon`, width / 2, height / 2);
   }
 };
 
@@ -298,9 +291,7 @@ export function AlgorithmVisualizer({
       setCurrentStep((prev) => {
         const nextStep = Math.min(prev + 1, steps.length - 1);
         const currentTime = performance.now();
-        const elapsedTime = Number(
-          (currentTime - startTimeRef.current).toFixed(1)
-        );
+        const elapsedTime = Number((currentTime - startTimeRef.current).toFixed(1));
 
         if (onMetricsUpdate && steps[nextStep]?.metrics) {
           const currentMetrics = {
@@ -356,9 +347,7 @@ export function AlgorithmVisualizer({
     <Card
       className={cn(
         "p-4 transition-colors duration-200",
-        theme === "nord"
-          ? "bg-nord-0 border-nord-3"
-          : "bg-slate-50 border-slate-200"
+        theme === "nord" ? "bg-nord-0 border-nord-3" : "bg-slate-50 border-slate-200"
       )}
     >
       <div className="flex flex-col gap-4">
@@ -444,18 +433,12 @@ export function AlgorithmVisualizer({
                   : "text-slate-900 hover:bg-slate-100 border-slate-200"
               )}
             >
-              {isPlaying ? (
-                <Pause className="h-4 w-4" />
-              ) : (
-                <Play className="h-4 w-4" />
-              )}
+              {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             </Button>
             <Button
               variant="outline"
               size="icon"
-              onClick={() =>
-                setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1))
-              }
+              onClick={() => setCurrentStep((prev) => Math.min(steps.length - 1, prev + 1))}
               disabled={currentStep === steps.length - 1}
               className={cn(
                 "transition-colors duration-200",
@@ -526,9 +509,7 @@ export function AlgorithmVisualizer({
             <div
               className={cn(
                 "text-sm text-center p-2 rounded-md transition-colors duration-200",
-                theme === "nord"
-                  ? "bg-nord-1 text-nord-4"
-                  : "bg-slate-100 text-slate-900"
+                theme === "nord" ? "bg-nord-1 text-nord-4" : "bg-slate-100 text-slate-900"
               )}
             >
               {steps[currentStep].description}
