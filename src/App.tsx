@@ -9,6 +9,7 @@ import PatternManagement from "./components/admin/PatternManagement";
 import { Navigation } from "./components/ui/navigation";
 import { TopBar } from "./components/algorithm-trainer/layout/TopBar";
 import HomePage from "./app/HomePage";
+import SystemsDesign from "./components/SystemsDesign/SystemsDesign";
 import { useTheme } from "./components/theme/theme-context";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Toaster } from "sonner";
@@ -196,6 +197,7 @@ function AppContent() {
             <Route path="/tutorials" element={<TutorialList />} />
             <Route path="/tutorials/:algorithm" element={<TutorialRoute />} />
             <Route path="/python-techniques" element={<PythonTechniques />} />
+            <Route path="/systems-design" element={<SystemsDesign />} />
             <Route
               path="/visualizer"
               element={
