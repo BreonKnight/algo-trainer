@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "./button";
 import { useTheme } from "../theme/theme-context";
 import { cn } from "@/lib/utils";
-import { Home, Book, BarChart, Menu, X, Code2, GraduationCap, Brain } from "lucide-react";
+import { Home, Book, BarChart, Menu, X, Code2, GraduationCap, Brain, Network } from "lucide-react";
 import { useState } from "react";
 import { GamificationButton } from "../gamification/GamificationButton";
 
@@ -74,6 +74,7 @@ export function Navigation() {
     { path: "/python-techniques", label: "Python", icon: Code2 },
     { path: "/algorithm-learning", label: "Learning", icon: GraduationCap },
     { path: "/visualizer", label: "Visualizer", icon: Brain },
+    { path: "/systems-design", label: "Systems Design", icon: Network },
   ];
 
   const isActive = (path: string) => location.pathname === path;
