@@ -1219,7 +1219,10 @@ const SystemsDesign: React.FC = () => {
                 "rounded-xl p-6 cursor-pointer transition-all duration-200 group",
                 "hover:shadow-lg backdrop-blur-sm",
                 "bg-card hover:bg-card/90 border border-border",
-                "shadow-[0_0_15px_var(--shadow-color)]"
+                "shadow-[0_0_15px_var(--shadow-color)]",
+                "relative overflow-hidden",
+                "before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-black/5 before:opacity-0 before:transition-opacity before:duration-200",
+                "hover:before:opacity-100"
               )}
               onClick={() => {
                 setSelectedChapter(chapter);
@@ -1240,10 +1243,10 @@ const SystemsDesign: React.FC = () => {
                     className={cn(
                       "text-xs sm:text-sm px-3 py-1 rounded-full font-bold inline-block border shadow-sm transition-colors duration-200",
                       chapter.difficulty === "Beginner"
-                        ? "bg-green-500 text-white border-green-600"
+                        ? "bg-green-500/10 text-green-500 border-green-500/20"
                         : chapter.difficulty === "Intermediate"
-                          ? "bg-yellow-500 text-white border-yellow-600"
-                          : "bg-red-500 text-white border-red-600"
+                          ? "bg-yellow-500/10 text-yellow-500 border-yellow-500/20"
+                          : "bg-red-500/10 text-red-500 border-red-500/20"
                     )}
                   >
                     {chapter.difficulty}
@@ -1270,7 +1273,8 @@ const SystemsDesign: React.FC = () => {
                     transition={{ delay: index * 0.1 }}
                     className={cn(
                       "px-2 py-1 rounded-full text-xs font-medium transition-colors duration-200",
-                      "bg-muted text-muted-foreground hover:bg-muted/80"
+                      "bg-muted/50 text-muted-foreground hover:bg-muted/80",
+                      "border border-border/50"
                     )}
                   >
                     {term}
@@ -1283,7 +1287,8 @@ const SystemsDesign: React.FC = () => {
                     transition={{ delay: 0.3 }}
                     className={cn(
                       "px-2 py-1 rounded-full text-xs font-medium transition-colors duration-200",
-                      "bg-muted text-muted-foreground hover:bg-muted/80"
+                      "bg-muted/50 text-muted-foreground hover:bg-muted/80",
+                      "border border-border/50"
                     )}
                   >
                     +{chapter.notableTerms.length - 3} more
