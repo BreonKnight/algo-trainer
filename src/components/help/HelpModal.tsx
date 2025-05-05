@@ -44,6 +44,10 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>(
             <Dialog.Title className="text-lg font-semibold text-accent">
               How to Use Algorithm Trainer
             </Dialog.Title>
+            <Dialog.Description className="sr-only">
+              A guide to using the Algorithm Trainer application, including
+              quick start instructions, features, and keyboard shortcuts.
+            </Dialog.Description>
             <div className="space-y-3 text-main">
               <p className="text-main/80 text-sm leading-relaxed">
                 Master algorithms through interactive coding exercises with
