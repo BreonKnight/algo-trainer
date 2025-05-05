@@ -29,18 +29,43 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
           size="sm"
           className={cn(
             buttonClass,
-            "font-bold text-xs sm:text-sm md:text-base px-2 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90 truncate max-w-[100px] sm:max-w-[140px]"
+            "font-medium text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-white/20 hover:scale-105 hover:opacity-90 min-w-[100px]"
           )}
         >
-          <span className="text-xs sm:text-sm md:text-base font-bold">How to Use :)</span>
+          <span className="font-medium whitespace-nowrap">How to Use</span>
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <Dialog.Content className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-md translate-x-[-50%] translate-y-[-50%] gap-3 border border-secondary bg-main p-5 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg">
-          <Dialog.Title className="text-lg font-semibold text-accent">
-            How to Use Algorithm Trainer
-          </Dialog.Title>
+          <div className="flex justify-between items-start w-full">
+            <Dialog.Title className="text-lg font-semibold text-accent">
+              How to Use Algorithm Trainer
+            </Dialog.Title>
+            <Dialog.Close asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full h-8 w-8 border border-secondary/20 bg-secondary/10 hover:bg-secondary/20 text-main/70 hover:text-accent2 transition-all duration-200 hover:scale-105 focus-visible:ring-1 focus-visible:ring-accent2 flex items-center justify-center ml-2"
+              >
+                <span className="sr-only">Close</span>
+                <span className="h-5 w-5 block" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-5 w-5"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </span>
+              </Button>
+            </Dialog.Close>
+          </div>
           <Dialog.Description className="sr-only">
             A guide to using the Algorithm Trainer application, including quick start instructions,
             features, and keyboard shortcuts.
@@ -127,34 +152,6 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
               <span className="text-main/60">Version 1.0.0</span>
             </div>
           </div>
-          <Dialog.Close asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-3 top-3 rounded-full h-8 w-8 border border-secondary/20 
-                  bg-secondary/10 hover:bg-secondary/20 
-                  text-main/70 hover:text-accent2 
-                  transition-all duration-200 hover:scale-105 
-                  focus-visible:ring-1 focus-visible:ring-accent2
-                  flex items-center justify-center"
-            >
-              <span className="sr-only">Close</span>
-              <span className="h-5 w-5 block" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-              </span>
-            </Button>
-          </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

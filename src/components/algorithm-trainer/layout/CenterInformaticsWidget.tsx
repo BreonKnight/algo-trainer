@@ -102,7 +102,7 @@ export function CenterInformaticsWidget() {
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
-        className="relative flex items-center gap-3 px-4 py-3 rounded-xl bg-background/80 backdrop-blur-sm border border-border shadow-lg w-full max-w-md transition-all duration-300 hover:shadow-xl hover:border-border/80"
+        className="relative flex items-center gap-3 px-4 py-3 w-full"
         whileHover={{ scale: 1.01 }}
       >
         <div className="flex-shrink-0">
@@ -140,7 +140,6 @@ export function CenterInformaticsWidget() {
                 {showTip ? TIPS[tipIdx] : FACTS[factIdx]}
               </motion.div>
             </AnimatePresence>
-            {/* Fade gradient for scroll hint */}
             {showFade && (
               <div
                 className="pointer-events-none absolute left-0 right-0 bottom-0 h-3 bg-gradient-to-t from-card/40 to-transparent"
@@ -168,8 +167,6 @@ export function CenterInformaticsWidget() {
             <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </button>
         </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/20 to-transparent rounded-b-xl" />
       </motion.div>
     </div>
   );
