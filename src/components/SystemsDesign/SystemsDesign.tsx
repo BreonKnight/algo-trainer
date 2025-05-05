@@ -1128,11 +1128,12 @@ const SystemsDesign: React.FC = () => {
     >
       <div className="flex justify-end max-w-7xl mx-auto mb-8">
         <Switch.Group>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
             <Switch.Label
               className={cn(
-                "font-medium text-sm",
-                isDarkTheme ? "text-foreground" : "text-foreground"
+                "font-semibold text-base select-none transition-colors duration-200 cursor-pointer",
+                isDarkTheme ? "text-foreground" : "text-foreground",
+                "hover:text-primary/80"
               )}
             >
               Monster Hunter Mode
@@ -1140,27 +1141,33 @@ const SystemsDesign: React.FC = () => {
             <Switch
               checked={monsterHunterMode}
               onChange={setMonsterHunterMode}
+              aria-label="Toggle Monster Hunter Mode"
               className={cn(
-                isDarkTheme
-                  ? "bg-muted border-muted-foreground"
-                  : "bg-muted border-muted-foreground",
-                "relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                "relative inline-flex h-7 w-14 items-center rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background overflow-hidden",
+                "hover:shadow-md active:scale-95",
+                monsterHunterMode ? "bg-primary shadow-lg shadow-primary/20" : "bg-muted shadow-sm",
+                "border border-border/50"
               )}
             >
               <span
                 className={cn(
-                  isDarkTheme ? "bg-foreground" : "bg-foreground",
-                  "inline-block h-4 w-4 transform rounded-full shadow-lg transition-transform duration-200 ease-in-out flex items-center justify-center",
-                  monsterHunterMode ? "translate-x-6" : "translate-x-1"
+                  "inline-block h-5 w-5 transform rounded-full transition-all duration-300 ease-in-out flex items-center justify-center",
+                  monsterHunterMode
+                    ? "translate-x-[1.75rem] scale-110 bg-white"
+                    : "translate-x-1 bg-white",
+                  "absolute left-0 top-1/2 -translate-y-1/2",
+                  "shadow-md"
                 )}
               >
                 {monsterHunterMode && (
-                  <PawPrint
-                    className={cn(
-                      "w-3 h-3",
-                      isDarkTheme ? "text-muted-foreground" : "text-muted-foreground"
-                    )}
-                  />
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    className="flex items-center justify-center"
+                  >
+                    <PawPrint className="w-3 h-3 text-primary" aria-hidden="true" />
+                  </motion.div>
                 )}
               </span>
             </Switch>
@@ -1180,7 +1187,7 @@ const SystemsDesign: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className={cn(
               "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
-              "text-card-foreground"
+              "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
             )}
           >
             Designing Data-Intensive Applications
@@ -1211,7 +1218,8 @@ const SystemsDesign: React.FC = () => {
               className={cn(
                 "rounded-xl p-6 cursor-pointer transition-all duration-200 group",
                 "hover:shadow-lg backdrop-blur-sm",
-                "bg-card hover:bg-card/90 border border-border shadow-[0_0_15px_var(--shadow-color)]"
+                "bg-card hover:bg-card/90 border border-border",
+                "shadow-[0_0_15px_var(--shadow-color)]"
               )}
               onClick={() => {
                 setSelectedChapter(chapter);
@@ -1223,19 +1231,19 @@ const SystemsDesign: React.FC = () => {
                   <h2
                     className={cn(
                       "text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors duration-200",
-                      "text-card-foreground"
+                      "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
                     )}
                   >
                     {chapter.title}
                   </h2>
                   <span
                     className={cn(
-                      "text-xs sm:text-sm px-3 py-1 rounded-full font-medium inline-block",
+                      "text-xs sm:text-sm px-3 py-1 rounded-full font-bold inline-block border shadow-sm transition-colors duration-200",
                       chapter.difficulty === "Beginner"
-                        ? "bg-success/10 text-success-foreground shadow-[0_0_10px_var(--success)]"
+                        ? "bg-green-500 text-white border-green-600"
                         : chapter.difficulty === "Intermediate"
-                          ? "bg-warning/10 text-warning-foreground shadow-[0_0_10px_var(--warning)]"
-                          : "bg-destructive/10 text-destructive-foreground shadow-[0_0_10px_var(--destructive)]"
+                          ? "bg-yellow-500 text-white border-yellow-600"
+                          : "bg-red-500 text-white border-red-600"
                     )}
                   >
                     {chapter.difficulty}
@@ -1340,12 +1348,12 @@ const SystemsDesign: React.FC = () => {
                   <div className="flex items-center gap-4">
                     <span
                       className={cn(
-                        "text-xs sm:text-sm px-3 py-1 rounded-full font-medium",
+                        "text-xs sm:text-sm px-3 py-1 rounded-full font-bold border shadow-sm transition-colors duration-200",
                         selectedChapter.difficulty === "Beginner"
-                          ? "bg-success/10 text-success-foreground shadow-[0_0_10px_var(--success)]"
+                          ? "bg-green-500 text-white border-green-600"
                           : selectedChapter.difficulty === "Intermediate"
-                            ? "bg-warning/10 text-warning-foreground shadow-[0_0_10px_var(--warning)]"
-                            : "bg-destructive/10 text-destructive-foreground shadow-[0_0_10px_var(--destructive)]"
+                            ? "bg-yellow-500 text-white border-yellow-600"
+                            : "bg-red-500 text-white border-red-600"
                       )}
                     >
                       {selectedChapter.difficulty}
