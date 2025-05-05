@@ -5,7 +5,7 @@ import { PatternKey } from "./types";
 import { algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { Code, TestTube, Sword, Book, Copy, Check, Languages } from "lucide-react";
+import { Code, TestTube, Sword, Book, Copy, Check } from "lucide-react";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTheme } from "@/components/theme/theme-context";
@@ -21,7 +21,6 @@ import {
 } from "@/lib/theme";
 import * as monaco from "monaco-editor";
 import { cn } from "@/lib/utils";
-import { toggleLanguage, Language } from "@/lib/code-transformer";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;
@@ -57,7 +56,6 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
   const [editorHeight, setEditorHeight] = useState<string | number>("300px");
   const monacoRef = useRef<Monaco | null>(null);
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-  const [currentLanguage, setCurrentLanguage] = useState<Language>("python");
 
   // Update editor height on mount and resize
   useEffect(() => {
@@ -117,57 +115,27 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
       if (showMonsterHunter) {
         const val = monsterHunterPatterns.get(currentPattern);
         if (val && typeof val === "object" && "implementation" in val) {
-          const implementation = (val as { implementation: string }).implementation;
-          return currentLanguage === "python"
-            ? implementation
-            : toggleLanguage(implementation, "python").code;
+          return (val as { implementation: string }).implementation;
         }
         if (typeof val === "string") {
-          return currentLanguage === "python" ? val : toggleLanguage(val, "python").code;
+          return val;
         }
-        return `# Monster Hunter ${
-          currentLanguage === "python" ? "Python" : "JavaScript"
-        } implementation for ${currentPattern}\n# Coming soon!`;
+        return `# Monster Hunter Python implementation for ${currentPattern}\n# Coming soon!`;
       } else {
         const val = algorithmPatterns[currentPattern];
         if (typeof val === "string") {
-          return currentLanguage === "python" ? val : toggleLanguage(val, "python").code;
+          return val;
         }
         if (val && typeof val === "object" && "implementation" in val) {
-          const implementation = (val as { implementation: string }).implementation;
-          return currentLanguage === "python"
-            ? implementation
-            : toggleLanguage(implementation, "python").code;
+          return (val as { implementation: string }).implementation;
         }
-        return `# ${
-          currentLanguage === "python" ? "Python" : "JavaScript"
-        } implementation for ${currentPattern}\n# Coming soon!`;
+        return `# Python implementation for ${currentPattern}\n# Coming soon!`;
       }
     } catch (error) {
       console.error("Error transforming code:", error);
-      return `# Error transforming code to ${currentLanguage}. Please try again.`;
+      return `# Error transforming code. Please try again.`;
     }
-  }, [currentPattern, currentLanguage, showMonsterHunter]);
-
-  const handleLanguageToggle = () => {
-    try {
-      const newLanguage = currentLanguage === "python" ? "javascript" : "python";
-      setCurrentLanguage(newLanguage);
-      if (editorRef.current && monacoRef.current) {
-        const model = editorRef.current.getModel();
-        if (model) {
-          monacoRef.current.editor.setModelLanguage(model, newLanguage);
-          editorRef.current.updateOptions({});
-          setTimeout(() => {
-            editorRef.current?.layout();
-          }, 0);
-        }
-      }
-    } catch (error) {
-      console.error("Error toggling language:", error);
-      // Optionally show a user-friendly error message
-    }
-  };
+  }, [currentPattern, showMonsterHunter]);
 
   return (
     <Card
@@ -198,33 +166,6 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                 {showTestData ? "Monster Hunter Guide:" : "Implementation:"}
               </h3>
               <div className="flex gap-2">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={handleLanguageToggle}
-                        className={cn(
-                          "h-8 px-2.5 text-accent hover:text-accent hover:bg-secondary/20 text-xs transition-all",
-                          currentLanguage === "javascript" && "bg-secondary/20"
-                        )}
-                        aria-label={`Switch to ${currentLanguage === "python" ? "JavaScript" : "Python"} implementation`}
-                        role="switch"
-                        aria-checked={currentLanguage === "javascript"}
-                      >
-                        <Languages className="h-3.5 w-3.5 mr-1" aria-hidden="true" />
-                        <span className="hidden sm:inline">
-                          {currentLanguage === "python" ? "Python" : "JavaScript"}
-                        </span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Toggle between Python and JavaScript implementations</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -368,7 +309,7 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                   >
                     <Editor
                       height={editorHeight}
-                      defaultLanguage={currentLanguage}
+                      defaultLanguage="python"
                       theme={theme}
                       onMount={handleEditorDidMount}
                       value={transformedCode}
