@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Lightbulb, Info, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
+import { Lightbulb, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const TIPS = [
@@ -67,12 +67,13 @@ export function CenterInformaticsWidget() {
       }
     };
     checkScroll();
-    if (scrollRef.current) {
-      scrollRef.current.addEventListener("scroll", checkScroll);
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener("scroll", checkScroll);
     }
     return () => {
-      if (scrollRef.current) {
-        scrollRef.current.removeEventListener("scroll", checkScroll);
+      if (el) {
+        el.removeEventListener("scroll", checkScroll);
       }
     };
   }, [showTip, isHovered]);
