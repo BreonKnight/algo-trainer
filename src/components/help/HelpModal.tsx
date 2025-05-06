@@ -15,6 +15,10 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
         return "bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 text-black";
       case "solarized":
         return "bg-gradient-to-r from-yellow-200 via-orange-200 to-pink-200 text-black";
+      case "kingdom-hearts":
+        return "bg-gradient-to-r from-[#0a1633] via-[#1a2747] to-[#0a1633] text-white border-2 border-[#ffe066] shadow-md";
+      case "fornite":
+        return "bg-gradient-to-r from-[#349a3a] via-[#4a5afd] via-[#9652b8] to-[#f7b227] text-white border-2 border-[#4a5afd] shadow-md";
       default:
         return "bg-gradient-to-r from-gray-200 to-gray-400 text-black";
     }

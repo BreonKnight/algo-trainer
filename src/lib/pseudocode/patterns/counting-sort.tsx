@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const CountingSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Counting Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Counting Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n+k) &nbsp;|&nbsp; Space: O(n+k) &nbsp;|&nbsp; Use: Sorting integers with small range
     </div>
@@ -120,7 +122,7 @@ COUNTING-SORT-RADIX(A, exp):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Count:</span> Count occurrences of each element
+        <span className="font-semibold text-accent">Count:</span> Occurrences of each element
       </span>
     </div>
     <div className="flex items-start mb-1">
@@ -134,7 +136,7 @@ COUNTING-SORT-RADIX(A, exp):
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Place:</span> Place elements in sorted order
+        <span className="font-semibold text-accent">Place:</span> Elements in sorted order
       </span>
     </div>
 

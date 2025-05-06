@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const TernarySearchAlgorithmPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Ternary Search</span>
-      <span className="ml-2 text-xs text-secondary">(Array)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Ternary Search
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(log₃ n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find maximum/minimum in unimodal
       function
@@ -53,26 +55,55 @@ Algorithm TERNARY-SEARCH(A, t)
 # Output: 5`}
     />
 
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">1.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Initialize:</span> Set left and right boundaries
+      </span>
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Initialize left and right pointers</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Divide range into three parts</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Compare target with mid points</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Update search range based on comparison</span>
-      </div>
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">2.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Divide:</span> Range into three parts
+      </span>
+    </div>
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">3.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Compare:</span> Target with mid points
+      </span>
+    </div>
+    <div className="flex items-start mb-1">
+      <span className="font-bold text-main mr-2">4.</span>
+      <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+      <span>
+        <span className="font-semibold text-accent">Update:</span> Search range based on comparison
+      </span>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Example: Finding Maximum</span>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+        {`Unimodal function: f(x) = -(x-5)² + 10
+Search range: [0, 10]
+
+Step 1: mid1 = 3.33, mid2 = 6.67
+        f(3.33) = 2.22, f(6.67) = 2.22
+        f(3.33) < f(6.67) → search [3.33, 10]
+
+Step 2: mid1 = 5.56, mid2 = 8.89
+        f(5.56) = 9.69, f(8.89) = -14.69
+        f(5.56) > f(8.89) → search [3.33, 8.89]
+
+Step 3: mid1 = 4.44, mid2 = 7.78
+        f(4.44) = 9.69, f(7.78) = -7.69
+        f(4.44) > f(7.78) → search [3.33, 7.78]
+
+Maximum found at x = 5`}
+      </pre>
     </div>
   </div>
 );

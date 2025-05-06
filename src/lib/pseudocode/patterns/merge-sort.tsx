@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const MergeSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Merge Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Sorting Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Merge Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Stable sorting of arrays
     </div>

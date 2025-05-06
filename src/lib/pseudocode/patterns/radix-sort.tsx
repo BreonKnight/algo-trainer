@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const RadixSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Radix Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Radix Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(d(n+k)) &nbsp;|&nbsp; Space: O(n+k) &nbsp;|&nbsp; Use: Sort numbers by processing
       individual digits

@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const SieveOfEratosthenesPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Sieve of Eratosthenes</span>
-      <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Sieve of Eratosthenes
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n log log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all primes up to n
     </div>

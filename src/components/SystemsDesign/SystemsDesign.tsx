@@ -1117,7 +1117,15 @@ const SystemsDesign: React.FC = () => {
   const [showDetailedView, setShowDetailedView] = useState(false);
   const [monsterHunterMode, setMonsterHunterMode] = useState(false);
   const { theme } = useTheme();
-  const isDarkTheme = ["dracula", "nord", "snes", "ps2", "re2", "kingdom-hearts"].includes(theme);
+  const isDarkTheme = [
+    "dracula",
+    "nord",
+    "snes",
+    "ps2",
+    "re2",
+    "kingdom-hearts",
+    "fornite",
+  ].includes(theme);
 
   return (
     <div
@@ -1126,6 +1134,17 @@ const SystemsDesign: React.FC = () => {
         isDarkTheme ? "bg-background" : "bg-background"
       )}
     >
+      <div className="text-xs text-muted-foreground italic mb-4">
+        Portions of this content are adapted from Martin Kleppmann's "Designing Data-Intensive
+        Applications" and other sources. See footnotes for details.
+      </div>
+      {monsterHunterMode && (
+        <div className="text-xs text-muted-foreground italic mb-4">
+          This project is an unofficial fan work inspired by Capcom's Monster Hunter series. All
+          Monster Hunter names, terms, and concepts are the property of Capcom. This project is not
+          affiliated with or endorsed by Capcom, and no original Monster Hunter assets are used.
+        </div>
+      )}
       <div className="flex justify-end max-w-7xl mx-auto mb-8">
         <Switch.Group>
           <div className="flex items-center gap-5">
@@ -1136,8 +1155,11 @@ const SystemsDesign: React.FC = () => {
                 "hover:text-primary/80"
               )}
             >
-              Monster Hunter Mode
+              Hunter Mode
             </Switch.Label>
+            <span className="text-xs text-muted-foreground italic ml-2">
+              Unofficial fan content. Not affiliated with Capcom.
+            </span>
             <Switch
               checked={monsterHunterMode}
               onChange={setMonsterHunterMode}
@@ -1474,6 +1496,33 @@ const SystemsDesign: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <div className="mt-8 text-xs text-muted-foreground">
+        <div className="font-semibold mb-2">Footnotes & Sources:</div>
+        <div className="italic mb-1">
+          Martin Kleppmann, <i>Designing Data-Intensive Applications</i>, O'Reilly Media, 2017.
+        </div>
+        <div className="italic mb-1">
+          <a
+            href="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781491903063/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-primary transition-colors"
+          >
+            Buy the book from O'Reilly
+          </a>
+        </div>
+        <div className="italic mb-1">
+          <a
+            href="https://www.monsterhunter.com/wilds/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-primary transition-colors"
+          >
+            Buy Monster Hunter Wilds (official site)
+          </a>
+        </div>
+        <div className="italic">Additional explanations and analogies by AlgoTrainer team.</div>
+      </div>
     </div>
   );
 };

@@ -145,7 +145,12 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                         }
                   }
                 >
-                  {currentPattern}
+                  <div className="inline-block text-center">
+                    <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                      {currentPattern}
+                    </span>
+                    <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                  </div>
                 </h2>
                 <span
                   className={cn(
@@ -227,8 +232,13 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                         } else {
                           return (
                             <div className="pseudocode">
-                              <span className="algorithm-title">{currentPattern}</span>
-                              <span className="algorithm-type">{category}</span>
+                              <div className="inline-block text-center">
+                                <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                                  {currentPattern}
+                                </span>
+                                <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                              </div>
+                              <span className="algorithm-type font-bold">{category}</span>
                               <span className="algorithm-meta">
                                 Time: O(n) | Space: O(n) | Use: Algorithm implementation
                               </span>
@@ -282,7 +292,12 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                     }
               }
             >
-              {currentPattern}
+              <div className="inline-block text-center">
+                <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                  {currentPattern}
+                </span>
+                <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+              </div>
             </h2>
             <span
               className={cn(
@@ -349,8 +364,13 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                     } else {
                       return (
                         <div className="pseudocode">
-                          <span className="algorithm-title">{currentPattern}</span>
-                          <span className="algorithm-type">{category}</span>
+                          <div className="inline-block text-center">
+                            <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                              {currentPattern}
+                            </span>
+                            <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                          </div>
+                          <span className="algorithm-type font-bold">{category}</span>
                           <span className="algorithm-meta">
                             Time: O(n) | Space: O(n) | Use: Algorithm implementation
                           </span>

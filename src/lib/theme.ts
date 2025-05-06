@@ -501,3 +501,57 @@ export const kingdomHeartsTheme: editor.IStandaloneThemeData = {
     "editorHint.foreground": "#7c6fa0",
   },
 };
+
+export const forniteTheme: editor.IStandaloneThemeData = {
+  base: "vs-dark",
+  inherit: true,
+  rules: [
+    { token: "", foreground: "ffffff" }, // White
+    { token: "comment", foreground: "349a3a" }, // Green
+    { token: "keyword", foreground: "4a5afd" }, // Blue
+    { token: "string", foreground: "9652b8" }, // Purple
+    { token: "number", foreground: "f7b227" }, // Orange
+    { token: "operator", foreground: "4a5afd" }, // Blue
+    { token: "function", foreground: "349a3a" }, // Green
+    { token: "variable", foreground: "ffffff" }, // White
+    { token: "type", foreground: "9652b8" }, // Purple
+    { token: "class", foreground: "9652b8" }, // Purple
+    { token: "interface", foreground: "9652b8" }, // Purple
+    { token: "enum", foreground: "9652b8" }, // Purple
+    { token: "constant", foreground: "f7b227" }, // Orange
+    { token: "parameter", foreground: "4a5afd" }, // Blue
+    { token: "property", foreground: "349a3a" }, // Green
+    { token: "punctuation", foreground: "ffffff" }, // White
+    { token: "delimiter", foreground: "ffffff" }, // White
+    { token: "bracket", foreground: "ffffff" }, // White
+    { token: "tag", foreground: "4a5afd" }, // Blue
+    { token: "attribute.name", foreground: "349a3a" }, // Green
+    { token: "attribute.value", foreground: "9652b8" }, // Purple
+  ],
+  colors: {
+    "editor.background": "#1a1a1a", // Dark background
+    "editor.foreground": "#ffffff", // White text
+    "editor.lineHighlightBackground": "#2a2a2a", // Slightly lighter background
+    "editor.selectionBackground": "#4a5afd33", // Blue highlight
+    "editor.inactiveSelectionBackground": "#4a5afd22",
+    "editorCursor.foreground": "#4a5afd",
+    "editorWhitespace.foreground": "#349a3a80",
+    "editorIndentGuide.background": "#349a3a80",
+    "editorIndentGuide.activeBackground": "#4a5afd80",
+    "editor.selectionHighlightBackground": "#4a5afd22",
+    "editor.wordHighlightBackground": "#4a5afd22",
+    "editor.wordHighlightStrongBackground": "#9652b822",
+    "editorBracketMatch.background": "#4a5afd22",
+    "editorBracketMatch.border": "#4a5afd",
+    "editor.findMatchBackground": "#9652b840",
+    "editor.findMatchHighlightBackground": "#9652b820",
+    "editor.findMatchBorder": "#4a5afd",
+    "editor.findMatchHighlightBorder": "#4a5afd80",
+    "editorOverviewRuler.border": "#2a2a2a",
+    "editorGutter.background": "#1a1a1a",
+    "editorError.foreground": "#f7b227",
+    "editorWarning.foreground": "#4a5afd",
+    "editorInfo.foreground": "#349a3a",
+    "editorHint.foreground": "#9652b8",
+  },
+};

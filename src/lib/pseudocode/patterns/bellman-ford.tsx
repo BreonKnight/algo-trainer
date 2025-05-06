@@ -4,8 +4,10 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const BellmanFordPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Bellman-Ford</span>
-      <span className="ml-2 text-xs text-secondary">(Graph)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Bellman Ford
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find shortest paths with negative
