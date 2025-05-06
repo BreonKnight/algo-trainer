@@ -152,6 +152,96 @@ const CLRS_SYMBOLS = [
     description: "Represents the sum of a sequence of terms",
     example: "∑(i=1 to n) i means 'the sum of all integers from 1 to n'",
   },
+  {
+    symbol: "⌊x⌋",
+    name: "Floor function",
+    description: "Rounds down to the nearest integer",
+    example: "⌊3.7⌋ = 3",
+  },
+  {
+    symbol: "⌈x⌉",
+    name: "Ceiling function",
+    description: "Rounds up to the nearest integer",
+    example: "⌈3.2⌉ = 4",
+  },
+  {
+    symbol: "lg",
+    name: "Binary logarithm",
+    description: "Logarithm with base 2",
+    example: "lg(8) = 3",
+  },
+  {
+    symbol: "ln",
+    name: "Natural logarithm",
+    description: "Logarithm with base e",
+    example: "ln(e) = 1",
+  },
+  {
+    symbol: "∏",
+    name: "Product",
+    description: "Represents the product of a sequence of terms",
+    example: "∏(i=1 to n) i means 'the product of all integers from 1 to n'",
+  },
+  {
+    symbol: "∞",
+    name: "Infinity",
+    description: "Represents an unbounded limit",
+    example: "lim(x→∞) means 'as x approaches infinity'",
+  },
+  {
+    symbol: "≠",
+    name: "Not equal to",
+    description: "Indicates inequality between two values",
+    example: "a ≠ b means 'a is not equal to b'",
+  },
+  {
+    symbol: "≤",
+    name: "Less than or equal to",
+    description: "Indicates that one value is less than or equal to another",
+    example: "a ≤ b means 'a is less than or equal to b'",
+  },
+  {
+    symbol: "≥",
+    name: "Greater than or equal to",
+    description: "Indicates that one value is greater than or equal to another",
+    example: "a ≥ b means 'a is greater than or equal to b'",
+  },
+  {
+    symbol: "⊂",
+    name: "Proper subset",
+    description: "Indicates that one set is a subset of another but not equal",
+    example: "A ⊂ B means 'A is a proper subset of B'",
+  },
+  {
+    symbol: "⊃",
+    name: "Proper superset",
+    description: "Indicates that one set contains another but is not equal",
+    example: "A ⊃ B means 'A is a proper superset of B'",
+  },
+  {
+    symbol: "⊕",
+    name: "Exclusive or",
+    description: "Logical operation that is true when exactly one operand is true",
+    example: "a ⊕ b means 'a exclusive or b'",
+  },
+  {
+    symbol: "∧",
+    name: "Logical and",
+    description: "Logical operation that is true when both operands are true",
+    example: "a ∧ b means 'a and b'",
+  },
+  {
+    symbol: "∨",
+    name: "Logical or",
+    description: "Logical operation that is true when at least one operand is true",
+    example: "a ∨ b means 'a or b'",
+  },
+  {
+    symbol: "¬",
+    name: "Logical not",
+    description: "Logical operation that inverts the truth value",
+    example: "¬a means 'not a'",
+  },
 ];
 
 const AlgorithmLearning: React.FC = () => {

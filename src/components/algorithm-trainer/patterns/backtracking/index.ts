@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 import { backtrackingPattern } from "./backtracking";
 
 export const backtrackingPatterns: Partial<Record<string, AlgorithmPattern>> = {

@@ -78,4 +78,59 @@ export const additionalConcepts: Concept[] = [
     mathematicalNotation:
       "P(Xₙ₊₁ = x | Xₙ = xₙ, ..., X₁ = x₁) = P(Xₙ₊₁ = x | Xₙ = xₙ)\n\nBreaking this down:\n- P(...) means 'probability of...'\n- Xₙ represents the state at time n\n- | means 'given that'\n- The equation shows that the next state only depends on the current state\n\nExample with monster states:\nTransition probabilities from enraged state:\nP(normal | enraged) = 0.2\nP(enraged | enraged) = 0.7\nP(exhausted | enraged) = 0.1",
   },
+  {
+    id: 11,
+    title: "Floor and Ceiling: Monster Health Thresholds",
+    category: "Algorithm Analysis",
+    monsterHunterExample:
+      "When calculating damage thresholds for breaking monster parts, we use floor and ceiling functions. For example, if a monster's tail requires 1000 damage to sever, and you deal 350 damage per hit, you'll need ⌈1000/350⌉ = 3 hits to break it. The ceiling function ensures we round up to account for partial damage.",
+    clrsExplanation:
+      "In CLRS, floor and ceiling functions are essential for analyzing algorithms that deal with integer operations or discrete steps. They help us calculate exact bounds for algorithms that can't perform fractional operations. For instance, in binary search, we use floor division to find the middle element, ensuring we always get a valid array index.",
+    mathematicalNotation:
+      "⌊x⌋ ≤ x < ⌊x⌋ + 1\n⌈x⌉ - 1 < x ≤ ⌈x⌉\n\nBreaking this down:\n- ⌊x⌋ is the greatest integer less than or equal to x\n- ⌈x⌉ is the smallest integer greater than or equal to x\n\nExample with monster damage:\nIf damage required = 1000 and damage per hit = 350:\nNumber of hits needed = ⌈1000/350⌉ = ⌈2.857⌉ = 3\nThis ensures we account for partial damage in the final hit",
+  },
+  {
+    id: 12,
+    title: "Logical Operations: Monster Status Effects",
+    category: "Algorithm Analysis",
+    monsterHunterExample:
+      "When a monster is both poisoned (P) and paralyzed (Q), we can represent its status as P ∧ Q. If it's either poisoned or paralyzed, but not both, that's P ⊕ Q. These logical operations help us track and predict monster behavior patterns and status effect interactions.",
+    clrsExplanation:
+      "In CLRS, logical operations are fundamental for algorithm correctness proofs and boolean logic in computer science. They help us express complex conditions and relationships between different states or conditions in our algorithms. For example, in binary search, we use logical operations to determine which half of the array to search next.",
+    mathematicalNotation:
+      "P ∧ Q (AND): Both conditions are true\nP ∨ Q (OR): At least one condition is true\nP ⊕ Q (XOR): Exactly one condition is true\n¬P (NOT): The opposite of P\n\nExample with monster status:\nIf:\nP = monster is poisoned\nQ = monster is paralyzed\nThen:\nP ∧ Q = monster is both poisoned and paralyzed\nP ⊕ Q = monster is either poisoned or paralyzed, but not both\n¬P = monster is not poisoned",
+  },
+  {
+    id: 13,
+    title: "Product Notation: Monster Drop Combinations",
+    category: "Probability",
+    monsterHunterExample:
+      "When calculating the probability of getting specific combinations of monster drops, we use product notation. For example, if a monster has three possible drop slots, each with different probabilities, the chance of getting a specific combination is the product of the individual probabilities.",
+    clrsExplanation:
+      "In CLRS, product notation is used in probability theory and combinatorics to calculate the probability of multiple independent events occurring together. This is crucial for analyzing randomized algorithms and understanding the likelihood of different outcomes in complex systems.",
+    mathematicalNotation:
+      "∏(i=1 to n) P(i) = P(1) × P(2) × ... × P(n)\n\nBreaking this down:\n- ∏ means 'product of'\n- P(i) represents the probability of event i\n- The expression multiplies all probabilities from 1 to n\n\nExample with monster drops:\nIf a monster has three drop slots with probabilities:\n- Slot 1: 10% chance of rare drop\n- Slot 2: 5% chance of rare drop\n- Slot 3: 2% chance of rare drop\nThen:\nP(all rare drops) = ∏(i=1 to 3) P(i) = 0.1 × 0.05 × 0.02 = 0.0001 (0.01%)",
+  },
+  {
+    id: 14,
+    title: "Proper Subsets: Monster Territory Hierarchies",
+    category: "Set Theory",
+    monsterHunterExample:
+      "A monster's territory can be represented as a proper subset of the entire map. For example, if Rathalos's territory (A) is a proper subset of the Ancient Forest (B), written as A ⊂ B, it means Rathalos can only appear in certain areas of the forest, but not all of them.",
+    clrsExplanation:
+      "In CLRS, proper subset relationships are important for understanding hierarchical data structures and containment relationships. This concept is fundamental in algorithms that deal with set operations, such as those used in graph theory and database operations.",
+    mathematicalNotation:
+      "A ⊂ B means A is a proper subset of B\n\nBreaking this down:\n- A ⊂ B means every element of A is in B\n- But B contains at least one element not in A\n- This is different from A ⊆ B, which allows A to equal B\n\nExample with monster territories:\nIf:\nA = {Area 1, Area 2} (Rathalos's territory)\nB = {Area 1, Area 2, Area 3, Area 4} (Ancient Forest)\nThen:\nA ⊂ B because Rathalos can only appear in Areas 1 and 2,\nbut the forest contains additional areas (3 and 4)",
+  },
+  {
+    id: 15,
+    title: "Binary Logarithms: Monster Search Patterns",
+    category: "Algorithm Analysis",
+    monsterHunterExample:
+      "When searching for a monster in a sorted list of possible locations, binary search takes lg(n) steps to find the monster. For example, if there are 1000 possible locations, we need at most lg(1000) ≈ 10 steps to find the monster's exact location.",
+    clrsExplanation:
+      "In CLRS, binary logarithms are crucial for analyzing divide-and-conquer algorithms like binary search and merge sort. The lg(n) notation specifically refers to logarithms with base 2, which is common in computer science since many algorithms divide problems into two parts at each step.",
+    mathematicalNotation:
+      "lg(n) = log₂(n)\n\nBreaking this down:\n- lg(n) is the logarithm of n with base 2\n- It answers the question: '2 raised to what power equals n?'\n- This is different from ln(n), which uses base e\n\nExample with monster search:\nIf n = 1000 possible locations:\nlg(1000) ≈ 9.97\nThis means we need at most 10 steps to find the monster\nin a binary search of 1000 sorted locations",
+  },
 ];
