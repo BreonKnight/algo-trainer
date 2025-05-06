@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Pattern, PatternFormData, TestCase } from "../../lib/types/pattern-management";
-import { patternManagementService } from "../../lib/services/pattern-management";
+import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
+import { patternManagementService } from "@/lib/services/pattern-management";
 import { toast } from "react-hot-toast";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -12,8 +12,10 @@ import {
   DroppableProvided,
   DraggableProvided,
 } from "react-beautiful-dnd";
-import { patternMapping } from "../../lib/pseudocode/utils/pattern-mapping";
+import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import { validateComponentOrder } from "./pattern-management/PatternValidation";
+import { getValidationResults } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import PatternValidationResults from "./pattern-management/PatternValidationResults";
 
 type FormStep = "basic" | "details" | "implementation" | "test-cases" | "preview";
 
@@ -103,6 +105,7 @@ const PatternManagement: React.FC = () => {
       sortConfig: { field: SortField; order: SortOrder };
     }[]
   >([]);
+  const [validationResults, setValidationResults] = useState<any>(null);
 
   // Load existing patterns on component mount
   useEffect(() => {
@@ -120,6 +123,12 @@ const PatternManagement: React.FC = () => {
       }
     };
     loadPatterns();
+  }, []);
+
+  useEffect(() => {
+    // Get validation results
+    const results = getValidationResults();
+    setValidationResults(results);
   }, []);
 
   // Validation helper functions
@@ -1154,6 +1163,7 @@ const PatternManagement: React.FC = () => {
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
               Debug Information
             </h3>
+            {validationResults && <PatternValidationResults results={validationResults} />}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => writePatternsToFile(patterns)}

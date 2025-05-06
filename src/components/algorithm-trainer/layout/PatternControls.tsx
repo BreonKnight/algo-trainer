@@ -1,8 +1,8 @@
 import { Button } from "../../ui/button";
 import { ChevronRight, ChevronLeft, Shuffle } from "lucide-react";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../../ui/tooltip";
-import { cn } from "@/lib/utils";
-import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "../../../lib/utils";
+import { useTheme } from "../../../components/theme/use-theme";
 import { useEffect } from "react";
 
 interface PatternControlsProps {

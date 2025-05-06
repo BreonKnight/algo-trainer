@@ -1,8 +1,8 @@
-import { AudioPlayer } from "../../audio/AudioPlayer";
-import { Timer } from "../../timer/Timer";
-import { MediaCard } from "../../ui/media-card";
-import { CenterInformaticsWidget } from "./CenterInformaticsWidget";
-import { RightControls } from "./RightControls";
+import { AudioPlayer } from "@/components/audio/AudioPlayer";
+import { Timer } from "@/components/timer/Timer";
+import { MediaCard } from "@/components/ui/media-card";
+import { CenterInformaticsWidget } from "@/components/algorithm-trainer/layout/CenterInformaticsWidget";
+import { RightControls } from "@/components/algorithm-trainer/layout/RightControls";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import {

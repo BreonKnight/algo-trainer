@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const gridTraversalPattern: AlgorithmPattern = {
   title: "Grid Traversal",

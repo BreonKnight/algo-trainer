@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const twoSumTwoPointersPattern: AlgorithmPattern = {
   title: "Two Sum Algorithm (Two Pointers)",

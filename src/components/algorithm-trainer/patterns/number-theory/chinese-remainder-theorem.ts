@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types";
+import type { AlgorithmPattern } from "../../types/pattern-types";
 
 export const chineseRemainderTheoremPattern: AlgorithmPattern = {
   title: "Chinese Remainder Theorem",

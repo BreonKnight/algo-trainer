@@ -1787,20 +1787,6 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for territory visualization",
     ],
   },
-  "Trie Operations": {
-    title: "Monster Territory Word Tree",
-    description:
-      "Like a monster hunter organizing monster names in a tree structure for efficient searching, Trie Operations provide efficient string operations using a prefix tree.",
-    example:
-      "Imagine you need to quickly find all monsters whose names start with a specific prefix - Trie Operations help you do this efficiently by storing monster names in a tree structure.",
-    tips: [
-      "Use a tree structure for efficient prefix matching",
-      "Insert strings character by character",
-      "Search for prefixes efficiently",
-      "Handle edge cases like empty strings",
-      "Use it for efficient string operations",
-    ],
-  },
 };
 
 export function getMonsterHunterExplanation(patternKey: PatternKey) {

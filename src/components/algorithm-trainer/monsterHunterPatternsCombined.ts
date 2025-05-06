@@ -264,7 +264,7 @@ export const monsterHunterPatternsByCategory = {
 // Type the algorithmPatterns object
 const typedAlgorithmPatterns = algorithmPatterns as Partial<Record<PatternKey, AlgorithmPattern>>;
 
-// Verify pattern completeness
+// Function to verify pattern completeness
 export function verifyPatternCompleteness() {
   const missingRegularPatterns = PATTERN_KEYS.filter((key: PatternKey) => {
     return !typedAlgorithmPatterns[key];
@@ -273,24 +273,6 @@ export function verifyPatternCompleteness() {
   const missingMonsterHunterPatterns = PATTERN_KEYS.filter((key: PatternKey) => {
     return !allPatterns.has(key);
   });
-
-  // Log results
-  console.log("Pattern Verification Results:");
-  console.log("----------------------------");
-
-  if (missingRegularPatterns.length > 0) {
-    console.log("\nMissing Regular Patterns:");
-    missingRegularPatterns.forEach((pattern) => console.log(`- ${pattern}`));
-  } else {
-    console.log("\n✓ All patterns have regular implementations");
-  }
-
-  if (missingMonsterHunterPatterns.length > 0) {
-    console.log("\nMissing Monster Hunter Patterns:");
-    missingMonsterHunterPatterns.forEach((pattern) => console.log(`- ${pattern}`));
-  } else {
-    console.log("\n✓ All patterns have Monster Hunter implementations");
-  }
 
   return {
     missingRegularPatterns,
@@ -301,76 +283,7 @@ export function verifyPatternCompleteness() {
   };
 }
 
-// Check for similar patterns in the combined patterns
-const similarPatterns = findSimilarPatterns(Array.from(allPatterns.keys()));
-
-// Log similar patterns if any are found
-if (Object.keys(similarPatterns).length > 0) {
-  console.log("\nSimilar Monster Hunter Patterns Found:");
-  Object.entries(similarPatterns).forEach(([pattern, similar]) => {
-    console.log(`\n${pattern}:`);
-    similar.forEach((similarPattern) => console.log(`- ${similarPattern}`));
-  });
-}
-
-// Export the combined patterns
-export const allMonsterHunterPatterns = allPatterns;
-
-// Check for inconsistencies between pattern keys
-const regularPatternKeys = Object.keys(typedAlgorithmPatterns);
-const monsterHunterPatternKeys = Array.from(allPatterns.keys());
-
-// Find patterns that exist in regular implementations but not in Monster Hunter patterns
-const missingInMonsterHunter = regularPatternKeys.filter(
-  (pattern: string) => !monsterHunterPatternKeys.includes(pattern as PatternKey)
-);
-
-// Find patterns that exist in Monster Hunter patterns but not in regular implementations
-const missingInRegular = monsterHunterPatternKeys.filter(
-  (pattern: PatternKey) => !regularPatternKeys.includes(pattern)
-);
-
-// Find patterns with different names
-const differentNames = regularPatternKeys.filter((pattern: string) => {
-  const monsterHunterPattern = monsterHunterPatternKeys.find(
-    (mhPattern: PatternKey) => mhPattern.toLowerCase() === pattern.toLowerCase()
-  );
-  return monsterHunterPattern && monsterHunterPattern !== pattern;
-});
-
-// Log results
-console.log("Pattern Inconsistency Check Results:");
-console.log("----------------------------------");
-
-if (missingInMonsterHunter.length > 0) {
-  console.log("\nPatterns missing in Monster Hunter implementations:");
-  missingInMonsterHunter.forEach((pattern) => console.log(`- ${pattern}`));
-}
-
-if (missingInRegular.length > 0) {
-  console.log("\nPatterns missing in regular implementations:");
-  missingInRegular.forEach((pattern) => console.log(`- ${pattern}`));
-}
-
-if (differentNames.length > 0) {
-  console.log("\nPatterns with different names:");
-  differentNames.forEach((pattern) => {
-    const monsterHunterPattern = monsterHunterPatternKeys.find(
-      (mhPattern) => mhPattern.toLowerCase() === pattern.toLowerCase()
-    );
-    console.log(`- Regular: "${pattern}" vs Monster Hunter: "${monsterHunterPattern}"`);
-  });
-}
-
-console.log("\nSummary:");
-console.log("--------");
-console.log(`Total regular patterns: ${regularPatternKeys.length}`);
-console.log(`Total Monster Hunter patterns: ${monsterHunterPatternKeys.length}`);
-console.log(`Missing in regular: ${missingInRegular.length}`);
-console.log(`Missing in Monster Hunter: ${missingInMonsterHunter.length}`);
-console.log(`Different names: ${differentNames.length}`);
-
-// Function to verify pattern consistency across all definitions
+// Function to verify pattern consistency
 export function verifyPatternConsistency() {
   // Get all patterns from different sources
   const typePatterns = PATTERN_KEYS;
@@ -407,35 +320,6 @@ export function verifyPatternConsistency() {
     }
   }
 
-  // Log results
-  console.log("\nPattern Consistency Check Results:");
-  console.log("--------------------------------");
-
-  if (missingInMonsterHunter.length > 0) {
-    console.log("\nPatterns in types.ts but missing in Monster Hunter patterns:");
-    missingInMonsterHunter.forEach((p) => console.log(`- ${p}`));
-  }
-
-  if (missingInCategories.length > 0) {
-    console.log("\nPatterns in types.ts but missing in categories:");
-    missingInCategories.forEach((p) => console.log(`- ${p}`));
-  }
-
-  if (differentNames.size > 0) {
-    console.log("\nPatterns with different names across files:");
-    Array.from(differentNames).forEach((p) => console.log(`- ${p}`));
-  }
-
-  // Summary statistics
-  console.log("\nSummary:");
-  console.log("--------");
-  console.log(`Total patterns in types.ts: ${typePatterns.length}`);
-  console.log(`Total patterns in Monster Hunter: ${monsterHunterPatterns.length}`);
-  console.log(`Total patterns in categories: ${categoryPatterns.length}`);
-  console.log(`Missing in Monster Hunter: ${missingInMonsterHunter.length}`);
-  console.log(`Missing in categories: ${missingInCategories.length}`);
-  console.log(`Different names: ${differentNames.size}`);
-
   return {
     missingInMonsterHunter,
     missingInCategories,
@@ -465,37 +349,37 @@ export function checkExtraPatterns() {
     (pattern) => !patternKeySet.has(pattern)
   );
 
-  // Log results
-  console.log("\nExtra Pattern Check Results:");
-  console.log("---------------------------");
-
-  if (extraMonsterHunterPatterns.length > 0) {
-    console.log("\nPatterns in Monster Hunter but not in PATTERN_KEYS:");
-    extraMonsterHunterPatterns.forEach((p) => console.log(`- ${p}`));
-  } else {
-    console.log("\n✓ No extra patterns in Monster Hunter implementations");
-  }
-
-  if (extraCategoryPatterns.length > 0) {
-    console.log("\nPatterns in Categories but not in PATTERN_KEYS:");
-    extraCategoryPatterns.forEach((p) => console.log(`- ${p}`));
-  } else {
-    console.log("\n✓ No extra patterns in Categories");
-  }
-
-  // Summary
-  console.log("\nSummary:");
-  console.log("--------");
-  console.log(`Total PATTERN_KEYS: ${PATTERN_KEYS.length}`);
-  console.log(`Extra in Monster Hunter: ${extraMonsterHunterPatterns.length}`);
-  console.log(`Extra in Categories: ${extraCategoryPatterns.length}`);
-
   return {
     extraMonsterHunterPatterns,
     extraCategoryPatterns,
   };
 }
 
-// Run all verifications
-verifyPatternConsistency();
-checkExtraPatterns();
+// Function to get all validation results
+export function getValidationResults() {
+  const completeness = verifyPatternCompleteness();
+  const consistency = verifyPatternConsistency();
+  const extraPatterns = checkExtraPatterns();
+  const similarPatterns = findSimilarPatterns(Array.from(allPatterns.keys()));
+
+  return {
+    similarPatterns,
+    missingInRegular: completeness.missingRegularPatterns,
+    missingInMonsterHunter: consistency.missingInMonsterHunter,
+    missingInCategories: consistency.missingInCategories,
+    differentNames: consistency.differentNames,
+    extraPatterns: {
+      monsterHunter: extraPatterns.extraMonsterHunterPatterns,
+      categories: extraPatterns.extraCategoryPatterns,
+    },
+    stats: {
+      totalPatterns: completeness.totalPatterns,
+      regularPatternsCount: completeness.regularPatternsCount,
+      monsterHunterPatternsCount: completeness.monsterHunterPatternsCount,
+      categoryPatternsCount: consistency.stats.categoryCount,
+    },
+  };
+}
+
+// Export the combined patterns
+export const allMonsterHunterPatterns = allPatterns;

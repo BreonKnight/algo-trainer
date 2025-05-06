@@ -1,19 +1,19 @@
-import { AlgorithmPattern } from "../../types.ts";
-import { matrixSpiralRecursivePattern } from "../matrix/matrix-spiral-recursive.ts";
-import { matrixSpiralTraversalPattern } from "../matrix/matrix-spiral-traversal.ts";
-import { matrixTraversalRecursivePattern } from "../matrix/matrix-traversal-recursive.ts";
-import { matrixTraversalPattern } from "../matrix/matrix-traversal.ts";
-import { kadanesAlgorithmPattern } from "./kadanes-algorithm.ts";
-import { prefixSumsPattern } from "./prefix-sums.ts";
-import { twoPointersPattern } from "./two-pointers.ts";
-import { bitManipulationPattern } from "./bit-manipulation.ts";
-import { slidingWindowPattern } from "./sliding-window.ts";
-import { twoSumTwoPointersPattern } from "./two-sum-two-pointers.ts";
-import { twoSumPattern } from "./two-sum.ts";
-import { twoSumDictPattern } from "./two-sum-dict.ts";
-import { matrixOperationsPattern } from "../matrix/matrix-operations.ts";
-import { matrixExponentiationPattern } from "../matrix/matrix-exponentiation.ts";
-import { gridTraversalPattern } from "../matrix/grid-traversal.ts";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
+import { matrixSpiralRecursivePattern } from "../matrix/matrix-spiral-recursive";
+import { matrixSpiralTraversalPattern } from "../matrix/matrix-spiral-traversal";
+import { matrixTraversalRecursivePattern } from "../matrix/matrix-traversal-recursive";
+import { matrixTraversalPattern } from "../matrix/matrix-traversal";
+import { kadanesAlgorithmPattern } from "./kadanes-algorithm";
+import { prefixSumsPattern } from "./prefix-sums";
+import { twoPointersPattern } from "./two-pointers";
+import { bitManipulationPattern } from "./bit-manipulation";
+import { slidingWindowPattern } from "./sliding-window";
+import { twoSumTwoPointersPattern } from "./two-sum-two-pointers";
+import { twoSumPattern } from "./two-sum";
+import { twoSumDictPattern } from "./two-sum-dict";
+import { matrixOperationsPattern } from "../matrix/matrix-operations";
+import { matrixExponentiationPattern } from "../matrix/matrix-exponentiation";
+import { gridTraversalPattern } from "../matrix/grid-traversal";
 
 type ArrayPatternKey =
   | "Matrix Spiral Recursive"

@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 import { createPatternRecord } from "../../../../lib/patterns/pattern-utils";
 import { matrixChainMultiplicationPattern } from "./matrix-chain-multiplication";
 import { matrixExponentiationPattern } from "./matrix-exponentiation";

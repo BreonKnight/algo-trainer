@@ -140,6 +140,11 @@ export interface AlgorithmPattern {
   category: string;
   pattern?: string;
   keySteps?: string[];
+  difficulty?: string;
+  keyPoints?: string[];
+  commonUseCases?: string[];
+  relatedPatterns?: string[];
+  tips?: string[];
 }
 
 export const PATTERN_KEYS: PatternKey[] = [
