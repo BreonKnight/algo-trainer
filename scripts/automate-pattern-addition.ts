@@ -201,7 +201,7 @@ Expected Output: ${this.patternConfig.example.output}
     const files = fs.readdirSync(monsterHunterDir);
     const patternFiles = files.filter((file) => file.startsWith("monsterHunterPatternsExtended"));
     const numbers = patternFiles.map((file) => parseInt(file.match(/\d+/)?.[0] || "0"));
-    return Math.max(...numbers) + 1;
+    return numbers.length > 0 ? Math.max(...numbers) + 1 : 1;
   }
 }
 
