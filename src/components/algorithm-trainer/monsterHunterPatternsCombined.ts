@@ -97,7 +97,9 @@ const allPatterns = new Map<PatternKey, string>(
     ...Array.from(monsterHunterPatternsExtended8.entries()),
     ...Array.from(monsterHunterPatternsExtended9.entries()),
     ...Array.from(monsterHunterPatterns.entries()),
-  ].map(([key, value]) => [key, value] as const)
+  ]
+    .map(([key, value]) => [key, value] as const)
+    .filter(([key]) => PATTERN_KEYS.includes(key as PatternKey) || key === "Null Pattern")
 );
 
 // Organize patterns by category
@@ -149,22 +151,39 @@ export const monsterHunterPatternsByCategory = {
     "Shell Sort",
   ],
 
-  Trees: [
+  "Data Structures": [
     "Binary Search Tree",
-    "Tree Implementation",
-    "B Tree",
     "AVL Tree",
+    "B Tree",
     "Red-Black Tree",
     "Fenwick Tree",
     "Segment Tree",
-    "Tree DP",
-    "Heavy Light Decomposition",
-    "Lowest Common Ancestor",
-    "LCA DFS",
-    "Inorder Traversal",
+    "Binary Indexed Tree",
+    "Suffix Tree",
+    "Hash Table",
+    "Linked List",
+    "Circular Linked List",
+    "DFS Linked List",
+    "BFS Linked List",
+    "Doubly Linked List",
+    "Stack Implementation",
+    "Queue Implementation",
+    "Heap Implementation",
+    "Union Find",
+    "Monotonic Stack",
+    "Monotonic Queue",
+    "Trie",
+    "Trie Operations",
+    "Sparse Table",
+    "Tree Implementation",
   ],
 
-  Graphs: [
+  Algorithms: [
+    "A* Search",
+    "DFS",
+    "BFS",
+    "DFS Binary Tree",
+    "DFS Graph",
     "Dijkstra",
     "Kosaraju",
     "Articulation Points",
@@ -172,7 +191,6 @@ export const monsterHunterPatternsByCategory = {
     "Strongly Connected Components",
     "Network Flow",
     "Maximum Bipartite Matching",
-    "A* Search",
     "Grid Traversal",
     "Kruskal",
     "Prim",
@@ -183,7 +201,6 @@ export const monsterHunterPatternsByCategory = {
     "Kahn's Topological Sort",
     "Topological Sort",
     "Graph Representation",
-    "DFS Graph",
     "Spanning Tree",
   ],
 
@@ -194,7 +211,6 @@ export const monsterHunterPatternsByCategory = {
     "Knuth-Morris-Pratt",
     "Rabin-Karp",
     "Suffix Array",
-    "Suffix Tree",
     "String Hashing",
     "Palindrome Partitioning",
     "Edit Distance",
@@ -213,18 +229,17 @@ export const monsterHunterPatternsByCategory = {
   ],
 
   "Greedy Algorithms": [
-    "Greedy",
     "Activity Selection",
     "Fractional Knapsack",
     "Huffman Coding",
     "Job Scheduling",
     "Interval Scheduling",
     "Hungarian Algorithm",
+    "Greedy",
   ],
 
-  Backtracking: ["Backtracking", "Palindrome Partitioning"],
-
-  "Number Theory": [
+  "Other Techniques": [
+    "Backtracking",
     "Extended Euclidean",
     "Chinese Remainder Theorem",
     "Sieve of Eratosthenes",
@@ -232,39 +247,18 @@ export const monsterHunterPatternsByCategory = {
     "Sieve of Sundaram",
     "Miller-Rabin Primality Test",
     "Fast Fourier Transform",
-  ],
-
-  "Divide and Conquer": ["Divide and Conquer", "Karatsuba Multiplication"],
-
-  Recursion: ["Recursion", "DFS", "DFS Linked List", "DFS Binary Tree", "BFS", "BFS Linked List"],
-
-  "Data Structures": [
-    "Hash Table",
-    "Linked List",
-    "Circular Linked List",
-    "Stack Implementation",
-    "Queue Implementation",
-    "Heap Implementation",
-    "Union Find",
-    "Monotonic Stack",
-    "Monotonic Queue",
-    "Sparse Table",
-    "Binary Indexed Tree",
-    "Doubly Linked List",
-    "Trie",
-    "Trie Operations",
-  ],
-
-  Miscellaneous: [
-    "A* Search",
-    "Bit Manipulation",
-    "Memoization",
-    "Quickselect",
+    "Divide and Conquer",
+    "Karatsuba Multiplication",
     "Fast and Slow Pointers",
+    "Heavy Light Decomposition",
+    "Lowest Common Ancestor",
+    "LCA DFS",
+    "Inorder Traversal",
+    "Recursion",
     "Fibonacci",
+    "Null Pattern",
+    "Test Data",
   ],
-
-  Testing: ["Test Data"],
 };
 
 // Type the algorithmPatterns object
