@@ -101,112 +101,182 @@ import { ZAlgorithmPattern } from "./patterns/z-algorithm";
 import { GreedyPattern } from "./patterns/greedy";
 import { HungarianPattern } from "./patterns/hungarian";
 import { RadixSortPattern } from "./patterns/radix-sort";
+import { BitwiseDPPattern } from "./patterns/bitwise-dp";
+import { SpanningTreePattern } from "./patterns/spanning-tree";
+import { SparseTablePattern } from "./patterns/sparse-table";
+import { StringHashingPattern } from "./patterns/string-hashing";
+import { ZigzagTraversalPattern } from "./patterns/zigzag-traversal";
+import { SortingComparisonsPattern } from "./patterns/sorting-comparisons";
+import { PalindromePartitioningPattern } from "./patterns/palindrome-partitioning";
+import { LCADFSPattern } from "./patterns/lca-dfs";
+import { EditDistancePattern } from "./patterns/edit-distance";
+import { FordFulkersonPattern } from "./patterns/ford-fulkerson";
+import { KahnTopologicalSortPattern } from "./patterns/kahn-topological-sort";
+import { KaratsubaMultiplicationPattern } from "./patterns/karatsuba-multiplication";
+import { InorderTraversalPattern } from "./patterns/inorder-traversal";
+import { HopcroftKarpPattern } from "./patterns/hopcroft-karp";
+import { GraphRepresentationPattern } from "./patterns/graph-representation";
+import { TreeImplementationPattern } from "./patterns/tree-implementation";
+import { TriePattern } from "./patterns/trie";
+import { BucketSortPattern } from "./patterns/bucket-sort";
+import { CountingSortPattern } from "./patterns/counting-sort";
+import { BinaryIndexedTreePattern } from "./patterns/binary-indexed-tree";
+import DoublyLinkedListPattern from "./patterns/doubly-linked-list";
+import FastAndSlowPointersPattern from "./patterns/fast-and-slow-pointers";
+import FibonacciPattern from "./patterns/fibonacci";
+import DFSGraphPattern from "./patterns/dfs-graph";
+import { IntervalSchedulingPattern } from "./patterns/interval-scheduling";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
-  "A* Search": AStarSearchPattern,
-  "Activity Selection": ActivitySelectionPattern,
-  "Articulation Points": ArticulationPointsPattern,
-  "AVL Tree": AVLTreePattern,
-  Backtracking: BacktrackingPattern,
-  "Bellman-Ford": BellmanFordPattern,
+  // ===== Graph Algorithms =====
   BFS: BFSPattern,
   "BFS Linked List": BfsLinkedListPattern,
-  "Binary Search": BinarySearchPattern,
-  "Binary Search on Answer": BinarySearchOnAnswerPattern,
-  "Binary Search Tree": BinarySearchTreePattern,
-  "Bit Manipulation": BitManipulationPattern,
-  "B Tree": BTreePattern,
-  "Bubble Sort": BubbleSortPattern,
-  "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
-  "Circular Linked List": CircularLinkedListPattern,
   DFS: DFSPattern,
   "DFS Binary Tree": DfsBinaryTreePattern,
   "DFS Linked List": DfsLinkedListPattern,
-  "Digit DP": DigitDPPattern,
-  "Divide and Conquer": DivideAndConquerPattern,
+  Dijkstra: DijkstraPattern,
+  "Bellman-Ford": BellmanFordPattern,
+  "Floyd-Warshall": FloydWarshallPattern,
+  Kruskal: KruskalPattern,
+  Prim: PrimPattern,
+  "Topological Sort": TopologicalSortPattern,
+  "Strongly Connected Components": StronglyConnectedComponentsPattern,
+  "Articulation Points": ArticulationPointsPattern,
+  Bridges: BridgesPattern,
+  Kosaraju: KosarajuPattern,
+  "Maximum Bipartite Matching": MaximumBipartiteMatchingPattern,
+  "Network Flow": NetworkFlowPattern,
+  "Heavy Light Decomposition": HeavyLightDecompositionPattern,
+  "Lowest Common Ancestor": LCAPattern,
+  "Ford-Fulkerson": FordFulkersonPattern,
+  "Kahn's Topological Sort": KahnTopologicalSortPattern,
+  "Hopcroft-Karp": HopcroftKarpPattern,
+  "Graph Representation": GraphRepresentationPattern,
+  "DFS Graph": DFSGraphPattern,
+  "Spanning Tree": SpanningTreePattern,
+
+  // ===== Tree Data Structures =====
+  "Binary Search Tree": BinarySearchTreePattern,
+  "AVL Tree": AVLTreePattern,
+  "Red-Black Tree": RedBlackTreePattern,
+  "B Tree": BTreePattern,
+  "Segment Tree": SegmentTreePattern,
+  "Fenwick Tree": FenwickTreePattern,
+  "Suffix Tree": SuffixTreePattern,
+  "Trie Operations": TrieOperationsPattern,
+  "Tree Implementation": TreeImplementationPattern,
+  "LCA DFS": LCADFSPattern,
+  "Inorder Traversal": InorderTraversalPattern,
+  "Zigzag Traversal": ZigzagTraversalPattern,
+
+  // ===== Dynamic Programming =====
   "Dynamic Programming": DynamicProgrammingPattern,
   "Dynamic Programming Coin Change": DynamicProgrammingCoinChangePattern,
   "Dynamic Programming Iterative": DynamicProgrammingIterativePattern,
   "Dynamic Programming Pattern": DynamicProgrammingPatternTemplate,
-  "Exponential Search": ExponentialSearchPattern,
-  "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
-  "Fast Fourier Transform": FastFourierTransformPattern,
-  "Fenwick Tree": FenwickTreePattern,
-  "Fibonacci Search": FibonacciSearchPattern,
-  "Floyd Cycle Detection": FloydCycleDetectionPattern,
-  "Floyd-Warshall": FloydWarshallPattern,
+  "Digit DP": DigitDPPattern,
+  "Probability DP": ProbabilityDPPattern,
+  "State Compression DP": StateCompressionDPPattern,
+  "Tree DP": TreeDynamicProgrammingPattern,
+  "Bitwise DP": BitwiseDPPattern,
+
+  // ===== Greedy Algorithms =====
+  Greedy: GreedyPattern,
+  "Activity Selection": ActivitySelectionPattern,
   "Fractional Knapsack": FractionalKnapsackPattern,
   "Huffman Coding": HuffmanCodingPattern,
-  "Insertion Sort": InsertionSortPattern,
-  "Interpolation Search": InterpolationSearchPattern,
-  Dijkstra: DijkstraPattern,
-  Bridges: BridgesPattern,
-  Kosaraju: KosarajuPattern,
-  Kruskal: KruskalPattern,
-  "Strongly Connected Components": StronglyConnectedComponentsPattern,
-  Greedy: GreedyPattern,
-  "Grid Traversal": GridTraversalPattern,
-  "Hash Table": HashTablePattern,
-  "Heap Implementation": HeapImplementationPattern,
-  "Heap Sort": HeapSortPattern,
-  "Heavy Light Decomposition": HeavyLightDecompositionPattern,
-  "Hungarian Algorithm": HungarianPattern,
   "Job Scheduling": JobSchedulingPattern,
-  "Jump Search": JumpSearchAlgorithmPattern,
-  "Kadane's Algorithm": KadanesAlgorithmPattern,
-  "Knuth-Morris-Pratt": KnuthMorrisPrattPattern,
+  "Hungarian Algorithm": HungarianPattern,
+
+  // ===== Search Algorithms =====
   "Linear Search": LinearSearchPattern,
-  "Linked List": LinkedListPattern,
-  "Manacher's Algorithm": ManachersAlgorithmPattern,
+  "Binary Search": BinarySearchPattern,
+  "Binary Search on Answer": BinarySearchOnAnswerPattern,
+  "Exponential Search": ExponentialSearchPattern,
+  "Fibonacci Search": FibonacciSearchPattern,
+  "Interpolation Search": InterpolationSearchPattern,
+  "Jump Search": JumpSearchAlgorithmPattern,
+  "Ternary Search": TernarySearchAlgorithmPattern,
+
+  // ===== Sorting Algorithms =====
+  "Bubble Sort": BubbleSortPattern,
+  "Insertion Sort": InsertionSortPattern,
+  "Selection Sort": SelectionSortPattern,
+  "Merge Sort": MergeSortPattern,
+  "Quick Sort": QuickSortPattern,
+  "Heap Sort": HeapSortPattern,
+  "Radix Sort": RadixSortPattern,
+  "Stack Sort": StackSortPattern,
+  "Sorting Comparisons": SortingComparisonsPattern,
+  "Bucket Sort": BucketSortPattern,
+  "Counting Sort": CountingSortPattern,
+
+  // ===== Matrix Operations =====
+  "Matrix Operations": MatrixOperationsPattern,
   "Matrix Chain Multiplication": MatrixChainMultiplicationPattern,
   "Matrix Exponentiation": MatrixExponentiationPattern,
-  "Matrix Operations": MatrixOperationsPattern,
-  "Matrix Spiral Recursive": MatrixSpiralTraversalRecursivePattern,
   "Matrix Spiral Traversal": MatrixSpiralTraversalPattern,
+  "Matrix Spiral Recursive": MatrixSpiralTraversalRecursivePattern,
   "Matrix Traversal": MatrixTraversalPattern,
   "Matrix Traversal Recursive": MatrixTraversalRecursivePattern,
-  "Maximum Bipartite Matching": MaximumBipartiteMatchingPattern,
-  Memoization: MemoizationPattern,
-  "Merge Sort": MergeSortPattern,
-  "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
-  "Monotonic Queue": MonotonicQueuePattern,
-  "Monotonic Stack": MonotonicStackPattern,
-  "Network Flow": NetworkFlowPattern,
-  "Null Pattern": NullPattern,
-  "Prefix Sums": PrefixSumsPattern,
-  Prim: PrimPattern,
-  "Prime Factorization": SieveOfEratosthenesPattern,
-  "Probability DP": ProbabilityDPPattern,
-  "Queue Implementation": QueueImplementationPattern,
-  Quickselect: QuickselectPattern,
-  "Quick Sort": QuickSortPattern,
-  "Radix Sort": RadixSortPattern,
-  "Rabin-Karp": RabinKarpPattern,
-  "Red-Black Tree": RedBlackTreePattern,
-  Recursion: RecursionPattern,
-  "Rotate Matrix": MatrixOperationsPattern,
-  "Segment Tree": SegmentTreePattern,
-  "Selection Sort": SelectionSortPattern,
-  "Sieve of Atkin": SieveOfAtkinPattern,
-  "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
-  "Sieve of Sundaram": SieveOfSundaramPattern,
-  "Sliding Window": SlidingWindowPattern,
-  "Stack Implementation": StackImplementationPattern,
-  "Stack Sort": StackSortPattern,
-  "State Compression DP": StateCompressionDPPattern,
+  "Grid Traversal": GridTraversalPattern,
+
+  // ===== String Algorithms =====
   "String Operations": StringOperationsPattern,
+  "Knuth-Morris-Pratt": KnuthMorrisPrattPattern,
+  "Rabin-Karp": RabinKarpPattern,
+  "Manacher's Algorithm": ManachersAlgorithmPattern,
+  "Z Algorithm": ZAlgorithmPattern,
   "Suffix Array": SuffixArrayPattern,
-  "Suffix Tree": SuffixTreePattern,
-  "Lowest Common Ancestor": LCAPattern,
-  "Ternary Search": TernarySearchAlgorithmPattern,
-  "Test Data": NullPattern,
-  "Topological Sort": TopologicalSortPattern,
-  "Tree DP": TreeDynamicProgrammingPattern,
-  "Trie Operations": TrieOperationsPattern,
+  "String Hashing": StringHashingPattern,
+  "Palindrome Partitioning": PalindromePartitioningPattern,
+  "Edit Distance": EditDistancePattern,
+
+  // ===== Number Theory =====
+  "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
+  "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
+  "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
+  "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
+  "Sieve of Atkin": SieveOfAtkinPattern,
+  "Sieve of Sundaram": SieveOfSundaramPattern,
+
+  // ===== Data Structures =====
+  "Hash Table": HashTablePattern,
+  "Linked List": LinkedListPattern,
+  "Circular Linked List": CircularLinkedListPattern,
+  "Stack Implementation": StackImplementationPattern,
+  "Queue Implementation": QueueImplementationPattern,
+  "Heap Implementation": HeapImplementationPattern,
+  "Union Find": UnionFindPattern,
+  "Monotonic Stack": MonotonicStackPattern,
+  "Monotonic Queue": MonotonicQueuePattern,
+  "Sparse Table": SparseTablePattern,
+  "Binary Indexed Tree": BinaryIndexedTreePattern,
+  "Doubly Linked List": DoublyLinkedListPattern,
+  Trie: TriePattern,
+
+  // ===== Array Techniques =====
   "Two Pointers": TwoPointersPattern,
+  "Sliding Window": SlidingWindowPattern,
+  "Prefix Sums": PrefixSumsPattern,
+  "Kadane's Algorithm": KadanesAlgorithmPattern,
   "Two Sum": TwoSumPattern,
   "Two Sum Dict": TwoSumDictionaryPattern,
   "Two Sum Two Pointers": TwoSumTwoPointersPattern,
-  "Union Find": UnionFindPattern,
-  "Z Algorithm": ZAlgorithmPattern,
+
+  // ===== Miscellaneous =====
+  "A* Search": AStarSearchPattern,
+  Backtracking: BacktrackingPattern,
+  "Bit Manipulation": BitManipulationPattern,
+  "Divide and Conquer": DivideAndConquerPattern,
+  "Fast Fourier Transform": FastFourierTransformPattern,
+  "Floyd Cycle Detection": FloydCycleDetectionPattern,
+  Memoization: MemoizationPattern,
+  Quickselect: QuickselectPattern,
+  Recursion: RecursionPattern,
+  "Test Data": NullPattern,
+  "Karatsuba Multiplication": KaratsubaMultiplicationPattern,
+  "Interval Scheduling": IntervalSchedulingPattern,
+  "Fast and Slow Pointers": FastAndSlowPointersPattern,
+  Fibonacci: FibonacciPattern,
 };
