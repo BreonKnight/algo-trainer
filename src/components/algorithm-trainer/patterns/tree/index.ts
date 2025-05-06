@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 import { binarySearchTreePattern } from "./binary-search-tree";
 import { treePattern } from "./tree";
 import { triePattern } from "./trie";

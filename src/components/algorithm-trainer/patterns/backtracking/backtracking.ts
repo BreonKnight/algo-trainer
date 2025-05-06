@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const backtrackingPattern: AlgorithmPattern = {
   title: "Backtracking Algorithm Pattern",

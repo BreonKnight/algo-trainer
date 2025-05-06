@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const avlTreePattern: AlgorithmPattern = {
   title: "AVL Tree",

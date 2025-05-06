@@ -1,5 +1,5 @@
 import React from "react";
-import { Pattern } from "../../../lib/types/pattern-management";
+import { Pattern } from "@/lib/types/pattern-management";
 
 interface PatternListProps {
   patterns: Pattern[];

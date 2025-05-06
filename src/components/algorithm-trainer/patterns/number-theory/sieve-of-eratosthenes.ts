@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types";
+import type { AlgorithmPattern } from "../../types/pattern-types";
 
 export const sieveOfEratosthenesPattern: AlgorithmPattern = {
   title: "Sieve of Eratosthenes",
@@ -6,6 +6,7 @@ export const sieveOfEratosthenesPattern: AlgorithmPattern = {
     "An efficient algorithm for finding all prime numbers up to a given limit by iteratively marking the multiples of each prime number starting from 2.",
   timeComplexity: "O(n log log n)",
   spaceComplexity: "O(n)",
+  difficulty: "Easy",
   pseudocode: `
 1. Create a boolean array of size n+1, initialized to true
 2. Mark 0 and 1 as non-prime

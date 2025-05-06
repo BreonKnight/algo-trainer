@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 import { createPatternRecord } from "../../../../lib/patterns/pattern-utils";
 import { manachersAlgorithmPattern } from "./manachers-algorithm";
 import { knuthMorrisPrattPattern } from "./knuth-morris-pratt";

@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types";
+import type { AlgorithmPattern } from "../../types/pattern-types";
 
 export const sieveOfAtkinPattern: AlgorithmPattern = {
   title: "Sieve of Atkin",
@@ -6,6 +6,7 @@ export const sieveOfAtkinPattern: AlgorithmPattern = {
     "A modern algorithm for finding all prime numbers up to a given limit. It's more efficient than the Sieve of Eratosthenes for large ranges.",
   timeComplexity: "O(n / log log n)",
   spaceComplexity: "O(n)",
+  difficulty: "Hard",
   pseudocode: `function sieveOfAtkin(n):
     # Initialize sieve array
     sieve = [False] * (n + 1)

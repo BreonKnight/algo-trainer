@@ -1,4 +1,4 @@
-import { Pattern } from "../../../lib/types/pattern-management";
+import { Pattern } from "@/lib/types/pattern-management";
 
 export const editDistance = (s1: string, s2: string): number => {
   s1 = s1.toLowerCase();

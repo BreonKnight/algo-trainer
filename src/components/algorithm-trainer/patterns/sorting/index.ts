@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 import { PatternCategory } from "../../../../lib/patterns/types";
 import { insertionSortPattern } from "./insertion-sort";
 import { selectionSortPattern } from "./selection-sort";

@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types";
+import type { AlgorithmPattern } from "../../types/pattern-types";
 
 export const millerRabinPrimalityTestPattern: AlgorithmPattern = {
   title: "Miller-Rabin Primality Test",
@@ -6,6 +6,7 @@ export const millerRabinPrimalityTestPattern: AlgorithmPattern = {
     "A probabilistic primality test that determines whether a given number is probably prime or definitely composite. It's more efficient than deterministic tests for large numbers.",
   timeComplexity: "O(k log³ n), where k is the number of rounds",
   spaceComplexity: "O(1)",
+  difficulty: "Hard",
   pseudocode: `# Miller-Rabin Primality Test
 # Input: Integer n > 2, number of rounds k
 # Output: "composite" or "probably prime"

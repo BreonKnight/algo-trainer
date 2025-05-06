@@ -1,5 +1,5 @@
-import { Button } from "../../ui/button";
-import { HelpModal } from "../../help/HelpModal";
+import { Button } from "@/components/ui/button";
+import { HelpModal } from "@/components/help/HelpModal";
 import {
   Sun,
   Moon,
