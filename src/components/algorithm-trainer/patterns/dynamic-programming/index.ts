@@ -1,7 +1,6 @@
 import { AlgorithmPattern } from "../../types/pattern-types.ts";
 import { digitDPPattern } from "./digit-dp.ts";
 import { dynamicProgrammingCoinChangePattern } from "./dynamic-programming-coin-change.ts";
-import { dynamicProgrammingFibonacciPattern } from "./dynamic-programming-fibonacci.ts";
 import { dynamicProgrammingIterativePattern } from "./dynamic-programming-iterative.ts";
 import { dynamicProgrammingPattern } from "./dynamic-programming.ts";
 import { dynamicProgrammingPattern as dpPattern } from "./dynamic-programming.ts";
@@ -27,7 +26,6 @@ export const dynamicProgrammingPatterns: Partial<
 > = {
   "Digit DP": digitDPPattern,
   "Dynamic Programming Coin Change": dynamicProgrammingCoinChangePattern,
-  "Dynamic Programming Fibonacci": dynamicProgrammingFibonacciPattern,
   "Dynamic Programming Iterative": dynamicProgrammingIterativePattern,
   "Dynamic Programming Pattern": dynamicProgrammingPattern,
   "Dynamic Programming": dpPattern,

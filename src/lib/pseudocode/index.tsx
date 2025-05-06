@@ -19,7 +19,6 @@ import { DfsLinkedListPattern } from "./patterns/dfs-linked-list";
 import { DigitDPPattern } from "./patterns/digit-dp";
 import { DivideAndConquerPattern } from "./patterns/divide-and-conquer";
 import { DynamicProgrammingCoinChangePattern } from "./patterns/dynamic-programming-coin-change";
-import { DynamicProgrammingFibonacciPattern } from "./patterns/dynamic-programming-fibonacci";
 import { DynamicProgrammingIterativePattern } from "./patterns/dynamic-programming-iterative";
 import { DynamicProgrammingPattern } from "./patterns/dynamic-programming";
 import { DynamicProgrammingPatternTemplate } from "./patterns/dynamic-programming-pattern";
@@ -32,7 +31,6 @@ import { FloydCycleDetectionPattern } from "./patterns/floyd-cycle-detection";
 import { FloydWarshallPattern } from "./patterns/graph-floyd-warshall";
 import { BridgesPattern } from "./patterns/graph-bridges";
 import { KosarajuPattern } from "./patterns/graph-kosaraju";
-import { GraphPattern } from "./patterns/graph";
 import { DijkstraPattern } from "./patterns/dijkstra";
 import { ActivitySelectionPattern } from "./patterns/activity-selection.tsx";
 import { FractionalKnapsackPattern } from "./patterns/fractional-knapsack.tsx";
@@ -93,7 +91,6 @@ import { SuffixTreePattern } from "./patterns/suffix-tree";
 import { TernarySearchAlgorithmPattern } from "./patterns/ternary-search-algorithm";
 import { TopologicalSortPattern } from "./patterns/topological-sort";
 import { TreeDynamicProgrammingPattern } from "./patterns/tree-dp";
-import { TreePattern } from "./patterns/tree";
 import { TrieOperationsPattern } from "./patterns/trie-operations";
 import { TwoPointersPattern } from "./patterns/two-pointers";
 import { TwoSumDictionaryPattern } from "./patterns/two-sum-dict";
@@ -129,7 +126,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Divide and Conquer": DivideAndConquerPattern,
   "Dynamic Programming": DynamicProgrammingPattern,
   "Dynamic Programming Coin Change": DynamicProgrammingCoinChangePattern,
-  "Dynamic Programming Fibonacci": DynamicProgrammingFibonacciPattern,
   "Dynamic Programming Iterative": DynamicProgrammingIterativePattern,
   "Dynamic Programming Pattern": DynamicProgrammingPatternTemplate,
   "Exponential Search": ExponentialSearchPattern,
@@ -140,7 +136,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Floyd Cycle Detection": FloydCycleDetectionPattern,
   "Floyd-Warshall": FloydWarshallPattern,
   "Fractional Knapsack": FractionalKnapsackPattern,
-  Graph: GraphPattern,
   "Huffman Coding": HuffmanCodingPattern,
   "Insertion Sort": InsertionSortPattern,
   "Interpolation Search": InterpolationSearchPattern,
@@ -206,7 +201,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Ternary Search": TernarySearchAlgorithmPattern,
   "Test Data": NullPattern,
   "Topological Sort": TopologicalSortPattern,
-  Tree: TreePattern,
   "Tree DP": TreeDynamicProgrammingPattern,
   "Trie Operations": TrieOperationsPattern,
   "Two Pointers": TwoPointersPattern,

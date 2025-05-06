@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import { Slider } from "../ui/slider";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
 export function ProgressView() {

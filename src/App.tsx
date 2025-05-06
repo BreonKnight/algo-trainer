@@ -10,7 +10,7 @@ import { Navigation } from "./components/ui/navigation";
 import { TopBar } from "./components/algorithm-trainer/layout/TopBar";
 import HomePage from "./app/HomePage";
 import SystemsDesign from "./components/SystemsDesign/SystemsDesign";
-import { useTheme } from "./components/theme/theme-context";
+import { useTheme } from "./components/theme/use-theme";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Toaster } from "sonner";
 import { cn } from "./lib/utils";

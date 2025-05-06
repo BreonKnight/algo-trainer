@@ -1,80 +1,81 @@
 import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "../PseudocodeDisplay";
 
-export const IntervalSchedulingPattern = () => (
+export const QuickSortPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
-        Interval Scheduling
+        Quick Sort
       </span>
     </div>
     <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Maximum non-overlapping
-      intervals
+      Time: O(n log n) avg, O(n²) worst &nbsp;|&nbsp; Space: O(log n) &nbsp;|&nbsp; Use: Efficient
+      general-purpose sorting
     </div>
 
     <PseudocodeDisplay
-      code={`INTERVAL-SCHEDULING(I):
-    // I is a list of intervals [start, end]
-    // Returns maximum set of non-overlapping intervals
-    
-    // Sort intervals by end time
-    SORT(I, key = end_time)
-    
-    selected ← empty list
-    last_end ← -∞
-    
-    for each interval [start, end] in I:
-        if start ≥ last_end:
-            selected.append([start, end])
-            last_end ← end
-    
-    return selected
+      code={`QUICKSORT(A, p, r):
+    if p < r:
+        q ← PARTITION(A, p, r)
+        QUICKSORT(A, p, q-1)
+        QUICKSORT(A, q+1, r)
+
+PARTITION(A, p, r):
+    x ← A[r]    // pivot
+    i ← p - 1
+    for j ← p to r-1:
+        if A[j] ≤ x:
+            i ← i + 1
+            exchange A[i] with A[j]
+    exchange A[i+1] with A[r]
+    return i + 1
 
 // Example:
-// Input intervals:
-// [1,4], [2,5], [3,6], [4,7], [5,8]
+// Input: A = [3, 7, 8, 5, 2, 1, 9, 5, 4]
 //
-// Sorted by end time:
-// [1,4], [2,5], [3,6], [4,7], [5,8]
+// First partition (pivot = 4):
+// [3, 2, 1, 4, 7, 8, 9, 5, 5]
 //
-// Selected intervals:
-// [1,4], [4,7]`}
+// Recursive calls:
+// Left: [3, 2, 1]
+// Right: [7, 8, 9, 5, 5]
+//
+// Final result: [1, 2, 3, 4, 5, 5, 7, 8, 9]`}
     />
 
     <div className="mb-2">
-      <span className="text-accent font-bold">Key Properties:</span>
+      <span className="text-accent font-bold">Key Steps:</span>
     </div>
     <div className="mb-2 text-sm">
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Greedy algorithm for interval selection</span>
+        <span>Choose pivot element (usually last element)</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Always selects interval with earliest end time</span>
+        <span>Partition array around pivot</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Produces optimal solution for maximum non-overlapping intervals</span>
+        <span>Recursively sort subarrays</span>
       </div>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">Complexity Analysis:</span>
+      <span className="font-semibold text-accent">Optimization Tips:</span>
       <div className="mt-2 text-sm">
         <div className="flex items-center">
           <ChevronRight className="h-4 w-4 text-accent" />
-          <span>Time: O(n log n) - dominated by sorting</span>
+          <span>Use median-of-three for pivot selection</span>
         </div>
         <div className="flex items-center">
           <ChevronRight className="h-4 w-4 text-accent" />
-          <span>Space: O(n) - for storing selected intervals</span>
+          <span>Switch to insertion sort for small subarrays</span>
         </div>
         <div className="flex items-center">
           <ChevronRight className="h-4 w-4 text-accent" />
-          <span>Optimal greedy solution for interval scheduling</span>
+          <span>Use tail recursion optimization</span>
         </div>
       </div>
     </div>

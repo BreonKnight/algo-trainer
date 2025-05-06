@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./button";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "../theme/use-theme";
 import { cn } from "@/lib/utils";
 import { Home, Book, BarChart, Menu, X, Code2, GraduationCap, Brain, Network } from "lucide-react";
 import { useState } from "react";

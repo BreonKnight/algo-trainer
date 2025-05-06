@@ -15,7 +15,7 @@ import {
   SelectGroup,
   SelectLabel,
 } from "../ui/select";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 import {
   Play,

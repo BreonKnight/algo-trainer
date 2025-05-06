@@ -14,7 +14,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
-import { useTheme } from "../../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
 interface PanelLayoutProps {

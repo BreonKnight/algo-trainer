@@ -7,7 +7,7 @@ import GamificationService, {
   Badge,
   AlgorithmProgress,
 } from "../../lib/gamification";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { Link } from "react-router-dom";
 
 const themeStyles = {

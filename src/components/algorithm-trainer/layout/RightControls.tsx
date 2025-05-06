@@ -13,7 +13,7 @@ import {
   Droplet,
   Check,
 } from "lucide-react";
-import { useTheme } from "../../theme/theme-context";
+import { useTheme } from "../../theme/use-theme";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,

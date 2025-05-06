@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { loadPyodide, PyodideInterface } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import GamificationService from "../../lib/gamification";
 import { cn } from "../../lib/utils";
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "../theme/use-theme";
 import { cn } from "@/lib/utils";
 import { BookOpen, Clock, GraduationCap, ChevronRight, X } from "lucide-react";
 import { Switch } from "@headlessui/react";

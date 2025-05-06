@@ -4,7 +4,7 @@ import { Slider } from "../ui/slider";
 import { Play, Pause, SkipBack, SkipForward, RotateCcw } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { PatternKey } from "./types";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
 interface AlgorithmVisualizerProps {
