@@ -85,6 +85,7 @@ export type PatternKey =
   | "Monotonic Queue"
   | "Monotonic Stack"
   | "Network Flow"
+  | "Null Pattern"
   | "Palindrome Partitioning"
   | "Prefix Sums"
   | "Prim"
@@ -228,6 +229,7 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Monotonic Queue",
   "Monotonic Stack",
   "Network Flow",
+  "Null Pattern",
   "Palindrome Partitioning",
   "Prefix Sums",
   "Prim",
