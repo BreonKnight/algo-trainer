@@ -96,13 +96,19 @@ const allPatterns = new Map<PatternKey, string>(
 
 // Organize patterns by category
 export const monsterHunterPatternsByCategory = {
-  // Basic Algorithms
+  Array: [
+    "Two Sums",
+    "Two Pointers",
+    "Sliding Window",
+    "Prefix Sums",
+    "Bit Manipulation",
+    "Two Sum Dict",
+    "Kadane's Algorithm",
+  ],
   Searching: [
     "Binary Search",
     "Linear Search",
     "Binary Search on Answer",
-    "Ternary Search",
-    "Jump Search",
     "Exponential Search",
     "Interpolation Search",
     "Fibonacci Search",
@@ -147,7 +153,6 @@ export const monsterHunterPatternsByCategory = {
   ],
 
   Strings: [
-    "String",
     "String Operations",
     "Z Algorithm",
     "Manacher's Algorithm",

@@ -118,6 +118,11 @@ export interface AlgorithmPattern {
   example: string;
   implementation: string;
   category: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+  keyPoints?: string[];
+  commonUseCases?: string[];
+  relatedPatterns?: string[];
+  tips?: string[];
   pattern?: string;
   keySteps?: string[];
   testData?: {

@@ -5,10 +5,10 @@ export const ZAlgorithmPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
-        Z Algorithm
+        Z-Algorithm
       </span>
-      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Pattern matching in string
     </div>

@@ -6,6 +6,20 @@ export const prefixSumsPattern: AlgorithmPattern = {
     "Prefix Sums is a technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.",
   timeComplexity: "O(n)",
   spaceComplexity: "O(n)",
+  category: "Array",
+  difficulty: "Easy",
+  keyPoints: [
+    "Precomputes cumulative sums for efficient range queries",
+    "Transforms O(n) range sum queries into O(1) operations",
+    "Useful for problems involving subarray sums",
+    "Can be extended to 2D arrays for matrix range queries",
+  ],
+  commonUseCases: [
+    "Finding sum of any subarray in O(1) time",
+    "Finding subarrays with target sum",
+    "Counting subarrays with specific properties",
+    "2D range queries in matrices",
+  ],
   pseudocode: `
     // Build prefix sums
     prefix_sums = [0] * (len(arr) + 1)
@@ -29,5 +43,11 @@ export const prefixSumsPattern: AlgorithmPattern = {
         prefix_sums[i + 1] = prefix_sums[i] + arr[i]
     return prefix_sums
 `,
-  category: "Array",
+  relatedPatterns: ["Sliding Window", "Two Pointers", "Binary Search"],
+  tips: [
+    "Initialize prefix array with size n+1 for easier indexing",
+    "Remember to handle edge cases (empty array, single element)",
+    "Consider using 0-based or 1-based indexing consistently",
+    "For 2D arrays, compute both row and column prefix sums",
+  ],
 };
