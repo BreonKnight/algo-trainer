@@ -83,15 +83,35 @@ export function Navigation() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { path: "/", label: "Home", icon: Home },
-    { path: "/tutorials", label: "Tutorials", icon: Book },
-    { path: "/progress", label: "Progress", icon: BarChart },
-    { path: "/python-techniques", label: "Python", icon: Code2 },
-    { path: "/algorithm-learning", label: "Learning", icon: GraduationCap },
-    { path: "/algorithm-practice", label: "Practice", icon: ListChecks },
-    { path: "/visualizer", label: "Visualizer", icon: Brain },
-    { path: "/systems-design", label: "Systems Design", icon: Network },
+  const navGroups = [
+    {
+      label: "Learn",
+      items: [
+        { path: "/algo-guide", label: "Algo Guide", icon: GraduationCap },
+        { path: "/algorithm-trainer", label: "Algorithm Trainer", icon: Code },
+        { path: "/cs-math", label: "CS Math", icon: GraduationCap },
+        { path: "/algorithm-practice", label: "Practice", icon: ListChecks },
+      ],
+    },
+    {
+      label: "Resources",
+      items: [
+        { path: "/tutorials", label: "Tutorials", icon: Book },
+        { path: "/python-techniques", label: "Python", icon: Code2 },
+        { path: "/visualizer", label: "Visualizer", icon: Brain },
+      ],
+    },
+    {
+      label: "Progress",
+      items: [
+        { path: "/progress", label: "Progress", icon: BarChart },
+        { path: "/systems-design", label: "Systems Design", icon: Network },
+      ],
+    },
+    {
+      label: "General",
+      items: [{ path: "/", label: "Home", icon: Home }],
+    },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -121,75 +141,47 @@ export function Navigation() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-2">
-              <div className="flex items-center space-x-1">
-                {navItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className={cn(
-                        "flex items-center px-2 py-1.5 rounded-md text-xs font-medium transition-colors",
-                        isActive(item.path)
-                          ? `bg-accent ${
-                              lightThemes.includes(theme)
-                                ? "text-gray-900"
-                                : blueThemes.includes(theme)
-                                  ? "text-white"
-                                  : "text-accent-foreground"
-                            } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                          : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
-                      )}
-                    >
-                      <Icon className="h-3.5 w-3.5 mr-1.5" />
-                      {item.label}
-                    </Link>
-                  );
-                })}
+              <div className="flex items-center">
+                {navGroups.map((group, groupIdx) => (
+                  <div key={group.label} className="flex items-center space-x-1">
+                    {group.items.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <Link
+                          key={item.path}
+                          to={item.path}
+                          className={cn(
+                            "flex items-center px-2 py-1.5 rounded-md text-xs font-medium transition-colors",
+                            isActive(item.path)
+                              ? `bg-accent ${
+                                  lightThemes.includes(theme)
+                                    ? "text-gray-900"
+                                    : blueThemes.includes(theme)
+                                      ? "text-white"
+                                      : "text-accent-foreground"
+                                } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
+                              : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
+                          )}
+                        >
+                          <Icon className="h-3.5 w-3.5 mr-1.5" />
+                          {item.label}
+                        </Link>
+                      );
+                    })}
+                    {/* Divider between groups except last */}
+                    {groupIdx < navGroups.length - 1 && (
+                      <span className="mx-2 h-5 w-px bg-border/60" />
+                    )}
+                  </div>
+                ))}
               </div>
               <div className="ml-2 flex items-center space-x-1.5">
-                <Link
-                  to="/algorithm-trainer"
-                  className={cn(
-                    "flex items-center px-2 py-1.5 rounded-md text-xs font-medium transition-colors",
-                    isActive("/algorithm-trainer")
-                      ? `bg-accent ${
-                          lightThemes.includes(theme)
-                            ? "text-gray-900"
-                            : blueThemes.includes(theme)
-                              ? "text-white"
-                              : "text-accent-foreground"
-                        } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                      : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
-                  )}
-                >
-                  <Code className="h-3.5 w-3.5 mr-1.5" />
-                  Algorithm Trainer
-                </Link>
                 <GamificationButton />
               </div>
             </div>
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-2">
-              <Link
-                to="/algorithm-trainer"
-                className={cn(
-                  "flex items-center px-2 py-1.5 rounded-md text-xs font-medium transition-colors",
-                  isActive("/algorithm-trainer")
-                    ? `bg-accent ${
-                        lightThemes.includes(theme)
-                          ? "text-gray-900"
-                          : blueThemes.includes(theme)
-                            ? "text-white"
-                            : "text-accent-foreground"
-                      } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                    : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
-                )}
-              >
-                <Code className="h-3.5 w-3.5 mr-1.5" />
-                Algorithm Trainer
-              </Link>
               <GamificationButton />
               <Button
                 variant="ghost"
@@ -206,32 +198,39 @@ export function Navigation() {
         {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={cn(
-                      "flex items-center px-2 py-1.5 rounded-md text-sm font-medium transition-colors",
-                      isActive(item.path)
-                        ? `bg-accent ${
-                            lightThemes.includes(theme)
-                              ? "text-gray-900"
-                              : blueThemes.includes(theme)
-                                ? "text-white"
-                                : "text-accent-foreground"
-                          } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                        : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
-                    )}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <Icon className="h-4 w-4 mr-2" />
-                    {item.label}
-                  </Link>
-                );
-              })}
+            <div className="px-2 pt-2 pb-3 space-y-2">
+              {navGroups.map((group) => (
+                <div key={group.label}>
+                  <span className="text-[10px] font-semibold text-muted-foreground px-2 pb-1 uppercase tracking-wide">
+                    {group.label}
+                  </span>
+                  {group.items.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        className={cn(
+                          "flex items-center px-2 py-1.5 rounded-md text-sm font-medium transition-colors mb-1",
+                          isActive(item.path)
+                            ? `bg-accent ${
+                                lightThemes.includes(theme)
+                                  ? "text-gray-900"
+                                  : blueThemes.includes(theme)
+                                    ? "text-white"
+                                    : "text-accent-foreground"
+                              } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
+                            : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
+                        )}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Icon className="h-4 w-4 mr-2" />
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
           </div>
         )}

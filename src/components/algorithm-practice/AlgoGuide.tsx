@@ -202,7 +202,7 @@ const categories: Category[] = [
   },
 ];
 
-export default function AlgorithmPractice() {
+export default function AlgoGuide() {
   const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>(categories[0].name);
   const [hoveredAlgorithm, setHoveredAlgorithm] = useState<string | null>(null);

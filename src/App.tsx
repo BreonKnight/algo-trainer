@@ -4,7 +4,7 @@ import { AlgorithmTutorial } from "./components/tutorials/AlgorithmTutorial";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
 import { AlgorithmVisualizer } from "./components/algorithm-trainer/AlgorithmVisualizer";
 import { AlgorithmComparison } from "./components/algorithm-trainer/AlgorithmComparison";
-import AlgorithmLearning from "./components/AlgorithmLearning/AlgorithmLearning";
+import CSMath from "./components/CSMath/CSMath";
 import PatternManagement from "./components/admin/PatternManagement";
 import { Navigation } from "./components/ui/navigation";
 import { TopBar } from "./components/algorithm-trainer/layout/TopBar";
@@ -21,7 +21,7 @@ import type { Tutorial } from "./components/tutorials/AlgorithmTutorial";
 import type { PatternKey } from "./components/tutorials/types";
 import tutorialsData from "./data/tutorials.json";
 import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
-import AlgorithmPractice from "./components/algorithm-practice/AlgorithmPractice";
+import AlgoGuide from "./components/algorithm-practice/AlgoGuide";
 
 // Log the imported data structure
 console.log("Imported tutorials data:", tutorialsData);
@@ -201,7 +201,7 @@ function AppContent() {
             <Route path="/python-techniques" element={<PythonTechniques />} />
             <Route path="/systems-design" element={<SystemsDesign />} />
             <Route path="/algorithm-trainer" element={<AlgorithmTrainer />} />
-            <Route path="/algorithm-practice" element={<AlgorithmPractice />} />
+            <Route path="/algo-guide" element={<AlgoGuide />} />
             <Route
               path="/visualizer"
               element={
@@ -220,7 +220,7 @@ function AppContent() {
               }
             />
             <Route path="/algorithm-comparison" element={<AlgorithmComparison />} />
-            <Route path="/algorithm-learning" element={<AlgorithmLearning />} />
+            <Route path="/cs-math" element={<CSMath />} />
             {import.meta.env.DEV && (
               <Route path="/admin/patterns" element={<PatternManagement />} />
             )}
