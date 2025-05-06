@@ -105,7 +105,9 @@ const PatternManagement: React.FC = () => {
       sortConfig: { field: SortField; order: SortOrder };
     }[]
   >([]);
-  const [validationResults, setValidationResults] = useState<any>(null);
+  const [validationResults, setValidationResults] = useState<DebugInfo["validationResults"] | null>(
+    null
+  );
 
   // Load existing patterns on component mount
   useEffect(() => {

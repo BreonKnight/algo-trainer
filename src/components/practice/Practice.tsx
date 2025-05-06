@@ -15,7 +15,7 @@ const Practice: React.FC = () => {
   const runCode = () => {
     setIsRunning(true);
     let result = "";
-    const log = (...args: any[]) => {
+    const log = (...args: unknown[]) => {
       result += args.map(String).join(" ") + "\n";
     };
     try {
@@ -23,8 +23,8 @@ const Practice: React.FC = () => {
       const fn = new Function("console", code);
       fn({ log });
       setOutput(result || "(No output)");
-    } catch (err: any) {
-      setOutput("Error: " + err.message);
+    } catch (err: unknown) {
+      setOutput("Error: " + (err instanceof Error ? err.message : String(err)));
     }
     setIsRunning(false);
   };

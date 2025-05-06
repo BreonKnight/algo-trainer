@@ -13,7 +13,6 @@ import SystemsDesign from "./components/SystemsDesign/SystemsDesign";
 import { useTheme } from "./components/theme/use-theme";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Toaster } from "sonner";
-import { cn } from "./lib/utils";
 import { useState, useEffect } from "react";
 import "./App.css";
 import { checkPatternFiles, logPatternCheckResults } from "./lib/utils/pattern-checker";
@@ -24,8 +23,8 @@ import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
 import AlgoGuide from "./components/algorithm-practice/AlgoGuide";
 
 // Log the imported data structure
-console.log("Imported tutorials data:", tutorialsData);
-console.log("Categories:", Object.keys(tutorialsData));
+// console.log("Imported tutorials data:", tutorialsData);
+// console.log("Categories:", Object.keys(tutorialsData));
 
 interface RawTutorial {
   id: string;

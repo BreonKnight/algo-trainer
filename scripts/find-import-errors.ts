@@ -1,6 +1,5 @@
 import { glob } from "glob";
 import * as fs from "fs";
-import * as path from "path";
 
 async function findImportErrors() {
   const files = await glob("src/**/*.{ts,tsx}");
