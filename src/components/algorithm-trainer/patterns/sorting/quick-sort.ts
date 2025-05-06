@@ -1,48 +1,76 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const quickSortPattern: AlgorithmPattern = {
   title: "Quick Sort Algorithm",
   description:
-    "A divide-and-conquer algorithm that picks a pivot element and partitions the array around it.",
+    "A highly efficient, comparison-based, divide and conquer sorting algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot.",
   timeComplexity: "O(n log n) average case, O(n²) worst case",
-  spaceComplexity: "O(log n) due to recursion stack",
-  pseudocode: `1. Base case: If array length <= 1, return array\n2. Choose pivot:\n   a. Select last element as pivot\n   b. Initialize left = 0, right = len(arr) - 2\n3. Partition:\n   a. While left <= right:\n      - If arr[left] <= pivot: move left pointer right\n      - If arr[right] > pivot: move right pointer left\n      - If both conditions false: swap elements\n   b. Place pivot in correct position\n4. Recursively sort:\n   a. Sort left subarray (elements <= pivot)\n   b. Sort right subarray (elements > pivot)`,
-  example: `arr = [7, 2, 1, 6, 8, 5, 3, 4]
+  spaceComplexity: "O(log n)",
+  pseudocode: `1. Choose a pivot element from the array
+2. Partition the array around the pivot:
+   - Elements smaller than pivot go to the left
+   - Elements larger than pivot go to the right
+3. Recursively sort the sub-arrays
+4. Combine the results`,
+  example: `arr = [3, 6, 8, 10, 1, 2, 1]
+
+Step 1: Choose pivot (3)
+[1, 2, 1] | 3 | [6, 8, 10]
+
+Step 2: Recursively sort sub-arrays
+[1, 1, 2] | 3 | [6, 8, 10]
+
+Final result: [1, 1, 2, 3, 6, 8, 10]`,
+  implementation: `def partition(arr, low, high):
+    # Choose the rightmost element as pivot
+    pivot = arr[high]
     
-    First partition (pivot = 4):
-    [7, 2, 1, 6, 8, 5, 3, 4]
-     L                    P
-    Swap 7 and 3:
-    [3, 2, 1, 6, 8, 5, 7, 4]
-        L              R
-    Swap 6 and 1:
-    [3, 2, 1, 6, 8, 5, 7, 4]
-           L        R
-    Final partition:
-    [3, 2, 1, 4, 8, 5, 7, 6]
-              P
+    # Index of smaller element
+    i = low - 1
     
-    Recursive calls:
-    Left: [3, 2, 1]
-Right: [8, 5, 7, 6]`,
-  implementation: `def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
+    for j in range(low, high):
+        # If current element is smaller than or equal to pivot
+        if arr[j] <= pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
     
-    pivot = arr[-1]
-    left = 0
-    right = len(arr) - 2
+    # Place pivot at its correct position
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
+
+def quick_sort(arr, low, high):
+    if low < high:
+        # pi is partitioning index
+        pi = partition(arr, low, high)
+        
+        # Sort elements before and after partition
+        quick_sort(arr, low, pi - 1)
+        quick_sort(arr, pi + 1, high)
     
-    while left <= right:
-        if arr[left] <= pivot:
-            left += 1
-        elif arr[right] > pivot:
-            right -= 1
-        else:
-            arr[left], arr[right] = arr[right], arr[left]
-    
-    arr[left], arr[-1] = arr[-1], arr[left]
-    
-    return quick_sort(arr[:left]) + [pivot] + quick_sort(arr[left+1:])`,
+    return arr
+
+# Wrapper function
+def quick_sort_wrapper(arr):
+    return quick_sort(arr, 0, len(arr) - 1)`,
   category: "Sorting",
+  difficulty: "Medium",
+  keyPoints: [
+    "In-place sorting algorithm",
+    "Not stable (may change relative order of equal elements)",
+    "Efficient for large datasets",
+    "Performance depends on pivot selection",
+  ],
+  commonUseCases: [
+    "General-purpose sorting",
+    "Large datasets",
+    "In-memory sorting",
+    "Real-time applications",
+  ],
+  relatedPatterns: ["Merge Sort", "Heap Sort", "Insertion Sort"],
+  tips: [
+    "Choose a good pivot strategy (e.g., median-of-three)",
+    "Use insertion sort for small sub-arrays",
+    "Consider using a random pivot to avoid worst-case scenarios",
+    "Be careful with duplicate elements",
+  ],
 };

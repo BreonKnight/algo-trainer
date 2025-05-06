@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { PatternKey } from "./types";
+import { PatternKey, AlgorithmPattern } from "./types";
 import { patterns as algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { useState, useRef, useEffect, useMemo } from "react";
@@ -126,7 +126,9 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
         }
         return `# Monster Hunter Python implementation for ${currentPattern}\n# Coming soon!`;
       } else {
-        const val = algorithmPatterns[currentPattern];
+        const val = (algorithmPatterns as Record<PatternKey, AlgorithmPattern | undefined>)[
+          currentPattern
+        ];
         if (typeof val === "string") {
           return val;
         }
@@ -261,7 +263,9 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
                         } else {
-                          const val = algorithmPatterns[currentPattern];
+                          const val = (
+                            algorithmPatterns as Record<PatternKey, AlgorithmPattern | undefined>
+                          )[currentPattern];
                           if (val && typeof val === "object" && "example" in val) {
                             const ex = (val as { example?: string }).example;
                             if (ex) return ex;

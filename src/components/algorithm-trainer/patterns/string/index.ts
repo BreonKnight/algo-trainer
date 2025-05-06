@@ -1,4 +1,5 @@
-import { AlgorithmPattern, PatternKey } from "../../types";
+import { AlgorithmPattern } from "../../types";
+import { createPatternRecord } from "../../../../lib/patterns/pattern-utils";
 import { manachersAlgorithmPattern } from "./manachers-algorithm";
 import { knuthMorrisPrattPattern } from "./knuth-morris-pratt";
 import { rabinKarpPattern } from "./rabin-karp";
@@ -7,7 +8,7 @@ import { zAlgorithmPattern } from "./z-algorithm";
 import { suffixArrayPattern } from "./suffix-array";
 import { suffixTreePattern } from "./suffix-tree";
 
-export const stringPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
+export const stringPatterns = createPatternRecord<AlgorithmPattern>({
   "String Operations": stringOperationsPattern,
   "Z Algorithm": zAlgorithmPattern,
   "Manacher's Algorithm": manachersAlgorithmPattern,
@@ -15,4 +16,4 @@ export const stringPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Rabin-Karp": rabinKarpPattern,
   "Suffix Array": suffixArrayPattern,
   "Suffix Tree": suffixTreePattern,
-};
+});

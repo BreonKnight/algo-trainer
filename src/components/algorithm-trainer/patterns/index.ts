@@ -1,20 +1,21 @@
 import { PatternKey } from "../types/pattern-types";
+import { createPatternRecord } from "../../../lib/patterns/pattern-utils";
 
 // Import all pattern categories
 import { arrayPatterns } from "./array/index";
 import { backtrackingPatterns } from "./backtracking/index";
 import { dataStructurePatterns } from "./data-structures/index";
 import { divideAndConquerPatterns } from "./divide-and-conquer/index";
-import * as dynamicProgramming from "./dynamic-programming";
-import * as greedy from "./greedy";
-import * as tree from "./tree";
-import * as string from "./string";
-import * as searching from "./searching";
-import * as sorting from "./sorting";
-import * as numberTheory from "./number-theory";
-import * as matrix from "./matrix";
-import * as graph from "./graph";
-import * as recursion from "./recursion";
+import { dynamicProgrammingPatterns } from "./dynamic-programming";
+import { greedyPatterns } from "./greedy";
+import { treePatterns } from "./tree";
+import { stringPatterns } from "./string";
+import { searchingPatterns } from "./searching";
+import { sortingPatterns } from "./sorting";
+import { numberTheoryPatterns } from "./number-theory";
+import { matrixPatterns } from "./matrix";
+import { graphPatterns } from "./graph";
+import { recursionPatterns } from "./recursion";
 
 // Patterns to be implemented later
 export const patternsToImplement = [
@@ -60,36 +61,36 @@ export const patternsToImplement = [
   "K-Means Clustering",
   "Decision Trees",
   "Neural Networks",
-];
+] as const;
 
 // Export all implemented patterns
-export const patterns = {
+export const patterns = createPatternRecord({
   // Dynamic Programming
-  ...dynamicProgramming.dynamicProgrammingPatterns,
+  ...dynamicProgrammingPatterns,
 
   // Greedy Algorithms
-  ...greedy.greedyPatterns,
+  ...greedyPatterns,
 
   // Tree Algorithms
-  ...tree.treePatterns,
+  ...treePatterns,
 
   // String Algorithms
-  ...string.stringPatterns,
+  ...stringPatterns,
 
   // Searching Algorithms
-  ...searching.searchingPatterns,
+  ...searchingPatterns,
 
   // Sorting Algorithms
-  ...sorting.sortingPatterns,
+  ...sortingPatterns,
 
   // Number Theory
-  ...numberTheory.numberTheoryPatterns,
+  ...numberTheoryPatterns,
 
   // Matrix Algorithms
-  ...matrix.matrixPatterns,
+  ...matrixPatterns,
 
   // Graph Algorithms
-  ...graph.graphPatterns,
+  ...graphPatterns,
 
   // Data Structures
   ...dataStructurePatterns,
@@ -104,8 +105,8 @@ export const patterns = {
   ...backtrackingPatterns,
 
   // Recursion
-  ...recursion.recursionPatterns,
-} as const;
+  ...recursionPatterns,
+});
 
 // Alias for backward compatibility
 export const algorithmPatterns = patterns;
@@ -118,7 +119,7 @@ import { monsterHunterExplanations } from "../monsterHunterExplanations";
 export function logPatternsMissingMonsterHunterGuides() {
   const allPatternKeys = Object.keys(patterns);
   const missingPatterns = allPatternKeys.filter(
-    (key) => !monsterHunterExplanations[key as PatternKey]
+    (key) => !monsterHunterExplanations[key as keyof typeof monsterHunterExplanations]
   );
   console.log("Patterns missing Monster Hunter guides:", missingPatterns);
   return missingPatterns;

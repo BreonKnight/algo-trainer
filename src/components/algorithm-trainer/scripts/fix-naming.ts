@@ -63,7 +63,7 @@ function toTitleCase(str: string): string {
     "hungarian algorithm": "Hungarian Algorithm",
     "radix sort": "Radix Sort",
     string: "String",
-    "rotate matrix": "Rotate Matrix",
+    "rotate matrix": "Matrix Operations",
     "bit manipulation": "Bit Manipulation",
   };
 

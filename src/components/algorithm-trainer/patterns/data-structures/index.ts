@@ -1,4 +1,5 @@
-import { AlgorithmPattern, PatternKey } from "../../types/pattern-types.ts";
+import { AlgorithmPattern } from "../../types/pattern-types.ts";
+import { createPatternRecord } from "../../../../lib/patterns/pattern-utils";
 import { monotonicQueuePattern } from "./monotonic-queue.ts";
 import { monotonicStackPattern } from "./monotonic-stack.ts";
 import { heapImplementationPattern } from "./heap-implementation.ts";
@@ -12,8 +13,9 @@ import { redBlackTreePattern } from "./red-black-tree.ts";
 import { bTreePattern } from "./b-tree.ts";
 import { fenwickTreePattern } from "./fenwick-tree.ts";
 import { segmentTreePattern } from "./segment-tree.ts";
+import { triePattern } from "./trie.ts";
 
-export const dataStructurePatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
+export const dataStructurePatterns = createPatternRecord<AlgorithmPattern>({
   "Monotonic Queue": monotonicQueuePattern,
   "Monotonic Stack": monotonicStackPattern,
   "Heap Implementation": heapImplementationPattern,
@@ -25,6 +27,8 @@ export const dataStructurePatterns: Partial<Record<PatternKey, AlgorithmPattern>
   "Union Find": unionFindPattern,
   "Red-Black Tree": redBlackTreePattern,
   "B Tree": bTreePattern,
-  "Fenwick Tree": fenwickTreePattern,
+  "Binary Indexed Tree": fenwickTreePattern,
   "Segment Tree": segmentTreePattern,
-};
+  Trie: triePattern,
+  "Trie Operations": triePattern,
+});

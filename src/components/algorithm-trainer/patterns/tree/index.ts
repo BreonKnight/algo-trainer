@@ -8,7 +8,7 @@ import { lowestCommonAncestorPattern } from "./lowest-common-ancestor";
 
 export const treePatterns: Partial<Record<string, AlgorithmPattern>> = {
   "Binary Search Tree": binarySearchTreePattern,
-  Tree: treePattern,
+  "Tree Implementation": treePattern,
   "Trie Operations": triePattern,
   "Heavy Light Decomposition": heavyLightDecompositionPattern,
   "AVL Tree": avlTreePattern,

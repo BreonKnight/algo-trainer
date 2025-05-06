@@ -26,13 +26,13 @@ export async function checkPatternFiles(): Promise<PatternCheckResult> {
     const [
       { monsterHunterTestData },
       { monsterHunterExplanations },
-      { monsterHunterPatterns },
+      { allMonsterHunterPatterns },
       { PATTERN_KEYS },
       { patternMapping },
     ] = await Promise.all([
       import("../../components/algorithm-trainer/monsterHunterTestData"),
       import("../../components/algorithm-trainer/monsterHunterExplanations"),
-      import("../../components/algorithm-trainer/monsterHunterPatterns"),
+      import("../../components/algorithm-trainer/monsterHunterPatternsCombined"),
       import("../../components/algorithm-trainer/types"),
       import("../pseudocode/utils/pattern-mapping"),
     ]);
@@ -48,7 +48,7 @@ export async function checkPatternFiles(): Promise<PatternCheckResult> {
       if (!monsterHunterExplanations[patternKey as keyof typeof monsterHunterExplanations]) {
         result.missingPatterns.monsterHunterExplanations.push(patternKey);
       }
-      if (!monsterHunterPatterns.has(patternKey)) {
+      if (!allMonsterHunterPatterns.has(patternKey)) {
         result.missingPatterns.monsterHunterPatterns.push(patternKey);
       }
       if (!PATTERN_KEYS.includes(patternKey)) {

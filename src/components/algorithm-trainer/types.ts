@@ -7,49 +7,66 @@ export type PatternKey =
   | "Bellman-Ford"
   | "BFS"
   | "BFS Linked List"
+  | "Binary Indexed Tree"
   | "Binary Search"
   | "Binary Search on Answer"
   | "Binary Search Tree"
   | "Bit Manipulation"
+  | "Bitwise DP"
   | "B Tree"
   | "Bridges"
   | "Bubble Sort"
+  | "Bucket Sort"
   | "Chinese Remainder Theorem"
   | "Circular Linked List"
+  | "Counting Sort"
   | "DFS"
   | "DFS Binary Tree"
+  | "DFS Graph"
   | "DFS Linked List"
   | "Digit DP"
   | "Dijkstra"
   | "Divide and Conquer"
+  | "Doubly Linked List"
   | "Dynamic Programming"
   | "Dynamic Programming Coin Change"
   | "Dynamic Programming Iterative"
   | "Dynamic Programming Pattern"
+  | "Edit Distance"
   | "Exponential Search"
   | "Extended Euclidean"
+  | "Fast and Slow Pointers"
   | "Fast Fourier Transform"
   | "Fenwick Tree"
+  | "Fibonacci"
   | "Fibonacci Search"
   | "Floyd Cycle Detection"
   | "Floyd-Warshall"
+  | "Ford-Fulkerson"
   | "Fractional Knapsack"
+  | "Graph Representation"
   | "Greedy"
   | "Grid Traversal"
   | "Hash Table"
   | "Heap Implementation"
   | "Heap Sort"
   | "Heavy Light Decomposition"
+  | "Hopcroft-Karp"
   | "Huffman Coding"
   | "Hungarian Algorithm"
+  | "Inorder Traversal"
   | "Insertion Sort"
   | "Interpolation Search"
+  | "Interval Scheduling"
   | "Job Scheduling"
   | "Jump Search"
   | "Kadane's Algorithm"
+  | "Kahn's Topological Sort"
+  | "Karatsuba Multiplication"
   | "Knuth-Morris-Pratt"
   | "Kosaraju"
   | "Kruskal"
+  | "LCA DFS"
   | "Linear Search"
   | "Linked List"
   | "Lowest Common Ancestor"
@@ -68,10 +85,9 @@ export type PatternKey =
   | "Monotonic Queue"
   | "Monotonic Stack"
   | "Network Flow"
-  | "Null Pattern"
+  | "Palindrome Partitioning"
   | "Prefix Sums"
   | "Prim"
-  | "Prime Factorization"
   | "Probability DP"
   | "Queue Implementation"
   | "Quickselect"
@@ -80,16 +96,19 @@ export type PatternKey =
   | "Radix Sort"
   | "Red-Black Tree"
   | "Recursion"
-  | "Rotate Matrix"
   | "Segment Tree"
   | "Selection Sort"
+  | "Shell Sort"
   | "Sieve of Atkin"
   | "Sieve of Eratosthenes"
   | "Sieve of Sundaram"
   | "Sliding Window"
+  | "Spanning Tree"
+  | "Sparse Table"
   | "Stack Implementation"
   | "Stack Sort"
   | "State Compression DP"
+  | "String Hashing"
   | "String Operations"
   | "Strongly Connected Components"
   | "Suffix Array"
@@ -97,15 +116,17 @@ export type PatternKey =
   | "Ternary Search"
   | "Test Data"
   | "Topological Sort"
-  | "Tree"
   | "Tree DP"
+  | "Tree Implementation"
+  | "Trie"
   | "Trie Operations"
   | "Two Pointers"
   | "Two Sum"
   | "Two Sum Dict"
   | "Two Sum Two Pointers"
   | "Union Find"
-  | "Z Algorithm";
+  | "Z Algorithm"
+  | "Zigzag Traversal";
 
 export interface AlgorithmPattern {
   title: string;
@@ -129,48 +150,66 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Bellman-Ford",
   "BFS",
   "BFS Linked List",
+  "Binary Indexed Tree",
   "Binary Search",
   "Binary Search on Answer",
   "Binary Search Tree",
   "Bit Manipulation",
+  "Bitwise DP",
   "B Tree",
+  "Bridges",
   "Bubble Sort",
+  "Bucket Sort",
   "Chinese Remainder Theorem",
   "Circular Linked List",
+  "Counting Sort",
   "DFS",
   "DFS Binary Tree",
+  "DFS Graph",
   "DFS Linked List",
   "Digit DP",
   "Dijkstra",
   "Divide and Conquer",
+  "Doubly Linked List",
   "Dynamic Programming",
   "Dynamic Programming Coin Change",
   "Dynamic Programming Iterative",
   "Dynamic Programming Pattern",
+  "Edit Distance",
   "Exponential Search",
   "Extended Euclidean",
+  "Fast and Slow Pointers",
   "Fast Fourier Transform",
   "Fenwick Tree",
+  "Fibonacci",
   "Fibonacci Search",
   "Floyd Cycle Detection",
   "Floyd-Warshall",
+  "Ford-Fulkerson",
   "Fractional Knapsack",
+  "Graph Representation",
   "Greedy",
   "Grid Traversal",
   "Hash Table",
   "Heap Implementation",
   "Heap Sort",
   "Heavy Light Decomposition",
+  "Hopcroft-Karp",
   "Huffman Coding",
   "Hungarian Algorithm",
+  "Inorder Traversal",
   "Insertion Sort",
   "Interpolation Search",
+  "Interval Scheduling",
   "Job Scheduling",
   "Jump Search",
   "Kadane's Algorithm",
+  "Kahn's Topological Sort",
+  "Karatsuba Multiplication",
   "Knuth-Morris-Pratt",
   "Kosaraju",
   "Kruskal",
+  "LCA DFS",
   "Linear Search",
   "Linked List",
   "Lowest Common Ancestor",
@@ -189,10 +228,9 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Monotonic Queue",
   "Monotonic Stack",
   "Network Flow",
-  "Null Pattern",
+  "Palindrome Partitioning",
   "Prefix Sums",
   "Prim",
-  "Prime Factorization",
   "Probability DP",
   "Queue Implementation",
   "Quickselect",
@@ -201,16 +239,19 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Radix Sort",
   "Red-Black Tree",
   "Recursion",
-  "Rotate Matrix",
   "Segment Tree",
   "Selection Sort",
+  "Shell Sort",
   "Sieve of Atkin",
   "Sieve of Eratosthenes",
   "Sieve of Sundaram",
   "Sliding Window",
+  "Spanning Tree",
+  "Sparse Table",
   "Stack Implementation",
   "Stack Sort",
   "State Compression DP",
+  "String Hashing",
   "String Operations",
   "Strongly Connected Components",
   "Suffix Array",
@@ -218,8 +259,9 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Ternary Search",
   "Test Data",
   "Topological Sort",
-  "Tree",
   "Tree DP",
+  "Tree Implementation",
+  "Trie",
   "Trie Operations",
   "Two Pointers",
   "Two Sum",
@@ -227,4 +269,5 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Two Sum Two Pointers",
   "Union Find",
   "Z Algorithm",
+  "Zigzag Traversal",
 ];

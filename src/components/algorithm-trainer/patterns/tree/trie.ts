@@ -1,8 +1,9 @@
 import { AlgorithmPattern } from "../../types";
 
 export const triePattern: AlgorithmPattern = {
-  title: "Trie Operations",
-  description: "A tree-like data structure for efficient string operations and prefix matching",
+  title: "Trie",
+  description:
+    "A pattern for implementing and using a trie (prefix tree) data structure. Tries are efficient for storing and searching strings.",
   timeComplexity: "O(m) for operations where m is the length of the string",
   spaceComplexity: "O(ALPHABET_SIZE * m * n) where n is the number of strings",
   pseudocode: `class TrieNode:
@@ -215,5 +216,5 @@ print(f"Words with prefix 'app': {trie.get_all_words_with_prefix('app')}")  # ['
 trie.delete('app')
 print(f"After deleting 'app': {trie.search('app')}")  # False
 print(f"Words with prefix 'app': {trie.get_all_words_with_prefix('app')}")  # ['apple', 'application']`,
-  category: "Tree",
+  category: "Data Structure",
 };
