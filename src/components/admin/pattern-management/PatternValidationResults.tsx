@@ -1,6 +1,6 @@
 import React from "react";
 
-interface ValidationResults {
+export interface ValidationResults {
   similarPatterns: Record<string, string[]>;
   missingInRegular: string[];
   missingInMonsterHunter: string[];
