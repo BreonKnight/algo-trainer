@@ -11,7 +11,9 @@ import { graphDfsPattern } from "./dfs";
 import { dijkstraPattern } from "./dijkstra";
 import { floydWarshallPattern } from "./floyd-warshall";
 import { floydCycleDetectionPattern } from "./floyd-cycle-detection";
-import { graphPattern } from "./graph";
+import { fordFulkersonPattern } from "./ford-fulkerson";
+import { graphRepresentationPattern } from "./graph-representation";
+import { kahnsTopologicalSortPattern } from "./kahns-topological-sort";
 import { kosarajuPattern } from "./kosaraju";
 import { kruskalPattern } from "./kruskal";
 import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching";
@@ -20,27 +22,31 @@ import { primPattern } from "./prim";
 import { stronglyConnectedComponentsPattern } from "./strongly-connected-components";
 import { topologicalSortPattern } from "./topological-sort";
 import { hungarianAlgorithmPattern } from "./hungarian-algorithm";
+import { hopcroftKarpPattern } from "./hopcroft-karp";
 
 export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
+  "A* Search": aStarSearchPattern,
+  "Articulation Points": articulationPointsPattern,
   "Bellman-Ford": bellmanFordPattern,
+  BFS: bfsPattern,
+  "BFS Linked List": bfsLinkedListPattern,
+  Bridges: bridgesPattern,
+  DFS: graphDfsPattern,
+  "DFS Binary Tree": dfsBinaryTreePattern,
+  "DFS Linked List": dfsLinkedListPattern,
   Dijkstra: dijkstraPattern,
   "Floyd-Warshall": floydWarshallPattern,
   "Floyd Cycle Detection": floydCycleDetectionPattern,
-  Kruskal: kruskalPattern,
-  Prim: primPattern,
-  "Articulation Points": articulationPointsPattern,
-  Bridges: bridgesPattern,
-  DFS: graphDfsPattern,
-  BFS: bfsPattern,
-  "DFS Linked List": dfsLinkedListPattern,
-  "DFS Binary Tree": dfsBinaryTreePattern,
-  "BFS Linked List": bfsLinkedListPattern,
-  Graph: graphPattern,
+  "Ford-Fulkerson": fordFulkersonPattern,
+  "Graph Representation": graphRepresentationPattern,
+  "Kahn's Topological Sort": kahnsTopologicalSortPattern,
   Kosaraju: kosarajuPattern,
-  "Topological Sort": topologicalSortPattern,
-  "Network Flow": networkFlowPattern,
-  "Strongly Connected Components": stronglyConnectedComponentsPattern,
+  Kruskal: kruskalPattern,
   "Maximum Bipartite Matching": maximumBipartiteMatchingPattern,
-  "A* Search": aStarSearchPattern,
+  "Network Flow": networkFlowPattern,
+  Prim: primPattern,
+  "Strongly Connected Components": stronglyConnectedComponentsPattern,
+  "Topological Sort": topologicalSortPattern,
   "Hungarian Algorithm": hungarianAlgorithmPattern,
+  "Hopcroft-Karp": hopcroftKarpPattern,
 };

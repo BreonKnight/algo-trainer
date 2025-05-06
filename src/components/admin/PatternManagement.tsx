@@ -297,7 +297,7 @@ const PatternManagement: React.FC = () => {
             key.includes("Matrix Exponentiation")
         ).length,
         "Matrix Algorithms": patternKeys.filter(
-          (key) => key.includes("Matrix") || key === "Grid Traversal" || key === "Rotate Matrix"
+          (key) => key.includes("Matrix") || key === "Grid Traversal" || key === "Matrix Operations"
         ).length,
         "Number Theory": patternKeys.filter(
           (key) =>

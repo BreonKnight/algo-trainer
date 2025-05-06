@@ -1,29 +1,27 @@
 import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const radixSortPattern: AlgorithmPattern = {
-  title: "Radix Sort",
+  title: "Radix Sort Algorithm",
   description:
-    "A non-comparative sorting algorithm that sorts numbers by processing individual digits. It uses counting sort as a subroutine to sort the numbers digit by digit, starting from the least significant digit to the most significant digit.",
+    "A non-comparative sorting algorithm that sorts data with integer keys by grouping keys by the individual digits which share the same significant position and value.",
   timeComplexity:
-    "O(d * (n + k)) where d is the number of digits, n is the number of elements, and k is the range of digits (usually 10)",
+    "O(d * (n + k)) where d is the number of digits, n is the number of elements, and k is the range of input",
   spaceComplexity: "O(n + k)",
   category: "Sorting",
-  pseudocode: `
-1. Find the maximum number to determine the number of digits
-2. For each digit position (from least significant to most):
-   a. Use counting sort to sort the numbers based on the current digit
-   b. Update the array with the sorted order
-3. Return the sorted array
-  `,
-  example: `Input: [170, 45, 75, 90, 802, 24, 2, 66]
+  difficulty: "Medium",
+  pseudocode: `1. Find the maximum number to know number of digits
+2. Do following for each digit i where i varies from least significant digit to the most significant digit:
+   a. Sort input array using counting sort (or any stable sort) according to the i'th digit
+3. Return sorted array`,
+  example: `arr = [170, 45, 75, 90, 802, 24, 2, 66]
 
-Step 1: Sort by least significant digit (1s place)
+Step 1: Sort by last digit
 [170, 90, 802, 2, 24, 45, 75, 66]
 
-Step 2: Sort by next digit (10s place)
+Step 2: Sort by second digit
 [802, 2, 24, 45, 66, 170, 75, 90]
 
-Step 3: Sort by most significant digit (100s place)
+Step 3: Sort by first digit
 [2, 24, 45, 66, 75, 90, 170, 802]`,
   implementation: `def counting_sort(arr, exp):
     n = len(arr)
@@ -35,26 +33,21 @@ Step 3: Sort by most significant digit (100s place)
         index = (arr[i] // exp) % 10
         count[index] += 1
     
-    # Change count[i] to position of digit i in output
+    # Change count[i] so that count[i] contains actual position
     for i in range(1, 10):
         count[i] += count[i - 1]
     
     # Build the output array
-    i = n - 1
-    while i >= 0:
+    for i in range(n-1, -1, -1):
         index = (arr[i] // exp) % 10
         output[count[index] - 1] = arr[i]
         count[index] -= 1
-        i -= 1
     
     # Copy the output array to arr
     for i in range(n):
         arr[i] = output[i]
 
 def radix_sort(arr):
-    if not arr:
-        return arr
-    
     # Find the maximum number to know number of digits
     max_num = max(arr)
     
@@ -64,12 +57,7 @@ def radix_sort(arr):
         counting_sort(arr, exp)
         exp *= 10
     
-    return arr
-
-# Example usage
-arr = [170, 45, 75, 90, 802, 24, 2, 66]
-sorted_arr = radix_sort(arr)
-print(sorted_arr)  # [2, 24, 45, 66, 75, 90, 170, 802]`,
+    return arr`,
   keySteps: [
     "Find the maximum number to determine the number of digits",
     "Implement counting sort for a specific digit position",
@@ -142,4 +130,23 @@ The algorithm is particularly useful when:
 - Memory usage is not a primary concern
 - Stability in sorting is required
   `,
+  keyPoints: [
+    "Uses counting sort as a subroutine",
+    "Stable sorting algorithm",
+    "Works well with numbers and strings",
+    "Can be used for both LSD (Least Significant Digit) and MSD (Most Significant Digit) variants",
+  ],
+  commonUseCases: [
+    "Sorting large numbers",
+    "Sorting strings",
+    "Sorting dates",
+    "Sorting IP addresses",
+  ],
+  relatedPatterns: ["Counting Sort", "Bucket Sort", "Merge Sort"],
+  tips: [
+    "Choose the right base for your data (e.g., base 10 for decimal numbers)",
+    "Consider using a larger base for better performance",
+    "Be careful with negative numbers - handle them separately",
+    "For strings, consider the length of the longest string",
+  ],
 };

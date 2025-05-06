@@ -11,7 +11,9 @@ import { slidingWindowPattern } from "./sliding-window.ts";
 import { twoSumTwoPointersPattern } from "./two-sum-two-pointers.ts";
 import { twoSumPattern } from "./two-sum.ts";
 import { twoSumDictPattern } from "./two-sum-dict.ts";
-import { rotateMatrixPattern } from "../matrix/rotate-matrix.ts";
+import { matrixOperationsPattern } from "../matrix/matrix-operations.ts";
+import { matrixExponentiationPattern } from "../matrix/matrix-exponentiation.ts";
+import { gridTraversalPattern } from "../matrix/grid-traversal.ts";
 
 type ArrayPatternKey =
   | "Matrix Spiral Recursive"
@@ -25,8 +27,10 @@ type ArrayPatternKey =
   | "Sliding Window"
   | "Two Sum Two Pointers"
   | "Two Sum Dict"
-  | "Rotate Matrix"
-  | "Two Sum";
+  | "Matrix Operations"
+  | "Two Sum"
+  | "Matrix Exponentiation"
+  | "Grid Traversal";
 
 export const arrayPatterns: Partial<Record<ArrayPatternKey, AlgorithmPattern>> = {
   "Matrix Spiral Recursive": matrixSpiralRecursivePattern,
@@ -40,6 +44,8 @@ export const arrayPatterns: Partial<Record<ArrayPatternKey, AlgorithmPattern>> =
   "Sliding Window": slidingWindowPattern,
   "Two Sum Two Pointers": twoSumTwoPointersPattern,
   "Two Sum Dict": twoSumDictPattern,
-  "Rotate Matrix": rotateMatrixPattern,
+  "Matrix Operations": matrixOperationsPattern,
   "Two Sum": twoSumPattern,
+  "Matrix Exponentiation": matrixExponentiationPattern,
+  "Grid Traversal": gridTraversalPattern,
 };

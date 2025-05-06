@@ -3,7 +3,7 @@ import { AlgorithmPattern } from "../../types";
 export const heavyLightDecompositionPattern: AlgorithmPattern = {
   title: "Heavy Light Decomposition",
   description:
-    "Tree decomposition technique that breaks a tree into chains for efficient path queries",
+    "A pattern for implementing and using heavy-light decomposition, a technique for efficiently handling queries on trees.",
   timeComplexity: "O(n) preprocessing, O(log n) per query",
   spaceComplexity: "O(n)",
   pseudocode: `1. First DFS to calculate subtree sizes and identify heavy edges
@@ -107,5 +107,5 @@ Each chain gets its own segment tree`,
         
         res += self.query_segment_tree(self.chain[u], self.chain_pos[u], self.chain_pos[v])
         return res`,
-  category: "Tree",
+  category: "Data Structure",
 };

@@ -49,8 +49,10 @@ export const PATTERN_KEYS = [
   "Linked List",
   "Segment Tree",
   "Union Find",
-  "Tree",
-  "DFS Binary Tree",
+  "Tree Implementation",
+  "Lowest Common Ancestor",
+  "Trie",
+  "Trie Operations",
 
   // String Patterns
   "String Operations",
@@ -88,6 +90,7 @@ export const PATTERN_KEYS = [
   "Recursion",
   "Sliding Window",
   "Two Pointers",
+  "Test Data",
 
   // Greedy Patterns
   "Activity Selection",

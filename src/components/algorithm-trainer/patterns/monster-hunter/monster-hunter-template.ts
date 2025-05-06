@@ -7,8 +7,8 @@ export const monsterHunterTemplate: AlgorithmPattern = {
   timeComplexity: "O(1) for template access",
   spaceComplexity: "O(1)",
   pseudocode: `
-// Monster Hunter Pattern Template
-function createMonsterHunterPattern(patternName, algorithm):
+# Monster Hunter Pattern Template
+def create_monster_hunter_pattern(pattern_name, algorithm):
     # 1. Monster Hunter Context
     context = {
         'scenario': 'Describe the hunting scenario',
@@ -46,147 +46,145 @@ function createMonsterHunterPattern(patternName, algorithm):
     }
   `,
   example: `
-// Example: Binary Search as Monster Territory Search
-const binarySearchPatternPatternPatternPatternPattern = createMonsterHunterPattern('Binary Search', {
-    scenario: 'Searching for a monster in a sorted list of territories',
-    monster: 'A specific monster type (e.g., Rathalos)',
-    objective: 'Find the monster's territory efficiently',
-    challenges: [
+# Example: Binary Search as Monster Territory Search
+binary_search_pattern = create_monster_hunter_pattern('Binary Search', {
+    'scenario': 'Searching for a monster in a sorted list of territories',
+    'monster': 'A specific monster type (e.g., Rathalos)',
+    'objective': 'Find the monster's territory efficiently',
+    'challenges': [
         'Large number of territories to search',
         'Need to minimize search time',
         'Territories are sorted by difficulty'
     ],
-    mapping: {
-        input: 'List of territories sorted by difficulty',
-        output: 'Index of the monster's territory',
-        steps: [
+    'mapping': {
+        'input': 'List of territories sorted by difficulty',
+        'output': 'Index of the monster's territory',
+        'steps': [
             'Start in the middle territory',
             'If monster found, return territory index',
             'If monster is stronger, search higher territories',
             'If monster is weaker, search lower territories'
         ]
     },
-    visualization: {
-        before: 'Map showing all territories',
-        after: 'Map highlighting the found territory',
-        steps: [
+    'visualization': {
+        'before': 'Map showing all territories',
+        'after': 'Map highlighting the found territory',
+        'steps': [
             'Show middle territory selection',
             'Show territory comparison',
             'Show search area reduction'
         ]
     },
-    interactive: {
-        try_it: 'Interactive territory search game',
-        common_mistakes: [
+    'interactive': {
+        'try_it': 'Interactive territory search game',
+        'common_mistakes': [
             'Not checking middle territory first',
             'Searching unsorted territories',
             'Incorrect territory comparison'
         ],
-        optimization: [
+        'optimization': [
             'Always start in the middle',
             'Keep territories sorted',
             'Use efficient comparison methods'
         ]
     }
-});
+})
   `,
-  implementation: `
-// Monster Hunter Pattern Implementation
-interface MonsterHunterPattern {
-    context: {
-        scenario: string;
-        monster: string;
-        objective: string;
-        challenges: string[];
-    };
-    mapping: {
-        input: string;
-        output: string;
-        steps: string[];
-    };
-    visualization: {
-        before: string;
-        after: string;
-        steps: string[];
-    };
-    interactive: {
-        try_it: string;
-        common_mistakes: string[];
-        optimization: string[];
-    };
-}
+  implementation: `from typing import TypedDict, List, Any
 
-function createMonsterHunterPattern(
-    patternName: string,
-    algorithm: any
-): MonsterHunterPattern {
+class MonsterHunterContext(TypedDict):
+    scenario: str
+    monster: str
+    objective: str
+    challenges: List[str]
+
+class MonsterHunterMapping(TypedDict):
+    input: str
+    output: str
+    steps: List[str]
+
+class MonsterHunterVisualization(TypedDict):
+    before: str
+    after: str
+    steps: List[str]
+
+class MonsterHunterInteractive(TypedDict):
+    try_it: str
+    common_mistakes: List[str]
+    optimization: List[str]
+
+class MonsterHunterPattern(TypedDict):
+    context: MonsterHunterContext
+    mapping: MonsterHunterMapping
+    visualization: MonsterHunterVisualization
+    interactive: MonsterHunterInteractive
+
+def create_monster_hunter_pattern(pattern_name: str, algorithm: Any) -> MonsterHunterPattern:
     return {
-        context: {
-            scenario: algorithm.scenario,
-            monster: algorithm.monster,
-            objective: algorithm.objective,
-            challenges: algorithm.challenges
+        "context": {
+            "scenario": algorithm["scenario"],
+            "monster": algorithm["monster"],
+            "objective": algorithm["objective"],
+            "challenges": algorithm["challenges"]
         },
-        mapping: {
-            input: algorithm.mapping.input,
-            output: algorithm.mapping.output,
-            steps: algorithm.mapping.steps
+        "mapping": {
+            "input": algorithm["mapping"]["input"],
+            "output": algorithm["mapping"]["output"],
+            "steps": algorithm["mapping"]["steps"]
         },
-        visualization: {
-            before: algorithm.visualization.before,
-            after: algorithm.visualization.after,
-            steps: algorithm.visualization.steps
+        "visualization": {
+            "before": algorithm["visualization"]["before"],
+            "after": algorithm["visualization"]["after"],
+            "steps": algorithm["visualization"]["steps"]
         },
-        interactive: {
-            try_it: algorithm.interactive.try_it,
-            common_mistakes: algorithm.interactive.common_mistakes,
-            optimization: algorithm.interactive.optimization
+        "interactive": {
+            "try_it": algorithm["interactive"]["try_it"],
+            "common_mistakes": algorithm["interactive"]["common_mistakes"],
+            "optimization": algorithm["interactive"]["optimization"]
         }
-    };
-}
+    }
 
-// Example: Dynamic Programming as Monster Hunting Strategy
-const dynamicProgrammingPatternPatternPatternPatternPattern = createMonsterHunterPattern('Dynamic Programming', {
-    scenario: 'Planning optimal monster hunting routes',
-    monster: 'Multiple monsters with different rewards',
-    objective: 'Maximize total rewards within time limit',
-    challenges: [
-        'Limited hunting time',
-        'Different monster rewards',
-        'Varying monster difficulty'
+# Example: Dynamic Programming as Monster Hunting Strategy
+dynamic_programming_pattern = create_monster_hunter_pattern('Dynamic Programming', {
+    "scenario": "Planning optimal monster hunting routes",
+    "monster": "Multiple monsters with different rewards",
+    "objective": "Maximize total rewards within time limit",
+    "challenges": [
+        "Limited hunting time",
+        "Different monster rewards",
+        "Varying monster difficulty"
     ],
-    mapping: {
-        input: 'List of monsters with time and reward values',
-        output: 'Maximum possible rewards',
-        steps: [
-            'Calculate time for each monster combination',
-            'Track maximum rewards for each time',
-            'Update rewards when better combination found'
+    "mapping": {
+        "input": "List of monsters with time and reward values",
+        "output": "Maximum possible rewards",
+        "steps": [
+            "Calculate time for each monster combination",
+            "Track maximum rewards for each time",
+            "Update rewards when better combination found"
         ]
     },
-    visualization: {
-        before: 'Map showing all monsters and their locations',
-        after: 'Map showing optimal hunting route',
-        steps: [
-            'Show time calculation for each monster',
-            'Show reward tracking',
-            'Show optimal route selection'
+    "visualization": {
+        "before": "Map showing all monsters and their locations",
+        "after": "Map showing optimal hunting route",
+        "steps": [
+            "Show time calculation for each monster",
+            "Show reward tracking",
+            "Show optimal route selection"
         ]
     },
-    interactive: {
-        try_it: 'Interactive hunting route planner',
-        common_mistakes: [
-            'Not considering all monster combinations',
-            'Ignoring time constraints',
-            'Missing optimal routes'
+    "interactive": {
+        "try_it": "Interactive hunting route planner",
+        "common_mistakes": [
+            "Not considering all monster combinations",
+            "Ignoring time constraints",
+            "Missing optimal routes"
         ],
-        optimization: [
-            'Use memoization for repeated calculations',
-            'Consider monster difficulty order',
-            'Balance time and reward trade-offs'
+        "optimization": [
+            "Use memoization for repeated calculations",
+            "Consider monster difficulty order",
+            "Balance time and reward trade-offs"
         ]
     }
-});
-  `,
+})`,
   category: "monster-hunter",
 };

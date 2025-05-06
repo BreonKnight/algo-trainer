@@ -1,12 +1,12 @@
 import { AlgorithmPattern } from "../../types";
 
 export const binarySearchTreePattern: AlgorithmPattern = {
-  title: "Binary Search Tree Implementation",
+  title: "Binary Search Tree",
   description:
-    "Implementation of a binary tree that maintains the BST property: left subtree values are less than node, right subtree values are greater.",
+    "A pattern for implementing and using a binary search tree, a hierarchical data structure where each node has at most two children.",
   timeComplexity: "Average: O(log n) for insert/delete/search, Worst: O(n)",
   spaceComplexity: "O(n) for n nodes",
-  category: "Tree",
+  category: "Data Structure",
   pseudocode: `
 BST operations:
 1. insert(value):

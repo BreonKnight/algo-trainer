@@ -53,7 +53,7 @@ export const patternMapping: Record<string, PatternKey> = {
   "Lowest Common Ancestor": "Lowest Common Ancestor",
   "Segment Tree": "Segment Tree",
   "Union Find": "Union Find",
-  Tree: "Tree",
+  "Tree Implementation": "Tree Implementation",
   "DFS Binary Tree": "DFS Binary Tree",
 
   // String Patterns
@@ -103,6 +103,10 @@ export const patternMapping: Record<string, PatternKey> = {
   "BFS Linked List": "BFS Linked List",
   DFS: "DFS",
   "DFS Linked List": "DFS Linked List",
+
+  // New additions
+  Trie: "Trie",
+  "Trie Operations": "Trie Operations",
 };
 
 // Function to get the corresponding Monster Hunter pattern key

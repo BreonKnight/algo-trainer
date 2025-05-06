@@ -8,6 +8,8 @@ import { probabilityDPPattern } from "./probability-dp.ts";
 import { stateCompressionDPPattern } from "./state-compression-dp.ts";
 import { treeDPPattern } from "./tree-dp.ts";
 import { memoizationPattern } from "./memoization.ts";
+import { bitwiseDPPattern } from "./bitwise-dp.ts";
+
 type DynamicProgrammingPatternKey =
   | "Digit DP"
   | "Dynamic Programming Coin Change"
@@ -19,7 +21,8 @@ type DynamicProgrammingPatternKey =
   | "Probability DP"
   | "State Compression DP"
   | "Tree DP"
-  | "Memoization";
+  | "Memoization"
+  | "Bitwise DP";
 
 export const dynamicProgrammingPatterns: Partial<
   Record<DynamicProgrammingPatternKey, AlgorithmPattern>
@@ -33,4 +36,5 @@ export const dynamicProgrammingPatterns: Partial<
   "State Compression DP": stateCompressionDPPattern,
   "Tree DP": treeDPPattern,
   Memoization: memoizationPattern,
+  "Bitwise DP": bitwiseDPPattern,
 };
