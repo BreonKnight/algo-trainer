@@ -1,19 +1,19 @@
 import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { ChevronDown, ChevronUp, LayoutGridIcon } from "lucide-react";
-import { PatternCard } from "../PatternCard";
-import { CodeEditor } from "../CodeEditor";
-import { AnswerCard } from "../AnswerCard";
-import { SortablePanel } from "./SortablePanel";
-import { usePanelManager } from "../hooks/usePanelManager";
-import { PatternKey } from "../types";
-import { Button } from "../../ui/button";
+import { PatternCard } from "@/components/algorithm-trainer/PatternCard";
+import { CodeEditor } from "@/components/algorithm-trainer/CodeEditor";
+import { AnswerCard } from "@/components/algorithm-trainer/AnswerCard";
+import { SortablePanel } from "@/components/algorithm-trainer/layout/SortablePanel";
+import { usePanelManager } from "@/components/algorithm-trainer/hooks/usePanelManager";
+import { PatternKey } from "@/components/algorithm-trainer/types";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
