@@ -1,5 +1,3 @@
-import { PatternKey } from "../../../components/algorithm-trainer/types/pattern-types";
-
 export const patternMapping: Record<string, string> = {
   // Sorting Algorithms
   "Quick Sort": "Quick Sort",

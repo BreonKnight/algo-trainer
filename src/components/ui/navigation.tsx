@@ -10,7 +10,6 @@ import {
   X,
   Code2,
   GraduationCap,
-  Brain,
   Network,
   Code,
   ListChecks,

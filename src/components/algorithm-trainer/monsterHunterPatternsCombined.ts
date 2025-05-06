@@ -11,7 +11,6 @@ import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8
 import { monsterHunterPatternsExtended9 } from "./monsterHunterPatternsExtended9.ts";
 import { monsterHunterPatterns } from "./monsterHunterPatterns.ts";
 import { patterns as algorithmPatterns } from "./patterns/index.ts";
-import { pseudocodePatterns } from "../../lib/pseudocode/index.tsx";
 
 // Helper function to calculate Levenshtein distance
 function levenshteinDistance(a: string, b: string): number {
@@ -291,7 +290,6 @@ export function verifyPatternConsistency() {
   const categoryPatterns = Object.values(monsterHunterPatternsByCategory).flat() as PatternKey[];
 
   // Create sets for easier comparison
-  const typeSet = new Set(typePatterns);
   const monsterHunterSet = new Set(monsterHunterPatterns);
   const categorySet = new Set(categoryPatterns);
 

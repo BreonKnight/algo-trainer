@@ -1,5 +1,3 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
-
 export const unionFindPattern = {
   title: "Union Find",
   description:

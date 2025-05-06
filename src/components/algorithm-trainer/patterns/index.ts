@@ -1,5 +1,4 @@
-import { PatternKey } from "../types/pattern-types";
-import { createPatternRecord } from "../../../lib/patterns/pattern-utils";
+import { createPatternRecord } from "@/lib/patterns/pattern-utils";
 
 // Import all pattern categories
 import { arrayPatterns } from "./array/index";
