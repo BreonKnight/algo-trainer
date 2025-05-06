@@ -16,6 +16,7 @@ import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import { validateComponentOrder } from "./pattern-management/PatternValidation";
 import { getValidationResults } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
 import PatternValidationResults from "./pattern-management/PatternValidationResults";
+import type { ValidationResults } from "./pattern-management/PatternValidationResults";
 
 type FormStep = "basic" | "details" | "implementation" | "test-cases" | "preview";
 
@@ -105,9 +106,7 @@ const PatternManagement: React.FC = () => {
       sortConfig: { field: SortField; order: SortOrder };
     }[]
   >([]);
-  const [validationResults, setValidationResults] = useState<DebugInfo["validationResults"] | null>(
-    null
-  );
+  const [validationResults, setValidationResults] = useState<ValidationResults | null>(null);
 
   // Load existing patterns on component mount
   useEffect(() => {
