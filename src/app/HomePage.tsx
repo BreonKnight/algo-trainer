@@ -1,20 +1,7 @@
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/theme/use-theme";
-import {
-  Brain,
-  Target,
-  Code2,
-  GraduationCap,
-  Sparkles,
-  Zap,
-  Sigma,
-  Calculator,
-  LineChart,
-  Binary,
-  Network,
-  Infinity,
-} from "lucide-react";
+import { Sigma, Calculator, LineChart, Binary, Network, Infinity } from "lucide-react";
 
 const HomePage = () => {
   const { theme } = useTheme();
