@@ -7,8 +7,6 @@ export const CircularLinkedListPattern = () => (
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
         Circular Linked List
       </span>
-      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Circular data structure operations

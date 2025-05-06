@@ -7,9 +7,8 @@ export const TrieOperationsPattern = () => (
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
         Trie Operations
       </span>
-      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(m) &nbsp;|&nbsp; Space: O(ALPHABET_SIZE * m * n) &nbsp;|&nbsp; Use: String prefix
       operations
