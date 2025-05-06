@@ -83,6 +83,13 @@ export function Navigation() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const navGroups = [
     {
       label: "Learn",
@@ -127,7 +134,7 @@ export function Navigation() {
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center">
+              <Link to="/" className="flex items-center" onClick={scrollToTop}>
                 <span
                   className={cn(
                     "text-lg font-bold text-transparent bg-clip-text gradient-text",
@@ -150,6 +157,7 @@ export function Navigation() {
                         <Link
                           key={item.path}
                           to={item.path}
+                          onClick={scrollToTop}
                           className={cn(
                             "flex items-center px-2 py-1.5 rounded-md text-xs font-medium transition-colors",
                             isActive(item.path)
@@ -210,6 +218,10 @@ export function Navigation() {
                       <Link
                         key={item.path}
                         to={item.path}
+                        onClick={() => {
+                          scrollToTop();
+                          setIsMobileMenuOpen(false);
+                        }}
                         className={cn(
                           "flex items-center px-2 py-1.5 rounded-md text-sm font-medium transition-colors mb-1",
                           isActive(item.path)
@@ -222,7 +234,6 @@ export function Navigation() {
                               } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
                             : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
                         )}
-                        onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <Icon className="h-4 w-4 mr-2" />
                         {item.label}
