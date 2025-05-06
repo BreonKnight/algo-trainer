@@ -105,7 +105,7 @@ export function Navigation() {
       items: [
         { path: "/tutorials", label: "Tutorials", icon: Book },
         { path: "/python-techniques", label: "Python", icon: Code2 },
-        { path: "/visualizer", label: "Visualizer", icon: Brain },
+        //{ path: "/visualizer", label: "Visualizer", icon: Brain },
       ],
     },
     {
