@@ -68,22 +68,203 @@ const HomePage = () => {
     },
   ];
 
+  // Helper functions for Nord theme
+  const getTagColor = (theme: string, type: string) => {
+    if (theme === "nord") {
+      if (type === "focus") return "bg-[#A3BE8C]/90 text-gray-900"; // Nord green
+      if (type === "music") return "bg-[#B48EAD]/90 text-gray-900"; // Nord purple
+      if (type === "facts") return "bg-[#EBCB8B]/90 text-gray-900"; // Nord yellow
+    }
+    if (type === "focus") return "bg-blue-100 text-blue-800";
+    if (type === "music") return "bg-purple-100 text-purple-800";
+    if (type === "facts") return "bg-yellow-100 text-yellow-800";
+    return "";
+  };
+
+  const getTextColor = (theme: string) => {
+    if (theme === "nord") return "text-gray-900";
+    if (theme === "dracula") return "text-white";
+    return "text-gray-800";
+  };
+
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 pb-24">
       {/* Hero Section */}
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <div className="text-center mb-12 pb-4 overflow-visible">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] pb-2">
           Master the Mathematics of Algorithms
         </h1>
-        <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto">
+        <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-2">
           Go beyond coding to understand the mathematical principles that make algorithms work.
+        </p>
+        <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
           Learn to think mathematically about problem-solving and algorithm design.
+        </p>
+      </div>
+
+      {/* How It Works Stepper */}
+      <div className="max-w-3xl mx-auto mb-12">
+        <h2 className="text-2xl font-bold mb-4 text-center">How AlgoTrainer Works</h2>
+        <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+          {[
+            {
+              emoji: "🧑‍🎓",
+              title: "1. Start with the Basics",
+              description:
+                "Build your foundation in math and algorithms with step-by-step lessons.",
+            },
+            {
+              emoji: "⏲️",
+              title: "2. Use Productivity Tools",
+              description:
+                "Stay focused with the timer, enjoy music, and get inspired by algorithm facts.",
+            },
+            {
+              emoji: "🏆",
+              title: "3. Practice & Progress",
+              description: "Apply what you learn, track your progress, and master algorithms!",
+            },
+          ].map((step, index) => (
+            <div
+              key={index}
+              className={cn(
+                "flex flex-col items-center text-center flex-1 p-4 rounded-xl shadow-md",
+                theme === "dracula"
+                  ? "bg-gray-800/60 border border-gray-700/50"
+                  : "bg-white/60 border border-gray-200/50"
+              )}
+            >
+              <span className="text-3xl mb-2">{step.emoji}</span>
+              <h3 className="font-semibold mb-1">{step.title}</h3>
+              <p className="text-sm text-foreground/70">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Informatics Bar Explanation */}
+      <div
+        className={cn(
+          "max-w-4xl mx-auto mb-16 p-8 rounded-xl border shadow-lg",
+          theme === "dracula"
+            ? "bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 border-gray-700/50"
+            : theme === "nord"
+              ? "bg-gradient-to-br from-[#ECEFF4] via-white to-[#E5E9F0] border-[#D8DEE9]/70"
+              : "bg-gradient-to-br from-blue-50 via-white to-purple-50 border-gray-200/50"
+        )}
+      >
+        <h2
+          className={cn(
+            "text-2xl font-bold mb-2 text-center flex items-center justify-center gap-2",
+            getTextColor(theme)
+          )}
+        >
+          <span>⏲️</span> <span>🎵</span> <span>💡</span> <span>Your Productivity Tools</span>
+        </h2>
+        <p
+          className={cn(
+            "mb-4 text-lg text-center",
+            theme === "nord" ? "text-gray-800/90" : "text-foreground/80"
+          )}
+        >
+          The Informatics Bar at the top of AlgoTrainer gives you everything you need to stay
+          focused, motivated, and learning efficiently.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {[
+            {
+              emoji: "⏲️",
+              title: "Focus Timer",
+              description: "Break your study into focused sessions for better results.",
+              tag: { text: "Science-backed!", type: "focus" },
+              items: [
+                "Boosts focus and retention (Konz & Wilkins, 1967)",
+                "Improves memory (Cepeda et al., 2006)",
+                "Prevents burnout",
+              ],
+            },
+            {
+              emoji: "🎵",
+              title: "Background Music",
+              description: "Set the mood and reduce stress while you learn.",
+              tag: { text: "Stay in the flow!", type: "music" },
+              items: ["Enhances mood and focus", "Reduces anxiety"],
+            },
+            {
+              emoji: "💡",
+              title: "Facts & Tips",
+              description: "Learn something new every session with rotating facts and tips.",
+              tag: { text: "Micro-learning!", type: "facts" },
+              items: ["Stay inspired", "Discover new ideas"],
+            },
+          ].map((tool, index) => (
+            <div
+              key={index}
+              className={cn(
+                "rounded-lg p-4 flex flex-col items-center shadow border",
+                theme === "dracula"
+                  ? "bg-gray-800/80 border-gray-700/50"
+                  : theme === "nord"
+                    ? "bg-white/90 border-[#D8DEE9]/70"
+                    : "bg-white/80 border border-gray-200/50"
+              )}
+            >
+              <span className="text-3xl mb-2">{tool.emoji}</span>
+              <h3 className={cn("font-semibold mb-1", getTextColor(theme))}>{tool.title}</h3>
+              <p
+                className={cn(
+                  "text-sm mb-2",
+                  theme === "nord" ? "text-gray-800/80" : "text-foreground/70"
+                )}
+              >
+                {tool.description}
+              </p>
+              <div
+                className={cn("text-xs rounded px-2 py-1 mb-1", getTagColor(theme, tool.tag.type))}
+              >
+                {tool.tag.text}
+              </div>
+              <ul
+                className={cn(
+                  "text-xs text-left list-disc list-inside",
+                  theme === "nord" ? "text-gray-700/90" : "text-foreground/60"
+                )}
+              >
+                {tool.items.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p
+          className={cn(
+            "mt-2 font-medium text-center",
+            theme === "nord" ? "text-gray-800/90" : "text-foreground/90"
+          )}
+        >
+          <span
+            className={cn(
+              "px-2 py-1 rounded",
+              theme === "dracula"
+                ? "bg-blue-900/50 text-blue-200"
+                : theme === "nord"
+                  ? "bg-[#A3BE8C]/90 text-gray-900"
+                  : "bg-blue-200 text-blue-900"
+            )}
+          >
+            Tip:
+          </span>{" "}
+          Use the timer to break your study into 25-minute sessions, then take a 5-minute break.
+          You'll learn faster, remember more, and enjoy the process!
         </p>
       </div>
 
       {/* Learning Path */}
       <div className="mb-16">
-        <h2 className="text-2xl font-bold mb-8 text-center">Your Mathematical Journey</h2>
+        <h2 className={cn("text-2xl font-bold mb-8 text-center", getTextColor(theme))}>
+          Your Mathematical Journey
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {learningPath.map((step, index) => (
             <div
@@ -93,11 +274,17 @@ const HomePage = () => {
                 "hover:shadow-lg hover:scale-[1.02]",
                 theme === "dracula"
                   ? "bg-gray-800/50 border-gray-700/50"
-                  : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
+                  : theme === "nord"
+                    ? "bg-white/90 border-[#D8DEE9]/70"
+                    : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
               )}
             >
-              <h3 className="text-lg font-semibold mb-3">{step.title}</h3>
-              <p className="text-foreground/70">{step.description}</p>
+              <h3 className={cn("text-lg font-semibold mb-3", getTextColor(theme))}>
+                {step.title}
+              </h3>
+              <p className={cn(theme === "nord" ? "text-gray-800/80" : "text-foreground/70")}>
+                {step.description}
+              </p>
             </div>
           ))}
         </div>
@@ -113,12 +300,18 @@ const HomePage = () => {
               "hover:shadow-lg hover:scale-[1.02]",
               theme === "dracula"
                 ? "bg-gray-800/50 border-gray-700/50"
-                : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
+                : theme === "nord"
+                  ? "bg-white/90 border-[#D8DEE9]/70"
+                  : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
             )}
           >
             <div className="mb-4 text-primary">{section.icon}</div>
-            <h3 className="text-xl font-semibold mb-3">{section.title}</h3>
-            <p className="text-foreground/70">{section.description}</p>
+            <h3 className={cn("text-xl font-semibold mb-3", getTextColor(theme))}>
+              {section.title}
+            </h3>
+            <p className={cn(theme === "nord" ? "text-gray-800/80" : "text-foreground/70")}>
+              {section.description}
+            </p>
           </div>
         ))}
       </div>
@@ -129,17 +322,28 @@ const HomePage = () => {
           "max-w-4xl mx-auto mb-16 p-8 rounded-xl border",
           theme === "dracula"
             ? "bg-gray-800/50 border-gray-700/50"
-            : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
+            : theme === "nord"
+              ? "bg-white/90 border-[#D8DEE9]/70"
+              : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
         )}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2
+          className={cn(
+            "text-2xl font-bold mb-6 text-center",
+            theme === "nord" ? "text-gray-900" : ""
+          )}
+        >
           Getting Started with Algorithm Learning
         </h2>
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-xl font-semibold mb-3">What You'll Find</h3>
-            <p className="text-foreground/70 mb-4">
+            <h3
+              className={cn("text-xl font-semibold mb-3", theme === "nord" ? "text-gray-900" : "")}
+            >
+              What You'll Find
+            </h3>
+            <p className={cn(theme === "nord" ? "text-gray-800/90" : "text-foreground/70", "mb-4")}>
               The{" "}
               <Link to="/algorithm-learning" className="text-primary hover:underline">
                 Algorithm Learning
@@ -151,8 +355,17 @@ const HomePage = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-3">How to Use the App</h3>
-            <ol className="list-decimal list-inside space-y-3 text-foreground/70">
+            <h3
+              className={cn("text-xl font-semibold mb-3", theme === "nord" ? "text-gray-900" : "")}
+            >
+              How to Use the App
+            </h3>
+            <ol
+              className={cn(
+                "list-decimal list-inside space-y-3",
+                theme === "nord" ? "text-gray-800/90" : "text-foreground/70"
+              )}
+            >
               <li>
                 <span className="font-medium">Start with the Basics:</span> Begin with the
                 mathematical foundations section to build your theoretical understanding.
@@ -178,61 +391,65 @@ const HomePage = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-3">Learning Path Integration</h3>
-            <div className="space-y-4 text-foreground/70">
+            <h3
+              className={cn("text-xl font-semibold mb-3", theme === "nord" ? "text-gray-900" : "")}
+            >
+              Learning Path Integration
+            </h3>
+            <div
+              className={cn(
+                "space-y-4",
+                theme === "nord" ? "text-gray-800/90" : "text-foreground/70"
+              )}
+            >
               <p>
                 Our platform offers three interconnected learning paths that work together to build
                 your algorithm skills:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div
-                  className={cn(
-                    "p-4 rounded-lg border",
-                    theme === "dracula"
-                      ? "bg-gray-800/30 border-gray-700/50"
-                      : "bg-white/30 border-gray-200/50"
-                  )}
-                >
-                  <h4 className="font-semibold mb-2">1. Algorithm Learning</h4>
-                  <p className="text-sm mb-2">
-                    Master the mathematical foundations and theoretical concepts.
-                  </p>
-                  <Link to="/algorithm-learning" className="text-primary hover:underline text-sm">
-                    Start Learning →
-                  </Link>
-                </div>
-                <div
-                  className={cn(
-                    "p-4 rounded-lg border",
-                    theme === "dracula"
-                      ? "bg-gray-800/30 border-gray-700/50"
-                      : "bg-white/30 border-gray-200/50"
-                  )}
-                >
-                  <h4 className="font-semibold mb-2">2. Python Learning</h4>
-                  <p className="text-sm mb-2">Learn Python programming fundamentals and syntax.</p>
-                  <Link to="/python-techniques" className="text-primary hover:underline text-sm">
-                    Start Learning →
-                  </Link>
-                </div>
-                <div
-                  className={cn(
-                    "p-4 rounded-lg border",
-                    theme === "dracula"
-                      ? "bg-gray-800/30 border-gray-700/50"
-                      : "bg-white/30 border-gray-200/50"
-                  )}
-                >
-                  <h4 className="font-semibold mb-2">3. Algorithm Trainer</h4>
-                  <p className="text-sm mb-2">
-                    Practice implementing algorithms with interactive challenges.
-                  </p>
-                  <Link to="/algorithm-trainer" className="text-primary hover:underline text-sm">
-                    Start Training →
-                  </Link>
-                </div>
+                {[
+                  {
+                    title: "1. Algorithm Learning",
+                    description: "Master the mathematical foundations and theoretical concepts.",
+                    link: "/algorithm-learning",
+                  },
+                  {
+                    title: "2. Python Learning",
+                    description: "Learn Python programming fundamentals and syntax.",
+                    link: "/python-techniques",
+                  },
+                  {
+                    title: "3. Algorithm Trainer",
+                    description: "Practice implementing algorithms with interactive challenges.",
+                    link: "/algorithm-trainer",
+                  },
+                ].map((path, index) => (
+                  <div
+                    key={index}
+                    className={cn(
+                      "p-4 rounded-lg border",
+                      theme === "dracula"
+                        ? "bg-gray-800/30 border-gray-700/50"
+                        : theme === "nord"
+                          ? "bg-white/90 border-[#D8DEE9]/70"
+                          : "bg-white/30 border-gray-200/50"
+                    )}
+                  >
+                    <h4
+                      className={cn("font-semibold mb-2", theme === "nord" ? "text-gray-900" : "")}
+                    >
+                      {path.title}
+                    </h4>
+                    <p className={cn("text-sm mb-2", theme === "nord" ? "text-gray-800/90" : "")}>
+                      {path.description}
+                    </p>
+                    <Link to={path.link} className="text-primary hover:underline text-sm">
+                      Start Learning →
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <p className="mt-4">
+              <p className={cn("mt-4", theme === "nord" ? "text-gray-800/90" : "")}>
                 We recommend starting with the{" "}
                 <Link to="/algorithm-learning" className="text-primary hover:underline">
                   Algorithm Learning
@@ -251,8 +468,17 @@ const HomePage = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-3">Tips for Success</h3>
-            <ul className="list-disc list-inside space-y-2 text-foreground/70">
+            <h3
+              className={cn("text-xl font-semibold mb-3", theme === "nord" ? "text-gray-900" : "")}
+            >
+              Tips for Success
+            </h3>
+            <ul
+              className={cn(
+                "list-disc list-inside space-y-2",
+                theme === "nord" ? "text-gray-800/90" : "text-foreground/70"
+              )}
+            >
               <li>Take time to understand the mathematical proofs and derivations</li>
               <li>Practice implementing algorithms from scratch</li>
               <li>Use the visualization tools to see how algorithms work</li>
@@ -272,7 +498,9 @@ const HomePage = () => {
             "hover:scale-105 hover:shadow-lg",
             theme === "dracula"
               ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-              : "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+              : theme === "nord"
+                ? "bg-gradient-to-r from-[#A3BE8C] to-[#B48EAD] text-gray-900"
+                : "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
           )}
         >
           Begin Your Mathematical Journey
