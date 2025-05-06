@@ -73,7 +73,7 @@ const styles = `
 }
 
 .gradient-text-fornite {
-  background-image: linear-gradient(to right, #349a3a, #4a5afd, #9652b8, #f7b227);
+  background-image: linear-gradient(to right, #2ecc71, #3498db, #9b59b6, #f1c40f);
 }
 `;
 
@@ -125,6 +125,8 @@ export function Navigation() {
   const lightThemes = ["light", "solarized"];
   const blueThemes = ["nord", "ps2"];
 
+  const fortniteTheme = theme === "fornite";
+
   return (
     <>
       <style>{styles}</style>
@@ -158,19 +160,21 @@ export function Navigation() {
                           to={item.path}
                           onClick={scrollToTop}
                           className={cn(
-                            "flex items-center px-2 py-1.5 rounded-md text-xs font-medium transition-colors",
+                            "flex items-center px-2.5 py-2 rounded-md text-sm font-medium transition-colors",
                             isActive(item.path)
                               ? `bg-accent ${
-                                  lightThemes.includes(theme)
-                                    ? "text-gray-900"
-                                    : blueThemes.includes(theme)
-                                      ? "text-white"
-                                      : "text-accent-foreground"
+                                  fortniteTheme
+                                    ? "text-black"
+                                    : lightThemes.includes(theme)
+                                      ? "text-gray-900"
+                                      : blueThemes.includes(theme)
+                                        ? "text-white"
+                                        : "text-accent-foreground"
                                 } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                              : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
+                              : "text-foreground/80 hover:text-foreground hover:bg-accent/20"
                           )}
                         >
-                          <Icon className="h-3.5 w-3.5 mr-1.5" />
+                          <Icon className="h-4 w-4 mr-2" />
                           {item.label}
                         </Link>
                       );
@@ -194,9 +198,9 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="h-7 w-7 text-foreground hover:bg-accent hover:text-accent-foreground"
+                className="h-8 w-8 text-foreground hover:bg-accent/20 hover:text-accent-foreground"
               >
-                {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
             </div>
           </div>
@@ -205,10 +209,10 @@ export function Navigation() {
         {/* Mobile menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-2">
+            <div className="px-3 pt-3 pb-4 space-y-3">
               {navGroups.map((group) => (
-                <div key={group.label}>
-                  <span className="text-[10px] font-semibold text-muted-foreground px-2 pb-1 uppercase tracking-wide">
+                <div key={group.label} className="space-y-1.5">
+                  <span className="text-xs font-semibold text-foreground/70 px-2 pb-1 uppercase tracking-wide">
                     {group.label}
                   </span>
                   {group.items.map((item) => {
@@ -222,19 +226,21 @@ export function Navigation() {
                           setIsMobileMenuOpen(false);
                         }}
                         className={cn(
-                          "flex items-center px-2 py-1.5 rounded-md text-sm font-medium transition-colors mb-1",
+                          "flex items-center px-3 py-2.5 rounded-md text-base font-medium transition-colors",
                           isActive(item.path)
                             ? `bg-accent ${
-                                lightThemes.includes(theme)
-                                  ? "text-gray-900"
-                                  : blueThemes.includes(theme)
-                                    ? "text-white"
-                                    : "text-accent-foreground"
+                                fortniteTheme
+                                  ? "text-black"
+                                  : lightThemes.includes(theme)
+                                    ? "text-gray-900"
+                                    : blueThemes.includes(theme)
+                                      ? "text-white"
+                                      : "text-accent-foreground"
                               } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                            : "text-foreground/60 hover:text-foreground hover:bg-accent/10"
+                            : "text-foreground/80 hover:text-foreground hover:bg-accent/20"
                         )}
                       >
-                        <Icon className="h-4 w-4 mr-2" />
+                        <Icon className="h-5 w-5 mr-3" />
                         {item.label}
                       </Link>
                     );
