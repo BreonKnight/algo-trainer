@@ -4,8 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const MatrixChainMultiplicationPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Matrix Chain Multiplication</span>
-      <span className="ml-2 text-xs text-secondary">(Optimization Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Matrix Chain Multiplication
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Finding optimal matrix
@@ -99,19 +102,6 @@ Split table s:
 
 Optimal order: (A₁A₂)A₃
 Minimum cost: 4500 multiplications`}
-      </pre>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Larger Chain</span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Matrices: A₁(5×4), A₂(4×6), A₃(6×2), A₄(2×7)
-
-Optimal order: (A₁(A₂A₃))A₄
-Minimum cost: 158 multiplications
-
-Alternative order: A₁((A₂A₃)A₄)
-Cost: 220 multiplications`}
       </pre>
     </div>
   </div>

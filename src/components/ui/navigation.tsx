@@ -60,6 +60,10 @@ const styles = `
 .gradient-text-kingdom-hearts {
   background-image: linear-gradient(to right, #ff69b4, #9370db, #ff69b4);
 }
+
+.gradient-text-fornite {
+  background-image: linear-gradient(to right, #349a3a, #4a5afd, #9652b8, #f7b227);
+}
 `;
 
 export function Navigation() {

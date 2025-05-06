@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const BubbleSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Bubble Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Bubble Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array in-place
     </div>
@@ -47,17 +49,28 @@ BUBBLE-SORT(A)
       <span className="text-accent font-bold">Key Steps:</span>
     </div>
     <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Compare: Adjacent elements in each pass</span>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">1.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Compare:</span> Adjacent elements in each pass
+        </span>
       </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Swap: Elements if they are in wrong order</span>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">2.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Swap:</span> Elements if they are in wrong
+          order
+        </span>
       </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Repeat: Until array is completely sorted</span>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">3.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Repeat:</span> Until array is completely
+          sorted
+        </span>
       </div>
     </div>
   </div>

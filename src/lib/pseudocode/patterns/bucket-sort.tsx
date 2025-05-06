@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const BucketSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Bucket Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Bucket Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Sorting uniformly distributed numbers
     </div>

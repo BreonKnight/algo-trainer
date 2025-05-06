@@ -64,7 +64,7 @@ export function RightControls() {
                           : theme === "dracula"
                             ? "bg-purple-900/80 hover:bg-purple-900 text-white"
                             : theme === "kingdom-hearts"
-                              ? "bg-pink-600/80 hover:bg-pink-600 text-white"
+                              ? "bg-gradient-to-r from-[#0a1633] via-[#1a2747] to-[#0a1633] text-white border-2 border-[#ffe066] shadow-md"
                               : theme === "re2"
                                 ? "bg-red-900/80 hover:bg-red-900 text-white"
                                 : theme === "mh"
@@ -75,13 +75,15 @@ export function RightControls() {
                                       ? "bg-cyan-900/80 hover:bg-cyan-900 text-white"
                                       : theme === "snes"
                                         ? "bg-yellow-700/80 hover:bg-yellow-700 text-gray-900"
-                                        : theme === "dracula"
-                                          ? "bg-purple-900/80 hover:bg-purple-900 text-white"
+                                        : theme === "fornite"
+                                          ? "bg-gradient-to-r from-[#349a3a] via-[#4a5afd] via-[#9652b8] to-[#f7b227] text-white border-2 border-[#4a5afd] shadow-md"
                                           : "bg-gray-800/80 hover:bg-gray-800 text-white",
                         "hover:scale-105 hover:shadow-lg"
                       )}
                     >
-                      {theme === "light" || theme === "solarized" ? (
+                      {theme === "fornite" ? (
+                        <Star className="h-4 w-4 text-yellow-400" />
+                      ) : theme === "light" || theme === "solarized" ? (
                         <Moon className="h-4 w-4 group-hover:animate-pulse" />
                       ) : (
                         <Sun className="h-4 w-4 group-hover:animate-pulse" />
@@ -124,6 +126,8 @@ export function RightControls() {
                           <Droplet className="h-4 w-4 text-purple-500" />
                         ) : t === "solarized" ? (
                           <Sun className="h-4 w-4" />
+                        ) : t === "fornite" ? (
+                          <Star className="h-4 w-4 text-yellow-400" />
                         ) : (
                           <Moon className="h-4 w-4" />
                         )}

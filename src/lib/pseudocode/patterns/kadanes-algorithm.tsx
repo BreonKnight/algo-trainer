@@ -4,9 +4,11 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const KadanesAlgorithmPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Kadane's Algorithm</span>
-      <span className="ml-2 text-xs text-secondary">(Optimization Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Kadane's Algorithm
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
       Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Finding maximum subarray sum
     </div>

@@ -4,8 +4,10 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const DigitDPPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Digit Dynamic Programming</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Digit DP
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
     </div>
     <div className="mb-2 text-xs text-secondary">
       Time: O(d·s·t) &nbsp;|&nbsp; Space: O(d·s·t) &nbsp;|&nbsp; Use: Count numbers with digit

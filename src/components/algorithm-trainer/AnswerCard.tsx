@@ -18,6 +18,8 @@ import {
   ps2Theme,
   re2Theme,
   mhTheme,
+  kingdomHeartsTheme,
+  forniteTheme,
 } from "@/lib/theme";
 import * as monaco from "monaco-editor";
 import { cn } from "@/lib/utils";
@@ -92,6 +94,8 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
     monaco.editor.defineTheme("ps2", ps2Theme);
     monaco.editor.defineTheme("re2", re2Theme);
     monaco.editor.defineTheme("mh", mhTheme);
+    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
+    monaco.editor.defineTheme("fornite", forniteTheme);
     monaco.editor.setTheme(theme);
 
     // Force layout update
