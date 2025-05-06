@@ -24,7 +24,6 @@ export type PatternKey =
   | "Divide and Conquer"
   | "Dynamic Programming"
   | "Dynamic Programming Coin Change"
-  | "Dynamic Programming Fibonacci"
   | "Dynamic Programming Iterative"
   | "Dynamic Programming Pattern"
   | "Exponential Search"
@@ -35,7 +34,6 @@ export type PatternKey =
   | "Floyd Cycle Detection"
   | "Floyd-Warshall"
   | "Fractional Knapsack"
-  | "Graph"
   | "Greedy"
   | "Grid Traversal"
   | "Hash Table"
@@ -147,7 +145,6 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Divide and Conquer",
   "Dynamic Programming",
   "Dynamic Programming Coin Change",
-  "Dynamic Programming Fibonacci",
   "Dynamic Programming Iterative",
   "Dynamic Programming Pattern",
   "Exponential Search",
@@ -158,7 +155,6 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Floyd Cycle Detection",
   "Floyd-Warshall",
   "Fractional Knapsack",
-  "Graph",
   "Greedy",
   "Grid Traversal",
   "Hash Table",

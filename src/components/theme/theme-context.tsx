@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext } from "react";
 import { Theme } from "./theme-constants";
 
 interface ThemeContextType {
@@ -9,16 +9,12 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: "dracula",
-  setTheme: () => {},
-  toggleTheme: () => {},
+  setTheme: (theme: Theme) => {
+    console.log("Theme set to:", theme);
+  },
+  toggleTheme: () => {
+    console.log("Theme toggled");
+  },
 });
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
-};
 
 export { ThemeContext };

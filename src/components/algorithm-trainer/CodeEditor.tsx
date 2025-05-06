@@ -12,7 +12,7 @@ import {
   re2Theme,
   mhTheme,
 } from "@/lib/theme";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";

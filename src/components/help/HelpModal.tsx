@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { Button } from "../ui/button";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import React from "react";
 import { cn } from "@/lib/utils";
 

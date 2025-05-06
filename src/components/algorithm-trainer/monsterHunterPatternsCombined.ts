@@ -7,7 +7,7 @@ import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5
 import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
 import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
 import { monsterHunterPatterns } from "./monsterHunterPatterns.ts";
-import { algorithmPatterns } from "./patterns/index.ts";
+import { patterns as algorithmPatterns } from "./patterns/index.ts";
 
 // Helper function to calculate Levenshtein distance
 function levenshteinDistance(a: string, b: string): number {
@@ -97,32 +97,48 @@ const allPatterns = new Map<PatternKey, string>(
 // Organize patterns by category
 export const monsterHunterPatternsByCategory = {
   Array: [
-    "Two Sums",
-    "Two Pointers",
-    "Sliding Window",
-    "Prefix Sums",
-    "Bit Manipulation",
+    "Two Sum",
     "Two Sum Dict",
+    "Two Sum Two Pointers",
+    "Sliding Window",
+    "Two Pointers",
+    "Prefix Sums",
     "Kadane's Algorithm",
+    "Quickselect",
+    "Union Find",
+    "Floyd Cycle Detection",
+    "Memoization",
+    "Bit Manipulation",
+    "Matrix Operations",
+    "Matrix Traversal",
+    "Matrix Traversal Recursive",
+    "Matrix Spiral Traversal",
+    "Matrix Spiral Recursive",
+    "Matrix Chain Multiplication",
+    "Matrix Exponentiation",
+    "Rotate Matrix",
+    "Zigzag Traversal",
   ],
   Searching: [
     "Binary Search",
-    "Linear Search",
     "Binary Search on Answer",
+    "Linear Search",
     "Exponential Search",
     "Interpolation Search",
     "Fibonacci Search",
+    "Ternary Search",
   ],
 
   Sorting: [
     "Quick Sort",
     "Merge Sort",
-    "Stack Sort",
     "Heap Sort",
     "Bubble Sort",
     "Selection Sort",
     "Insertion Sort",
     "Radix Sort",
+    "Counting Sort",
+    "Bucket Sort",
   ],
 
   // Data Structures
@@ -134,10 +150,14 @@ export const monsterHunterPatternsByCategory = {
     "Red-Black Tree",
     "Fenwick Tree",
     "Segment Tree",
+    "Tree DP",
+    "Tree Implementation",
+    "Tree Algorithms",
+    "Heavy Light Decomposition",
+    "Lowest Common Ancestor",
   ],
 
   Graphs: [
-    "Graph",
     "Dijkstra",
     "Kosaraju",
     "Articulation Points",
@@ -149,7 +169,12 @@ export const monsterHunterPatternsByCategory = {
     "Grid Traversal",
     "Kruskal",
     "Prim",
-    "Lowest Common Ancestor",
+    "Bellman Ford",
+    "Floyd Warshall",
+    "Ford Fulkerson",
+    "Hopcroft Karp",
+    "Kahn Topological Sort",
+    "Topological Sort",
   ],
 
   Strings: [
@@ -160,67 +185,46 @@ export const monsterHunterPatternsByCategory = {
     "Rabin-Karp",
     "Suffix Array",
     "Suffix Tree",
+    "String Hashing",
   ],
 
   // Advanced Algorithms
   "Dynamic Programming": [
     "Dynamic Programming",
     "Dynamic Programming Pattern",
-    "Dynamic Programming Fibonacci",
     "Dynamic Programming Iterative",
     "Dynamic Programming Coin Change",
     "State Compression DP",
     "Digit DP",
     "Tree DP",
     "Probability DP",
+    "Bitwise DP",
   ],
 
-  "Activity Selection": ["Activity Selection"],
+  "Greedy Algorithms": [
+    "Greedy",
+    "Activity Selection",
+    "Fractional Knapsack",
+    "Huffman Coding",
+    "Job Scheduling",
+    "Interval Scheduling",
+  ],
 
-  Dijkstra: ["Dijkstra"],
-
-  "Fractional Knapsack": ["Fractional Knapsack"],
-
-  "Huffman Coding": ["Huffman Coding"],
-
-  "Job Scheduling": ["Job Scheduling"],
-
-  Backtracking: ["Backtracking"],
+  Backtracking: ["Backtracking", "Palindrome Partitioning", "Palindrome Substring"],
 
   // Specialized Algorithms
   "Number Theory": [
     "Extended Euclidean",
     "Chinese Remainder Theorem",
     "Sieve of Eratosthenes",
+    "Sieve of Atkin",
+    "Sieve of Sundaram",
     "Miller-Rabin Primality Test",
   ],
 
-  "Bit Manipulation": ["Bit Manipulation"],
+  "Divide and Conquer": ["Divide and Conquer", "Karatsuba Multiplication"],
 
-  // Tree Algorithms
-  "Tree Algorithms": ["Heavy Light Decomposition"],
-
-  // Matrix Operations
-  "Matrix Operations": [
-    "Matrix Operations",
-    "Matrix Traversal",
-    "Matrix Traversal Recursive",
-    "Matrix Spiral Traversal",
-    "Matrix Spiral Recursive",
-    "Matrix Chain Multiplication",
-    "Matrix Exponentiation",
-  ],
-
-  // Utility Functions
-  Utility: [
-    "Two Pointers",
-    "Sliding Window",
-    "Prefix Sums",
-    "Floyd Cycle Detection",
-    "Memoization",
-    "Quickselect",
-    "Union Find",
-  ],
+  Recursion: ["Recursion", "DFS", "DFS Linked List", "DFS Binary Tree", "BFS", "BFS Linked List"],
 };
 
 // Verify pattern completeness

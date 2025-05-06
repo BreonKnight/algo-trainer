@@ -275,7 +275,7 @@ function generateQuiz(algorithm: string, category: AlgorithmCategory): QuizQuest
     {
       id: "application",
       question: `Which of the following is a common application of ${algorithm}?`,
-      options: getApplicationOptions(algorithm, category),
+      options: getApplicationOptions(),
       correctAnswer: 0,
       explanation: getApplicationExplanation(algorithm, category),
     },
@@ -310,7 +310,7 @@ function getSpaceComplexityExplanation(algorithm: string): string {
   return "O(n) for storing intermediate results";
 }
 
-function getApplicationOptions(algorithm: string, category: AlgorithmCategory): string[] {
+function getApplicationOptions(): string[] {
   const options = [
     "Database indexing",
     "Network routing",

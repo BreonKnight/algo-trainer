@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { Book, Sword, X } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { PatternKey } from "./types";
 import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
 import { categoryColors } from "@/lib/patterns";

@@ -11,7 +11,7 @@ import {
   FaChevronUp,
   FaSearch,
 } from "react-icons/fa";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "../theme/use-theme";
 import { cn } from "@/lib/utils";
 
 export interface Concept {

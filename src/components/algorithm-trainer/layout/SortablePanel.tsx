@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 import { GripVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "../../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 
 interface SortablePanelProps {
   id: UniqueIdentifier;

@@ -5,86 +5,95 @@ export const DigitDPPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
-        Digit DP
+        Digit Dynamic Programming
       </span>
-      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(d·s·t) &nbsp;|&nbsp; Space: O(d·s·t) &nbsp;|&nbsp; Use: Count numbers with digit
-      constraints
+      Time: O(d * s * b) &nbsp;|&nbsp; Space: O(d * s) &nbsp;|&nbsp; Use: Number range problems
     </div>
 
     <PseudocodeDisplay
-      code={`DIGIT-DP(n, k)
-    let digits[1‥d] be a new array
-    let i ← 1
-    while n > 0
-        do digits[i] ← n mod 10
-            n ← ⌊n/10⌋
-            i ← i + 1
-    let d ← i - 1
-    let dp[0‥d][0‥k][0‥1] be a new array
-    return COUNT-DIGITS(digits, d, k, 0, TRUE)
+      code={`DIGIT-DP(low, high, condition):
+    // low and high are the range boundaries
+    // condition is a function that checks digit constraints
+    // Returns count of numbers in range satisfying condition
+    
+    function COUNT(n):
+        digits ← convert n to array of digits
+        d ← length(digits)
+        dp[d][s][tight] ← -1  // Initialize memoization table
+        
+        function SOLVE(pos, sum, tight):
+            if pos = d:
+                return 1 if condition(sum) else 0
+            
+            if dp[pos][sum][tight] ≠ -1:
+                return dp[pos][sum][tight]
+            
+            limit ← digits[pos] if tight else 9
+            count ← 0
+            
+            for digit ← 0 to limit:
+                new_tight ← tight and (digit = limit)
+                new_sum ← sum + digit
+                if condition(new_sum):
+                    count ← count + SOLVE(pos + 1, new_sum, new_tight)
+            
+            dp[pos][sum][tight] ← count
+            return count
+        
+        return SOLVE(0, 0, true)
+    
+    return COUNT(high) - COUNT(low - 1)
 
-COUNT-DIGITS(digits, pos, sum, tight, leading_zero)
-    if pos = 0
-        then if sum = 0 and not leading_zero
-                then return 1
-                else return 0
-    if dp[pos][sum][tight] ≠ -1
-        then return dp[pos][sum][tight]
-
-    let limit ← if tight then digits[pos] else 9
-    let count ← 0
-
-    for i ← 0 to limit
-        do let new_tight ← tight and (i = limit)
-            let new_leading ← leading_zero and (i = 0)
-            let new_sum ← sum - i
-            if new_sum ≥ 0
-                then count ← count + COUNT-DIGITS(digits, pos-1, new_sum, new_tight, new_leading)
-
-    dp[pos][sum][tight] ← count
-    return count
-
-// Example:
-// Input: n = 123, k = 6
+// Example: Count numbers with digit sum = target
+// Range: [1, 1000], target = 10
 //
-// digits = [3, 2, 1]
-// d = 3
+// For number 123:
+// pos=0: digit=1, sum=1, tight=true
+// pos=1: digit=2, sum=3, tight=true
+// pos=2: digit=3, sum=6, tight=true
 //
-// Initial call: pos = 3, sum = 6, tight = TRUE, leading_zero = TRUE
-//
-// For i = 0:
-//   new_tight = FALSE, new_leading = TRUE
-//   new_sum = 6
-//   Recursive call with pos = 2
-//
-// For i = 1:
-//   new_tight = TRUE, new_leading = FALSE
-//   new_sum = 5
-//   Recursive call with pos = 2
-//
-// ... (continues for all digits)
-//
-// Output: Number of numbers ≤ 123 with digit sum = 6`}
+// For number 910:
+// pos=0: digit=9, sum=9, tight=true
+// pos=1: digit=1, sum=10, tight=true
+// pos=2: digit=0, sum=10, tight=false`}
     />
 
     <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+      <span className="text-accent font-bold">Key Properties:</span>
     </div>
     <div className="mb-2 text-sm">
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Preprocess: Convert number to digits array</span>
+        <span>Efficiently solves number range problems</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Memoize: Store results for digit positions and constraints</span>
+        <span>Uses digit-by-digit processing with memoization</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Count: Recursively count valid numbers with digit constraints</span>
+        <span>Handles constraints on digits and their properties</span>
+      </div>
+    </div>
+
+    <div className="mt-4">
+      <span className="font-semibold text-accent">Complexity Analysis:</span>
+      <div className="mt-2 text-sm">
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Time: O(d * s * b) - where d is digits, s is sum range, b is base</span>
+        </div>
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Space: O(d * s) - for memoization table</span>
+        </div>
+        <div className="flex items-center">
+          <ChevronRight className="h-4 w-4 text-accent" />
+          <span>Efficient for large number ranges with digit constraints</span>
+        </div>
       </div>
     </div>
   </div>

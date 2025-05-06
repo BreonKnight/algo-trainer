@@ -2,13 +2,13 @@ import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { PatternKey } from "./types";
-import { algorithmPatterns } from "./patterns/index";
+import { patterns as algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { Code, TestTube, Sword, Book, Copy, Check } from "lucide-react";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import {
   draculaTheme,
   solarizedTheme,
