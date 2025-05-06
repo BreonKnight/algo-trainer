@@ -235,22 +235,20 @@ export function GamificationButton() {
       {/* Floating button in the corner */}
       <Button
         onClick={() => setShowPanel(true)}
-        className={`group overflow-hidden ${styles.button} 
-          rounded-full w-14 h-14 flex items-center justify-center transition-all duration-300 
-          hover:scale-110 hover:shadow-xl hover:shadow-accent2/20 
-          active:scale-95 transform-gpu z-[9999]
-          animate-in slide-in-from-bottom-8`}
+        className={`group overflow-hidden rounded-full w-12 h-12 flex items-center justify-center transition-all duration-200
+          bg-white/5 border border-accent/30 hover:bg-accent/10 hover:scale-105 focus:outline-none focus:ring-0 shadow-none z-[9999]`}
         style={{
-          background:
-            "linear-gradient(135deg, rgba(var(--accent2), 0.7) 0%, rgba(var(--accent3), 0.7) 100%)",
-          boxShadow: "0 8px 24px -8px rgba(var(--accent2), 0.2)",
+          backdropFilter: "blur(8px)",
         }}
         aria-label="View Progress"
       >
-        <Trophy className="w-6 h-6 text-background transition-transform duration-300 group-hover:rotate-12 relative z-10" />
-        <div
-          className="absolute inset-0 rounded-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 
-          group-hover:rotate-180 duration-700 transition-transform ease-out"
+        <Trophy
+          className={
+            `w-8 h-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] transition-colors duration-200 ` +
+            (theme === "dracula" || theme === "ps2" || theme === "re2" || theme === "mh"
+              ? "text-accent2 group-hover:text-accent"
+              : "text-yellow-200 group-hover:text-yellow-300")
+          }
         />
       </Button>
 

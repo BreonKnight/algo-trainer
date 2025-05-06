@@ -2,7 +2,7 @@ import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
 import { ProgressView } from "./components/progress/ProgressView";
 import { AlgorithmTutorial } from "./components/tutorials/AlgorithmTutorial";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
-import { AlgorithmVisualizer } from "./components/algorithm-trainer/AlgorithmVisualizer";
+//import { AlgorithmVisualizer } from "./components/algorithm-trainer/AlgorithmVisualizer";
 import { AlgorithmComparison } from "./components/algorithm-trainer/AlgorithmComparison";
 import CSMath from "./components/CSMath/CSMath";
 import PatternManagement from "./components/admin/PatternManagement";
@@ -202,23 +202,6 @@ function AppContent() {
             <Route path="/systems-design" element={<SystemsDesign />} />
             <Route path="/algorithm-trainer" element={<AlgorithmTrainer />} />
             <Route path="/algo-guide" element={<AlgoGuide />} />
-            <Route
-              path="/visualizer"
-              element={
-                <div
-                  className={cn(
-                    "container mx-auto p-4 min-h-[calc(100vh-64px)]",
-                    theme === "nord" ? "bg-nord-0" : "bg-slate-50"
-                  )}
-                >
-                  <AlgorithmVisualizer
-                    algorithm="Bubble Sort"
-                    visualizationType="sorting"
-                    data={[5, 2, 8, 1, 9, 3, 7, 4, 6]}
-                  />
-                </div>
-              }
-            />
             <Route path="/algorithm-comparison" element={<AlgorithmComparison />} />
             <Route path="/cs-math" element={<CSMath />} />
             {import.meta.env.DEV && (
