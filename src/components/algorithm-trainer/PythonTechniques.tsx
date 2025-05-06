@@ -1,5 +1,5 @@
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 import { Highlight, type PrismTheme } from "prism-react-renderer";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
