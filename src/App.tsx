@@ -20,6 +20,8 @@ import { checkPatternFiles, logPatternCheckResults } from "./lib/utils/pattern-c
 import type { Tutorial } from "./components/tutorials/AlgorithmTutorial";
 import type { PatternKey } from "./components/tutorials/types";
 import tutorialsData from "./data/tutorials.json";
+import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
+import AlgorithmPractice from "./components/algorithm-practice/AlgorithmPractice";
 
 // Log the imported data structure
 console.log("Imported tutorials data:", tutorialsData);
@@ -198,6 +200,8 @@ function AppContent() {
             <Route path="/tutorials/:algorithm" element={<TutorialRoute />} />
             <Route path="/python-techniques" element={<PythonTechniques />} />
             <Route path="/systems-design" element={<SystemsDesign />} />
+            <Route path="/algorithm-trainer" element={<AlgorithmTrainer />} />
+            <Route path="/algorithm-practice" element={<AlgorithmPractice />} />
             <Route
               path="/visualizer"
               element={
