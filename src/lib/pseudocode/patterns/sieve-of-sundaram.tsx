@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const SieveOfSundaramPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Sieve of Sundaram</span>
-      <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Sieve of Sundaram
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all
-      primes up to n
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all primes up to n
     </div>
 
-    <PseudocodeDisplay code={`# Sieve of Sundaram
+    <PseudocodeDisplay
+      code={`# Sieve of Sundaram
 # Input: Integer n > 1
 # Output: Array of primes ≤ n
 
@@ -58,7 +61,8 @@ Algorithm SIEVE-OF-SUNDARAM(n)
 # Step 3: Collect primes
 #         primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 #
-# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`} />
+# Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

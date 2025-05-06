@@ -1,4 +1,4 @@
-import { Pattern } from "../../../lib/types/pattern-management";
+import { Pattern } from "@/lib/types/pattern-management";
 
 export const editDistance = (s1: string, s2: string): number => {
   s1 = s1.toLowerCase();
@@ -21,10 +21,7 @@ export const editDistance = (s1: string, s2: string): number => {
   return costs[s2.length];
 };
 
-export const calculateStringSimilarity = (
-  str1: string,
-  str2: string
-): number => {
+export const calculateStringSimilarity = (str1: string, str2: string): number => {
   if (!str1 || !str2) return 0;
   const longer = str1.length > str2.length ? str1 : str2;
   const shorter = str1.length > str2.length ? str2 : str1;
@@ -42,10 +39,7 @@ export const findDuplicatePatterns = (patterns: Pattern[]) => {
 
   for (let i = 0; i < patterns.length; i++) {
     for (let j = i + 1; j < patterns.length; j++) {
-      const nameSimilarity = calculateStringSimilarity(
-        patterns[i].name,
-        patterns[j].name
-      );
+      const nameSimilarity = calculateStringSimilarity(patterns[i].name, patterns[j].name);
       const descSimilarity = calculateStringSimilarity(
         patterns[i].description,
         patterns[j].description
@@ -96,8 +90,7 @@ export const validatePatternNames = (
     if (!/^[A-Z][a-zA-Z\s]*$/.test(pattern.name)) {
       issues.push({
         pattern: pattern.name,
-        issue:
-          "Name should start with capital letter and contain only letters and spaces",
+        issue: "Name should start with capital letter and contain only letters and spaces",
       });
     }
 
@@ -118,10 +111,7 @@ export const validatePatternCategories = (
 ) => {
   const validCategories = Object.keys(patternCategories);
   return patterns
-    .filter(
-      (pattern) =>
-        !validCategories.some((category) => pattern.category === category)
-    )
+    .filter((pattern) => !validCategories.some((category) => pattern.category === category))
     .map((pattern) => ({
       pattern: pattern.name,
       issue: `Invalid category: ${pattern.category}`,
@@ -139,8 +129,7 @@ export const validateComponentOrder = (
   if (currentOrder.length !== originalOrder.length) {
     issues.push({
       pattern: "System",
-      issue:
-        "Component order has been tampered with - number of components changed",
+      issue: "Component order has been tampered with - number of components changed",
     });
     return issues;
   }

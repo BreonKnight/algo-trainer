@@ -4,12 +4,15 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const ActivitySelectionPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Activity Selection</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Activity Selection
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Selecting
-      maximum number of non-overlapping activities
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Selecting maximum number of
+      non-overlapping activities
     </div>
 
     <PseudocodeDisplay
@@ -131,9 +134,7 @@ def activity_selection_resources(activities, resources):
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Select: First activity and subsequent non-overlapping activities
-        </span>
+        <span>Select: First activity and subsequent non-overlapping activities</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />

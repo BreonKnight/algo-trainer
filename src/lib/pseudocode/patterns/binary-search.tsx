@@ -4,12 +4,13 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const BinarySearchPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Binary Search</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Binary Search
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Searching in
-      sorted arrays
+      Time: O(log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Searching in sorted arrays
     </div>
 
     <PseudocodeDisplay
@@ -84,31 +85,27 @@ ROTATED-SEARCH(A, x):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set
-        search boundaries
+        <span className="font-semibold text-accent">Initialize:</span> Set search boundaries
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Compare:</span> Check middle
-        element
+        <span className="font-semibold text-accent">Compare:</span> Check middle element
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Adjust:</span> Update
-        boundaries based on comparison
+        <span className="font-semibold text-accent">Adjust:</span> Update boundaries based on
+        comparison
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Search
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Search</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`A = [1, 3, 5, 7, 9, 11, 13]
 x = 7
@@ -122,9 +119,7 @@ Found at index 3`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: First Occurrence
-      </span>
+      <span className="font-semibold text-accent">Example: First Occurrence</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`A = [1, 2, 2, 2, 3, 4, 5]
 x = 2

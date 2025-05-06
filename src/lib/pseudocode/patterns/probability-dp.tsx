@@ -4,17 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const ProbabilityDPPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">
-        Probability Dynamic Programming
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Probability DP
       </span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n·k) &nbsp;|&nbsp; Space: O(n·k) &nbsp;|&nbsp; Use: Calculate
-      probability of events
+      Time: O(n·k) &nbsp;|&nbsp; Space: O(n·k) &nbsp;|&nbsp; Use: Calculate probability of events
     </div>
 
-    <PseudocodeDisplay code={`PROBABILITY-DP(n, k, p)
+    <PseudocodeDisplay
+      code={`PROBABILITY-DP(n, k, p)
     let dp[0‥n][0‥k] be a new array
     for i ← 0 to n
         do for j ← 0 to k
@@ -53,7 +53,8 @@ CALC-PROB(n, k, p, dp)
 //   CALC-PROB(0,0) = 1
 //   CALC-PROB(0,-1) = 0
 //
-// Output: Probability of exactly 2 successes in 3 trials`} />
+// Output: Probability of exactly 2 successes in 3 trials`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

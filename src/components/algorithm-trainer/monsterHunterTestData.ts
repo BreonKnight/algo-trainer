@@ -2,24 +2,19 @@ import type { PatternKey } from "./types.ts";
 
 export const monsterHunterTestData = new Map<PatternKey, string>([
   [
-    "Rotate Matrix" as PatternKey,
-    `# Monster Hunter Rotate Matrix Challenge
-# You are rotating a territory map to find the best hunting angle!
+    "Matrix Operations" as PatternKey,
+    `# Monster Hunter Matrix Operations Challenge
+# You are performing operations on territory matrices!
 
-# Test Case 1: Basic Rotation
-Input: [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-]
-Expected Output: [
-    [7, 4, 1],
-    [8, 5, 2],
-    [9, 6, 3]
-]
+# Test Case 1: Basic Operations
+Input: {
+    "matrix1": [[1, 2], [3, 4]],
+    "matrix2": [[5, 6], [7, 8]]
+}
+Expected Output: [[19, 22], [43, 50]]
 
 # Monster Hunter Tip:
-# Like rotating your map to find the best approach angle!`,
+# Like combining territory data for better analysis!`,
   ],
   [
     "Radix Sort" as PatternKey,
@@ -88,18 +83,7 @@ Expected Output: [2, 2, 3, 5]
 # Monster Hunter Tip:
 # Like breaking down a monster's strength into its prime components!`,
   ],
-  [
-    "Null Pattern" as PatternKey,
-    `# Monster Hunter Null Pattern Challenge
-# You are handling empty territories safely!
 
-# Test Case 1: Empty Territory
-Input: null
-Expected Output: "No monsters in this territory"
-
-# Monster Hunter Tip:
-# Like checking if a territory is empty before hunting!`,
-  ],
   [
     "Quickselect" as PatternKey,
     `# Monster Hunter Quickselect Challenge
@@ -1837,18 +1821,538 @@ Expected Output: [[8, 5], [5, 3]]
 # Like predicting how territories will grow over time!`,
   ],
   [
-    "Matrix Operations" as PatternKey,
-    `# Monster Hunter Matrix Operations Challenge
-# You are performing operations on territory matrices!
+    "Binary Indexed Tree" as PatternKey,
+    `# Monster Hunter Binary Indexed Tree Challenge
+# You are tracking resources across territories!
 
-# Test Case 1: Basic Operations
+# Test Case 1: Basic Resource Tracking
 Input: {
-    "matrix1": [[1, 2], [3, 4]],
-    "matrix2": [[5, 6], [7, 8]]
+    "territory_resources": [2, 1, 1, 3, 2, 3, 4, 5, 6, 7, 8, 9],
+    "queries": [
+        {"type": "sum", "range": [0, 5]},
+        {"type": "update", "index": 3, "value": 6},
+        {"type": "sum", "range": [0, 5]}
+    ]
 }
-Expected Output: [[19, 22], [43, 50]]
+Expected Output: [12, null, 17]
 
 # Monster Hunter Tip:
-# Like combining territory data for better analysis!`,
+# Like efficiently tracking and updating resources across territories!`,
+  ],
+  [
+    "Bitwise DP" as PatternKey,
+    `# Monster Hunter Bitwise DP Challenge
+# You are tracking monster states efficiently!
+
+# Test Case 1: Basic State Tracking
+Input: {
+    "monster_states": [1, 0, 1, 1, 0],
+    "target_state": 3
+}
+Expected Output: 3
+
+# Monster Hunter Tip:
+# Like tracking monster states using bitwise operations!`,
+  ],
+  [
+    "Bucket Sort" as PatternKey,
+    `# Monster Hunter Bucket Sort Challenge
+# You are organizing monsters by size!
+
+# Test Case 1: Basic Size Organization
+Input: {
+    "monster_sizes": [0.897, 0.565, 0.656, 0.1234, 0.665, 0.3434],
+    "num_buckets": 4
+}
+Expected Output: [0.1234, 0.3434, 0.565, 0.656, 0.665, 0.897]
+
+# Monster Hunter Tip:
+# Like organizing monsters by size for efficient hunting!`,
+  ],
+  [
+    "Counting Sort" as PatternKey,
+    `# Monster Hunter Counting Sort Challenge
+# You are organizing monsters by rarity!
+
+# Test Case 1: Basic Rarity Organization
+Input: {
+    "monster_rarities": [2, 5, 3, 0, 2, 3, 0, 3],
+    "max_rarity": 5
+}
+Expected Output: [0, 0, 2, 2, 3, 3, 3, 5]
+
+# Monster Hunter Tip:
+# Like organizing monsters by rarity level!`,
+  ],
+  [
+    "DFS Graph" as PatternKey,
+    `# Monster Hunter DFS Graph Challenge
+# You are exploring connected territories!
+
+# Test Case 1: Basic Territory Exploration
+Input: {
+    "territory_graph": {
+        "Base Camp": ["Ancient Forest", "Wildspire Waste"],
+        "Ancient Forest": ["Coral Highlands"],
+        "Wildspire Waste": ["Rotten Vale"],
+        "Coral Highlands": ["Elder's Recess"],
+        "Rotten Vale": ["Elder's Recess"],
+        "Elder's Recess": []
+    },
+    "start": "Base Camp"
+}
+Expected Output: ["Base Camp", "Ancient Forest", "Coral Highlands", "Elder's Recess", "Wildspire Waste", "Rotten Vale"]
+
+# Monster Hunter Tip:
+# Like exploring all connected territories systematically!`,
+  ],
+  [
+    "Doubly Linked List" as PatternKey,
+    `# Monster Hunter Doubly Linked List Challenge
+# You are managing a chain of territories!
+
+# Test Case 1: Basic Territory Chain
+Input: {
+    "operations": [
+        {"type": "insert", "value": 1, "position": "start"},
+        {"type": "insert", "value": 2, "position": "end"},
+        {"type": "insert", "value": 3, "position": "end"},
+        {"type": "delete", "value": 2},
+        {"type": "traverse", "direction": "forward"}
+    ]
+}
+Expected Output: [1, 3]
+
+# Monster Hunter Tip:
+# Like managing bidirectional territory connections!`,
+  ],
+  [
+    "Edit Distance" as PatternKey,
+    `# Monster Hunter Edit Distance Challenge
+# You are transforming hunting routes!
+
+# Test Case 1: Basic Route Transformation
+Input: {
+    "route1": "Ancient Forest -> Coral Highlands",
+    "route2": "Ancient Forest -> Rotten Vale -> Coral Highlands"
+}
+Expected Output: 1
+
+# Monster Hunter Tip:
+# Like finding minimum changes needed to transform routes!`,
+  ],
+  [
+    "Fast and Slow Pointers" as PatternKey,
+    `# Monster Hunter Fast and Slow Pointers Challenge
+# You are detecting monster movement cycles!
+
+# Test Case 1: Basic Cycle Detection
+Input: {
+    "movement_pattern": [1, 2, 3, 4, 5, 3],
+    "pointers": {"fast": 2, "slow": 1}
+}
+Expected Output: true
+
+# Monster Hunter Tip:
+# Like detecting cycles in monster movement patterns!`,
+  ],
+  [
+    "Fibonacci" as PatternKey,
+    `# Monster Hunter Fibonacci Challenge
+# You are predicting monster population growth!
+
+# Test Case 1: Basic Population Prediction
+Input: {
+    "generations": 7
+}
+Expected Output: 13
+
+# Monster Hunter Tip:
+# Like predicting monster population growth!`,
+  ],
+  [
+    "Ford-Fulkerson" as PatternKey,
+    `# Monster Hunter Ford-Fulkerson Challenge
+# You are optimizing resource flow!
+
+# Test Case 1: Basic Resource Flow
+Input: {
+    "graph": {
+        "Base Camp": {"Ancient Forest": 10, "Wildspire Waste": 5},
+        "Ancient Forest": {"Coral Highlands": 7},
+        "Wildspire Waste": {"Rotten Vale": 4},
+        "Coral Highlands": {"Elder's Recess": 6},
+        "Rotten Vale": {"Elder's Recess": 3},
+        "Elder's Recess": {}
+    },
+    "source": "Base Camp",
+    "sink": "Elder's Recess"
+}
+Expected Output: 9
+
+# Monster Hunter Tip:
+# Like finding maximum resource flow through territories!`,
+  ],
+  [
+    "Graph Representation" as PatternKey,
+    `# Monster Hunter Graph Representation Challenge
+# You are mapping territory connections!
+
+# Test Case 1: Basic Territory Map
+Input: {
+    "territories": ["Base Camp", "Ancient Forest", "Wildspire Waste", "Coral Highlands"],
+    "connections": [
+        ["Base Camp", "Ancient Forest"],
+        ["Base Camp", "Wildspire Waste"],
+        ["Ancient Forest", "Coral Highlands"]
+    ]
+}
+Expected Output: {
+    "Base Camp": ["Ancient Forest", "Wildspire Waste"],
+    "Ancient Forest": ["Base Camp", "Coral Highlands"],
+    "Wildspire Waste": ["Base Camp"],
+    "Coral Highlands": ["Ancient Forest"]
+}
+
+# Monster Hunter Tip:
+# Like creating efficient territory connection maps!`,
+  ],
+  [
+    "Hopcroft-Karp" as PatternKey,
+    `# Monster Hunter Hopcroft-Karp Challenge
+# You are matching hunters to monsters!
+
+# Test Case 1: Basic Matching
+Input: {
+    "hunters": ["Hunter1", "Hunter2", "Hunter3"],
+    "monsters": ["Rathalos", "Diablos", "Nergigante"],
+    "compatibility": [
+        ["Hunter1", "Rathalos"],
+        ["Hunter1", "Diablos"],
+        ["Hunter2", "Diablos"],
+        ["Hunter2", "Nergigante"],
+        ["Hunter3", "Rathalos"],
+        ["Hunter3", "Nergigante"]
+    ]
+}
+Expected Output: [
+    ["Hunter1", "Rathalos"],
+    ["Hunter2", "Diablos"],
+    ["Hunter3", "Nergigante"]
+]
+
+# Monster Hunter Tip:
+# Like finding optimal hunter-monster matches!`,
+  ],
+  [
+    "Inorder Traversal" as PatternKey,
+    `# Monster Hunter Inorder Traversal Challenge
+# You are exploring territory hierarchy!
+
+# Test Case 1: Basic Territory Exploration
+Input: {
+    "tree": {
+        "value": 1,
+        "left": {
+            "value": 2,
+            "left": {"value": 4},
+            "right": {"value": 5}
+        },
+        "right": {
+            "value": 3,
+            "left": {"value": 6},
+            "right": {"value": 7}
+        }
+    }
+}
+Expected Output: [4, 2, 5, 1, 6, 3, 7]
+
+# Monster Hunter Tip:
+# Like exploring territory hierarchy systematically!`,
+  ],
+  [
+    "Interval Scheduling" as PatternKey,
+    `# Monster Hunter Interval Scheduling Challenge
+# You are scheduling hunts efficiently!
+
+# Test Case 1: Basic Hunt Scheduling
+Input: {
+    "hunts": [
+        {"start": 1, "end": 4, "value": 3},
+        {"start": 2, "end": 6, "value": 5},
+        {"start": 3, "end": 8, "value": 4},
+        {"start": 5, "end": 7, "value": 2},
+        {"start": 6, "end": 9, "value": 6}
+    ]
+}
+Expected Output: [
+    {"start": 1, "end": 4, "value": 3},
+    {"start": 5, "end": 7, "value": 2},
+    {"start": 6, "end": 9, "value": 6}
+]
+
+# Monster Hunter Tip:
+# Like scheduling non-overlapping hunts!`,
+  ],
+  [
+    "Kahn's Topological Sort" as PatternKey,
+    `# Monster Hunter Kahn's Topological Sort Challenge
+# You are ordering hunting tasks!
+
+# Test Case 1: Basic Task Ordering
+Input: {
+    "tasks": {
+        "Gather Supplies": ["Prepare Weapons"],
+        "Prepare Weapons": ["Hunt Monster"],
+        "Study Monster": ["Hunt Monster"],
+        "Hunt Monster": []
+    }
+}
+Expected Output: ["Gather Supplies", "Prepare Weapons", "Study Monster", "Hunt Monster"]
+
+# Monster Hunter Tip:
+# Like ordering tasks based on dependencies!`,
+  ],
+  [
+    "Karatsuba Multiplication" as PatternKey,
+    `# Monster Hunter Karatsuba Multiplication Challenge
+# You are calculating territory areas!
+
+# Test Case 1: Basic Area Calculation
+Input: {
+    "x": 1234,
+    "y": 5678
+}
+Expected Output: 7006652
+
+# Monster Hunter Tip:
+# Like efficiently calculating large territory areas!`,
+  ],
+  [
+    "LCA DFS" as PatternKey,
+    `# Monster Hunter LCA DFS Challenge
+# You are finding common monster ancestors!
+
+# Test Case 1: Basic Ancestor Finding
+Input: {
+    "tree": {
+        "value": "Wyvern",
+        "left": {
+            "value": "Flying Wyvern",
+            "left": {"value": "Rathalos"},
+            "right": {"value": "Rathian"}
+        },
+        "right": {
+            "value": "Brute Wyvern",
+            "left": {"value": "Anjanath"},
+            "right": {"value": "Deviljho"}
+        }
+    },
+    "node1": "Rathalos",
+    "node2": "Rathian"
+}
+Expected Output: "Flying Wyvern"
+
+# Monster Hunter Tip:
+# Like finding common ancestors of monster species!`,
+  ],
+  [
+    "Palindrome Partitioning" as PatternKey,
+    `# Monster Hunter Palindrome Partitioning Challenge
+# You are analyzing territory patterns!
+
+# Test Case 1: Basic Pattern Analysis
+Input: {
+    "territory": "Rathalos"
+}
+Expected Output: [
+    ["R", "a", "t", "h", "a", "l", "o", "s"],
+    ["R", "a", "t", "h", "a", "los"],
+    ["R", "a", "th", "a", "l", "o", "s"],
+    ["R", "a", "th", "a", "los"],
+    ["R", "ath", "a", "l", "o", "s"],
+    ["R", "ath", "a", "los"],
+    ["Ra", "t", "h", "a", "l", "o", "s"],
+    ["Ra", "t", "h", "a", "los"],
+    ["Ra", "th", "a", "l", "o", "s"],
+    ["Ra", "th", "a", "los"],
+    ["Rat", "h", "a", "l", "o", "s"],
+    ["Rat", "h", "a", "los"]
+]
+
+# Monster Hunter Tip:
+# Like finding symmetrical patterns in territories!`,
+  ],
+  [
+    "Spanning Tree" as PatternKey,
+    `# Monster Hunter Spanning Tree Challenge
+# You are creating efficient territory networks!
+
+# Test Case 1: Basic Network Creation
+Input: {
+    "graph": {
+        "Base Camp": [["Ancient Forest", 2], ["Wildspire Waste", 3]],
+        "Ancient Forest": [["Base Camp", 2], ["Coral Highlands", 4]],
+        "Wildspire Waste": [["Base Camp", 3], ["Rotten Vale", 1]],
+        "Coral Highlands": [["Ancient Forest", 4], ["Elder's Recess", 5]],
+        "Rotten Vale": [["Wildspire Waste", 1], ["Elder's Recess", 2]],
+        "Elder's Recess": [["Coral Highlands", 5], ["Rotten Vale", 2]]
+    }
+}
+Expected Output: [
+    ["Base Camp", "Ancient Forest"],
+    ["Ancient Forest", "Coral Highlands"],
+    ["Wildspire Waste", "Rotten Vale"],
+    ["Rotten Vale", "Elder's Recess"]
+]
+
+# Monster Hunter Tip:
+# Like creating efficient territory networks!`,
+  ],
+  [
+    "Sparse Table" as PatternKey,
+    `# Monster Hunter Sparse Table Challenge
+# You are processing territory ranges!
+
+# Test Case 1: Basic Range Processing
+Input: {
+    "territory_values": [4, 2, 3, 7, 1, 5, 3, 3, 9, 6, 7, 8],
+    "queries": [
+        {"start": 0, "end": 3},
+        {"start": 4, "end": 7},
+        {"start": 8, "end": 11}
+    ]
+}
+Expected Output: [7, 5, 9]
+
+# Monster Hunter Tip:
+# Like efficiently processing territory ranges!`,
+  ],
+  [
+    "String Hashing" as PatternKey,
+    `# Monster Hunter String Hashing Challenge
+# You are finding monster name patterns!
+
+# Test Case 1: Basic Pattern Finding
+Input: {
+    "text": "RathalosRathianRathalos",
+    "pattern": "Rathalos"
+}
+Expected Output: [0, 14]
+
+# Monster Hunter Tip:
+# Like efficiently matching monster name patterns!`,
+  ],
+  [
+    "Zigzag Traversal" as PatternKey,
+    `# Monster Hunter Zigzag Traversal Challenge
+# You are exploring territory levels!
+
+# Test Case 1: Basic Level Exploration
+Input: {
+    "territory_tree": {
+        "value": "Base Camp",
+        "left": {
+            "value": "Ancient Forest",
+            "left": {"value": "Forest Edge"},
+            "right": {"value": "Forest Depths"}
+        },
+        "right": {
+            "value": "Wildspire Waste",
+            "left": {"value": "Desert Edge"},
+            "right": {"value": "Desert Center"}
+        }
+    }
+}
+Expected Output: ["Base Camp", "Wildspire Waste", "Ancient Forest", "Forest Edge", "Forest Depths", "Desert Center", "Desert Edge"]
+
+# Monster Hunter Tip:
+# Like exploring territory levels in zigzag pattern!`,
+  ],
+  [
+    "Bridges" as PatternKey,
+    `# Monster Hunter Bridges Challenge
+# You are finding critical connections between territories!
+
+# Test Case 1: Basic Bridge Detection
+Input: {
+    "territories": {
+        "Base Camp": ["Ancient Forest", "Wildspire Waste"],
+        "Ancient Forest": ["Base Camp", "Coral Highlands"],
+        "Wildspire Waste": ["Base Camp", "Rotten Vale"],
+        "Coral Highlands": ["Ancient Forest", "Elder's Recess"],
+        "Rotten Vale": ["Wildspire Waste", "Elder's Recess"],
+        "Elder's Recess": ["Coral Highlands", "Rotten Vale"]
+    }
+}
+Expected Output: [
+    ["Base Camp", "Ancient Forest"],
+    ["Base Camp", "Wildspire Waste"]
+]
+
+# Monster Hunter Tip:
+# Like finding critical paths that connect territories!`,
+  ],
+  [
+    "Tree Implementation" as PatternKey,
+    `# Monster Hunter Tree Implementation Challenge
+# You are implementing a territory hierarchy!
+
+# Test Case 1: Basic Tree Operations
+Input: {
+    "operations": [
+        {"type": "insert", "value": "Base Camp"},
+        {"type": "insert", "value": "Ancient Forest"},
+        {"type": "insert", "value": "Wildspire Waste"},
+        {"type": "insert", "value": "Coral Highlands"},
+        {"type": "insert", "value": "Rotten Vale"},
+        {"type": "insert", "value": "Elder's Recess"}
+    ]
+}
+Expected Output: {
+    "root": "Base Camp",
+    "children": [
+        {
+            "value": "Ancient Forest",
+            "children": [{"value": "Coral Highlands", "children": []}]
+        },
+        {
+            "value": "Wildspire Waste",
+            "children": [{"value": "Rotten Vale", "children": []}]
+        },
+        {
+            "value": "Elder's Recess",
+            "children": []
+        }
+    ]
+}
+
+# Monster Hunter Tip:
+# Like organizing territories in a hierarchical structure!`,
+  ],
+  [
+    "Trie" as PatternKey,
+    `# Monster Hunter Trie Challenge
+# You are implementing a monster name dictionary!
+
+# Test Case 1: Basic Trie Operations
+Input: {
+    "operations": [
+        {"type": "insert", "word": "Rathalos"},
+        {"type": "insert", "word": "Rathian"},
+        {"type": "insert", "word": "Nergigante"},
+        {"type": "search", "word": "Rathalos"},
+        {"type": "search", "word": "Rathian"},
+        {"type": "search", "word": "Nergigante"},
+        {"type": "startsWith", "prefix": "Rath"}
+    ]
+}
+Expected Output: {
+    "search_results": [true, true, true],
+    "prefix_results": ["Rathalos", "Rathian"]
+}
+
+# Monster Hunter Tip:
+# Like efficiently storing and searching monster names!`,
   ],
 ]);

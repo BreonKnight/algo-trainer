@@ -1,8 +1,8 @@
-import { AudioPlayer } from "../../audio/AudioPlayer";
-import { Timer } from "../../timer/Timer";
-import { MediaCard } from "../../ui/media-card";
-import { CenterInformaticsWidget } from "./CenterInformaticsWidget";
-import { RightControls } from "./RightControls";
+import { AudioPlayer } from "@/components/audio/AudioPlayer";
+import { Timer } from "@/components/timer/Timer";
+import { MediaCard } from "@/components/ui/media-card";
+import { CenterInformaticsWidget } from "@/components/algorithm-trainer/layout/CenterInformaticsWidget";
+import { RightControls } from "@/components/algorithm-trainer/layout/RightControls";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import {
@@ -34,14 +34,9 @@ interface SortableItemProps {
 }
 
 function SortableItem({ id, children }: SortableItemProps) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -50,9 +45,19 @@ function SortableItem({ id, children }: SortableItemProps) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative group">
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={cn("relative group", isDragging && "shadow-lg scale-105")}
+    >
       <button
-        className="absolute -left-6 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-accent/10 transition-all duration-200 cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100"
+        className={cn(
+          "absolute -left-6 top-1/2 -translate-y-1/2 p-1.5 rounded-full",
+          "hover:bg-accent/10 transition-all duration-200",
+          "cursor-grab active:cursor-grabbing",
+          "opacity-0 group-hover:opacity-100",
+          "focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-accent/20"
+        )}
         {...attributes}
         {...listeners}
       >
@@ -72,7 +77,11 @@ export function TopBar({ className }: TopBarProps) {
   ]);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
@@ -95,22 +104,18 @@ export function TopBar({ className }: TopBarProps) {
     <div
       className={cn(
         "w-full mb-2 sm:mb-3 rounded-xl bg-background/95 p-3 sm:p-4 relative",
-        "shadow-md border border-border/50",
+        "shadow-md border border-border/50 backdrop-blur-sm",
         className
       )}
     >
       <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-accent via-accent2 to-accent opacity-50 z-10" />
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 w-full">
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
             {items.map((item) => (
               <SortableItem key={item.id} id={item.id}>
                 <div className="w-full flex justify-center">
-                  <MediaCard className="w-full max-w-md">
+                  <MediaCard className="w-full hover:shadow-lg transition-shadow duration-200">
                     {item.component}
                   </MediaCard>
                 </div>

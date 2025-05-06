@@ -1,12 +1,12 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { useState, useEffect, useRef } from "react";
 import { loadPyodide, PyodideInterface } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import GamificationService from "../../lib/gamification";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 interface ReplCardProps {
   userCode: string;
@@ -86,8 +86,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
   };
 
   const currentStyle =
-    terminalStyles[theme as keyof typeof terminalStyles] ||
-    terminalStyles.dracula;
+    terminalStyles[theme as keyof typeof terminalStyles] || terminalStyles.dracula;
 
   useEffect(() => {
     let mounted = true;
@@ -195,15 +194,13 @@ except Exception as e:
       // Trigger confetti animation
       triggerConfetti();
     } catch (error) {
-      let errorMessage =
-        error instanceof Error ? error.message : "Unknown error";
+      let errorMessage = error instanceof Error ? error.message : "Unknown error";
       let errorType = "Error";
 
       // Handle browser-specific errors
       if (errorMessage.includes("Pyodide failed to load")) {
         errorType = "Initialization Error";
-        errorMessage =
-          "Failed to load Python environment. Please refresh the page.";
+        errorMessage = "Failed to load Python environment. Please refresh the page.";
       }
 
       setError(`${errorType}: ${errorMessage}`);
@@ -335,9 +332,7 @@ except Exception as e:
               {error ? (
                 <span className={currentStyle.error}>{error}</span>
               ) : (
-                <span>
-                  {output || "Run your code to see the output here..."}
-                </span>
+                <span>{output || "Run your code to see the output here..."}</span>
               )}
             </pre>
           </div>
@@ -353,10 +348,7 @@ except Exception as e:
             const maxHeight = 800; // Increased max height for REPL
             const onMove = (moveEvent: MouseEvent) => {
               const delta = moveEvent.clientY - startY;
-              const newHeight = Math.max(
-                300,
-                Math.min(startHeight + delta, maxHeight)
-              );
+              const newHeight = Math.max(300, Math.min(startHeight + delta, maxHeight));
               setReplHeight(newHeight);
             };
             const onUp = () => {

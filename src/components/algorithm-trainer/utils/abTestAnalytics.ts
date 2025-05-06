@@ -21,9 +21,7 @@ export interface ABTestAnalyticsData {
  * Track an A/B test event
  * @param data The analytics data to track
  */
-export function trackABTestEvent(
-  data: Omit<ABTestAnalyticsData, "timestamp">
-): void {
+export function trackABTestEvent(data: Omit<ABTestAnalyticsData, "timestamp">): void {
   // In a real application, you would send this data to your analytics service
   // For now, we'll just log it to the console and store it in localStorage
 
@@ -36,9 +34,7 @@ export function trackABTestEvent(
   console.log("A/B Test Event:", analyticsData);
 
   // Store the event in localStorage
-  const storedEvents = JSON.parse(
-    localStorage.getItem("ab-test-events") || "[]"
-  );
+  const storedEvents = JSON.parse(localStorage.getItem("ab-test-events") || "[]");
   storedEvents.push(analyticsData);
   localStorage.setItem("ab-test-events", JSON.stringify(storedEvents));
 }
@@ -74,15 +70,21 @@ export function getABTestAnalytics(testId: keyof typeof TEST_IDS) {
     totalEvents: testEvents.length,
     groupAEvents: groupAEvents.length,
     groupBEvents: groupBEvents.length,
-    eventsByType: testEvents.reduce((acc, event) => {
-      acc[event.event] = (acc[event.event] || 0) + 1;
-      return acc;
-    }, {} as Record<ABTestEvent, number>),
-    eventsByPattern: testEvents.reduce((acc, event) => {
-      if (event.patternKey) {
-        acc[event.patternKey] = (acc[event.patternKey] || 0) + 1;
-      }
-      return acc;
-    }, {} as Record<string, number>),
+    eventsByType: testEvents.reduce(
+      (acc, event) => {
+        acc[event.event] = (acc[event.event] || 0) + 1;
+        return acc;
+      },
+      {} as Record<ABTestEvent, number>
+    ),
+    eventsByPattern: testEvents.reduce(
+      (acc, event) => {
+        if (event.patternKey) {
+          acc[event.patternKey] = (acc[event.patternKey] || 0) + 1;
+        }
+        return acc;
+      },
+      {} as Record<string, number>
+    ),
   };
 }

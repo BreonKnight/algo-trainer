@@ -6,11 +6,7 @@ const OUTPUT_DIR = path.join(process.cwd(), "src/lib/pseudocode");
 
 // Create directory structure
 const createDirectoryStructure = () => {
-  const dirs = [
-    OUTPUT_DIR,
-    path.join(OUTPUT_DIR, "patterns"),
-    path.join(OUTPUT_DIR, "utils"),
-  ];
+  const dirs = [OUTPUT_DIR, path.join(OUTPUT_DIR, "patterns"), path.join(OUTPUT_DIR, "utils")];
 
   dirs.forEach((dir) => {
     if (!fs.existsSync(dir)) {
@@ -27,10 +23,7 @@ const extractPatternName = (pattern: string): string => {
 };
 
 // Generate pattern file content
-const generatePatternFile = (
-  patternName: string,
-  patternContent: string
-): string => {
+const generatePatternFile = (patternName: string, patternContent: string): string => {
   return `import { ChevronRight } from "lucide-react";
 
 export const ${patternName.replace(/\s+/g, "")}Pattern = () => (
@@ -159,8 +152,7 @@ const splitPseudocodeFile = () => {
 
     // Remove duplicates
     const uniquePatterns = patterns.filter(
-      (pattern, index, self) =>
-        index === self.findIndex((p) => p.name === pattern.name)
+      (pattern, index, self) => index === self.findIndex((p) => p.name === pattern.name)
     );
 
     // Generate pattern files

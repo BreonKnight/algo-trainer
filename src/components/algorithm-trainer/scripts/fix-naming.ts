@@ -63,7 +63,7 @@ function toTitleCase(str: string): string {
     "hungarian algorithm": "Hungarian Algorithm",
     "radix sort": "Radix Sort",
     string: "String",
-    "rotate matrix": "Rotate Matrix",
+    "rotate matrix": "Matrix Operations",
     "bit manipulation": "Bit Manipulation",
   };
 
@@ -73,18 +73,7 @@ function toTitleCase(str: string): string {
   }
 
   // Special acronyms that should stay uppercase
-  const acronyms = new Set([
-    "KMP",
-    "BFS",
-    "DFS",
-    "DP",
-    "AVL",
-    "B",
-    "FFT",
-    "LCP",
-    "SCC",
-    "SCCs",
-  ]);
+  const acronyms = new Set(["KMP", "BFS", "DFS", "DP", "AVL", "B", "FFT", "LCP", "SCC", "SCCs"]);
 
   return str
     .replace(/([A-Z])/g, " $1")

@@ -8,11 +8,12 @@ export const FloydWarshallPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V³) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Finding all
-      pairs shortest paths in weighted graphs
+      Time: O(V³) &nbsp;|&nbsp; Space: O(V²) &nbsp;|&nbsp; Use: Finding all pairs shortest paths in
+      weighted graphs
     </div>
 
-    <PseudocodeDisplay code={`// Standard Floyd-Warshall
+    <PseudocodeDisplay
+      code={`// Standard Floyd-Warshall
 FLOYD-WARSHALL(G):
     # Initialize distance matrix
     dist = [[∞] * |V| for _ in range(|V|)]
@@ -83,37 +84,34 @@ FLOYD-WARSHALL-NEGATIVE(G):
         if dist[i][i] < 0:
             return "Graph contains negative cycle"
 
-    return dist`} />
+    return dist`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set up
-        distance matrix
+        <span className="font-semibold text-accent">Initialize:</span> Set up distance matrix
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Relax:</span> Update
-        distances through intermediate vertices
+        <span className="font-semibold text-accent">Relax:</span> Update distances through
+        intermediate vertices
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Check:</span> Detect
-        negative cycles if needed
+        <span className="font-semibold text-accent">Check:</span> Detect negative cycles if needed
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Floyd-Warshall
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Floyd-Warshall</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 --4-- 1 --1-- 2
@@ -143,9 +141,7 @@ Final distance matrix:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Path Reconstruction
-      </span>
+      <span className="font-semibold text-accent">Example: Path Reconstruction</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Next matrix:
 [[0,1,1,3,1,1],
@@ -161,9 +157,7 @@ Shortest path from 0 to 5:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Negative Cycle Detection
-      </span>
+      <span className="font-semibold text-accent">Example: Negative Cycle Detection</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph with negative cycle:
 0 --4-- 1 --1-- 2

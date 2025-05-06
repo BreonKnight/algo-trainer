@@ -8,11 +8,12 @@ export const StronglyConnectedComponentsPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Graph)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find groups of
-      territories where monsters can freely move between any two areas
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find groups of territories where
+      monsters can freely move between any two areas
     </div>
 
-    <PseudocodeDisplay code={`# Monster Territory Clusters: Find groups of interconnected monster territories
+    <PseudocodeDisplay
+      code={`# Monster Territory Clusters: Find groups of interconnected monster territories
 # Input: G = (V, E) - directed graph of monster territories and migration paths
 # Output: List of territory clusters where monsters can freely move between any two areas
 
@@ -89,7 +90,8 @@ Algorithm REVERSE-MIGRATION-PATHS(graph)
 #   ["Ancient Forest", "Wildspire Waste", "Coral Highlands"],
 #   ["Elder's Recess"],
 #   ["Rotten Vale"]
-# ]`} />
+# ]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Hunter's Strategy:</span>
@@ -105,16 +107,11 @@ Algorithm REVERSE-MIGRATION-PATHS(graph)
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Identify clusters where monsters can freely move between territories
-        </span>
+        <span>Identify clusters where monsters can freely move between territories</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Use clusters to plan efficient hunting routes and predict monster
-          movements
-        </span>
+        <span>Use clusters to plan efficient hunting routes and predict monster movements</span>
       </div>
     </div>
   </div>

@@ -140,13 +140,7 @@ export const interactiveElements: Record<string, InteractiveElement[]> = {
       type: "dropdown",
       label: "Select Monster",
       description: "Choose a monster to search for",
-      options: [
-        "Great Jagras",
-        "Barroth",
-        "Tobi-Kadachi",
-        "Odogaron",
-        "Nergigante",
-      ],
+      options: ["Great Jagras", "Barroth", "Tobi-Kadachi", "Odogaron", "Nergigante"],
     },
     {
       type: "slider",
@@ -181,8 +175,7 @@ export const visualSteps: Record<string, VisualStep[]> = {
   binarySearch: [
     {
       title: "Initial Setup",
-      description:
-        "Display all territories with their monsters and difficulty levels",
+      description: "Display all territories with their monsters and difficulty levels",
       visualElements: [
         "Territory map with difficulty indicators",
         "Monster icons for each territory",
@@ -207,9 +200,7 @@ export function getVisualTemplate(algorithm: string): VisualTemplate {
   return searchAlgorithmTemplates[algorithm];
 }
 
-export function getInteractiveElements(
-  algorithm: string
-): InteractiveElement[] {
+export function getInteractiveElements(algorithm: string): InteractiveElement[] {
   return interactiveElements[algorithm] || [];
 }
 

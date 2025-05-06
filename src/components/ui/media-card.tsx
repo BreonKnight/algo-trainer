@@ -10,10 +10,7 @@ export function MediaCard({
 }) {
   return (
     <div
-      className={cn(
-        "bg-background rounded-2xl shadow-xl border-2 border-accent/30 p-6",
-        className
-      )}
+      className={cn("bg-background rounded-2xl shadow-xl border-2 border-accent/30 p-6", className)}
     >
       {children}
     </div>

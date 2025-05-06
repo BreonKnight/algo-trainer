@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const StackImplementationPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Stack Implementation</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Stack Implementation
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO data
-      structure
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO data structure
     </div>
 
-    <PseudocodeDisplay code={`STACK-EMPTY(S)
+    <PseudocodeDisplay
+      code={`STACK-EMPTY(S)
     if S.top = 0
         then return true
         else return false
@@ -59,7 +62,8 @@ POP(S)
 //
 // Final state:
 //   S = [10, 30, 40]
-//   S.top = 3`} />
+//   S.top = 3`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

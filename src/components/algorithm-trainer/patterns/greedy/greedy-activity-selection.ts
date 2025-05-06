@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const greedyActivitySelectionPattern: AlgorithmPattern = {
   title: "Greedy Activity Selection",
@@ -17,20 +17,17 @@ Selected:
 3. (8,11)
 
 Result: 3 activities`,
-  implementation: `function activitySelection(activities: [number, number][]): [number, number][] {
-    // Sort activities by finish time
-    activities.sort((a, b) => a[1] - b[1]);
+  implementation: `def activity_selection(activities):
+    # Sort activities by finish time
+    activities.sort(key=lambda x: x[1])
     
-    const selected: [number, number][] = [activities[0]];
-    let last_finish = activities[0][1];
+    selected = [activities[0]]
+    last_finish = activities[0][1]
     
-    for (let i = 1; i < activities.length; i++) {
-      if (activities[i][0] >= last_finish) {
-        selected.push(activities[i]);
-        last_finish = activities[i][1];
-      }
-    }
+    for i in range(1, len(activities)):
+        if activities[i][0] >= last_finish:
+            selected.append(activities[i])
+            last_finish = activities[i][1]
     
-    return selected;
-  }`,
+    return selected`,
 };

@@ -1,9 +1,9 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const matrixOperationsPattern: AlgorithmPattern = {
   title: "Matrix Operations",
   description:
-    "Perform various operations on matrices including initialization, traversal, and common operations",
+    "Perform various matrix operations including rotation, multiplication, and traversal",
   timeComplexity: "O(n^2)",
   spaceComplexity: "O(n^2)",
   pseudocode: `function matrixOperations(matrix):

@@ -8,11 +8,12 @@ export const MaximumBipartiteMatchingPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find maximum
-      matching in bipartite graph
+      Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find maximum matching in bipartite
+      graph
     </div>
 
-    <PseudocodeDisplay code={`// Maximum bipartite matching using Ford-Fulkerson
+    <PseudocodeDisplay
+      code={`// Maximum bipartite matching using Ford-Fulkerson
 MAX-BIPARTITE-MATCHING(G):
     // G is a bipartite graph with partitions L and R
     // Add source s and sink t
@@ -50,7 +51,8 @@ FORD-FULKERSON(G, s, t):
 //    - s→2→5→t
 //    - s→3→6→t
 //
-// Output: Matching = {(1,4), (2,5), (3,6)}`} />
+// Output: Matching = {(1,4), (2,5), (3,6)}`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

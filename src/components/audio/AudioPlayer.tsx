@@ -147,13 +147,9 @@ class AudioPlayerErrorBoundary extends React.Component<
     if (this.state.hasError) {
       return (
         <div className="flex flex-col items-center gap-1 w-full max-w-[300px] md:max-w-full">
-          <div className="text-xs text-secondary font-medium mb-1">
-            Background Music
-          </div>
+          <div className="text-xs text-secondary font-medium mb-1">Background Music</div>
           <div className="flex flex-col items-center justify-center gap-2 p-4 bg-secondary/20 rounded-lg border border-secondary/40">
-            <p className="text-sm text-error">
-              Audio player encountered an error
-            </p>
+            <p className="text-sm text-error">Audio player encountered an error</p>
             <Button
               onClick={() => this.setState({ hasError: false, error: null })}
               variant="outline"
@@ -172,15 +168,10 @@ class AudioPlayerErrorBoundary extends React.Component<
 }
 
 // Function to create YouTube embed URL
-const createYouTubeEmbedURL = (
-  videoId: string,
-  shouldAutoplay: boolean = false
-) => {
+const createYouTubeEmbedURL = (videoId: string, shouldAutoplay: boolean = false) => {
   return `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=${
     shouldAutoplay ? 1 : 0
-  }&controls=0&modestbranding=1&rel=0&showinfo=0&origin=${
-    window.location.origin
-  }`;
+  }&controls=0&modestbranding=1&rel=0&showinfo=0&origin=${window.location.origin}`;
 };
 
 // Add prop type for onPlayStateChange
@@ -189,9 +180,7 @@ interface AudioPlayerProps {
 }
 
 // Memoized AudioPlayer component
-export const AudioPlayer = memo(function AudioPlayer({
-  onPlayStateChange,
-}: AudioPlayerProps) {
+export const AudioPlayer = memo(function AudioPlayer({ onPlayStateChange }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(50);
   const [currentVideoId, setCurrentVideoId] = useState<string>("");
@@ -317,9 +306,7 @@ export const AudioPlayer = memo(function AudioPlayer({
   return (
     <AudioPlayerErrorBoundary>
       <div className="bg-white dark:bg-background rounded-xl shadow-lg border border-accent/20 p-4 max-w-xs mx-auto flex flex-col items-center w-full">
-        <div className="text-[10px] text-secondary font-medium mb-0.5">
-          Background Music
-        </div>
+        <div className="text-[10px] text-secondary font-medium mb-0.5">Background Music</div>
         <div className="flex flex-row gap-4 justify-center mb-1 mt-2">
           <div className="relative flex flex-col items-center">
             <Button
@@ -328,9 +315,7 @@ export const AudioPlayer = memo(function AudioPlayer({
               size="sm"
               className="h-8 w-8 min-w-[32px] min-h-[32px] p-0 bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md flex-shrink-0 transition-transform duration-200 group"
               title={isPlaying ? "Pause" : "Play"}
-              aria-label={
-                isPlaying ? "Pause background music" : "Play background music"
-              }
+              aria-label={isPlaying ? "Pause background music" : "Play background music"}
             >
               <span className="transition-transform duration-200 ease-in-out transform group-hover:scale-110">
                 {isPlaying ? (
@@ -394,9 +379,7 @@ export const AudioPlayer = memo(function AudioPlayer({
         </div>
         <iframe
           ref={iframeRef}
-          src={
-            currentVideoId ? createYouTubeEmbedURL(currentVideoId, false) : ""
-          }
+          src={currentVideoId ? createYouTubeEmbedURL(currentVideoId, false) : ""}
           width="1"
           height="1"
           style={{

@@ -41,17 +41,11 @@ while ((match = patternRegex.exec(algorithmPatternsStr)) !== null) {
   // Extract pattern properties
   const titleMatch = patternContent.match(/title:\s*"([^"]+)"/);
   const descriptionMatch = patternContent.match(/description:\s*"([^"]+)"/);
-  const timeComplexityMatch = patternContent.match(
-    /timeComplexity:\s*"([^"]+)"/
-  );
-  const spaceComplexityMatch = patternContent.match(
-    /spaceComplexity:\s*"([^"]+)"/
-  );
+  const timeComplexityMatch = patternContent.match(/timeComplexity:\s*"([^"]+)"/);
+  const spaceComplexityMatch = patternContent.match(/spaceComplexity:\s*"([^"]+)"/);
   const pseudocodeMatch = patternContent.match(/pseudocode:\s*`([\s\S]*?)`/);
   const exampleMatch = patternContent.match(/example:\s*`([\s\S]*?)`/);
-  const implementationMatch = patternContent.match(
-    /implementation:\s*`([\s\S]*?)`/
-  );
+  const implementationMatch = patternContent.match(/implementation:\s*`([\s\S]*?)`/);
 
   if (
     titleMatch &&
@@ -165,9 +159,7 @@ Object.entries(patterns).forEach(([key, pattern]) => {
   // If no directory is defined for this pattern, use "other"
   if (!dir) {
     dir = "other";
-    console.log(
-      `No specific directory defined for pattern: ${key}, using "other" category`
-    );
+    console.log(`No specific directory defined for pattern: ${key}, using "other" category`);
   }
 
   // Create a filename from the pattern key
@@ -216,10 +208,7 @@ export const ${key
   } else {
     indexContent = `import { AlgorithmPattern } from "../../types";
 
-export const ${dir.replace(
-      /-/g,
-      "_"
-    )}Patterns: Partial<Record<string, AlgorithmPattern>> = {
+export const ${dir.replace(/-/g, "_")}Patterns: Partial<Record<string, AlgorithmPattern>> = {
   // ${dir} patterns will be added here
 };
 `;
@@ -229,10 +218,7 @@ export const ${dir.replace(
   const importStatement = `import { ${key
     .toLowerCase()
     .replace(/\s+/g, "_")
-    .replace(/[^a-z0-9_]/g, "")}Pattern } from "./${fileName.replace(
-    ".ts",
-    ""
-  )}";\n`;
+    .replace(/[^a-z0-9_]/g, "")}Pattern } from "./${fileName.replace(".ts", "")}";\n`;
 
   if (!indexContent.includes(importStatement)) {
     indexContent = indexContent.replace(
@@ -288,9 +274,7 @@ export const algorithmPatterns: Record<string, AlgorithmPattern> = {
 // Add all directories
 allDirectories.forEach((dir, index, array) => {
   const dirName = dir.replace(/-/g, "_");
-  mainIndexContent += `    ...${dirName}Patterns${
-    index < array.length - 1 ? "," : ""
-  }\n`;
+  mainIndexContent += `    ...${dirName}Patterns${index < array.length - 1 ? "," : ""}\n`;
 });
 
 mainIndexContent += `  }).reduce((acc, [_, patterns]) => ({ ...acc, ...patterns }), {})

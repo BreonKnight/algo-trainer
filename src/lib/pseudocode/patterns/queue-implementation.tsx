@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const QueueImplementationPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Queue Implementation</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Queue Implementation
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO data
-      structure
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: FIFO data structure
     </div>
 
-    <PseudocodeDisplay code={`QUEUE-EMPTY(Q)
+    <PseudocodeDisplay
+      code={`QUEUE-EMPTY(Q)
     if Q.head = Q.tail
         then return true
         else return false
@@ -76,7 +78,8 @@ DEQUEUE(Q)
 // Final state:
 //   Q = [20, 30, 40]
 //   Q.head = 2
-//   Q.tail = 5`} />
+//   Q.tail = 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

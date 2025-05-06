@@ -4,12 +4,13 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const GreedyPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Greedy</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Greedy
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Make locally
-      optimal choices
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Make locally optimal choices
     </div>
 
     <PseudocodeDisplay
@@ -69,31 +70,26 @@ DIJKSTRA(G, s):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Sort:</span> Order items by
-        some criterion
+        <span className="font-semibold text-accent">Sort:</span> Order items by some criterion
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Select:</span> Choose best
-        option at each step
+        <span className="font-semibold text-accent">Select:</span> Choose best option at each step
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Modify
-        remaining options
+        <span className="font-semibold text-accent">Update:</span> Modify remaining options
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Activity Selection
-      </span>
+      <span className="font-semibold text-accent">Example: Activity Selection</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`S = [(1,4), (3,5), (0,6), (5,7), (3,8), (5,9), (6,10), (8,11), (8,12), (2,13), (12,14)]
 Sorted by finish time:
@@ -104,9 +100,7 @@ Selected activities:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Fractional Knapsack
-      </span>
+      <span className="font-semibold text-accent">Example: Fractional Knapsack</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`W = [10, 20, 30]
 V = [60, 100, 120]

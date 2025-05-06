@@ -1,4 +1,5 @@
 import { PatternKey, PATTERN_KEYS } from "./types.ts";
+import { AlgorithmPattern } from "./types/pattern-types.ts";
 import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
 import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
 import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";
@@ -6,8 +7,11 @@ import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4
 import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5.ts";
 import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
 import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
+import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8.ts";
+import { monsterHunterPatternsExtended9 } from "./monsterHunterPatternsExtended9.ts";
 import { monsterHunterPatterns } from "./monsterHunterPatterns.ts";
-import { algorithmPatterns } from "./patterns/index.ts";
+import { patterns as algorithmPatterns } from "./patterns/index.ts";
+import { pseudocodePatterns } from "../../lib/pseudocode/index.tsx";
 
 // Helper function to calculate Levenshtein distance
 function levenshteinDistance(a: string, b: string): number {
@@ -90,113 +94,29 @@ const allPatterns = new Map<PatternKey, string>(
     ...Array.from(monsterHunterPatternsExtended5.entries()),
     ...Array.from(monsterHunterPatternsExtended6.entries()),
     ...Array.from(monsterHunterPatternsExtended7.entries()),
+    ...Array.from(monsterHunterPatternsExtended8.entries()),
+    ...Array.from(monsterHunterPatternsExtended9.entries()),
     ...Array.from(monsterHunterPatterns.entries()),
-  ].map(([key, value]) => [key, value] as const)
+  ]
+    .map(([key, value]) => [key, value] as const)
+    .filter(([key]) => PATTERN_KEYS.includes(key as PatternKey) || key === "Null Pattern")
 );
 
 // Organize patterns by category
 export const monsterHunterPatternsByCategory = {
-  // Basic Algorithms
-  Searching: [
-    "Binary Search",
-    "Linear Search",
-    "Binary Search on Answer",
-    "Ternary Search",
-    "Jump Search",
-    "Exponential Search",
-    "Interpolation Search",
-    "Fibonacci Search",
-  ],
-
-  Sorting: [
-    "Quick Sort",
-    "Merge Sort",
-    "Stack Sort",
-    "Heap Sort",
-    "Bubble Sort",
-    "Selection Sort",
-    "Insertion Sort",
-    "Radix Sort",
-  ],
-
-  // Data Structures
-  Trees: [
-    "Binary Search Tree",
-    "Tree",
-    "B Tree",
-    "AVL Tree",
-    "Red-Black Tree",
-    "Fenwick Tree",
-    "Segment Tree",
-  ],
-
-  Graphs: [
-    "Graph",
-    "Dijkstra",
-    "Kosaraju",
-    "Articulation Points",
-    "Bridges",
-    "Strongly Connected Components",
-    "Network Flow",
-    "Maximum Bipartite Matching",
-    "A* Search",
-    "Grid Traversal",
-    "Kruskal",
-    "Prim",
-    "Lowest Common Ancestor",
-  ],
-
-  Strings: [
-    "String",
-    "String Operations",
-    "Z Algorithm",
-    "Manacher's Algorithm",
-    "Knuth-Morris-Pratt",
-    "Rabin-Karp",
-    "Suffix Array",
-    "Suffix Tree",
-  ],
-
-  // Advanced Algorithms
-  "Dynamic Programming": [
-    "Dynamic Programming",
-    "Dynamic Programming Pattern",
-    "Dynamic Programming Fibonacci",
-    "Dynamic Programming Iterative",
-    "Dynamic Programming Coin Change",
-    "State Compression DP",
-    "Digit DP",
-    "Tree DP",
-    "Probability DP",
-  ],
-
-  "Activity Selection": ["Activity Selection"],
-
-  Dijkstra: ["Dijkstra"],
-
-  "Fractional Knapsack": ["Fractional Knapsack"],
-
-  "Huffman Coding": ["Huffman Coding"],
-
-  "Job Scheduling": ["Job Scheduling"],
-
-  Backtracking: ["Backtracking"],
-
-  // Specialized Algorithms
-  "Number Theory": [
-    "Extended Euclidean",
-    "Chinese Remainder Theorem",
-    "Sieve of Eratosthenes",
-    "Miller-Rabin Primality Test",
-  ],
-
-  "Bit Manipulation": ["Bit Manipulation"],
-
-  // Tree Algorithms
-  "Tree Algorithms": ["Heavy Light Decomposition"],
-
-  // Matrix Operations
-  "Matrix Operations": [
+  Array: [
+    "Two Sum",
+    "Two Sum Dict",
+    "Two Sum Two Pointers",
+    "Sliding Window",
+    "Two Pointers",
+    "Prefix Sums",
+    "Kadane's Algorithm",
+    "Quickselect",
+    "Union Find",
+    "Floyd Cycle Detection",
+    "Memoization",
+    "Bit Manipulation",
     "Matrix Operations",
     "Matrix Traversal",
     "Matrix Traversal Recursive",
@@ -204,130 +124,262 @@ export const monsterHunterPatternsByCategory = {
     "Matrix Spiral Recursive",
     "Matrix Chain Multiplication",
     "Matrix Exponentiation",
+    "Zigzag Traversal",
+    "Stack Sort",
+  ],
+  Searching: [
+    "Binary Search",
+    "Binary Search on Answer",
+    "Linear Search",
+    "Exponential Search",
+    "Interpolation Search",
+    "Fibonacci Search",
+    "Ternary Search",
+    "Jump Search",
   ],
 
-  // Utility Functions
-  Utility: [
-    "Two Pointers",
-    "Sliding Window",
-    "Prefix Sums",
-    "Floyd Cycle Detection",
-    "Memoization",
-    "Quickselect",
+  Sorting: [
+    "Quick Sort",
+    "Merge Sort",
+    "Heap Sort",
+    "Bubble Sort",
+    "Selection Sort",
+    "Insertion Sort",
+    "Radix Sort",
+    "Counting Sort",
+    "Bucket Sort",
+    "Shell Sort",
+  ],
+
+  "Data Structures": [
+    "Binary Search Tree",
+    "AVL Tree",
+    "B Tree",
+    "Red-Black Tree",
+    "Fenwick Tree",
+    "Segment Tree",
+    "Binary Indexed Tree",
+    "Suffix Tree",
+    "Hash Table",
+    "Linked List",
+    "Circular Linked List",
+    "DFS Linked List",
+    "BFS Linked List",
+    "Doubly Linked List",
+    "Stack Implementation",
+    "Queue Implementation",
+    "Heap Implementation",
     "Union Find",
+    "Monotonic Stack",
+    "Monotonic Queue",
+    "Trie",
+    "Trie Operations",
+    "Sparse Table",
+    "Tree Implementation",
+  ],
+
+  Algorithms: [
+    "A* Search",
+    "DFS",
+    "BFS",
+    "DFS Binary Tree",
+    "DFS Graph",
+    "Dijkstra",
+    "Kosaraju",
+    "Articulation Points",
+    "Bridges",
+    "Strongly Connected Components",
+    "Network Flow",
+    "Maximum Bipartite Matching",
+    "Grid Traversal",
+    "Kruskal",
+    "Prim",
+    "Bellman-Ford",
+    "Floyd-Warshall",
+    "Ford-Fulkerson",
+    "Hopcroft-Karp",
+    "Kahn's Topological Sort",
+    "Topological Sort",
+    "Graph Representation",
+    "Spanning Tree",
+  ],
+
+  Strings: [
+    "String Operations",
+    "Z Algorithm",
+    "Manacher's Algorithm",
+    "Knuth-Morris-Pratt",
+    "Rabin-Karp",
+    "Suffix Array",
+    "String Hashing",
+    "Palindrome Partitioning",
+    "Edit Distance",
+  ],
+
+  "Dynamic Programming": [
+    "Dynamic Programming",
+    "Dynamic Programming Pattern",
+    "Dynamic Programming Iterative",
+    "Dynamic Programming Coin Change",
+    "State Compression DP",
+    "Digit DP",
+    "Tree DP",
+    "Probability DP",
+    "Bitwise DP",
+  ],
+
+  "Greedy Algorithms": [
+    "Activity Selection",
+    "Fractional Knapsack",
+    "Huffman Coding",
+    "Job Scheduling",
+    "Interval Scheduling",
+    "Hungarian Algorithm",
+    "Greedy",
+  ],
+
+  "Other Techniques": [
+    "Backtracking",
+    "Extended Euclidean",
+    "Chinese Remainder Theorem",
+    "Sieve of Eratosthenes",
+    "Sieve of Atkin",
+    "Sieve of Sundaram",
+    "Miller-Rabin Primality Test",
+    "Fast Fourier Transform",
+    "Divide and Conquer",
+    "Karatsuba Multiplication",
+    "Fast and Slow Pointers",
+    "Heavy Light Decomposition",
+    "Lowest Common Ancestor",
+    "LCA DFS",
+    "Inorder Traversal",
+    "Recursion",
+    "Fibonacci",
+    "Null Pattern",
+    "Test Data",
   ],
 };
 
-// Verify pattern completeness
+// Type the algorithmPatterns object
+const typedAlgorithmPatterns = algorithmPatterns as Partial<Record<PatternKey, AlgorithmPattern>>;
+
+// Function to verify pattern completeness
 export function verifyPatternCompleteness() {
   const missingRegularPatterns = PATTERN_KEYS.filter((key: PatternKey) => {
-    return !algorithmPatterns[key];
+    return !typedAlgorithmPatterns[key];
   });
 
-  const missingMonsterHunterPatterns = PATTERN_KEYS.filter(
-    (key: PatternKey) => {
-      return !allPatterns.has(key);
-    }
-  );
-
-  // Log results
-  console.log("Pattern Verification Results:");
-  console.log("----------------------------");
-
-  if (missingRegularPatterns.length > 0) {
-    console.log("\nMissing Regular Patterns:");
-    missingRegularPatterns.forEach((pattern) => console.log(`- ${pattern}`));
-  } else {
-    console.log("\n✓ All patterns have regular implementations");
-  }
-
-  if (missingMonsterHunterPatterns.length > 0) {
-    console.log("\nMissing Monster Hunter Patterns:");
-    missingMonsterHunterPatterns.forEach((pattern) =>
-      console.log(`- ${pattern}`)
-    );
-  } else {
-    console.log("\n✓ All patterns have Monster Hunter implementations");
-  }
+  const missingMonsterHunterPatterns = PATTERN_KEYS.filter((key: PatternKey) => {
+    return !allPatterns.has(key);
+  });
 
   return {
     missingRegularPatterns,
     missingMonsterHunterPatterns,
     totalPatterns: PATTERN_KEYS.length,
-    regularPatternsCount: Object.keys(algorithmPatterns).length,
+    regularPatternsCount: Object.keys(typedAlgorithmPatterns).length,
     monsterHunterPatternsCount: allPatterns.size,
   };
 }
 
-// Check for similar patterns in the combined patterns
-const similarPatterns = findSimilarPatterns(Array.from(allPatterns.keys()));
+// Function to verify pattern consistency
+export function verifyPatternConsistency() {
+  // Get all patterns from different sources
+  const typePatterns = PATTERN_KEYS;
+  const monsterHunterPatterns = Array.from(allPatterns.keys());
+  const categoryPatterns = Object.values(monsterHunterPatternsByCategory).flat() as PatternKey[];
 
-// Log similar patterns if any are found
-if (Object.keys(similarPatterns).length > 0) {
-  console.log("\nSimilar Monster Hunter Patterns Found:");
-  Object.entries(similarPatterns).forEach(([pattern, similar]) => {
-    console.log(`\n${pattern}:`);
-    similar.forEach((similarPattern) => console.log(`- ${similarPattern}`));
-  });
+  // Create sets for easier comparison
+  const typeSet = new Set(typePatterns);
+  const monsterHunterSet = new Set(monsterHunterPatterns);
+  const categorySet = new Set(categoryPatterns);
+
+  // Find patterns that exist in one place but not others
+  const missingInMonsterHunter = typePatterns.filter((p) => !monsterHunterSet.has(p));
+  const missingInCategories = typePatterns.filter((p) => !categorySet.has(p));
+
+  // Find patterns with different names (case-insensitive comparison)
+  const normalizeName = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const normalizedType = new Map(typePatterns.map((p) => [normalizeName(p), p]));
+  const normalizedMonsterHunter = new Map(monsterHunterPatterns.map((p) => [normalizeName(p), p]));
+  const normalizedCategory = new Map(categoryPatterns.map((p) => [normalizeName(p), p]));
+
+  const differentNames = new Set<string>();
+
+  // Compare normalized names
+  for (const [normName, pattern] of normalizedType) {
+    if (
+      normalizedMonsterHunter.get(normName) &&
+      normalizedMonsterHunter.get(normName) !== pattern
+    ) {
+      differentNames.add(`${pattern} vs ${normalizedMonsterHunter.get(normName)}`);
+    }
+    if (normalizedCategory.get(normName) && normalizedCategory.get(normName) !== pattern) {
+      differentNames.add(`${pattern} vs ${normalizedCategory.get(normName)}`);
+    }
+  }
+
+  return {
+    missingInMonsterHunter,
+    missingInCategories,
+    differentNames: Array.from(differentNames),
+    stats: {
+      typeCount: typePatterns.length,
+      monsterHunterCount: monsterHunterPatterns.length,
+      categoryCount: categoryPatterns.length,
+    },
+  };
+}
+
+// Function to check for extra patterns
+export function checkExtraPatterns() {
+  const patternKeySet = new Set(PATTERN_KEYS);
+
+  // Check Monster Hunter patterns
+  const extraMonsterHunterPatterns = Array.from(allPatterns.keys()).filter(
+    (pattern) => !patternKeySet.has(pattern)
+  );
+
+  // Check Categories
+  const categoryPatterns = new Set(
+    Object.values(monsterHunterPatternsByCategory).flat()
+  ) as Set<PatternKey>;
+  const extraCategoryPatterns = Array.from(categoryPatterns).filter(
+    (pattern) => !patternKeySet.has(pattern)
+  );
+
+  return {
+    extraMonsterHunterPatterns,
+    extraCategoryPatterns,
+  };
+}
+
+// Function to get all validation results
+export function getValidationResults() {
+  const completeness = verifyPatternCompleteness();
+  const consistency = verifyPatternConsistency();
+  const extraPatterns = checkExtraPatterns();
+  const similarPatterns = findSimilarPatterns(Array.from(allPatterns.keys()));
+
+  return {
+    similarPatterns,
+    missingInRegular: completeness.missingRegularPatterns,
+    missingInMonsterHunter: consistency.missingInMonsterHunter,
+    missingInCategories: consistency.missingInCategories,
+    differentNames: consistency.differentNames,
+    extraPatterns: {
+      monsterHunter: extraPatterns.extraMonsterHunterPatterns,
+      categories: extraPatterns.extraCategoryPatterns,
+    },
+    stats: {
+      totalPatterns: completeness.totalPatterns,
+      regularPatternsCount: completeness.regularPatternsCount,
+      monsterHunterPatternsCount: completeness.monsterHunterPatternsCount,
+      categoryPatternsCount: consistency.stats.categoryCount,
+    },
+  };
 }
 
 // Export the combined patterns
 export const allMonsterHunterPatterns = allPatterns;
-
-// Check for inconsistencies between pattern keys
-const regularPatternKeys = Object.keys(algorithmPatterns);
-const monsterHunterPatternKeys = Array.from(allPatterns.keys());
-
-// Find patterns that exist in regular implementations but not in Monster Hunter patterns
-const missingInMonsterHunter = regularPatternKeys.filter(
-  (pattern: string) => !monsterHunterPatternKeys.includes(pattern as PatternKey)
-);
-
-// Find patterns that exist in Monster Hunter patterns but not in regular implementations
-const missingInRegular = monsterHunterPatternKeys.filter(
-  (pattern: PatternKey) => !regularPatternKeys.includes(pattern)
-);
-
-// Find patterns with different names
-const differentNames = regularPatternKeys.filter((pattern: string) => {
-  const monsterHunterPattern = monsterHunterPatternKeys.find(
-    (mhPattern: PatternKey) => mhPattern.toLowerCase() === pattern.toLowerCase()
-  );
-  return monsterHunterPattern && monsterHunterPattern !== pattern;
-});
-
-// Log results
-console.log("Pattern Inconsistency Check Results:");
-console.log("----------------------------------");
-
-if (missingInMonsterHunter.length > 0) {
-  console.log("\nPatterns missing in Monster Hunter implementations:");
-  missingInMonsterHunter.forEach((pattern) => console.log(`- ${pattern}`));
-}
-
-if (missingInRegular.length > 0) {
-  console.log("\nPatterns missing in regular implementations:");
-  missingInRegular.forEach((pattern) => console.log(`- ${pattern}`));
-}
-
-if (differentNames.length > 0) {
-  console.log("\nPatterns with different names:");
-  differentNames.forEach((pattern) => {
-    const monsterHunterPattern = monsterHunterPatternKeys.find(
-      (mhPattern) => mhPattern.toLowerCase() === pattern.toLowerCase()
-    );
-    console.log(
-      `- Regular: "${pattern}" vs Monster Hunter: "${monsterHunterPattern}"`
-    );
-  });
-}
-
-console.log("\nSummary:");
-console.log("--------");
-console.log(`Total regular patterns: ${regularPatternKeys.length}`);
-console.log(
-  `Total Monster Hunter patterns: ${monsterHunterPatternKeys.length}`
-);
-console.log(`Missing in regular: ${missingInRegular.length}`);
-console.log(`Missing in Monster Hunter: ${missingInMonsterHunter.length}`);
-console.log(`Different names: ${differentNames.length}`);

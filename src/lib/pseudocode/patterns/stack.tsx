@@ -8,11 +8,11 @@ export const StackPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO
-      (Last-In-First-Out) operations
+      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO (Last-In-First-Out) operations
     </div>
 
-    <PseudocodeDisplay code={`# Stack: LIFO (Last-In-First-Out) data structure
+    <PseudocodeDisplay
+      code={`# Stack: LIFO (Last-In-First-Out) data structure
 # Input: Elements to be pushed onto stack
 # Output: Elements popped from stack in reverse order
 
@@ -64,7 +64,8 @@ Algorithm STACK-OPERATIONS
 # Step 5: PEEK(S)
 #         Returns 2
 #
-# Output: Elements popped in order [3, 2, 1]`} />
+# Output: Elements popped in order [3, 2, 1]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Operations:</span>

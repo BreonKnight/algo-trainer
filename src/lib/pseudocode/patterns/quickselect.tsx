@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const QuickselectPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Quickselect</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Quickselect
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) average, O(n²) worst &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp;
-      Use: Find k-th smallest element
+      Time: O(n) average, O(n²) worst &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find k-th
+      smallest element
     </div>
 
-    <PseudocodeDisplay code={`QUICKSELECT(A, k)
+    <PseudocodeDisplay
+      code={`QUICKSELECT(A, k)
     return SELECT(A, 1, A.length, k)
 
 SELECT(A, p, r, k)
@@ -44,7 +47,8 @@ PARTITION(A, p, r)
 //   i = 3 - 1 + 1 = 3
 //   k = i, return A[3] = 3
 //
-// Output: 3`} />
+// Output: 3`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -8,11 +8,11 @@ export const HeavyLightDecompositionPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) per query &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Tree
-      path queries
+      Time: O(log n) per query &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Tree path queries
     </div>
 
-    <PseudocodeDisplay code={`HLD(G)
+    <PseudocodeDisplay
+      code={`HLD(G)
     let size[1‥n] be a new array
     let parent[1‥n] be a new array
     let depth[1‥n] be a new array
@@ -60,7 +60,8 @@ DFS-HLD(G, u, h)
 //   head = [1, 1, 3, 1, 1, 3]
 //   pos = [1, 2, 4, 3, 5, 6]
 //
-// Output: Decomposed tree with heavy paths`} />
+// Output: Decomposed tree with heavy paths`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -1,8 +1,9 @@
-import type { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const avlTreePattern: AlgorithmPattern = {
   title: "AVL Tree",
-  description: "AVL Tree is a self-balancing binary search tree.",
+  description:
+    "A pattern for implementing and using an AVL tree, a self-balancing binary search tree that maintains O(log n) height.",
   timeComplexity: "O(log n)",
   spaceComplexity: "O(n)",
   pseudocode: `
@@ -476,5 +477,5 @@ export const avlTreePattern: AlgorithmPattern = {
             return False
         return self.is_heap(node.left)
   `,
-  category: "Tree",
+  category: "Data Structure",
 };

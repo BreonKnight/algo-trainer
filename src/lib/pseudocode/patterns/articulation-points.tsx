@@ -4,15 +4,19 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const ArticulationPointsPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Articulation Points</span>
-      <span className="ml-2 text-xs text-secondary">(Graph)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Articulation Points
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find vertices
-      whose removal increases connected components
+      Time: O(V + E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find vertices whose removal
+      increases connected components
     </div>
 
-    <PseudocodeDisplay code={`# Articulation Points: Find vertices whose removal increases connected components
+    <PseudocodeDisplay
+      code={`# Articulation Points: Find vertices whose removal increases connected components
 # Input: Undirected graph G = (V, E)
 # Output: Set of articulation points
 
@@ -72,7 +76,8 @@ Algorithm DFS-AP(u)
 #         - 1 is root with 2 children
 #         - No other vertices satisfy conditions
 #
-# Output: {1}`} />
+# Output: {1}`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

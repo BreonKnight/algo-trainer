@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const DynamicProgrammingIterativePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Iterative DP</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Iterative DP
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solving problems
-      with bottom-up approach
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solving problems with bottom-up
+      approach
     </div>
 
-    <PseudocodeDisplay code={`ITERATIVE-DP(n)
+    <PseudocodeDisplay
+      code={`ITERATIVE-DP(n)
     # Initialize DP array with base cases
     dp[0] ← base_case_0
     dp[1] ← base_case_1
@@ -27,7 +30,8 @@ export const DynamicProgrammingIterativePattern = () => (
 # Input: n = 5
 # Base cases: dp[0] = 0, dp[1] = 1
 # Compute: dp[i] = dp[i-1] + dp[i-2]
-# Output: dp[5] = 5`} />
+# Output: dp[5] = 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

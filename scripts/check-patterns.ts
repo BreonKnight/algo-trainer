@@ -97,9 +97,7 @@ function checkPatternMapping() {
   const patternKeys = Object.keys(patternMapping) as PatternKey[];
 
   // Check if all patterns have regular implementations
-  const missingRegularPatterns = patternKeys.filter(
-    (key) => !algorithmPatterns[key]
-  );
+  const missingRegularPatterns = patternKeys.filter((key) => !algorithmPatterns[key]);
 
   // Check if all patterns have Monster Hunter implementations
   const missingMonsterHunterPatterns = patternKeys.filter(
@@ -107,14 +105,10 @@ function checkPatternMapping() {
   );
 
   // Check if all patterns have test data
-  const missingTestData = patternKeys.filter(
-    (key) => !monsterHunterTestData.has(key)
-  );
+  const missingTestData = patternKeys.filter((key) => !monsterHunterTestData.has(key));
 
   // Check if all patterns have explanations
-  const missingExplanations = patternKeys.filter(
-    (key) => !(key in monsterHunterExplanations)
-  );
+  const missingExplanations = patternKeys.filter((key) => !(key in monsterHunterExplanations));
 
   // Check if all patterns have mapping entries
   const missingMappings = patternKeys.filter((key) => !(key in patternMapping));
@@ -129,9 +123,7 @@ function checkPatternMapping() {
 
   if (missingMonsterHunterPatterns.length > 0) {
     console.log("\nMissing Monster Hunter Patterns:");
-    missingMonsterHunterPatterns.forEach((pattern) =>
-      console.log(`- ${pattern}`)
-    );
+    missingMonsterHunterPatterns.forEach((pattern) => console.log(`- ${pattern}`));
   } else {
     console.log("\n✓ All patterns have Monster Hunter implementations");
   }
@@ -159,13 +151,9 @@ function checkPatternMapping() {
 
   // Check for inconsistencies in pattern names
   const regularPatternKeys = Object.keys(algorithmPatterns) as PatternKey[];
-  const monsterHunterPatternKeys = Array.from(
-    allMonsterHunterPatterns.keys()
-  ) as PatternKey[];
+  const monsterHunterPatternKeys = Array.from(allMonsterHunterPatterns.keys()) as PatternKey[];
   const testDataKeys = Array.from(monsterHunterTestData.keys()) as PatternKey[];
-  const explanationKeys = Object.keys(
-    monsterHunterExplanations
-  ) as PatternKey[];
+  const explanationKeys = Object.keys(monsterHunterExplanations) as PatternKey[];
   const mappingKeys = Object.keys(patternMapping) as PatternKey[];
 
   const allKeys = new Set([
@@ -189,8 +177,7 @@ function checkPatternMapping() {
   allKeys.forEach((key) => {
     const missingIn: string[] = [];
     if (!regularPatternKeys.includes(key)) missingIn.push("Regular Patterns");
-    if (!monsterHunterPatternKeys.includes(key))
-      missingIn.push("Monster Hunter Patterns");
+    if (!monsterHunterPatternKeys.includes(key)) missingIn.push("Monster Hunter Patterns");
     if (!testDataKeys.includes(key)) missingIn.push("Test Data");
     if (!explanationKeys.includes(key)) missingIn.push("Explanations");
     if (!mappingKeys.includes(key)) missingIn.push("Mappings");

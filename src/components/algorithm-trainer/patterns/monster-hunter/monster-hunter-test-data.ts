@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const monsterHunterTestDataPattern: AlgorithmPattern = {
   title: "Monster Hunter Test Data",
@@ -36,114 +36,107 @@ function generateTestData():
     }
   `,
   example: `
-// Example usage:
-const testDataPatternPatternPatternPattern = generateTestData();
-console.log(testData.basic);    // Basic monster configurations
-console.log(testData.advanced); // Advanced monster configurations
-console.log(testData.edge);     // Edge case configurations
+# Example usage:
+test_data = generate_test_data()
+print(test_data["basic"])     # Basic monster configurations
+print(test_data["advanced"])  # Advanced monster configurations
+print(test_data["edge"])      # Edge case configurations
   `,
-  implementation: `
-interface BasicMonster {
-  time: number;
-  reward: number;
-}
+  implementation: `from typing import TypedDict, List, Dict
+import random
 
-interface AdvancedMonster {
-  id: number;
-  health: number;
-  weakness: string;
-  resistance: string;
-}
+class BasicMonster(TypedDict):
+    time: int
+    reward: int
 
-interface TestData {
-  basic: BasicMonster[];
-  advanced: AdvancedMonster[];
-  edge: BasicMonster[];
-}
+class AdvancedMonster(TypedDict):
+    id: int
+    health: int
+    weakness: str
+    resistance: str
 
-function generateTestData(): TestData {
-  // Basic test cases
-  const basicMonsters: BasicMonster[] = [
-    { time: 2, reward: 10 },
-    { time: 3, reward: 15 },
-    { time: 5, reward: 20 }
-  ];
-  
-  // Advanced test cases with elemental properties
-  const advancedMonsters: AdvancedMonster[] = [
-    { id: 1, health: 100, weakness: 'fire', resistance: 'water' },
-    { id: 2, health: 150, weakness: 'ice', resistance: 'fire' },
-    { id: 3, health: 200, weakness: 'thunder', resistance: 'ice' }
-  ];
-  
-  // Edge cases
-  const edgeMonsters: BasicMonster[] = [
-    { time: 1, reward: 1 },
-    { time: 1000, reward: 1000 },
-    { time: 0, reward: 0 }
-  ];
-  
-  return {
-    basic: basicMonsters,
-    advanced: advancedMonsters,
-    edge: edgeMonsters
-  };
-}
+class TestData(TypedDict):
+    basic: List[BasicMonster]
+    advanced: List[AdvancedMonster]
+    edge: List[BasicMonster]
 
-// Helper function to generate random test data
-function generateRandomTestData(count: number): TestData {
-  const elementsPatternPatternPatternPattern = ['fire', 'ice', 'thunder', 'water', 'dragon'];
-  
-  const basicMonsters: BasicMonster[] = Array.from({ length: count }, () => ({
-    time: Math.floor(Math.random() * 10) + 1,
-    reward: Math.floor(Math.random() * 100) + 1
-  }));
-  
-  const advancedMonsters: AdvancedMonster[] = Array.from({ length: count }, (_, i) => ({
-    id: i + 1,
-    health: Math.floor(Math.random() * 200) + 50,
-    weakness: elements[Math.floor(Math.random() * elements.length)],
-    resistance: elements[Math.floor(Math.random() * elements.length)]
-  }));
-  
-  const edgeMonsters: BasicMonster[] = [
-    { time: 1, reward: 1 },
-    { time: 1000, reward: 1000 },
-    { time: 0, reward: 0 }
-  ];
-  
-  return {
-    basic: basicMonsters,
-    advanced: advancedMonsters,
-    edge: edgeMonsters
-  };
-}
-
-// Helper function to validate test data
-function validateTestData(data: TestData): boolean {
-  // Validate basic monsters
-  for (const monster of data.basic) {
-    if (monster.time < 0 || monster.reward < 0) {
-      return false;
+def generate_test_data() -> TestData:
+    # Basic test cases
+    basic_monsters: List[BasicMonster] = [
+        {"time": 2, "reward": 10},
+        {"time": 3, "reward": 15},
+        {"time": 5, "reward": 20}
+    ]
+    
+    # Advanced test cases with elemental properties
+    advanced_monsters: List[AdvancedMonster] = [
+        {"id": 1, "health": 100, "weakness": "fire", "resistance": "water"},
+        {"id": 2, "health": 150, "weakness": "ice", "resistance": "fire"},
+        {"id": 3, "health": 200, "weakness": "thunder", "resistance": "ice"}
+    ]
+    
+    # Edge cases
+    edge_monsters: List[BasicMonster] = [
+        {"time": 1, "reward": 1},
+        {"time": 1000, "reward": 1000},
+        {"time": 0, "reward": 0}
+    ]
+    
+    return {
+        "basic": basic_monsters,
+        "advanced": advanced_monsters,
+        "edge": edge_monsters
     }
-  }
-  
-  // Validate advanced monsters
-  for (const monster of data.advanced) {
-    if (monster.health <= 0 || !monster.weakness || !monster.resistance) {
-      return false;
+
+def generate_random_test_data(count: int) -> TestData:
+    elements = ["fire", "ice", "thunder", "water", "dragon"]
+    
+    basic_monsters = [
+        {
+            "time": random.randint(1, 10),
+            "reward": random.randint(1, 100)
+        }
+        for _ in range(count)
+    ]
+    
+    advanced_monsters = [
+        {
+            "id": i + 1,
+            "health": random.randint(50, 250),
+            "weakness": random.choice(elements),
+            "resistance": random.choice(elements)
+        }
+        for i in range(count)
+    ]
+    
+    edge_monsters = [
+        {"time": 1, "reward": 1},
+        {"time": 1000, "reward": 1000},
+        {"time": 0, "reward": 0}
+    ]
+    
+    return {
+        "basic": basic_monsters,
+        "advanced": advanced_monsters,
+        "edge": edge_monsters
     }
-  }
-  
-  // Validate edge cases
-  for (const monster of data.edge) {
-    if (monster.time < 0 || monster.reward < 0) {
-      return false;
-    }
-  }
-  
-  return true;
-}
-  `,
+
+def validate_test_data(data: TestData) -> bool:
+    # Validate basic monsters
+    for monster in data["basic"]:
+        if monster["time"] < 0 or monster["reward"] < 0:
+            return False
+    
+    # Validate advanced monsters
+    for monster in data["advanced"]:
+        if monster["health"] <= 0 or not monster["weakness"] or not monster["resistance"]:
+            return False
+    
+    # Validate edge cases
+    for monster in data["edge"]:
+        if monster["time"] < 0 or monster["reward"] < 0:
+            return False
+    
+    return True`,
   category: "monster-hunter",
 };

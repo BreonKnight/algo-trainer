@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { FaChartLine, FaBook, FaPython, FaCode } from "react-icons/fa";
+import { FaChartLine, FaBook, FaPython, FaCode, FaGraduationCap } from "react-icons/fa";
 import { cn } from "@/lib/utils";
-import { useTheme } from "../../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 
 interface NavigationBarProps {
   className?: string;
@@ -64,6 +64,18 @@ export function NavigationBar({ className }: NavigationBarProps) {
       >
         <FaCode className="h-4 w-4" />
         <span className="text-sm font-medium">Visualizer</span>
+      </Link>
+      <Link
+        to="/algorithm-learning"
+        className={cn(
+          "flex items-center gap-2 px-4 py-3 sm:py-2 rounded-lg transition-colors w-full sm:w-auto justify-center",
+          theme === "nord"
+            ? "text-white/90 hover:text-white hover:bg-white/10"
+            : "text-main hover:bg-secondary/20"
+        )}
+      >
+        <FaGraduationCap className="h-4 w-4" />
+        <span className="text-sm font-medium">Algorithms</span>
       </Link>
     </nav>
   );

@@ -8,11 +8,11 @@ export const MatrixSpiralTraversalPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(mn) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Traverse matrix
-      in spiral order
+      Time: O(mn) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Traverse matrix in spiral order
     </div>
 
-    <PseudocodeDisplay code={`SPIRAL-TRAVERSE(A)
+    <PseudocodeDisplay
+      code={`SPIRAL-TRAVERSE(A)
     let m, n be the dimensions of A
     let result[1‥m·n] be a new array
     let top ← 1, bottom ← m
@@ -55,7 +55,8 @@ export const MatrixSpiralTraversalPattern = () => (
 // 4. Left column: 5
 // 5. Middle: 6, 7
 //
-// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`} />
+// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

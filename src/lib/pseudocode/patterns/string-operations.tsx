@@ -5,13 +5,10 @@ export const StringOperationsPattern = () => (
   <div>
     <div className="mb-2">
       <span className="text-accent font-bold">String Operations</span>
-      <span className="ml-2 text-xs text-secondary">
-        (Basic String Manipulation)
-      </span>
+      <span className="ml-2 text-xs text-secondary">(Basic String Manipulation)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: String
-      manipulation
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: String manipulation
     </div>
 
     <PseudocodeDisplay
@@ -57,16 +54,14 @@ TO_LOWER(s):
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Concatenation:</span>{" "}
-        Combine strings
+        <span className="font-semibold text-accent">Concatenation:</span> Combine strings
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Substring:</span> Extract
-        portion
+        <span className="font-semibold text-accent">Substring:</span> Extract portion
       </span>
     </div>
     <div className="flex items-start mb-1">
@@ -78,9 +73,7 @@ TO_LOWER(s):
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: String Operations
-      </span>
+      <span className="font-semibold text-accent">Example: String Operations</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: "Hello World"
 

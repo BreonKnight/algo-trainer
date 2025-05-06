@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const QuickSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Quick Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Sorting Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Quick Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(log n) &nbsp;|&nbsp; Use: Efficient
-      in-place sorting
+      Time: O(n²) &nbsp;|&nbsp; Space: O(log n) &nbsp;|&nbsp; Use: Efficient in-place sorting
     </div>
 
-    <PseudocodeDisplay code={`// Main quick sort function
+    <PseudocodeDisplay
+      code={`// Main quick sort function
 QUICK-SORT(array, start, end):
     # If array has more than one element
     if start < end:
@@ -42,45 +44,40 @@ PARTITION(array, start, end):
     # Place pivot in correct position
     swap array[smaller_element_pointer + 1] with array[end]
     # Return pivot position
-    return smaller_element_pointer + 1`} />
+    return smaller_element_pointer + 1`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Choose:</span> Select pivot
-        element
+        <span className="font-semibold text-accent">Choose:</span> Select pivot element
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Partition:</span> Move
-        elements around pivot
+        <span className="font-semibold text-accent">Partition:</span> Move elements around pivot
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Sort:</span> Recursively
-        sort each side
+        <span className="font-semibold text-accent">Sort:</span> Recursively sort each side
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">4.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Combine:</span> No combine
-        step needed
+        <span className="font-semibold text-accent">Combine:</span> No combine step needed
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Sorting [2, 8, 7, 1, 3, 5, 6, 4]
-      </span>
+      <span className="font-semibold text-accent">Example: Sorting [2, 8, 7, 1, 3, 5, 6, 4]</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Step 1: Initial array
 [2, 8, 7, 1, 3, 5, 6, 4]
@@ -100,9 +97,7 @@ Final result:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Partition Process
-      </span>
+      <span className="font-semibold text-accent">Example: Partition Process</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Partitioning [2, 8, 7, 1, 3, 5, 6, 4] with pivot = 4:
 

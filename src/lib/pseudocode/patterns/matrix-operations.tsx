@@ -8,11 +8,11 @@ export const MatrixOperationsPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Matrix
-      multiplication and operations
+      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Matrix multiplication and operations
     </div>
 
-    <PseudocodeDisplay code={`MATRIX-MULTIPLY(A, B)
+    <PseudocodeDisplay
+      code={`MATRIX-MULTIPLY(A, B)
     let m, n, p be the dimensions of A and B
     let C[1‥m, 1‥p] be a new matrix
     for i ← 1 to m
@@ -64,7 +64,8 @@ MATRIX-ADD(A, B)
 //     [3 4]        [7 8]
 //
 // Result: [6  8]
-//         [10 12]`} />
+//         [10 12]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
@@ -72,9 +73,7 @@ MATRIX-ADD(A, B)
     <div className="mb-2 text-sm">
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Multiplication: Three nested loops for dot product calculation
-        </span>
+        <span>Multiplication: Three nested loops for dot product calculation</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />

@@ -24,11 +24,7 @@ const algorithmCategories = {
     "Selection Sort",
     "Insertion Sort",
   ],
-  "Search Algorithms": [
-    "Binary Search",
-    "Binary Search on Answer",
-    "Linear Search",
-  ],
+  "Search Algorithms": ["Binary Search", "Binary Search on Answer", "Linear Search"],
   "Dynamic Programming": [
     "Dynamic Programming",
     "Dynamic Programming Fibonacci",
@@ -72,12 +68,7 @@ const algorithmCategories = {
     "Prefix Sum",
     "Kadane's Algorithm",
   ],
-  "String Algorithms": [
-    "Rabin-Karp",
-    "KMP Algorithm",
-    "Manacher's Algorithm",
-    "Z Algorithm",
-  ],
+  "String Algorithms": ["Rabin-Karp", "KMP Algorithm", "Manacher's Algorithm", "Z Algorithm"],
   "Matrix Operations": [
     "Matrix Traversal",
     "Matrix Traversal Recursive",

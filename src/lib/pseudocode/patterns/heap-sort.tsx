@@ -8,11 +8,12 @@ export const HeapSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: In-place
-      sorting with guaranteed performance
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: In-place sorting with guaranteed
+      performance
     </div>
 
-    <PseudocodeDisplay code={`// Standard Heap Sort
+    <PseudocodeDisplay
+      code={`// Standard Heap Sort
 HEAP-SORT(A):
     n = len(A)
 
@@ -101,37 +102,33 @@ HEAPIFY-COMPARATOR(A, n, i, compare):
     # If root is not target, swap and heapify
     if target != i:
         swap(A[i], A[target])
-        HEAPIFY-COMPARATOR(A, n, target, compare)`} />
+        HEAPIFY-COMPARATOR(A, n, target, compare)`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Build:</span> Construct max
-        heap from array
+        <span className="font-semibold text-accent">Build:</span> Construct max heap from array
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Extract:</span> Remove max
-        element and heapify
+        <span className="font-semibold text-accent">Extract:</span> Remove max element and heapify
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Repeat:</span> Continue
-        until array is sorted
+        <span className="font-semibold text-accent">Repeat:</span> Continue until array is sorted
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Heap Sort
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Heap Sort</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: [4, 10, 3, 5, 1]
 
@@ -167,9 +164,7 @@ Output: [10, 5, 4, 3, 1]`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Custom Comparator
-      </span>
+      <span className="font-semibold text-accent">Example: Custom Comparator</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input: ["banana", "apple", "cherry", "date"]
 Comparator: length

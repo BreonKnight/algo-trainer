@@ -6,14 +6,9 @@ import { MonsterHunterGuide } from "./MonsterHunterGuide";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "../ui/button";
 import { Book, Sword, X } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { AlgorithmSelector } from "./AlgorithmSelector";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { PatternKey } from "./types";
 import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
 import { categoryColors } from "@/lib/patterns";
@@ -25,9 +20,7 @@ type PseudocodePatterns = Record<string, () => JSX.Element>;
 // Get category for a pattern
 const getPatternCategory = (pattern: PatternKey): string => {
   // Find the category that contains this pattern
-  for (const [category, patterns] of Object.entries(
-    monsterHunterPatternsByCategory
-  )) {
+  for (const [category, patterns] of Object.entries(monsterHunterPatternsByCategory)) {
     if (patterns.includes(pattern)) {
       return category;
     }
@@ -41,11 +34,7 @@ interface PatternCardProps {
   patternNumber?: number;
 }
 
-export function PatternCard({
-  currentPattern,
-  onPatternChange,
-  patternNumber,
-}: PatternCardProps) {
+export function PatternCard({ currentPattern, onPatternChange, patternNumber }: PatternCardProps) {
   const [showMonsterGuide, setShowMonsterGuide] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const category = getPatternCategory(currentPattern);
@@ -106,8 +95,7 @@ export function PatternCard({
     }
 
     // If not found, try to map the name
-    const mappedName =
-      patternMapping[patternName as keyof typeof patternMapping];
+    const mappedName = patternMapping[patternName as keyof typeof patternMapping];
     if (mappedName) {
       return typedPseudocodePatterns[mappedName];
     }
@@ -129,10 +117,7 @@ export function PatternCard({
         )}
         onClick={(e) => {
           // Only close if clicking outside the content area
-          if (
-            contentRef.current &&
-            !contentRef.current.contains(e.target as Node)
-          ) {
+          if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
             setIsExpanded(false);
           }
         }}
@@ -160,17 +145,20 @@ export function PatternCard({
                         }
                   }
                 >
-                  {currentPattern}
+                  <div className="inline-block text-center">
+                    <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                      {currentPattern}
+                    </span>
+                    <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                  </div>
                 </h2>
                 <span
                   className={cn(
-                    categoryColors[category as keyof typeof categoryColors] ||
-                      "text-secondary/80",
+                    categoryColors[category as keyof typeof categoryColors] || "text-secondary/80",
                     "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium"
                   )}
                 >
-                  {category}{" "}
-                  {patternNumber !== undefined && `#${patternNumber}`}
+                  {category} {patternNumber !== undefined && `#${patternNumber}`}
                 </span>
               </div>
               <Button
@@ -202,9 +190,7 @@ export function PatternCard({
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
-                      {showMonsterGuide
-                        ? "Show Pseudocode"
-                        : "Show Monster Guide"}
+                      {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -246,19 +232,20 @@ export function PatternCard({
                         } else {
                           return (
                             <div className="pseudocode">
-                              <span className="algorithm-title">
-                                {currentPattern}
-                              </span>
-                              <span className="algorithm-type">{category}</span>
+                              <div className="inline-block text-center">
+                                <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                                  {currentPattern}
+                                </span>
+                                <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                              </div>
+                              <span className="algorithm-type font-bold">{category}</span>
                               <span className="algorithm-meta">
-                                Time: O(n) | Space: O(n) | Use: Algorithm
-                                implementation
+                                Time: O(n) | Space: O(n) | Use: Algorithm implementation
                               </span>
                               <div className="nested">
                                 <span
                                   dangerouslySetInnerHTML={{
-                                    __html:
-                                      pseudo || "Pseudocode coming soon...",
+                                    __html: pseudo || "Pseudocode coming soon...",
                                   }}
                                 />
                               </div>
@@ -305,12 +292,16 @@ export function PatternCard({
                     }
               }
             >
-              {currentPattern}
+              <div className="inline-block text-center">
+                <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                  {currentPattern}
+                </span>
+                <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+              </div>
             </h2>
             <span
               className={cn(
-                categoryColors[category as keyof typeof categoryColors] ||
-                  "text-secondary/80",
+                categoryColors[category as keyof typeof categoryColors] || "text-secondary/80",
                 "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium"
               )}
             >
@@ -344,10 +335,7 @@ export function PatternCard({
             </TooltipProvider>
           </div>
           <div className="w-full sm:w-auto">
-            <AlgorithmSelector
-              currentPattern={currentPattern}
-              onPatternChange={onPatternChange}
-            />
+            <AlgorithmSelector currentPattern={currentPattern} onPatternChange={onPatternChange} />
           </div>
         </div>
       </div>
@@ -376,13 +364,15 @@ export function PatternCard({
                     } else {
                       return (
                         <div className="pseudocode">
-                          <span className="algorithm-title">
-                            {currentPattern}
-                          </span>
-                          <span className="algorithm-type">{category}</span>
+                          <div className="inline-block text-center">
+                            <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                              {currentPattern}
+                            </span>
+                            <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                          </div>
+                          <span className="algorithm-type font-bold">{category}</span>
                           <span className="algorithm-meta">
-                            Time: O(n) | Space: O(n) | Use: Algorithm
-                            implementation
+                            Time: O(n) | Space: O(n) | Use: Algorithm implementation
                           </span>
                           <div className="nested">
                             <span
@@ -409,10 +399,7 @@ export function PatternCard({
                 const maxHeight = 800;
                 const onMove = (moveEvent: MouseEvent) => {
                   const delta = moveEvent.clientY - startY;
-                  const newHeight = Math.max(
-                    300,
-                    Math.min(startHeight + delta, maxHeight)
-                  );
+                  const newHeight = Math.max(300, Math.min(startHeight + delta, maxHeight));
                   setDescHeight(newHeight);
                 };
                 const onUp = () => {

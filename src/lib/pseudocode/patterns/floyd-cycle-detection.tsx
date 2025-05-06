@@ -8,11 +8,11 @@ export const FloydCycleDetectionPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Detect cycles in
-      linked lists
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Detect cycles in linked lists
     </div>
 
-    <PseudocodeDisplay code={`FLOYD-CYCLE-DETECTION(head)
+    <PseudocodeDisplay
+      code={`FLOYD-CYCLE-DETECTION(head)
     let slow ← head
     let fast ← head
 
@@ -67,7 +67,8 @@ FIND-CYCLE-START(head)
 //   slow = 2, fast = 3
 //   slow = 3, fast = 3 (cycle start found)
 //
-// Output: Cycle exists, starts at node 3`} />
+// Output: Cycle exists, starts at node 3`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

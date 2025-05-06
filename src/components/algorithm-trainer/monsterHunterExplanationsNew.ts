@@ -209,8 +209,7 @@ export const monsterHunterExplanations: Partial<
   },
   "Prefix Sums": {
     title: "Cumulative Monster Stats",
-    description:
-      "Calculate running totals of monster statistics to enable quick range queries.",
+    description: "Calculate running totals of monster statistics to enable quick range queries.",
     example:
       "Precompute cumulative damage dealt by monsters to quickly find total damage in any time range.",
     tips: [
@@ -251,8 +250,7 @@ export const monsterHunterExplanations: Partial<
   },
   "Floyd-Warshall": {
     title: "All-Pairs Monster Routes",
-    description:
-      "Calculate shortest paths between all pairs of locations in monster territories.",
+    description: "Calculate shortest paths between all pairs of locations in monster territories.",
     example:
       "Find the shortest paths between all hunting camps and monster nests, considering all possible intermediate stops.",
     tips: [
@@ -265,8 +263,7 @@ export const monsterHunterExplanations: Partial<
   },
   "Union Find": {
     title: "Monster Territory Grouping",
-    description:
-      "Track and merge monster territories while maintaining efficient group lookups.",
+    description: "Track and merge monster territories while maintaining efficient group lookups.",
     example:
       "Group monsters into territories and quickly determine if two monsters belong to the same territory.",
     tips: [
@@ -279,8 +276,7 @@ export const monsterHunterExplanations: Partial<
   },
   "Topological Sort": {
     title: "Monster Hunt Prerequisite Planner",
-    description:
-      "Organize monster hunts based on their prerequisites and dependencies.",
+    description: "Organize monster hunts based on their prerequisites and dependencies.",
     example:
       "Plan a sequence of hunts where some monsters must be defeated before others can be challenged.",
     tips: [

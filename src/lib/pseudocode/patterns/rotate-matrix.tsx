@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const RotateMatrixPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Rotate Matrix</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Matrix Operations
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Rotate matrix 90
-      degrees
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Matrix transformations and operations
     </div>
 
-    <PseudocodeDisplay code={`ROTATE-CLOCKWISE(A)
+    <PseudocodeDisplay
+      code={`ROTATE-CLOCKWISE(A)
 1  n = A.rows
 2  // Transpose the matrix
 3  for i = 1 to n
@@ -59,23 +61,34 @@ ROTATE-COUNTERCLOCKWISE(A)
 // Step 2: Reverse columns
 //         [[3, 6, 9],
 //          [2, 5, 8],
-//          [1, 4, 7]]`} />
+//          [1, 4, 7]]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
     </div>
     <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Transpose: Swap elements across diagonal</span>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">1.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Transpose:</span> Swap elements across
+          diagonal
+        </span>
       </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Clockwise: Reverse each row</span>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">2.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Clockwise:</span> Reverse each row
+        </span>
       </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Counterclockwise: Reverse each column</span>
+      <div className="flex items-start mb-1">
+        <span className="font-bold text-main mr-2">3.</span>
+        <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
+        <span>
+          <span className="font-semibold text-accent">Counterclockwise:</span> Reverse each column
+        </span>
       </div>
     </div>
   </div>

@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const ChineseRemainderTheoremPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Chinese Remainder Theorem</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Chinese Remainder Theorem
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solve system of
-      congruences
+      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Solve system of congruences
     </div>
 
-    <PseudocodeDisplay code={`CRT(a, m)
+    <PseudocodeDisplay
+      code={`CRT(a, m)
     let n be the length of a
     let M ← 1
     for i ← 1 to n
@@ -60,7 +62,8 @@ EXTENDED-EUCLID(a, b)
 //
 // x = 2·35·2 + 3·21·1 + 2·15·1 = 233
 //
-// Output: 233 mod 105 = 23`} />
+// Output: 233 mod 105 = 23`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
@@ -72,9 +75,7 @@ EXTENDED-EUCLID(a, b)
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Calculate: Modular inverses using extended Euclidean algorithm
-        </span>
+        <span>Calculate: Modular inverses using extended Euclidean algorithm</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />

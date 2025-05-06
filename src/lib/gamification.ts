@@ -143,9 +143,7 @@ class GamificationService {
     today.setHours(0, 0, 0, 0);
     lastActive.setHours(0, 0, 0, 0);
 
-    const diffDays = Math.floor(
-      (today.getTime() - lastActive.getTime()) / (1000 * 60 * 60 * 24)
-    );
+    const diffDays = Math.floor((today.getTime() - lastActive.getTime()) / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) {
       // Already logged in today, no streak update needed
@@ -189,9 +187,7 @@ class GamificationService {
   // Record algorithm attempt
   public recordAlgorithmAttempt(algorithmId: string, success: boolean): void {
     // Update algorithm progress
-    let algorithmProgress = this.userProgress.algorithmProgress.find(
-      (p) => p.id === algorithmId
-    );
+    let algorithmProgress = this.userProgress.algorithmProgress.find((p) => p.id === algorithmId);
 
     if (!algorithmProgress) {
       algorithmProgress = {
@@ -206,8 +202,7 @@ class GamificationService {
 
     if (success) {
       algorithmProgress.progress++;
-      algorithmProgress.completed =
-        algorithmProgress.progress >= algorithmProgress.maxProgress;
+      algorithmProgress.completed = algorithmProgress.progress >= algorithmProgress.maxProgress;
 
       if (!this.userProgress.completedAlgorithms.includes(algorithmId)) {
         this.userProgress.completedAlgorithms.push(algorithmId);
@@ -216,20 +211,13 @@ class GamificationService {
     }
 
     // Update algorithm explorer badge
-    this.updateBadgeProgress(
-      "algorithm-explorer",
-      this.userProgress.completedAlgorithms.length
-    );
+    this.updateBadgeProgress("algorithm-explorer", this.userProgress.completedAlgorithms.length);
 
     this.saveProgress();
   }
 
   // Record code execution
-  public recordCodeExecution(
-    linesOfCode: number,
-    executionTime: number,
-    hasError: boolean
-  ): void {
+  public recordCodeExecution(linesOfCode: number, executionTime: number, hasError: boolean): void {
     // Points for running code
     this.addPoints(5);
 

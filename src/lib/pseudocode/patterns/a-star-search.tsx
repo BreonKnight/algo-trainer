@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const AStarSearchPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">A* Search</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        A* Search
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(b^d) &nbsp;|&nbsp; Space: O(b^d) &nbsp;|&nbsp; Use: Optimal path
-      finding with heuristics
+      Time: O(b^d) &nbsp;|&nbsp; Space: O(b^d) &nbsp;|&nbsp; Use: Optimal path finding with
+      heuristics
     </div>
 
-    <PseudocodeDisplay code={`A-STAR-SEARCH(G, start, goal)
+    <PseudocodeDisplay
+      code={`A-STAR-SEARCH(G, start, goal)
     let openSet be a new priority queue
     let gScore[1‥n] be a new array
     let fScore[1‥n] be a new array
@@ -74,7 +77,8 @@ RECONSTRUCT-PATH(cameFrom, current)
 //   gScore = {A:0, B:4, C:2, D:3, E:5}
 //   fScore = {A:6, B:9, C:5, D:4, E:5}
 //
-// Final path: A → C → D → E`} />
+// Final path: A → C → D → E`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

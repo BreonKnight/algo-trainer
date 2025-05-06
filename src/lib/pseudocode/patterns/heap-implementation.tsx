@@ -8,11 +8,11 @@ export const HeapImplementationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Priority queue
-      operations
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Priority queue operations
     </div>
 
-    <PseudocodeDisplay code={`// Get parent index
+    <PseudocodeDisplay
+      code={`// Get parent index
 PARENT(i):
     return ⌊i/2⌋
 
@@ -96,7 +96,8 @@ MAX-HEAP-INSERT(A, key):
 //  /  \\    /  \\
 // 8    7  9    3
 // / \\  /
-// 2  4 1`} />
+// 2  4 1`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

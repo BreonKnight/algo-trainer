@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 import { GripVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "../../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 
 interface SortablePanelProps {
   id: UniqueIdentifier;
@@ -13,14 +13,9 @@ interface SortablePanelProps {
 
 export function SortablePanel({ id, children }: SortablePanelProps) {
   const { theme } = useTheme();
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id,
+  });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,

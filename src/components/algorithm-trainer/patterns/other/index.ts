@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 import { nullPattern } from "./null-pattern";
 import { testDataPattern } from "./test-data";
 

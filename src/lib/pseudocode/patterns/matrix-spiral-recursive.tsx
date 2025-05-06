@@ -4,17 +4,15 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const MatrixSpiralTraversalRecursivePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">
-        Matrix Spiral Traversal (Recursive)
-      </span>
+      <span className="text-accent font-bold">Matrix Spiral Traversal (Recursive)</span>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(mn) &nbsp;|&nbsp; Space: O(mn) &nbsp;|&nbsp; Use: Matrix traversal
-      in spiral order
+      Time: O(mn) &nbsp;|&nbsp; Space: O(mn) &nbsp;|&nbsp; Use: Matrix traversal in spiral order
     </div>
 
-    <PseudocodeDisplay code={`// Recursive spiral traversal of matrix
+    <PseudocodeDisplay
+      code={`// Recursive spiral traversal of matrix
 SPIRAL-TRAVERSE(A, top, bottom, left, right):
     if top > bottom or left > right:
         return
@@ -45,7 +43,8 @@ SPIRAL-TRAVERSE(A, top, bottom, left, right):
 // 1. Outer layer: 1, 2, 3, 4, 8, 12, 11, 10, 9, 5
 // 2. Inner layer: 6, 7
 //
-// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`} />
+// Output: [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

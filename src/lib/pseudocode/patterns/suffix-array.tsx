@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const SuffixArrayPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Suffix Array</span>
-      <span className="ml-2 text-xs text-secondary">(String)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Suffix Array
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient
-      string operations
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient string operations
     </div>
 
-    <PseudocodeDisplay code={`# Suffix Array: Efficient string operations
+    <PseudocodeDisplay
+      code={`# Suffix Array: Efficient string operations
 # Input: String S[1..n]
 # Output: Suffix array SA[1..n] where SA[i] is starting index of i-th smallest suffix
 
@@ -82,7 +85,8 @@ Algorithm SUFFIX-ARRAY(S)
 # Step 4: Sort by first 4 characters
 #         SA = [6, 4, 2, 1, 3, 5]
 #
-# Output: [6, 4, 2, 1, 3, 5]`} />
+# Output: [6, 4, 2, 1, 3, 5]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

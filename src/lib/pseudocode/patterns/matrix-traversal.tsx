@@ -8,11 +8,12 @@ export const MatrixTraversalPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(mn) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Traverse 2D
-      matrix in various patterns
+      Time: O(mn) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Traverse 2D matrix in various
+      patterns
     </div>
 
-    <PseudocodeDisplay code={`// Matrix traversal patterns
+    <PseudocodeDisplay
+      code={`// Matrix traversal patterns
 MATRIX-TRAVERSE(A):
     m ← rows[A]
     n ← columns[A]
@@ -42,7 +43,8 @@ MATRIX-TRAVERSE(A):
 //
 // Row-wise: 1, 2, 3, 4, 5, 6, 7, 8, 9
 // Column-wise: 1, 4, 7, 2, 5, 8, 3, 6, 9
-// Diagonal: 1, 2, 4, 3, 5, 7, 6, 8, 9`} />
+// Diagonal: 1, 2, 4, 3, 5, 7, 6, 8, 9`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -7,7 +7,7 @@ import GamificationService, {
   Badge,
   AlgorithmProgress,
 } from "../../lib/gamification";
-import { useTheme } from "../theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { Link } from "react-router-dom";
 
 const themeStyles = {
@@ -34,8 +34,7 @@ const themeStyles = {
   },
   light: {
     button: "bg-accent/10 hover:bg-accent/20 text-accent",
-    dialog:
-      "bg-background/95 backdrop-blur-sm border border-accent/10 shadow-xl",
+    dialog: "bg-background/95 backdrop-blur-sm border border-accent/10 shadow-xl",
     header: "border-b border-accent/10",
     title: "text-accent font-bold",
     card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
@@ -45,8 +44,7 @@ const themeStyles = {
       muted: "text-accent-foreground/50",
     },
     badge: {
-      unlocked:
-        "bg-background/30 border border-accent/30 shadow-sm backdrop-blur-sm",
+      unlocked: "bg-background/30 border border-accent/30 shadow-sm backdrop-blur-sm",
       locked: "bg-background/20 border border-accent/10 backdrop-blur-sm",
       icon: "text-accent",
     },
@@ -120,8 +118,7 @@ const themeStyles = {
   },
   snes: {
     button: "bg-accent/20 hover:bg-accent/30 text-accent",
-    dialog:
-      "bg-background/95 backdrop-blur-sm border border-accent/20 shadow-xl",
+    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20 shadow-xl",
     header: "border-b border-accent/20",
     title: "text-accent font-bold",
     card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
@@ -211,8 +208,7 @@ export function GamificationButton() {
   const { theme } = useTheme();
 
   // Default to dracula theme if current theme is not in themeStyles
-  const styles =
-    themeStyles[theme as keyof typeof themeStyles] || themeStyles.dracula;
+  const styles = themeStyles[theme as keyof typeof themeStyles] || themeStyles.dracula;
 
   useEffect(() => {
     // Get initial progress
@@ -271,9 +267,7 @@ export function GamificationButton() {
           }}
         >
           <DialogHeader className={`${styles.header} pb-4`}>
-            <DialogTitle
-              className={`text-2xl font-bold ${styles.title} tracking-tight`}
-            >
+            <DialogTitle className={`text-2xl font-bold ${styles.title} tracking-tight`}>
               Your Progress
             </DialogTitle>
           </DialogHeader>
@@ -281,9 +275,7 @@ export function GamificationButton() {
           <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2 custom-scrollbar">
             {/* User Stats Section */}
             <div className="mb-8">
-              <h3
-                className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}
-              >
+              <h3 className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}>
                 Your Stats
               </h3>
               <div className="grid grid-cols-3 gap-4">
@@ -296,22 +288,16 @@ export function GamificationButton() {
                       boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
                     }}
                   >
-                    <div
-                      className={`text-sm font-medium ${styles.text.secondary} tracking-wide`}
-                    >
+                    <div className={`text-sm font-medium ${styles.text.secondary} tracking-wide`}>
                       {stat}
                     </div>
-                    <div
-                      className={`text-3xl font-bold ${styles.text.primary} mt-1`}
-                    >
+                    <div className={`text-3xl font-bold ${styles.text.primary} mt-1`}>
                       {stat === "Level" && userProgress.level}
                       {stat === "Points" && userProgress.points}
                       {stat === "Streak" && `${userProgress.streak} days`}
                     </div>
                     {stat === "Level" && (
-                      <div
-                        className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}
-                      >
+                      <div className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}>
                         {userProgress.experience} / 1000 XP
                       </div>
                     )}
@@ -322,9 +308,7 @@ export function GamificationButton() {
 
             {/* Achievements Section */}
             <div className="mb-8">
-              <h3
-                className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}
-              >
+              <h3 className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}>
                 Achievements
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -333,41 +317,27 @@ export function GamificationButton() {
                     key={badge.id}
                     className={`p-4 rounded-xl text-center backdrop-blur-md bg-white/5 border border-white/10
                       transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:bg-white/10
-                      ${
-                        badge.unlocked
-                          ? "border-accent2/40"
-                          : "border-secondary/40"
-                      }`}
+                      ${badge.unlocked ? "border-accent2/40" : "border-secondary/40"}`}
                     style={{
                       boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
                     }}
                   >
                     <div
                       className={`text-3xl mb-2 transition-transform duration-300 hover:scale-110
-                        ${
-                          badge.unlocked
-                            ? styles.badge.icon
-                            : styles.text.secondary
-                        }`}
+                        ${badge.unlocked ? styles.badge.icon : styles.text.secondary}`}
                     >
                       {badge.icon}
                     </div>
-                    <div
-                      className={`text-sm font-medium ${styles.text.primary} tracking-wide`}
-                    >
+                    <div className={`text-sm font-medium ${styles.text.primary} tracking-wide`}>
                       {badge.name}
                     </div>
                     {!badge.unlocked && (
-                      <div
-                        className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}
-                      >
+                      <div className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}>
                         {badge.progress}/{badge.maxProgress}
                       </div>
                     )}
                     {badge.unlocked && badge.dateEarned && (
-                      <div
-                        className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}
-                      >
+                      <div className={`text-xs mt-2 ${styles.text.muted} tracking-wide`}>
                         {new Date(badge.dateEarned).toLocaleDateString()}
                       </div>
                     )}
@@ -378,47 +348,37 @@ export function GamificationButton() {
 
             {/* Algorithm Progress Section */}
             <div className="mb-6">
-              <h3
-                className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}
-              >
+              <h3 className={`text-lg font-semibold mb-3 ${styles.text.primary} tracking-wide`}>
                 Algorithm Progress
               </h3>
               <div className="space-y-3">
-                {userProgress.algorithmProgress.map(
-                  (algorithm: AlgorithmProgress) => (
-                    <div key={algorithm.id} className="flex items-center gap-4">
-                      <div
-                        className={`w-24 text-sm ${styles.text.primary} tracking-wide`}
-                      >
-                        {algorithm.name}
-                      </div>
-                      <div
-                        className={`flex-1 h-2.5 backdrop-blur-md bg-white/5 rounded-full overflow-hidden border border-white/10`}
-                        style={{
-                          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-                        }}
-                      >
-                        <div
-                          className={`h-full ${styles.progress.bar} rounded-full transition-all duration-500`}
-                          style={{
-                            width: `${
-                              (algorithm.progress / algorithm.maxProgress) * 100
-                            }%`,
-                          }}
-                        ></div>
-                      </div>
-                      <div
-                        className={`w-12 text-right text-sm ${styles.text.secondary} tracking-wide`}
-                      >
-                        {algorithm.progress}/{algorithm.maxProgress}
-                      </div>
+                {userProgress.algorithmProgress.map((algorithm: AlgorithmProgress) => (
+                  <div key={algorithm.id} className="flex items-center gap-4">
+                    <div className={`w-24 text-sm ${styles.text.primary} tracking-wide`}>
+                      {algorithm.name}
                     </div>
-                  )
-                )}
+                    <div
+                      className={`flex-1 h-2.5 backdrop-blur-md bg-white/5 rounded-full overflow-hidden border border-white/10`}
+                      style={{
+                        boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
+                      <div
+                        className={`h-full ${styles.progress.bar} rounded-full transition-all duration-500`}
+                        style={{
+                          width: `${(algorithm.progress / algorithm.maxProgress) * 100}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <div
+                      className={`w-12 text-right text-sm ${styles.text.secondary} tracking-wide`}
+                    >
+                      {algorithm.progress}/{algorithm.maxProgress}
+                    </div>
+                  </div>
+                ))}
                 {userProgress.algorithmProgress.length === 0 && (
-                  <div
-                    className={`text-center py-6 ${styles.text.muted} tracking-wide`}
-                  >
+                  <div className={`text-center py-6 ${styles.text.muted} tracking-wide`}>
                     Try some algorithms to track your progress!
                   </div>
                 )}
@@ -438,9 +398,7 @@ export function GamificationButton() {
                 }}
               >
                 <BarChart className="h-4 w-4" />
-                <span className="tracking-wide">
-                  View Progress Component Examples
-                </span>
+                <span className="tracking-wide">View Progress Component Examples</span>
               </Button>
             </Link>
           </div>

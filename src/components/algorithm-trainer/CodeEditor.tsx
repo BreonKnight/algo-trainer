@@ -12,15 +12,10 @@ import {
   re2Theme,
   mhTheme,
 } from "@/lib/theme";
-import { useTheme } from "@/components/theme/theme-context";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CodeEditorProps {
   userCode: string;
@@ -35,8 +30,7 @@ interface CodeEditorProps {
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    const check = () =>
-      setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+    const check = () => setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -162,10 +156,7 @@ export function CodeEditor({
   }, [isDesktop]);
 
   // Editor mount
-  const handleEditorDidMount = (
-    editor: monaco.editor.IStandaloneCodeEditor,
-    monaco: Monaco
-  ) => {
+  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
     monaco.editor.defineTheme("dracula", draculaTheme);
@@ -218,6 +209,25 @@ export function CodeEditor({
       {/* Editor controls */}
       <div className="flex-none flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className={cn(
+                    "p-1 rounded-md hover:bg-accent3/20 transition-colors",
+                    theme === "nord" ? "text-white" : "text-background"
+                  )}
+                  onClick={handleCopy}
+                >
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">{copied ? "Copied!" : "Copy code (Ctrl+Shift+C)"}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
           <div className="flex items-center gap-1.5 bg-accent2/20 rounded-md p-0.5">
             <TooltipProvider>
               <Tooltip>
@@ -264,31 +274,6 @@ export function CodeEditor({
               </Tooltip>
             </TooltipProvider>
           </div>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  className={cn(
-                    "p-1 rounded-md hover:bg-accent3/20 transition-colors",
-                    theme === "nord" ? "text-white" : "text-background"
-                  )}
-                  onClick={handleCopy}
-                >
-                  {copied ? (
-                    <Check className="h-3.5 w-3.5" />
-                  ) : (
-                    <Copy className="h-3.5 w-3.5" />
-                  )}
-                </button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-xs">
-                  {copied ? "Copied!" : "Copy code (Ctrl+Shift+C)"}
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
         </div>
 
         <TooltipProvider>
@@ -309,9 +294,7 @@ export function CodeEditor({
               </button>
             </TooltipTrigger>
             <TooltipContent>
-              <p className="text-xs">
-                {isExpanded ? "Minimize" : "Maximize"} editor
-              </p>
+              <p className="text-xs">{isExpanded ? "Minimize" : "Maximize"} editor</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -365,10 +348,7 @@ export function CodeEditor({
             const maxHeight = 500;
             const onMove = (moveEvent: MouseEvent) => {
               const delta = moveEvent.clientY - startY;
-              const newHeight = Math.max(
-                120,
-                Math.min(startHeight + delta, maxHeight)
-              );
+              const newHeight = Math.max(120, Math.min(startHeight + delta, maxHeight));
               setEditorHeight(newHeight);
             };
             const onUp = () => {

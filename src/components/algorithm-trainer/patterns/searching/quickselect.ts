@@ -1,9 +1,8 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const quickselectPattern: AlgorithmPattern = {
   title: "Quickselect",
-  description:
-    "Efficient algorithm to find the k-th smallest element in an unsorted array",
+  description: "Efficient algorithm to find the k-th smallest element in an unsorted array",
   timeComplexity: "O(n) average, O(n²) worst case",
   spaceComplexity: "O(1)",
   pseudocode: `1. Choose a pivot element (randomly to avoid worst case)

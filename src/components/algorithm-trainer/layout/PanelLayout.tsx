@@ -1,29 +1,20 @@
-import {
-  DndContext,
-  closestCenter,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { ChevronDown, ChevronUp, LayoutGridIcon } from "lucide-react";
-import { PatternCard } from "../PatternCard";
-import { CodeEditor } from "../CodeEditor";
-import { AnswerCard } from "../AnswerCard";
-import { SortablePanel } from "./SortablePanel";
-import { usePanelManager } from "../hooks/usePanelManager";
-import { PatternKey } from "../types";
-import { Button } from "../../ui/button";
+import { PatternCard } from "@/components/algorithm-trainer/PatternCard";
+import { CodeEditor } from "@/components/algorithm-trainer/CodeEditor";
+import { AnswerCard } from "@/components/algorithm-trainer/AnswerCard";
+import { SortablePanel } from "@/components/algorithm-trainer/layout/SortablePanel";
+import { usePanelManager } from "@/components/algorithm-trainer/hooks/usePanelManager";
+import { PatternKey } from "@/components/algorithm-trainer/types";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { useTheme } from "../../theme/theme-context";
+} from "@/components/ui/dropdown-menu";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
 interface PanelLayoutProps {
@@ -122,29 +113,19 @@ export function PanelLayout({
                   theme === "nord"
                     ? "text-white/90 hover:text-white hover:bg-white/10"
                     : "text-secondary hover:text-main hover:bg-secondary/20",
-                  JSON.stringify(layout) === JSON.stringify(panelOrder) &&
-                    "bg-accent/10"
+                  JSON.stringify(layout) === JSON.stringify(panelOrder) && "bg-accent/10"
                 )}
               >
                 <span>{name}</span>
-                <span className="text-xs opacity-70">
-                  {layout.map((p) => p[0]).join(" → ")}
-                </span>
+                <span className="text-xs opacity-70">{layout.map((p) => p[0]).join(" → ")}</span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext
-          items={panelOrder}
-          strategy={verticalListSortingStrategy}
-        >
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={panelOrder} strategy={verticalListSortingStrategy}>
           <div
             className="flex flex-col md:grid md:grid-cols-3 gap-4 w-full"
             ref={(el) => {
@@ -205,11 +186,9 @@ export function PanelLayout({
                             setUserCode={setUserCode}
                             onRunCode={() => {
                               // Run code in REPL
-                              const replCard =
-                                document.querySelector(".repl-card");
+                              const replCard = document.querySelector(".repl-card");
                               if (replCard) {
-                                const runButton =
-                                  replCard.querySelector("button[onClick]");
+                                const runButton = replCard.querySelector("button[onClick]");
                                 if (runButton) {
                                   (runButton as HTMLButtonElement).click();
                                 }
