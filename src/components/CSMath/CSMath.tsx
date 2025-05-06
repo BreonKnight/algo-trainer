@@ -309,7 +309,7 @@ const CSMath: React.FC = () => {
             theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
           )}
         >
-          Monster Hunter Algorithm Academy
+          AlgoTrainer: Computer Science Math Academy
         </motion.h1>
 
         {/* Control Buttons */}
