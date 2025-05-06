@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const dfsBinaryTreePattern: AlgorithmPattern = {
   title: "DFS on Binary Tree",

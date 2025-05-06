@@ -50,9 +50,10 @@ export const patternMapping: Record<string, PatternKey> = {
   "Circular Linked List": "Circular Linked List",
   "Fenwick Tree": "Fenwick Tree",
   "Linked List": "Linked List",
+  "Lowest Common Ancestor": "Lowest Common Ancestor",
   "Segment Tree": "Segment Tree",
   "Union Find": "Union Find",
-  Tree: "Tree",
+  "Tree Implementation": "Tree Implementation",
   "DFS Binary Tree": "DFS Binary Tree",
 
   // String Patterns
@@ -102,19 +103,19 @@ export const patternMapping: Record<string, PatternKey> = {
   "BFS Linked List": "BFS Linked List",
   DFS: "DFS",
   "DFS Linked List": "DFS Linked List",
+
+  // New additions
+  Trie: "Trie",
+  "Trie Operations": "Trie Operations",
 };
 
 // Function to get the corresponding Monster Hunter pattern key
-export function getMonsterHunterPatternKey(
-  regularPatternKey: string
-): PatternKey | undefined {
+export function getMonsterHunterPatternKey(regularPatternKey: string): PatternKey | undefined {
   return patternMapping[regularPatternKey];
 }
 
 // Function to get the corresponding regular pattern key
-export function getRegularPatternKey(
-  monsterHunterPatternKey: PatternKey
-): string | undefined {
+export function getRegularPatternKey(monsterHunterPatternKey: PatternKey): string | undefined {
   const entry = Object.entries(patternMapping).find(
     ([, value]) => value === monsterHunterPatternKey
   );

@@ -188,10 +188,7 @@ export const testDataPatternPatternPatternPattern = {
   ],
 };
 
-export const testDataPatternsPatternPatternPattern = new Map<
-  PatternKey,
-  string
->([
+export const testDataPatternsPatternPatternPattern = new Map<PatternKey, string>([
   [
     "Test Data" as PatternKey,
     `class TestDataGenerator:

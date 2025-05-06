@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const SelectionSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Selection Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Selection Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array
-      in-place
+      Time: O(n²) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Sorting array in-place
     </div>
 
-    <PseudocodeDisplay code={`SELECTION-SORT(A)
+    <PseudocodeDisplay
+      code={`SELECTION-SORT(A)
     n ← length[A]
 
     for i ← 1 to n-1
@@ -33,7 +35,8 @@ export const SelectionSortPattern = () => (
 # [1, 2, 3, 6, 5, 4]  # 3 is selected
 # [1, 2, 3, 4, 5, 6]  # 4 is selected
 # [1, 2, 3, 4, 5, 6]  # 5 is selected
-# Output: [1, 2, 3, 4, 5, 6]`} />
+# Output: [1, 2, 3, 4, 5, 6]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

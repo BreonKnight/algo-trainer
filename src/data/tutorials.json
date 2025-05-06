@@ -1,0 +1,3050 @@
+{
+  "sorting": [
+    {
+      "id": "bubble-sort",
+      "title": "Bubble Sort",
+      "description": "Bubble Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Bubble Sort.",
+      "videoUrl": "https://www.youtube.com/embed/lyZQPjUT5B4",
+      "difficulty": "beginner",
+      "duration": 15,
+      "prerequisites": [],
+      "pseudocode": "# Bubble Sort: Repeatedly swap adjacent elements if they are in wrong order\n# Input: Array A[1..n] of n elements\n# Output: Array A sorted in non-decreasing order\n\nBUBBLE-SORT(A)\n    n ← length[A]    # Number of elements in array\n\n    # Outer loop: n-1 passes needed\n    for i ← 1 to n-1 do\n        # Inner loop: compare adjacent elements\n        for j ← 1 to n-i do\n            # Swap if elements are in wrong order\n            if A[j] > A[j+1] then\n                # Exchange A[j] and A[j+1]\n                temp ← A[j]\n                A[j] ← A[j+1]\n                A[j+1] ← temp\n            end if\n        end for\n    end for\n\n# Example:\n# Input: A = [5, 2, 4, 6, 1, 3]\n# Pass 1: [2, 4, 5, 1, 3, 6]  # 6 bubbles to end\n# Pass 2: [2, 4, 1, 3, 5, 6]  # 5 bubbles to end\n# Pass 3: [2, 1, 3, 4, 5, 6]  # 4 bubbles to end\n# Pass 4: [1, 2, 3, 4, 5, 6]  # 3 bubbles to end\n# Pass 5: [1, 2, 3, 4, 5, 6]  # 2 bubbles to end\n# Output: [1, 2, 3, 4, 5, 6]",
+      "implementations": {
+        "python": "def bubble_sort(input):\n    # Implementation of Bubble Sort\n    pass",
+        "javascript": "function bubble_sort(input) {\n    // Implementation of Bubble Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Bubble Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Bubble Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Bubble Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Bubble Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Bubble Sort?",
+          "options": [
+            "Data compression",
+            "Web search engines",
+            "Game development",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Bubble Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "quick-sort",
+      "title": "Quick Sort",
+      "description": "Quick Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Quick Sort.",
+      "videoUrl": "https://www.youtube.com/embed/Hoixgm4-P4M",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["bubble-sort"],
+      "pseudocode": "# Quick Sort: Divide and conquer sorting algorithm\n# Input: Array A[p..r] of elements\n# Output: Array A sorted in non-decreasing order\n\nQUICKSORT(A, p, r)\n    if p < r\n        then q ← PARTITION(A, p, r)\n            QUICKSORT(A, p, q - 1)\n            QUICKSORT(A, q + 1, r)\n\nPARTITION(A, p, r)\n    x ← A[r]    # Choose pivot\n    i ← p - 1   # Index of smaller element\n\n    for j ← p to r - 1\n        do if A[j] ≤ x\n            then i ← i + 1\n                exchange A[i] with A[j]\n    exchange A[i + 1] with A[r]\n    return i + 1\n\n# Example:\n# Input: A = [3, 7, 8, 5, 2, 1, 9, 5, 4]\n# Pivot = 4\n#\n# First partition:\n# [3, 2, 1, 4, 8, 7, 9, 5, 5]\n#           ↑\n# Recursively sort left and right subarrays:\n# Left:  [3, 2, 1]\n# Right: [8, 7, 9, 5, 5]\n#\n# Final result: [1, 2, 3, 4, 5, 5, 7, 8, 9]",
+      "implementations": {
+        "python": "def quick_sort(input):\n    # Implementation of Quick Sort\n    pass",
+        "javascript": "function quick_sort(input) {\n    // Implementation of Quick Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Quick Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Quick Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Quick Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Quick Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Quick Sort?",
+          "options": [
+            "Network routing",
+            "Web search engines",
+            "Image processing",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Quick Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "merge-sort",
+      "title": "Merge Sort",
+      "description": "Merge Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Merge Sort.",
+      "videoUrl": "https://www.youtube.com/embed/4VqmGXwpLqc",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["quick-sort"],
+      "implementations": {
+        "python": "def merge_sort(input):\n    # Implementation of Merge Sort\n    pass",
+        "javascript": "function merge_sort(input) {\n    // Implementation of Merge Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Merge Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Merge Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Merge Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Merge Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Merge Sort?",
+          "options": [
+            "Image processing",
+            "Web search engines",
+            "Data compression",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Merge Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "insertion-sort",
+      "title": "Insertion Sort",
+      "description": "Insertion Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Insertion Sort.",
+      "videoUrl": "https://www.youtube.com/embed/ROalU379l3U",
+      "difficulty": "beginner",
+      "duration": 15,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def insertion_sort(input):\n    # Implementation of Insertion Sort\n    pass",
+        "javascript": "function insertion_sort(input) {\n    // Implementation of Insertion Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Insertion Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Insertion Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Insertion Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Insertion Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Insertion Sort?",
+          "options": [
+            "Network routing",
+            "Web search engines",
+            "Image processing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Insertion Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "selection-sort",
+      "title": "Selection Sort",
+      "description": "Selection Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Selection Sort.",
+      "videoUrl": "https://www.youtube.com/embed/g-PGLbMth_g",
+      "difficulty": "beginner",
+      "duration": 15,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def selection_sort(input):\n    # Implementation of Selection Sort\n    pass",
+        "javascript": "function selection_sort(input) {\n    // Implementation of Selection Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Selection Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Selection Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Selection Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Selection Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Selection Sort?",
+          "options": [
+            "Web search engines",
+            "Database indexing",
+            "Data compression",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Selection Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "heap-sort",
+      "title": "Heap Sort",
+      "description": "Heap Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Heap Sort.",
+      "videoUrl": "https://www.youtube.com/embed/HqPJF2L5c9U",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def heap_sort(input):\n    # Implementation of Heap Sort\n    pass",
+        "javascript": "function heap_sort(input) {\n    // Implementation of Heap Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Heap Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Heap Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Heap Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Heap Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Heap Sort?",
+          "options": [
+            "Game development",
+            "Data compression",
+            "Web search engines",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Heap Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "counting-sort",
+      "title": "Counting Sort",
+      "description": "Counting Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Counting Sort.",
+      "videoUrl": "https://www.youtube.com/embed/OKd534EWcdk",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def counting_sort(input):\n    # Implementation of Counting Sort\n    pass",
+        "javascript": "function counting_sort(input) {\n    // Implementation of Counting Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Counting Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Counting Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Counting Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Counting Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Counting Sort?",
+          "options": [
+            "Web search engines",
+            "Network routing",
+            "Database indexing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Counting Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "radix-sort",
+      "title": "Radix Sort",
+      "description": "Radix Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Radix Sort.",
+      "videoUrl": "https://www.youtube.com/embed/YXFI4osELGU",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def radix_sort(input):\n    # Implementation of Radix Sort\n    pass",
+        "javascript": "function radix_sort(input) {\n    // Implementation of Radix Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Radix Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Radix Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Radix Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Radix Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Radix Sort?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Network routing",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Radix Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "bucket-sort",
+      "title": "Bucket Sort",
+      "description": "Bucket Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Bucket Sort.",
+      "videoUrl": "https://www.youtube.com/embed/VuXbEb5ywrU",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def bucket_sort(input):\n    # Implementation of Bucket Sort\n    pass",
+        "javascript": "function bucket_sort(input) {\n    // Implementation of Bucket Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Bucket Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Bucket Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Bucket Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Bucket Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Bucket Sort?",
+          "options": [
+            "Database indexing",
+            "Web search engines",
+            "Data compression",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Bucket Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "shell-sort",
+      "title": "Shell Sort",
+      "description": "Shell Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Shell Sort.",
+      "videoUrl": "https://www.youtube.com/embed/9crZRd8GPWM",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def shell_sort(input):\n    # Implementation of Shell Sort\n    pass",
+        "javascript": "function shell_sort(input) {\n    // Implementation of Shell Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Shell Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Shell Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Shell Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Shell Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Shell Sort?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Image processing",
+            "Data compression"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Shell Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "tim-sort",
+      "title": "Tim Sort",
+      "description": "Tim Sort is a sorting algorithm that efficiently organizes data in a specific order. This tutorial will cover the theory, implementation, and applications of Tim Sort.",
+      "videoUrl": "https://www.youtube.com/embed/emeME_917EM",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def tim_sort(input):\n    # Implementation of Tim Sort\n    pass",
+        "javascript": "function tim_sort(input) {\n    // Implementation of Tim Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Tim Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Tim Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Tim Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Tim Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Tim Sort?",
+          "options": [
+            "Web search engines",
+            "Game development",
+            "Data compression",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Tim Sort is commonly used in database systems and data processing due to its efficient data organization capabilities."
+        }
+      ]
+    }
+  ],
+  "searching": [
+    {
+      "id": "binary-search",
+      "title": "Binary Search",
+      "description": "Binary Search is a searching algorithm that finds the position of a target value within a sorted array. This tutorial will cover the theory, implementation, and applications of Binary Search.",
+      "videoUrl": "https://www.youtube.com/embed/MFhxShGxHWc",
+      "difficulty": "beginner",
+      "duration": 15,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def binary_search(input):\n    # Implementation of Binary Search\n    pass",
+        "javascript": "function binary_search(input) {\n    // Implementation of Binary Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Binary Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Binary Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Binary Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Binary Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Binary Search?",
+          "options": [
+            "Network routing",
+            "Web search engines",
+            "Image processing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Binary Search is commonly used in search engines and data retrieval systems due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "linear-search",
+      "title": "Linear Search",
+      "description": "Linear Search is a searching algorithm that finds the position of a target value within a sorted array. This tutorial will cover the theory, implementation, and applications of Linear Search.",
+      "videoUrl": "https://www.youtube.com/embed/C46Q5TtrO8",
+      "difficulty": "beginner",
+      "duration": 15,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def linear_search(input):\n    # Implementation of Linear Search\n    pass",
+        "javascript": "function linear_search(input) {\n    // Implementation of Linear Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Linear Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Linear Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Linear Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Linear Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Linear Search?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Web search engines",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Linear Search is commonly used in search engines and data retrieval systems due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "jump-search",
+      "title": "Jump Search",
+      "description": "Jump Search is a searching algorithm that finds the position of a target value within a sorted array. This tutorial will cover the theory, implementation, and applications of Jump Search.",
+      "videoUrl": "https://www.youtube.com/embed/63kS6YZDON0",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def jump_search(input):\n    # Implementation of Jump Search\n    pass",
+        "javascript": "function jump_search(input) {\n    // Implementation of Jump Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Jump Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Jump Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Jump Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Jump Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Jump Search?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Game development",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Jump Search is commonly used in search engines and data retrieval systems due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "interpolation-search",
+      "title": "Interpolation Search",
+      "description": "Interpolation Search is a searching algorithm that finds the position of a target value within a sorted array. This tutorial will cover the theory, implementation, and applications of Interpolation Search.",
+      "videoUrl": "https://www.youtube.com/embed/bOk35XmHPKs",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def interpolation_search(input):\n    # Implementation of Interpolation Search\n    pass",
+        "javascript": "function interpolation_search(input) {\n    // Implementation of Interpolation Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Interpolation Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Interpolation Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Interpolation Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Interpolation Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Interpolation Search?",
+          "options": [
+            "Image processing",
+            "Network routing",
+            "Database indexing",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Interpolation Search is commonly used in search engines and data retrieval systems due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "exponential-search",
+      "title": "Exponential Search",
+      "description": "Exponential Search is a searching algorithm that finds the position of a target value within a sorted array. This tutorial will cover the theory, implementation, and applications of Exponential Search.",
+      "videoUrl": "https://www.youtube.com/embed/GBuHSRDGZBY",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def exponential_search(input):\n    # Implementation of Exponential Search\n    pass",
+        "javascript": "function exponential_search(input) {\n    // Implementation of Exponential Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Exponential Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Exponential Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Exponential Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Exponential Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Exponential Search?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Game development",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Exponential Search is commonly used in search engines and data retrieval systems due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "fibonacci-search",
+      "title": "Fibonacci Search",
+      "description": "Fibonacci Search is a searching algorithm that finds the position of a target value within a sorted array. This tutorial will cover the theory, implementation, and applications of Fibonacci Search.",
+      "videoUrl": "https://www.youtube.com/embed/q_AVjuzi_MM",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def fibonacci_search(input):\n    # Implementation of Fibonacci Search\n    pass",
+        "javascript": "function fibonacci_search(input) {\n    // Implementation of Fibonacci Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Fibonacci Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Fibonacci Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Fibonacci Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Fibonacci Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Fibonacci Search?",
+          "options": [
+            "Database indexing",
+            "Web search engines",
+            "Network routing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Fibonacci Search is commonly used in search engines and data retrieval systems due to its fast search performance."
+        }
+      ]
+    }
+  ],
+  "graph": [
+    {
+      "id": "breadth-first-search",
+      "title": "Breadth-First Search",
+      "description": "Breadth-First Search is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Breadth-First Search.",
+      "videoUrl": "https://www.youtube.com/embed/oDqjPvD54Ss",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def breadth_first_search(input):\n    # Implementation of Breadth-First Search\n    pass",
+        "javascript": "function breadth_first_search(input) {\n    // Implementation of Breadth-First Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Breadth-First Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Breadth-First Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Breadth-First Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Breadth-First Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Breadth-First Search?",
+          "options": [
+            "Game development",
+            "Data compression",
+            "Web search engines",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Breadth-First Search is commonly used in network routing and social network analysis due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "depth-first-search",
+      "title": "Depth-First Search",
+      "description": "Depth-First Search is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Depth-First Search.",
+      "videoUrl": "https://www.youtube.com/embed/7fujbpJ0LB4",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def depth_first_search(input):\n    # Implementation of Depth-First Search\n    pass",
+        "javascript": "function depth_first_search(input) {\n    // Implementation of Depth-First Search\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Depth-First Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Depth-First Search is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Depth-First Search?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Depth-First Search is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Depth-First Search?",
+          "options": [
+            "Game development",
+            "Database indexing",
+            "Network routing",
+            "Data compression"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Depth-First Search is commonly used in network routing and social network analysis due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "dijkstra-s-algorithm",
+      "title": "Dijkstra's Algorithm",
+      "description": "Dijkstra's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Dijkstra's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/pVfj6mxhdMw",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def dijkstra_s_algorithm(input):\n    # Implementation of Dijkstra's Algorithm\n    pass",
+        "javascript": "function dijkstra_s_algorithm(input) {\n    // Implementation of Dijkstra's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Dijkstra's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Dijkstra's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Dijkstra's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Dijkstra's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Dijkstra's Algorithm?",
+          "options": [
+            "Web search engines",
+            "Image processing",
+            "Network routing",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Dijkstra's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "bellman-ford-algorithm",
+      "title": "Bellman-Ford Algorithm",
+      "description": "Bellman-Ford Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Bellman-Ford Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/obWXjtg0L64",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def bellman_ford_algorithm(input):\n    # Implementation of Bellman-Ford Algorithm\n    pass",
+        "javascript": "function bellman_ford_algorithm(input) {\n    // Implementation of Bellman-Ford Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Bellman-Ford Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Bellman-Ford Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Bellman-Ford Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Bellman-Ford Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Bellman-Ford Algorithm?",
+          "options": [
+            "Database indexing",
+            "Image processing",
+            "Network routing",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Bellman-Ford Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "floyd-warshall-algorithm",
+      "title": "Floyd-Warshall Algorithm",
+      "description": "Floyd-Warshall Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Floyd-Warshall Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/4OQeCuLYj-4",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def floyd_warshall_algorithm(input):\n    # Implementation of Floyd-Warshall Algorithm\n    pass",
+        "javascript": "function floyd_warshall_algorithm(input) {\n    // Implementation of Floyd-Warshall Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Floyd-Warshall Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Floyd-Warshall Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Floyd-Warshall Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Floyd-Warshall Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Floyd-Warshall Algorithm?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Data compression",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Floyd-Warshall Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "kruskal-s-algorithm",
+      "title": "Kruskal's Algorithm",
+      "description": "Kruskal's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Kruskal's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/JZBQLXgSGfs",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def kruskal_s_algorithm(input):\n    # Implementation of Kruskal's Algorithm\n    pass",
+        "javascript": "function kruskal_s_algorithm(input) {\n    // Implementation of Kruskal's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Kruskal's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Kruskal's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Kruskal's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Kruskal's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Kruskal's Algorithm?",
+          "options": [
+            "Web search engines",
+            "Game development",
+            "Data compression",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Kruskal's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "prim-s-algorithm",
+      "title": "Prim's Algorithm",
+      "description": "Prim's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Prim's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/cplfcGZmX7I",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def prim_s_algorithm(input):\n    # Implementation of Prim's Algorithm\n    pass",
+        "javascript": "function prim_s_algorithm(input) {\n    // Implementation of Prim's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Prim's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Prim's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Prim's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Prim's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Prim's Algorithm?",
+          "options": [
+            "Database indexing",
+            "Web search engines",
+            "Data compression",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Prim's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "topological-sort",
+      "title": "Topological Sort",
+      "description": "Topological Sort is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Topological Sort.",
+      "videoUrl": "https://www.youtube.com/embed/ddTC4Zovtbc",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def topological_sort(input):\n    # Implementation of Topological Sort\n    pass",
+        "javascript": "function topological_sort(input) {\n    // Implementation of Topological Sort\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Topological Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 3,
+          "explanation": "The time complexity of Topological Sort is O(n log n) in the average case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Topological Sort?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Topological Sort is O(n) for auxiliary space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Topological Sort?",
+          "options": [
+            "Game development",
+            "Network routing",
+            "Image processing",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Topological Sort is commonly used in network routing and social network analysis due to its efficient data organization capabilities."
+        }
+      ]
+    },
+    {
+      "id": "kosaraju-s-algorithm",
+      "title": "Kosaraju's Algorithm",
+      "description": "Kosaraju's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Kosaraju's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/R6uoSjZ2imo",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def kosaraju_s_algorithm(input):\n    # Implementation of Kosaraju's Algorithm\n    pass",
+        "javascript": "function kosaraju_s_algorithm(input) {\n    // Implementation of Kosaraju's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Kosaraju's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Kosaraju's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Kosaraju's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Kosaraju's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Kosaraju's Algorithm?",
+          "options": [
+            "Data compression",
+            "Image processing",
+            "Game development",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Kosaraju's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "tarjan-s-algorithm",
+      "title": "Tarjan's Algorithm",
+      "description": "Tarjan's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Tarjan's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/wUgWX0nc4NY",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def tarjan_s_algorithm(input):\n    # Implementation of Tarjan's Algorithm\n    pass",
+        "javascript": "function tarjan_s_algorithm(input) {\n    // Implementation of Tarjan's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Tarjan's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Tarjan's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Tarjan's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Tarjan's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Tarjan's Algorithm?",
+          "options": [
+            "Web search engines",
+            "Database indexing",
+            "Network routing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Tarjan's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "articulation-points",
+      "title": "Articulation Points",
+      "description": "Articulation Points is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Articulation Points.",
+      "videoUrl": "https://www.youtube.com/embed/2FFq2_je7Lg",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def articulation_points(input):\n    # Implementation of Articulation Points\n    pass",
+        "javascript": "function articulation_points(input) {\n    // Implementation of Articulation Points\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Articulation Points?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Articulation Points is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Articulation Points?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Articulation Points is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Articulation Points?",
+          "options": [
+            "Web search engines",
+            "Data compression",
+            "Network routing",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Articulation Points is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "bridges",
+      "title": "Bridges",
+      "description": "Bridges is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Bridges.",
+      "videoUrl": "https://www.youtube.com/embed/Rhxs4kqIjQs",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def bridges(input):\n    # Implementation of Bridges\n    pass",
+        "javascript": "function bridges(input) {\n    // Implementation of Bridges\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Bridges?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Bridges is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Bridges?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Bridges is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Bridges?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Web search engines",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Bridges is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "strongly-connected-components",
+      "title": "Strongly Connected Components",
+      "description": "Strongly Connected Components is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Strongly Connected Components.",
+      "videoUrl": "https://www.youtube.com/embed/R6uoSjZ2imo",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def strongly_connected_components(input):\n    # Implementation of Strongly Connected Components\n    pass",
+        "javascript": "function strongly_connected_components(input) {\n    // Implementation of Strongly Connected Components\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Strongly Connected Components?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Strongly Connected Components is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Strongly Connected Components?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Strongly Connected Components is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Strongly Connected Components?",
+          "options": [
+            "Data compression",
+            "Network routing",
+            "Database indexing",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Strongly Connected Components is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "biconnected-components",
+      "title": "Biconnected Components",
+      "description": "Biconnected Components is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Biconnected Components.",
+      "videoUrl": "https://www.youtube.com/embed/2FFq2_je7Lg",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def biconnected_components(input):\n    # Implementation of Biconnected Components\n    pass",
+        "javascript": "function biconnected_components(input) {\n    // Implementation of Biconnected Components\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Biconnected Components?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Biconnected Components is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Biconnected Components?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Biconnected Components is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Biconnected Components?",
+          "options": [
+            "Network routing",
+            "Web search engines",
+            "Game development",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Biconnected Components is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "eulerian-path",
+      "title": "Eulerian Path",
+      "description": "Eulerian Path is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Eulerian Path.",
+      "videoUrl": "https://www.youtube.com/embed/8MpoO2zV2q4",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def eulerian_path(input):\n    # Implementation of Eulerian Path\n    pass",
+        "javascript": "function eulerian_path(input) {\n    // Implementation of Eulerian Path\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Eulerian Path?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Eulerian Path is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Eulerian Path?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Eulerian Path is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Eulerian Path?",
+          "options": [
+            "Data compression",
+            "Database indexing",
+            "Web search engines",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Eulerian Path is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "hamiltonian-path",
+      "title": "Hamiltonian Path",
+      "description": "Hamiltonian Path is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Hamiltonian Path.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def hamiltonian_path(input):\n    # Implementation of Hamiltonian Path\n    pass",
+        "javascript": "function hamiltonian_path(input) {\n    // Implementation of Hamiltonian Path\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Hamiltonian Path?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Hamiltonian Path is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Hamiltonian Path?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Hamiltonian Path is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Hamiltonian Path?",
+          "options": [
+            "Game development",
+            "Image processing",
+            "Data compression",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Hamiltonian Path is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "johnson-s-algorithm",
+      "title": "Johnson's Algorithm",
+      "description": "Johnson's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Johnson's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def johnson_s_algorithm(input):\n    # Implementation of Johnson's Algorithm\n    pass",
+        "javascript": "function johnson_s_algorithm(input) {\n    // Implementation of Johnson's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Johnson's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Johnson's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Johnson's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Johnson's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Johnson's Algorithm?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Image processing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Johnson's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "ford-fulkerson-algorithm",
+      "title": "Ford-Fulkerson Algorithm",
+      "description": "Ford-Fulkerson Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Ford-Fulkerson Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def ford_fulkerson_algorithm(input):\n    # Implementation of Ford-Fulkerson Algorithm\n    pass",
+        "javascript": "function ford_fulkerson_algorithm(input) {\n    // Implementation of Ford-Fulkerson Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Ford-Fulkerson Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Ford-Fulkerson Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Ford-Fulkerson Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Ford-Fulkerson Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Ford-Fulkerson Algorithm?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Network routing",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Ford-Fulkerson Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "edmonds-karp-algorithm",
+      "title": "Edmonds-Karp Algorithm",
+      "description": "Edmonds-Karp Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Edmonds-Karp Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def edmonds_karp_algorithm(input):\n    # Implementation of Edmonds-Karp Algorithm\n    pass",
+        "javascript": "function edmonds_karp_algorithm(input) {\n    // Implementation of Edmonds-Karp Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Edmonds-Karp Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Edmonds-Karp Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Edmonds-Karp Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Edmonds-Karp Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Edmonds-Karp Algorithm?",
+          "options": [
+            "Game development",
+            "Web search engines",
+            "Image processing",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Edmonds-Karp Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "dinic-s-algorithm",
+      "title": "Dinic's Algorithm",
+      "description": "Dinic's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Dinic's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def dinic_s_algorithm(input):\n    # Implementation of Dinic's Algorithm\n    pass",
+        "javascript": "function dinic_s_algorithm(input) {\n    // Implementation of Dinic's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Dinic's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Dinic's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Dinic's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Dinic's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Dinic's Algorithm?",
+          "options": [
+            "Data compression",
+            "Database indexing",
+            "Game development",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Dinic's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "push-relabel-algorithm",
+      "title": "Push-Relabel Algorithm",
+      "description": "Push-Relabel Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Push-Relabel Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def push_relabel_algorithm(input):\n    # Implementation of Push-Relabel Algorithm\n    pass",
+        "javascript": "function push_relabel_algorithm(input) {\n    // Implementation of Push-Relabel Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Push-Relabel Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Push-Relabel Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Push-Relabel Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Push-Relabel Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Push-Relabel Algorithm?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Web search engines",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Push-Relabel Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "hopcroft-karp-algorithm",
+      "title": "Hopcroft-Karp Algorithm",
+      "description": "Hopcroft-Karp Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Hopcroft-Karp Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def hopcroft_karp_algorithm(input):\n    # Implementation of Hopcroft-Karp Algorithm\n    pass",
+        "javascript": "function hopcroft_karp_algorithm(input) {\n    // Implementation of Hopcroft-Karp Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Hopcroft-Karp Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Hopcroft-Karp Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Hopcroft-Karp Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Hopcroft-Karp Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Hopcroft-Karp Algorithm?",
+          "options": [
+            "Image processing",
+            "Network routing",
+            "Web search engines",
+            "Data compression"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Hopcroft-Karp Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "kuhn-s-algorithm",
+      "title": "Kuhn's Algorithm",
+      "description": "Kuhn's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Kuhn's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def kuhn_s_algorithm(input):\n    # Implementation of Kuhn's Algorithm\n    pass",
+        "javascript": "function kuhn_s_algorithm(input) {\n    // Implementation of Kuhn's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Kuhn's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Kuhn's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Kuhn's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Kuhn's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Kuhn's Algorithm?",
+          "options": [
+            "Database indexing",
+            "Web search engines",
+            "Network routing",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Kuhn's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "hungarian-algorithm",
+      "title": "Hungarian Algorithm",
+      "description": "Hungarian Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Hungarian Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def hungarian_algorithm(input):\n    # Implementation of Hungarian Algorithm\n    pass",
+        "javascript": "function hungarian_algorithm(input) {\n    // Implementation of Hungarian Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Hungarian Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Hungarian Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Hungarian Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Hungarian Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Hungarian Algorithm?",
+          "options": [
+            "Data compression",
+            "Image processing",
+            "Network routing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Hungarian Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "gale-shapley-algorithm",
+      "title": "Gale-Shapley Algorithm",
+      "description": "Gale-Shapley Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Gale-Shapley Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "intermediate",
+      "duration": 25,
+      "prerequisites": ["breadth-first-search", "depth-first-search"],
+      "implementations": {
+        "python": "def gale_shapley_algorithm(input):\n    # Implementation of Gale-Shapley Algorithm\n    pass",
+        "javascript": "function gale_shapley_algorithm(input) {\n    // Implementation of Gale-Shapley Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Gale-Shapley Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Gale-Shapley Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Gale-Shapley Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Gale-Shapley Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Gale-Shapley Algorithm?",
+          "options": [
+            "Database indexing",
+            "Web search engines",
+            "Network routing",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Gale-Shapley Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+        }
+      ]
+    }
+  ],
+  "dynamic-programming": [
+    {
+      "id": "knapsack-problem",
+      "title": "Knapsack Problem",
+      "description": "Knapsack Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Knapsack Problem.",
+      "videoUrl": "https://www.youtube.com/embed/8LusJS5-AGo",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def knapsack_problem(input):\n    # Implementation of Knapsack Problem\n    pass",
+        "javascript": "function knapsack_problem(input) {\n    // Implementation of Knapsack Problem\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Knapsack Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Knapsack Problem is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Knapsack Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Knapsack Problem is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Knapsack Problem?",
+          "options": [
+            "Data compression",
+            "Database indexing",
+            "Web search engines",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Knapsack Problem is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "longest-common-subsequence",
+      "title": "Longest Common Subsequence",
+      "description": "Longest Common Subsequence is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Longest Common Subsequence.",
+      "videoUrl": "https://www.youtube.com/embed/ASoaQq66oQI",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def longest_common_subsequence(input):\n    # Implementation of Longest Common Subsequence\n    pass",
+        "javascript": "function longest_common_subsequence(input) {\n    // Implementation of Longest Common Subsequence\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Longest Common Subsequence?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Longest Common Subsequence is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Longest Common Subsequence?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Longest Common Subsequence is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Longest Common Subsequence?",
+          "options": [
+            "Game development",
+            "Image processing",
+            "Database indexing",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Longest Common Subsequence is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "longest-increasing-subsequence",
+      "title": "Longest Increasing Subsequence",
+      "description": "Longest Increasing Subsequence is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Longest Increasing Subsequence.",
+      "videoUrl": "https://www.youtube.com/embed/fV-TF4OvZpk",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def longest_increasing_subsequence(input):\n    # Implementation of Longest Increasing Subsequence\n    pass",
+        "javascript": "function longest_increasing_subsequence(input) {\n    // Implementation of Longest Increasing Subsequence\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Longest Increasing Subsequence?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Longest Increasing Subsequence is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Longest Increasing Subsequence?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Longest Increasing Subsequence is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Longest Increasing Subsequence?",
+          "options": [
+            "Game development",
+            "Data compression",
+            "Database indexing",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Longest Increasing Subsequence is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "matrix-chain-multiplication",
+      "title": "Matrix Chain Multiplication",
+      "description": "Matrix Chain Multiplication is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Matrix Chain Multiplication.",
+      "videoUrl": "https://www.youtube.com/embed/prmezH63EZU",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def matrix_chain_multiplication(input):\n    # Implementation of Matrix Chain Multiplication\n    pass",
+        "javascript": "function matrix_chain_multiplication(input) {\n    // Implementation of Matrix Chain Multiplication\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Matrix Chain Multiplication?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Matrix Chain Multiplication is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Matrix Chain Multiplication?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Matrix Chain Multiplication is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Matrix Chain Multiplication?",
+          "options": [
+            "Network routing",
+            "Image processing",
+            "Web search engines",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Matrix Chain Multiplication is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "coin-change-problem",
+      "title": "Coin Change Problem",
+      "description": "Coin Change Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Coin Change Problem.",
+      "videoUrl": "https://www.youtube.com/embed/H9bfqozjoqs",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def coin_change_problem(input):\n    # Implementation of Coin Change Problem\n    pass",
+        "javascript": "function coin_change_problem(input) {\n    // Implementation of Coin Change Problem\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Coin Change Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Coin Change Problem is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Coin Change Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Coin Change Problem is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Coin Change Problem?",
+          "options": [
+            "Web search engines",
+            "Data compression",
+            "Game development",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Coin Change Problem is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "edit-distance",
+      "title": "Edit Distance",
+      "description": "Edit Distance is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Edit Distance.",
+      "videoUrl": "https://www.youtube.com/embed/We3YDTzNXEk",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def edit_distance(input):\n    # Implementation of Edit Distance\n    pass",
+        "javascript": "function edit_distance(input) {\n    // Implementation of Edit Distance\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Edit Distance?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Edit Distance is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Edit Distance?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Edit Distance is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Edit Distance?",
+          "options": [
+            "Data compression",
+            "Database indexing",
+            "Network routing",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Edit Distance is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "rod-cutting",
+      "title": "Rod Cutting",
+      "description": "Rod Cutting is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Rod Cutting.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def rod_cutting(input):\n    # Implementation of Rod Cutting\n    pass",
+        "javascript": "function rod_cutting(input) {\n    // Implementation of Rod Cutting\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Rod Cutting?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Rod Cutting is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Rod Cutting?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Rod Cutting is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Rod Cutting?",
+          "options": [
+            "Game development",
+            "Web search engines",
+            "Network routing",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Rod Cutting is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "subset-sum-problem",
+      "title": "Subset Sum Problem",
+      "description": "Subset Sum Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Subset Sum Problem.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def subset_sum_problem(input):\n    # Implementation of Subset Sum Problem\n    pass",
+        "javascript": "function subset_sum_problem(input) {\n    // Implementation of Subset Sum Problem\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Subset Sum Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Subset Sum Problem is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Subset Sum Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Subset Sum Problem is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Subset Sum Problem?",
+          "options": [
+            "Web search engines",
+            "Database indexing",
+            "Network routing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Subset Sum Problem is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "partition-problem",
+      "title": "Partition Problem",
+      "description": "Partition Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Partition Problem.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def partition_problem(input):\n    # Implementation of Partition Problem\n    pass",
+        "javascript": "function partition_problem(input) {\n    // Implementation of Partition Problem\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Partition Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Partition Problem is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Partition Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Partition Problem is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Partition Problem?",
+          "options": [
+            "Network routing",
+            "Web search engines",
+            "Database indexing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Partition Problem is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "word-break-problem",
+      "title": "Word Break Problem",
+      "description": "Word Break Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Word Break Problem.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def word_break_problem(input):\n    # Implementation of Word Break Problem\n    pass",
+        "javascript": "function word_break_problem(input) {\n    // Implementation of Word Break Problem\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Word Break Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Word Break Problem is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Word Break Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Word Break Problem is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Word Break Problem?",
+          "options": [
+            "Image processing",
+            "Data compression",
+            "Game development",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Word Break Problem is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "palindrome-partitioning",
+      "title": "Palindrome Partitioning",
+      "description": "Palindrome Partitioning is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Palindrome Partitioning.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def palindrome_partitioning(input):\n    # Implementation of Palindrome Partitioning\n    pass",
+        "javascript": "function palindrome_partitioning(input) {\n    // Implementation of Palindrome Partitioning\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Palindrome Partitioning?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Palindrome Partitioning is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Palindrome Partitioning?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Palindrome Partitioning is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Palindrome Partitioning?",
+          "options": [
+            "Web search engines",
+            "Game development",
+            "Data compression",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Palindrome Partitioning is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "optimal-binary-search-tree",
+      "title": "Optimal Binary Search Tree",
+      "description": "Optimal Binary Search Tree is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Optimal Binary Search Tree.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def optimal_binary_search_tree(input):\n    # Implementation of Optimal Binary Search Tree\n    pass",
+        "javascript": "function optimal_binary_search_tree(input) {\n    // Implementation of Optimal Binary Search Tree\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Optimal Binary Search Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The time complexity of Optimal Binary Search Tree is O(n) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Optimal Binary Search Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 0,
+          "explanation": "The space complexity of Optimal Binary Search Tree is O(1) as it uses constant space."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Optimal Binary Search Tree?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Web search engines",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Optimal Binary Search Tree is commonly used in optimization problems and resource allocation due to its fast search performance."
+        }
+      ]
+    },
+    {
+      "id": "activity-selection",
+      "title": "Activity Selection",
+      "description": "Activity Selection is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Activity Selection.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def activity_selection(input):\n    # Implementation of Activity Selection\n    pass",
+        "javascript": "function activity_selection(input) {\n    // Implementation of Activity Selection\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Activity Selection?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Activity Selection is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Activity Selection?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Activity Selection is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Activity Selection?",
+          "options": [
+            "Image processing",
+            "Data compression",
+            "Game development",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Activity Selection is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "job-sequencing-problem",
+      "title": "Job Sequencing Problem",
+      "description": "Job Sequencing Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Job Sequencing Problem.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def job_sequencing_problem(input):\n    # Implementation of Job Sequencing Problem\n    pass",
+        "javascript": "function job_sequencing_problem(input) {\n    // Implementation of Job Sequencing Problem\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Job Sequencing Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Job Sequencing Problem is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Job Sequencing Problem?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Job Sequencing Problem is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Job Sequencing Problem?",
+          "options": [
+            "Network routing",
+            "Game development",
+            "Web search engines",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Job Sequencing Problem is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "fractional-knapsack",
+      "title": "Fractional Knapsack",
+      "description": "Fractional Knapsack is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Fractional Knapsack.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": ["knapsack-problem"],
+      "implementations": {
+        "python": "def fractional_knapsack(input):\n    # Implementation of Fractional Knapsack\n    pass",
+        "javascript": "function fractional_knapsack(input) {\n    // Implementation of Fractional Knapsack\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Fractional Knapsack?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Fractional Knapsack is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Fractional Knapsack?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Fractional Knapsack is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Fractional Knapsack?",
+          "options": [
+            "Network routing",
+            "Game development",
+            "Data compression",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Fractional Knapsack is commonly used in optimization problems and resource allocation due to its optimal solution finding capabilities."
+        }
+      ]
+    }
+  ],
+  "string": [
+    {
+      "id": "kmp-algorithm",
+      "title": "KMP Algorithm",
+      "description": "KMP Algorithm is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of KMP Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/GTJr8Ovy_eQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def kmp_algorithm(input):\n    # Implementation of KMP Algorithm\n    pass",
+        "javascript": "function kmp_algorithm(input) {\n    // Implementation of KMP Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of KMP Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of KMP Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of KMP Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of KMP Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of KMP Algorithm?",
+          "options": [
+            "Image processing",
+            "Network routing",
+            "Web search engines",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "KMP Algorithm is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "rabin-karp-algorithm",
+      "title": "Rabin-Karp Algorithm",
+      "description": "Rabin-Karp Algorithm is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of Rabin-Karp Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/qQ8vS2btsxI",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def rabin_karp_algorithm(input):\n    # Implementation of Rabin-Karp Algorithm\n    pass",
+        "javascript": "function rabin_karp_algorithm(input) {\n    // Implementation of Rabin-Karp Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Rabin-Karp Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Rabin-Karp Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Rabin-Karp Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Rabin-Karp Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Rabin-Karp Algorithm?",
+          "options": [
+            "Image processing",
+            "Network routing",
+            "Game development",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Rabin-Karp Algorithm is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "boyer-moore-algorithm",
+      "title": "Boyer-Moore Algorithm",
+      "description": "Boyer-Moore Algorithm is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of Boyer-Moore Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def boyer_moore_algorithm(input):\n    # Implementation of Boyer-Moore Algorithm\n    pass",
+        "javascript": "function boyer_moore_algorithm(input) {\n    // Implementation of Boyer-Moore Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Boyer-Moore Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Boyer-Moore Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Boyer-Moore Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Boyer-Moore Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Boyer-Moore Algorithm?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Image processing",
+            "Data compression"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Boyer-Moore Algorithm is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "z-algorithm",
+      "title": "Z Algorithm",
+      "description": "Z Algorithm is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of Z Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def z_algorithm(input):\n    # Implementation of Z Algorithm\n    pass",
+        "javascript": "function z_algorithm(input) {\n    // Implementation of Z Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Z Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Z Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Z Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Z Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Z Algorithm?",
+          "options": [
+            "Image processing",
+            "Data compression",
+            "Web search engines",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Z Algorithm is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "manacher-s-algorithm",
+      "title": "Manacher's Algorithm",
+      "description": "Manacher's Algorithm is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of Manacher's Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def manacher_s_algorithm(input):\n    # Implementation of Manacher's Algorithm\n    pass",
+        "javascript": "function manacher_s_algorithm(input) {\n    // Implementation of Manacher's Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Manacher's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Manacher's Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Manacher's Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Manacher's Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Manacher's Algorithm?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Web search engines",
+            "Image processing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Manacher's Algorithm is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "aho-corasick-algorithm",
+      "title": "Aho-Corasick Algorithm",
+      "description": "Aho-Corasick Algorithm is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of Aho-Corasick Algorithm.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def aho_corasick_algorithm(input):\n    # Implementation of Aho-Corasick Algorithm\n    pass",
+        "javascript": "function aho_corasick_algorithm(input) {\n    // Implementation of Aho-Corasick Algorithm\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Aho-Corasick Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Aho-Corasick Algorithm is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Aho-Corasick Algorithm?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Aho-Corasick Algorithm is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Aho-Corasick Algorithm?",
+          "options": [
+            "Game development",
+            "Image processing",
+            "Network routing",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Aho-Corasick Algorithm is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "suffix-automaton",
+      "title": "Suffix Automaton",
+      "description": "Suffix Automaton is a string algorithm that performs efficient string matching and manipulation. This tutorial will cover the theory, implementation, and applications of Suffix Automaton.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def suffix_automaton(input):\n    # Implementation of Suffix Automaton\n    pass",
+        "javascript": "function suffix_automaton(input) {\n    // Implementation of Suffix Automaton\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Suffix Automaton?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Suffix Automaton is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Suffix Automaton?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Suffix Automaton is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Suffix Automaton?",
+          "options": [
+            "Image processing",
+            "Network routing",
+            "Web search engines",
+            "Database indexing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Suffix Automaton is commonly used in text processing and pattern matching due to its optimal solution finding capabilities."
+        }
+      ]
+    }
+  ],
+  "data-structures": [
+    {
+      "id": "trie",
+      "title": "Trie",
+      "description": "Trie is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Trie.",
+      "videoUrl": "https://www.youtube.com/embed/zIjfhVPRZCg",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def trie(input):\n    # Implementation of Trie\n    pass",
+        "javascript": "function trie(input) {\n    // Implementation of Trie\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Trie?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Trie is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Trie?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Trie is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Trie?",
+          "options": [
+            "Database indexing",
+            "Image processing",
+            "Data compression",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Trie is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "suffix-array",
+      "title": "Suffix Array",
+      "description": "Suffix Array is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Suffix Array.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def suffix_array(input):\n    # Implementation of Suffix Array\n    pass",
+        "javascript": "function suffix_array(input) {\n    // Implementation of Suffix Array\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Suffix Array?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Suffix Array is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Suffix Array?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Suffix Array is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Suffix Array?",
+          "options": [
+            "Data compression",
+            "Database indexing",
+            "Game development",
+            "Web search engines"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Suffix Array is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "suffix-tree",
+      "title": "Suffix Tree",
+      "description": "Suffix Tree is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Suffix Tree.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def suffix_tree(input):\n    # Implementation of Suffix Tree\n    pass",
+        "javascript": "function suffix_tree(input) {\n    // Implementation of Suffix Tree\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Suffix Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Suffix Tree is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Suffix Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Suffix Tree is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Suffix Tree?",
+          "options": [
+            "Data compression",
+            "Game development",
+            "Image processing",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Suffix Tree is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "fenwick-tree",
+      "title": "Fenwick Tree",
+      "description": "Fenwick Tree is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Fenwick Tree.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def fenwick_tree(input):\n    # Implementation of Fenwick Tree\n    pass",
+        "javascript": "function fenwick_tree(input) {\n    // Implementation of Fenwick Tree\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Fenwick Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Fenwick Tree is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Fenwick Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Fenwick Tree is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Fenwick Tree?",
+          "options": [
+            "Data compression",
+            "Web search engines",
+            "Image processing",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Fenwick Tree is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "segment-tree",
+      "title": "Segment Tree",
+      "description": "Segment Tree is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Segment Tree.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def segment_tree(input):\n    # Implementation of Segment Tree\n    pass",
+        "javascript": "function segment_tree(input) {\n    // Implementation of Segment Tree\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Segment Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Segment Tree is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Segment Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Segment Tree is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Segment Tree?",
+          "options": [
+            "Game development",
+            "Data compression",
+            "Image processing",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Segment Tree is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "binary-indexed-tree",
+      "title": "Binary Indexed Tree",
+      "description": "Binary Indexed Tree is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Binary Indexed Tree.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def binary_indexed_tree(input):\n    # Implementation of Binary Indexed Tree\n    pass",
+        "javascript": "function binary_indexed_tree(input) {\n    // Implementation of Binary Indexed Tree\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Binary Indexed Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Binary Indexed Tree is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Binary Indexed Tree?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Binary Indexed Tree is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Binary Indexed Tree?",
+          "options": [
+            "Database indexing",
+            "Network routing",
+            "Image processing",
+            "Data compression"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Binary Indexed Tree is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "sparse-table",
+      "title": "Sparse Table",
+      "description": "Sparse Table is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Sparse Table.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def sparse_table(input):\n    # Implementation of Sparse Table\n    pass",
+        "javascript": "function sparse_table(input) {\n    // Implementation of Sparse Table\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Sparse Table?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Sparse Table is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Sparse Table?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Sparse Table is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Sparse Table?",
+          "options": [
+            "Database indexing",
+            "Data compression",
+            "Web search engines",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Sparse Table is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "disjoint-set-union",
+      "title": "Disjoint Set Union",
+      "description": "Disjoint Set Union is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Disjoint Set Union.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def disjoint_set_union(input):\n    # Implementation of Disjoint Set Union\n    pass",
+        "javascript": "function disjoint_set_union(input) {\n    // Implementation of Disjoint Set Union\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Disjoint Set Union?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Disjoint Set Union is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Disjoint Set Union?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Disjoint Set Union is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Disjoint Set Union?",
+          "options": [
+            "Image processing",
+            "Database indexing",
+            "Data compression",
+            "Network routing"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Disjoint Set Union is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "union-find",
+      "title": "Union Find",
+      "description": "Union Find is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Union Find.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def union_find(input):\n    # Implementation of Union Find\n    pass",
+        "javascript": "function union_find(input) {\n    // Implementation of Union Find\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Union Find?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Union Find is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Union Find?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Union Find is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Union Find?",
+          "options": [
+            "Network routing",
+            "Database indexing",
+            "Web search engines",
+            "Data compression"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Union Find is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    },
+    {
+      "id": "huffman-coding",
+      "title": "Huffman Coding",
+      "description": "Huffman Coding is a data-structures algorithm that provides efficient data organization and retrieval. This tutorial will cover the theory, implementation, and applications of Huffman Coding.",
+      "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
+      "difficulty": "advanced",
+      "duration": 35,
+      "prerequisites": [],
+      "implementations": {
+        "python": "def huffman_coding(input):\n    # Implementation of Huffman Coding\n    pass",
+        "javascript": "function huffman_coding(input) {\n    // Implementation of Huffman Coding\n}"
+      },
+      "quiz": [
+        {
+          "id": "time-complexity",
+          "question": "What is the time complexity of Huffman Coding?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 4,
+          "explanation": "The time complexity of Huffman Coding is O(n²) in the worst case."
+        },
+        {
+          "id": "space-complexity",
+          "question": "What is the space complexity of Huffman Coding?",
+          "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
+          "correctAnswer": 2,
+          "explanation": "The space complexity of Huffman Coding is O(n) for storing intermediate results."
+        },
+        {
+          "id": "application",
+          "question": "Which of the following is a common application of Huffman Coding?",
+          "options": [
+            "Network routing",
+            "Image processing",
+            "Database indexing",
+            "Game development"
+          ],
+          "correctAnswer": 0,
+          "explanation": "Huffman Coding is commonly used in data organization and retrieval systems due to its optimal solution finding capabilities."
+        }
+      ]
+    }
+  ]
+}

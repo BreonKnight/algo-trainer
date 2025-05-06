@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const ternarySearchPattern: AlgorithmPattern = {
   title: "Ternary Search",
@@ -49,56 +49,43 @@ function findMaximum(func, left, right, precision = 1e-6):
             right = mid2
             
     return (left + right) / 2`,
-  implementation: `function ternarySearch(arr: number[], target: number): number {
-  let left = 0;
-  let right = arr.length - 1;
-  
-  while (left <= right) {
-    // Calculate two midpoints
-    const mid1PatternPatternPattern = left + Math.floor((right - left) / 3);
-    const mid2PatternPatternPattern = right - Math.floor((right - left) / 3);
+  implementation: `def ternary_search(arr, target):
+    left = 0
+    right = len(arr) - 1
     
-    // Check if target is at either midpoint
-    if (arr[mid1] === target) {
-      return mid1;
-    }
-    if (arr[mid2] === target) {
-      return mid2;
-    }
+    while left <= right:
+        # Calculate two midpoints
+        mid1 = left + (right - left) // 3
+        mid2 = right - (right - left) // 3
+        
+        # Check if target is at either midpoint
+        if arr[mid1] == target:
+            return mid1
+        if arr[mid2] == target:
+            return mid2
+        
+        # Determine which third to search
+        if target < arr[mid1]:
+            right = mid1 - 1
+        elif target > arr[mid2]:
+            left = mid2 + 1
+        else:
+            left = mid1 + 1
+            right = mid2 - 1
     
-    // Determine which third to search
-    if (target < arr[mid1]) {
-      right = mid1 - 1;
-    } else if (target > arr[mid2]) {
-      left = mid2 + 1;
-    } else {
-      left = mid1 + 1;
-      right = mid2 - 1;
-    }
-  }
-  
-  return -1; // Target not found
-}
+    return -1  # Target not found
 
-// Finding maximum of a unimodal function
-function findMaximum(
-  func: (x: number) => number,
-  left: number,
-  right: number,
-  precision: number = 1e-6
-): number {
-  while (right - left > precision) {
-    const mid1PatternPatternPattern = left + (right - left) / 3;
-    const mid2PatternPatternPattern = right - (right - left) / 3;
+# Finding maximum of a unimodal function
+def find_maximum(func, left, right, precision=1e-6):
+    while right - left > precision:
+        mid1 = left + (right - left) / 3
+        mid2 = right - (right - left) / 3
+        
+        if func(mid1) < func(mid2):
+            left = mid1
+        else:
+            right = mid2
     
-    if (func(mid1) < func(mid2)) {
-      left = mid1;
-    } else {
-      right = mid2;
-    }
-  }
-  
-  return (left + right) / 2;
-}`,
+    return (left + right) / 2`,
   category: "Searching",
 };

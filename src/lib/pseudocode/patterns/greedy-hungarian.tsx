@@ -8,11 +8,11 @@ export const GreedyHungarianPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Solve assignment
-      problem
+      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Solve assignment problem
     </div>
 
-    <PseudocodeDisplay code={`// Hungarian algorithm for assignment problem
+    <PseudocodeDisplay
+      code={`// Hungarian algorithm for assignment problem
 HUNGARIAN(C):
     n ← rows[C]
     // Step 1: Subtract row minima
@@ -71,7 +71,8 @@ HUNGARIAN(C):
 // ]
 //
 // Step 3: Find matching
-// Output: {(1,1), (2,2), (3,3)}`} />
+// Output: {(1,1), (2,2), (3,3)}`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

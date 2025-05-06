@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const SuffixTreePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Suffix Tree</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Suffix Tree
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient string
-      operations
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient string operations
     </div>
 
-    <PseudocodeDisplay code={`// Suffix tree node structure
+    <PseudocodeDisplay
+      code={`// Suffix tree node structure
 SUFFIX-NODE:
     start
     end
@@ -97,7 +100,8 @@ BUILD-SUFFIX-TREE(S):
 //            |
 //            a
 //            |
-//            $`} />
+//            $`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

@@ -8,11 +8,11 @@ export const StackSortPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Sort using stack
-      operations
+      Time: O(n²) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Sort using stack operations
     </div>
 
-    <PseudocodeDisplay code={`// Sort array using stack operations
+    <PseudocodeDisplay
+      code={`// Sort array using stack operations
 STACK-SORT(A):
     n ← length[A]
     S ← empty stack
@@ -42,7 +42,8 @@ STACK-SORT(A):
 // 5. After fourth iteration: S = [5], T = [1, 2, 3, 4, 6]
 // 6. After fifth iteration: S = [], T = [1, 2, 3, 4, 5, 6]
 //
-// Output: [1, 2, 3, 4, 5, 6]`} />
+// Output: [1, 2, 3, 4, 5, 6]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

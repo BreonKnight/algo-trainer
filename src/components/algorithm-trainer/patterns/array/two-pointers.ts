@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const twoPointersPattern: AlgorithmPattern = {
   title: "Two Pointers Pattern",
@@ -7,6 +7,19 @@ export const twoPointersPattern: AlgorithmPattern = {
   timeComplexity: "Usually O(n)",
   spaceComplexity: "Usually O(1)",
   category: "Array",
+  difficulty: "Medium",
+  keyPoints: [
+    "Use two pointers to traverse the array",
+    "Can move in opposite directions or same direction",
+    "Often used for searching pairs or subarrays",
+    "Efficient for sorted arrays",
+  ],
+  commonUseCases: [
+    "Finding pairs that sum to a target",
+    "Removing duplicates from sorted array",
+    "Finding subarrays with specific properties",
+    "Merging sorted arrays",
+  ],
   pseudocode: `
 Two Pointers patterns:
 1. Opposite direction:
@@ -56,4 +69,11 @@ def two_pointers_same_direction(arr):
             arr[slow] = arr[fast]
     
     return slow + 1`,
+  relatedPatterns: ["Sliding Window", "Binary Search", "Merge Sort"],
+  tips: [
+    "Always check array bounds before moving pointers",
+    "Consider edge cases (empty array, single element)",
+    "For opposite direction, ensure pointers don't cross",
+    "For same direction, consider if you need to maintain order",
+  ],
 };

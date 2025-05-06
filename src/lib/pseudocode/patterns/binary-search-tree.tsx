@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const BinarySearchTreePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Binary Search Tree</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Binary Search Tree
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(h) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient search
-      and insertion
+      Time: O(h) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Efficient search and insertion
     </div>
 
-    <PseudocodeDisplay code={`// Binary search tree node structure
+    <PseudocodeDisplay
+      code={`// Binary search tree node structure
 BST-NODE:
     key
     left
@@ -86,7 +89,8 @@ TRANSPLANT(T, u, v):
 //      /   \\
 //     3     7
 //    / \\   / \\
-//   2   4 6   8`} />
+//   2   4 6   8`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

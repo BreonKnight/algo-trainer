@@ -8,11 +8,12 @@ export const GreedyFordFulkersonPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E * max_flow) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      maximum flow in networks
+      Time: O(E * max_flow) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding maximum flow in
+      networks
     </div>
 
-    <PseudocodeDisplay code={`// Standard Ford-Fulkerson
+    <PseudocodeDisplay
+      code={`// Standard Ford-Fulkerson
 def ford_fulkerson(graph, source, sink):
     # Initialize residual graph and max flow
     residual = {u: {v: graph[u][v] for v in graph[u]}
@@ -171,37 +172,33 @@ def ford_fulkerson_multiple(graph, sources, sinks):
 
         max_flow += path_flow
 
-    return max_flow`} />
+    return max_flow`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Residual
-        graph and max flow
+        <span className="font-semibold text-accent">Initialize:</span> Residual graph and max flow
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Find:</span> Augmenting path
-        using BFS
+        <span className="font-semibold text-accent">Find:</span> Augmenting path using BFS
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Update:</span> Residual
-        capacities and max flow
+        <span className="font-semibold text-accent">Update:</span> Residual capacities and max flow
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Ford-Fulkerson
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Ford-Fulkerson</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 S -> A(10), B(5)
@@ -217,9 +214,7 @@ Max Flow: 20`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Capacity Scaling
-      </span>
+      <span className="font-semibold text-accent">Example: Capacity Scaling</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 S -> A(10), B(5)
@@ -236,9 +231,7 @@ Max Flow: 20`}
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Multiple Sources/Sinks
-      </span>
+      <span className="font-semibold text-accent">Example: Multiple Sources/Sinks</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Input Graph:
 S1 -> A(10), B(5)

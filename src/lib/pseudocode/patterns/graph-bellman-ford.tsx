@@ -8,11 +8,12 @@ export const BellmanFordPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding
-      single-source shortest paths with negative weights
+      Time: O(VE) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Finding single-source shortest paths
+      with negative weights
     </div>
 
-    <PseudocodeDisplay code={`// Standard Bellman-Ford
+    <PseudocodeDisplay
+      code={`// Standard Bellman-Ford
 BELLMAN-FORD(G, s):
     # Initialize
     dist = [∞] * |V|
@@ -87,37 +88,35 @@ BELLMAN-FORD-EARLY(G, s):
         if dist[u] + w < dist[v]:
             return "Graph contains negative cycle"
 
-    return dist, parent`} />
+    return dist, parent`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Set up
-        distance and parent arrays
+        <span className="font-semibold text-accent">Initialize:</span> Set up distance and parent
+        arrays
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Relax:</span> Update
-        distances through edge relaxation
+        <span className="font-semibold text-accent">Relax:</span> Update distances through edge
+        relaxation
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Check:</span> Detect
-        negative cycles
+        <span className="font-semibold text-accent">Check:</span> Detect negative cycles
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Standard Bellman-Ford
-      </span>
+      <span className="font-semibold text-accent">Example: Standard Bellman-Ford</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph:
 0 --4-- 1 --1-- 2
@@ -146,9 +145,7 @@ Final distances from 0:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Path Reconstruction
-      </span>
+      <span className="font-semibold text-accent">Example: Path Reconstruction</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Parent array:
 [None,0,1,0,1,2]
@@ -163,9 +160,7 @@ Shortest paths from 0:
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Negative Cycle Detection
-      </span>
+      <span className="font-semibold text-accent">Example: Negative Cycle Detection</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Graph with negative cycle:
 0 --4-- 1 --1-- 2

@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const MergeSortPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Merge Sort</span>
-      <span className="ml-2 text-xs text-secondary">(Sorting Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Merge Sort
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Stable
-      sorting of arrays
+      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Stable sorting of arrays
     </div>
 
-    <PseudocodeDisplay code={`// Main merge sort function
+    <PseudocodeDisplay
+      code={`// Main merge sort function
 MERGE-SORT(array, start, end):
     # If array has more than one element
     if start < end:
@@ -57,45 +59,41 @@ MERGE(array, start, middle, end):
             i = i + 1
         else:
             array[k] = right[j]
-            j = j + 1`} />
+            j = j + 1`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Divide:</span> Split array
-        into two halves
+        <span className="font-semibold text-accent">Divide:</span> Split array into two halves
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Sort:</span> Recursively
-        sort each half
+        <span className="font-semibold text-accent">Sort:</span> Recursively sort each half
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Merge:</span> Combine sorted
-        halves
+        <span className="font-semibold text-accent">Merge:</span> Combine sorted halves
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">4.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Compare:</span> Pick
-        smallest element from either half
+        <span className="font-semibold text-accent">Compare:</span> Pick smallest element from
+        either half
       </span>
     </div>
 
     <div className="mt-4">
-      <span className="font-semibold text-accent">
-        Example: Sorting [5, 2, 4, 7, 1, 3, 2, 6]
-      </span>
+      <span className="font-semibold text-accent">Example: Sorting [5, 2, 4, 7, 1, 3, 2, 6]</span>
       <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
         {`Step 1: Split array
 [5, 2, 4, 7] | [1, 3, 2, 6]

@@ -1,0 +1,52 @@
+import { PatternKey } from "./types";
+import { PATTERN_KEYS } from "./types";
+
+export const monsterHunterExplanations: Partial<
+  Record<
+    PatternKey,
+    {
+      title: string;
+      description: string;
+      example: string;
+      tips: string[];
+    }
+  >
+> = {
+  "Trie Operations": {
+    title: "Monster Territory Trie Operations",
+    description:
+      "Operations on a trie data structure for efficient string storage and retrieval. Like organizing your monster names in a way that makes it easy to find similar names.",
+    example:
+      "Imagine you have a list of monster names and you need to find all names that start with a specific prefix. Trie Operations helps you do this efficiently.",
+    tips: [
+      "Use a trie data structure",
+      "Insert strings into the trie",
+      "Search for strings in the trie",
+      "Handle edge cases like empty strings",
+      "Use it for efficient string storage and retrieval",
+    ],
+  },
+  "Zigzag Traversal": {
+    title: "Monster Territory Zigzag Explorer",
+    description:
+      "Like a monster hunter exploring a territory in a zigzag pattern, Zigzag Traversal visits nodes in a binary tree level by level, alternating direction.",
+    example:
+      "Imagine you need to explore a binary tree of monster territories in a zigzag pattern - Zigzag Traversal helps you visit each level alternately from left to right and right to left.",
+    tips: [
+      "Use a queue for level order traversal",
+      "Alternate direction at each level",
+      "Handle different tree structures",
+      "Use it for systematic territory exploration",
+      "Consider using it for territory visualization",
+    ],
+  }
+};
+
+export function getMonsterHunterExplanation(patternKey: PatternKey) {
+  return monsterHunterExplanations[patternKey];
+}
+
+export function checkMissingPatterns() {
+  const missingPatterns = PATTERN_KEYS.filter((key) => !monsterHunterExplanations[key]);
+  return missingPatterns;
+} 

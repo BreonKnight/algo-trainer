@@ -4,17 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const MatrixChainMultiplicationPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Matrix Chain Multiplication</span>
-      <span className="ml-2 text-xs text-secondary">
-        (Optimization Algorithm)
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Matrix Chain Multiplication
       </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Finding optimal
-      matrix multiplication order
+      Time: O(n³) &nbsp;|&nbsp; Space: O(n²) &nbsp;|&nbsp; Use: Finding optimal matrix
+      multiplication order
     </div>
 
-    <PseudocodeDisplay code={`// Find minimum number of scalar multiplications
+    <PseudocodeDisplay
+      code={`// Find minimum number of scalar multiplications
 MATRIX-CHAIN-ORDER(p):
     n = length of p - 1
     # Initialize tables for costs and splits
@@ -49,38 +50,35 @@ PRINT-OPTIMAL-PARENS(s, i, j):
         print "("
         PRINT-OPTIMAL-PARENS(s, i, s[i][j])
         PRINT-OPTIMAL-PARENS(s, s[i][j] + 1, j)
-        print ")"`} />
+        print ")"`}
+    />
 
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">1.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Initialize:</span> Create
-        cost and split tables
+        <span className="font-semibold text-accent">Initialize:</span> Create cost and split tables
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">2.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Fill:</span> Compute costs
-        for all chain lengths
+        <span className="font-semibold text-accent">Fill:</span> Compute costs for all chain lengths
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">3.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Split:</span> Try all
-        possible split points
+        <span className="font-semibold text-accent">Split:</span> Try all possible split points
       </span>
     </div>
     <div className="flex items-start mb-1">
       <span className="font-bold text-main mr-2">4.</span>
       <ChevronRight className="w-4 h-4 text-accent mt-1 mr-1" />
       <span>
-        <span className="font-semibold text-accent">Print:</span> Show optimal
-        multiplication order
+        <span className="font-semibold text-accent">Print:</span> Show optimal multiplication order
       </span>
     </div>
 
@@ -103,19 +101,6 @@ Split table s:
 
 Optimal order: (A₁A₂)A₃
 Minimum cost: 4500 multiplications`}
-      </pre>
-    </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">Example: Larger Chain</span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
-        {`Matrices: A₁(5×4), A₂(4×6), A₃(6×2), A₄(2×7)
-
-Optimal order: (A₁(A₂A₃))A₄
-Minimum cost: 158 multiplications
-
-Alternative order: A₁((A₂A₃)A₄)
-Cost: 220 multiplications`}
       </pre>
     </div>
   </div>

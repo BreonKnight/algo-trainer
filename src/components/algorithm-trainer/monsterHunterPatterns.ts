@@ -101,10 +101,7 @@ console.log(\`Frequency analysis of attack pattern: \${frequency_analysis}\`);
 ]);
 
 // Add Articulation Points pattern
-export const articulationPointsMonsterHunterPattern = new Map<
-  PatternKey,
-  string
->([
+export const articulationPointsMonsterHunterPattern = new Map<PatternKey, string>([
   [
     "Articulation Points",
     `# Monster Hunter Articulation Points Pattern
@@ -169,6 +166,53 @@ console.log(\`Critical territory junctions: \${critical_junctions}\`);
   ],
 ]);
 
+// Add Shell Sort pattern
+const shellSortPattern = new Map<PatternKey, string>([
+  [
+    "Shell Sort",
+    `# Monster Hunter Shell Sort Pattern
+# Weapon Upgrade Sequence Optimization
+
+function shell_sort(weapons: number[]): number[] {
+  const n = weapons.length;
+  
+  // Start with a big gap, then reduce the gap
+  for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2)) {
+    // Do a gapped insertion sort for this gap size
+    for (let i = gap; i < n; i++) {
+      // Save current weapon power
+      const temp = weapons[i];
+      
+      // Shift earlier gap-sorted weapons up until the correct
+      // location for weapons[i] is found
+      let j;
+      for (j = i; j >= gap && weapons[j - gap] > temp; j -= gap) {
+        weapons[j] = weapons[j - gap];
+      }
+      
+      // Put temp (the original weapons[i]) in its correct location
+      weapons[j] = temp;
+    }
+  }
+  
+  return weapons;
+}
+
+// Example usage:
+const weapon_powers = [64, 34, 25, 12, 22, 11, 90];
+const sorted_weapons = shell_sort(weapon_powers);
+console.log(\`Sorted weapon powers: \${sorted_weapons}\`);
+
+// Tips:
+// 1. Use Shell Sort for efficient weapon power progression
+// 2. Choose appropriate gap sequences for different weapon types
+// 3. Optimize gap reduction strategy for specific monster encounters
+// 4. Consider using different gap sequences for different weapon categories
+// 5. Use Shell Sort when you need to quickly sort partially upgraded weapons
+`,
+  ],
+]);
+
 // Export all patterns
 export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended,
@@ -182,4 +226,5 @@ export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...matrixExponentiationPattern,
   ...fastFourierTransformPattern,
   ...articulationPointsMonsterHunterPattern,
+  ...shellSortPattern,
 ]);

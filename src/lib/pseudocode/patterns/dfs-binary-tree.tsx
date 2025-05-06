@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const DfsBinaryTreePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">DFS Binary Tree</span>
-      <span className="ml-2 text-xs text-secondary">(Tree)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        DFS (Binary Tree)
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(h) &nbsp;|&nbsp; Use: Traverse binary
-      tree in depth-first order
+      Time: O(n) &nbsp;|&nbsp; Space: O(h) &nbsp;|&nbsp; Use: Traverse binary tree in depth-first
+      order
     </div>
 
-    <PseudocodeDisplay code={`# DFS Binary Tree: Traverse binary tree in depth-first order
+    <PseudocodeDisplay
+      code={`# DFS Binary Tree: Traverse binary tree in depth-first order
 # Input: Binary tree T with root node
 # Output: List of nodes in DFS order
 
@@ -57,7 +60,8 @@ Algorithm DFS-BINARY-TREE(T)
 # Step 6: Pop 3, Push 6
 # Step 7: Pop 6
 #
-# Output: [1, 2, 4, 5, 3, 6]`} />
+# Output: [1, 2, 4, 5, 3, 6]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
@@ -73,9 +77,7 @@ Algorithm DFS-BINARY-TREE(T)
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Process nodes in stack order, pushing right then left children
-        </span>
+        <span>Process nodes in stack order, pushing right then left children</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />

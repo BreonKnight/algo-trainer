@@ -1,9 +1,9 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "../../types/pattern-types";
 
 export const rotateMatrixPattern: AlgorithmPattern = {
-  title: "Rotate Matrix",
+  title: "Matrix Operations",
   description:
-    "Rotate a 2D matrix 90 degrees clockwise. This is like rotating a map of the Ancient Forest to get a better view of monster paths.",
+    "A pattern for rotating a matrix by 90 degrees clockwise or counterclockwise. This is a common operation in matrix manipulation problems.",
   category: "Array",
   timeComplexity: "O(n²)",
   spaceComplexity: "O(1)",

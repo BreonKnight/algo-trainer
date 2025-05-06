@@ -7,11 +7,9 @@ const DRYRUN = process.argv.includes("--dryrun");
 const patternDir = "src/lib/pseudocode/patterns";
 const indexFilePath = "src/lib/pseudocode/index.tsx";
 const typesFilePath = "src/components/algorithm-trainer/types.ts";
-const mhPatternPath =
-  "src/components/algorithm-trainer/monsterHunterPatternsExtended4.ts";
+const mhPatternPath = "src/components/algorithm-trainer/monsterHunterPatternsExtended4.ts";
 const mhGuidePath = "src/components/algorithm-trainer/MonsterHunterGuide.tsx";
-const mhTestDataPath =
-  "src/components/algorithm-trainer/monsterHunterTestData.ts";
+const mhTestDataPath = "src/components/algorithm-trainer/monsterHunterTestData.ts";
 const implRoot = "src/components/algorithm-trainer/patterns";
 
 // --- HELPERS ---
@@ -26,8 +24,7 @@ function groupForPattern(key) {
   if (/sort/i.test(key)) return "sorting";
   if (/search/i.test(key)) return "searching";
   if (/dp|dynamic programming/i.test(key)) return "dp";
-  if (/queue|stack|heap|tree|trie|linked list|hash/i.test(key))
-    return "data-structures";
+  if (/queue|stack|heap|tree|trie|linked list|hash/i.test(key)) return "data-structures";
   if (
     /graph|bfs|dfs|dijkstra|kruskal|prim|floyd|bellman|kosaraju|network|bridge|articulation/i.test(
       key
@@ -35,9 +32,7 @@ function groupForPattern(key) {
   )
     return "graphs";
   if (/matrix|grid/i.test(key)) return "matrix";
-  if (
-    /probability|compression|fft|z-algorithm|kmp|rabin-karp|manacher/i.test(key)
-  )
+  if (/probability|compression|fft|z-algorithm|kmp|rabin-karp|manacher/i.test(key))
     return "advanced";
   return "misc";
 }
@@ -48,19 +43,13 @@ const filePatternKeys = files.map(toPatternKey);
 
 // --- 2. Get all keys in pseudocodePatterns ---
 const indexFile = fs.readFileSync(indexFilePath, "utf8");
-const patternsMatch = indexFile.match(
-  /export const pseudocodePatterns:.*?{([\s\S]*?)};/
-);
+const patternsMatch = indexFile.match(/export const pseudocodePatterns:.*?{([\s\S]*?)};/);
 const patternObj = patternsMatch[1];
-const patternObjKeys = Array.from(patternObj.matchAll(/"([^"]+)":/g)).map(
-  (m) => m[1]
-);
+const patternObjKeys = Array.from(patternObj.matchAll(/"([^"]+)":/g)).map((m) => m[1]);
 
 // --- 3. Get all dropdown options (PATTERN_KEYS) ---
 const typesFile = fs.readFileSync(typesFilePath, "utf8");
-const patternKeysMatch = typesFile.match(
-  /export const PATTERN_KEYS = \[(.*?)\] as const;/s
-);
+const patternKeysMatch = typesFile.match(/export const PATTERN_KEYS = \[(.*?)\] as const;/s);
 const patternKeys = patternKeysMatch[1]
   .split("\n")
   .map((line) => line.replace(/["',]/g, "").trim())
@@ -68,19 +57,17 @@ const patternKeys = patternKeysMatch[1]
 
 // --- 4. Get all Monster Hunter Guide/Pattern/TestData keys ---
 const mhPatternFile = fs.readFileSync(mhPatternPath, "utf8");
-const mhPatternKeys = Array.from(
-  mhPatternFile.matchAll(/\[\s*"([^"]+)" as PatternKey,/g)
-).map((m) => m[1]);
+const mhPatternKeys = Array.from(mhPatternFile.matchAll(/\[\s*"([^"]+)" as PatternKey,/g)).map(
+  (m) => m[1]
+);
 
 const mhGuideFile = fs.readFileSync(mhGuidePath, "utf8");
-const mhGuideKeys = Array.from(
-  mhGuideFile.matchAll(/["']([^"']+)["']: ?{/g)
-).map((m) => m[1]);
+const mhGuideKeys = Array.from(mhGuideFile.matchAll(/["']([^"']+)["']: ?{/g)).map((m) => m[1]);
 
 const mhTestDataFile = fs.readFileSync(mhTestDataPath, "utf8");
-const mhTestDataKeys = Array.from(
-  mhTestDataFile.matchAll(/["']([^"']+)["']: ?`/g)
-).map((m) => m[1]);
+const mhTestDataKeys = Array.from(mhTestDataFile.matchAll(/["']([^"']+)["']: ?`/g)).map(
+  (m) => m[1]
+);
 
 // --- 5. For each pattern, check and add missing entries ---
 filePatternKeys.forEach((key) => {

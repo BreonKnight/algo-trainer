@@ -1,0 +1,899 @@
+Pattern Verification Report:
+Missing Regular Patterns:
+Bitwise DP, Heavy Light Decomposition, Hopcroft-Karp, Ford-Fulkerson, Kahn's Topological Sort, Graph Representation, DFS Graph, Spanning Tree, Tree, AVL Tree, Binary Search Tree, Binary Indexed Tree, Doubly Linked List, Tree Implementation, Trie, Trie Operations, Sparse Table, String Hashing, Palindrome Partitioning, Edit Distance, Chinese Remainder Theorem, Extended Euclidean, Fast Fourier Transform, Sieve of Atkin, Sieve of Eratosthenes, Sieve of Sundaram, Miller-Rabin Primality Test, Prime Factorization, Karatsuba Multiplication, Backtracking, Divide and Conquer, Recursion, Fast and Slow Pointers, Fibonacci, Interval Scheduling, Greedy, LCA DFS, Inorder Traversal, Zigzag Traversal
+
+Missing Monster Hunter Patterns:
+Bucket Sort, Counting Sort, Bitwise DP, Hopcroft-Karp, Ford-Fulkerson, Kahn's Topological Sort, Graph Representation, DFS Graph, Spanning Tree, Binary Indexed Tree, Doubly Linked List, Tree Implementation, Trie, Sparse Table, String Hashing, Palindrome Partitioning, Edit Distance, Karatsuba Multiplication, Fast and Slow Pointers, Fibonacci, Interval Scheduling, LCA DFS, Inorder Traversal, Zigzag Traversal
+
+Inconsistent Patterns:
+
+Radix Sort:
+Regular Pattern:
+  Title: Radix Sort Algorithm
+  Description: A non-comparative sorting algorithm that sorts data with integer keys by grouping keys by the individual digits which share the same significant position and value.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Territory Digit Sorter
+  Description: Like a monster hunter organizing monsters by their unique identifiers digit by digit, Radix Sort sorts numbers by processing individual digits from least significant to most significant.
+  Category: Other
+
+Quick Sort:
+Regular Pattern:
+  Title: Quick Sort Algorithm
+  Description: A highly efficient, comparison-based, divide and conquer sorting algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays according to whether they are less than or greater than the pivot.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Territory Division
+  Description: Like dividing a monster's territory into smaller regions, Quick Sort efficiently sorts elements by partitioning around a pivot.
+  Category: Other
+
+Merge Sort:
+Regular Pattern:
+  Title: Merge Sort Algorithm
+  Description: A divide-and-conquer algorithm that recursively breaks down a problem into two or more sub-problems of the same or related type, until these become simple enough to be solved directly. The solutions to the sub-problems are then combined to give a solution to the original problem.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Territory Merger
+  Description: Like merging two organized monster territories into one, Merge Sort combines sorted subarrays into a larger sorted array.
+  Category: Other
+
+Heap Sort:
+Regular Pattern:
+  Title: Heap Sort Algorithm
+  Description: A comparison-based sorting algorithm that uses a binary heap data structure. It divides the input into a sorted and an unsorted region, and iteratively shrinks the unsorted region by extracting the largest element and moving it to the sorted region.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Power Hierarchy
+  Description: Like organizing monsters in a power hierarchy where the strongest is always at the top, Heap Sort uses a heap data structure to sort elements.
+  Category: Other
+
+Bubble Sort:
+Regular Pattern:
+  Title: Bubble Sort Algorithm
+  Description: A simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The algorithm gets its name from the way smaller elements 'bubble' to the top of the list.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Strength Comparison
+  Description: Like comparing adjacent monsters and swapping them if they're in the wrong order, Bubble Sort repeatedly steps through the list.
+  Category: Other
+
+Selection Sort:
+Regular Pattern:
+  Title: Selection Sort Algorithm
+  Description: A simple sorting algorithm that divides the input into a sorted and an unsorted region, and iteratively shrinks the unsorted region by extracting the smallest element and moving it to the sorted region. It has the advantage of making the minimum number of swaps of any sorting algorithm.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Selection Tournament
+  Description: Like finding the strongest monster in a group and placing it at the front, Selection Sort repeatedly finds the minimum element and places it at the beginning.
+  Category: Other
+
+Insertion Sort:
+Regular Pattern:
+  Title: Insertion Sort Algorithm
+  Description: A simple sorting algorithm that builds the final sorted array one item at a time. It is much less efficient on large lists than more advanced algorithms such as quicksort, heapsort, or merge sort. However, insertion sort provides several advantages: it is simple to implement, efficient for small data sets, stable, in-place, and online.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Line Formation
+  Description: Like building a line of monsters one by one, Insertion Sort builds the final sorted array one item at a time.
+  Category: Other
+
+Stack Sort:
+Regular Pattern:
+  Title: Stack Sort Algorithm
+  Description: A sorting algorithm that uses two stacks to sort an array. It works by pushing elements onto a stack and then popping them off in sorted order. The algorithm is not efficient for large datasets but demonstrates the use of stack data structure for sorting.
+  Category: Sorting
+Monster Hunter Pattern:
+  Title: Monster Territory Stack Sort
+  Description: A sorting algorithm that uses a stack to sort elements. It's like organizing your inventory by putting items in a stack and then taking them out in order.
+  Category: Other
+
+Binary Search:
+Regular Pattern:
+  Title: Binary Search
+  Description: Efficient search algorithm for sorted arrays
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Search
+  Description: Like efficiently searching for a specific monster in a sorted territory, Binary Search quickly finds an element in a sorted array.
+  Category: Other
+
+Linear Search:
+Regular Pattern:
+  Title: Linear Search
+  Description: Simple search algorithm for unsorted arrays
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Scan
+  Description: Like systematically scanning a territory for a specific monster, Linear Search checks each element in sequence.
+  Category: Other
+
+Binary Search on Answer:
+Regular Pattern:
+  Title: Binary Search on Answer Algorithm
+  Description: A problem-solving pattern that uses binary search to find an answer in a range of possible values, typically used when the answer space is monotonic.
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Rarity Search
+  Description: Like finding the minimum rarity needed for a craft, Binary Search on Answer efficiently finds the optimal value in a range.
+  Category: Other
+
+Ternary Search:
+Regular Pattern:
+  Title: Ternary Search
+  Description: A divide-and-conquer search algorithm that divides the search space into three parts instead of two, useful for finding the maximum or minimum of a unimodal function.
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Triangulation
+  Description: Like a monster hunter dividing their search area into three parts to find the optimal hunting ground, Ternary Search efficiently finds the maximum or minimum in a unimodal function.
+  Category: Other
+
+Jump Search:
+Regular Pattern:
+  Title: Jump Search
+  Description: A search algorithm for sorted arrays that jumps ahead by fixed steps and then performs linear search in the identified block.
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Leaping
+  Description: Like a monster hunter jumping through a territory in fixed steps, Jump Search divides the array into blocks and jumps through them to find the target.
+  Category: Other
+
+Exponential Search:
+Regular Pattern:
+  Title: Exponential Search
+  Description: A search algorithm for unbounded or infinite sorted arrays. It first finds a range where the target might be present, then performs a binary search within that range.
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Expansion
+  Description: Like a monster hunter expanding their search area exponentially to find a rare monster, Exponential Search efficiently finds a range where a target might be present in an unbounded sorted array.
+  Category: Other
+
+Interpolation Search:
+Regular Pattern:
+  Title: Interpolation Search
+  Description: An improved variant of binary search that uses the value of the target to estimate its position in the array. It works best on uniformly distributed data.
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Estimation
+  Description: Like a monster hunter estimating the target's location based on known values, Interpolation Search estimates the position of the target in a uniformly distributed array.
+  Category: Other
+
+Fibonacci Search:
+Regular Pattern:
+  Title: Fibonacci Search
+  Description: A divide and conquer algorithm that uses Fibonacci numbers to search a sorted array. It divides the array into unequal parts using Fibonacci numbers and performs comparisons to find the target element.
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Fibonacci Explorer
+  Description: Like a monster hunter using the Fibonacci sequence to efficiently search through territories, Fibonacci Search divides the search space using Fibonacci numbers to find targets quickly.
+  Category: Other
+
+Quickselect:
+Regular Pattern:
+  Title: Quickselect
+  Description: Efficient algorithm to find the k-th smallest element in an unsorted array
+  Category: Searching
+Monster Hunter Pattern:
+  Title: Monster Territory Quick Selector
+  Description: Like a monster hunter quickly finding the k-th strongest monster in a territory, Quickselect efficiently finds the k-th smallest element in an unsorted list.
+  Category: Other
+
+Dynamic Programming:
+Regular Pattern:
+  Title: Dynamic Programming
+  Description: A method for solving complex problems by breaking them down into simpler subproblems, solving each subproblem only once, and storing the results for future use.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Dynamic Solver
+  Description: Like a monster hunter solving problems by breaking them down into smaller subproblems, Dynamic Programming solves problems by storing and reusing solutions to subproblems.
+  Category: Other
+
+Dynamic Programming Pattern:
+Regular Pattern:
+  Title: Dynamic Programming
+  Description: A method for solving complex problems by breaking them down into simpler subproblems, solving each subproblem only once, and storing the results for future use.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Dynamic Programming Pattern
+  Description: A method for solving complex problems by breaking them down into simpler subproblems.
+  Category: Other
+
+Dynamic Programming Iterative:
+Regular Pattern:
+  Title: Dynamic Programming Iterative
+  Description: A bottom-up approach to dynamic programming that solves problems by building solutions iteratively from smaller subproblems.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Iterative Solver
+  Description: Like a monster hunter solving problems iteratively, Dynamic Programming Iterative solves problems using an iterative approach with dynamic programming.
+  Category: Other
+
+Dynamic Programming Coin Change:
+Regular Pattern:
+  Title: Dynamic Programming Coin Change
+  Description: A dynamic programming solution to the coin change problem that finds the minimum number of coins needed to make up a given amount.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Coin Changer
+  Description: Like a monster hunter making change for monster currency, Dynamic Programming Coin Change finds the minimum number of coins needed to make change.
+  Category: Other
+
+State Compression DP:
+Regular Pattern:
+  Title: State Compression DP
+  Description: A dynamic programming technique that reduces space complexity by representing states using bitmasks or other compact representations.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory State Compressor
+  Description: Like a monster hunter efficiently tracking the state of multiple territories, State Compression DP uses bit manipulation to represent and process multiple states simultaneously.
+  Category: Other
+
+Digit DP:
+Regular Pattern:
+  Title: Digit DP
+  Description: A dynamic programming technique for solving problems involving digits of numbers, such as counting numbers with specific properties in a range.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Digit Counter
+  Description: Like a monster hunter counting specific patterns in monster numbers, Digit DP efficiently counts numbers with specific digit properties in a range.
+  Category: Other
+
+Tree DP:
+Regular Pattern:
+  Title: Tree DP
+  Description: A dynamic programming technique for solving problems on trees by processing nodes in a post-order traversal and combining results from subtrees.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Tree Dynamic Solver
+  Description: Like a monster hunter solving problems on a tree structure using dynamic programming, Tree DP solves problems on trees by storing and reusing solutions to subproblems.
+  Category: Other
+
+Probability DP:
+Regular Pattern:
+  Title: Probability DP
+  Description: A dynamic programming technique for solving probability problems by breaking them down into smaller subproblems and combining their probabilities.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Probability Predictor
+  Description: Like a monster hunter predicting the probability of different hunting outcomes, Probability DP calculates probabilities of different events in a sequence.
+  Category: Other
+
+A* Search:
+Regular Pattern:
+  Title: A* Search
+  Description: A graph algorithm that finds the shortest path between two nodes using a heuristic function to guide the search. It combines the advantages of Dijkstra's algorithm (guaranteed shortest path) with the efficiency of greedy best-first search.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: A* Monster Pathfinder
+  Description: Like a master monster hunter planning the optimal path through dangerous territory, A* Search efficiently finds the shortest path by considering both the distance traveled and the estimated distance to the goal.
+  Category: Other
+
+Articulation Points:
+Regular Pattern:
+  Title: Articulation Points
+  Description: Find vertices in a graph whose removal increases the number of connected components
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Articulation Points
+  Description: Like a monster hunter identifying critical territories that connect different regions, Articulation Points finds nodes whose removal would disconnect the graph.
+  Category: Other
+
+Bellman-Ford:
+Regular Pattern:
+  Title: Bellman-Ford Algorithm
+  Description: Find shortest paths from a source vertex to all other vertices, even with negative edge weights
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Negative Pathfinder
+  Description: Find the shortest paths through territories with negative weights, like areas that speed up or slow down movement.
+  Category: Other
+
+Floyd-Warshall:
+Regular Pattern:
+  Title: Floyd-Warshall Algorithm
+  Description: Find shortest paths between all pairs of vertices in a weighted graph
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory All-Pairs Pathfinder
+  Description: Like a monster hunter finding the shortest paths between all pairs of territories, Graph Floyd Warshall finds the shortest paths between all pairs of vertices in a graph.
+  Category: Other
+
+Kruskal:
+Regular Pattern:
+  Title: Kruskal
+  Description: Find a minimum spanning tree in a weighted undirected graph
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Network Optimizer
+  Description: Create an optimal network of paths connecting all hunting grounds while minimizing total path difficulty.
+  Category: Other
+
+Strongly Connected Components:
+Regular Pattern:
+  Title: Strongly Connected Components
+  Description: A graph algorithm that finds strongly connected components in a directed graph. A strongly connected component is a maximal subgraph where every pair of vertices is mutually reachable.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Group Analyzer
+  Description: Find groups of hunting grounds where monsters can freely move between all areas in the group.
+  Category: Other
+
+Maximum Bipartite Matching:
+Regular Pattern:
+  Title: Maximum Bipartite Matching
+  Description: A graph algorithm that finds the maximum matching in a bipartite graph. A matching is a set of edges without common vertices, and a maximum matching is a matching of maximum size.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Hunter's Perfect Match Finder
+  Description: Like a monster hunter matching hunters to their ideal monster targets, Maximum Bipartite Matching finds the largest set of edges without common vertices.
+  Category: Other
+
+Topological Sort:
+Regular Pattern:
+  Title: Topological Sort
+  Description: Algorithm for ordering vertices in a directed acyclic graph (DAG) such that for each directed edge u->v, vertex u comes before v in the ordering.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Topological Sort Monster Hunter
+  Description: The Topological Sort Monster Hunter is an expert at ordering monsters based on their dependencies. It's perfect for problems involving task scheduling or course prerequisites.
+  Category: Other
+
+Prim:
+Regular Pattern:
+  Title: Prim's Algorithm
+  Description: Find a minimum spanning tree in a weighted undirected graph starting from a source vertex
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Prim
+  Description: Like a monster hunter growing a network of paths from a central territory, Prim's algorithm builds a minimum spanning tree by always adding the closest unconnected territory.
+  Category: Other
+
+Kosaraju:
+Regular Pattern:
+  Title: Kosaraju
+  Description: Find strongly connected components in a directed graph
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Connectivity Analyzer
+  Description: Identify strongly connected regions in the hunting grounds to understand monster movement patterns.
+  Category: Other
+
+Bridges:
+Regular Pattern:
+  Title: Bridges
+  Description: Find edges in a graph whose removal disconnects the graph
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Bridge Finder
+  Description: Find critical paths between hunting zones that, if blocked, would disconnect regions.
+  Category: Other
+
+Dijkstra:
+Regular Pattern:
+  Title: Dijkstra
+  Description: Find shortest paths from a source vertex to all other vertices in a weighted graph with non-negative edges
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Hunter's Pathfinder
+  Description: Like a monster hunter finding the safest path through dangerous territory, Dijkstra's algorithm finds the shortest path from a starting point to all other points.
+  Category: Other
+
+Network Flow:
+Regular Pattern:
+  Title: Network Flow
+  Description: A collection of algorithms for solving maximum flow problems in networks, including Dinic's, Edmonds-Karp, and Ford-Fulkerson algorithms.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Flow Network
+  Description: Like managing the flow of monsters between territories, Network Flow algorithms find the maximum flow in a network of connected territories.
+  Category: Other
+
+B Tree:
+Regular Pattern:
+  Title: B Tree
+  Description: A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Balanced Tree
+  Description: Like a monster hunter organizing territories in a balanced way for efficient access, B Tree maintains a balanced tree structure for efficient search, insertion, and deletion.
+  Category: Other
+
+Circular Linked List:
+Regular Pattern:
+  Title: Circular Linked List Implementation
+  Description: Implementation of a linked list where the last element points back to the first element, forming a circle.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Circular Organizer
+  Description: Like a monster hunter organizing territories in a circular pattern, Circular Linked List connects the last node back to the first.
+  Category: Other
+
+Fenwick Tree:
+Regular Pattern:
+  Title: Fenwick Tree
+  Description: A Fenwick Tree (or Binary Indexed Tree) is a data structure that can efficiently update elements and calculate prefix sums in a table of numbers.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Binary Indexed Tree
+  Description: Like a monster hunter efficiently tracking cumulative resources across territories, Fenwick Tree provides efficient prefix sum operations and updates.
+  Category: Other
+
+Linked List:
+Regular Pattern:
+  Title: Linked List Implementation
+  Description: Implementation of a linear data structure where each element points to the next element in the sequence.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Chain Organizer
+  Description: Like a monster hunter organizing territories in a chain, Linked List provides efficient insertion and deletion operations.
+  Category: Other
+
+Segment Tree:
+Regular Pattern:
+  Title: Segment Tree
+  Description: A Segment Tree is a data structure that can efficiently answer range queries and perform range updates on an array.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Range Query Tree
+  Description: Like a monster hunter efficiently answering questions about ranges of territories, Segment Tree provides efficient range queries and updates.
+  Category: Other
+
+Union Find:
+Regular Pattern:
+  Title: Union Find
+  Description: A data structure that tracks elements partitioned into a number of disjoint (non-overlapping) subsets. It provides near-constant-time operations for adding new sets, merging sets, and finding a representative member of a set.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Union Manager
+  Description: Like a monster hunter managing groups of connected territories, Union Find efficiently manages disjoint sets and finds connected components.
+  Category: Other
+
+DFS Binary Tree:
+Regular Pattern:
+  Title: DFS on Binary Tree
+  Description: Apply Depth-First Search on a binary tree structure to traverse or search through nodes in pre-order, in-order, or post-order.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Binary Tree Explorer
+  Description: Like a monster hunter exploring a binary tree of territories using depth-first search, DFS Binary Tree visits all nodes in a binary tree using DFS.
+  Category: Other
+
+Red-Black Tree:
+Regular Pattern:
+  Title: Red-Black Tree
+  Description: 
+    A self-balancing binary search tree where each node has an extra bit for color (red or black). 
+    The tree maintains balance through color properties and rotations, ensuring O(log n) performance for all operations.
+
+    Properties:
+    1. Every node is either red or black
+    2. The root is black
+    3. All leaves (NIL) are black
+    4. If a node is red, both its children are black
+    5. Every path from a node to its descendant leaves contains the same number of black nodes
+  
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Color-Balanced Tree
+  Description: Like a monster hunter using color coding to maintain territory balance, Red-Black Tree is a self-balancing binary search tree that uses color properties to maintain balance.
+  Category: Other
+
+Hash Table:
+Regular Pattern:
+  Title: Hash Table Implementation
+  Description: Implementation of a data structure that maps keys to values using a hash function, providing constant-time average case operations.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Hash Organizer
+  Description: Like a monster hunter organizing territories by their unique identifiers, Hash Table provides efficient insertion, deletion, and lookup operations.
+  Category: Other
+
+Heap Implementation:
+Regular Pattern:
+  Title: Binary Heap Implementation
+  Description: Implementation of a complete binary tree that satisfies the heap property (min-heap or max-heap), commonly used for priority queues.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Priority Organizer
+  Description: Like a monster hunter organizing territories by priority, Heap Implementation provides efficient priority queue operations.
+  Category: Other
+
+Queue Implementation:
+Regular Pattern:
+  Title: Queue Data Structure Implementation
+  Description: Implementation of a First-In-First-Out (FIFO) data structure that supports enqueue and dequeue operations.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Queue Builder
+  Description: Like a monster hunter organizing a line of territories to explore, Queue Implementation provides efficient FIFO (First In, First Out) operations.
+  Category: Other
+
+Stack Implementation:
+Regular Pattern:
+  Title: Stack Data Structure Implementation
+  Description: Implementation of a Last-In-First-Out (LIFO) data structure that supports push and pop operations.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Stack Builder
+  Description: Like a monster hunter organizing a stack of territories to explore, Stack Implementation provides efficient LIFO (Last In, First Out) operations.
+  Category: Other
+
+Monotonic Queue:
+Regular Pattern:
+  Title: Monotonic Queue Pattern
+  Description: A queue that maintains its elements in a strictly increasing or decreasing order, commonly used for sliding window maximum/minimum problems.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Queue Optimizer
+  Description: Like a monster hunter maintaining an optimal queue of territories, Monotonic Queue maintains elements in a specific order to solve sliding window problems efficiently.
+  Category: Other
+
+Monotonic Stack:
+Regular Pattern:
+  Title: Monotonic Stack Pattern
+  Description: A stack that maintains its elements in a strictly increasing or decreasing order, useful for finding the next/previous greater/smaller element.
+  Category: Data Structure
+Monster Hunter Pattern:
+  Title: Monster Territory Stack Optimizer
+  Description: Like a monster hunter maintaining an optimal stack of territories, Monotonic Stack maintains elements in a specific order to solve problems efficiently.
+  Category: Other
+
+String Operations:
+Regular Pattern:
+  Title: String Operations
+  Description: Common string manipulation operations including concatenation, substring, and character manipulation.
+  Category: String
+Monster Hunter Pattern:
+  Title: Monster Territory String Operations
+  Description: Like a monster hunter manipulating strings of monster names and descriptions, String Operations provides efficient string manipulation and pattern matching.
+  Category: Other
+
+Rabin-Karp:
+Regular Pattern:
+  Title: Rabin-Karp
+  Description: A string matching algorithm that uses hashing to find patterns in text. It uses a rolling hash function to efficiently compute hash values for substrings and compares them with the pattern's hash. This approach allows for average-case linear time complexity.
+  Category: String
+Monster Hunter Pattern:
+  Title: Monster Territory Pattern Searcher
+  Description: Like a monster hunter searching for patterns in monster names and descriptions, Rabin Karp efficiently finds all occurrences of a pattern in a text using hashing.
+  Category: Other
+
+Knuth-Morris-Pratt:
+Regular Pattern:
+  Title: Knuth-Morris-Pratt
+  Description: A string matching algorithm that uses pattern preprocessing to achieve linear time complexity. It builds a prefix table (lps array) to avoid unnecessary character comparisons by utilizing information about the pattern itself.
+  Category: String
+Monster Hunter Pattern:
+  Title: Knuth-Morris-Pratt Monster Pattern Seeker
+  Description: Like a monster hunter tracking a specific monster's movement pattern, the Knuth-Morris-Pratt algorithm efficiently searches for patterns in monster behavior sequences.
+  Category: Other
+
+Manacher's Algorithm:
+Regular Pattern:
+  Title: Manacher's Algorithm
+  Description: An efficient algorithm to find all palindromic substrings in a string in linear time.
+  Category: String
+Monster Hunter Pattern:
+  Title: Monster Territory Symmetry Finder
+  Description: Like a monster hunter identifying symmetrical patterns in monster territories, Manacher's algorithm finds the longest palindromic substring in linear time.
+  Category: Other
+
+Z Algorithm:
+Regular Pattern:
+  Title: Z Algorithm
+  Description: A linear time pattern matching algorithm that utilizes the Z array (which stores the length of the longest substring starting from the current position that is also a prefix of the string).
+  Category: String
+Monster Hunter Pattern:
+  Title: Monster Territory Pattern Matcher
+  Description: Like a monster hunter finding patterns in monster names and descriptions, Z Algorithm efficiently finds all occurrences of a pattern in a text.
+  Category: Other
+
+Suffix Array:
+Regular Pattern:
+  Title: Suffix Array
+  Description: A data structure that provides efficient string operations by storing all suffixes of a string in sorted order.
+  Category: String
+Monster Hunter Pattern:
+  Title: Monster Territory Suffix Organizer
+  Description: Like a monster hunter organizing all possible endings of monster territories, Suffix Array provides an efficient way to search and analyze patterns in monster-related text.
+  Category: Other
+
+Suffix Tree:
+Regular Pattern:
+  Title: Suffix Tree
+  Description: A compressed trie containing all the suffixes of a given string, providing efficient string operations.
+  Category: String
+Monster Hunter Pattern:
+  Title: Monster Territory Suffix Tree
+  Description: Like a monster hunter organizing all possible patterns in a monster's territory, Suffix Tree provides a compact way to represent and search through all suffixes of a text.
+  Category: Other
+
+Matrix Operations:
+Regular Pattern:
+  Title: Matrix Operations
+  Description: Perform various operations on matrices including initialization, traversal, and common operations
+  Category: Matrix
+Monster Hunter Pattern:
+  Title: Monster Territory Matrix Navigator
+  Description: Like a master monster hunter navigating through complex territories, Matrix Operations provide a comprehensive toolkit for territory mapping and analysis. Each matrix cell represents a different territory or region, and the various traversal methods and operations help you efficiently explore and manipulate these territories. Whether you're tracking monster movements, mapping resource distributions, or analyzing territory patterns, these operations give you the flexibility to process data in multiple ways.
+  Category: Other
+
+Matrix Traversal:
+Regular Pattern:
+  Title: Matrix Traversal
+  Description: A pattern for traversing a 2D matrix iteratively, typically using nested loops to visit each element in a specific order (row-wise or column-wise).
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Matrix Operations
+  Description: Like navigating through a grid of monster territories, Matrix Traversal algorithms help you efficiently visit and process each cell in a matrix.
+  Category: Other
+
+Matrix Traversal Recursive:
+Regular Pattern:
+  Title: Matrix Traversal Recursive
+  Description: A recursive approach to traverse a 2D matrix, which can be particularly useful for problems requiring backtracking or complex traversal patterns.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Recursive Explorer
+  Description: Like a monster hunter exploring a territory using recursive calls, Matrix Traversal Recursive visits all elements of a matrix using recursion.
+  Category: Other
+
+Matrix Spiral Traversal:
+Regular Pattern:
+  Title: Matrix Spiral Traversal
+  Description: An iterative pattern to traverse a matrix in a spiral order, moving in a clockwise direction from the outer elements to the inner elements.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Spiral Explorer
+  Description: Like a monster hunter exploring a territory in a spiral pattern, Matrix Spiral Traversal visits all elements of a matrix in a spiral order.
+  Category: Other
+
+Matrix Spiral Recursive:
+Regular Pattern:
+  Title: Matrix Spiral Recursive
+  Description: A recursive approach to traverse a matrix in spiral order, which breaks down the spiral traversal into smaller subproblems.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Spiral Recursive Explorer
+  Description: Like a monster hunter exploring a territory in a spiral pattern using recursive calls, Matrix Spiral Recursive visits all elements of a matrix in a spiral order using recursion.
+  Category: Other
+
+Matrix Chain Multiplication:
+Regular Pattern:
+  Title: Matrix Chain Multiplication
+  Description: Find the optimal way to multiply a chain of matrices to minimize the number of scalar multiplications.
+  Category: Matrix
+Monster Hunter Pattern:
+  Title: Monster Territory Chain Multiplier
+  Description: Like a monster hunter finding the most efficient way to multiply multiple territories, Matrix Chain Multiplication finds the optimal way to multiply a sequence of matrices.
+  Category: Other
+
+Matrix Exponentiation:
+Regular Pattern:
+  Title: Matrix Exponentiation
+  Description: Compute the power of a matrix efficiently using exponentiation by squaring.
+  Category: Matrix
+Monster Hunter Pattern:
+  Title: Monster Territory Power Calculator
+  Description: Like a monster hunter calculating territory powers efficiently, Matrix Exponentiation efficiently computes high powers of matrices.
+  Category: Other
+
+Grid Traversal:
+Regular Pattern:
+  Title: Grid Traversal
+  Description: Traverse a 2D grid using different patterns like spiral, diagonal, or zigzag.
+  Category: Matrix
+Monster Hunter Pattern:
+  Title: Monster Territory Grid Explorer
+  Description: Like a monster hunter systematically exploring a grid-based territory, Grid Traversal algorithms help navigate and analyze grid-based monster habitats.
+  Category: Other
+
+Rotate Matrix:
+Regular Pattern:
+  Title: Rotate Matrix
+  Description: Rotate a 2D matrix 90 degrees clockwise. This is like rotating a map of the Ancient Forest to get a better view of monster paths.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Hunter's Map Rotator
+  Description: Like a monster hunter rotating their territory map to view it from different strategic angles, Rotate Matrix transforms a matrix by rotating it 90 degrees.
+  Category: Other
+
+Bit Manipulation:
+Regular Pattern:
+  Title: Bit Manipulation Pattern
+  Description: Techniques for performing operations at the bit level, often used to optimize space usage or perform fast arithmetic operations.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Bit Master
+  Description: Like a monster hunter efficiently tracking multiple monster attributes with bits, Bit Manipulation uses bitwise operations to solve problems efficiently.
+  Category: Other
+
+Floyd Cycle Detection:
+Regular Pattern:
+  Title: Floyd Cycle Detection
+  Description: An algorithm to detect cycles in a linked list using two pointers moving at different speeds.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Fast and Slow Pointers Monster Hunter
+  Description: The Fast and Slow Pointers Monster Hunter is a master of detecting cycles and finding middle points in monster sequences. It uses two pointers moving at different speeds to efficiently solve problems involving cycles, palindromes, or finding middle elements.
+  Category: Other
+
+Kadane's Algorithm:
+Regular Pattern:
+  Title: Kadane's Algorithm Pattern
+  Description: A dynamic programming algorithm for finding the maximum subarray sum in a one-dimensional array.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Kadane's Monster Territory Analyzer
+  Description: Like a monster hunter analyzing the most profitable hunting grounds, Kadane's algorithm finds the maximum sum subarray in a sequence of monster territories.
+  Category: Other
+
+Prefix Sums:
+Regular Pattern:
+  Title: Prefix Sums
+  Description: Prefix Sums is a technique that precomputes cumulative sums of array elements to efficiently answer range sum queries.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Prefix Sums
+  Description: A technique for efficient range sum queries.
+  Category: Other
+
+Sliding Window:
+Regular Pattern:
+  Title: Sliding Window Pattern
+  Description: An algorithmic technique that involves maintaining a subset of elements as a window that slides over the data, typically used for array/string problems involving contiguous sequences.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Sliding Window Monster Hunter
+  Description: The Sliding Window Monster Hunter is a master of tracking and maintaining a window of monsters. It uses a fixed-size window to efficiently hunt monsters in a sequence, perfect for problems where you need to find a subarray or substring that meets certain criteria.
+  Category: Other
+
+Two Pointers:
+Regular Pattern:
+  Title: Two Pointers Pattern
+  Description: A technique that uses two pointers to solve array-related problems efficiently, often moving them towards each other or in the same direction.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Two Pointers Monster Hunter
+  Description: The Two Pointers Monster Hunter is an expert at using two pointers to efficiently track and hunt monsters in a sequence. It's particularly effective when you need to find pairs of monsters that meet certain criteria or when you need to manipulate a sequence of monsters in place.
+  Category: Other
+
+Memoization:
+Regular Pattern:
+  Title: Memoization
+  Description: A top-down dynamic programming technique that stores the results of expensive function calls and returns the cached result when the same inputs occur again.
+  Category: Dynamic Programming
+Monster Hunter Pattern:
+  Title: Monster Territory Memoization
+  Description: Like a monster hunter using a memoization table to store and reuse results of expensive function calls, Memoization efficiently solves problems by storing and reusing results of previous computations.
+  Category: Other
+
+Activity Selection:
+Regular Pattern:
+  Title: Greedy Activity Selection
+  Description: A greedy algorithm that selects the maximum number of non-overlapping activities that can be performed by a single person.
+  Category: Greedy
+Monster Hunter Pattern:
+  Title: Monster Hunter's Greedy Strategy
+  Description: Like a monster hunter who always chooses the most valuable target at each step, the Greedy algorithm makes locally optimal choices hoping they lead to a globally optimal solution.
+  Category: Other
+
+Fractional Knapsack:
+Regular Pattern:
+  Title: Greedy Fractional Knapsack
+  Description: A greedy approach to the knapsack problem where items can be broken into smaller pieces, always choosing the item with the highest value per unit weight.
+  Category: Greedy
+Monster Hunter Pattern:
+  Title: Monster Hunter's Resource Packer
+  Description: Like a monster hunter maximizing the value of their limited inventory space, Fractional Knapsack helps you select the most valuable combination of items when you can take fractions of items.
+  Category: Other
+
+Huffman Coding:
+Regular Pattern:
+  Title: Greedy Huffman Coding Algorithm
+  Description: A greedy algorithm used for data compression, which builds a Huffman tree to assign variable-length codes to characters based on their frequencies.
+  Category: Greedy
+Monster Hunter Pattern:
+  Title: Monster Territory Code Compressor
+  Description: Like a monster hunter creating an efficient code for different monster types, Huffman Coding creates an optimal prefix code for compressing monster-related data.
+  Category: Other
+
+Job Scheduling:
+Regular Pattern:
+  Title: Greedy Job Scheduling
+  Description: A greedy algorithm that schedules jobs to minimize completion time or maximize profit, typically sorting jobs by duration or profit/time ratio.
+  Category: Greedy
+Monster Hunter Pattern:
+  Title: Monster Hunter's Schedule Optimizer
+  Description: Like a monster hunter scheduling hunts to maximize rewards, Job Scheduling selects jobs to maximize profit while meeting deadlines.
+  Category: Other
+
+Hungarian Algorithm:
+Regular Pattern:
+  Title: Hungarian Algorithm
+  Description: An algorithm for solving the assignment problem in polynomial time. It finds the minimum cost matching in a bipartite graph where each edge has a non-negative cost.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Hunter's Perfect Match Finder
+  Description: Like a monster hunter matching hunters to their ideal monster targets, the Hungarian Algorithm finds the optimal assignment of tasks to workers with minimum total cost.
+  Category: Other
+
+BFS:
+Regular Pattern:
+  Title: BFS
+  Description: Breadth-First Search (BFS) is an algorithm for traversing or searching tree or graph data structures. It explores all vertices at the present depth before moving to vertices at the next depth level.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Breadth Explorer
+  Description: Like a monster hunter systematically exploring a territory level by level, BFS explores all nodes at the current depth before moving to the next level.
+  Category: Other
+
+BFS Linked List:
+Regular Pattern:
+  Title: BFS on Linked List
+  Description: Apply Breadth-First Search on a linked list structure to traverse or search through nodes level by level.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Linked List Breadth Explorer
+  Description: Like a monster hunter exploring a linked list of territories using breadth-first search, BFS Linked List visits all nodes in a linked list using BFS.
+  Category: Other
+
+DFS:
+Regular Pattern:
+  Title: Graph DFS
+  Description: Depth-First Search (DFS) is an algorithm for traversing or searching tree or graph data structures. It starts at a selected node and explores as far as possible along each branch before backtracking.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Depth Explorer
+  Description: Like a monster hunter following a trail as far as possible before backtracking, DFS explores as far as possible along each branch before backtracking.
+  Category: Other
+
+DFS Linked List:
+Regular Pattern:
+  Title: DFS on Linked List
+  Description: Apply Depth-First Search on a linked list structure to traverse or search through nodes.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Linked List Explorer
+  Description: Like a monster hunter exploring a linked list of territories using depth-first search, DFS Linked List visits all nodes in a linked list using DFS.
+  Category: Other
+
+DFS Binary Tree:
+Regular Pattern:
+  Title: DFS on Binary Tree
+  Description: Apply Depth-First Search on a binary tree structure to traverse or search through nodes in pre-order, in-order, or post-order.
+  Category: Graph
+Monster Hunter Pattern:
+  Title: Monster Territory Binary Tree Explorer
+  Description: Like a monster hunter exploring a binary tree of territories using depth-first search, DFS Binary Tree visits all nodes in a binary tree using DFS.
+  Category: Other
+
+Two Sum:
+Regular Pattern:
+  Title: Two Sum Algorithm (Brute Force)
+  Description: A problem-solving pattern that finds two numbers in an array that sum to a target value using a brute force approach.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Two Sum Finder
+  Description: Finding two numbers in an array that add up to a target value. Like finding two monsters whose levels add up to a specific number.
+  Category: Other
+
+Two Sum Dict:
+Regular Pattern:
+  Title: Two Sum Dict
+  Description: A problem-solving pattern that finds two numbers in an array that sum to a target value using a dictionary/hash map for optimal time complexity.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Two Sum Dictionary
+  Description: Using a dictionary to store seen values for quick lookup in Two Sum. Like keeping a log of monster levels you've seen to find matches quickly.
+  Category: Other
+
+Two Sum Two Pointers:
+Regular Pattern:
+  Title: Two Sum Algorithm (Two Pointers)
+  Description: A solution to the Two Sum problem using two pointers technique, which requires the array to be sorted.
+  Category: Other
+Monster Hunter Pattern:
+  Title: Monster Territory Two Sum Two Pointers
+  Description: A variation of Two Sum that uses two pointers to find pairs efficiently. Like using two scouts to find matching monsters from opposite ends of a list.
+  Category: Other
+

@@ -1,15 +1,10 @@
-import { useTheme } from "@/components/theme/theme-context";
-import { cn } from "../../lib/utils";
+import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 import { Highlight, type PrismTheme } from "prism-react-renderer";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import { useState, useRef, useEffect } from "react";
 
 const CodeBlock = ({ code }: { code: string }) => {
@@ -423,74 +418,56 @@ const CodeBlock = ({ code }: { code: string }) => {
     switch (theme) {
       case "nord":
         return {
-          containerClass:
-            "bg-[#3c3c9c]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(80, 80, 160, 0.5), transparent)",
+          containerClass: "bg-[#3c3c9c]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.15)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(80, 80, 160, 0.5), transparent)",
           textClass: "text-[#e7e7e7]",
         };
       case "dracula":
         return {
-          containerClass:
-            "bg-[#282a36]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(68, 71, 90, 0.5), transparent)",
+          containerClass: "bg-[#282a36]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(68, 71, 90, 0.5), transparent)",
           textClass: "text-[#f8f8f2]",
         };
       case "solarized":
         return {
-          containerClass:
-            "bg-[#fdf6e3]/95 shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(238, 232, 213, 0.5), transparent)",
+          containerClass: "bg-[#fdf6e3]/95 shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(238, 232, 213, 0.5), transparent)",
           textClass: "text-[#657b83]",
         };
       case "light":
         return {
-          containerClass:
-            "bg-[#f8fafc]/95 shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(226, 232, 240, 0.5), transparent)",
+          containerClass: "bg-[#f8fafc]/95 shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(226, 232, 240, 0.5), transparent)",
           textClass: "text-[#22223b]",
         };
       case "snes":
         return {
-          containerClass:
-            "bg-[#a0a0a0]/95 shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(128, 128, 128, 0.5), transparent)",
+          containerClass: "bg-[#a0a0a0]/95 shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(128, 128, 128, 0.5), transparent)",
           textClass: "text-[#333333]",
         };
       case "ps2":
         return {
-          containerClass:
-            "bg-[#001b4d]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(0, 43, 117, 0.5), transparent)",
+          containerClass: "bg-[#001b4d]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(0, 43, 117, 0.5), transparent)",
           textClass: "text-[#b4c7ff]",
         };
       case "re2":
         return {
-          containerClass:
-            "bg-[#0a0a0a]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(26, 24, 22, 0.5), transparent)",
+          containerClass: "bg-[#0a0a0a]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(26, 24, 22, 0.5), transparent)",
           textClass: "text-[#e6e0d6]",
         };
       case "mh":
         return {
-          containerClass:
-            "bg-[#1c2320]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(42, 51, 45, 0.5), transparent)",
+          containerClass: "bg-[#1c2320]/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(42, 51, 45, 0.5), transparent)",
           textClass: "text-[#e8d5a9]",
         };
       default:
         return {
-          containerClass:
-            "bg-zinc-950/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
-          gradientOverlay:
-            "linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)",
+          containerClass: "bg-zinc-950/95 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]",
+          gradientOverlay: "linear-gradient(to bottom, rgba(255,255,255,0.1), transparent)",
           textClass: "text-zinc-200",
         };
     }
@@ -499,12 +476,7 @@ const CodeBlock = ({ code }: { code: string }) => {
   const containerStyles = getContainerStyles(appTheme);
 
   return (
-    <div
-      className={cn(
-        "relative rounded-lg overflow-hidden",
-        containerStyles.containerClass
-      )}
-    >
+    <div className={cn("relative rounded-lg overflow-hidden", containerStyles.containerClass)}>
       {/* Add subtle gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
@@ -605,8 +577,7 @@ zinogre_water = monster_weaknesses.get('Zinogre', {}).get('water', 0)`,
     },
     {
       title: "List Slicing",
-      description:
-        "List slicing provides powerful ways to extract and manipulate sequences.",
+      description: "List slicing provides powerful ways to extract and manipulate sequences.",
       code: `# Quest rewards list
 rewards = ['Plate', 'Scale+', 'Wing', 'Ruby', 'Tail', 'Gem']
 
@@ -684,11 +655,9 @@ strongest = heapq.nlargest(2, monsters)  # First 2 strongest`,
                   "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
               }}
             >
-              Algorithm Trainer
-            </Link>
-            <h1 className="text-xl font-semibold text-accent2">
               Python Techniques
-            </h1>
+            </Link>
+            {/* Navigation Bar */}
 
             {/* Navigation Hamburger */}
             <div className="absolute left-0 top-1/2 -translate-y-1/2 z-50">
@@ -819,10 +788,7 @@ strongest = heapq.nlargest(2, monsters)  # First 2 strongest`,
                   </h2>
                   <div className="space-y-4">
                     <p
-                      className={cn(
-                        "text-sm",
-                        theme === "nord" ? "text-nord-4" : "text-zinc-400"
-                      )}
+                      className={cn("text-sm", theme === "nord" ? "text-nord-4" : "text-zinc-400")}
                     >
                       {section.description}
                     </p>

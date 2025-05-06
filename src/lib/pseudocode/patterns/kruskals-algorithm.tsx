@@ -7,8 +7,7 @@ export const KruskalPattern = () => (
       <span className="text-accent font-bold">Kruskal's Algorithm</span>
     </h2>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(E log E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find minimum
-      spanning tree
+      Time: O(E log E) &nbsp;|&nbsp; Space: O(V) &nbsp;|&nbsp; Use: Find minimum spanning tree
     </div>
 
     <PseudocodeDisplay

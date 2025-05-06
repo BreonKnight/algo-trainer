@@ -4,12 +4,14 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const BfsLinkedListPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">BFS on Linked List</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        BFS Linked List
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked
-      list level by level
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked list level by level
     </div>
 
     <PseudocodeDisplay

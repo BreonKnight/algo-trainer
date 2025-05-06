@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const TrieOperationsPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Trie Operations</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Trie Operations
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(m) &nbsp;|&nbsp; Space: O(ALPHABET_SIZE * m * n) &nbsp;|&nbsp;
-      Use: String prefix operations
+      Time: O(m) &nbsp;|&nbsp; Space: O(ALPHABET_SIZE * m * n) &nbsp;|&nbsp; Use: String prefix
+      operations
     </div>
 
-    <PseudocodeDisplay code={`// Node structure
+    <PseudocodeDisplay
+      code={`// Node structure
 NODE:
     children[ALPHABET_SIZE]
     isEndOfWord
@@ -116,7 +119,8 @@ TRIE-DELETE-HELPER(node, word, depth):
 //     |
 //     l
 //     |
-//     e (end)`} />
+//     e (end)`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

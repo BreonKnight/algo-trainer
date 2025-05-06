@@ -19,7 +19,6 @@ import { DfsLinkedListPattern } from "./patterns/dfs-linked-list";
 import { DigitDPPattern } from "./patterns/digit-dp";
 import { DivideAndConquerPattern } from "./patterns/divide-and-conquer";
 import { DynamicProgrammingCoinChangePattern } from "./patterns/dynamic-programming-coin-change";
-import { DynamicProgrammingFibonacciPattern } from "./patterns/dynamic-programming-fibonacci";
 import { DynamicProgrammingIterativePattern } from "./patterns/dynamic-programming-iterative";
 import { DynamicProgrammingPattern } from "./patterns/dynamic-programming";
 import { DynamicProgrammingPatternTemplate } from "./patterns/dynamic-programming-pattern";
@@ -32,7 +31,6 @@ import { FloydCycleDetectionPattern } from "./patterns/floyd-cycle-detection";
 import { FloydWarshallPattern } from "./patterns/graph-floyd-warshall";
 import { BridgesPattern } from "./patterns/graph-bridges";
 import { KosarajuPattern } from "./patterns/graph-kosaraju";
-import { GraphPattern } from "./patterns/graph";
 import { DijkstraPattern } from "./patterns/dijkstra";
 import { ActivitySelectionPattern } from "./patterns/activity-selection.tsx";
 import { FractionalKnapsackPattern } from "./patterns/fractional-knapsack.tsx";
@@ -67,7 +65,6 @@ import { MillerRabinPrimalityTestPattern } from "./patterns/miller-rabin-primali
 import { MonotonicQueuePattern } from "./patterns/monotonic-queue";
 import { MonotonicStackPattern } from "./patterns/monotonic-stack";
 import { NetworkFlowPattern } from "./patterns/network-flow";
-import { NullPattern } from "./patterns/null-pattern";
 import { PrefixSumsPattern } from "./patterns/prefix-sums";
 import { PrimPattern } from "./patterns/prims-algorithm";
 import { ProbabilityDPPattern } from "./patterns/probability-dp";
@@ -93,7 +90,6 @@ import { SuffixTreePattern } from "./patterns/suffix-tree";
 import { TernarySearchAlgorithmPattern } from "./patterns/ternary-search-algorithm";
 import { TopologicalSortPattern } from "./patterns/topological-sort";
 import { TreeDynamicProgrammingPattern } from "./patterns/tree-dp";
-import { TreePattern } from "./patterns/tree";
 import { TrieOperationsPattern } from "./patterns/trie-operations";
 import { TwoPointersPattern } from "./patterns/two-pointers";
 import { TwoSumDictionaryPattern } from "./patterns/two-sum-dict";
@@ -104,115 +100,472 @@ import { ZAlgorithmPattern } from "./patterns/z-algorithm";
 import { GreedyPattern } from "./patterns/greedy";
 import { HungarianPattern } from "./patterns/hungarian";
 import { RadixSortPattern } from "./patterns/radix-sort";
+import { BitwiseDPPattern } from "./patterns/bitwise-dp";
+import { SpanningTreePattern } from "./patterns/spanning-tree";
+import { SparseTablePattern } from "./patterns/sparse-table";
+import { StringHashingPattern } from "./patterns/string-hashing";
+import { ZigzagTraversalPattern } from "./patterns/zigzag-traversal";
+import { SortingComparisonsPattern } from "./patterns/sorting-comparisons";
+import { PalindromePartitioningPattern } from "./patterns/palindrome-partitioning";
+import { LCADFSPattern } from "./patterns/lca-dfs";
+import { EditDistancePattern } from "./patterns/edit-distance";
+import { FordFulkersonPattern } from "./patterns/ford-fulkerson";
+import { KahnTopologicalSortPattern } from "./patterns/kahn-topological-sort";
+import { KaratsubaMultiplicationPattern } from "./patterns/karatsuba-multiplication";
+import { InorderTraversalPattern } from "./patterns/inorder-traversal";
+import { HopcroftKarpPattern } from "./patterns/hopcroft-karp";
+import { GraphRepresentationPattern } from "./patterns/graph-representation";
+import { TreeImplementationPattern } from "./patterns/tree-implementation";
+import { TriePattern } from "./patterns/trie";
+import { BucketSortPattern } from "./patterns/bucket-sort";
+import { CountingSortPattern } from "./patterns/counting-sort";
+import { BinaryIndexedTreePattern } from "./patterns/binary-indexed-tree";
+import DoublyLinkedListPattern from "./patterns/doubly-linked-list";
+import FastAndSlowPointersPattern from "./patterns/fast-and-slow-pointers";
+import FibonacciPattern from "./patterns/fibonacci";
+import DFSGraphPattern from "./patterns/dfs-graph";
+import { IntervalSchedulingPattern } from "./patterns/interval-scheduling";
+import { TestDataPattern } from "./patterns/test-data";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
-  "A* Search": AStarSearchPattern,
-  "Activity Selection": ActivitySelectionPattern,
-  "Articulation Points": ArticulationPointsPattern,
-  "AVL Tree": AVLTreePattern,
-  Backtracking: BacktrackingPattern,
-  "Bellman-Ford": BellmanFordPattern,
+  // ===== Graph Algorithms =====
   BFS: BFSPattern,
   "BFS Linked List": BfsLinkedListPattern,
-  "Binary Search": BinarySearchPattern,
-  "Binary Search on Answer": BinarySearchOnAnswerPattern,
-  "Binary Search Tree": BinarySearchTreePattern,
-  "Bit Manipulation": BitManipulationPattern,
-  "B Tree": BTreePattern,
-  "Bubble Sort": BubbleSortPattern,
-  "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
-  "Circular Linked List": CircularLinkedListPattern,
   DFS: DFSPattern,
   "DFS Binary Tree": DfsBinaryTreePattern,
   "DFS Linked List": DfsLinkedListPattern,
-  "Digit DP": DigitDPPattern,
-  "Divide and Conquer": DivideAndConquerPattern,
-  "Dynamic Programming": DynamicProgrammingPattern,
-  "Dynamic Programming Coin Change": DynamicProgrammingCoinChangePattern,
-  "Dynamic Programming Fibonacci": DynamicProgrammingFibonacciPattern,
-  "Dynamic Programming Iterative": DynamicProgrammingIterativePattern,
-  "Dynamic Programming Pattern": DynamicProgrammingPatternTemplate,
-  "Exponential Search": ExponentialSearchPattern,
-  "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
-  "Fast Fourier Transform": FastFourierTransformPattern,
-  "Fenwick Tree": FenwickTreePattern,
-  "Fibonacci Search": FibonacciSearchPattern,
-  "Floyd Cycle Detection": FloydCycleDetectionPattern,
-  "Floyd-Warshall": FloydWarshallPattern,
-  "Fractional Knapsack": FractionalKnapsackPattern,
-  Graph: GraphPattern,
-  "Huffman Coding": HuffmanCodingPattern,
-  "Insertion Sort": InsertionSortPattern,
-  "Interpolation Search": InterpolationSearchPattern,
   Dijkstra: DijkstraPattern,
+  "Bellman-Ford": BellmanFordPattern,
+  "Floyd-Warshall": FloydWarshallPattern,
+  Kruskal: KruskalPattern,
+  Prim: PrimPattern,
+  "Topological Sort": TopologicalSortPattern,
+  "Strongly Connected Components": StronglyConnectedComponentsPattern,
+  "Articulation Points": ArticulationPointsPattern,
   Bridges: BridgesPattern,
   Kosaraju: KosarajuPattern,
-  Kruskal: KruskalPattern,
-  "Strongly Connected Components": StronglyConnectedComponentsPattern,
-  Greedy: GreedyPattern,
-  "Grid Traversal": GridTraversalPattern,
-  "Hash Table": HashTablePattern,
-  "Heap Implementation": HeapImplementationPattern,
-  "Heap Sort": HeapSortPattern,
+  "Maximum Bipartite Matching": MaximumBipartiteMatchingPattern,
+  "Network Flow": NetworkFlowPattern,
   "Heavy Light Decomposition": HeavyLightDecompositionPattern,
-  "Hungarian Algorithm": HungarianPattern,
+  "Lowest Common Ancestor": LCAPattern,
+  "Ford-Fulkerson": FordFulkersonPattern,
+  "Kahn's Topological Sort": KahnTopologicalSortPattern,
+  "Hopcroft-Karp": HopcroftKarpPattern,
+  "Graph Representation": GraphRepresentationPattern,
+  "DFS Graph": DFSGraphPattern,
+  "Spanning Tree": SpanningTreePattern,
+
+  // ===== Tree Data Structures =====
+  "Binary Search Tree": BinarySearchTreePattern,
+  "AVL Tree": AVLTreePattern,
+  "Red-Black Tree": RedBlackTreePattern,
+  "B Tree": BTreePattern,
+  "Segment Tree": SegmentTreePattern,
+  "Fenwick Tree": FenwickTreePattern,
+  "Suffix Tree": SuffixTreePattern,
+  "Trie Operations": TrieOperationsPattern,
+  "Tree Implementation": TreeImplementationPattern,
+  "LCA DFS": LCADFSPattern,
+  "Inorder Traversal": InorderTraversalPattern,
+  "Zigzag Traversal": ZigzagTraversalPattern,
+
+  // ===== Dynamic Programming =====
+  "Dynamic Programming": DynamicProgrammingPattern,
+  "Dynamic Programming Coin Change": DynamicProgrammingCoinChangePattern,
+  "Dynamic Programming Iterative": DynamicProgrammingIterativePattern,
+  "Dynamic Programming Pattern": DynamicProgrammingPatternTemplate,
+  "Digit DP": DigitDPPattern,
+  "Probability DP": ProbabilityDPPattern,
+  "State Compression DP": StateCompressionDPPattern,
+  "Tree DP": TreeDynamicProgrammingPattern,
+  "Bitwise DP": BitwiseDPPattern,
+
+  // ===== Greedy Algorithms =====
+  Greedy: GreedyPattern,
+  "Activity Selection": ActivitySelectionPattern,
+  "Fractional Knapsack": FractionalKnapsackPattern,
+  "Huffman Coding": HuffmanCodingPattern,
   "Job Scheduling": JobSchedulingPattern,
-  "Jump Search": JumpSearchAlgorithmPattern,
-  "Kadane's Algorithm": KadanesAlgorithmPattern,
-  "Knuth-Morris-Pratt": KnuthMorrisPrattPattern,
+  "Hungarian Algorithm": HungarianPattern,
+
+  // ===== Search Algorithms =====
   "Linear Search": LinearSearchPattern,
-  "Linked List": LinkedListPattern,
-  "Manacher's Algorithm": ManachersAlgorithmPattern,
+  "Binary Search": BinarySearchPattern,
+  "Binary Search on Answer": BinarySearchOnAnswerPattern,
+  "Exponential Search": ExponentialSearchPattern,
+  "Fibonacci Search": FibonacciSearchPattern,
+  "Interpolation Search": InterpolationSearchPattern,
+  "Jump Search": JumpSearchAlgorithmPattern,
+  "Ternary Search": TernarySearchAlgorithmPattern,
+
+  // ===== Sorting Algorithms =====
+  "Bubble Sort": BubbleSortPattern,
+  "Insertion Sort": InsertionSortPattern,
+  "Selection Sort": SelectionSortPattern,
+  "Merge Sort": MergeSortPattern,
+  "Quick Sort": QuickSortPattern,
+  "Heap Sort": HeapSortPattern,
+  "Radix Sort": RadixSortPattern,
+  "Stack Sort": StackSortPattern,
+  "Sorting Comparisons": SortingComparisonsPattern,
+  "Bucket Sort": BucketSortPattern,
+  "Counting Sort": CountingSortPattern,
+
+  // ===== Matrix Operations =====
+  "Matrix Operations": MatrixOperationsPattern,
   "Matrix Chain Multiplication": MatrixChainMultiplicationPattern,
   "Matrix Exponentiation": MatrixExponentiationPattern,
-  "Matrix Operations": MatrixOperationsPattern,
-  "Matrix Spiral Recursive": MatrixSpiralTraversalRecursivePattern,
   "Matrix Spiral Traversal": MatrixSpiralTraversalPattern,
+  "Matrix Spiral Recursive": MatrixSpiralTraversalRecursivePattern,
   "Matrix Traversal": MatrixTraversalPattern,
   "Matrix Traversal Recursive": MatrixTraversalRecursivePattern,
-  "Maximum Bipartite Matching": MaximumBipartiteMatchingPattern,
-  Memoization: MemoizationPattern,
-  "Merge Sort": MergeSortPattern,
-  "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
-  "Monotonic Queue": MonotonicQueuePattern,
-  "Monotonic Stack": MonotonicStackPattern,
-  "Network Flow": NetworkFlowPattern,
-  "Null Pattern": NullPattern,
-  "Prefix Sums": PrefixSumsPattern,
-  Prim: PrimPattern,
-  "Prime Factorization": SieveOfEratosthenesPattern,
-  "Probability DP": ProbabilityDPPattern,
-  "Queue Implementation": QueueImplementationPattern,
-  Quickselect: QuickselectPattern,
-  "Quick Sort": QuickSortPattern,
-  "Radix Sort": RadixSortPattern,
-  "Rabin-Karp": RabinKarpPattern,
-  "Red-Black Tree": RedBlackTreePattern,
-  Recursion: RecursionPattern,
-  "Rotate Matrix": MatrixOperationsPattern,
-  "Segment Tree": SegmentTreePattern,
-  "Selection Sort": SelectionSortPattern,
-  "Sieve of Atkin": SieveOfAtkinPattern,
-  "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
-  "Sieve of Sundaram": SieveOfSundaramPattern,
-  "Sliding Window": SlidingWindowPattern,
-  "Stack Implementation": StackImplementationPattern,
-  "Stack Sort": StackSortPattern,
-  "State Compression DP": StateCompressionDPPattern,
+  "Grid Traversal": GridTraversalPattern,
+
+  // ===== String Algorithms =====
   "String Operations": StringOperationsPattern,
+  "Knuth-Morris-Pratt": KnuthMorrisPrattPattern,
+  "Rabin-Karp": RabinKarpPattern,
+  "Manacher's Algorithm": ManachersAlgorithmPattern,
+  "Z Algorithm": ZAlgorithmPattern,
   "Suffix Array": SuffixArrayPattern,
-  "Suffix Tree": SuffixTreePattern,
-  "Lowest Common Ancestor": LCAPattern,
-  "Ternary Search": TernarySearchAlgorithmPattern,
-  "Test Data": NullPattern,
-  "Topological Sort": TopologicalSortPattern,
-  Tree: TreePattern,
-  "Tree DP": TreeDynamicProgrammingPattern,
-  "Trie Operations": TrieOperationsPattern,
+  "String Hashing": StringHashingPattern,
+  "Palindrome Partitioning": PalindromePartitioningPattern,
+  "Edit Distance": EditDistancePattern,
+
+  // ===== Number Theory =====
+  "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
+  "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
+  "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
+  "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
+  "Sieve of Atkin": SieveOfAtkinPattern,
+  "Sieve of Sundaram": SieveOfSundaramPattern,
+
+  // ===== Data Structures =====
+  "Hash Table": HashTablePattern,
+  "Linked List": LinkedListPattern,
+  "Circular Linked List": CircularLinkedListPattern,
+  "Stack Implementation": StackImplementationPattern,
+  "Queue Implementation": QueueImplementationPattern,
+  "Heap Implementation": HeapImplementationPattern,
+  "Union Find": UnionFindPattern,
+  "Monotonic Stack": MonotonicStackPattern,
+  "Monotonic Queue": MonotonicQueuePattern,
+  "Sparse Table": SparseTablePattern,
+  "Binary Indexed Tree": BinaryIndexedTreePattern,
+  "Doubly Linked List": DoublyLinkedListPattern,
+  Trie: TriePattern,
+
+  // ===== Array Techniques =====
   "Two Pointers": TwoPointersPattern,
+  "Sliding Window": SlidingWindowPattern,
+  "Prefix Sums": PrefixSumsPattern,
+  "Kadane's Algorithm": KadanesAlgorithmPattern,
   "Two Sum": TwoSumPattern,
   "Two Sum Dict": TwoSumDictionaryPattern,
   "Two Sum Two Pointers": TwoSumTwoPointersPattern,
-  "Union Find": UnionFindPattern,
-  "Z Algorithm": ZAlgorithmPattern,
+
+  // ===== Miscellaneous =====
+  "A* Search": AStarSearchPattern,
+  Backtracking: BacktrackingPattern,
+  "Bit Manipulation": BitManipulationPattern,
+  "Divide and Conquer": DivideAndConquerPattern,
+  "Fast Fourier Transform": FastFourierTransformPattern,
+  "Floyd Cycle Detection": FloydCycleDetectionPattern,
+  Memoization: MemoizationPattern,
+  Quickselect: QuickselectPattern,
+  Recursion: RecursionPattern,
+  "Test Data": TestDataPattern,
+  "Karatsuba Multiplication": KaratsubaMultiplicationPattern,
+  "Interval Scheduling": IntervalSchedulingPattern,
+  "Fast and Slow Pointers": FastAndSlowPointersPattern,
+  Fibonacci: FibonacciPattern,
 };
+
+// Function to verify pattern consistency
+export function verifyPseudocodePatterns() {
+  // Get all pattern names
+  const patternNames = Object.keys(pseudocodePatterns);
+
+  // Check for duplicate patterns
+  const duplicates = patternNames.filter((name, index) => patternNames.indexOf(name) !== index);
+
+  // Check for patterns with similar names (case-insensitive)
+  const normalizeName = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const normalizedNames = new Map(patternNames.map((name) => [normalizeName(name), name]));
+  const similarNames = new Set<string>();
+
+  patternNames.forEach((name) => {
+    const normalized = normalizeName(name);
+    const existing = normalizedNames.get(normalized);
+    if (existing && existing !== name) {
+      similarNames.add(`${name} vs ${existing}`);
+    }
+  });
+
+  // Check for patterns that might be in wrong categories
+  const categoryPatterns = new Map<string, string[]>();
+  patternNames.forEach((name) => {
+    const pattern = pseudocodePatterns[name]();
+    const category = pattern.props.category;
+    if (!categoryPatterns.has(category)) {
+      categoryPatterns.set(category, []);
+    }
+    categoryPatterns.get(category)?.push(name);
+  });
+
+  // Log results
+  console.log("\nPseudocode Pattern Verification Results:");
+  console.log("--------------------------------------");
+
+  if (duplicates.length > 0) {
+    console.log("\nDuplicate patterns found:");
+    duplicates.forEach((p) => console.log(`- ${p}`));
+  }
+
+  if (similarNames.size > 0) {
+    console.log("\nPatterns with similar names:");
+    Array.from(similarNames).forEach((p) => console.log(`- ${p}`));
+  }
+
+  // Log patterns by category
+  console.log("\nPatterns by category:");
+  console.log("-------------------");
+  for (const [category, patterns] of categoryPatterns) {
+    console.log(`\n${category}:`);
+    patterns.forEach((p) => console.log(`- ${p}`));
+  }
+
+  // Summary statistics
+  console.log("\nSummary:");
+  console.log("--------");
+  console.log(`Total patterns: ${patternNames.length}`);
+  console.log(`Total categories: ${categoryPatterns.size}`);
+  console.log(`Duplicate patterns: ${duplicates.length}`);
+  console.log(`Similar names: ${similarNames.size}`);
+
+  return {
+    totalPatterns: patternNames.length,
+    duplicates,
+    similarNames: Array.from(similarNames),
+    categories: Object.fromEntries(categoryPatterns),
+    stats: {
+      categoryCount: categoryPatterns.size,
+      duplicateCount: duplicates.length,
+      similarNameCount: similarNames.size,
+    },
+  };
+}
+
+// Function to verify patterns against pattern files
+export function verifyPatternFiles() {
+  // Get all pattern names from pseudocodePatterns
+  const pseudocodeNames = Object.keys(pseudocodePatterns);
+
+  // Get all pattern names from the patterns directory
+  const patternFiles = new Map<string, string[]>();
+  const patternCategories = new Map<string, string[]>();
+  const missingImplementations = new Map<string, { pattern: string; expectedPaths: string[] }[]>();
+  const implementationDetails = new Map<
+    string,
+    { category: string; filePath: string; exists: boolean }
+  >();
+
+  // Check each pattern's implementation
+  pseudocodeNames.forEach((name) => {
+    const pattern = pseudocodePatterns[name]();
+    const category = pattern.props.category;
+
+    // Add to category map
+    if (!patternCategories.has(category)) {
+      patternCategories.set(category, []);
+    }
+    patternCategories.get(category)?.push(name);
+
+    // Check if pattern file exists
+    const normalizedName = name?.toLowerCase().replace(/[^a-z0-9]/g, "-") || "";
+    const possiblePaths = [
+      `patterns/${category?.toLowerCase() || ""}/${normalizedName}.ts`,
+      `patterns/${category?.toLowerCase() || ""}/${normalizedName}.tsx`,
+      `patterns/${category?.toLowerCase() || ""}/index.ts`,
+      `patterns/${category?.toLowerCase() || ""}/index.tsx`,
+    ];
+
+    const foundPaths: string[] = [];
+    const exists = possiblePaths.some((path) => {
+      try {
+        require.resolve(`../../components/algorithm-trainer/${path}`);
+        foundPaths.push(path);
+        patternFiles.set(name, foundPaths);
+        return true;
+      } catch {
+        return false;
+      }
+    });
+
+    // Store implementation details
+    implementationDetails.set(name, {
+      category,
+      filePath: foundPaths[0] || possiblePaths[0],
+      exists,
+    });
+
+    if (!exists) {
+      if (!missingImplementations.has(category)) {
+        missingImplementations.set(category, []);
+      }
+      missingImplementations.get(category)?.push({
+        pattern: name,
+        expectedPaths: possiblePaths,
+      });
+    }
+  });
+
+  // Check for patterns in files but not in pseudocodePatterns
+  const allPatternFiles = new Map<string, { name: string; file: string }[]>();
+  const categoryDirs = [
+    "array",
+    "backtracking",
+    "data-structures",
+    "divide-and-conquer",
+    "dynamic-programming",
+    "greedy",
+    "tree",
+    "string",
+    "searching",
+    "sorting",
+    "number-theory",
+    "matrix",
+    "graph",
+    "recursion",
+  ];
+
+  categoryDirs.forEach((dir) => {
+    try {
+      const files = require(`../../components/algorithm-trainer/patterns/${dir}`);
+      Object.keys(files).forEach((key) => {
+        if (key.endsWith("Patterns")) {
+          const patterns = files[key];
+          Object.keys(patterns).forEach((patternName) => {
+            if (!allPatternFiles.has(dir)) {
+              allPatternFiles.set(dir, []);
+            }
+            allPatternFiles.get(dir)?.push({
+              name: patternName,
+              file: key,
+            });
+          });
+        }
+      });
+    } catch (e) {
+      console.warn(`Warning: Could not load patterns from ${dir} directory`);
+    }
+  });
+
+  // Find patterns in files but not in pseudocodePatterns
+  const missingInPseudocode = new Map<string, { name: string; file: string }[]>();
+  for (const [dir, patterns] of allPatternFiles) {
+    const missing = patterns.filter(({ name }) => !pseudocodeNames.includes(name));
+    if (missing.length > 0) {
+      missingInPseudocode.set(dir, missing);
+    }
+  }
+
+  // Log results
+  console.log("\nPattern File Verification Results:");
+  console.log("=================================");
+
+  // Implementation Status
+  console.log("\nImplementation Status:");
+  console.log("---------------------");
+  for (const [category, patterns] of patternCategories) {
+    console.log(`\n${category}:`);
+    patterns.forEach((name) => {
+      const details = implementationDetails.get(name);
+      if (details) {
+        console.log(`- ${name}`);
+        console.log(`  File: ${details.filePath}`);
+        console.log(`  Status: ${details.exists ? "✓ Implemented" : "✗ Missing"}`);
+      }
+    });
+  }
+
+  if (missingImplementations.size > 0) {
+    console.log("\nPatterns Missing Implementation Files:");
+    console.log("-----------------------------------");
+    for (const [category, patterns] of missingImplementations) {
+      console.log(`\n${category}:`);
+      patterns.forEach(({ pattern, expectedPaths }) => {
+        console.log(`- ${pattern}`);
+        console.log(`  Expected in one of:`);
+        expectedPaths.forEach((path) => console.log(`    ${path}`));
+      });
+    }
+  }
+
+  if (missingInPseudocode.size > 0) {
+    console.log("\nPatterns in Files but Missing in pseudocodePatterns:");
+    console.log("------------------------------------------------");
+    for (const [dir, patterns] of missingInPseudocode) {
+      console.log(`\n${dir}:`);
+      patterns.forEach(({ name, file }) => {
+        console.log(`- ${name}`);
+        console.log(`  Found in: ${file}`);
+      });
+    }
+  }
+
+  // Category Analysis
+  console.log("\nCategory Analysis:");
+  console.log("----------------");
+  for (const [category, patterns] of patternCategories) {
+    const implemented = patterns.filter((name) => implementationDetails.get(name)?.exists);
+    const missing = patterns.filter((name) => !implementationDetails.get(name)?.exists);
+    console.log(`\n${category}:`);
+    console.log(`  Total Patterns: ${patterns.length}`);
+    console.log(`  Implemented: ${implemented.length}`);
+    console.log(`  Missing: ${missing.length}`);
+    if (missing.length > 0) {
+      console.log(`  Missing Patterns:`);
+      missing.forEach((p) => console.log(`    - ${p}`));
+    }
+  }
+
+  // Summary statistics
+  console.log("\nSummary Statistics:");
+  console.log("-----------------");
+  console.log(`Total patterns in pseudocodePatterns: ${pseudocodeNames.length}`);
+  console.log(`Total patterns in files: ${Array.from(allPatternFiles.values()).flat().length}`);
+  console.log(
+    `Patterns missing implementation files: ${Array.from(missingImplementations.values()).flat().length}`
+  );
+  console.log(
+    `Patterns missing in pseudocodePatterns: ${Array.from(missingInPseudocode.values()).flat().length}`
+  );
+  console.log(`Total categories: ${patternCategories.size}`);
+
+  // Implementation coverage
+  const totalImplemented = Array.from(implementationDetails.values()).filter(
+    (d) => d.exists
+  ).length;
+  const coverage = ((totalImplemented / pseudocodeNames.length) * 100).toFixed(1);
+  console.log(`\nImplementation Coverage: ${coverage}%`);
+
+  return {
+    totalPseudocodePatterns: pseudocodeNames.length,
+    totalFilePatterns: Array.from(allPatternFiles.values()).flat().length,
+    missingImplementations: Object.fromEntries(missingImplementations),
+    missingInPseudocode: Object.fromEntries(missingInPseudocode),
+    categories: Object.fromEntries(patternCategories),
+    implementationDetails: Object.fromEntries(implementationDetails),
+    stats: {
+      categoryCount: patternCategories.size,
+      missingImplementationCount: Array.from(missingImplementations.values()).flat().length,
+      missingInPseudocodeCount: Array.from(missingInPseudocode.values()).flat().length,
+      coverage: parseFloat(coverage),
+    },
+  };
+}
+
+// Run both verifications
+verifyPseudocodePatterns();
+verifyPatternFiles();

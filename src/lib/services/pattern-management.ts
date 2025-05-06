@@ -54,9 +54,7 @@ export const patternManagementService = {
     const categories = new Set(patterns.map((p) => p.category));
     return Array.from(categories).map((category) => ({
       name: category,
-      patterns: patterns
-        .filter((p) => p.category === category)
-        .map((p) => p.id),
+      patterns: patterns.filter((p) => p.category === category).map((p) => p.id),
     }));
   },
 
@@ -75,14 +73,11 @@ export const patternManagementService = {
     if (!pattern.timeComplexity) errors.push("Time complexity is required");
     if (!pattern.spaceComplexity) errors.push("Space complexity is required");
     if (!pattern.description) errors.push("Description is required");
-    if (!pattern.monsterHunterContext)
-      errors.push("Monster Hunter context is required");
+    if (!pattern.monsterHunterContext) errors.push("Monster Hunter context is required");
     if (!pattern.example) errors.push("Example is required");
     if (!pattern.implementation) errors.push("Implementation is required");
-    if (pattern.process.length === 0)
-      errors.push("At least one process step is required");
-    if (pattern.testCases.length === 0)
-      errors.push("At least one test case is required");
+    if (pattern.process.length === 0) errors.push("At least one process step is required");
+    if (pattern.testCases.length === 0) errors.push("At least one test case is required");
 
     return errors;
   },

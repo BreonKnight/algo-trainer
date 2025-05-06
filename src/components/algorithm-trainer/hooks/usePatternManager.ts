@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import { PatternKey } from "../types.ts";
-import GamificationService from "../../../lib/gamification";
-import { monsterHunterPatternsByCategory } from "../monsterHunterPatternsCombined";
+import { PatternKey } from "@/components/algorithm-trainer/types";
+import GamificationService from "@/lib/gamification";
+import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
 
 // Get all patterns in predefined order
 const getOrderedPatterns = () => {
@@ -32,10 +32,7 @@ export function usePatternManager() {
 
     if (selectedPattern !== nextPattern) {
       if (currentIndexRef.current < patternHistoryRef.current.length - 1) {
-        patternHistoryRef.current = patternHistoryRef.current.slice(
-          0,
-          currentIndexRef.current + 1
-        );
+        patternHistoryRef.current = patternHistoryRef.current.slice(0, currentIndexRef.current + 1);
       }
       patternHistoryRef.current.push(nextPattern);
       currentIndexRef.current = patternHistoryRef.current.length - 1;
@@ -47,9 +44,7 @@ export function usePatternManager() {
   const previousPattern = () => {
     if (currentIndexRef.current > 0) {
       currentIndexRef.current--;
-      const previousPattern = patternHistoryRef.current[
-        currentIndexRef.current
-      ] as PatternKey;
+      const previousPattern = patternHistoryRef.current[currentIndexRef.current] as PatternKey;
       handlePatternChange(previousPattern);
     }
   };

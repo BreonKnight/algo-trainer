@@ -4,15 +4,19 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const SlidingWindowPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">Sliding Window</span>
-      <span className="ml-2 text-xs text-secondary">(Array)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Sliding Window
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find subarrays
-      with specific properties
+      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find subarrays with specific
+      properties
     </div>
 
-    <PseudocodeDisplay code={`# Sliding Window: Find subarrays with specific properties
+    <PseudocodeDisplay
+      code={`# Sliding Window: Find subarrays with specific properties
 # Input: Array A[1..n], window size k
 # Output: Maximum sum of any subarray of size k
 
@@ -53,7 +57,8 @@ Algorithm SLIDING-WINDOW(A, k)
 # Step 6: window_sum = 6 + 20 - 2 = 24
 #         max_sum = 24
 #
-# Output: 24`} />
+# Output: 24`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

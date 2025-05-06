@@ -1,6 +1,8 @@
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
 @layer base {
   :root {
@@ -87,6 +89,56 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes animated-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(90deg, #ffe066, #b85c6e, #6ec6f7, #ffe066);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: animated-gradient 4s ease-in-out infinite;
+}
+
+.theme-kingdom-hearts .animated-gradient-text {
+  background: linear-gradient(90deg, #ffe066, #b85c6e, #6ec6f7, #ffe066);
+}
+.theme-fornite .animated-gradient-text {
+  background: linear-gradient(90deg, #349a3a, #4a5afd, #9652b8, #f7b227);
+}
+.theme-dracula .animated-gradient-text {
+  background: linear-gradient(90deg, #ff79c6, #bd93f9, #50fa7b, #ff79c6);
+}
+.theme-nord .animated-gradient-text {
+  background: linear-gradient(90deg, #88c0d0, #81a1c1, #8fbcbb, #88c0d0);
+}
+.theme-mh .animated-gradient-text {
+  background: linear-gradient(90deg, #d4b056, #66a355, #4a7b8c, #d4b056);
+}
+.theme-re2 .animated-gradient-text {
+  background: linear-gradient(90deg, #b80000, #c7a14a, #e6e0d6, #b80000);
+}
+.theme-ps2 .animated-gradient-text {
+  background: linear-gradient(90deg, #4b75ff, #00a5ff, #2e59ff, #4b75ff);
+}
+.theme-snes .animated-gradient-text {
+  background: linear-gradient(90deg, #e40058, #4040e0, #00a800, #ffd700, #e40058);
+}
+.theme-solarized .animated-gradient-text {
+  background: linear-gradient(90deg, #b58900, #268bd2, #2aa198, #b58900);
 }
 
 :root {
@@ -506,13 +558,136 @@ textarea,
 }
 
 .bg-background\/95 {
-  background-color: color-mix(
-    in srgb,
-    var(--bg-background) 95%,
-    transparent
-  ) !important;
+  background-color: color-mix(in srgb, var(--bg-background) 95%, transparent) !important;
 }
 
 .text-main {
   color: var(--text-main) !important;
+}
+
+.theme-fornite {
+  --bg-main: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --text-main: #ffffff;
+  --text-secondary: #bdbdbd;
+  --accent: #4a5afd; /* blue */
+  --accent2: #349a3a; /* green */
+  --accent3: #9652b8; /* purple */
+  --accent4: #f7b227; /* orange */
+  --border: #4a5afd;
+  --error: #f44336;
+  --success: #349a3a;
+  --gradient-from: #349a3a;
+  --gradient-to: #f7b227;
+  --focus-ring: #9652b8;
+  --text-selected-dark: #1a1a1a;
+  --pseudocode-gradient: linear-gradient(
+    135deg,
+    #349a3a 0%,
+    #4a5afd 33%,
+    #9652b8 66%,
+    #f7b227 100%
+  );
+  --pseudocode-gradient-overlay: linear-gradient(
+    135deg,
+    rgba(52, 154, 58, 0.08) 0%,
+    rgba(74, 90, 253, 0.08) 33%,
+    rgba(150, 82, 184, 0.08) 66%,
+    rgba(247, 178, 39, 0.08) 100%
+  );
+}
+
+.extruded-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent, #1937b7);
+  text-shadow:
+    1px 1px 0 var(--accent2, #7fffd4),
+    2px 2px 0 var(--accent3, #ffe066),
+    3px 3px 0 var(--accent4, #f7b227),
+    4px 4px 0 #00000033;
+}
+.theme-kingdom-hearts .extruded-text {
+  color: #ffe066;
+  text-shadow:
+    1px 1px 0 #b85c6e,
+    2px 2px 0 #6ec6f7,
+    3px 3px 0 #ffe066,
+    4px 4px 0 #00000033;
+}
+.theme-fornite .extruded-text {
+  color: #4a5afd;
+  text-shadow:
+    1px 1px 0 #349a3a,
+    2px 2px 0 #9652b8,
+    3px 3px 0 #f7b227,
+    4px 4px 0 #00000033;
+}
+.theme-dracula .extruded-text {
+  color: #ff79c6;
+  text-shadow:
+    1px 1px 0 #bd93f9,
+    2px 2px 0 #50fa7b,
+    3px 3px 0 #ff79c6,
+    4px 4px 0 #00000033;
+}
+.theme-nord .extruded-text {
+  color: #88c0d0;
+  text-shadow:
+    1px 1px 0 #81a1c1,
+    2px 2px 0 #8fbcbb,
+    3px 3px 0 #88c0d0,
+    4px 4px 0 #00000033;
+}
+.theme-mh .extruded-text {
+  color: #d4b056;
+  text-shadow:
+    1px 1px 0 #66a355,
+    2px 2px 0 #4a7b8c,
+    3px 3px 0 #d4b056,
+    4px 4px 0 #00000033;
+}
+.theme-re2 .extruded-text {
+  color: #b80000;
+  text-shadow:
+    1px 1px 0 #c7a14a,
+    2px 2px 0 #e6e0d6,
+    3px 3px 0 #b80000,
+    4px 4px 0 #00000033;
+}
+.theme-ps2 .extruded-text {
+  color: #4b75ff;
+  text-shadow:
+    1px 1px 0 #00a5ff,
+    2px 2px 0 #2e59ff,
+    3px 3px 0 #4b75ff,
+    4px 4px 0 #00000033;
+}
+.theme-snes .extruded-text {
+  color: #e40058;
+  text-shadow:
+    1px 1px 0 #4040e0,
+    2px 2px 0 #00a800,
+    3px 3px 0 #ffd700,
+    4px 4px 0 #00000033;
+}
+.theme-solarized .extruded-text {
+  color: #b58900;
+  text-shadow:
+    1px 1px 0 #268bd2,
+    2px 2px 0 #2aa198,
+    3px 3px 0 #b58900,
+    4px 4px 0 #00000033;
+}
+
+.layered-shadow {
+  text-shadow:
+    0 1px 0 #fff,
+    0 2px 0 #bbb,
+    0 3px 0 #aaa,
+    0 4px 0 #999,
+    0 5px 0 #888,
+    0 6px 1px rgba(0, 0, 0, 0.1),
+    0 0 5px var(--accent, #ff79c6),
+    0 1px 3px var(--accent2, #8be9fd);
 }

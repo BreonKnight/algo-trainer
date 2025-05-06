@@ -8,11 +8,11 @@ export const MonotonicStackPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Next
-      greater/smaller element
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Next greater/smaller element
     </div>
 
-    <PseudocodeDisplay code={`// Next greater element
+    <PseudocodeDisplay
+      code={`// Next greater element
 NEXT-GREATER-ELEMENT(A):
     n ← length[A]
     S ← empty stack
@@ -65,7 +65,8 @@ PREVIOUS-SMALLER-ELEMENT(A):
 //   i = 3: S = [2, 3], result = [5, -1, -1, -1, -1]
 //   i = 4: S = [4], result = [5, 10, 10, -1, -1]
 //   i = 5: S = [4, 5], result = [5, 10, 10, -1, -1]
-//   Final result: [5, 10, 10, -1, -1]`} />
+//   Final result: [5, 10, 10, -1, -1]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
@@ -77,9 +78,7 @@ PREVIOUS-SMALLER-ELEMENT(A):
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />
-        <span>
-          Process: Maintain monotonic property while processing elements
-        </span>
+        <span>Process: Maintain monotonic property while processing elements</span>
       </div>
       <div className="flex items-center">
         <ChevronRight className="h-4 w-4 text-accent" />

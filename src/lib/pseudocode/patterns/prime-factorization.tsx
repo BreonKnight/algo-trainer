@@ -8,8 +8,8 @@ export const PrimeFactorizationPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(√n) &nbsp;|&nbsp; Space: O(log n) &nbsp;|&nbsp; Use: Decompose
-      number into prime factors
+      Time: O(√n) &nbsp;|&nbsp; Space: O(log n) &nbsp;|&nbsp; Use: Decompose number into prime
+      factors
     </div>
 
     <PseudocodeDisplay

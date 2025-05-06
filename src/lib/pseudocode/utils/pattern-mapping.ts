@@ -1,6 +1,6 @@
 import { PatternKey } from "../../../components/algorithm-trainer/types/pattern-types";
 
-export const patternMapping: Record<PatternKey, string> = {
+export const patternMapping: Record<string, string> = {
   // Sorting Algorithms
   "Quick Sort": "Quick Sort",
   "Merge Sort": "Merge Sort",
@@ -29,7 +29,6 @@ export const patternMapping: Record<PatternKey, string> = {
   // Dynamic Programming
   "Dynamic Programming": "Dynamic Programming",
   "Dynamic Programming Pattern": "Dynamic Programming Pattern",
-  "Dynamic Programming Fibonacci": "Dynamic Programming Fibonacci",
   "Dynamic Programming Iterative": "Dynamic Programming Iterative",
   "Dynamic Programming Coin Change": "Dynamic Programming Coin Change",
   "State Compression DP": "State Compression DP",
@@ -71,11 +70,12 @@ export const patternMapping: Record<PatternKey, string> = {
   "Red-Black Tree": "Red-Black Tree",
   "Segment Tree": "Segment Tree",
   "Stack Implementation": "Stack Implementation",
+  Trie: "Trie",
   "Trie Operations": "Trie Operations",
   "Union Find": "Union Find",
 
   // Tree Algorithms
-  Tree: "Tree",
+  "Tree Implementation": "Tree Implementation",
   "DFS Binary Tree": "DFS Binary Tree",
   "Lowest Common Ancestor": "Lowest Common Ancestor",
 
@@ -96,14 +96,13 @@ export const patternMapping: Record<PatternKey, string> = {
   "Matrix Spiral Recursive": "Matrix Spiral Recursive",
   "Matrix Chain Multiplication": "Matrix Chain Multiplication",
   "Matrix Exponentiation": "Matrix Exponentiation",
-  "Rotate Matrix": "Rotate Matrix",
+  "Grid Traversal": "Grid Traversal",
 
   // Number Theory
   "Chinese Remainder Theorem": "Chinese Remainder Theorem",
   "Extended Euclidean": "Extended Euclidean",
   "Fast Fourier Transform": "Fast Fourier Transform",
   "Miller-Rabin Primality Test": "Miller-Rabin Primality Test",
-  "Prime Factorization": "Prime Factorization",
   "Sieve of Atkin": "Sieve of Atkin",
   "Sieve of Eratosthenes": "Sieve of Eratosthenes",
   "Sieve of Sundaram": "Sieve of Sundaram",
@@ -132,9 +131,31 @@ export const patternMapping: Record<PatternKey, string> = {
   "DFS Linked List": "DFS Linked List",
 
   // Special Patterns
-  "Null Pattern": "Null Pattern",
   "Job Scheduling": "Job Scheduling",
   Graph: "Graph",
-  "Grid Traversal": "Grid Traversal",
   Greedy: "Greedy",
+
+  // Additional Patterns
+  "Binary Indexed Tree": "Binary Indexed Tree",
+  "Bitwise DP": "Bitwise DP",
+  "Bucket Sort": "Bucket Sort",
+  "Counting Sort": "Counting Sort",
+  "DFS Graph": "DFS Graph",
+  "Doubly Linked List": "Doubly Linked List",
+  "Edit Distance": "Edit Distance",
+  "Fast and Slow Pointers": "Fast and Slow Pointers",
+  Fibonacci: "Fibonacci",
+  "Ford-Fulkerson": "Ford-Fulkerson",
+  "Graph Representation": "Graph Representation",
+  "Hopcroft-Karp": "Hopcroft-Karp",
+  "Inorder Traversal": "Inorder Traversal",
+  "Interval Scheduling": "Interval Scheduling",
+  "Kahn's Topological Sort": "Kahn's Topological Sort",
+  "Karatsuba Multiplication": "Karatsuba Multiplication",
+  "LCA DFS": "LCA DFS",
+  "Palindrome Partitioning": "Palindrome Partitioning",
+  "Spanning Tree": "Spanning Tree",
+  "Sparse Table": "Sparse Table",
+  "String Hashing": "String Hashing",
+  "Zigzag Traversal": "Zigzag Traversal",
 };

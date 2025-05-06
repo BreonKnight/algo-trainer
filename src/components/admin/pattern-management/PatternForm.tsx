@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pattern, TestCase } from "../../../lib/types/pattern-management";
+import { Pattern, TestCase } from "@/lib/types/pattern-management";
 
 interface PatternFormProps {
   pattern?: Pattern;
@@ -36,19 +36,13 @@ export const PatternForm: React.FC<PatternFormProps> = ({
   };
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleTestCaseChange = (
-    index: number,
-    field: keyof TestCase,
-    value: string
-  ) => {
+  const handleTestCaseChange = (index: number, field: keyof TestCase, value: string) => {
     setFormData((prev) => {
       const newTestCases = [...prev.testCases];
       newTestCases[index] = { ...newTestCases[index], [field]: value };
@@ -76,10 +70,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
           Name
         </label>
         <input
@@ -94,10 +85,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="category"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700">
           Category
         </label>
         <select
@@ -118,10 +106,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="timeComplexity"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="timeComplexity" className="block text-sm font-medium text-gray-700">
           Time Complexity
         </label>
         <input
@@ -136,10 +121,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="spaceComplexity"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="spaceComplexity" className="block text-sm font-medium text-gray-700">
           Space Complexity
         </label>
         <input
@@ -154,10 +136,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
           Description
         </label>
         <textarea
@@ -172,10 +151,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="monsterHunterContext"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="monsterHunterContext" className="block text-sm font-medium text-gray-700">
           Monster Hunter Context
         </label>
         <textarea
@@ -189,10 +165,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="example"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="example" className="block text-sm font-medium text-gray-700">
           Example
         </label>
         <textarea
@@ -206,10 +179,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label
-          htmlFor="implementation"
-          className="block text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="implementation" className="block text-sm font-medium text-gray-700">
           Implementation
         </label>
         <textarea
@@ -224,9 +194,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Test Cases
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Test Cases</label>
         <div className="mt-2 space-y-2">
           {formData.testCases.map((testCase, index) => (
             <div key={index} className="flex space-x-2">
@@ -235,9 +203,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
                   type="text"
                   placeholder="Name"
                   value={testCase.name}
-                  onChange={(e) =>
-                    handleTestCaseChange(index, "name", e.target.value)
-                  }
+                  onChange={(e) => handleTestCaseChange(index, "name", e.target.value)}
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   required
                 />
@@ -245,9 +211,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
                   type="text"
                   placeholder="Input"
                   value={testCase.input}
-                  onChange={(e) =>
-                    handleTestCaseChange(index, "input", e.target.value)
-                  }
+                  onChange={(e) => handleTestCaseChange(index, "input", e.target.value)}
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   required
                 />
@@ -255,13 +219,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
                   type="text"
                   placeholder="Expected Output"
                   value={testCase.expectedOutput}
-                  onChange={(e) =>
-                    handleTestCaseChange(
-                      index,
-                      "expectedOutput",
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => handleTestCaseChange(index, "expectedOutput", e.target.value)}
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   required
                 />
@@ -269,13 +227,7 @@ export const PatternForm: React.FC<PatternFormProps> = ({
                   type="text"
                   placeholder="Monster Hunter Tip"
                   value={testCase.monsterHunterTip}
-                  onChange={(e) =>
-                    handleTestCaseChange(
-                      index,
-                      "monsterHunterTip",
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => handleTestCaseChange(index, "monsterHunterTip", e.target.value)}
                   className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   required
                 />

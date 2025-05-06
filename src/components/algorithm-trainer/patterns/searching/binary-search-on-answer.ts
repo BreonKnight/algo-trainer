@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const binarySearchOnAnswerPattern: AlgorithmPattern = {
   title: "Binary Search on Answer Algorithm",

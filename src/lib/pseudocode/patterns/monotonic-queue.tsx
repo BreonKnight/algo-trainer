@@ -8,11 +8,11 @@ export const MonotonicQueuePattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(k) &nbsp;|&nbsp; Use: Sliding window
-      maximum/minimum
+      Time: O(n) &nbsp;|&nbsp; Space: O(k) &nbsp;|&nbsp; Use: Sliding window maximum/minimum
     </div>
 
-    <PseudocodeDisplay code={`SLIDING-WINDOW-MAXIMUM(A, k)
+    <PseudocodeDisplay
+      code={`SLIDING-WINDOW-MAXIMUM(A, k)
     let n be the length of A
     let result[1‥n-k+1] be a new array
     let Q be a new empty deque
@@ -61,7 +61,8 @@ export const MonotonicQueuePattern = () => (
 //   Q = [8]
 //   result[6] = 7
 //
-// Output: [3, 3, 5, 5, 6, 7]`} />
+// Output: [3, 3, 5, 5, 6, 7]`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

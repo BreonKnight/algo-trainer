@@ -1,19 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { PatternKey } from "./types";
-import { algorithmPatterns } from "./patterns/index";
+import { PatternKey, AlgorithmPattern } from "./types";
+import { patterns as algorithmPatterns } from "./patterns/index";
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Code, TestTube, Sword, Book, Copy, Check } from "lucide-react";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useTheme } from "@/components/theme/theme-context";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTheme } from "@/components/theme/use-theme";
 import {
   draculaTheme,
   solarizedTheme,
@@ -23,6 +18,8 @@ import {
   ps2Theme,
   re2Theme,
   mhTheme,
+  kingdomHeartsTheme,
+  forniteTheme,
 } from "@/lib/theme";
 import * as monaco from "monaco-editor";
 import { cn } from "@/lib/utils";
@@ -40,8 +37,7 @@ interface AnswerCardProps {
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    const check = () =>
-      setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
+    const check = () => setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -51,11 +47,7 @@ function useIsDesktop() {
 
 // Hook to detect scroll position for shadows
 
-export function AnswerCard({
-  currentPattern,
-  showAnswer,
-  setShowAnswer,
-}: AnswerCardProps) {
+export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: AnswerCardProps) {
   const [showTestData, setShowTestData] = useState(false);
   const [showMonsterHunter, setShowMonsterHunter] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -91,10 +83,7 @@ export function AnswerCard({
   }, [showAnswer]);
 
   // Editor mount
-  const handleEditorDidMount = (
-    editor: monaco.editor.IStandaloneCodeEditor,
-    monaco: Monaco
-  ) => {
+  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     monacoRef.current = monaco;
     editorRef.current = editor;
     monaco.editor.defineTheme("dracula", draculaTheme);
@@ -105,6 +94,8 @@ export function AnswerCard({
     monaco.editor.defineTheme("ps2", ps2Theme);
     monaco.editor.defineTheme("re2", re2Theme);
     monaco.editor.defineTheme("mh", mhTheme);
+    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
+    monaco.editor.defineTheme("fornite", forniteTheme);
     monaco.editor.setTheme(theme);
 
     // Force layout update
@@ -121,6 +112,36 @@ export function AnswerCard({
       setTimeout(() => setCopied(false), 2000);
     }
   };
+
+  // Memoize the transformed code
+  const transformedCode = useMemo(() => {
+    try {
+      if (showMonsterHunter) {
+        const val = monsterHunterPatterns.get(currentPattern);
+        if (val && typeof val === "object" && "implementation" in val) {
+          return (val as { implementation: string }).implementation;
+        }
+        if (typeof val === "string") {
+          return val;
+        }
+        return `# Monster Hunter Python implementation for ${currentPattern}\n# Coming soon!`;
+      } else {
+        const val = (algorithmPatterns as Record<PatternKey, AlgorithmPattern | undefined>)[
+          currentPattern
+        ];
+        if (typeof val === "string") {
+          return val;
+        }
+        if (val && typeof val === "object" && "implementation" in val) {
+          return (val as { implementation: string }).implementation;
+        }
+        return `# Python implementation for ${currentPattern}\n# Coming soon!`;
+      }
+    } catch (error) {
+      console.error("Error transforming code:", error);
+      return `# Error transforming code. Please try again.`;
+    }
+  }, [currentPattern, showMonsterHunter]);
 
   return (
     <Card
@@ -236,19 +257,16 @@ export function AnswerCard({
                     <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
                       {(() => {
                         if (showMonsterHunter) {
-                          const testData =
-                            monsterHunterTestData.get(currentPattern);
+                          const testData = monsterHunterTestData.get(currentPattern);
                           if (testData) {
                             return testData;
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
                         } else {
-                          const val = algorithmPatterns[currentPattern];
-                          if (
-                            val &&
-                            typeof val === "object" &&
-                            "example" in val
-                          ) {
+                          const val = (
+                            algorithmPatterns as Record<PatternKey, AlgorithmPattern | undefined>
+                          )[currentPattern];
+                          if (val && typeof val === "object" && "example" in val) {
                             const ex = (val as { example?: string }).example;
                             if (ex) return ex;
                           }
@@ -302,37 +320,7 @@ export function AnswerCard({
                       defaultLanguage="python"
                       theme={theme}
                       onMount={handleEditorDidMount}
-                      value={(() => {
-                        if (showMonsterHunter) {
-                          const val = monsterHunterPatterns.get(currentPattern);
-                          if (
-                            val &&
-                            typeof val === "object" &&
-                            "implementation" in val
-                          ) {
-                            return (val as { implementation: string })
-                              .implementation;
-                          }
-                          if (typeof val === "string") {
-                            return val;
-                          }
-                          return `# Monster Hunter Python implementation for ${currentPattern}\n# Coming soon!`;
-                        } else {
-                          const val = algorithmPatterns[currentPattern];
-                          if (typeof val === "string") {
-                            return val;
-                          }
-                          if (
-                            val &&
-                            typeof val === "object" &&
-                            "implementation" in val
-                          ) {
-                            return (val as { implementation: string })
-                              .implementation;
-                          }
-                          return `# Python implementation for ${currentPattern}\n# Coming soon!`;
-                        }
-                      })()}
+                      value={transformedCode}
                       options={{
                         fontSize: 14,
                         minimap: { enabled: false },
@@ -366,10 +354,7 @@ export function AnswerCard({
                       const maxHeight = 500;
                       const onMove = (moveEvent: MouseEvent) => {
                         const delta = moveEvent.clientY - startY;
-                        const newHeight = Math.max(
-                          120,
-                          Math.min(startHeight + delta, maxHeight)
-                        );
+                        const newHeight = Math.max(120, Math.min(startHeight + delta, maxHeight));
                         setEditorHeight(newHeight);
                       };
                       const onUp = () => {

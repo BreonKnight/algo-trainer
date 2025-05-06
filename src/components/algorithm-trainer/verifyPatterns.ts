@@ -3,9 +3,7 @@ import { algorithmPatterns } from "./patterns";
 import { allMonsterHunterPatterns } from "./monsterHunterPatternsCombined";
 
 // Check if all patterns have regular implementations
-const missingRegularPatterns = PATTERN_KEYS.filter(
-  (key) => !algorithmPatterns[key]
-);
+const missingRegularPatterns = PATTERN_KEYS.filter((key) => !algorithmPatterns[key]);
 
 // Check if all patterns have Monster Hunter implementations
 const missingMonsterHunterPatterns = PATTERN_KEYS.filter(
@@ -25,9 +23,7 @@ if (missingRegularPatterns.length > 0) {
 
 if (missingMonsterHunterPatterns.length > 0) {
   console.log("\nMissing Monster Hunter Patterns:");
-  missingMonsterHunterPatterns.forEach((pattern) =>
-    console.log(`- ${pattern}`)
-  );
+  missingMonsterHunterPatterns.forEach((pattern) => console.log(`- ${pattern}`));
 } else {
   console.log("\n✓ All patterns have Monster Hunter implementations");
 }

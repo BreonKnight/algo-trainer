@@ -8,11 +8,12 @@ export const InterpolationSearchPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Search)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find
-      element in uniformly distributed sorted array
+      Time: O(log log n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find element in uniformly
+      distributed sorted array
     </div>
 
-    <PseudocodeDisplay code={`# Interpolation Search: Find element in uniformly distributed sorted array
+    <PseudocodeDisplay
+      code={`# Interpolation Search: Find element in uniformly distributed sorted array
 # Input: Sorted array A[1..n], target value x
 # Output: Index of x in A if found, -1 otherwise
 
@@ -44,7 +45,8 @@ Algorithm INTERPOLATION-SEARCH(A, x)
 #         pos = 1 + ((50-10)*(9-1))/(90-10) = 5
 #         A[5] = 50
 #
-# Output: 5`} />
+# Output: 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

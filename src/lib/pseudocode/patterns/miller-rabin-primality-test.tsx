@@ -8,8 +8,7 @@ export const MillerRabinPrimalityTestPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Number Theory)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(k log³ n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use:
-      Probabilistic primality test
+      Time: O(k log³ n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Probabilistic primality test
     </div>
 
     <PseudocodeDisplay

@@ -4,15 +4,18 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const AVLTreePattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">AVL Tree</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        AVL Tree
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Self-balancing
-      binary search tree
+      Time: O(log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Self-balancing binary search tree
     </div>
 
-    <PseudocodeDisplay code={`AVL-INSERT(T, z)
+    <PseudocodeDisplay
+      code={`AVL-INSERT(T, z)
     let y ← null
     let x ← T.root
 
@@ -117,7 +120,8 @@ LEFT-ROTATE(T, x)
 //        /  \
 //      20    40
 //     /  \    \
-//   10   25   50`} />
+//   10   25   50`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>

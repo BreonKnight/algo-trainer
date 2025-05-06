@@ -33,11 +33,7 @@
   --pseudocode-step: #50fa7b;
   --pseudocode-indicator: #ff79c6;
 
-  --pseudocode-gradient: linear-gradient(
-    135deg,
-    rgba(40, 42, 54, 0.95),
-    rgba(68, 71, 90, 0.95)
-  );
+  --pseudocode-gradient: linear-gradient(135deg, rgba(40, 42, 54, 0.95), rgba(68, 71, 90, 0.95));
   --pseudocode-gradient-overlay: linear-gradient(
     135deg,
     rgba(40, 42, 54, 0.1),

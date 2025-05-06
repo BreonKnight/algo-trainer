@@ -8,8 +8,8 @@ export const GreedyFractionalKnapsackPattern = () => (
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
     <div className="mb-2 text-xs text-secondary">
-      Time: O(nW) &nbsp;|&nbsp; Space: O(nW) &nbsp;|&nbsp; Use: Optimal item
-      selection with weight constraint
+      Time: O(nW) &nbsp;|&nbsp; Space: O(nW) &nbsp;|&nbsp; Use: Optimal item selection with weight
+      constraint
     </div>
 
     <PseudocodeDisplay

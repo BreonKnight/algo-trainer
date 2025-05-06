@@ -4,15 +4,17 @@ import { PseudocodeDisplay } from "../PseudocodeDisplay";
 export const DfsLinkedListPattern = () => (
   <div>
     <div className="mb-2">
-      <span className="text-accent font-bold">DFS on Linked List</span>
-      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        DFS (Linked List)
+      </span>
     </div>
+    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked
-      list depth-first
+      Time: O(n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Traverse linked list depth-first
     </div>
 
-    <PseudocodeDisplay code={`// Node structure for linked list
+    <PseudocodeDisplay
+      code={`// Node structure for linked list
 NODE:
     key
     next
@@ -41,7 +43,8 @@ DFS-LINKED-LIST(head):
 // 4. Visit 4, visited = {1,2,3,4}
 // 5. Visit 5, visited = {1,2,3,4,5}
 //
-// Output: 1, 2, 3, 4, 5`} />
+// Output: 1, 2, 3, 4, 5`}
+    />
 
     <div className="mb-2">
       <span className="text-accent font-bold">Key Steps:</span>
