@@ -8,13 +8,13 @@ import { graphPatterns } from "@/components/algorithm-trainer/patterns/graph";
 import { greedyPatterns } from "@/components/algorithm-trainer/patterns/greedy";
 import { matrixPatterns } from "@/components/algorithm-trainer/patterns/matrix";
 import { numberTheoryPatterns } from "@/components/algorithm-trainer/patterns/number-theory";
+import { otherPatterns } from "@/components/algorithm-trainer/patterns/other";
 import { recursionPatterns } from "@/components/algorithm-trainer/patterns/recursion";
 import { searchingPatterns } from "@/components/algorithm-trainer/patterns/searching";
 import { sortingPatterns } from "@/components/algorithm-trainer/patterns/sorting";
 import { stringPatterns } from "@/components/algorithm-trainer/patterns/string";
 import { treePatterns } from "@/components/algorithm-trainer/patterns/tree";
 import { createPatternRecord } from "@/lib/patterns/pattern-utils";
-import { otherPatterns } from "@/components/algorithm-trainer/patterns/other";
 
 // Import all pattern categories
 
