@@ -1,11 +1,11 @@
-import { execSync } from "child_process";
-
 import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
 import { allMonsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
 import { patterns } from "@/components/algorithm-trainer/patterns/index";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+
+const { execSync } = require("child_process");
 
 try {
   console.log("Running pattern checks...\n");

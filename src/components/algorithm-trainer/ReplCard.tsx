@@ -102,9 +102,14 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
       setIsLoading(true);
       setError(null);
       try {
-        // Try loading from CDN first
+        // Determine if we're in Electron
+        const isElectron = window.navigator.userAgent.toLowerCase().includes("electron");
+
+        // Load Pyodide with appropriate configuration
         const pyodideInstance = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/",
+          indexURL: isElectron
+            ? "./pyodide" // Local path in Electron
+            : "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/", // CDN for web
           stdout: (text: string) => {
             if (mounted) {
               setOutput((prev) => prev + text);
