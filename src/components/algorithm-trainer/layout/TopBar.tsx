@@ -121,7 +121,7 @@ export function TopBar({ className }: TopBarProps) {
             {items.map((item) => (
               <SortableItem key={item.id} id={item.id}>
                 <div className="w-full flex justify-center">
-                  <MediaCard className="w-full hover:shadow-lg transition-shadow duration-200">
+                  <MediaCard className="w-full min-h-[180px] hover:shadow-lg transition-shadow duration-200">
                     {item.component}
                   </MediaCard>
                 </div>

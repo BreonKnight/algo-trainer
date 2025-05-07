@@ -84,14 +84,49 @@ const HomePage = () => {
   const getTextColor = (theme: string) => {
     if (theme === "nord") return "text-gray-900";
     if (theme === "dracula") return "text-white";
-    return "text-gray-800";
+    return "text-gray-900";
+  };
+
+  const getCardStyle = (theme: string) => {
+    if (theme === "dracula") {
+      return "bg-gray-800/50 border-gray-700/50 backdrop-blur-xl";
+    }
+    if (theme === "nord") {
+      return "bg-white/90 border-[#D8DEE9]/70 backdrop-blur-xl";
+    }
+    return "bg-white/50 border-gray-200/50 backdrop-blur-xl";
+  };
+
+  const getCardHoverStyle = (theme: string) => {
+    if (theme === "dracula") {
+      return "hover:bg-gray-800/70 hover:border-gray-600/50";
+    }
+    if (theme === "nord") {
+      return "hover:bg-white/95 hover:border-[#A3BE8C]/50";
+    }
+    return "hover:bg-white/70 hover:border-blue-200/50";
+  };
+
+  const getCardTextStyle = (theme: string) => {
+    if (theme === "dracula") {
+      return "text-white";
+    }
+    if (theme === "nord") {
+      return "text-gray-900";
+    }
+    return "text-gray-900";
   };
 
   return (
     <div className="container mx-auto px-4 py-12 pb-24">
       {/* Hero Section */}
       <div className="text-center mb-12 pb-4 overflow-visible">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-[1.3] pb-2">
+        <h1
+          className={cn(
+            "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
+            `gradient-text-${theme}`
+          )}
+        >
           Master the Mathematics of Algorithms
         </h1>
         <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-2">
@@ -145,12 +180,12 @@ const HomePage = () => {
       {/* Informatics Bar Explanation */}
       <div
         className={cn(
-          "max-w-4xl mx-auto mb-16 p-8 rounded-xl border shadow-lg",
+          "max-w-4xl mx-auto mb-16 p-8 rounded-3xl border shadow-lg backdrop-blur-xl",
           theme === "dracula"
-            ? "bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 border-gray-700/50"
+            ? "bg-white/10 border-blue-400/30"
             : theme === "nord"
-              ? "bg-gradient-to-br from-[#ECEFF4] via-white to-[#E5E9F0] border-[#D8DEE9]/70"
-              : "bg-gradient-to-br from-blue-50 via-white to-purple-50 border-gray-200/50"
+              ? "bg-white/60 border-[#A3BE8C]/40"
+              : "bg-white/70 border-blue-300/30"
         )}
       >
         <h2
@@ -163,8 +198,12 @@ const HomePage = () => {
         </h2>
         <p
           className={cn(
-            "mb-4 text-lg text-center",
-            theme === "nord" ? "text-gray-800/90" : "text-foreground/80"
+            "mb-4 text-lg text-center font-medium",
+            theme === "dracula"
+              ? "text-white/90 drop-shadow"
+              : theme === "nord"
+                ? "text-gray-900/90 drop-shadow"
+                : "text-gray-800/90 drop-shadow"
           )}
         >
           The Informatics Bar at the top of AlgoTrainer gives you everything you need to stay
@@ -202,33 +241,20 @@ const HomePage = () => {
               key={index}
               className={cn(
                 "rounded-lg p-4 flex flex-col items-center shadow border",
-                theme === "dracula"
-                  ? "bg-gray-800/80 border-gray-700/50"
-                  : theme === "nord"
-                    ? "bg-white/90 border-[#D8DEE9]/70"
-                    : "bg-white/80 border border-gray-200/50"
+                getCardStyle(theme),
+                getCardHoverStyle(theme)
               )}
             >
               <span className="text-3xl mb-2">{tool.emoji}</span>
-              <h3 className={cn("font-semibold mb-1", getTextColor(theme))}>{tool.title}</h3>
-              <p
-                className={cn(
-                  "text-sm mb-2",
-                  theme === "nord" ? "text-gray-800/80" : "text-foreground/70"
-                )}
-              >
-                {tool.description}
-              </p>
+              <h3 className={cn("font-semibold mb-1", getCardTextStyle(theme))}>{tool.title}</h3>
+              <p className={cn("text-sm mb-2", getCardTextStyle(theme))}>{tool.description}</p>
               <div
                 className={cn("text-xs rounded px-2 py-1 mb-1", getTagColor(theme, tool.tag.type))}
               >
                 {tool.tag.text}
               </div>
               <ul
-                className={cn(
-                  "text-xs text-left list-disc list-inside",
-                  theme === "nord" ? "text-gray-700/90" : "text-foreground/60"
-                )}
+                className={cn("text-xs text-left list-disc list-inside", getCardTextStyle(theme))}
               >
                 {tool.items.map((item, i) => (
                   <li key={i}>{item}</li>
@@ -262,7 +288,7 @@ const HomePage = () => {
 
       {/* Learning Path */}
       <div className="mb-16">
-        <h2 className={cn("text-2xl font-bold mb-8 text-center", getTextColor(theme))}>
+        <h2 className={cn("text-2xl font-bold mb-8 text-center", getCardTextStyle(theme))}>
           Your Mathematical Journey
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -272,17 +298,14 @@ const HomePage = () => {
               className={cn(
                 "p-6 rounded-xl border transition-all duration-300",
                 "hover:shadow-lg hover:scale-[1.02]",
-                theme === "dracula"
-                  ? "bg-gray-800/50 border-gray-700/50"
-                  : theme === "nord"
-                    ? "bg-white/90 border-[#D8DEE9]/70"
-                    : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
+                getCardStyle(theme),
+                getCardHoverStyle(theme)
               )}
             >
-              <h3 className={cn("text-lg font-semibold mb-3", getTextColor(theme))}>
+              <h3 className={cn("text-lg font-semibold mb-3", getCardTextStyle(theme))}>
                 {step.title}
               </h3>
-              <p className={cn(theme === "nord" ? "text-gray-800/80" : "text-foreground/70")}>
+              <p className={cn("text-foreground/80", getCardTextStyle(theme))}>
                 {step.description}
               </p>
             </div>
@@ -298,18 +321,15 @@ const HomePage = () => {
             className={cn(
               "p-6 rounded-xl border transition-all duration-300",
               "hover:shadow-lg hover:scale-[1.02]",
-              theme === "dracula"
-                ? "bg-gray-800/50 border-gray-700/50"
-                : theme === "nord"
-                  ? "bg-white/90 border-[#D8DEE9]/70"
-                  : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
+              getCardStyle(theme),
+              getCardHoverStyle(theme)
             )}
           >
             <div className="mb-4 text-primary">{section.icon}</div>
-            <h3 className={cn("text-xl font-semibold mb-3", getTextColor(theme))}>
+            <h3 className={cn("text-xl font-semibold mb-3", getCardTextStyle(theme))}>
               {section.title}
             </h3>
-            <p className={cn(theme === "nord" ? "text-gray-800/80" : "text-foreground/70")}>
+            <p className={cn("text-foreground/80", getCardTextStyle(theme))}>
               {section.description}
             </p>
           </div>
@@ -320,19 +340,11 @@ const HomePage = () => {
       <div
         className={cn(
           "max-w-4xl mx-auto mb-16 p-8 rounded-xl border",
-          theme === "dracula"
-            ? "bg-gray-800/50 border-gray-700/50"
-            : theme === "nord"
-              ? "bg-white/90 border-[#D8DEE9]/70"
-              : "bg-white/50 border-gray-200/50 backdrop-blur-sm"
+          getCardStyle(theme),
+          getCardHoverStyle(theme)
         )}
       >
-        <h2
-          className={cn(
-            "text-2xl font-bold mb-6 text-center",
-            theme === "nord" ? "text-gray-900" : ""
-          )}
-        >
+        <h2 className={cn("text-2xl font-bold mb-6 text-center", getCardTextStyle(theme))}>
           Getting Started with Algorithm Learning
         </h2>
 
