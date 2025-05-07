@@ -24,9 +24,11 @@ import {
 import { THEMES } from "../../theme/theme-constants";
 import { Progress } from "../../ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../ui/tooltip";
+import { useSessionProgress } from "@/hooks/useSessionProgress";
 
 export function RightControls() {
   const { theme, setTheme } = useTheme();
+  const { sessionProgress } = useSessionProgress();
 
   // Format theme name for display
   const formatThemeName = (themeName: string) => {
@@ -156,9 +158,9 @@ export function RightControls() {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">Session Progress</span>
-          <span className="font-medium">60%</span>
+          <span className="font-medium">{Math.round(sessionProgress)}%</span>
         </div>
-        <Progress value={60} className="h-2 bg-background/50" />
+        <Progress value={sessionProgress} className="h-2 bg-background/50" />
       </div>
     </div>
   );

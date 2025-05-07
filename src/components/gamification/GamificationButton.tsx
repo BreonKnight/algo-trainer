@@ -263,11 +263,15 @@ export function GamificationButton() {
             border: "1px solid rgba(255, 255, 255, 0.2)",
             boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
           }}
+          aria-describedby="gamification-dialog-description"
         >
           <DialogHeader className={`${styles.header} pb-4`}>
             <DialogTitle className={`text-2xl font-bold ${styles.title} tracking-tight`}>
               Your Progress
             </DialogTitle>
+            <p id="gamification-dialog-description" className="sr-only">
+              View your learning progress, achievements, and algorithm mastery
+            </p>
           </DialogHeader>
 
           <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2 custom-scrollbar">

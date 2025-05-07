@@ -127,7 +127,7 @@ const HomePage = () => {
             `gradient-text-${theme}`
           )}
         >
-          Master the Mathematics of Algorithms
+          Master Algorithms, Don't be Afraid :)
         </h1>
         <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-2">
           Go beyond coding to understand the mathematical principles that make algorithms work.
@@ -138,7 +138,7 @@ const HomePage = () => {
       </div>
 
       {/* How It Works Stepper */}
-      <div className="max-w-3xl mx-auto mb-12">
+      <div className="max-w-3x2 mx-auto mb-12">
         <h2 className="text-2xl font-bold mb-4 text-center">How AlgoTrainer Works</h2>
         <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
           {[
@@ -146,18 +146,25 @@ const HomePage = () => {
               emoji: "🧑‍🎓",
               title: "1. Start with the Basics",
               description:
-                "Build your foundation in math and algorithms with step-by-step lessons.",
+                "Build your foundation in math and algorithms with step-by-step lessons. It's a good idea to have a basic understanding of Python before you start.",
             },
             {
               emoji: "⏲️",
               title: "2. Use Productivity Tools",
               description:
-                "Stay focused with the timer, enjoy music, and get inspired by algorithm facts.",
+                "Stay focused with the timer, enjoy music, and get inspired by algorithm facts. Focusing is key to learning. Music can help you stay in the flow.",
             },
             {
               emoji: "🏆",
               title: "3. Practice & Progress",
-              description: "Apply what you learn, track your progress, and master algorithms!",
+              description:
+                "Apply what you learn, track your progress, and master algorithms! It makes perfect sense to practice in Python.",
+            },
+            {
+              emoji: "🐍",
+              title: "4. Why in Python?",
+              description:
+                "Python is the best language for algorithm learning. Its simple and has builtins like lists, dictionaries, and tuples that make it easy to implement algorithms.",
             },
           ].map((step, index) => (
             <div

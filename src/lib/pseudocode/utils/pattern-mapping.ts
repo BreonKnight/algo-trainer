@@ -8,6 +8,7 @@ export const patternMapping: Record<string, string> = {
   "Selection Sort": "Selection Sort",
   "Insertion Sort": "Insertion Sort",
   "Radix Sort": "Radix Sort",
+  "Shell Sort": "Shell Sort",
 
   // Searching Algorithms
   "Binary Search": "Binary Search",
@@ -156,4 +157,5 @@ export const patternMapping: Record<string, string> = {
   "Sparse Table": "Sparse Table",
   "String Hashing": "String Hashing",
   "Zigzag Traversal": "Zigzag Traversal",
+  "Null Pattern": "Null Pattern",
 };

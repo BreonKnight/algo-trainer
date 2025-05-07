@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { useTheme } from "../theme/use-theme";
 import { Card } from "@/components/ui/card";
@@ -12,6 +12,8 @@ import {
   ps2Theme,
   re2Theme,
   mhTheme,
+  kingdomHeartsTheme,
+  forniteTheme,
 } from "@/lib/theme";
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -29,6 +31,7 @@ const Practice = () => {
     '# Write your Python code here\n\ndef main():\n    print("Hello, World!")\n\nif __name__ == "__main__":\n    main()'
   );
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  const monacoRef = useRef<Monaco | null>(null);
 
   // Register Monaco themes before the editor mounts
   useEffect(() => {
@@ -36,15 +39,47 @@ const Practice = () => {
     if (window.__monacoThemesRegistered) return;
     // @ts-ignore
     window.__monacoThemesRegistered = true;
-    monaco.editor.defineTheme("dracula", draculaTheme);
-    monaco.editor.defineTheme("solarized", solarizedTheme);
-    monaco.editor.defineTheme("light", lightTheme);
-    monaco.editor.defineTheme("snes", snesTheme);
-    monaco.editor.defineTheme("nord", nordTheme);
-    monaco.editor.defineTheme("ps2", ps2Theme);
-    monaco.editor.defineTheme("re2", re2Theme);
-    monaco.editor.defineTheme("mh", mhTheme);
+
+    const defineThemes = (monaco: Monaco) => {
+      monaco.editor.defineTheme("dracula", draculaTheme);
+      monaco.editor.defineTheme("solarized", solarizedTheme);
+      monaco.editor.defineTheme("light", lightTheme);
+      monaco.editor.defineTheme("snes", snesTheme);
+      monaco.editor.defineTheme("nord", nordTheme);
+      monaco.editor.defineTheme("ps2", ps2Theme);
+      monaco.editor.defineTheme("re2", re2Theme);
+      monaco.editor.defineTheme("mh", mhTheme);
+      monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
+      monaco.editor.defineTheme("fornite", forniteTheme);
+    };
+
+    if (monacoRef.current) {
+      defineThemes(monacoRef.current);
+    }
   }, []);
+
+  const getMonacoTheme = useMemo(() => {
+    const themeMap: Record<string, string> = {
+      dracula: "dracula",
+      solarized: "solarized",
+      light: "light",
+      snes: "snes",
+      nord: "nord",
+      ps2: "ps2",
+      re2: "re2",
+      mh: "mh",
+      "kingdom-hearts": "kingdom-hearts",
+      fornite: "fornite",
+    };
+    return () => themeMap[theme] || "dracula";
+  }, [theme]);
+
+  // Update theme when it changes
+  useEffect(() => {
+    if (monacoRef.current) {
+      monacoRef.current.editor.setTheme(getMonacoTheme());
+    }
+  }, [getMonacoTheme]);
 
   // Load code from localStorage on mount
   useEffect(() => {
@@ -58,32 +93,25 @@ const Practice = () => {
     localStorage.setItem("practice-code", code);
   }, [code]);
 
-  // Map app theme to Monaco theme
-  const getMonacoTheme = () => {
-    switch (theme) {
-      case "dracula":
-        return "dracula";
-      case "solarized":
-        return "solarized";
-      case "light":
-        return "light";
-      case "snes":
-        return "snes";
-      case "nord":
-        return "nord";
-      case "ps2":
-        return "ps2";
-      case "re2":
-        return "re2";
-      case "mh":
-        return "mh";
-      default:
-        return "dracula";
-    }
-  };
-
   const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     editorRef.current = editor;
+    monacoRef.current = monaco;
+
+    // Define themes
+    monaco.editor.defineTheme("dracula", draculaTheme);
+    monaco.editor.defineTheme("solarized", solarizedTheme);
+    monaco.editor.defineTheme("light", lightTheme);
+    monaco.editor.defineTheme("snes", snesTheme);
+    monaco.editor.defineTheme("nord", nordTheme);
+    monaco.editor.defineTheme("ps2", ps2Theme);
+    monaco.editor.defineTheme("re2", re2Theme);
+    monaco.editor.defineTheme("mh", mhTheme);
+    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
+    monaco.editor.defineTheme("fornite", forniteTheme);
+
+    // Set initial theme
+    monaco.editor.setTheme(getMonacoTheme());
+
     editor.focus();
     setTimeout(() => {
       editor.layout();
@@ -113,7 +141,7 @@ const Practice = () => {
                 : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
             )}
           >
-            Practice pyt
+            Practice some Python 🐍
           </h1>
         </div>
 
@@ -234,27 +262,12 @@ const Practice = () => {
 
             <div className="h-full w-full flex-1 min-h-[300px] overflow-hidden rounded-xl">
               <Editor
-                key={getMonacoTheme()}
                 height="100%"
                 defaultLanguage="python"
                 theme={getMonacoTheme()}
                 value={code}
                 onChange={(value) => setCode(value || "")}
-                onMount={(editor, monaco) => {
-                  monaco.editor.defineTheme("dracula", draculaTheme);
-                  monaco.editor.defineTheme("solarized", solarizedTheme);
-                  monaco.editor.defineTheme("light", lightTheme);
-                  monaco.editor.defineTheme("snes", snesTheme);
-                  monaco.editor.defineTheme("nord", nordTheme);
-                  monaco.editor.defineTheme("ps2", ps2Theme);
-                  monaco.editor.defineTheme("re2", re2Theme);
-                  monaco.editor.defineTheme("mh", mhTheme);
-                  editorRef.current = editor;
-                  editor.focus();
-                  setTimeout(() => {
-                    editor.layout();
-                  }, 100);
-                }}
+                onMount={handleEditorDidMount}
                 options={{
                   fontSize,
                   fontFamily: "Menlo",
