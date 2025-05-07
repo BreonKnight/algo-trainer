@@ -7,14 +7,14 @@ import HomePage from "@/app/HomePage";
 import PatternManagement from "@/components/admin/PatternManagement";
 import { TopBar } from "@/components/algorithm-trainer/layout/TopBar";
 import Practice from "@/components/practice/Practice";
-import { useTheme } from "@/components/theme/use-theme";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AlgorithmTutorial } from "@/components/tutorials/AlgorithmTutorial";
 import type { Tutorial } from "@/components/tutorials/AlgorithmTutorial";
 import type { PatternKey } from "@/components/tutorials/types";
 import { Navigation } from "@/components/ui/navigation";
 import tutorialsData from "@/data/tutorials.json";
-import { checkPatternFiles, logPatternCheckResults } from "@/lib/utils/pattern-checker";
+
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Lazy load components
 const AlgorithmTrainer = lazy(() => import("./components/algorithm-trainer/AlgorithmTrainer"));
@@ -28,8 +28,8 @@ const AlgorithmComparison = lazy(
 );
 
 // Log the imported data structure
-// console.log("Imported tutorials data:", tutorialsData);
-// console.log("Categories:", Object.keys(tutorialsData));
+//console.log("Imported tutorials data:", tutorialsData);
+//console.log("Categories:", Object.keys(tutorialsData));
 
 interface RawTutorial {
   id: string;
@@ -168,9 +168,6 @@ function TutorialRoute() {
 }
 
 const AppContent = memo(function AppContent() {
-  const { theme } = useTheme();
-  console.log("AppContent rendered with theme:", theme);
-
   const routeElements = useMemo(
     () => (
       <Routes>
@@ -300,28 +297,22 @@ const AppContent = memo(function AppContent() {
         <TopBar />
         <main className="pt-4">{routeElements}</main>
       </div>
-
       <Toaster position="bottom-left" richColors theme="dark" />
     </div>
   );
 });
 
 function App() {
-  const checkPatterns = useCallback(async () => {
-    if (import.meta.env.DEV) {
-      const results = await checkPatternFiles();
-      logPatternCheckResults(results);
-    }
-  }, []);
-
-  useEffect(() => {
-    checkPatterns();
-  }, [checkPatterns]);
-
   return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <div className="min-h-screen bg-background">
+          <div className="container mx-auto">
+            <AppContent />
+          </div>
+        </div>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 

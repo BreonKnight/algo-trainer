@@ -569,6 +569,6 @@ export function verifyPatternFiles() {
   };
 }
 
-// Run both verifications
-verifyPseudocodePatterns();
-verifyPatternFiles();
+//Run both verifications
+//verifyPseudocodePatterns();
+//verifyPatternFiles();
