@@ -478,23 +478,6 @@ export const monsterHunterExplanations: Partial<
       "Use it for advanced pattern matching in monster databases",
     ],
   },
-  "Tree Implementation": {
-    title: "Monster Territory Tree Operations",
-    description:
-      "A comprehensive collection of tree-based algorithms for organizing and managing monster territories in a hierarchical structure. This includes all basic tree operations, traversal methods, and specialized tree manipulations for efficient territory management.",
-    example:
-      "Imagine you have a complex network of monster territories organized in a tree structure. You need to perform various operations like adding new territories, removing old ones, finding specific territories, and analyzing relationships between different areas.",
-    tips: [
-      "Start with basic tree operations - like establishing new territory connections",
-      "Use appropriate traversal methods for different analysis needs",
-      "Maintain balance in your territory hierarchy for efficient access",
-      "Consider edge cases like isolated territories or boundary regions",
-      "Document your territory structure for future reference",
-      "Implement proper error handling for invalid operations",
-      "Optimize performance for large-scale territory networks",
-      "Use appropriate tree types based on your specific needs",
-    ],
-  },
   "B Tree": {
     title: "Monster Territory Balanced Tree",
     description:

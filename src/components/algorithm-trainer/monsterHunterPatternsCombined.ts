@@ -174,7 +174,7 @@ export const monsterHunterPatternsByCategory = {
     "Trie",
     "Trie Operations",
     "Sparse Table",
-    "Tree Implementation",
+    // "Tree Implementation",
   ],
 
   Algorithms: [

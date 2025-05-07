@@ -74,7 +74,6 @@ export const patternMapping: Record<string, string> = {
   "Union Find": "Union Find",
 
   // Tree Algorithms
-  "Tree Implementation": "Tree Implementation",
   "DFS Binary Tree": "DFS Binary Tree",
   "Lowest Common Ancestor": "Lowest Common Ancestor",
 
