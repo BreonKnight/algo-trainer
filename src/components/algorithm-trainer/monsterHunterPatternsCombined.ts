@@ -174,7 +174,7 @@ export const monsterHunterPatternsByCategory = {
     "Trie",
     "Trie Operations",
     "Sparse Table",
-    // "Tree Implementation",
+    // "Tree Implementation", // Commented out because it is not yet implemented or used in the current system. Ensure to update related mappings and documentation if re-enabled.
   ],
 
   Algorithms: [
