@@ -1,4 +1,4 @@
-import { PatternKey, PATTERN_KEYS } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types/pattern-types";
 
 // Create a mapping from pattern keys to their URL-friendly versions
 export const patternMapping: Record<PatternKey, string> = Object.fromEntries(

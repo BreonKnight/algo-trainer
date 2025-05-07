@@ -1,4 +1,4 @@
-import { PatternKey } from "@/src/components/algorithm-trainer/types";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterPatternsExtended4 = new Map<PatternKey, string>([
   [
@@ -582,42 +582,6 @@ def monster_hunter_merge(left, right):
             right -= 1
     
     return None  # No combination found`,
-  ],
-
-  [
-    "Dynamic Programming Fibonacci" as PatternKey,
-    `def monster_hunter_dp_fibonacci(n):
-    """
-    Calculate nth Fibonacci number using Dynamic Programming.
-    Time: O(n)
-    Space: O(1)
-    
-    Monster Hunter Context:
-    - Like calculating monster population growth
-    - Each generation produces offspring
-    - Track population over time
-    
-    Example:
-    n = 5  # 5th generation
-    
-    Process:
-    1. Start with base cases (0, 1)
-    2. Build up to nth generation
-    3. Each generation is sum of previous two
-    """
-    if n <= 0:
-        return 0
-    elif n == 1:
-        return 1
-    
-    # Initialize base cases
-    prev, curr = 0, 1
-    
-    # Build up to nth generation
-    for i in range(2, n + 1):
-        prev, curr = curr, prev + curr
-    
-    return curr`,
   ],
 
   [

@@ -13,24 +13,19 @@ import {
 } from "lucide-react";
 
 import { HelpModal } from "@/components/help/HelpModal";
+import { THEMES } from "@/components/theme/theme-constants";
+import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
-import { useSessionProgress } from "@/hooks/useSessionProgress";
-import { cn } from "@/lib/utils";
-import { THEMES } from "@/src/components/theme/theme-constants";
-import { useTheme } from "@/src/components/theme/use-theme";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu";
-import { Progress } from "@/src/components/ui/progress";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/src/components/ui/tooltip";
+} from "@/components/ui/dropdown-menu";
+import { Progress } from "@/components/ui/progress";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useSessionProgress } from "@/hooks/useSessionProgress";
+import { cn } from "@/lib/utils";
 
 export function RightControls() {
   const { theme, setTheme } = useTheme();

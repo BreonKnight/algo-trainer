@@ -10,6 +10,10 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { AlgorithmVisualizer } from "@/components/algorithm-trainer/AlgorithmVisualizer";
+import { NavigationBar } from "@/components/algorithm-trainer/layout/NavigationBar";
+import { sortingPatterns } from "@/components/algorithm-trainer/patterns/sorting";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -28,10 +32,6 @@ import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { AlgorithmVisualizer } from "@/src/components/algorithm-trainer/AlgorithmVisualizer";
-import { NavigationBar } from "@/src/components/algorithm-trainer/layout/NavigationBar";
-import { sortingPatterns } from "@/src/components/algorithm-trainer/patterns/sorting";
-import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 interface AlgorithmComparisonProps {
   algorithms?: PatternKey[];

@@ -1,15 +1,10 @@
 import { ChevronRight, ChevronLeft, Shuffle } from "lucide-react";
 import { useEffect } from "react";
 
-import { useTheme } from "@/src/components/theme/use-theme";
-import { Button } from "@/src/components/ui/button";
-import {
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-  TooltipProvider,
-} from "@/src/components/ui/tooltip";
-import { cn } from "@/src/lib/utils";
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface PatternControlsProps {
   onPreviousPattern: () => void;

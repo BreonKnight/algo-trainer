@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
 
-import { PseudocodeDisplay } from "@/src/lib/pseudocode/PseudocodeDisplay";
+import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const DfsLinkedListPattern = () => (
   <div>

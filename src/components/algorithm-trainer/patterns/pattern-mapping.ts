@@ -1,4 +1,4 @@
-import { PatternKey } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { PatternKey } from "@/components/algorithm-trainer/types/pattern-types";
 
 // This mapping ensures consistency between regular patterns and Monster Hunter patterns
 export const patternMapping: Record<string, PatternKey> = {
@@ -25,7 +25,6 @@ export const patternMapping: Record<string, PatternKey> = {
   // Dynamic Programming Patterns
   "Dynamic Programming": "Dynamic Programming",
   "Dynamic Programming Pattern": "Dynamic Programming Pattern",
-  "Dynamic Programming Fibonacci": "Dynamic Programming Fibonacci",
   "Dynamic Programming Iterative": "Dynamic Programming Iterative",
   "Dynamic Programming Coin Change": "Dynamic Programming Coin Change",
   "State Compression DP": "State Compression DP",
@@ -53,7 +52,6 @@ export const patternMapping: Record<string, PatternKey> = {
   "Lowest Common Ancestor": "Lowest Common Ancestor",
   "Segment Tree": "Segment Tree",
   "Union Find": "Union Find",
-  "Tree Implementation": "Tree Implementation",
   "DFS Binary Tree": "DFS Binary Tree",
 
   // String Patterns

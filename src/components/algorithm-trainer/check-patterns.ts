@@ -1,12 +1,12 @@
-import { monsterHunterPatterns } from "@/src/components/algorithm-trainer/monsterHunterPatterns";
-import { monsterHunterPatternsExtended } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended";
-import { monsterHunterPatternsExtended2 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended2";
-import { monsterHunterPatternsExtended3 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended3";
-import { monsterHunterPatternsExtended4 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended4";
-import { monsterHunterPatternsExtended5 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended5";
-import { monsterHunterPatternsExtended6 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended6";
-import { monsterHunterPatternsExtended7 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended7";
-import { monsterHunterPatternsExtended8 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended8";
+import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
+import { monsterHunterPatternsExtended } from "@/components/algorithm-trainer/monsterHunterPatternsExtended";
+import { monsterHunterPatternsExtended2 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended2";
+import { monsterHunterPatternsExtended3 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended3";
+import { monsterHunterPatternsExtended4 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended4";
+import { monsterHunterPatternsExtended5 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended5";
+import { monsterHunterPatternsExtended6 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended6";
+import { monsterHunterPatternsExtended7 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended7";
+import { monsterHunterPatternsExtended8 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended8";
 
 // Function to get all pattern keys from a Map
 function getPatternKeys(map: Map<string, string>): string[] {

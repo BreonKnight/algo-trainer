@@ -39,7 +39,6 @@ const patternDirectories = {
 
   // Dynamic Programming
   "Dynamic Programming": "dynamic-programming",
-  "Dynamic Programming Fibonacci": "dynamic-programming",
   "Dynamic Programming Iterative": "dynamic-programming",
   "Dynamic Programming Coin Change": "dynamic-programming",
 
