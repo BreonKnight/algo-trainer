@@ -53,15 +53,21 @@ function SortableItem({ id, children }: SortableItemProps) {
       <button
         className={cn(
           "absolute -left-6 top-1/2 -translate-y-1/2 p-1.5 rounded-full",
-          "hover:bg-accent/10 transition-all duration-200",
-          "cursor-grab active:cursor-grabbing",
+          "bg-card",
+          "hover:bg-card/90",
+          "hover:scale-110 transition-all duration-300 ease-out",
+          "cursor-grab active:cursor-grabbing active:scale-95",
           "opacity-0 group-hover:opacity-100",
-          "focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-accent/20"
+          "focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring/50",
+          "backdrop-blur-sm",
+          "border border-border/20",
+          "shadow-sm hover:shadow-md",
+          "shadow-[inset_0_2px_8px_0_rgba(0,0,0,0.10)]"
         )}
         {...attributes}
         {...listeners}
       >
-        <GripVertical className="w-3.5 h-3.5 text-accent/60 hover:text-accent transition-colors" />
+        <GripVertical className="w-3.5 h-3.5 text-muted-foreground/80 hover:text-foreground transition-all duration-300 ease-out" />
       </button>
       {children}
     </div>

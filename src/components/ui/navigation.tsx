@@ -96,7 +96,7 @@ export function Navigation() {
         { path: "/algo-guide", label: "Algo Guide", icon: GraduationCap },
         { path: "/algorithm-trainer", label: "Algorithm Trainer", icon: Code },
         { path: "/cs-math", label: "CS Math", icon: GraduationCap },
-        { path: "/algorithm-practice", label: "Practice", icon: ListChecks },
+        { path: "/practice", label: "Practice", icon: ListChecks },
       ],
     },
     {
