@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
-import { useTheme } from "@/components/theme/use-theme";
 import { Sigma, Calculator, LineChart, Binary, Network, Infinity } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -511,7 +512,7 @@ const HomePage = () => {
       {/* Call to Action */}
       <div className="text-center">
         <Link
-          to="/algorithm-learning"
+          to="/cs-math"
           className={cn(
             "inline-flex items-center px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300",
             "hover:scale-105 hover:shadow-lg",

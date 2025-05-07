@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { HelpModal } from "@/components/help/HelpModal";
 import {
   Sun,
   Moon,
@@ -13,18 +11,26 @@ import {
   Droplet,
   Check,
 } from "lucide-react";
-import { useTheme } from "../../theme/use-theme";
+
+import { HelpModal } from "@/components/help/HelpModal";
+import { Button } from "@/components/ui/button";
+import { useSessionProgress } from "@/hooks/useSessionProgress";
 import { cn } from "@/lib/utils";
+import { THEMES } from "@/src/components/theme/theme-constants";
+import { useTheme } from "@/src/components/theme/use-theme";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { THEMES } from "../../theme/theme-constants";
-import { Progress } from "../../ui/progress";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../ui/tooltip";
-import { useSessionProgress } from "@/hooks/useSessionProgress";
+} from "@/src/components/ui/dropdown-menu";
+import { Progress } from "@/src/components/ui/progress";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 
 export function RightControls() {
   const { theme, setTheme } = useTheme();

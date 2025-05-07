@@ -1,4 +1,3 @@
-import { PatternKey } from "./types";
 import {
   Select,
   SelectContent,
@@ -8,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 interface AlgorithmSelectorABTestProps {
   currentPattern: PatternKey;

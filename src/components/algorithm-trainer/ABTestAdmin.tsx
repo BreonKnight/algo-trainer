@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+
 import { Card } from "@/components/ui/card";
-import { Button } from "../ui/button";
-import { getABTestAnalytics, clearABTestEvents } from "./utils/abTestAnalytics";
-import { TEST_IDS, ABTestAnalytics } from "./utils/abTestTypes";
+import {
+  getABTestAnalytics,
+  clearABTestEvents,
+} from "@/src/components/algorithm-trainer/utils/abTestAnalytics";
+import { TEST_IDS, ABTestAnalytics } from "@/src/components/algorithm-trainer/utils/abTestTypes";
+import { Button } from "@/src/components/ui/button";
 
 export function ABTestAdmin() {
   const [analytics, setAnalytics] = useState<ABTestAnalytics | null>(null);

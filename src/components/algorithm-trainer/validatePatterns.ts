@@ -1,8 +1,8 @@
-import { PATTERN_KEYS } from "../../lib/patterns/types";
-import { monsterHunterTestData } from "./monsterHunterTestData";
-import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
-import { monsterHunterExplanations } from "./monsterHunterExplanations";
-import { monsterHunterExplanations as monsterHunterExplanationsNew } from "./monsterHunterExplanationsNew";
+import { monsterHunterExplanations } from "@/src/components/algorithm-trainer/monsterHunterExplanations";
+import { monsterHunterExplanations as monsterHunterExplanationsNew } from "@/src/components/algorithm-trainer/monsterHunterExplanationsNew";
+import { monsterHunterPatternsByCategory } from "@/src/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { monsterHunterTestData } from "@/src/components/algorithm-trainer/monsterHunterTestData";
+import { PATTERN_KEYS } from "@/src/lib/patterns/types";
 
 type PatternKey = (typeof PATTERN_KEYS)[number];
 

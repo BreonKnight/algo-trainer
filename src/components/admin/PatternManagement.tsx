@@ -1,9 +1,4 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
-import { patternManagementService } from "@/lib/services/pattern-management";
-import { toast } from "react-hot-toast";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   DragDropContext,
   Droppable,
@@ -12,11 +7,17 @@ import {
   DroppableProvided,
   DraggableProvided,
 } from "react-beautiful-dnd";
-import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
-import { validateComponentOrder } from "./pattern-management/PatternValidation";
+import { toast } from "react-hot-toast";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 import { getValidationResults } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
-import PatternValidationResults from "./pattern-management/PatternValidationResults";
-import type { ValidationResults } from "./pattern-management/PatternValidationResults";
+import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+import { patternManagementService } from "@/lib/services/pattern-management";
+import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
+import { validateComponentOrder } from "@/src/components/admin/pattern-management/PatternValidation";
+import PatternValidationResults from "@/src/components/admin/pattern-management/PatternValidationResults";
+import type { ValidationResults } from "@/src/components/admin/pattern-management/PatternValidationResults";
 
 type FormStep = "basic" | "details" | "implementation" | "test-cases" | "preview";
 

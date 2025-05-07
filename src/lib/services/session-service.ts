@@ -1,4 +1,4 @@
-import GamificationService from "../gamification";
+import GamificationService from "@/lib/gamification";
 
 interface SessionProgress {
   progress: number;

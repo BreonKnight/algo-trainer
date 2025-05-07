@@ -1,5 +1,5 @@
-import { PatternKey } from "./types";
-import { PATTERN_KEYS } from "./types";
+import { PATTERN_KEYS } from "@/src/components/algorithm-trainer/types";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 export const monsterHunterExplanations: Partial<
   Record<

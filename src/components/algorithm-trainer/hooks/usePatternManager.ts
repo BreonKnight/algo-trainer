@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+
+import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import GamificationService from "@/lib/gamification";
-import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
 
 // Get all patterns in predefined order
 const getOrderedPatterns = () => {

@@ -1,14 +1,14 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "../ui/button";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { PatternKey, AlgorithmPattern } from "./types";
-import { patterns as algorithmPatterns } from "./patterns/index";
-import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
-import { useState, useRef, useEffect, useMemo } from "react";
 import { Code, TestTube, Sword, Book, Copy, Check } from "lucide-react";
+import * as monaco from "monaco-editor";
+import { useState, useRef, useEffect, useMemo } from "react";
+
+import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   draculaTheme,
   solarizedTheme,
@@ -21,8 +21,9 @@ import {
   kingdomHeartsTheme,
   forniteTheme,
 } from "@/lib/theme";
-import * as monaco from "monaco-editor";
 import { cn } from "@/lib/utils";
+import { patterns as algorithmPatterns } from "@/src/components/algorithm-trainer/patterns/index";
+import { PatternKey, AlgorithmPattern } from "@/src/components/algorithm-trainer/types";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;

@@ -1,4 +1,4 @@
-import { PatternKey } from "./types";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 export const monsterHunterExplanations: Partial<
   Record<

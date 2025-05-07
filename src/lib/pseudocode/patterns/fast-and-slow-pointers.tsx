@@ -1,4 +1,4 @@
-import { PatternComponent } from "../types";
+import { PatternComponent } from "@/src/lib/pseudocode/types";
 
 const FastAndSlowPointersPattern: PatternComponent = () => {
   return (

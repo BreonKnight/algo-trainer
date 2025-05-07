@@ -1,8 +1,12 @@
-import { useState, useRef, useEffect, useMemo } from "react";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { useTheme } from "../theme/use-theme";
+import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
+import * as monaco from "monaco-editor";
+import { useState, useRef, useEffect, useMemo } from "react";
+
+import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
+import { useTheme } from "@/components/theme/use-theme";
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   draculaTheme,
   solarizedTheme,
@@ -15,10 +19,7 @@ import {
   kingdomHeartsTheme,
   forniteTheme,
 } from "@/lib/theme";
-import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
-import * as monaco from "monaco-editor";
+import { cn } from "@/lib/utils";
 
 const Practice = () => {
   const { theme } = useTheme();

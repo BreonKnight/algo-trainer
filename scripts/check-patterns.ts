@@ -1,10 +1,11 @@
 import { execSync } from "child_process";
-import { PatternKey } from "../src/components/algorithm-trainer/types.ts";
-import { algorithmPatterns } from "../src/components/algorithm-trainer/patterns/index.ts";
-import { allMonsterHunterPatterns } from "../src/components/algorithm-trainer/monsterHunterPatternsCombined.ts";
-import { patternMapping } from "../src/lib/pseudocode/utils/pattern-mapping.ts";
-import { monsterHunterTestData } from "../src/components/algorithm-trainer/monsterHunterTestData.ts";
-import { monsterHunterExplanations } from "../src/components/algorithm-trainer/monsterHunterExplanations.ts";
+
+import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
+import { allMonsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
+import { patterns } from "@/components/algorithm-trainer/patterns/index";
+import { PatternKey } from "@/components/algorithm-trainer/types";
+import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 
 try {
   console.log("Running pattern checks...\n");
@@ -97,7 +98,7 @@ function checkPatternMapping() {
   const patternKeys = Object.keys(patternMapping) as PatternKey[];
 
   // Check if all patterns have regular implementations
-  const missingRegularPatterns = patternKeys.filter((key) => !algorithmPatterns[key]);
+  const missingRegularPatterns = patternKeys.filter((key) => !patterns[key]);
 
   // Check if all patterns have Monster Hunter implementations
   const missingMonsterHunterPatterns = patternKeys.filter(
@@ -150,7 +151,7 @@ function checkPatternMapping() {
   }
 
   // Check for inconsistencies in pattern names
-  const regularPatternKeys = Object.keys(algorithmPatterns) as PatternKey[];
+  const regularPatternKeys = Object.keys(patterns) as PatternKey[];
   const monsterHunterPatternKeys = Array.from(allMonsterHunterPatterns.keys()) as PatternKey[];
   const testDataKeys = Array.from(monsterHunterTestData.keys()) as PatternKey[];
   const explanationKeys = Object.keys(monsterHunterExplanations) as PatternKey[];

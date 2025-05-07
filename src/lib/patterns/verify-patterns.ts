@@ -1,17 +1,17 @@
-import { verifyPatterns, generateVerificationReport } from "./verification.js";
-import { monsterHunterExplanations } from "../../components/algorithm-trainer/monsterHunterExplanations.js";
-import { MonsterHunterPattern, PatternCategory, PatternKey } from "./types.js";
-import { AlgorithmPattern } from "../../components/algorithm-trainer/types/pattern-types.js";
-import { sortingPatterns } from "../../components/algorithm-trainer/patterns/sorting/index.js";
-import { searchingPatterns } from "../../components/algorithm-trainer/patterns/searching/index.js";
-import { dynamicProgrammingPatterns } from "../../components/algorithm-trainer/patterns/dynamic-programming/index.js";
-import { graphPatterns } from "../../components/algorithm-trainer/patterns/graph/index.js";
-import { dataStructurePatterns } from "../../components/algorithm-trainer/patterns/data-structures/index.js";
-import { stringPatterns } from "../../components/algorithm-trainer/patterns/string/index.js";
-import { matrixPatterns } from "../../components/algorithm-trainer/patterns/matrix/index.js";
-import { numberTheoryPatterns } from "../../components/algorithm-trainer/patterns/number-theory/index.js";
-import { arrayPatterns } from "../../components/algorithm-trainer/patterns/array/index.js";
-import { greedyPatterns } from "../../components/algorithm-trainer/patterns/greedy/index.js";
+import { monsterHunterExplanations } from "@/src/components/algorithm-trainer/monsterHunterExplanations";
+import { arrayPatterns } from "@/src/components/algorithm-trainer/patterns/array/index";
+import { dataStructurePatterns } from "@/src/components/algorithm-trainer/patterns/data-structures/index";
+import { dynamicProgrammingPatterns } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/index";
+import { graphPatterns } from "@/src/components/algorithm-trainer/patterns/graph/index";
+import { greedyPatterns } from "@/src/components/algorithm-trainer/patterns/greedy/index";
+import { matrixPatterns } from "@/src/components/algorithm-trainer/patterns/matrix/index";
+import { numberTheoryPatterns } from "@/src/components/algorithm-trainer/patterns/number-theory/index";
+import { searchingPatterns } from "@/src/components/algorithm-trainer/patterns/searching/index";
+import { sortingPatterns } from "@/src/components/algorithm-trainer/patterns/sorting/index";
+import { stringPatterns } from "@/src/components/algorithm-trainer/patterns/string/index";
+import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { MonsterHunterPattern, PatternCategory, PatternKey } from "@/src/lib/patterns/types";
+import { verifyPatterns, generateVerificationReport } from "@/src/lib/patterns/verification";
 
 // Convert monsterHunterExplanations to MonsterHunterPattern format
 const monsterHunterPatterns: Partial<Record<PatternKey, MonsterHunterPattern>> = {};

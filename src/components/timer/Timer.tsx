@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
-import { Button } from "../ui/button";
 import { Play, Pause, RotateCcw } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+
+import { Button } from "@/components/ui/button";
 
 export function Timer() {
   const [timeLeft, setTimeLeft] = useState<number>(0);

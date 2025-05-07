@@ -1,11 +1,12 @@
 import React from "react";
+
 import { Pattern } from "@/lib/types/pattern-management";
 import {
   findDuplicatePatterns,
   findIncompletePatterns,
   validatePatternNames,
   validatePatternCategories,
-} from "./PatternValidation";
+} from "@/src/components/admin/pattern-management/PatternValidation";
 
 interface PatternDebugProps {
   patterns: Pattern[];

@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "../../types/pattern-types";
+import type { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
 
 export const matrixChainMultiplicationPattern: AlgorithmPattern = {
   title: "Matrix Chain Multiplication",

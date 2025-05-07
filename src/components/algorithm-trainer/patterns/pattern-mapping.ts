@@ -1,4 +1,4 @@
-import { PatternKey } from "../types/pattern-types";
+import { PatternKey } from "@/src/components/algorithm-trainer/types/pattern-types";
 
 // This mapping ensures consistency between regular patterns and Monster Hunter patterns
 export const patternMapping: Record<string, PatternKey> = {

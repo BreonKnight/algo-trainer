@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 // Add Binary Indexed Tree Monster Hunter Pattern
 const binaryIndexedTreeMonsterHunterPattern = new Map<PatternKey, string>([

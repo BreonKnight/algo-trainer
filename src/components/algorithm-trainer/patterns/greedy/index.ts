@@ -1,8 +1,11 @@
-import { AlgorithmPattern, PatternKey } from "../../types/pattern-types";
-import { greedyHuffmanCodingPattern } from "./greedy-huffman-coding";
-import { greedyActivitySelectionPattern } from "./greedy-activity-selection";
-import { greedyFractionalKnapsackPattern } from "./greedy-fractional-knapsack";
-import { greedyJobSchedulingPattern } from "./greedy-job-scheduling";
+import { greedyActivitySelectionPattern } from "@/src/components/algorithm-trainer/patterns/greedy/greedy-activity-selection";
+import { greedyFractionalKnapsackPattern } from "@/src/components/algorithm-trainer/patterns/greedy/greedy-fractional-knapsack";
+import { greedyHuffmanCodingPattern } from "@/src/components/algorithm-trainer/patterns/greedy/greedy-huffman-coding";
+import { greedyJobSchedulingPattern } from "@/src/components/algorithm-trainer/patterns/greedy/greedy-job-scheduling";
+import {
+  AlgorithmPattern,
+  PatternKey,
+} from "@/src/components/algorithm-trainer/types/pattern-types";
 
 export const greedyPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "Huffman Coding": greedyHuffmanCodingPattern,

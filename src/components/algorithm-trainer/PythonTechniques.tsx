@@ -1,11 +1,12 @@
-import { useTheme } from "@/components/theme/use-theme";
-import { cn } from "@/lib/utils";
+import { Check, Copy } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
+import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
-import { useState, useEffect } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { Check, Copy } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const CodeBlock = ({ code }: { code: string }) => {
   const { theme: appTheme } = useTheme();

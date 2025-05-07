@@ -1,7 +1,3 @@
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "./button";
-import { useTheme } from "../theme/use-theme";
-import { cn } from "@/lib/utils";
 import {
   Home,
   Book,
@@ -15,7 +11,12 @@ import {
   ListChecks,
 } from "lucide-react";
 import { useState } from "react";
-import { GamificationButton } from "../gamification/GamificationButton";
+import { Link, useLocation } from "react-router-dom";
+
+import { cn } from "@/lib/utils";
+import { GamificationButton } from "@/src/components/gamification/GamificationButton";
+import { useTheme } from "@/src/components/theme/use-theme";
+import { Button } from "@/src/components/ui/button";
 
 // Add custom styles for the gradient animation
 const styles = `

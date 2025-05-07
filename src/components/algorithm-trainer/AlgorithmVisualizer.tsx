@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from "react";
-import { Button } from "../ui/button";
-import { Slider } from "../ui/slider";
 import { Play, Pause, SkipBack, SkipForward, RotateCcw } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { PatternKey } from "./types";
+import { useState, useEffect, useRef } from "react";
+
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 interface AlgorithmVisualizerProps {
   algorithm: PatternKey;

@@ -1,4 +1,4 @@
-import { PatternMapping } from "./types.js";
+import { PatternMapping } from "@/src/lib/patterns/types";
 
 // This mapping ensures consistency between regular patterns and Monster Hunter patterns
 export const patternMapping: PatternMapping = {

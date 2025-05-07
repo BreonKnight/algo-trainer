@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { TooltipProvider } from "../ui/tooltip";
-import { ReplCard } from "./ReplCard";
-import { PanelLayout } from "./layout/PanelLayout";
-import { PatternControls } from "./layout/PatternControls";
-import { usePatternManager } from "./hooks/usePatternManager";
-import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
+
+import { usePatternManager } from "@/components/algorithm-trainer/hooks/usePatternManager";
+import { PanelLayout } from "@/components/algorithm-trainer/layout/PanelLayout";
+import { PatternControls } from "@/components/algorithm-trainer/layout/PatternControls";
+import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function AlgorithmTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);

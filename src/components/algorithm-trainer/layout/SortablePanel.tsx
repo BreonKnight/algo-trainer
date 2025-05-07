@@ -1,10 +1,11 @@
+import type { UniqueIdentifier } from "@dnd-kit/core";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import type { ReactNode } from "react";
-import type { UniqueIdentifier } from "@dnd-kit/core";
 import { GripVertical } from "lucide-react";
-import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
+
 import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 
 interface SortablePanelProps {
   id: UniqueIdentifier;

@@ -1,4 +1,4 @@
-import { Concept } from "./AlgorithmLearning";
+import { Concept } from "@/src/components/CSMath/AlgorithmLearning";
 
 export const additionalConcepts: Concept[] = [
   {

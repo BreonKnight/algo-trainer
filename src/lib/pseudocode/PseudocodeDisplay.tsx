@@ -1,6 +1,7 @@
+import "./pseudocode.css";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus, vs } from "react-syntax-highlighter/dist/esm/styles/prism";
-import "./pseudocode.css";
+
 import { useTheme } from "@/components/theme/use-theme";
 
 interface PseudocodeDisplayProps {
