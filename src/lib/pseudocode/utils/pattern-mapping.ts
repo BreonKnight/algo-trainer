@@ -1,5 +1,3 @@
-import { PatternKey } from "../../../components/algorithm-trainer/types/pattern-types";
-
 export const patternMapping: Record<string, string> = {
   // Sorting Algorithms
   "Quick Sort": "Quick Sort",
@@ -10,6 +8,7 @@ export const patternMapping: Record<string, string> = {
   "Selection Sort": "Selection Sort",
   "Insertion Sort": "Insertion Sort",
   "Radix Sort": "Radix Sort",
+  "Shell Sort": "Shell Sort",
 
   // Searching Algorithms
   "Binary Search": "Binary Search",
@@ -75,7 +74,6 @@ export const patternMapping: Record<string, string> = {
   "Union Find": "Union Find",
 
   // Tree Algorithms
-  "Tree Implementation": "Tree Implementation",
   "DFS Binary Tree": "DFS Binary Tree",
   "Lowest Common Ancestor": "Lowest Common Ancestor",
 
@@ -158,4 +156,5 @@ export const patternMapping: Record<string, string> = {
   "Sparse Table": "Sparse Table",
   "String Hashing": "String Hashing",
   "Zigzag Traversal": "Zigzag Traversal",
+  "Null Pattern": "Null Pattern",
 };

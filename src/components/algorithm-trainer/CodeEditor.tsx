@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import * as monaco from "monaco-editor";
 import {
   draculaTheme,
@@ -11,6 +11,8 @@ import {
   ps2Theme,
   re2Theme,
   mhTheme,
+  kingdomHeartsTheme,
+  forniteTheme,
 } from "@/lib/theme";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
@@ -155,6 +157,29 @@ export function CodeEditor({
     return () => window.removeEventListener("resize", updateHeight);
   }, [isDesktop]);
 
+  const getMonacoTheme = useMemo(() => {
+    const themeMap: Record<string, string> = {
+      dracula: "dracula",
+      solarized: "solarized",
+      light: "light",
+      snes: "snes",
+      nord: "nord",
+      ps2: "ps2",
+      re2: "re2",
+      mh: "mh",
+      "kingdom-hearts": "kingdom-hearts",
+      fornite: "fornite",
+    };
+    return () => themeMap[theme] || "dracula";
+  }, [theme]);
+
+  // Update theme when it changes
+  useEffect(() => {
+    if (monacoRef.current) {
+      monacoRef.current.editor.setTheme(getMonacoTheme());
+    }
+  }, [getMonacoTheme]);
+
   // Editor mount
   const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     monacoRef.current = monaco;
@@ -167,7 +192,9 @@ export function CodeEditor({
     monaco.editor.defineTheme("ps2", ps2Theme);
     monaco.editor.defineTheme("re2", re2Theme);
     monaco.editor.defineTheme("mh", mhTheme);
-    monaco.editor.setTheme(theme);
+    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
+    monaco.editor.defineTheme("fornite", forniteTheme);
+    monaco.editor.setTheme(getMonacoTheme());
     editor.focus();
 
     // Force layout update
@@ -214,8 +241,12 @@ export function CodeEditor({
               <TooltipTrigger asChild>
                 <button
                   className={cn(
-                    "p-1 rounded-md hover:bg-accent3/20 transition-colors",
-                    theme === "nord" ? "text-white" : "text-background"
+                    "p-1 rounded-md transition-colors border",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-white border-accent text-accent shadow"
+                      : theme === "nord"
+                        ? "text-white border-none"
+                        : "text-background hover:bg-accent3/20 border-none"
                   )}
                   onClick={handleCopy}
                 >
@@ -234,8 +265,12 @@ export function CodeEditor({
                 <TooltipTrigger asChild>
                   <button
                     className={cn(
-                      "p-1 rounded hover:bg-accent2/40 transition-colors",
-                      theme === "nord" ? "text-white" : "text-background"
+                      "p-1 rounded transition-colors border",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-white border-accent text-accent shadow"
+                        : theme === "nord"
+                          ? "text-white border-none"
+                          : "text-background hover:bg-accent2/40 border-none"
                     )}
                     onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
                   >
@@ -260,8 +295,12 @@ export function CodeEditor({
                 <TooltipTrigger asChild>
                   <button
                     className={cn(
-                      "p-1 rounded hover:bg-accent2/40 transition-colors",
-                      theme === "nord" ? "text-white" : "text-background"
+                      "p-1 rounded transition-colors border",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-white border-accent text-accent shadow"
+                        : theme === "nord"
+                          ? "text-white border-none"
+                          : "text-background hover:bg-accent2/40 border-none"
                     )}
                     onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
                   >
@@ -281,8 +320,12 @@ export function CodeEditor({
             <TooltipTrigger asChild>
               <button
                 className={cn(
-                  "p-1.5 rounded-md hover:bg-accent2/20 transition-colors",
-                  theme === "nord" ? "text-white" : "text-background"
+                  "p-1.5 rounded-md transition-colors border",
+                  theme === "light" || theme === "solarized"
+                    ? "bg-white border-accent text-accent shadow"
+                    : theme === "nord"
+                      ? "text-white border-none"
+                      : "text-background hover:bg-accent2/20 border-none"
                 )}
                 onClick={toggleExpand}
               >
@@ -312,7 +355,7 @@ export function CodeEditor({
           <Editor
             height={editorHeight}
             defaultLanguage="python"
-            theme={theme}
+            theme={getMonacoTheme()}
             value={userCode}
             onChange={(value: string | undefined) => setUserCode(value || "")}
             onMount={handleEditorDidMount}

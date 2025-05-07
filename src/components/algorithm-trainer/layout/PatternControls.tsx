@@ -62,13 +62,12 @@ export function PatternControls({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "h-11 w-11 rounded-full transition-all duration-300",
-                    "hover:scale-110 active:scale-95",
-                    "shadow-lg backdrop-blur-sm",
-                    "focus:ring-2 focus:ring-offset-2 focus:ring-accent",
-                    theme === "nord"
-                      ? "bg-white/10 hover:bg-white/20 text-white/90 hover:text-white"
-                      : "bg-background/80 hover:bg-background text-secondary hover:text-main"
+                    "h-11 w-11 rounded-full transition-all duration-300 shadow-lg backdrop-blur-sm focus:ring-2 focus:ring-offset-2 focus:ring-accent",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-white border border-accent text-accent"
+                      : theme === "nord"
+                        ? "bg-white/10 hover:bg-white/20 text-white/90 hover:text-white"
+                        : "bg-background/80 hover:bg-background text-secondary hover:text-main"
                   )}
                   aria-label="Previous pattern"
                 >
@@ -87,13 +86,12 @@ export function PatternControls({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "h-11 w-11 rounded-full transition-all duration-300",
-                    "hover:scale-110 active:scale-95",
-                    "shadow-lg backdrop-blur-sm",
-                    "focus:ring-2 focus:ring-offset-2 focus:ring-accent",
-                    theme === "nord"
-                      ? "bg-white/10 hover:bg-white/20 text-white/90 hover:text-white"
-                      : "bg-background/80 hover:bg-background text-secondary hover:text-main"
+                    "h-11 w-11 rounded-full transition-all duration-300 shadow-lg backdrop-blur-sm focus:ring-2 focus:ring-offset-2 focus:ring-accent",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-white border border-accent text-accent"
+                      : theme === "nord"
+                        ? "bg-white/10 hover:bg-white/20 text-white/90 hover:text-white"
+                        : "bg-background/80 hover:bg-background text-secondary hover:text-main"
                   )}
                   aria-label="Next pattern"
                 >
@@ -112,13 +110,12 @@ export function PatternControls({
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "h-11 w-11 rounded-full transition-all duration-300",
-                    "hover:scale-110 active:scale-95",
-                    "shadow-lg backdrop-blur-sm",
-                    "focus:ring-2 focus:ring-offset-2 focus:ring-accent",
-                    theme === "nord"
-                      ? "bg-white/10 hover:bg-white/20 text-white/90 hover:text-white"
-                      : "bg-background/80 hover:bg-background text-secondary hover:text-main"
+                    "h-11 w-11 rounded-full transition-all duration-300 shadow-lg backdrop-blur-sm focus:ring-2 focus:ring-offset-2 focus:ring-accent",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-white border border-accent text-accent"
+                      : theme === "nord"
+                        ? "bg-white/10 hover:bg-white/20 text-white/90 hover:text-white"
+                        : "bg-background/80 hover:bg-background text-secondary hover:text-main"
                   )}
                   aria-label="Random pattern"
                 >

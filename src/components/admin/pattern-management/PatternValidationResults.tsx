@@ -1,7 +1,6 @@
 import React from "react";
-import { PatternKey } from "../../../components/algorithm-trainer/types";
 
-interface ValidationResults {
+export interface ValidationResults {
   similarPatterns: Record<string, string[]>;
   missingInRegular: string[];
   missingInMonsterHunter: string[];

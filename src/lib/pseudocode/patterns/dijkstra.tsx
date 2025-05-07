@@ -7,9 +7,7 @@ export const DijkstraPattern = () => (
       <span className="text-accent font-bold">Dijkstra's Algorithm</span>
     </h2>
     <div className="mb-2">
-      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
-        Dijkstra's Algorithm
-      </span>
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent"></span>
     </div>
     <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
     <div className="mb-2 text-xs text-secondary">

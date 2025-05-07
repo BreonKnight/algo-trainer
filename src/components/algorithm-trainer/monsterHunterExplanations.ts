@@ -478,23 +478,6 @@ export const monsterHunterExplanations: Partial<
       "Use it for advanced pattern matching in monster databases",
     ],
   },
-  "Tree Implementation": {
-    title: "Monster Territory Tree Operations",
-    description:
-      "A comprehensive collection of tree-based algorithms for organizing and managing monster territories in a hierarchical structure. This includes all basic tree operations, traversal methods, and specialized tree manipulations for efficient territory management.",
-    example:
-      "Imagine you have a complex network of monster territories organized in a tree structure. You need to perform various operations like adding new territories, removing old ones, finding specific territories, and analyzing relationships between different areas.",
-    tips: [
-      "Start with basic tree operations - like establishing new territory connections",
-      "Use appropriate traversal methods for different analysis needs",
-      "Maintain balance in your territory hierarchy for efficient access",
-      "Consider edge cases like isolated territories or boundary regions",
-      "Document your territory structure for future reference",
-      "Implement proper error handling for invalid operations",
-      "Optimize performance for large-scale territory networks",
-      "Use appropriate tree types based on your specific needs",
-    ],
-  },
   "B Tree": {
     title: "Monster Territory Balanced Tree",
     description:
@@ -1785,6 +1768,34 @@ export const monsterHunterExplanations: Partial<
       "Handle different tree structures",
       "Use it for systematic territory exploration",
       "Consider using it for territory visualization",
+    ],
+  },
+  "Null Pattern": {
+    title: "Training Ground Pattern",
+    description:
+      "A placeholder pattern used for testing and fallback purposes, like a training ground where new hunters can practice their skills.",
+    example:
+      "When a specific pattern isn't available, this pattern provides a safe fallback, similar to how new hunters start in a training area before facing real monsters.",
+    tips: [
+      "Use as a fallback when specific patterns aren't available",
+      "Practice basic concepts in a safe environment",
+      "Learn the fundamentals before moving to complex patterns",
+      "Test new strategies without risk",
+      "Perfect for initial training sessions",
+    ],
+  },
+  "Shell Sort": {
+    title: "Monster Territory Gap Sorter",
+    description:
+      "Like organizing monsters in increasingly smaller groups until the entire territory is sorted, Shell Sort improves upon insertion sort by comparing elements with a gap.",
+    example:
+      "Imagine organizing monsters by comparing and swapping pairs that are far apart, then gradually reducing the distance between compared pairs until the territory is fully sorted.",
+    tips: [
+      "Start with a large gap - like organizing monsters in widely spaced groups",
+      "Gradually reduce the gap - similar to fine-tuning the organization with smaller groups",
+      "End with gap of 1 - like performing a final insertion sort",
+      "Choose gap sequence carefully - like planning your group sizes strategically",
+      "Handle edge cases - like dealing with territory boundaries",
     ],
   },
 };

@@ -244,7 +244,7 @@ const CLRS_SYMBOLS = [
   },
 ];
 
-const AlgorithmLearning: React.FC = () => {
+const CSMath: React.FC = () => {
   const { theme } = useTheme();
   const [currentConcept, setCurrentConcept] = useState<number>(0);
   const [showDetails, setShowDetails] = useState<boolean>(false);
@@ -309,7 +309,7 @@ const AlgorithmLearning: React.FC = () => {
             theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
           )}
         >
-          Monster Hunter Algorithm Academy
+          AlgoTrainer: Computer Science Math Academy
         </motion.h1>
 
         {/* Control Buttons */}
@@ -761,4 +761,4 @@ const AlgorithmLearning: React.FC = () => {
   );
 };
 
-export default AlgorithmLearning;
+export default CSMath;

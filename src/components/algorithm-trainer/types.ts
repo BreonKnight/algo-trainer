@@ -118,7 +118,6 @@ export type PatternKey =
   | "Test Data"
   | "Topological Sort"
   | "Tree DP"
-  | "Tree Implementation"
   | "Trie"
   | "Trie Operations"
   | "Two Pointers"
@@ -267,7 +266,6 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Test Data",
   "Topological Sort",
   "Tree DP",
-  "Tree Implementation",
   "Trie",
   "Trie Operations",
   "Two Pointers",

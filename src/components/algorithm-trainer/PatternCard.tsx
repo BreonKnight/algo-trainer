@@ -100,11 +100,9 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
       return typedPseudocodePatterns[mappedName];
     }
 
-    console.warn(`Pattern lookup failed for: ${patternName}`);
-    console.log("Available patterns:", Object.keys(typedPseudocodePatterns));
-    console.log("Pattern name mapping:", patternMapping);
-
-    return null;
+    // If pattern is not found, return the Test Data pattern as a fallback
+    console.warn(`Pattern lookup failed for: ${patternName}. Using Test Data pattern as fallback.`);
+    return typedPseudocodePatterns["Test Data"];
   };
 
   const pseudo = getPseudocodePattern(currentPattern);

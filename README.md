@@ -11,16 +11,24 @@ A modern, interactive web application for practicing and learning algorithms wit
 - 💻 Interactive code editor with Dracula theme
 - 📚 Built-in pseudocode patterns for common algorithms:
 
-  | Category           | Patterns                                                                              |
-  | ------------------ | ------------------------------------------------------------------------------------- |
-  | 🔄 Sorting         | `Quick Sort` `Merge Sort` `Heap Sort` `Bubble Sort` `Selection Sort` `Insertion Sort` |
-  | 🔍 Searching       | `Binary Search` `Linear Search` `Binary Search on Answer`                             |
-  | 📊 Data Structures | `Trees` `Linked Lists` `Graphs` `Hash Tables` `Stack` `Queue` `Heap` `Trie`           |
-  | 🧩 Techniques      | `Dynamic Programming` `Greedy` `Backtracking` `Two Pointers` `Sliding Window`         |
-  | 🌳 Tree Operations | `DFS` `BFS` `Binary Search Tree`                                                      |
-  | 📝 Advanced        | `Monotonic Stack` `Monotonic Queue` `Bit Manipulation` `Topological Sort`             |
+  | Category           | Patterns                                                                                                                                                                                                                                                                                                                                             |
+  | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | 🔄 Sorting         | `Quick Sort` `Merge Sort` `Heap Sort` `Bubble Sort` `Selection Sort` `Insertion Sort` `Radix Sort` `Counting Sort` `Bucket Sort` `Shell Sort` `Stack Sort`                                                                                                                                                                                           |
+  | 🔍 Searching       | `Binary Search` `Linear Search` `Binary Search on Answer` `Exponential Search` `Interpolation Search` `Fibonacci Search` `Ternary Search` `Jump Search`                                                                                                                                                                                              |
+  | 📊 Data Structures | `Trees` `Linked Lists` `Graphs` `Hash Tables` `Stack` `Queue` `Heap` `Trie` `AVL Tree` `B Tree` `Red-Black Tree` `Fenwick Tree` `Segment Tree` `Binary Indexed Tree` `Suffix Tree` `Circular Linked List` `Doubly Linked List` `Monotonic Stack` `Monotonic Queue` `Sparse Table`                                                                    |
+  | 🧩 Techniques      | `Dynamic Programming` `Greedy` `Backtracking` `Two Pointers` `Sliding Window` `Bit Manipulation` `State Compression DP` `Digit DP` `Tree DP` `Probability DP` `Bitwise DP`                                                                                                                                                                           |
+  | 🌳 Tree Operations | `DFS` `BFS` `Binary Search Tree` `Zigzag Traversal` `Heavy Light Decomposition` `Lowest Common Ancestor` `Inorder Traversal`                                                                                                                                                                                                                         |
+  | 📝 Advanced        | `Monotonic Stack` `Monotonic Queue` `Bit Manipulation` `Topological Sort` `A* Search` `Dijkstra` `Kosaraju` `Articulation Points` `Bridges` `Strongly Connected Components` `Network Flow` `Maximum Bipartite Matching` `Grid Traversal` `Kruskal` `Prim` `Bellman-Ford` `Floyd-Warshall` `Ford-Fulkerson` `Hopcroft-Karp` `Kahn's Topological Sort` |
+  | 🔤 String          | `String Operations` `Z Algorithm` `Manacher's Algorithm` `Knuth-Morris-Pratt` `Rabin-Karp` `Suffix Array` `String Hashing` `Palindrome Partitioning` `Edit Distance`                                                                                                                                                                                 |
+  | 🔢 Number Theory   | `Extended Euclidean` `Chinese Remainder Theorem` `Sieve of Eratosthenes` `Sieve of Atkin` `Sieve of Sundaram` `Miller-Rabin Primality Test`                                                                                                                                                                                                          |
+  | 📐 Matrix          | `Matrix Operations` `Matrix Traversal` `Matrix Spiral Traversal` `Matrix Chain Multiplication` `Matrix Exponentiation`                                                                                                                                                                                                                               |
+  | 🎯 Other           | `Fast Fourier Transform` `Divide and Conquer` `Karatsuba Multiplication` `Fast and Slow Pointers` `Recursion` `Fibonacci`                                                                                                                                                                                                                            |
 
 - 🔄 Side-by-side comparison of your solution with the reference implementation
+- 🎯 Interactive Python REPL for testing solutions
+- 📊 Progress tracking and gamification system
+- 🏆 Achievement badges and experience points
+- 🔥 Daily practice streaks with bonus rewards
 
 ### 🎮 Monster Hunter Themed Learning
 
@@ -35,17 +43,20 @@ A modern, interactive web application for practicing and learning algorithms wit
   - Graph algorithms explained through monster territory navigation
   - Tree structures visualized as monster family hierarchies
   - Hash tables demonstrated through monster material registries
+  - Trie operations for efficient monster name organization
 
 - 🎯 **Monster Hunting Challenges**
 
   - Algorithm problems presented as monster hunting scenarios
   - Test cases based on monster materials and crafting
   - Performance optimization through monster behavior patterns
+  - Monster-themed tips and hints for each challenge
 
 - 🏃 **Monster Movement Patterns**
   - Sorting algorithms explained through monster migration patterns
   - Search algorithms demonstrated through monster tracking
   - Dynamic programming illustrated through hunting route optimization
+  - Zigzag traversal for territory exploration
 
 ### ⚡ Productivity Tools
 
@@ -55,12 +66,22 @@ A modern, interactive web application for practicing and learning algorithms wit
   - Play/Pause functionality
   - Reset option
   - Visual countdown
+  - Focus alerts
 
 - 🎵 **Background Music Player**
   - Curated playlist of Madlib and J Dilla instrumentals
   - Volume control
   - Auto-shuffling playlist
   - Minimal interface
+
+### 📚 Learning Resources
+
+- 🎥 Video tutorials for each algorithm pattern
+- 📖 Detailed explanations with time and space complexity
+- 🎯 Practice problems with Monster Hunter themes
+- 💡 Tips and tricks for implementation
+- 🔍 Common pitfalls and best practices
+- 📊 Real-world applications and use cases
 
 ## 🛠️ Tech Stack
 
