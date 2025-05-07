@@ -1,3 +1,12 @@
+declare global {
+  interface Window {
+    require: {
+      config: (config: { paths: { vs: string } }) => void;
+      (modules: string[], onLoad: () => void, onError: (error: Error) => void): void;
+    };
+  }
+}
+
 export function setupMonaco() {
   // Configure require paths for Monaco
   const requireConfig = {
@@ -10,11 +19,11 @@ export function setupMonaco() {
   };
 
   // Add require config to window
-  (window as any).require.config(requireConfig);
+  window.require.config(requireConfig);
 
   // Load Monaco
   return new Promise<void>((resolve, reject) => {
-    (window as any).require(
+    window.require(
       ["vs/editor/editor.main"],
       () => {
         console.log("Monaco Editor loaded successfully!");
