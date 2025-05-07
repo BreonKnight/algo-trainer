@@ -294,7 +294,7 @@ const Practice = () => {
             </div>
           </Card>
 
-          <ReplCard userCode={code} />
+          <ReplCard userCode={code} setUserCode={setCode} />
         </div>
       </div>
     </div>

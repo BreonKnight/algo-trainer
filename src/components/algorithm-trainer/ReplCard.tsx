@@ -1,15 +1,19 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { loadPyodide, PyodideInterface } from "pyodide";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
 import { useTheme } from "@/components/theme/use-theme";
 import GamificationService from "../../lib/gamification";
 import { cn } from "@/lib/utils";
+import { PythonCodeHandler } from "@/lib/python/codeHandler";
+import { Code } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ReplCardProps {
   userCode: string;
+  setUserCode: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Custom hook for media query
@@ -31,7 +35,7 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-export function ReplCard({ userCode }: ReplCardProps) {
+export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
   const [output, setOutput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [pyodide, setPyodide] = useState<PyodideInterface | null>(null);
@@ -140,6 +144,23 @@ export function ReplCard({ userCode }: ReplCardProps) {
     };
   }, []);
 
+  const handleFormat = useCallback(() => {
+    const formattedCode = PythonCodeHandler.formatCode(userCode);
+    setUserCode(formattedCode);
+  }, [userCode, setUserCode]);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Format code with Ctrl+Shift+F
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "f") {
+        e.preventDefault();
+        handleFormat();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [handleFormat]);
+
   const runCode = async () => {
     if (!pyodide) {
       setOutput("Python environment is not ready yet. Please wait...");
@@ -156,54 +177,46 @@ export function ReplCard({ userCode }: ReplCardProps) {
     const startTime = performance.now();
 
     try {
-      // Create a wrapper to capture print statements and return values
-      const wrappedCode = `
-import sys
-from io import StringIO
-sys.stdout = StringIO()
-try:
-${userCode
-  .split("\n")
-  .map((line) => "    " + line)
-  .join("\n")}
-    result = sys.stdout.getvalue()
-    sys.stdout = sys.__stdout__
-    print(result)
-except Exception as e:
-    sys.stdout = sys.__stdout__
-    print(f"Error: {str(e)}")
-`;
+      console.log("[DEBUG] Running code:", userCode);
+
+      // Validate code before execution
+      const validation = PythonCodeHandler.validateCode(userCode);
+      console.log("[DEBUG] Code validation result:", validation);
+
+      if (!validation.isValid && validation.error) {
+        setError(validation.error);
+        toast.error(validation.error, {
+          duration: 5000,
+        });
+        return;
+      }
+
+      // Wrap and execute code
+      const wrappedCode = PythonCodeHandler.wrapCodeForExecution(userCode);
+      console.log("[DEBUG] Wrapped code:", wrappedCode);
+
       await pyodide.runPythonAsync(wrappedCode);
 
       // Calculate execution time
       const endTime = performance.now();
       const executionTime = endTime - startTime;
+      console.log("[DEBUG] Execution time:", executionTime, "ms");
 
-      // Record code execution in gamification service
+      // Record code execution
       const gamificationService = GamificationService.getInstance();
-      gamificationService.recordCodeExecution(
-        userCode.split("\n").length, // Lines of code
-        executionTime, // Execution time in ms
-        false // No error
-      );
+      gamificationService.recordCodeExecution(userCode.split("\n").length, executionTime, false);
 
       toast.success("Code ran successfully!", {
         duration: 3000,
       });
 
-      // Trigger confetti animation
       triggerConfetti();
     } catch (error) {
-      let errorMessage = error instanceof Error ? error.message : "Unknown error";
-      let errorType = "Error";
-
-      // Handle browser-specific errors
-      if (errorMessage.includes("Pyodide failed to load")) {
-        errorType = "Initialization Error";
-        errorMessage = "Failed to load Python environment. Please refresh the page.";
-      }
-
-      setError(`${errorType}: ${errorMessage}`);
+      console.error("[DEBUG] Error during execution:", error);
+      const errorMessage = PythonCodeHandler.handlePythonError(
+        error instanceof Error ? error : String(error)
+      );
+      setError(errorMessage);
       setOutput("");
 
       // Record error in gamification service
@@ -214,7 +227,7 @@ except Exception as e:
         true
       );
 
-      toast.error(`Error: ${errorMessage}`, {
+      toast.error(errorMessage, {
         duration: 5000,
       });
     } finally {
@@ -360,6 +373,34 @@ except Exception as e:
           }}
         >
           <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+        </div>
+      </div>
+      {/* Editor controls */}
+      <div className="flex-none flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          {/* Add format button */}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className={cn(
+                    "p-1.5 rounded-md transition-colors border",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-white border-accent text-accent shadow"
+                      : theme === "nord"
+                        ? "text-white border-none"
+                        : "text-background hover:bg-accent2/20 border-none"
+                  )}
+                  onClick={handleFormat}
+                >
+                  <Code className="h-3.5 w-3.5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Format code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
     </Card>
