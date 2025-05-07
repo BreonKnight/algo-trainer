@@ -48,7 +48,7 @@ export default function AlgorithmTrainer() {
               patternNumber={patternNumber}
             />
             <div className="mt-4">
-              <ReplCard userCode={userCode} />
+              <ReplCard userCode={userCode} setUserCode={setUserCode} />
             </div>
             <PatternControls
               onPreviousPattern={previousPattern}
