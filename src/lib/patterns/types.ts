@@ -169,6 +169,8 @@ export const PATTERN_KEYS = [
   "Fast and Slow Pointers",
   "Fibonacci",
   "Interval Scheduling",
+  "Test Data",
+  "Null Pattern",
 
   // Greedy Patterns
   "Activity Selection",

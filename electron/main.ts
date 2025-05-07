@@ -33,9 +33,19 @@ function createWindow() {
     const monacoPath = path.join(appPath, "node_modules/monaco-editor");
     const pyodidePath = path.join(appPath, "node_modules/pyodide");
 
+    // Set paths in the renderer process
     win.webContents.executeJavaScript(`
       window.MONACO_EDITOR_PATH = "${monacoPath.replace(/\\/g, "\\\\")}";
       window.PYODIDE_PATH = "${pyodidePath.replace(/\\/g, "\\\\")}";
+      
+      // Configure require for Monaco
+      window.require.config({
+        paths: {
+          vs: process.env.NODE_ENV === 'development' 
+            ? 'https://cdn.jsdelivr.net/npm/monaco-editor@0.52.2/min/vs'
+            : '${monacoPath.replace(/\\/g, "\\\\")}/min/vs'
+        }
+      });
     `);
   });
 

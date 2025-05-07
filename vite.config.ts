@@ -11,14 +11,17 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: process.env.NODE_ENV === "production" ? "./" : "/",
+  base: "./",
   build: {
     outDir: "dist",
     emptyOutDir: true,
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+      },
       output: {
         manualChunks: {
-          monaco: ["monaco-editor"],
+          "monaco-editor": ["monaco-editor"],
           pyodide: ["pyodide"],
         },
       },
