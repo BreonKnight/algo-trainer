@@ -148,7 +148,12 @@ export function PanelLayout({
                     <div className="relative h-full">
                       <button
                         onClick={() => setPatternOpen(!patternOpen)}
-                        className="absolute top-[18px] right-2 z-10 p-1.5 rounded-md hover:bg-secondary/20 transition-colors"
+                        className={cn(
+                          "absolute top-[18px] right-2 z-10 p-1.5 rounded-md transition-colors border",
+                          theme === "light" || theme === "solarized"
+                            ? "bg-white border-accent text-accent shadow"
+                            : "hover:bg-secondary/20 border-border text-secondary hover:text-main"
+                        )}
                       >
                         {patternOpen ? (
                           <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
@@ -171,7 +176,12 @@ export function PanelLayout({
                     <div className="relative h-full">
                       <button
                         onClick={() => setEditorOpen(!editorOpen)}
-                        className="absolute top-[18px] right-2 z-10 p-1.5 rounded-md hover:bg-secondary/20 transition-colors"
+                        className={cn(
+                          "absolute top-[18px] right-2 z-10 p-1.5 rounded-md transition-colors border",
+                          theme === "light" || theme === "solarized"
+                            ? "bg-white border-accent text-accent shadow"
+                            : "hover:bg-secondary/20 border-border text-secondary hover:text-main"
+                        )}
                       >
                         {editorOpen ? (
                           <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />
@@ -204,7 +214,12 @@ export function PanelLayout({
                     <div className="relative h-full">
                       <button
                         onClick={() => setAnswerOpen(!answerOpen)}
-                        className="absolute top-[18px] right-2 z-10 p-1.5 rounded-md hover:bg-secondary/20 transition-colors"
+                        className={cn(
+                          "absolute top-[18px] right-2 z-10 p-1.5 rounded-md transition-colors border",
+                          theme === "light" || theme === "solarized"
+                            ? "bg-white border-accent text-accent shadow"
+                            : "hover:bg-secondary/20 border-border text-secondary hover:text-main"
+                        )}
                       >
                         {answerOpen ? (
                           <ChevronUp className="h-4 w-4 sm:h-5 sm:w-5 text-secondary hover:text-main" />

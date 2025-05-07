@@ -86,7 +86,7 @@ export function Timer() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-0.5 w-full min-w-0 px-1.5 sm:px-2 md:px-3 py-1 sm:py-1.5 md:py-2">
+    <div className="flex flex-col items-center gap-0.5 w-full min-w-0 px-4 py-3">
       <div className="text-[10px] sm:text-xs md:text-sm text-secondary font-medium mb-0.5">
         Timebox Timer
       </div>

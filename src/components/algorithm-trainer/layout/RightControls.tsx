@@ -24,9 +24,11 @@ import {
 import { THEMES } from "../../theme/theme-constants";
 import { Progress } from "../../ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../ui/tooltip";
+import { useSessionProgress } from "@/hooks/useSessionProgress";
 
 export function RightControls() {
   const { theme, setTheme } = useTheme();
+  const { sessionProgress } = useSessionProgress();
 
   // Format theme name for display
   const formatThemeName = (themeName: string) => {
@@ -36,9 +38,14 @@ export function RightControls() {
       .join(" ");
   };
 
+  const fortniteTheme = theme === "fornite";
+
   return (
     <div className="w-full p-4 space-y-4 bg-background/80 backdrop-blur-md border border-border/30 rounded-xl shadow-xl">
       <div className="flex flex-col sm:flex-row items-center gap-3 w-full min-w-0 flex-wrap">
+        <span className="text-xs text-muted-foreground block mb-2 text-center w-full hidden sm:block">
+          Personalize your experience!
+        </span>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -58,27 +65,26 @@ export function RightControls() {
                     <Button
                       variant="ghost"
                       className={cn(
-                        "h-10 w-full rounded-lg transition-all duration-300 group flex items-center justify-center gap-2 px-3 truncate",
+                        "h-10 w-full rounded-lg transition-all duration-300 group flex items-center justify-center gap-2 px-3 truncate scale-105 shadow-lg border-2",
                         theme === "light" || theme === "solarized"
-                          ? "bg-accent/10 hover:bg-accent/20 text-accent"
+                          ? "bg-white border border-accent text-accent shadow"
                           : theme === "dracula"
-                            ? "bg-purple-900/80 hover:bg-purple-900 text-white"
+                            ? "bg-purple-900 text-white border-purple-400"
                             : theme === "kingdom-hearts"
-                              ? "bg-gradient-to-r from-[#0a1633] via-[#1a2747] to-[#0a1633] text-white border-2 border-[#ffe066] shadow-md"
+                              ? "bg-gradient-to-r from-[#0a1633] via-[#1a2747] to-[#0a1633] text-white border-[#ffe066] shadow-md"
                               : theme === "re2"
-                                ? "bg-red-900/80 hover:bg-red-900 text-white"
+                                ? "bg-red-900 text-white border-red-500"
                                 : theme === "mh"
-                                  ? "bg-orange-900/80 hover:bg-orange-900 text-white"
+                                  ? "bg-orange-900 text-white border-orange-500"
                                   : theme === "ps2"
-                                    ? "bg-blue-900/80 hover:bg-blue-900 text-white"
+                                    ? "bg-blue-900 text-white border-blue-400"
                                     : theme === "nord"
-                                      ? "bg-cyan-900/80 hover:bg-cyan-900 text-white"
+                                      ? "bg-cyan-900 text-white border-blue-400"
                                       : theme === "snes"
-                                        ? "bg-yellow-700/80 hover:bg-yellow-700 text-gray-900"
-                                        : theme === "fornite"
-                                          ? "bg-gradient-to-r from-[#349a3a] via-[#4a5afd] via-[#9652b8] to-[#f7b227] text-white border-2 border-[#4a5afd] shadow-md"
-                                          : "bg-gray-800/80 hover:bg-gray-800 text-white",
-                        "hover:scale-105 hover:shadow-lg"
+                                        ? "bg-yellow-700 text-gray-900 border-yellow-400"
+                                        : fortniteTheme
+                                          ? "bg-gradient-to-r from-[#2ecc71] via-[#3498db] via-[#9b59b6] to-[#f1c40f] text-black border-[#3498db] shadow-md"
+                                          : "bg-gray-800 text-white border-gray-400"
                       )}
                     >
                       {theme === "fornite" ? (
@@ -106,7 +112,9 @@ export function RightControls() {
                         className={cn(
                           "flex items-center gap-2 cursor-pointer rounded-lg px-2 py-2 text-sm transition-all duration-150 border-l-4 border-transparent",
                           t === theme
-                            ? "bg-accent/80 text-foreground border-l-accent shadow-lg"
+                            ? fortniteTheme
+                              ? "bg-accent/80 text-black border-l-accent shadow-lg"
+                              : "bg-accent/80 text-foreground border-l-accent shadow-lg"
                             : "hover:bg-accent/30 hover:text-foreground focus:bg-accent/30 focus:text-foreground"
                         )}
                       >
@@ -150,9 +158,9 @@ export function RightControls() {
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">Session Progress</span>
-          <span className="font-medium">60%</span>
+          <span className="font-medium">{Math.round(sessionProgress)}%</span>
         </div>
-        <Progress value={60} className="h-2 bg-background/50" />
+        <Progress value={sessionProgress} className="h-2 bg-background/50" />
       </div>
     </div>
   );

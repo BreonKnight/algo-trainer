@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaChartLine, FaBook, FaPython, FaCode, FaGraduationCap } from "react-icons/fa";
+import { FaChartLine, FaBook, FaPython, FaGraduationCap, FaTrophy } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/theme/use-theme";
 
@@ -53,6 +53,29 @@ export function NavigationBar({ className }: NavigationBarProps) {
         <FaPython className="h-4 w-4" />
         <span className="text-sm font-medium">Python</span>
       </Link>
+      {/* Gamification button */}
+      <Link
+        to="/gamification"
+        className={cn(
+          "flex items-center gap-2 px-4 py-3 sm:py-2 rounded-lg transition-colors w-full sm:w-auto justify-center group focus:outline-none focus:ring-0 ring-0 border-0",
+          theme === "nord"
+            ? "text-white/90 hover:text-white hover:bg-white/10"
+            : "text-main hover:bg-secondary/20"
+        )}
+        aria-label="Gamification"
+      >
+        <FaTrophy
+          className={cn(
+            "h-2 w-2 transition-colors duration-200",
+            theme === "nord"
+              ? "text-[#EBCB8B] group-hover:text-yellow-300"
+              : "text-yellow-500 group-hover:text-yellow-400"
+          )}
+        />
+        <span className="text-sm font-medium">Gamification</span>
+      </Link>
+      {/* Remove Visualizer link for launch */}
+      {/*
       <Link
         to="/visualizer"
         className={cn(
@@ -65,6 +88,7 @@ export function NavigationBar({ className }: NavigationBarProps) {
         <FaCode className="h-4 w-4" />
         <span className="text-sm font-medium">Visualizer</span>
       </Link>
+      */}
       <Link
         to="/algorithm-learning"
         className={cn(

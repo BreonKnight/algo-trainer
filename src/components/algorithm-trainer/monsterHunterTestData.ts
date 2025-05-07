@@ -2293,43 +2293,43 @@ Expected Output: [
 # Monster Hunter Tip:
 # Like finding critical paths that connect territories!`,
   ],
-  [
-    "Tree Implementation" as PatternKey,
-    `# Monster Hunter Tree Implementation Challenge
-# You are implementing a territory hierarchy!
+  //   [
+  //     "Tree Implementation" as PatternKey,
+  //     `# Monster Hunter Tree Implementation Challenge
+  // # You are implementing a territory hierarchy!
 
-# Test Case 1: Basic Tree Operations
-Input: {
-    "operations": [
-        {"type": "insert", "value": "Base Camp"},
-        {"type": "insert", "value": "Ancient Forest"},
-        {"type": "insert", "value": "Wildspire Waste"},
-        {"type": "insert", "value": "Coral Highlands"},
-        {"type": "insert", "value": "Rotten Vale"},
-        {"type": "insert", "value": "Elder's Recess"}
-    ]
-}
-Expected Output: {
-    "root": "Base Camp",
-    "children": [
-        {
-            "value": "Ancient Forest",
-            "children": [{"value": "Coral Highlands", "children": []}]
-        },
-        {
-            "value": "Wildspire Waste",
-            "children": [{"value": "Rotten Vale", "children": []}]
-        },
-        {
-            "value": "Elder's Recess",
-            "children": []
-        }
-    ]
-}
+  // # Test Case 1: Basic Tree Operations
+  // Input: {
+  //     "operations": [
+  //         {"type": "insert", "value": "Base Camp"},
+  //         {"type": "insert", "value": "Ancient Forest"},
+  //         {"type": "insert", "value": "Wildspire Waste"},
+  //         {"type": "insert", "value": "Coral Highlands"},
+  //         {"type": "insert", "value": "Rotten Vale"},
+  //         {"type": "insert", "value": "Elder's Recess"}
+  //     ]
+  // }
+  // Expected Output: {
+  //     "root": "Base Camp",
+  //     "children": [
+  //         {
+  //             "value": "Ancient Forest",
+  //             "children": [{"value": "Coral Highlands", "children": []}]
+  //         },
+  //         {
+  //             "value": "Wildspire Waste",
+  //             "children": [{"value": "Rotten Vale", "children": []}]
+  //         },
+  //         {
+  //             "value": "Elder's Recess",
+  //             "children": []
+  //         }
+  //     ]
+  // }
 
-# Monster Hunter Tip:
-# Like organizing territories in a hierarchical structure!`,
-  ],
+  // # Monster Hunter Tip:
+  // # Like organizing territories in a hierarchical structure!`,
+  //   ],
   [
     "Trie" as PatternKey,
     `# Monster Hunter Trie Challenge
@@ -2354,5 +2354,37 @@ Expected Output: {
 
 # Monster Hunter Tip:
 # Like efficiently storing and searching monster names!`,
+  ],
+  [
+    "Null Pattern" as PatternKey,
+    `# Monster Hunter Null Pattern Challenge
+# This is a placeholder pattern for testing and fallback purposes.
+
+# Test Case 1: Basic Test
+Input: null
+Expected Output: null
+
+# Monster Hunter Tip:
+# Like a training ground for new hunters!`,
+  ],
+  [
+    "Shell Sort" as PatternKey,
+    `# Monster Hunter Shell Sort Challenge
+# You are organizing monsters by their power levels using gaps!
+
+# Test Case 1: Basic Sort
+Input: [23, 29, 15, 19, 31, 7, 9, 5, 2]
+Expected Output: [2, 5, 7, 9, 15, 19, 23, 29, 31]
+
+# Test Case 2: Already Sorted
+Input: [1, 2, 3, 4, 5]
+Expected Output: [1, 2, 3, 4, 5]
+
+# Test Case 3: Reverse Sorted
+Input: [5, 4, 3, 2, 1]
+Expected Output: [1, 2, 3, 4, 5]
+
+# Monster Hunter Tip:
+# Like organizing monsters in groups of decreasing size until the entire territory is sorted!`,
   ],
 ]);

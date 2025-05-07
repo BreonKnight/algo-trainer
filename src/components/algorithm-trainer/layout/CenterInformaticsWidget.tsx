@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Lightbulb, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const TIPS = [
   "Use two pointers for many array problems.",
@@ -44,6 +45,7 @@ export function CenterInformaticsWidget() {
   const [isHovered, setIsHovered] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showFade, setShowFade] = useState(false);
+  const [theme] = useState("light");
 
   useEffect(() => {
     if (!isHovered) {
@@ -153,19 +155,39 @@ export function CenterInformaticsWidget() {
         <div className="flex flex-col gap-2 ml-2">
           <button
             onClick={handlePrevious}
-            className="p-1.5 rounded-full hover:bg-muted/50 transition-colors border border-border"
+            className={cn(
+              "p-1.5 rounded-full transition-colors border",
+              theme === "light" || theme === "solarized"
+                ? "bg-white border-accent text-accent shadow"
+                : "hover:bg-muted/50 border-border text-muted-foreground"
+            )}
             title="Previous"
             style={{ width: 28, height: 28 }}
           >
-            <ChevronLeft className="w-4 h-4 text-muted-foreground" />
+            <ChevronLeft
+              className={cn(
+                "w-4 h-4",
+                theme === "light" || theme === "solarized" ? "text-accent" : "text-muted-foreground"
+              )}
+            />
           </button>
           <button
             onClick={handleNext}
-            className="p-1.5 rounded-full hover:bg-muted/50 transition-colors border border-border"
+            className={cn(
+              "p-1.5 rounded-full transition-colors border",
+              theme === "light" || theme === "solarized"
+                ? "bg-white border-accent text-accent shadow"
+                : "hover:bg-muted/50 border-border text-muted-foreground"
+            )}
             title="Next"
             style={{ width: 28, height: 28 }}
           >
-            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            <ChevronRight
+              className={cn(
+                "w-4 h-4",
+                theme === "light" || theme === "solarized" ? "text-accent" : "text-muted-foreground"
+              )}
+            />
           </button>
         </div>
       </motion.div>

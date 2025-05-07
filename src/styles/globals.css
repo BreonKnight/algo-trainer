@@ -39,6 +39,39 @@
     rgba(40, 42, 54, 0.1),
     rgba(68, 71, 90, 0.1)
   );
+
+  /* Code Block Theme Colors */
+  --code-bg-nord: #3c3c9c;
+  --code-bg-dracula: #282a36;
+  --code-bg-solarized: #fdf6e3;
+  --code-bg-light: #f8fafc;
+  --code-bg-snes: #a0a0a0;
+  --code-bg-ps2: #001b4d;
+  --code-bg-re2: #0a0a0a;
+  --code-bg-mh: #1c2320;
+  --code-bg-default: #18181b;
+
+  /* Code Block Text Colors */
+  --code-text-nord: #e5e7eb;
+  --code-text-dracula: #f8f8f2;
+  --code-text-solarized: #657b83;
+  --code-text-light: #1e293b;
+  --code-text-snes: #ffffff;
+  --code-text-ps2: #e0e0e0;
+  --code-text-re2: #d4d4d4;
+  --code-text-mh: #e6e6e6;
+  --code-text-default: #e5e7eb;
+
+  /* Code Block Accent Colors */
+  --code-accent-nord: #88c0d0;
+  --code-accent-dracula: #bd93f9;
+  --code-accent-solarized: #268bd2;
+  --code-accent-light: #2563eb;
+  --code-accent-snes: #ff6b6b;
+  --code-accent-ps2: #ff4757;
+  --code-accent-re2: #ff3333;
+  --code-accent-mh: #ff6b6b;
+  --code-accent-default: #a855f7;
 }
 
 body {
@@ -85,4 +118,120 @@ body {
 .monaco-scrollable-element {
   border-radius: 0.75rem !important;
   overflow: hidden !important;
+}
+
+/* Code Block Styles */
+.code-block {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.code-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.3);
+}
+
+.code-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--pseudocode-gradient-overlay);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.code-block:hover::before {
+  opacity: 1;
+}
+
+/* Syntax Highlighting Improvements */
+.token.comment {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.token.keyword {
+  font-weight: 600;
+  text-shadow: var(--pseudocode-keyword-shadow);
+}
+
+.token.function {
+  font-weight: 500;
+  text-shadow: var(--pseudocode-function-shadow);
+}
+
+.token.string {
+  text-shadow: var(--pseudocode-string-shadow);
+}
+
+.token.number {
+  font-weight: 500;
+  text-shadow: var(--pseudocode-number-shadow);
+}
+
+/* Line Numbers */
+.line-numbers {
+  color: var(--text-secondary);
+  border-right: 1px solid var(--border);
+  padding-right: 1.5em;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.code-block:hover .line-numbers {
+  opacity: 0.8;
+}
+
+/* Copy Button */
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.code-block:hover .copy-button {
+  opacity: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .code-block {
+    font-size: 0.875rem;
+    padding: 1rem;
+  }
+
+  .line-numbers {
+    padding-right: 1em;
+  }
+}
+
+/* Custom scrollbar for code blocks */
+.code-block pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+.code-block pre::-webkit-scrollbar-thumb {
+  background: var(--accent2, rgba(120, 120, 120, 0.25));
+  border-radius: 6px;
+}
+
+.code-block pre::-webkit-scrollbar-thumb:hover {
+  background: var(--accent2, rgba(120, 120, 120, 0.45));
+}
+
+.code-block pre::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* For Firefox */
+.code-block pre {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent2, rgba(120, 120, 120, 0.25)) transparent;
 }

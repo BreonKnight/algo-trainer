@@ -2,9 +2,9 @@ import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
 import { ProgressView } from "./components/progress/ProgressView";
 import { AlgorithmTutorial } from "./components/tutorials/AlgorithmTutorial";
 import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
-import { AlgorithmVisualizer } from "./components/algorithm-trainer/AlgorithmVisualizer";
+//import { AlgorithmVisualizer } from "./components/algorithm-trainer/AlgorithmVisualizer";
 import { AlgorithmComparison } from "./components/algorithm-trainer/AlgorithmComparison";
-import AlgorithmLearning from "./components/AlgorithmLearning/AlgorithmLearning";
+import CSMath from "./components/CSMath/CSMath";
 import PatternManagement from "./components/admin/PatternManagement";
 import { Navigation } from "./components/ui/navigation";
 import { TopBar } from "./components/algorithm-trainer/layout/TopBar";
@@ -13,17 +13,19 @@ import SystemsDesign from "./components/SystemsDesign/SystemsDesign";
 import { useTheme } from "./components/theme/use-theme";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { Toaster } from "sonner";
-import { cn } from "./lib/utils";
 import { useState, useEffect } from "react";
 import "./App.css";
 import { checkPatternFiles, logPatternCheckResults } from "./lib/utils/pattern-checker";
 import type { Tutorial } from "./components/tutorials/AlgorithmTutorial";
 import type { PatternKey } from "./components/tutorials/types";
 import tutorialsData from "./data/tutorials.json";
+import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
+import AlgoGuide from "./components/algorithm-practice/AlgoGuide";
+import Practice from "./components/practice/Practice";
 
 // Log the imported data structure
-console.log("Imported tutorials data:", tutorialsData);
-console.log("Categories:", Object.keys(tutorialsData));
+// console.log("Imported tutorials data:", tutorialsData);
+// console.log("Categories:", Object.keys(tutorialsData));
 
 interface RawTutorial {
   id: string;
@@ -197,26 +199,12 @@ function AppContent() {
             <Route path="/tutorials" element={<TutorialList />} />
             <Route path="/tutorials/:algorithm" element={<TutorialRoute />} />
             <Route path="/python-techniques" element={<PythonTechniques />} />
+            <Route path="/practice" element={<Practice />} />
             <Route path="/systems-design" element={<SystemsDesign />} />
-            <Route
-              path="/visualizer"
-              element={
-                <div
-                  className={cn(
-                    "container mx-auto p-4 min-h-[calc(100vh-64px)]",
-                    theme === "nord" ? "bg-nord-0" : "bg-slate-50"
-                  )}
-                >
-                  <AlgorithmVisualizer
-                    algorithm="Bubble Sort"
-                    visualizationType="sorting"
-                    data={[5, 2, 8, 1, 9, 3, 7, 4, 6]}
-                  />
-                </div>
-              }
-            />
+            <Route path="/algorithm-trainer" element={<AlgorithmTrainer />} />
+            <Route path="/algo-guide" element={<AlgoGuide />} />
             <Route path="/algorithm-comparison" element={<AlgorithmComparison />} />
-            <Route path="/algorithm-learning" element={<AlgorithmLearning />} />
+            <Route path="/cs-math" element={<CSMath />} />
             {import.meta.env.DEV && (
               <Route path="/admin/patterns" element={<PatternManagement />} />
             )}
@@ -224,7 +212,7 @@ function AppContent() {
         </main>
       </div>
 
-      <Toaster position="top-center" richColors theme="dark" />
+      <Toaster position="bottom-left" richColors theme="dark" />
     </div>
   );
 }

@@ -20,8 +20,12 @@ export function HamburgerMenu() {
         size="icon"
         onClick={toggleMenu}
         className={cn(
-          "text-foreground hover:bg-accent hover:text-accent-foreground",
-          theme === "nord" ? "text-white hover:bg-white/10" : ""
+          "transition-all duration-200 border",
+          theme === "light" || theme === "solarized"
+            ? "bg-white border-accent text-accent shadow"
+            : theme === "nord"
+              ? "text-white hover:bg-white/10 border-none"
+              : "text-foreground hover:bg-accent hover:text-accent-foreground border-none"
         )}
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
