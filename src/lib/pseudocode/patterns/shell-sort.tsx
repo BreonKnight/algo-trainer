@@ -1,4 +1,4 @@
-import { PseudocodeDisplay } from "@/src/lib/pseudocode/PseudocodeDisplay";
+import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const ShellSortPattern = () => (
   <div>

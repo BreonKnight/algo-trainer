@@ -2,23 +2,18 @@ import { Book, Sword, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
+import { AlgorithmSelector } from "@/components/algorithm-trainer/AlgorithmSelector";
+import { MonsterHunterGuide } from "@/components/algorithm-trainer/MonsterHunterGuide";
+import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { categoryColors } from "@/lib/patterns";
 import { pseudocodePatterns } from "@/lib/pseudocode";
 import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import { cn } from "@/lib/utils";
-import { AlgorithmSelector } from "@/src/components/algorithm-trainer/AlgorithmSelector";
-import { MonsterHunterGuide } from "@/src/components/algorithm-trainer/MonsterHunterGuide";
-import { monsterHunterPatternsByCategory } from "@/src/components/algorithm-trainer/monsterHunterPatternsCombined";
-import { PatternKey } from "@/src/components/algorithm-trainer/types";
-import { Button } from "@/src/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/src/components/ui/tooltip";
 import styles from "@/styles/pseudocode.module.css";
 
 // Define the type for pseudocodePatterns

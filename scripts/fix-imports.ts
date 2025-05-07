@@ -14,7 +14,9 @@ function convertToAliasImport(importPath: string, filePath: string): string {
   const relativeToRoot = path.relative(workspaceRoot, absoluteImportPath);
 
   // Convert to @/ alias
-  return "@/" + relativeToRoot.replace(/\.(js|ts|tsx)$/, "");
+  let aliasPath = "@/" + relativeToRoot.replace(/\.(js|ts|tsx)$/, "");
+  aliasPath = aliasPath.replace(/^@\/src\//, "@/"); // Remove 'src' after '@/'
+  return aliasPath;
 }
 
 async function fixImports() {
@@ -28,17 +30,17 @@ async function fixImports() {
     // Match relative imports
     const importRegex = /from\s+['"](\.[^'"]+)['"]/g;
     let match;
-    let hasChanges = false;
 
     while ((match = importRegex.exec(content)) !== null) {
       const [fullMatch, importPath] = match;
       const aliasPath = convertToAliasImport(importPath, file);
-      newContent = newContent.replace(fullMatch, `from "${aliasPath}"`);
-      hasChanges = true;
+      newContent = newContent.replace(fullMatch, `from \"${aliasPath}\"`);
     }
 
-    if (hasChanges) {
-      fs.writeFileSync(file, newContent);
+    // Replace any '@/src/' with '@/' in all import statements
+    const updatedContent = newContent.replace(/(["'])@\/src\//g, "$1@/");
+    if (updatedContent !== content) {
+      fs.writeFileSync(file, updatedContent);
       console.log(`Fixed imports in ${file}`);
     }
   }

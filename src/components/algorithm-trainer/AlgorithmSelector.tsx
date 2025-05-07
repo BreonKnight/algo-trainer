@@ -2,8 +2,8 @@ import { ChevronDown, Search, Star } from "lucide-react";
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 
-import { monsterHunterPatternsByCategory } from "@/src/components/algorithm-trainer/monsterHunterPatternsCombined";
-import { PatternKey } from "@/src/components/algorithm-trainer/types";
+import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 // Group patterns by their category
 const getPatternCategories = () => {

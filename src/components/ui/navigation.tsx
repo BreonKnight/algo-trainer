@@ -13,10 +13,10 @@ import {
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import { GamificationButton } from "@/components/gamification/GamificationButton";
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { GamificationButton } from "@/src/components/gamification/GamificationButton";
-import { useTheme } from "@/src/components/theme/use-theme";
-import { Button } from "@/src/components/ui/button";
 
 // Add custom styles for the gradient animation
 const styles = `

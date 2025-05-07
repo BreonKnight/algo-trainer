@@ -5,6 +5,8 @@ import { useState, useRef, useEffect, useMemo } from "react";
 
 import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
+import { patterns as algorithmPatterns } from "@/components/algorithm-trainer/patterns/index";
+import { PatternKey, AlgorithmPattern } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -22,8 +24,6 @@ import {
   forniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
-import { patterns as algorithmPatterns } from "@/src/components/algorithm-trainer/patterns/index";
-import { PatternKey, AlgorithmPattern } from "@/src/components/algorithm-trainer/types";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;

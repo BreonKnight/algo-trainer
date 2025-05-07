@@ -3,17 +3,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
-import { Button } from "@/src/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/src/components/ui/card";
-import { Progress } from "@/src/components/ui/progress";
-import { Slider } from "@/src/components/ui/slider";
 
 export function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);

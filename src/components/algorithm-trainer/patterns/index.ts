@@ -1,19 +1,19 @@
+import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
+import { arrayPatterns } from "@/components/algorithm-trainer/patterns/array/index";
+import { backtrackingPatterns } from "@/components/algorithm-trainer/patterns/backtracking/index";
+import { dataStructurePatterns } from "@/components/algorithm-trainer/patterns/data-structures/index";
+import { divideAndConquerPatterns } from "@/components/algorithm-trainer/patterns/divide-and-conquer/index";
+import { dynamicProgrammingPatterns } from "@/components/algorithm-trainer/patterns/dynamic-programming";
+import { graphPatterns } from "@/components/algorithm-trainer/patterns/graph";
+import { greedyPatterns } from "@/components/algorithm-trainer/patterns/greedy";
+import { matrixPatterns } from "@/components/algorithm-trainer/patterns/matrix";
+import { numberTheoryPatterns } from "@/components/algorithm-trainer/patterns/number-theory";
+import { recursionPatterns } from "@/components/algorithm-trainer/patterns/recursion";
+import { searchingPatterns } from "@/components/algorithm-trainer/patterns/searching";
+import { sortingPatterns } from "@/components/algorithm-trainer/patterns/sorting";
+import { stringPatterns } from "@/components/algorithm-trainer/patterns/string";
+import { treePatterns } from "@/components/algorithm-trainer/patterns/tree";
 import { createPatternRecord } from "@/lib/patterns/pattern-utils";
-import { monsterHunterExplanations } from "@/src/components/algorithm-trainer/monsterHunterExplanations";
-import { arrayPatterns } from "@/src/components/algorithm-trainer/patterns/array/index";
-import { backtrackingPatterns } from "@/src/components/algorithm-trainer/patterns/backtracking/index";
-import { dataStructurePatterns } from "@/src/components/algorithm-trainer/patterns/data-structures/index";
-import { divideAndConquerPatterns } from "@/src/components/algorithm-trainer/patterns/divide-and-conquer/index";
-import { dynamicProgrammingPatterns } from "@/src/components/algorithm-trainer/patterns/dynamic-programming";
-import { graphPatterns } from "@/src/components/algorithm-trainer/patterns/graph";
-import { greedyPatterns } from "@/src/components/algorithm-trainer/patterns/greedy";
-import { matrixPatterns } from "@/src/components/algorithm-trainer/patterns/matrix";
-import { numberTheoryPatterns } from "@/src/components/algorithm-trainer/patterns/number-theory";
-import { recursionPatterns } from "@/src/components/algorithm-trainer/patterns/recursion";
-import { searchingPatterns } from "@/src/components/algorithm-trainer/patterns/searching";
-import { sortingPatterns } from "@/src/components/algorithm-trainer/patterns/sorting";
-import { stringPatterns } from "@/src/components/algorithm-trainer/patterns/string";
-import { treePatterns } from "@/src/components/algorithm-trainer/patterns/tree";
 
 // Import all pattern categories
 
@@ -111,7 +111,7 @@ export const patterns = createPatternRecord({
 // Alias for backward compatibility
 export const algorithmPatterns = patterns;
 
-export * from "@/src/components/algorithm-trainer/patterns/data-structures/union-find";
+export * from "@/components/algorithm-trainer/patterns/data-structures/union-find";
 
 // DEBUG: List patterns missing Monster Hunter guides
 

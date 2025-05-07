@@ -1,4 +1,4 @@
-import type { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import type { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const fastFourierTransformPattern: AlgorithmPattern = {
   title: "Fast Fourier Transform",

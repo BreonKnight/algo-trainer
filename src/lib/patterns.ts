@@ -22,7 +22,6 @@ export const PATTERN_KEYS = [
   // Dynamic Programming Patterns
   "Dynamic Programming",
   "Dynamic Programming Pattern",
-  "Dynamic Programming Fibonacci",
   "Dynamic Programming Iterative",
   "Dynamic Programming Coin Change",
   "State Compression DP",

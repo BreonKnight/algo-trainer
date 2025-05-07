@@ -1,13 +1,13 @@
-import { binarySearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/binary-search";
-import { binarySearchOnAnswerPattern } from "@/src/components/algorithm-trainer/patterns/searching/binary-search-on-answer";
-import { exponentialSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/exponential-search";
-import { fibonacciSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/fibonacci-search";
-import { interpolationSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/interpolation-search";
-import { jumpSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/jump-search";
-import { linearSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/linear-search";
-import { quickselectPattern } from "@/src/components/algorithm-trainer/patterns/searching/quickselect";
-import { ternarySearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/ternary-search";
-import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { binarySearchPattern } from "@/components/algorithm-trainer/patterns/searching/binary-search";
+import { binarySearchOnAnswerPattern } from "@/components/algorithm-trainer/patterns/searching/binary-search-on-answer";
+import { exponentialSearchPattern } from "@/components/algorithm-trainer/patterns/searching/exponential-search";
+import { fibonacciSearchPattern } from "@/components/algorithm-trainer/patterns/searching/fibonacci-search";
+import { interpolationSearchPattern } from "@/components/algorithm-trainer/patterns/searching/interpolation-search";
+import { jumpSearchPattern } from "@/components/algorithm-trainer/patterns/searching/jump-search";
+import { linearSearchPattern } from "@/components/algorithm-trainer/patterns/searching/linear-search";
+import { quickselectPattern } from "@/components/algorithm-trainer/patterns/searching/quickselect";
+import { ternarySearchPattern } from "@/components/algorithm-trainer/patterns/searching/ternary-search";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 type SearchingPatternKey =
   | "Binary Search"

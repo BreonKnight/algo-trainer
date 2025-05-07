@@ -1,4 +1,4 @@
-import { PatternComponent } from "@/src/lib/pseudocode/types";
+import { PatternComponent } from "@/lib/pseudocode/types";
 
 const FibonacciPattern: PatternComponent = () => {
   return (

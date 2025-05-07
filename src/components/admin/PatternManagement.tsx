@@ -11,13 +11,13 @@ import { toast } from "react-hot-toast";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+import { validateComponentOrder } from "@/components/admin/pattern-management/PatternValidation";
+import PatternValidationResults from "@/components/admin/pattern-management/PatternValidationResults";
+import type { ValidationResults } from "@/components/admin/pattern-management/PatternValidationResults";
 import { getValidationResults } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
 import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
 import { patternManagementService } from "@/lib/services/pattern-management";
 import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
-import { validateComponentOrder } from "@/src/components/admin/pattern-management/PatternValidation";
-import PatternValidationResults from "@/src/components/admin/pattern-management/PatternValidationResults";
-import type { ValidationResults } from "@/src/components/admin/pattern-management/PatternValidationResults";
 
 type FormStep = "basic" | "details" | "implementation" | "test-cases" | "preview";
 

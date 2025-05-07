@@ -10,10 +10,10 @@ import {
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
-import { Progress } from "@/src/components/ui/progress";
-import GamificationService, { UserProgress } from "@/src/lib/gamification";
-import { cn } from "@/src/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import GamificationService, { UserProgress } from "@/lib/gamification";
+import { cn } from "@/lib/utils";
 
 interface Category {
   name: string;

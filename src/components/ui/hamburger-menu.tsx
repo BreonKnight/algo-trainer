@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Button } from "@/src/components/ui/button";
 
 export function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);

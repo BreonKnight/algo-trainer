@@ -1,8 +1,8 @@
-import { monsterHunterExplanations } from "@/src/components/algorithm-trainer/monsterHunterExplanations";
-import { monsterHunterExplanations as monsterHunterExplanationsNew } from "@/src/components/algorithm-trainer/monsterHunterExplanationsNew";
-import { monsterHunterPatternsByCategory } from "@/src/components/algorithm-trainer/monsterHunterPatternsCombined";
-import { monsterHunterTestData } from "@/src/components/algorithm-trainer/monsterHunterTestData";
-import { PATTERN_KEYS } from "@/src/lib/patterns/types";
+import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
+import { monsterHunterExplanations as monsterHunterExplanationsNew } from "@/components/algorithm-trainer/monsterHunterExplanationsNew";
+import { monsterHunterPatternsByCategory } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
+import { PATTERN_KEYS } from "@/lib/patterns/types";
 
 type PatternKey = (typeof PATTERN_KEYS)[number];
 

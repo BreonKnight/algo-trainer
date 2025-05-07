@@ -1,4 +1,4 @@
-import { monsterHunterExplanations } from "@/src/components/algorithm-trainer/monsterHunterExplanations";
+import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
 
 const fs = require("fs");
 const path = require("path");

@@ -128,7 +128,7 @@ import { UnionFindPattern } from "@/lib/pseudocode/patterns/union-find";
 import { ZAlgorithmPattern } from "@/lib/pseudocode/patterns/z-algorithm";
 import { ZigzagTraversalPattern } from "@/lib/pseudocode/patterns/zigzag-traversal";
 
-// import { TreeImplementationPattern } from "@/src/lib/pseudocode/patterns/tree-implementation";
+// import { TreeImplementationPattern } from "@/lib/pseudocode/patterns/tree-implementation";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   // ===== Graph Algorithms =====

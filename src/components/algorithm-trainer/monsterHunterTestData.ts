@@ -1,4 +1,4 @@
-import type { PatternKey } from "@/src/components/algorithm-trainer/types";
+import type { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterTestData = new Map<PatternKey, string>([
   [

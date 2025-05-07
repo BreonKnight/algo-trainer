@@ -1,16 +1,16 @@
-import { monsterHunterPatterns } from "@/src/components/algorithm-trainer/monsterHunterPatterns";
-import { monsterHunterPatternsExtended } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended";
-import { monsterHunterPatternsExtended2 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended2";
-import { monsterHunterPatternsExtended3 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended3";
-import { monsterHunterPatternsExtended4 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended4";
-import { monsterHunterPatternsExtended5 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended5";
-import { monsterHunterPatternsExtended6 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended6";
-import { monsterHunterPatternsExtended7 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended7";
-import { monsterHunterPatternsExtended8 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended8";
-import { monsterHunterPatternsExtended9 } from "@/src/components/algorithm-trainer/monsterHunterPatternsExtended9";
-import { patterns as algorithmPatterns } from "@/src/components/algorithm-trainer/patterns/index";
-import { PatternKey, PATTERN_KEYS } from "@/src/components/algorithm-trainer/types";
-import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
+import { monsterHunterPatternsExtended } from "@/components/algorithm-trainer/monsterHunterPatternsExtended";
+import { monsterHunterPatternsExtended2 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended2";
+import { monsterHunterPatternsExtended3 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended3";
+import { monsterHunterPatternsExtended4 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended4";
+import { monsterHunterPatternsExtended5 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended5";
+import { monsterHunterPatternsExtended6 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended6";
+import { monsterHunterPatternsExtended7 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended7";
+import { monsterHunterPatternsExtended8 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended8";
+import { monsterHunterPatternsExtended9 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended9";
+import { patterns as algorithmPatterns } from "@/components/algorithm-trainer/patterns/index";
+import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 // Helper function to calculate Levenshtein distance
 function levenshteinDistance(a: string, b: string): number {

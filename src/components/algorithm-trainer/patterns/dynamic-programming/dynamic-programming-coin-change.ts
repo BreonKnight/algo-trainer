@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const dynamicProgrammingCoinChangePattern: AlgorithmPattern = {
   title: "Dynamic Programming Coin Change",
