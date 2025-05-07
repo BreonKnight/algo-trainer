@@ -98,7 +98,7 @@ function checkPatternMapping() {
   const patternKeys = Object.keys(patternMapping) as PatternKey[];
 
   // Check if all patterns have regular implementations
-  const missingRegularPatterns = patternKeys.filter((key) => !patterns[key]);
+  const missingRegularPatterns = patternKeys.filter((key) => !(key in patterns));
 
   // Check if all patterns have Monster Hunter implementations
   const missingMonsterHunterPatterns = patternKeys.filter(

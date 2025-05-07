@@ -15,13 +15,6 @@ const createDirectoryStructure = () => {
   });
 };
 
-// Extract pattern name from pattern definition
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const extractPatternName = (pattern: string): string => {
-  const match = pattern.match(/['"](\w+(\s+\w+)*)['"]:/);
-  return match ? match[1] : "";
-};
-
 // Generate pattern file content
 const generatePatternFile = (patternName: string, patternContent: string): string => {
   return `import { ChevronRight } from "lucide-react";
