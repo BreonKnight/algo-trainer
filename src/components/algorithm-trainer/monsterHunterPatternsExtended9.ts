@@ -1874,20 +1874,7 @@ print("Pattern matches found at:", matches)
   ],
 ]);
 
-// // Add Tree Implementation Monster Hunter Pattern
-// const treeImplementationMonsterHunterPattern = new Map<PatternKey, string>([
-//   [
-//     "Tree Implementation",
-//     `# Monster Hunter Tree Implementation Pattern
-// # Monster Hierarchy Strategy
-
-// def create_monster_hierarchy():
-//     """
-//     Implement a tree structure for monster relationships.
-//     Time: O(1) for creation, varies for operations
-//     Space: O(n) where n is number of nodes
-
-//     Monster Hunter Context:
+// Removed unused "Tree Implementation Monster Hunter Pattern" code block for maintainability.
 //     - Like organizing monster hierarchies
 //     - Track species relationships
 //     - Manage monster families
