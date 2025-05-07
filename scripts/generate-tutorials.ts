@@ -209,12 +209,11 @@ function getPrerequisites(algorithm: string, category: AlgorithmCategory): strin
 
 function generateDescription(algorithm: string, category: AlgorithmCategory): string {
   return `${algorithm} is a ${category} algorithm that ${getAlgorithmPurpose(
-    algorithm,
     category
   )}. This tutorial will cover the theory, implementation, and applications of ${algorithm}.`;
 }
 
-function getAlgorithmPurpose(algorithm: string, category: AlgorithmCategory): string {
+function getAlgorithmPurpose(category: AlgorithmCategory): string {
   switch (category) {
     case "sorting":
       return "efficiently organizes data in a specific order";

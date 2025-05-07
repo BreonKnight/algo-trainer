@@ -10,6 +10,17 @@ node_modules
 /dist
 /build
 
+# Electron release directories
+dist/
+dist-electron/
+release/
+*.dmg
+*.zip
+*.exe
+*.AppImage
+*.deb
+*.rpm
+
 # Misc
 .DS_Store
 .env.local
