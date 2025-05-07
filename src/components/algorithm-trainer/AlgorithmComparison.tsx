@@ -8,7 +8,7 @@ import {
   Info,
   ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo, useCallback, memo } from "react";
 
 import { AlgorithmVisualizer } from "@/components/algorithm-trainer/AlgorithmVisualizer";
 import { NavigationBar } from "@/components/algorithm-trainer/layout/NavigationBar";
@@ -56,7 +56,9 @@ const sortingCategories = {
   "Other Sorts": ["Stack Sort"],
 };
 
-export function AlgorithmComparison({
+const AlgorithmVisualizerMemo = memo(AlgorithmVisualizer);
+
+export default function AlgorithmComparison({
   algorithms = Object.keys(sortingPatterns) as PatternKey[],
 }: AlgorithmComparisonProps) {
   const { theme } = useTheme();
@@ -74,36 +76,39 @@ export function AlgorithmComparison({
     { comparisons: 0, swaps: 0, time: 0 },
   ]);
 
-  const generateRandomArray = () => {
+  const generateRandomArray = useCallback(() => {
     const newArray = Array.from(
       { length: arraySize },
       () => Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
     );
     setData(newArray);
-  };
+  }, [arraySize, maxValue, minValue]);
 
-  const generatePresetPattern = (pattern: "random" | "nearly-sorted" | "reverse-sorted") => {
-    let newArray = Array.from(
-      { length: arraySize },
-      () => Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
-    );
+  const generatePresetPattern = useCallback(
+    (pattern: "random" | "nearly-sorted" | "reverse-sorted") => {
+      let newArray = Array.from(
+        { length: arraySize },
+        () => Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
+      );
 
-    if (pattern === "nearly-sorted") {
-      newArray.sort((a, b) => a - b);
-      // Randomly swap a few elements
-      for (let i = 0; i < arraySize / 10; i++) {
-        const idx1 = Math.floor(Math.random() * arraySize);
-        const idx2 = Math.floor(Math.random() * arraySize);
-        [newArray[idx1], newArray[idx2]] = [newArray[idx2], newArray[idx1]];
+      if (pattern === "nearly-sorted") {
+        newArray.sort((a, b) => a - b);
+        // Randomly swap a few elements
+        for (let i = 0; i < arraySize / 10; i++) {
+          const idx1 = Math.floor(Math.random() * arraySize);
+          const idx2 = Math.floor(Math.random() * arraySize);
+          [newArray[idx1], newArray[idx2]] = [newArray[idx2], newArray[idx1]];
+        }
+      } else if (pattern === "reverse-sorted") {
+        newArray.sort((a, b) => b - a);
       }
-    } else if (pattern === "reverse-sorted") {
-      newArray.sort((a, b) => b - a);
-    }
 
-    setData(newArray);
-  };
+      setData(newArray);
+    },
+    [arraySize, maxValue, minValue]
+  );
 
-  const handleCustomInput = (input: string) => {
+  const handleCustomInput = useCallback((input: string) => {
     try {
       const newArray = input
         .split(",")
@@ -116,69 +121,92 @@ export function AlgorithmComparison({
     } catch (error) {
       console.error("Invalid input format");
     }
-  };
+  }, []);
 
-  const startRace = () => {
+  const startRace = useCallback(() => {
     setIsRacing(true);
     // Reset metrics
     setMetrics([
       { comparisons: 0, swaps: 0, time: 0 },
       { comparisons: 0, swaps: 0, time: 0 },
     ]);
-  };
+  }, []);
 
-  const stopRace = () => {
+  const stopRace = useCallback(() => {
     setIsRacing(false);
-  };
+  }, []);
 
-  const handleRaceComplete = (index: number, finalMetrics: PerformanceMetrics) => {
+  const handleRaceComplete = useCallback((index: number, finalMetrics: PerformanceMetrics) => {
     setMetrics((prev) => {
       const newMetrics = [...prev];
       newMetrics[index] = finalMetrics;
       return newMetrics as [PerformanceMetrics, PerformanceMetrics];
     });
-  };
+  }, []);
 
-  const isDarkTheme =
-    theme === "dracula" ||
-    theme === "solarized" ||
-    theme === "nord" ||
-    theme === "snes" ||
-    theme === "ps2" ||
-    theme === "re2" ||
-    theme === "mh" ||
-    theme === "kingdom-hearts";
-
-  const cardClasses = cn(
-    "p-6 rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl",
-    isDarkTheme
-      ? "bg-background/80 backdrop-blur-sm border border-border/50"
-      : "bg-card border border-border"
+  const isDarkTheme = useMemo(
+    () =>
+      theme === "dracula" ||
+      theme === "solarized" ||
+      theme === "nord" ||
+      theme === "snes" ||
+      theme === "ps2" ||
+      theme === "re2" ||
+      theme === "mh" ||
+      theme === "kingdom-hearts",
+    [theme]
   );
 
-  const textClasses = cn(
-    "transition-colors duration-200",
-    isDarkTheme ? "text-foreground" : "text-foreground"
+  const cardClasses = useMemo(
+    () =>
+      cn(
+        "p-6 rounded-xl shadow-lg transition-all duration-200 hover:shadow-xl",
+        isDarkTheme
+          ? "bg-background/80 backdrop-blur-sm border border-border/50"
+          : "bg-card border border-border"
+      ),
+    [isDarkTheme]
   );
 
-  const mutedTextClasses = cn(
-    "transition-colors duration-200",
-    isDarkTheme ? "text-muted-foreground" : "text-muted-foreground"
+  const textClasses = useMemo(
+    () => cn("transition-colors duration-200", isDarkTheme ? "text-foreground" : "text-foreground"),
+    [isDarkTheme]
   );
 
-  const buttonClasses = cn(
-    "transition-all duration-200 rounded-lg",
-    isDarkTheme ? "hover:bg-accent/20 border-border/50" : "hover:bg-accent/10 border-border"
+  const mutedTextClasses = useMemo(
+    () =>
+      cn(
+        "transition-colors duration-200",
+        isDarkTheme ? "text-muted-foreground" : "text-muted-foreground"
+      ),
+    [isDarkTheme]
   );
 
-  const iconContainerClasses = cn(
-    "p-2 rounded-lg transition-colors duration-200",
-    isDarkTheme ? "bg-accent/10" : "bg-accent/5"
+  const buttonClasses = useMemo(
+    () =>
+      cn(
+        "transition-all duration-200 rounded-lg",
+        isDarkTheme ? "hover:bg-accent/20 border-border/50" : "hover:bg-accent/10 border-border"
+      ),
+    [isDarkTheme]
   );
 
-  const metricCardClasses = cn(
-    "p-4 rounded-lg transition-colors duration-200",
-    isDarkTheme ? "bg-accent/10" : "bg-accent/5"
+  const iconContainerClasses = useMemo(
+    () =>
+      cn(
+        "p-2 rounded-lg transition-colors duration-200",
+        isDarkTheme ? "bg-accent/10" : "bg-accent/5"
+      ),
+    [isDarkTheme]
+  );
+
+  const metricCardClasses = useMemo(
+    () =>
+      cn(
+        "p-4 rounded-lg transition-colors duration-200",
+        isDarkTheme ? "bg-accent/10" : "bg-accent/5"
+      ),
+    [isDarkTheme]
   );
 
   return (
@@ -403,7 +431,7 @@ export function AlgorithmComparison({
             </div>
 
             <div className="grid grid-cols-2 gap-8">
-              <AlgorithmVisualizer
+              <AlgorithmVisualizerMemo
                 algorithm={selectedAlgorithms[0]}
                 data={data}
                 visualizationType="sorting"
@@ -417,7 +445,7 @@ export function AlgorithmComparison({
                   });
                 }}
               />
-              <AlgorithmVisualizer
+              <AlgorithmVisualizerMemo
                 algorithm={selectedAlgorithms[1]}
                 data={data}
                 visualizationType="sorting"

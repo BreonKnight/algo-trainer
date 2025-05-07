@@ -9,9 +9,10 @@ import {
   Network,
   Code,
   ListChecks,
+  LucideIcon,
 } from "lucide-react";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { memo, useState, useMemo, useCallback } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { GamificationButton } from "@/components/gamification/GamificationButton";
 import { useTheme } from "@/components/theme/use-theme";
@@ -78,55 +79,241 @@ const styles = `
 }
 `;
 
+interface NavItem {
+  path: string;
+  label: string;
+  icon: LucideIcon;
+  onClick?: (e: React.MouseEvent) => void;
+  onMouseEnter?: () => void;
+  isLoading?: boolean;
+}
+
 export function Navigation() {
   const { theme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
 
-  const scrollToTop = () => {
+  // Preload route
+  const preloadRoute = useCallback((path: string) => {
+    // Map route paths to their actual component paths
+    const pathMap: Record<string, string> = {
+      "/algo-guide": "../algo-guide/AlgoGuide",
+      "/algorithm-trainer": "../algorithm-trainer/AlgorithmTrainer",
+      "/cs-math": "../cs-math/CSMath",
+      "/practice": "../practice/Practice",
+      "/tutorials": "../tutorials/Tutorials",
+      "/python-techniques": "../python-techniques/PythonTechniques",
+      "/progress": "../progress/Progress",
+      "/systems-design": "../systems-design/SystemsDesign",
+      "/": "../home/Home",
+    };
+
+    const componentPath = pathMap[path];
+    if (!componentPath) return Promise.resolve();
+
+    return import(/* @vite-ignore */ componentPath);
+  }, []);
+
+  // Handle navigation with loading state
+  const handleNavClick = useCallback(
+    async (path: string, e: React.MouseEvent) => {
+      e.preventDefault();
+      setLoadingStates((prev) => ({ ...prev, [path]: true }));
+      try {
+        await preloadRoute(path);
+        navigate(path);
+      } catch (error) {
+        console.error(`Failed to load route: ${path}`, error);
+        // Still navigate even if preload fails
+        navigate(path);
+      } finally {
+        setLoadingStates((prev) => ({ ...prev, [path]: false }));
+      }
+    },
+    [navigate, preloadRoute]
+  );
+
+  // Memoize scroll handler
+  const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  };
+  }, []);
 
-  const navGroups = [
-    {
-      label: "Learn",
-      items: [
-        { path: "/algo-guide", label: "Algo Guide", icon: GraduationCap },
-        { path: "/algorithm-trainer", label: "Algorithm Trainer", icon: Code },
-        { path: "/cs-math", label: "CS Math", icon: GraduationCap },
-        { path: "/practice", label: "Practice", icon: ListChecks },
-      ],
-    },
-    {
-      label: "Resources",
-      items: [
-        { path: "/tutorials", label: "Tutorials", icon: Book },
-        { path: "/python-techniques", label: "Python", icon: Code2 },
-        //{ path: "/visualizer", label: "Visualizer", icon: Brain },
-      ],
-    },
-    {
-      label: "Progress",
-      items: [
-        { path: "/progress", label: "Progress", icon: BarChart },
-        { path: "/systems-design", label: "Systems Design", icon: Network },
-      ],
-    },
-    {
-      label: "General",
-      items: [{ path: "/", label: "Home", icon: Home }],
-    },
-  ];
+  // Memoize navigation groups
+  const navGroups = useMemo(
+    () => [
+      {
+        label: "Learn",
+        items: [
+          {
+            path: "/algo-guide",
+            label: "Algo Guide",
+            icon: GraduationCap,
+            onClick: (e: React.MouseEvent) => handleNavClick("/algo-guide", e),
+            onMouseEnter: () => preloadRoute("/algo-guide"),
+            isLoading: loadingStates["/algo-guide"],
+          },
+          {
+            path: "/algorithm-trainer",
+            label: "Algorithm Trainer",
+            icon: Code,
+            onClick: (e: React.MouseEvent) => handleNavClick("/algorithm-trainer", e),
+            onMouseEnter: () => preloadRoute("/algorithm-trainer"),
+            isLoading: loadingStates["/algorithm-trainer"],
+          },
+          {
+            path: "/cs-math",
+            label: "CS Math",
+            icon: GraduationCap,
+            onClick: (e: React.MouseEvent) => handleNavClick("/cs-math", e),
+            onMouseEnter: () => preloadRoute("/cs-math"),
+            isLoading: loadingStates["/cs-math"],
+          },
+          {
+            path: "/practice",
+            label: "Practice",
+            icon: ListChecks,
+            onClick: (e: React.MouseEvent) => handleNavClick("/practice", e),
+            onMouseEnter: () => preloadRoute("/practice"),
+            isLoading: loadingStates["/practice"],
+          },
+        ],
+      },
+      {
+        label: "Resources",
+        items: [
+          {
+            path: "/tutorials",
+            label: "Tutorials",
+            icon: Book,
+            onClick: (e: React.MouseEvent) => handleNavClick("/tutorials", e),
+            onMouseEnter: () => preloadRoute("/tutorials"),
+            isLoading: loadingStates["/tutorials"],
+          },
+          {
+            path: "/python-techniques",
+            label: "Python",
+            icon: Code2,
+            onClick: (e: React.MouseEvent) => handleNavClick("/python-techniques", e),
+            onMouseEnter: () => preloadRoute("/python-techniques"),
+            isLoading: loadingStates["/python-techniques"],
+          },
+        ],
+      },
+      {
+        label: "Progress",
+        items: [
+          {
+            path: "/progress",
+            label: "Progress",
+            icon: BarChart,
+            onClick: (e: React.MouseEvent) => handleNavClick("/progress", e),
+            onMouseEnter: () => preloadRoute("/progress"),
+            isLoading: loadingStates["/progress"],
+          },
+          {
+            path: "/systems-design",
+            label: "Systems Design",
+            icon: Network,
+            onClick: (e: React.MouseEvent) => handleNavClick("/systems-design", e),
+            onMouseEnter: () => preloadRoute("/systems-design"),
+            isLoading: loadingStates["/systems-design"],
+          },
+        ],
+      },
+      {
+        label: "General",
+        items: [
+          {
+            path: "/",
+            label: "Home",
+            icon: Home,
+            onClick: (e: React.MouseEvent) => handleNavClick("/", e),
+            onMouseEnter: () => preloadRoute("/"),
+            isLoading: loadingStates["/"],
+          },
+        ],
+      },
+    ],
+    [handleNavClick, preloadRoute, loadingStates]
+  );
 
-  const isActive = (path: string) => location.pathname === path;
+  // Memoize active state check
+  const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
 
-  const lightThemes = ["light", "solarized"];
-  const blueThemes = ["nord", "ps2"];
+  // Memoize theme checks
+  const themeChecks = useMemo(
+    () => ({
+      lightThemes: ["light", "solarized"],
+      blueThemes: ["nord", "ps2"],
+      fortniteTheme: theme === "fornite",
+    }),
+    [theme]
+  );
 
-  const fortniteTheme = theme === "fornite";
+  // Memoize mobile menu toggle
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
+
+  // Memoize mobile menu close
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
+  // Memoize link click handler
+  const handleLinkClick = useCallback(() => {
+    scrollToTop();
+    closeMobileMenu();
+  }, [scrollToTop, closeMobileMenu]);
+
+  // Update the Link rendering in both desktop and mobile menus
+  const renderNavLink = useCallback(
+    (item: NavItem) => {
+      const Icon = item.icon;
+      return (
+        <Link
+          key={item.path}
+          to={item.path}
+          onClick={(e) => {
+            if (item.onClick) {
+              item.onClick(e);
+            } else {
+              scrollToTop();
+            }
+          }}
+          onMouseEnter={item.onMouseEnter}
+          className={cn(
+            "flex items-center px-2.5 py-2 rounded-md text-sm font-medium transition-colors relative",
+            isActive(item.path)
+              ? `bg-accent ${
+                  themeChecks.fortniteTheme
+                    ? "text-black"
+                    : themeChecks.lightThemes.includes(theme)
+                      ? "text-gray-900"
+                      : themeChecks.blueThemes.includes(theme)
+                        ? "text-white"
+                        : "text-accent-foreground"
+                } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
+              : "text-foreground/80 hover:text-foreground hover:bg-accent/20"
+          )}
+        >
+          <Icon className="h-4 w-4 mr-2" />
+          {item.label}
+          {item.isLoading && (
+            <span className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+              <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+            </span>
+          )}
+        </Link>
+      );
+    },
+    [isActive, themeChecks, theme, scrollToTop]
+  );
 
   return (
     <>
@@ -153,34 +340,7 @@ export function Navigation() {
               <div className="flex items-center">
                 {navGroups.map((group, groupIdx) => (
                   <div key={group.label} className="flex items-center space-x-1">
-                    {group.items.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <Link
-                          key={item.path}
-                          to={item.path}
-                          onClick={scrollToTop}
-                          className={cn(
-                            "flex items-center px-2.5 py-2 rounded-md text-sm font-medium transition-colors",
-                            isActive(item.path)
-                              ? `bg-accent ${
-                                  fortniteTheme
-                                    ? "text-black"
-                                    : lightThemes.includes(theme)
-                                      ? "text-gray-900"
-                                      : blueThemes.includes(theme)
-                                        ? "text-white"
-                                        : "text-accent-foreground"
-                                } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                              : "text-foreground/80 hover:text-foreground hover:bg-accent/20"
-                          )}
-                        >
-                          <Icon className="h-4 w-4 mr-2" />
-                          {item.label}
-                        </Link>
-                      );
-                    })}
-                    {/* Divider between groups except last */}
+                    {group.items.map(renderNavLink)}
                     {groupIdx < navGroups.length - 1 && (
                       <span className="mx-2 h-5 w-px bg-border/60" />
                     )}
@@ -198,7 +358,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={toggleMobileMenu}
                 className="h-8 w-8 text-foreground hover:bg-accent/20 hover:text-accent-foreground"
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -222,19 +382,16 @@ export function Navigation() {
                       <Link
                         key={item.path}
                         to={item.path}
-                        onClick={() => {
-                          scrollToTop();
-                          setIsMobileMenuOpen(false);
-                        }}
+                        onClick={handleLinkClick}
                         className={cn(
                           "flex items-center px-3 py-2.5 rounded-md text-base font-medium transition-colors",
                           isActive(item.path)
                             ? `bg-accent ${
-                                fortniteTheme
+                                themeChecks.fortniteTheme
                                   ? "text-black"
-                                  : lightThemes.includes(theme)
+                                  : themeChecks.lightThemes.includes(theme)
                                     ? "text-gray-900"
-                                    : blueThemes.includes(theme)
+                                    : themeChecks.blueThemes.includes(theme)
                                       ? "text-white"
                                       : "text-accent-foreground"
                               } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
@@ -255,3 +412,5 @@ export function Navigation() {
     </>
   );
 }
+
+export default memo(Navigation);

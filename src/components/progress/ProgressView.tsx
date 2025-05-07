@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
 
 import { useTheme } from "@/components/theme/use-theme";
@@ -9,9 +9,13 @@ import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 
-export function ProgressView() {
+const ProgressView = memo(function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);
   const { theme } = useTheme();
+
+  const handleProgressChange = useCallback((value: number[]) => {
+    setProgressValue(value[0]);
+  }, []);
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -60,7 +64,7 @@ export function ProgressView() {
             <div className="flex items-center space-x-2">
               <Slider
                 value={[progressValue]}
-                onValueChange={(value) => setProgressValue(value[0])}
+                onValueChange={handleProgressChange}
                 min={0}
                 max={100}
                 step={1}
@@ -109,4 +113,6 @@ export function ProgressView() {
       </div>
     </div>
   );
-}
+});
+
+export default ProgressView;
