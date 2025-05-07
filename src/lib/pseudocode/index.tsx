@@ -115,7 +115,7 @@ import { KaratsubaMultiplicationPattern } from "./patterns/karatsuba-multiplicat
 import { InorderTraversalPattern } from "./patterns/inorder-traversal";
 import { HopcroftKarpPattern } from "./patterns/hopcroft-karp";
 import { GraphRepresentationPattern } from "./patterns/graph-representation";
-import { TreeImplementationPattern } from "./patterns/tree-implementation";
+// import { TreeImplementationPattern } from "./patterns/tree-implementation";
 import { TriePattern } from "./patterns/trie";
 import { BucketSortPattern } from "./patterns/bucket-sort";
 import { CountingSortPattern } from "./patterns/counting-sort";
@@ -166,7 +166,6 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Fenwick Tree": FenwickTreePattern,
   "Suffix Tree": SuffixTreePattern,
   "Trie Operations": TrieOperationsPattern,
-  "Tree Implementation": TreeImplementationPattern,
   "LCA DFS": LCADFSPattern,
   "Inorder Traversal": InorderTraversalPattern,
   "Zigzag Traversal": ZigzagTraversalPattern,

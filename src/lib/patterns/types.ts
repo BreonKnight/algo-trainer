@@ -115,7 +115,6 @@ export const PATTERN_KEYS = [
   "Heap Implementation",
   "Queue Implementation",
   "Stack Implementation",
-  "Tree Implementation",
   "Lowest Common Ancestor",
   "Trie",
   "Trie Operations",

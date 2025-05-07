@@ -75,7 +75,6 @@ export const patternMapping: PatternMapping = {
   "Heap Implementation": "Heap Implementation",
   "Queue Implementation": "Queue Implementation",
   "Stack Implementation": "Stack Implementation",
-  "Tree Implementation": "Tree Implementation",
   "Lowest Common Ancestor": "Lowest Common Ancestor",
   Trie: "Trie",
   "Trie Operations": "Trie Operations",

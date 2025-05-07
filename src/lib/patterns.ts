@@ -49,7 +49,6 @@ export const PATTERN_KEYS = [
   "Linked List",
   "Segment Tree",
   "Union Find",
-  "Tree Implementation",
   "Lowest Common Ancestor",
   "Trie",
   "Trie Operations",
