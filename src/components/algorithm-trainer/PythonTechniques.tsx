@@ -1,5 +1,5 @@
 import { Check, Copy } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-const CodeBlock = ({ code }: { code: string }) => {
+const CodeBlock = memo(({ code }: { code: string }) => {
   const { theme: appTheme } = useTheme();
   const [copied, setCopied] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -154,15 +154,18 @@ const CodeBlock = ({ code }: { code: string }) => {
     },
   };
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
+  }, [code]);
 
-  const handleLineClick = (lineNumber: number) => {
-    setHighlightedLine(lineNumber === highlightedLine ? null : lineNumber);
-  };
+  const handleLineClick = useCallback(
+    (lineNumber: number) => {
+      setHighlightedLine(lineNumber === highlightedLine ? null : lineNumber);
+    },
+    [highlightedLine]
+  );
 
   return (
     <div
@@ -263,9 +266,9 @@ const CodeBlock = ({ code }: { code: string }) => {
       </div>
     </div>
   );
-};
+});
 
-export const PythonTechniques = () => {
+export default function PythonTechniques() {
   const { theme } = useTheme();
   const [activeSection, setActiveSection] = useState<string>("");
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -1000,4 +1003,4 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
       </div>
     </div>
   );
-};
+}

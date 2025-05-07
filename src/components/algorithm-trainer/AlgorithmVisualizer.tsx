@@ -1,5 +1,5 @@
-import { Play, Pause, SkipBack, SkipForward, RotateCcw } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { Play, Pause, RotateCcw, SkipBack, SkipForward } from "lucide-react";
+import { useState, useEffect, useRef, useMemo, useCallback, memo } from "react";
 
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
@@ -10,18 +10,11 @@ import { cn } from "@/lib/utils";
 
 interface AlgorithmVisualizerProps {
   algorithm: PatternKey;
-  data?: number[];
+  data: number[];
   visualizationType: "sorting" | "graph" | "tree" | "array";
-  onMetricsUpdate?: (metrics: PerformanceMetrics) => void;
   isRacing?: boolean;
   onComplete?: (metrics: PerformanceMetrics) => void;
-}
-
-interface VisualizationStep {
-  array: number[];
-  highlightedIndices: number[];
-  description: string;
-  metrics?: PerformanceMetrics;
+  onMetricsUpdate?: (metrics: PerformanceMetrics) => void;
 }
 
 interface PerformanceMetrics {
@@ -30,137 +23,21 @@ interface PerformanceMetrics {
   time: number;
 }
 
-// Helper function to generate visualization steps based on algorithm
-const generateVisualizationSteps = (algorithm: string, data: number[]): VisualizationStep[] => {
-  const steps = [];
-  const arr = [...data];
-  let metrics: PerformanceMetrics = { comparisons: 0, swaps: 0, time: 0 };
+interface VisualizationStep {
+  array: number[];
+  highlightedIndices: number[];
+  sortedIndices?: number[];
+  comparingIndices?: number[];
+  metrics: PerformanceMetrics;
+  description: string;
+}
 
-  if (algorithm.includes("Sort")) {
-    if (algorithm === "Bubble Sort") {
-      for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr.length - i - 1; j++) {
-          metrics.comparisons++;
-          steps.push({
-            array: [...arr],
-            highlightedIndices: [j, j + 1],
-            description: `Comparing elements at positions ${j} and ${j + 1}`,
-            metrics: { ...metrics },
-          });
-
-          if (arr[j] > arr[j + 1]) {
-            metrics.swaps++;
-            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-            steps.push({
-              array: [...arr],
-              highlightedIndices: [j, j + 1],
-              description: `Swapped elements at positions ${j} and ${j + 1}`,
-              metrics: { ...metrics },
-            });
-          }
-        }
-      }
-    } else if (algorithm === "Quick Sort") {
-      const quickSort = (arr: number[], low: number, high: number) => {
-        if (low < high) {
-          const pivotIndex = partition(arr, low, high);
-          quickSort(arr, low, pivotIndex - 1);
-          quickSort(arr, pivotIndex + 1, high);
-        }
-      };
-
-      const partition = (arr: number[], low: number, high: number) => {
-        const pivot = arr[high];
-        let i = low - 1;
-
-        steps.push({
-          array: [...arr],
-          highlightedIndices: [high],
-          description: `Selected pivot: ${pivot}`,
-          metrics: { ...metrics },
-        });
-
-        for (let j = low; j < high; j++) {
-          metrics.comparisons++;
-          steps.push({
-            array: [...arr],
-            highlightedIndices: [j, high],
-            description: `Comparing ${arr[j]} with pivot ${pivot}`,
-            metrics: { ...metrics },
-          });
-
-          if (arr[j] < pivot) {
-            i++;
-            metrics.swaps++;
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-            steps.push({
-              array: [...arr],
-              highlightedIndices: [i, j],
-              description: `Swapped elements at positions ${i} and ${j}`,
-              metrics: { ...metrics },
-            });
-          }
-        }
-
-        metrics.swaps++;
-        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
-        steps.push({
-          array: [...arr],
-          highlightedIndices: [i + 1, high],
-          description: `Placed pivot in its final position`,
-          metrics: { ...metrics },
-        });
-
-        return i + 1;
-      };
-
-      quickSort(arr, 0, arr.length - 1);
-    } else {
-      // For other sorting algorithms, just show the initial and final state
-      steps.push({
-        array: [...data],
-        highlightedIndices: [],
-        description: "Initial array",
-        metrics: { ...metrics },
-      });
-
-      // Sort the array (using built-in sort for simplicity)
-      arr.sort((a, b) => a - b);
-
-      steps.push({
-        array: [...arr],
-        highlightedIndices: [],
-        description: "Sorted array",
-        metrics: { ...metrics },
-      });
-    }
-  } else {
-    // For non-sorting algorithms, just show the initial and final state
-    steps.push({
-      array: [...data],
-      highlightedIndices: [],
-      description: "Initial state",
-      metrics: { ...metrics },
-    });
-
-    steps.push({
-      array: [...data],
-      highlightedIndices: [],
-      description: "Final state",
-      metrics: { ...metrics },
-    });
-  }
-
-  return steps;
-};
-
-// Helper function to render a step on the canvas
-const renderStep = (
+function renderStep(
   ctx: CanvasRenderingContext2D,
   step: VisualizationStep,
-  visualizationType: string,
+  visualizationType: "sorting" | "graph" | "tree" | "array",
   theme: string
-) => {
+) {
   const { width, height } = ctx.canvas;
   ctx.clearRect(0, 0, width, height);
 
@@ -168,59 +45,179 @@ const renderStep = (
   ctx.fillStyle = theme === "nord" ? "#2E3440" : "#f8fafc";
   ctx.fillRect(0, 0, width, height);
 
-  if (visualizationType === "sorting" || visualizationType === "array") {
-    const { array, highlightedIndices } = step;
-    const barWidth = width / array.length;
-    const maxValue = Math.max(...array);
-    const scale = height / maxValue;
+  switch (visualizationType) {
+    case "sorting":
+    case "array":
+      const maxValue = Math.max(...step.array);
+      const barWidth = width / step.array.length;
 
-    // Draw bars
-    array.forEach((value: number, index: number) => {
-      const barHeight = value * scale;
-      const x = index * barWidth;
-      const y = height - barHeight;
+      step.array.forEach((value, index) => {
+        const isActive = step.highlightedIndices.includes(index);
+        const isSorted = step.sortedIndices?.includes(index) ?? false;
+        const isComparing = step.comparingIndices?.includes(index) ?? false;
 
-      // Set colors based on theme and highlight state
-      if (highlightedIndices.includes(index)) {
-        ctx.fillStyle = theme === "nord" ? "#A3BE8C" : "#3b82f6"; // Highlight color
-      } else {
-        ctx.fillStyle = theme === "nord" ? "#5E81AC" : "#94a3b8"; // Default color
-      }
+        // Use Bar component's color logic
+        let barColor;
+        if (isSorted) {
+          barColor = "#10B981"; // green
+        } else if (isComparing) {
+          barColor = "#F59E0B"; // yellow
+        } else if (isActive) {
+          barColor = theme === "nord" ? "#88C0D0" : "#3B82F6"; // nord blue or regular blue
+        } else {
+          barColor = theme === "nord" ? "#4C566A" : "#94A3B8"; // nord gray or regular gray
+        }
 
-      ctx.fillRect(x, y, barWidth - 1, barHeight);
+        const barHeight = (value / maxValue) * height;
+        const x = index * barWidth;
+        const y = height - barHeight;
 
-      // Draw value on top of bar if there's enough space
-      if (barHeight > 20) {
-        ctx.fillStyle = theme === "nord" ? "#ECEFF4" : "#1e293b";
+        // Draw bar
+        ctx.fillStyle = barColor;
+        ctx.fillRect(x, y, barWidth - 1, barHeight);
+
+        // Draw value text
+        ctx.fillStyle = theme === "nord" ? "#ECEFF4" : "#1E293B";
         ctx.font = "12px sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText(value.toString(), x + barWidth / 2, y + 15);
-      }
-    });
-
-    // Draw description
-    ctx.fillStyle = theme === "nord" ? "#ECEFF4" : "#1e293b";
-    ctx.font = "14px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(step.description, width / 2, 20);
-  } else {
-    // Placeholder for other visualization types
-    ctx.fillStyle = theme === "nord" ? "#ECEFF4" : "#1e293b";
-    ctx.font = "16px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(`${visualizationType} visualization coming soon`, width / 2, height / 2);
+        ctx.fillText(value.toString(), x + barWidth / 2, height + 15);
+      });
+      break;
+    case "graph":
+      // TODO: Implement graph visualization
+      break;
+    case "tree":
+      // TODO: Implement tree visualization
+      break;
   }
-};
+}
+
+const Bar = memo(
+  ({
+    value,
+    maxValue,
+    isActive,
+    isSorted,
+    isComparing,
+  }: {
+    value: number;
+    maxValue: number;
+    isActive: boolean;
+    isSorted: boolean;
+    isComparing: boolean;
+  }) => {
+    const height = (value / maxValue) * 100;
+    const { theme } = useTheme();
+
+    const barClasses = useMemo(
+      () =>
+        cn(
+          "w-full transition-all duration-200 ease-in-out",
+          isSorted && (theme === "nord" ? "bg-nord-14" : "bg-green-500"), // green
+          isComparing && (theme === "nord" ? "bg-nord-13" : "bg-yellow-500"), // yellow
+          isActive && (theme === "nord" ? "bg-nord-10" : "bg-blue-500"), // blue
+          !isActive &&
+            !isSorted &&
+            !isComparing &&
+            (theme === "nord" ? "bg-nord-3" : "bg-slate-300") // default
+        ),
+      [isActive, isSorted, isComparing, theme]
+    );
+
+    return (
+      <div className="flex flex-col items-center gap-1">
+        <div
+          className={barClasses}
+          style={{
+            height: `${height}%`,
+            minHeight: "4px",
+          }}
+        />
+        <span className={cn("text-xs", theme === "nord" ? "text-nord-4" : "text-slate-600")}>
+          {value}
+        </span>
+      </div>
+    );
+  }
+);
+
+const MetricsDisplay = memo(({ metrics }: { metrics: PerformanceMetrics }) => {
+  return (
+    <div className="flex justify-between text-sm text-muted-foreground mt-2">
+      <span>Comparisons: {metrics.comparisons}</span>
+      <span>Swaps: {metrics.swaps}</span>
+      <span>Time: {metrics.time.toFixed(1)}ms</span>
+    </div>
+  );
+});
+
+function generateVisualizationSteps(data: number[]): VisualizationStep[] {
+  const steps: VisualizationStep[] = [];
+  const n = data.length;
+  const arr = [...data];
+  let comparisons = 0;
+  let swaps = 0;
+  const startTime = performance.now();
+
+  // Initial state
+  steps.push({
+    array: [...arr],
+    highlightedIndices: [],
+    sortedIndices: [],
+    comparingIndices: [],
+    metrics: { comparisons, swaps, time: 0 },
+    description: "Initial array",
+  });
+
+  // Bubble sort implementation for demonstration
+  for (let i = 0; i < n - 1; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      comparisons++;
+      steps.push({
+        array: [...arr],
+        highlightedIndices: [j, j + 1],
+        sortedIndices: Array.from({ length: n - i }, (_, k) => n - k - 1),
+        comparingIndices: [j, j + 1],
+        metrics: { comparisons, swaps, time: performance.now() - startTime },
+        description: `Comparing ${arr[j]} and ${arr[j + 1]}`,
+      });
+
+      if (arr[j] > arr[j + 1]) {
+        swaps++;
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        steps.push({
+          array: [...arr],
+          highlightedIndices: [j, j + 1],
+          sortedIndices: Array.from({ length: n - i }, (_, k) => n - k - 1),
+          comparingIndices: [],
+          metrics: { comparisons, swaps, time: performance.now() - startTime },
+          description: `Swapped ${arr[j]} and ${arr[j + 1]}`,
+        });
+      }
+    }
+  }
+
+  // Final state
+  steps.push({
+    array: [...arr],
+    highlightedIndices: [],
+    sortedIndices: Array.from({ length: n }, (_, i) => i),
+    comparingIndices: [],
+    metrics: { comparisons, swaps, time: performance.now() - startTime },
+    description: "Array sorted",
+  });
+
+  return steps;
+}
 
 export function AlgorithmVisualizer({
   algorithm,
-  data = [5, 2, 8, 1, 9, 3, 7, 4, 6],
+  data,
   visualizationType,
-  onMetricsUpdate,
   isRacing = false,
   onComplete,
+  onMetricsUpdate,
 }: AlgorithmVisualizerProps) {
-  const { theme } = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -229,34 +226,70 @@ export function AlgorithmVisualizer({
   const containerRef = useRef<HTMLDivElement>(null);
   const startTimeRef = useRef<number>(0);
   const lastUpdateTimeRef = useRef<number>(0);
+  const [metrics, setMetrics] = useState<PerformanceMetrics>({ comparisons: 0, swaps: 0, time: 0 });
+  const [currentState, setCurrentState] = useState<number[]>(data);
+  const [activeIndices, setActiveIndices] = useState<number[]>([]);
+  const [sortedIndices, setSortedIndices] = useState<number[]>([]);
+  const [comparingIndices, setComparingIndices] = useState<number[]>([]);
+  const animationFrameRef = useRef<number>();
+  const { theme } = useTheme();
 
-  // Initialize canvas
+  // Memoize maxValue calculation
+  const maxValue = useMemo(() => Math.max(...currentState), [currentState]);
+
+  // Memoize steps generation
+  const generatedSteps = useMemo(() => generateVisualizationSteps(data), [data]);
+
+  // Update steps when data changes
   useEffect(() => {
-    if (!canvasRef.current || !containerRef.current) return;
-
-    const ctx = canvasRef.current.getContext("2d");
-    if (!ctx) return;
-
-    const containerWidth = containerRef.current.clientWidth;
-    const containerHeight = containerRef.current.clientHeight;
-
-    canvasRef.current.width = containerWidth;
-    canvasRef.current.height = containerHeight;
-
-    // Set initial background
-    ctx.fillStyle = theme === "nord" ? "#2E3440" : "#f8fafc";
-    ctx.fillRect(0, 0, containerWidth, containerHeight);
-  }, [theme]);
-
-  // Generate visualization steps based on algorithm
-  useEffect(() => {
-    const newSteps = generateVisualizationSteps(algorithm, data);
-    setSteps(newSteps);
+    setSteps(generatedSteps);
     setCurrentStep(0);
     setIsPlaying(false);
     startTimeRef.current = 0;
     lastUpdateTimeRef.current = 0;
-  }, [algorithm, data]);
+  }, [generatedSteps]);
+
+  // Batch state updates
+  useEffect(() => {
+    if (steps[currentStep]) {
+      const step = steps[currentStep];
+      requestAnimationFrame(() => {
+        setCurrentState(step.array);
+        setActiveIndices(step.highlightedIndices);
+        setSortedIndices(step.sortedIndices || []);
+        setComparingIndices(step.comparingIndices || []);
+        setMetrics(step.metrics);
+      });
+    }
+  }, [currentStep, steps]);
+
+  // Optimize canvas rendering
+  const renderCanvas = useCallback(() => {
+    if (!canvasRef.current || !steps[currentStep]) return;
+
+    const ctx = canvasRef.current.getContext("2d");
+    if (!ctx) return;
+
+    requestAnimationFrame(() => {
+      renderStep(ctx, steps[currentStep], visualizationType, theme);
+    });
+  }, [currentStep, steps, visualizationType, theme]);
+
+  // Use ResizeObserver for canvas resizing
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (canvasRef.current && containerRef.current) {
+        canvasRef.current.width = containerRef.current.clientWidth;
+        canvasRef.current.height = containerRef.current.clientHeight;
+        renderCanvas();
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, [renderCanvas]);
 
   // Handle race mode
   useEffect(() => {
@@ -310,47 +343,94 @@ export function AlgorithmVisualizer({
     return () => clearInterval(interval);
   }, [isPlaying, currentStep, steps, speed, onComplete, onMetricsUpdate]);
 
-  // Handle canvas resize
+  const handlePlayPause = useCallback(() => {
+    setIsPlaying((prev) => !prev);
+  }, []);
+
+  const handleReset = useCallback(() => {
+    setCurrentStep(0);
+    setIsPlaying(false);
+    setCurrentState(data);
+    setActiveIndices([]);
+    setSortedIndices([]);
+    setComparingIndices([]);
+    setMetrics({ comparisons: 0, swaps: 0, time: 0 });
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+  }, [data]);
+
+  const updateVisualization = useCallback(
+    (step: number) => {
+      if (step >= steps.length) {
+        setIsPlaying(false);
+        if (onComplete) {
+          onComplete(metrics);
+        }
+        return;
+      }
+
+      const currentStepData = steps[step];
+      setCurrentState(currentStepData.array);
+      setActiveIndices(currentStepData.highlightedIndices || []);
+      setSortedIndices(currentStepData.sortedIndices || []);
+      setComparingIndices(currentStepData.comparingIndices || []);
+      setMetrics(currentStepData.metrics);
+      if (onMetricsUpdate) {
+        onMetricsUpdate(currentStepData.metrics);
+      }
+
+      setCurrentStep(step + 1);
+    },
+    [steps, metrics, onComplete, onMetricsUpdate]
+  );
+
   useEffect(() => {
-    const updateCanvasSize = () => {
-      if (!canvasRef.current || !containerRef.current) return;
+    if (isRacing) {
+      setIsPlaying(true);
+      startTimeRef.current = performance.now();
+    }
+  }, [isRacing]);
 
-      const containerWidth = containerRef.current.clientWidth;
-      const containerHeight = containerRef.current.clientHeight;
+  useEffect(() => {
+    if (isPlaying) {
+      const animate = () => {
+        if (startTimeRef.current) {
+          const elapsed = performance.now() - startTimeRef.current;
+          const step = Math.floor(elapsed / 100); // Adjust speed here
+          if (step < steps.length) {
+            updateVisualization(step);
+          } else {
+            setIsPlaying(false);
+            if (onComplete) {
+              onComplete(metrics);
+            }
+            return;
+          }
+        }
+        animationFrameRef.current = requestAnimationFrame(animate);
+      };
+      animationFrameRef.current = requestAnimationFrame(animate);
+    }
 
-      // Set canvas size to container size
-      canvasRef.current.width = containerWidth;
-      canvasRef.current.height = containerHeight;
-
-      // Re-render current step
-      const ctx = canvasRef.current.getContext("2d");
-      if (ctx && steps.length > 0) {
-        renderStep(ctx, steps[currentStep], visualizationType, theme);
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
       }
     };
+  }, [isPlaying, steps, updateVisualization, metrics, onComplete]);
 
-    updateCanvasSize();
-    window.addEventListener("resize", updateCanvasSize);
-    return () => window.removeEventListener("resize", updateCanvasSize);
-  }, [currentStep, steps, visualizationType, theme]);
-
-  // Render current step
-  useEffect(() => {
-    if (!canvasRef.current || steps.length === 0) return;
-
-    const ctx = canvasRef.current.getContext("2d");
-    if (!ctx) return;
-
-    renderStep(ctx, steps[currentStep], visualizationType, theme);
-  }, [currentStep, steps, visualizationType, theme]);
+  const containerClasses = useMemo(
+    () =>
+      cn(
+        "p-4 rounded-lg border",
+        theme === "nord" ? "bg-nord-1 border-nord-4" : "bg-card border-border"
+      ),
+    [theme]
+  );
 
   return (
-    <Card
-      className={cn(
-        "p-4 transition-colors duration-200",
-        theme === "nord" ? "bg-nord-0 border-nord-3" : "bg-slate-50 border-slate-200"
-      )}
-    >
+    <Card className={containerClasses}>
       <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <h3
@@ -365,10 +445,7 @@ export function AlgorithmVisualizer({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => {
-                setCurrentStep(0);
-                setIsPlaying(false);
-              }}
+              onClick={handleReset}
               disabled={currentStep === 0}
               className={cn(
                 "transition-colors duration-200",
@@ -391,6 +468,18 @@ export function AlgorithmVisualizer({
               theme === "nord" ? "border-nord-3" : "border-slate-200"
             )}
           />
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(20px,1fr))] gap-1 h-full">
+            {currentState.map((value, index) => (
+              <Bar
+                key={index}
+                value={value}
+                maxValue={maxValue}
+                isActive={activeIndices.includes(index)}
+                isSorted={sortedIndices.includes(index)}
+                isComparing={comparingIndices.includes(index)}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -398,7 +487,7 @@ export function AlgorithmVisualizer({
             <Button
               variant="outline"
               size="icon"
-              onClick={() => setCurrentStep(0)}
+              onClick={handleReset}
               disabled={currentStep === 0}
               className={cn(
                 "transition-colors duration-200",
@@ -426,7 +515,7 @@ export function AlgorithmVisualizer({
             <Button
               variant="outline"
               size="icon"
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={handlePlayPause}
               className={cn(
                 "transition-colors duration-200",
                 theme === "nord"
@@ -517,6 +606,8 @@ export function AlgorithmVisualizer({
             </div>
           )}
         </div>
+
+        <MetricsDisplay metrics={metrics} />
       </div>
     </Card>
   );

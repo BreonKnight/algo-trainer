@@ -1,6 +1,6 @@
-import Editor, { Monaco } from "@monaco-editor/react";
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import * as monaco from "monaco-editor";
+import { lazy, Suspense } from "react";
 import { useRef, useEffect, useState, useMemo } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
@@ -19,6 +19,11 @@ import {
   forniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
+
+// Lazy load Monaco editor
+const Editor = lazy(() => import("@monaco-editor/react"));
+
+type Monaco = typeof monaco;
 
 interface CodeEditorProps {
   userCode: string;
@@ -353,33 +358,41 @@ export function CodeEditor({
             minHeight: isDesktop ? "0" : "300px",
           }}
         >
-          <Editor
-            height={editorHeight}
-            defaultLanguage="python"
-            theme={getMonacoTheme()}
-            value={userCode}
-            onChange={(value: string | undefined) => setUserCode(value || "")}
-            onMount={handleEditorDidMount}
-            options={{
-              fontSize,
-              minimap: { enabled: false },
-              scrollBeyondLastLine: false,
-              lineNumbers: "on",
-              roundedSelection: false,
-              padding: { top: 8, bottom: 8 },
-              cursorStyle: "line",
-              automaticLayout: true,
-              wordWrap: "on",
-              tabSize: 4,
-              insertSpaces: true,
-              overviewRulerBorder: false,
-              hideCursorInOverviewRuler: true,
-              renderLineHighlight: "line",
-              lineDecorationsWidth: 0,
-              renderLineHighlightOnlyWhenFocus: true,
-              fixedOverflowWidgets: true,
-            }}
-          />
+          <Suspense
+            fallback={
+              <div className="h-full w-full flex items-center justify-center">
+                Loading editor...
+              </div>
+            }
+          >
+            <Editor
+              height={editorHeight}
+              defaultLanguage="python"
+              theme={getMonacoTheme()}
+              value={userCode}
+              onChange={(value: string | undefined) => setUserCode(value || "")}
+              onMount={handleEditorDidMount}
+              options={{
+                fontSize,
+                minimap: { enabled: false },
+                scrollBeyondLastLine: false,
+                lineNumbers: "on",
+                roundedSelection: false,
+                padding: { top: 8, bottom: 8 },
+                cursorStyle: "line",
+                automaticLayout: true,
+                wordWrap: "on",
+                tabSize: 4,
+                insertSpaces: true,
+                overviewRulerBorder: false,
+                hideCursorInOverviewRuler: true,
+                renderLineHighlight: "line",
+                lineDecorationsWidth: 0,
+                renderLineHighlightOnlyWhenFocus: true,
+                fixedOverflowWidgets: true,
+              }}
+            />
+          </Suspense>
         </div>
         {/* Vertical resize handle */}
         <div
