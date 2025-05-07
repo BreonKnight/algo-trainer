@@ -1,9 +1,10 @@
+import { BarChart, Book, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "./button";
-import { BarChart, Book, Menu, X } from "lucide-react";
+
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+import { Button } from "@/src/components/ui/button";
 
 export function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);

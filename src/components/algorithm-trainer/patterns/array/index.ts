@@ -1,19 +1,19 @@
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
-import { matrixSpiralRecursivePattern } from "../matrix/matrix-spiral-recursive";
-import { matrixSpiralTraversalPattern } from "../matrix/matrix-spiral-traversal";
-import { matrixTraversalRecursivePattern } from "../matrix/matrix-traversal-recursive";
-import { matrixTraversalPattern } from "../matrix/matrix-traversal";
-import { kadanesAlgorithmPattern } from "./kadanes-algorithm";
-import { prefixSumsPattern } from "./prefix-sums";
-import { twoPointersPattern } from "./two-pointers";
-import { bitManipulationPattern } from "./bit-manipulation";
-import { slidingWindowPattern } from "./sliding-window";
-import { twoSumTwoPointersPattern } from "./two-sum-two-pointers";
-import { twoSumPattern } from "./two-sum";
-import { twoSumDictPattern } from "./two-sum-dict";
-import { matrixOperationsPattern } from "../matrix/matrix-operations";
-import { matrixExponentiationPattern } from "../matrix/matrix-exponentiation";
-import { gridTraversalPattern } from "../matrix/grid-traversal";
+import { bitManipulationPattern } from "@/src/components/algorithm-trainer/patterns/array/bit-manipulation";
+import { kadanesAlgorithmPattern } from "@/src/components/algorithm-trainer/patterns/array/kadanes-algorithm";
+import { prefixSumsPattern } from "@/src/components/algorithm-trainer/patterns/array/prefix-sums";
+import { slidingWindowPattern } from "@/src/components/algorithm-trainer/patterns/array/sliding-window";
+import { twoPointersPattern } from "@/src/components/algorithm-trainer/patterns/array/two-pointers";
+import { twoSumPattern } from "@/src/components/algorithm-trainer/patterns/array/two-sum";
+import { twoSumDictPattern } from "@/src/components/algorithm-trainer/patterns/array/two-sum-dict";
+import { twoSumTwoPointersPattern } from "@/src/components/algorithm-trainer/patterns/array/two-sum-two-pointers";
+import { gridTraversalPattern } from "@/src/components/algorithm-trainer/patterns/matrix/grid-traversal";
+import { matrixExponentiationPattern } from "@/src/components/algorithm-trainer/patterns/matrix/matrix-exponentiation";
+import { matrixOperationsPattern } from "@/src/components/algorithm-trainer/patterns/matrix/matrix-operations";
+import { matrixSpiralRecursivePattern } from "@/src/components/algorithm-trainer/patterns/matrix/matrix-spiral-recursive";
+import { matrixSpiralTraversalPattern } from "@/src/components/algorithm-trainer/patterns/matrix/matrix-spiral-traversal";
+import { matrixTraversalPattern } from "@/src/components/algorithm-trainer/patterns/matrix/matrix-traversal";
+import { matrixTraversalRecursivePattern } from "@/src/components/algorithm-trainer/patterns/matrix/matrix-traversal-recursive";
 
 type ArrayPatternKey =
   | "Matrix Spiral Recursive"

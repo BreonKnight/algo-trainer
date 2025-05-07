@@ -1,7 +1,11 @@
-import { Card } from "@/components/ui/card";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import * as monaco from "monaco-editor";
+import { useRef, useEffect, useState, useMemo } from "react";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   draculaTheme,
   solarizedTheme,
@@ -14,10 +18,7 @@ import {
   kingdomHeartsTheme,
   forniteTheme,
 } from "@/lib/theme";
-import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
-import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CodeEditorProps {
   userCode: string;

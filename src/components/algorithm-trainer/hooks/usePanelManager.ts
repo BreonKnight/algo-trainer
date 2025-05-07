@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { arrayMove } from "@dnd-kit/sortable";
 import { DragEndEvent } from "@dnd-kit/core";
+import { arrayMove } from "@dnd-kit/sortable";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 const VALID_PANEL_ORDERS = [

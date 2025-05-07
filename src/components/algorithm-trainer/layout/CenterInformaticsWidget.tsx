@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { Lightbulb, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Lightbulb, Info, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+
 import { cn } from "@/lib/utils";
 
 const TIPS = [

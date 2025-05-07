@@ -1,5 +1,5 @@
-import { Pattern, PatternCategory } from "../types/pattern-management";
-import { algorithmPatterns } from "../../components/algorithm-trainer/patterns";
+import { algorithmPatterns } from "@/components/algorithm-trainer/patterns";
+import { Pattern, PatternCategory } from "@/lib/types/pattern-management";
 
 // In a real application, these would be API calls to your backend
 export const patternManagementService = {

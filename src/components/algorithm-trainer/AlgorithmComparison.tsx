@@ -1,22 +1,3 @@
-import { useState } from "react";
-import { AlgorithmVisualizer } from "./AlgorithmVisualizer";
-import { PatternKey } from "./types";
-import { Card } from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Slider } from "../ui/slider";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectGroup,
-  SelectLabel,
-} from "../ui/select";
-import { useTheme } from "@/components/theme/use-theme";
-import { cn } from "@/lib/utils";
 import {
   Play,
   Pause,
@@ -27,10 +8,30 @@ import {
   Info,
   ChevronRight,
 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { Separator } from "../ui/separator";
-import { sortingPatterns } from "./patterns/sorting";
-import { NavigationBar } from "./layout/NavigationBar";
+import { useState } from "react";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectGroup,
+  SelectLabel,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { AlgorithmVisualizer } from "@/src/components/algorithm-trainer/AlgorithmVisualizer";
+import { NavigationBar } from "@/src/components/algorithm-trainer/layout/NavigationBar";
+import { sortingPatterns } from "@/src/components/algorithm-trainer/patterns/sorting";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 interface AlgorithmComparisonProps {
   algorithms?: PatternKey[];

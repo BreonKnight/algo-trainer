@@ -1,20 +1,21 @@
 import { createPatternRecord } from "@/lib/patterns/pattern-utils";
+import { monsterHunterExplanations } from "@/src/components/algorithm-trainer/monsterHunterExplanations";
+import { arrayPatterns } from "@/src/components/algorithm-trainer/patterns/array/index";
+import { backtrackingPatterns } from "@/src/components/algorithm-trainer/patterns/backtracking/index";
+import { dataStructurePatterns } from "@/src/components/algorithm-trainer/patterns/data-structures/index";
+import { divideAndConquerPatterns } from "@/src/components/algorithm-trainer/patterns/divide-and-conquer/index";
+import { dynamicProgrammingPatterns } from "@/src/components/algorithm-trainer/patterns/dynamic-programming";
+import { graphPatterns } from "@/src/components/algorithm-trainer/patterns/graph";
+import { greedyPatterns } from "@/src/components/algorithm-trainer/patterns/greedy";
+import { matrixPatterns } from "@/src/components/algorithm-trainer/patterns/matrix";
+import { numberTheoryPatterns } from "@/src/components/algorithm-trainer/patterns/number-theory";
+import { recursionPatterns } from "@/src/components/algorithm-trainer/patterns/recursion";
+import { searchingPatterns } from "@/src/components/algorithm-trainer/patterns/searching";
+import { sortingPatterns } from "@/src/components/algorithm-trainer/patterns/sorting";
+import { stringPatterns } from "@/src/components/algorithm-trainer/patterns/string";
+import { treePatterns } from "@/src/components/algorithm-trainer/patterns/tree";
 
 // Import all pattern categories
-import { arrayPatterns } from "./array/index";
-import { backtrackingPatterns } from "./backtracking/index";
-import { dataStructurePatterns } from "./data-structures/index";
-import { divideAndConquerPatterns } from "./divide-and-conquer/index";
-import { dynamicProgrammingPatterns } from "./dynamic-programming";
-import { greedyPatterns } from "./greedy";
-import { treePatterns } from "./tree";
-import { stringPatterns } from "./string";
-import { searchingPatterns } from "./searching";
-import { sortingPatterns } from "./sorting";
-import { numberTheoryPatterns } from "./number-theory";
-import { matrixPatterns } from "./matrix";
-import { graphPatterns } from "./graph";
-import { recursionPatterns } from "./recursion";
 
 // Patterns to be implemented later
 export const patternsToImplement = [
@@ -110,10 +111,9 @@ export const patterns = createPatternRecord({
 // Alias for backward compatibility
 export const algorithmPatterns = patterns;
 
-export * from "./data-structures/union-find";
+export * from "@/src/components/algorithm-trainer/patterns/data-structures/union-find";
 
 // DEBUG: List patterns missing Monster Hunter guides
-import { monsterHunterExplanations } from "../monsterHunterExplanations";
 
 export function logPatternsMissingMonsterHunterGuides() {
   const allPatternKeys = Object.keys(patterns);

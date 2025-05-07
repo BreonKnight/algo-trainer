@@ -1,15 +1,16 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { loadPyodide, PyodideInterface } from "pyodide";
-import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { useTheme } from "@/components/theme/use-theme";
-import GamificationService from "../../lib/gamification";
-import { cn } from "@/lib/utils";
-import { PythonCodeHandler } from "@/lib/python/codeHandler";
 import { Code } from "lucide-react";
+import { loadPyodide, PyodideInterface } from "pyodide";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { toast } from "sonner";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import GamificationService from "@/lib/gamification";
+import { PythonCodeHandler } from "@/lib/python/codeHandler";
+import { cn } from "@/lib/utils";
 
 interface ReplCardProps {
   userCode: string;
@@ -177,12 +178,8 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
     const startTime = performance.now();
 
     try {
-      console.log("[DEBUG] Running code:", userCode);
-
       // Validate code before execution
       const validation = PythonCodeHandler.validateCode(userCode);
-      console.log("[DEBUG] Code validation result:", validation);
-
       if (!validation.isValid && validation.error) {
         setError(validation.error);
         toast.error(validation.error, {
@@ -193,14 +190,11 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
 
       // Wrap and execute code
       const wrappedCode = PythonCodeHandler.wrapCodeForExecution(userCode);
-      console.log("[DEBUG] Wrapped code:", wrappedCode);
-
       await pyodide.runPythonAsync(wrappedCode);
 
       // Calculate execution time
       const endTime = performance.now();
       const executionTime = endTime - startTime;
-      console.log("[DEBUG] Execution time:", executionTime, "ms");
 
       // Record code execution
       const gamificationService = GamificationService.getInstance();
@@ -212,7 +206,6 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
 
       triggerConfetti();
     } catch (error) {
-      console.error("[DEBUG] Error during execution:", error);
       const errorMessage = PythonCodeHandler.handlePythonError(
         error instanceof Error ? error : String(error)
       );

@@ -1,4 +1,4 @@
-import { PseudocodeDisplay } from "../PseudocodeDisplay";
+import { PseudocodeDisplay } from "@/src/lib/pseudocode/PseudocodeDisplay";
 
 export const NullPattern = () => (
   <div>

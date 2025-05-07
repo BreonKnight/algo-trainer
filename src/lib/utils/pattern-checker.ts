@@ -1,4 +1,4 @@
-import { PatternKey } from "../../components/algorithm-trainer/types";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
 
 export interface PatternCheckResult {
   missingPatterns: {

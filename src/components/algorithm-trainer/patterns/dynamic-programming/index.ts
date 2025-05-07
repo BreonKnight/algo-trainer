@@ -1,14 +1,14 @@
-import { AlgorithmPattern } from "../../types/pattern-types.ts";
-import { digitDPPattern } from "./digit-dp.ts";
-import { dynamicProgrammingCoinChangePattern } from "./dynamic-programming-coin-change.ts";
-import { dynamicProgrammingIterativePattern } from "./dynamic-programming-iterative.ts";
-import { dynamicProgrammingPattern } from "./dynamic-programming.ts";
-import { dynamicProgrammingPattern as dpPattern } from "./dynamic-programming.ts";
-import { probabilityDPPattern } from "./probability-dp.ts";
-import { stateCompressionDPPattern } from "./state-compression-dp.ts";
-import { treeDPPattern } from "./tree-dp.ts";
-import { memoizationPattern } from "./memoization.ts";
-import { bitwiseDPPattern } from "./bitwise-dp.ts";
+import { bitwiseDPPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/bitwise-dp";
+import { digitDPPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/digit-dp";
+import { dynamicProgrammingPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/dynamic-programming";
+import { dynamicProgrammingPattern as dpPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/dynamic-programming";
+import { dynamicProgrammingCoinChangePattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/dynamic-programming-coin-change";
+import { dynamicProgrammingIterativePattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/dynamic-programming-iterative";
+import { memoizationPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/memoization";
+import { probabilityDPPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/probability-dp";
+import { stateCompressionDPPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/state-compression-dp";
+import { treeDPPattern } from "@/src/components/algorithm-trainer/patterns/dynamic-programming/tree-dp";
+import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
 
 type DynamicProgrammingPatternKey =
   | "Digit DP"

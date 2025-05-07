@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { additionalConcepts } from "./concepts";
+import React, { useState } from "react";
 import {
   FaScroll,
   FaBook,
@@ -11,7 +10,9 @@ import {
   FaChevronUp,
   FaSearch,
 } from "react-icons/fa";
-import { useTheme } from "../theme/use-theme";
+
+import { additionalConcepts } from "@/components/CSMath/concepts";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
 export interface Concept {

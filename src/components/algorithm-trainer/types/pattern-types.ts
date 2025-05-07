@@ -1,10 +1,10 @@
-import { PatternKey as BasePatternKey } from "../../../lib/patterns/types";
+import { PatternKey as BasePatternKey } from "@/src/lib/patterns/types";
 
 // Re-export the base PatternKey type
 export type PatternKey = BasePatternKey;
 
 // Re-export the PATTERN_KEYS array
-export { PATTERN_KEYS } from "../../../lib/patterns/types";
+export { PATTERN_KEYS } from "@/src/lib/patterns/types";
 
 export interface AlgorithmPattern {
   title: string;

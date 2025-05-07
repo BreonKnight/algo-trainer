@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react";
-import { PseudocodeDisplay } from "../PseudocodeDisplay";
+
+import { PseudocodeDisplay } from "@/src/lib/pseudocode/PseudocodeDisplay";
 
 export const DijkstraPattern = () => (
   <div className="space-y-4">

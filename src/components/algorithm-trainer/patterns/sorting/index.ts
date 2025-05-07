@@ -1,16 +1,16 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
-import { PatternCategory } from "../../../../lib/patterns/types";
-import { insertionSortPattern } from "./insertion-sort";
-import { selectionSortPattern } from "./selection-sort";
-import { bubbleSortPattern } from "./bubble-sort";
-import { heapSortPattern } from "./heap-sort";
-import { stackSortPattern } from "./stack-sort";
-import { mergeSortPattern } from "./merge-sort";
-import { quickSortPattern } from "./quick-sort";
-import { radixSortPattern } from "./radix-sort";
-import { bucketSortPattern } from "./bucket-sort";
-import { countingSortPattern } from "./counting-sort";
-import { shellSortPattern } from "./shell-sort";
+import { bubbleSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/bubble-sort";
+import { bucketSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/bucket-sort";
+import { countingSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/counting-sort";
+import { heapSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/heap-sort";
+import { insertionSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/insertion-sort";
+import { mergeSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/merge-sort";
+import { quickSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/quick-sort";
+import { radixSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/radix-sort";
+import { selectionSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/selection-sort";
+import { shellSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/shell-sort";
+import { stackSortPattern } from "@/src/components/algorithm-trainer/patterns/sorting/stack-sort";
+import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { PatternCategory } from "@/src/lib/patterns/types";
 
 type SortingPatternKey =
   | "Quick Sort"

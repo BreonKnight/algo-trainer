@@ -1,27 +1,29 @@
-import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
-import { ProgressView } from "./components/progress/ProgressView";
-import { AlgorithmTutorial } from "./components/tutorials/AlgorithmTutorial";
-import { PythonTechniques } from "./components/algorithm-trainer/PythonTechniques";
-//import { AlgorithmVisualizer } from "./components/algorithm-trainer/AlgorithmVisualizer";
-import { AlgorithmComparison } from "./components/algorithm-trainer/AlgorithmComparison";
-import CSMath from "./components/CSMath/CSMath";
-import PatternManagement from "./components/admin/PatternManagement";
-import { Navigation } from "./components/ui/navigation";
-import { TopBar } from "./components/algorithm-trainer/layout/TopBar";
-import HomePage from "./app/HomePage";
-import SystemsDesign from "./components/SystemsDesign/SystemsDesign";
-import { useTheme } from "./components/theme/use-theme";
-import { ThemeProvider } from "./components/ThemeProvider";
-import { Toaster } from "sonner";
-import { useState, useEffect } from "react";
 import "./App.css";
-import { checkPatternFiles, logPatternCheckResults } from "./lib/utils/pattern-checker";
-import type { Tutorial } from "./components/tutorials/AlgorithmTutorial";
-import type { PatternKey } from "./components/tutorials/types";
-import tutorialsData from "./data/tutorials.json";
-import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
-import AlgoGuide from "./components/algorithm-practice/AlgoGuide";
-import Practice from "./components/practice/Practice";
+import { useState, useEffect, Suspense, lazy } from "react";
+import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
+import { Toaster } from "sonner";
+
+import HomePage from "@/app/HomePage";
+import PatternManagement from "@/components/admin/PatternManagement";
+import { AlgorithmComparison } from "@/components/algorithm-trainer/AlgorithmComparison";
+import { TopBar } from "@/components/algorithm-trainer/layout/TopBar";
+import { PythonTechniques } from "@/components/algorithm-trainer/PythonTechniques";
+import CSMath from "@/components/CSMath/CSMath";
+import Practice from "@/components/practice/Practice";
+import { ProgressView } from "@/components/progress/ProgressView";
+import SystemsDesign from "@/components/SystemsDesign/SystemsDesign";
+import { useTheme } from "@/components/theme/use-theme";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { AlgorithmTutorial } from "@/components/tutorials/AlgorithmTutorial";
+import type { Tutorial } from "@/components/tutorials/AlgorithmTutorial";
+import type { PatternKey } from "@/components/tutorials/types";
+import { Navigation } from "@/components/ui/navigation";
+import tutorialsData from "@/data/tutorials.json";
+import { checkPatternFiles, logPatternCheckResults } from "@/lib/utils/pattern-checker";
+
+// Lazy load components
+const AlgorithmTrainer = lazy(() => import("./components/algorithm-trainer/AlgorithmTrainer"));
+const AlgoGuide = lazy(() => import("./components/algorithm-practice/AlgoGuide"));
 
 // Log the imported data structure
 // console.log("Imported tutorials data:", tutorialsData);
@@ -199,10 +201,49 @@ function AppContent() {
             <Route path="/tutorials" element={<TutorialList />} />
             <Route path="/tutorials/:algorithm" element={<TutorialRoute />} />
             <Route path="/python-techniques" element={<PythonTechniques />} />
-            <Route path="/practice" element={<Practice />} />
+            <Route
+              path="/practice"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="flex items-center justify-center h-screen">
+                      Loading practice environment...
+                    </div>
+                  }
+                >
+                  <Practice />
+                </Suspense>
+              }
+            />
             <Route path="/systems-design" element={<SystemsDesign />} />
-            <Route path="/algorithm-trainer" element={<AlgorithmTrainer />} />
-            <Route path="/algo-guide" element={<AlgoGuide />} />
+            <Route
+              path="/algorithm-trainer"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="flex items-center justify-center h-screen">
+                      Loading algorithm trainer...
+                    </div>
+                  }
+                >
+                  <AlgorithmTrainer />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/algo-guide"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="flex items-center justify-center h-screen">
+                      Loading algorithm guide...
+                    </div>
+                  }
+                >
+                  <AlgoGuide />
+                </Suspense>
+              }
+            />
             <Route path="/algorithm-comparison" element={<AlgorithmComparison />} />
             <Route path="/cs-math" element={<CSMath />} />
             {import.meta.env.DEV && (

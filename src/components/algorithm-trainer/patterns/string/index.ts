@@ -1,12 +1,12 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
-import { createPatternRecord } from "../../../../lib/patterns/pattern-utils";
-import { manachersAlgorithmPattern } from "./manachers-algorithm";
-import { knuthMorrisPrattPattern } from "./knuth-morris-pratt";
-import { rabinKarpPattern } from "./rabin-karp";
-import { stringOperationsPattern } from "./string-operations";
-import { zAlgorithmPattern } from "./z-algorithm";
-import { suffixArrayPattern } from "./suffix-array";
-import { suffixTreePattern } from "./suffix-tree";
+import { knuthMorrisPrattPattern } from "@/src/components/algorithm-trainer/patterns/string/knuth-morris-pratt";
+import { manachersAlgorithmPattern } from "@/src/components/algorithm-trainer/patterns/string/manachers-algorithm";
+import { rabinKarpPattern } from "@/src/components/algorithm-trainer/patterns/string/rabin-karp";
+import { stringOperationsPattern } from "@/src/components/algorithm-trainer/patterns/string/string-operations";
+import { suffixArrayPattern } from "@/src/components/algorithm-trainer/patterns/string/suffix-array";
+import { suffixTreePattern } from "@/src/components/algorithm-trainer/patterns/string/suffix-tree";
+import { zAlgorithmPattern } from "@/src/components/algorithm-trainer/patterns/string/z-algorithm";
+import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
+import { createPatternRecord } from "@/src/lib/patterns/pattern-utils";
 
 export const stringPatterns = createPatternRecord<AlgorithmPattern>({
   "String Operations": stringOperationsPattern,

@@ -1,10 +1,3 @@
-import { AudioPlayer } from "@/components/audio/AudioPlayer";
-import { Timer } from "@/components/timer/Timer";
-import { MediaCard } from "@/components/ui/media-card";
-import { CenterInformaticsWidget } from "@/components/algorithm-trainer/layout/CenterInformaticsWidget";
-import { RightControls } from "@/components/algorithm-trainer/layout/RightControls";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -23,6 +16,14 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
+import { useState } from "react";
+
+import { CenterInformaticsWidget } from "@/components/algorithm-trainer/layout/CenterInformaticsWidget";
+import { RightControls } from "@/components/algorithm-trainer/layout/RightControls";
+import { AudioPlayer } from "@/components/audio/AudioPlayer";
+import { Timer } from "@/components/timer/Timer";
+import { MediaCard } from "@/components/ui/media-card";
+import { cn } from "@/lib/utils";
 
 interface TopBarProps {
   className?: string;

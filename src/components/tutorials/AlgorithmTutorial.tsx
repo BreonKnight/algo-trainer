@@ -1,13 +1,15 @@
+import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
+
+import type { PatternKey } from "@/components/tutorials/types";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
-import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from "lucide-react";
-import type { PatternKey } from "@/components/tutorials/types";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
-import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+
 type Language = "python" | "javascript";
 
 export interface Tutorial {

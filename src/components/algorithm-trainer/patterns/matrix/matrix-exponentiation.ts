@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
 
 export const matrixExponentiationPattern: AlgorithmPattern = {
   title: "Matrix Exponentiation",

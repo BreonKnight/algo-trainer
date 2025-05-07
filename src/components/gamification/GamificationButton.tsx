@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
 import { Trophy, BarChart } from "lucide-react";
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/src/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/src/components/ui/dialog";
 import GamificationService, {
   UserProgress,
   Badge,
   AlgorithmProgress,
-} from "../../lib/gamification";
-import { useTheme } from "@/components/theme/use-theme";
-import { Link } from "react-router-dom";
+} from "@/src/lib/gamification";
 
 const themeStyles = {
   dracula: {

@@ -4,6 +4,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import * as tseslint from "@typescript-eslint/eslint-plugin";
 import * as tseslintParser from "@typescript-eslint/parser";
 import prettier from "eslint-plugin-prettier";
+import importPlugin from "eslint-plugin-import";
 
 export default [
   {
@@ -18,6 +19,7 @@ export default [
         ecmaFeatures: {
           jsx: true,
         },
+        project: "./tsconfig.json",
       },
     },
     plugins: {
@@ -25,6 +27,15 @@ export default [
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
       prettier: prettier,
+      import: importPlugin,
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+          project: "./tsconfig.json",
+        },
+      },
     },
     rules: {
       "prettier/prettier": "error",
@@ -36,6 +47,35 @@ export default [
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["../*"],
+              message: "Use @/ imports instead of relative paths",
+            },
+          ],
+        },
+      ],
+      "import/order": [
+        "error",
+        {
+          groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+          pathGroups: [
+            {
+              pattern: "@/**",
+              group: "internal",
+              position: "before",
+            },
+          ],
+          "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
     },
   },
 ];

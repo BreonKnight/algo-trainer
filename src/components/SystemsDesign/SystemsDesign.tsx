@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "../theme/use-theme";
-import { cn } from "@/lib/utils";
-import { BookOpen, Clock, GraduationCap, ChevronRight, X } from "lucide-react";
 import { Switch } from "@headlessui/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { BookOpen, Clock, GraduationCap, ChevronRight, X } from "lucide-react";
 import { PawPrint } from "lucide-react";
+import React, { useState } from "react";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 
 interface Chapter {
   id: number;

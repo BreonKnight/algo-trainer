@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect, useCallback, memo } from "react";
-import { Button } from "../ui/button";
-import { Play, Pause, Volume2, SkipForward } from "lucide-react";
 import * as Slider from "@radix-ui/react-slider";
+import { Play, Pause, Volume2, SkipForward } from "lucide-react";
+import { useState, useRef, useEffect, useCallback, memo } from "react";
 import React from "react";
+
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface YouTubePlayer {

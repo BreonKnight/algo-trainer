@@ -1,13 +1,13 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
-import { linearSearchPattern } from "./linear-search";
-import { binarySearchOnAnswerPattern } from "./binary-search-on-answer";
-import { binarySearchPattern } from "./binary-search";
-import { ternarySearchPattern } from "./ternary-search";
-import { jumpSearchPattern } from "./jump-search";
-import { exponentialSearchPattern } from "./exponential-search";
-import { interpolationSearchPattern } from "./interpolation-search";
-import { quickselectPattern } from "./quickselect";
-import { fibonacciSearchPattern } from "./fibonacci-search";
+import { binarySearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/binary-search";
+import { binarySearchOnAnswerPattern } from "@/src/components/algorithm-trainer/patterns/searching/binary-search-on-answer";
+import { exponentialSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/exponential-search";
+import { fibonacciSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/fibonacci-search";
+import { interpolationSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/interpolation-search";
+import { jumpSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/jump-search";
+import { linearSearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/linear-search";
+import { quickselectPattern } from "@/src/components/algorithm-trainer/patterns/searching/quickselect";
+import { ternarySearchPattern } from "@/src/components/algorithm-trainer/patterns/searching/ternary-search";
+import { AlgorithmPattern } from "@/src/components/algorithm-trainer/types/pattern-types";
 
 type SearchingPatternKey =
   | "Binary Search"

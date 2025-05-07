@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import { FaChartLine, FaBook, FaPython, FaGraduationCap, FaTrophy } from "react-icons/fa";
-import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
+
 import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 
 interface NavigationBarProps {
   className?: string;

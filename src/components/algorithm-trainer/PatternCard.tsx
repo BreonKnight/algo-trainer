@@ -1,19 +1,25 @@
+import { Book, Sword, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+
+import { useTheme } from "@/components/theme/use-theme";
 import { Card } from "@/components/ui/card";
+import { categoryColors } from "@/lib/patterns";
 import { pseudocodePatterns } from "@/lib/pseudocode";
 import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
-import styles from "@/styles/pseudocode.module.css";
-import { MonsterHunterGuide } from "./MonsterHunterGuide";
-import { useState, useEffect, useRef } from "react";
-import { Button } from "../ui/button";
-import { Book, Sword, X } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { AlgorithmSelector } from "./AlgorithmSelector";
-import { useTheme } from "@/components/theme/use-theme";
-import { PatternKey } from "./types";
-import { monsterHunterPatternsByCategory } from "./monsterHunterPatternsCombined";
-import { categoryColors } from "@/lib/patterns";
 import { cn } from "@/lib/utils";
-import { createPortal } from "react-dom";
+import { AlgorithmSelector } from "@/src/components/algorithm-trainer/AlgorithmSelector";
+import { MonsterHunterGuide } from "@/src/components/algorithm-trainer/MonsterHunterGuide";
+import { monsterHunterPatternsByCategory } from "@/src/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { PatternKey } from "@/src/components/algorithm-trainer/types";
+import { Button } from "@/src/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
+import styles from "@/styles/pseudocode.module.css";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;

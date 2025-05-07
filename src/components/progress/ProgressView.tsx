@@ -1,12 +1,19 @@
-import { useState } from "react";
-import { Progress } from "../ui/progress";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Slider } from "../ui/slider";
-import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+import { Button } from "@/src/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/src/components/ui/card";
+import { Progress } from "@/src/components/ui/progress";
+import { Slider } from "@/src/components/ui/slider";
 
 export function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);
