@@ -1787,6 +1787,34 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for territory visualization",
     ],
   },
+  "Null Pattern": {
+    title: "Training Ground Pattern",
+    description:
+      "A placeholder pattern used for testing and fallback purposes, like a training ground where new hunters can practice their skills.",
+    example:
+      "When a specific pattern isn't available, this pattern provides a safe fallback, similar to how new hunters start in a training area before facing real monsters.",
+    tips: [
+      "Use as a fallback when specific patterns aren't available",
+      "Practice basic concepts in a safe environment",
+      "Learn the fundamentals before moving to complex patterns",
+      "Test new strategies without risk",
+      "Perfect for initial training sessions",
+    ],
+  },
+  "Shell Sort": {
+    title: "Monster Territory Gap Sorter",
+    description:
+      "Like organizing monsters in increasingly smaller groups until the entire territory is sorted, Shell Sort improves upon insertion sort by comparing elements with a gap.",
+    example:
+      "Imagine organizing monsters by comparing and swapping pairs that are far apart, then gradually reducing the distance between compared pairs until the territory is fully sorted.",
+    tips: [
+      "Start with a large gap - like organizing monsters in widely spaced groups",
+      "Gradually reduce the gap - similar to fine-tuning the organization with smaller groups",
+      "End with gap of 1 - like performing a final insertion sort",
+      "Choose gap sequence carefully - like planning your group sizes strategically",
+      "Handle edge cases - like dealing with territory boundaries",
+    ],
+  },
 };
 
 export function getMonsterHunterExplanation(patternKey: PatternKey) {

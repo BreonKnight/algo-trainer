@@ -126,6 +126,8 @@ import FibonacciPattern from "./patterns/fibonacci";
 import DFSGraphPattern from "./patterns/dfs-graph";
 import { IntervalSchedulingPattern } from "./patterns/interval-scheduling";
 import { TestDataPattern } from "./patterns/test-data";
+import { ShellSortPattern } from "./patterns/shell-sort";
+import { NullPattern } from "./patterns/null-pattern";
 
 export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   // ===== Graph Algorithms =====
@@ -210,7 +212,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Sorting Comparisons": SortingComparisonsPattern,
   "Bucket Sort": BucketSortPattern,
   "Counting Sort": CountingSortPattern,
-
+  "Shell Sort": ShellSortPattern,
   // ===== Matrix Operations =====
   "Matrix Operations": MatrixOperationsPattern,
   "Matrix Chain Multiplication": MatrixChainMultiplicationPattern,
@@ -279,6 +281,7 @@ export const pseudocodePatterns: Record<string, () => JSX.Element> = {
   "Interval Scheduling": IntervalSchedulingPattern,
   "Fast and Slow Pointers": FastAndSlowPointersPattern,
   Fibonacci: FibonacciPattern,
+  "Null Pattern": NullPattern,
 };
 
 // Function to verify pattern consistency
