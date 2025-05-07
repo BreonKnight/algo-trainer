@@ -1,66 +1,289 @@
-import React, { useState } from "react";
-import Editor from "@monaco-editor/react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
+import { useState, useRef, useEffect } from "react";
+import Editor, { Monaco } from "@monaco-editor/react";
+import { useTheme } from "../theme/use-theme";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import {
+  draculaTheme,
+  solarizedTheme,
+  lightTheme,
+  snesTheme,
+  nordTheme,
+  ps2Theme,
+  re2Theme,
+  mhTheme,
+} from "@/lib/theme";
+import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
+import * as monaco from "monaco-editor";
 
-const DEFAULT_CODE = `// Write your JavaScript code here\nfunction greet(name) {\n  return 'Hello, ' + name + '!';\n}\n\nconsole.log(greet('World'));
-`;
+const Practice = () => {
+  const { theme } = useTheme();
+  const [copied, setCopied] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [fontSize, setFontSize] = useState(14);
+  const minFont = 12;
+  const maxFont = 28;
+  const [code, setCode] = useState<string>(
+    '# Write your Python code here\n\ndef main():\n    print("Hello, World!")\n\nif __name__ == "__main__":\n    main()'
+  );
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-const Practice: React.FC = () => {
-  const [code, setCode] = useState<string>(DEFAULT_CODE);
-  const [output, setOutput] = useState<string>("");
-  const [isRunning, setIsRunning] = useState(false);
+  // Register Monaco themes before the editor mounts
+  useEffect(() => {
+    // @ts-ignore
+    if (window.__monacoThemesRegistered) return;
+    // @ts-ignore
+    window.__monacoThemesRegistered = true;
+    monaco.editor.defineTheme("dracula", draculaTheme);
+    monaco.editor.defineTheme("solarized", solarizedTheme);
+    monaco.editor.defineTheme("light", lightTheme);
+    monaco.editor.defineTheme("snes", snesTheme);
+    monaco.editor.defineTheme("nord", nordTheme);
+    monaco.editor.defineTheme("ps2", ps2Theme);
+    monaco.editor.defineTheme("re2", re2Theme);
+    monaco.editor.defineTheme("mh", mhTheme);
+  }, []);
 
-  const runCode = () => {
-    setIsRunning(true);
-    let result = "";
-    const log = (...args: unknown[]) => {
-      result += args.map(String).join(" ") + "\n";
-    };
-    try {
-      // eslint-disable-next-line no-new-func
-      const fn = new Function("console", code);
-      fn({ log });
-      setOutput(result || "(No output)");
-    } catch (err: unknown) {
-      setOutput("Error: " + (err instanceof Error ? err.message : String(err)));
+  // Load code from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("practice-code");
+    if (saved) setCode(saved);
+    // eslint-disable-next-line
+  }, []);
+
+  // Save code to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("practice-code", code);
+  }, [code]);
+
+  // Map app theme to Monaco theme
+  const getMonacoTheme = () => {
+    switch (theme) {
+      case "dracula":
+        return "dracula";
+      case "solarized":
+        return "solarized";
+      case "light":
+        return "light";
+      case "snes":
+        return "snes";
+      case "nord":
+        return "nord";
+      case "ps2":
+        return "ps2";
+      case "re2":
+        return "re2";
+      case "mh":
+        return "mh";
+      default:
+        return "dracula";
     }
-    setIsRunning(false);
+  };
+
+  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+    editorRef.current = editor;
+    editor.focus();
+    setTimeout(() => {
+      editor.layout();
+    }, 100);
+  };
+
+  const handleCopy = () => {
+    if (!editorRef.current) return;
+    navigator.clipboard.writeText(editorRef.current.getValue());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
-    <div className="min-h-screen bg-background py-8 px-2 flex flex-col items-center">
-      <Card className="w-full max-w-3xl mb-8 shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold">Practice Editor</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-4">
-            <Editor
-              height="300px"
-              defaultLanguage="python"
-              value={code}
-              onChange={(value) => setCode(value || "")}
-              theme="vs-dark"
-              options={{ fontSize: 16, minimap: { enabled: false } }}
-            />
-          </div>
-          <Button onClick={runCode} disabled={isRunning} className="mt-2">
-            {isRunning ? "Running..." : "Run"}
-          </Button>
-        </CardContent>
-      </Card>
-      <Card className="w-full max-w-3xl shadow-md">
-        <CardHeader>
-          <CardTitle className="text-lg font-semibold">REPL Output</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <pre className={cn("bg-background/80 rounded p-4 text-sm overflow-x-auto min-h-[80px]")}>
-            {output}
-          </pre>
-        </CardContent>
-      </Card>
+    <div className="container mx-auto p-4 h-[calc(100vh-4rem)]">
+      <div className="flex flex-col h-full gap-4">
+        <div className="flex justify-between items-center">
+          <h1
+            className={cn(
+              "text-2xl font-bold",
+              theme === "nord"
+                ? "text-white"
+                : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+            )}
+          >
+            Practice pyt
+          </h1>
+        </div>
+
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+            <div className="flex-none flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        className={cn(
+                          "p-1 rounded-md transition-colors border",
+                          theme === "light" || theme === "solarized"
+                            ? "bg-white border-accent text-accent shadow"
+                            : theme === "nord"
+                              ? "text-white border-none"
+                              : "text-background hover:bg-accent3/20 border-none"
+                        )}
+                        onClick={handleCopy}
+                      >
+                        {copied ? (
+                          <Check className="h-3.5 w-3.5" />
+                        ) : (
+                          <Copy className="h-3.5 w-3.5" />
+                        )}
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="text-xs">{copied ? "Copied!" : "Copy code"}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+
+                <div className="flex items-center gap-1.5 bg-accent2/20 rounded-md p-0.5">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={cn(
+                            "p-1 rounded transition-colors border",
+                            theme === "light" || theme === "solarized"
+                              ? "bg-white border-accent text-accent shadow"
+                              : theme === "nord"
+                                ? "text-white border-none"
+                                : "text-background hover:bg-accent2/40 border-none"
+                          )}
+                          onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
+                        >
+                          <Type className="h-3.5 w-3.5" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="text-xs">Decrease font size</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <span
+                    className={cn(
+                      "text-xs min-w-[2rem] text-center",
+                      theme === "nord" ? "text-white" : "text-background"
+                    )}
+                  >
+                    {fontSize}px
+                  </span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={cn(
+                            "p-1 rounded transition-colors border",
+                            theme === "light" || theme === "solarized"
+                              ? "bg-white border-accent text-accent shadow"
+                              : theme === "nord"
+                                ? "text-white border-none"
+                                : "text-background hover:bg-accent2/40 border-none"
+                          )}
+                          onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
+                        >
+                          <Type className="h-3.5 w-3.5" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="text-xs">Increase font size</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
+              </div>
+
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      className={cn(
+                        "p-1.5 rounded-md transition-colors border",
+                        theme === "light" || theme === "solarized"
+                          ? "bg-white border-accent text-accent shadow"
+                          : theme === "nord"
+                            ? "text-white border-none"
+                            : "text-background hover:bg-accent2/20 border-none"
+                      )}
+                      onClick={toggleExpand}
+                    >
+                      {isExpanded ? (
+                        <Minimize2 className="h-3.5 w-3.5" />
+                      ) : (
+                        <Maximize2 className="h-3.5 w-3.5" />
+                      )}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="text-xs">{isExpanded ? "Minimize" : "Maximize"} editor</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+
+            <div className="h-full w-full flex-1 min-h-[300px] overflow-hidden rounded-xl">
+              <Editor
+                key={getMonacoTheme()}
+                height="100%"
+                defaultLanguage="python"
+                theme={getMonacoTheme()}
+                value={code}
+                onChange={(value) => setCode(value || "")}
+                onMount={(editor, monaco) => {
+                  monaco.editor.defineTheme("dracula", draculaTheme);
+                  monaco.editor.defineTheme("solarized", solarizedTheme);
+                  monaco.editor.defineTheme("light", lightTheme);
+                  monaco.editor.defineTheme("snes", snesTheme);
+                  monaco.editor.defineTheme("nord", nordTheme);
+                  monaco.editor.defineTheme("ps2", ps2Theme);
+                  monaco.editor.defineTheme("re2", re2Theme);
+                  monaco.editor.defineTheme("mh", mhTheme);
+                  editorRef.current = editor;
+                  editor.focus();
+                  setTimeout(() => {
+                    editor.layout();
+                  }, 100);
+                }}
+                options={{
+                  fontSize,
+                  fontFamily: "Menlo",
+                  minimap: { enabled: true },
+                  scrollBeyondLastLine: true,
+                  lineNumbers: "on",
+                  roundedSelection: true,
+                  padding: { top: 8, bottom: 8 },
+                  cursorStyle: "underline",
+                  automaticLayout: true,
+                  wordWrap: "off",
+                  tabSize: 4,
+                  insertSpaces: true,
+                  overviewRulerBorder: false,
+                  hideCursorInOverviewRuler: true,
+                  renderLineHighlight: "line",
+                  lineDecorationsWidth: 0,
+                  fixedOverflowWidgets: true,
+                  glyphMargin: false,
+                  folding: false,
+                  renderWhitespace: "none",
+                }}
+              />
+            </div>
+          </Card>
+
+          <ReplCard userCode={code} />
+        </div>
+      </div>
     </div>
   );
 };

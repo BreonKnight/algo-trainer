@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography, Button, Box, Chip } from "@mui/material";
 import { PlayArrow, Refresh, Check, NavigateNext, Lightbulb, Code } from "@mui/icons-material";
+import { useTheme } from "@/components/theme/use-theme";
 
 interface ProblemCardProps {
   title: string;
@@ -27,6 +28,7 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
 }) => {
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -104,7 +106,17 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
                 setIsActive(true);
                 onStart();
               }}
-              sx={{ mr: 1 }}
+              sx={{
+                mr: 1,
+                ...(theme === "light" || theme === "solarized"
+                  ? {
+                      backgroundColor: "#fff",
+                      color: "#2563eb",
+                      border: "1px solid #2563eb",
+                      boxShadow: 2,
+                    }
+                  : {}),
+              }}
             >
               Start
             </Button>
@@ -116,7 +128,17 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
                 setTimeElapsed(0);
                 onReset();
               }}
-              sx={{ mr: 1 }}
+              sx={{
+                mr: 1,
+                ...(theme === "light" || theme === "solarized"
+                  ? {
+                      backgroundColor: "#fff",
+                      color: "#2563eb",
+                      border: "1px solid #2563eb",
+                      boxShadow: 2,
+                    }
+                  : {}),
+              }}
             >
               Reset
             </Button>
@@ -125,7 +147,17 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
               color="primary"
               startIcon={<Check />}
               onClick={onSubmit}
-              sx={{ mr: 1 }}
+              sx={{
+                mr: 1,
+                ...(theme === "light" || theme === "solarized"
+                  ? {
+                      backgroundColor: "#fff",
+                      color: "#2563eb",
+                      border: "1px solid #2563eb",
+                      boxShadow: 2,
+                    }
+                  : {}),
+              }}
             >
               Submit
             </Button>
@@ -134,16 +166,54 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
               color="secondary"
               startIcon={<NavigateNext />}
               onClick={onNext}
+              sx={{
+                ...(theme === "light" || theme === "solarized"
+                  ? {
+                      backgroundColor: "#fff",
+                      color: "#2563eb",
+                      border: "1px solid #2563eb",
+                      boxShadow: 2,
+                    }
+                  : {}),
+              }}
             >
               Next
             </Button>
           </Box>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
-          <Button variant="outlined" startIcon={<Lightbulb />} onClick={onHint}>
+          <Button
+            variant="outlined"
+            startIcon={<Lightbulb />}
+            onClick={onHint}
+            sx={{
+              ...(theme === "light" || theme === "solarized"
+                ? {
+                    backgroundColor: "#fff",
+                    color: "#2563eb",
+                    border: "1px solid #2563eb",
+                    boxShadow: 2,
+                  }
+                : {}),
+            }}
+          >
             Hint
           </Button>
-          <Button variant="outlined" startIcon={<Code />} onClick={onSolution}>
+          <Button
+            variant="outlined"
+            startIcon={<Code />}
+            onClick={onSolution}
+            sx={{
+              ...(theme === "light" || theme === "solarized"
+                ? {
+                    backgroundColor: "#fff",
+                    color: "#2563eb",
+                    border: "1px solid #2563eb",
+                    boxShadow: 2,
+                  }
+                : {}),
+            }}
+          >
             Solution
           </Button>
         </Box>

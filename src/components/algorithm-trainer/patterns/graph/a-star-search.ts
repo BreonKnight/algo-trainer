@@ -67,8 +67,7 @@ const goalPatternPatternPatternPattern = 5;   // F
 const pathPatternPatternPatternPattern = aStar(start, goal, graph, heuristic);
 console.log(path); // Output: [0, 1, 4, 5] or similar shortest path
   `,
-  implementation: `
-class PriorityQueue:
+  implementation: `class PriorityQueue:
     def __init__(self):
         self.elements = []
     

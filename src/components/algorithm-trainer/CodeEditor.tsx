@@ -214,8 +214,12 @@ export function CodeEditor({
               <TooltipTrigger asChild>
                 <button
                   className={cn(
-                    "p-1 rounded-md hover:bg-accent3/20 transition-colors",
-                    theme === "nord" ? "text-white" : "text-background"
+                    "p-1 rounded-md transition-colors border",
+                    theme === "light" || theme === "solarized"
+                      ? "bg-white border-accent text-accent shadow"
+                      : theme === "nord"
+                        ? "text-white border-none"
+                        : "text-background hover:bg-accent3/20 border-none"
                   )}
                   onClick={handleCopy}
                 >
@@ -234,8 +238,12 @@ export function CodeEditor({
                 <TooltipTrigger asChild>
                   <button
                     className={cn(
-                      "p-1 rounded hover:bg-accent2/40 transition-colors",
-                      theme === "nord" ? "text-white" : "text-background"
+                      "p-1 rounded transition-colors border",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-white border-accent text-accent shadow"
+                        : theme === "nord"
+                          ? "text-white border-none"
+                          : "text-background hover:bg-accent2/40 border-none"
                     )}
                     onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
                   >
@@ -260,8 +268,12 @@ export function CodeEditor({
                 <TooltipTrigger asChild>
                   <button
                     className={cn(
-                      "p-1 rounded hover:bg-accent2/40 transition-colors",
-                      theme === "nord" ? "text-white" : "text-background"
+                      "p-1 rounded transition-colors border",
+                      theme === "light" || theme === "solarized"
+                        ? "bg-white border-accent text-accent shadow"
+                        : theme === "nord"
+                          ? "text-white border-none"
+                          : "text-background hover:bg-accent2/40 border-none"
                     )}
                     onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
                   >
@@ -281,8 +293,12 @@ export function CodeEditor({
             <TooltipTrigger asChild>
               <button
                 className={cn(
-                  "p-1.5 rounded-md hover:bg-accent2/20 transition-colors",
-                  theme === "nord" ? "text-white" : "text-background"
+                  "p-1.5 rounded-md transition-colors border",
+                  theme === "light" || theme === "solarized"
+                    ? "bg-white border-accent text-accent shadow"
+                    : theme === "nord"
+                      ? "text-white border-none"
+                      : "text-background hover:bg-accent2/20 border-none"
                 )}
                 onClick={toggleExpand}
               >

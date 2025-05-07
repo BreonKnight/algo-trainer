@@ -21,6 +21,7 @@ import type { PatternKey } from "./components/tutorials/types";
 import tutorialsData from "./data/tutorials.json";
 import AlgorithmTrainer from "./components/algorithm-trainer/AlgorithmTrainer";
 import AlgoGuide from "./components/algorithm-practice/AlgoGuide";
+import Practice from "./components/practice/Practice";
 
 // Log the imported data structure
 // console.log("Imported tutorials data:", tutorialsData);
@@ -198,6 +199,7 @@ function AppContent() {
             <Route path="/tutorials" element={<TutorialList />} />
             <Route path="/tutorials/:algorithm" element={<TutorialRoute />} />
             <Route path="/python-techniques" element={<PythonTechniques />} />
+            <Route path="/practice" element={<Practice />} />
             <Route path="/systems-design" element={<SystemsDesign />} />
             <Route path="/algorithm-trainer" element={<AlgorithmTrainer />} />
             <Route path="/algo-guide" element={<AlgoGuide />} />
@@ -210,7 +212,7 @@ function AppContent() {
         </main>
       </div>
 
-      <Toaster position="top-center" richColors theme="dark" />
+      <Toaster position="bottom-left" richColors theme="dark" />
     </div>
   );
 }
