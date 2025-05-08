@@ -1,7 +1,3 @@
-import path from "path";
-
-import { getPyodidePath } from "./electron-api";
-
 type PythonResult = {
   stdout: string;
   stderr: string;
@@ -18,15 +14,10 @@ type PyodideModule = {
   loadPyodide: (options: { indexURL?: string; fullStdLib?: boolean }) => Promise<PyodideInstance>;
 };
 
-interface ElectronAPI {
-  getPyodidePath: () => Promise<string>;
-}
-
 declare global {
   interface Window {
-    PYODIDE_PATH?: string;
     IN_NODE?: boolean;
-    electronAPI?: ElectronAPI;
+    electronAPI?: unknown; // for type check, not used for path
   }
 }
 
@@ -35,45 +26,45 @@ let pyodideInstance: PyodideInstance | null = null;
 const PYODIDE_VERSION = "v0.27.5";
 const PYODIDE_CDN_URL = `https://cdn.jsdelivr.net/pyodide/${PYODIDE_VERSION}/full`;
 
+function getPyodideBaseUrl(): string {
+  if (window.electronAPI) {
+    // Use file:// protocol for local testing
+    // __dirname is relative to the renderer bundle location
+    // Adjust as needed if this does not work
+    return `file://${__dirname}/dist/pyodide/`;
+  }
+  return PYODIDE_CDN_URL + "/";
+}
+
 export async function setupPyodide(): Promise<PyodideInstance> {
   if (pyodideInstance) {
     return pyodideInstance;
   }
 
   try {
-    // Check if we're in Electron
-    const isElectron = window.electronAPI !== undefined;
+    const pyodideBaseUrl = getPyodideBaseUrl();
 
-    if (isElectron && window.electronAPI) {
-      // In Electron, get the path from the main process
-      const pyodidePath = await window.electronAPI.getPyodidePath();
-      const pyodideModule = await import(/* @vite-ignore */ `${pyodidePath}/pyodide.mjs`);
+    // Load Pyodide script
+    const script = document.createElement("script");
+    script.src = `${pyodideBaseUrl}pyodide.js`;
+    script.async = true;
 
-      const instance = await pyodideModule.loadPyodide({
-        indexURL: pyodidePath,
-        fullStdLib: true,
-      });
+    await new Promise((resolve, reject) => {
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
 
-      pyodideInstance = instance;
-    } else {
-      // In browser development, load from CDN
-      const script = document.createElement("script");
-      script.src = "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js";
-      script.async = true;
+    const pyodideModule: PyodideModule = await import(
+      /* @vite-ignore */ `${pyodideBaseUrl}pyodide.mjs`
+    );
 
-      await new Promise((resolve, reject) => {
-        script.onload = resolve;
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
+    const instance = await pyodideModule.loadPyodide({
+      indexURL: pyodideBaseUrl,
+      fullStdLib: true,
+    });
 
-      const pyodideModule = (window as any).loadPyodide;
-      const instance = await pyodideModule({
-        fullStdLib: true,
-      });
-
-      pyodideInstance = instance;
-    }
+    pyodideInstance = instance;
 
     if (!pyodideInstance) {
       throw new Error("Failed to initialize Pyodide");

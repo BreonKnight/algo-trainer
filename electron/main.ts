@@ -53,18 +53,16 @@ function createWindow() {
     }
   );
 
-  // Register protocol for Pyodide files with improved error handling
+  // Register protocol for Pyodide files with improved error handling and logging
   protocol.registerFileProtocol(
     "pyodide",
     (
       request: { url: string },
       callback: (response: { path: string } | { error: number }) => void
     ) => {
-      const url = request.url.substr(9);
+      const url = request.url.substr(9); // Remove 'pyodide://'
       const filePath = path.join(app.getAppPath(), "dist", "pyodide", url);
       console.log(`Pyodide requesting: ${url} -> ${filePath}`);
-
-      // Check if file exists
       if (fs.existsSync(filePath)) {
         callback({ path: filePath });
       } else {

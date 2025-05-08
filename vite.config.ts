@@ -10,7 +10,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: "node_modules/pyodide/*",
+          src: "node_modules/pyodide/**/*",
           dest: "pyodide",
         },
       ],
