@@ -129,6 +129,8 @@ export const patternMapping: PatternMapping = {
   "Fast and Slow Pointers": "Fast and Slow Pointers",
   Fibonacci: "Fibonacci",
   "Interval Scheduling": "Interval Scheduling",
+  "Test Data": "Test Data",
+  "Null Pattern": "Null Pattern",
 
   // Greedy Patterns
   "Activity Selection": "Activity Selection",
