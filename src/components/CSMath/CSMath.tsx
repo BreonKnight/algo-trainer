@@ -14,6 +14,7 @@ import {
 import { additionalConcepts } from "@/components/CSMath/concepts";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+import { Background } from "@/components/ui/background";
 
 export interface Concept {
   id: number;
@@ -293,14 +294,7 @@ const CSMath: React.FC = () => {
   });
 
   return (
-    <div
-      className={cn(
-        "min-h-screen p-8 font-sans",
-        theme === "light" || theme === "solarized"
-          ? "bg-gradient-to-b from-background via-background/95 to-background text-foreground"
-          : "bg-gradient-to-b from-background via-background/95 to-background text-foreground"
-      )}
-    >
+    <Background>
       <div className="max-w-4xl mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -758,7 +752,7 @@ const CSMath: React.FC = () => {
           </div>
         </motion.div>
       </div>
-    </div>
+    </Background>
   );
 };
 

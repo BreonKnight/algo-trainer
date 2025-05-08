@@ -20,6 +20,7 @@ import {
   forniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
+import { Background } from "@/components/ui/background";
 
 const Practice = () => {
   const { theme } = useTheme();
@@ -131,174 +132,176 @@ const Practice = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 h-[calc(100vh-4rem)]">
-      <div className="flex flex-col h-full gap-4">
-        <div className="flex justify-between items-center">
-          <h1
-            className={cn(
-              "text-2xl font-bold",
-              theme === "nord"
-                ? "text-white"
-                : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
-            )}
-          >
-            Practice some Python 🐍
-          </h1>
-        </div>
+    <Background>
+      <div className="container mx-auto p-4 h-[calc(100vh-4rem)]">
+        <div className="flex flex-col h-full gap-4">
+          <div className="flex justify-between items-center">
+            <h1
+              className={cn(
+                "text-2xl font-bold",
+                theme === "nord"
+                  ? "text-white"
+                  : "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+              )}
+            >
+              Practice some Python 🐍
+            </h1>
+          </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
-            <div className="flex-none flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+              <div className="flex-none flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          className={cn(
+                            "p-1 rounded-md transition-colors border",
+                            theme === "light" || theme === "solarized"
+                              ? "bg-white border-accent text-accent shadow"
+                              : theme === "nord"
+                                ? "text-white border-none"
+                                : "text-background hover:bg-accent3/20 border-none"
+                          )}
+                          onClick={handleCopy}
+                        >
+                          {copied ? (
+                            <Check className="h-3.5 w-3.5" />
+                          ) : (
+                            <Copy className="h-3.5 w-3.5" />
+                          )}
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p className="text-xs">{copied ? "Copied!" : "Copy code"}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+
+                  <div className="flex items-center gap-1.5 bg-accent2/20 rounded-md p-0.5">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            className={cn(
+                              "p-1 rounded transition-colors border",
+                              theme === "light" || theme === "solarized"
+                                ? "bg-white border-accent text-accent shadow"
+                                : theme === "nord"
+                                  ? "text-white border-none"
+                                  : "text-background hover:bg-accent2/40 border-none"
+                            )}
+                            onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
+                          >
+                            <Type className="h-3.5 w-3.5" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="text-xs">Decrease font size</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <span
+                      className={cn(
+                        "text-xs min-w-[2rem] text-center",
+                        theme === "nord" ? "text-white" : "text-background"
+                      )}
+                    >
+                      {fontSize}px
+                    </span>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            className={cn(
+                              "p-1 rounded transition-colors border",
+                              theme === "light" || theme === "solarized"
+                                ? "bg-white border-accent text-accent shadow"
+                                : theme === "nord"
+                                  ? "text-white border-none"
+                                  : "text-background hover:bg-accent2/40 border-none"
+                            )}
+                            onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
+                          >
+                            <Type className="h-3.5 w-3.5" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="text-xs">Increase font size</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </div>
+
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <button
                         className={cn(
-                          "p-1 rounded-md transition-colors border",
+                          "p-1.5 rounded-md transition-colors border",
                           theme === "light" || theme === "solarized"
                             ? "bg-white border-accent text-accent shadow"
                             : theme === "nord"
                               ? "text-white border-none"
-                              : "text-background hover:bg-accent3/20 border-none"
+                              : "text-background hover:bg-accent2/20 border-none"
                         )}
-                        onClick={handleCopy}
+                        onClick={toggleExpand}
                       >
-                        {copied ? (
-                          <Check className="h-3.5 w-3.5" />
+                        {isExpanded ? (
+                          <Minimize2 className="h-3.5 w-3.5" />
                         ) : (
-                          <Copy className="h-3.5 w-3.5" />
+                          <Maximize2 className="h-3.5 w-3.5" />
                         )}
                       </button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p className="text-xs">{copied ? "Copied!" : "Copy code"}</p>
+                      <p className="text-xs">{isExpanded ? "Minimize" : "Maximize"} editor</p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-
-                <div className="flex items-center gap-1.5 bg-accent2/20 rounded-md p-0.5">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          className={cn(
-                            "p-1 rounded transition-colors border",
-                            theme === "light" || theme === "solarized"
-                              ? "bg-white border-accent text-accent shadow"
-                              : theme === "nord"
-                                ? "text-white border-none"
-                                : "text-background hover:bg-accent2/40 border-none"
-                          )}
-                          onClick={() => setFontSize((f) => Math.max(minFont, f - 1))}
-                        >
-                          <Type className="h-3.5 w-3.5" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p className="text-xs">Decrease font size</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                  <span
-                    className={cn(
-                      "text-xs min-w-[2rem] text-center",
-                      theme === "nord" ? "text-white" : "text-background"
-                    )}
-                  >
-                    {fontSize}px
-                  </span>
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          className={cn(
-                            "p-1 rounded transition-colors border",
-                            theme === "light" || theme === "solarized"
-                              ? "bg-white border-accent text-accent shadow"
-                              : theme === "nord"
-                                ? "text-white border-none"
-                                : "text-background hover:bg-accent2/40 border-none"
-                          )}
-                          onClick={() => setFontSize((f) => Math.min(maxFont, f + 1))}
-                        >
-                          <Type className="h-3.5 w-3.5" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p className="text-xs">Increase font size</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
               </div>
 
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button
-                      className={cn(
-                        "p-1.5 rounded-md transition-colors border",
-                        theme === "light" || theme === "solarized"
-                          ? "bg-white border-accent text-accent shadow"
-                          : theme === "nord"
-                            ? "text-white border-none"
-                            : "text-background hover:bg-accent2/20 border-none"
-                      )}
-                      onClick={toggleExpand}
-                    >
-                      {isExpanded ? (
-                        <Minimize2 className="h-3.5 w-3.5" />
-                      ) : (
-                        <Maximize2 className="h-3.5 w-3.5" />
-                      )}
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p className="text-xs">{isExpanded ? "Minimize" : "Maximize"} editor</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
+              <div className="h-full w-full flex-1 min-h-[300px] overflow-hidden rounded-xl">
+                <Editor
+                  height="100%"
+                  defaultLanguage="python"
+                  theme={getMonacoTheme()}
+                  value={code}
+                  onChange={(value) => setCode(value || "")}
+                  onMount={handleEditorDidMount}
+                  options={{
+                    fontSize,
+                    fontFamily: "Menlo",
+                    minimap: { enabled: true },
+                    scrollBeyondLastLine: true,
+                    lineNumbers: "on",
+                    roundedSelection: true,
+                    padding: { top: 8, bottom: 8 },
+                    cursorStyle: "underline",
+                    automaticLayout: true,
+                    wordWrap: "off",
+                    tabSize: 4,
+                    insertSpaces: true,
+                    overviewRulerBorder: false,
+                    hideCursorInOverviewRuler: true,
+                    renderLineHighlight: "line",
+                    lineDecorationsWidth: 0,
+                    fixedOverflowWidgets: true,
+                    glyphMargin: false,
+                    folding: false,
+                    renderWhitespace: "none",
+                  }}
+                />
+              </div>
+            </Card>
 
-            <div className="h-full w-full flex-1 min-h-[300px] overflow-hidden rounded-xl">
-              <Editor
-                height="100%"
-                defaultLanguage="python"
-                theme={getMonacoTheme()}
-                value={code}
-                onChange={(value) => setCode(value || "")}
-                onMount={handleEditorDidMount}
-                options={{
-                  fontSize,
-                  fontFamily: "Menlo",
-                  minimap: { enabled: true },
-                  scrollBeyondLastLine: true,
-                  lineNumbers: "on",
-                  roundedSelection: true,
-                  padding: { top: 8, bottom: 8 },
-                  cursorStyle: "underline",
-                  automaticLayout: true,
-                  wordWrap: "off",
-                  tabSize: 4,
-                  insertSpaces: true,
-                  overviewRulerBorder: false,
-                  hideCursorInOverviewRuler: true,
-                  renderLineHighlight: "line",
-                  lineDecorationsWidth: 0,
-                  fixedOverflowWidgets: true,
-                  glyphMargin: false,
-                  folding: false,
-                  renderWhitespace: "none",
-                }}
-              />
-            </div>
-          </Card>
-
-          <ReplCard userCode={code} setUserCode={setCode} />
+            <ReplCard userCode={code} setUserCode={setCode} />
+          </div>
         </div>
       </div>
-    </div>
+    </Background>
   );
 };
 
