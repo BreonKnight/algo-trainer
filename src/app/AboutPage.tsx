@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
-const HomePage = () => {
+const AboutPage = () => {
   const { theme } = useTheme();
 
   const sections = [
@@ -530,4 +530,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AboutPage;

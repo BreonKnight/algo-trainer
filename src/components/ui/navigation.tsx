@@ -1,5 +1,5 @@
 import {
-  Home,
+  Info,
   Book,
   BarChart,
   Menu,
@@ -99,15 +99,15 @@ export function Navigation() {
   const preloadRoute = useCallback((path: string) => {
     // Map route paths to their actual component paths
     const pathMap: Record<string, string> = {
-      "/algo-guide": "../algo-guide/AlgoGuide",
       "/algorithm-trainer": "../algorithm-trainer/AlgorithmTrainer",
+      "/algo-guide": "../algo-guide/AlgoGuide",
       "/cs-math": "../cs-math/CSMath",
-      "/practice": "../practice/Practice",
       "/tutorials": "../tutorials/Tutorials",
+      "/practice": "../practice/Practice",
       "/python-techniques": "../python-techniques/PythonTechniques",
       "/progress": "../progress/Progress",
       "/systems-design": "../systems-design/SystemsDesign",
-      "/": "../home/Home",
+      "/": "../about/AboutPage",
     };
 
     const componentPath = pathMap[path];
@@ -150,20 +150,20 @@ export function Navigation() {
         label: "Learn",
         items: [
           {
-            path: "/algo-guide",
-            label: "Algo Guide",
-            icon: GraduationCap,
-            onClick: (e: React.MouseEvent) => handleNavClick("/algo-guide", e),
-            onMouseEnter: () => preloadRoute("/algo-guide"),
-            isLoading: loadingStates["/algo-guide"],
-          },
-          {
             path: "/algorithm-trainer",
             label: "Algorithm Trainer",
             icon: Code,
             onClick: (e: React.MouseEvent) => handleNavClick("/algorithm-trainer", e),
             onMouseEnter: () => preloadRoute("/algorithm-trainer"),
             isLoading: loadingStates["/algorithm-trainer"],
+          },
+          {
+            path: "/algo-guide",
+            label: "Algo Guide",
+            icon: GraduationCap,
+            onClick: (e: React.MouseEvent) => handleNavClick("/algo-guide", e),
+            onMouseEnter: () => preloadRoute("/algo-guide"),
+            isLoading: loadingStates["/algo-guide"],
           },
           {
             path: "/cs-math",
@@ -229,12 +229,12 @@ export function Navigation() {
         label: "General",
         items: [
           {
-            path: "/",
-            label: "Home",
-            icon: Home,
-            onClick: (e: React.MouseEvent) => handleNavClick("/", e),
-            onMouseEnter: () => preloadRoute("/"),
-            isLoading: loadingStates["/"],
+            path: "/about",
+            label: "About",
+            icon: Info,
+            onClick: (e: React.MouseEvent) => handleNavClick("/about", e),
+            onMouseEnter: () => preloadRoute("/about"),
+            isLoading: loadingStates["/about"],
           },
         ],
       },

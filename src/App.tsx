@@ -3,7 +3,7 @@ import { useState, useEffect, Suspense, lazy, memo, useCallback, useMemo } from 
 import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
 import { Toaster } from "sonner";
 
-import HomePage from "@/app/HomePage";
+import AboutPage from "@/app/AboutPage";
 import PatternManagement from "@/components/admin/PatternManagement";
 import { TopBar } from "@/components/algorithm-trainer/layout/TopBar";
 import Practice from "@/components/practice/Practice";
@@ -171,7 +171,7 @@ const AppContent = memo(function AppContent() {
   const routeElements = useMemo(
     () => (
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<AlgorithmTrainer />} />
         <Route
           path="/progress"
           element={
@@ -285,6 +285,16 @@ const AppContent = memo(function AppContent() {
           }
         />
         {import.meta.env.DEV && <Route path="/admin/patterns" element={<PatternManagement />} />}
+        <Route
+          path="/about"
+          element={
+            <Suspense
+              fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}
+            >
+              <AboutPage />
+            </Suspense>
+          }
+        />
       </Routes>
     ),
     []
