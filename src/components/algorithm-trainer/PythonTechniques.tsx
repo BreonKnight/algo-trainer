@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { Background } from "@/components/ui/background";
 import { cn } from "@/lib/utils";
 
 const CodeBlock = memo(({ code }: { code: string }) => {
@@ -738,7 +739,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
   ];
 
   return (
-    <div className="w-full">
+    <Background>
       {/* Back to Top Button */}
       <TooltipProvider>
         <Tooltip>
@@ -846,7 +847,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
           <div className="flex flex-col items-center justify-center mt-6 mb-8 relative w-full">
             <Link
               to="/"
-              className="text-2xl font-extrabold text-transparent bg-clip-text text-center animate-gradient-x drop-shadow-lg tracking-tight select-none mb-4"
+              className="text-3xl font-extrabold text-transparent bg-clip-text text-center animate-gradient-x drop-shadow-lg tracking-tight select-none mb-4 hover:scale-105 transition-transform duration-300"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
@@ -856,13 +857,13 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
             </Link>
 
             {/* Section Navigation */}
-            <div className="w-full max-w-4xl mx-auto">
+            <div className="w-full max-w-3xl mx-auto">
               <div
                 className={cn(
-                  "flex flex-wrap gap-2 justify-center p-4 rounded-xl backdrop-blur-md",
+                  "flex flex-wrap gap-2 justify-center p-4 rounded-xl backdrop-blur-md transition-all duration-300 hover:shadow-xl",
                   theme === "nord"
-                    ? "bg-white/10 border border-white/20"
-                    : "bg-secondary/20 border border-secondary/40"
+                    ? "bg-white/10 border border-white/20 hover:bg-white/15"
+                    : "bg-secondary/20 border border-secondary/40 hover:bg-secondary/30"
                 )}
               >
                 {sections.map((section, index) => (
@@ -915,34 +916,50 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
           </div>
 
           {/* Main Content */}
-          <div className="w-full mb-6 rounded-xl shadow-lg p-4 glassy-gradient-bg relative">
-            {/* Glass overlay */}
+          <div className="w-full max-w-3xl mx-auto mb-6 rounded-xl shadow-lg p-4 glassy-gradient-bg relative group">
+            {/* Enhanced glass overlay - more subtle */}
             <div
+              className="absolute inset-0 rounded-xl transition-all duration-300"
               style={{
-                content: "''",
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: "var(--pseudocode-gradient-overlay)",
-                zIndex: 0,
-                pointerEvents: "none",
-                opacity: 0.7,
-                borderRadius: "0.75rem",
+                background:
+                  theme === "nord"
+                    ? "linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))"
+                    : "linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02))",
+                backdropFilter: "blur(8px)",
+                border:
+                  theme === "nord"
+                    ? "1px solid rgba(255,255,255,0.05)"
+                    : "1px solid rgba(0,0,0,0.05)",
               }}
             />
+
+            {/* Interactive hover effect - more subtle */}
+            <div
+              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background:
+                  "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.05), transparent 40%)",
+              }}
+            />
+
             <div className="relative z-10 space-y-6">
               {sections.map((section, index) => (
                 <div
                   key={index}
                   id={`section-${index}`}
                   className={cn(
-                    "rounded-lg p-6 backdrop-blur-sm border",
+                    "rounded-lg p-6 backdrop-blur-sm border transition-all duration-300 hover:shadow-lg hover:scale-[1.01]",
                     theme === "nord"
-                      ? "bg-nord-1/95 border-white/20"
-                      : "bg-zinc-900/95 border-zinc-700/30"
+                      ? "bg-nord-1/95 border-white/20 hover:bg-nord-1/98"
+                      : "bg-zinc-900/95 border-zinc-700/30 hover:bg-zinc-900/98"
                   )}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
+                    e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
+                  }}
                 >
                   <h2
                     className={cn(
@@ -1001,6 +1018,6 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
           </div>
         </TooltipProvider>
       </div>
-    </div>
+    </Background>
   );
 }
