@@ -1,6 +1,3 @@
-import { X } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,6 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 
 interface NotationModalProps {
   isOpen: boolean;
@@ -22,21 +21,38 @@ interface NotationModalProps {
 }
 
 export function NotationModal({ isOpen, onClose, notation }: NotationModalProps) {
+  const { theme } = useTheme();
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}
+    >
+      <DialogContent
+        className={cn(
+          "sm:max-w-[425px] pointer-events-auto font-sans",
+          theme === "light" || theme === "solarized"
+            ? "bg-white text-main"
+            : theme === "nord"
+              ? "bg-nord0 text-white"
+              : "bg-background text-accent2"
+        )}
+      >
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+          <DialogTitle className="flex items-center gap-2 font-sans">
             <span className="text-2xl font-mono">{notation.symbol}</span>
             <span>{notation.name}</span>
           </DialogTitle>
-          <DialogDescription>{notation.description}</DialogDescription>
+          <DialogDescription className="font-sans">{notation.description}</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <div className="grid gap-4 py-4 font-sans">
           {notation.latex && (
             <div className="space-y-2">
               <h4 className="text-sm font-medium">LaTeX Representation</h4>
-              <code className="block p-2 bg-muted rounded-md text-sm">{notation.latex}</code>
+              <code className="block p-2 bg-muted rounded-md text-sm font-mono">
+                {notation.latex}
+              </code>
             </div>
           )}
           {notation.examples && notation.examples.length > 0 && (
@@ -50,9 +66,6 @@ export function NotationModal({ isOpen, onClose, notation }: NotationModalProps)
             </div>
           )}
         </div>
-        <Button variant="ghost" size="icon" className="absolute right-4 top-4" onClick={onClose}>
-          <X className="h-4 w-4" />
-        </Button>
       </DialogContent>
     </Dialog>
   );

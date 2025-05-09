@@ -77,16 +77,16 @@ const AboutPage = () => {
       if (type === "music") return "bg-[#B48EAD]/90 text-gray-900"; // Nord purple
       if (type === "facts") return "bg-[#EBCB8B]/90 text-gray-900"; // Nord yellow
     }
-    if (type === "focus") return "bg-blue-100 text-blue-800";
-    if (type === "music") return "bg-purple-100 text-purple-800";
-    if (type === "facts") return "bg-yellow-100 text-yellow-800";
-    return "";
+    if (type === "focus") return "bg-accent/90 text-main";
+    if (type === "music") return "bg-accent2/90 text-main";
+    if (type === "facts") return "bg-accent3/90 text-main";
+    return "bg-main/90 border-border/70 backdrop-blur-xl";
   };
 
   const getTextColor = (theme: string) => {
     if (theme === "nord") return "text-gray-900";
     if (theme === "dracula") return "text-white";
-    return "text-gray-900";
+    return "text-main";
   };
 
   const getCardStyle = (theme: string) => {
@@ -96,7 +96,7 @@ const AboutPage = () => {
     if (theme === "nord") {
       return "bg-white/90 border-[#D8DEE9]/70 backdrop-blur-xl";
     }
-    return "bg-white/50 border-gray-200/50 backdrop-blur-xl";
+    return "bg-main/90 border-border/70 backdrop-blur-xl";
   };
 
   const getCardHoverStyle = (theme: string) => {
@@ -106,7 +106,7 @@ const AboutPage = () => {
     if (theme === "nord") {
       return "hover:bg-white/95 hover:border-[#A3BE8C]/50";
     }
-    return "hover:bg-white/70 hover:border-blue-200/50";
+    return "hover:bg-main/95 hover:border-accent/50";
   };
 
   const getCardTextStyle = (theme: string) => {
@@ -116,7 +116,7 @@ const AboutPage = () => {
     if (theme === "nord") {
       return "text-gray-900";
     }
-    return "text-gray-900";
+    return "text-main";
   };
 
   return (
@@ -176,7 +176,7 @@ const AboutPage = () => {
                   "flex flex-col items-center text-center flex-1 p-4 rounded-xl shadow-md",
                   theme === "dracula"
                     ? "bg-gray-800/60 border border-gray-700/50"
-                    : "bg-white/60 border border-gray-200/50"
+                    : "bg-main/60 border border-accent/40"
                 )}
               >
                 <span className="text-3xl mb-2">{step.emoji}</span>
@@ -195,7 +195,7 @@ const AboutPage = () => {
               ? "bg-white/10 border-blue-400/30"
               : theme === "nord"
                 ? "bg-white/60 border-[#A3BE8C]/40"
-                : "bg-white/70 border-blue-300/30"
+                : "bg-main/60 border-accent/40"
           )}
         >
           <h2
@@ -213,7 +213,7 @@ const AboutPage = () => {
                 ? "text-white/90 drop-shadow"
                 : theme === "nord"
                   ? "text-gray-900/90 drop-shadow"
-                  : "text-gray-800/90 drop-shadow"
+                  : "text-main/90 drop-shadow"
             )}
           >
             The Informatics Bar at the top of AlgoTrainer gives you everything you need to stay
@@ -289,7 +289,7 @@ const AboutPage = () => {
                   ? "bg-blue-900/50 text-blue-200"
                   : theme === "nord"
                     ? "bg-[#A3BE8C]/90 text-gray-900"
-                    : "bg-blue-200 text-blue-900"
+                    : "bg-accent/90 text-main"
               )}
             >
               Tip:
@@ -468,7 +468,7 @@ const AboutPage = () => {
                           ? "bg-gray-800/30 border-gray-700/50"
                           : theme === "nord"
                             ? "bg-white/90 border-[#D8DEE9]/70"
-                            : "bg-white/30 border-gray-200/50"
+                            : "bg-main/30 border-accent/50"
                       )}
                     >
                       <h4
@@ -542,7 +542,7 @@ const AboutPage = () => {
                 ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
                 : theme === "nord"
                   ? "bg-gradient-to-r from-[#A3BE8C] to-[#B48EAD] text-gray-900"
-                  : "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                  : "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-main"
             )}
           >
             Begin Your Mathematical Journey

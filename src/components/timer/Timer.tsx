@@ -2,8 +2,11 @@ import { Play, Pause, RotateCcw } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/components/theme/use-theme";
+import { cn } from "@/lib/utils";
 
 export function Timer() {
+  const { theme } = useTheme();
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isRunning, setIsRunning] = useState(false);
   const [totalTime, setTotalTime] = useState<number>(0); // Track total time for progress
@@ -133,7 +136,16 @@ export function Timer() {
                 </defs>
               </svg>
               <span
-                className="absolute inset-0 flex items-center justify-center font-mono text-base sm:text-lg font-bold text-main bg-secondary/50 rounded-full px-1 shadow-lg ring-2 ring-accent/20 [text-shadow:_0_0_8px_rgba(0,0,0,0.5)]"
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center font-mono text-base sm:text-lg font-bold bg-secondary/50 rounded-full px-1 shadow-lg ring-2 ring-accent/20 [text-shadow:_0_0_8px_rgba(0,0,0,0.5)]",
+                  theme === "light"
+                    ? "text-black"
+                    : theme === "dracula"
+                      ? "text-[#8be9fd]"
+                      : theme === "solarized"
+                        ? "text-[#cb4b16] [text-shadow:_-1px_-1px_0_#fff,_1px_-1px_0_#fff,_-1px_1px_0_#fff,_1px_1px_0_#fff]"
+                        : "text-white"
+                )}
                 aria-live="polite"
               >
                 {formatTime(timeLeft)}

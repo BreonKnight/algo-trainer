@@ -1444,7 +1444,7 @@ export default function AlgoGuide() {
             {selectedAlgorithm && (
               <DialogContent
                 className={cn(
-                  "max-w-4xl backdrop-blur-xl max-h-[90vh] overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-accent/70 scrollbar-track-accent/20 hover:scrollbar-thumb-accent",
+                  "flex flex-col h-screen max-h-screen sm:max-h-[90vh] w-full max-w-full sm:max-w-4xl px-1 py-1 sm:px-8 sm:py-6 rounded-xl my-2 sm:my-4 backdrop-blur-xl overflow-x-hidden",
                   theme === "light"
                     ? "bg-white text-main"
                     : theme === "nord"
@@ -1454,7 +1454,7 @@ export default function AlgoGuide() {
               >
                 <DialogHeader
                   className={cn(
-                    "sticky top-0 backdrop-blur-xl z-10 pb-4 border-b border-accent/10",
+                    "sticky top-0 rounded-t-xl px-1 py-1 sm:px-8 sm:py-6 backdrop-blur-xl z-10 pb-4 border-b border-accent/10",
                     theme === "light"
                       ? "bg-white text-main"
                       : theme === "nord"
@@ -1472,7 +1472,7 @@ export default function AlgoGuide() {
                     {selectedAlgorithm.what}
                   </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-8 py-6 pr-2">
+                <div className="flex-1 min-h-0 overflow-y-auto space-y-8 py-4 pr-2">
                   {/* Implementation Details */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
@@ -1485,7 +1485,7 @@ export default function AlgoGuide() {
                       </p>
                       <div className="relative">
                         <div className="absolute -left-4 top-0 bottom-0 w-1 bg-accent/20 rounded-full" />
-                        <pre className="bg-background/50 p-4 rounded-lg overflow-x-auto">
+                        <pre className="bg-background/50 p-4 rounded-lg overflow-x-auto whitespace-pre-wrap break-words">
                           <SyntaxHighlighter
                             language="python"
                             style={customTheme}
@@ -1498,6 +1498,9 @@ export default function AlgoGuide() {
                               letterSpacing: "0.025em",
                               fontFamily:
                                 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                              whiteSpace: "pre-wrap",
+                              wordBreak: "break-word",
+                              overflowX: "auto",
                             }}
                             codeTagProps={{
                               style: {
@@ -1506,6 +1509,8 @@ export default function AlgoGuide() {
                                 fontSize: "0.875rem",
                                 lineHeight: 1.7,
                                 letterSpacing: "0.025em",
+                                whiteSpace: "pre-wrap",
+                                wordBreak: "break-word",
                               },
                             }}
                           >

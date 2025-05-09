@@ -1,7 +1,7 @@
 import { Check, Copy } from "lucide-react";
 import { useState, useEffect, useCallback, memo } from "react";
-import { Link } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { motion } from "framer-motion";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
@@ -882,7 +882,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
             side="left"
             className={cn(
               "px-3 py-2 text-sm font-medium",
-              theme === "nord" ? "bg-white/10 text-white" : "bg-secondary/20 text-main"
+              theme === "nord" ? "bg-white text-black" : "bg-secondary text-main"
             )}
           >
             <p>Back to Top</p>
@@ -893,17 +893,18 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
       <div className="w-full px-6">
         <TooltipProvider>
           {/* Title and Section Navigation */}
-          <div className="flex flex-col items-center justify-center mt-6 mb-8 relative w-full">
-            <Link
-              to="/"
-              className="text-3xl font-extrabold text-transparent bg-clip-text text-center animate-gradient-x drop-shadow-lg tracking-tight select-none mb-4 hover:scale-105 transition-transform duration-300"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-              }}
+          <div className="text-center mb-16">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className={cn(
+                "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
+                "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+              )}
             >
               Python Techniques
-            </Link>
+            </motion.h1>
 
             {/* Section Navigation */}
             <div className="w-full max-w-3xl mx-auto">
@@ -944,7 +945,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                       side="bottom"
                       className={cn(
                         "z-[9999] px-3 py-2 text-sm font-medium max-w-[200px]",
-                        theme === "nord" ? "bg-white/10 text-white" : "bg-secondary/20 text-main"
+                        theme === "nord" ? "bg-white text-black" : "bg-secondary text-main"
                       )}
                     >
                       <p className="text-xs leading-relaxed">{section.description}</p>

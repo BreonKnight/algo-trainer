@@ -43,6 +43,17 @@
     --bg-secondary: #f3f4f6;
     --text-main: #111827;
     --text-secondary: #4b5563;
+    --media-gradient: conic-gradient(
+      at top left,
+      #3b82f6 0%,
+      #8b5cf6 15%,
+      #ff79c6 30%,
+      #ffe066 45%,
+      #ff4500 60%,
+      #2ecc71 75%,
+      #3498db 90%,
+      #3b82f6 100%
+    );
   }
 
   .dark {
@@ -298,34 +309,34 @@ html {
 
 /* Example usage for Tailwind utility overrides */
 .bg-main {
-  background-color: var(--bg-main) !important;
+  background-color: var(--bg-main);
 }
 .bg-secondary {
-  background-color: var(--bg-secondary) !important;
+  background-color: var(--bg-secondary);
 }
 .text-main {
-  color: var(--text-main) !important;
+  color: var(--text-main);
 }
 .text-secondary {
-  color: var(--text-secondary) !important;
+  color: var(--text-secondary);
 }
 .text-accent {
-  color: var(--accent) !important;
+  color: var(--accent);
 }
 .text-accent2 {
-  color: var(--accent2) !important;
+  color: var(--accent2);
 }
 .text-accent3 {
-  color: var(--accent3) !important;
+  color: var(--accent3);
 }
 .bg-accent {
-  background-color: var(--accent) !important;
+  background-color: var(--accent);
 }
 .bg-accent2 {
-  background-color: var(--accent2) !important;
+  background-color: var(--accent2);
 }
 .bg-accent3 {
-  background-color: var(--accent3) !important;
+  background-color: var(--accent3);
 }
 
 /* Global focus ring and border fix for Dracula and all themes */
@@ -336,18 +347,30 @@ html {
 }
 
 *:focus-visible {
-  outline: 2px solid var(--focus-ring) !important;
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
-/* Override default border color for interactive elements */
-button,
+/* Updated: Exclude .theme-snes button from the global rule */
+button:not(.theme-snes button),
 input,
 select,
 textarea,
 .border,
 .border-solid {
-  border-color: var(--border) !important;
+  border-color: var(--border);
+}
+
+/* Add a specific rule for SNES theme buttons */
+.theme-snes button {
+  border-color: var(--sfc-dark);
+  color: white;
+}
+
+.theme-snes button svg {
+  color: white;
+  fill: white;
+  stroke: white;
 }
 
 .theme-nord {
@@ -403,6 +426,14 @@ textarea,
   --radius: 0.5rem;
   --code-bg-nord: 46, 52, 64;
   --code-text-nord: #eceff4;
+  --media-gradient: conic-gradient(
+    at top left,
+    #88c0d0 0%,
+    #81a1c1 25%,
+    #8fbcbb 50%,
+    #88c0d0 75%,
+    #88c0d0 100%
+  );
 }
 
 .theme-snes {
@@ -410,9 +441,9 @@ textarea,
   --bg-secondary: #808080; /* Even darker secondary background */
   --text-main: #333333;
   --text-secondary: #666666;
-  --accent: #e40058; /* SNES red - slightly muted for better contrast */
-  --accent2: #4040e0; /* SNES blue - slightly muted for better contrast */
-  --accent3: #00a800; /* SNES green - slightly muted for better contrast */
+  --accent: #4040e0; /* SNES blue - slightly muted for better contrast */
+  --accent2: #00a800; /* SNES green - slightly muted for better contrast */
+  --accent3: #e40058; /* SNES red - slightly muted for better contrast */
   --accent4: #ffd700; /* SNES yellow/gold */
   --border: #999999;
   --error: #e40058; /* SNES red */
@@ -435,6 +466,14 @@ textarea,
   );
   --code-bg-snes: 160, 160, 160;
   --code-text-snes: #333333;
+  --media-gradient: conic-gradient(
+    at top left,
+    #4040e0 0%,
+    #00a800 25%,
+    #e40058 50%,
+    #ffd700 75%,
+    #4040e0 100%
+  );
 }
 
 .theme-ps2 {
@@ -466,6 +505,7 @@ textarea,
   );
   --code-bg-ps2: 0, 27, 77;
   --code-text-ps2: #b4c7ff;
+  --media-gradient: conic-gradient(at top left, #4b75ff 0%, #00a5ff 33%, #2e59ff 66%, #4b75ff 100%);
 }
 
 .theme-re2 {
@@ -497,6 +537,7 @@ textarea,
   );
   --code-bg-re2: 10, 10, 10;
   --code-text-re2: #e6e0d6;
+  --media-gradient: conic-gradient(at top left, #b80000 0%, #c7a14a 33%, #e6e0d6 66%, #b80000 100%);
 }
 
 .theme-mh {
@@ -528,13 +569,14 @@ textarea,
   );
   --code-bg-mh: 28, 35, 32;
   --code-text-mh: #e8d5a9;
+  --media-gradient: conic-gradient(at top left, #d4b056 0%, #66a355 33%, #4a7b8c 66%, #d4b056 100%);
 }
 
 .text-accent4 {
-  color: var(--accent4) !important;
+  color: var(--accent4);
 }
 .bg-accent4 {
-  background-color: var(--accent4) !important;
+  background-color: var(--accent4);
 }
 
 #root {
@@ -570,19 +612,20 @@ textarea,
   );
   --code-bg-kingdom-hearts: 10, 22, 51;
   --code-text-kingdom-hearts: #f8f8ff;
+  --media-gradient: conic-gradient(at top left, #ffe066 0%, #b85c6e 33%, #6ec6f7 66%, #ffe066 100%);
 }
 
 /* Add these utility classes for background and text colors */
 .bg-background {
-  background-color: var(--bg-background) !important;
+  background-color: var(--bg-background);
 }
 
 .bg-background\/95 {
-  background-color: color-mix(in srgb, var(--bg-background) 95%, transparent) !important;
+  background-color: color-mix(in srgb, var(--bg-background) 95%, transparent);
 }
 
 .text-main {
-  color: var(--text-main) !important;
+  color: var(--text-main);
 }
 
 .theme-fornite {
@@ -617,6 +660,14 @@ textarea,
   );
   --code-bg-fornite: 26, 26, 26;
   --code-text-fornite: #ffffff;
+  --media-gradient: conic-gradient(
+    at top left,
+    #349a3a 0%,
+    #4a5afd 25%,
+    #9652b8 50%,
+    #f7b227 75%,
+    #349a3a 100%
+  );
 }
 
 .extruded-text {
@@ -712,4 +763,96 @@ textarea,
     0 6px 1px rgba(0, 0, 0, 0.1),
     0 0 5px var(--accent, #ff79c6),
     0 1px 3px var(--accent2, #8be9fd);
+}
+
+.theme-snes .flex.items-center:nth-child(1) .text-accent {
+  color: var(--accent);
+}
+
+.theme-snes .flex.items-center:nth-child(2) .text-accent {
+  color: var(--accent2);
+}
+
+.theme-snes .flex.items-center:nth-child(3) .text-accent {
+  color: var(--accent3);
+}
+
+.theme-snes .flex.items-center:nth-child(4) .text-accent {
+  color: var(--accent4);
+}
+
+/* Add rules for list items */
+.theme-snes .flex.items-center:nth-child(4n + 1) .text-accent {
+  color: var(--accent);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 2) .text-accent {
+  color: var(--accent2);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 3) .text-accent {
+  color: var(--accent3);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 4) .text-accent {
+  color: var(--accent4);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 1) button {
+  background-color: var(--accent);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 2) button {
+  background-color: var(--accent2);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 3) button {
+  background-color: var(--accent3);
+}
+
+.theme-snes .flex.items-center:nth-child(4n + 4) button {
+  background-color: var(--accent4);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 1) .text-accent {
+  color: var(--accent);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 2) .text-accent {
+  color: var(--accent2);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 3) .text-accent {
+  color: var(--accent3);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 4) .text-accent {
+  color: var(--accent4);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 1) button {
+  background-color: var(--accent);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 2) button {
+  background-color: var(--accent2);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 3) button {
+  background-color: var(--accent3);
+}
+
+.theme-nord .flex.items-center:nth-child(4n + 4) button {
+  background-color: var(--accent4);
+}
+
+.theme-nord button svg {
+  color: white;
+  fill: white;
+  stroke: white;
+}
+
+.theme-snes button,
+.theme-nord button {
+  color: white !important;
 }

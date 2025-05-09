@@ -11,8 +11,8 @@ interface PseudocodeDisplayProps {
 export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
   const { theme } = useTheme();
   const isDark = ["dracula", "nord"].includes(theme);
-  const backgroundColor = isDark ? "#23272e" : "#f8fafc";
-  const textColor = isDark ? "#e5e7eb" : "#23272e";
+  const backgroundColor = isDark ? "var(--bg-secondary)" : "var(--bg-main)";
+  const textColor = isDark ? "var(--text-secondary)" : "var(--text-main)";
   const syntaxStyle = isDark ? vscDarkPlus : vs;
 
   return (
