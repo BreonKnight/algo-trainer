@@ -909,7 +909,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
             <div className="w-full max-w-3xl mx-auto">
               <div
                 className={cn(
-                  "flex flex-wrap gap-2 justify-center p-4 rounded-xl backdrop-blur-md transition-all duration-300 hover:shadow-xl",
+                  "flex flex-wrap gap-2 justify-center p-4 rounded-xl backdrop-blur-md transition-all duration-300 hover:shadow-xl z-auto",
                   theme === "nord"
                     ? "bg-white/10 border border-white/20 hover:bg-white/15"
                     : "bg-secondary/20 border border-secondary/40 hover:bg-secondary/30"
@@ -943,7 +943,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                     <TooltipContent
                       side="bottom"
                       className={cn(
-                        "px-3 py-2 text-sm font-medium max-w-[200px]",
+                        "z-[9999] px-3 py-2 text-sm font-medium max-w-[200px]",
                         theme === "nord" ? "bg-white/10 text-white" : "bg-secondary/20 text-main"
                       )}
                     >

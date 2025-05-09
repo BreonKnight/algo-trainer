@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/components/theme/use-theme";
 
 interface BackgroundProps {
   children: React.ReactNode;
@@ -7,8 +6,6 @@ interface BackgroundProps {
 }
 
 export function Background({ children, className }: BackgroundProps) {
-  const { theme } = useTheme();
-
   return (
     <div className={cn("relative min-h-screen", className)}>
       {/* Animated background gradient - subtle */}
