@@ -252,10 +252,10 @@ export function TopBar({ className }: TopBarProps) {
                   <span className="text-xs text-muted-foreground/60">
                     Learn more about these notations in{" "}
                     <a
-                      href="/algorithm-practice/guide"
+                      href="/cs-math"
                       className="text-accent hover:text-accent/80 underline underline-offset-2"
                     >
-                      AlgoGuide
+                      CS Math
                     </a>
                   </span>
                 </div>
