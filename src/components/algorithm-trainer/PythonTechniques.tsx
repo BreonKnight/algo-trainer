@@ -932,7 +932,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                           activeSection === section.title
                             ? theme === "nord"
                               ? "bg-white/20 text-white"
-                              : "bg-secondary/40 text-main"
+                              : "bg-secondary/40 text-accent"
                             : theme === "nord"
                               ? "text-white/70 hover:text-white hover:bg-white/10"
                               : "text-main/70 hover:text-main hover:bg-secondary/30"

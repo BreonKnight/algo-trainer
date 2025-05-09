@@ -103,6 +103,18 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
     };
   }, [rowVirtualizer]);
 
+  // Add scroll lock effect
+  React.useEffect(() => {
+    if (showDetailedView) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showDetailedView]);
+
   // Memoize chapter card render function
   const renderChapterCard = useCallback(
     (chapter: Chapter) => (
@@ -133,7 +145,7 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
           <div className="space-y-2">
             <h2
               className={cn(
-                "text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors duration-200",
+                "text-xl sm:text-2xl font-semibold group-hover:text-primary transition-colors duration-200 tracking-tight",
                 "text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
               )}
             >
@@ -160,7 +172,9 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
           />
         </div>
 
-        <p className={cn("text-sm mb-4 line-clamp-2", "text-muted-foreground")}>{chapter.theme}</p>
+        <p className={cn("text-base mb-4 line-clamp-2 leading-relaxed", "text-muted-foreground")}>
+          {chapter.theme}
+        </p>
 
         <div className="flex flex-wrap gap-2 mb-4">
           {chapter.notableTerms.slice(0, 3).map((term, index) => (
@@ -289,7 +303,7 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className={cn(
-                "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
+                "text-4xl sm:text-5xl md:text-6xl font-bold mb-8 bg-clip-text text-transparent leading-[1.1] tracking-tight",
                 "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
               )}
             >
@@ -299,7 +313,10 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className={cn("text-base sm:text-lg max-w-2xl mx-auto px-4", "text-muted-foreground")}
+              className={cn(
+                "text-lg sm:text-xl max-w-3xl mx-auto px-4 leading-relaxed",
+                "text-muted-foreground"
+              )}
             >
               A comprehensive guide to building reliable, scalable, and maintainable systems
             </motion.p>
@@ -358,7 +375,12 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                 className={cn(
                   "rounded-2xl p-6 sm:p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto",
                   "shadow-2xl border backdrop-blur-sm",
-                  "bg-card border-border"
+                  theme === "light" || theme === "solarized"
+                    ? "bg-white/95"
+                    : theme === "nord"
+                      ? "bg-[#2E3440]/95"
+                      : "bg-[#282A36]/95",
+                  "border-border"
                 )}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -401,12 +423,14 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                   </div>
                   <button
                     className={cn(
-                      "p-2 rounded-full hover:bg-opacity-10 transition-colors",
-                      "text-muted-foreground hover:bg-foreground"
+                      "p-2 rounded-full transition-all duration-300 ease-in-out",
+                      "hover:scale-110 active:scale-95",
+                      "flex items-center justify-center",
+                      theme === "light" && "text-white"
                     )}
                     onClick={handleClose}
                   >
-                    <X className="w-5 h-5" />
+                    <X className="h-4 w-4" />
                   </button>
                 </div>
 
@@ -430,14 +454,21 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                       transition={{ duration: 0.3 }}
                       className="space-y-3"
                     >
-                      <h3
-                        className={cn(
-                          "text-lg sm:text-xl font-semibold tracking-tight flex items-center gap-2",
-                          "text-card-foreground"
-                        )}
-                      >
-                        {title}
-                      </h3>
+                      <div className="space-y-2">
+                        <h3
+                          className={cn(
+                            "text-xl sm:text-2xl font-semibold tracking-tight flex items-center gap-2 pb-2 border-b",
+                            theme === "light" || theme === "solarized"
+                              ? "border-accent/20"
+                              : theme === "nord"
+                                ? "border-white/20"
+                                : "border-accent/20",
+                            "text-card-foreground"
+                          )}
+                        >
+                          {title}
+                        </h3>
+                      </div>
                       {Array.isArray(content) ? (
                         title === "Notable Terms" ? (
                           <div className="flex flex-wrap gap-2">
@@ -446,7 +477,7 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                                 key={index}
                                 whileHover={{ scale: 1.05 }}
                                 className={cn(
-                                  "px-3 py-1.5 rounded-full text-sm font-medium",
+                                  "px-3 py-1.5 rounded-full text-sm font-medium tracking-wide",
                                   "transition-transform",
                                   "text-muted-foreground"
                                 )}
@@ -464,13 +495,13 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.05 }}
                                 className={cn(
-                                  "flex items-start gap-3 group",
+                                  "flex items-start gap-3 group text-base leading-relaxed",
                                   "text-muted-foreground"
                                 )}
                               >
                                 <span
                                   className={cn(
-                                    "mt-1.5 h-1.5 w-1.5 rounded-full shrink-0",
+                                    "mt-2 h-1.5 w-1.5 rounded-full shrink-0",
                                     "transition-colors duration-200",
                                     "text-primary group-hover:bg-primary/80"
                                   )}
@@ -485,7 +516,7 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                       ) : (
                         <p
                           className={cn(
-                            "leading-relaxed text-sm sm:text-base",
+                            "leading-relaxed text-base sm:text-lg",
                             "text-muted-foreground"
                           )}
                         >

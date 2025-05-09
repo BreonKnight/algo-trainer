@@ -126,9 +126,9 @@ const themeStyles = {
     title: "text-accent font-bold",
     card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
     text: {
-      primary: "text-accent-foreground/90",
-      secondary: "text-accent-foreground/70",
-      muted: "text-accent-foreground/50",
+      primary: "text-white",
+      secondary: "text-white/80",
+      muted: "text-white/60",
     },
     badge: {
       unlocked: "bg-background/30 border border-accent/40 backdrop-blur-sm",
@@ -213,6 +213,18 @@ export function GamificationButton() {
   // Default to dracula theme if current theme is not in themeStyles
   const styles = themeStyles[theme as keyof typeof themeStyles] || themeStyles.dracula;
 
+  // Add scroll lock effect
+  useEffect(() => {
+    if (showPanel) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showPanel]);
+
   useEffect(() => {
     // Get initial progress
     const gamificationService = GamificationService.getInstance();
@@ -250,7 +262,9 @@ export function GamificationButton() {
             `w-8 h-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] transition-colors duration-200 ` +
             (theme === "dracula" || theme === "ps2" || theme === "re2" || theme === "mh"
               ? "text-accent2 group-hover:text-accent"
-              : "text-yellow-200 group-hover:text-yellow-300")
+              : theme === "light" || theme === "solarized"
+                ? "text-accent group-hover:text-accent/80"
+                : "text-yellow-200 group-hover:text-yellow-300")
           }
         />
       </Button>
@@ -260,11 +274,25 @@ export function GamificationButton() {
         <DialogContent
           className={`max-w-2xl max-h-[80vh] ${styles.dialog}`}
           style={{
-            background: "rgba(255, 255, 255, 0.1)",
+            background:
+              theme === "light" || theme === "solarized"
+                ? "rgba(255, 255, 255, 0.8)"
+                : theme === "nord"
+                  ? "rgba(236, 239, 244, 0.8)"
+                  : "rgba(40, 42, 54, 0.8)",
             backdropFilter: "blur(12px)",
             animation: "modalSlideIn 0.3s ease-out",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
+            border:
+              theme === "light" || theme === "solarized"
+                ? "1px solid rgba(0, 0, 0, 0.1)"
+                : theme === "nord"
+                  ? "1px solid rgba(255, 255, 255, 0.1)"
+                  : "1px solid rgba(255, 255, 255, 0.1)",
             boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
+          }}
+          onPointerDownOutside={(e) => {
+            e.preventDefault();
+            setShowPanel(false);
           }}
         >
           <DialogHeader className={`${styles.header} pb-4`}>
