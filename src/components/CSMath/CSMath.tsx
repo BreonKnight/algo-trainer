@@ -297,7 +297,7 @@ const SymbolModal: React.FC<SymbolModalProps> = ({ symbol, isOpen, onClose, them
         <button
           onClick={onClose}
           className={cn(
-            "absolute top-4 right-4 p-2 rounded-full hover:bg-opacity-20",
+            "absolute top-4 right-4 p-2 rounded-full hover:bg-accent hover:bg-opacity-20",
             theme === "light" || theme === "solarized"
               ? "text-accent hover:bg-accent"
               : "text-accent2 hover:bg-accent2"
@@ -476,9 +476,10 @@ const CSMath: React.FC = () => {
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className={cn(
-            "text-5xl font-bold mb-8 text-center font-display tracking-tight",
-            theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+            "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
+            "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
           )}
         >
           AlgoTrainer: Computer Science Math Academy
@@ -494,7 +495,7 @@ const CSMath: React.FC = () => {
               "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
               theme === "light" || theme === "solarized"
                 ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                : "bg-accent/20 hover:bg-accent/30 text-accent"
             )}
           >
             <FaScroll className="h-5 w-5" />
@@ -514,7 +515,7 @@ const CSMath: React.FC = () => {
               "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
               theme === "light" || theme === "solarized"
                 ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                : "bg-accent/20 hover:bg-accent/30 text-accent"
             )}
           >
             <FaCalculator className="h-5 w-5" />
@@ -719,7 +720,7 @@ const CSMath: React.FC = () => {
                           ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                           : "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                         : currentConcept === concept.id - 1
-                          ? "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                          ? "bg-accent/20 hover:bg-accent/30 text-accent"
                           : "bg-background/50 hover:bg-background/70"
                     )}
                   >
@@ -908,7 +909,7 @@ const CSMath: React.FC = () => {
                 "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
                 theme === "light" || theme === "solarized"
                   ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                  : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                  : "bg-accent/20 hover:bg-accent/30 text-accent"
               )}
             >
               Previous
@@ -922,7 +923,7 @@ const CSMath: React.FC = () => {
                 "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
                 theme === "light" || theme === "solarized"
                   ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                  : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                  : "bg-accent/20 hover:bg-accent/30 text-accent"
               )}
             >
               {showDetails ? "Hide Details" : "Show Details"}
@@ -936,7 +937,7 @@ const CSMath: React.FC = () => {
                 "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
                 theme === "light" || theme === "solarized"
                   ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                  : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
+                  : "bg-accent/20 hover:bg-accent/30 text-accent"
               )}
             >
               Next

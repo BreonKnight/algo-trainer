@@ -2,6 +2,8 @@ import "./App.css";
 import { useState, useEffect, Suspense, lazy, memo, useCallback, useMemo } from "react";
 import { Routes, Route, useParams, Navigate, Link } from "react-router-dom";
 import { Toaster } from "sonner";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 import AboutPage from "@/app/AboutPage";
 import PatternManagement from "@/components/admin/PatternManagement";
@@ -84,7 +86,18 @@ function TutorialList() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Available Tutorials</h1>
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className={cn(
+          "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
+          "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+        )}
+      >
+        Available Tutorials
+      </motion.h1>
+
       {sortedCategories.map(([category, categoryTutorials]) => (
         <div key={category} className="mb-8">
           <h2 className="text-xl font-semibold mb-4 capitalize">{category.replace("-", " ")}</h2>

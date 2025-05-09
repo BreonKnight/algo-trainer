@@ -182,6 +182,31 @@ interface AudioPlayerProps {
   onPlayStateChange?: (isPlaying: boolean) => void;
 }
 
+const getThemeGradient = (theme: string) => {
+  switch (theme) {
+    case "snes":
+      return "linear-gradient(45deg, #ff0000 0%, #ffa500 20%, #ffff00 40%, #00ff00 60%, #0000ff 80%, #4b0082 100%)";
+    case "ps2":
+      return "linear-gradient(45deg, #000000 0%, #1a1a1a 25%, #333333 50%, #4d4d4d 75%, #666666 100%)";
+    case "re2":
+      return "linear-gradient(45deg, #8b0000 0%, #a52a2a 25%, #b22222 50%, #dc143c 75%, #ff0000 100%)";
+    case "mh":
+      return "linear-gradient(45deg, #2c3e50 0%, #34495e 25%, #3498db 50%, #2980b9 75%, #1abc9c 100%)";
+    case "kingdom-hearts":
+      return "linear-gradient(45deg, #1e90ff 0%, #4169e1 25%, #0000cd 50%, #000080 75%, #00008b 100%)";
+    case "fornite":
+      return "linear-gradient(45deg, #ffd700 0%, #ffa500 25%, #ff8c00 50%, #ff4500 75%, #ff0000 100%)";
+    case "nord":
+      return "linear-gradient(45deg, #2e3440 0%, #3b4252 25%, #434c5e 50%, #4c566a 75%, #5e81ac 100%)";
+    case "dracula":
+      return "linear-gradient(45deg, #ff79c6 0%, #bd93f9 25%, #6272a4 50%, #44475a 75%, #282a36 100%)";
+    case "solarized":
+      return "linear-gradient(45deg, #fdf6e3 0%, #eee8d5 25%, #93a1a1 50%, #586e75 75%, #073642 100%)";
+    default: // light theme
+      return "linear-gradient(45deg, #ffffff 0%, #f0f0f0 25%, #e0e0e0 50%, #d0d0d0 75%, #c0c0c0 100%)";
+  }
+};
+
 // Memoized AudioPlayer component
 export const AudioPlayer = memo(function AudioPlayer({ onPlayStateChange }: AudioPlayerProps) {
   const { theme } = useTheme();
@@ -309,12 +334,35 @@ export const AudioPlayer = memo(function AudioPlayer({ onPlayStateChange }: Audi
 
   return (
     <AudioPlayerErrorBoundary>
-      <div className="relative p-[2px] rounded-2xl bg-[conic-gradient(at_top_left,_#3b82f6_0%,_#8b5cf6_15%,_#ff79c6_30%,_#ffe066_45%,_#ff4500_60%,_#2ecc71_75%,_#3498db_90%,_#3b82f6_100%)] shadow-2xl">
+      <div
+        className="relative p-[2px] rounded-2xl shadow-2xl"
+        style={{
+          background:
+            theme === "snes"
+              ? "rgb(212, 212, 212)"
+              : theme === "light" || theme === "solarized"
+                ? "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(56,189,248,0.08) 100%)"
+                : "linear-gradient(135deg, var(--background) 0%, rgba(56,189,248,0.08) 100%)",
+        }}
+      >
+        <div
+          className="absolute inset-0 rounded-2xl p-[2px]"
+          style={{
+            background: getThemeGradient(theme),
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
         <div
           className="bg-white/90 dark:bg-background rounded-2xl p-4 max-w-xs mx-auto flex flex-col items-center w-full shadow-xl"
           style={{
             background:
-              "linear-gradient(135deg, rgba(255,255,255,0.95) 60%, rgba(56,189,248,0.08) 100%)",
+              theme === "snes"
+                ? "rgb(212, 212, 212)"
+                : theme === "light" || theme === "solarized"
+                  ? "linear-gradient(135deg, rgba(255,255,255,0.95) 60%, rgba(56,189,248,0.08) 100%)"
+                  : "linear-gradient(135deg, var(--background) 60%, rgba(56,189,248,0.08) 100%)",
           }}
         >
           <div className="text-[10px] text-secondary font-medium mb-0.5">Background Music</div>
@@ -327,7 +375,7 @@ export const AudioPlayer = memo(function AudioPlayer({ onPlayStateChange }: Audi
                 className={cn(
                   "h-8 w-8 min-w-[32px] min-h-[32px] p-0 rounded-md flex-shrink-0 transition-transform duration-200 group border",
                   theme === "light" || theme === "solarized"
-                    ? "bg-white border-accent text-accent shadow"
+                    ? "bg-white border-accent text-accent shadow hover:bg-accent/10"
                     : "bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 border-none"
                 )}
                 title={isPlaying ? "Pause" : "Play"}
@@ -356,7 +404,7 @@ export const AudioPlayer = memo(function AudioPlayer({ onPlayStateChange }: Audi
                 className={cn(
                   "h-8 w-8 min-w-[32px] min-h-[32px] p-0 rounded-md flex-shrink-0 transition-transform duration-200 border",
                   theme === "light" || theme === "solarized"
-                    ? "bg-white border-accent text-accent shadow"
+                    ? "bg-white border-accent text-accent shadow hover:bg-accent/10"
                     : "bg-secondary text-main hover:bg-accent2 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-accent2/50 border-none"
                 )}
                 title="Skip to next song"

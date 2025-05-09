@@ -11,7 +11,6 @@ import {
 import { useState, useMemo, useCallback, memo } from "react";
 
 import { AlgorithmVisualizer } from "@/components/algorithm-trainer/AlgorithmVisualizer";
-import { NavigationBar } from "@/components/algorithm-trainer/layout/NavigationBar";
 import { sortingPatterns } from "@/components/algorithm-trainer/patterns/sorting";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
@@ -186,27 +185,30 @@ export default function AlgorithmComparison({
     () =>
       cn(
         "transition-all duration-200 rounded-lg",
-        isDarkTheme ? "hover:bg-accent/20 border-border/50" : "hover:bg-accent/10 border-border"
+        isDarkTheme ? "hover:bg-accent/20 border-border/50" : "hover:bg-accent/10 border-border",
+        theme === "light" ? "hover:text-green-600" : ""
       ),
-    [isDarkTheme]
+    [isDarkTheme, theme]
   );
 
   const iconContainerClasses = useMemo(
     () =>
       cn(
         "p-2 rounded-lg transition-colors duration-200",
-        isDarkTheme ? "bg-accent/10" : "bg-accent/5"
+        isDarkTheme ? "bg-accent/10" : "bg-accent/5",
+        theme === "light" ? "hover:text-green-600" : ""
       ),
-    [isDarkTheme]
+    [isDarkTheme, theme]
   );
 
   const metricCardClasses = useMemo(
     () =>
       cn(
         "p-4 rounded-lg transition-colors duration-200",
-        isDarkTheme ? "bg-accent/10" : "bg-accent/5"
+        isDarkTheme ? "bg-accent/10" : "bg-accent/5",
+        theme === "light" ? "hover:text-green-600" : ""
       ),
-    [isDarkTheme]
+    [isDarkTheme, theme]
   );
 
   return (
@@ -220,7 +222,6 @@ export default function AlgorithmComparison({
         >
           Algorithm Comparison
         </h1>
-        <NavigationBar />
       </div>
       <div className={cn("flex flex-col gap-8 w-full max-w-7xl px-6 py-12", textClasses)}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
@@ -550,7 +551,8 @@ export default function AlgorithmComparison({
                       className={cn(
                         "w-full h-12 text-base",
                         buttonClasses,
-                        isRacing ? "opacity-50" : ""
+                        isRacing ? "opacity-50" : "",
+                        theme === "light" ? "hover:text-green-600" : ""
                       )}
                       variant={isRacing ? "outline" : "default"}
                     >

@@ -246,14 +246,6 @@ export function Navigation() {
   const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
 
   // Memoize theme checks
-  const themeChecks = useMemo(
-    () => ({
-      lightThemes: ["light", "solarized"],
-      blueThemes: ["nord", "ps2"],
-      fortniteTheme: theme === "fornite",
-    }),
-    [theme]
-  );
 
   // Memoize mobile menu toggle
   const toggleMobileMenu = useCallback(() => {
@@ -270,6 +262,34 @@ export function Navigation() {
     scrollToTop();
     closeMobileMenu();
   }, [scrollToTop, closeMobileMenu]);
+
+  // Add theme-specific text class mapping
+  const themeTextClass = (() => {
+    switch (theme) {
+      case "dracula":
+        return "text-accent";
+      case "nord":
+        return "text-accent2";
+      case "solarized":
+        return "text-accent";
+      case "light":
+        return "text-blue-600";
+      case "snes":
+        return "text-accent";
+      case "ps2":
+        return "text-accent";
+      case "re2":
+        return "text-accent";
+      case "mh":
+        return "text-accent";
+      case "kingdom-hearts":
+        return "text-accent";
+      case "fornite":
+        return "text-accent4";
+      default:
+        return "text-accent";
+    }
+  })();
 
   // Update the Link rendering in both desktop and mobile menus
   const renderNavLink = useCallback(
@@ -288,18 +308,10 @@ export function Navigation() {
           }}
           onMouseEnter={item.onMouseEnter}
           className={cn(
-            "flex items-center px-2.5 py-2 rounded-md text-sm font-medium transition-colors relative",
+            "flex items-center px-2.5 py-2 rounded-md text-sm font-medium transition-colors relative focus-visible:ring-2 focus-visible:ring-accent",
             isActive(item.path)
-              ? `bg-accent ${
-                  themeChecks.fortniteTheme
-                    ? "text-black"
-                    : themeChecks.lightThemes.includes(theme)
-                      ? "text-gray-900"
-                      : themeChecks.blueThemes.includes(theme)
-                        ? "text-white"
-                        : "text-accent-foreground"
-                } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-              : "text-foreground/80 hover:text-foreground hover:bg-accent/20"
+              ? `bg-accent/20 ${themeTextClass} font-semibold`
+              : `${themeTextClass}/80 hover:${themeTextClass} hover:bg-accent/20`
           )}
         >
           <Icon className="h-4 w-4 mr-2" />
@@ -312,7 +324,7 @@ export function Navigation() {
         </Link>
       );
     },
-    [isActive, themeChecks, theme, scrollToTop]
+    [isActive, themeTextClass, scrollToTop]
   );
 
   return (
@@ -384,18 +396,10 @@ export function Navigation() {
                         to={item.path}
                         onClick={handleLinkClick}
                         className={cn(
-                          "flex items-center px-3 py-2.5 rounded-md text-base font-medium transition-colors",
+                          "flex items-center px-3 py-2.5 rounded-md text-base font-medium transition-colors focus-visible:ring-2 focus-visible:ring-accent",
                           isActive(item.path)
-                            ? `bg-accent ${
-                                themeChecks.fortniteTheme
-                                  ? "text-black"
-                                  : themeChecks.lightThemes.includes(theme)
-                                    ? "text-gray-900"
-                                    : themeChecks.blueThemes.includes(theme)
-                                      ? "text-white"
-                                      : "text-accent-foreground"
-                              } ring-1 ring-accent-foreground/40 ring-offset-1 ring-offset-background`
-                            : "text-foreground/80 hover:text-foreground hover:bg-accent/20"
+                            ? `bg-accent/20 ${themeTextClass} font-semibold`
+                            : `${themeTextClass}/80 hover:${themeTextClass} hover:bg-accent/20`
                         )}
                       >
                         <Icon className="h-5 w-5 mr-3" />

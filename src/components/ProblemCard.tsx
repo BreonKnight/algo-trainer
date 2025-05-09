@@ -99,7 +99,7 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
           <Typography variant="h6">Time: {formatTime(timeElapsed)}</Typography>
           <Box>
             <Button
-              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent2 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={() => {
                 setIsActive(true);
                 onStart();
@@ -118,13 +118,13 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
               Reset
             </Button>
             <Button
-              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent2 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={onSubmit}
             >
               Submit
             </Button>
             <Button
-              className="px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent2 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+              className="px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={onNext}
             >
               Next

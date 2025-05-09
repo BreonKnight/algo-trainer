@@ -17,6 +17,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { BookOpen, ChevronDown, GripVertical, HelpCircle } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "@/components/theme/use-theme";
 
 import { CenterInformaticsWidget } from "@/components/algorithm-trainer/layout/CenterInformaticsWidget";
 import { RightControls } from "@/components/algorithm-trainer/layout/RightControls";
@@ -86,6 +87,7 @@ export function TopBar({ className }: TopBarProps) {
     { id: "controls", component: <RightControls /> },
   ]);
 
+  const { theme } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const sensors = useSensors(
@@ -150,8 +152,17 @@ export function TopBar({ className }: TopBarProps) {
 
         {/* Mathematical Notation Legend */}
         <TooltipProvider>
-          <div className="mt-4 space-y-2">
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-background/30 backdrop-blur-sm border border-border/20 shadow-sm hover:bg-background/40 transition-colors w-fit">
+          <div className="mt-4 space-y-2 relative">
+            <div
+              className={cn(
+                "flex items-center gap-2 px-2 py-1.5 rounded-md border border-border/20 shadow-sm hover:bg-background/40 transition-colors w-fit relative z-[9999] pointer-events-auto",
+                theme === "light" || theme === "solarized"
+                  ? "bg-background/30"
+                  : theme === "nord"
+                    ? "bg-background/30"
+                    : "bg-background/30"
+              )}
+            >
               <div className="flex items-center gap-1">
                 <HelpCircle className="w-3 h-3 text-muted-foreground/60" />
                 <span className="text-xs font-medium text-muted-foreground/60">Notation</span>
@@ -161,14 +172,14 @@ export function TopBar({ className }: TopBarProps) {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-1">
-                      <ClickableNotation
-                        notationKey="elementOf"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="subset"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["elementOf", "subset"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -179,14 +190,14 @@ export function TopBar({ className }: TopBarProps) {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-1">
-                      <ClickableNotation
-                        notationKey="union"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="intersection"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["union", "intersection"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -197,14 +208,14 @@ export function TopBar({ className }: TopBarProps) {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div className="flex items-center gap-1">
-                      <ClickableNotation
-                        notationKey="forAll"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="exists"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["forAll", "exists"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -215,8 +226,17 @@ export function TopBar({ className }: TopBarProps) {
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-6 px-2 ml-1 text-muted-foreground/60 hover:text-foreground"
-                onClick={() => setIsExpanded(!isExpanded)}
+                className={cn(
+                  "h-6 px-2 ml-1 transition-colors focus:outline-none focus:ring-2 focus:ring-ring/50 cursor-pointer relative z-[9999] pointer-events-auto",
+                  theme === "light" || theme === "solarized"
+                    ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
+                    : theme === "nord"
+                      ? "bg-background/30 text-white hover:bg-background/50"
+                      : "bg-background/30 text-accent2 hover:bg-background/50"
+                )}
+                onClick={() => {
+                  setIsExpanded(!isExpanded);
+                }}
               >
                 <ChevronDown
                   className={cn("w-3 h-3 transition-transform", isExpanded && "rotate-180")}
@@ -226,13 +246,13 @@ export function TopBar({ className }: TopBarProps) {
 
             {/* Expanded Notation Categories */}
             {isExpanded && (
-              <div className="space-y-3">
+              <div className="space-y-3 relative z-0">
                 <div className="flex items-center gap-2 px-2">
                   <BookOpen className="w-3.5 h-3.5 text-muted-foreground/60" />
                   <span className="text-xs text-muted-foreground/60">
                     Learn more about these notations in{" "}
                     <a
-                      href="/algo-guide"
+                      href="/algorithm-practice/guide"
                       className="text-accent hover:text-accent/80 underline underline-offset-2"
                     >
                       AlgoGuide
@@ -246,18 +266,14 @@ export function TopBar({ className }: TopBarProps) {
                       Logic
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="forAll"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="exists"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="notElementOf"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["forAll", "exists", "notElementOf"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -267,18 +283,14 @@ export function TopBar({ className }: TopBarProps) {
                       Set Theory
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="elementOf"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="subset"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="emptySet"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["elementOf", "subset", "emptySet"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -288,14 +300,14 @@ export function TopBar({ className }: TopBarProps) {
                       Set Operations
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="union"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="intersection"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["union", "intersection"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -305,18 +317,14 @@ export function TopBar({ className }: TopBarProps) {
                       Number Theory
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="forAll"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="exists"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="elementOf"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["forAll", "exists", "elementOf"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -326,14 +334,14 @@ export function TopBar({ className }: TopBarProps) {
                       Relations
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="subset"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="elementOf"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["subset", "elementOf"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -343,14 +351,14 @@ export function TopBar({ className }: TopBarProps) {
                       Functions
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="forAll"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="exists"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["forAll", "exists"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -360,14 +368,14 @@ export function TopBar({ className }: TopBarProps) {
                       Graph Theory
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="elementOf"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="subset"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["elementOf", "subset"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
 
@@ -377,14 +385,14 @@ export function TopBar({ className }: TopBarProps) {
                       Complexity
                     </h4>
                     <div className="flex flex-wrap gap-1.5 p-1.5 rounded bg-background/30">
-                      <ClickableNotation
-                        notationKey="forAll"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
-                      <ClickableNotation
-                        notationKey="exists"
-                        className="text-muted-foreground/60 hover:text-foreground"
-                      />
+                      {["forAll", "exists"].map((key, idx) => (
+                        <ClickableNotation
+                          key={key}
+                          notationKey={key}
+                          snesColorIndex={idx}
+                          className="text-muted-foreground/60 hover:text-foreground"
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>

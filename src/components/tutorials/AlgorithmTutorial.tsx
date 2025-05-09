@@ -256,7 +256,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                       setCurrentTutorial(null);
                       setActiveTab("overview");
                     }}
-                    className="bg-accent2 hover:bg-accent2/90 text-background gap-2 text-base"
+                    className="bg-accent hover:bg-accent text-accent gap-2 text-base"
                   >
                     <Check className="h-4 w-4" />
                     Complete Tutorial
@@ -290,7 +290,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                       setCurrentTutorial(null);
                       setActiveTab("overview");
                     }}
-                    className="bg-accent2 hover:bg-accent2/90 text-background gap-2 text-base"
+                    className="bg-accent hover:bg-accent text-accent gap-2 text-base"
                   >
                     <Check className="h-4 w-4" />
                     Complete Tutorial

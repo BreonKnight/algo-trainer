@@ -68,7 +68,7 @@ export function RightControls() {
                       className={cn(
                         "h-10 w-full rounded-lg transition-all duration-300 group flex items-center justify-center gap-2 px-3 truncate scale-105 shadow-lg border-2",
                         theme === "light" || theme === "solarized"
-                          ? "bg-white border border-accent text-accent shadow"
+                          ? "bg-white border border-accent text-accent shadow hover:bg-accent/10"
                           : theme === "dracula"
                             ? "bg-purple-900 text-white border-purple-400"
                             : theme === "kingdom-hearts"
