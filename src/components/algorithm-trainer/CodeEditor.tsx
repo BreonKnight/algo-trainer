@@ -127,12 +127,12 @@ export function CodeEditor({
         onShowAnswer && onShowAnswer();
         e.preventDefault();
       }
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "n") {
-        onNextPattern && onNextPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "[") {
+        onPrevPattern && onPrevPattern();
         e.preventDefault();
       }
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "p") {
-        onPrevPattern && onPrevPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "]") {
+        onNextPattern && onNextPattern();
         e.preventDefault();
       }
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") {
