@@ -23,6 +23,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogClose,
 } from "@/components/ui/dialog";
 import GamificationService, { UserProgress } from "@/lib/gamification";
 import { cn } from "@/lib/utils";
@@ -1454,21 +1455,33 @@ export default function AlgoGuide() {
               >
                 <DialogHeader
                   className={cn(
-                    "sticky top-0 rounded-t-xl px-1 py-1 sm:px-8 sm:py-6 backdrop-blur-xl z-10 pb-4 border-b border-accent/10",
+                    "sticky top-0 rounded-t-xl px-1 py-1 sm:px-8 sm:py-6 z-10 pb-4 border-b border-accent/10",
                     theme === "light"
-                      ? "bg-white text-main"
+                      ? "bg-transparent text-main"
                       : theme === "nord"
-                        ? "bg-nord-1 text-white"
-                        : "bg-zinc-900 text-white"
+                        ? "bg-transparent text-white"
+                        : "bg-transparent text-white"
                   )}
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-                    <DialogTitle className="text-2xl font-bold">
-                      {selectedAlgorithm.name}
-                    </DialogTitle>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+                      <DialogTitle className="text-2xl font-bold">
+                        {selectedAlgorithm.name}
+                      </DialogTitle>
+                    </div>
+                    <DialogClose
+                      className={cn(
+                        "p-2 rounded-full transition-all duration-300 ease-in-out",
+                        "hover:scale-110 active:scale-95",
+                        "flex items-center justify-center",
+                        theme === "light" && "text-white"
+                      )}
+                    >
+                      <span className="sr-only">Close</span>
+                    </DialogClose>
                   </div>
-                  <DialogDescription className="text-base">
+                  <DialogDescription className="text-base mt-2">
                     {selectedAlgorithm.what}
                   </DialogDescription>
                 </DialogHeader>

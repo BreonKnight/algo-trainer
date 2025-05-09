@@ -134,10 +134,13 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
                   <b>Ctrl+Shift+A</b>: Show answer
                 </li>
                 <li>
-                  <b>Ctrl+Shift+N</b>: Next pattern
+                  <b>Ctrl+Shift+[</b>: Previous pattern
                 </li>
                 <li>
-                  <b>Ctrl+Shift+P</b>: Previous pattern
+                  <b>Ctrl+Shift+]</b>: Next pattern
+                </li>
+                <li>
+                  <b>Ctrl+Shift+R</b>: Random pattern
                 </li>
                 <li>
                   <b>Ctrl+Shift+C</b>: Copy code

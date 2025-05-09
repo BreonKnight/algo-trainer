@@ -7,9 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme/use-theme";
 
 const ProgressView = memo(function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);
+  const { theme } = useTheme();
 
   const handleProgressChange = useCallback((value: number[]) => {
     setProgressValue(value[0]);
@@ -253,13 +255,32 @@ const ProgressView = memo(function ProgressView() {
                     >
                       <div className="p-2 rounded-lg bg-accent/10">{tip.icon}</div>
                       <div className="flex-1">
-                        <h3 className="font-semibold mb-1">{tip.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-2">{tip.desc}</p>
+                        <h3
+                          className={cn(
+                            "font-semibold mb-1",
+                            theme === "light" ? "text-zinc-900" : "text-zinc-100"
+                          )}
+                        >
+                          {tip.title}
+                        </h3>
+                        <p
+                          className={cn(
+                            "text-sm mb-2",
+                            theme === "light" ? "text-zinc-600" : "text-zinc-400"
+                          )}
+                        >
+                          {tip.desc}
+                        </p>
                         <a
                           href={tip.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-accent hover:text-accent2 transition-colors duration-200 flex items-center gap-1"
+                          className={cn(
+                            "text-sm transition-colors duration-200 flex items-center gap-1",
+                            theme === "light"
+                              ? "text-blue-600 hover:text-blue-700"
+                              : "text-accent hover:text-accent2"
+                          )}
                         >
                           {tip.linkText}
                           <svg
