@@ -278,7 +278,7 @@ export function GamificationButton() {
               theme === "light" || theme === "solarized"
                 ? "rgba(255, 255, 255, 0.8)"
                 : theme === "nord"
-                  ? "rgba(236, 239, 244, 0.8)"
+                  ? "rgb(88, 91, 112)"
                   : "rgba(40, 42, 54, 0.8)",
             backdropFilter: "blur(12px)",
             animation: "modalSlideIn 0.3s ease-out",
