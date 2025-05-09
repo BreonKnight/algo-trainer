@@ -1,8 +1,6 @@
-import { PlayArrow, Refresh, Check, NavigateNext, Lightbulb, Code } from "@mui/icons-material";
 import { Card, CardContent, Typography, Box, Chip } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
-import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 
 interface ProblemCardProps {
@@ -30,7 +28,6 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
 }) => {
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;

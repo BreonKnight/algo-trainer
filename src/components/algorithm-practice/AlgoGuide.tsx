@@ -27,6 +27,7 @@ import {
 import GamificationService, { UserProgress } from "@/lib/gamification";
 import { cn } from "@/lib/utils";
 import { Background } from "@/components/ui/background";
+import { useTheme } from "@/components/theme/use-theme";
 
 interface LeetCodeProblem {
   title: string;
@@ -1039,6 +1040,7 @@ export default function AlgoGuide() {
   const [selectedCategory, setSelectedCategory] = useState<string>(categories[0].name);
   const [hoveredAlgorithm, setHoveredAlgorithm] = useState<string | null>(null);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<Algorithm | null>(null);
+  const { theme } = useTheme();
 
   // Custom theme styles using our CSS variables
   const customTheme: Record<string, CSSProperties> = {
@@ -1319,11 +1321,16 @@ export default function AlgoGuide() {
                 key={category.name}
                 onClick={() => setSelectedCategory(category.name)}
                 className={cn(
-                  "px-4 py-2 rounded-lg transition-all duration-200",
-                  "flex items-center gap-2",
+                  "px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 border",
                   selectedCategory === category.name
-                    ? "bg-accent text-accent-foreground shadow-lg scale-105"
-                    : "bg-background/50 backdrop-blur-sm hover:bg-background/80 border border-accent/10 hover:scale-105"
+                    ? // Active button styling
+                      theme === "light"
+                      ? "bg-accent/10 text-accent border-accent hover:bg-accent/20"
+                      : "bg-accent text-accent-foreground border-accent shadow-lg scale-105"
+                    : // Inactive button styling
+                      theme === "light"
+                      ? "bg-white/80 text-main border-accent/20 hover:bg-accent/10 hover:text-accent"
+                      : "bg-background/50 backdrop-blur-sm text-main/80 border-accent/10 hover:bg-background/80 hover:text-accent"
                 )}
               >
                 {category.name}
@@ -1435,8 +1442,26 @@ export default function AlgoGuide() {
           {/* Algorithm Details Dialog */}
           <Dialog open={!!selectedAlgorithm} onOpenChange={() => setSelectedAlgorithm(null)}>
             {selectedAlgorithm && (
-              <DialogContent className="max-w-4xl backdrop-blur-md bg-background/80 max-h-[90vh] overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-accent/70 scrollbar-track-accent/20 hover:scrollbar-thumb-accent">
-                <DialogHeader className="sticky top-0 bg-background/80 backdrop-blur-md z-10 pb-4 border-b border-accent/10">
+              <DialogContent
+                className={cn(
+                  "max-w-4xl backdrop-blur-xl max-h-[90vh] overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-accent/70 scrollbar-track-accent/20 hover:scrollbar-thumb-accent",
+                  theme === "light"
+                    ? "bg-white text-main"
+                    : theme === "nord"
+                      ? "bg-nord-1 text-white"
+                      : "bg-zinc-900 text-white"
+                )}
+              >
+                <DialogHeader
+                  className={cn(
+                    "sticky top-0 backdrop-blur-xl z-10 pb-4 border-b border-accent/10",
+                    theme === "light"
+                      ? "bg-white text-main"
+                      : theme === "nord"
+                        ? "bg-nord-1 text-white"
+                        : "bg-zinc-900 text-white"
+                  )}
+                >
                   <div className="flex items-center gap-3 mb-2">
                     <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
                     <DialogTitle className="text-2xl font-bold">
