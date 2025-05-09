@@ -1,8 +1,9 @@
 import { PlayArrow, Refresh, Check, NavigateNext, Lightbulb, Code } from "@mui/icons-material";
-import { Card, CardContent, Typography, Button, Box, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Box, Chip } from "@mui/material";
 import React, { useState, useEffect } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 
 interface ProblemCardProps {
   title: string;
@@ -101,82 +102,33 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
           <Typography variant="h6">Time: {formatTime(timeElapsed)}</Typography>
           <Box>
             <Button
-              variant="contained"
-              startIcon={<PlayArrow />}
+              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent2 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={() => {
                 setIsActive(true);
                 onStart();
-              }}
-              sx={{
-                mr: 1,
-                ...(theme === "light" || theme === "solarized"
-                  ? {
-                      backgroundColor: "#fff",
-                      color: "#2563eb",
-                      border: "1px solid #2563eb",
-                      boxShadow: 2,
-                    }
-                  : {}),
               }}
             >
               Start
             </Button>
             <Button
-              variant="outlined"
-              startIcon={<Refresh />}
+              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-background text-accent border border-accent hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={() => {
                 setIsActive(false);
                 setTimeElapsed(0);
                 onReset();
               }}
-              sx={{
-                mr: 1,
-                ...(theme === "light" || theme === "solarized"
-                  ? {
-                      backgroundColor: "#fff",
-                      color: "#2563eb",
-                      border: "1px solid #2563eb",
-                      boxShadow: 2,
-                    }
-                  : {}),
-              }}
             >
               Reset
             </Button>
             <Button
-              variant="contained"
-              color="primary"
-              startIcon={<Check />}
+              className="mr-2 px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent2 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={onSubmit}
-              sx={{
-                mr: 1,
-                ...(theme === "light" || theme === "solarized"
-                  ? {
-                      backgroundColor: "#fff",
-                      color: "#2563eb",
-                      border: "1px solid #2563eb",
-                      boxShadow: 2,
-                    }
-                  : {}),
-              }}
             >
               Submit
             </Button>
             <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<NavigateNext />}
+              className="px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent2 hover:text-white focus:outline-none focus:ring-2 focus:ring-accent"
               onClick={onNext}
-              sx={{
-                ...(theme === "light" || theme === "solarized"
-                  ? {
-                      backgroundColor: "#fff",
-                      color: "#2563eb",
-                      border: "1px solid #2563eb",
-                      boxShadow: 2,
-                    }
-                  : {}),
-              }}
             >
               Next
             </Button>
@@ -184,36 +136,14 @@ const ProblemCard: React.FC<ProblemCardProps> = ({
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
           <Button
-            variant="outlined"
-            startIcon={<Lightbulb />}
+            className="px-4 py-2 rounded-md font-medium transition-colors bg-background text-accent border border-accent hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
             onClick={onHint}
-            sx={{
-              ...(theme === "light" || theme === "solarized"
-                ? {
-                    backgroundColor: "#fff",
-                    color: "#2563eb",
-                    border: "1px solid #2563eb",
-                    boxShadow: 2,
-                  }
-                : {}),
-            }}
           >
             Hint
           </Button>
           <Button
-            variant="outlined"
-            startIcon={<Code />}
+            className="px-4 py-2 rounded-md font-medium transition-colors bg-background text-accent border border-accent hover:bg-accent/10 hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
             onClick={onSolution}
-            sx={{
-              ...(theme === "light" || theme === "solarized"
-                ? {
-                    backgroundColor: "#fff",
-                    color: "#2563eb",
-                    border: "1px solid #2563eb",
-                    boxShadow: 2,
-                  }
-                : {}),
-            }}
           >
             Solution
           </Button>
