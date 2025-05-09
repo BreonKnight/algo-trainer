@@ -9,6 +9,7 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaSearch,
+  FaTimes,
 } from "react-icons/fa";
 
 import { additionalConcepts } from "@/components/CSMath/concepts";
@@ -246,6 +247,164 @@ const CLRS_SYMBOLS = [
   },
 ];
 
+interface BaseSymbol {
+  symbol: string;
+  name: string;
+  description: string;
+  example: string;
+}
+
+interface EnhancedSymbol extends BaseSymbol {
+  applications: string[];
+  relatedConcepts: string[];
+}
+
+interface SymbolModalProps {
+  symbol: EnhancedSymbol;
+  isOpen: boolean;
+  onClose: () => void;
+  theme: string;
+}
+
+const SymbolModal: React.FC<SymbolModalProps> = ({ symbol, isOpen, onClose, theme }) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={cn(
+        "fixed inset-0 z-50 flex items-center justify-center p-4",
+        theme === "light" || theme === "solarized"
+          ? "bg-black/60 backdrop-blur-xl"
+          : "bg-black/60 backdrop-blur-xl"
+      )}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className={cn(
+          "relative w-full max-w-2xl rounded-xl p-6 shadow-2xl border",
+          theme === "light" || theme === "solarized"
+            ? "bg-background/95 backdrop-blur-sm border-accent/20"
+            : "bg-background/95 backdrop-blur-sm border-accent2/20"
+        )}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className={cn(
+            "absolute top-4 right-4 p-2 rounded-full hover:bg-opacity-20",
+            theme === "light" || theme === "solarized"
+              ? "text-accent hover:bg-accent"
+              : "text-accent2 hover:bg-accent2"
+          )}
+        >
+          <FaTimes className="h-5 w-5" />
+        </button>
+
+        <div className="flex items-start gap-4 mb-6">
+          <span
+            className={cn(
+              "text-4xl font-mono",
+              theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+            )}
+          >
+            {symbol.symbol}
+          </span>
+          <div className="flex-1">
+            <h2
+              className={cn(
+                "text-2xl font-mono tracking-wide pb-2 border-b-2",
+                theme === "light" || theme === "solarized"
+                  ? "text-accent border-accent/30"
+                  : "text-accent2 border-accent2/30"
+              )}
+            >
+              {symbol.name}
+            </h2>
+            <p className="text-foreground mt-3 font-sans leading-relaxed">{symbol.description}</p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div
+            className={cn(
+              "p-4 rounded-lg border",
+              theme === "light" || theme === "solarized"
+                ? "bg-background border-accent/20"
+                : "bg-background/95 border-accent2/20"
+            )}
+          >
+            <h3
+              className={cn(
+                "text-lg font-mono tracking-wide mb-3",
+                theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+              )}
+            >
+              Example Usage
+            </h3>
+            <p className="font-mono text-foreground leading-relaxed">{symbol.example}</p>
+          </div>
+
+          <div
+            className={cn(
+              "p-4 rounded-lg border",
+              theme === "light" || theme === "solarized"
+                ? "bg-background border-accent/20"
+                : "bg-background/95 border-accent2/20"
+            )}
+          >
+            <h3
+              className={cn(
+                "text-lg font-mono tracking-wide mb-3",
+                theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+              )}
+            >
+              Common Applications
+            </h3>
+            <ul className="list-disc list-inside space-y-2 text-foreground font-sans">
+              {symbol.applications?.map((app, index) => (
+                <li key={index} className="leading-relaxed">
+                  {app}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div
+            className={cn(
+              "p-4 rounded-lg border",
+              theme === "light" || theme === "solarized"
+                ? "bg-background border-accent/20"
+                : "bg-background/95 border-accent2/20"
+            )}
+          >
+            <h3
+              className={cn(
+                "text-lg font-mono tracking-wide mb-3",
+                theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+              )}
+            >
+              Related Concepts
+            </h3>
+            <ul className="list-disc list-inside space-y-2 text-foreground font-sans">
+              {symbol.relatedConcepts?.map((concept, index) => (
+                <li key={index} className="leading-relaxed">
+                  {concept}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const CSMath: React.FC = () => {
   const { theme } = useTheme();
   const [currentConcept, setCurrentConcept] = useState<number>(0);
@@ -254,6 +413,7 @@ const CSMath: React.FC = () => {
   const [showSymbols, setShowSymbols] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedSymbol, setSelectedSymbol] = useState<EnhancedSymbol | null>(null);
 
   const nextConcept = () => {
     setCurrentConcept((prev) => (prev + 1) % allConcepts.length);
@@ -293,6 +453,23 @@ const CSMath: React.FC = () => {
     return matchesSearch && matchesCategory;
   });
 
+  // Update the CLRS_SYMBOLS array to include more detailed information
+  const enhancedCLRS_SYMBOLS: EnhancedSymbol[] = CLRS_SYMBOLS.map((symbol) => ({
+    ...symbol,
+    applications: [
+      "Used in algorithm analysis to describe time and space complexity",
+      "Essential for understanding asymptotic behavior of algorithms",
+      "Helps in comparing different algorithmic approaches",
+      "Used in mathematical proofs and formal reasoning",
+    ],
+    relatedConcepts: [
+      "Asymptotic Analysis",
+      "Algorithm Complexity",
+      "Mathematical Induction",
+      "Recurrence Relations",
+    ],
+  }));
+
   return (
     <Background>
       <div className="max-w-4xl mx-auto">
@@ -316,7 +493,7 @@ const CSMath: React.FC = () => {
             className={cn(
               "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
               theme === "light" || theme === "solarized"
-                ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                 : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
             )}
           >
@@ -336,7 +513,7 @@ const CSMath: React.FC = () => {
             className={cn(
               "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
               theme === "light" || theme === "solarized"
-                ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                 : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
             )}
           >
@@ -380,7 +557,7 @@ const CSMath: React.FC = () => {
                     className={cn(
                       "w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
                       theme === "light" || theme === "solarized"
-                        ? "bg-background/50 border-accent/20 text-foreground placeholder-foreground/50 focus:ring-accent"
+                        ? "bg-white text-accent border border-accent shadow-sm placeholder-accent/60 focus:ring-accent"
                         : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
                     )}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -389,71 +566,86 @@ const CSMath: React.FC = () => {
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {CLRS_SYMBOLS.filter(
-                  (symbol) =>
-                    symbol.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    symbol.description.toLowerCase().includes(searchQuery.toLowerCase())
-                ).map((symbol, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className={cn(
-                      "p-4 rounded-lg border hover:transition-colors",
-                      theme === "light" || theme === "solarized"
-                        ? "bg-background/50 border-accent/10 hover:bg-background/70"
-                        : "bg-background/50 border-accent2/10 hover:bg-background/70"
-                    )}
-                  >
-                    <div className="flex items-start gap-3">
-                      <span
-                        className={cn(
-                          "text-2xl font-mono mt-1",
-                          theme === "light" || theme === "solarized"
-                            ? "text-accent"
-                            : "text-accent2"
-                        )}
-                      >
-                        {symbol.symbol}
-                      </span>
-                      <div className="flex-1">
-                        <h3
+                {enhancedCLRS_SYMBOLS
+                  .filter(
+                    (symbol) =>
+                      symbol.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                      symbol.description.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                  .map((symbol, index) => (
+                    <motion.button
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => setSelectedSymbol(symbol)}
+                      className={cn(
+                        "p-4 rounded-lg border cursor-pointer transition-colors",
+                        theme === "light" || theme === "solarized"
+                          ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10 hover:shadow-lg"
+                          : "bg-background/50 border-accent2/10 hover:bg-accent2/10 hover:shadow-lg"
+                      )}
+                    >
+                      <div className="flex items-start gap-3">
+                        <span
                           className={cn(
-                            "font-medium",
+                            "text-2xl font-mono mt-1",
                             theme === "light" || theme === "solarized"
                               ? "text-accent"
                               : "text-accent2"
                           )}
                         >
-                          {symbol.name}
-                        </h3>
-                        <p
-                          className={cn(
-                            "text-sm mt-1",
-                            theme === "light" || theme === "solarized"
-                              ? "text-foreground/80"
-                              : "text-foreground/80"
-                          )}
-                        >
-                          {symbol.description}
-                        </p>
-                        <p
-                          className={cn(
-                            "text-sm mt-1 font-mono",
-                            theme === "light" || theme === "solarized"
-                              ? "text-foreground/60"
-                              : "text-foreground/60"
-                          )}
-                        >
-                          {symbol.example}
-                        </p>
+                          {symbol.symbol}
+                        </span>
+                        <div className="flex-1">
+                          <h3
+                            className={cn(
+                              "font-mono tracking-wide pb-2 border-b-2 mb-2",
+                              theme === "light" || theme === "solarized"
+                                ? "text-accent border-accent/30"
+                                : "text-accent2 border-accent2/30"
+                            )}
+                          >
+                            {symbol.name}
+                          </h3>
+                          <p
+                            className={cn(
+                              "text-sm mt-1 font-sans leading-relaxed",
+                              theme === "light" || theme === "solarized"
+                                ? "text-foreground/90"
+                                : "text-foreground/90"
+                            )}
+                          >
+                            {symbol.description}
+                          </p>
+                          <p
+                            className={cn(
+                              "text-sm mt-2 font-mono leading-relaxed",
+                              theme === "light" || theme === "solarized"
+                                ? "text-foreground/80"
+                                : "text-foreground/80"
+                            )}
+                          >
+                            {symbol.example}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.button>
+                  ))}
               </div>
             </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Symbol Modal */}
+        <AnimatePresence>
+          {selectedSymbol && (
+            <SymbolModal
+              symbol={selectedSymbol}
+              isOpen={!!selectedSymbol}
+              onClose={() => setSelectedSymbol(null)}
+              theme={theme}
+            />
           )}
         </AnimatePresence>
 
@@ -488,7 +680,7 @@ const CSMath: React.FC = () => {
                       className={cn(
                         "w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
                         theme === "light" || theme === "solarized"
-                          ? "bg-background/50 border-accent/20 text-foreground placeholder-foreground/50 focus:ring-accent"
+                          ? "bg-white text-accent border border-accent shadow-sm placeholder-accent/60 focus:ring-accent"
                           : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
                       )}
                       onChange={(e) => setSearchQuery(e.target.value)}
@@ -499,7 +691,7 @@ const CSMath: React.FC = () => {
                     className={cn(
                       "px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
                       theme === "light" || theme === "solarized"
-                        ? "bg-background/50 border-accent/20 text-foreground focus:ring-accent"
+                        ? "bg-white text-accent border border-accent shadow-sm focus:ring-accent"
                         : "bg-background/50 border-accent2/20 text-foreground focus:ring-accent2"
                     )}
                     value={selectedCategory}
@@ -522,12 +714,12 @@ const CSMath: React.FC = () => {
                     onClick={() => selectConcept(concept.id)}
                     className={cn(
                       "p-4 rounded-lg transition-colors flex items-start gap-3",
-                      currentConcept === concept.id - 1
-                        ? theme === "light" || theme === "solarized"
-                          ? "bg-accent/20 hover:bg-accent/30 text-accent"
-                          : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
-                        : theme === "light" || theme === "solarized"
-                          ? "bg-background/50 hover:bg-background/70"
+                      theme === "light" || theme === "solarized"
+                        ? currentConcept === concept.id - 1
+                          ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
+                          : "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
+                        : currentConcept === concept.id - 1
+                          ? "bg-accent2/20 hover:bg-accent2/30 text-accent2"
                           : "bg-background/50 hover:bg-background/70"
                     )}
                   >
@@ -715,7 +907,7 @@ const CSMath: React.FC = () => {
               className={cn(
                 "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
                 theme === "light" || theme === "solarized"
-                  ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                  ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                   : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
               )}
             >
@@ -729,7 +921,7 @@ const CSMath: React.FC = () => {
               className={cn(
                 "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
                 theme === "light" || theme === "solarized"
-                  ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                  ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                   : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
               )}
             >
@@ -743,7 +935,7 @@ const CSMath: React.FC = () => {
               className={cn(
                 "w-full sm:w-auto px-6 py-3 rounded-lg transition-colors font-medium tracking-wide",
                 theme === "light" || theme === "solarized"
-                  ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                  ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                   : "bg-accent2/20 hover:bg-accent2/30 text-accent2"
               )}
             >

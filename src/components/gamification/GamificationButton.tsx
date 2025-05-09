@@ -36,19 +36,19 @@ const themeStyles = {
     },
   },
   light: {
-    button: "bg-accent/10 hover:bg-accent/20 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/10 shadow-xl",
-    header: "border-b border-accent/10",
+    button: "bg-accent hover:bg-accent/90 text-white shadow-sm",
+    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20",
+    header: "border-b border-accent/20",
     title: "text-accent font-bold",
-    card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
+    card: "bg-background/30 backdrop-blur-sm border border-accent/10",
     text: {
-      primary: "text-accent-foreground/90",
-      secondary: "text-accent-foreground/70",
-      muted: "text-accent-foreground/50",
+      primary: "text-main",
+      secondary: "text-main/80",
+      muted: "text-main/60",
     },
     badge: {
-      unlocked: "bg-background/30 border border-accent/30 shadow-sm backdrop-blur-sm",
-      locked: "bg-background/20 border border-accent/10 backdrop-blur-sm",
+      unlocked: "bg-accent/10 border border-accent/40 backdrop-blur-sm",
+      locked: "bg-background/20 border border-secondary/40 backdrop-blur-sm",
       icon: "text-accent",
     },
     progress: {

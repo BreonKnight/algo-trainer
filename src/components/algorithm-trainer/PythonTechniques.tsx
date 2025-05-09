@@ -9,8 +9,21 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/comp
 import { Background } from "@/components/ui/background";
 import { cn } from "@/lib/utils";
 
+// Custom hook to detect desktop
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.matchMedia("(min-width: 640px)").matches);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isDesktop;
+}
+
 const CodeBlock = memo(({ code }: { code: string }) => {
   const { theme: appTheme } = useTheme();
+  const isDesktop = useIsDesktop();
   const [copied, setCopied] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [highlightedLine, setHighlightedLine] = useState<number | null>(null);
@@ -22,8 +35,8 @@ const CodeBlock = memo(({ code }: { code: string }) => {
       background: "transparent",
       textShadow: "none",
       fontFamily: "var(--font-mono)",
-      fontSize: "0.95rem",
-      lineHeight: 1.8,
+      fontSize: "1.05rem",
+      lineHeight: 2,
       textAlign: "left",
       whiteSpace: "pre",
       wordSpacing: "normal",
@@ -42,8 +55,8 @@ const CodeBlock = memo(({ code }: { code: string }) => {
       background: "transparent",
       textShadow: "none",
       fontFamily: "var(--font-mono)",
-      fontSize: "0.95rem",
-      lineHeight: 1.8,
+      fontSize: "1.05rem",
+      lineHeight: 2,
       textAlign: "left",
       whiteSpace: "pre",
       wordSpacing: "normal",
@@ -67,9 +80,9 @@ const CodeBlock = memo(({ code }: { code: string }) => {
       whiteSpace: "normal",
     },
     comment: {
-      color: "var(--text-secondary)",
+      color: "#8b949e",
       fontStyle: "italic",
-      opacity: 0.8,
+      opacity: 0.85,
     },
     punctuation: {
       color: "var(--text-main)",
@@ -164,41 +177,46 @@ const CodeBlock = memo(({ code }: { code: string }) => {
   const handleLineClick = useCallback(
     (lineNumber: number) => {
       setHighlightedLine(lineNumber === highlightedLine ? null : lineNumber);
+      // Highlight for 1s
+      setTimeout(() => setHighlightedLine(null), 1000);
     },
     [highlightedLine]
   );
 
   return (
-    <div
-      className={cn(
-        "code-block relative rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg group",
-        `bg-[var(--code-bg-${appTheme})]/90`
-      )}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Copy button */}
-      <div
-        className={cn(
-          "copy-button absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200",
-          appTheme === "nord" ? "text-white" : "text-accent"
-        )}
-      >
+    <div className="space-y-2 w-full">
+      {/* Copy button in a flex container */}
+      <div className="flex justify-end items-center">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="ghost"
-                size="icon"
+                size="sm"
                 onClick={handleCopy}
+                aria-label={copied ? "Copied!" : "Copy code"}
                 className={cn(
-                  "h-8 w-8 rounded-full transition-colors",
-                  appTheme === "nord"
-                    ? "bg-white/10 hover:bg-white/20"
-                    : "bg-secondary/20 hover:bg-secondary/40"
+                  "h-10 px-4 transition-colors border text-base sm:h-8 sm:px-3 sm:text-xs",
+                  appTheme === "light" || appTheme === "solarized"
+                    ? "bg-accent/10 text-accent border-accent hover:bg-accent/20"
+                    : appTheme === "nord"
+                      ? "bg-white/10 text-white border-white/20 hover:bg-white/20"
+                      : "bg-secondary/20 text-accent border-accent2 hover:bg-secondary/40"
                 )}
               >
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                <div className="flex items-center gap-2">
+                  {copied ? (
+                    <Check
+                      className={cn(
+                        "h-5 w-5 transition-transform duration-200",
+                        copied ? "scale-125" : "scale-100"
+                      )}
+                    />
+                  ) : (
+                    <Copy className="h-5 w-5" />
+                  )}
+                  <span className="font-medium">{copied ? "Copied!" : "Copy code"}</span>
+                </div>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -208,62 +226,93 @@ const CodeBlock = memo(({ code }: { code: string }) => {
         </TooltipProvider>
       </div>
 
-      {/* Glass overlay with reduced opacity */}
+      {/* Code block container */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className={cn(
+          "rounded-xl w-full overflow-x-auto transition-all duration-200 group relative",
+          "px-2 sm:px-6 py-3 sm:py-6 shadow-lg border",
+          appTheme === "light"
+            ? "bg-white border-accent"
+            : `bg-[rgba(var(--code-bg-${appTheme}),0.98)] border-accent2`
+        )}
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(var(--code-bg-${appTheme}), 0.3), transparent)`,
+          color: appTheme === "light" ? "#1a1a1a" : `var(--code-text-${appTheme})`,
         }}
-      />
-      <div className="relative z-10">
-        <SyntaxHighlighter
-          language="python"
-          style={customTheme}
-          showLineNumbers={true}
-          wrapLines={true}
-          useInlineStyles={true}
-          lineNumberStyle={{
-            minWidth: "3em",
-            paddingRight: "1.5em",
-            textAlign: "right",
-            userSelect: "none",
-            opacity: 0.5,
-            transition: "opacity 0.2s ease",
-            cursor: "pointer",
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Glass overlay with reduced opacity, hidden on mobile */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-30 hidden sm:block"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(var(--code-bg-${appTheme}), 0.3), transparent)`,
           }}
-          customStyle={{
-            transition: "all 0.2s ease",
-            padding: "2rem 1.5rem",
-            margin: 0,
-            borderRadius: "0.5rem",
-            fontSize: "0.95rem",
-            lineHeight: 1.8,
-            letterSpacing: "0.3px",
-          }}
-          lineProps={(lineNumber) => ({
-            style: {
-              transition: "all 0.2s ease",
-              backgroundColor:
-                lineNumber === highlightedLine
-                  ? "rgba(255, 255, 255, 0.1)"
-                  : isHovered
-                    ? "rgba(255, 255, 255, 0.05)"
-                    : "transparent",
+        />
+        {/* Horizontal scroll hint (fade) on mobile */}
+        <div className="pointer-events-none absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-[rgba(0,0,0,0.08)] to-transparent sm:hidden z-20" />
+        <div className="relative z-10">
+          <SyntaxHighlighter
+            language="python"
+            style={customTheme}
+            showLineNumbers={isDesktop}
+            wrapLongLines={true}
+            useInlineStyles={true}
+            lineNumberStyle={{
+              minWidth: "2.5em",
+              paddingRight: "1.2em",
+              textAlign: "right",
+              userSelect: "none",
+              opacity: 0.7,
+              transition: "opacity 0.2s ease",
               cursor: "pointer",
-            },
-            onClick: () => handleLineClick(lineNumber),
-          })}
-          startingLineNumber={1}
-          lineNumberContainerStyle={{
-            float: "left",
-            paddingRight: "1.5em",
-            borderRight: "1px solid var(--border)",
-            marginRight: "1.5em",
-            userSelect: "none",
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              background: "rgba(120,120,120,0.07)",
+              borderRadius: "0.4em 0 0 0.4em",
+              marginRight: "1.2em",
+            }}
+            customStyle={{
+              transition: "all 0.2s ease",
+              padding: 0,
+              margin: 0,
+              borderRadius: "0.5rem",
+              fontSize: "1.05rem",
+              lineHeight: 2,
+              letterSpacing: "0.2px",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              paddingLeft: "0.5em",
+            }}
+            lineProps={(lineNumber) => ({
+              style: {
+                transition: "all 0.2s ease",
+                backgroundColor:
+                  lineNumber === highlightedLine
+                    ? "rgba(255, 255, 0, 0.12)"
+                    : isHovered
+                      ? "rgba(255, 255, 255, 0.05)"
+                      : "transparent",
+                cursor: "pointer",
+              },
+              onClick: () => handleLineClick(lineNumber),
+            })}
+            startingLineNumber={1}
+            lineNumberContainerStyle={{
+              float: "left",
+              paddingRight: "1.2em",
+              borderRight: "1px solid var(--border)",
+              marginRight: "1.2em",
+              userSelect: "none",
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              background: "rgba(120,120,120,0.07)",
+              borderRadius: "0.4em 0 0 0.4em",
+            }}
+            className="text-sm sm:text-base leading-relaxed sm:leading-[2] min-w-full whitespace-pre-wrap break-words"
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
       </div>
     </div>
   );
@@ -817,7 +866,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                     )}
                     strokeWidth="4"
                     strokeDasharray={289.03}
-                    strokeDashoffset={289.03 - 289.03 * scrollProgress}
+                    strokeDashoffset={289.03 - 289.03 * Number(scrollProgress)}
                     strokeLinecap="round"
                     stroke="currentColor"
                     fill="transparent"
@@ -878,16 +927,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                           setActiveSection(section.title);
                         }}
                         className={cn(
-                          "transition-all duration-200 whitespace-nowrap",
-                          "text-sm px-3 py-1.5",
-                          // Adjust width based on content length
-                          section.title.length > 20
-                            ? "w-48"
-                            : section.title.length > 15
-                              ? "w-40"
-                              : section.title.length > 10
-                                ? "w-36"
-                                : "w-32",
+                          "transition-all duration-200 whitespace-normal text-sm px-3 py-1.5 min-w-0 flex-grow text-ellipsis overflow-hidden max-w-xs sm:max-w-sm",
                           activeSection === section.title
                             ? theme === "nord"
                               ? "bg-white/20 text-white"
@@ -948,10 +988,15 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                   key={index}
                   id={`section-${index}`}
                   className={cn(
-                    "rounded-lg p-6 backdrop-blur-sm border transition-all duration-300 hover:shadow-lg hover:scale-[1.01]",
-                    theme === "nord"
-                      ? "bg-nord-1/95 border-white/20 hover:bg-nord-1/98"
-                      : "bg-zinc-900/95 border-zinc-700/30 hover:bg-zinc-900/98"
+                    // Minimal on mobile: no border, bg, or extra padding; styled on sm+
+                    "w-full p-0 border-0 bg-transparent rounded-none",
+                    "sm:rounded-lg sm:p-6 sm:border sm:backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.01]",
+                    "sm:max-w-3xl mx-0 sm:mx-auto",
+                    theme === "light" || theme === "solarized"
+                      ? "sm:bg-main/80 sm:border-accent"
+                      : theme === "nord"
+                        ? "sm:bg-nord-1/95 sm:border-white/20 sm:hover:bg-nord-1/98"
+                        : "sm:bg-zinc-900/95 sm:border-zinc-700/30 sm:hover:bg-zinc-900/98"
                   )}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
@@ -992,18 +1037,12 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                   <div className="space-y-4">
                     <p
                       className={cn(
-                        "text-base leading-relaxed",
-                        theme === "nord" ? "text-nord-4" : "text-zinc-400",
-                        "font-medium tracking-wide",
-                        "italic",
-                        "border-l-4 pl-4",
-                        theme === "nord" ? "border-white/20" : "border-zinc-700/30",
-                        "hover:border-accent/50 transition-colors duration-300",
-                        "relative",
-                        "before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:to-accent/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300",
-                        "after:content-[''] after:absolute after:left-0 after:top-0 after:h-full after:w-1 after:bg-gradient-to-b after:from-accent/0 after:via-accent/50 after:to-accent/0 after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300",
-                        "text-shadow-sm",
-                        "hover:translate-x-1 transition-transform duration-300"
+                        "text-base leading-relaxed font-medium tracking-wide italic border-l-4 pl-4 transition-colors duration-300 relative",
+                        theme === "light" || theme === "solarized"
+                          ? "text-main border-accent/30"
+                          : theme === "nord"
+                            ? "text-nord-4 border-white/20"
+                            : "text-zinc-400 border-zinc-700/30 hover:border-accent/50"
                       )}
                     >
                       <span className="relative z-10">{section.description}</span>

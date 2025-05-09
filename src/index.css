@@ -256,30 +256,38 @@ button:focus-visible {
 }
 
 .theme-light {
-  --bg-main: #f8fafc;
-  --bg-secondary: #e2e8f0;
-  --text-main: #22223b;
-  --text-secondary: #6272a4;
-  --accent: #6366f1;
-  --accent2: #f59e42;
-  --accent3: #10b981;
-  --gradient-from: #6366f1;
-  --gradient-to: #10b981;
-  --border: #6272a4;
-  --focus-ring: #6366f1;
+  --bg-main: #ffffff;
+  --bg-secondary: #f1f5f9;
+  --text-main: #0f172a;
+  --text-secondary: #334155;
+  --accent: #2563eb;
+  --accent2: #dc2626;
+  --accent3: #059669;
+  --gradient-from: #2563eb;
+  --gradient-to: #059669;
+  --border: #cbd5e1;
+  --focus-ring: #2563eb;
   --pseudocode-gradient: linear-gradient(
     135deg,
-    rgba(248, 250, 252, 0.95) 0%,
-    rgba(226, 232, 240, 0.95) 50%,
-    rgba(248, 250, 252, 0.95) 100%
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(241, 245, 249, 0.95) 50%,
+    rgba(255, 255, 255, 0.95) 100%
   );
   --pseudocode-gradient-overlay: linear-gradient(
     135deg,
-    rgba(99, 102, 241, 0.08) 0%,
-    rgba(245, 158, 66, 0.08) 50%,
-    rgba(16, 185, 129, 0.08) 100%
+    rgba(37, 99, 235, 0.08) 0%,
+    rgba(220, 38, 38, 0.08) 50%,
+    rgba(5, 150, 105, 0.08) 100%
   );
-  --text-selected-dark: #22223b;
+  --text-selected-dark: #0f172a;
+  --button-text: #ffffff;
+  --button-bg: #2563eb;
+  --button-hover-bg: #1d4ed8;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-text: #0f172a;
+  --code-bg-light: 255, 255, 255;
+  --code-text-light: #1a1a1a;
 }
 
 body,
@@ -393,6 +401,8 @@ textarea,
   --pseudocode-bullet-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --pseudocode-sub-bullet-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --radius: 0.5rem;
+  --code-bg-nord: 46, 52, 64;
+  --code-text-nord: #eceff4;
 }
 
 .theme-snes {
@@ -423,6 +433,8 @@ textarea,
     rgba(64, 64, 224, 0.08) 50%,
     rgba(0, 168, 0, 0.08) 100%
   );
+  --code-bg-snes: 160, 160, 160;
+  --code-text-snes: #333333;
 }
 
 .theme-ps2 {
@@ -452,6 +464,8 @@ textarea,
     rgba(0, 165, 255, 0.08) 50%,
     rgba(46, 89, 255, 0.08) 100%
   );
+  --code-bg-ps2: 0, 27, 77;
+  --code-text-ps2: #b4c7ff;
 }
 
 .theme-re2 {
@@ -481,6 +495,8 @@ textarea,
     rgba(231, 0, 0, 0.08) 50%,
     rgba(199, 161, 74, 0.08) 100%
   );
+  --code-bg-re2: 10, 10, 10;
+  --code-text-re2: #e6e0d6;
 }
 
 .theme-mh {
@@ -510,6 +526,8 @@ textarea,
     rgba(102, 163, 85, 0.08) 50%,
     rgba(74, 123, 140, 0.08) 100%
   );
+  --code-bg-mh: 28, 35, 32;
+  --code-text-mh: #e8d5a9;
 }
 
 .text-accent4 {
@@ -550,6 +568,8 @@ textarea,
     rgba(184, 92, 110, 0.08) 50%,
     rgba(110, 198, 247, 0.08) 100%
   );
+  --code-bg-kingdom-hearts: 10, 22, 51;
+  --code-text-kingdom-hearts: #f8f8ff;
 }
 
 /* Add these utility classes for background and text colors */
@@ -595,6 +615,8 @@ textarea,
     rgba(150, 82, 184, 0.08) 66%,
     rgba(247, 178, 39, 0.08) 100%
   );
+  --code-bg-fornite: 26, 26, 26;
+  --code-text-fornite: #ffffff;
 }
 
 .extruded-text {
