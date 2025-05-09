@@ -221,16 +221,29 @@ const ProgressView = memo(function ProgressView() {
                       icon: <Target className="h-7 w-7 text-accent" />,
                       title: "Set Daily Goals",
                       desc: "Break down your learning into manageable daily targets",
+                      link: "https://todoist.com",
+                      linkText: "Try Todoist",
                     },
                     {
                       icon: <Activity className="h-7 w-7 text-accent2" />,
                       title: "Track Progress",
                       desc: "Monitor your advancement and celebrate milestones",
+                      link: "https://notion.so",
+                      linkText: "Use Notion",
                     },
                     {
                       icon: <ChevronRight className="h-7 w-7 text-accent" />,
                       title: "Stay Consistent",
                       desc: "Maintain a regular practice schedule for optimal results",
+                      link: "https://forestapp.cc",
+                      linkText: "Try Forest",
+                    },
+                    {
+                      icon: <Activity className="h-7 w-7 text-accent" />,
+                      title: "Exercise Regularly",
+                      desc: "Keep your mind sharp with regular physical activity",
+                      link: "https://www.strava.com",
+                      linkText: "Track with Strava",
                     },
                   ].map((tip, index) => (
                     <motion.div
@@ -239,9 +252,33 @@ const ProgressView = memo(function ProgressView() {
                       whileHover={{ scale: 1.02 }}
                     >
                       <div className="p-2 rounded-lg bg-accent/10">{tip.icon}</div>
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold mb-1">{tip.title}</h3>
-                        <p className="text-sm text-muted-foreground">{tip.desc}</p>
+                        <p className="text-sm text-muted-foreground mb-2">{tip.desc}</p>
+                        <a
+                          href={tip.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-accent hover:text-accent2 transition-colors duration-200 flex items-center gap-1"
+                        >
+                          {tip.linkText}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-4 w-4"
+                          >
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                          </svg>
+                        </a>
                       </div>
                     </motion.div>
                   ))}
