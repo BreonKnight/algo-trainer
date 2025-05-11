@@ -5,9 +5,11 @@ import { dynamicProgrammingPattern as dpPattern } from "@/components/algorithm-t
 import { dynamicProgrammingCoinChangePattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/dynamic-programming-coin-change";
 import { dynamicProgrammingIterativePattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/dynamic-programming-iterative";
 import { memoizationPattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/memoization";
+import { palindromePartitioningPattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/palindrome-partitioning";
 import { probabilityDPPattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/probability-dp";
 import { stateCompressionDPPattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/state-compression-dp";
 import { treeDPPattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/tree-dp";
+import { editDistancePattern } from "@/components/algorithm-trainer/patterns/dynamic-programming/edit-distance";
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 type DynamicProgrammingPatternKey =
@@ -21,7 +23,9 @@ type DynamicProgrammingPatternKey =
   | "State Compression DP"
   | "Tree (Dynamic Programming)"
   | "Memoization"
-  | "Bitwise DP";
+  | "Bitwise DP"
+  | "Palindrome Partitioning"
+  | "Edit Distance";
 
 export const dynamicProgrammingPatterns: Partial<
   Record<DynamicProgrammingPatternKey, AlgorithmPattern>
@@ -31,7 +35,9 @@ export const dynamicProgrammingPatterns: Partial<
   "Dynamic Programming Iterative": dynamicProgrammingIterativePattern,
   "Dynamic Programming Pattern": dynamicProgrammingPattern,
   "Dynamic Programming": dpPattern,
+  "Edit Distance": editDistancePattern,
   "Probability DP": probabilityDPPattern,
+  "Palindrome Partitioning": palindromePartitioningPattern,
   "State Compression DP": stateCompressionDPPattern,
   "Tree (Dynamic Programming)": treeDPPattern,
   Memoization: memoizationPattern,
