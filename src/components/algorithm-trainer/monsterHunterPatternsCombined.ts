@@ -215,7 +215,6 @@ export const monsterHunterPatternsByCategory = {
     "Suffix Array",
     "String Hashing",
     "Palindrome Partitioning",
-    "Edit Distance",
   ],
 
   "Dynamic Programming": [
@@ -228,6 +227,7 @@ export const monsterHunterPatternsByCategory = {
     "Tree (Dynamic Programming)",
     "Probability DP",
     "Bitwise DP",
+    "Edit Distance",
   ],
 
   "Greedy Algorithms": [

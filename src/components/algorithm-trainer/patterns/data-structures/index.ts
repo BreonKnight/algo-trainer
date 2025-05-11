@@ -17,6 +17,7 @@ import { createPatternRecord } from "@/lib/patterns/pattern-utils";
 import { fastAndSlowPointersPattern } from "@/components/algorithm-trainer/patterns/data-structures/fast-and-slow-pointers";
 import { doublyLinkedListPattern } from "@/components/algorithm-trainer/patterns/data-structures/doubly-linked-list";
 import { inorderTraversalPattern } from "@/components/algorithm-trainer/patterns/data-structures/inorder-traversal";
+import { sparseTablePattern } from "@/components/algorithm-trainer/patterns/data-structures/sparse-table";
 
 export const dataStructurePatterns = createPatternRecord<AlgorithmPattern>({
   "Monotonic Queue": monotonicQueuePattern,
@@ -38,4 +39,5 @@ export const dataStructurePatterns = createPatternRecord<AlgorithmPattern>({
   "Fast and Slow Pointers": fastAndSlowPointersPattern,
   "Doubly Linked List": doublyLinkedListPattern,
   "Inorder Traversal": inorderTraversalPattern,
+  "Sparse Table": sparseTablePattern,
 });
