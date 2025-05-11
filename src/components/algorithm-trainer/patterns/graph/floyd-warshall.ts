@@ -17,7 +17,7 @@ Forest        0          3           6
 Waste         3          0           2
 Highland      6          2           0
 
-After Floyd-Warshall:
+After Floyd-Warshall Algorithm:
            To Forest  To Waste   To Highland
 Forest        0          3           5
 Waste         3          0           2
@@ -34,7 +34,7 @@ Highland      5          2           0`,
         for j, weight in graph[i].items():
             dist[i][j] = weight
     
-    # Floyd-Warshall algorithm
+    # Floyd-Warshall Algorithm
     for k in vertices:
         for i in vertices:
             for j in vertices:

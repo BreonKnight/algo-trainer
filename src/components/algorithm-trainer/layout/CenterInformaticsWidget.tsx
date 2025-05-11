@@ -28,7 +28,7 @@ const TIPS = [
 
 const FACTS = [
   "The word 'algorithm' comes from the Persian mathematician Al-Khwarizmi.",
-  "Dijkstra's algorithm was invented in 1956 and is still widely used today.",
+  "Dijkstra's Algorithm was invented in 1956 and is still widely used today.",
   "The first computer bug was an actual moth found in a relay.",
   "The Big-O notation describes the upper bound of an algorithm's running time.",
   "Merge sort was invented by John von Neumann in 1945.",

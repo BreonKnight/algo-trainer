@@ -224,6 +224,30 @@ export function CodeEditor({
     }
   };
 
+  // Add touch event handling for resize
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isDesktop) return;
+    const touch = e.touches[0];
+    const startY = touch.clientY;
+    const startHeight = scrollRef.current?.offsetHeight || 0;
+    const maxHeight = 500;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      const delta = touch.clientY - startY;
+      const newHeight = Math.max(120, Math.min(startHeight + delta, maxHeight));
+      setEditorHeight(newHeight);
+    };
+
+    const handleTouchEnd = () => {
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
+  };
+
   return (
     <Card
       className={cn(
@@ -404,7 +428,7 @@ export function CodeEditor({
         {/* Vertical resize handle */}
         <div
           className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group"
-          style={{ userSelect: "none" }}
+          style={{ userSelect: "none", touchAction: "none" }}
           onMouseDown={(e) => {
             if (!isDesktop) return;
             const startY = e.clientY;
@@ -422,6 +446,7 @@ export function CodeEditor({
             window.addEventListener("mousemove", onMove);
             window.addEventListener("mouseup", onUp);
           }}
+          onTouchStart={handleTouchStart}
         >
           <div className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 transition-all" />
         </div>

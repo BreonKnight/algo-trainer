@@ -34,45 +34,44 @@ Common String Operations:
 9. Join: ["Hello", "World"].join("-") = "Hello-World"
 10. Trim: "  Hello  ".trim() = "Hello"
 11. Case: "Hello World".toUpperCase() = "HELLO WORLD"`,
-  implementation: `// Common string operations
-function stringOperations() {
-  // Concatenation
-  const str1 = "Hello";
-  const str2 = "World";
-  const concatenated = str1 + " " + str2; // "Hello World"
-  
-  // Substring
-  const str = "Hello World";
-  const substring = str.substring(0, 5); // "Hello"
-  
-  // Character access
-  const char = str[0]; // "H"
-  
-  // String length
-  const length = str.length; // 11
-  
-  // String comparison
-  const isEqual = str1 === str2; // false
-  
-  // String search
-  const index = str.indexOf("World"); // 6
-  
-  // String replace
-  const replaced = str.replace("World", "Universe"); // "Hello Universe"
-  
-  // String split
-  const parts = str.split(" "); // ["Hello", "World"]
-  
-  // String join
-  const joined = parts.join("-"); // "Hello-World"
-  
-  // String trim
-  const trimmed = "  Hello  ".trim(); // "Hello"
-  
-  // String case conversion
-  const upper = str.toUpperCase(); // "HELLO WORLD"
-  const lower = str.toLowerCase(); // "hello world"
-}`,
+  implementation: `# Common string operations
+def string_operations():
+    # Concatenation
+    str1 = "Hello"
+    str2 = "World"
+    concatenated = str1 + " " + str2  # "Hello World"
+    
+    # Substring (slicing)
+    str = "Hello World"
+    substring = str[0:5]  # "Hello"
+    
+    # Character access
+    char = str[0]  # "H"
+    
+    # String length
+    length = len(str)  # 11
+    
+    # String comparison
+    is_equal = str1 == str2  # False
+    
+    # String search
+    index = str.find("World")  # 6
+    
+    # String replace
+    replaced = str.replace("World", "Universe")  # "Hello Universe"
+    
+    # String split
+    parts = str.split(" ")  # ["Hello", "World"]
+    
+    # String join
+    joined = "-".join(parts)  # "Hello-World"
+    
+    # String strip (trim)
+    trimmed = "  Hello  ".strip()  # "Hello"
+    
+    # String case conversion
+    upper = str.upper()  # "HELLO WORLD"
+    lower = str.lower()  # "hello world"`,
   keySteps: [
     "Understand basic string operations",
     "Learn string manipulation methods",

@@ -1,9 +1,9 @@
 Pattern Verification Report:
 Missing Regular Patterns:
-Bitwise DP, Heavy Light Decomposition, Hopcroft-Karp, Ford-Fulkerson, Kahn's Topological Sort, Graph Representation, DFS Graph, Spanning Tree, Tree, AVL Tree, Binary Search Tree, Binary Indexed Tree, Doubly Linked List, Tree Implementation, Trie, Trie Operations, Sparse Table, String Hashing, Palindrome Partitioning, Edit Distance, Chinese Remainder Theorem, Extended Euclidean, Fast Fourier Transform, Sieve of Atkin, Sieve of Eratosthenes, Sieve of Sundaram, Miller-Rabin Primality Test, Prime Factorization, Karatsuba Multiplication, Backtracking, Divide and Conquer, Recursion, Fast and Slow Pointers, Fibonacci, Interval Scheduling, Greedy, LCA DFS, Inorder Traversal, Zigzag Traversal
+Bitwise DP, Heavy Light Decomposition, Hopcroft-Karp's Algorithm, Ford-Fulkerson Algorithm, Kahn's Topological Sort, Graph Representation, DFS Graph, Spanning Tree, Tree, AVL Tree, Binary Search Tree, Binary Indexed Tree, Doubly Linked List, Tree Implementation, Trie, Trie Operations, Sparse Table, String Hashing, Palindrome Partitioning, Edit Distance, Chinese Remainder Theorem, Extended Euclidean, Fast Fourier Transform, Sieve of Atkin, Sieve of Eratosthenes, Sieve of Sundaram, Miller-Rabin Primality Test, Prime Factorization, Karatsuba Multiplication, Backtracking, Divide and Conquer, Recursion, Fast and Slow Pointers, Fibonacci, Interval Scheduling, Greedy, Lowest Common Ancestor, Inorder Traversal, Zigzag Traversal
 
 Missing Monster Hunter Patterns:
-Bucket Sort, Counting Sort, Bitwise DP, Hopcroft-Karp, Ford-Fulkerson, Kahn's Topological Sort, Graph Representation, DFS Graph, Spanning Tree, Binary Indexed Tree, Doubly Linked List, Tree Implementation, Trie, Sparse Table, String Hashing, Palindrome Partitioning, Edit Distance, Karatsuba Multiplication, Fast and Slow Pointers, Fibonacci, Interval Scheduling, LCA DFS, Inorder Traversal, Zigzag Traversal
+Bucket Sort, Counting Sort, Bitwise DP, Hopcroft-Karp's Algorithm, Ford-Fulkerson Algorithm, Kahn's Topological Sort, Graph Representation, DFS Graph, Spanning Tree, Binary Indexed Tree, Doubly Linked List, Tree Implementation, Trie, Sparse Table, String Hashing, Palindrome Partitioning, Edit Distance, Karatsuba Multiplication, Fast and Slow Pointers, Fibonacci, Interval Scheduling, Lowest Common Ancestor, Inorder Traversal, Zigzag Traversal
 
 Inconsistent Patterns:
 
@@ -207,14 +207,14 @@ Monster Hunter Pattern:
   Description: Like a monster hunter solving problems iteratively, Dynamic Programming Iterative solves problems using an iterative approach with dynamic programming.
   Category: Other
 
-Dynamic Programming Coin Change:
+Coin Change:
 Regular Pattern:
-  Title: Dynamic Programming Coin Change
+  Title: Coin Change
   Description: A dynamic programming solution to the coin change problem that finds the minimum number of coins needed to make up a given amount.
   Category: Dynamic Programming
 Monster Hunter Pattern:
   Title: Monster Territory Coin Changer
-  Description: Like a monster hunter making change for monster currency, Dynamic Programming Coin Change finds the minimum number of coins needed to make change.
+  Description: Like a monster hunter making change for monster currency, Coin Change finds the minimum number of coins needed to make change.
   Category: Other
 
 State Compression DP:
@@ -237,14 +237,14 @@ Monster Hunter Pattern:
   Description: Like a monster hunter counting specific patterns in monster numbers, Digit DP efficiently counts numbers with specific digit properties in a range.
   Category: Other
 
-Tree DP:
+Tree (Dynamic Programming):
 Regular Pattern:
-  Title: Tree DP
+  Title: Tree (Dynamic Programming)
   Description: A dynamic programming technique for solving problems on trees by processing nodes in a post-order traversal and combining results from subtrees.
   Category: Dynamic Programming
 Monster Hunter Pattern:
   Title: Monster Territory Tree Dynamic Solver
-  Description: Like a monster hunter solving problems on a tree structure using dynamic programming, Tree DP solves problems on trees by storing and reusing solutions to subproblems.
+  Description: Like a monster hunter solving problems on a tree structure using dynamic programming, Tree (Dynamic Programming) solves problems on trees by storing and reusing solutions to subproblems.
   Category: Other
 
 Probability DP:
@@ -260,7 +260,7 @@ Monster Hunter Pattern:
 A* Search:
 Regular Pattern:
   Title: A* Search
-  Description: A graph algorithm that finds the shortest path between two nodes using a heuristic function to guide the search. It combines the advantages of Dijkstra's algorithm (guaranteed shortest path) with the efficiency of greedy best-first search.
+  Description: A graph algorithm that finds the shortest path between two nodes using a heuristic function to guide the search. It combines the advantages of Dijkstra's Algorithm (guaranteed shortest path) with the efficiency of greedy best-first search.
   Category: Graph
 Monster Hunter Pattern:
   Title: A* Monster Pathfinder
@@ -287,7 +287,7 @@ Monster Hunter Pattern:
   Description: Find the shortest paths through territories with negative weights, like areas that speed up or slow down movement.
   Category: Other
 
-Floyd-Warshall:
+Floyd-Warshall Algorithm:
 Regular Pattern:
   Title: Floyd-Warshall Algorithm
   Description: Find shortest paths between all pairs of vertices in a weighted graph
@@ -297,9 +297,9 @@ Monster Hunter Pattern:
   Description: Like a monster hunter finding the shortest paths between all pairs of territories, Graph Floyd Warshall finds the shortest paths between all pairs of vertices in a graph.
   Category: Other
 
-Kruskal:
+Kruskal's Algorithm:
 Regular Pattern:
-  Title: Kruskal
+  Title: Kruskal's Algorithm
   Description: Find a minimum spanning tree in a weighted undirected graph
   Category: Graph
 Monster Hunter Pattern:
@@ -347,9 +347,9 @@ Monster Hunter Pattern:
   Description: Like a monster hunter growing a network of paths from a central territory, Prim's algorithm builds a minimum spanning tree by always adding the closest unconnected territory.
   Category: Other
 
-Kosaraju:
+Kosaraju's Algorithm:
 Regular Pattern:
-  Title: Kosaraju
+  Title: Kosaraju's Algorithm
   Description: Find strongly connected components in a directed graph
   Category: Graph
 Monster Hunter Pattern:
@@ -367,20 +367,20 @@ Monster Hunter Pattern:
   Description: Find critical paths between hunting zones that, if blocked, would disconnect regions.
   Category: Other
 
-Dijkstra:
+
 Regular Pattern:
   Title: Dijkstra
   Description: Find shortest paths from a source vertex to all other vertices in a weighted graph with non-negative edges
   Category: Graph
 Monster Hunter Pattern:
   Title: Monster Hunter's Pathfinder
-  Description: Like a monster hunter finding the safest path through dangerous territory, Dijkstra's algorithm finds the shortest path from a starting point to all other points.
+  Description: Like a monster hunter finding the safest path through dangerous territory, Dijkstra's Algorithm finds the shortest path from a starting point to all other points.
   Category: Other
 
 Network Flow:
 Regular Pattern:
   Title: Network Flow
-  Description: A collection of algorithms for solving maximum flow problems in networks, including Dinic's, Edmonds-Karp, and Ford-Fulkerson algorithms.
+  Description: A collection of algorithms for solving maximum flow problems in networks, including Dinic's, Edmonds-Karp, and Ford-Fulkerson Algorithm algorithms.
   Category: Graph
 Monster Hunter Pattern:
   Title: Monster Territory Flow Network
@@ -447,14 +447,14 @@ Monster Hunter Pattern:
   Description: Like a monster hunter managing groups of connected territories, Union Find efficiently manages disjoint sets and finds connected components.
   Category: Other
 
-DFS Binary Tree:
+DFS (Binary Tree):
 Regular Pattern:
   Title: DFS on Binary Tree
   Description: Apply Depth-First Search on a binary tree structure to traverse or search through nodes in pre-order, in-order, or post-order.
   Category: Graph
 Monster Hunter Pattern:
   Title: Monster Territory Binary Tree Explorer
-  Description: Like a monster hunter exploring a binary tree of territories using depth-first search, DFS Binary Tree visits all nodes in a binary tree using DFS.
+  Description: Like a monster hunter exploring a binary tree of territories using depth-first search, DFS (Binary Tree) visits all nodes in a binary tree using DFS.
   Category: Other
 
 Red-Black Tree:
@@ -857,14 +857,14 @@ Monster Hunter Pattern:
   Description: Like a monster hunter exploring a linked list of territories using depth-first search, DFS Linked List visits all nodes in a linked list using DFS.
   Category: Other
 
-DFS Binary Tree:
+DFS (Binary Tree):
 Regular Pattern:
   Title: DFS on Binary Tree
   Description: Apply Depth-First Search on a binary tree structure to traverse or search through nodes in pre-order, in-order, or post-order.
   Category: Graph
 Monster Hunter Pattern:
   Title: Monster Territory Binary Tree Explorer
-  Description: Like a monster hunter exploring a binary tree of territories using depth-first search, DFS Binary Tree visits all nodes in a binary tree using DFS.
+  Description: Like a monster hunter exploring a binary tree of territories using depth-first search, DFS (Binary Tree) visits all nodes in a binary tree using DFS.
   Category: Other
 
 Two Sum:
@@ -877,9 +877,9 @@ Monster Hunter Pattern:
   Description: Finding two numbers in an array that add up to a target value. Like finding two monsters whose levels add up to a specific number.
   Category: Other
 
-Two Sum Dict:
+Two Sum Dictionary:
 Regular Pattern:
-  Title: Two Sum Dict
+  Title: Two Sum Dictionary
   Description: A problem-solving pattern that finds two numbers in an array that sum to a target value using a dictionary/hash map for optimal time complexity.
   Category: Other
 Monster Hunter Pattern:

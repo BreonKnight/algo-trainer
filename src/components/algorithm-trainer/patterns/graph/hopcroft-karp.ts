@@ -1,7 +1,7 @@
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const hopcroftKarpPattern: AlgorithmPattern = {
-  title: "Hopcroft-Karp",
+  title: "Hopcroft-Karp's Algorithm",
   description:
     "An algorithm that finds the maximum matching in a bipartite graph. It's more efficient than the Ford-Fulkerson algorithm for bipartite matching problems, with a time complexity of O(√V * E) where V is the number of vertices and E is the number of edges.",
   timeComplexity: "O(√V * E) where V is the number of vertices and E is the number of edges",
@@ -111,5 +111,5 @@ Final matching: 1-5, 2-6, 3-4`,
     "Consider using a queue for BFS implementation",
     "Use arrays for efficient matching storage",
   ],
-  relatedPatterns: ["Maximum Bipartite Matching", "Ford-Fulkerson", "BFS", "DFS"],
+  relatedPatterns: ["Maximum Bipartite Matching", "Ford-Fulkerson Algorithm", "BFS", "DFS"],
 };

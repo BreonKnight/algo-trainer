@@ -11,11 +11,8 @@ export const pseudocodePatterns: Partial<Record<PatternKey, ComponentType>> = Ob
   jsonPatterns
 ).reduce(
   (acc, [key, pattern]) => {
-    // Convert kebab-case key to PatternKey format
-    const patternKey = key
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ") as PatternKey;
+    // Use the pattern.name as the PatternKey for accurate mapping
+    const patternKey = pattern.name as PatternKey;
 
     // Only add if it's a valid PatternKey
     if (PATTERN_KEYS.includes(patternKey)) {
@@ -53,10 +50,8 @@ export function getPatternsByCategory(): Record<string, PatternKey[]> {
   const patternsByCategory: Record<string, PatternKey[]> = {};
 
   Object.entries(jsonPatterns).forEach(([key, pattern]) => {
-    const patternKey = key
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ") as PatternKey;
+    // Use the pattern.name as the PatternKey for accurate mapping
+    const patternKey = pattern.name as PatternKey;
 
     if (PATTERN_KEYS.includes(patternKey)) {
       const category = pattern.type;
@@ -94,12 +89,16 @@ export function verifyPseudocodePatterns() {
   // Check for patterns that might be in wrong categories
   const categoryPatterns = new Map<string, string[]>();
   patternNames.forEach((name) => {
-    const pattern = pseudocodePatterns[name]();
-    const category = pattern.props.category;
-    if (!categoryPatterns.has(category)) {
-      categoryPatterns.set(category, []);
+    const patternKey = name as PatternKey;
+    const PatternComponent = pseudocodePatterns[patternKey];
+    if (PatternComponent) {
+      const pattern = <PatternComponent />;
+      const category = pattern.props.category;
+      if (!categoryPatterns.has(category)) {
+        categoryPatterns.set(category, []);
+      }
+      categoryPatterns.get(category)?.push(name);
     }
-    categoryPatterns.get(category)?.push(name);
   });
 
   // Log results
@@ -161,51 +160,55 @@ export function verifyPatternFiles() {
 
   // Check each pattern's implementation
   pseudocodeNames.forEach((name) => {
-    const pattern = pseudocodePatterns[name]();
-    const category = pattern.props.category;
+    const patternKey = name as PatternKey;
+    const PatternComponent = pseudocodePatterns[patternKey];
+    if (PatternComponent) {
+      const pattern = <PatternComponent />;
+      const category = pattern.props.category;
 
-    // Add to category map
-    if (!patternCategories.has(category)) {
-      patternCategories.set(category, []);
-    }
-    patternCategories.get(category)?.push(name);
-
-    // Check if pattern file exists
-    const normalizedName = name?.toLowerCase().replace(/[^a-z0-9]/g, "-") || "";
-    const possiblePaths = [
-      `patterns/${category?.toLowerCase() || ""}/${normalizedName}.ts`,
-      `patterns/${category?.toLowerCase() || ""}/${normalizedName}.tsx`,
-      `patterns/${category?.toLowerCase() || ""}/index.ts`,
-      `patterns/${category?.toLowerCase() || ""}/index.tsx`,
-    ];
-
-    const foundPaths: string[] = [];
-    const exists = possiblePaths.some((path) => {
-      try {
-        require.resolve(`../../components/algorithm-trainer/${path}`);
-        foundPaths.push(path);
-        patternFiles.set(name, foundPaths);
-        return true;
-      } catch {
-        return false;
+      // Add to category map
+      if (!patternCategories.has(category)) {
+        patternCategories.set(category, []);
       }
-    });
+      patternCategories.get(category)?.push(name);
 
-    // Store implementation details
-    implementationDetails.set(name, {
-      category,
-      filePath: foundPaths[0] || possiblePaths[0],
-      exists,
-    });
+      // Check if pattern file exists
+      const normalizedName = name?.toLowerCase().replace(/[^a-z0-9]/g, "-") || "";
+      const possiblePaths = [
+        `patterns/${category?.toLowerCase() || ""}/${normalizedName}.ts`,
+        `patterns/${category?.toLowerCase() || ""}/${normalizedName}.tsx`,
+        `patterns/${category?.toLowerCase() || ""}/index.ts`,
+        `patterns/${category?.toLowerCase() || ""}/index.tsx`,
+      ];
 
-    if (!exists) {
-      if (!missingImplementations.has(category)) {
-        missingImplementations.set(category, []);
-      }
-      missingImplementations.get(category)?.push({
-        pattern: name,
-        expectedPaths: possiblePaths,
+      const foundPaths: string[] = [];
+      const exists = possiblePaths.some((path) => {
+        try {
+          require.resolve(`../../components/algorithm-trainer/${path}`);
+          foundPaths.push(path);
+          patternFiles.set(name, foundPaths);
+          return true;
+        } catch {
+          return false;
+        }
       });
+
+      // Store implementation details
+      implementationDetails.set(name, {
+        category,
+        filePath: foundPaths[0] || possiblePaths[0],
+        exists,
+      });
+
+      if (!exists) {
+        if (!missingImplementations.has(category)) {
+          missingImplementations.set(category, []);
+        }
+        missingImplementations.get(category)?.push({
+          pattern: name,
+          expectedPaths: possiblePaths,
+        });
+      }
     }
   });
 

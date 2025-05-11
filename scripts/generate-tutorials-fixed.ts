@@ -64,10 +64,10 @@ const algorithmList: Record<AlgorithmCategory, string[]> = {
     "Dijkstra's Algorithm",
     "Bellman-Ford Algorithm",
     "Floyd-Warshall Algorithm",
-    "Kruskal's Algorithm",
+    "Kruskal's Algorithm's Algorithm",
     "Prim's Algorithm",
     "Topological Sort",
-    "Kosaraju's Algorithm",
+    "Kosaraju's Algorithm's Algorithm",
     "Tarjan's Algorithm",
     "Articulation Points",
     "Bridges",
@@ -80,7 +80,7 @@ const algorithmList: Record<AlgorithmCategory, string[]> = {
     "Edmonds-Karp Algorithm",
     "Dinic's Algorithm",
     "Push-Relabel Algorithm",
-    "Hopcroft-Karp Algorithm",
+    "Hopcroft-Karp's Algorithm",
     "Kuhn's Algorithm",
     "Hungarian Algorithm",
     "Gale-Shapley Algorithm",
@@ -90,7 +90,7 @@ const algorithmList: Record<AlgorithmCategory, string[]> = {
     "Longest Common Subsequence",
     "Longest Increasing Subsequence",
     "Matrix Chain Multiplication",
-    "Coin Change Problem",
+    "Coin Change",
     "Edit Distance",
     "Rod Cutting",
     "Subset Sum Problem",
@@ -153,10 +153,10 @@ const videoIds: Record<string, string> = {
   "Dijkstra's Algorithm": "pVfj6mxhdMw", // CS Dojo
   "Bellman-Ford Algorithm": "obWXjtg0L64", // CS Dojo
   "Floyd-Warshall Algorithm": "4OQeCuLYj-4", // CS Dojo
-  "Kruskal's Algorithm": "JZBQLXgSGfs", // CS Dojo
+  "Kruskal's Algorithm's Algorithm": "JZBQLXgSGfs", // CS Dojo
   "Prim's Algorithm": "cplfcGZmX7I", // CS Dojo
   "Topological Sort": "ddTC4Zovtbc", // CS Dojo
-  "Kosaraju's Algorithm": "R6uoSjZ2imo", // CS Dojo
+  "Kosaraju's Algorithm's Algorithm": "R6uoSjZ2imo", // CS Dojo
   "Tarjan's Algorithm": "wUgWX0nc4NY", // CS Dojo
   "Articulation Points": "2FFq2_je7Lg", // CS Dojo
   Bridges: "Rhxs4kqIjQs", // CS Dojo
@@ -169,7 +169,7 @@ const videoIds: Record<string, string> = {
   "Edmonds-Karp Algorithm": "dQr4w9WgXcQ", // Placeholder
   "Dinic's Algorithm": "dQr4w9WgXcQ", // Placeholder
   "Push-Relabel Algorithm": "dQr4w9WgXcQ", // Placeholder
-  "Hopcroft-Karp Algorithm": "dQr4w9WgXcQ", // Placeholder
+  "Hopcroft-Karp's Algorithm": "dQr4w9WgXcQ", // Placeholder
   "Kuhn's Algorithm": "dQr4w9WgXcQ", // Placeholder
   "Hungarian Algorithm": "dQr4w9WgXcQ", // Placeholder
   "Gale-Shapley Algorithm": "dQr4w9WgXcQ", // Placeholder
@@ -179,7 +179,7 @@ const videoIds: Record<string, string> = {
   "Longest Common Subsequence": "ASoaQq66oQI", // CS Dojo
   "Longest Increasing Subsequence": "fV-TF4OvZpk", // CS Dojo
   "Matrix Chain Multiplication": "prmezH63EZU", // CS Dojo
-  "Coin Change Problem": "H9bfqozjoqs", // CS Dojo
+  "Coin Change": "H9bfqozjoqs", // CS Dojo
   "Edit Distance": "We3YDTzNXEk", // CS Dojo
   "Rod Cutting": "dQr4w9WgXcQ", // Placeholder
   "Subset Sum Problem": "dQr4w9WgXcQ", // Placeholder

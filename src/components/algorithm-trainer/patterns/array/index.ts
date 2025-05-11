@@ -26,7 +26,7 @@ type ArrayPatternKey =
   | "Bit Manipulation"
   | "Sliding Window"
   | "Two Sum Two Pointers"
-  | "Two Sum Dict"
+  | "Two Sum Dictionary"
   | "Matrix Operations"
   | "Two Sum"
   | "Matrix Exponentiation"
@@ -43,7 +43,7 @@ export const arrayPatterns: Partial<Record<ArrayPatternKey, AlgorithmPattern>> =
   "Bit Manipulation": bitManipulationPattern,
   "Sliding Window": slidingWindowPattern,
   "Two Sum Two Pointers": twoSumTwoPointersPattern,
-  "Two Sum Dict": twoSumDictPattern,
+  "Two Sum Dictionary": twoSumDictPattern,
   "Matrix Operations": matrixOperationsPattern,
   "Two Sum": twoSumPattern,
   "Matrix Exponentiation": matrixExponentiationPattern,

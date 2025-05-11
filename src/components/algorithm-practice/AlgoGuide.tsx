@@ -324,7 +324,7 @@ def dfs(graph, start):
       {
         name: "Union-Find (Disjoint Set)",
         what: "Track connectivity components with path compression.",
-        why: "Essential for Kruskal's MST, cycle detection.",
+        why: "Essential for Kruskal's Algorithm's MST, cycle detection.",
         keywords: ["union", "find", "connected components", "path compression", "parent", "set"],
         implementation: {
           explanation:
@@ -957,7 +957,7 @@ class FenwickTree:
         ],
       },
       {
-        name: "Dijkstra's & A* Search",
+        name: "Dijkstra's Algorithm & A* Search",
         what: "Shortest paths with priority queues (and heuristics).",
         why: "Graph weights / heuristics—common in 'hard' tier.",
         keywords: [
@@ -971,7 +971,7 @@ class FenwickTree:
         ],
         implementation: {
           explanation:
-            "Dijkstra's algorithm finds the shortest path between nodes in a weighted graph, while A* Search uses heuristics to guide the search towards the goal.",
+            "Dijkstra's Algorithm finds the shortest path between nodes in a weighted graph, while A* Search uses heuristics to guide the search towards the goal.",
           code: `import heapq
 
 def dijkstra(graph, start):
@@ -1016,7 +1016,7 @@ def a_star(graph, start, goal, heuristic):
     
     return came_from, cost_so_far`,
           timeComplexity:
-            "O((V + E)log V) for Dijkstra's, O(b^d) for A* where b is branching factor and d is depth",
+            "O((V + E)log V) for Dijkstra's Algorithm, O(b^d) for A* where b is branching factor and d is depth",
           spaceComplexity: "O(V) for both algorithms",
         },
         leetCodeProblems: [

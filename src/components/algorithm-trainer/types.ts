@@ -21,15 +21,15 @@ export type PatternKey =
   | "Circular Linked List"
   | "Counting Sort"
   | "DFS"
-  | "DFS Binary Tree"
+  | "DFS (Binary Tree)"
   | "DFS Graph"
   | "DFS Linked List"
   | "Digit DP"
-  | "Dijkstra"
+  | "Dijkstra's Algorithm"
   | "Divide and Conquer"
   | "Doubly Linked List"
   | "Dynamic Programming"
-  | "Dynamic Programming Coin Change"
+  | "Coin Change"
   | "Dynamic Programming Iterative"
   | "Dynamic Programming Pattern"
   | "Edit Distance"
@@ -41,8 +41,8 @@ export type PatternKey =
   | "Fibonacci"
   | "Fibonacci Search"
   | "Floyd Cycle Detection"
-  | "Floyd-Warshall"
-  | "Ford-Fulkerson"
+  | "Floyd-Warshall Algorithm"
+  | "Ford-Fulkerson Algorithm"
   | "Fractional Knapsack"
   | "Graph Representation"
   | "Greedy"
@@ -51,7 +51,7 @@ export type PatternKey =
   | "Heap Implementation"
   | "Heap Sort"
   | "Heavy Light Decomposition"
-  | "Hopcroft-Karp"
+  | "Hopcroft-Karp's Algorithm"
   | "Huffman Coding"
   | "Hungarian Algorithm"
   | "Inorder Traversal"
@@ -64,9 +64,9 @@ export type PatternKey =
   | "Kahn's Topological Sort"
   | "Karatsuba Multiplication"
   | "Knuth-Morris-Pratt"
-  | "Kosaraju"
-  | "Kruskal"
-  | "LCA DFS"
+  | "Kosaraju's Algorithm"
+  | "Kruskal's Algorithm"
+  | "Lowest Common Ancestor"
   | "Linear Search"
   | "Linked List"
   | "Lowest Common Ancestor"
@@ -88,7 +88,7 @@ export type PatternKey =
   | "Null Pattern"
   | "Palindrome Partitioning"
   | "Prefix Sums"
-  | "Prim"
+  | "Prim's Algorithm"
   | "Probability DP"
   | "Queue Implementation"
   | "Quickselect"
@@ -104,7 +104,6 @@ export type PatternKey =
   | "Sieve of Eratosthenes"
   | "Sieve of Sundaram"
   | "Sliding Window"
-  | "Spanning Tree"
   | "Sparse Table"
   | "Stack Implementation"
   | "Stack Sort"
@@ -117,12 +116,12 @@ export type PatternKey =
   | "Ternary Search"
   | "Test Data"
   | "Topological Sort"
-  | "Tree DP"
+  | "Tree (Dynamic Programming)"
   | "Trie"
   | "Trie Operations"
   | "Two Pointers"
   | "Two Sum"
-  | "Two Sum Dict"
+  | "Two Sum Dictionary"
   | "Two Sum Two Pointers"
   | "Union Find"
   | "Z Algorithm"
@@ -169,15 +168,15 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Circular Linked List",
   "Counting Sort",
   "DFS",
-  "DFS Binary Tree",
+  "DFS (Binary Tree)",
   "DFS Graph",
   "DFS Linked List",
   "Digit DP",
-  "Dijkstra",
+  "Dijkstra's Algorithm",
   "Divide and Conquer",
   "Doubly Linked List",
   "Dynamic Programming",
-  "Dynamic Programming Coin Change",
+  "Coin Change",
   "Dynamic Programming Iterative",
   "Dynamic Programming Pattern",
   "Edit Distance",
@@ -189,8 +188,8 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Fibonacci",
   "Fibonacci Search",
   "Floyd Cycle Detection",
-  "Floyd-Warshall",
-  "Ford-Fulkerson",
+  "Floyd-Warshall Algorithm",
+  "Ford-Fulkerson Algorithm",
   "Fractional Knapsack",
   "Graph Representation",
   "Greedy",
@@ -199,7 +198,7 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Heap Implementation",
   "Heap Sort",
   "Heavy Light Decomposition",
-  "Hopcroft-Karp",
+  "Hopcroft-Karp's Algorithm",
   "Huffman Coding",
   "Hungarian Algorithm",
   "Inorder Traversal",
@@ -212,9 +211,9 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Kahn's Topological Sort",
   "Karatsuba Multiplication",
   "Knuth-Morris-Pratt",
-  "Kosaraju",
-  "Kruskal",
-  "LCA DFS",
+  "Kosaraju's Algorithm",
+  "Kruskal's Algorithm",
+  "Lowest Common Ancestor",
   "Linear Search",
   "Linked List",
   "Lowest Common Ancestor",
@@ -236,7 +235,7 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Null Pattern",
   "Palindrome Partitioning",
   "Prefix Sums",
-  "Prim",
+  "Prim's Algorithm",
   "Probability DP",
   "Queue Implementation",
   "Quickselect",
@@ -252,7 +251,6 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Sieve of Eratosthenes",
   "Sieve of Sundaram",
   "Sliding Window",
-  "Spanning Tree",
   "Sparse Table",
   "Stack Implementation",
   "Stack Sort",
@@ -265,12 +263,12 @@ export const PATTERN_KEYS: PatternKey[] = [
   "Ternary Search",
   "Test Data",
   "Topological Sort",
-  "Tree DP",
+  "Tree (Dynamic Programming)",
   "Trie",
   "Trie Operations",
   "Two Pointers",
   "Two Sum",
-  "Two Sum Dict",
+  "Two Sum Dictionary",
   "Two Sum Two Pointers",
   "Union Find",
   "Z Algorithm",

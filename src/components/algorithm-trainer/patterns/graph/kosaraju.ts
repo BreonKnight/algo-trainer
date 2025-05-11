@@ -1,7 +1,7 @@
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const kosarajuPattern: AlgorithmPattern = {
-  title: "Kosaraju",
+  title: "Kosaraju's Algorithm",
   description: "Find strongly connected components in a directed graph",
   timeComplexity: "O(V + E)",
   spaceComplexity: "O(V)",

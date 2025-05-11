@@ -926,6 +926,6 @@ def traverse_matrix_spiral_recursive(matrix):
 
 if __name__ == "__main__":
     # Example usage
-    print("Two Sum Dict:", two_sum_dict([2, 7, 11, 15], 9))
-    print("Two Sum Dict:", two_sum_dict([3, 2, 4], 6))
-    print("Two Sum Dict:", two_sum_dict([3, 3], 6))
+    print("Two Sum Dictionary:", two_sum_dict([2, 7, 11, 15], 9))
+    print("Two Sum Dictionary:", two_sum_dict([3, 2, 4], 6))
+    print("Two Sum Dictionary:", two_sum_dict([3, 3], 6))
