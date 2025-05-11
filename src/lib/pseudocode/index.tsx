@@ -1,288 +1,74 @@
-import { AStarSearchPattern } from "@/lib/pseudocode/patterns/a-star-search";
-import { ActivitySelectionPattern } from "@/lib/pseudocode/patterns/activity-selection";
-import { ArticulationPointsPattern } from "@/lib/pseudocode/patterns/articulation-points";
-import { AVLTreePattern } from "@/lib/pseudocode/patterns/avl-tree";
-import { BTreePattern } from "@/lib/pseudocode/patterns/b-tree";
-import { BacktrackingPattern } from "@/lib/pseudocode/patterns/backtracking";
-import { BellmanFordPattern } from "@/lib/pseudocode/patterns/bellman-ford";
-import { BFSPattern } from "@/lib/pseudocode/patterns/bfs";
-import { BfsLinkedListPattern } from "@/lib/pseudocode/patterns/bfs-linked-list";
-import { BinaryIndexedTreePattern } from "@/lib/pseudocode/patterns/binary-indexed-tree";
-import { BinarySearchPattern } from "@/lib/pseudocode/patterns/binary-search";
-import { BinarySearchOnAnswerPattern } from "@/lib/pseudocode/patterns/binary-search-on-answer";
-import { BinarySearchTreePattern } from "@/lib/pseudocode/patterns/binary-search-tree";
-import { BitManipulationPattern } from "@/lib/pseudocode/patterns/bit-manipulation";
-import { BitwiseDPPattern } from "@/lib/pseudocode/patterns/bitwise-dp";
-import { BubbleSortPattern } from "@/lib/pseudocode/patterns/bubble-sort";
-import { BucketSortPattern } from "@/lib/pseudocode/patterns/bucket-sort";
-import { ChineseRemainderTheoremPattern } from "@/lib/pseudocode/patterns/chinese-remainder-theorem";
-import { CircularLinkedListPattern } from "@/lib/pseudocode/patterns/circular-linked-list";
-import { CountingSortPattern } from "@/lib/pseudocode/patterns/counting-sort";
-import { DFSPattern } from "@/lib/pseudocode/patterns/dfs";
-import { DfsBinaryTreePattern } from "@/lib/pseudocode/patterns/dfs-binary-tree";
-import DFSGraphPattern from "@/lib/pseudocode/patterns/dfs-graph";
-import { DfsLinkedListPattern } from "@/lib/pseudocode/patterns/dfs-linked-list";
-import { DigitDPPattern } from "@/lib/pseudocode/patterns/digit-dp";
-import { DijkstraPattern } from "@/lib/pseudocode/patterns/dijkstra";
-import { DivideAndConquerPattern } from "@/lib/pseudocode/patterns/divide-and-conquer";
-import DoublyLinkedListPattern from "@/lib/pseudocode/patterns/doubly-linked-list";
-import { DynamicProgrammingPattern } from "@/lib/pseudocode/patterns/dynamic-programming";
-import { DynamicProgrammingCoinChangePattern } from "@/lib/pseudocode/patterns/dynamic-programming-coin-change";
-import { DynamicProgrammingIterativePattern } from "@/lib/pseudocode/patterns/dynamic-programming-iterative";
-import { DynamicProgrammingPatternTemplate } from "@/lib/pseudocode/patterns/dynamic-programming-pattern";
-import { EditDistancePattern } from "@/lib/pseudocode/patterns/edit-distance";
-import { ExponentialSearchPattern } from "@/lib/pseudocode/patterns/exponential-search";
-import { ExtendedEuclideanAlgorithmPattern } from "@/lib/pseudocode/patterns/extended-euclidean-algorithm";
-import FastAndSlowPointersPattern from "@/lib/pseudocode/patterns/fast-and-slow-pointers";
-import { FastFourierTransformPattern } from "@/lib/pseudocode/patterns/fast-fourier-transform";
-import { FenwickTreePattern } from "@/lib/pseudocode/patterns/fenwick-tree";
-import FibonacciPattern from "@/lib/pseudocode/patterns/fibonacci";
-import { FibonacciSearchPattern } from "@/lib/pseudocode/patterns/fibonacci-search";
-import { FloydCycleDetectionPattern } from "@/lib/pseudocode/patterns/floyd-cycle-detection";
-import { FordFulkersonPattern } from "@/lib/pseudocode/patterns/ford-fulkerson";
-import { FractionalKnapsackPattern } from "@/lib/pseudocode/patterns/fractional-knapsack";
-import { BridgesPattern } from "@/lib/pseudocode/patterns/graph-bridges";
-import { FloydWarshallPattern } from "@/lib/pseudocode/patterns/graph-floyd-warshall";
-import { KosarajuPattern } from "@/lib/pseudocode/patterns/graph-kosaraju";
-import { GraphRepresentationPattern } from "@/lib/pseudocode/patterns/graph-representation";
-import { GreedyPattern } from "@/lib/pseudocode/patterns/greedy";
-import { KruskalPattern } from "@/lib/pseudocode/patterns/greedy-kruskal";
-import { GridTraversalPattern } from "@/lib/pseudocode/patterns/grid-traversal";
-import { HashTablePattern } from "@/lib/pseudocode/patterns/hash-table";
-import { HeapImplementationPattern } from "@/lib/pseudocode/patterns/heap-implementation";
-import { HeapSortPattern } from "@/lib/pseudocode/patterns/heap-sort";
-import { HeavyLightDecompositionPattern } from "@/lib/pseudocode/patterns/heavy-light-decomposition";
-import { HopcroftKarpPattern } from "@/lib/pseudocode/patterns/hopcroft-karp";
-import { HuffmanCodingPattern } from "@/lib/pseudocode/patterns/huffman-coding";
-import { HungarianPattern } from "@/lib/pseudocode/patterns/hungarian";
-import { InorderTraversalPattern } from "@/lib/pseudocode/patterns/inorder-traversal";
-import { InsertionSortPattern } from "@/lib/pseudocode/patterns/insertion-sort";
-import { InterpolationSearchPattern } from "@/lib/pseudocode/patterns/interpolation-search";
-import { IntervalSchedulingPattern } from "@/lib/pseudocode/patterns/interval-scheduling";
-import { JobSchedulingPattern } from "@/lib/pseudocode/patterns/job-scheduling";
-import { JumpSearchAlgorithmPattern } from "@/lib/pseudocode/patterns/jump-search-algorithm";
-import { KadanesAlgorithmPattern } from "@/lib/pseudocode/patterns/kadanes-algorithm";
-import { KahnTopologicalSortPattern } from "@/lib/pseudocode/patterns/kahn-topological-sort";
-import { KaratsubaMultiplicationPattern } from "@/lib/pseudocode/patterns/karatsuba-multiplication";
-import { KnuthMorrisPrattPattern } from "@/lib/pseudocode/patterns/kmp-algorithm";
-import { LCAPattern } from "@/lib/pseudocode/patterns/lca";
-import { LCADFSPattern } from "@/lib/pseudocode/patterns/lca-dfs";
-import { LinearSearchPattern } from "@/lib/pseudocode/patterns/linear-search";
-import { LinkedListPattern } from "@/lib/pseudocode/patterns/linked-list";
-import { ManachersAlgorithmPattern } from "@/lib/pseudocode/patterns/manachers-algorithm";
-import { MatrixChainMultiplicationPattern } from "@/lib/pseudocode/patterns/matrix-chain-multiplication";
-import { MatrixExponentiationPattern } from "@/lib/pseudocode/patterns/matrix-exponentiation";
-import { MatrixOperationsPattern } from "@/lib/pseudocode/patterns/matrix-operations";
-import { MatrixSpiralTraversalRecursivePattern } from "@/lib/pseudocode/patterns/matrix-spiral-recursive";
-import { MatrixSpiralTraversalPattern } from "@/lib/pseudocode/patterns/matrix-spiral-traversal";
-import { MatrixTraversalPattern } from "@/lib/pseudocode/patterns/matrix-traversal";
-import { MatrixTraversalRecursivePattern } from "@/lib/pseudocode/patterns/matrix-traversal-recursive";
-import { MaximumBipartiteMatchingPattern } from "@/lib/pseudocode/patterns/maximum-bipartite-matching";
-import { MemoizationPattern } from "@/lib/pseudocode/patterns/memoization";
-import { MergeSortPattern } from "@/lib/pseudocode/patterns/merge-sort";
-import { MillerRabinPrimalityTestPattern } from "@/lib/pseudocode/patterns/miller-rabin-primality-test";
-import { MonotonicQueuePattern } from "@/lib/pseudocode/patterns/monotonic-queue";
-import { MonotonicStackPattern } from "@/lib/pseudocode/patterns/monotonic-stack";
-import { NetworkFlowPattern } from "@/lib/pseudocode/patterns/network-flow";
-import { NullPattern } from "@/lib/pseudocode/patterns/null-pattern";
-import { PalindromePartitioningPattern } from "@/lib/pseudocode/patterns/palindrome-partitioning";
-import { PrefixSumsPattern } from "@/lib/pseudocode/patterns/prefix-sums";
-import { PrimPattern } from "@/lib/pseudocode/patterns/prims-algorithm";
-import { ProbabilityDPPattern } from "@/lib/pseudocode/patterns/probability-dp";
-import { QueueImplementationPattern } from "@/lib/pseudocode/patterns/queue-implementation";
-import { QuickSortPattern } from "@/lib/pseudocode/patterns/quick-sort";
-import { QuickselectPattern } from "@/lib/pseudocode/patterns/quickselect";
-import { RabinKarpPattern } from "@/lib/pseudocode/patterns/rabin-karp";
-import { RadixSortPattern } from "@/lib/pseudocode/patterns/radix-sort";
-import { RecursionPattern } from "@/lib/pseudocode/patterns/recursion";
-import { RedBlackTreePattern } from "@/lib/pseudocode/patterns/red-black-tree";
-import { SegmentTreePattern } from "@/lib/pseudocode/patterns/segment-tree";
-import { SelectionSortPattern } from "@/lib/pseudocode/patterns/selection-sort";
-import { ShellSortPattern } from "@/lib/pseudocode/patterns/shell-sort";
-import { SieveOfAtkinPattern } from "@/lib/pseudocode/patterns/sieve-of-atkin";
-import { SieveOfEratosthenesPattern } from "@/lib/pseudocode/patterns/sieve-of-eratosthenes";
-import { SieveOfSundaramPattern } from "@/lib/pseudocode/patterns/sieve-of-sundaram";
-import { SlidingWindowPattern } from "@/lib/pseudocode/patterns/sliding-window";
-import { SortingComparisonsPattern } from "@/lib/pseudocode/patterns/sorting-comparisons";
-import { SpanningTreePattern } from "@/lib/pseudocode/patterns/spanning-tree";
-import { SparseTablePattern } from "@/lib/pseudocode/patterns/sparse-table";
-import { StackImplementationPattern } from "@/lib/pseudocode/patterns/stack-implementation";
-import { StackSortPattern } from "@/lib/pseudocode/patterns/stack-sort";
-import { StateCompressionDPPattern } from "@/lib/pseudocode/patterns/state-compression-dp";
-import { StringHashingPattern } from "@/lib/pseudocode/patterns/string-hashing";
-import { StringOperationsPattern } from "@/lib/pseudocode/patterns/string-operations";
-import { StronglyConnectedComponentsPattern } from "@/lib/pseudocode/patterns/strongly-connected-components";
-import { SuffixArrayPattern } from "@/lib/pseudocode/patterns/suffix-array";
-import { SuffixTreePattern } from "@/lib/pseudocode/patterns/suffix-tree";
-import { TernarySearchAlgorithmPattern } from "@/lib/pseudocode/patterns/ternary-search-algorithm";
-import { TestDataPattern } from "@/lib/pseudocode/patterns/test-data";
-import { TopologicalSortPattern } from "@/lib/pseudocode/patterns/topological-sort";
-import { TreeDynamicProgrammingPattern } from "@/lib/pseudocode/patterns/tree-dp";
-import { TriePattern } from "@/lib/pseudocode/patterns/trie";
-import { TrieOperationsPattern } from "@/lib/pseudocode/patterns/trie-operations";
-import { TwoPointersPattern } from "@/lib/pseudocode/patterns/two-pointers";
-import { TwoSumPattern } from "@/lib/pseudocode/patterns/two-sum";
-import { TwoSumDictionaryPattern } from "@/lib/pseudocode/patterns/two-sum-dict";
-import { TwoSumTwoPointersPattern } from "@/lib/pseudocode/patterns/two-sum-two-pointers";
-import { UnionFindPattern } from "@/lib/pseudocode/patterns/union-find";
-import { ZAlgorithmPattern } from "@/lib/pseudocode/patterns/z-algorithm";
-import { ZigzagTraversalPattern } from "@/lib/pseudocode/patterns/zigzag-traversal";
+import { DynamicPattern } from "./patterns/DynamicPattern";
+import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types";
+import { ComponentType } from "react";
+import { getAllPatterns } from "./patterns/utils";
 
-// import { TreeImplementationPattern } from "@/lib/pseudocode/patterns/tree-implementation";
+// Get all patterns from JSON
+const jsonPatterns = getAllPatterns();
 
-export const pseudocodePatterns: Record<string, () => JSX.Element> = {
-  // ===== Graph Algorithms =====
-  BFS: BFSPattern,
-  "BFS Linked List": BfsLinkedListPattern,
-  DFS: DFSPattern,
-  "DFS Binary Tree": DfsBinaryTreePattern,
-  "DFS Linked List": DfsLinkedListPattern,
-  Dijkstra: DijkstraPattern,
-  "Bellman-Ford": BellmanFordPattern,
-  "Floyd-Warshall": FloydWarshallPattern,
-  Kruskal: KruskalPattern,
-  Prim: PrimPattern,
-  "Topological Sort": TopologicalSortPattern,
-  "Strongly Connected Components": StronglyConnectedComponentsPattern,
-  "Articulation Points": ArticulationPointsPattern,
-  Bridges: BridgesPattern,
-  Kosaraju: KosarajuPattern,
-  "Maximum Bipartite Matching": MaximumBipartiteMatchingPattern,
-  "Network Flow": NetworkFlowPattern,
-  "Heavy Light Decomposition": HeavyLightDecompositionPattern,
-  "Lowest Common Ancestor": LCAPattern,
-  "Ford-Fulkerson": FordFulkersonPattern,
-  "Kahn's Topological Sort": KahnTopologicalSortPattern,
-  "Hopcroft-Karp": HopcroftKarpPattern,
-  "Graph Representation": GraphRepresentationPattern,
-  "DFS Graph": DFSGraphPattern,
-  "Spanning Tree": SpanningTreePattern,
+// Create dynamic pattern components for all JSON patterns
+export const pseudocodePatterns: Partial<Record<PatternKey, ComponentType>> = Object.entries(
+  jsonPatterns
+).reduce(
+  (acc, [key, pattern]) => {
+    // Convert kebab-case key to PatternKey format
+    const patternKey = key
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ") as PatternKey;
 
-  // ===== Tree Data Structures =====
-  "Binary Search Tree": BinarySearchTreePattern,
-  "AVL Tree": AVLTreePattern,
-  "Red-Black Tree": RedBlackTreePattern,
-  "B Tree": BTreePattern,
-  "Segment Tree": SegmentTreePattern,
-  "Fenwick Tree": FenwickTreePattern,
-  "Suffix Tree": SuffixTreePattern,
-  "Trie Operations": TrieOperationsPattern,
-  "LCA DFS": LCADFSPattern,
-  "Inorder Traversal": InorderTraversalPattern,
-  "Zigzag Traversal": ZigzagTraversalPattern,
+    // Only add if it's a valid PatternKey
+    if (PATTERN_KEYS.includes(patternKey)) {
+      acc[patternKey] = (props) => (
+        <DynamicPattern patternKey={patternKey} patternName={pattern.name} {...props} />
+      );
+    }
+    return acc;
+  },
+  {} as Partial<Record<PatternKey, ComponentType>>
+);
 
-  // ===== Dynamic Programming =====
-  "Dynamic Programming": DynamicProgrammingPattern,
-  "Dynamic Programming Coin Change": DynamicProgrammingCoinChangePattern,
-  "Dynamic Programming Iterative": DynamicProgrammingIterativePattern,
-  "Dynamic Programming Pattern": DynamicProgrammingPatternTemplate,
-  "Digit DP": DigitDPPattern,
-  "Probability DP": ProbabilityDPPattern,
-  "State Compression DP": StateCompressionDPPattern,
-  "Tree DP": TreeDynamicProgrammingPattern,
-  "Bitwise DP": BitwiseDPPattern,
+// Helper function to get pattern component
+export function getPatternComponent(name: string): ComponentType | undefined {
+  const patternKey = name as PatternKey;
+  if (!PATTERN_KEYS.includes(patternKey)) {
+    return undefined;
+  }
+  return pseudocodePatterns[patternKey];
+}
 
-  // ===== Greedy Algorithms =====
-  Greedy: GreedyPattern,
-  "Activity Selection": ActivitySelectionPattern,
-  "Fractional Knapsack": FractionalKnapsackPattern,
-  "Huffman Coding": HuffmanCodingPattern,
-  "Job Scheduling": JobSchedulingPattern,
-  "Hungarian Algorithm": HungarianPattern,
+// Helper function to check if pattern exists
+export function hasPattern(name: string): boolean {
+  const patternKey = name as PatternKey;
+  return PATTERN_KEYS.includes(patternKey) && patternKey in pseudocodePatterns;
+}
 
-  // ===== Search Algorithms =====
-  "Linear Search": LinearSearchPattern,
-  "Binary Search": BinarySearchPattern,
-  "Binary Search on Answer": BinarySearchOnAnswerPattern,
-  "Exponential Search": ExponentialSearchPattern,
-  "Fibonacci Search": FibonacciSearchPattern,
-  "Interpolation Search": InterpolationSearchPattern,
-  "Jump Search": JumpSearchAlgorithmPattern,
-  "Ternary Search": TernarySearchAlgorithmPattern,
+// Helper function to get all available patterns
+export function getAvailablePatterns(): PatternKey[] {
+  return PATTERN_KEYS.filter((key) => hasPattern(key));
+}
 
-  // ===== Sorting Algorithms =====
-  "Bubble Sort": BubbleSortPattern,
-  "Insertion Sort": InsertionSortPattern,
-  "Selection Sort": SelectionSortPattern,
-  "Merge Sort": MergeSortPattern,
-  "Quick Sort": QuickSortPattern,
-  "Heap Sort": HeapSortPattern,
-  "Radix Sort": RadixSortPattern,
-  "Stack Sort": StackSortPattern,
-  "Sorting Comparisons": SortingComparisonsPattern,
-  "Bucket Sort": BucketSortPattern,
-  "Counting Sort": CountingSortPattern,
-  "Shell Sort": ShellSortPattern,
-  // ===== Matrix Operations =====
-  "Matrix Operations": MatrixOperationsPattern,
-  "Matrix Chain Multiplication": MatrixChainMultiplicationPattern,
-  "Matrix Exponentiation": MatrixExponentiationPattern,
-  "Matrix Spiral Traversal": MatrixSpiralTraversalPattern,
-  "Matrix Spiral Recursive": MatrixSpiralTraversalRecursivePattern,
-  "Matrix Traversal": MatrixTraversalPattern,
-  "Matrix Traversal Recursive": MatrixTraversalRecursivePattern,
-  "Grid Traversal": GridTraversalPattern,
+// Helper function to get patterns by category
+export function getPatternsByCategory(): Record<string, PatternKey[]> {
+  const patternsByCategory: Record<string, PatternKey[]> = {};
 
-  // ===== String Algorithms =====
-  "String Operations": StringOperationsPattern,
-  "Knuth-Morris-Pratt": KnuthMorrisPrattPattern,
-  "Rabin-Karp": RabinKarpPattern,
-  "Manacher's Algorithm": ManachersAlgorithmPattern,
-  "Z Algorithm": ZAlgorithmPattern,
-  "Suffix Array": SuffixArrayPattern,
-  "String Hashing": StringHashingPattern,
-  "Palindrome Partitioning": PalindromePartitioningPattern,
-  "Edit Distance": EditDistancePattern,
+  Object.entries(jsonPatterns).forEach(([key, pattern]) => {
+    const patternKey = key
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ") as PatternKey;
 
-  // ===== Number Theory =====
-  "Chinese Remainder Theorem": ChineseRemainderTheoremPattern,
-  "Extended Euclidean": ExtendedEuclideanAlgorithmPattern,
-  "Miller-Rabin Primality Test": MillerRabinPrimalityTestPattern,
-  "Sieve of Eratosthenes": SieveOfEratosthenesPattern,
-  "Sieve of Atkin": SieveOfAtkinPattern,
-  "Sieve of Sundaram": SieveOfSundaramPattern,
+    if (PATTERN_KEYS.includes(patternKey)) {
+      const category = pattern.type;
+      if (!patternsByCategory[category]) {
+        patternsByCategory[category] = [];
+      }
+      patternsByCategory[category].push(patternKey);
+    }
+  });
 
-  // ===== Data Structures =====
-  "Hash Table": HashTablePattern,
-  "Linked List": LinkedListPattern,
-  "Circular Linked List": CircularLinkedListPattern,
-  "Stack Implementation": StackImplementationPattern,
-  "Queue Implementation": QueueImplementationPattern,
-  "Heap Implementation": HeapImplementationPattern,
-  "Union Find": UnionFindPattern,
-  "Monotonic Stack": MonotonicStackPattern,
-  "Monotonic Queue": MonotonicQueuePattern,
-  "Sparse Table": SparseTablePattern,
-  "Binary Indexed Tree": BinaryIndexedTreePattern,
-  "Doubly Linked List": DoublyLinkedListPattern,
-  Trie: TriePattern,
-
-  // ===== Array Techniques =====
-  "Two Pointers": TwoPointersPattern,
-  "Sliding Window": SlidingWindowPattern,
-  "Prefix Sums": PrefixSumsPattern,
-  "Kadane's Algorithm": KadanesAlgorithmPattern,
-  "Two Sum": TwoSumPattern,
-  "Two Sum Dict": TwoSumDictionaryPattern,
-  "Two Sum Two Pointers": TwoSumTwoPointersPattern,
-
-  // ===== Miscellaneous =====
-  "A* Search": AStarSearchPattern,
-  Backtracking: BacktrackingPattern,
-  "Bit Manipulation": BitManipulationPattern,
-  "Divide and Conquer": DivideAndConquerPattern,
-  "Fast Fourier Transform": FastFourierTransformPattern,
-  "Floyd Cycle Detection": FloydCycleDetectionPattern,
-  Memoization: MemoizationPattern,
-  Quickselect: QuickselectPattern,
-  Recursion: RecursionPattern,
-  "Test Data": TestDataPattern,
-  "Karatsuba Multiplication": KaratsubaMultiplicationPattern,
-  "Interval Scheduling": IntervalSchedulingPattern,
-  "Fast and Slow Pointers": FastAndSlowPointersPattern,
-  Fibonacci: FibonacciPattern,
-  "Null Pattern": NullPattern,
-};
+  return patternsByCategory;
+}
 
 // Function to verify pattern consistency
 export function verifyPseudocodePatterns() {

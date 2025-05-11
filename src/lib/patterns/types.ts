@@ -53,6 +53,7 @@ export const PATTERN_KEYS = [
   "Stack Sort",
   "Bucket Sort",
   "Counting Sort",
+  "Sorting Comparisons",
 
   // Searching Patterns
   "Binary Search",
@@ -188,6 +189,7 @@ export const PATTERN_KEYS = [
   "LCA DFS",
   "Inorder Traversal",
   "Zigzag Traversal",
+  "Zigzag Traversal Template",
 
   // Two Sum Variations
   "Two Sum",

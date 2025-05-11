@@ -1,4 +1,6 @@
 import { PatternComponent } from "@/lib/pseudocode/types";
+import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 const DFSPattern: PatternComponent = () => {
   return (
@@ -12,12 +14,13 @@ const DFSPattern: PatternComponent = () => {
       </div>
       <div className="mt-4 text-sm text-secondary">
         <p>Depth-First Search for Graph Traversal</p>
-        <p className="mt-2">Time Complexity: O(V + E)</p>
-        <p>Space Complexity: O(V)</p>
+        <p>Time: O(V + E) where V is vertices and E is edges</p>
+        <p>Space: O(V) for visited set and recursion stack</p>
+        <p>Use: Finding connected components, cycle detection, topological sorting</p>
       </div>
       <div className="mt-4 w-full">
-        <pre className="bg-background/50 p-4 rounded-lg text-sm">
-          {`function DFS(graph, start):
+        <PseudocodeDisplay
+          code={`function DFS(graph, start):
     visited = set()
     stack = [start]
     
@@ -31,7 +34,28 @@ const DFSPattern: PatternComponent = () => {
             for neighbor in graph[current]:
                 if neighbor not in visited:
                     stack.append(neighbor)`}
-        </pre>
+        />
+      </div>
+      <div className="mt-4 w-full">
+        <h3 className="text-lg font-semibold mb-2">Key Steps:</h3>
+        <div className="space-y-2">
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Initialize: Visited set and stack with start vertex</span>
+          </div>
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Process: Pop vertex from stack and mark as visited</span>
+          </div>
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Explore: Add unvisited neighbors to stack</span>
+          </div>
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Repeat: Until stack is empty</span>
+          </div>
+        </div>
       </div>
     </div>
   );

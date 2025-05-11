@@ -1,4 +1,6 @@
 import { PatternComponent } from "@/lib/pseudocode/types";
+import { ChevronRight } from "lucide-react";
+import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 const DoublyLinkedListPattern: PatternComponent = () => {
   return (
@@ -12,17 +14,13 @@ const DoublyLinkedListPattern: PatternComponent = () => {
       </div>
       <div className="mt-4 text-sm text-secondary">
         <p>A linked list where each node has references to both the next and previous nodes</p>
-        <p className="mt-2">Time Complexity:</p>
-        <ul className="list-disc list-inside">
-          <li>Access: O(n)</li>
-          <li>Search: O(n)</li>
-          <li>Insertion: O(1)</li>
-          <li>Deletion: O(1)</li>
-        </ul>
+        <p>Time: O(n) for access/search, O(1) for insertion/deletion</p>
+        <p>Space: O(n) for storing n nodes</p>
+        <p>Use: When you need bidirectional traversal and O(1) insertion/deletion at both ends</p>
       </div>
       <div className="mt-4 w-full">
-        <pre className="bg-background/50 p-4 rounded-lg text-sm">
-          {`class Node:
+        <PseudocodeDisplay
+          code={`class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -52,7 +50,28 @@ class DoublyLinkedList:
             new_node.prev = self.tail
             self.tail.next = new_node
             self.tail = new_node`}
-        </pre>
+        />
+      </div>
+      <div className="mt-4 w-full">
+        <h3 className="text-lg font-semibold mb-2">Key Steps:</h3>
+        <div className="space-y-2">
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Each node contains data and pointers to both next and previous nodes</span>
+          </div>
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Maintain head and tail pointers for O(1) access to both ends</span>
+          </div>
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Update both next and prev pointers when inserting or deleting nodes</span>
+          </div>
+          <div className="flex items-start">
+            <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+            <span>Handle edge cases: empty list, single node, first/last node operations</span>
+          </div>
+        </div>
       </div>
     </div>
   );

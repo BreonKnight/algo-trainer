@@ -3,17 +3,25 @@ import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const FloydCycleDetectionPattern = () => (
-  <div>
-    <div className="mb-2">
-      <span className="text-accent font-bold">Floyd Cycle Detection</span>
+  <div className="flex flex-col items-center">
+    <div className="flex items-center">
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Floyd Cycle Detection
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Detect cycles in linked lists
+    <div className="mt-4 text-sm text-secondary">
+      <p>
+        A technique to detect cycles in linked lists using two pointers moving at different speeds
+      </p>
+      <p>Time: O(n) where n is the number of nodes</p>
+      <p>Space: O(1) using only two pointers</p>
+      <p>Use: Detect cycles in linked lists, find cycle start node</p>
     </div>
-
-    <PseudocodeDisplay
-      code={`FLOYD-CYCLE-DETECTION(head)
+    <div className="mt-4 w-full">
+      <PseudocodeDisplay
+        code={`FLOYD-CYCLE-DETECTION(head)
     let slow ← head
     let fast ← head
 
@@ -69,23 +77,23 @@ FIND-CYCLE-START(head)
 //   slow = 3, fast = 3 (cycle start found)
 //
 // Output: Cycle exists, starts at node 3`}
-    />
-
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+      />
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Initialize: Set slow and fast pointers to head</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Detect: Move pointers at different speeds until they meet</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Find: Reset slow pointer and move both at same speed</span>
+    <div className="mt-4 w-full">
+      <h3 className="text-lg font-semibold mb-2">Key Steps:</h3>
+      <div className="space-y-2">
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Initialize: Set slow and fast pointers to head</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Detect: Move pointers at different speeds until they meet</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Find: Reset slow pointer and move both at same speed</span>
+        </div>
       </div>
     </div>
   </div>
