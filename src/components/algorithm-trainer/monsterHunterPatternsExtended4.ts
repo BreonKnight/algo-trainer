@@ -500,7 +500,7 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Two Sum Dict" as PatternKey,
+    "Two Sum Dictionary" as PatternKey,
     `def monster_hunter_two_sum_dict(material_values, target_value):
     """
     Find two materials that combine to target value using dictionary.
@@ -623,7 +623,7 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Dynamic Programming Coin Change" as PatternKey,
+    "Coin Change" as PatternKey,
     `def monster_hunter_dp_coin_change(material_values, target_value):
     """
     Find minimum materials needed to reach target value.
@@ -1075,7 +1075,7 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "DFS Binary Tree" as PatternKey,
+    "DFS (Binary Tree)" as PatternKey,
     `def monster_hunter_dfs_binary_tree(root):
     """
     Traverse binary tree using DFS approaches.
@@ -1392,10 +1392,10 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Tree DP" as PatternKey,
+    "Tree (Dynamic Programming)" as PatternKey,
     `def monster_hunter_tree_dp(monster_tree):
     """
-    Optimize monster territory control using Tree DP.
+    Optimize monster territory control using Tree (Dynamic Programming).
     Time: O(n)
     Space: O(n)
     
@@ -1650,10 +1650,10 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Graph Floyd-Warshall" as PatternKey,
+    "Graph Floyd-Warshall Algorithm" as PatternKey,
     `def monster_hunter_floyd_warshall(territory_graph):
     """
-    Find all-pairs shortest paths using Floyd-Warshall.
+    Find all-pairs shortest paths using Floyd-Warshall Algorithm.
     Time: O(V³)
     Space: O(V²)
     
@@ -1686,7 +1686,7 @@ def monster_hunter_merge(left, right):
             j = territories.index(neighbor)
             dist[i][j] = weight
     
-    # Floyd-Warshall algorithm
+    # Floyd-Warshall Algorithm
     for k in range(n):
         for i in range(n):
             for j in range(n):
@@ -1702,10 +1702,10 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Kruskal" as PatternKey,
+    "Kruskal's Algorithm" as PatternKey,
     `def monster_hunter_kruskal(territory_edges):
     """
-    Find minimum spanning tree using Kruskal's algorithm.
+    Find minimum spanning tree using Kruskal's Algorithm's algorithm.
     Time: O(E log E)
     Space: O(V)
     
@@ -1770,10 +1770,10 @@ def monster_hunter_merge(left, right):
   ],
 
   [
-    "Prim" as PatternKey,
+    "Prim's Algorithm" as PatternKey,
     `def monster_hunter_prim(territory_graph):
     """
-    Find minimum spanning tree using Prim's algorithm.
+    Find minimum spanning tree using Prim's Algorithm.
     Time: O(E log V)
     Space: O(V)
     
@@ -2257,9 +2257,57 @@ def monster_hunter_merge(left, right):
     return slow  # Start of patrol cycle`,
   ],
 
-  ["Prim" as PatternKey, "Prim's Algorithm"],
   [
-    "Kruskal",
+    "Fast and Slow Pointers" as PatternKey,
+    `def monster_hunter_fast_slow_pointers(monster_sequence):
+    """
+    Detect cycles and find middle points in monster sequences using Fast and Slow Pointers.
+    Time: O(n)
+    Space: O(1)
+    
+    Monster Hunter Context:
+    - Like tracking monster movement patterns
+    - Use two scouts moving at different speeds
+    - Detect cycles and find middle points
+    
+    Example:
+    sequence = [1, 2, 3, 4, 5, 6]  # Monster positions
+    1 -> 2 -> 3 -> 4 -> 5 -> 6
+    
+    Process:
+    1. Initialize slow and fast pointers
+    2. Move slow by 1, fast by 2
+    3. If they meet, cycle exists
+    4. If fast reaches end, no cycle
+    """
+    def get_next_position(current):
+        return monster_sequence[current]
+    
+    # Initialize pointers
+    slow = fast = 0
+    
+    # Detect cycle
+    while True:
+        # Move slow pointer by 1
+        slow = get_next_position(slow)
+        
+        # Move fast pointer by 2
+        fast = get_next_position(fast)
+        if fast is None:
+            return False  # No cycle
+        fast = get_next_position(fast)
+        if fast is None:
+            return False  # No cycle
+        
+        # Check if pointers meet
+        if slow == fast:
+            return True  # Cycle detected
+    
+    return False  # No cycle`,
+  ],
+
+  [
+    "Kruskal's Algorithm",
     `
 function find_minimum_spanning_tree(territories: number[][]): number[][] {
   const n = territories.length;

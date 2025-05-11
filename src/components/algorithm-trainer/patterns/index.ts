@@ -21,7 +21,7 @@ import { createPatternRecord } from "@/lib/patterns/pattern-utils";
 // Patterns to be implemented later
 export const patternsToImplement = [
   // Graph Algorithms
-  "Hopcroft-Karp",
+  "Hopcroft-Karp's Algorithm",
   "Tarjan's Algorithm",
   "Eulerian Path/Circuit",
   "Hamiltonian Path/Circuit",

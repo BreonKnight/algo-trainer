@@ -14,6 +14,9 @@ import { triePattern } from "@/components/algorithm-trainer/patterns/data-struct
 import { unionFindPattern } from "@/components/algorithm-trainer/patterns/data-structures/union-find";
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 import { createPatternRecord } from "@/lib/patterns/pattern-utils";
+import { fastAndSlowPointersPattern } from "@/components/algorithm-trainer/patterns/data-structures/fast-and-slow-pointers";
+import { doublyLinkedListPattern } from "@/components/algorithm-trainer/patterns/data-structures/doubly-linked-list";
+import { inorderTraversalPattern } from "@/components/algorithm-trainer/patterns/data-structures/inorder-traversal";
 
 export const dataStructurePatterns = createPatternRecord<AlgorithmPattern>({
   "Monotonic Queue": monotonicQueuePattern,
@@ -28,7 +31,11 @@ export const dataStructurePatterns = createPatternRecord<AlgorithmPattern>({
   "Red-Black Tree": redBlackTreePattern,
   "B Tree": bTreePattern,
   "Binary Indexed Tree": fenwickTreePattern,
+  "Fenwick Tree": fenwickTreePattern,
   "Segment Tree": segmentTreePattern,
   Trie: triePattern,
   "Trie Operations": triePattern,
+  "Fast and Slow Pointers": fastAndSlowPointersPattern,
+  "Doubly Linked List": doublyLinkedListPattern,
+  "Inorder Traversal": inorderTraversalPattern,
 });

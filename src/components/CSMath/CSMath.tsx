@@ -34,7 +34,7 @@ const initialConcepts: Concept[] = [
     monsterHunterExample:
       "When Rathalos and Rathian share a territory, their combined hunting grounds form a union. Just like how the Ancient Forest and Wildspire Waste can overlap during certain hunts. If Rathalos can be found in areas {1, 2, 3} and Rathian in areas {2, 3, 4}, their combined territory is {1, 2, 3, 4} - all areas where either monster can appear.",
     clrsExplanation:
-      "In CLRS, set union (A ∪ B) represents all elements that are in either set A or set B. This is fundamental for understanding data structures like disjoint sets, which are used in algorithms like Kruskal's minimum spanning tree. The union operation helps us efficiently combine different sets of data while maintaining their relationships.",
+      "In CLRS, set union (A ∪ B) represents all elements that are in either set A or set B. This is fundamental for understanding data structures like disjoint sets, which are used in algorithms like Kruskal's Algorithm's minimum spanning tree. The union operation helps us efficiently combine different sets of data while maintaining their relationships.",
     mathematicalNotation:
       "A ∪ B = {x | x ∈ A or x ∈ B}\n\nBreaking this down:\n- A ∪ B means 'A union B' (all elements in either set)\n- {x | ...} means 'the set of all x such that...'\n- x ∈ A means 'x is an element of set A'\n\nExample with monster territories:\nIf:\nA = {1, 2, 3} (Rathalos areas)\nB = {2, 3, 4} (Rathian areas)\nThen:\nA ∪ B = {1, 2, 3, 4} (all areas where either monster appears)",
   },
@@ -45,7 +45,7 @@ const initialConcepts: Concept[] = [
     monsterHunterExample:
       "Think of each monster's nest as a node, and their migration paths as edges. When Nergigante moves between regions, it creates an adjacency list of possible locations. For example, if Nergigante can move from its nest to areas 2, 3, and 5, but not directly to area 4, this creates specific connections in our graph that help us predict its movement patterns.",
     clrsExplanation:
-      "In CLRS, graphs are fundamental for representing relationships between objects. Nodes (vertices) represent entities, and edges represent relationships between them. This structure is crucial for algorithms like Dijkstra's shortest path and depth-first search, which help us solve problems like finding the most efficient route between locations or detecting cycles in monster movement patterns.",
+      "In CLRS, graphs are fundamental for representing relationships between objects. Nodes (vertices) represent entities, and edges represent relationships between them. This structure is crucial for algorithms like Dijkstra's Algorithm shortest path and depth-first search, which help us solve problems like finding the most efficient route between locations or detecting cycles in monster movement patterns.",
     mathematicalNotation:
       "G = (V, E) where V is the set of vertices and E is the set of edges\n\nBreaking this down:\n- G represents the entire graph\n- V is the set of vertices (nodes/locations)\n- E is the set of edges (connections/paths)\n\nExample with monster migration:\nIf a monster can move between 4 areas:\nV = {1, 2, 3, 4} (the areas)\nE = {(1,2), (2,3), (3,4), (1,4)} (possible movements)\nThis means the monster can move:\n1 → 2 → 3 → 4 or 1 → 4 directly",
   },

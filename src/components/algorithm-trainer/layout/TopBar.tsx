@@ -47,6 +47,7 @@ function SortableItem({ id, children }: SortableItemProps) {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.5 : 1,
+    touchAction: "none",
   };
 
   return (
@@ -71,6 +72,7 @@ function SortableItem({ id, children }: SortableItemProps) {
         )}
         {...attributes}
         {...listeners}
+        style={{ touchAction: "none" }}
       >
         <GripVertical className="w-3.5 h-3.5 text-muted-foreground/80 hover:text-foreground transition-all duration-300 ease-out" />
       </button>

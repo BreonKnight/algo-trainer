@@ -124,7 +124,7 @@ The implementation uses two optimizations:
 This results in near-constant-time operations, making it extremely efficient for problems involving connected components, such as:
 - Finding connected components in a graph
 - Detecting cycles in a graph
-- Kruskal's algorithm for minimum spanning trees
+- Kruskal's Algorithm's algorithm for minimum spanning trees
 - Image processing
 - Network connectivity problems
 

@@ -8,7 +8,7 @@ import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 
 interface SortablePanelProps {
-  id: UniqueIdentifier;
+  id: string;
   children: ReactNode;
 }
 
@@ -51,6 +51,7 @@ export function SortablePanel({ id, children }: SortablePanelProps) {
           "touch-manipulation",
           theme === "nord" ? "text-white/70" : "text-secondary"
         )}
+        style={{ touchAction: "none" }}
       >
         <GripVertical className="h-4 w-4" />
       </div>

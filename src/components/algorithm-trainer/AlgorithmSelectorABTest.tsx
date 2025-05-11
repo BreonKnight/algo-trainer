@@ -29,7 +29,7 @@ const algorithmCategories = {
     "Dynamic Programming",
     "Dynamic Programming Fibonacci",
     "Dynamic Programming Iterative",
-    "Dynamic Programming Coin Change",
+    "Coin Change",
   ],
   "Greedy Algorithms": [
     "Greedy",
@@ -42,7 +42,7 @@ const algorithmCategories = {
   "Graph Algorithms": [
     "DFS",
     "DFS Linked List",
-    "DFS Binary Tree",
+    "DFS (Binary Tree)",
     "BFS",
     "BFS Linked List",
     "Topological Sort",
@@ -61,7 +61,7 @@ const algorithmCategories = {
   ],
   "Array Techniques": [
     "Two Sum",
-    "Two Sum Dict",
+    "Two Sum Dictionary",
     "Two Sum Two Pointers",
     "Sliding Window",
     "Two Pointers",

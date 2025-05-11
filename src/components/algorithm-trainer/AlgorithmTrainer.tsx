@@ -12,22 +12,15 @@ export default function AlgorithmTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [userCode, setUserCode] = useState("");
 
-  const { selectedPattern, handlePatternChange, nextPattern, previousPattern } =
-    usePatternManager();
+  const {
+    selectedPattern,
+    handlePatternChange,
+    nextPattern,
+    previousPattern,
+    randomPattern,
+    currentPatternIndex,
+  } = usePatternManager();
 
-  // Calculate pattern number based on predefined order
-  const getPatternNumber = (pattern: string) => {
-    let count = 0;
-    for (const category of Object.values(monsterHunterPatternsByCategory)) {
-      if (category.includes(pattern)) {
-        return count + category.indexOf(pattern) + 1;
-      }
-      count += category.length;
-    }
-    return 0; // Return 0 if pattern not found in predefined order
-  };
-
-  const patternNumber = getPatternNumber(selectedPattern);
   const totalPatterns = Object.values(monsterHunterPatternsByCategory).reduce(
     (sum, category) => sum + category.length,
     0
@@ -48,7 +41,7 @@ export default function AlgorithmTrainer() {
                 showAnswer={showAnswer}
                 setShowAnswer={setShowAnswer}
                 onNextPattern={nextPattern}
-                patternNumber={patternNumber}
+                patternNumber={currentPatternIndex + 1}
               />
               <div className="mt-4">
                 <ReplCard userCode={userCode} setUserCode={setUserCode} />
@@ -56,7 +49,7 @@ export default function AlgorithmTrainer() {
               <PatternControls
                 onPreviousPattern={previousPattern}
                 onNextPattern={nextPattern}
-                onRandomPattern={nextPattern}
+                onRandomPattern={randomPattern}
                 currentPattern={selectedPattern}
                 totalPatterns={totalPatterns}
               />

@@ -108,6 +108,30 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
 
   const pseudo = getPseudocodePattern(currentPattern);
 
+  // Add touch event handling for resize
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isDesktop) return;
+    const touch = e.touches[0];
+    const startY = touch.clientY;
+    const startHeight = descRef.current?.offsetHeight || 0;
+    const maxHeight = 800;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      const delta = touch.clientY - startY;
+      const newHeight = Math.max(300, Math.min(startHeight + delta, maxHeight));
+      setDescHeight(newHeight);
+    };
+
+    const handleTouchEnd = () => {
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
+  };
+
   return isExpanded ? (
     createPortal(
       <Card
@@ -394,7 +418,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
             {/* Vertical resize handle */}
             <div
               className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group mt-1"
-              style={{ userSelect: "none" }}
+              style={{ userSelect: "none", touchAction: "none" }}
               onMouseDown={(e) => {
                 if (!isDesktop) return;
                 const startY = e.clientY;
@@ -412,6 +436,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                 window.addEventListener("mousemove", onMove);
                 window.addEventListener("mouseup", onUp);
               }}
+              onTouchStart={handleTouchStart}
             >
               <div
                 className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 

@@ -25,7 +25,7 @@ const patternDirectories = {
 
   // Array algorithms
   "Two Sum": "array",
-  "Two Sum Dict": "array",
+  "Two Sum Dictionary": "array",
   "Two Sum Two Pointers": "array",
   "Sliding Window": "array",
   "Bit Manipulation": "array",
@@ -40,7 +40,7 @@ const patternDirectories = {
   // Dynamic Programming
   "Dynamic Programming": "dynamic-programming",
   "Dynamic Programming Iterative": "dynamic-programming",
-  "Dynamic Programming Coin Change": "dynamic-programming",
+  "Coin Change": "dynamic-programming",
 
   // Greedy algorithms
   Greedy: "greedy",
@@ -57,7 +57,7 @@ const patternDirectories = {
   "Topological Sort": "graph",
   DFS: "graph",
   "DFS Linked List": "graph",
-  "DFS Binary Tree": "graph",
+  "DFS (Binary Tree)": "graph",
   BFS: "graph",
   "BFS Linked List": "graph",
   "Floyd Cycle Detection": "graph",

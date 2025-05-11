@@ -6,7 +6,7 @@ class TreeNode:
         self.children = children or []
 
 class TreeDPPattern:
-    title = "Tree DP"
+    title = "Tree (Dynamic Programming)"
     description = "A dynamic programming technique applied to tree structures. It's used to solve problems where the solution for a node depends on the solutions of its children."
     time_complexity = "O(n) where n is the number of nodes in the tree"
     space_complexity = "O(n)"
@@ -14,12 +14,12 @@ class TreeDPPattern:
 
     # Monster Hunter Guide
     monster_hunter_guide = """
-    # Monster Hunter Tree DP Guide
+    # Monster Hunter Tree (Dynamic Programming) Guide
     # ===========================
     
     # Understanding Territory Control
     # -----------------------------
-    # In Monster Hunter, Tree DP helps you plan optimal routes through monster territories.
+    # In Monster Hunter, Tree (Dynamic Programming) helps you plan optimal routes through monster territories.
     # Each territory has:
     # - A reward value (materials, resources, etc.)
     # - Connections to other territories

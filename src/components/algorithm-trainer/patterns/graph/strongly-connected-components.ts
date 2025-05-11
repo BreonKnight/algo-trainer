@@ -64,7 +64,7 @@ print(components)  # Output: [[0, 1, 2], [3, 4, 5]]
 
 def kosaraju(graph: List[List[int]]) -> List[List[int]]:
     """
-    Find strongly connected components in a directed graph using Kosaraju's algorithm.
+    Find strongly connected components in a directed graph using Kosaraju's Algorithm's algorithm.
     
     Args:
         graph: Adjacency list representation of the graph

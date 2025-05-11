@@ -1,7 +1,7 @@
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const dynamicProgrammingCoinChangePattern: AlgorithmPattern = {
-  title: "Dynamic Programming Coin Change",
+  title: "Coin Change",
   description:
     "A dynamic programming solution to the coin change problem that finds the minimum number of coins needed to make up a given amount.",
   timeComplexity: "O(n * m) where n is amount and m is number of coin types",

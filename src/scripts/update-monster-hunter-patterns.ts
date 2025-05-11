@@ -19,17 +19,16 @@ const missingImplementations = [
   // Graph Algorithms
   "A* Search",
   "Bellman-Ford",
-  "Floyd-Warshall",
-  "Kruskal",
-  "Prim",
+  "Floyd-Warshall Algorithm",
+  "Kruskal's Algorithm",
+  "Prim's Algorithm",
   "Network Flow",
   "Heavy Light Decomposition",
-  "Hopcroft-Karp",
-  "Ford-Fulkerson",
+  "Hopcroft-Karp's Algorithm",
+  "Ford-Fulkerson Algorithm",
   "Kahn's Topological Sort",
   "Graph Representation",
   "DFS Graph",
-  "Spanning Tree",
 
   // String Algorithms
   "Rabin-Karp",

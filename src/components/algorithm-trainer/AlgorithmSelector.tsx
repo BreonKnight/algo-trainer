@@ -134,6 +134,34 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
 
   // Handle algorithm selection
   const handleAlgorithmSelect = (algorithm: string) => {
+    console.log("Selecting algorithm:", algorithm);
+
+    // Get all patterns from all categories
+    const allPatterns = Object.values(algorithmCategories).flat();
+    console.log("Available patterns:", allPatterns);
+
+    // Try exact match first
+    if (allPatterns.includes(algorithm)) {
+      console.log("Found exact match");
+      onPatternChange(algorithm as PatternKey);
+      setIsDropdownOpen(false);
+      setActiveIndex(-1);
+      return;
+    }
+
+    // Try case-insensitive match
+    const normalizedAlgorithm = algorithm.toLowerCase();
+    const matchingPattern = allPatterns.find((p) => p.toLowerCase() === normalizedAlgorithm);
+
+    if (matchingPattern) {
+      console.log("Found case-insensitive match:", matchingPattern);
+      onPatternChange(matchingPattern as PatternKey);
+      setIsDropdownOpen(false);
+      setActiveIndex(-1);
+      return;
+    }
+
+    console.log("No match found for:", algorithm);
     onPatternChange(algorithm as PatternKey);
     setIsDropdownOpen(false);
     setActiveIndex(-1);

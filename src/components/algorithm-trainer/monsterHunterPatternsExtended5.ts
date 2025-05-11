@@ -174,7 +174,7 @@ export const monsterHunterPatternsExtended5 = new Map<PatternKey, string>([
   ],
 
   [
-    "Tree DP" as PatternKey,
+    "Tree (Dynamic Programming)" as PatternKey,
     `def monster_hunter_tree_dp(monster_tree):
     """
     Optimize monster hunting path using tree DP.

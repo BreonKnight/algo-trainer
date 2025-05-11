@@ -22,17 +22,17 @@ export const patternMapping: Record<string, string> = {
 
   // Two Sum Variations
   "Two Sum": "Two Sum",
-  "Two Sum Dict": "Two Sum Dict",
+  "Two Sum Dictionary": "Two Sum Dictionary",
   "Two Sum Two Pointers": "Two Sum Two Pointers",
 
   // Dynamic Programming
   "Dynamic Programming": "Dynamic Programming",
   "Dynamic Programming Pattern": "Dynamic Programming Pattern",
   "Dynamic Programming Iterative": "Dynamic Programming Iterative",
-  "Dynamic Programming Coin Change": "Dynamic Programming Coin Change",
+  "Coin Change": "Coin Change",
   "State Compression DP": "State Compression DP",
   "Digit DP": "Digit DP",
-  "Tree DP": "Tree DP",
+  "Tree (Dynamic Programming)": "Tree (Dynamic Programming)",
   "Probability DP": "Probability DP",
 
   // Greedy Algorithms
@@ -45,10 +45,10 @@ export const patternMapping: Record<string, string> = {
   "Articulation Points": "Articulation Points",
   "Bellman-Ford": "Bellman-Ford",
   Bridges: "Bridges",
-  Dijkstra: "Dijkstra",
-  "Floyd-Warshall": "Floyd-Warshall",
+  "Dijkastra Algorithm": "Dijkstra Algorithm",
+  "Floyd-Warshall Algorithm": "Floyd-Warshall Algorithm",
   Kosaraju: "Kosaraju",
-  Kruskal: "Kruskal",
+  "Kruskal's Algorithm": "Kruskal's Algorithm",
   "Network Flow": "Network Flow",
   "Strongly Connected Components": "Strongly Connected Components",
   "Maximum Bipartite Matching": "Maximum Bipartite Matching",
@@ -74,7 +74,7 @@ export const patternMapping: Record<string, string> = {
   "Union Find": "Union Find",
 
   // Tree Algorithms
-  "DFS Binary Tree": "DFS Binary Tree",
+  "DFS (Binary Tree)": "DFS (Binary Tree)",
   "Lowest Common Ancestor": "Lowest Common Ancestor",
 
   // String Algorithms
@@ -85,6 +85,7 @@ export const patternMapping: Record<string, string> = {
   "Z Algorithm": "Z Algorithm",
   "Suffix Array": "Suffix Array",
   "Suffix Tree": "Suffix Tree",
+  "String: Hashing": "String Hashing",
 
   // Matrix Patterns
   "Matrix Operations": "Matrix Operations",
@@ -143,19 +144,16 @@ export const patternMapping: Record<string, string> = {
   "Edit Distance": "Edit Distance",
   "Fast and Slow Pointers": "Fast and Slow Pointers",
   Fibonacci: "Fibonacci",
-  "Ford-Fulkerson": "Ford-Fulkerson",
+  "Ford-Fulkerson Algorithm": "Ford-Fulkerson Algorithm",
   "Graph Representation": "Graph Representation",
-  "Hopcroft-Karp": "Hopcroft-Karp",
+  "Hopcroft-Karp's Algorithm": "Hopcroft-Karp's Algorithm",
   "Inorder Traversal": "Inorder Traversal",
   "Interval Scheduling": "Interval Scheduling",
   "Kahn's Topological Sort": "Kahn's Topological Sort",
   "Karatsuba Multiplication": "Karatsuba Multiplication",
-  "LCA DFS": "LCA DFS",
   "Palindrome Partitioning": "Palindrome Partitioning",
-  "Spanning Tree": "Spanning Tree",
   "Sparse Table": "Sparse Table",
   "String Hashing": "String Hashing",
   "Zigzag Traversal": "Zigzag Traversal",
-  "Zigzag Traversal Template": "Zigzag Traversal Template",
   "Null Pattern": "Null Pattern",
 };

@@ -910,34 +910,34 @@
     },
     {
       "id": "kruskal-s-algorithm",
-      "title": "Kruskal's Algorithm",
-      "description": "Kruskal's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Kruskal's Algorithm.",
+      "title": "Kruskal's Algorithm's Algorithm",
+      "description": "Kruskal's Algorithm's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Kruskal's Algorithm's Algorithm.",
       "videoUrl": "https://www.youtube.com/embed/JZBQLXgSGfs",
       "difficulty": "intermediate",
       "duration": 25,
       "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
-        "python": "def kruskal_s_algorithm(input):\n    # Implementation of Kruskal's Algorithm\n    pass",
-        "javascript": "function kruskal_s_algorithm(input) {\n    // Implementation of Kruskal's Algorithm\n}"
+        "python": "def kruskal_s_algorithm(input):\n    # Implementation of Kruskal's Algorithm's Algorithm\n    pass",
+        "javascript": "function kruskal_s_algorithm(input) {\n    // Implementation of Kruskal's Algorithm's Algorithm\n}"
       },
       "quiz": [
         {
           "id": "time-complexity",
-          "question": "What is the time complexity of Kruskal's Algorithm?",
+          "question": "What is the time complexity of Kruskal's Algorithm's Algorithm?",
           "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
-          "explanation": "The time complexity of Kruskal's Algorithm is O(n²) in the worst case."
+          "explanation": "The time complexity of Kruskal's Algorithm's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
-          "question": "What is the space complexity of Kruskal's Algorithm?",
+          "question": "What is the space complexity of Kruskal's Algorithm's Algorithm?",
           "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
-          "explanation": "The space complexity of Kruskal's Algorithm is O(n) for storing intermediate results."
+          "explanation": "The space complexity of Kruskal's Algorithm's Algorithm is O(n) for storing intermediate results."
         },
         {
           "id": "application",
-          "question": "Which of the following is a common application of Kruskal's Algorithm?",
+          "question": "Which of the following is a common application of Kruskal's Algorithm's Algorithm?",
           "options": [
             "Web search engines",
             "Game development",
@@ -945,7 +945,7 @@
             "Image processing"
           ],
           "correctAnswer": 0,
-          "explanation": "Kruskal's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+          "explanation": "Kruskal's Algorithm's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
         }
       ]
     },
@@ -1033,7 +1033,7 @@
     },
     {
       "id": "kosaraju-s-algorithm",
-      "title": "Kosaraju's Algorithm",
+      "title": "Kosaraju's Algorithm's Algorithm",
       "description": "Kosaraju's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Kosaraju's Algorithm.",
       "videoUrl": "https://www.youtube.com/embed/R6uoSjZ2imo",
       "difficulty": "intermediate",
@@ -1566,34 +1566,34 @@
     },
     {
       "id": "hopcroft-karp-algorithm",
-      "title": "Hopcroft-Karp Algorithm",
-      "description": "Hopcroft-Karp Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Hopcroft-Karp Algorithm.",
+      "title": "Hopcroft-Karp's Algorithm",
+      "description": "Hopcroft-Karp's Algorithm is a graph algorithm that solves problems related to graph traversal and optimization. This tutorial will cover the theory, implementation, and applications of Hopcroft-Karp's Algorithm.",
       "videoUrl": "https://www.youtube.com/embed/dQr4w9WgXcQ",
       "difficulty": "intermediate",
       "duration": 25,
       "prerequisites": ["breadth-first-search", "depth-first-search"],
       "implementations": {
-        "python": "def hopcroft_karp_algorithm(input):\n    # Implementation of Hopcroft-Karp Algorithm\n    pass",
-        "javascript": "function hopcroft_karp_algorithm(input) {\n    // Implementation of Hopcroft-Karp Algorithm\n}"
+        "python": "def hopcroft_karp_algorithm(input):\n    # Implementation of Hopcroft-Karp's Algorithm\n    pass",
+        "javascript": "function hopcroft_karp_algorithm(input) {\n    // Implementation of Hopcroft-Karp's Algorithm\n}"
       },
       "quiz": [
         {
           "id": "time-complexity",
-          "question": "What is the time complexity of Hopcroft-Karp Algorithm?",
+          "question": "What is the time complexity of Hopcroft-Karp's Algorithm?",
           "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 4,
-          "explanation": "The time complexity of Hopcroft-Karp Algorithm is O(n²) in the worst case."
+          "explanation": "The time complexity of Hopcroft-Karp's Algorithm is O(n²) in the worst case."
         },
         {
           "id": "space-complexity",
-          "question": "What is the space complexity of Hopcroft-Karp Algorithm?",
+          "question": "What is the space complexity of Hopcroft-Karp's Algorithm?",
           "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n²)", "O(2ⁿ)"],
           "correctAnswer": 2,
-          "explanation": "The space complexity of Hopcroft-Karp Algorithm is O(n) for storing intermediate results."
+          "explanation": "The space complexity of Hopcroft-Karp's Algorithm is O(n) for storing intermediate results."
         },
         {
           "id": "application",
-          "question": "Which of the following is a common application of Hopcroft-Karp Algorithm?",
+          "question": "Which of the following is a common application of Hopcroft-Karp's Algorithm?",
           "options": [
             "Image processing",
             "Network routing",
@@ -1601,7 +1601,7 @@
             "Data compression"
           ],
           "correctAnswer": 0,
-          "explanation": "Hopcroft-Karp Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
+          "explanation": "Hopcroft-Karp's Algorithm is commonly used in network routing and social network analysis due to its optimal solution finding capabilities."
         }
       ]
     },
@@ -1896,8 +1896,8 @@
     },
     {
       "id": "coin-change-problem",
-      "title": "Coin Change Problem",
-      "description": "Coin Change Problem is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Coin Change Problem.",
+      "title": "Coin Change",
+      "description": "Coin Change is a dynamic-programming algorithm that solves complex problems by breaking them down into simpler subproblems. This tutorial will cover the theory, implementation, and applications of Coin Change Problem.",
       "videoUrl": "https://www.youtube.com/embed/H9bfqozjoqs",
       "difficulty": "advanced",
       "duration": 35,

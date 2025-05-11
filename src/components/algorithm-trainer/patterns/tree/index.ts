@@ -4,7 +4,7 @@ import { heavyLightDecompositionPattern } from "@/components/algorithm-trainer/p
 import { lowestCommonAncestorPattern } from "@/components/algorithm-trainer/patterns/tree/lowest-common-ancestor";
 import { triePattern } from "@/components/algorithm-trainer/patterns/tree/trie";
 import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
-
+import { zigzagTraversalPattern } from "@/components/algorithm-trainer/patterns/tree/zigzag-traversal";
 // import { treePattern } from "@/components/algorithm-trainer/patterns/tree/tree";
 
 export const treePatterns: Partial<Record<string, AlgorithmPattern>> = {
@@ -13,4 +13,5 @@ export const treePatterns: Partial<Record<string, AlgorithmPattern>> = {
   "Heavy Light Decomposition": heavyLightDecompositionPattern,
   "AVL Tree": avlTreePattern,
   "Lowest Common Ancestor": lowestCommonAncestorPattern,
+  "Zigzag Traversal": zigzagTraversalPattern,
 };

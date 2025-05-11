@@ -12,14 +12,14 @@ import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-t
 
 type DynamicProgrammingPatternKey =
   | "Digit DP"
-  | "Dynamic Programming Coin Change"
+  | "Coin Change"
   | "Dynamic Programming Iterative"
   | "Dynamic Programming Pattern"
   | "Dynamic Programming"
   | "Fibonacci"
   | "Probability DP"
   | "State Compression DP"
-  | "Tree DP"
+  | "Tree (Dynamic Programming)"
   | "Memoization"
   | "Bitwise DP";
 
@@ -27,13 +27,13 @@ export const dynamicProgrammingPatterns: Partial<
   Record<DynamicProgrammingPatternKey, AlgorithmPattern>
 > = {
   "Digit DP": digitDPPattern,
-  "Dynamic Programming Coin Change": dynamicProgrammingCoinChangePattern,
+  "Coin Change": dynamicProgrammingCoinChangePattern,
   "Dynamic Programming Iterative": dynamicProgrammingIterativePattern,
   "Dynamic Programming Pattern": dynamicProgrammingPattern,
   "Dynamic Programming": dpPattern,
   "Probability DP": probabilityDPPattern,
   "State Compression DP": stateCompressionDPPattern,
-  "Tree DP": treeDPPattern,
+  "Tree (Dynamic Programming)": treeDPPattern,
   Memoization: memoizationPattern,
   "Bitwise DP": bitwiseDPPattern,
 };

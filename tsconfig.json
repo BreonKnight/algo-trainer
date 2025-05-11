@@ -3,7 +3,7 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "module": "es2022",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "bundler",
@@ -31,8 +31,8 @@
     "transpileOnly": true,
     "files": true,
     "compilerOptions": {
-      "module": "ESNext",
-      "moduleResolution": "bundler"
+      "module": "es2022",
+      "moduleResolution": "node"
     }
   },
   "include": ["src/**/*", "scripts/**/*", "electron/**/*"],
