@@ -112,7 +112,9 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
     createPortal(
       <Card
         className={cn(
-          "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30 fixed inset-0 z-[90] m-4"
+          theme === "snes"
+            ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db] fixed inset-0 z-[90] m-4"
+            : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30 fixed inset-0 z-[90] m-4"
         )}
         onClick={(e) => {
           // Only close if clicking outside the content area
@@ -265,7 +267,9 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
   ) : (
     <Card
       className={cn(
-        "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
+        theme === "snes"
+          ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db]"
+          : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
       )}
       onClick={() => setIsExpanded(true)}
     >

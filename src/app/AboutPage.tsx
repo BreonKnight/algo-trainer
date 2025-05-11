@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Background } from "@/components/ui/background";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+import snesController from "/snes-controller.svg";
 
 const AboutPage = () => {
   const { theme } = useTheme();
@@ -70,10 +71,10 @@ const AboutPage = () => {
     },
   ];
 
-  // Helper functions for Nord theme
+  // Helper functions for SNES theme
   const getTagColor = (theme: string, type: string) => {
-    if (theme === "nord") {
-      if (type === "focus") return "bg-[#A3BE8C]/90 text-gray-900"; // Nord green
+    if (theme === "snes") {
+      if (type === "focus") return "bg-[#3498db]/90 text-[#1a237e]"; // SNES blue
       if (type === "music") return "bg-[#B48EAD]/90 text-gray-900"; // Nord purple
       if (type === "facts") return "bg-[#EBCB8B]/90 text-gray-900"; // Nord yellow
     }
@@ -84,12 +85,15 @@ const AboutPage = () => {
   };
 
   const getTextColor = (theme: string) => {
-    if (theme === "nord") return "text-gray-900";
+    if (theme === "snes") return "text-[#1a237e]";
     if (theme === "dracula") return "text-white";
     return "text-main";
   };
 
   const getCardStyle = (theme: string) => {
+    if (theme === "snes") {
+      return "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] shadow-[0_4px_24px_rgba(52,152,219,0.08)]";
+    }
     if (theme === "dracula") {
       return "bg-gray-800/50 border-gray-700/50 backdrop-blur-xl";
     }
@@ -100,6 +104,9 @@ const AboutPage = () => {
   };
 
   const getCardHoverStyle = (theme: string) => {
+    if (theme === "snes") {
+      return "hover:border-[#3498db]";
+    }
     if (theme === "dracula") {
       return "hover:bg-gray-800/70 hover:border-gray-600/50";
     }
@@ -110,6 +117,9 @@ const AboutPage = () => {
   };
 
   const getCardTextStyle = (theme: string) => {
+    if (theme === "snes") {
+      return "text-[#1a237e]";
+    }
     if (theme === "dracula") {
       return "text-white";
     }
@@ -121,13 +131,29 @@ const AboutPage = () => {
 
   return (
     <Background>
-      <div className="container mx-auto px-4 py-12 pb-24">
+      <div
+        className={cn("container mx-auto px-4 py-12 pb-24", theme === "snes" && "relative")}
+        style={
+          theme === "snes"
+            ? {
+                backgroundImage: "url('/snes-pixel-bg.png')",
+                backgroundSize: "cover",
+                backgroundRepeat: "repeat",
+                zIndex: 0,
+              }
+            : {}
+        }
+      >
         {/* Hero Section */}
         <div className="text-center mb-12 pb-4 overflow-visible">
+          {theme === "snes" && (
+            <img src={snesController} alt="SNES Controller" className="w-10 h-10 mx-auto mb-2" />
+          )}
           <h1
             className={cn(
               "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
-              `gradient-text-${theme}`
+              `gradient-text-${theme}`,
+              theme === "snes" && "snes-font"
             )}
           >
             Master Algorithms, Don't be Afraid :)
@@ -174,12 +200,16 @@ const AboutPage = () => {
                 key={index}
                 className={cn(
                   "flex flex-col items-center text-center flex-1 p-4 rounded-xl shadow-md",
-                  theme === "dracula"
-                    ? "bg-gray-800/60 border border-gray-700/50"
-                    : "bg-main/60 border border-accent/40"
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] shadow-[0_4px_24px_rgba(52,152,219,0.08)] snes-glow"
+                    : theme === "dracula"
+                      ? "bg-gray-800/60 border border-gray-700/50"
+                      : "bg-main/60 border border-accent/40"
                 )}
               >
-                <span className="text-3xl mb-2">{step.emoji}</span>
+                <span className={cn("text-3xl mb-2", theme === "snes" && "animate-bounce")}>
+                  {step.emoji}
+                </span>
                 <h3 className="font-semibold mb-1">{step.title}</h3>
                 <p className="text-sm text-foreground/70">{step.description}</p>
               </div>
@@ -191,11 +221,13 @@ const AboutPage = () => {
         <div
           className={cn(
             "max-w-4xl mx-auto mb-16 p-8 rounded-3xl border shadow-lg backdrop-blur-xl",
-            theme === "dracula"
-              ? "bg-white/10 border-blue-400/30"
-              : theme === "nord"
-                ? "bg-white/60 border-[#A3BE8C]/40"
-                : "bg-main/60 border-accent/40"
+            theme === "snes"
+              ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] backdrop-blur-xl"
+              : theme === "dracula"
+                ? "bg-white/10 border-blue-400/30"
+                : theme === "nord"
+                  ? "bg-white/60 border-[#A3BE8C]/40"
+                  : "bg-main/60 border-accent/40"
           )}
         >
           <h2
@@ -209,11 +241,13 @@ const AboutPage = () => {
           <p
             className={cn(
               "mb-4 text-lg text-center font-medium",
-              theme === "dracula"
-                ? "text-white/90 drop-shadow"
-                : theme === "nord"
-                  ? "text-gray-900/90 drop-shadow"
-                  : "text-main/90 drop-shadow"
+              theme === "snes"
+                ? "text-[#1a237e]/90 drop-shadow"
+                : theme === "dracula"
+                  ? "text-white/90 drop-shadow"
+                  : theme === "nord"
+                    ? "text-gray-900/90 drop-shadow"
+                    : "text-main/90 drop-shadow"
             )}
           >
             The Informatics Bar at the top of AlgoTrainer gives you everything you need to stay
@@ -251,11 +285,15 @@ const AboutPage = () => {
                 key={index}
                 className={cn(
                   "rounded-lg p-4 flex flex-col items-center shadow border",
-                  getCardStyle(theme),
-                  getCardHoverStyle(theme)
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] shadow-[0_4px_24px_rgba(52,152,219,0.08)] snes-glow"
+                    : getCardStyle(theme),
+                  theme === "snes" ? "hover:border-[#3498db]" : getCardHoverStyle(theme)
                 )}
               >
-                <span className="text-3xl mb-2">{tool.emoji}</span>
+                <span className={cn("text-3xl mb-2", theme === "snes" && "animate-bounce")}>
+                  {tool.emoji}
+                </span>
                 <h3 className={cn("font-semibold mb-1", getCardTextStyle(theme))}>{tool.title}</h3>
                 <p className={cn("text-sm mb-2", getCardTextStyle(theme))}>{tool.description}</p>
                 <div
@@ -279,17 +317,25 @@ const AboutPage = () => {
           <p
             className={cn(
               "mt-2 font-medium text-center",
-              theme === "nord" ? "text-gray-800/90" : "text-foreground/90"
+              theme === "snes"
+                ? "text-[#1a237e]/90"
+                : theme === "dracula"
+                  ? "text-blue-200"
+                  : theme === "nord"
+                    ? "text-gray-800/90"
+                    : "text-foreground/90"
             )}
           >
             <span
               className={cn(
                 "px-2 py-1 rounded",
-                theme === "dracula"
-                  ? "bg-blue-900/50 text-blue-200"
-                  : theme === "nord"
-                    ? "bg-[#A3BE8C]/90 text-gray-900"
-                    : "bg-accent/90 text-main"
+                theme === "snes"
+                  ? "bg-[#3498db]/50 text-[#1a237e]"
+                  : theme === "dracula"
+                    ? "bg-blue-900/50 text-blue-200"
+                    : theme === "nord"
+                      ? "bg-[#A3BE8C]/90 text-gray-900"
+                      : "bg-accent/90 text-main"
               )}
             >
               Tip:
@@ -310,9 +356,10 @@ const AboutPage = () => {
                 key={index}
                 className={cn(
                   "p-6 rounded-xl border transition-all duration-300",
-                  "hover:shadow-lg hover:scale-[1.02]",
-                  getCardStyle(theme),
-                  getCardHoverStyle(theme)
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db] snes-glow"
+                    : getCardStyle(theme),
+                  theme === "snes" ? "hover:shadow-lg hover:scale-[1.02]" : getCardHoverStyle(theme)
                 )}
               >
                 <h3 className={cn("text-lg font-semibold mb-3", getCardTextStyle(theme))}>
@@ -333,9 +380,10 @@ const AboutPage = () => {
               key={index}
               className={cn(
                 "p-6 rounded-xl border transition-all duration-300",
-                "hover:shadow-lg hover:scale-[1.02]",
-                getCardStyle(theme),
-                getCardHoverStyle(theme)
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db] snes-glow"
+                  : getCardStyle(theme),
+                theme === "snes" ? "hover:shadow-lg hover:scale-[1.02]" : getCardHoverStyle(theme)
               )}
             >
               <div className="mb-4 text-primary">{section.icon}</div>
@@ -353,8 +401,10 @@ const AboutPage = () => {
         <div
           className={cn(
             "max-w-4xl mx-auto mb-16 p-8 rounded-xl border",
-            getCardStyle(theme),
-            getCardHoverStyle(theme)
+            theme === "snes"
+              ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db] snes-glow"
+              : getCardStyle(theme),
+            theme === "snes" ? "hover:shadow-lg hover:scale-[1.02]" : getCardHoverStyle(theme)
           )}
         >
           <h2 className={cn("text-2xl font-bold mb-6 text-center", getCardTextStyle(theme))}>
@@ -366,13 +416,16 @@ const AboutPage = () => {
               <h3
                 className={cn(
                   "text-xl font-semibold mb-3",
-                  theme === "nord" ? "text-gray-900" : ""
+                  theme === "snes" ? "text-[#1a237e]" : ""
                 )}
               >
                 What You'll Find
               </h3>
               <p
-                className={cn(theme === "nord" ? "text-gray-800/90" : "text-foreground/70", "mb-4")}
+                className={cn(
+                  theme === "snes" ? "text-[#1a237e]/90" : "text-foreground/70",
+                  "mb-4"
+                )}
               >
                 The{" "}
                 <Link to="/algorithm-learning" className="text-primary hover:underline">
@@ -388,7 +441,7 @@ const AboutPage = () => {
               <h3
                 className={cn(
                   "text-xl font-semibold mb-3",
-                  theme === "nord" ? "text-gray-900" : ""
+                  theme === "snes" ? "text-[#1a237e]" : ""
                 )}
               >
                 How to Use the App
@@ -396,7 +449,7 @@ const AboutPage = () => {
               <ol
                 className={cn(
                   "list-decimal list-inside space-y-3",
-                  theme === "nord" ? "text-gray-800/90" : "text-foreground/70"
+                  theme === "snes" ? "text-[#1a237e]/90" : "text-foreground/70"
                 )}
               >
                 <li>
@@ -427,7 +480,7 @@ const AboutPage = () => {
               <h3
                 className={cn(
                   "text-xl font-semibold mb-3",
-                  theme === "nord" ? "text-gray-900" : ""
+                  theme === "snes" ? "text-[#1a237e]" : ""
                 )}
               >
                 Learning Path Integration
@@ -435,7 +488,7 @@ const AboutPage = () => {
               <div
                 className={cn(
                   "space-y-4",
-                  theme === "nord" ? "text-gray-800/90" : "text-foreground/70"
+                  theme === "snes" ? "text-[#1a237e]/90" : "text-foreground/70"
                 )}
               >
                 <p>
@@ -464,22 +517,26 @@ const AboutPage = () => {
                       key={index}
                       className={cn(
                         "p-4 rounded-lg border",
-                        theme === "dracula"
-                          ? "bg-gray-800/30 border-gray-700/50"
-                          : theme === "nord"
-                            ? "bg-white/90 border-[#D8DEE9]/70"
-                            : "bg-main/30 border-accent/50"
+                        theme === "snes"
+                          ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-lg shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db] snes-glow"
+                          : theme === "dracula"
+                            ? "bg-gray-800/30 border-gray-700/50"
+                            : theme === "nord"
+                              ? "bg-white/90 border-[#D8DEE9]/70"
+                              : "bg-main/30 border-accent/50"
                       )}
                     >
                       <h4
                         className={cn(
                           "font-semibold mb-2",
-                          theme === "nord" ? "text-gray-900" : ""
+                          theme === "snes" ? "text-[#1a237e]" : ""
                         )}
                       >
                         {path.title}
                       </h4>
-                      <p className={cn("text-sm mb-2", theme === "nord" ? "text-gray-800/90" : "")}>
+                      <p
+                        className={cn("text-sm mb-2", theme === "snes" ? "text-[#1a237e]/90" : "")}
+                      >
                         {path.description}
                       </p>
                       <Link to={path.link} className="text-primary hover:underline text-sm">
@@ -488,7 +545,7 @@ const AboutPage = () => {
                     </div>
                   ))}
                 </div>
-                <p className={cn("mt-4", theme === "nord" ? "text-gray-800/90" : "")}>
+                <p className={cn("mt-4", theme === "snes" ? "text-[#1a237e]/90" : "")}>
                   We recommend starting with the{" "}
                   <Link to="/algorithm-learning" className="text-primary hover:underline">
                     Algorithm Learning
@@ -510,7 +567,7 @@ const AboutPage = () => {
               <h3
                 className={cn(
                   "text-xl font-semibold mb-3",
-                  theme === "nord" ? "text-gray-900" : ""
+                  theme === "snes" ? "text-[#1a237e]" : ""
                 )}
               >
                 Tips for Success
@@ -518,7 +575,7 @@ const AboutPage = () => {
               <ul
                 className={cn(
                   "list-disc list-inside space-y-2",
-                  theme === "nord" ? "text-gray-800/90" : "text-foreground/70"
+                  theme === "snes" ? "text-[#1a237e]/90" : "text-foreground/70"
                 )}
               >
                 <li>Take time to understand the mathematical proofs and derivations</li>
@@ -538,11 +595,13 @@ const AboutPage = () => {
             className={cn(
               "inline-flex items-center px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300",
               "hover:scale-105 hover:shadow-lg",
-              theme === "dracula"
-                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                : theme === "nord"
-                  ? "bg-gradient-to-r from-[#A3BE8C] to-[#B48EAD] text-gray-900"
-                  : "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-main"
+              theme === "snes"
+                ? "bg-[#3498db] border-[#1a237e] text-white snes-font rounded-full font-bold animate-pulse border-2 hover:bg-[#1a237e] hover:text-[#fffbe6]"
+                : theme === "dracula"
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                  : theme === "nord"
+                    ? "bg-gradient-to-r from-[#A3BE8C] to-[#B48EAD] text-gray-900"
+                    : "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-main"
             )}
           >
             Begin Your Mathematical Journey

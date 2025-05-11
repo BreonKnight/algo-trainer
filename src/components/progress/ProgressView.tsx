@@ -54,8 +54,9 @@ const ProgressView = memo(function ProgressView() {
           >
             <Card
               className={cn(
-                "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                "bg-background/50 border-accent/10 hover:border-accent/20"
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
               <CardHeader className="pb-2">
@@ -74,8 +75,9 @@ const ProgressView = memo(function ProgressView() {
 
             <Card
               className={cn(
-                "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                "bg-background/50 border-accent/10 hover:border-accent/20"
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
               <CardHeader className="pb-2">
@@ -92,8 +94,9 @@ const ProgressView = memo(function ProgressView() {
 
             <Card
               className={cn(
-                "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                "bg-background/50 border-accent/10 hover:border-accent/20"
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
               <CardHeader className="pb-2">
@@ -108,8 +111,9 @@ const ProgressView = memo(function ProgressView() {
 
             <Card
               className={cn(
-                "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                "bg-background/50 border-accent/10 hover:border-accent/20"
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
               <CardHeader className="pb-2">
@@ -131,7 +135,13 @@ const ProgressView = memo(function ProgressView() {
             animate={{ opacity: 1, y: 0 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
           >
-            <Card className={cn("backdrop-blur-sm", "bg-background/50 border-accent/10")}>
+            <Card
+              className={cn(
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm bg-background/50 border-accent/10"
+              )}
+            >
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-accent" />
@@ -164,7 +174,13 @@ const ProgressView = memo(function ProgressView() {
               </CardContent>
             </Card>
 
-            <Card className={cn("backdrop-blur-sm", "bg-background/50 border-accent/10")}>
+            <Card
+              className={cn(
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm bg-background/50 border-accent/10"
+              )}
+            >
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-accent" />
@@ -202,8 +218,9 @@ const ProgressView = memo(function ProgressView() {
           >
             <Card
               className={cn(
-                "backdrop-blur-sm rounded-2xl shadow-lg",
-                "bg-background/50 border-accent/10"
+                theme === "snes"
+                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-2xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  : "backdrop-blur-sm rounded-2xl shadow-lg bg-background/50 border-accent/10"
               )}
             >
               <CardHeader>

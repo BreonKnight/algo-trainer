@@ -1223,8 +1223,9 @@ export default function AlgoGuide() {
             >
               <Card
                 className={cn(
-                  "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                  "bg-background/50 border-accent/10 hover:border-accent/20"
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
                 <CardHeader className="pb-2">
@@ -1241,8 +1242,9 @@ export default function AlgoGuide() {
 
               <Card
                 className={cn(
-                  "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                  "bg-background/50 border-accent/10 hover:border-accent/20"
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
                 <CardHeader className="pb-2">
@@ -1261,8 +1263,9 @@ export default function AlgoGuide() {
 
               <Card
                 className={cn(
-                  "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                  "bg-background/50 border-accent/10 hover:border-accent/20"
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
                 <CardHeader className="pb-2">
@@ -1281,8 +1284,9 @@ export default function AlgoGuide() {
 
               <Card
                 className={cn(
-                  "backdrop-blur-sm transition-all duration-300 hover:scale-105",
-                  "bg-background/50 border-accent/10 hover:border-accent/20"
+                  theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
                 <CardHeader className="pb-2">

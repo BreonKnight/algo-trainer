@@ -126,8 +126,10 @@ export function TopBar({ className }: TopBarProps) {
 
       <div
         className={cn(
-          "w-full mb-2 sm:mb-3 rounded-xl bg-background/95 p-3 sm:p-4 relative",
-          "shadow-md border border-border/50 backdrop-blur-sm",
+          "w-full mb-2 sm:mb-3 rounded-xl p-3 sm:p-4 relative",
+          theme === "snes"
+            ? "bg-[#fffbe6] border-2 border-[#3498db] shadow-[0_4px_24px_rgba(52,152,219,0.08)]"
+            : "bg-background/95 shadow-md border border-border/50 backdrop-blur-sm",
           "z-10 pointer-events-auto",
           className
         )}
