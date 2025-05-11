@@ -225,7 +225,14 @@ export function CodeEditor({
   };
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card
+      className={cn(
+        "p-4 w-full h-full flex flex-col overflow-hidden",
+        theme === "snes"
+          ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)]"
+          : "bg-secondary border-text-secondary"
+      )}
+    >
       <div className="flex-none flex justify-between items-center mb-3">
         <h2
           className={cn(

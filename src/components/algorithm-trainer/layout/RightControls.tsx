@@ -80,9 +80,9 @@ export function RightControls() {
                                   : theme === "ps2"
                                     ? "bg-blue-900 text-white border-blue-400"
                                     : theme === "nord"
-                                      ? "bg-cyan-900 text-white border-blue-400"
+                                      ? "bg-gradient-to-r from-[#2e3440] via-[#3b4252] to-[#2e3440] text-[#81a1c1] font-bold border-[#88c0d0] shadow-[0_0_15px_rgba(136,192,208,0.3)] hover:shadow-[0_0_20px_rgba(136,192,208,0.5)]"
                                       : theme === "snes"
-                                        ? "bg-yellow-700 text-gray-900 border-yellow-400"
+                                        ? "bg-gradient-to-r from-[#ff0000] via-[#ffff00] to-[#00ff00] text-[#1a237e] font-bold border-[#ffa500] shadow-[0_0_15px_rgba(255,165,0,0.3)] hover:shadow-[0_0_20px_rgba(255,165,0,0.5)] animate-pulse [text-shadow:0_1px_2px_rgba(0,0,0,0.25)]"
                                         : fortniteTheme
                                           ? "bg-gradient-to-r from-[#2ecc71] via-[#3498db] via-[#9b59b6] to-[#f1c40f] text-black border-[#3498db] shadow-md"
                                           : "bg-gray-800 text-white border-gray-400"
@@ -92,6 +92,10 @@ export function RightControls() {
                         <Star className="h-4 w-4 text-yellow-400" />
                       ) : theme === "light" || theme === "solarized" ? (
                         <Moon className="h-4 w-4 group-hover:animate-pulse" />
+                      ) : theme === "nord" ? (
+                        <Snowflake className="h-4 w-4 text-[#88c0d0] group-hover:animate-spin" />
+                      ) : theme === "snes" ? (
+                        <Star className="h-4 w-4 text-[#ffa500] group-hover:animate-bounce" />
                       ) : (
                         <Sun className="h-4 w-4 group-hover:animate-pulse" />
                       )}

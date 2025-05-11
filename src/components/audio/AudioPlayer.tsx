@@ -185,7 +185,7 @@ interface AudioPlayerProps {
 const getThemeGradient = (theme: string) => {
   switch (theme) {
     case "snes":
-      return "linear-gradient(45deg, #ff0000 0%, #ffa500 20%, #ffff00 40%, #00ff00 60%, #0000ff 80%, #4b0082 100%)";
+      return "linear-gradient(45deg, #ff0000 0%, #ffa500 25%, #ffff00 50%, #00ff00 75%, #008000 100%)";
     case "ps2":
       return "linear-gradient(45deg, #000000 0%, #1a1a1a 25%, #333333 50%, #4d4d4d 75%, #666666 100%)";
     case "re2":
