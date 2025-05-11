@@ -3,20 +3,23 @@ import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const SieveOfSundaramPattern = () => (
-  <div>
-    <div className="mb-2">
+  <div className="flex flex-col items-center">
+    <div className="flex items-center">
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
         Sieve of Sundaram
       </span>
       <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(n log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all primes up to n
+    <div className="mt-4 text-sm text-secondary">
+      <p>An alternative to the Sieve of Eratosthenes that generates odd composite numbers</p>
+      <p>Time: O(n log n) where n is the upper limit</p>
+      <p>Space: O(n/2) for storing odd numbers up to n</p>
+      <p>Use: Finding prime numbers, especially when memory is limited</p>
     </div>
-
-    <PseudocodeDisplay
-      code={`# Sieve of Sundaram
+    <div className="mt-4 w-full">
+      <PseudocodeDisplay
+        code={`# Sieve of Sundaram
 # Input: Integer n > 1
 # Output: Array of primes ≤ n
 
@@ -63,27 +66,27 @@ Algorithm SIEVE-OF-SUNDARAM(n)
 #         primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 #
 # Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`}
-    />
-
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+      />
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Initialize array for odd numbers</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Mark numbers of form i + j + 2ij</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Collect remaining primes</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Transform indices to get actual primes</span>
+    <div className="mt-4 w-full">
+      <h3 className="text-lg font-semibold mb-2">Key Steps:</h3>
+      <div className="space-y-2">
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Initialize array for odd numbers up to n/2</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Mark numbers of form i + j + 2ij as composite</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Collect remaining unmarked numbers as potential primes</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Transform indices to get actual prime numbers</span>
+        </div>
       </div>
     </div>
   </div>

@@ -3,19 +3,23 @@ import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const SieveOfEratosthenesPattern = () => (
-  <div>
-    <div className="mb-2">
+  <div className="flex flex-col items-center">
+    <div className="flex items-center">
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
         Sieve of Eratosthenes
       </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
+      <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
-    <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto" />
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(n log log n) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: Find all primes up to n
+    <div className="mt-4 text-sm text-secondary">
+      <p>An efficient algorithm to find all prime numbers up to a given limit</p>
+      <p>Time: O(n log log n) where n is the upper limit</p>
+      <p>Space: O(n) for storing the boolean array</p>
+      <p>Use: Finding prime numbers, prime factorization, number theory problems</p>
     </div>
-
-    <PseudocodeDisplay
-      code={`# Sieve of Eratosthenes: Find all primes up to n
+    <div className="mt-4 w-full">
+      <PseudocodeDisplay
+        code={`# Sieve of Eratosthenes: Find all primes up to n
 # Input: Integer n > 1
 # Output: Array of primes ≤ n
 
@@ -57,27 +61,27 @@ Algorithm SIEVE-OF-ERATOSTHENES(n)
 #         is_prime = [F, F, T, T, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F, T, F, F, F, T, F]
 #
 # Output: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]`}
-    />
-
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+      />
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Initialize array of booleans</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Mark multiples of primes as non-prime</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Collect remaining primes</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Return array of primes</span>
+    <div className="mt-4 w-full">
+      <h3 className="text-lg font-semibold mb-2">Key Steps:</h3>
+      <div className="space-y-2">
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Initialize array of booleans for all numbers up to n</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Mark multiples of each prime number as non-prime</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Collect remaining unmarked numbers as primes</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Return the array of prime numbers</span>
+        </div>
       </div>
     </div>
   </div>

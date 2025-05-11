@@ -3,17 +3,23 @@ import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const StackPattern = () => (
-  <div>
-    <div className="mb-2">
-      <span className="text-accent font-bold">Stack</span>
+  <div className="flex flex-col items-center">
+    <div className="flex items-center">
+      <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+        Stack
+      </span>
+      <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Data Structure)</span>
     </div>
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(1) &nbsp;|&nbsp; Space: O(n) &nbsp;|&nbsp; Use: LIFO (Last-In-First-Out) operations
+    <div className="mt-4 text-sm text-secondary">
+      <p>A linear data structure that follows Last-In-First-Out (LIFO) principle</p>
+      <p>Time: O(1) for push, pop, and peek operations</p>
+      <p>Space: O(n) for storing n elements</p>
+      <p>Use: Function call stack, expression evaluation, backtracking algorithms</p>
     </div>
-
-    <PseudocodeDisplay
-      code={`# Stack: LIFO (Last-In-First-Out) data structure
+    <div className="mt-4 w-full">
+      <PseudocodeDisplay
+        code={`# Stack: LIFO (Last-In-First-Out) data structure
 # Input: Elements to be pushed onto stack
 # Output: Elements popped from stack in reverse order
 
@@ -66,33 +72,32 @@ Algorithm STACK-OPERATIONS
 #         Returns 2
 #
 # Output: Elements popped in order [3, 2, 1]`}
-    />
-
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Operations:</span>
+      />
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>PUSH: Add element to top of stack</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>POP: Remove and return top element</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>STACK-EMPTY: Check if stack is empty</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>PEEK: View top element without removal</span>
+    <div className="mt-4 w-full">
+      <h3 className="text-lg font-semibold mb-2">Key Operations:</h3>
+      <div className="space-y-2">
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>PUSH: Add element to top of stack in O(1) time</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>POP: Remove and return top element in O(1) time</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>STACK-EMPTY: Check if stack is empty in O(1) time</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>PEEK: View top element without removal in O(1) time</span>
+        </div>
       </div>
     </div>
-
-    <div className="mt-4">
-      <span className="font-semibold text-accent">Example:</span>
-      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto mt-1">
+    <div className="mt-4 w-full">
+      <h3 className="text-lg font-semibold mb-2">Example:</h3>
+      <pre className="bg-main/10 p-2 rounded text-sm overflow-x-auto">
         {`Operations:
 PUSH(1) → S = [1]
 PUSH(2) → S = [1, 2]

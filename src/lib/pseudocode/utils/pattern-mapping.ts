@@ -156,5 +156,6 @@ export const patternMapping: Record<string, string> = {
   "Sparse Table": "Sparse Table",
   "String Hashing": "String Hashing",
   "Zigzag Traversal": "Zigzag Traversal",
+  "Zigzag Traversal Template": "Zigzag Traversal Template",
   "Null Pattern": "Null Pattern",
 };

@@ -124,6 +124,7 @@ export const monsterHunterPatternsByCategory = {
     "Matrix Chain Multiplication",
     "Matrix Exponentiation",
     "Zigzag Traversal",
+    "Zigzag Traversal Template",
     "Stack Sort",
   ],
   Searching: [

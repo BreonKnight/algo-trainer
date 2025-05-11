@@ -3,21 +3,25 @@ import { ChevronRight } from "lucide-react";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const SlidingWindowPattern = () => (
-  <div>
-    <div className="mb-2">
+  <div className="flex flex-col items-center">
+    <div className="flex items-center">
       <span className="text-2xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
         Sliding Window
       </span>
       <div className="h-1 bg-accent rounded mt-1 w-8 mx-auto"></div>
       <span className="ml-2 text-xs text-secondary">(Algorithm)</span>
     </div>
-    <div className="mb-2 text-xs text-secondary">
-      Time: O(n) &nbsp;|&nbsp; Space: O(1) &nbsp;|&nbsp; Use: Find subarrays with specific
-      properties
+    <div className="mt-4 text-sm text-secondary">
+      <p>A technique for efficiently processing arrays by maintaining a window of elements</p>
+      <p>Time: O(n) where n is the array length</p>
+      <p>Space: O(1) for fixed-size window problems</p>
+      <p>
+        Use: Finding subarrays with specific properties, string pattern matching, array optimization
+      </p>
     </div>
-
-    <PseudocodeDisplay
-      code={`# Sliding Window: Find subarrays with specific properties
+    <div className="mt-4 w-full">
+      <PseudocodeDisplay
+        code={`# Sliding Window: Find subarrays with specific properties
 # Input: Array A[1..n], window size k
 # Output: Maximum sum of any subarray of size k
 
@@ -59,27 +63,27 @@ Algorithm SLIDING-WINDOW(A, k)
 #         max_sum = 24
 #
 # Output: 24`}
-    />
-
-    <div className="mb-2">
-      <span className="text-accent font-bold">Key Steps:</span>
+      />
     </div>
-    <div className="mb-2 text-sm">
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Initialize window sum and maximum sum</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Compute sum of first window</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Slide window and update sum</span>
-      </div>
-      <div className="flex items-center">
-        <ChevronRight className="h-4 w-4 text-accent" />
-        <span>Update maximum sum if needed</span>
+    <div className="mt-4 w-full">
+      <h3 className="text-lg font-semibold mb-2">Key Steps:</h3>
+      <div className="space-y-2">
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Initialize window sum and maximum sum variables</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Compute sum of the first window of size k</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Slide window by adding new element and removing oldest</span>
+        </div>
+        <div className="flex items-start">
+          <ChevronRight className="h-5 w-5 text-accent mt-0.5" />
+          <span>Update maximum sum when a larger sum is found</span>
+        </div>
       </div>
     </div>
   </div>
