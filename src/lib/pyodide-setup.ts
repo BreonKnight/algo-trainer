@@ -5,9 +5,9 @@ type PythonResult = {
 };
 
 type PyodideInstance = {
-  runPython: (code: string) => any;
-  runPythonAsync: (code: string) => Promise<any>;
-  globals: { get: (key: string) => any };
+  runPython: (code: string) => unknown;
+  runPythonAsync: (code: string) => Promise<unknown>;
+  globals: { get: (key: string) => unknown };
 };
 
 type PyodideModule = {

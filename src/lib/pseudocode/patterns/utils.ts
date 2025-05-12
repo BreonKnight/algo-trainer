@@ -1,7 +1,5 @@
 import { PatternKey } from "@/components/algorithm-trainer/types";
-
-import patterns from "../patterns.json";
-
+import patterns from "@/lib/pseudocode/patterns.json";
 // Valid algorithm types in our system
 const VALID_TYPES = [
   "array",
@@ -51,13 +49,13 @@ type PatternsData = {
 
 const typedPatterns = patterns as PatternsData;
 
-// Helper function to normalize pattern name
-function normalizePatternName(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
+// // Helper function to normalize pattern name
+// function normalizePatternName(name: string): string {
+//   return name
+//     .toLowerCase()
+//     .replace(/[^a-z0-9]+/g, "-")
+//     .replace(/^-+|-+$/g, "");
+// }
 
 // Helper function to sanitize complexity strings
 function sanitizeComplexity(complexity: string): string {
@@ -77,14 +75,6 @@ function sanitizeDescription(description: string): string {
 }
 
 // Helper function to validate algorithm type
-function isValidType(type: string): type is AlgorithmType {
-  // Normalize the type string
-  const normalizedType = type.toLowerCase().trim().replace(/\s+/g, "-");
-  return VALID_TYPES.some((validType) => {
-    const normalizedValidType = validType.toLowerCase().replace(/\s+/g, "-");
-    return normalizedValidType === normalizedType;
-  });
-}
 
 // Helper function to validate pattern data
 function validatePattern(pattern: unknown): pattern is AlgorithmPattern {
@@ -112,7 +102,6 @@ function validatePattern(pattern: unknown): pattern is AlgorithmPattern {
   }
 
   // Normalize the type
-  const normalizedType = rawType.toLowerCase().trim().replace(/\s+/g, "-");
 
   // Sanitize fields
   p.timeComplexity = sanitizeComplexity(p.timeComplexity);
@@ -142,7 +131,6 @@ function validatePattern(pattern: unknown): pattern is AlgorithmPattern {
 
 export function getPattern(patternKey: PatternKey): AlgorithmPattern | null {
   // First try direct key lookup
-  const patternId = normalizePatternName(patternKey);
 
   // Try exact match first
   if (patternKey in typedPatterns) {

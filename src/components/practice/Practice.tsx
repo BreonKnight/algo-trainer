@@ -87,7 +87,6 @@ const Practice = () => {
   useEffect(() => {
     const saved = localStorage.getItem("practice-code");
     if (saved) setCode(saved);
-    // eslint-disable-next-line
   }, []);
 
   // Save code to localStorage on change

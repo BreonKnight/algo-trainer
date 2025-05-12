@@ -12,7 +12,7 @@ const jsonPatterns = getAllPatterns();
 export const pseudocodePatterns: Partial<Record<PatternKey, ComponentType>> = Object.entries(
   jsonPatterns
 ).reduce(
-  (acc, [key, pattern]) => {
+  (acc, [, pattern]) => {
     // Use the pattern.name as the PatternKey for accurate mapping
     const patternKey = pattern.name as PatternKey;
 
@@ -51,7 +51,7 @@ export function getAvailablePatterns(): PatternKey[] {
 export function getPatternsByCategory(): Record<string, PatternKey[]> {
   const patternsByCategory: Record<string, PatternKey[]> = {};
 
-  Object.entries(jsonPatterns).forEach(([key, pattern]) => {
+  Object.entries(jsonPatterns).forEach(([, pattern]) => {
     // Use the pattern.name as the PatternKey for accurate mapping
     const patternKey = pattern.name as PatternKey;
 
