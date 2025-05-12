@@ -1,8 +1,8 @@
 import { Play, Pause, RotateCcw } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
-import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Timer() {

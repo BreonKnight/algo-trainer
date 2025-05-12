@@ -1,6 +1,8 @@
-import { DynamicPattern } from "./patterns/DynamicPattern";
-import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types";
 import { ComponentType } from "react";
+
+import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types";
+
+import { DynamicPattern } from "./patterns/DynamicPattern";
 import { getAllPatterns } from "./patterns/utils";
 
 // Get all patterns from JSON

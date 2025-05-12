@@ -1,7 +1,7 @@
 const path = require("path");
-const fs = require("fs-extra");
 
 const { app, BrowserWindow, ipcMain, protocol } = require("electron");
+const fs = require("fs-extra");
 
 // Register protocols before app is ready
 protocol.registerSchemesAsPrivileged([

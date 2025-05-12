@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Background } from "@/components/ui/background";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+
 import snesController from "/snes-controller.svg";
 
 const AboutPage = () => {

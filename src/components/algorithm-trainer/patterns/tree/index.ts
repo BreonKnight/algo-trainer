@@ -3,8 +3,8 @@ import { binarySearchTreePattern } from "@/components/algorithm-trainer/patterns
 import { heavyLightDecompositionPattern } from "@/components/algorithm-trainer/patterns/tree/heavy-light-decomposition";
 import { lowestCommonAncestorPattern } from "@/components/algorithm-trainer/patterns/tree/lowest-common-ancestor";
 import { triePattern } from "@/components/algorithm-trainer/patterns/tree/trie";
-import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 import { zigzagTraversalPattern } from "@/components/algorithm-trainer/patterns/tree/zigzag-traversal";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 // import { treePattern } from "@/components/algorithm-trainer/patterns/tree/tree";
 
 export const treePatterns: Partial<Record<string, AlgorithmPattern>> = {

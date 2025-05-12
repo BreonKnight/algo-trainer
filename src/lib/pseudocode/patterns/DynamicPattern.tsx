@@ -1,6 +1,7 @@
 import { PatternKey } from "@/components/algorithm-trainer/types";
-import { getPattern, getPatternKeyFromName } from "./utils";
+
 import { AlgorithmPattern } from "./AlgorithmPattern";
+import { getPattern, getPatternKeyFromName } from "./utils";
 
 interface DynamicPatternProps {
   patternKey: PatternKey;

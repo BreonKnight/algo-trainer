@@ -1,6 +1,7 @@
 import path from "path";
-import fs from "fs-extra";
+
 import { jest, describe, beforeEach, it, expect } from "@jest/globals";
+import fs from "fs-extra";
 
 // Required Pyodide files that must be present in the build
 const REQUIRED_PYODIDE_FILES = [
