@@ -5,8 +5,8 @@ import { BookOpen, Clock, GraduationCap, ChevronRight, X } from "lucide-react";
 import { PawPrint } from "lucide-react";
 import React, { useState, useMemo, useCallback } from "react";
 
-import { Background } from "@/components/ui/background";
 import { useTheme } from "@/components/theme/use-theme";
+import { Background } from "@/components/ui/background";
 import { cn } from "@/lib/utils";
 
 import { chapters, mhChapters } from "./chapters";
@@ -133,7 +133,8 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
         className={cn(
           "rounded-xl p-6 cursor-pointer transition-all duration-200 group",
           "hover:shadow-lg backdrop-blur-sm",
-          "bg-card hover:bg-card/90 border border-border",
+          theme === "snes" ? "bg-[var(--snes-cream)]" : "bg-card hover:bg-card/90",
+          "border border-border",
           "shadow-[0_0_15px_var(--shadow-color)]",
           "relative overflow-hidden",
           "before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:to-black/5 before:opacity-0 before:transition-opacity before:duration-200",
@@ -379,7 +380,9 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
                     ? "bg-white/95"
                     : theme === "nord"
                       ? "bg-[#2E3440]/95"
-                      : "bg-[#282A36]/95",
+                      : theme === "snes"
+                        ? "bg-[#fffbe6]/95"
+                        : "bg-[#282A36]/95",
                   "border-border"
                 )}
                 onClick={(e) => e.stopPropagation()}

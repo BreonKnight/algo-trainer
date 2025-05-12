@@ -1,13 +1,20 @@
+import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
 import { useState, useEffect, useCallback, memo } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { motion } from "framer-motion";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
-import { Background } from "@/components/ui/background";
 import { cn } from "@/lib/utils";
+import {
+  getCardClass,
+  getButtonClass,
+  getTooltipClass,
+  getCodeBlockClass,
+  getIconClass,
+} from "@/lib/utils/theme-class-utils";
 
 // Custom hook to detect desktop
 function useIsDesktop() {
@@ -195,31 +202,25 @@ const CodeBlock = memo(({ code }: { code: string }) => {
                 size="sm"
                 onClick={handleCopy}
                 aria-label={copied ? "Copied!" : "Copy code"}
-                className={cn(
-                  "h-10 px-4 transition-colors border text-base sm:h-8 sm:px-3 sm:text-xs",
-                  appTheme === "light" || appTheme === "solarized"
-                    ? "bg-accent/10 text-accent border-accent hover:bg-accent/20"
-                    : appTheme === "nord"
-                      ? "bg-white/10 text-white border-white/20 hover:bg-white/20"
-                      : "bg-secondary/20 text-accent border-accent2 hover:bg-secondary/40"
-                )}
+                className={getButtonClass(appTheme, copied)}
               >
                 <div className="flex items-center gap-2">
                   {copied ? (
                     <Check
-                      className={cn(
-                        "h-5 w-5 transition-transform duration-200",
-                        copied ? "scale-125" : "scale-100"
-                      )}
+                      className={
+                        getIconClass(appTheme) +
+                        " h-5 w-5 transition-transform duration-200 " +
+                        (copied ? "scale-125" : "scale-100")
+                      }
                     />
                   ) : (
-                    <Copy className="h-5 w-5" />
+                    <Copy className={getIconClass(appTheme) + " h-5 w-5"} />
                   )}
                   <span className="font-medium">{copied ? "Copied!" : "Copy code"}</span>
                 </div>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className={getTooltipClass(appTheme)}>
               <p className="text-xs">{copied ? "Copied!" : "Copy code"}</p>
             </TooltipContent>
           </Tooltip>
@@ -228,16 +229,10 @@ const CodeBlock = memo(({ code }: { code: string }) => {
 
       {/* Code block container */}
       <div
-        className={cn(
-          "rounded-xl w-full overflow-x-auto transition-all duration-200 group relative",
-          "px-2 sm:px-6 py-3 sm:py-6 shadow-lg border",
-          appTheme === "light"
-            ? "bg-white border-accent"
-            : `bg-[rgba(var(--code-bg-${appTheme}),0.98)] border-accent2`
-        )}
-        style={{
-          color: appTheme === "light" ? "#1a1a1a" : `var(--code-text-${appTheme})`,
-        }}
+        className={
+          getCodeBlockClass(appTheme) + " w-full transition-all duration-200 group relative"
+        }
+        style={{ color: appTheme === "light" ? "#1a1a1a" : `var(--code-text-${appTheme})` }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -800,18 +795,12 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               className={cn(
+                getButtonClass(theme, false),
                 "fixed bottom-6 right-6 z-50 rounded-full transition-all duration-300",
                 showBackToTop
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10 pointer-events-none",
-                theme === "nord"
-                  ? "bg-white/10 hover:bg-white/20 text-white"
-                  : "bg-secondary/20 hover:bg-secondary/40 text-main",
-                "shadow-lg backdrop-blur-md",
-                "hover:scale-110 active:scale-95",
-                "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent",
-                "touch-manipulation select-none",
-                "w-12 h-12 sm:w-14 sm:h-14"
+                "shadow-lg backdrop-blur-md hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent touch-manipulation select-none w-12 h-12 sm:w-14 sm:h-14"
               )}
               aria-label="Back to top"
             >
@@ -878,13 +867,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
               </div>
             </Button>
           </TooltipTrigger>
-          <TooltipContent
-            side="left"
-            className={cn(
-              "px-3 py-2 text-sm font-medium",
-              theme === "nord" ? "bg-white text-black" : "bg-secondary text-main"
-            )}
-          >
+          <TooltipContent className={cn(getTooltipClass(theme), "px-3 py-2 text-sm font-medium")}>
             <p>Back to Top</p>
           </TooltipContent>
         </Tooltip>
@@ -928,25 +911,16 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                           setActiveSection(section.title);
                         }}
                         className={cn(
-                          "transition-all duration-200 whitespace-normal text-sm px-3 py-1.5 min-w-0 flex-grow text-ellipsis overflow-hidden max-w-xs sm:max-w-sm",
-                          activeSection === section.title
-                            ? theme === "nord"
-                              ? "bg-white/20 text-white"
-                              : "bg-secondary/40 text-accent"
-                            : theme === "nord"
-                              ? "text-white/70 hover:text-white hover:bg-white/10"
-                              : "text-main/70 hover:text-main hover:bg-secondary/30"
+                          getButtonClass(theme, activeSection === section.title),
+                          "transition-all duration-200 whitespace-normal text-sm px-3 py-1.5 min-w-0 flex-grow text-ellipsis overflow-hidden max-w-xs sm:max-w-sm"
                         )}
                       >
                         {section.title}
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent
+                      className={cn(getTooltipClass(theme), "z-[9999] max-w-[200px]")}
                       side="bottom"
-                      className={cn(
-                        "z-[9999] px-3 py-2 text-sm font-medium max-w-[200px]",
-                        theme === "nord" ? "bg-white text-black" : "bg-secondary text-main"
-                      )}
                     >
                       <p className="text-xs leading-relaxed">{section.description}</p>
                     </TooltipContent>
@@ -989,15 +963,8 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                   key={index}
                   id={`section-${index}`}
                   className={cn(
-                    // Minimal on mobile: no border, bg, or extra padding; styled on sm+
-                    "w-full p-0 border-0 bg-transparent rounded-none",
-                    "sm:rounded-lg sm:p-6 sm:border sm:backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.01]",
-                    "sm:max-w-3xl mx-0 sm:mx-auto",
-                    theme === "light" || theme === "solarized"
-                      ? "sm:bg-main/80 sm:border-accent"
-                      : theme === "nord"
-                        ? "sm:bg-nord-1/95 sm:border-white/20 sm:hover:bg-nord-1/98"
-                        : "sm:bg-zinc-900/95 sm:border-zinc-700/30 sm:hover:bg-zinc-900/98"
+                    getCardClass(theme),
+                    "w-full p-0 border-0 bg-transparent rounded-none sm:rounded-lg sm:p-6 sm:border sm:backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.01] sm:max-w-3xl mx-0 sm:mx-auto"
                   )}
                   onMouseMove={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
@@ -1014,7 +981,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                     )}
                   >
                     <span
-                      className="text-3xl select-none"
+                      className={getIconClass(theme) + " text-3xl select-none"}
                       style={{ WebkitTextFillColor: "initial" }}
                     >
                       {section.emoji}

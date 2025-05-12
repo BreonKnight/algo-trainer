@@ -14,8 +14,8 @@ import {
 
 import { additionalConcepts } from "@/components/CSMath/concepts";
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from "@/lib/utils";
 import { Background } from "@/components/ui/background";
+import { cn } from "@/lib/utils";
 
 export interface Concept {
   id: number;
@@ -479,7 +479,13 @@ const CSMath: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className={cn(
             "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
-            "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+            theme === "light" || theme === "solarized"
+              ? "bg-gradient-to-r from-accent to-accent2"
+              : theme === "nord"
+                ? "bg-gradient-to-r from-nord7 to-nord10"
+                : theme === "snes"
+                  ? "bg-gradient-to-r from-[#e40058] via-[#4040e0] to-[#ffd700]"
+                  : "bg-gradient-to-r from-accent3 to-accent4"
           )}
         >
           AlgoTrainer: Computer Science Math Academy
@@ -492,13 +498,18 @@ const CSMath: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowQuestBoard(!showQuestBoard)}
             className={cn(
-              "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
+              "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-accent",
               theme === "light" || theme === "solarized"
-                ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                : "bg-accent/20 hover:bg-accent/30 text-accent"
+                ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10 hover:text-accent"
+                : theme === "nord"
+                  ? "bg-nord7/20 hover:bg-nord7/40 text-nord10 border border-nord7 shadow-sm"
+                  : theme === "snes"
+                    ? "bg-[#4040e0] text-[#fffbe6] border-2 border-[#3498db] shadow hover:bg-[#e40058] hover:text-[#fffbe6]"
+                    : "bg-accent/20 hover:bg-accent/30 text-accent border border-accent/30"
             )}
+            aria-label={showQuestBoard ? "Close Quest Board" : "Open Quest Board"}
           >
-            <FaScroll className="h-5 w-5" />
+            <FaScroll className={cn("h-5 w-5", theme === "snes" ? "text-[#4040e0]" : "")} />
             {showQuestBoard ? "Close Quest Board" : "Open Quest Board"}
             {showQuestBoard ? (
               <FaChevronUp className="h-4 w-4" />
@@ -512,13 +523,18 @@ const CSMath: React.FC = () => {
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowSymbols(!showSymbols)}
             className={cn(
-              "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2",
+              "px-6 py-3 rounded-lg transition-colors font-medium tracking-wide flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-accent",
               theme === "light" || theme === "solarized"
-                ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                : "bg-accent/20 hover:bg-accent/30 text-accent"
+                ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10 hover:text-accent"
+                : theme === "nord"
+                  ? "bg-nord7/20 hover:bg-nord7/40 text-nord10 border border-nord7 shadow-sm"
+                  : theme === "snes"
+                    ? "bg-[#4040e0] text-[#fffbe6] border-2 border-[#3498db] shadow hover:bg-[#e40058] hover:text-[#fffbe6]"
+                    : "bg-accent/20 hover:bg-accent/30 text-accent border border-accent/30"
             )}
+            aria-label="Toggle CLRS Symbols"
           >
-            <FaCalculator className="h-5 w-5" />
+            <FaCalculator className={cn("h-5 w-5", theme === "snes" ? "text-[#4040e0]" : "")} />
             CLRS Symbols
             {showSymbols ? (
               <FaChevronUp className="h-4 w-4" />
@@ -539,14 +555,24 @@ const CSMath: React.FC = () => {
                 "rounded-xl p-6 shadow-2xl border mb-8",
                 theme === "light" || theme === "solarized"
                   ? "bg-background/95 backdrop-blur-sm border-accent/20"
-                  : "bg-background/95 backdrop-blur-sm border-accent2/20"
+                  : theme === "nord"
+                    ? "bg-nord6/90 backdrop-blur-sm border-nord7"
+                    : theme === "snes"
+                      ? "bg-[#4040e0]/10 backdrop-blur-sm border-2 border-[#3498db]"
+                      : "bg-background/95 backdrop-blur-sm border-accent2/20"
               )}
             >
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 <h2
                   className={cn(
                     "text-2xl font-semibold font-display tracking-wide",
-                    theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+                    theme === "light" || theme === "solarized"
+                      ? "text-accent"
+                      : theme === "nord"
+                        ? "text-nord10"
+                        : theme === "snes"
+                          ? "text-[#4040e0]"
+                          : "text-accent2"
                   )}
                 >
                   CLRS Mathematical Notation
@@ -559,7 +585,11 @@ const CSMath: React.FC = () => {
                       "w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
                       theme === "light" || theme === "solarized"
                         ? "bg-white text-accent border border-accent shadow-sm placeholder-accent/60 focus:ring-accent"
-                        : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
+                        : theme === "nord"
+                          ? "bg-nord6/90 text-nord3 border-nord7 placeholder-nord3/60 focus:ring-nord7"
+                          : theme === "snes"
+                            ? "bg-[#fffbe6] text-[#4040e0] border-2 border-[#3498db] placeholder-[#4040e0]/60 focus:ring-[#3498db]"
+                            : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
                     )}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -584,7 +614,11 @@ const CSMath: React.FC = () => {
                         "p-4 rounded-lg border cursor-pointer transition-colors",
                         theme === "light" || theme === "solarized"
                           ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10 hover:shadow-lg"
-                          : "bg-background/50 border-accent2/10 hover:bg-accent2/10 hover:shadow-lg"
+                          : theme === "nord"
+                            ? "bg-nord6/90 border-nord7 hover:bg-nord7/20"
+                            : theme === "snes"
+                              ? "bg-[#fffbe6] border-2 border-[#3498db] hover:bg-[#e40058]/10 hover:shadow-lg text-[#4040e0]"
+                              : "bg-background/50 border-accent2/10 hover:bg-accent2/10 hover:shadow-lg"
                       )}
                     >
                       <div className="flex items-start gap-3">
@@ -593,7 +627,11 @@ const CSMath: React.FC = () => {
                             "text-2xl font-mono mt-1",
                             theme === "light" || theme === "solarized"
                               ? "text-accent"
-                              : "text-accent2"
+                              : theme === "nord"
+                                ? "text-nord10"
+                                : theme === "snes"
+                                  ? "text-[#e40058]"
+                                  : "text-accent2"
                           )}
                         >
                           {symbol.symbol}
@@ -604,7 +642,11 @@ const CSMath: React.FC = () => {
                               "font-mono tracking-wide pb-2 border-b-2 mb-2",
                               theme === "light" || theme === "solarized"
                                 ? "text-accent border-accent/30"
-                                : "text-accent2 border-accent2/30"
+                                : theme === "nord"
+                                  ? "text-nord10 border-nord7/30"
+                                  : theme === "snes"
+                                    ? "text-[#4040e0] border-[#3498db]/30"
+                                    : "text-accent2 border-accent2/30"
                             )}
                           >
                             {symbol.name}
@@ -614,7 +656,11 @@ const CSMath: React.FC = () => {
                               "text-sm mt-1 font-sans leading-relaxed",
                               theme === "light" || theme === "solarized"
                                 ? "text-foreground/90"
-                                : "text-foreground/90"
+                                : theme === "nord"
+                                  ? "text-nord3"
+                                  : theme === "snes"
+                                    ? "text-[#4040e0]/90"
+                                    : "text-foreground/90"
                             )}
                           >
                             {symbol.description}
@@ -624,7 +670,11 @@ const CSMath: React.FC = () => {
                               "text-sm mt-2 font-mono leading-relaxed",
                               theme === "light" || theme === "solarized"
                                 ? "text-foreground/80"
-                                : "text-foreground/80"
+                                : theme === "nord"
+                                  ? "text-nord3/80"
+                                  : theme === "snes"
+                                    ? "text-[#4040e0]/80"
+                                    : "text-foreground/80"
                             )}
                           >
                             {symbol.example}
@@ -661,14 +711,24 @@ const CSMath: React.FC = () => {
                 "rounded-xl p-6 shadow-2xl border mb-8",
                 theme === "light" || theme === "solarized"
                   ? "bg-background/95 backdrop-blur-sm border-accent/20"
-                  : "bg-background/95 backdrop-blur-sm border-accent2/20"
+                  : theme === "nord"
+                    ? "bg-nord6/90 backdrop-blur-sm border-nord7"
+                    : theme === "snes"
+                      ? "bg-[#4040e0]/10 backdrop-blur-sm border-2 border-[#3498db]"
+                      : "bg-background/95 backdrop-blur-sm border-accent2/20"
               )}
             >
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                 <h2
                   className={cn(
                     "text-2xl font-semibold font-display tracking-wide",
-                    theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+                    theme === "light" || theme === "solarized"
+                      ? "text-accent"
+                      : theme === "nord"
+                        ? "text-nord10"
+                        : theme === "snes"
+                          ? "text-[#4040e0]"
+                          : "text-accent2"
                   )}
                 >
                   Available Quests
@@ -682,7 +742,11 @@ const CSMath: React.FC = () => {
                         "w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
                         theme === "light" || theme === "solarized"
                           ? "bg-white text-accent border border-accent shadow-sm placeholder-accent/60 focus:ring-accent"
-                          : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
+                          : theme === "nord"
+                            ? "bg-nord6/90 text-nord3 border-nord7 placeholder-nord3/60 focus:ring-nord7"
+                            : theme === "snes"
+                              ? "bg-[#fffbe6] text-[#4040e0] border-2 border-[#3498db] placeholder-[#4040e0]/60 focus:ring-[#3498db]"
+                              : "bg-background/50 border-accent2/20 text-foreground placeholder-foreground/50 focus:ring-accent2"
                       )}
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -693,7 +757,11 @@ const CSMath: React.FC = () => {
                       "px-4 py-2 rounded-lg border focus:outline-none focus:ring-2",
                       theme === "light" || theme === "solarized"
                         ? "bg-white text-accent border border-accent shadow-sm focus:ring-accent"
-                        : "bg-background/50 border-accent2/20 text-foreground focus:ring-accent2"
+                        : theme === "nord"
+                          ? "bg-nord6/90 text-nord3 border-nord7 focus:ring-nord7"
+                          : theme === "snes"
+                            ? "bg-[#fffbe6] text-[#4040e0] border-2 border-[#3498db] focus:ring-[#3498db]"
+                            : "bg-background/50 border-accent2/20 text-foreground focus:ring-accent2"
                     )}
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
@@ -719,15 +787,31 @@ const CSMath: React.FC = () => {
                         ? currentConcept === concept.id - 1
                           ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
                           : "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                        : currentConcept === concept.id - 1
-                          ? "bg-accent/20 hover:bg-accent/30 text-accent"
-                          : "bg-background/50 hover:bg-background/70"
+                        : theme === "nord"
+                          ? currentConcept === concept.id - 1
+                            ? "bg-nord6/90 text-nord10 border border-nord7 hover:bg-nord7/20"
+                            : "bg-nord6/90 text-nord3 border border-nord7 hover:bg-nord7/20"
+                          : theme === "snes"
+                            ? currentConcept === concept.id - 1
+                              ? "bg-[#4040e0] text-[#fffbe6] border-2 border-[#3498db] hover:bg-[#e40058] hover:text-[#fffbe6]"
+                              : "bg-[#fffbe6] text-[#4040e0] border-2 border-[#3498db] hover:bg-[#e40058] hover:text-[#fffbe6]"
+                            : currentConcept === concept.id - 1
+                              ? "bg-accent/20 hover:bg-accent/30 text-accent"
+                              : "bg-background/50 hover:bg-background/70"
                     )}
                   >
                     <div
                       className={cn(
                         "mt-1",
-                        theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+                        theme === "light" || theme === "solarized"
+                          ? "text-accent drop-shadow-[0_0_2px_#fff]"
+                          : theme === "nord"
+                            ? "text-nord10 drop-shadow-[0_0_2px_#2e3440]"
+                            : theme === "snes"
+                              ? currentConcept === concept.id - 1
+                                ? "text-[#fffbe6] drop-shadow-[0_0_2px_#4040e0]"
+                                : "text-[#4040e0] drop-shadow-[0_0_2px_#00ff00]"
+                              : "text-accent2 drop-shadow-[0_0_2px_#000]"
                       )}
                     >
                       {getCategoryIcon(concept.category)}
@@ -738,7 +822,13 @@ const CSMath: React.FC = () => {
                           "font-medium",
                           theme === "light" || theme === "solarized"
                             ? "text-accent"
-                            : "text-accent2"
+                            : theme === "nord"
+                              ? "text-nord10"
+                              : theme === "snes"
+                                ? currentConcept === concept.id - 1
+                                  ? "text-[#fffbe6]"
+                                  : "text-[#4040e0]"
+                                : "text-accent2"
                         )}
                       >
                         {concept.title}
@@ -748,7 +838,13 @@ const CSMath: React.FC = () => {
                           "text-sm mt-1",
                           theme === "light" || theme === "solarized"
                             ? "text-foreground/80"
-                            : "text-foreground/80"
+                            : theme === "nord"
+                              ? "text-nord3/80"
+                              : theme === "snes"
+                                ? currentConcept === concept.id - 1
+                                  ? "text-[#fffbe6]/80"
+                                  : "text-[#4040e0]/80"
+                                : "text-foreground/80"
                         )}
                       >
                         {concept.category}
@@ -770,7 +866,11 @@ const CSMath: React.FC = () => {
             "rounded-xl p-8 shadow-2xl border",
             theme === "light" || theme === "solarized"
               ? "bg-background/95 backdrop-blur-sm border-accent/20"
-              : "bg-background/95 backdrop-blur-sm border-accent2/20"
+              : theme === "nord"
+                ? "bg-nord6/90 backdrop-blur-sm border-nord7"
+                : theme === "snes"
+                  ? "bg-[#4040e0]/10 backdrop-blur-sm border-2 border-[#3498db]"
+                  : "bg-background/95 backdrop-blur-sm border-accent2/20"
           )}
         >
           <motion.h2
@@ -778,7 +878,13 @@ const CSMath: React.FC = () => {
             animate={{ opacity: 1 }}
             className={cn(
               "text-3xl font-semibold mb-6 font-display tracking-wide text-left",
-              theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
+              theme === "light" || theme === "solarized"
+                ? "text-accent"
+                : theme === "nord"
+                  ? "text-nord10"
+                  : theme === "snes"
+                    ? "text-[#4040e0]"
+                    : "text-accent2"
             )}
           >
             {allConcepts[currentConcept].title}

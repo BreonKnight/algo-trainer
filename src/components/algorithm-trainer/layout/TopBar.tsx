@@ -17,16 +17,17 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { BookOpen, ChevronDown, GripVertical, HelpCircle } from "lucide-react";
 import { useState } from "react";
-import { useTheme } from "@/components/theme/use-theme";
 
 import { CenterInformaticsWidget } from "@/components/algorithm-trainer/layout/CenterInformaticsWidget";
 import { RightControls } from "@/components/algorithm-trainer/layout/RightControls";
 import { AudioPlayer } from "@/components/audio/AudioPlayer";
+import { useTheme } from "@/components/theme/use-theme";
 import { Timer } from "@/components/timer/Timer";
 import { Button } from "@/components/ui/button";
 import { MediaCard } from "@/components/ui/media-card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+
 import { ClickableNotation } from "./ClickableNotation";
 
 interface TopBarProps {
@@ -181,7 +182,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -199,7 +202,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -217,7 +222,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -275,7 +282,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -292,7 +301,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -309,7 +320,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -326,7 +339,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -343,7 +358,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -360,7 +377,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -377,7 +396,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
@@ -394,7 +415,9 @@ export function TopBar({ className }: TopBarProps) {
                           key={key}
                           notationKey={key}
                           snesColorIndex={idx}
-                          className="text-muted-foreground/60 hover:text-foreground"
+                          className={
+                            theme === "snes" ? "" : "text-muted-foreground/60 hover:text-foreground"
+                          }
                         />
                       ))}
                     </div>
