@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface SolutionCardProps {
   children: ReactNode;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export function SolutionCard({ children, ...props }: SolutionCardProps) {

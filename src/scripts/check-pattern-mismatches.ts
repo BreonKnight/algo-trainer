@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { PATTERN_KEYS } from "../lib/patterns/types";
+import { PATTERN_KEYS } from "@/lib/patterns/types";
 
 // Read patterns.json
 const patternsPath = path.join(process.cwd(), "src/lib/pseudocode/patterns.json");
@@ -17,8 +17,9 @@ const patternKeys = PATTERN_KEYS;
 const missingInJson = patternKeys.filter((key: string) => !patternNames.includes(key));
 
 // Find patterns in patterns.json but not in PATTERN_KEYS
-const extraInJson = patternNames.filter((name: string) => !patternKeys.includes(name));
-
+const extraInJson = patternNames.filter(
+  (name: string) => !(patternKeys as readonly string[]).includes(name)
+);
 console.log("Patterns in PATTERN_KEYS but missing from patterns.json:");
 console.log(missingInJson);
 console.log("\nPatterns in patterns.json but not in PATTERN_KEYS:");

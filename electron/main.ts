@@ -1,7 +1,7 @@
-const path = require("path");
+import path from "path";
 
-const { app, BrowserWindow, ipcMain, protocol } = require("electron");
-const fs = require("fs-extra");
+import { app, BrowserWindow, ipcMain, protocol } from "electron";
+import fs from "fs-extra";
 
 // Register protocols before app is ready
 protocol.registerSchemesAsPrivileged([
@@ -25,7 +25,7 @@ ipcMain.handle("get-pyodide-path", () => {
   return path.join(app.getAppPath(), "dist", "pyodide");
 });
 
-ipcMain.handle("log-pyodide-access", (_event: any, url: string) => {
+ipcMain.handle("log-pyodide-access", (_event: unknown, url: string) => {
   console.log("Pyodide accessing:", url);
   return null;
 });
@@ -74,6 +74,7 @@ function createWindow() {
 
   // Monitor network requests
   win.webContents.session.webRequest.onBeforeRequest(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (details: any, callback: (response: { cancel: boolean }) => void) => {
       if (details.url.includes("pyodide") || details.url.includes("cdn.jsdelivr.net")) {
         console.log("Pyodide network request:", details.url);

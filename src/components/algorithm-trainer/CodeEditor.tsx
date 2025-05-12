@@ -150,7 +150,6 @@ export function CodeEditor({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-    // eslint-disable-next-line
   }, [userCode, onRunCode, onShowAnswer, onNextPattern, onPrevPattern]);
 
   // Update editor height on mount and resize

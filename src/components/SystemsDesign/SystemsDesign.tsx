@@ -221,7 +221,7 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
         </div>
       </motion.div>
     ),
-    [handleChapterClick]
+    [handleChapterClick, theme]
   );
 
   return (
