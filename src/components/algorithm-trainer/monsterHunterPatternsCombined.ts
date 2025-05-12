@@ -228,6 +228,7 @@ export const monsterHunterPatternsByCategory = {
     "Probability DP",
     "Bitwise DP",
     "Edit Distance",
+    "Fibonacci",
   ],
 
   "Greedy Algorithms": [
@@ -252,7 +253,6 @@ export const monsterHunterPatternsByCategory = {
     "Divide and Conquer",
     "Karatsuba Multiplication",
     "Recursion",
-    "Fibonacci",
     "Null Pattern",
     "Test Data",
   ],

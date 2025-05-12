@@ -321,7 +321,7 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
   };
 
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card className="p-4 bg-[var(--card-bg)] border-text-secondary w-full h-full flex flex-col overflow-hidden">
       <div className="flex-none flex justify-between items-center mb-4">
         <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
           Output

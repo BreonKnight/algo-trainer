@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { useTheme } from "@/components/theme/use-theme";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { useState } from "react";
 
-import { NotationModal } from "./NotationModal";
-import { notationData } from "./notation-data";
+import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+
+import { notationData } from "./notation-data";
+import { NotationModal } from "./NotationModal";
 
 interface ClickableNotationProps {
   notationKey: keyof typeof notationData;
@@ -23,17 +24,43 @@ export function ClickableNotation({
   const notation = notationData[notationKey];
   const { theme } = useTheme();
 
-  // Super Famicom button colors (scoped to SNES theme via CSS variables)
+  // Color palettes for each theme (solid, high-contrast, no transparency)
   const famicomColors = [
-    "bg-[var(--sfc-blue)] text-white border-[var(--sfc-dark)]",
-    "bg-[var(--sfc-green)] text-white border-[var(--sfc-dark)]",
-    "bg-[var(--sfc-red)] text-white border-[var(--sfc-dark)]",
-    "bg-[var(--sfc-yellow)] text-black border-[var(--sfc-dark)]",
+    "bg-[#4040e0] text-white border-[#2d2d2d]", // Blue
+    "bg-[#00a800] text-white border-[#2d2d2d]", // Green
+    "bg-[#e40058] text-white border-[#2d2d2d]", // Red
+    "bg-[#ffd700] text-black border-[#2d2d2d]", // Yellow
   ];
-  const famicomClass =
-    theme === "snes" && typeof snesColorIndex === "number"
-      ? famicomColors[snesColorIndex % famicomColors.length]
-      : "";
+  const lightColors = [
+    "bg-accent text-white border-accent",
+    "bg-accent2 text-white border-accent2",
+    "bg-accent3 text-white border-accent3",
+    "bg-accent4 text-black border-accent4",
+  ];
+  const nordColors = [
+    "bg-nord10 text-white border-nord7",
+    "bg-nord7 text-nord3 border-nord10",
+    "bg-nord9 text-white border-nord3",
+    "bg-nord11 text-nord0 border-nord3",
+  ];
+  const darkColors = [
+    "bg-accent text-white border-accent",
+    "bg-accent2 text-white border-accent2",
+    "bg-accent3 text-white border-accent3",
+    "bg-accent4 text-black border-accent4",
+  ];
+
+  let colorClass = "";
+  const idx = typeof snesColorIndex === "number" ? snesColorIndex : 0;
+  if (theme === "snes") {
+    colorClass = famicomColors[idx % famicomColors.length];
+  } else if (theme === "light" || theme === "solarized") {
+    colorClass = lightColors[idx % lightColors.length];
+  } else if (theme === "nord") {
+    colorClass = nordColors[idx % nordColors.length];
+  } else {
+    colorClass = darkColors[idx % darkColors.length];
+  }
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -49,13 +76,7 @@ export function ClickableNotation({
             onClick={handleClick}
             className={cn(
               "inline-flex items-center gap-1 px-2 py-1 rounded-full font-semibold shadow-sm border transition-colors focus:outline-none",
-              theme === "snes"
-                ? famicomClass
-                : theme === "light" || theme === "solarized"
-                  ? "bg-white text-accent border border-accent shadow-sm hover:bg-accent/10"
-                  : theme === "nord"
-                    ? "bg-background/30 text-white hover:bg-background/50"
-                    : "bg-background/30 text-accent2 hover:bg-background/50",
+              colorClass,
               className
             )}
           >

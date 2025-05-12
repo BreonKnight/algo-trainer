@@ -1,13 +1,13 @@
-import { useState, useCallback, memo } from "react";
 import { motion } from "framer-motion";
 import { BarChart3, TrendingUp, Activity, Target, ChevronRight } from "lucide-react";
+import { useState, useCallback, memo } from "react";
 
+import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/components/theme/use-theme";
 
 const ProgressView = memo(function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);
@@ -55,7 +55,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
@@ -76,7 +76,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
@@ -95,7 +95,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
@@ -112,7 +112,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
               )}
             >
@@ -138,7 +138,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm bg-background/50 border-accent/10"
               )}
             >
@@ -177,7 +177,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm bg-background/50 border-accent/10"
               )}
             >
@@ -219,7 +219,7 @@ const ProgressView = memo(function ProgressView() {
             <Card
               className={cn(
                 theme === "snes"
-                  ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-2xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                   : "backdrop-blur-sm rounded-2xl shadow-lg bg-background/50 border-accent/10"
               )}
             >
@@ -267,35 +267,33 @@ const ProgressView = memo(function ProgressView() {
                   ].map((tip, index) => (
                     <motion.div
                       key={index}
-                      className="flex items-start gap-4 p-4 rounded-lg border border-accent/10 bg-background/90 hover:bg-background/95 transition-all duration-200"
+                      className={cn(
+                        "flex items-start gap-4 p-4 rounded-lg border transition-all duration-200",
+                        theme === "snes"
+                          ? "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-hover)]"
+                          : "bg-background/90 border-accent/10 hover:bg-background/95"
+                      )}
                       whileHover={{ scale: 1.02 }}
                     >
-                      <div className="p-2 rounded-lg bg-accent/10">{tip.icon}</div>
+                      <div
+                        className={cn(
+                          "p-2 rounded-lg",
+                          theme === "snes" ? "bg-[var(--accent)]/10" : "bg-accent/10"
+                        )}
+                      >
+                        {tip.icon}
+                      </div>
                       <div className="flex-1">
-                        <h3
-                          className={cn(
-                            "font-semibold mb-1",
-                            theme === "light" ? "text-zinc-900" : "text-zinc-100"
-                          )}
-                        >
-                          {tip.title}
-                        </h3>
-                        <p
-                          className={cn(
-                            "text-sm mb-2",
-                            theme === "light" ? "text-zinc-600" : "text-zinc-400"
-                          )}
-                        >
-                          {tip.desc}
-                        </p>
+                        <h3 className="font-semibold mb-1 text-foreground">{tip.title}</h3>
+                        <p className="text-sm mb-2 text-muted-foreground">{tip.desc}</p>
                         <a
                           href={tip.link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className={cn(
                             "text-sm transition-colors duration-200 flex items-center gap-1",
-                            theme === "light"
-                              ? "text-blue-600 hover:text-blue-700"
+                            theme === "snes"
+                              ? "text-[var(--accent)] hover:text-[var(--accent2)]"
                               : "text-accent hover:text-accent2"
                           )}
                         >

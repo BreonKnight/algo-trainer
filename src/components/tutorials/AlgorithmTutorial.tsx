@@ -2,8 +2,9 @@ import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { Background } from "@/components/ui/background";
+import { useTheme } from "@/components/theme/use-theme";
 import type { PatternKey } from "@/components/tutorials/types";
+import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -43,6 +44,7 @@ interface AlgorithmTutorialProps {
 }
 
 export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialProps) {
+  const { theme } = useTheme();
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
   const [activeTab, setActiveTab] = useState("video");
@@ -76,6 +78,34 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
       available: unmetPrerequisites.length === 0,
       unmetPrerequisites,
     };
+  };
+
+  // Get theme-specific card styles
+  const getCardStyles = () => {
+    switch (theme) {
+      case "snes":
+        return "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] shadow-[0_4px_24px_rgba(52,152,219,0.08)]";
+      case "dracula":
+        return "bg-background/95 backdrop-blur-sm border border-accent2/20";
+      case "nord":
+        return "bg-white/90 border-[#D8DEE9]/70 backdrop-blur-sm";
+      case "light":
+        return "bg-white/95 backdrop-blur-sm border border-accent/20";
+      case "solarized":
+        return "bg-[#fdf6e3]/95 backdrop-blur-sm border border-[#93a1a1]/20";
+      case "ps2":
+        return "bg-[#000000]/95 backdrop-blur-sm border border-[#1a1a1a]/20";
+      case "re2":
+        return "bg-[#8b0000]/95 backdrop-blur-sm border border-[#a52a2a]/20";
+      case "mh":
+        return "bg-[#2c3e50]/95 backdrop-blur-sm border border-[#34495e]/20";
+      case "kingdom-hearts":
+        return "bg-[#1e90ff]/95 backdrop-blur-sm border border-[#4169e1]/20";
+      case "fornite":
+        return "bg-[#ffd700]/95 backdrop-blur-sm border border-[#ffa500]/20";
+      default:
+        return "bg-background/95 backdrop-blur-sm border border-accent2/20";
+    }
   };
 
   if (!tutorials || tutorials.length === 0) {
@@ -150,7 +180,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
         </div>
 
         {!isAvailable ? (
-          <Card className="p-8 bg-secondary/10 border-secondary/20 backdrop-blur-sm">
+          <Card className={cn("p-8", getCardStyles())}>
             <div className="flex items-center gap-4 mb-6">
               <Lock className="h-8 w-8 text-accent2" />
               <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
@@ -223,7 +253,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
             </TabsList>
 
             <TabsContent value="video" className="mt-8">
-              <Card className="p-8 bg-secondary/10 border-secondary/20 backdrop-blur-sm">
+              <Card className={cn("p-8", getCardStyles())}>
                 <div className="flex flex-col gap-8">
                   <div className="flex items-center justify-between">
                     <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
@@ -266,7 +296,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
             </TabsContent>
 
             <TabsContent value="implementation" className="mt-8">
-              <Card className="p-8 bg-secondary/10 border-secondary/20 backdrop-blur-sm">
+              <Card className={cn("p-8", getCardStyles())}>
                 <div className="flex flex-col gap-8">
                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
                     {currentTutorial?.title} Implementation
@@ -300,7 +330,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
             </TabsContent>
 
             <TabsContent value="quiz" className="mt-8">
-              <Card className="p-8 bg-secondary/10 border-secondary/20 backdrop-blur-sm">
+              <Card className={cn("p-8", getCardStyles())}>
                 <div className="flex flex-col gap-8">
                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
                     Knowledge Check
@@ -376,7 +406,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
             </TabsContent>
 
             <TabsContent value="resources" className="mt-8">
-              <Card className="p-8 bg-secondary/10 border-secondary/20 backdrop-blur-sm">
+              <Card className={cn("p-8", getCardStyles())}>
                 <div className="flex flex-col gap-8">
                   <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
                     Additional Resources

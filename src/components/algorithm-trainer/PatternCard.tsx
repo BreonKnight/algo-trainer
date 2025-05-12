@@ -9,7 +9,7 @@ import { PatternKey } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+//import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { categoryColors } from "@/lib/patterns";
 import { pseudocodePatterns } from "@/lib/pseudocode";
 import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
@@ -137,44 +137,100 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
       <Card
         className={cn(
           theme === "snes"
-            ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db] fixed inset-0 z-[90] m-4"
-            : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30 fixed inset-0 z-[90] m-4"
+            ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-[calc(100%-2rem)] h-[calc(100%-2rem)] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90]"
+            : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-[calc(100%-2rem)] h-[calc(100%-2rem)] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90]"
         )}
         onClick={(e) => {
-          // Only close if clicking outside the content area
           if (contentRef.current && !contentRef.current.contains(e.target as Node)) {
             setIsExpanded(false);
           }
         }}
       >
-        <div ref={contentRef} className="flex-1 flex flex-col overflow-y-auto">
+        {/* Sword/Book icon toggle at the top */}
+        <div className="flex items-center gap-2 mb-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowMonsterGuide((v) => !v);
+            }}
+            className="ml-2 p-0 flex items-center justify-center aspect-square"
+            title={showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
+          >
+            {showMonsterGuide ? (
+              <Book
+                className={cn(
+                  "w-6 h-6 scale-100",
+                  theme === "snes" ? "text-[#1a237e]" : "text-accent"
+                )}
+                strokeWidth={3}
+              />
+            ) : (
+              <Sword
+                className={cn(
+                  "w-6 h-6 scale-100",
+                  theme === "snes" ? "text-[#1a237e]" : "text-accent"
+                )}
+                strokeWidth={3}
+              />
+            )}
+          </Button>
+        </div>
+        <div
+          ref={contentRef}
+          className="flex-1 flex flex-col overflow-y-auto max-w-7xl mx-auto w-full"
+        >
           <div className="flex-none flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <div className="flex-1 min-w-0 text-left">
+              <div className="flex-1 min-w-0 text-center">
                 <h2
                   className={cn(
-                    "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left",
+                    "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-center",
                     isExpanded
                       ? "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
                       : "text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
-                    theme === "nord"
-                      ? " text-white"
-                      : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+                    theme === "nord" ? " text-white" : " text-transparent bg-clip-text"
                   )}
                   style={
-                    theme === "nord"
-                      ? undefined
-                      : {
-                          backgroundImage:
-                            "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-                        }
+                    theme === "snes"
+                      ? { backgroundImage: "var(--gradient-snes)" }
+                      : theme === "nord"
+                        ? undefined
+                        : {
+                            backgroundImage:
+                              "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                          }
                   }
                 >
                   <div className="inline-block text-center">
-                    <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+                    <span
+                      className="text-4xl font-extrabold uppercase tracking-wide bg-clip-text text-transparent"
+                      style={
+                        theme === "snes"
+                          ? { backgroundImage: "var(--gradient-snes)" }
+                          : {
+                              backgroundImage:
+                                "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                            }
+                      }
+                    >
                       {currentPattern}
                     </span>
-                    <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
+                    <div
+                      className="h-1 rounded mt-2 w-12 mx-auto"
+                      style={
+                        theme === "snes"
+                          ? {
+                              background:
+                                "linear-gradient(90deg, #e40058 0%, #4040e0 33%, #00a800 66%, #ffd700 100%)",
+                            }
+                          : {
+                              background:
+                                "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
+                            }
+                      }
+                    />
                   </div>
                 </h2>
                 <span
@@ -186,40 +242,19 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                   {category} {patternNumber !== undefined && `#${patternNumber}`}
                 </span>
               </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsExpanded(false)}
-                className="text-secondary hover:text-main hover:bg-secondary/20 p-2 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-md"
-              >
-                <X className="w-5 h-5" />
-              </Button>
+              {/* X Button with overflow-hidden wrapper */}
+              <div className="overflow-hidden">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsExpanded(false)}
+                  className="text-secondary hover:text-main hover:bg-secondary/20 p-2 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md relative z-10 m-1"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="default"
-                        onClick={() => setShowMonsterGuide(!showMonsterGuide)}
-                        className="text-accent hover:text-accent hover:bg-secondary/20 p-2 rounded-full
-                              transition-all duration-300 hover:scale-110 hover:shadow-md"
-                      >
-                        {showMonsterGuide ? (
-                          <Book className="w-6 h-6" />
-                        ) : (
-                          <Sword className="w-6 h-6" />
-                        )}
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
-                      {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
               <div className="w-full sm:w-auto">
                 <AlgorithmSelector
                   currentPattern={currentPattern}
@@ -234,7 +269,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                 <MonsterHunterGuide currentPattern={currentPattern} />
               </div>
             ) : (
-              <div className="h-full flex flex-col overflow-hidden">
+              <div className="h-full flex flex-col overflow-y-auto">
                 <div
                   ref={descRef}
                   className={`${
@@ -292,90 +327,52 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
     <Card
       className={cn(
         theme === "snes"
-          ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db]"
-          : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
+          ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full min-h-[180px] max-h-[549px] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db]"
+          : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full min-h-[180px] max-h-[549px] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
       )}
       onClick={() => setIsExpanded(true)}
     >
-      <div className="flex-none flex flex-col gap-2">
-        <div className="flex items-center justify-between">
-          <div className="flex-1 min-w-0 text-left">
-            <h2
+      {/* Sword/Book icon toggle at the top */}
+      <div className="flex items-center gap-2 mb-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowMonsterGuide((v) => !v);
+          }}
+          className="ml-2 p-0 flex items-center justify-center aspect-square"
+          title={showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
+        >
+          {showMonsterGuide ? (
+            <Book
               className={cn(
-                "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left",
-                isExpanded
-                  ? "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
-                  : "text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
-                theme === "nord"
-                  ? " text-white"
-                  : " text-transparent bg-clip-text bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+                "w-6 h-6 scale-100",
+                theme === "snes" ? "text-[#1a237e]" : "text-accent"
               )}
-              style={
-                theme === "nord"
-                  ? undefined
-                  : {
-                      backgroundImage:
-                        "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-                    }
-              }
-            >
-              <div className="inline-block text-center">
-                <span className="text-4xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] bg-clip-text text-transparent">
-                  {currentPattern}
-                </span>
-                <div className="h-1 bg-accent rounded mt-2 w-12 mx-auto"></div>
-              </div>
-            </h2>
-            <span
+              strokeWidth={3}
+            />
+          ) : (
+            <Sword
               className={cn(
-                categoryColors[category as keyof typeof categoryColors] || "text-secondary/80",
-                "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium"
+                "w-6 h-6 scale-100",
+                theme === "snes" ? "text-[#1a237e]" : "text-accent"
               )}
-            >
-              {category} {patternNumber !== undefined && `#${patternNumber}`}
-            </span>
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="default"
-                    onClick={() => setShowMonsterGuide(!showMonsterGuide)}
-                    className="text-accent hover:text-accent hover:bg-secondary/20 p-2 rounded-full
-                          transition-all duration-300 hover:scale-110 hover:shadow-md"
-                  >
-                    {showMonsterGuide ? (
-                      <Book className="w-6 h-6" />
-                    ) : (
-                      <Sword className="w-6 h-6" />
-                    )}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent className="bg-secondary/90 backdrop-blur-sm border border-secondary/20">
-                  {showMonsterGuide ? "Show Pseudocode" : "Show Monster Guide"}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          </div>
-          <div className="w-full sm:w-auto">
-            <AlgorithmSelector currentPattern={currentPattern} onPatternChange={onPatternChange} />
-          </div>
-        </div>
+              strokeWidth={3}
+            />
+          )}
+        </Button>
       </div>
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {showMonsterGuide ? (
           <div className="h-full overflow-hidden rounded-xl bg-main/80 backdrop-blur-sm border border-secondary/20 mt-3">
             <MonsterHunterGuide currentPattern={currentPattern} />
           </div>
         ) : (
-          <div className="h-full flex flex-col overflow-hidden">
+          <div className="h-full flex flex-col">
             <div
               ref={descRef}
-              className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3`}
+              className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3 overflow-y-auto`}
               style={{
                 height: isDesktop ? descHeight : "300px",
                 minHeight: isDesktop ? "0" : "300px",

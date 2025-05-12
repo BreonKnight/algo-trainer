@@ -12,11 +12,12 @@ import {
   Database,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import type { CSSProperties } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
+import { useTheme } from "@/components/theme/use-theme";
+import { Background } from "@/components/ui/background";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import {
   Dialog,
   DialogContent,
@@ -25,10 +26,9 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
 import GamificationService, { UserProgress } from "@/lib/gamification";
 import { cn } from "@/lib/utils";
-import { Background } from "@/components/ui/background";
-import { useTheme } from "@/components/theme/use-theme";
 
 interface LeetCodeProblem {
   title: string;
@@ -1328,14 +1328,16 @@ export default function AlgoGuide() {
                 className={cn(
                   "px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 border",
                   selectedCategory === category.name
-                    ? // Active button styling
-                      theme === "light"
-                      ? "bg-accent/10 text-accent border-accent hover:bg-accent/20"
-                      : "bg-accent text-accent-foreground border-accent shadow-lg scale-105"
-                    : // Inactive button styling
-                      theme === "light"
-                      ? "bg-white/80 text-main border-accent/20 hover:bg-accent/10 hover:text-accent"
-                      : "bg-background/50 backdrop-blur-sm text-main/80 border-accent/10 hover:bg-background/80 hover:text-accent"
+                    ? theme === "snes"
+                      ? "bg-[var(--accent)] text-[var(--accent-foreground)] border-[var(--accent)]"
+                      : theme === "light"
+                        ? "bg-accent/10 text-accent border-accent hover:bg-accent/20"
+                        : "bg-accent text-accent-foreground border-accent shadow-lg scale-105"
+                    : theme === "snes"
+                      ? "bg-[var(--card-bg)] text-black border-[var(--card-border)] hover:bg-[var(--card-hover)]"
+                      : theme === "light"
+                        ? "bg-white text-accent border-accent/20 hover:bg-accent/10 hover:text-accent"
+                        : "bg-background/50 backdrop-blur-sm text-main/80 border-accent/10 hover:bg-background/80 hover:text-accent"
                 )}
               >
                 {category.name}
@@ -1354,7 +1356,13 @@ export default function AlgoGuide() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card className={cn("backdrop-blur-sm", "bg-background/50 border-accent/10")}>
+                <Card
+                  className={cn(
+                    theme === "snes"
+                      ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+                      : "backdrop-blur-sm bg-background/50 border-accent/10"
+                  )}
+                >
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">
                       {selectedCategoryData.name}
@@ -1383,9 +1391,10 @@ export default function AlgoGuide() {
                         <motion.div
                           key={algorithm.name}
                           className={cn(
-                            "p-4 rounded-lg transition-all duration-200",
-                            "hover:bg-accent/5 cursor-pointer",
-                            "border border-transparent hover:border-accent/10"
+                            "p-4 rounded-lg transition-all duration-200 cursor-pointer",
+                            theme === "snes"
+                              ? "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-hover)] hover:border-[var(--accent)] hover:shadow-[0_0_0_2px_var(--accent)]"
+                              : "hover:bg-accent/5 border border-transparent hover:border-accent/10"
                           )}
                           onHoverStart={() => setHoveredAlgorithm(algorithm.name)}
                           onHoverEnd={() => setHoveredAlgorithm(null)}
@@ -1393,12 +1402,22 @@ export default function AlgoGuide() {
                           onClick={() => setSelectedAlgorithm(algorithm)}
                         >
                           <div className="flex items-start justify-between">
-                            <h3 className="text-lg font-semibold mb-2">{algorithm.name}</h3>
+                            <h3
+                              className={cn(
+                                "text-lg font-semibold mb-2",
+                                theme === "snes" && "group-hover:text-[var(--accent)]"
+                              )}
+                            >
+                              {algorithm.name}
+                            </h3>
                             {hoveredAlgorithm === algorithm.name && (
                               <motion.div
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className="text-accent"
+                                className={cn(
+                                  "text-accent",
+                                  theme === "snes" && "text-[var(--accent)]"
+                                )}
                               >
                                 <ChevronRight className="h-5 w-5" />
                               </motion.div>
@@ -1406,29 +1425,65 @@ export default function AlgoGuide() {
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex items-start space-x-2">
-                              <Target className="h-5 w-5 text-accent mt-0.5" />
+                              <Target
+                                className={cn(
+                                  "h-5 w-5 mt-0.5",
+                                  theme === "snes" ? "text-[var(--accent)]" : "text-accent"
+                                )}
+                              />
                               <div>
-                                <span className="font-medium">What: </span>
+                                <span
+                                  className={cn(
+                                    "font-medium",
+                                    theme === "snes" && "text-[var(--accent)]"
+                                  )}
+                                >
+                                  What:{" "}
+                                </span>
                                 {algorithm.what}
                               </div>
                             </div>
                             <div className="flex items-start space-x-2">
-                              <Brain className="h-5 w-5 text-accent2 mt-0.5" />
+                              <Brain
+                                className={cn(
+                                  "h-5 w-5 mt-0.5",
+                                  theme === "snes" ? "text-[var(--accent2)]" : "text-accent2"
+                                )}
+                              />
                               <div>
-                                <span className="font-medium">Why: </span>
+                                <span
+                                  className={cn(
+                                    "font-medium",
+                                    theme === "snes" && "text-[var(--accent2)]"
+                                  )}
+                                >
+                                  Why:{" "}
+                                </span>
                                 {algorithm.why}
                               </div>
                             </div>
                           </div>
                           {algorithm.keywords && (
                             <div className="mt-3 flex flex-wrap gap-2">
-                              <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mr-2">
+                              <span
+                                className={cn(
+                                  "text-xs font-semibold uppercase tracking-wide",
+                                  theme === "snes"
+                                    ? "text-[var(--accent)]"
+                                    : "text-muted-foreground"
+                                )}
+                              >
                                 Keywords:
                               </span>
                               {algorithm.keywords.map((kw) => (
                                 <span
                                   key={kw}
-                                  className="px-2 py-0.5 rounded-full border border-accent bg-accent/10 text-accent font-medium text-xs shadow-sm transition-colors hover:bg-accent/20"
+                                  className={cn(
+                                    "px-2 py-0.5 rounded-full border font-medium text-xs shadow-sm transition-colors",
+                                    theme === "snes"
+                                      ? "border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20"
+                                      : "border-accent bg-accent/10 text-accent hover:bg-accent/20"
+                                  )}
                                 >
                                   {kw}
                                 </span>
@@ -1449,22 +1504,22 @@ export default function AlgoGuide() {
             {selectedAlgorithm && (
               <DialogContent
                 className={cn(
-                  "flex flex-col h-screen max-h-screen sm:max-h-[90vh] w-full max-w-full sm:max-w-4xl px-1 py-1 sm:px-8 sm:py-6 rounded-xl my-2 sm:my-4 backdrop-blur-xl overflow-x-hidden",
-                  theme === "light"
-                    ? "bg-white text-main"
-                    : theme === "nord"
-                      ? "bg-nord-1 text-white"
-                      : "bg-zinc-900 text-white"
+                  "flex flex-col h-screen max-h-screen sm:max-h-[90vh] w-full max-w-full sm:max-w-4xl px-1 py-1 sm:px-8 sm:py-6 rounded-xl my-2 sm:my-4",
+                  theme === "snes"
+                    ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+                    : theme === "light"
+                      ? "bg-white text-main backdrop-blur-xl"
+                      : theme === "nord"
+                        ? "bg-nord-1 text-white backdrop-blur-xl"
+                        : "bg-zinc-900 text-white backdrop-blur-xl"
                 )}
               >
                 <DialogHeader
                   className={cn(
-                    "sticky top-0 rounded-t-xl px-1 py-1 sm:px-8 sm:py-6 z-10 pb-4 border-b border-accent/10",
-                    theme === "light"
-                      ? "bg-transparent text-main"
-                      : theme === "nord"
-                        ? "bg-transparent text-white"
-                        : "bg-transparent text-white"
+                    "sticky top-0 rounded-t-xl px-1 py-1 sm:px-8 sm:py-6 z-10 pb-4 border-b",
+                    theme === "snes"
+                      ? "border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-text)]"
+                      : "border-accent/10 bg-transparent"
                   )}
                 >
                   <div className="flex items-center justify-between">
@@ -1496,13 +1551,30 @@ export default function AlgoGuide() {
                       <Code2 className="h-5 w-5 text-accent" />
                       <h3 className="text-lg font-semibold">Implementation</h3>
                     </div>
-                    <div className="bg-muted/50 p-6 rounded-lg border border-accent/10">
+                    <div
+                      className={cn(
+                        "p-6 rounded-lg border",
+                        theme === "snes"
+                          ? "bg-[var(--card-bg)] border-[var(--card-border)]"
+                          : "bg-muted/50 border-accent/10"
+                      )}
+                    >
                       <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
                         {selectedAlgorithm.implementation.explanation}
                       </p>
                       <div className="relative">
-                        <div className="absolute -left-4 top-0 bottom-0 w-1 bg-accent/20 rounded-full" />
-                        <pre className="bg-background/50 p-4 rounded-lg overflow-x-auto whitespace-pre-wrap break-words">
+                        <div
+                          className={cn(
+                            "absolute -left-4 top-0 bottom-0 w-1 rounded-full",
+                            theme === "snes" ? "bg-[var(--accent)]" : "bg-accent/20"
+                          )}
+                        />
+                        <pre
+                          className={cn(
+                            "p-4 rounded-lg overflow-x-auto whitespace-pre-wrap break-words",
+                            theme === "snes" ? "bg-[var(--card-bg)]" : "bg-background/50"
+                          )}
+                        >
                           <SyntaxHighlighter
                             language="python"
                             style={customTheme}
@@ -1537,7 +1609,14 @@ export default function AlgoGuide() {
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-muted/30 p-4 rounded-lg border border-accent/10 hover:bg-muted/40 transition-colors">
+                      <div
+                        className={cn(
+                          "p-4 rounded-lg border",
+                          theme === "snes"
+                            ? "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-hover)]"
+                            : "bg-muted/30 border-accent/10 hover:bg-muted/40"
+                        )}
+                      >
                         <div className="flex items-center gap-2 mb-2">
                           <Clock className="h-4 w-4 text-accent" />
                           <span className="text-sm font-medium">Time Complexity</span>
@@ -1546,7 +1625,14 @@ export default function AlgoGuide() {
                           {selectedAlgorithm.implementation.timeComplexity}
                         </p>
                       </div>
-                      <div className="bg-muted/30 p-4 rounded-lg border border-accent/10 hover:bg-muted/40 transition-colors">
+                      <div
+                        className={cn(
+                          "p-4 rounded-lg border",
+                          theme === "snes"
+                            ? "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-hover)]"
+                            : "bg-muted/30 border-accent/10 hover:bg-muted/40"
+                        )}
+                      >
                         <div className="flex items-center gap-2 mb-2">
                           <Database className="h-4 w-4 text-accent" />
                           <span className="text-sm font-medium">Space Complexity</span>
@@ -1571,26 +1657,51 @@ export default function AlgoGuide() {
                           href={problem.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group flex items-center justify-between p-4 rounded-lg border border-accent/10 hover:bg-accent/5 transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
+                          className={cn(
+                            "group flex items-center justify-between p-4 rounded-lg border transition-all duration-200",
+                            theme === "snes"
+                              ? "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-hover)] hover:border-[var(--accent)] hover:shadow-[0_0_0_2px_var(--accent)]"
+                              : "border-accent/10 hover:bg-accent/5 hover:scale-[1.02] hover:shadow-md"
+                          )}
                         >
                           <div className="space-y-1">
-                            <h4 className="font-medium group-hover:text-accent transition-colors">
+                            <h4
+                              className={cn(
+                                "font-medium transition-colors",
+                                theme === "snes"
+                                  ? "text-[var(--card-text)] group-hover:text-[var(--accent)]"
+                                  : "group-hover:text-accent"
+                              )}
+                            >
                               {problem.title}
                             </h4>
                             <span
                               className={cn(
                                 "text-xs font-medium px-2 py-1 rounded-full",
                                 problem.difficulty === "Easy"
-                                  ? "bg-green-500/10 text-green-500"
+                                  ? theme === "snes"
+                                    ? "bg-[var(--success)]/20 text-[var(--success)]"
+                                    : "bg-green-500/10 text-green-500"
                                   : problem.difficulty === "Medium"
-                                    ? "bg-yellow-500/10 text-yellow-500"
-                                    : "bg-red-500/10 text-red-500"
+                                    ? theme === "snes"
+                                      ? "bg-[var(--warning)]/20 text-[var(--warning)]"
+                                      : "bg-yellow-500/10 text-yellow-500"
+                                    : theme === "snes"
+                                      ? "bg-[var(--error)]/20 text-[var(--error)]"
+                                      : "bg-red-500/10 text-red-500"
                               )}
                             >
                               {problem.difficulty}
                             </span>
                           </div>
-                          <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
+                          <ExternalLink
+                            className={cn(
+                              "h-4 w-4 transition-colors",
+                              theme === "snes"
+                                ? "text-[var(--card-text)] group-hover:text-[var(--accent)]"
+                                : "text-muted-foreground group-hover:text-accent"
+                            )}
+                          />
                         </a>
                       ))}
                     </div>
@@ -1604,8 +1715,10 @@ export default function AlgoGuide() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <Card
               className={cn(
-                "backdrop-blur-sm rounded-2xl shadow-lg max-w-4xl mx-auto my-8",
-                "bg-background/50 border-accent/10"
+                "rounded-2xl shadow-lg max-w-4xl mx-auto my-8",
+                theme === "snes"
+                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
+                  : "backdrop-blur-sm bg-background/50 border-accent/10"
               )}
             >
               <CardHeader>
@@ -1663,7 +1776,12 @@ export default function AlgoGuide() {
                   ].map((step) => (
                     <motion.li
                       key={step.title}
-                      className="relative flex items-start gap-4 md:gap-6 p-3 md:p-6 rounded-2xl border border-accent/10 bg-background/90 shadow-md hover:shadow-xl transition-all duration-200"
+                      className={cn(
+                        "relative flex items-start gap-4 md:gap-6 p-3 md:p-6 rounded-2xl border",
+                        theme === "snes"
+                          ? "bg-[var(--card-bg)] border-[var(--card-border)] hover:bg-[var(--card-hover)]"
+                          : "bg-background/90 border-accent/10 shadow-md hover:shadow-xl"
+                      )}
                       whileHover={{ scale: 1.015 }}
                     >
                       {/* Accent bar for desktop, dot for mobile */}

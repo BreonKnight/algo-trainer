@@ -11,7 +11,7 @@ import {
   ListChecks,
   LucideIcon,
 } from "lucide-react";
-import { memo, useState, useMemo, useCallback } from "react";
+import { memo, useState, useMemo, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { GamificationButton } from "@/components/gamification/GamificationButton";
@@ -31,6 +31,31 @@ const styles = `
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+.hamburger-animation {
+  animation: bounce 1s ease-in-out infinite, wiggle 2s ease-in-out infinite;
 }
 
 .gradient-text {
@@ -77,6 +102,10 @@ const styles = `
 .gradient-text-fornite {
   background-image: linear-gradient(to right, #2ecc71, #3498db, #9b59b6, #f1c40f);
 }
+
+.snes-nav-shadow {
+  text-shadow: 0 1px 2px #fff, 0 2px 4px #4040e0, 0 0 2px #000a;
+}
 `;
 
 interface NavItem {
@@ -94,6 +123,20 @@ export function Navigation() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
+
+  // Add effect to handle body scroll lock
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to ensure scroll is re-enabled when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
 
   // Preload route
   const preloadRoute = useCallback((path: string) => {
@@ -275,7 +318,7 @@ export function Navigation() {
       case "light":
         return "text-blue-600";
       case "snes":
-        return "text-accent";
+        return "text-accent snes-nav-shadow";
       case "ps2":
         return "text-accent";
       case "re2":
@@ -330,7 +373,7 @@ export function Navigation() {
   return (
     <>
       <style>{styles}</style>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-sm border-b border-border/50">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
           <div className="flex items-center justify-between h-14">
             {/* Logo */}
@@ -371,9 +414,13 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleMobileMenu}
-                className="h-8 w-8 text-foreground hover:bg-accent/20 hover:text-accent-foreground"
+                className="h-9 w-9 p-2 text-foreground hover:bg-accent/20 hover:text-accent-foreground"
               >
-                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5 hamburger-animation" />
+                )}
               </Button>
             </div>
           </div>

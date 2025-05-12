@@ -437,43 +437,41 @@ textarea,
 }
 
 .theme-snes {
-  --bg-main: #a0a0a0; /* Darker grey background */
-  --bg-secondary: #808080; /* Even darker secondary background */
+  --bg-main: #e9e4d7;
+  --bg-secondary: #d6d3c7;
+  --card-bg: #f5f3e7;
+  --card-border: #e0dccf;
+  --card-text: #333333;
+  --card-shadow: 0 4px 24px rgba(64, 64, 224, 0.08);
+
+  --button-bg: #e40058;
+  --button-text: #fff;
+  --button-border: #4040e0;
+  --button-shadow: 0 2px 8px rgba(64, 64, 224, 0.12);
+
+  --accent: #4040e0;
+  --accent2: #00a800;
+  --accent3: #e40058;
+  --accent4: #ffd700;
+  --border: #bdb8a9;
+  --error: #e40058;
+  --success: #00a800;
+
+  --tooltip-bg: #fffbe6;
+  --tooltip-text: #333333;
+  --tooltip-border: #bdb8a9;
+
+  --code-bg: #fffbe6;
+  --code-text: #333333;
+
+  --icon-color: #4040e0;
+
+  --gradient-from: #e40058;
+  --gradient-to: #4040e0;
+  --focus-ring: #4040e0;
   --text-main: #333333;
   --text-secondary: #666666;
-  --accent: #4040e0; /* SNES blue - slightly muted for better contrast */
-  --accent2: #00a800; /* SNES green - slightly muted for better contrast */
-  --accent3: #e40058; /* SNES red - slightly muted for better contrast */
-  --accent4: #ffd700; /* SNES yellow/gold */
-  --border: #999999;
-  --error: #e40058; /* SNES red */
-  --success: #00a800; /* SNES green */
-  --gradient-from: #e40058; /* Using solid SNES red instead of gradient */
-  --gradient-to: #e40058; /* Using solid SNES red instead of gradient */
-  --focus-ring: #4040e0; /* SNES blue */
-  --text-selected-dark: #333333;
-  --pseudocode-gradient: linear-gradient(
-    135deg,
-    rgba(160, 160, 160, 0.95) 0%,
-    rgba(128, 128, 128, 0.95) 50%,
-    rgba(160, 160, 160, 0.95) 100%
-  );
-  --pseudocode-gradient-overlay: linear-gradient(
-    135deg,
-    rgba(228, 0, 88, 0.08) 0%,
-    rgba(64, 64, 224, 0.08) 50%,
-    rgba(0, 168, 0, 0.08) 100%
-  );
-  --code-bg-snes: 160, 160, 160;
-  --code-text-snes: #333333;
-  --media-gradient: conic-gradient(
-    at top left,
-    #4040e0 0%,
-    #00a800 25%,
-    #e40058 50%,
-    #ffd700 75%,
-    #4040e0 100%
-  );
+  --gradient-snes: linear-gradient(90deg, #e40058 0%, #4040e0 33%, #00a800 66%, #ffd700 100%);
 }
 
 .theme-ps2 {
