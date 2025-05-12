@@ -1,5 +1,6 @@
-import patterns from "../patterns.json";
 import { PatternKey } from "@/components/algorithm-trainer/types";
+
+import patterns from "../patterns.json";
 
 // Valid algorithm types in our system
 const VALID_TYPES = [

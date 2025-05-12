@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+
 import { PATTERN_KEYS } from "../lib/patterns/types";
 
 // Read patterns.json

@@ -1,7 +1,7 @@
-import { jest, describe, beforeEach, it, expect } from "@jest/globals";
-
-import fs from "fs-extra";
 import path from "path";
+
+import { jest, describe, beforeEach, it, expect } from "@jest/globals";
+import fs from "fs-extra";
 
 // Mock process.resourcesPath
 Object.defineProperty(process, "resourcesPath", {

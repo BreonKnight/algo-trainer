@@ -5,6 +5,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 
 import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
 import { useTheme } from "@/components/theme/use-theme";
+import { Background } from "@/components/ui/background";
 import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
@@ -20,7 +21,6 @@ import {
   forniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
-import { Background } from "@/components/ui/background";
 
 const Practice = () => {
   const { theme } = useTheme();
