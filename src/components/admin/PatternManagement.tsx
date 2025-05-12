@@ -119,7 +119,7 @@ const PatternManagement: React.FC = () => {
         // Store the original order of components
         setOriginalOrder(existingPatterns.map((p) => p.id));
       } catch (error) {
-        toast.error("Failed to load patterns");
+        toast.error("Failed to load patterns " + error);
       } finally {
         setIsLoading(false);
       }
@@ -566,7 +566,7 @@ const PatternManagement: React.FC = () => {
       toast.success("Pattern saved successfully!");
       clearForm();
     } catch (error) {
-      toast.error("Failed to save pattern");
+      toast.error("Failed to save pattern" + error);
     } finally {
       setIsLoading(false);
     }
@@ -580,7 +580,7 @@ const PatternManagement: React.FC = () => {
         setPatterns((prev) => prev.filter((p) => p.id !== patternId));
         toast.success("Pattern deleted successfully!");
       } catch (error) {
-        toast.error("Failed to delete pattern");
+        toast.error("Failed to delete pattern" + error);
       } finally {
         setIsLoading(false);
       }
@@ -777,7 +777,7 @@ const PatternManagement: React.FC = () => {
         setSelectedPatterns(new Set());
         toast.success(`${selectedPatterns.size} patterns deleted successfully!`);
       } catch (error) {
-        toast.error("Failed to delete patterns");
+        toast.error("Failed to delete patterns " + error);
       } finally {
         setIsLoading(false);
       }
@@ -825,7 +825,7 @@ const PatternManagement: React.FC = () => {
         setPatterns((prev) => [...prev, ...validatedPatterns]);
         toast.success(`${validatedPatterns.length} patterns imported successfully!`);
       } catch (error) {
-        toast.error("Failed to import patterns");
+        toast.error("Failed to import patterns " + error);
       } finally {
         setIsLoading(false);
       }

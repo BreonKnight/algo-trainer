@@ -477,19 +477,11 @@ const CSMath: React.FC = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className={cn(
-            "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
-            theme === "light" || theme === "solarized"
-              ? "bg-gradient-to-r from-accent to-accent2"
-              : theme === "nord"
-                ? "bg-gradient-to-r from-nord7 to-nord10"
-                : theme === "snes"
-                  ? "bg-gradient-to-r from-[#e40058] via-[#4040e0] to-[#ffd700]"
-                  : "bg-gradient-to-r from-accent3 to-accent4"
-          )}
+          className="text-4xl sm:text-5xl font-bold mb-6 leading-[1.15] pb-2 text-[var(--card-text)] text-center"
         >
           AlgoTrainer: Computer Science Math Academy
         </motion.h1>
+        <div className="mx-auto mb-10 w-32 h-2 rounded-full bg-gradient-to-r from-[var(--accent)] via-[var(--accent2)] to-[var(--accent3)] opacity-80 animate-gradient-x"></div>
 
         {/* Control Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">

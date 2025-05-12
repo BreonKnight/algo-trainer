@@ -9,11 +9,11 @@ export function Background({ children, className }: BackgroundProps) {
   return (
     <div className={cn("relative min-h-screen", className)}>
       {/* Animated background gradient - subtle */}
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background/98 to-background/95 z-0" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))] z-0" />
+      <div className="fixed inset-0 bg-gradient-to-br from-background via-background/98 to-background/95 z-0 pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))] z-0 pointer-events-none" />
 
       {/* Animated grid overlay - lighter */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] z-0" />
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px] z-0 pointer-events-none" />
 
       {/* Floating particles - subtle */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">

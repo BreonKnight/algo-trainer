@@ -1,33 +1,31 @@
 import { PatternKey } from "@/components/algorithm-trainer/types";
 import patterns from "@/lib/pseudocode/patterns.json";
-// Valid algorithm types in our system
-const VALID_TYPES = [
-  "array",
-  "backtracking",
-  "data-structures",
-  "divide-and-conquer",
-  "dynamic-programming",
-  "greedy",
-  "tree",
-  "string",
-  "searching",
-  "sorting",
-  "number-theory",
-  "matrix",
-  "graph",
-  "recursion",
-  "Algorithm",
-  "n/log log n",
-  "algorithm",
-  "number theory",
-  "data structures",
-  "divide and conquer",
-  "dynamic programming",
-  "other",
-  "Number Theory",
-] as const;
 
-type AlgorithmType = (typeof VALID_TYPES)[number];
+// Valid algorithm types in our system
+type AlgorithmType =
+  | "array"
+  | "backtracking"
+  | "data-structures"
+  | "divide-and-conquer"
+  | "dynamic-programming"
+  | "greedy"
+  | "tree"
+  | "string"
+  | "searching"
+  | "sorting"
+  | "number-theory"
+  | "matrix"
+  | "graph"
+  | "recursion"
+  | "Algorithm"
+  | "n/log log n"
+  | "algorithm"
+  | "number theory"
+  | "data structures"
+  | "divide and conquer"
+  | "dynamic programming"
+  | "other"
+  | "Number Theory";
 
 export interface AlgorithmPattern {
   name: string;

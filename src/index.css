@@ -197,12 +197,14 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
   border-color: #646cff;
+  background-color: var(--button-hover-bg);
 }
 button:focus,
 button:focus-visible {
@@ -264,6 +266,7 @@ button:focus-visible {
     rgba(42, 161, 152, 0.08) 100%
   );
   --text-selected-dark: #22223b;
+  --card-text: #111827;
 }
 
 .theme-light {
@@ -296,7 +299,7 @@ button:focus-visible {
   --button-hover-bg: #1d4ed8;
   --card-bg: #ffffff;
   --card-border: #e2e8f0;
-  --card-text: #0f172a;
+  --card-text: #111827;
   --code-bg-light: 255, 255, 255;
   --code-text-light: #1a1a1a;
 }
@@ -441,7 +444,7 @@ textarea,
   --bg-secondary: #d6d3c7;
   --card-bg: #f5f3e7;
   --card-border: #e0dccf;
-  --card-text: #333333;
+  --card-text: #111827;
   --card-shadow: 0 4px 24px rgba(64, 64, 224, 0.08);
 
   --button-bg: #e40058;
@@ -853,4 +856,10 @@ textarea,
 .theme-snes button,
 .theme-nord button {
   color: white !important;
+}
+
+.theme-light button:active,
+.theme-light button:focus,
+.theme-light button:focus-visible {
+  color: #fff;
 }
