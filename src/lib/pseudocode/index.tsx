@@ -250,8 +250,8 @@ export function verifyPatternFiles() {
           });
         }
       });
-    } catch (e) {
-      console.warn(`Warning: Could not load patterns from ${dir} directory`);
+    } catch (_) {
+      console.warn(`Warning: Could not load patterns from ${dir} directory`, _);
     }
   });
 

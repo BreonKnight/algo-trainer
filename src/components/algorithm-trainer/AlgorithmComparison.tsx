@@ -118,7 +118,7 @@ export default function AlgorithmComparison({
         setArraySize(newArray.length);
       }
     } catch (error) {
-      console.error("Invalid input format");
+      console.error("Invalid input format " + error);
     }
   }, []);
 
