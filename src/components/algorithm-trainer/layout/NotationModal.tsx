@@ -27,13 +27,6 @@ export const NotationModal = forwardRef<HTMLDivElement, NotationModalProps>(func
   ref
 ) {
   const { theme } = useTheme();
-  // SNES accent palette for alternating example colors
-  const snesAccentPalette = [
-    "#4040e0", // blue
-    "#e40058", // red
-    "#00a800", // green
-    "#ffd700", // yellow
-  ];
   return (
     <Dialog
       open={isOpen}
