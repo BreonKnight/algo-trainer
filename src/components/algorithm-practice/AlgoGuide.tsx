@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { CSSProperties } from "react";
+
 import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,7 +26,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
-
 import GamificationService, { UserProgress } from "@/lib/gamification";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 import { cn } from "@/lib/utils";
