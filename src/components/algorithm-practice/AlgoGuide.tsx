@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { CSSProperties } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-
 import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +25,9 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
+
 import GamificationService, { UserProgress } from "@/lib/gamification";
+import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 import { cn } from "@/lib/utils";
 
 interface LeetCodeProblem {
@@ -1046,8 +1046,8 @@ export default function AlgoGuide() {
   // Custom theme styles using our CSS variables
   const customTheme: Record<string, CSSProperties> = {
     'code[class*="language-"]': {
-      color: "var(--text-main)",
-      background: "transparent",
+      color: theme === "ps2" ? "#f8f8f2" : "var(--text-main)",
+      background: theme === "ps2" ? "#001b4d !important" : "transparent",
       textShadow: "none",
       fontFamily: "var(--font-mono)",
       fontSize: "0.95rem",
@@ -1064,10 +1064,12 @@ export default function AlgoGuide() {
       msHyphens: "none",
       hyphens: "none",
       letterSpacing: "0.3px",
+      borderRadius: theme === "ps2" ? "8px" : undefined,
+      padding: theme === "ps2" ? "1.5rem" : undefined,
     },
     'pre[class*="language-"]': {
-      color: "var(--text-main)",
-      background: "transparent",
+      color: theme === "ps2" ? "#f8f8f2" : "var(--text-main)",
+      background: theme === "ps2" ? "#001b4d !important" : "transparent",
       textShadow: "none",
       fontFamily: "var(--font-mono)",
       fontSize: "0.95rem",
@@ -1084,9 +1086,10 @@ export default function AlgoGuide() {
       msHyphens: "none",
       hyphens: "none",
       margin: 0,
-      padding: "2rem 1.5rem",
+      padding: theme === "ps2" ? "1.5rem" : "2rem 1.5rem",
       overflow: "auto",
       letterSpacing: "0.3px",
+      borderRadius: theme === "ps2" ? "8px" : undefined,
     },
     comment: {
       color: "var(--text-secondary)",
@@ -1170,6 +1173,33 @@ export default function AlgoGuide() {
       opacity: 0.7,
     },
   };
+
+  // Syntax tokens for ps2 theme
+  if (theme === "ps2") {
+    customTheme["comment"] = { color: "#6272a4", fontStyle: "italic" };
+    customTheme["keyword"] = { color: "#ff79c6" };
+    customTheme["string"] = { color: "#f1fa8c" };
+    customTheme["function"] = { color: "#50fa7b" };
+    customTheme["number"] = { color: "#bd93f9" };
+    customTheme["operator"] = { color: "#ffb86c" };
+    customTheme["property"] = { color: "#8be9fd" };
+    customTheme["tag"] = { color: "#8be9fd" };
+    customTheme["boolean"] = { color: "#bd93f9" };
+    customTheme["constant"] = { color: "#bd93f9" };
+    customTheme["symbol"] = { color: "#bd93f9" };
+    customTheme["selector"] = { color: "#50fa7b" };
+    customTheme['"attr-name"'] = { color: "#50fa7b" };
+    customTheme["char"] = { color: "#f1fa8c" };
+    customTheme["builtin"] = { color: "#50fa7b" };
+    customTheme["entity"] = { color: "#ffb86c", cursor: "help" };
+    customTheme["url"] = { color: "#8be9fd", textDecoration: "underline", opacity: 0.8 };
+    customTheme["variable"] = { color: "#f8f8f2" };
+    customTheme["regex"] = { color: "#f1fa8c" };
+    customTheme["important"] = { color: "#ff79c6", fontWeight: "500" };
+    customTheme["bold"] = { fontWeight: "500" };
+    customTheme["italic"] = { fontStyle: "italic" };
+    customTheme['".namespace"'] = { opacity: 0.7 };
+  }
 
   useEffect(() => {
     const gamificationService = GamificationService.getInstance();
@@ -1569,43 +1599,7 @@ export default function AlgoGuide() {
                             theme === "snes" ? "bg-[var(--accent)]" : "bg-accent/20"
                           )}
                         />
-                        <pre
-                          className={cn(
-                            "p-4 rounded-lg overflow-x-auto whitespace-pre-wrap break-words",
-                            theme === "snes" ? "bg-[var(--card-bg)]" : "bg-background/50"
-                          )}
-                        >
-                          <SyntaxHighlighter
-                            language="python"
-                            style={customTheme}
-                            customStyle={{
-                              background: "transparent",
-                              padding: "1.5rem",
-                              margin: 0,
-                              fontSize: "0.875rem",
-                              lineHeight: 1.7,
-                              letterSpacing: "0.025em",
-                              fontFamily:
-                                'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                              whiteSpace: "pre-wrap",
-                              wordBreak: "break-word",
-                              overflowX: "auto",
-                            }}
-                            codeTagProps={{
-                              style: {
-                                fontFamily:
-                                  'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                                fontSize: "0.875rem",
-                                lineHeight: 1.7,
-                                letterSpacing: "0.025em",
-                                whiteSpace: "pre-wrap",
-                                wordBreak: "break-word",
-                              },
-                            }}
-                          >
-                            {selectedAlgorithm.implementation.code}
-                          </SyntaxHighlighter>
-                        </pre>
+                        <PseudocodeDisplay code={selectedAlgorithm.implementation.code} />
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
