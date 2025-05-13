@@ -90,12 +90,12 @@ export function Timer() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-0.5 w-full min-w-0 px-4 py-3">
+    <div className="flex flex-col items-center gap-0.5 w-full min-w-0 px-4 py-3 overflow-x-auto">
       <div className="text-[10px] sm:text-xs md:text-sm text-secondary font-medium mb-0.5">
         Timebox Timer
       </div>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-y-2 sm:gap-y-3 sm:gap-x-3 md:gap-x-4 w-full min-w-0">
-        <div className="flex flex-col items-center flex-shrink-0 min-w-[50px] sm:min-w-[60px] mb-1.5 sm:mb-0">
+        <div className="flex flex-col items-center flex-shrink-0 min-w-0 sm:min-w-[60px] mb-1.5 sm:mb-0">
           <div className="flex flex-col items-center justify-center">
             <span
               className="mb-1.5 sm:mb-2 px-1.5 sm:px-2 py-0.5 rounded-full bg-accent/20 text-accent font-bold text-[10px] sm:text-xs text-center w-full shadow-sm"
@@ -154,14 +154,14 @@ export function Timer() {
           </div>
         </div>
         <div className="flex flex-col items-center gap-y-1.5 sm:gap-y-2 flex-1 w-full min-w-0">
-          <div className="flex items-center gap-0.5 sm:gap-1">
+          <div className="flex flex-wrap items-center gap-0.5 sm:gap-1 justify-center w-full">
             {[15, 30, 45, 60].map((min) => (
               <Button
                 key={min}
                 onClick={() => startTimer(min)}
                 variant={totalTime / 60 === min ? "default" : "outline"}
                 size="sm"
-                className={`text-[10px] sm:text-xs px-1.5 sm:px-2 h-5 sm:h-6 min-w-[32px] sm:min-w-[36px] rounded-md ring-1 ring-accent/20 transition-all duration-150
+                className={`text-[10px] sm:text-xs px-1.5 sm:px-2 h-5 sm:h-6 min-w-0 sm:min-w-[36px] rounded-md ring-1 ring-accent/20 transition-all duration-150
                   ${
                     totalTime / 60 === min
                       ? "bg-accent text-accent-foreground shadow-lg scale-105"
@@ -177,13 +177,13 @@ export function Timer() {
             ))}
           </div>
           <div className="h-0.5 sm:h-1" />
-          <div className="flex items-center gap-0.5 sm:gap-1">
-            <div className="flex flex-col items-center">
+          <div className="flex flex-wrap items-center gap-0.5 sm:gap-1 justify-center w-full">
+            <div className="flex flex-col items-center min-w-0">
               <Button
                 onClick={isRunning ? pauseTimer : resumeTimer}
                 variant="default"
                 size="sm"
-                className={`h-5 w-5 sm:h-6 sm:w-6 min-w-[32px] sm:min-w-[36px] min-h-[32px] sm:min-h-[36px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform duration-200 flex items-center justify-center ${
+                className={`h-5 w-5 sm:h-6 sm:w-6 min-w-0 sm:min-w-[36px] min-h-[32px] sm:min-h-[36px] p-0 bg-accent text-main hover:bg-accent2 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform duration-200 flex items-center justify-center ${
                   isRunning || (!isRunning && timeLeft > 0) ? "ring-2 ring-accent shadow-lg" : ""
                 }`}
                 title={isRunning ? "Pause timer" : "Start timer"}
@@ -201,12 +201,12 @@ export function Timer() {
                 {isRunning ? "Pause" : "Start"}
               </span>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center min-w-0">
               <Button
                 onClick={resetTimer}
                 variant="ghost"
                 size="sm"
-                className="h-5 w-5 sm:h-6 sm:w-6 min-w-[32px] sm:min-w-[36px] min-h-[32px] sm:min-h-[36px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ring-1 ring-accent/20"
+                className="h-5 w-5 sm:h-6 sm:w-6 min-w-0 sm:min-w-[36px] min-h-[32px] sm:min-h-[36px] p-0 bg-secondary text-main hover:bg-secondary/80 active:scale-95 focus:ring-2 focus:ring-accent2/50 rounded-md transition-transform ring-1 ring-accent/20"
                 title="Reset timer"
                 aria-label="Reset timer"
               >
