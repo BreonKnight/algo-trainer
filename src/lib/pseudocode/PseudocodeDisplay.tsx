@@ -1,8 +1,19 @@
 import "./pseudocode.css";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus, vs } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { useTheme } from "@/components/theme/use-theme";
+import {
+  prismDracula,
+  prismNord,
+  prismLight,
+  prismSolarized,
+  prismSnes,
+  prismPs2,
+  prismRe2,
+  prismMh,
+  prismKingdomHearts,
+  prismFornite,
+} from "./prismThemes";
 
 interface PseudocodeDisplayProps {
   code: string;
@@ -10,10 +21,22 @@ interface PseudocodeDisplayProps {
 
 export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
   const { theme } = useTheme();
-  const isDark = ["dracula", "nord"].includes(theme);
+  const isDark = ["dracula", "nord", "fortnite"].includes(theme);
   const backgroundColor = isDark ? "var(--bg-secondary)" : "var(--bg-main)";
   const textColor = isDark ? "var(--text-secondary)" : "var(--text-main)";
-  const syntaxStyle = isDark ? vscDarkPlus : vs;
+  const themeMap: Record<string, any> = {
+    dracula: prismDracula,
+    nord: prismNord,
+    light: prismLight,
+    solarized: prismSolarized,
+    snes: prismSnes,
+    ps2: prismPs2,
+    re2: prismRe2,
+    mh: prismMh,
+    "kingdom-hearts": prismKingdomHearts,
+    fornite: prismFornite,
+  };
+  const syntaxStyle = themeMap[theme] || prismDracula;
 
   return (
     <div
@@ -25,6 +48,7 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
       }
     >
       <SyntaxHighlighter
+        key={theme}
         language="python"
         style={syntaxStyle}
         customStyle={{
