@@ -2,6 +2,7 @@ import "./pseudocode.css";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 
 import { useTheme } from "@/components/theme/use-theme";
+
 import {
   prismDracula,
   prismNord,
@@ -24,7 +25,7 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
   const isDark = ["dracula", "nord", "fortnite"].includes(theme);
   const backgroundColor = isDark ? "var(--bg-secondary)" : "var(--bg-main)";
   const textColor = isDark ? "var(--text-secondary)" : "var(--text-main)";
-  const themeMap: Record<string, any> = {
+  const themeMap: Record<string, object> = {
     dracula: prismDracula,
     nord: prismNord,
     light: prismLight,
@@ -50,7 +51,7 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
       <SyntaxHighlighter
         key={theme}
         language="python"
-        style={syntaxStyle}
+        style={syntaxStyle as { [key: string]: React.CSSProperties }}
         customStyle={{
           backgroundColor: "var(--pseudocode-bg)",
           color: textColor,

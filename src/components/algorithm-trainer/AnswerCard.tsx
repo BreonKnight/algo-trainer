@@ -284,15 +284,43 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                       minHeight: isDesktop ? "0" : "300px",
                     }}
                   >
-                    <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
-                      {(() => {
-                        if (showMonsterHunter) {
+                    {showMonsterHunter ? (
+                      <Editor
+                        height={editorHeight}
+                        defaultLanguage="python"
+                        theme={theme}
+                        onMount={handleEditorDidMount}
+                        value={(() => {
                           const testData = monsterHunterTestData.get(currentPattern);
                           if (testData) {
                             return testData;
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
-                        } else {
+                        })()}
+                        options={{
+                          fontSize: 14,
+                          minimap: { enabled: false },
+                          scrollBeyondLastLine: false,
+                          lineNumbers: "on",
+                          readOnly: true,
+                          roundedSelection: false,
+                          padding: { top: 8, bottom: 8 },
+                          cursorStyle: "line",
+                          automaticLayout: true,
+                          wordWrap: "on",
+                          tabSize: 4,
+                          insertSpaces: true,
+                          overviewRulerBorder: false,
+                          hideCursorInOverviewRuler: true,
+                          renderLineHighlight: "line",
+                          lineDecorationsWidth: 0,
+                          renderLineHighlightOnlyWhenFocus: true,
+                          fixedOverflowWidgets: true,
+                        }}
+                      />
+                    ) : (
+                      <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
+                        {(() => {
                           const val = (
                             algorithmPatterns as Record<PatternKey, AlgorithmPattern | undefined>
                           )[currentPattern];
@@ -301,9 +329,9 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                             if (ex) return ex;
                           }
                           return `# Example/Test Data for ${currentPattern}\n# (No regular example/test data available yet.)`;
-                        }
-                      })()}
-                    </pre>
+                        })()}
+                      </pre>
+                    )}
                   </div>
                 </div>
               ) : (
