@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 interface ReplCardProps {
   userCode: string;
-  setUserCode: React.Dispatch<React.SetStateAction<string>>;
+  setUserCode: (code: string) => void;
 }
 
 // Custom hook for media query
