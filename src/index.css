@@ -391,6 +391,9 @@ textarea,
   --gradient-to: #ff5555; /* Red */
   --focus-ring: #0066ff; /* Blue button */
   --text-selected-dark: #3e328c;
+  --card-bg: #2e3440; /* Nord0, a solid dark blue-gray */
+  --card-border: #4c566a; /* Nord3, a lighter border */
+  --card-text: #eceff4; /* Nord6, a light text color */
   --pseudocode-gradient: linear-gradient(
     135deg,
     rgba(62, 50, 140, 0.95) 0%,

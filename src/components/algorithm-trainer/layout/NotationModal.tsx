@@ -50,7 +50,7 @@ export const NotationModal = forwardRef<HTMLDivElement, NotationModalProps>(func
             : theme === "light" || theme === "solarized"
               ? "bg-white text-main"
               : theme === "nord"
-                ? "bg-nord0 text-white"
+                ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
                 : "bg-background text-accent2"
         )}
       >
