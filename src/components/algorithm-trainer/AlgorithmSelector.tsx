@@ -1,3 +1,12 @@
+import {
+  useFloating,
+  autoUpdate,
+  offset,
+  flip,
+  shift,
+  useDismiss,
+  useInteractions,
+} from "@floating-ui/react";
 import { ChevronDown, Search, Star } from "lucide-react";
 import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
@@ -14,6 +23,7 @@ const getPatternCategories = () => {
 interface AlgorithmSelectorProps {
   currentPattern: PatternKey;
   onPatternChange: (pattern: PatternKey) => void;
+  forcePortal?: boolean;
 }
 
 export function AlgorithmSelector({ currentPattern, onPatternChange }: AlgorithmSelectorProps) {
@@ -24,9 +34,21 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
   const [favorites, setFavorites] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const dropdownContentRef = useRef<HTMLDivElement>(null);
+  const [, setDropdownRef] = useState<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // floating-ui v2
+  const { refs, floatingStyles, update, context } = useFloating({
+    placement: "bottom-start",
+    middleware: [offset(4), flip(), shift()],
+    whileElementsMounted: autoUpdate,
+    open: isDropdownOpen,
+    onOpenChange: setIsDropdownOpen,
+  });
+
+  // useDismiss for click outside and Escape
+  const dismiss = useDismiss(context);
+  const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
 
   // Load favorites from localStorage
   useEffect(() => {
@@ -40,27 +62,6 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
   useEffect(() => {
     localStorage.setItem("algorithmFavorites", JSON.stringify(favorites));
   }, [favorites]);
-
-  // Handle click outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        dropdownContentRef.current &&
-        !dropdownRef.current.contains(event.target as Node) &&
-        !dropdownContentRef.current.contains(event.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    }
-
-    if (isDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isDropdownOpen]);
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -85,6 +86,11 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
       }, 100);
     }
   }, [isDropdownOpen]);
+
+  // Attach refs
+  useEffect(() => {
+    if (update) update();
+  }, [update, isDropdownOpen]);
 
   // Filter algorithms based on search query
   const filteredCategories = Object.entries(algorithmCategories).reduce(
@@ -197,15 +203,28 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
     );
   };
 
+  // Prevent background scroll when dropdown is open
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isDropdownOpen]);
+
   return (
     <div
       className="w-full relative"
-      ref={dropdownRef}
+      ref={refs.setReference}
       onKeyDown={handleKeyDown}
       role="combobox"
       aria-expanded={isDropdownOpen}
       aria-haspopup="listbox"
       aria-controls="algorithm-list"
+      {...getReferenceProps()}
     >
       <div
         className="w-full bg-main border border-secondary text-main hover:bg-main/80 rounded-md shadow-md transition-all duration-200 flex items-center justify-between p-2 cursor-pointer group"
@@ -236,27 +255,24 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
       {isDropdownOpen &&
         createPortal(
           <div
-            ref={dropdownContentRef}
-            className="fixed sm:absolute z-[100] w-[calc(100vw-2rem)] sm:w-full mt-1 bg-main border border-secondary text-main max-h-[60vh] sm:max-h-[400px] overflow-y-auto min-w-[300px] p-2 rounded-md shadow-lg animate-fadeIn"
+            ref={(el) => {
+              setDropdownRef(el);
+              refs.setFloating(el);
+            }}
+            className="algorithm-selector-dropdown z-[9999] w-[calc(100vw-2rem)] sm:w-full mt-1 bg-main border border-secondary text-main max-h-[60vh] sm:max-h-[400px] overflow-y-auto min-w-[300px] p-2 rounded-md shadow-lg animate-fadeIn"
             style={{
-              left:
-                window.innerWidth < 640
-                  ? "1rem"
-                  : (dropdownRef.current?.getBoundingClientRect().left ?? 0),
-              top:
-                window.innerWidth < 640
-                  ? "50%"
-                  : (dropdownRef.current?.getBoundingClientRect().bottom ?? 0) + window.scrollY,
-              transform: window.innerWidth < 640 ? "translateY(-50%)" : "none",
-              position: window.innerWidth < 640 ? "fixed" : "absolute",
+              ...floatingStyles,
               width:
-                window.innerWidth < 640
-                  ? "calc(100vw - 2rem)"
-                  : (dropdownRef.current?.offsetWidth ?? "auto"),
+                refs.reference.current && "offsetWidth" in refs.reference.current
+                  ? (refs.reference.current as HTMLElement).offsetWidth
+                  : undefined,
             }}
             role="listbox"
             id="algorithm-list"
             onClick={(e) => e.stopPropagation()}
+            onKeyDown={(e) => e.stopPropagation()}
+            onKeyUp={(e) => e.stopPropagation()}
+            {...getFloatingProps()}
           >
             <div className="sticky top-0 bg-main z-20 pb-2">
               <div className="relative">
@@ -273,7 +289,6 @@ export function AlgorithmSelector({ currentPattern, onPatternChange }: Algorithm
                 />
               </div>
             </div>
-
             {isLoading ? (
               <div className="flex items-center justify-center py-4">
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent2"></div>

@@ -43,12 +43,58 @@ interface AlgorithmTutorialProps {
   tutorials: Tutorial[];
 }
 
+// Theme-aware gradient map for headings
+const headingGradients: Record<string, string> = {
+  snes: "linear-gradient(90deg, #3498db 0%, #e67e22 100%)",
+  dracula: "linear-gradient(90deg, #ff79c6 0%, #8be9fd 100%)",
+  nord: "linear-gradient(90deg, #5e81ac 0%, #a3be8c 100%)",
+  light: "linear-gradient(90deg, #f7971e 0%, #ffd200 100%)",
+  solarized: "linear-gradient(90deg, #b58900 0%, #268bd2 100%)",
+  ps2: "linear-gradient(90deg, #003087 0%, #00a4e4 100%)",
+  re2: "linear-gradient(90deg, #8b0000 0%, #ffd700 100%)",
+  mh: "linear-gradient(90deg, #2c3e50 0%, #e67e22 100%)",
+  "kingdom-hearts": "linear-gradient(90deg, #1e90ff 0%, #ffd700 100%)",
+  fornite: "linear-gradient(90deg, #ffd700 0%, #00bfff 100%)",
+};
+
+// Style variables for tabs and progress
+const tabBase =
+  "px-5 py-2 rounded-full font-semibold text-base transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent2/60";
+const tabActive = "bg-accent2/90 text-white shadow-md scale-105";
+const tabInactive = "bg-secondary/10 text-accent2 hover:bg-accent2/10";
+const mainTabBase =
+  "px-6 py-2 rounded-full font-bold text-base transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent2/60";
+const mainTabActive = "bg-accent3/90 text-white shadow-lg scale-105";
+const mainTabInactive = "bg-secondary/10 text-accent3 hover:bg-accent3/10";
+const progressBarClass =
+  "w-32 h-2 rounded-full bg-secondary/30 [&>div]:rounded-full [&>div]:bg-accent2/90";
+
+const isTutorialAvailable = (
+  tutorial: Tutorial
+): { available: boolean; unmetPrerequisites: string[] } => {
+  if (tutorial.prerequisites.length === 0) {
+    return { available: true, unmetPrerequisites: [] };
+  }
+
+  const unmetPrerequisites = tutorial.prerequisites.filter(
+    (prereq) => localStorage.getItem(`tutorial-${prereq}`) !== "completed"
+  );
+
+  return {
+    available: unmetPrerequisites.length === 0,
+    unmetPrerequisites,
+  };
+};
+
 export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialProps) {
   const { theme } = useTheme();
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
   const [activeTab, setActiveTab] = useState("video");
-  const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(tutorials[0] || null);
+  const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(() => {
+    const firstAvailable = tutorials.find((t) => isTutorialAvailable(t).available);
+    return firstAvailable || null;
+  });
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
   const [showResults, setShowResults] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<Language>("python");
@@ -60,24 +106,6 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
       (t) => localStorage.getItem(`tutorial-${t.id}`) === "completed"
     ).length;
     return (completed / tutorials.length) * 100;
-  };
-
-  // Check if tutorial is available (prerequisites met)
-  const isTutorialAvailable = (
-    tutorial: Tutorial
-  ): { available: boolean; unmetPrerequisites: string[] } => {
-    if (tutorial.prerequisites.length === 0) {
-      return { available: true, unmetPrerequisites: [] };
-    }
-
-    const unmetPrerequisites = tutorial.prerequisites.filter(
-      (prereq) => localStorage.getItem(`tutorial-${prereq}`) !== "completed"
-    );
-
-    return {
-      available: unmetPrerequisites.length === 0,
-      unmetPrerequisites,
-    };
   };
 
   // Get theme-specific card styles
@@ -107,6 +135,13 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
         return "bg-background/95 backdrop-blur-sm border border-accent2/20";
     }
   };
+
+  // Force all quiz text to be black for maximum readability
+  const quizTextColor = "text-black";
+
+  // Get theme-aware gradient for headings
+  const headingGradient =
+    headingGradients[theme] || "linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)";
 
   if (!tutorials || tutorials.length === 0) {
     return (
@@ -147,31 +182,28 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                 defaultValue="python"
                 onValueChange={(value) => setSelectedLanguage(value as Language)}
               >
-                <TabsList className="bg-secondary/20 p-1 rounded-lg">
+                <TabsList className="bg-secondary/20 p-1 rounded-full shadow-sm flex gap-2">
                   <TabsTrigger
                     value="python"
-                    className={cn(
-                      "data-[state=active]:bg-accent2/20 text-sm font-medium",
-                      selectedLanguage === "python" && "bg-accent2/20"
-                    )}
+                    className={cn(tabBase, selectedLanguage === "python" ? tabActive : tabInactive)}
                   >
                     Python
                   </TabsTrigger>
                   <TabsTrigger
                     value="javascript"
                     className={cn(
-                      "data-[state=active]:bg-accent2/20 text-sm font-medium",
-                      selectedLanguage === "javascript" && "bg-accent2/20"
+                      tabBase,
+                      selectedLanguage === "javascript" ? tabActive : tabInactive
                     )}
                   >
                     JavaScript
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className="flex items-center gap-4 bg-secondary/20 px-4 py-2 rounded-xl backdrop-blur-sm">
-                <span className="text-sm font-medium text-secondary tracking-wide">Progress</span>
-                <Progress value={calculateProgress()} className="w-32 h-2" />
-                <span className="text-sm font-medium text-main tracking-wide">
+              <div className="flex items-center gap-4 bg-secondary/20 px-4 py-2 rounded-xl backdrop-blur-sm mt-2">
+                <span className="text-sm font-semibold text-accent2 tracking-wide">Progress</span>
+                <Progress value={calculateProgress()} className={progressBarClass} />
+                <span className="text-sm font-semibold text-accent3 tracking-wide">
                   {Math.round(calculateProgress())}%
                 </span>
               </div>
@@ -221,33 +253,39 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="w-full justify-start gap-2 bg-secondary/20 p-1 rounded-xl">
+            <TabsList className="w-full justify-start gap-3 bg-secondary/20 p-2 rounded-full shadow-sm flex">
               <TabsTrigger
                 value="video"
-                className="data-[state=active]:bg-accent2/20 gap-2 text-sm font-medium"
+                className={cn(mainTabBase, activeTab === "video" ? mainTabActive : mainTabInactive)}
               >
-                <Video className="h-4 w-4" />
+                <Video className="h-4 w-4 mr-1" />
                 Video
               </TabsTrigger>
               <TabsTrigger
                 value="implementation"
-                className="data-[state=active]:bg-accent2/20 gap-2 text-sm font-medium"
+                className={cn(
+                  mainTabBase,
+                  activeTab === "implementation" ? mainTabActive : mainTabInactive
+                )}
               >
-                <Code className="h-4 w-4" />
+                <Code className="h-4 w-4 mr-1" />
                 Implementation
               </TabsTrigger>
               <TabsTrigger
                 value="quiz"
-                className="data-[state=active]:bg-accent2/20 gap-2 text-sm font-medium"
+                className={cn(mainTabBase, activeTab === "quiz" ? mainTabActive : mainTabInactive)}
               >
-                <FileText className="h-4 w-4" />
+                <FileText className="h-4 w-4 mr-1" />
                 Quiz
               </TabsTrigger>
               <TabsTrigger
                 value="resources"
-                className="data-[state=active]:bg-accent2/20 gap-2 text-sm font-medium"
+                className={cn(
+                  mainTabBase,
+                  activeTab === "resources" ? mainTabActive : mainTabInactive
+                )}
               >
-                <Book className="h-4 w-4" />
+                <Book className="h-4 w-4 mr-1" />
                 Resources
               </TabsTrigger>
             </TabsList>
@@ -283,10 +321,8 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                   <Button
                     onClick={() => {
                       localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
-                      setCurrentTutorial(null);
-                      setActiveTab("overview");
                     }}
-                    className="bg-accent hover:bg-accent text-accent gap-2 text-base"
+                    className="bg-accent hover:bg-accent text-white gap-2 text-base"
                   >
                     <Check className="h-4 w-4" />
                     Complete Tutorial
@@ -317,10 +353,8 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                   <Button
                     onClick={() => {
                       localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
-                      setCurrentTutorial(null);
-                      setActiveTab("overview");
                     }}
-                    className="bg-accent hover:bg-accent text-accent gap-2 text-base"
+                    className="bg-accent hover:bg-accent text-white gap-2 text-base"
                   >
                     <Check className="h-4 w-4" />
                     Complete Tutorial
@@ -332,74 +366,152 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
             <TabsContent value="quiz" className="mt-8">
               <Card className={cn("p-8", getCardStyles())}>
                 <div className="flex flex-col gap-8">
-                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
-                    Knowledge Check
+                  <h3
+                    className="text-3xl font-bold bg-clip-text text-transparent tracking-tight"
+                    style={{ backgroundImage: headingGradient }}
+                  >
+                    Vibe Check
                   </h3>
+                  {/* Progress Indicator */}
+                  {currentTutorial && currentTutorial.quiz && currentTutorial.quiz.length > 1 && (
+                    <div className="flex items-center gap-4 mb-4">
+                      <Progress
+                        value={
+                          (Object.keys(quizAnswers).length / currentTutorial.quiz.length) * 100
+                        }
+                        className="w-40 h-2"
+                      />
+                      <span
+                        className="inline-block rounded-full bg-accent3/90 text-accent2 font-extrabold px-4 py-1 text-base shadow-xl drop-shadow-lg border-2 border-accent2 tracking-widest uppercase transition-transform duration-150 hover:scale-105 cursor-pointer"
+                        style={{ textShadow: "0 2px 6px rgba(0,0,0,0.18)" }}
+                      >
+                        {Object.keys(quizAnswers).length} / {currentTutorial.quiz.length} answered
+                      </span>
+                    </div>
+                  )}
                   <div className="space-y-10">
-                    {currentTutorial?.quiz.map((question) => (
-                      <div key={question.id} className="space-y-6">
-                        <p className="font-medium text-xl text-main leading-relaxed">
-                          {question.question}
-                        </p>
-                        <div className="space-y-4">
-                          {question.options.map((option, index) => (
-                            <div
-                              key={index}
-                              className={cn(
-                                "p-4 rounded-lg cursor-pointer transition-all duration-200 text-base",
-                                quizAnswers[question.id] === index
-                                  ? "bg-accent2/20 border border-accent2/40"
-                                  : "hover:bg-secondary/20 border border-transparent",
-                                showResults &&
-                                  index === question.correctAnswer &&
-                                  "bg-green-500/20 border-green-500/40",
-                                showResults &&
-                                  quizAnswers[question.id] === index &&
-                                  index !== question.correctAnswer &&
-                                  "bg-red-500/20 border-red-500/40"
-                              )}
-                              onClick={() =>
-                                !showResults &&
-                                setQuizAnswers({
-                                  ...quizAnswers,
-                                  [question.id]: index,
-                                })
-                              }
-                            >
-                              {option}
-                            </div>
-                          ))}
-                        </div>
-                        {showResults && (
-                          <div className="mt-4 p-4 rounded-lg bg-secondary/10 border border-secondary/20">
-                            <p className="text-base text-main leading-relaxed">
-                              <span className="font-semibold text-accent2">Explanation:</span>{" "}
-                              {question.explanation}
-                            </p>
+                    {currentTutorial &&
+                      currentTutorial.quiz &&
+                      currentTutorial.quiz.map((question, qIdx) => (
+                        <div
+                          key={question.id}
+                          className="space-y-6 rounded-2xl border border-[var(--card-border)] shadow-lg bg-white/80 dark:bg-background/80 p-6 transition-all duration-300"
+                        >
+                          <p
+                            className={cn(
+                              "font-semibold text-lg text-main leading-relaxed mb-2 flex items-center gap-2",
+                              quizTextColor
+                            )}
+                          >
+                            <span className="inline-block w-8 h-8 rounded-full bg-gradient-to-br from-[var(--accent2)] to-[var(--accent3)] text-white flex items-center justify-center font-bold mr-2">
+                              {qIdx + 1}
+                            </span>
+                            {question.question}
+                          </p>
+                          <div className="space-y-3">
+                            {question.options.map((option, index) => {
+                              const isSelected = quizAnswers[question.id] === index;
+                              const isCorrect = showResults && index === question.correctAnswer;
+                              const isIncorrect =
+                                showResults && isSelected && index !== question.correctAnswer;
+                              return (
+                                <label
+                                  key={index}
+                                  className={cn(
+                                    "flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-200 text-base group",
+                                    quizTextColor,
+                                    isSelected &&
+                                      !showResults &&
+                                      "border-accent2 bg-accent2/10 shadow-md scale-[1.03]",
+                                    isCorrect &&
+                                      "border-green-500 bg-green-100/80 dark:bg-green-500/10 scale-[1.03]",
+                                    isIncorrect &&
+                                      "border-red-500 bg-red-100/80 dark:bg-red-500/10 scale-[1.03]",
+                                    !isSelected &&
+                                      !isCorrect &&
+                                      !isIncorrect &&
+                                      "border-[var(--card-border)] hover:bg-secondary/10"
+                                  )}
+                                  style={{ transition: "transform 0.15s cubic-bezier(.4,2,.6,1)" }}
+                                >
+                                  <input
+                                    type="radio"
+                                    name={`quiz-${question.id}`}
+                                    checked={isSelected}
+                                    disabled={showResults}
+                                    onChange={() => {
+                                      if (!showResults) {
+                                        setQuizAnswers({
+                                          ...quizAnswers,
+                                          [question.id]: index,
+                                        });
+                                      }
+                                    }}
+                                    className="form-radio h-5 w-5 text-accent2 border-accent2 focus:ring-accent2 transition-all duration-150"
+                                  />
+                                  <span className={cn("flex-1", quizTextColor)}>{option}</span>
+                                  {showResults && isCorrect && (
+                                    <span className="ml-2 text-green-400 font-semibold">
+                                      Correct
+                                    </span>
+                                  )}
+                                  {showResults && isIncorrect && (
+                                    <span className="ml-2 text-red-400 font-semibold">
+                                      Your Answer
+                                    </span>
+                                  )}
+                                </label>
+                              );
+                            })}
                           </div>
-                        )}
-                      </div>
-                    ))}
+                          {showResults && (
+                            <div className="mt-4 p-4 rounded-lg bg-secondary/10 border border-secondary/20 animate-fade-in">
+                              <p
+                                className={cn("text-base text-main leading-relaxed", quizTextColor)}
+                              >
+                                <span className="font-semibold text-accent2">Explanation:</span>{" "}
+                                {question.explanation}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      ))}
                   </div>
                   {!showResults ? (
                     <Button
-                      className="bg-accent2 hover:bg-accent2/90 text-background text-base"
+                      className="bg-accent2 hover:bg-accent2/90 text-white text-base mt-4"
                       onClick={() => setShowResults(true)}
+                      disabled={
+                        !currentTutorial ||
+                        !currentTutorial.quiz ||
+                        Object.keys(quizAnswers).length !== currentTutorial.quiz.length
+                      }
                     >
                       Submit Quiz
                     </Button>
                   ) : (
-                    <Button
-                      className="bg-accent3 hover:bg-accent3/90 text-background gap-2 text-base"
-                      onClick={() => {
-                        localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
-                        setCurrentTutorial(null);
-                        setActiveTab("overview");
-                      }}
-                    >
-                      <Check className="h-4 w-4" />
-                      Complete Tutorial
-                    </Button>
+                    <>
+                      <Button
+                        className="bg-accent3 hover:bg-accent3/90 text-white gap-2 text-base mt-4"
+                        onClick={() => {
+                          if (currentTutorial) {
+                            localStorage.setItem(`tutorial-${currentTutorial.id}`, "completed");
+                          }
+                        }}
+                      >
+                        <Check className="h-4 w-4" />
+                        Complete Tutorial
+                      </Button>
+                      <Button
+                        className="bg-accent2 hover:bg-accent2/90 text-white gap-2 text-base mt-2 ml-2"
+                        onClick={() => {
+                          setQuizAnswers({});
+                          setShowResults(false);
+                        }}
+                      >
+                        Retry Quiz
+                      </Button>
+                    </>
                   )}
                 </div>
               </Card>

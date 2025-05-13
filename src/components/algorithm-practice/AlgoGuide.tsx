@@ -1327,14 +1327,14 @@ export default function AlgoGuide() {
                 onClick={() => setSelectedCategory(category.name)}
                 className={cn(
                   "px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 border",
-                  selectedCategory === category.name
-                    ? theme === "snes"
-                      ? "bg-[var(--accent)] text-[var(--accent-foreground)] border-[var(--accent)]"
-                      : theme === "light"
+                  theme === "snes"
+                    ? selectedCategory === category.name
+                      ? "bg-[#e40058] text-[#fffbe6] border-2 border-[#4040e0] shadow-lg scale-105 font-bold"
+                      : "bg-[#4040e0] text-[#fffbe6] border-2 border-[#3498db] shadow font-bold hover:bg-[#e40058] hover:text-[#fffbe6]"
+                    : selectedCategory === category.name
+                      ? theme === "light"
                         ? "bg-accent/10 text-accent border-accent hover:bg-accent/20"
                         : "bg-accent text-accent-foreground border-accent shadow-lg scale-105"
-                    : theme === "snes"
-                      ? "bg-[var(--card-bg)] text-black border-[var(--card-border)] hover:bg-[var(--card-hover)]"
                       : theme === "light"
                         ? "bg-white text-accent border-accent/20 hover:bg-accent/10 hover:text-accent"
                         : "bg-background/50 backdrop-blur-sm text-main/80 border-accent/10 hover:bg-background/80 hover:text-accent"
