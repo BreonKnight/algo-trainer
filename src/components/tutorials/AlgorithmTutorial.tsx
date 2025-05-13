@@ -92,7 +92,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
   const [activeTab, setActiveTab] = useState("video");
-  const [currentTutorial, setCurrentTutorial] = useState<Tutorial | null>(() => {
+  const [currentTutorial] = useState<Tutorial | null>(() => {
     const firstAvailable = tutorials.find((t) => isTutorialAvailable(t).available);
     return firstAvailable || null;
   });
