@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 import { cn } from "@/lib/utils";
 
@@ -145,98 +146,15 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
 
   if (!tutorials || tutorials.length === 0) {
     return (
-      <Background>
-        <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center">
-          <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] tracking-tight">
-            No Tutorial Available
-          </h2>
-          <p className="text-secondary mb-8 text-lg leading-relaxed max-w-md">
-            There are no tutorial available for {algorithm} at this time.
-          </p>
-          <Button
-            variant="outline"
-            onClick={() => window.history.back()}
-            className="bg-secondary/10 hover:bg-secondary/20 gap-2 text-base"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Go Back
-          </Button>
-        </div>
-      </Background>
-    );
-  }
-
-  const availability = isTutorialAvailable(currentTutorial!);
-  const isAvailable = availability.available;
-
-  return (
-    <Background>
-      <div className="flex flex-col gap-10 max-w-6xl mx-auto px-4 py-8">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] tracking-tight">
-              {currentTutorial?.title || algorithm} Tutorial
+      <TooltipProvider>
+        <Background>
+          <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center">
+            <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] tracking-tight">
+              No Tutorial Available
             </h2>
-            <div className="flex items-center gap-6">
-              <Tabs
-                defaultValue="python"
-                onValueChange={(value) => setSelectedLanguage(value as Language)}
-              >
-                <TabsList className="bg-secondary/20 p-1 rounded-full shadow-sm flex gap-2">
-                  <TabsTrigger
-                    value="python"
-                    className={cn(tabBase, selectedLanguage === "python" ? tabActive : tabInactive)}
-                  >
-                    Python
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="javascript"
-                    className={cn(
-                      tabBase,
-                      selectedLanguage === "javascript" ? tabActive : tabInactive
-                    )}
-                  >
-                    JavaScript
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-              <div className="flex items-center gap-4 bg-secondary/20 px-4 py-2 rounded-xl backdrop-blur-sm mt-2">
-                <span className="text-sm font-semibold text-accent2 tracking-wide">Progress</span>
-                <Progress value={calculateProgress()} className={progressBarClass} />
-                <span className="text-sm font-semibold text-accent3 tracking-wide">
-                  {Math.round(calculateProgress())}%
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {!isAvailable ? (
-          <Card className={cn("p-8", getCardStyles())}>
-            <div className="flex items-center gap-4 mb-6">
-              <Lock className="h-8 w-8 text-accent2" />
-              <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
-                Tutorial Locked
-              </h3>
-            </div>
-            <p className="mb-8 text-secondary text-lg leading-relaxed">
-              Complete these prerequisites to unlock this tutorial:
+            <p className="text-secondary mb-8 text-lg leading-relaxed max-w-md">
+              There are no tutorial available for {algorithm} at this time.
             </p>
-            <ul className="space-y-4 mb-8">
-              {availability.unmetPrerequisites.map((prereq) => (
-                <li key={prereq} className="flex items-center gap-3 text-secondary text-base">
-                  <div className="h-2 w-2 rounded-full bg-accent2" />
-                  <Link to={`/tutorials/${prereq}`}>
-                    {tutorials.find((t) => t.id === prereq)?.title ||
-                      prereq
-                        .replace(/-/g, " ")
-                        .split(/\s+/)
-                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                        .join(" ")}
-                  </Link>
-                </li>
-              ))}
-            </ul>
             <Button
               variant="outline"
               onClick={() => window.history.back()}
@@ -245,328 +163,448 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
               <ArrowLeft className="h-4 w-4" />
               Go Back
             </Button>
-          </Card>
-        ) : (
-          <Tabs
-            defaultValue="video"
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <TabsList className="w-full justify-start gap-3 bg-secondary/20 p-2 rounded-full shadow-sm flex">
-              <TabsTrigger
-                value="video"
-                className={cn(mainTabBase, activeTab === "video" ? mainTabActive : mainTabInactive)}
-              >
-                <Video className="h-4 w-4 mr-1" />
-                Video
-              </TabsTrigger>
-              <TabsTrigger
-                value="implementation"
-                className={cn(
-                  mainTabBase,
-                  activeTab === "implementation" ? mainTabActive : mainTabInactive
-                )}
-              >
-                <Code className="h-4 w-4 mr-1" />
-                Implementation
-              </TabsTrigger>
-              <TabsTrigger
-                value="quiz"
-                className={cn(mainTabBase, activeTab === "quiz" ? mainTabActive : mainTabInactive)}
-              >
-                <FileText className="h-4 w-4 mr-1" />
-                Quiz
-              </TabsTrigger>
-              <TabsTrigger
-                value="resources"
-                className={cn(
-                  mainTabBase,
-                  activeTab === "resources" ? mainTabActive : mainTabInactive
-                )}
-              >
-                <Book className="h-4 w-4 mr-1" />
-                Resources
-              </TabsTrigger>
-            </TabsList>
+          </div>
+        </Background>
+      </TooltipProvider>
+    );
+  }
 
-            <TabsContent value="video" className="mt-8">
-              <Card className={cn("p-8", getCardStyles())}>
-                <div className="flex flex-col gap-8">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
-                      {currentTutorial?.title}
-                    </h3>
-                    <div className="flex items-center gap-6">
-                      <div className="flex items-center gap-2 text-secondary text-sm font-medium tracking-wide">
-                        <Clock className="h-4 w-4" />
-                        <span>{currentTutorial?.duration} min</span>
-                      </div>
-                      <div className="px-3 py-1 rounded-full bg-accent2/20 text-accent2 text-sm font-medium tracking-wide">
-                        {currentTutorial?.difficulty}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-                    <iframe
-                      src={currentTutorial?.videoUrl}
-                      className="w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                  <p className="text-secondary leading-relaxed text-lg">
-                    {currentTutorial?.description}
-                  </p>
+  const availability = currentTutorial
+    ? isTutorialAvailable(currentTutorial)
+    : { available: false, unmetPrerequisites: [] };
+  const isAvailable = availability.available;
+
+  return (
+    <TooltipProvider>
+      <Background>
+        <div className="flex flex-col gap-10 max-w-6xl mx-auto px-4 py-8">
+          <div className="mb-6">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link to="/tutorials" tabIndex={-1}>
                   <Button
-                    onClick={() => {
-                      localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
-                    }}
-                    className="bg-accent hover:bg-accent text-white gap-2 text-base"
+                    variant="outline"
+                    className="gap-2 text-base px-6 py-3 rounded-full font-semibold shadow-lg bg-gradient-to-r from-accent2/20 to-accent3/20 border-0 hover:from-accent2/40 hover:to-accent3/40 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-200 focus:ring-2 focus:ring-accent2/40"
+                    style={{ color: "var(--accent2)" }}
                   >
-                    <Check className="h-4 w-4" />
-                    Complete Tutorial
+                    <ArrowLeft className="h-5 w-5" />
+                    <span className="tracking-wide">Back to Tutorials</span>
                   </Button>
-                </div>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="implementation" className="mt-8">
-              <Card className={cn("p-8", getCardStyles())}>
-                <div className="flex flex-col gap-8">
-                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
-                    {currentTutorial?.title} Implementation
-                  </h3>
-                  {currentTutorial?.pseudocode && (
-                    <div className="mb-8">
-                      <h4 className="text-xl font-semibold text-main mb-4">Pseudocode</h4>
-                      <PseudocodeDisplay code={currentTutorial.pseudocode} />
-                    </div>
-                  )}
-                  <div className="prose prose-sm dark:prose-invert max-w-none">
-                    <pre className="language-{selectedLanguage} rounded-lg p-6 bg-secondary/20">
-                      <code className="text-sm font-mono leading-relaxed">
-                        {currentTutorial?.implementations[selectedLanguage]}
-                      </code>
-                    </pre>
-                  </div>
-                  <Button
-                    onClick={() => {
-                      localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
-                    }}
-                    className="bg-accent hover:bg-accent text-white gap-2 text-base"
-                  >
-                    <Check className="h-4 w-4" />
-                    Complete Tutorial
-                  </Button>
-                </div>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="quiz" className="mt-8">
-              <Card className={cn("p-8", getCardStyles())}>
-                <div className="flex flex-col gap-8">
-                  <h3
-                    className="text-3xl font-bold bg-clip-text text-transparent tracking-tight"
-                    style={{ backgroundImage: headingGradient }}
-                  >
-                    Vibe Check
-                  </h3>
-                  {/* Progress Indicator */}
-                  {currentTutorial && currentTutorial.quiz && currentTutorial.quiz.length > 1 && (
-                    <div className="flex items-center gap-4 mb-4">
-                      <Progress
-                        value={
-                          (Object.keys(quizAnswers).length / currentTutorial.quiz.length) * 100
-                        }
-                        className="w-40 h-2"
-                      />
-                      <span
-                        className="inline-block rounded-full bg-accent3/90 text-accent2 font-extrabold px-4 py-1 text-base shadow-xl drop-shadow-lg border-2 border-accent2 tracking-widest uppercase transition-transform duration-150 hover:scale-105 cursor-pointer"
-                        style={{ textShadow: "0 2px 6px rgba(0,0,0,0.18)" }}
-                      >
-                        {Object.keys(quizAnswers).length} / {currentTutorial.quiz.length} answered
-                      </span>
-                    </div>
-                  )}
-                  <div className="space-y-10">
-                    {currentTutorial &&
-                      currentTutorial.quiz &&
-                      currentTutorial.quiz.map((question, qIdx) => (
-                        <div
-                          key={question.id}
-                          className="space-y-6 rounded-2xl border border-[var(--card-border)] shadow-lg bg-white/80 dark:bg-background/80 p-6 transition-all duration-300"
-                        >
-                          <p
-                            className={cn(
-                              "font-semibold text-lg text-main leading-relaxed mb-2 flex items-center gap-2",
-                              quizTextColor
-                            )}
-                          >
-                            <span className="inline-block w-8 h-8 rounded-full bg-gradient-to-br from-[var(--accent2)] to-[var(--accent3)] text-white flex items-center justify-center font-bold mr-2">
-                              {qIdx + 1}
-                            </span>
-                            {question.question}
-                          </p>
-                          <div className="space-y-3">
-                            {question.options.map((option, index) => {
-                              const isSelected = quizAnswers[question.id] === index;
-                              const isCorrect = showResults && index === question.correctAnswer;
-                              const isIncorrect =
-                                showResults && isSelected && index !== question.correctAnswer;
-                              return (
-                                <label
-                                  key={index}
-                                  className={cn(
-                                    "flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-200 text-base group",
-                                    quizTextColor,
-                                    isSelected &&
-                                      !showResults &&
-                                      "border-accent2 bg-accent2/10 shadow-md scale-[1.03]",
-                                    isCorrect &&
-                                      "border-green-500 bg-green-100/80 dark:bg-green-500/10 scale-[1.03]",
-                                    isIncorrect &&
-                                      "border-red-500 bg-red-100/80 dark:bg-red-500/10 scale-[1.03]",
-                                    !isSelected &&
-                                      !isCorrect &&
-                                      !isIncorrect &&
-                                      "border-[var(--card-border)] hover:bg-secondary/10"
-                                  )}
-                                  style={{ transition: "transform 0.15s cubic-bezier(.4,2,.6,1)" }}
-                                >
-                                  <input
-                                    type="radio"
-                                    name={`quiz-${question.id}`}
-                                    checked={isSelected}
-                                    disabled={showResults}
-                                    onChange={() => {
-                                      if (!showResults) {
-                                        setQuizAnswers({
-                                          ...quizAnswers,
-                                          [question.id]: index,
-                                        });
-                                      }
-                                    }}
-                                    className="form-radio h-5 w-5 text-accent2 border-accent2 focus:ring-accent2 transition-all duration-150"
-                                  />
-                                  <span className={cn("flex-1", quizTextColor)}>{option}</span>
-                                  {showResults && isCorrect && (
-                                    <span className="ml-2 text-green-400 font-semibold">
-                                      Correct
-                                    </span>
-                                  )}
-                                  {showResults && isIncorrect && (
-                                    <span className="ml-2 text-red-400 font-semibold">
-                                      Your Answer
-                                    </span>
-                                  )}
-                                </label>
-                              );
-                            })}
-                          </div>
-                          {showResults && (
-                            <div className="mt-4 p-4 rounded-lg bg-secondary/10 border border-secondary/20 animate-fade-in">
-                              <p
-                                className={cn("text-base text-main leading-relaxed", quizTextColor)}
-                              >
-                                <span className="font-semibold text-accent2">Explanation:</span>{" "}
-                                {question.explanation}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                  {!showResults ? (
-                    <Button
-                      className="bg-accent2 hover:bg-accent2/90 text-white text-base mt-4"
-                      onClick={() => setShowResults(true)}
-                      disabled={
-                        !currentTutorial ||
-                        !currentTutorial.quiz ||
-                        Object.keys(quizAnswers).length !== currentTutorial.quiz.length
-                      }
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">Back to all tutorials</TooltipContent>
+            </Tooltip>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8">
+            <div className="flex flex-col gap-4">
+              <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)] tracking-tight">
+                {currentTutorial?.title || algorithm} Tutorial
+              </h2>
+              <div className="flex items-center gap-6">
+                <Tabs
+                  defaultValue="python"
+                  onValueChange={(value) => setSelectedLanguage(value as Language)}
+                >
+                  <TabsList className="bg-secondary/20 p-1 rounded-full shadow-sm flex gap-2">
+                    <TabsTrigger
+                      value="python"
+                      className={cn(
+                        tabBase,
+                        selectedLanguage === "python" ? tabActive : tabInactive
+                      )}
                     >
-                      Submit Quiz
-                    </Button>
-                  ) : (
-                    <>
-                      <Button
-                        className="bg-accent3 hover:bg-accent3/90 text-white gap-2 text-base mt-4"
-                        onClick={() => {
-                          if (currentTutorial) {
-                            localStorage.setItem(`tutorial-${currentTutorial.id}`, "completed");
-                          }
-                        }}
-                      >
-                        <Check className="h-4 w-4" />
-                        Complete Tutorial
-                      </Button>
-                      <Button
-                        className="bg-accent2 hover:bg-accent2/90 text-white gap-2 text-base mt-2 ml-2"
-                        onClick={() => {
-                          setQuizAnswers({});
-                          setShowResults(false);
-                        }}
-                      >
-                        Retry Quiz
-                      </Button>
-                    </>
-                  )}
+                      Python
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="javascript"
+                      className={cn(
+                        tabBase,
+                        selectedLanguage === "javascript" ? tabActive : tabInactive
+                      )}
+                    >
+                      JavaScript
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+                <div className="flex items-center gap-4 bg-secondary/20 px-4 py-2 rounded-xl backdrop-blur-sm mt-2">
+                  <span className="text-sm font-semibold text-accent2 tracking-wide">Progress</span>
+                  <Progress value={calculateProgress()} className={progressBarClass} />
+                  <span className="text-sm font-semibold text-accent3 tracking-wide">
+                    {Math.round(calculateProgress())}%
+                  </span>
                 </div>
-              </Card>
-            </TabsContent>
+              </div>
+            </div>
+          </div>
 
-            <TabsContent value="resources" className="mt-8">
-              <Card className={cn("p-8", getCardStyles())}>
-                <div className="flex flex-col gap-8">
-                  <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
-                    Additional Resources
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="flex items-start gap-4 p-6 rounded-lg bg-secondary/10 border border-secondary/20">
-                      <Book className="h-6 w-6 mt-1 text-accent2" />
-                      <div>
-                        <h4 className="font-semibold text-xl mb-4 tracking-tight">
-                          Further Reading
-                        </h4>
-                        <ul className="space-y-4 text-secondary">
-                          <li className="flex items-center gap-3 text-base">
-                            <div className="h-2 w-2 rounded-full bg-accent2" />
-                            Introduction to Algorithms by CLRS
-                          </li>
-                          <li className="flex items-center gap-3 text-base">
-                            <div className="h-2 w-2 rounded-full bg-accent2" />
-                            Algorithm Design Manual by Steven Skiena
-                          </li>
-                        </ul>
+          {!isAvailable ? (
+            <Card className={cn("p-8", getCardStyles())}>
+              <div className="flex items-center gap-4 mb-6">
+                <Lock className="h-8 w-8 text-accent2" />
+                <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
+                  Tutorial Locked
+                </h3>
+              </div>
+              <p className="mb-8 text-secondary text-lg leading-relaxed">
+                Complete these prerequisites to unlock this tutorial:
+              </p>
+              <ul className="space-y-4 mb-8">
+                {availability.unmetPrerequisites.map((prereq) => (
+                  <li key={prereq} className="flex items-center gap-3 text-secondary text-base">
+                    <div className="h-2 w-2 rounded-full bg-accent2" />
+                    <Link to={`/tutorials/${prereq}`}>
+                      {tutorials.find((t) => t.id === prereq)?.title ||
+                        prereq
+                          .replace(/-/g, " ")
+                          .split(/\s+/)
+                          .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                          .join(" ")}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Button
+                variant="outline"
+                onClick={() => window.history.back()}
+                className="bg-secondary/10 hover:bg-secondary/20 gap-2 text-base"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Go Back
+              </Button>
+            </Card>
+          ) : (
+            <Tabs
+              defaultValue="video"
+              value={activeTab}
+              onValueChange={setActiveTab}
+              className="w-full"
+            >
+              <TabsList className="w-full justify-start gap-3 bg-secondary/20 p-2 rounded-full shadow-sm flex">
+                <TabsTrigger
+                  value="video"
+                  className={cn(
+                    mainTabBase,
+                    activeTab === "video" ? mainTabActive : mainTabInactive
+                  )}
+                >
+                  <Video className="h-4 w-4 mr-1" />
+                  Video
+                </TabsTrigger>
+                <TabsTrigger
+                  value="implementation"
+                  className={cn(
+                    mainTabBase,
+                    activeTab === "implementation" ? mainTabActive : mainTabInactive
+                  )}
+                >
+                  <Code className="h-4 w-4 mr-1" />
+                  Implementation
+                </TabsTrigger>
+                <TabsTrigger
+                  value="quiz"
+                  className={cn(
+                    mainTabBase,
+                    activeTab === "quiz" ? mainTabActive : mainTabInactive
+                  )}
+                >
+                  <FileText className="h-4 w-4 mr-1" />
+                  Quiz
+                </TabsTrigger>
+                <TabsTrigger
+                  value="resources"
+                  className={cn(
+                    mainTabBase,
+                    activeTab === "resources" ? mainTabActive : mainTabInactive
+                  )}
+                >
+                  <Book className="h-4 w-4 mr-1" />
+                  Resources
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="video" className="mt-8">
+                <Card className={cn("p-8", getCardStyles())}>
+                  <div className="flex flex-col gap-8">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
+                        {currentTutorial?.title}
+                      </h3>
+                      <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-2 text-secondary text-sm font-medium tracking-wide">
+                          <Clock className="h-4 w-4" />
+                          <span>{currentTutorial?.duration} min</span>
+                        </div>
+                        <div className="px-3 py-1 rounded-full bg-accent2/20 text-accent2 text-sm font-medium tracking-wide">
+                          {currentTutorial?.difficulty}
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4 p-6 rounded-lg bg-secondary/10 border border-secondary/20">
-                      <Play className="h-6 w-6 mt-1 text-accent3" />
-                      <div>
-                        <h4 className="font-semibold text-xl mb-4 tracking-tight">
-                          Related Videos
-                        </h4>
-                        <ul className="space-y-4 text-secondary">
-                          <li className="flex items-center gap-3 text-base">
-                            <div className="h-2 w-2 rounded-full bg-accent3" />
-                            Advanced {currentTutorial?.title} Techniques
-                          </li>
-                          <li className="flex items-center gap-3 text-base">
-                            <div className="h-2 w-2 rounded-full bg-accent3" />
-                            {currentTutorial?.title} Optimization Strategies
-                          </li>
-                        </ul>
+                    <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+                      <iframe
+                        src={currentTutorial?.videoUrl}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <p className="text-secondary leading-relaxed text-lg">
+                      {currentTutorial?.description}
+                    </p>
+                    <Button
+                      onClick={() => {
+                        localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
+                      }}
+                      className="bg-accent hover:bg-accent text-white gap-2 text-base"
+                    >
+                      <Check className="h-4 w-4" />
+                      Complete Tutorial
+                    </Button>
+                  </div>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="implementation" className="mt-8">
+                <Card className={cn("p-8", getCardStyles())}>
+                  <div className="flex flex-col gap-8">
+                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
+                      {currentTutorial?.title} Implementation
+                    </h3>
+                    {currentTutorial?.pseudocode && (
+                      <div className="mb-8">
+                        <h4 className="text-xl font-semibold text-main mb-4">Pseudocode</h4>
+                        <PseudocodeDisplay code={currentTutorial.pseudocode} />
+                      </div>
+                    )}
+                    <div className="prose prose-sm dark:prose-invert max-w-none">
+                      <pre className="language-{selectedLanguage} rounded-lg p-6 bg-secondary/20">
+                        <code className="text-sm font-mono leading-relaxed">
+                          {currentTutorial?.implementations[selectedLanguage]}
+                        </code>
+                      </pre>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
+                      }}
+                      className="bg-accent hover:bg-accent text-white gap-2 text-base"
+                    >
+                      <Check className="h-4 w-4" />
+                      Complete Tutorial
+                    </Button>
+                  </div>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="quiz" className="mt-8">
+                <Card className={cn("p-8", getCardStyles())}>
+                  <div className="flex flex-col gap-8">
+                    <h3
+                      className="text-3xl font-bold bg-clip-text text-transparent tracking-tight"
+                      style={{ backgroundImage: headingGradient }}
+                    >
+                      Vibe Check
+                    </h3>
+                    {/* Progress Indicator */}
+                    {currentTutorial && currentTutorial.quiz && currentTutorial.quiz.length > 1 && (
+                      <div className="flex items-center gap-4 mb-4">
+                        <Progress
+                          value={
+                            (Object.keys(quizAnswers).length / currentTutorial.quiz.length) * 100
+                          }
+                          className="w-40 h-2"
+                        />
+                        <span
+                          className="inline-block rounded-full bg-accent3/90 text-accent2 font-extrabold px-4 py-1 text-base shadow-xl drop-shadow-lg border-2 border-accent2 tracking-widest uppercase transition-transform duration-150 hover:scale-105 cursor-pointer"
+                          style={{ textShadow: "0 2px 6px rgba(0,0,0,0.18)" }}
+                        >
+                          {Object.keys(quizAnswers).length} / {currentTutorial.quiz.length} answered
+                        </span>
+                      </div>
+                    )}
+                    <div className="space-y-10">
+                      {currentTutorial &&
+                        currentTutorial.quiz &&
+                        currentTutorial.quiz.map((question, qIdx) => (
+                          <div
+                            key={question.id}
+                            className="space-y-6 rounded-2xl border border-[var(--card-border)] shadow-lg bg-white/80 dark:bg-background/80 p-6 transition-all duration-300"
+                          >
+                            <p
+                              className={cn(
+                                "font-semibold text-lg text-main leading-relaxed mb-2 flex items-center gap-2",
+                                quizTextColor
+                              )}
+                            >
+                              <span className="inline-block w-8 h-8 rounded-full bg-gradient-to-br from-[var(--accent2)] to-[var(--accent3)] text-white flex items-center justify-center font-bold mr-2">
+                                {qIdx + 1}
+                              </span>
+                              {question.question}
+                            </p>
+                            <div className="space-y-3">
+                              {question.options.map((option, index) => {
+                                const isSelected = quizAnswers[question.id] === index;
+                                const isCorrect = showResults && index === question.correctAnswer;
+                                const isIncorrect =
+                                  showResults && isSelected && index !== question.correctAnswer;
+                                return (
+                                  <label
+                                    key={index}
+                                    className={cn(
+                                      "flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all duration-200 text-base group",
+                                      quizTextColor,
+                                      isSelected &&
+                                        !showResults &&
+                                        "border-accent2 bg-accent2/10 shadow-md scale-[1.03]",
+                                      isCorrect &&
+                                        "border-green-500 bg-green-100/80 dark:bg-green-500/10 scale-[1.03]",
+                                      isIncorrect &&
+                                        "border-red-500 bg-red-100/80 dark:bg-red-500/10 scale-[1.03]",
+                                      !isSelected &&
+                                        !isCorrect &&
+                                        !isIncorrect &&
+                                        "border-[var(--card-border)] hover:bg-secondary/10"
+                                    )}
+                                    style={{
+                                      transition: "transform 0.15s cubic-bezier(.4,2,.6,1)",
+                                    }}
+                                  >
+                                    <input
+                                      type="radio"
+                                      name={`quiz-${question.id}`}
+                                      checked={isSelected}
+                                      disabled={showResults}
+                                      onChange={() => {
+                                        if (!showResults) {
+                                          setQuizAnswers({
+                                            ...quizAnswers,
+                                            [question.id]: index,
+                                          });
+                                        }
+                                      }}
+                                      className="form-radio h-5 w-5 text-accent2 border-accent2 focus:ring-accent2 transition-all duration-150"
+                                    />
+                                    <span className={cn("flex-1", quizTextColor)}>{option}</span>
+                                    {showResults && isCorrect && (
+                                      <span className="ml-2 text-green-400 font-semibold">
+                                        Correct
+                                      </span>
+                                    )}
+                                    {showResults && isIncorrect && (
+                                      <span className="ml-2 text-red-400 font-semibold">
+                                        Your Answer
+                                      </span>
+                                    )}
+                                  </label>
+                                );
+                              })}
+                            </div>
+                            {showResults && (
+                              <div className="mt-4 p-4 rounded-lg bg-secondary/10 border border-secondary/20 animate-fade-in">
+                                <p
+                                  className={cn(
+                                    "text-base text-main leading-relaxed",
+                                    quizTextColor
+                                  )}
+                                >
+                                  <span className="font-semibold text-accent2">Explanation:</span>{" "}
+                                  {question.explanation}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                    </div>
+                    {!showResults ? (
+                      <Button
+                        className="bg-accent2 hover:bg-accent2/90 text-white text-base mt-4"
+                        onClick={() => setShowResults(true)}
+                        disabled={
+                          !currentTutorial ||
+                          !currentTutorial.quiz ||
+                          Object.keys(quizAnswers).length !== currentTutorial.quiz.length
+                        }
+                      >
+                        Submit Quiz
+                      </Button>
+                    ) : (
+                      <>
+                        <Button
+                          className="bg-accent3 hover:bg-accent3/90 text-white gap-2 text-base mt-4"
+                          onClick={() => {
+                            if (currentTutorial) {
+                              localStorage.setItem(`tutorial-${currentTutorial.id}`, "completed");
+                            }
+                          }}
+                        >
+                          <Check className="h-4 w-4" />
+                          Complete Tutorial
+                        </Button>
+                        <Button
+                          className="bg-accent2 hover:bg-accent2/90 text-white gap-2 text-base mt-2 ml-2"
+                          onClick={() => {
+                            setQuizAnswers({});
+                            setShowResults(false);
+                          }}
+                        >
+                          Retry Quiz
+                        </Button>
+                      </>
+                    )}
+                  </div>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="resources" className="mt-8">
+                <Card className={cn("p-8", getCardStyles())}>
+                  <div className="flex flex-col gap-8">
+                    <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
+                      Additional Resources
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="flex items-start gap-4 p-6 rounded-lg bg-secondary/10 border border-secondary/20">
+                        <Book className="h-6 w-6 mt-1 text-accent2" />
+                        <div>
+                          <h4 className="font-semibold text-xl mb-4 tracking-tight">
+                            Further Reading
+                          </h4>
+                          <ul className="space-y-4 text-secondary">
+                            <li className="flex items-center gap-3 text-base">
+                              <div className="h-2 w-2 rounded-full bg-accent2" />
+                              Introduction to Algorithms by CLRS
+                            </li>
+                            <li className="flex items-center gap-3 text-base">
+                              <div className="h-2 w-2 rounded-full bg-accent2" />
+                              Algorithm Design Manual by Steven Skiena
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4 p-6 rounded-lg bg-secondary/10 border border-secondary/20">
+                        <Play className="h-6 w-6 mt-1 text-accent3" />
+                        <div>
+                          <h4 className="font-semibold text-xl mb-4 tracking-tight">
+                            Related Videos
+                          </h4>
+                          <ul className="space-y-4 text-secondary">
+                            <li className="flex items-center gap-3 text-base">
+                              <div className="h-2 w-2 rounded-full bg-accent3" />
+                              Advanced {currentTutorial?.title} Techniques
+                            </li>
+                            <li className="flex items-center gap-3 text-base">
+                              <div className="h-2 w-2 rounded-full bg-accent3" />
+                              {currentTutorial?.title} Optimization Strategies
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        )}
-      </div>
-    </Background>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          )}
+        </div>
+      </Background>
+    </TooltipProvider>
   );
 }
