@@ -429,8 +429,8 @@ const AboutPage = () => {
                 )}
               >
                 The{" "}
-                <Link to="/algorithm-learning" className="text-primary hover:underline">
-                  Algorithm Learning
+                <Link to="/cs-math" className="text-primary hover:underline">
+                  Computer Science Math Theory!
                 </Link>{" "}
                 page is your gateway to understanding the mathematical foundations of algorithms.
                 You'll find interactive lessons, visualizations, and practice problems that help you
@@ -548,7 +548,7 @@ const AboutPage = () => {
                 </div>
                 <p className={cn("mt-4", theme === "snes" ? "text-[#1a237e]/90" : "")}>
                   We recommend starting with the{" "}
-                  <Link to="/algorithm-learning" className="text-primary hover:underline">
+                  <Link to="/algo-guide" className="text-primary hover:underline">
                     Algorithm Learning
                   </Link>{" "}
                   section to build your theoretical foundation, then moving to{" "}
@@ -590,24 +590,6 @@ const AboutPage = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center">
-          <Link
-            to="/cs-math"
-            className={cn(
-              "inline-flex items-center px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300",
-              "hover:scale-105 hover:shadow-lg",
-              theme === "snes"
-                ? "bg-[#3498db] border-[#1a237e] text-white snes-font rounded-full font-bold animate-pulse border-2 hover:bg-[#1a237e] hover:text-[#fffbe6]"
-                : theme === "dracula"
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                  : theme === "nord"
-                    ? "bg-gradient-to-r from-[#A3BE8C] to-[#B48EAD] text-gray-900"
-                    : "bg-gradient-to-r from-[var(--accent)] to-[var(--accent2)] text-main"
-            )}
-          >
-            Begin Your Mathematical Journey
-          </Link>
-        </div>
       </div>
     </Background>
   );

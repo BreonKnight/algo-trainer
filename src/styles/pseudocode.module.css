@@ -5,7 +5,6 @@
   font-size: 0.875rem;
   padding: 1rem;
   border-radius: 0.75rem;
-  overflow: hidden;
   background: var(--pseudocode-gradient);
   backdrop-filter: blur(12px);
   box-shadow:
