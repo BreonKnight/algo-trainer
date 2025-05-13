@@ -901,3 +901,7 @@ textarea,
 .theme-light button:focus-visible {
   color: #fff;
 }
+
+.theme-light button {
+  color: var(--text-main) !important;
+}

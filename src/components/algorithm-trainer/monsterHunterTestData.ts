@@ -1499,21 +1499,14 @@ Expected Output: 8
 # You are detecting cycles in monster movement patterns!
 
 # Test Case 1: Basic Cycle Detection
-Input: {
-    "head": {
-        "value": 1,
-        "next": {
-            "value": 2,
-            "next": {
-                "value": 3,
-                "next": {
-                    "value": 4,
-                    "next": null
-                }
-            }
-        }
-    }
-}
+# Example: Creating a linked list 1 -> 2 -> 3 -> 4
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+
+# Now you can use 'head' as input to your function, e.g.:
+result = your_function(head)
 Expected Output: false
 
 # Monster Hunter Tip:
