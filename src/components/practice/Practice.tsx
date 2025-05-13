@@ -2,6 +2,7 @@ import Editor, { Monaco } from "@monaco-editor/react";
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import * as monaco from "monaco-editor";
 import { useState, useRef, useEffect, useMemo } from "react";
+import { create } from "zustand";
 
 import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
 import { useTheme } from "@/components/theme/use-theme";
@@ -22,6 +23,12 @@ import {
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
+// Zustand store for practice code
+const usePracticeStore = create<{ code: string; setCode: (c: string) => void }>((set) => ({
+  code: '# Write your Python code here\n\ndef main():\n    print("Hello, World!")\n\nif __name__ == "__main__":\n    main()',
+  setCode: (c) => set({ code: c }),
+}));
+
 const Practice = () => {
   const { theme } = useTheme();
   const [copied, setCopied] = useState(false);
@@ -29,9 +36,8 @@ const Practice = () => {
   const [fontSize, setFontSize] = useState(14);
   const minFont = 12;
   const maxFont = 28;
-  const [code, setCode] = useState<string>(
-    '# Write your Python code here\n\ndef main():\n    print("Hello, World!")\n\nif __name__ == "__main__":\n    main()'
-  );
+  const code = usePracticeStore((s) => s.code);
+  const setCode = usePracticeStore((s) => s.setCode);
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const monacoRef = useRef<Monaco | null>(null);
 
@@ -82,17 +88,6 @@ const Practice = () => {
       monacoRef.current.editor.setTheme(getMonacoTheme());
     }
   }, [getMonacoTheme]);
-
-  // Load code from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem("practice-code");
-    if (saved) setCode(saved);
-  }, []);
-
-  // Save code to localStorage on change
-  useEffect(() => {
-    localStorage.setItem("practice-code", code);
-  }, [code]);
 
   const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     editorRef.current = editor;

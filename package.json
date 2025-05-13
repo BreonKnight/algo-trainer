@@ -76,7 +76,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "sonner": "^2.0.3",
     "tailwind-merge": "^2.6.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "zustand": "^5.0.4"
   },
   "devDependencies": {
     "@babel/parser": "^7.27.2",
