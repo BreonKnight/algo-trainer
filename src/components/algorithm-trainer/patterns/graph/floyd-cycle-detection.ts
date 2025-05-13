@@ -21,27 +21,22 @@ Step 2: slow=2, fast=3
 Step 3: slow=3, fast=5
 Step 4: slow=4, fast=3
 Step 5: slow=5, fast=5 (meet - cycle detected)`,
-  implementation: `class ListNode {
-  constructor(val, next = null) {
-    this.val = val;
-    this.next = next;
-  }
-}
+  implementation: `class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-function hasCycle(head) {
-  if (!head || !head.next) return false;
-  
-  let slow = head;
-  let fast = head.next;
-  
-  while (fast && fast.next) {
-    if (slow === fast) return true;
-    slow = slow.next;
-    fast = fast.next.next;
-  }
-  
-  return false;
-}`,
+def has_cycle(head):
+    if not head or not head.next:
+        return False
+    slow = head
+    fast = head.next
+    while fast and fast.next:
+        if slow == fast:
+            return True
+        slow = slow.next
+        fast = fast.next.next
+    return False`,
   keySteps: [
     "Initialize two pointers at the head of the list",
     "Move pointers at different speeds",

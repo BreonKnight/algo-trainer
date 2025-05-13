@@ -45,6 +45,9 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
       style={
         {
           "--pseudocode-bg": backgroundColor,
+          display: "inline-block",
+          width: "fit-content",
+          overflowX: "auto",
         } as React.CSSProperties
       }
     >
@@ -62,6 +65,9 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
           fontFamily: "JetBrains Mono, Fira Mono, Menlo, Monaco, Consolas, monospace",
           textAlign: "left",
           whiteSpace: "pre",
+          display: "inline-block",
+          width: "fit-content",
+          overflowX: "auto",
         }}
         showLineNumbers={true}
         codeTagProps={{

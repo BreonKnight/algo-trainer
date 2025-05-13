@@ -117,7 +117,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
       case "dracula":
         return "bg-background/95 backdrop-blur-sm border border-accent2/20";
       case "nord":
-        return "bg-white/90 border-[#D8DEE9]/70 backdrop-blur-sm";
+        return "bg-[#3b4252] border-[#D8DEE9]/70 backdrop-blur-sm text-[#eceff4]";
       case "light":
         return "bg-white/95 backdrop-blur-sm border border-accent/20";
       case "solarized":

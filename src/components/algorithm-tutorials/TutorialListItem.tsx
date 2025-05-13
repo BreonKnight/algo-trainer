@@ -30,7 +30,7 @@ const getThemeListItemClass = (theme: string) =>
     theme === "dracula"
       ? "bg-background/90 border-accent2/20 text-main"
       : theme === "nord"
-        ? "bg-white/90 border-[#D8DEE9]/70 text-[#2e3440]"
+        ? "bg-[#3b4252] border-[#D8DEE9]/70 text-[#eceff4]"
         : theme === "light"
           ? "bg-white border-accent/20 text-gray-900"
           : theme === "solarized"
