@@ -318,7 +318,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
   };
 
   return (
-    <Card className="repl-card p-4 bg-[var(--card-bg)] border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card className="repl-card p-4 w-full h-full flex flex-col overflow-hidden bg-transparent backdrop-blur-sm border border-[var(--border)]/20">
       <div className="flex-none flex justify-between items-center mb-4">
         <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
           Output
@@ -357,9 +357,9 @@ export function ReplCard({ userCode }: ReplCardProps) {
             minHeight: "300px",
           }}
         >
-          <div className="h-full w-full overflow-auto p-4">
+          <div className={`h-full w-full overflow-auto p-4 ${currentStyle.bg}`}>
             <pre
-              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed ${currentStyle.text}`}
+              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed ${currentStyle.text} ${currentStyle.bg}`}
             >
               {error ? (
                 <span className={currentStyle.error}>{error}</span>
