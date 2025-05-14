@@ -1,10 +1,10 @@
 import { Sigma, Calculator, LineChart, Binary, Network, Infinity } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
 
 import { Background } from "@/components/ui/background";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 import snesController from "/snes-controller.svg";
 import gamecubeController from "/gamecube-controller.svg";
@@ -102,14 +102,14 @@ const AboutPage = () => {
       if (type === "facts") return "bg-[#EBCB8B]/90 text-[#1a237e]"; // Nord yellow
     }
     if (theme === "nord") {
-      if (type === "focus") return "bg-[#6A4BB6]/90 text-[#1a237e]";
-      if (type === "music") return "bg-[#B48EAD]/90 text-[#1a237e]";
-      if (type === "facts") return "bg-[#EBCB8B]/90 text-[#1a237e]";
+      if (type === "focus") return "bg-[#81A1C1]/90 text-[#2E3440]"; // Nord blue accent
+      if (type === "music") return "bg-[#B48EAD]/90 text-[#2E3440]"; // Nord purple accent
+      if (type === "facts") return "bg-[#EBCB8B]/90 text-[#2E3440]"; // Nord yellow accent
     }
     if (theme === "dracula") {
-      if (type === "focus") return "bg-[#ff79c6]/90 text-[#1a237e]";
-      if (type === "music") return "bg-[#bd93f9]/90 text-[#1a237e]";
-      if (type === "facts") return "bg-[#f1fa8c]/90 text-[#1a237e]";
+      if (type === "focus") return "bg-[#ff79c6]/90 text-[#f8f8f2]";
+      if (type === "music") return "bg-[#bd93f9]/90 text-[#f8f8f2]";
+      if (type === "facts") return "bg-[#f1fa8c]/90 text-[#282a36]";
     }
     if (type === "focus") return "bg-accent/90 text-[#1a237e]";
     if (type === "music") return "bg-accent2/90 text-[#1a237e]";
@@ -119,8 +119,8 @@ const AboutPage = () => {
 
   const getTextColor = (theme: string) => {
     if (theme === "snes") return "text-[#1a237e]";
-    if (theme === "dracula") return "text-[#1a237e]";
-    if (theme === "nord") return "text-[#1a237e]";
+    if (theme === "dracula") return "text-[#bd93f9]";
+    if (theme === "nord") return "text-[#ECEFF4]";
     return "text-main";
   };
 
@@ -132,7 +132,7 @@ const AboutPage = () => {
       return "bg-gray-800/50 border-gray-700/50 backdrop-blur-xl";
     }
     if (theme === "nord") {
-      return "bg-white/90 border-[#D8DEE9]/70 backdrop-blur-xl";
+      return "bg-[#3B4252] border-[#4C566A] text-[#ECEFF4] backdrop-blur-xl";
     }
     return "bg-main/90 border-border/70 backdrop-blur-xl";
   };
@@ -145,7 +145,7 @@ const AboutPage = () => {
       return "hover:bg-gray-800/70 hover:border-gray-600/50";
     }
     if (theme === "nord") {
-      return "hover:bg-white/95 hover:border-[#A3BE8C]/50";
+      return "hover:bg-[#434C5E] hover:border-[#81A1C1]";
     }
     return "hover:bg-main/95 hover:border-accent/50";
   };
@@ -155,12 +155,28 @@ const AboutPage = () => {
       return "text-[#1a237e]";
     }
     if (theme === "dracula") {
-      return "text-[#1a237e]";
+      return "text-[#bd93f9]";
     }
     if (theme === "nord") {
-      return "text-[#1a237e]";
+      return "text-[#ECEFF4]";
     }
     return "text-main";
+  };
+
+  // GameCube-inspired color classes for Nord theme
+  const gamecubeColors = [
+    "text-[#78C850]", // Green (A)
+    "text-[#FFD700]", // Yellow (Y)
+    "text-[#E06C75]", // Red (B)
+    "text-[#58A6FF]", // Blue (X)
+    "text-[#6A4BB6]", // Purple (Body)
+  ];
+
+  // Helper to alternate section title colors for Nord
+  const getGamecubeSectionColor = (index: number) => {
+    return theme === "nord"
+      ? gamecubeColors[index % gamecubeColors.length]
+      : getCardTextStyle(theme);
   };
 
   return (
@@ -169,25 +185,25 @@ const AboutPage = () => {
       <div
         className={cn(
           "w-full flex justify-center gap-2 md:gap-6 py-4 px-2 md:px-0 mb-8",
-          theme === "nord" ? "bg-[#6A4BB6]/10" : ""
+          theme === "nord" ? "bg-[#2E3440]" : ""
         )}
       >
         {sectionLinks.map((link) => (
-          <button
+          <Button
             key={link.id}
-            onClick={() => scrollToSection(link.id)}
+            size="standard"
+            variant={theme === "nord" ? "outline" : "default"}
             className={cn(
-              "text-sm md:text-base font-semibold px-4 py-2 rounded-full transition-all",
-              theme === "nord"
-                ? "bg-[#6A4BB6]/20 text-white hover:bg-[#6A4BB6]/40 hover:scale-105"
-                : theme === "snes"
-                  ? "bg-[#3498db]/20 text-[#1a237e] hover:bg-[#3498db]/40 hover:scale-105"
-                  : "bg-accent/20 text-main hover:bg-accent/40 hover:scale-105"
+              theme === "nord" &&
+                "bg-[#434C5E] text-[#ECEFF4] hover:bg-[#4C566A] hover:text-[#81A1C1] border border-[#4C566A]",
+              theme === "snes" && "bg-[#3498db]/20 text-[#1a237e] hover:bg-[#3498db]/40",
+              theme !== "nord" && theme !== "snes" && "bg-accent/20 text-main hover:bg-accent/40"
             )}
             aria-label={`Jump to ${link.label}`}
+            onClick={() => scrollToSection(link.id)}
           >
             {link.label}
-          </button>
+          </Button>
         ))}
       </div>
       <div
@@ -209,7 +225,7 @@ const AboutPage = () => {
           className={cn(
             "text-center mb-12 pb-4 overflow-visible max-w-4xl mx-auto p-8 rounded-3xl",
             theme === "nord"
-              ? "border border-white/20 text-white"
+              ? "bg-[#3B4252] border border-[#4C566A] text-[#ECEFF4]"
               : theme === "snes"
                 ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e]"
                 : "bg-main/60 border-accent/40"
@@ -221,7 +237,9 @@ const AboutPage = () => {
           <h1
             className={cn(
               "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
-              `gradient-text-${theme}`,
+              theme === "nord"
+                ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text"
+                : `gradient-text-${theme}`,
               theme === "snes" && "snes-font"
             )}
           >
@@ -251,7 +269,7 @@ const AboutPage = () => {
           className={cn(
             "max-w-4xl mx-auto mb-12 p-8 rounded-3xl",
             theme === "nord"
-              ? "border border-white/20 text-white"
+              ? "bg-[#3B4252] border border-[#4C566A] text-[#ECEFF4]"
               : theme === "snes"
                 ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e]"
                 : "bg-main/60 border-accent/40"
@@ -260,7 +278,9 @@ const AboutPage = () => {
           <h2
             className={cn(
               "text-2xl font-bold mb-8 text-center",
-              theme === "nord" ? "text-white drop-shadow-lg" : getCardTextStyle(theme)
+              theme === "nord"
+                ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text drop-shadow-lg"
+                : getCardTextStyle(theme)
             )}
           >
             How AlgoTrainer Works
@@ -297,7 +317,7 @@ const AboutPage = () => {
                 className={cn(
                   "p-6 rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl",
                   theme === "nord"
-                    ? "border border-white/20 text-white hover:bg-white/5"
+                    ? "border border-[#4C566A] text-[#ECEFF4] hover:bg-[#434C5E]"
                     : theme === "snes"
                       ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] hover:border-[#3498db] snes-glow"
                       : "bg-main/60 border-accent/40"
@@ -315,18 +335,13 @@ const AboutPage = () => {
                 >
                   {step.emoji}
                 </span>
-                <h3
-                  className={cn(
-                    "font-semibold mb-2 text-lg",
-                    theme === "nord" ? "text-[#1a237e] drop-shadow" : getCardTextStyle(theme)
-                  )}
-                >
+                <h3 className={cn("font-semibold mb-2 text-lg", getGamecubeSectionColor(index))}>
                   {step.title}
                 </h3>
                 <p
                   className={cn(
                     "text-sm",
-                    theme === "nord" ? "text-[#1a237e]/90" : "text-foreground/70"
+                    theme === "nord" ? "text-[#ECEFF4]/90" : "text-foreground/70"
                   )}
                 >
                   {step.description}
@@ -344,16 +359,18 @@ const AboutPage = () => {
             theme === "snes"
               ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] backdrop-blur-xl"
               : theme === "dracula"
-                ? "bg-white/10 border-blue-400/30"
+                ? "bg-gray-800/50 border-blue-400/30"
                 : theme === "nord"
-                  ? "bg-white/60 border-[#A3BE8C]/40"
+                  ? "bg-[#3B4252] border-[#4C566A] text-[#ECEFF4] backdrop-blur-xl"
                   : "bg-main/60 border-accent/40"
           )}
         >
           <h2
             className={cn(
               "text-2xl font-bold mb-2 text-center flex items-center justify-center gap-2",
-              getTextColor(theme)
+              theme === "nord"
+                ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text"
+                : getTextColor(theme)
             )}
           >
             <span>⏲️</span> <span>🎵</span> <span>💡</span> <span>Your Productivity Tools</span>
@@ -414,8 +431,12 @@ const AboutPage = () => {
                 <span className={cn("text-3xl mb-2", theme === "snes" && "animate-bounce")}>
                   {tool.emoji}
                 </span>
-                <h3 className={cn("font-semibold mb-1", getCardTextStyle(theme))}>{tool.title}</h3>
-                <p className={cn("text-sm mb-2", getCardTextStyle(theme))}>{tool.description}</p>
+                <h3 className={cn("font-semibold mb-1", getGamecubeSectionColor(index))}>
+                  {tool.title}
+                </h3>
+                <p className={cn("text-sm mb-2", getGamecubeSectionColor(index))}>
+                  {tool.description}
+                </p>
                 <div
                   className={cn(
                     "text-xs rounded px-2 py-1 mb-1",
@@ -425,7 +446,10 @@ const AboutPage = () => {
                   {tool.tag.text}
                 </div>
                 <ul
-                  className={cn("text-xs text-left list-disc list-inside", getCardTextStyle(theme))}
+                  className={cn(
+                    "text-xs text-left list-disc list-inside",
+                    getGamecubeSectionColor(index)
+                  )}
                 >
                   {tool.items.map((item, i) => (
                     <li key={i}>{item}</li>
@@ -471,7 +495,7 @@ const AboutPage = () => {
           className={cn(
             "max-w-4xl mx-auto mb-16 p-8 rounded-3xl",
             theme === "nord"
-              ? "border border-white/20 text-white"
+              ? "bg-[#3B4252] border border-[#4C566A] text-[#ECEFF4]"
               : theme === "snes"
                 ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e]"
                 : "bg-main/60 border-accent/40"
@@ -480,7 +504,9 @@ const AboutPage = () => {
           <h2
             className={cn(
               "text-2xl font-bold mb-8 text-center",
-              theme === "nord" ? "text-white drop-shadow-lg" : getCardTextStyle(theme)
+              theme === "nord"
+                ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text drop-shadow-lg"
+                : getCardTextStyle(theme)
             )}
           >
             Your Mathematical Journey
@@ -492,7 +518,7 @@ const AboutPage = () => {
                 className={cn(
                   "p-6 rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl",
                   theme === "nord"
-                    ? "border border-white/20 text-white hover:bg-white/5"
+                    ? "border border-[#4C566A] text-[#ECEFF4] hover:bg-[#434C5E]"
                     : theme === "snes"
                       ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] hover:border-[#3498db] snes-glow"
                       : "bg-main/60 border-accent/40"
@@ -501,18 +527,13 @@ const AboutPage = () => {
                 <div className={cn("mb-4 text-primary", theme === "nord" ? "text-white" : "")}>
                   {step.icon}
                 </div>
-                <h3
-                  className={cn(
-                    "text-lg font-semibold mb-3",
-                    theme === "nord" ? "text-[#1a237e] drop-shadow" : getCardTextStyle(theme)
-                  )}
-                >
+                <h3 className={cn("text-lg font-semibold mb-3", getGamecubeSectionColor(index))}>
                   {step.title}
                 </h3>
                 <p
                   className={cn(
                     "text-foreground/80",
-                    theme === "nord" ? "text-[#1a237e]/90" : getCardTextStyle(theme)
+                    theme === "nord" ? "text-[#ECEFF4]/90" : getGamecubeSectionColor(index)
                   )}
                 >
                   {step.description}
@@ -527,16 +548,18 @@ const AboutPage = () => {
           className={cn(
             "max-w-4xl mx-auto mb-16 p-8 rounded-3xl",
             theme === "nord"
-              ? "border border-white/20 text-white"
+              ? "bg-[#3B4252] border border-[#4C566A] text-[#ECEFF4]"
               : theme === "snes"
                 ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e]"
-                : "bg-main/60 border-accent/40"
+                : "bg-main/60 border-accent/40 text-white"
           )}
         >
           <h2
             className={cn(
               "text-2xl font-bold mb-8 text-center",
-              theme === "nord" ? "text-white drop-shadow-lg" : getCardTextStyle(theme)
+              theme === "nord"
+                ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text drop-shadow-lg"
+                : "text-white"
             )}
           >
             Core Learning Areas
@@ -548,27 +571,22 @@ const AboutPage = () => {
                 className={cn(
                   "p-6 rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl",
                   theme === "nord"
-                    ? "border border-white/20 text-white hover:bg-white/5"
+                    ? "border border-[#4C566A] text-[#ECEFF4] hover:bg-[#434C5E]"
                     : theme === "snes"
                       ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] hover:border-[#3498db] snes-glow"
-                      : "bg-main/60 border-accent/40"
+                      : "bg-main/60 border-accent/40 text-white"
                 )}
               >
-                <div className={cn("mb-4 text-primary", theme === "nord" ? "text-white" : "")}>
+                <div className={cn("mb-4", theme === "nord" ? "text-white" : "text-white")}>
                   {section.icon}
                 </div>
-                <h3
-                  className={cn(
-                    "text-xl font-semibold mb-3",
-                    theme === "nord" ? "text-[#1a237e] drop-shadow" : getCardTextStyle(theme)
-                  )}
-                >
+                <h3 className={cn("text-xl font-semibold mb-3", getGamecubeSectionColor(index))}>
                   {section.title}
                 </h3>
                 <p
                   className={cn(
                     "text-foreground/80",
-                    theme === "nord" ? "text-[#1a237e]/90" : getCardTextStyle(theme)
+                    theme === "nord" ? "text-[#ECEFF4]/90" : "text-white/90"
                   )}
                 >
                   {section.description}
@@ -588,7 +606,7 @@ const AboutPage = () => {
               : theme === "dracula"
                 ? "bg-white/10 border-blue-400/30"
                 : theme === "nord"
-                  ? "bg-gradient-to-br from-[#3b206a] to-[#5a3fa0] border border-white/30 text-white"
+                  ? "bg-[#3B4252] border border-[#4C566A] text-[#ECEFF4] backdrop-blur-xl"
                   : "bg-main/60 border-accent/40"
           )}
         >
@@ -614,7 +632,8 @@ const AboutPage = () => {
               className={cn(
                 "text-2xl md:text-3xl font-bold text-center flex items-center justify-center gap-2 mb-1",
                 getTextColor(theme),
-                theme === "nord" && "drop-shadow-lg"
+                theme === "nord" &&
+                  "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text drop-shadow-lg"
               )}
             >
               Getting Started with Algorithm Learning
@@ -650,7 +669,7 @@ const AboutPage = () => {
                 className={cn(
                   "text-xl font-semibold mb-3 flex items-center gap-2",
                   getTextColor(theme),
-                  theme === "nord" && "drop-shadow-md"
+                  theme === "nord" && "text-[#FFD700] drop-shadow-md"
                 )}
               >
                 📝 How to Use the App
@@ -695,7 +714,7 @@ const AboutPage = () => {
                 className={cn(
                   "text-xl font-semibold mb-3 flex items-center gap-2",
                   getTextColor(theme),
-                  theme === "nord" && "drop-shadow-md"
+                  theme === "nord" && "text-[#78C850] drop-shadow-md"
                 )}
               >
                 🎮 Learning Path Integration
@@ -772,7 +791,10 @@ const AboutPage = () => {
                       </p>
                       <Link
                         to={path.link}
-                        className="text-primary font-semibold hover:underline text-sm transition-colors"
+                        className={cn(
+                          "text-primary font-semibold hover:underline text-sm transition-colors",
+                          theme === "nord" && "text-[#58A6FF] hover:text-[#FFD700]"
+                        )}
                       >
                         Start Learning →
                       </Link>
@@ -814,7 +836,7 @@ const AboutPage = () => {
               className={cn(
                 "text-xl font-semibold mb-3 flex items-center gap-2",
                 getTextColor(theme),
-                theme === "nord" && "drop-shadow-md"
+                theme === "nord" && "text-[#E06C75] drop-shadow-md"
               )}
             >
               💡 Tips for Success
@@ -837,17 +859,19 @@ const AboutPage = () => {
             </ul>
           </div>
           <div className="flex justify-center mt-10">
-            <Link
-              to="/algorithm-learning"
+            <Button
               className={cn(
-                "px-8 py-4 rounded-2xl font-bold text-lg shadow-lg bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white hover:from-purple-500 hover:to-pink-500 transition-all border-2 border-white/40 animate-glow",
+                "px-8 py-4 text-lg shadow-lg border-2 animate-glow",
                 theme === "snes"
                   ? "bg-[#3498db] text-[#fffbe6] border-[#1a237e] hover:bg-[#1a237e] hover:text-[#fffbe6]"
-                  : ""
+                  : theme === "nord" &&
+                      "bg-[#58A6FF] text-[#2E3440] border-[#FFD700] hover:bg-[#FFD700] hover:text-[#2E3440] hover:border-[#58A6FF]"
               )}
+              asChild
+              size="standard"
             >
-              Start Learning Now
-            </Link>
+              <Link to="/algorithm-learning">Start Learning Now</Link>
+            </Button>
           </div>
           {/* Animations */}
           <style>{`

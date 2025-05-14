@@ -29,12 +29,10 @@ export const AlgorithmPattern = ({
           className="text-lg sm:text-xl md:text-2xl font-extrabold uppercase tracking-wide break-words"
           style={
             theme === "snes"
-              ? { color: "#4040e0", background: "none", backgroundColor: "green" }
+              ? { color: "#4040e0", background: "none", backgroundColor: "transparent" }
               : {
-                  backgroundImage:
-                    "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
+                  color: "var(--text-main)",
+                  background: "var(--pseudocode-gradient)",
                 }
           }
         >

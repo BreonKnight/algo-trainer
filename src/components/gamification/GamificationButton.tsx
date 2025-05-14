@@ -5,21 +5,16 @@ import { Link } from "react-router-dom";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+  ThemedDialog,
+  ThemedDialogHeader,
+  ThemedDialogTitle,
+  ThemedDialogDescription,
+  ThemedDialogBody,
+} from "@/components/ui/themed-dialog";
 import GamificationService, { UserProgress, Badge, AlgorithmProgress } from "@/lib/gamification";
 
 const themeStyles = {
   dracula: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -36,11 +31,6 @@ const themeStyles = {
     },
   },
   light: {
-    button: "bg-accent hover:bg-accent/90 text-white shadow-sm",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20",
-    header: "border-b border-accent/20",
-    title: "text-accent font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent/10",
     text: {
       primary: "text-main",
       secondary: "text-main/80",
@@ -57,11 +47,6 @@ const themeStyles = {
     },
   },
   dark: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-main",
-    dialog: "bg-background/95 backdrop-blur-sm border border-secondary/20",
-    header: "border-b border-secondary/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -78,11 +63,6 @@ const themeStyles = {
     },
   },
   solarized: {
-    button: "bg-accent/10 hover:bg-accent/20 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/10",
-    header: "border-b border-accent/10",
-    title: "text-accent font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent/10",
     text: {
       primary: "text-accent-foreground/90",
       secondary: "text-accent-foreground/70",
@@ -99,11 +79,6 @@ const themeStyles = {
     },
   },
   nord: {
-    button: "bg-accent/20 hover:bg-accent/30 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20",
-    header: "border-b border-accent/20",
-    title: "text-accent font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -120,11 +95,6 @@ const themeStyles = {
     },
   },
   snes: {
-    button: "bg-accent/20 hover:bg-accent/30 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20 shadow-xl",
-    header: "border-b border-accent/20",
-    title: "text-accent font-bold",
-    card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
     text: {
       primary: "text-white",
       secondary: "text-white/80",
@@ -141,11 +111,6 @@ const themeStyles = {
     },
   },
   ps2: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -162,11 +127,6 @@ const themeStyles = {
     },
   },
   re2: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -183,11 +143,6 @@ const themeStyles = {
     },
   },
   mh: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -270,40 +225,14 @@ export function GamificationButton() {
       </Button>
 
       {/* Gamification Panel */}
-      <Dialog open={showPanel} onOpenChange={setShowPanel}>
-        <DialogContent
-          className={`max-w-2xl max-h-[80vh] ${styles.dialog}`}
-          style={{
-            background:
-              theme === "light" || theme === "solarized"
-                ? "rgba(255, 255, 255, 0.8)"
-                : theme === "nord"
-                  ? "rgb(88, 91, 112)"
-                  : "rgba(40, 42, 54, 0.8)",
-            backdropFilter: "blur(12px)",
-            animation: "modalSlideIn 0.3s ease-out",
-            border:
-              theme === "light" || theme === "solarized"
-                ? "1px solid rgba(0, 0, 0, 0.1)"
-                : theme === "nord"
-                  ? "1px solid rgba(255, 255, 255, 0.1)"
-                  : "1px solid rgba(255, 255, 255, 0.1)",
-            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
-          }}
-          onPointerDownOutside={(e) => {
-            e.preventDefault();
-            setShowPanel(false);
-          }}
-        >
-          <DialogHeader className={`${styles.header} pb-4`}>
-            <DialogTitle className={`text-2xl font-bold ${styles.title} tracking-tight`}>
-              Your Progress
-            </DialogTitle>
-            <DialogDescription className={`${styles.text.secondary} mt-2`}>
-              View your learning progress, achievements, and algorithm mastery
-            </DialogDescription>
-          </DialogHeader>
-
+      <ThemedDialog isOpen={showPanel} onClose={() => setShowPanel(false)} maxWidth="2xl">
+        <ThemedDialogHeader>
+          <ThemedDialogTitle>Your Progress</ThemedDialogTitle>
+          <ThemedDialogDescription>
+            View your learning progress, achievements, and algorithm mastery
+          </ThemedDialogDescription>
+        </ThemedDialogHeader>
+        <ThemedDialogBody>
           <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2 custom-scrollbar">
             {/* User Stats Section */}
             <div className="mb-8">
@@ -434,8 +363,8 @@ export function GamificationButton() {
               </Button>
             </Link>
           </div>
-        </DialogContent>
-      </Dialog>
+        </ThemedDialogBody>
+      </ThemedDialog>
     </>
   );
 }
