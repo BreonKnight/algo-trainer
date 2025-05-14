@@ -49,43 +49,59 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const terminalStyles = {
     dracula: {
       bg: "bg-[#282a36]",
-      text: "text-[#f8f8f2]",
-      error: "text-[#ff5555]",
+      text: "text-[#f8f8f2] font-mono",
+      error: "text-[#ff5555] font-mono",
+      container: "border border-[#bd93f9]/30 shadow-[0_0_10px_rgba(189,147,249,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#bd93f9]/5 after:pointer-events-none",
     },
     solarized: {
       bg: "bg-[#002b36]",
-      text: "text-[#839496]",
-      error: "text-[#dc322f]",
+      text: "text-[#839496] font-mono",
+      error: "text-[#dc322f] font-mono",
+      container: "border border-[#2aa198]/30 shadow-[0_0_10px_rgba(42,161,152,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#2aa198]/5 after:pointer-events-none",
     },
     light: {
-      bg: "bg-[#f8f8f8]",
-      text: "text-[#2d3748]",
-      error: "text-red-600",
+      bg: "bg-[#1a1a1a]",
+      text: "text-[#e0e0e0] font-mono",
+      error: "text-[#ff4444] font-mono",
+      container: "border border-[#4a9eff]/30 shadow-[0_0_10px_rgba(74,158,255,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#4a9eff]/5 after:pointer-events-none",
     },
     nord: {
       bg: "bg-[#2e3440]",
-      text: "text-[#d8dee9]",
-      error: "text-[#bf616a]",
+      text: "text-[#d8dee9] font-mono",
+      error: "text-[#bf616a] font-mono",
+      container: "border border-[#88c0d0]/30 shadow-[0_0_10px_rgba(136,192,208,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#88c0d0]/5 after:pointer-events-none",
     },
     snes: {
       bg: "bg-[#2c2c2c]",
-      text: "text-[#c7c7c7]",
-      error: "text-[#ff6b6b]",
+      text: "text-[#00ff00] font-mono",
+      error: "text-[#ff6b6b] font-mono",
+      container: "border border-[#00ff00]/30 shadow-[0_0_10px_rgba(0,255,0,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#00ff00]/5 after:pointer-events-none",
     },
     ps2: {
       bg: "bg-[#1a1a1a]",
-      text: "text-[#e0e0e0]",
-      error: "text-[#ff4757]",
+      text: "text-[#4a9eff] font-mono",
+      error: "text-[#ff4757] font-mono",
+      container: "border border-[#4a9eff]/30 shadow-[0_0_10px_rgba(74,158,255,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#4a9eff]/5 after:pointer-events-none",
     },
     re2: {
       bg: "bg-[#1e1e1e]",
-      text: "text-[#d4d4d4]",
-      error: "text-[#ff3333]",
+      text: "text-[#d4d4d4] font-mono",
+      error: "text-[#ff3333] font-mono",
+      container: "border border-[#569cd6]/30 shadow-[0_0_10px_rgba(86,156,214,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#569cd6]/5 after:pointer-events-none",
     },
     mh: {
       bg: "bg-[#2d2d2d]",
-      text: "text-[#e6e6e6]",
-      error: "text-[#ff6b6b]",
+      text: "text-[#e6e6e6] font-mono",
+      error: "text-[#ff6b6b] font-mono",
+      container: "border border-[#ffd700]/30 shadow-[0_0_10px_rgba(255,215,0,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#ffd700]/5 after:pointer-events-none",
     },
   };
 
@@ -351,20 +367,20 @@ export function ReplCard({ userCode }: ReplCardProps) {
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         <div
           ref={replRef}
-          className={`flex-1 min-h-[300px] overflow-hidden rounded-xl ${currentStyle.bg}`}
+          className={`flex-1 min-h-[300px] overflow-hidden rounded-xl relative ${currentStyle.bg} ${currentStyle.container} ${currentStyle.glow} flex flex-col`}
           style={{
             height: isDesktop ? replHeight : "300px",
             minHeight: "300px",
           }}
         >
-          <div className={`h-full w-full overflow-auto p-4 ${currentStyle.bg}`}>
+          <div className={`absolute inset-0 overflow-auto ${currentStyle.bg}`}>
             <pre
-              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed ${currentStyle.text} ${currentStyle.bg}`}
+              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed p-2 ${currentStyle.text} ${currentStyle.bg}`}
             >
               {error ? (
                 <span className={currentStyle.error}>{error}</span>
               ) : (
-                <span>{output || "Run your code to see the output here..."}</span>
+                <span>{output || ":)"}</span>
               )}
             </pre>
           </div>

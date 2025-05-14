@@ -120,6 +120,50 @@ body {
   overflow: hidden !important;
 }
 
+/* Matrix Terminal Styles */
+.repl-card pre span {
+  position: relative;
+}
+
+.repl-card pre span::after {
+  content: '_';
+  opacity: 0;
+  margin-left: 2px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.repl-card pre {
+  position: relative;
+  z-index: 1;
+}
+
+.repl-card pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03) 0px,
+    rgba(0, 255, 0, 0) 1px,
+    rgba(0, 255, 0, 0.03) 2px
+  );
+  pointer-events: none;
+  animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
 /* Code Block Styles */
 .code-block {
   position: relative;
