@@ -55,5 +55,18 @@ export function getCodeBlockClass(theme: string) {
 }
 
 export function getIconClass(theme: string) {
-  return theme === "snes" ? "text-[var(--icon-color)]" : "text-[var(--icon-color)]";
+  switch (theme) {
+    case "snes":
+      return "text-[var(--icon-color)] drop-shadow-[0_1px_2px_rgba(255,255,255,0.5)]";
+    case "ps2":
+      return "text-[var(--icon-color)] drop-shadow-[0_0_8px_rgba(75,117,255,0.4)]";
+    case "re2":
+      return "text-[var(--icon-color)] drop-shadow-[0_0_8px_rgba(184,0,0,0.4)]";
+    case "nord":
+      return "text-[var(--icon-color)] drop-shadow-[0_1px_2px_rgba(236,239,244,0.3)]";
+    case "dracula":
+      return "text-[var(--icon-color)] drop-shadow-[0_0_8px_rgba(189,147,249,0.3)]";
+    default:
+      return "text-[var(--icon-color)]";
+  }
 }

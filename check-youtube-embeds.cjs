@@ -25,7 +25,7 @@ async function checkYouTubeEmbed(url) {
   for (const section of Object.values(tutorials)) {
     for (const tutorial of section) {
       if (tutorial.videoUrl) {
-        // eslint-disable-next-line no-await-in-loop
+         
         const valid = await checkYouTubeEmbed(tutorial.videoUrl);
         if (!valid) {
           allValid = false;

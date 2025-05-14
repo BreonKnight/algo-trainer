@@ -47,35 +47,50 @@
   position: relative;
   z-index: 3;
   color: var(--pseudocode-text);
-  line-height: 1.6;
+  line-height: 1.8;
   white-space: pre-wrap;
   text-shadow: var(--pseudocode-text-shadow);
   padding-left: 0;
 }
 
+.pseudocodeContent p {
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--pseudocode-text);
+  opacity: 0.95;
+}
+
+.pseudocodeContent p:last-child {
+  margin-bottom: 0;
+}
+
 /* Algorithm title and metadata */
 .pseudocodeContent .algorithm-title {
   color: var(--pseudocode-heading);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   display: block;
   padding-left: 0;
+  letter-spacing: 0.02em;
 }
 
 .pseudocodeContent .algorithm-type {
   color: var(--pseudocode-type);
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   display: block;
+  letter-spacing: 0.01em;
 }
 
 .pseudocodeContent .algorithm-meta {
   color: var(--pseudocode-metadata);
-  font-size: 0.75rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.75rem;
   display: block;
+  line-height: 1.6;
 }
 
 /* Syntax highlighting */

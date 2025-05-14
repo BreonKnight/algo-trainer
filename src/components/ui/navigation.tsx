@@ -38,7 +38,7 @@ const styles = `
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 }
 
@@ -47,15 +47,24 @@ const styles = `
     transform: rotate(0);
   }
   25% {
-    transform: rotate(-5deg);
+    transform: rotate(-2deg);
   }
   75% {
-    transform: rotate(5deg);
+    transform: rotate(2deg);
   }
 }
 
 .hamburger-animation {
-  animation: bounce 1s ease-in-out infinite, wiggle 2s ease-in-out infinite;
+  animation: bounce 1.5s ease-in-out infinite, wiggle 3s ease-in-out infinite;
+}
+
+.icon-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.icon-hover:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
 }
 
 .gradient-text {
