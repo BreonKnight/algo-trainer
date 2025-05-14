@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 
 interface ReplCardProps {
   userCode: string;
-  setUserCode: (code: string) => void;
 }
 
 // Custom hook for media query
@@ -36,7 +35,7 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
+export function ReplCard({ userCode }: ReplCardProps) {
   const [output, setOutput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [pyodide, setPyodide] = useState<PyodideInterface | null>(null);
@@ -150,10 +149,8 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
     };
   }, []);
 
-  const handleFormat = useCallback(() => {
-    const formattedCode = PythonCodeHandler.formatCode(userCode);
-    setUserCode(formattedCode);
-  }, [userCode, setUserCode]);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const handleFormat = useCallback(() => {}, []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -321,7 +318,7 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
   };
 
   return (
-    <Card className="p-4 bg-[var(--card-bg)] border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card className="repl-card p-4 bg-[var(--card-bg)] border-text-secondary w-full h-full flex flex-col overflow-hidden">
       <div className="flex-none flex justify-between items-center mb-4">
         <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
           Output
@@ -405,22 +402,25 @@ export function ReplCard({ userCode, setUserCode }: ReplCardProps) {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <button
-                  className={cn(
-                    "p-1.5 rounded-md transition-colors border",
-                    theme === "light" || theme === "solarized"
-                      ? "bg-white border-accent text-accent shadow"
-                      : theme === "nord"
-                        ? "text-white border-none"
-                        : "text-background hover:bg-accent2/20 border-none"
-                  )}
-                  onClick={handleFormat}
-                >
+                <Button variant="ghost" size="sm" onClick={handleFormat}>
                   <Code className="h-3.5 w-3.5" />
-                </button>
+                </Button>
               </TooltipTrigger>
               <TooltipContent>
                 <p className="text-xs">Format code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm" className="ml-2" onClick={runCode}>
+                  Run
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Run code</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

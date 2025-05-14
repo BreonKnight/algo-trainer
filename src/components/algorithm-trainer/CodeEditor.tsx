@@ -1,9 +1,10 @@
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import * as monaco from "monaco-editor";
 import { lazy, Suspense } from "react";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
@@ -92,6 +93,40 @@ export function CodeEditor({
       });
     }
   }, [userCode]);
+
+  // Handle keyboard shortcuts through Monaco's editor configuration
+  useEffect(() => {
+    if (!monacoRef.current || !editorRef.current) return;
+
+    const editor = editorRef.current;
+    const runAction = editor.addAction({
+      id: "algo-trainer.runCode",
+      label: "Run Code",
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
+      contextMenuGroupId: "navigation",
+      contextMenuOrder: 1.5,
+      run: function () {
+        onRunCode?.();
+      },
+    });
+
+    // Update editor options
+    editor.updateOptions({
+      extraEditorClassName: "algo-trainer-editor",
+      automaticLayout: true,
+      minimap: { enabled: false },
+      quickSuggestions: false,
+      parameterHints: { enabled: false },
+      suggestOnTriggerCharacters: false,
+      acceptSuggestionOnEnter: "off",
+      tabCompletion: "off",
+    });
+
+    return () => {
+      // Clean up by removing the action
+      runAction.dispose();
+    };
+  }, [onRunCode]); // monacoRef and editorRef are mutable, so we don't include them in deps
 
   // Handle error line highlighting
   useEffect(() => {
@@ -185,28 +220,74 @@ export function CodeEditor({
     }
   }, [getMonacoTheme]);
 
-  // Editor mount
-  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
-    monacoRef.current = monaco;
-    editorRef.current = editor;
-    monaco.editor.defineTheme("dracula", draculaTheme);
-    monaco.editor.defineTheme("solarized", solarizedTheme);
-    monaco.editor.defineTheme("light", lightTheme);
-    monaco.editor.defineTheme("snes", snesTheme);
-    monaco.editor.defineTheme("nord", nordTheme);
-    monaco.editor.defineTheme("ps2", ps2Theme);
-    monaco.editor.defineTheme("re2", re2Theme);
-    monaco.editor.defineTheme("mh", mhTheme);
-    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
-    monaco.editor.defineTheme("fornite", forniteTheme);
-    monaco.editor.setTheme(getMonacoTheme());
-    editor.focus();
+  // Handle editor value changes with debounce
+  const handleEditorChange = useCallback(
+    (value: string | undefined) => {
+      try {
+        setUserCode(value || "");
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Editor error:", e);
+        }
+      }
+    },
+    [setUserCode]
+  );
 
-    // Force layout update
-    setTimeout(() => {
-      editor.layout();
-    }, 100);
-  };
+  // Editor mount with cancellation handling
+  const handleEditorDidMount = useCallback(
+    (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+      try {
+        monacoRef.current = monaco;
+        editorRef.current = editor;
+
+        // Define themes
+        const themes = {
+          dracula: draculaTheme,
+          solarized: solarizedTheme,
+          light: lightTheme,
+          snes: snesTheme,
+          nord: nordTheme,
+          ps2: ps2Theme,
+          re2: re2Theme,
+          mh: mhTheme,
+          "kingdom-hearts": kingdomHeartsTheme,
+          fornite: forniteTheme,
+        };
+
+        Object.entries(themes).forEach(([name, theme]) => {
+          try {
+            monaco.editor.defineTheme(name, theme);
+          } catch (e) {
+            if (e instanceof Error && e.name !== "Canceled") {
+              console.error(`Failed to define theme ${name}:`, e);
+            }
+          }
+        });
+
+        monaco.editor.setTheme(getMonacoTheme());
+        editor.focus();
+
+        // Force layout update with cancellation handling
+        const layoutTimeout = setTimeout(() => {
+          try {
+            editor.layout();
+          } catch (e) {
+            if (e instanceof Error && e.name !== "Canceled") {
+              console.error("Layout error:", e);
+            }
+          }
+        }, 100);
+
+        return () => clearTimeout(layoutTimeout);
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Editor mount error:", e);
+        }
+      }
+    },
+    [getMonacoTheme]
+  );
 
   const handleCopy = () => {
     navigator.clipboard.writeText(userCode);
@@ -377,6 +458,19 @@ export function CodeEditor({
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="ml-2" onClick={() => onRunCode?.()}>
+                Run (Ctrl+Enter)
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-xs">Run code (Ctrl+Enter)</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
@@ -400,7 +494,7 @@ export function CodeEditor({
               defaultLanguage="python"
               theme={getMonacoTheme()}
               value={userCode}
-              onChange={(value: string | undefined) => setUserCode(value || "")}
+              onChange={handleEditorChange}
               onMount={handleEditorDidMount}
               options={{
                 fontSize,
@@ -420,6 +514,14 @@ export function CodeEditor({
                 lineDecorationsWidth: 0,
                 renderLineHighlightOnlyWhenFocus: true,
                 fixedOverflowWidgets: true,
+                quickSuggestions: {
+                  other: false,
+                  comments: false,
+                  strings: false,
+                },
+                suggest: {
+                  showWords: false,
+                },
               }}
             />
           </Suspense>

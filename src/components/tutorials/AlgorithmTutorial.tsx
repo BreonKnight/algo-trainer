@@ -110,32 +110,6 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
   };
 
   // Get theme-specific card styles
-  const getCardStyles = () => {
-    switch (theme) {
-      case "snes":
-        return "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] shadow-[0_4px_24px_rgba(52,152,219,0.08)]";
-      case "dracula":
-        return "bg-background/95 backdrop-blur-sm border border-accent2/20";
-      case "nord":
-        return "bg-[#3b4252] border-[#D8DEE9]/70 backdrop-blur-sm text-[#eceff4]";
-      case "light":
-        return "bg-white/95 backdrop-blur-sm border border-accent/20";
-      case "solarized":
-        return "bg-[#fdf6e3]/95 backdrop-blur-sm border border-[#93a1a1]/20";
-      case "ps2":
-        return "bg-[#000000]/95 backdrop-blur-sm border border-[#1a1a1a]/20";
-      case "re2":
-        return "bg-[#8b0000]/95 backdrop-blur-sm border border-[#a52a2a]/20";
-      case "mh":
-        return "bg-[#2c3e50]/95 backdrop-blur-sm border border-[#34495e]/20";
-      case "kingdom-hearts":
-        return "bg-[#1e90ff]/95 backdrop-blur-sm border border-[#4169e1]/20";
-      case "fornite":
-        return "bg-[#ffd700]/95 backdrop-blur-sm border border-[#ffa500]/20";
-      default:
-        return "bg-background/95 backdrop-blur-sm border border-accent2/20";
-    }
-  };
 
   // Force all quiz text to be black for maximum readability
   const quizTextColor = "text-black";
@@ -238,7 +212,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
           </div>
 
           {!isAvailable ? (
-            <Card className={cn("p-8", getCardStyles())}>
+            <Card className="bg-background/95 backdrop-blur-sm border border-accent2/20 p-8">
               <div className="flex items-center gap-4 mb-6">
                 <Lock className="h-8 w-8 text-accent2" />
                 <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
@@ -263,11 +237,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                   </li>
                 ))}
               </ul>
-              <Button
-                variant="outline"
-                onClick={() => window.history.back()}
-                className="bg-secondary/10 hover:bg-secondary/20 gap-2 text-base"
-              >
+              <Button variant="outline" onClick={() => window.history.back()}>
                 <ArrowLeft className="h-4 w-4" />
                 Go Back
               </Button>
@@ -323,7 +293,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
               </TabsList>
 
               <TabsContent value="video" className="mt-8">
-                <Card className={cn("p-8", getCardStyles())}>
+                <Card className="bg-background/95 backdrop-blur-sm border border-accent2/20 p-8">
                   <div className="flex flex-col gap-8">
                     <div className="flex items-center justify-between">
                       <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
@@ -354,7 +324,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                       onClick={() => {
                         localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
                       }}
-                      className="bg-accent hover:bg-accent text-white gap-2 text-base"
+                      variant="default"
                     >
                       <Check className="h-4 w-4" />
                       Complete Tutorial
@@ -364,7 +334,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
               </TabsContent>
 
               <TabsContent value="implementation" className="mt-8">
-                <Card className={cn("p-8", getCardStyles())}>
+                <Card className="bg-background/95 backdrop-blur-sm border border-accent2/20 p-8">
                   <div className="flex flex-col gap-8">
                     <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
                       {currentTutorial?.title} Implementation
@@ -386,7 +356,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                       onClick={() => {
                         localStorage.setItem(`tutorial-${currentTutorial?.id}`, "completed");
                       }}
-                      className="bg-accent hover:bg-accent text-white gap-2 text-base"
+                      variant="default"
                     >
                       <Check className="h-4 w-4" />
                       Complete Tutorial
@@ -396,7 +366,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
               </TabsContent>
 
               <TabsContent value="quiz" className="mt-8">
-                <Card className={cn("p-8", getCardStyles())}>
+                <Card className="bg-background/95 backdrop-blur-sm border border-accent2/20 p-8">
                   <div className="flex flex-col gap-8">
                     <h3
                       className="text-3xl font-bold bg-clip-text text-transparent tracking-tight"
@@ -516,7 +486,8 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                     </div>
                     {!showResults ? (
                       <Button
-                        className="bg-accent2 hover:bg-accent2/90 text-white text-base mt-4"
+                        variant="secondary"
+                        className="mt-4"
                         onClick={() => setShowResults(true)}
                         disabled={
                           !currentTutorial ||
@@ -529,7 +500,8 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                     ) : (
                       <>
                         <Button
-                          className="bg-accent3 hover:bg-accent3/90 text-white gap-2 text-base mt-4"
+                          variant="default"
+                          className="mt-4"
                           onClick={() => {
                             if (currentTutorial) {
                               localStorage.setItem(`tutorial-${currentTutorial.id}`, "completed");
@@ -540,7 +512,8 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                           Complete Tutorial
                         </Button>
                         <Button
-                          className="bg-accent2 hover:bg-accent2/90 text-white gap-2 text-base mt-2 ml-2"
+                          variant="secondary"
+                          className="mt-2 ml-2"
                           onClick={() => {
                             setQuizAnswers({});
                             setShowResults(false);
@@ -555,7 +528,7 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
               </TabsContent>
 
               <TabsContent value="resources" className="mt-8">
-                <Card className={cn("p-8", getCardStyles())}>
+                <Card className="bg-background/95 backdrop-blur-sm border border-accent2/20 p-8">
                   <div className="flex flex-col gap-8">
                     <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent2)] to-[var(--accent3)] tracking-tight">
                       Additional Resources

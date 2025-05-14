@@ -10,7 +10,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function AlgorithmTrainer() {
   const [showAnswer, setShowAnswer] = useState(false);
-  const [userCode, setUserCode] = useState("");
+  const [code, setCode] = useState("");
 
   const {
     selectedPattern,
@@ -36,15 +36,15 @@ export default function AlgorithmTrainer() {
               <PanelLayout
                 selectedPattern={selectedPattern}
                 onPatternChange={handlePatternChange}
-                userCode={userCode}
-                setUserCode={setUserCode}
                 showAnswer={showAnswer}
                 setShowAnswer={setShowAnswer}
                 onNextPattern={nextPattern}
                 patternNumber={currentPatternIndex + 1}
+                userCode={code}
+                setUserCode={setCode}
               />
               <div className="mt-4">
-                <ReplCard userCode={userCode} setUserCode={setUserCode} />
+                <ReplCard userCode={code} />
               </div>
               <PatternControls
                 onPreviousPattern={previousPattern}

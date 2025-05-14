@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
 
 import AboutPage from "@/app/AboutPage";
+import DesignSystemPage from "@/app/DesignSystemPage";
 import PatternManagement from "@/components/admin/PatternManagement";
 import { TopBar } from "@/components/algorithm-trainer/layout/TopBar";
 import Practice from "@/components/practice/Practice";
@@ -160,6 +161,20 @@ const AppContent = memo(function AppContent() {
               fallback={<div className="flex items-center justify-center h-screen">Loading...</div>}
             >
               <AboutPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/design-system"
+          element={
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center h-screen">
+                  Loading design system...
+                </div>
+              }
+            >
+              <DesignSystemPage />
             </Suspense>
           }
         />
