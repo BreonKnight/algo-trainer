@@ -187,6 +187,17 @@ function App() {
         <div className="min-h-screen bg-background">
           <div className="container mx-auto">
             <AppContent />
+            <div className="mt-4 text-center text-sm text-secondary flex-none">
+              Created by{" "}
+              <a
+                href="https://breon.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent3 hover:text-accent transition-colors"
+              >
+                Breon
+              </a>
+            </div>
           </div>
         </div>
       </ThemeProvider>

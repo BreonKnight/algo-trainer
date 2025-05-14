@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main body -->
+  <path d="M256 64C167.6 64 96 135.6 96 224C96 312.4 167.6 384 256 384C344.4 384 416 312.4 416 224C416 135.6 344.4 64 256 64Z" fill="#3b206a" stroke="#6c4bb6" stroke-width="8"/>
+  
+  <!-- D-pad -->
+  <path d="M192 192H224V224H192V192Z" fill="#6c4bb6"/>
+  <path d="M224 160H256V192H224V160Z" fill="#6c4bb6"/>
+  <path d="M256 192H288V224H256V192Z" fill="#6c4bb6"/>
+  <path d="M224 224H256V256H224V224Z" fill="#6c4bb6"/>
+  
+  <!-- A button -->
+  <circle cx="320" cy="224" r="24" fill="#6c4bb6"/>
+  
+  <!-- B button -->
+  <circle cx="352" cy="192" r="16" fill="#6c4bb6"/>
+  
+  <!-- X button -->
+  <circle cx="288" cy="192" r="16" fill="#6c4bb6"/>
+  
+  <!-- Y button -->
+  <circle cx="320" cy="160" r="16" fill="#6c4bb6"/>
+  
+  <!-- L and R buttons -->
+  <path d="M160 160C160 160 144 176 144 224C144 272 160 288 160 288" stroke="#6c4bb6" stroke-width="8" stroke-linecap="round"/>
+  <path d="M352 160C352 160 368 176 368 224C368 272 352 288 352 288" stroke="#6c4bb6" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Start button -->
+  <circle cx="256" cy="288" r="12" fill="#6c4bb6"/>
+</svg> 
