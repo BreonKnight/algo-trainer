@@ -126,15 +126,20 @@ body {
 }
 
 .repl-card pre span::after {
-  content: '_';
+  content: "_";
   opacity: 0;
   margin-left: 2px;
   animation: blink 1s infinite;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .repl-card pre {
@@ -143,7 +148,7 @@ body {
 }
 
 .repl-card pre::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -160,8 +165,12 @@ body {
 }
 
 @keyframes scan {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100%); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 /* Code Block Styles */
