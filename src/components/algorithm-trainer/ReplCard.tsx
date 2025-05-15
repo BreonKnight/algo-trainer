@@ -329,7 +329,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
       document.removeEventListener("touchend", handleTouchEnd);
     };
 
-    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
     document.addEventListener("touchend", handleTouchEnd);
   };
 
@@ -375,7 +375,8 @@ export function ReplCard({ userCode }: ReplCardProps) {
         >
           <div className={`absolute inset-0 overflow-auto ${currentStyle.bg}`}>
             <pre
-              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed p-2 ${currentStyle.text} ${currentStyle.bg}`}
+              className={`whitespace-pre-line break-all text-xs sm:text-sm md:text-base leading-relaxed p-2 ${currentStyle.text} ${currentStyle.bg}`}
+              style={{ tabSize: 4 }}
             >
               {error ? (
                 <span className={currentStyle.error}>{error}</span>

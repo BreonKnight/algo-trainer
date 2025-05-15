@@ -1,7 +1,8 @@
 import Editor, { Monaco } from "@monaco-editor/react";
 import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
-import * as monaco from "monaco-editor";
+import * as monacoAPI from "monaco-editor";
 import { useState, useRef, useEffect, useMemo } from "react";
+import { toast } from "sonner";
 import { create } from "zustand";
 
 import { ReplCard } from "@/components/algorithm-trainer/ReplCard";
@@ -38,36 +39,12 @@ const Practice = () => {
   const maxFont = 28;
   const code = usePracticeStore((s) => s.code);
   const setCode = usePracticeStore((s) => s.setCode);
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-  const monacoRef = useRef<Monaco | null>(null);
+  const editorRef = useRef<monacoAPI.editor.IStandaloneCodeEditor | null>(null);
+  const monacoInstanceRef = useRef<Monaco | null>(null);
+  const [isMonacoReady, setIsMonacoReady] = useState(false);
 
-  // Register Monaco themes before the editor mounts
-  useEffect(() => {
-    // @ts-ignore
-    if (window.__monacoThemesRegistered) return;
-    // @ts-ignore
-    window.__monacoThemesRegistered = true;
-
-    const defineThemes = (monaco: Monaco) => {
-      monaco.editor.defineTheme("dracula", draculaTheme);
-      monaco.editor.defineTheme("solarized", solarizedTheme);
-      monaco.editor.defineTheme("light", lightTheme);
-      monaco.editor.defineTheme("snes", snesTheme);
-      monaco.editor.defineTheme("nord", nordTheme);
-      monaco.editor.defineTheme("ps2", ps2Theme);
-      monaco.editor.defineTheme("re2", re2Theme);
-      monaco.editor.defineTheme("mh", mhTheme);
-      monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
-      monaco.editor.defineTheme("fornite", forniteTheme);
-    };
-
-    if (monacoRef.current) {
-      defineThemes(monacoRef.current);
-    }
-  }, []);
-
-  const getMonacoTheme = useMemo(() => {
-    const themeMap: Record<string, string> = {
+  const themeMap: Record<string, string> = useMemo(
+    () => ({
       dracula: "dracula",
       solarized: "solarized",
       light: "light",
@@ -78,51 +55,179 @@ const Practice = () => {
       mh: "mh",
       "kingdom-hearts": "kingdom-hearts",
       fornite: "fornite",
-    };
-    return () => themeMap[theme] || "dracula";
-  }, [theme]);
+    }),
+    []
+  );
 
-  // Update theme when it changes
+  const monacoTheme = useMemo(() => themeMap[theme] || "dracula", [theme, themeMap]);
+
+  // Define and register Monaco themes once the monaco instance is available
   useEffect(() => {
-    if (monacoRef.current) {
-      monacoRef.current.editor.setTheme(getMonacoTheme());
+    if (isMonacoReady && monacoInstanceRef.current) {
+      // @ts-ignore
+      if (window.__monacoThemesRegisteredPractice) return;
+
+      const themesToDefine = {
+        dracula: draculaTheme,
+        solarized: solarizedTheme,
+        light: lightTheme,
+        snes: snesTheme,
+        nord: nordTheme,
+        ps2: ps2Theme,
+        re2: re2Theme,
+        mh: mhTheme,
+        "kingdom-hearts": kingdomHeartsTheme,
+        fornite: forniteTheme,
+      };
+      Object.entries(themesToDefine).forEach(([name, themeData]) => {
+        try {
+          monacoInstanceRef.current!.editor.defineTheme(name, themeData);
+        } catch (e) {
+          if (e instanceof Error && e.name !== "Canceled") {
+            console.error(`Practice: Failed to define theme ${name}:`, e);
+          }
+        }
+      });
+      // @ts-ignore
+      window.__monacoThemesRegisteredPractice = true;
     }
-  }, [getMonacoTheme]);
+  }, [isMonacoReady]);
 
-  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+  // Update editor theme when our application theme or monaco instance changes
+  useEffect(() => {
+    if (isMonacoReady && monacoInstanceRef.current) {
+      try {
+        monacoInstanceRef.current.editor.setTheme(monacoTheme);
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Practice: Failed to set theme:", e);
+        }
+      }
+    }
+  }, [monacoTheme, isMonacoReady]);
+
+  const handleEditorDidMount = (
+    editor: monacoAPI.editor.IStandaloneCodeEditor,
+    mountedMonaco: Monaco
+  ) => {
     editorRef.current = editor;
-    monacoRef.current = monaco;
+    monacoInstanceRef.current = mountedMonaco;
+    setIsMonacoReady(true);
 
-    // Define themes
-    monaco.editor.defineTheme("dracula", draculaTheme);
-    monaco.editor.defineTheme("solarized", solarizedTheme);
-    monaco.editor.defineTheme("light", lightTheme);
-    monaco.editor.defineTheme("snes", snesTheme);
-    monaco.editor.defineTheme("nord", nordTheme);
-    monaco.editor.defineTheme("ps2", ps2Theme);
-    monaco.editor.defineTheme("re2", re2Theme);
-    monaco.editor.defineTheme("mh", mhTheme);
-    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
-    monaco.editor.defineTheme("fornite", forniteTheme);
+    // console.log("Debug: mountedMonaco object:", mountedMonaco); // Kept for reference
+    // console.log("Debug: window.monaco object:", (window as any).monaco); // Kept for reference
 
-    // Set initial theme
-    monaco.editor.setTheme(getMonacoTheme());
+    // Attempt to set the global error handler via window.monaco
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const globalMonaco = (window as any).monaco;
+      let handlerSet = false;
+
+      if (globalMonaco) {
+        if (
+          globalMonaco.ErrorHandling &&
+          typeof globalMonaco.ErrorHandling.setUnexpectedErrorHandler === "function"
+        ) {
+          globalMonaco.ErrorHandling.setUnexpectedErrorHandler((error: Error) => {
+            if (error && error.name !== "Canceled") {
+              console.error(
+                "Monaco Global Unexpected Error (Practice - via window.monaco.ErrorHandling):",
+                error
+              );
+            }
+          });
+          handlerSet = true;
+          console.log("Unexpected error handler set via window.monaco.ErrorHandling");
+        } else if (typeof globalMonaco.setUnexpectedErrorHandler === "function") {
+          globalMonaco.setUnexpectedErrorHandler((error: Error) => {
+            if (error && error.name !== "Canceled") {
+              console.error(
+                "Monaco Global Unexpected Error (Practice - via window.monaco root):",
+                error
+              );
+            }
+          });
+          handlerSet = true;
+          console.log("Unexpected error handler set via window.monaco root");
+        }
+      }
+
+      if (!handlerSet) {
+        console.error(
+          "Could not set Monaco unexpected error handler via window.monaco: API not found or not a function."
+        );
+      }
+    } catch (e) {
+      console.error(
+        "Error while trying to set Monaco unexpected error handler via window.monaco:",
+        e
+      );
+    }
 
     editor.focus();
     setTimeout(() => {
-      editor.layout();
+      try {
+        editor.layout();
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Practice: Editor layout error:", e);
+        }
+      }
     }, 100);
   };
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (!editorRef.current) return;
-    navigator.clipboard.writeText(editorRef.current.getValue());
-    setCopied(true);
+    const codeToCopy = editorRef.current.getValue();
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(codeToCopy);
+        setCopied(true);
+        toast.success("Code copied to clipboard!");
+      } catch (err) {
+        console.warn("Clipboard API writeText failed, falling back:", err);
+        copyFallback(codeToCopy);
+      }
+    } else {
+      copyFallback(codeToCopy);
+    }
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const copyFallback = (codeToCopy: string) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = codeToCopy;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand("copy");
+      setCopied(true);
+      toast.success("Code copied (fallback method)!");
+    } catch (fallbackErr) {
+      console.error("Fallback copy method failed:", fallbackErr);
+      toast.error("Failed to copy code.");
+    } finally {
+      document.body.removeChild(textArea);
+    }
   };
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
+    setTimeout(() => {
+      if (editorRef.current) {
+        try {
+          editorRef.current.layout();
+        } catch (e) {
+          if (e instanceof Error && e.name !== "Canceled") {
+            console.error("Practice: Editor layout error on toggleExpand:", e);
+          }
+        }
+      }
+    }, 0);
   };
 
   return (
@@ -142,14 +247,25 @@ const Practice = () => {
             </h1>
           </div>
 
-          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+          <div
+            className={cn(
+              "flex-1 grid grid-cols-1 gap-4",
+              isExpanded ? "lg:grid-cols-1" : "lg:grid-cols-2"
+            )}
+          >
+            <Card
+              className={cn(
+                "p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden",
+                isExpanded && "lg:col-span-1"
+              )}
+            >
               <div className="flex-none flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <button
+                          aria-label="Copy code"
                           className={cn(
                             "p-1 rounded-md transition-colors border",
                             theme === "light" || theme === "solarized"
@@ -178,6 +294,7 @@ const Practice = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <button
+                            aria-label="Decrease font size"
                             className={cn(
                               "p-1 rounded transition-colors border",
                               theme === "light" || theme === "solarized"
@@ -208,6 +325,7 @@ const Practice = () => {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <button
+                            aria-label="Increase font size"
                             className={cn(
                               "p-1 rounded transition-colors border",
                               theme === "light" || theme === "solarized"
@@ -233,6 +351,7 @@ const Practice = () => {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <button
+                        aria-label={isExpanded ? "Minimize editor" : "Maximize editor"}
                         className={cn(
                           "p-1.5 rounded-md transition-colors border",
                           theme === "light" || theme === "solarized"
@@ -251,7 +370,9 @@ const Practice = () => {
                       </button>
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p className="text-xs">{isExpanded ? "Minimize" : "Maximize"} editor</p>
+                      <p className="text-xs">
+                        {isExpanded ? "Minimize editor" : "Maximize editor"}
+                      </p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -261,7 +382,7 @@ const Practice = () => {
                 <Editor
                   height="100%"
                   defaultLanguage="python"
-                  theme={getMonacoTheme()}
+                  theme={monacoTheme}
                   value={code}
                   onChange={(value) => setCode(value || "")}
                   onMount={handleEditorDidMount}
@@ -286,12 +407,14 @@ const Practice = () => {
                     glyphMargin: false,
                     folding: false,
                     renderWhitespace: "none",
+                    quickSuggestions: { other: false, comments: false, strings: false },
+                    suggest: { showWords: false },
                   }}
                 />
               </div>
             </Card>
 
-            <ReplCard userCode={code} />
+            {!isExpanded && <ReplCard userCode={code} />}
           </div>
         </div>
       </div>

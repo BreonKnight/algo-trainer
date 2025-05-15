@@ -131,8 +131,8 @@ export function CodeEditor({
   // Handle error line highlighting
   useEffect(() => {
     if (monacoRef.current && editorRef.current && errorLine) {
-      setDecorations(
-        editorRef.current.deltaDecorations(decorations, [
+      try {
+        const newDecorations = editorRef.current.deltaDecorations(decorations, [
           {
             range: new monacoRef.current.Range(errorLine, 1, errorLine, 1),
             options: {
@@ -145,11 +145,16 @@ export function CodeEditor({
               },
             },
           },
-        ])
-      );
+        ]);
+        setDecorations(newDecorations);
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Error applying decorations:", e);
+        }
+        // If it's a 'Canceled' error, we intentionally swallow it.
+      }
     }
-    // eslint-disable-next-line
-  }, [errorLine]);
+  }, [errorLine, decorations]); // Added 'decorations' to dependency array
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -324,7 +329,7 @@ export function CodeEditor({
       document.removeEventListener("touchend", handleTouchEnd);
     };
 
-    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
     document.addEventListener("touchend", handleTouchEnd);
   };
 
