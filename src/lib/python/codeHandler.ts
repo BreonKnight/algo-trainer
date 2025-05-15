@@ -9,6 +9,8 @@ export class PythonCodeHandler {
 
       if (!trimmedLine) continue;
 
+      const indent = line.search(/\S|$/);
+
       // Check for indentation after control flow statements
       if (trimmedLine.endsWith(":")) {
         const nextLine = lines[i + 1];
@@ -18,22 +20,15 @@ export class PythonCodeHandler {
             error: `Expected indented block after '${trimmedLine}' on line ${i + 1}`,
           };
         }
-        if (!nextLine.startsWith("    ")) {
-          return {
-            isValid: false,
-            error: `Expected indented block after '${trimmedLine}' on line ${i + 1}`,
-          };
-        }
-        currentIndent = 4;
+        currentIndent = indent;
         continue;
       }
 
-      // Check for consistent indentation
-      const indent = line.search(/\S|$/);
+      // Check for Python's required 4-space indentation
       if (indent % 4 !== 0) {
         return {
           isValid: false,
-          error: `Inconsistent indentation on line ${i + 1}. Expected multiple of 4 spaces.`,
+          error: `Incorrect indentation on line ${i + 1}. Python requires indentation with 4 spaces.`,
         };
       }
 
@@ -41,7 +36,7 @@ export class PythonCodeHandler {
       if (indent > currentIndent + 4) {
         return {
           isValid: false,
-          error: `Invalid indentation on line ${i + 1}. Cannot increase indentation by more than 4 spaces.`,
+          error: `Invalid indentation on line ${i + 1}. Python requires exactly 4 spaces per indentation level.`,
         };
       }
 
