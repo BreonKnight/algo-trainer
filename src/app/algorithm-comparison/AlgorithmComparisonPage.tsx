@@ -1,4 +1,4 @@
-import { AlgorithmComparison } from "@/components/algorithm-trainer/AlgorithmComparison";
+import AlgorithmComparison from "@/components/algorithm-trainer/AlgorithmComparison";
 import { PatternKey } from "@/components/algorithm-trainer/types";
 
 const algorithms: PatternKey[] = [

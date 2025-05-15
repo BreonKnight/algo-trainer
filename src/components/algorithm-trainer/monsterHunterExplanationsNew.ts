@@ -1,4 +1,4 @@
-import { PatternKey } from "./types";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterExplanations: Partial<
   Record<
@@ -11,7 +11,7 @@ export const monsterHunterExplanations: Partial<
     }
   >
 > = {
-  Dijkstra: {
+  "Dijkstra's Algorithm": {
     title: "Monster Territory Pathfinder",
     description:
       "Find the shortest paths between hunting grounds, considering terrain difficulty and monster presence.",
@@ -248,7 +248,7 @@ export const monsterHunterExplanations: Partial<
       "Use for negative weights",
     ],
   },
-  "Floyd-Warshall": {
+  "Floyd-Warshall Algorithm": {
     title: "All-Pairs Monster Routes",
     description: "Calculate shortest paths between all pairs of locations in monster territories.",
     example:
@@ -294,7 +294,7 @@ export const monsterHunterExplanations: Partial<
     example:
       "Find groups of monster nests that form closed ecosystems where monsters can freely move between all locations.",
     tips: [
-      "Use Kosaraju's algorithm",
+      "Use Kosaraju's Algorithm's algorithm",
       "Track visit order",
       "Handle edge cases",
       "Consider graph direction",

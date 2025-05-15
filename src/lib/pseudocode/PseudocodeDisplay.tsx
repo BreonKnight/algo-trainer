@@ -1,7 +1,20 @@
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus, vs } from "react-syntax-highlighter/dist/esm/styles/prism";
 import "./pseudocode.css";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
 import { useTheme } from "@/components/theme/use-theme";
+
+import {
+  prismDracula,
+  prismNord,
+  prismLight,
+  prismSolarized,
+  prismSnes,
+  prismPs2,
+  prismRe2,
+  prismMh,
+  prismKingdomHearts,
+  prismFornite,
+} from "./prismThemes";
 
 interface PseudocodeDisplayProps {
   code: string;
@@ -9,10 +22,22 @@ interface PseudocodeDisplayProps {
 
 export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
   const { theme } = useTheme();
-  const isDark = ["dracula", "nord"].includes(theme);
-  const backgroundColor = isDark ? "#23272e" : "#f8fafc";
-  const textColor = isDark ? "#e5e7eb" : "#23272e";
-  const syntaxStyle = isDark ? vscDarkPlus : vs;
+  const isDark = ["dracula", "nord", "fortnite"].includes(theme);
+  const backgroundColor = isDark ? "var(--bg-secondary)" : "var(--bg-main)";
+  const textColor = isDark ? "var(--text-secondary)" : "var(--text-main)";
+  const themeMap: Record<string, object> = {
+    dracula: prismDracula,
+    nord: prismNord,
+    light: prismLight,
+    solarized: prismSolarized,
+    snes: prismSnes,
+    ps2: prismPs2,
+    re2: prismRe2,
+    mh: prismMh,
+    "kingdom-hearts": prismKingdomHearts,
+    fornite: prismFornite,
+  };
+  const syntaxStyle = themeMap[theme] || prismDracula;
 
   return (
     <div
@@ -20,12 +45,16 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
       style={
         {
           "--pseudocode-bg": backgroundColor,
+          display: "inline-block",
+          width: "fit-content",
+          overflowX: "auto",
         } as React.CSSProperties
       }
     >
       <SyntaxHighlighter
+        key={theme}
         language="python"
-        style={syntaxStyle}
+        style={syntaxStyle as { [key: string]: React.CSSProperties }}
         customStyle={{
           backgroundColor: "var(--pseudocode-bg)",
           color: textColor,
@@ -36,6 +65,9 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
           fontFamily: "JetBrains Mono, Fira Mono, Menlo, Monaco, Consolas, monospace",
           textAlign: "left",
           whiteSpace: "pre",
+          display: "inline-block",
+          width: "fit-content",
+          overflowX: "auto",
         }}
         showLineNumbers={true}
         codeTagProps={{

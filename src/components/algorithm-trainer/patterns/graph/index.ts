@@ -1,28 +1,28 @@
-import { AlgorithmPattern, PatternKey } from "../../types/pattern-types";
-import { aStarSearchPattern } from "./a-star-search";
-import { articulationPointsPattern } from "./articulation-points";
-import { bellmanFordPattern } from "./bellman-ford";
-import { bfsPattern } from "./bfs";
-import { bfsLinkedListPattern } from "./bfs-linked-list";
-import { bridgesPattern } from "./bridges";
-import { dfsBinaryTreePattern } from "./dfs-binary-tree";
-import { dfsLinkedListPattern } from "./dfs-linked-list";
-import { graphDfsPattern } from "./dfs";
-import { dijkstraPattern } from "./dijkstra";
-import { floydWarshallPattern } from "./floyd-warshall";
-import { floydCycleDetectionPattern } from "./floyd-cycle-detection";
-import { fordFulkersonPattern } from "./ford-fulkerson";
-import { graphRepresentationPattern } from "./graph-representation";
-import { kahnsTopologicalSortPattern } from "./kahns-topological-sort";
-import { kosarajuPattern } from "./kosaraju";
-import { kruskalPattern } from "./kruskal";
-import { maximumBipartiteMatchingPattern } from "./maximum-bipartite-matching";
-import { networkFlowPattern } from "./network-flow";
-import { primPattern } from "./prim";
-import { stronglyConnectedComponentsPattern } from "./strongly-connected-components";
-import { topologicalSortPattern } from "./topological-sort";
-import { hungarianAlgorithmPattern } from "./hungarian-algorithm";
-import { hopcroftKarpPattern } from "./hopcroft-karp";
+import { aStarSearchPattern } from "@/components/algorithm-trainer/patterns/graph/a-star-search";
+import { articulationPointsPattern } from "@/components/algorithm-trainer/patterns/graph/articulation-points";
+import { bellmanFordPattern } from "@/components/algorithm-trainer/patterns/graph/bellman-ford";
+import { bfsPattern } from "@/components/algorithm-trainer/patterns/graph/bfs";
+import { bfsLinkedListPattern } from "@/components/algorithm-trainer/patterns/graph/bfs-linked-list";
+import { bridgesPattern } from "@/components/algorithm-trainer/patterns/graph/bridges";
+import { graphDfsPattern } from "@/components/algorithm-trainer/patterns/graph/dfs";
+import { dfsBinaryTreePattern } from "@/components/algorithm-trainer/patterns/graph/dfs-binary-tree";
+import { dfsLinkedListPattern } from "@/components/algorithm-trainer/patterns/graph/dfs-linked-list";
+import { dijkstraPattern } from "@/components/algorithm-trainer/patterns/graph/dijkstra";
+import { floydCycleDetectionPattern } from "@/components/algorithm-trainer/patterns/graph/floyd-cycle-detection";
+import { floydWarshallPattern } from "@/components/algorithm-trainer/patterns/graph/floyd-warshall";
+import { fordFulkersonPattern } from "@/components/algorithm-trainer/patterns/graph/ford-fulkerson";
+import { graphRepresentationPattern } from "@/components/algorithm-trainer/patterns/graph/graph-representation";
+import { hopcroftKarpPattern } from "@/components/algorithm-trainer/patterns/graph/hopcroft-karp";
+import { hungarianAlgorithmPattern } from "@/components/algorithm-trainer/patterns/graph/hungarian-algorithm";
+import { kahnsTopologicalSortPattern } from "@/components/algorithm-trainer/patterns/graph/kahns-topological-sort";
+import { kosarajuPattern } from "@/components/algorithm-trainer/patterns/graph/kosaraju";
+import { kruskalPattern } from "@/components/algorithm-trainer/patterns/graph/kruskal";
+import { maximumBipartiteMatchingPattern } from "@/components/algorithm-trainer/patterns/graph/maximum-bipartite-matching";
+import { networkFlowPattern } from "@/components/algorithm-trainer/patterns/graph/network-flow";
+import { primPattern } from "@/components/algorithm-trainer/patterns/graph/prim";
+import { stronglyConnectedComponentsPattern } from "@/components/algorithm-trainer/patterns/graph/strongly-connected-components";
+import { topologicalSortPattern } from "@/components/algorithm-trainer/patterns/graph/topological-sort";
+import { AlgorithmPattern, PatternKey } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   "A* Search": aStarSearchPattern,
@@ -31,22 +31,22 @@ export const graphPatterns: Partial<Record<PatternKey, AlgorithmPattern>> = {
   BFS: bfsPattern,
   "BFS Linked List": bfsLinkedListPattern,
   Bridges: bridgesPattern,
-  DFS: graphDfsPattern,
-  "DFS Binary Tree": dfsBinaryTreePattern,
+  "DFS Graph": graphDfsPattern,
+  "DFS (Binary Tree)": dfsBinaryTreePattern,
   "DFS Linked List": dfsLinkedListPattern,
-  Dijkstra: dijkstraPattern,
-  "Floyd-Warshall": floydWarshallPattern,
+  "Dijkstra's Algorithm": dijkstraPattern,
+  "Floyd-Warshall Algorithm": floydWarshallPattern,
   "Floyd Cycle Detection": floydCycleDetectionPattern,
-  "Ford-Fulkerson": fordFulkersonPattern,
+  "Ford-Fulkerson Algorithm": fordFulkersonPattern,
   "Graph Representation": graphRepresentationPattern,
   "Kahn's Topological Sort": kahnsTopologicalSortPattern,
-  Kosaraju: kosarajuPattern,
-  Kruskal: kruskalPattern,
+  "Kosaraju's Algorithm": kosarajuPattern,
+  "Kruskal's Algorithm": kruskalPattern,
   "Maximum Bipartite Matching": maximumBipartiteMatchingPattern,
   "Network Flow": networkFlowPattern,
-  Prim: primPattern,
+  "Prim's Algorithm": primPattern,
   "Strongly Connected Components": stronglyConnectedComponentsPattern,
   "Topological Sort": topologicalSortPattern,
   "Hungarian Algorithm": hungarianAlgorithmPattern,
-  "Hopcroft-Karp": hopcroftKarpPattern,
+  "Hopcroft-Karp's Algorithm": hopcroftKarpPattern,
 };

@@ -1,4 +1,4 @@
-import { PatternKey } from "../types/pattern-types";
+import { PatternKey } from "@/components/algorithm-trainer/types/pattern-types";
 
 // This mapping ensures consistency between regular patterns and Monster Hunter patterns
 export const patternMapping: Record<string, PatternKey> = {
@@ -25,25 +25,24 @@ export const patternMapping: Record<string, PatternKey> = {
   // Dynamic Programming Patterns
   "Dynamic Programming": "Dynamic Programming",
   "Dynamic Programming Pattern": "Dynamic Programming Pattern",
-  "Dynamic Programming Fibonacci": "Dynamic Programming Fibonacci",
   "Dynamic Programming Iterative": "Dynamic Programming Iterative",
-  "Dynamic Programming Coin Change": "Dynamic Programming Coin Change",
+  "Coin Change": "Coin Change",
   "State Compression DP": "State Compression DP",
   "Digit DP": "Digit DP",
-  "Tree DP": "Tree DP",
+  "Tree (Dynamic Programming)": "Tree (Dynamic Programming)",
   "Probability DP": "Probability DP",
 
   // Graph Patterns
   "A* Search": "A* Search",
   "Articulation Points": "Articulation Points",
   "Bellman-Ford": "Bellman-Ford",
-  "Floyd-Warshall": "Floyd-Warshall",
-  Kruskal: "Kruskal",
+  "Floyd-Warshall Algorithm": "Floyd-Warshall Algorithm",
+  "Kruskal's Algorithm": "Kruskal's Algorithm",
   "Strongly Connected Components": "Strongly Connected Components",
   "Maximum Bipartite Matching": "Maximum Bipartite Matching",
   "Topological Sort": "Topological Sort",
-  Prim: "Prim",
-  Kosaraju: "Kosaraju",
+  "Prim's Algorithm": "Prim's Algorithm",
+  "Kosaraju's Algorithm": "Kosaraju's Algorithm",
 
   // Data Structure Patterns
   "B Tree": "B Tree",
@@ -53,8 +52,8 @@ export const patternMapping: Record<string, PatternKey> = {
   "Lowest Common Ancestor": "Lowest Common Ancestor",
   "Segment Tree": "Segment Tree",
   "Union Find": "Union Find",
-  "Tree Implementation": "Tree Implementation",
-  "DFS Binary Tree": "DFS Binary Tree",
+  "DFS (Binary Tree)": "DFS (Binary Tree)",
+  "Zigzag Traversal": "Zigzag Traversal",
 
   // String Patterns
   "String Operations": "String Operations",

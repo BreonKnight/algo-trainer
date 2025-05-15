@@ -1,13 +1,13 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
-import { createPatternRecord } from "../../../../lib/patterns/pattern-utils";
-import { matrixChainMultiplicationPattern } from "./matrix-chain-multiplication";
-import { matrixExponentiationPattern } from "./matrix-exponentiation";
-import { gridTraversalPattern } from "./grid-traversal";
-import { matrixOperationsPattern } from "./matrix-operations";
-import { matrixSpiralRecursivePattern } from "./matrix-spiral-recursive";
-import { matrixTraversalPattern } from "./matrix-traversal";
-import { matrixSpiralTraversalPattern } from "./matrix-spiral-traversal";
-import { matrixTraversalRecursivePattern } from "./matrix-traversal-recursive";
+import { gridTraversalPattern } from "@/components/algorithm-trainer/patterns/matrix/grid-traversal";
+import { matrixChainMultiplicationPattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-chain-multiplication";
+import { matrixExponentiationPattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-exponentiation";
+import { matrixOperationsPattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-operations";
+import { matrixSpiralRecursivePattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-spiral-recursive";
+import { matrixSpiralTraversalPattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-spiral-traversal";
+import { matrixTraversalPattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-traversal";
+import { matrixTraversalRecursivePattern } from "@/components/algorithm-trainer/patterns/matrix/matrix-traversal-recursive";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
+import { createPatternRecord } from "@/lib/patterns/pattern-utils";
 
 export const matrixPatterns = createPatternRecord<AlgorithmPattern>({
   "Matrix Chain Multiplication": matrixChainMultiplicationPattern,

@@ -1,5 +1,5 @@
-import { PatternKey } from "./types";
-import { PATTERN_KEYS } from "./types";
+import { PATTERN_KEYS } from "@/components/algorithm-trainer/types";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterExplanations: Partial<
   Record<
@@ -12,7 +12,7 @@ export const monsterHunterExplanations: Partial<
     }
   >
 > = {
-  Kosaraju: {
+  "Kosaraju's Algorithm": {
     title: "Monster Territory Connectivity Analyzer",
     description:
       "Identify strongly connected regions in the hunting grounds to understand monster movement patterns.",
@@ -40,7 +40,7 @@ export const monsterHunterExplanations: Partial<
       "Maintain awareness of seasonal changes",
     ],
   },
-  Kruskal: {
+  "Kruskal's Algorithm": {
     title: "Monster Territory Network Optimizer",
     description:
       "Create an optimal network of paths connecting all hunting grounds while minimizing total path difficulty.",
@@ -254,20 +254,7 @@ export const monsterHunterExplanations: Partial<
       "Be careful with pointer movement to avoid missing valid pairs",
     ],
   },
-  "Floyd Cycle Detection": {
-    title: "Fast and Slow Pointers Monster Hunter",
-    description:
-      "The Fast and Slow Pointers Monster Hunter is a master of detecting cycles and finding middle points in monster sequences. It uses two pointers moving at different speeds to efficiently solve problems involving cycles, palindromes, or finding middle elements.",
-    example:
-      "When hunting for a cycle in a sequence of monsters where each monster points to another monster, the Fast and Slow Pointers Monster Hunter uses a fast pointer that moves two steps at a time and a slow pointer that moves one step at a time. If they meet, there's a cycle!",
-    tips: [
-      "Use a fast pointer that moves two steps and a slow pointer that moves one step",
-      "Initialize both pointers at the start of the sequence",
-      "Check if the pointers meet to detect cycles",
-      "Use the meeting point to find the start of the cycle",
-      "Be careful with null checks when moving pointers",
-    ],
-  },
+
   "Topological Sort": {
     title: "Topological Sort Monster Hunter",
     description:
@@ -296,10 +283,10 @@ export const monsterHunterExplanations: Partial<
       "Choose an appropriate heuristic for your hunting terrain",
     ],
   },
-  Dijkstra: {
+  "Dijkstra's Algorithm": {
     title: "Monster Hunter's Pathfinder",
     description:
-      "Like a monster hunter finding the safest path through dangerous territory, Dijkstra's algorithm finds the shortest path from a starting point to all other points.",
+      "Like a monster hunter finding the safest path through dangerous territory, Dijkstra's Algorithm finds the shortest path from a starting point to all other points.",
     example:
       "Imagine you're hunting a rare monster in a dangerous territory. Dijkstra helps you find the safest (shortest) path from your base to any location, avoiding the most dangerous areas.",
     tips: [
@@ -432,7 +419,7 @@ export const monsterHunterExplanations: Partial<
       "Model the problem as a bipartite graph",
       "Use augmenting paths to increase the matching",
       "Alternate between matched and unmatched edges",
-      "Consider using the Hopcroft-Karp algorithm for efficiency",
+      "Consider using the Hopcroft-Karp's Algorithm for efficiency",
       "Use it for optimal resource allocation in monster hunting",
     ],
   },
@@ -677,19 +664,19 @@ export const monsterHunterExplanations: Partial<
       "Be mindful of numerical stability with large powers",
     ],
   },
-  Prim: {
-    title: "Monster Territory Prim",
+  "Prim's Algorithm": {
+    title: "Monster Territory Prim's Algorithm",
     description:
-      "Like a monster hunter growing a network of paths from a central territory, Prim's algorithm builds a minimum spanning tree by always adding the closest unconnected territory.",
+      "Like a monster hunter growing a network of paths from a central territory, Prim's Algorithm builds a minimum spanning tree by always adding the closest unconnected territory.",
     example:
-      "Imagine starting from your base camp and gradually connecting to the nearest unconnected territories - Prim helps you build the most efficient network while always staying connected.",
+      "Imagine starting from your base camp and gradually connecting to the nearest unconnected territories - Prim's Algorithm helps you build the most efficient network while always staying connected.",
     tips: [
       "Use a greedy approach to find the minimum spanning tree",
       "Start with an arbitrary node",
       "Add the smallest edge that connects a new node to the tree",
       "Use it for finding the minimum spanning tree in a graph",
       "Handle edge cases like disconnected graph",
-      "Consider using Prim for dense graphs",
+      "Consider using Prim's Algorithm for dense graphs",
     ],
   },
   "Bellman-Ford": {
@@ -1028,7 +1015,7 @@ export const monsterHunterExplanations: Partial<
       "Use it for efficient pair finding",
     ],
   },
-  "Two Sum Dict": {
+  "Two Sum Dictionary": {
     title: "Monster Territory Two Sum Dictionary",
     description:
       "Using a dictionary to store seen values for quick lookup in Two Sum. Like keeping a log of monster levels you've seen to find matches quickly.",
@@ -1112,12 +1099,12 @@ export const monsterHunterExplanations: Partial<
       "Use it for systematic territory exploration",
     ],
   },
-  "Dynamic Programming Coin Change": {
+  "Coin Change": {
     title: "Monster Territory Coin Changer",
     description:
-      "Like a monster hunter making change for monster currency, Dynamic Programming Coin Change finds the minimum number of coins needed to make change.",
+      "Like a monster hunter making change for monster currency, Coin Change finds the minimum number of coins needed to make change.",
     example:
-      "Imagine you need to make change for a monster currency using the minimum number of coins - Dynamic Programming Coin Change helps you do this efficiently.",
+      "Imagine you need to make change for a monster currency using the minimum number of coins - Coin Change helps you do this efficiently.",
     tips: [
       "Use dynamic programming to store intermediate results",
       "Consider both top-down and bottom-up approaches",
@@ -1140,12 +1127,12 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for optimization problems",
     ],
   },
-  "Tree DP": {
+  "Tree (Dynamic Programming)": {
     title: "Monster Territory Tree Dynamic Solver",
     description:
-      "Like a monster hunter solving problems on a tree structure using dynamic programming, Tree DP solves problems on trees by storing and reusing solutions to subproblems.",
+      "Like a monster hunter solving problems on a tree structure using dynamic programming, Tree (Dynamic Programming) solves problems on trees by storing and reusing solutions to subproblems.",
     example:
-      "Imagine you need to solve a problem on a tree structure by breaking it down into smaller subproblems - Tree DP helps you do this efficiently.",
+      "Imagine you need to solve a problem on a tree structure by breaking it down into smaller subproblems - Tree (Dynamic Programming) helps you do this efficiently.",
     tips: [
       "Use dynamic programming on tree structures",
       "Store solutions to subproblems",
@@ -1154,7 +1141,7 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for tree optimization problems",
     ],
   },
-  "Floyd-Warshall": {
+  "Floyd-Warshall Algorithm": {
     title: "Monster Territory All-Pairs Pathfinder",
     description:
       "Like a monster hunter finding the shortest paths between all pairs of territories, Graph Floyd Warshall finds the shortest paths between all pairs of vertices in a graph.",
@@ -1196,12 +1183,12 @@ export const monsterHunterExplanations: Partial<
       "Be mindful of stack depth in recursive implementations",
     ],
   },
-  "DFS Binary Tree": {
+  "DFS (Binary Tree)": {
     title: "Monster Territory Binary Tree Explorer",
     description:
-      "Like a monster hunter exploring a binary tree of territories using depth-first search, DFS Binary Tree visits all nodes in a binary tree using DFS.",
+      "Like a monster hunter exploring a binary tree of territories using depth-first search, DFS (Binary Tree) visits all nodes in a binary tree using DFS.",
     example:
-      "Imagine you need to explore a binary tree of monster territories using depth-first search - DFS Binary Tree helps you visit every territory systematically.",
+      "Imagine you need to explore a binary tree of monster territories using depth-first search - DFS (Binary Tree) helps you visit every territory systematically.",
     tips: [
       "Use recursion or a stack to track the path",
       "Mark nodes as visited to avoid cycles",
@@ -1225,17 +1212,17 @@ export const monsterHunterExplanations: Partial<
     ],
   },
   "Z Algorithm": {
-    title: "Monster Territory Pattern Matcher",
+    title: "Z Algorithm Monster Hunter",
     description:
-      "Like a monster hunter finding patterns in monster names and descriptions, Z Algorithm efficiently finds all occurrences of a pattern in a text.",
+      "Like a monster hunter analyzing patterns in monster behavior, the Z Algorithm efficiently finds all occurrences of a pattern in a text.",
     example:
-      "Imagine you need to find all occurrences of a pattern in a monster's name or description - Z Algorithm helps you do this efficiently.",
+      "When tracking a monster's movement pattern through different territories, the Z Algorithm helps identify where the pattern matches occur, allowing hunters to predict the monster's next location.",
     tips: [
-      "Use Z Algorithm for pattern matching",
-      "Consider using it for string matching",
-      "Handle edge cases like empty strings",
-      "Use it for efficient pattern matching",
-      "Consider using it for text processing",
+      "Use the Z array to store the length of the longest substring starting from each position",
+      "Compare characters to find matches",
+      "Use the Z array to skip unnecessary comparisons",
+      "Consider using it for pattern matching in monster behavior",
+      "Combine with other string algorithms for complex pattern matching",
     ],
   },
   "Rabin-Karp": {
@@ -1504,12 +1491,12 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for finding cycle start points",
     ],
   },
-  "Ford-Fulkerson": {
+  "Ford-Fulkerson Algorithm": {
     title: "Monster Territory Flow Optimizer",
     description:
-      "Like a monster hunter optimizing the flow of resources through a network of territories, Ford-Fulkerson finds the maximum flow in a flow network.",
+      "Like a monster hunter optimizing the flow of resources through a network of territories, Ford-Fulkerson Algorithm finds the maximum flow in a flow network.",
     example:
-      "Imagine you need to maximize the flow of resources through a network of monster territories - Ford-Fulkerson helps you find the optimal flow.",
+      "Imagine you need to maximize the flow of resources through a network of monster territories - Ford-Fulkerson Algorithm helps you find the optimal flow.",
     tips: [
       "Use residual graphs to track available capacity",
       "Find augmenting paths to increase flow",
@@ -1546,12 +1533,12 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for dynamic territory updates",
     ],
   },
-  "Hopcroft-Karp": {
+  "Hopcroft-Karp's Algorithm": {
     title: "Monster Territory Match Optimizer",
     description:
-      "Like a monster hunter finding the optimal matching between hunters and monsters, Hopcroft-Karp efficiently finds the maximum bipartite matching.",
+      "Like a monster hunter finding the optimal matching between hunters and monsters, Hopcroft-Karp's Algorithm efficiently finds the maximum bipartite matching.",
     example:
-      "Imagine you need to match each hunter with their most suitable monster target - Hopcroft-Karp helps you find the maximum number of optimal matches.",
+      "Imagine you need to match each hunter with their most suitable monster target - Hopcroft-Karp's Algorithm helps you find the maximum number of optimal matches.",
     tips: [
       "Use BFS to find augmenting paths",
       "Use DFS to find maximal matching",
@@ -1616,20 +1603,6 @@ export const monsterHunterExplanations: Partial<
       "Consider using it for territory area calculations",
     ],
   },
-  "LCA DFS": {
-    title: "Monster Territory Ancestor Finder",
-    description:
-      "Like a monster hunter finding the common ancestor territory of two monster species, LCA DFS finds the lowest common ancestor using depth-first search.",
-    example:
-      "Imagine you need to find the most recent common ancestor of two monster species in an evolutionary tree - LCA DFS helps you do this efficiently.",
-    tips: [
-      "Use DFS to track discovery and finish times",
-      "Find the lowest common ancestor",
-      "Handle different tree structures",
-      "Use it for evolutionary relationship analysis",
-      "Consider using it for territory path queries",
-    ],
-  },
   Memoization: {
     title: "Monster Territory Memory Optimizer",
     description:
@@ -1670,20 +1643,6 @@ export const monsterHunterExplanations: Partial<
       "Consider all possible outcomes",
       "Use it for complex probability problems",
       "Consider using it for risk assessment",
-    ],
-  },
-  "Spanning Tree": {
-    title: "Monster Territory Network Connector",
-    description:
-      "Like a monster hunter creating an efficient network of paths connecting all territories, Spanning Tree finds a tree that connects all vertices with minimum total weight.",
-    example:
-      "Imagine you need to connect all monster territories with paths while minimizing total path length - Spanning Tree helps you find the optimal network.",
-    tips: [
-      "Use Kruskal's or Prim's algorithm",
-      "Consider edge weights carefully",
-      "Ensure all territories are connected",
-      "Use it for territory network optimization",
-      "Consider using it for path planning",
     ],
   },
   "Sparse Table": {
@@ -1759,15 +1718,15 @@ export const monsterHunterExplanations: Partial<
   "Zigzag Traversal": {
     title: "Monster Territory Zigzag Explorer",
     description:
-      "Like a monster hunter exploring a territory in a zigzag pattern, Zigzag Traversal visits nodes in a binary tree level by level, alternating direction.",
+      "Like a monster hunter exploring territories in a zigzag pattern, Zigzag Traversal visits nodes in a binary tree level by level, alternating between left-to-right and right-to-left.",
     example:
-      "Imagine you need to explore a binary tree of monster territories in a zigzag pattern - Zigzag Traversal helps you visit each level alternately from left to right and right to left.",
+      "Imagine you need to explore a binary tree of monster territories in a zigzag pattern - Zigzag Traversal helps you visit each territory level by level, alternating direction.",
     tips: [
       "Use a queue for level order traversal",
-      "Alternate direction at each level",
-      "Handle different tree structures",
+      "Track the current level",
+      "Reverse the order of nodes at even levels",
       "Use it for systematic territory exploration",
-      "Consider using it for territory visualization",
+      "Consider using it for territory tree operations",
     ],
   },
   "Null Pattern": {

@@ -1,9 +1,9 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const aStarSearchPattern: AlgorithmPattern = {
   title: "A* Search",
   description:
-    "A graph algorithm that finds the shortest path between two nodes using a heuristic function to guide the search. It combines the advantages of Dijkstra's algorithm (guaranteed shortest path) with the efficiency of greedy best-first search.",
+    "A graph algorithm that finds the shortest path between two nodes using a heuristic function to guide the search. It combines the advantages of Dijkstra's Algorithm (guaranteed shortest path) with the efficiency of greedy best-first search.",
   timeComplexity: "O(b^d) where b is the branching factor and d is the depth of the solution",
   spaceComplexity: "O(b^d)",
   pseudocode: `

@@ -1,4 +1,4 @@
-import type { PatternKey } from "./types.ts";
+import type { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterTestData = new Map<PatternKey, string>([
   [
@@ -302,8 +302,8 @@ Expected Output: {"weakness": "Flash", "habitat": "Ancient Forest"}
 # Like having a quick reference guide for monster information!`,
   ],
   [
-    "Kosaraju" as PatternKey,
-    `# Monster Hunter Kosaraju Challenge
+    "Kosaraju's Algorithm" as PatternKey,
+    `# Monster Hunter Kosaraju's Algorithm Challenge
 
 # Given a map of monster territories with directed paths between them,
 # find groups of territories where monsters can freely move between all areas.
@@ -514,8 +514,8 @@ Expected Output: [0, 3, 4, 8, 10, 15]
 # Like tracking cumulative resources for quick range queries!`,
   ],
   [
-    "Prim" as PatternKey,
-    `# Monster Hunter Prim Challenge
+    "Prim's Algorithm" as PatternKey,
+    `# Monster Hunter Prim's Algorithm Challenge
 # You are building the minimum cost network of monster camps!
 
 # Test Case 1: Basic MST
@@ -764,11 +764,11 @@ Expected Output: ["Base Camp", "Ancient Forest", "Wildspire Waste"]
 # Like exploring all branches of monster territories!`,
   ],
   [
-    "Tree DP" as PatternKey,
-    `# Monster Hunter Tree DP Challenge
+    "Tree (Dynamic Programming)" as PatternKey,
+    `# Monster Hunter Tree (Dynamic Programming) Challenge
 # You are optimizing hunts on a tree of monster territories!
 
-# Test Case 1: Basic Tree DP
+# Test Case 1: Basic Tree (Dynamic Programming)
 Input: {
     "tree": {
         "value": 1,
@@ -811,8 +811,8 @@ Expected Output: [0, 1]
 # Like finding the right combination of materials for weapon crafting!`,
   ],
   [
-    "Two Sum Dict" as PatternKey,
-    `# Monster Hunter Two Sum Dict Challenge
+    "Two Sum Dictionary" as PatternKey,
+    `# Monster Hunter Two Sum Dictionary Challenge
 # You are finding pairs of materials that combine to make a weapon!
 
 # Test Case 1: Basic Material Pair
@@ -1287,8 +1287,8 @@ Expected Output: ["Base Camp", "Ancient Forest", "Coral Highlands", "Base Camp"]
 # Like patrolling territories in a continuous loop!`,
   ],
   [
-    "DFS Binary Tree" as PatternKey,
-    `# Monster Hunter DFS Binary Tree Challenge
+    "DFS (Binary Tree)" as PatternKey,
+    `# Monster Hunter DFS (Binary Tree) Challenge
 # You are exploring a binary tree of monster territories!
 
 # Test Case 1: Basic Tree Traversal
@@ -1337,8 +1337,8 @@ Expected Output: ["Base Camp", "Ancient Forest", "Coral Highlands", "Elder's Rec
 # Like following a monster's trail as deep as it goes!`,
   ],
   [
-    "Dijkstra" as PatternKey,
-    `# Monster Hunter Dijkstra Challenge
+    "Dijkstra's Algorithm" as PatternKey,
+    `# Monster Hunter Dijkstra's Challenge
 # You are finding the shortest path to hunt a monster!
 
 # Test Case 1: Basic Path Finding
@@ -1389,8 +1389,8 @@ Expected Output: [
 # Like breaking down a large territory into manageable sections!`,
   ],
   [
-    "Dynamic Programming Coin Change" as PatternKey,
-    `# Monster Hunter Dynamic Programming Coin Change Challenge
+    "Coin Change" as PatternKey,
+    `# Monster Hunter Coin Change Challenge
 # You are finding the minimum number of materials needed for crafting!
 
 # Test Case 1: Basic Material Combination
@@ -1499,29 +1499,22 @@ Expected Output: 8
 # You are detecting cycles in monster movement patterns!
 
 # Test Case 1: Basic Cycle Detection
-Input: {
-    "head": {
-        "value": 1,
-        "next": {
-            "value": 2,
-            "next": {
-                "value": 3,
-                "next": {
-                    "value": 4,
-                    "next": null
-                }
-            }
-        }
-    }
-}
+# Example: Creating a linked list 1 -> 2 -> 3 -> 4
+head = ListNode(1)
+head.next = ListNode(2)
+head.next.next = ListNode(3)
+head.next.next.next = ListNode(4)
+
+# Now you can use 'head' as input to your function, e.g.:
+result = your_function(head)
 Expected Output: false
 
 # Monster Hunter Tip:
 # Like detecting if a monster is moving in circles!`,
   ],
   [
-    "Floyd-Warshall" as PatternKey,
-    `# Monster Hunter Floyd-Warshall Challenge
+    "Floyd-Warshall Algorithm" as PatternKey,
+    `# Monster Hunter Floyd-Warshall Algorithm Challenge
 # You are finding the shortest paths between all territories!
 
 # Test Case 1: Basic Path Finding
@@ -1699,8 +1692,8 @@ Expected Output: 10
 # Like finding a monster's movement pattern in territory data!`,
   ],
   [
-    "Kruskal" as PatternKey,
-    `# Monster Hunter Kruskal Challenge
+    "Kruskal's Algorithm" as PatternKey,
+    `# Monster Hunter Kruskal's Algorithm Challenge
 # You are building the minimum cost network of monster camps!
 
 # Test Case 1: Basic MST
@@ -1971,8 +1964,8 @@ Expected Output: 13
 # Like predicting monster population growth!`,
   ],
   [
-    "Ford-Fulkerson" as PatternKey,
-    `# Monster Hunter Ford-Fulkerson Challenge
+    "Ford-Fulkerson Algorithm" as PatternKey,
+    `# Monster Hunter Ford-Fulkerson Algorithm Challenge
 # You are optimizing resource flow!
 
 # Test Case 1: Basic Resource Flow
@@ -2018,8 +2011,8 @@ Expected Output: {
 # Like creating efficient territory connection maps!`,
   ],
   [
-    "Hopcroft-Karp" as PatternKey,
-    `# Monster Hunter Hopcroft-Karp Challenge
+    "Hopcroft-Karp's Algorithm" as PatternKey,
+    `# Monster Hunter Hopcroft-Karp's Algorithm Challenge
 # You are matching hunters to monsters!
 
 # Test Case 1: Basic Matching
@@ -2129,8 +2122,8 @@ Expected Output: 7006652
 # Like efficiently calculating large territory areas!`,
   ],
   [
-    "LCA DFS" as PatternKey,
-    `# Monster Hunter LCA DFS Challenge
+    "Lowest Common Ancestor" as PatternKey,
+    `# Monster Hunter Lowest Common Ancestor Challenge
 # You are finding common monster ancestors!
 
 # Test Case 1: Basic Ancestor Finding
@@ -2182,32 +2175,6 @@ Expected Output: [
 
 # Monster Hunter Tip:
 # Like finding symmetrical patterns in territories!`,
-  ],
-  [
-    "Spanning Tree" as PatternKey,
-    `# Monster Hunter Spanning Tree Challenge
-# You are creating efficient territory networks!
-
-# Test Case 1: Basic Network Creation
-Input: {
-    "graph": {
-        "Base Camp": [["Ancient Forest", 2], ["Wildspire Waste", 3]],
-        "Ancient Forest": [["Base Camp", 2], ["Coral Highlands", 4]],
-        "Wildspire Waste": [["Base Camp", 3], ["Rotten Vale", 1]],
-        "Coral Highlands": [["Ancient Forest", 4], ["Elder's Recess", 5]],
-        "Rotten Vale": [["Wildspire Waste", 1], ["Elder's Recess", 2]],
-        "Elder's Recess": [["Coral Highlands", 5], ["Rotten Vale", 2]]
-    }
-}
-Expected Output: [
-    ["Base Camp", "Ancient Forest"],
-    ["Ancient Forest", "Coral Highlands"],
-    ["Wildspire Waste", "Rotten Vale"],
-    ["Rotten Vale", "Elder's Recess"]
-]
-
-# Monster Hunter Tip:
-# Like creating efficient territory networks!`,
   ],
   [
     "Sparse Table" as PatternKey,
@@ -2293,43 +2260,6 @@ Expected Output: [
 # Monster Hunter Tip:
 # Like finding critical paths that connect territories!`,
   ],
-  //   [
-  //     "Tree Implementation" as PatternKey,
-  //     `# Monster Hunter Tree Implementation Challenge
-  // # You are implementing a territory hierarchy!
-
-  // # Test Case 1: Basic Tree Operations
-  // Input: {
-  //     "operations": [
-  //         {"type": "insert", "value": "Base Camp"},
-  //         {"type": "insert", "value": "Ancient Forest"},
-  //         {"type": "insert", "value": "Wildspire Waste"},
-  //         {"type": "insert", "value": "Coral Highlands"},
-  //         {"type": "insert", "value": "Rotten Vale"},
-  //         {"type": "insert", "value": "Elder's Recess"}
-  //     ]
-  // }
-  // Expected Output: {
-  //     "root": "Base Camp",
-  //     "children": [
-  //         {
-  //             "value": "Ancient Forest",
-  //             "children": [{"value": "Coral Highlands", "children": []}]
-  //         },
-  //         {
-  //             "value": "Wildspire Waste",
-  //             "children": [{"value": "Rotten Vale", "children": []}]
-  //         },
-  //         {
-  //             "value": "Elder's Recess",
-  //             "children": []
-  //         }
-  //     ]
-  // }
-
-  // # Monster Hunter Tip:
-  // # Like organizing territories in a hierarchical structure!`,
-  //   ],
   [
     "Trie" as PatternKey,
     `# Monster Hunter Trie Challenge

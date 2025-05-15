@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterPatternsExtended6 = new Map<PatternKey, string>([
   [
@@ -864,57 +864,61 @@ def find_next_taller_monster(monster_heights):
   ],
 
   [
-    "Dijkstra" as PatternKey,
-    `function find_shortest_paths(territories: number[][], start: number): number[] {
-      const n = territories.length;
-      const dist = Array(n).fill(Infinity);
-      const visited = Array(n).fill(false);
-      dist[start] = 0;
+    "Dijkstra's Algorithm" as PatternKey,
+    `def find_safest_hunting_routes(territory_map: list[list[int]], base_camp: int) -> list[int]:
+      """
+      Find the safest routes from base camp to all hunting grounds using Dijkstra's algorithm.
+      Each edge weight represents the danger level of the path between territories.
+      """
+      n = len(territory_map)
+      danger_levels = [float('inf')] * n  # Initialize all danger levels as infinite
+      visited = [False] * n
+      danger_levels[base_camp] = 0  # Base camp has no danger
       
-      for (let i = 0; i < n - 1; i++) {
-        let u = -1;
-        for (let j = 0; j < n; j++) {
-          if (!visited[j] && (u === -1 || dist[j] < dist[u])) {
-            u = j;
-          }
-        }
-        
-        if (u === -1) break;
-        visited[u] = true;
-        
-        for (let v = 0; v < n; v++) {
-          if (territories[u][v] > 0) {
-            dist[v] = Math.min(dist[v], dist[u] + territories[u][v]);
-          }
-        }
-      }
+      for _ in range(n - 1):
+          # Find the safest unvisited territory
+          current_territory = -1
+          for j in range(n):
+              if not visited[j] and (current_territory == -1 or danger_levels[j] < danger_levels[current_territory]):
+                  current_territory = j
+          
+          if current_territory == -1:
+              break
+          visited[current_territory] = True
+          
+          # Update danger levels for neighboring territories
+          for next_territory in range(n):
+              if territory_map[current_territory][next_territory] > 0:
+                  danger_levels[next_territory] = min(
+                      danger_levels[next_territory],
+                      danger_levels[current_territory] + territory_map[current_territory][next_territory]
+                  )
       
-      return dist;
-    }
+      return danger_levels
 
-    // Example usage:
-    const territories = [
-      [0, 4, 0, 0, 0, 0, 0, 8, 0],
-      [4, 0, 8, 0, 0, 0, 0, 11, 0],
-      [0, 8, 0, 7, 0, 4, 0, 0, 2],
-      [0, 0, 7, 0, 9, 14, 0, 0, 0],
-      [0, 0, 0, 9, 0, 10, 0, 0, 0],
-      [0, 0, 4, 14, 10, 0, 2, 0, 0],
-      [0, 0, 0, 0, 0, 2, 0, 1, 6],
-      [8, 11, 0, 0, 0, 0, 1, 0, 7],
-      [0, 0, 2, 0, 0, 0, 6, 7, 0]
-    ];
+    # Example usage:
+    hunting_grounds = [
+        [0, 4, 0, 0, 0, 0, 0, 8, 0],  # Base camp connections
+        [4, 0, 8, 0, 0, 0, 0, 11, 0], # Ancient Forest
+        [0, 8, 0, 7, 0, 4, 0, 0, 2],  # Wildspire Waste
+        [0, 0, 7, 0, 9, 14, 0, 0, 0], # Coral Highlands
+        [0, 0, 0, 9, 0, 10, 0, 0, 0], # Rotten Vale
+        [0, 0, 4, 14, 10, 0, 2, 0, 0], # Elder's Recess
+        [0, 0, 0, 0, 0, 2, 0, 1, 6],  # Hoarfrost Reach
+        [8, 11, 0, 0, 0, 0, 1, 0, 7], # Guiding Lands
+        [0, 0, 2, 0, 0, 0, 6, 7, 0]   # Seliana
+    ]
 
-    const start_territory = 0;
-    const shortest_paths = find_shortest_paths(territories, start_territory);
-    console.log(\`Shortest paths from territory \${start_territory}:\`, shortest_paths);
+    base_camp = 0
+    safest_routes = find_safest_hunting_routes(hunting_grounds, base_camp)
+    print(f"Safest routes from base camp to all hunting grounds:", safest_routes)
 
-    // Tips:
-    // 1. Use edge weights to represent terrain difficulty
-    // 2. Consider monster presence in path weights
-    // 3. Update paths dynamically as monsters move
-    // 4. Use for efficient resource gathering routes
-    // 5. Plan multiple backup paths
+    # Tips:
+    # 1. Use edge weights to represent monster threat levels
+    # 2. Consider environmental hazards in path weights
+    # 3. Update routes dynamically as monsters migrate
+    # 4. Use for efficient resource gathering paths
+    # 5. Always plan multiple escape routes
     `,
   ],
 
@@ -1598,10 +1602,10 @@ def manage_territory_connections(territories, connections):
   ],
 
   [
-    "Tree DP" as PatternKey,
+    "Tree (Dynamic Programming)" as PatternKey,
     `def monster_hunter_tree_dp(territory_tree):
     """
-    Find optimal resource gathering path using Tree DP.
+    Find optimal resource gathering path using Tree (Dynamic Programming).
     Time: O(n)
     Space: O(n)
     
@@ -1660,7 +1664,7 @@ def manage_territory_connections(territories, connections):
 def find_optimal_gathering_path(territory_tree):
     """
     Find the optimal path to gather resources while avoiding monster detection.
-    Uses Tree DP to maximize resource collection while respecting adjacency rules.
+    Uses Tree (Dynamic Programming) to maximize resource collection while respecting adjacency rules.
     
     Args:
         territory_tree (dict): Tree structure representing gathering points

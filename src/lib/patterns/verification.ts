@@ -1,6 +1,6 @@
-import { PatternKey, PATTERN_KEYS, MonsterHunterPattern } from "./types.js";
-import { patternMapping } from "./mapping.js";
-import { AlgorithmPattern } from "../../components/algorithm-trainer/types/pattern-types.js";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
+import { patternMapping } from "@/lib/patterns/mapping";
+import { PatternKey, PATTERN_KEYS, MonsterHunterPattern } from "@/lib/patterns/types";
 
 interface VerificationResult {
   missingPatterns: {

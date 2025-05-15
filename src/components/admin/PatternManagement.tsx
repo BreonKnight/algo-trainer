@@ -1,9 +1,4 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
-import { patternManagementService } from "@/lib/services/pattern-management";
-import { toast } from "react-hot-toast";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import {
   DragDropContext,
   Droppable,
@@ -12,11 +7,17 @@ import {
   DroppableProvided,
   DraggableProvided,
 } from "react-beautiful-dnd";
-import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
-import { validateComponentOrder } from "./pattern-management/PatternValidation";
+import { toast } from "react-hot-toast";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+import { validateComponentOrder } from "@/components/admin/pattern-management/PatternValidation";
+import PatternValidationResults from "@/components/admin/pattern-management/PatternValidationResults";
+import type { ValidationResults } from "@/components/admin/pattern-management/PatternValidationResults";
 import { getValidationResults } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
-import PatternValidationResults from "./pattern-management/PatternValidationResults";
-import type { ValidationResults } from "./pattern-management/PatternValidationResults";
+import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+import { patternManagementService } from "@/lib/services/pattern-management";
+import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
 
 type FormStep = "basic" | "details" | "implementation" | "test-cases" | "preview";
 
@@ -118,7 +119,7 @@ const PatternManagement: React.FC = () => {
         // Store the original order of components
         setOriginalOrder(existingPatterns.map((p) => p.id));
       } catch (error) {
-        toast.error("Failed to load patterns");
+        toast.error("Failed to load patterns " + error);
       } finally {
         setIsLoading(false);
       }
@@ -289,13 +290,14 @@ const PatternManagement: React.FC = () => {
             key.includes("Graph") ||
             key === "BFS" ||
             key === "DFS" ||
-            key === "Kruskal" ||
-            key === "Prim" ||
+            key === "Kruskal's Algorithm" ||
+            key === "Prim's Algorithm" ||
             key === "Bellman-Ford" ||
-            key === "Floyd-Warshall" ||
+            key === "Floyd-Warshall Algorithm" ||
             key === "A* Search" ||
             key === "Network Flow" ||
             key === "Maximum Bipartite Matching" ||
+            key === "Hungarian Algorithm" ||
             key === "Topological Sort" ||
             key === "Articulation Points"
         ).length,
@@ -314,6 +316,8 @@ const PatternManagement: React.FC = () => {
             key === "Extended Euclidean" ||
             key === "Chinese Remainder Theorem" ||
             key === "Sieve of Eratosthenes" ||
+            key === "Sieve of Atkin" ||
+            key === "Sieve of Sundaram" ||
             key === "Prime Factorization" ||
             key === "Miller-Rabin Primality Test"
         ).length,
@@ -491,27 +495,8 @@ const PatternManagement: React.FC = () => {
   const validatePattern = (pattern: Pattern): string[] => {
     const errors: string[] = [];
 
-    // Debug log for pattern mapping
-    console.log("Pattern Mapping Debug:", {
-      patternName: pattern.name,
-      patternMapping: debugInfo.patternMapping[pattern.name],
-      patternCategories: debugInfo.patternCategories,
-      allPatterns: patterns.map((p) => p.name),
-    });
-
-    // Check if pattern name exists in pattern types
-    const categoryKeys = Object.keys(debugInfo.patternCategories);
-    const patternExists = categoryKeys.some(
-      (category) =>
-        debugInfo.patternCategories[category] > 0 && patterns.some((p) => p.name === pattern.name)
-    );
-
-    if (!patternExists) {
-      errors.push(`Pattern name "${pattern.name}" is not a valid pattern type`);
-    }
-
     // Check if pattern name exists in pattern mapping
-    if (!debugInfo.patternMapping[pattern.name]) {
+    if (!patternMapping[pattern.name]) {
       errors.push(`Pattern name "${pattern.name}" is not mapped in pattern-mapping.ts`);
     }
 
@@ -581,7 +566,7 @@ const PatternManagement: React.FC = () => {
       toast.success("Pattern saved successfully!");
       clearForm();
     } catch (error) {
-      toast.error("Failed to save pattern");
+      toast.error("Failed to save pattern" + error);
     } finally {
       setIsLoading(false);
     }
@@ -595,7 +580,7 @@ const PatternManagement: React.FC = () => {
         setPatterns((prev) => prev.filter((p) => p.id !== patternId));
         toast.success("Pattern deleted successfully!");
       } catch (error) {
-        toast.error("Failed to delete pattern");
+        toast.error("Failed to delete pattern" + error);
       } finally {
         setIsLoading(false);
       }
@@ -792,7 +777,7 @@ const PatternManagement: React.FC = () => {
         setSelectedPatterns(new Set());
         toast.success(`${selectedPatterns.size} patterns deleted successfully!`);
       } catch (error) {
-        toast.error("Failed to delete patterns");
+        toast.error("Failed to delete patterns " + error);
       } finally {
         setIsLoading(false);
       }
@@ -840,7 +825,7 @@ const PatternManagement: React.FC = () => {
         setPatterns((prev) => [...prev, ...validatedPatterns]);
         toast.success(`${validatedPatterns.length} patterns imported successfully!`);
       } catch (error) {
-        toast.error("Failed to import patterns");
+        toast.error("Failed to import patterns " + error);
       } finally {
         setIsLoading(false);
       }

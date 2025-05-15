@@ -60,10 +60,10 @@ const algorithmList: Record<AlgorithmCategory, string[]> = {
     "Dijkstra's Algorithm",
     "Bellman-Ford Algorithm",
     "Floyd-Warshall Algorithm",
-    "Kruskal's Algorithm",
+    "Kruskal's Algorithm's Algorithm",
     "Prim's Algorithm",
     "Topological Sort",
-    "Kosaraju's Algorithm",
+    "Kosaraju's Algorithm's Algorithm",
     "Tarjan's Algorithm",
     "Articulation Points",
     "Bridges",
@@ -76,17 +76,18 @@ const algorithmList: Record<AlgorithmCategory, string[]> = {
     "Edmonds-Karp Algorithm",
     "Dinic's Algorithm",
     "Push-Relabel Algorithm",
-    "Hopcroft-Karp Algorithm",
+    "Hopcroft-Karp's Algorithm",
     "Kuhn's Algorithm",
     "Hungarian Algorithm",
     "Gale-Shapley Algorithm",
+    "Dijkstra's Algorithm",
   ],
   "dynamic-programming": [
     "Knapsack Problem",
     "Longest Common Subsequence",
     "Longest Increasing Subsequence",
     "Matrix Chain Multiplication",
-    "Coin Change Problem",
+    "Coin Change",
     "Edit Distance",
     "Rod Cutting",
     "Subset Sum Problem",
@@ -209,12 +210,11 @@ function getPrerequisites(algorithm: string, category: AlgorithmCategory): strin
 
 function generateDescription(algorithm: string, category: AlgorithmCategory): string {
   return `${algorithm} is a ${category} algorithm that ${getAlgorithmPurpose(
-    algorithm,
     category
   )}. This tutorial will cover the theory, implementation, and applications of ${algorithm}.`;
 }
 
-function getAlgorithmPurpose(algorithm: string, category: AlgorithmCategory): string {
+function getAlgorithmPurpose(category: AlgorithmCategory): string {
   switch (category) {
     case "sorting":
       return "efficiently organizes data in a specific order";

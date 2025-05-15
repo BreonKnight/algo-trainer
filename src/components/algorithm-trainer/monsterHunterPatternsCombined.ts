@@ -1,16 +1,16 @@
-import { PatternKey, PATTERN_KEYS } from "./types.ts";
-import { AlgorithmPattern } from "./types/pattern-types.ts";
-import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
-import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
-import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";
-import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4.ts";
-import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5.ts";
-import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
-import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
-import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8.ts";
-import { monsterHunterPatternsExtended9 } from "./monsterHunterPatternsExtended9.ts";
-import { monsterHunterPatterns } from "./monsterHunterPatterns.ts";
-import { patterns as algorithmPatterns } from "./patterns/index.ts";
+import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
+import { monsterHunterPatternsExtended } from "@/components/algorithm-trainer/monsterHunterPatternsExtended";
+import { monsterHunterPatternsExtended2 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended2";
+import { monsterHunterPatternsExtended3 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended3";
+import { monsterHunterPatternsExtended4 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended4";
+import { monsterHunterPatternsExtended5 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended5";
+import { monsterHunterPatternsExtended6 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended6";
+import { monsterHunterPatternsExtended7 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended7";
+import { monsterHunterPatternsExtended8 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended8";
+import { monsterHunterPatternsExtended9 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended9";
+import { patterns as algorithmPatterns } from "@/components/algorithm-trainer/patterns/index";
+import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 // Helper function to calculate Levenshtein distance
 function levenshteinDistance(a: string, b: string): number {
@@ -105,7 +105,7 @@ const allPatterns = new Map<PatternKey, string>(
 export const monsterHunterPatternsByCategory = {
   Array: [
     "Two Sum",
-    "Two Sum Dict",
+    "Two Sum Dictionary",
     "Two Sum Two Pointers",
     "Sliding Window",
     "Two Pointers",
@@ -123,7 +123,6 @@ export const monsterHunterPatternsByCategory = {
     "Matrix Spiral Recursive",
     "Matrix Chain Multiplication",
     "Matrix Exponentiation",
-    "Zigzag Traversal",
     "Stack Sort",
   ],
   Searching: [
@@ -165,6 +164,7 @@ export const monsterHunterPatternsByCategory = {
     "DFS Linked List",
     "BFS Linked List",
     "Doubly Linked List",
+    "Fast and Slow Pointers",
     "Stack Implementation",
     "Queue Implementation",
     "Heap Implementation",
@@ -174,6 +174,8 @@ export const monsterHunterPatternsByCategory = {
     "Trie",
     "Trie Operations",
     "Sparse Table",
+    "Zigzag Traversal",
+    "Heavy Light Decomposition",
     // "Tree Implementation", // Commented out because it is not yet implemented or used in the current system. Ensure to update related mappings and documentation if re-enabled.
   ],
 
@@ -181,26 +183,27 @@ export const monsterHunterPatternsByCategory = {
     "A* Search",
     "DFS",
     "BFS",
-    "DFS Binary Tree",
+    "DFS (Binary Tree)",
     "DFS Graph",
-    "Dijkstra",
-    "Kosaraju",
+    "Dijkstra's Algorithm",
+    "Kosaraju's Algorithm",
     "Articulation Points",
     "Bridges",
     "Strongly Connected Components",
     "Network Flow",
     "Maximum Bipartite Matching",
     "Grid Traversal",
-    "Kruskal",
-    "Prim",
+    "Kruskal's Algorithm",
+    "Prim's Algorithm",
     "Bellman-Ford",
-    "Floyd-Warshall",
-    "Ford-Fulkerson",
-    "Hopcroft-Karp",
+    "Floyd-Warshall Algorithm",
+    "Ford-Fulkerson Algorithm",
+    "Hopcroft-Karp's Algorithm",
     "Kahn's Topological Sort",
+    "Lowest Common Ancestor",
     "Topological Sort",
     "Graph Representation",
-    "Spanning Tree",
+    "Inorder Traversal",
   ],
 
   Strings: [
@@ -212,19 +215,20 @@ export const monsterHunterPatternsByCategory = {
     "Suffix Array",
     "String Hashing",
     "Palindrome Partitioning",
-    "Edit Distance",
   ],
 
   "Dynamic Programming": [
     "Dynamic Programming",
     "Dynamic Programming Pattern",
     "Dynamic Programming Iterative",
-    "Dynamic Programming Coin Change",
+    "Coin Change",
     "State Compression DP",
     "Digit DP",
-    "Tree DP",
+    "Tree (Dynamic Programming)",
     "Probability DP",
     "Bitwise DP",
+    "Edit Distance",
+    "Fibonacci",
   ],
 
   "Greedy Algorithms": [
@@ -248,13 +252,7 @@ export const monsterHunterPatternsByCategory = {
     "Fast Fourier Transform",
     "Divide and Conquer",
     "Karatsuba Multiplication",
-    "Fast and Slow Pointers",
-    "Heavy Light Decomposition",
-    "Lowest Common Ancestor",
-    "LCA DFS",
-    "Inorder Traversal",
     "Recursion",
-    "Fibonacci",
     "Null Pattern",
     "Test Data",
   ],

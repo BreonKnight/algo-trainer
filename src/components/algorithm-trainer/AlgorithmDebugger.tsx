@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "../ui/button";
 import { Play, Pause, SkipBack, SkipForward, RotateCcw, Bug } from "lucide-react";
-import { PatternKey } from "./types";
-import { CodeEditor } from "./CodeEditor";
+import { useState, useEffect } from "react";
+
+import { CodeEditor } from "@/components/algorithm-trainer/CodeEditor";
+import { PatternKey } from "@/components/algorithm-trainer/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface AlgorithmDebuggerProps {
   algorithm: PatternKey;

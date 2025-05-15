@@ -1,9 +1,9 @@
-import { PATTERN_KEYS } from "./types.ts";
-import { algorithmPatterns } from "./patterns";
-import { allMonsterHunterPatterns } from "./monsterHunterPatternsCombined";
+import { allMonsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatternsCombined";
+import { algorithmPatterns } from "@/components/algorithm-trainer/patterns";
+import { PATTERN_KEYS } from "@/components/algorithm-trainer/types";
 
 // Check if all patterns have regular implementations
-const missingRegularPatterns = PATTERN_KEYS.filter((key) => !algorithmPatterns[key]);
+const missingRegularPatterns = PATTERN_KEYS.filter((key) => !(key in algorithmPatterns));
 
 // Check if all patterns have Monster Hunter implementations
 const missingMonsterHunterPatterns = PATTERN_KEYS.filter(

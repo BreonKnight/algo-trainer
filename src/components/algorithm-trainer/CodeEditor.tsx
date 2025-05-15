@@ -1,7 +1,12 @@
-import { Card } from "@/components/ui/card";
-import Editor, { Monaco } from "@monaco-editor/react";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
 import * as monaco from "monaco-editor";
+import { lazy, Suspense } from "react";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   draculaTheme,
   solarizedTheme,
@@ -14,10 +19,12 @@ import {
   kingdomHeartsTheme,
   forniteTheme,
 } from "@/lib/theme";
-import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
-import { Copy, Check, Type, Maximize2, Minimize2 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
+// Lazy load Monaco editor
+const Editor = lazy(() => import("@monaco-editor/react"));
+
+type Monaco = typeof monaco;
 
 interface CodeEditorProps {
   userCode: string;
@@ -87,11 +94,45 @@ export function CodeEditor({
     }
   }, [userCode]);
 
+  // Handle keyboard shortcuts through Monaco's editor configuration
+  useEffect(() => {
+    if (!monacoRef.current || !editorRef.current) return;
+
+    const editor = editorRef.current;
+    const runAction = editor.addAction({
+      id: "algo-trainer.runCode",
+      label: "Run Code",
+      keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter],
+      contextMenuGroupId: "navigation",
+      contextMenuOrder: 1.5,
+      run: function () {
+        onRunCode?.();
+      },
+    });
+
+    // Update editor options
+    editor.updateOptions({
+      extraEditorClassName: "algo-trainer-editor",
+      automaticLayout: true,
+      minimap: { enabled: false },
+      quickSuggestions: false,
+      parameterHints: { enabled: false },
+      suggestOnTriggerCharacters: false,
+      acceptSuggestionOnEnter: "off",
+      tabCompletion: "off",
+    });
+
+    return () => {
+      // Clean up by removing the action
+      runAction.dispose();
+    };
+  }, [onRunCode]); // monacoRef and editorRef are mutable, so we don't include them in deps
+
   // Handle error line highlighting
   useEffect(() => {
     if (monacoRef.current && editorRef.current && errorLine) {
-      setDecorations(
-        editorRef.current.deltaDecorations(decorations, [
+      try {
+        const newDecorations = editorRef.current.deltaDecorations(decorations, [
           {
             range: new monacoRef.current.Range(errorLine, 1, errorLine, 1),
             options: {
@@ -104,11 +145,16 @@ export function CodeEditor({
               },
             },
           },
-        ])
-      );
+        ]);
+        setDecorations(newDecorations);
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Error applying decorations:", e);
+        }
+        // If it's a 'Canceled' error, we intentionally swallow it.
+      }
     }
-    // eslint-disable-next-line
-  }, [errorLine]);
+  }, [errorLine, decorations]); // Added 'decorations' to dependency array
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -121,12 +167,12 @@ export function CodeEditor({
         onShowAnswer && onShowAnswer();
         e.preventDefault();
       }
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "n") {
-        onNextPattern && onNextPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "[") {
+        onPrevPattern && onPrevPattern();
         e.preventDefault();
       }
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "p") {
-        onPrevPattern && onPrevPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "]") {
+        onNextPattern && onNextPattern();
         e.preventDefault();
       }
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") {
@@ -144,7 +190,6 @@ export function CodeEditor({
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-    // eslint-disable-next-line
   }, [userCode, onRunCode, onShowAnswer, onNextPattern, onPrevPattern]);
 
   // Update editor height on mount and resize
@@ -180,28 +225,74 @@ export function CodeEditor({
     }
   }, [getMonacoTheme]);
 
-  // Editor mount
-  const handleEditorDidMount = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
-    monacoRef.current = monaco;
-    editorRef.current = editor;
-    monaco.editor.defineTheme("dracula", draculaTheme);
-    monaco.editor.defineTheme("solarized", solarizedTheme);
-    monaco.editor.defineTheme("light", lightTheme);
-    monaco.editor.defineTheme("snes", snesTheme);
-    monaco.editor.defineTheme("nord", nordTheme);
-    monaco.editor.defineTheme("ps2", ps2Theme);
-    monaco.editor.defineTheme("re2", re2Theme);
-    monaco.editor.defineTheme("mh", mhTheme);
-    monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
-    monaco.editor.defineTheme("fornite", forniteTheme);
-    monaco.editor.setTheme(getMonacoTheme());
-    editor.focus();
+  // Handle editor value changes with debounce
+  const handleEditorChange = useCallback(
+    (value: string | undefined) => {
+      try {
+        setUserCode(value || "");
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Editor error:", e);
+        }
+      }
+    },
+    [setUserCode]
+  );
 
-    // Force layout update
-    setTimeout(() => {
-      editor.layout();
-    }, 100);
-  };
+  // Editor mount with cancellation handling
+  const handleEditorDidMount = useCallback(
+    (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+      try {
+        monacoRef.current = monaco;
+        editorRef.current = editor;
+
+        // Define themes
+        const themes = {
+          dracula: draculaTheme,
+          solarized: solarizedTheme,
+          light: lightTheme,
+          snes: snesTheme,
+          nord: nordTheme,
+          ps2: ps2Theme,
+          re2: re2Theme,
+          mh: mhTheme,
+          "kingdom-hearts": kingdomHeartsTheme,
+          fornite: forniteTheme,
+        };
+
+        Object.entries(themes).forEach(([name, theme]) => {
+          try {
+            monaco.editor.defineTheme(name, theme);
+          } catch (e) {
+            if (e instanceof Error && e.name !== "Canceled") {
+              console.error(`Failed to define theme ${name}:`, e);
+            }
+          }
+        });
+
+        monaco.editor.setTheme(getMonacoTheme());
+        editor.focus();
+
+        // Force layout update with cancellation handling
+        const layoutTimeout = setTimeout(() => {
+          try {
+            editor.layout();
+          } catch (e) {
+            if (e instanceof Error && e.name !== "Canceled") {
+              console.error("Layout error:", e);
+            }
+          }
+        }, 100);
+
+        return () => clearTimeout(layoutTimeout);
+      } catch (e) {
+        if (e instanceof Error && e.name !== "Canceled") {
+          console.error("Editor mount error:", e);
+        }
+      }
+    },
+    [getMonacoTheme]
+  );
 
   const handleCopy = () => {
     navigator.clipboard.writeText(userCode);
@@ -218,8 +309,39 @@ export function CodeEditor({
     }
   };
 
+  // Add touch event handling for resize
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isDesktop) return;
+    const touch = e.touches[0];
+    const startY = touch.clientY;
+    const startHeight = scrollRef.current?.offsetHeight || 0;
+    const maxHeight = 500;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      const delta = touch.clientY - startY;
+      const newHeight = Math.max(120, Math.min(startHeight + delta, maxHeight));
+      setEditorHeight(newHeight);
+    };
+
+    const handleTouchEnd = () => {
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd);
+  };
+
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card
+      className={cn(
+        "p-4 w-full h-full flex flex-col overflow-hidden",
+        theme === "snes"
+          ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)]"
+          : "bg-secondary border-text-secondary"
+      )}
+    >
       <div className="flex-none flex justify-between items-center mb-3">
         <h2
           className={cn(
@@ -341,6 +463,19 @@ export function CodeEditor({
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="sm" className="ml-2" onClick={() => onRunCode?.()}>
+                Run (Ctrl+Enter)
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-xs">Run code (Ctrl+Enter)</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
@@ -352,38 +487,54 @@ export function CodeEditor({
             minHeight: isDesktop ? "0" : "300px",
           }}
         >
-          <Editor
-            height={editorHeight}
-            defaultLanguage="python"
-            theme={getMonacoTheme()}
-            value={userCode}
-            onChange={(value: string | undefined) => setUserCode(value || "")}
-            onMount={handleEditorDidMount}
-            options={{
-              fontSize,
-              minimap: { enabled: false },
-              scrollBeyondLastLine: false,
-              lineNumbers: "on",
-              roundedSelection: false,
-              padding: { top: 8, bottom: 8 },
-              cursorStyle: "line",
-              automaticLayout: true,
-              wordWrap: "on",
-              tabSize: 4,
-              insertSpaces: true,
-              overviewRulerBorder: false,
-              hideCursorInOverviewRuler: true,
-              renderLineHighlight: "line",
-              lineDecorationsWidth: 0,
-              renderLineHighlightOnlyWhenFocus: true,
-              fixedOverflowWidgets: true,
-            }}
-          />
+          <Suspense
+            fallback={
+              <div className="h-full w-full flex items-center justify-center">
+                Loading editor...
+              </div>
+            }
+          >
+            <Editor
+              height={editorHeight}
+              defaultLanguage="python"
+              theme={getMonacoTheme()}
+              value={userCode}
+              onChange={handleEditorChange}
+              onMount={handleEditorDidMount}
+              options={{
+                fontSize,
+                minimap: { enabled: false },
+                scrollBeyondLastLine: false,
+                lineNumbers: "on",
+                roundedSelection: false,
+                padding: { top: 8, bottom: 8 },
+                cursorStyle: "line",
+                automaticLayout: true,
+                wordWrap: "on",
+                tabSize: 4,
+                insertSpaces: true,
+                overviewRulerBorder: false,
+                hideCursorInOverviewRuler: true,
+                renderLineHighlight: "line",
+                lineDecorationsWidth: 0,
+                renderLineHighlightOnlyWhenFocus: true,
+                fixedOverflowWidgets: true,
+                quickSuggestions: {
+                  other: false,
+                  comments: false,
+                  strings: false,
+                },
+                suggest: {
+                  showWords: false,
+                },
+              }}
+            />
+          </Suspense>
         </div>
         {/* Vertical resize handle */}
         <div
           className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group"
-          style={{ userSelect: "none" }}
+          style={{ userSelect: "none", touchAction: "none" }}
           onMouseDown={(e) => {
             if (!isDesktop) return;
             const startY = e.clientY;
@@ -401,6 +552,7 @@ export function CodeEditor({
             window.addEventListener("mousemove", onMove);
             window.addEventListener("mouseup", onUp);
           }}
+          onTouchStart={handleTouchStart}
         >
           <div className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 transition-all" />
         </div>

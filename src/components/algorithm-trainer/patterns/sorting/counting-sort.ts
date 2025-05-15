@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const countingSortPattern: AlgorithmPattern = {
   title: "Counting Sort Algorithm",

@@ -1,11 +1,11 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const networkFlowPattern: AlgorithmPattern = {
   title: "Network Flow",
   description:
-    "A collection of algorithms for solving maximum flow problems in networks, including Dinic's, Edmonds-Karp, and Ford-Fulkerson algorithms.",
+    "A collection of algorithms for solving maximum flow problems in networks, including Dinic's, Edmonds-Karp, and Ford-Fulkerson Algorithm algorithms.",
   timeComplexity:
-    "Dinic's: O(V²E), Edmonds-Karp: O(VE²), Ford-Fulkerson: O(Ef) where f is the maximum flow",
+    "Dinic's: O(V²E), Edmonds-Karp: O(VE²), Ford-Fulkerson Algorithm: O(Ef) where f is the maximum flow",
   spaceComplexity: "O(V²)",
   category: "Graph",
   pseudocode: `DINIC(G, s, t)
@@ -279,5 +279,5 @@ edmonds_karp_flow = nf.edmonds_karp(s, t)
 print(f"Edmonds-Karp algorithm max flow: {edmonds_karp_flow}")
 
 ford_fulkerson_flow = nf.ford_fulkerson(s, t)
-print(f"Ford-Fulkerson algorithm max flow: {ford_fulkerson_flow}")`,
+print(f"Ford-Fulkerson Algorithm algorithm max flow: {ford_fulkerson_flow}")`,
 };
