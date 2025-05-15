@@ -1,4 +1,4 @@
-import { PATTERN_KEYS, PatternKey } from "./types";
+import { PATTERN_KEYS, PatternKey } from "@/lib/patterns/types";
 
 // Type-safe pattern key validation
 export function createPatternRecord<T>(

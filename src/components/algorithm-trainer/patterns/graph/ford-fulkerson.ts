@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const fordFulkersonPattern: AlgorithmPattern = {
-  title: "Ford-Fulkerson",
+  title: "Ford-Fulkerson Algorithm",
   description:
     "An algorithm for computing the maximum flow in a flow network. It works by finding augmenting paths from the source to the sink and increasing the flow along these paths until no more augmenting paths can be found.",
   timeComplexity:

@@ -22,24 +22,23 @@ export const PATTERN_KEYS = [
   // Dynamic Programming Patterns
   "Dynamic Programming",
   "Dynamic Programming Pattern",
-  "Dynamic Programming Fibonacci",
   "Dynamic Programming Iterative",
-  "Dynamic Programming Coin Change",
+  "Coin Change",
   "State Compression DP",
   "Digit DP",
-  "Tree DP",
+  "Tree (Dynamic Programming)",
   "Probability DP",
 
   // Graph Patterns
   "A* Search",
   "Articulation Points",
   "Bellman-Ford",
-  "Floyd-Warshall",
-  "Kruskal",
+  "Floyd-Warshall Algorithm",
+  "Kruskal's Algorithm",
   "Strongly Connected Components",
   "Maximum Bipartite Matching",
   "Topological Sort",
-  "Prim",
+  "Prim's Algorithm",
   "Kosaraju",
 
   // Data Structure Patterns
@@ -61,6 +60,7 @@ export const PATTERN_KEYS = [
   "Z Algorithm",
   "Suffix Array",
   "Suffix Tree",
+  "String Hashing",
 
   // Matrix Patterns
   "Matrix Operations",

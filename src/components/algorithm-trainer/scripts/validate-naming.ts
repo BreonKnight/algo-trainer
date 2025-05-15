@@ -1,7 +1,8 @@
+import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
+
 const fs = require("fs");
 const path = require("path");
 const { fileURLToPath } = require("url");
-import { monsterHunterExplanations } from "../monsterHunterExplanations";
 
 interface ValidationResult {
   file: string;

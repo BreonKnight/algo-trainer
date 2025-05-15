@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 export const monsterHunterPatternsExtended3 = new Map<PatternKey, string>([
   [

@@ -1,12 +1,13 @@
-import { PatternKey } from "./types.ts";
-import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended.ts";
-import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2.ts";
-import { monsterHunterPatternsExtended3 } from "./monsterHunterPatternsExtended3.ts";
-import { monsterHunterPatternsExtended4 } from "./monsterHunterPatternsExtended4.ts";
-import { monsterHunterPatternsExtended5 } from "./monsterHunterPatternsExtended5.ts";
-import { monsterHunterPatternsExtended6 } from "./monsterHunterPatternsExtended6.ts";
-import { monsterHunterPatternsExtended7 } from "./monsterHunterPatternsExtended7.ts";
-import { monsterHunterPatternsExtended8 } from "./monsterHunterPatternsExtended8.ts";
+import { monsterHunterPatternsExtended } from "@/components/algorithm-trainer/monsterHunterPatternsExtended";
+import { monsterHunterPatternsExtended2 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended2";
+import { monsterHunterPatternsExtended3 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended3";
+import { monsterHunterPatternsExtended4 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended4";
+import { monsterHunterPatternsExtended5 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended5";
+import { monsterHunterPatternsExtended6 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended6";
+import { monsterHunterPatternsExtended7 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended7";
+import { monsterHunterPatternsExtended8 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended8";
+import { monsterHunterPatternsExtended9 } from "@/components/algorithm-trainer/monsterHunterPatternsExtended9";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 // Add matrix exponentiation pattern
 const matrixExponentiationPattern = new Map<PatternKey, string>([
@@ -213,6 +214,112 @@ console.log(\`Sorted weapon powers: \${sorted_weapons}\`);
   ],
 ]);
 
+// Add Zigzag Traversal pattern
+const zigzagTraversalPattern = new Map<PatternKey, string>([
+  [
+    "Zigzag Traversal",
+    `# Monster Hunter Zigzag Traversal Pattern
+# Territory Exploration Strategy
+
+def explore_territory_levels(territory_tree):
+    """
+    Explore territory levels in zigzag pattern.
+    Time: O(n)
+    Space: O(n)
+    
+    Monster Hunter Context:
+    - Like exploring territory levels
+    - Alternate exploration paths
+    - Cover all areas efficiently
+    - Plan patrol routes
+    
+    Example:
+    territory_tree = {
+        "value": "Base Camp",
+        "left": {
+            "value": "Ancient Forest",
+            "left": {"value": "Forest Edge"},
+            "right": {"value": "Forest Depths"}
+        },
+        "right": {
+            "value": "Wildspire Waste",
+            "left": {"value": "Desert Edge"},
+            "right": {"value": "Desert Center"}
+        }
+    }
+    path = explore_territory_levels(territory_tree)
+    # Shows zigzag exploration path
+    """
+    def get_level_nodes(root):
+        if not root:
+            return []
+        
+        result = []
+        current_level = [root]
+        left_to_right = True
+        
+        while current_level:
+            level_size = len(current_level)
+            current_values = []
+            
+            for _ in range(level_size):
+                node = current_level.pop(0)
+                current_values.append(node["value"])
+                
+                if node.get("left"):
+                    current_level.append(node["left"])
+                if node.get("right"):
+                    current_level.append(node["right"])
+            
+            if not left_to_right:
+                current_values.reverse()
+            
+            result.extend(current_values)
+            left_to_right = not left_to_right
+        
+        return result
+    
+    return get_level_nodes(territory_tree)
+
+def plan_territory_exploration(territory_tree):
+    """
+    Plan territory exploration in zigzag pattern.
+    
+    Args:
+        territory_tree: Tree structure of territories
+    
+    Returns:
+        List of territories in zigzag traversal order
+    """
+    return explore_territory_levels(territory_tree)
+
+# Example usage
+territory_tree = {
+    "value": "Base Camp",
+    "left": {
+        "value": "Ancient Forest",
+        "left": {"value": "Forest Edge"},
+        "right": {"value": "Forest Depths"}
+    },
+    "right": {
+        "value": "Wildspire Waste",
+        "left": {"value": "Desert Edge"},
+        "right": {"value": "Desert Center"}
+    }
+}
+
+path = plan_territory_exploration(territory_tree)
+print("Territory exploration path:", path)
+
+# Monster Hunter Tips:
+# 1. Use for level exploration
+# 2. Alternate directions
+# 3. Cover all areas
+# 4. Plan patrol routes
+# 5. Consider level order`,
+  ],
+]);
+
 // Export all patterns
 export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended,
@@ -223,8 +330,10 @@ export const monsterHunterPatterns = new Map<PatternKey, string>([
   ...monsterHunterPatternsExtended6,
   ...monsterHunterPatternsExtended7,
   ...monsterHunterPatternsExtended8,
+  ...monsterHunterPatternsExtended9,
   ...matrixExponentiationPattern,
   ...fastFourierTransformPattern,
   ...articulationPointsMonsterHunterPattern,
   ...shellSortPattern,
+  ...zigzagTraversalPattern,
 ]);

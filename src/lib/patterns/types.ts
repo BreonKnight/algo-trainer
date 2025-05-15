@@ -53,6 +53,7 @@ export const PATTERN_KEYS = [
   "Stack Sort",
   "Bucket Sort",
   "Counting Sort",
+  "Sorting Comparisons",
 
   // Searching Patterns
   "Binary Search",
@@ -69,10 +70,10 @@ export const PATTERN_KEYS = [
   "Dynamic Programming",
   "Dynamic Programming Pattern",
   "Dynamic Programming Iterative",
-  "Dynamic Programming Coin Change",
+  "Coin Change",
   "State Compression DP",
   "Digit DP",
-  "Tree DP",
+  "Tree (Dynamic Programming)",
   "Probability DP",
   "Bitwise DP",
 
@@ -80,23 +81,22 @@ export const PATTERN_KEYS = [
   "A* Search",
   "Articulation Points",
   "Bellman-Ford",
-  "Floyd-Warshall",
-  "Kruskal",
+  "Floyd-Warshall Algorithm",
+  "Kruskal's Algorithm",
   "Strongly Connected Components",
   "Maximum Bipartite Matching",
   "Topological Sort",
-  "Prim",
-  "Kosaraju",
+  "Prim's Algorithm",
+  "Kosaraju's Algorithm",
   "Bridges",
-  "Dijkstra",
+  "Dijkstra's Algorithm",
   "Network Flow",
   "Heavy Light Decomposition",
-  "Hopcroft-Karp",
-  "Ford-Fulkerson",
+  "Hopcroft-Karp's Algorithm",
+  "Ford-Fulkerson Algorithm",
   "Kahn's Topological Sort",
   "Graph Representation",
   "DFS Graph",
-  "Spanning Tree",
 
   // Data Structure Patterns
   "B Tree",
@@ -105,7 +105,7 @@ export const PATTERN_KEYS = [
   "Linked List",
   "Segment Tree",
   "Union Find",
-  "DFS Binary Tree",
+  "DFS (Binary Tree)",
   "AVL Tree",
   "Binary Search Tree",
   "Red-Black Tree",
@@ -133,6 +133,7 @@ export const PATTERN_KEYS = [
   "String Hashing",
   "Palindrome Partitioning",
   "Edit Distance",
+  "String Hashing",
 
   // Matrix Patterns
   "Matrix Operations",
@@ -169,6 +170,8 @@ export const PATTERN_KEYS = [
   "Fast and Slow Pointers",
   "Fibonacci",
   "Interval Scheduling",
+  "Test Data",
+  "Null Pattern",
 
   // Greedy Patterns
   "Activity Selection",
@@ -183,13 +186,13 @@ export const PATTERN_KEYS = [
   "BFS Linked List",
   "DFS",
   "DFS Linked List",
-  "LCA DFS",
+  "Lowest Common Ancestor",
   "Inorder Traversal",
   "Zigzag Traversal",
 
   // Two Sum Variations
   "Two Sum",
-  "Two Sum Dict",
+  "Two Sum Dictionary",
   "Two Sum Two Pointers",
 ] as const;
 

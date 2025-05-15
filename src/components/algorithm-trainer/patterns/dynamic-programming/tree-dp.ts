@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const treeDPPattern: AlgorithmPattern = {
-  title: "Tree DP",
+  title: "Tree (Dynamic Programming)",
   description:
     "A dynamic programming technique for solving problems on trees by processing nodes in a post-order traversal and combining results from subtrees.",
   timeComplexity: "O(n) where n is number of nodes",

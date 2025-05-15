@@ -1,14 +1,36 @@
+import { motion } from "framer-motion";
+import { Check, Copy } from "lucide-react";
+import { useState, useEffect, useCallback, memo } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
+import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
-import { useState, useEffect } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { Check, Copy } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  getCardClass,
+  getButtonClass,
+  getTooltipClass,
+  getCodeBlockClass,
+  getIconClass,
+} from "@/lib/utils/theme-class-utils";
 
-const CodeBlock = ({ code }: { code: string }) => {
+// Custom hook to detect desktop
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.matchMedia("(min-width: 640px)").matches);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+  return isDesktop;
+}
+
+const CodeBlock = memo(({ code }: { code: string }) => {
   const { theme: appTheme } = useTheme();
+  const isDesktop = useIsDesktop();
   const [copied, setCopied] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [highlightedLine, setHighlightedLine] = useState<number | null>(null);
@@ -20,8 +42,8 @@ const CodeBlock = ({ code }: { code: string }) => {
       background: "transparent",
       textShadow: "none",
       fontFamily: "var(--font-mono)",
-      fontSize: "0.95rem",
-      lineHeight: 1.8,
+      fontSize: "1.05rem",
+      lineHeight: 2,
       textAlign: "left",
       whiteSpace: "pre",
       wordSpacing: "normal",
@@ -40,8 +62,8 @@ const CodeBlock = ({ code }: { code: string }) => {
       background: "transparent",
       textShadow: "none",
       fontFamily: "var(--font-mono)",
-      fontSize: "0.95rem",
-      lineHeight: 1.8,
+      fontSize: "1.05rem",
+      lineHeight: 2,
       textAlign: "left",
       whiteSpace: "pre",
       wordSpacing: "normal",
@@ -65,9 +87,9 @@ const CodeBlock = ({ code }: { code: string }) => {
       whiteSpace: "normal",
     },
     comment: {
-      color: "var(--text-secondary)",
+      color: "#8b949e",
       fontStyle: "italic",
-      opacity: 0.8,
+      opacity: 0.85,
     },
     punctuation: {
       color: "var(--text-main)",
@@ -153,118 +175,145 @@ const CodeBlock = ({ code }: { code: string }) => {
     },
   };
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
+  }, [code]);
 
-  const handleLineClick = (lineNumber: number) => {
-    setHighlightedLine(lineNumber === highlightedLine ? null : lineNumber);
-  };
+  const handleLineClick = useCallback(
+    (lineNumber: number) => {
+      setHighlightedLine(lineNumber === highlightedLine ? null : lineNumber);
+      // Highlight for 1s
+      setTimeout(() => setHighlightedLine(null), 1000);
+    },
+    [highlightedLine]
+  );
 
   return (
-    <div
-      className={cn(
-        "code-block relative rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg group",
-        `bg-[var(--code-bg-${appTheme})]/90`
-      )}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Copy button */}
-      <div
-        className={cn(
-          "copy-button absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200",
-          appTheme === "nord" ? "text-white" : "text-accent"
-        )}
-      >
+    <div className="space-y-2 w-full">
+      {/* Copy button in a flex container */}
+      <div className="flex justify-end items-center">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="ghost"
-                size="icon"
+                size="sm"
                 onClick={handleCopy}
-                className={cn(
-                  "h-8 w-8 rounded-full transition-colors",
-                  appTheme === "nord"
-                    ? "bg-white/10 hover:bg-white/20"
-                    : "bg-secondary/20 hover:bg-secondary/40"
-                )}
+                aria-label={copied ? "Copied!" : "Copy code"}
+                className={getButtonClass(appTheme, copied)}
               >
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                <div className="flex items-center gap-2">
+                  {copied ? (
+                    <Check
+                      className={
+                        getIconClass(appTheme) +
+                        " h-5 w-5 transition-transform duration-200 " +
+                        (copied ? "scale-125" : "scale-100")
+                      }
+                    />
+                  ) : (
+                    <Copy className={getIconClass(appTheme) + " h-5 w-5"} />
+                  )}
+                  <span className="font-medium">{copied ? "Copied!" : "Copy code"}</span>
+                </div>
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className={getTooltipClass(appTheme)}>
               <p className="text-xs">{copied ? "Copied!" : "Copy code"}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </div>
 
-      {/* Glass overlay with reduced opacity */}
+      {/* Code block container */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-30"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(var(--code-bg-${appTheme}), 0.3), transparent)`,
-        }}
-      />
-      <div className="relative z-10">
-        <SyntaxHighlighter
-          language="python"
-          style={customTheme}
-          showLineNumbers={true}
-          wrapLines={true}
-          useInlineStyles={true}
-          lineNumberStyle={{
-            minWidth: "3em",
-            paddingRight: "1.5em",
-            textAlign: "right",
-            userSelect: "none",
-            opacity: 0.5,
-            transition: "opacity 0.2s ease",
-            cursor: "pointer",
+        className={
+          getCodeBlockClass(appTheme) + " w-full transition-all duration-200 group relative"
+        }
+        style={{ color: appTheme === "light" ? "#1a1a1a" : `var(--code-text-${appTheme})` }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Glass overlay with reduced opacity, hidden on mobile */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-30 hidden sm:block"
+          style={{
+            backgroundImage: `linear-gradient(to bottom, rgba(var(--code-bg-${appTheme}), 0.3), transparent)`,
           }}
-          customStyle={{
-            transition: "all 0.2s ease",
-            padding: "2rem 1.5rem",
-            margin: 0,
-            borderRadius: "0.5rem",
-            fontSize: "0.95rem",
-            lineHeight: 1.8,
-            letterSpacing: "0.3px",
-          }}
-          lineProps={(lineNumber) => ({
-            style: {
-              transition: "all 0.2s ease",
-              backgroundColor:
-                lineNumber === highlightedLine
-                  ? "rgba(255, 255, 255, 0.1)"
-                  : isHovered
-                    ? "rgba(255, 255, 255, 0.05)"
-                    : "transparent",
+        />
+        {/* Horizontal scroll hint (fade) on mobile */}
+        <div className="pointer-events-none absolute top-0 right-0 h-full w-6 bg-gradient-to-l from-[rgba(0,0,0,0.08)] to-transparent sm:hidden z-20" />
+        <div className="relative z-10">
+          <SyntaxHighlighter
+            language="python"
+            style={customTheme}
+            showLineNumbers={isDesktop}
+            wrapLongLines={true}
+            useInlineStyles={true}
+            lineNumberStyle={{
+              minWidth: "2.5em",
+              paddingRight: "1.2em",
+              textAlign: "right",
+              userSelect: "none",
+              opacity: 0.7,
+              transition: "opacity 0.2s ease",
               cursor: "pointer",
-            },
-            onClick: () => handleLineClick(lineNumber),
-          })}
-          startingLineNumber={1}
-          lineNumberContainerStyle={{
-            float: "left",
-            paddingRight: "1.5em",
-            borderRight: "1px solid var(--border)",
-            marginRight: "1.5em",
-            userSelect: "none",
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              background: "rgba(120,120,120,0.07)",
+              borderRadius: "0.4em 0 0 0.4em",
+              marginRight: "1.2em",
+            }}
+            customStyle={{
+              transition: "all 0.2s ease",
+              padding: 0,
+              margin: 0,
+              borderRadius: "0.5rem",
+              fontSize: "1.05rem",
+              lineHeight: 2,
+              letterSpacing: "0.2px",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              paddingLeft: "0.5em",
+            }}
+            lineProps={(lineNumber) => ({
+              style: {
+                transition: "all 0.2s ease",
+                backgroundColor:
+                  lineNumber === highlightedLine
+                    ? "rgba(255, 255, 0, 0.12)"
+                    : isHovered
+                      ? "rgba(255, 255, 255, 0.05)"
+                      : "transparent",
+                cursor: "pointer",
+              },
+              onClick: () => handleLineClick(lineNumber),
+            })}
+            startingLineNumber={1}
+            lineNumberContainerStyle={{
+              float: "left",
+              paddingRight: "1.2em",
+              borderRight: "1px solid var(--border)",
+              marginRight: "1.2em",
+              userSelect: "none",
+              fontSize: "0.85rem",
+              lineHeight: 1.5,
+              background: "rgba(120,120,120,0.07)",
+              borderRadius: "0.4em 0 0 0.4em",
+            }}
+            className="text-sm sm:text-base leading-relaxed sm:leading-[2] min-w-full whitespace-pre-wrap break-words"
+          >
+            {code}
+          </SyntaxHighlighter>
+        </div>
       </div>
     </div>
   );
-};
+});
 
-export const PythonTechniques = () => {
+export default function PythonTechniques() {
   const { theme } = useTheme();
   const [activeSection, setActiveSection] = useState<string>("");
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -734,7 +783,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
   ];
 
   return (
-    <div className="w-full">
+    <Background>
       {/* Back to Top Button */}
       <TooltipProvider>
         <Tooltip>
@@ -746,18 +795,12 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               className={cn(
+                getButtonClass(theme, false),
                 "fixed bottom-6 right-6 z-50 rounded-full transition-all duration-300",
                 showBackToTop
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10 pointer-events-none",
-                theme === "nord"
-                  ? "bg-white/10 hover:bg-white/20 text-white"
-                  : "bg-secondary/20 hover:bg-secondary/40 text-main",
-                "shadow-lg backdrop-blur-md",
-                "hover:scale-110 active:scale-95",
-                "focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent",
-                "touch-manipulation select-none",
-                "w-12 h-12 sm:w-14 sm:h-14"
+                "shadow-lg backdrop-blur-md hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent touch-manipulation select-none w-12 h-12 sm:w-14 sm:h-14"
               )}
               aria-label="Back to top"
             >
@@ -812,7 +855,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                     )}
                     strokeWidth="4"
                     strokeDasharray={289.03}
-                    strokeDashoffset={289.03 - 289.03 * scrollProgress}
+                    strokeDashoffset={289.03 - 289.03 * Number(scrollProgress)}
                     strokeLinecap="round"
                     stroke="currentColor"
                     fill="transparent"
@@ -824,13 +867,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
               </div>
             </Button>
           </TooltipTrigger>
-          <TooltipContent
-            side="left"
-            className={cn(
-              "px-3 py-2 text-sm font-medium",
-              theme === "nord" ? "bg-white/10 text-white" : "bg-secondary/20 text-main"
-            )}
-          >
+          <TooltipContent className={cn(getTooltipClass(theme), "px-3 py-2 text-sm font-medium")}>
             <p>Back to Top</p>
           </TooltipContent>
         </Tooltip>
@@ -839,26 +876,27 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
       <div className="w-full px-6">
         <TooltipProvider>
           {/* Title and Section Navigation */}
-          <div className="flex flex-col items-center justify-center mt-6 mb-8 relative w-full">
-            <Link
-              to="/"
-              className="text-2xl font-extrabold text-transparent bg-clip-text text-center animate-gradient-x drop-shadow-lg tracking-tight select-none mb-4"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
-              }}
+          <div className="text-center mb-16">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className={cn(
+                "text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent leading-[1.15] pb-2",
+                "bg-gradient-to-r from-[var(--gradient-from)] to-[var(--gradient-to)]"
+              )}
             >
               Python Techniques
-            </Link>
+            </motion.h1>
 
             {/* Section Navigation */}
-            <div className="w-full max-w-4xl mx-auto">
+            <div className="w-full max-w-3xl mx-auto">
               <div
                 className={cn(
-                  "flex flex-wrap gap-2 justify-center p-4 rounded-xl backdrop-blur-md",
+                  "flex flex-wrap gap-2 justify-center p-4 rounded-xl backdrop-blur-md transition-all duration-300 hover:shadow-xl z-auto",
                   theme === "nord"
-                    ? "bg-white/10 border border-white/20"
-                    : "bg-secondary/20 border border-secondary/40"
+                    ? "bg-white/10 border border-white/20 hover:bg-white/15"
+                    : "bg-secondary/20 border border-secondary/40 hover:bg-secondary/30"
                 )}
               >
                 {sections.map((section, index) => (
@@ -873,34 +911,16 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                           setActiveSection(section.title);
                         }}
                         className={cn(
-                          "transition-all duration-200 whitespace-nowrap",
-                          "text-sm px-3 py-1.5",
-                          // Adjust width based on content length
-                          section.title.length > 20
-                            ? "w-48"
-                            : section.title.length > 15
-                              ? "w-40"
-                              : section.title.length > 10
-                                ? "w-36"
-                                : "w-32",
-                          activeSection === section.title
-                            ? theme === "nord"
-                              ? "bg-white/20 text-white"
-                              : "bg-secondary/40 text-main"
-                            : theme === "nord"
-                              ? "text-white/70 hover:text-white hover:bg-white/10"
-                              : "text-main/70 hover:text-main hover:bg-secondary/30"
+                          getButtonClass(theme, activeSection === section.title),
+                          "transition-all duration-200 whitespace-normal text-sm px-3 py-1.5 min-w-0 flex-grow text-ellipsis overflow-hidden max-w-xs sm:max-w-sm"
                         )}
                       >
                         {section.title}
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent
+                      className={cn(getTooltipClass(theme), "z-[9999] max-w-[200px]")}
                       side="bottom"
-                      className={cn(
-                        "px-3 py-2 text-sm font-medium max-w-[200px]",
-                        theme === "nord" ? "bg-white/10 text-white" : "bg-secondary/20 text-main"
-                      )}
                     >
                       <p className="text-xs leading-relaxed">{section.description}</p>
                     </TooltipContent>
@@ -911,34 +931,48 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
           </div>
 
           {/* Main Content */}
-          <div className="w-full mb-6 rounded-xl shadow-lg p-4 glassy-gradient-bg relative">
-            {/* Glass overlay */}
+          <div className="w-full max-w-3xl mx-auto mb-6 rounded-xl shadow-lg p-4 glassy-gradient-bg relative group">
+            {/* Enhanced glass overlay - more subtle */}
             <div
+              className="absolute inset-0 rounded-xl transition-all duration-300"
               style={{
-                content: "''",
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: "var(--pseudocode-gradient-overlay)",
-                zIndex: 0,
-                pointerEvents: "none",
-                opacity: 0.7,
-                borderRadius: "0.75rem",
+                background:
+                  theme === "nord"
+                    ? "linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))"
+                    : "linear-gradient(135deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02))",
+                backdropFilter: "blur(8px)",
+                border:
+                  theme === "nord"
+                    ? "1px solid rgba(255,255,255,0.05)"
+                    : "1px solid rgba(0,0,0,0.05)",
               }}
             />
+
+            {/* Interactive hover effect - more subtle */}
+            <div
+              className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background:
+                  "radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.05), transparent 40%)",
+              }}
+            />
+
             <div className="relative z-10 space-y-6">
               {sections.map((section, index) => (
                 <div
                   key={index}
                   id={`section-${index}`}
                   className={cn(
-                    "rounded-lg p-6 backdrop-blur-sm border",
-                    theme === "nord"
-                      ? "bg-nord-1/95 border-white/20"
-                      : "bg-zinc-900/95 border-zinc-700/30"
+                    getCardClass(theme),
+                    "w-full p-0 border-0 bg-transparent rounded-none sm:rounded-lg sm:p-6 sm:border sm:backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.01] sm:max-w-3xl mx-0 sm:mx-auto"
                   )}
+                  onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    e.currentTarget.style.setProperty("--mouse-x", `${x}%`);
+                    e.currentTarget.style.setProperty("--mouse-y", `${y}%`);
+                  }}
                 >
                   <h2
                     className={cn(
@@ -947,7 +981,7 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                     )}
                   >
                     <span
-                      className="text-3xl select-none"
+                      className={getIconClass(theme) + " text-3xl select-none"}
                       style={{ WebkitTextFillColor: "initial" }}
                     >
                       {section.emoji}
@@ -971,18 +1005,12 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
                   <div className="space-y-4">
                     <p
                       className={cn(
-                        "text-base leading-relaxed",
-                        theme === "nord" ? "text-nord-4" : "text-zinc-400",
-                        "font-medium tracking-wide",
-                        "italic",
-                        "border-l-4 pl-4",
-                        theme === "nord" ? "border-white/20" : "border-zinc-700/30",
-                        "hover:border-accent/50 transition-colors duration-300",
-                        "relative",
-                        "before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:to-accent/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300",
-                        "after:content-[''] after:absolute after:left-0 after:top-0 after:h-full after:w-1 after:bg-gradient-to-b after:from-accent/0 after:via-accent/50 after:to-accent/0 after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-300",
-                        "text-shadow-sm",
-                        "hover:translate-x-1 transition-transform duration-300"
+                        "text-base leading-relaxed font-medium tracking-wide italic border-l-4 pl-4 transition-colors duration-300 relative",
+                        theme === "light" || theme === "solarized"
+                          ? "text-main border-accent/30"
+                          : theme === "nord"
+                            ? "text-nord-4 border-white/20"
+                            : "text-zinc-400 border-zinc-700/30 hover:border-accent/50"
                       )}
                     >
                       <span className="relative z-10">{section.description}</span>
@@ -997,6 +1025,6 @@ fatalis.use_special_ability()  # Fatalis uses Black Flame!`,
           </div>
         </TooltipProvider>
       </div>
-    </div>
+    </Background>
   );
-};
+}

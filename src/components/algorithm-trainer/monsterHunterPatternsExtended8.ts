@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 // Add Activity Selection Monster Hunter Pattern
 const activitySelectionMonsterHunterPattern = new Map<PatternKey, string>([
@@ -71,11 +71,11 @@ print("Selected quests:", selected_quests)
   ],
 ]);
 
-// Add Floyd-Warshall Monster Hunter Pattern
+// Add Floyd-Warshall Algorithm Monster Hunter Pattern
 const floydWarshallMonsterHunterPattern = new Map<PatternKey, string>([
   [
-    "Floyd-Warshall",
-    `# Monster Hunter Floyd-Warshall Pattern
+    "Floyd-Warshall Algorithm",
+    `# Monster Hunter Floyd-Warshall Algorithm Pattern
 # Territory Path Optimization
 
 def find_shortest_paths(territories):
@@ -113,7 +113,7 @@ def find_shortest_paths(territories):
             j = list(territories.keys()).index(neighbor)
             dist[i][j] = distance
     
-    # Floyd-Warshall algorithm
+    # Floyd-Warshall Algorithm
     for k in range(n):
         for i in range(n):
             for j in range(n):
@@ -315,11 +315,11 @@ print("Optimal quest schedule:", schedule)
   ],
 ]);
 
-// Add Kruskal Monster Hunter Pattern
+// Add Kruskal's Algorithm Monster Hunter Pattern
 const kruskalMonsterHunterPattern = new Map<PatternKey, string>([
   [
-    "Kruskal",
-    `# Monster Hunter Kruskal Pattern
+    "Kruskal's Algorithm",
+    `# Monster Hunter Kruskal's Algorithm Pattern
 # Territory Connection Optimization
 
 def find_minimum_spanning_tree(territories):
@@ -395,7 +395,7 @@ def find_minimum_spanning_tree(territories):
 
 def optimize_territory_connections(territories):
     """
-    Optimize territory connections using Kruskal's algorithm.
+    Optimize territory connections using Kruskal's Algorithm's algorithm.
     
     Args:
         territories: List of territory connections with weights
@@ -677,11 +677,11 @@ print("Gathered resources:", gathered)
   ],
 ]);
 
-// Add Kosaraju Monster Hunter Pattern
+// Add Kosaraju's Algorithm Monster Hunter Pattern
 const kosarajuMonsterHunterPattern = new Map<PatternKey, string>([
   [
-    "Kosaraju",
-    `# Monster Hunter Kosaraju Pattern
+    "Kosaraju's Algorithm",
+    `# Monster Hunter Kosaraju's Algorithm Pattern
 # Territory Connection Analysis
 
 def analyze_territory_connections(territories):

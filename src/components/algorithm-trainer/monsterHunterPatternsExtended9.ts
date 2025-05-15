@@ -1,4 +1,4 @@
-import { PatternKey } from "./types.ts";
+import { PatternKey } from "@/components/algorithm-trainer/types";
 
 // Add Binary Indexed Tree Monster Hunter Pattern
 const binaryIndexedTreeMonsterHunterPattern = new Map<PatternKey, string>([
@@ -753,11 +753,11 @@ print("Predicted population:", population)
   ],
 ]);
 
-// Add Ford-Fulkerson Monster Hunter Pattern
+// Add Ford-Fulkerson Algorithm Monster Hunter Pattern
 const fordFulkersonMonsterHunterPattern = new Map<PatternKey, string>([
   [
-    "Ford-Fulkerson",
-    `# Monster Hunter Ford-Fulkerson Pattern
+    "Ford-Fulkerson Algorithm",
+    `# Monster Hunter Ford-Fulkerson Algorithm Pattern
 # Resource Flow Optimization Strategy
 
 def optimize_resource_flow(graph, source, sink):
@@ -939,11 +939,11 @@ print("Territory connection map:", graph)
   ],
 ]);
 
-// Add Hopcroft-Karp Monster Hunter Pattern
+// Add Hopcroft-Karp's Algorithm Monster Hunter Pattern
 const hopcroftKarpMonsterHunterPattern = new Map<PatternKey, string>([
   [
-    "Hopcroft-Karp",
-    `# Monster Hunter Hopcroft-Karp Pattern
+    "Hopcroft-Karp's Algorithm",
+    `# Monster Hunter Hopcroft-Karp's Algorithm Pattern
 # Hunter-Monster Matching Strategy
 
 def match_hunters_monsters(hunters, monsters, compatibility):
@@ -1394,11 +1394,11 @@ print("Territory area:", area)
   ],
 ]);
 
-// Add LCA DFS Monster Hunter Pattern
+// Add Lowest Common Ancestor Monster Hunter Pattern
 const lcaDFSMonsterHunterPattern = new Map<PatternKey, string>([
   [
-    "LCA DFS",
-    `# Monster Hunter LCA DFS Pattern
+    "Lowest Common Ancestor",
+    `# Monster Hunter Lowest Common Ancestor Pattern
 # Monster Species Ancestry Strategy
 
 def find_common_ancestor(tree, node1, node2):
@@ -1577,112 +1577,6 @@ print("Symmetrical territory patterns:", patterns)
   ],
 ]);
 
-// Add Spanning Tree Monster Hunter Pattern
-const spanningTreeMonsterHunterPattern = new Map<PatternKey, string>([
-  [
-    "Spanning Tree",
-    `# Monster Hunter Spanning Tree Pattern
-# Territory Network Strategy
-
-def create_territory_network(graph):
-    """
-    Create efficient network connecting all territories.
-    Time: O(E log V) where E is edges and V is vertices
-    Space: O(V)
-    
-    Monster Hunter Context:
-    - Like connecting all territories efficiently
-    - Minimize path costs
-    - Plan resource networks
-    - Optimize travel routes
-    
-    Example:
-    graph = {
-        "Base Camp": [["Ancient Forest", 2], ["Wildspire Waste", 3]],
-        "Ancient Forest": [["Base Camp", 2], ["Coral Highlands", 4]],
-        "Wildspire Waste": [["Base Camp", 3], ["Rotten Vale", 1]],
-        "Coral Highlands": [["Ancient Forest", 4], ["Elder's Recess", 5]],
-        "Rotten Vale": [["Wildspire Waste", 1], ["Elder's Recess", 2]],
-        "Elder's Recess": [["Coral Highlands", 5], ["Rotten Vale", 2]]
-    }
-    network = create_territory_network(graph)
-    # Shows efficient territory network
-    """
-    def find(parent, i):
-        if parent[i] != i:
-            parent[i] = find(parent, parent[i])
-        return parent[i]
-    
-    def union(parent, rank, x, y):
-        root_x = find(parent, x)
-        root_y = find(parent, y)
-        
-        if rank[root_x] < rank[root_y]:
-            parent[root_x] = root_y
-        elif rank[root_x] > rank[root_y]:
-            parent[root_y] = root_x
-        else:
-            parent[root_y] = root_x
-            rank[root_x] += 1
-    
-    # Create list of edges
-    edges = []
-    territories = list(graph.keys())
-    for territory in territories:
-        for neighbor, weight in graph[territory]:
-            edges.append([territory, neighbor, weight])
-    
-    # Sort edges by weight
-    edges.sort(key=lambda x: x[2])
-    
-    # Initialize parent and rank arrays
-    parent = {territory: territory for territory in territories}
-    rank = {territory: 0 for territory in territories}
-    
-    # Create minimum spanning tree
-    mst = []
-    for edge in edges:
-        territory1, territory2, weight = edge
-        if find(parent, territory1) != find(parent, territory2):
-            mst.append([territory1, territory2])
-            union(parent, rank, territory1, territory2)
-    
-    return mst
-
-def optimize_territory_connections(graph):
-    """
-    Optimize territory connections for efficient travel.
-    
-    Args:
-        graph: Dictionary of territory connections with weights
-    
-    Returns:
-        List of optimal territory connections
-    """
-    return create_territory_network(graph)
-
-// Example usage
-graph = {
-    "Base Camp": [["Ancient Forest", 2], ["Wildspire Waste", 3]],
-    "Ancient Forest": [["Base Camp", 2], ["Coral Highlands", 4]],
-    "Wildspire Waste": [["Base Camp", 3], ["Rotten Vale", 1]],
-    "Coral Highlands": [["Ancient Forest", 4], ["Elder's Recess", 5]],
-    "Rotten Vale": [["Wildspire Waste", 1], ["Elder's Recess", 2]],
-    "Elder's Recess": [["Coral Highlands", 5], ["Rotten Vale", 2]]
-}
-
-network = optimize_territory_connections(graph)
-print("Optimal territory network:", network)
-
-// Monster Hunter Tips:
-// 1. Use for efficient connections
-// 2. Minimize path costs
-// 3. Plan resource networks
-// 4. Consider terrain features
-// 5. Optimize travel routes`,
-  ],
-]);
-
 // Add Sparse Table Monster Hunter Pattern
 const sparseTableMonsterHunterPattern = new Map<PatternKey, string>([
   [
@@ -1717,11 +1611,11 @@ def process_territory_ranges(territory_values, queries):
         max_log = int(math.log2(n)) + 1
         st = [[0] * max_log for _ in range(n)]
         
-        # Initialize for intervals of length 1
+        // Initialize for intervals of length 1
         for i in range(n):
             st[i][0] = arr[i]
         
-        # Build table
+        // Build table
         for j in range(1, max_log):
             for i in range(n - (1 << j) + 1):
                 st[i][j] = max(st[i][j-1], st[i + (1 << (j-1))][j-1])
@@ -1732,10 +1626,10 @@ def process_territory_ranges(territory_values, queries):
         j = int(math.log2(R - L + 1))
         return max(st[L][j], st[R - (1 << j) + 1][j])
     
-    # Build sparse table
+    // Build sparse table
     st = build_sparse_table(territory_values)
     
-    # Process queries
+    // Process queries
     results = []
     for query in queries:
         start, end = query["start"], query["end"]
@@ -1819,23 +1713,23 @@ def find_monster_patterns(text, pattern):
         p = 31
         m_mod = 10**9 + 9
         
-        # Calculate pattern hash
+        // Calculate pattern hash
         pattern_hash = compute_hash(pattern)
         
-        # Calculate initial window hash
+        // Calculate initial window hash
         text_hash = compute_hash(text[:m])
         
-        # Find matches
+        // Find matches
         matches = []
         if text_hash == pattern_hash and text[:m] == pattern:
             matches.append(0)
         
-        # Rolling hash for remaining windows
+        // Rolling hash for remaining windows
         p_pow = pow(p, m-1, m_mod)
         for i in range(n - m):
-            # Remove first character of previous window
+            // Remove first character of previous window
             text_hash = (text_hash - (ord(text[i]) - ord('a') + 1) * p_pow) % m_mod
-            # Add new character
+            // Add new character
             text_hash = (text_hash * p + (ord(text[i + m]) - ord('a') + 1)) % m_mod
             
             if text_hash == pattern_hash and text[i+1:i+m+1] == pattern:
@@ -1873,99 +1767,6 @@ print("Pattern matches found at:", matches)
 // 5. Optimize search speed`,
   ],
 ]);
-
-// Removed unused "Tree Implementation Monster Hunter Pattern" code block for maintainability.
-//     - Like organizing monster hierarchies
-//     - Track species relationships
-//     - Manage monster families
-//     - Study evolution paths
-
-//     Example:
-//     tree = MonsterTree()
-//     tree.add("Elder Dragons")
-//     tree.add("Teostra", "Elder Dragons")
-//     tree.add("Kushala Daora", "Elder Dragons")
-//     # Shows monster hierarchy
-//     """
-//     class MonsterNode:
-//         def __init__(self, value):
-//             self.value = value
-//             self.children = []
-//             self.parent = None
-
-//     class MonsterTree:
-//         def __init__(self):
-//             self.root = None
-//             self.nodes = {}
-
-//         def add(self, value, parent_value=None):
-//             # Create new node
-//             node = MonsterNode(value)
-//             self.nodes[value] = node
-
-//             if parent_value is None:
-//                 if self.root is None:
-//                     self.root = node
-//                 else:
-//                     raise ValueError("Root already exists")
-//             else:
-//                 if parent_value not in self.nodes:
-//                     raise ValueError("Parent not found")
-//                 parent = self.nodes[parent_value]
-//                 node.parent = parent
-//                 parent.children.append(node)
-
-//         def get_children(self, value):
-//             if value not in self.nodes:
-//                 raise ValueError("Node not found")
-//             return [child.value for child in self.nodes[value].children]
-
-//         def get_parent(self, value):
-//             if value not in self.nodes:
-//                 raise ValueError("Node not found")
-//             node = self.nodes[value]
-//             return node.parent.value if node.parent else None
-
-//         def is_ancestor(self, ancestor, descendant):
-//             if ancestor not in self.nodes or descendant not in self.nodes:
-//                 raise ValueError("Node not found")
-
-//             current = self.nodes[descendant]
-//             while current.parent:
-//                 if current.parent.value == ancestor:
-//                     return True
-//                 current = current.parent
-//             return False
-
-//     return MonsterTree()
-
-// def build_monster_tree():
-//     """
-//     Build a tree structure for monster relationships.
-
-//     Returns:
-//         MonsterTree instance for managing monster hierarchies
-//     """
-//     return create_monster_hierarchy()
-
-// // Example usage
-// tree = build_monster_tree()
-// tree.add("Elder Dragons")
-// tree.add("Teostra", "Elder Dragons")
-// tree.add("Kushala Daora", "Elder Dragons")
-
-// print("Children of Elder Dragons:", tree.get_children("Elder Dragons"))
-// print("Parent of Teostra:", tree.get_parent("Teostra"))
-// print("Is Elder Dragons ancestor of Teostra:", tree.is_ancestor("Elder Dragons", "Teostra"))
-
-// // Monster Hunter Tips:
-// // 1. Use for hierarchy management
-// // 2. Track relationships
-// // 3. Study evolution paths
-// // 4. Consider family trees
-// // 5. Optimize tree operations`,
-//   ],
-// ]);
 
 // Add Trie Monster Hunter Pattern
 const trieMonsterHunterPattern = new Map<PatternKey, string>([
@@ -2007,7 +1808,7 @@ def create_monster_dictionary():
         def insert(self, name):
             node = self.root
             
-            # Add name to all nodes in path
+            // Add name to all nodes in path
             for char in name:
                 if char not in node.children:
                     node.children[char] = TrieNode()
@@ -2210,7 +2011,7 @@ def find_critical_paths(territory_graph):
         time += 1
         
         for v in territory_graph[u]:
-            if disc[v] == -1:  # If v is not visited
+            if disc[v] == -1:  // If v is not visited
                 parent[v] = u
                 dfs(v, disc, low, parent, bridges)
                 
@@ -2219,17 +2020,17 @@ def find_critical_paths(territory_graph):
                 if low[v] > disc[u]:
                     bridges.append([u, v])
             
-            elif v != parent[u]:  # Back edge and not parent
+            elif v != parent[u]:  // Back edge and not parent
                 low[u] = min(low[u], disc[v])
     
     V = len(territory_graph)
-    disc = {territory: -1 for territory in territory_graph}  # Discovery times
-    low = {territory: -1 for territory in territory_graph}   # Earliest reachable vertex
-    parent = {territory: None for territory in territory_graph}  # Parent vertices
+    disc = {territory: -1 for territory in territory_graph}  // Discovery times
+    low = {territory: -1 for territory in territory_graph}   // Earliest reachable vertex
+    parent = {territory: None for territory in territory_graph}  // Parent vertices
     time = 0
     bridges = []
     
-    # Find bridges in connected components
+    // Find bridges in connected components
     for territory in territory_graph:
         if disc[territory] == -1:
             dfs(territory, disc, low, parent, bridges)
@@ -2248,7 +2049,7 @@ def identify_critical_paths(territory_graph):
     """
     return find_critical_paths(territory_graph)
 
-// Example usage
+# Example usage
 territory_graph = {
     "Base Camp": ["Ancient Forest", "Wildspire Waste"],
     "Ancient Forest": ["Coral Highlands"],
@@ -2261,16 +2062,118 @@ territory_graph = {
 critical_paths = identify_critical_paths(territory_graph)
 print("Critical territory paths:", critical_paths)
 
-// Monster Hunter Tips:
-// 1. Use for critical path analysis
-// 2. Identify vulnerable connections
-// 3. Plan backup routes
-// 4. Secure important paths
-// 5. Consider path redundancy`,
+# Monster Hunter Tips:
+# 1. Use for critical path analysis
+# 2. Identify vulnerable connections
+# 3. Plan backup routes
+# 4. Secure important paths
+# 5. Consider path redundancy`,
   ],
 ]);
 
-export const monsterHunterPatternsExtended9 = new Map([
+// Add Dijkstra's Algorithm Monster Hunter Pattern
+const dijkstrasAlgorithmMonsterHunterPattern = new Map<PatternKey, string>([
+  [
+    "Dijkstra's Algorithm" as PatternKey,
+    `def find_safest_hunting_routes(territory_map: list[list[int]], base_camp: int) -> list[int]:
+    """
+    Find the safest routes from base camp to all hunting grounds using Dijkstra's algorithm.
+    Each edge weight represents the danger level of the path between territories.
+    
+    Monster Hunter Context:
+    - Like finding the safest paths through monster territories
+    - Each path has a danger level based on monster presence and terrain
+    - Find routes that minimize total danger from base camp
+    
+    Example:
+    territory_map = [
+        [0, 4, 0, 0, 0, 0, 0, 8, 0],  # Base camp connections
+        [4, 0, 8, 0, 0, 0, 0, 11, 0], # Ancient Forest
+        [0, 8, 0, 7, 0, 4, 0, 0, 2],  # Wildspire Waste
+        [0, 0, 7, 0, 9, 14, 0, 0, 0], # Coral Highlands
+        [0, 0, 0, 9, 0, 10, 0, 0, 0], # Rotten Vale
+        [0, 0, 4, 14, 10, 0, 2, 0, 0], # Elder's Recess
+        [0, 0, 0, 0, 0, 2, 0, 1, 6],  # Hoarfrost Reach
+        [8, 11, 0, 0, 0, 0, 1, 0, 7], # Guiding Lands
+        [0, 0, 2, 0, 0, 0, 6, 7, 0]   # Seliana
+    ]
+    
+    Process:
+    1. Initialize danger levels as infinite
+    2. Start from base camp (danger level 0)
+    3. Find safest unvisited territory
+    4. Update danger levels for neighboring territories
+    5. Repeat until all territories are visited
+    """
+    n = len(territory_map)
+    danger_levels = [float('inf')] * n  # Initialize all danger levels as infinite
+    visited = [False] * n
+    danger_levels[base_camp] = 0  # Base camp has no danger
+    
+    for _ in range(n - 1):
+        # Find the safest unvisited territory
+        current_territory = -1
+        for j in range(n):
+            if not visited[j] and (current_territory == -1 or danger_levels[j] < danger_levels[current_territory]):
+                current_territory = j
+        
+        if current_territory == -1:
+            break
+        visited[current_territory] = True
+        
+        # Update danger levels for neighboring territories
+        for next_territory in range(n):
+            if territory_map[current_territory][next_territory] > 0:
+                danger_levels[next_territory] = min(
+                    danger_levels[next_territory],
+                    danger_levels[current_territory] + territory_map[current_territory][next_territory]
+                )
+    
+    return danger_levels
+
+def plan_hunting_routes(territory_map, base_camp):
+    """
+    Plan the safest hunting routes from base camp to all territories.
+    Uses Dijkstra's algorithm to find paths with minimum danger levels.
+    
+    Args:
+        territory_map (list): 2D list representing territory connections and danger levels
+        base_camp (int): Index of the base camp territory
+        
+    Returns:
+        list: Minimum danger levels to reach each territory
+    """
+    return find_safest_hunting_routes(territory_map, base_camp)
+
+# Example usage:
+# hunting_grounds = [
+#     [0, 4, 0, 0, 0, 0, 0, 8, 0],  # Base camp connections
+#     [4, 0, 8, 0, 0, 0, 0, 11, 0], # Ancient Forest
+#     [0, 8, 0, 7, 0, 4, 0, 0, 2],  # Wildspire Waste
+#     [0, 0, 7, 0, 9, 14, 0, 0, 0], # Coral Highlands
+#     [0, 0, 0, 9, 0, 10, 0, 0, 0], # Rotten Vale
+#     [0, 0, 4, 14, 10, 0, 2, 0, 0], # Elder's Recess
+#     [0, 0, 0, 0, 0, 2, 0, 1, 6],  # Hoarfrost Reach
+#     [8, 11, 0, 0, 0, 0, 1, 0, 7], # Guiding Lands
+#     [0, 0, 2, 0, 0, 0, 6, 7, 0]   # Seliana
+# ]
+# 
+# base_camp = 0
+# safest_routes = plan_hunting_routes(hunting_grounds, base_camp)
+# print(f"Safest routes from base camp to all hunting grounds:", safest_routes)
+
+# Tips:
+# 1. Use edge weights to represent monster threat levels
+# 2. Consider environmental hazards in path weights
+# 3. Update routes dynamically as monsters migrate
+# 4. Use for efficient resource gathering paths
+# 5. Always plan multiple escape routes
+    `,
+  ],
+]);
+
+// Export all patterns
+export const monsterHunterPatternsExtended9 = new Map<PatternKey, string>([
   ...binaryIndexedTreeMonsterHunterPattern,
   ...bitwiseDPMonsterHunterPattern,
   ...bridgesMonsterHunterPattern,
@@ -2290,10 +2193,9 @@ export const monsterHunterPatternsExtended9 = new Map([
   ...karatsubaMultiplicationMonsterHunterPattern,
   ...lcaDFSMonsterHunterPattern,
   ...palindromePartitioningMonsterHunterPattern,
-  ...spanningTreeMonsterHunterPattern,
   ...sparseTableMonsterHunterPattern,
   ...stringHashingMonsterHunterPattern,
-  //...treeImplementationMonsterHunterPattern,
   ...trieMonsterHunterPattern,
   ...zigzagTraversalMonsterHunterPattern,
+  ...dijkstrasAlgorithmMonsterHunterPattern,
 ]);

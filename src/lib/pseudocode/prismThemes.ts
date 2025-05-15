@@ -1,0 +1,215 @@
+// Prism theme objects matching Monaco editor themes
+// Only the most common Prism token types are mapped
+
+export const prismDracula = {
+  'code[class*="language-"]': {
+    color: "#f8f8f2",
+    background: "#282a36",
+  },
+  comment: { color: "#6272a4" },
+  keyword: { color: "#ff79c6" },
+  string: { color: "#f1fa8c" },
+  number: { color: "#bd93f9" },
+  operator: { color: "#ff79c6" },
+  function: { color: "#50fa7b" },
+  variable: { color: "#f8f8f2" },
+  className: { color: "#8be9fd" },
+  constant: { color: "#bd93f9" },
+  parameter: { color: "#ffb86c" },
+  property: { color: "#66d9ef" },
+  punctuation: { color: "#f8f8f2" },
+  tag: { color: "#ff79c6" },
+  attrName: { color: "#50fa7b" },
+  attrValue: { color: "#f1fa8c" },
+};
+
+export const prismSolarized = {
+  'code[class*="language-"]': {
+    color: "#657b83",
+    background: "#fdf6e3",
+  },
+  comment: { color: "#93a1a1" },
+  keyword: { color: "#b58900" },
+  string: { color: "#2aa198" },
+  number: { color: "#268bd2" },
+  operator: { color: "#b58900" },
+  function: { color: "#268bd2" },
+  variable: { color: "#657b83" },
+  className: { color: "#b58900" },
+  constant: { color: "#268bd2" },
+  parameter: { color: "#b58900" },
+  property: { color: "#268bd2" },
+  punctuation: { color: "#657b83" },
+  tag: { color: "#b58900" },
+  attrName: { color: "#268bd2" },
+  attrValue: { color: "#2aa198" },
+};
+
+export const prismLight = {
+  'code[class*="language-"]': {
+    color: "#0f172a",
+    background: "#ffffff",
+  },
+  comment: { color: "#64748b" },
+  keyword: { color: "#2563eb" },
+  string: { color: "#059669" },
+  number: { color: "#dc2626" },
+  operator: { color: "#2563eb" },
+  function: { color: "#059669" },
+  variable: { color: "#0f172a" },
+  className: { color: "#2563eb" },
+  constant: { color: "#dc2626" },
+  parameter: { color: "#2563eb" },
+  property: { color: "#059669" },
+  punctuation: { color: "#0f172a" },
+  tag: { color: "#2563eb" },
+  attrName: { color: "#059669" },
+  attrValue: { color: "#dc2626" },
+};
+
+export const prismNord = {
+  'code[class*="language-"]': {
+    color: "#FFFFFF",
+    background: "#2A1F73",
+  },
+  comment: { color: "#B4B4B4" },
+  keyword: { color: "#50FF50" },
+  string: { color: "#FFE44D" },
+  number: { color: "#66B6FF" },
+  operator: { color: "#FF5555" },
+  function: { color: "#FF5555" },
+  variable: { color: "#FFFFFF" },
+  className: { color: "#66B6FF" },
+  constant: { color: "#FFE44D" },
+  property: { color: "#66B6FF" },
+  punctuation: { color: "#FFFFFF" },
+  tag: { color: "#66B6FF" },
+  attrName: { color: "#FF5555" },
+  attrValue: { color: "#50FF50" },
+};
+
+export const prismSnes = {
+  'code[class*="language-"]': {
+    color: "#333333",
+    background: "#B8B8B8",
+  },
+  comment: { color: "#666666" },
+  keyword: { color: "#0000FF" },
+  string: { color: "#00B800" },
+  number: { color: "#FFD700" },
+  operator: { color: "#FF0000" },
+  function: { color: "#FF0000" },
+  variable: { color: "#333333" },
+  className: { color: "#0000FF" },
+  constant: { color: "#00B800" },
+  property: { color: "#0000FF" },
+  punctuation: { color: "#333333" },
+  tag: { color: "#0000FF" },
+  attrName: { color: "#FF0000" },
+  attrValue: { color: "#00B800" },
+};
+
+export const prismPs2 = {
+  'code[class*="language-"]': {
+    color: "#B4C7FF",
+    background: "#001B4D",
+  },
+  comment: { color: "#6B88CC" },
+  keyword: { color: "#4B75FF" },
+  string: { color: "#00A5FF" },
+  number: { color: "#2E59FF" },
+  operator: { color: "#6F9AFF" },
+  function: { color: "#00A5FF" },
+  variable: { color: "#B4C7FF" },
+  className: { color: "#4B75FF" },
+  constant: { color: "#2E59FF" },
+  property: { color: "#4B75FF" },
+  punctuation: { color: "#B4C7FF" },
+  tag: { color: "#4B75FF" },
+  attrName: { color: "#6F9AFF" },
+  attrValue: { color: "#00A5FF" },
+};
+
+export const prismRe2 = {
+  'code[class*="language-"]': {
+    color: "#E6E0D6",
+    background: "#0A0A0A",
+  },
+  comment: { color: "#B0A99F" },
+  keyword: { color: "#B80000" },
+  string: { color: "#C7A14A" },
+  number: { color: "#C7A14A" },
+  operator: { color: "#E60000" },
+  function: { color: "#E6E0D6" },
+  variable: { color: "#E6E0D6" },
+  className: { color: "#B80000" },
+  constant: { color: "#C7A14A" },
+  property: { color: "#E6E0D6" },
+  punctuation: { color: "#E6E0D6" },
+  tag: { color: "#B80000" },
+  attrName: { color: "#C7A14A" },
+  attrValue: { color: "#E6E0D6" },
+};
+
+export const prismMh = {
+  'code[class*="language-"]': {
+    color: "#E8D5A9",
+    background: "#1C2320",
+  },
+  comment: { color: "#7AA364" },
+  keyword: { color: "#D4B056" },
+  string: { color: "#4A7B8C" },
+  number: { color: "#D4B056" },
+  operator: { color: "#66A355" },
+  function: { color: "#66A355" },
+  variable: { color: "#E8D5A9" },
+  className: { color: "#D4B056" },
+  constant: { color: "#4A7B8C" },
+  property: { color: "#4A7B8C" },
+  punctuation: { color: "#E8D5A9" },
+  tag: { color: "#D4B056" },
+  attrName: { color: "#66A355" },
+  attrValue: { color: "#4A7B8C" },
+};
+
+export const prismKingdomHearts = {
+  'code[class*="language-"]': {
+    color: "#f8f8ff",
+    background: "#0a1633",
+  },
+  comment: { color: "#7c6fa0" },
+  keyword: { color: "#ffe066" },
+  string: { color: "#b85c6e" },
+  number: { color: "#ffe066" },
+  operator: { color: "#ffe066" },
+  function: { color: "#6ec6f7" },
+  variable: { color: "#f8f8ff" },
+  className: { color: "#bfc9d1" },
+  constant: { color: "#ffe066" },
+  property: { color: "#6ec6f7" },
+  punctuation: { color: "#f8f8ff" },
+  tag: { color: "#ffe066" },
+  attrName: { color: "#6ec6f7" },
+  attrValue: { color: "#b85c6e" },
+};
+
+export const prismFornite = {
+  'code[class*="language-"]': {
+    color: "#ffffff",
+    background: "#1a1a1a",
+  },
+  comment: { color: "#349a3a" },
+  keyword: { color: "#4a5afd" },
+  string: { color: "#9652b8" },
+  number: { color: "#f7b227" },
+  operator: { color: "#4a5afd" },
+  function: { color: "#349a3a" },
+  variable: { color: "#ffffff" },
+  className: { color: "#9652b8" },
+  constant: { color: "#f7b227" },
+  property: { color: "#349a3a" },
+  punctuation: { color: "#ffffff" },
+  tag: { color: "#4a5afd" },
+  attrName: { color: "#349a3a" },
+  attrValue: { color: "#9652b8" },
+};

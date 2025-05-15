@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const twoSumDictPattern: AlgorithmPattern = {
-  title: "Two Sum Dict",
+  title: "Two Sum Dictionary",
   description:
     "A problem-solving pattern that finds two numbers in an array that sum to a target value using a dictionary/hash map for optimal time complexity.",
   timeComplexity: "O(n)",

@@ -1,7 +1,7 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 export const dijkstraPattern: AlgorithmPattern = {
-  title: "Dijkstra",
+  title: "Dijkstra's Algorithm",
   description:
     "Find shortest paths from a source vertex to all other vertices in a weighted graph with non-negative edges",
   timeComplexity: "O((V + E) * log V) with binary heap",

@@ -1,9 +1,10 @@
-import { Button } from "../../ui/button";
 import { ChevronRight, ChevronLeft, Shuffle } from "lucide-react";
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../../ui/tooltip";
-import { cn } from "../../../lib/utils";
-import { useTheme } from "../../../components/theme/use-theme";
 import { useEffect } from "react";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface PatternControlsProps {
   onPreviousPattern: () => void;
@@ -27,9 +28,9 @@ export function PatternControls({
   // Handle keyboard shortcuts
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") onPreviousPattern();
-      if (e.key === "ArrowRight") onNextPattern();
-      if (e.key === "r") onRandomPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "[") onPreviousPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "]") onNextPattern();
+      if (e.ctrlKey && e.shiftKey && e.key === "r") onRandomPattern();
     };
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
@@ -75,7 +76,7 @@ export function PatternControls({
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Previous pattern (←)</p>
+                <p>Previous pattern (Ctrl+Shift+[)</p>
               </TooltipContent>
             </Tooltip>
 
@@ -99,7 +100,7 @@ export function PatternControls({
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Next pattern (→)</p>
+                <p>Next pattern (Ctrl+Shift+])</p>
               </TooltipContent>
             </Tooltip>
 
@@ -123,7 +124,7 @@ export function PatternControls({
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Random pattern (R)</p>
+                <p>Random pattern (Ctrl+Shift+R)</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>

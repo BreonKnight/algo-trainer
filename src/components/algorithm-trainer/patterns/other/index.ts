@@ -1,6 +1,6 @@
-import { AlgorithmPattern } from "../../types/pattern-types";
-import { nullPattern } from "./null-pattern";
-import { testDataPattern } from "./test-data";
+import { nullPattern } from "@/components/algorithm-trainer/patterns/other/null-pattern";
+import { testDataPattern } from "@/components/algorithm-trainer/patterns/other/test-data";
+import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
 
 type OtherPatternKey = "Null Pattern" | "Test Data";
 

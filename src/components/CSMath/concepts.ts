@@ -1,4 +1,4 @@
-import { Concept } from "./AlgorithmLearning";
+import { Concept } from "./types";
 
 export const additionalConcepts: Concept[] = [
   {

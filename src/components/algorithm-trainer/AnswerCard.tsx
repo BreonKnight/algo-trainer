@@ -1,14 +1,16 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "../ui/button";
 import Editor, { Monaco } from "@monaco-editor/react";
-import { PatternKey, AlgorithmPattern } from "./types";
-import { patterns as algorithmPatterns } from "./patterns/index";
-import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
-import { useState, useRef, useEffect, useMemo } from "react";
 import { Code, TestTube, Sword, Book, Copy, Check } from "lucide-react";
+import * as monaco from "monaco-editor";
+import { useState, useRef, useEffect, useMemo } from "react";
+
+import { monsterHunterPatterns } from "@/components/algorithm-trainer/monsterHunterPatterns";
 import { monsterHunterTestData } from "@/components/algorithm-trainer/monsterHunterTestData";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { patterns as algorithmPatterns } from "@/components/algorithm-trainer/patterns/index";
+import { PatternKey, AlgorithmPattern } from "@/components/algorithm-trainer/types";
 import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   draculaTheme,
   solarizedTheme,
@@ -21,7 +23,6 @@ import {
   kingdomHeartsTheme,
   forniteTheme,
 } from "@/lib/theme";
-import * as monaco from "monaco-editor";
 import { cn } from "@/lib/utils";
 
 interface AnswerCardProps {
@@ -143,9 +144,38 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
     }
   }, [currentPattern, showMonsterHunter]);
 
+  // Add touch event handling for resize
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isDesktop) return;
+    const touch = e.touches[0];
+    const startY = touch.clientY;
+    const startHeight = scrollRef.current?.offsetHeight || 0;
+    const maxHeight = 500;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      const delta = touch.clientY - startY;
+      const newHeight = Math.max(120, Math.min(startHeight + delta, maxHeight));
+      setEditorHeight(newHeight);
+    };
+
+    const handleTouchEnd = () => {
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
+  };
+
   return (
     <Card
-      className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden"
+      className={cn(
+        theme === "snes"
+          ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)]"
+          : "bg-secondary border border-secondary/20",
+        "p-4 w-full h-full flex flex-col overflow-hidden"
+      )}
       ref={cardRef}
     >
       <div className="flex-none flex justify-between items-center mb-4">
@@ -254,15 +284,43 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                       minHeight: isDesktop ? "0" : "300px",
                     }}
                   >
-                    <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
-                      {(() => {
-                        if (showMonsterHunter) {
+                    {showMonsterHunter ? (
+                      <Editor
+                        height={editorHeight}
+                        defaultLanguage="python"
+                        theme={theme}
+                        onMount={handleEditorDidMount}
+                        value={(() => {
                           const testData = monsterHunterTestData.get(currentPattern);
                           if (testData) {
                             return testData;
                           }
                           return `# Monster Hunter Example/Test Data for ${currentPattern}\n# Coming soon!`;
-                        } else {
+                        })()}
+                        options={{
+                          fontSize: 14,
+                          minimap: { enabled: false },
+                          scrollBeyondLastLine: false,
+                          lineNumbers: "on",
+                          readOnly: true,
+                          roundedSelection: false,
+                          padding: { top: 8, bottom: 8 },
+                          cursorStyle: "line",
+                          automaticLayout: true,
+                          wordWrap: "on",
+                          tabSize: 4,
+                          insertSpaces: true,
+                          overviewRulerBorder: false,
+                          hideCursorInOverviewRuler: true,
+                          renderLineHighlight: "line",
+                          lineDecorationsWidth: 0,
+                          renderLineHighlightOnlyWhenFocus: true,
+                          fixedOverflowWidgets: true,
+                        }}
+                      />
+                    ) : (
+                      <pre className="whitespace-pre-wrap text-main break-words text-xs sm:text-sm md:text-base leading-relaxed">
+                        {(() => {
                           const val = (
                             algorithmPatterns as Record<PatternKey, AlgorithmPattern | undefined>
                           )[currentPattern];
@@ -271,9 +329,9 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                             if (ex) return ex;
                           }
                           return `# Example/Test Data for ${currentPattern}\n# (No regular example/test data available yet.)`;
-                        }
-                      })()}
-                    </pre>
+                        })()}
+                      </pre>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -346,7 +404,7 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                   {/* Vertical resize handle */}
                   <div
                     className="flex-none w-full h-4 cursor-row-resize flex items-center justify-center group"
-                    style={{ userSelect: "none" }}
+                    style={{ userSelect: "none", touchAction: "none" }}
                     onMouseDown={(e) => {
                       if (!isDesktop) return;
                       const startY = e.clientY;
@@ -364,6 +422,7 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
                       window.addEventListener("mousemove", onMove);
                       window.addEventListener("mouseup", onUp);
                     }}
+                    onTouchStart={handleTouchStart}
                   >
                     <div className="w-16 h-1.5 rounded-full bg-accent2/40 group-hover:bg-accent2/70 transition-all" />
                   </div>

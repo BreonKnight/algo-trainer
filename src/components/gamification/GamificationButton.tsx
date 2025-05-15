@@ -1,22 +1,20 @@
-import { useState, useEffect } from "react";
 import { Trophy, BarChart } from "lucide-react";
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import GamificationService, {
-  UserProgress,
-  Badge,
-  AlgorithmProgress,
-} from "../../lib/gamification";
-import { useTheme } from "@/components/theme/use-theme";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
+import {
+  ThemedDialog,
+  ThemedDialogHeader,
+  ThemedDialogTitle,
+  ThemedDialogDescription,
+  ThemedDialogBody,
+} from "@/components/ui/themed-dialog";
+import GamificationService, { UserProgress, Badge, AlgorithmProgress } from "@/lib/gamification";
 
 const themeStyles = {
   dracula: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -33,19 +31,14 @@ const themeStyles = {
     },
   },
   light: {
-    button: "bg-accent/10 hover:bg-accent/20 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/10 shadow-xl",
-    header: "border-b border-accent/10",
-    title: "text-accent font-bold",
-    card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
     text: {
-      primary: "text-accent-foreground/90",
-      secondary: "text-accent-foreground/70",
-      muted: "text-accent-foreground/50",
+      primary: "text-main",
+      secondary: "text-main/80",
+      muted: "text-main/60",
     },
     badge: {
-      unlocked: "bg-background/30 border border-accent/30 shadow-sm backdrop-blur-sm",
-      locked: "bg-background/20 border border-accent/10 backdrop-blur-sm",
+      unlocked: "bg-accent/10 border border-accent/40 backdrop-blur-sm",
+      locked: "bg-background/20 border border-secondary/40 backdrop-blur-sm",
       icon: "text-accent",
     },
     progress: {
@@ -54,11 +47,6 @@ const themeStyles = {
     },
   },
   dark: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-main",
-    dialog: "bg-background/95 backdrop-blur-sm border border-secondary/20",
-    header: "border-b border-secondary/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -75,11 +63,6 @@ const themeStyles = {
     },
   },
   solarized: {
-    button: "bg-accent/10 hover:bg-accent/20 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/10",
-    header: "border-b border-accent/10",
-    title: "text-accent font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent/10",
     text: {
       primary: "text-accent-foreground/90",
       secondary: "text-accent-foreground/70",
@@ -96,11 +79,6 @@ const themeStyles = {
     },
   },
   nord: {
-    button: "bg-accent/20 hover:bg-accent/30 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20",
-    header: "border-b border-accent/20",
-    title: "text-accent font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -117,15 +95,10 @@ const themeStyles = {
     },
   },
   snes: {
-    button: "bg-accent/20 hover:bg-accent/30 text-accent",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent/20 shadow-xl",
-    header: "border-b border-accent/20",
-    title: "text-accent font-bold",
-    card: "bg-background/30 shadow-sm backdrop-blur-sm border border-accent/10",
     text: {
-      primary: "text-accent-foreground/90",
-      secondary: "text-accent-foreground/70",
-      muted: "text-accent-foreground/50",
+      primary: "text-white",
+      secondary: "text-white/80",
+      muted: "text-white/60",
     },
     badge: {
       unlocked: "bg-background/30 border border-accent/40 backdrop-blur-sm",
@@ -138,11 +111,6 @@ const themeStyles = {
     },
   },
   ps2: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -159,11 +127,6 @@ const themeStyles = {
     },
   },
   re2: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -180,11 +143,6 @@ const themeStyles = {
     },
   },
   mh: {
-    button: "bg-accent2/20 hover:bg-accent2/30 text-accent2",
-    dialog: "bg-background/95 backdrop-blur-sm border border-accent2/20",
-    header: "border-b border-accent2/20",
-    title: "text-accent2 font-bold",
-    card: "bg-background/30 backdrop-blur-sm border border-accent2/10",
     text: {
       primary: "text-main/90",
       secondary: "text-main/70",
@@ -209,6 +167,18 @@ export function GamificationButton() {
 
   // Default to dracula theme if current theme is not in themeStyles
   const styles = themeStyles[theme as keyof typeof themeStyles] || themeStyles.dracula;
+
+  // Add scroll lock effect
+  useEffect(() => {
+    if (showPanel) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showPanel]);
 
   useEffect(() => {
     // Get initial progress
@@ -247,33 +217,22 @@ export function GamificationButton() {
             `w-8 h-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)] transition-colors duration-200 ` +
             (theme === "dracula" || theme === "ps2" || theme === "re2" || theme === "mh"
               ? "text-accent2 group-hover:text-accent"
-              : "text-yellow-200 group-hover:text-yellow-300")
+              : theme === "light" || theme === "solarized"
+                ? "text-accent group-hover:text-accent/80"
+                : "text-yellow-200 group-hover:text-yellow-300")
           }
         />
       </Button>
 
       {/* Gamification Panel */}
-      <Dialog open={showPanel} onOpenChange={setShowPanel}>
-        <DialogContent
-          className={`max-w-2xl max-h-[80vh] ${styles.dialog}`}
-          style={{
-            background: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(12px)",
-            animation: "modalSlideIn 0.3s ease-out",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
-          }}
-          aria-describedby="gamification-dialog-description"
-        >
-          <DialogHeader className={`${styles.header} pb-4`}>
-            <DialogTitle className={`text-2xl font-bold ${styles.title} tracking-tight`}>
-              Your Progress
-            </DialogTitle>
-            <p id="gamification-dialog-description" className="sr-only">
-              View your learning progress, achievements, and algorithm mastery
-            </p>
-          </DialogHeader>
-
+      <ThemedDialog isOpen={showPanel} onClose={() => setShowPanel(false)} maxWidth="2xl">
+        <ThemedDialogHeader>
+          <ThemedDialogTitle>Your Progress</ThemedDialogTitle>
+          <ThemedDialogDescription>
+            View your learning progress, achievements, and algorithm mastery
+          </ThemedDialogDescription>
+        </ThemedDialogHeader>
+        <ThemedDialogBody>
           <div className="overflow-y-auto max-h-[calc(80vh-8rem)] pr-2 custom-scrollbar">
             {/* User Stats Section */}
             <div className="mb-8">
@@ -404,8 +363,8 @@ export function GamificationButton() {
               </Button>
             </Link>
           </div>
-        </DialogContent>
-      </Dialog>
+        </ThemedDialogBody>
+      </ThemedDialog>
     </>
   );
 }

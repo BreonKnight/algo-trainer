@@ -1,5 +1,6 @@
 import { ChevronRight } from "lucide-react";
-import { PseudocodeDisplay } from "../PseudocodeDisplay";
+
+import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 export const ZAlgorithmPattern = () => (
   <div>

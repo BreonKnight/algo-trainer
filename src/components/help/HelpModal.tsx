@@ -1,27 +1,25 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { Button } from "../ui/button";
-import { useTheme } from "@/components/theme/use-theme";
 import React from "react";
+
+import { useTheme } from "@/components/theme/use-theme";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) => {
   const { theme } = useTheme();
 
   const buttonClass = (() => {
-    switch (theme) {
-      case "dracula":
-        return "bg-gradient-to-r from-[#50fa7b] via-[#bd93f9] to-[#ff79c6] text-white";
-      case "light":
-        return "bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 text-black";
-      case "solarized":
-        return "bg-gradient-to-r from-yellow-200 via-orange-200 to-pink-200 text-black";
-      case "kingdom-hearts":
-        return "bg-gradient-to-r from-[#0a1633] via-[#1a2747] to-[#0a1633] text-white border-2 border-[#ffe066] shadow-md";
-      case "fornite":
-        return "bg-gradient-to-r from-[#349a3a] via-[#4a5afd] via-[#9652b8] to-[#f7b227] text-white border-2 border-[#4a5afd] shadow-md";
-      default:
-        return "bg-gradient-to-r from-gray-200 to-gray-400 text-black";
-    }
+    if (theme === "dracula")
+      return "bg-gradient-to-r from-[var(--accent2)] via-[var(--accent3)] to-[var(--accent)] text-main";
+    if (theme === "kingdom-hearts")
+      return "bg-gradient-to-r from-[var(--bg-main)] via-[var(--bg-secondary)] to-[var(--bg-main)] text-main border-2 border-[var(--accent)] shadow-md";
+    if (theme === "fornite")
+      return "bg-gradient-to-r from-[var(--accent2)] via-[var(--accent)] via-[var(--accent3)] to-[var(--accent4)] text-main border-2 border-[var(--accent)] shadow-md";
+    if (theme === "light")
+      return "bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 text-black";
+    if (theme === "solarized")
+      return "bg-gradient-to-r from-yellow-200 via-orange-200 to-pink-200 text-black";
+    return "bg-gradient-to-r from-gray-200 to-gray-400 text-black";
   })();
 
   return (
@@ -76,18 +74,32 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
           </Dialog.Description>
           <div className="space-y-3 text-main">
             <p className="text-main/80 text-sm leading-relaxed">
-              Master algorithms through interactive coding exercises with gamification. Choose from
-              various patterns, practice with real Python code, and track your progress.
+              Master algorithms, systems design, and computer science through interactive learning.
+              Choose from various topics, practice with real code, and track your progress.
             </p>
             <div className="space-y-2">
-              <h3 className="font-medium text-accent3">Quick Start:</h3>
-              <ol className="list-decimal pl-4 space-y-0.5 text-main">
-                <li>Pick an algorithm pattern from the navigation bar</li>
-                <li>Choose between standard or Monster Hunter themed guides</li>
-                <li>Write your solution in the Python editor</li>
-                <li>Use the REPL to test with different inputs</li>
-                <li>Submit and earn XP based on your solution</li>
-              </ol>
+              <h3 className="font-medium text-accent3">Available Topics:</h3>
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div>
+                  <span className="text-accent2 font-medium">📚 Learning</span>
+                  <ul className="list-disc pl-4 space-y-0.5 mt-1 text-main">
+                    <li>Algorithm Trainer</li>
+                    <li>Algorithm Guide</li>
+                    <li>Python Techniques</li>
+                    <li>Systems Design</li>
+                    <li>CS Math</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="text-accent2 font-medium">🎯 Practice</span>
+                  <ul className="list-disc pl-4 space-y-0.5 mt-1 text-main">
+                    <li>Interactive Practice</li>
+                    <li>Algorithm Comparison</li>
+                    <li>Progress Tracking</li>
+                    <li>Tutorials</li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div className="space-y-2">
               <h3 className="font-medium text-accent3">Features:</h3>
@@ -95,33 +107,25 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
                 <div>
                   <span className="text-accent2 font-medium">🏆 Progress System</span>
                   <ul className="list-disc pl-4 space-y-0.5 mt-1 text-main">
-                    <li>Gain XP for solutions</li>
-                    <li>Level up & earn badges</li>
+                    <li>Track learning progress</li>
+                    <li>View achievements</li>
                     <li>Daily practice streaks</li>
-                    <li>Pattern completion tracking</li>
+                    <li>Pattern completion</li>
                   </ul>
                 </div>
                 <div>
                   <span className="text-accent2 font-medium">🎮 Learning Tools</span>
                   <ul className="list-disc pl-4 space-y-0.5 mt-1 text-main">
                     <li>Interactive Python REPL</li>
-                    <li>Focus timer with alerts</li>
-                    <li>Themed explanations</li>
-                    <li>Ambient background music</li>
+                    <li>Focus timer</li>
+                    <li>Multiple themes</li>
+                    <li>Keyboard shortcuts</li>
                   </ul>
                 </div>
               </div>
             </div>
             <div className="space-y-2">
-              <h3 className="font-medium text-accent3">Pro Tips:</h3>
-              <ul className="list-disc pl-4 space-y-0.5 text-main/80">
-                <li>Use the timer to practice solving within time limits</li>
-                <li>Check your stats in the trophy panel to track improvement</li>
-                <li>Try both explanation styles for better understanding</li>
-              </ul>
-            </div>
-            <div className="space-y-2">
-              <h3 className="font-medium text-accent3 mt-4">Editor Keyboard Shortcuts:</h3>
+              <h3 className="font-medium text-accent3">Editor Shortcuts:</h3>
               <ul className="list-disc pl-4 space-y-0.5 text-main/90 text-sm">
                 <li>
                   <b>Ctrl+Enter</b>: Run code
@@ -130,16 +134,19 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
                   <b>Ctrl+Shift+A</b>: Show answer
                 </li>
                 <li>
-                  <b>Ctrl+Shift+N</b>: Next pattern
+                  <b>Ctrl+Shift+[</b>: Previous pattern
                 </li>
                 <li>
-                  <b>Ctrl+Shift+P</b>: Previous pattern
+                  <b>Ctrl+Shift+]</b>: Next pattern
+                </li>
+                <li>
+                  <b>Ctrl+Shift+R</b>: Random pattern
                 </li>
                 <li>
                   <b>Ctrl+Shift+C</b>: Copy code
                 </li>
                 <li>
-                  <b>Ctrl++</b> / <b>Ctrl+-</b>: Increase/decrease font size
+                  <b>Ctrl++</b> / <b>Ctrl+-</b>: Font size
                 </li>
               </ul>
             </div>

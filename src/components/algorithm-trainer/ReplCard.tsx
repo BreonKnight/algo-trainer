@@ -1,11 +1,15 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useState, useEffect, useRef } from "react";
-import { loadPyodide, PyodideInterface } from "pyodide";
-import { toast } from "sonner";
 import confetti from "canvas-confetti";
+import { Code } from "lucide-react";
+import { loadPyodide, PyodideInterface } from "pyodide";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { toast } from "sonner";
+
 import { useTheme } from "@/components/theme/use-theme";
-import GamificationService from "../../lib/gamification";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import GamificationService from "@/lib/gamification";
+import { PythonCodeHandler } from "@/lib/python/codeHandler";
 import { cn } from "@/lib/utils";
 
 interface ReplCardProps {
@@ -45,43 +49,59 @@ export function ReplCard({ userCode }: ReplCardProps) {
   const terminalStyles = {
     dracula: {
       bg: "bg-[#282a36]",
-      text: "text-[#f8f8f2]",
-      error: "text-[#ff5555]",
+      text: "text-[#f8f8f2] font-mono",
+      error: "text-[#ff5555] font-mono",
+      container: "border border-[#bd93f9]/30 shadow-[0_0_10px_rgba(189,147,249,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#bd93f9]/5 after:pointer-events-none",
     },
     solarized: {
       bg: "bg-[#002b36]",
-      text: "text-[#839496]",
-      error: "text-[#dc322f]",
+      text: "text-[#839496] font-mono",
+      error: "text-[#dc322f] font-mono",
+      container: "border border-[#2aa198]/30 shadow-[0_0_10px_rgba(42,161,152,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#2aa198]/5 after:pointer-events-none",
     },
     light: {
-      bg: "bg-[#f8f8f8]",
-      text: "text-[#2d3748]",
-      error: "text-red-600",
+      bg: "bg-[#1a1a1a]",
+      text: "text-[#e0e0e0] font-mono",
+      error: "text-[#ff4444] font-mono",
+      container: "border border-[#4a9eff]/30 shadow-[0_0_10px_rgba(74,158,255,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#4a9eff]/5 after:pointer-events-none",
     },
     nord: {
       bg: "bg-[#2e3440]",
-      text: "text-[#d8dee9]",
-      error: "text-[#bf616a]",
+      text: "text-[#d8dee9] font-mono",
+      error: "text-[#bf616a] font-mono",
+      container: "border border-[#88c0d0]/30 shadow-[0_0_10px_rgba(136,192,208,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#88c0d0]/5 after:pointer-events-none",
     },
     snes: {
       bg: "bg-[#2c2c2c]",
-      text: "text-[#c7c7c7]",
-      error: "text-[#ff6b6b]",
+      text: "text-[#00ff00] font-mono",
+      error: "text-[#ff6b6b] font-mono",
+      container: "border border-[#00ff00]/30 shadow-[0_0_10px_rgba(0,255,0,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#00ff00]/5 after:pointer-events-none",
     },
     ps2: {
       bg: "bg-[#1a1a1a]",
-      text: "text-[#e0e0e0]",
-      error: "text-[#ff4757]",
+      text: "text-[#4a9eff] font-mono",
+      error: "text-[#ff4757] font-mono",
+      container: "border border-[#4a9eff]/30 shadow-[0_0_10px_rgba(74,158,255,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#4a9eff]/5 after:pointer-events-none",
     },
     re2: {
       bg: "bg-[#1e1e1e]",
-      text: "text-[#d4d4d4]",
-      error: "text-[#ff3333]",
+      text: "text-[#d4d4d4] font-mono",
+      error: "text-[#ff3333] font-mono",
+      container: "border border-[#569cd6]/30 shadow-[0_0_10px_rgba(86,156,214,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#569cd6]/5 after:pointer-events-none",
     },
     mh: {
       bg: "bg-[#2d2d2d]",
-      text: "text-[#e6e6e6]",
-      error: "text-[#ff6b6b]",
+      text: "text-[#e6e6e6] font-mono",
+      error: "text-[#ff6b6b] font-mono",
+      container: "border border-[#ffd700]/30 shadow-[0_0_10px_rgba(255,215,0,0.3)]",
+      glow: "after:content-[''] after:absolute after:inset-0 after:bg-[#ffd700]/5 after:pointer-events-none",
     },
   };
 
@@ -97,9 +117,14 @@ export function ReplCard({ userCode }: ReplCardProps) {
       setIsLoading(true);
       setError(null);
       try {
-        // Try loading from CDN first
+        // Determine if we're in Electron
+        const isElectron = window.navigator.userAgent.toLowerCase().includes("electron");
+
+        // Load Pyodide with appropriate configuration
         const pyodideInstance = await loadPyodide({
-          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/",
+          indexURL: isElectron
+            ? "./pyodide" // Local path in Electron
+            : "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/", // CDN for web
           stdout: (text: string) => {
             if (mounted) {
               setOutput((prev) => prev + text);
@@ -140,6 +165,21 @@ export function ReplCard({ userCode }: ReplCardProps) {
     };
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const handleFormat = useCallback(() => {}, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Format code with Ctrl+Shift+F
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "f") {
+        e.preventDefault();
+        handleFormat();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [handleFormat]);
+
   const runCode = async () => {
     if (!pyodide) {
       setOutput("Python environment is not ready yet. Please wait...");
@@ -156,54 +196,38 @@ export function ReplCard({ userCode }: ReplCardProps) {
     const startTime = performance.now();
 
     try {
-      // Create a wrapper to capture print statements and return values
-      const wrappedCode = `
-import sys
-from io import StringIO
-sys.stdout = StringIO()
-try:
-${userCode
-  .split("\n")
-  .map((line) => "    " + line)
-  .join("\n")}
-    result = sys.stdout.getvalue()
-    sys.stdout = sys.__stdout__
-    print(result)
-except Exception as e:
-    sys.stdout = sys.__stdout__
-    print(f"Error: {str(e)}")
-`;
+      // Validate code before execution
+      const validation = PythonCodeHandler.validateCode(userCode);
+      if (!validation.isValid && validation.error) {
+        setError(validation.error);
+        toast.error(validation.error, {
+          duration: 5000,
+        });
+        return;
+      }
+
+      // Wrap and execute code
+      const wrappedCode = PythonCodeHandler.wrapCodeForExecution(userCode);
       await pyodide.runPythonAsync(wrappedCode);
 
       // Calculate execution time
       const endTime = performance.now();
       const executionTime = endTime - startTime;
 
-      // Record code execution in gamification service
+      // Record code execution
       const gamificationService = GamificationService.getInstance();
-      gamificationService.recordCodeExecution(
-        userCode.split("\n").length, // Lines of code
-        executionTime, // Execution time in ms
-        false // No error
-      );
+      gamificationService.recordCodeExecution(userCode.split("\n").length, executionTime, false);
 
       toast.success("Code ran successfully!", {
         duration: 3000,
       });
 
-      // Trigger confetti animation
       triggerConfetti();
     } catch (error) {
-      let errorMessage = error instanceof Error ? error.message : "Unknown error";
-      let errorType = "Error";
-
-      // Handle browser-specific errors
-      if (errorMessage.includes("Pyodide failed to load")) {
-        errorType = "Initialization Error";
-        errorMessage = "Failed to load Python environment. Please refresh the page.";
-      }
-
-      setError(`${errorType}: ${errorMessage}`);
+      const errorMessage = PythonCodeHandler.handlePythonError(
+        error instanceof Error ? error : String(error)
+      );
+      setError(errorMessage);
       setOutput("");
 
       // Record error in gamification service
@@ -214,7 +238,7 @@ except Exception as e:
         true
       );
 
-      toast.error(`Error: ${errorMessage}`, {
+      toast.error(errorMessage, {
         duration: 5000,
       });
     } finally {
@@ -285,8 +309,32 @@ except Exception as e:
     setError(null);
   };
 
+  // Add touch event handling for resize
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isDesktop) return;
+    const touch = e.touches[0];
+    const startY = touch.clientY;
+    const startHeight = replRef.current?.offsetHeight || 0;
+    const maxHeight = 800;
+
+    const handleTouchMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      const delta = touch.clientY - startY;
+      const newHeight = Math.max(300, Math.min(startHeight + delta, maxHeight));
+      setReplHeight(newHeight);
+    };
+
+    const handleTouchEnd = () => {
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+
+    document.addEventListener("touchmove", handleTouchMove, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd);
+  };
+
   return (
-    <Card className="p-4 bg-secondary border-text-secondary w-full h-full flex flex-col overflow-hidden">
+    <Card className="repl-card p-4 w-full h-full flex flex-col overflow-hidden bg-transparent backdrop-blur-sm border border-[var(--border)]/20">
       <div className="flex-none flex justify-between items-center mb-4">
         <h2 className="text-main text-base sm:text-lg md:text-xl font-semibold truncate leading-relaxed">
           Output
@@ -319,20 +367,21 @@ except Exception as e:
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         <div
           ref={replRef}
-          className={`flex-1 min-h-[300px] overflow-hidden rounded-xl ${currentStyle.bg}`}
+          className={`flex-1 min-h-[300px] overflow-hidden rounded-xl relative ${currentStyle.bg} ${currentStyle.container} ${currentStyle.glow} flex flex-col`}
           style={{
             height: isDesktop ? replHeight : "300px",
             minHeight: "300px",
           }}
         >
-          <div className="h-full w-full overflow-auto p-4">
+          <div className={`absolute inset-0 overflow-auto ${currentStyle.bg}`}>
             <pre
-              className={`whitespace-pre-wrap break-words text-xs sm:text-sm md:text-base leading-relaxed ${currentStyle.text}`}
+              className={`whitespace-pre-line break-all text-xs sm:text-sm md:text-base leading-relaxed p-2 ${currentStyle.text} ${currentStyle.bg}`}
+              style={{ tabSize: 4 }}
             >
               {error ? (
                 <span className={currentStyle.error}>{error}</span>
               ) : (
-                <span>{output || "Run your code to see the output here..."}</span>
+                <span>{output || ":)"}</span>
               )}
             </pre>
           </div>
@@ -340,12 +389,12 @@ except Exception as e:
         {/* Vertical resize handle */}
         <div
           className="flex-none w-full h-3 cursor-row-resize flex items-center justify-center group"
-          style={{ userSelect: "none" }}
+          style={{ userSelect: "none", touchAction: "none" }}
           onMouseDown={(e) => {
             if (!isDesktop) return;
             const startY = e.clientY;
             const startHeight = replRef.current?.offsetHeight || 0;
-            const maxHeight = 800; // Increased max height for REPL
+            const maxHeight = 800;
             const onMove = (moveEvent: MouseEvent) => {
               const delta = moveEvent.clientY - startY;
               const newHeight = Math.max(300, Math.min(startHeight + delta, maxHeight));
@@ -358,8 +407,40 @@ except Exception as e:
             window.addEventListener("mousemove", onMove);
             window.addEventListener("mouseup", onUp);
           }}
+          onTouchStart={handleTouchStart}
         >
           <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
+        </div>
+      </div>
+      {/* Editor controls */}
+      <div className="flex-none flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          {/* Add format button */}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm" onClick={handleFormat}>
+                  <Code className="h-3.5 w-3.5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Format code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm" className="ml-2" onClick={runCode}>
+                  Run
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Run code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
     </Card>
