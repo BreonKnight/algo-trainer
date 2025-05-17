@@ -2,6 +2,7 @@ import { Sigma, Calculator, LineChart, Binary, Network, Infinity } from "lucide-
 import { Link } from "react-router-dom";
 
 import { Background } from "@/components/ui/background";
+import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
 import { useTheme } from "@/components/theme/use-theme";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -234,33 +235,23 @@ const AboutPage = () => {
           {theme === "snes" && (
             <img src={snesController} alt="SNES Controller" className="w-10 h-10 mx-auto mb-2" />
           )}
-          <h1
-            className={cn(
+          <AnimatedHeader
+            title="Master Algorithms, Don't be Afraid :)"
+            subtitle="Go beyond coding to understand the mathematical principles that make algorithms work.\nLearn to think mathematically about problem-solving and algorithm design."
+            titleClassName={cn(
               "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
               theme === "nord"
                 ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text"
                 : `gradient-text-${theme}`,
               theme === "snes" && "snes-font"
             )}
-          >
-            Master Algorithms, Don't be Afraid :)
-          </h1>
-          <p
-            className={cn(
+            subtitleClassName={cn(
               "text-xl md:text-2xl max-w-3xl mx-auto mb-2",
-              theme === "nord" ? "text-[#1a237e] drop-shadow" : "text-foreground/80"
-            )}
-          >
-            Go beyond coding to understand the mathematical principles that make algorithms work.
-          </p>
-          <p
-            className={cn(
+              theme === "nord" ? "text-[#ECEFF4] drop-shadow" : "text-foreground/80",
               "text-lg max-w-2xl mx-auto",
-              theme === "nord" ? "text-[#1a237e]/90" : "text-foreground/70"
+              theme === "nord" ? "text-[#ECEFF4]/90" : "text-foreground/70"
             )}
-          >
-            Learn to think mathematically about problem-solving and algorithm design.
-          </p>
+          />
         </div>
 
         {/* How It Works Stepper */}

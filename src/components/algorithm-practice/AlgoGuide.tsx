@@ -15,8 +15,9 @@ import { useState, useEffect } from "react";
 import type { CSSProperties } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
 import { Background } from "@/components/ui/background";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -26,6 +27,8 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
+import { ThemedButton } from "@/components/ui/themed-button";
+import { ThemedCard } from "@/components/ui/themed-card";
 import GamificationService, { UserProgress } from "@/lib/gamification";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 import { cn } from "@/lib/utils";
@@ -1225,18 +1228,13 @@ export default function AlgoGuide() {
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center justify-between"
           >
-            <div className="space-y-2">
-              <h1
-                className={cn(
-                  "text-4xl font-bold bg-clip-text text-transparent",
-                  "bg-gradient-to-r from-accent to-accent2"
-                )}
-              >
-                Algorithm Practice Guide
-              </h1>
-              <p className="text-base md:text-lg font-semibold text-accent tracking-wide drop-shadow-sm mt-1">
-                Master algorithms through structured practice and gamified learning
-              </p>
+            <div className="space-y-2 flex-1">
+              <AnimatedHeader
+                title="Algorithm Practice Guide"
+                subtitle="Master algorithms through structured practice and gamified learning"
+                titleClassName="bg-gradient-to-r from-accent to-accent2 mb-0 md:mb-0"
+                subtitleClassName="text-base md:text-lg font-semibold text-accent tracking-wide drop-shadow-sm mt-1"
+              />
             </div>
             <div className="flex items-center gap-2">
               <Sparkles className="h-6 w-6 text-accent animate-pulse" />
@@ -1251,10 +1249,10 @@ export default function AlgoGuide() {
               animate={{ opacity: 1, y: 0 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
             >
-              <Card
+              <ThemedCard
                 className={cn(
                   theme === "snes"
-                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    ? "hover:border-[#3498db]"
                     : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
@@ -1268,12 +1266,12 @@ export default function AlgoGuide() {
                     {1000 - (userProgress.experience % 1000)} XP to next level
                   </div>
                 </CardContent>
-              </Card>
+              </ThemedCard>
 
-              <Card
+              <ThemedCard
                 className={cn(
                   theme === "snes"
-                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    ? "hover:border-[#3498db]"
                     : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
@@ -1289,12 +1287,12 @@ export default function AlgoGuide() {
                     🔥 {userProgress.streak} days strong
                   </div>
                 </CardContent>
-              </Card>
+              </ThemedCard>
 
-              <Card
+              <ThemedCard
                 className={cn(
                   theme === "snes"
-                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    ? "hover:border-[#3498db]"
                     : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
@@ -1310,12 +1308,12 @@ export default function AlgoGuide() {
                     ⭐ {userProgress.points} points collected
                   </div>
                 </CardContent>
-              </Card>
+              </ThemedCard>
 
-              <Card
+              <ThemedCard
                 className={cn(
                   theme === "snes"
-                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] hover:border-[#3498db]"
+                    ? "hover:border-[#3498db]"
                     : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
                 )}
               >
@@ -1341,7 +1339,7 @@ export default function AlgoGuide() {
                     % complete
                   </div>
                 </CardContent>
-              </Card>
+              </ThemedCard>
             </motion.div>
           )}
 
@@ -1352,11 +1350,11 @@ export default function AlgoGuide() {
             className="flex flex-wrap gap-2"
           >
             {categories.map((category) => (
-              <button
+              <ThemedButton
                 key={category.name}
                 onClick={() => setSelectedCategory(category.name)}
                 className={cn(
-                  "px-4 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 border",
+                  "px-4 py-2 rounded-lg flex items-center gap-2 border",
                   theme === "snes"
                     ? selectedCategory === category.name
                       ? "bg-[#e40058] text-[#fffbe6] border-2 border-[#4040e0] shadow-lg scale-105 font-bold"
@@ -1372,7 +1370,7 @@ export default function AlgoGuide() {
               >
                 {category.name}
                 {selectedCategory === category.name && <ChevronRight className="h-4 w-4" />}
-              </button>
+              </ThemedButton>
             ))}
           </motion.div>
 
@@ -1386,12 +1384,8 @@ export default function AlgoGuide() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.2 }}
               >
-                <Card
-                  className={cn(
-                    theme === "snes"
-                      ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                      : "backdrop-blur-sm bg-background/50 border-accent/10"
-                  )}
+                <ThemedCard
+                  className={cn(theme !== "snes" ? "bg-background/50 border-accent/10" : "")}
                 >
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">
@@ -1524,7 +1518,7 @@ export default function AlgoGuide() {
                       ))}
                     </div>
                   </CardContent>
-                </Card>
+                </ThemedCard>
               </motion.div>
             )}
           </AnimatePresence>
@@ -1707,12 +1701,10 @@ export default function AlgoGuide() {
 
           {/* Practice Tips */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Card
+            <ThemedCard
               className={cn(
                 "rounded-2xl shadow-lg max-w-4xl mx-auto my-8",
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm bg-background/50 border-accent/10"
+                theme !== "snes" ? "bg-background/50 border-accent/10" : ""
               )}
             >
               <CardHeader>
@@ -1811,7 +1803,7 @@ export default function AlgoGuide() {
                   ))}
                 </ol>
               </CardContent>
-            </Card>
+            </ThemedCard>
           </motion.div>
         </div>
       </div>

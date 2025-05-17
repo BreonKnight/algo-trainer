@@ -3,10 +3,12 @@ import { BarChart3, TrendingUp, Activity, Target, ChevronRight } from "lucide-re
 import { useState, useCallback, memo } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
+import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
 import { Background } from "@/components/ui/background";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
+import { ThemedCard } from "@/components/ui/themed-card";
 import { cn } from "@/lib/utils";
 
 const ProgressView = memo(function ProgressView() {
@@ -22,29 +24,20 @@ const ProgressView = memo(function ProgressView() {
       <div className="container mx-auto p-4">
         <div className="max-w-6xl mx-auto space-y-8">
           {/* Header Section */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-between"
-          >
-            <div className="space-y-2">
-              <h1
-                className={cn(
-                  "text-4xl font-bold bg-clip-text text-transparent",
-                  "bg-gradient-to-r from-accent to-accent2"
-                )}
-              >
-                Progress Dashboard
-              </h1>
-              <p className="text-base md:text-lg font-semibold text-accent tracking-wide drop-shadow-sm mt-1">
-                Track your learning journey and achievements
-              </p>
+          <div className="flex items-center justify-between">
+            <div className="space-y-2 flex-1">
+              <AnimatedHeader
+                title="Progress Dashboard"
+                subtitle="Track your learning journey and achievements"
+                titleClassName="bg-gradient-to-r from-accent to-accent2 mb-0 md:mb-0"
+                subtitleClassName="text-base md:text-lg font-semibold text-accent tracking-wide drop-shadow-sm mt-1"
+              />
             </div>
             <div className="flex items-center gap-2">
               <Activity className="h-6 w-6 text-accent animate-pulse" />
               <span className="text-sm font-medium text-accent">Level {progressValue}</span>
             </div>
-          </motion.div>
+          </div>
 
           {/* Progress Cards */}
           <motion.div
@@ -52,11 +45,9 @@ const ProgressView = memo(function ProgressView() {
             animate={{ opacity: 1, y: 0 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
           >
-            <Card
+            <ThemedCard
               className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
+                theme !== "snes" ? "hover:scale-105 border-accent/10 hover:border-accent/20" : ""
               )}
             >
               <CardHeader className="pb-2">
@@ -71,13 +62,11 @@ const ProgressView = memo(function ProgressView() {
                   {100 - progressValue}% to next level
                 </div>
               </CardContent>
-            </Card>
+            </ThemedCard>
 
-            <Card
+            <ThemedCard
               className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
+                theme !== "snes" ? "hover:scale-105 border-accent/10 hover:border-accent/20" : ""
               )}
             >
               <CardHeader className="pb-2">
@@ -90,13 +79,11 @@ const ProgressView = memo(function ProgressView() {
                 <div className="text-sm text-muted-foreground mt-1">Keep it up!</div>
                 <div className="text-xs text-accent mt-1">🔥 7 days strong</div>
               </CardContent>
-            </Card>
+            </ThemedCard>
 
-            <Card
+            <ThemedCard
               className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
+                theme !== "snes" ? "hover:scale-105 border-accent/10 hover:border-accent/20" : ""
               )}
             >
               <CardHeader className="pb-2">
@@ -107,13 +94,11 @@ const ProgressView = memo(function ProgressView() {
                 <div className="text-sm text-muted-foreground mt-1">Total earned</div>
                 <div className="text-xs text-accent mt-1">⭐ 1,250 points collected</div>
               </CardContent>
-            </Card>
+            </ThemedCard>
 
-            <Card
+            <ThemedCard
               className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
+                theme !== "snes" ? "hover:scale-105 border-accent/10 hover:border-accent/20" : ""
               )}
             >
               <CardHeader className="pb-2">
@@ -126,7 +111,7 @@ const ProgressView = memo(function ProgressView() {
                 <div className="text-sm text-muted-foreground mt-1">Out of 24</div>
                 <div className="text-xs text-accent mt-1">🏆 50% complete</div>
               </CardContent>
-            </Card>
+            </ThemedCard>
           </motion.div>
 
           {/* Interactive Progress Section */}
@@ -135,13 +120,7 @@ const ProgressView = memo(function ProgressView() {
             animate={{ opacity: 1, y: 0 }}
             className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
           >
-            <Card
-              className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm bg-background/50 border-accent/10"
-              )}
-            >
+            <ThemedCard className={cn(theme !== "snes" ? "border-accent/10" : "")}>
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-accent" />
@@ -172,15 +151,9 @@ const ProgressView = memo(function ProgressView() {
                   />
                 </div>
               </CardContent>
-            </Card>
+            </ThemedCard>
 
-            <Card
-              className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm bg-background/50 border-accent/10"
-              )}
-            >
+            <ThemedCard className={cn(theme !== "snes" ? "border-accent/10" : "")}>
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-accent" />
@@ -207,7 +180,7 @@ const ProgressView = memo(function ProgressView() {
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </ThemedCard>
           </motion.div>
 
           {/* Progress Tips */}
@@ -216,11 +189,9 @@ const ProgressView = memo(function ProgressView() {
             animate={{ opacity: 1, y: 0 }}
             className="mt-8 max-w-4xl mx-auto"
           >
-            <Card
+            <ThemedCard
               className={cn(
-                theme === "snes"
-                  ? "bg-[var(--card-bg)] border-[var(--card-border)] text-[var(--card-text)]"
-                  : "backdrop-blur-sm rounded-2xl shadow-lg bg-background/50 border-accent/10"
+                theme !== "snes" ? "rounded-2xl shadow-lg border-accent/10" : "rounded-2xl"
               )}
             >
               <CardHeader>
@@ -320,7 +291,7 @@ const ProgressView = memo(function ProgressView() {
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </ThemedCard>
           </motion.div>
         </div>
       </div>

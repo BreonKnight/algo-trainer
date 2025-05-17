@@ -3,6 +3,7 @@ import React from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
+import { ThemedButton } from "@/components/ui/themed-button";
 import { cn } from "@/lib/utils";
 
 export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) => {
@@ -25,7 +26,7 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button
+        <ThemedButton
           ref={ref}
           variant="ghost"
           size="sm"
@@ -35,7 +36,7 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
           )}
         >
           <span className="font-medium whitespace-nowrap">How to Use</span>
-        </Button>
+        </ThemedButton>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
