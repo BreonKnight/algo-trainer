@@ -62,18 +62,11 @@ export function ClickableNotation({
     colorClass = darkColors[idx % darkColors.length];
   }
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsModalOpen(true);
-  };
-
   return (
     <DialogPrimitive.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
       <div className="relative pointer-events-auto" style={{ zIndex: 100 }}>
         <DialogPrimitive.Trigger asChild>
           <button
-            onClick={handleClick}
             className={cn(
               "inline-flex items-center gap-1 px-2 py-1 rounded-full font-semibold shadow-sm border transition-colors focus:outline-none",
               colorClass,
