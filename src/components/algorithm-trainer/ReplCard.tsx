@@ -340,28 +340,31 @@ export function ReplCard({ userCode }: ReplCardProps) {
           Output
         </h2>
         <div className="flex gap-2">
-          <Button
-            onClick={clearOutput}
-            variant="ghost"
-            className={cn(
-              "text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md",
-              theme === "nord"
-                ? "text-white hover:text-white"
-                : "text-background hover:text-background"
-            )}
-          >
-            Clear
-          </Button>
-          <Button
-            onClick={runCode}
-            disabled={isLoading}
-            className={cn(
-              "bg-accent3 hover:bg-accent3/90 text-sm sm:text-base whitespace-nowrap h-8 px-3 rounded-md",
-              theme === "nord" ? "text-white" : "text-background"
-            )}
-          >
-            {isLoading ? "Running..." : "Run Code"}
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm" onClick={handleFormat}>
+                  <Code className="h-3.5 w-3.5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Format code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="sm" onClick={runCode}>
+                  Run
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-xs">Run code</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
@@ -410,37 +413,6 @@ export function ReplCard({ userCode }: ReplCardProps) {
           onTouchStart={handleTouchStart}
         >
           <div className="w-12 h-1.5 rounded bg-accent2/40 group-hover:bg-accent2/70 transition" />
-        </div>
-      </div>
-      {/* Editor controls */}
-      <div className="flex-none flex items-center justify-between mb-2">
-        <div className="flex items-center gap-2">
-          {/* Add format button */}
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="sm" onClick={handleFormat}>
-                  <Code className="h-3.5 w-3.5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-xs">Format code</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="sm" className="ml-2" onClick={runCode}>
-                  Run
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="text-xs">Run code</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
         </div>
       </div>
     </Card>
