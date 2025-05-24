@@ -14,7 +14,7 @@ import {
 import { memo, useState, useMemo, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { GamificationButton } from "@/components/gamification/GamificationButton";
+import { GamificationButton } from "@/components/features/gamification/GamificationButton";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -108,7 +108,7 @@ const styles = `
   background-image: linear-gradient(to right, #ff69b4, #9370db, #ff69b4);
 }
 
-.gradient-text-fornite {
+.gradient-text-fortnite {
   background-image: linear-gradient(to right, #2ecc71, #3498db, #9b59b6, #f1c40f);
 }
 
@@ -336,7 +336,7 @@ export function Navigation() {
         return "text-accent";
       case "kingdom-hearts":
         return "text-accent";
-      case "fornite":
+      case "fortnite":
         return "text-accent4";
       default:
         return "text-accent";

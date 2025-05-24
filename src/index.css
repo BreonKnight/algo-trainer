@@ -127,7 +127,7 @@
 .theme-kingdom-hearts .animated-gradient-text {
   background: linear-gradient(90deg, #ffe066, #b85c6e, #6ec6f7, #ffe066);
 }
-.theme-fornite .animated-gradient-text {
+.theme-fortnite .animated-gradient-text {
   background: linear-gradient(90deg, #349a3a, #4a5afd, #9652b8, #f7b227);
 }
 .theme-dracula .animated-gradient-text {
@@ -667,7 +667,7 @@ textarea,
   color: var(--text-main);
 }
 
-.theme-fornite {
+.theme-fortnite {
   --bg-main: #1a1a1a;
   --bg-secondary: #2a2a2a;
   --text-main: #ffffff;
@@ -697,8 +697,8 @@ textarea,
     rgba(150, 82, 184, 0.08) 66%,
     rgba(247, 178, 39, 0.08) 100%
   );
-  --code-bg-fornite: 26, 26, 26;
-  --code-text-fornite: #ffffff;
+  --code-bg-fortnite: 26, 26, 26;
+  --code-text-fortnite: #ffffff;
   --media-gradient: conic-gradient(
     at top left,
     #349a3a 0%,
@@ -727,7 +727,7 @@ textarea,
     3px 3px 0 #ffe066,
     4px 4px 0 #00000033;
 }
-.theme-fornite .extruded-text {
+.theme-fortnite .extruded-text {
   color: #4a5afd;
   text-shadow:
     1px 1px 0 #349a3a,

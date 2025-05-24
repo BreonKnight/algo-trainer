@@ -1,4 +1,4 @@
-import { PatternKey } from "@/components/algorithm-trainer/types";
+import { PatternKey } from "@/lib/patterns/types";
 
 export interface PatternCheckResult {
   missingPatterns: {
@@ -24,31 +24,37 @@ export async function checkPatternFiles(): Promise<PatternCheckResult> {
   try {
     // Import and check patterns using dynamic imports
     const [
-      { monsterHunterTestData },
-      { monsterHunterExplanations },
-      { allMonsterHunterPatterns },
+      { monsterHunterTestDataPattern },
+      { monsterHunterGuidePattern },
+      { monsterHunterPattern },
       { PATTERN_KEYS },
       { patternMapping },
     ] = await Promise.all([
-      import("../../components/algorithm-trainer/monsterHunterTestData"),
-      import("../../components/algorithm-trainer/monsterHunterExplanations"),
-      import("../../components/algorithm-trainer/monsterHunterPatternsCombined"),
-      import("../../components/algorithm-trainer/types"),
-      import("../pseudocode/utils/pattern-mapping"),
+      import(
+        "@/components/features/algorithm-trainer/patterns/monster-hunter/monster-hunter-test-data"
+      ),
+      import(
+        "@/components/features/algorithm-trainer/patterns/monster-hunter/monster-hunter-guide"
+      ),
+      import(
+        "@/components/features/algorithm-trainer/patterns/monster-hunter/monster-hunter-pattern"
+      ),
+      import("@/lib/patterns/types"),
+      import("@/lib/pseudocode/utils/pattern-mapping"),
     ]);
 
     // Get all pattern keys
-    const allPatternKeys = PATTERN_KEYS as PatternKey[];
+    const allPatternKeys = [...PATTERN_KEYS] as PatternKey[];
 
     // Check each pattern exists in all required files
     allPatternKeys.forEach((patternKey) => {
-      if (!monsterHunterTestData.has(patternKey)) {
+      if (!monsterHunterTestDataPattern?.title) {
         result.missingPatterns.monsterHunterTestData.push(patternKey);
       }
-      if (!monsterHunterExplanations[patternKey as keyof typeof monsterHunterExplanations]) {
+      if (!monsterHunterGuidePattern?.title) {
         result.missingPatterns.monsterHunterExplanations.push(patternKey);
       }
-      if (!allMonsterHunterPatterns.has(patternKey)) {
+      if (!monsterHunterPattern?.title) {
         result.missingPatterns.monsterHunterPatterns.push(patternKey);
       }
       if (!PATTERN_KEYS.includes(patternKey)) {

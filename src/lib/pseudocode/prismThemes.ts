@@ -193,7 +193,7 @@ export const prismKingdomHearts = {
   attrValue: { color: "#b85c6e" },
 };
 
-export const prismFornite = {
+export const prismFortnite = {
   'code[class*="language-"]': {
     color: "#ffffff",
     background: "#1a1a1a",

@@ -1,565 +1,452 @@
+import { motion } from "framer-motion";
+import { Code2 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
+import { useTheme } from "@/components/theme/use-theme";
+import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
+import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { HamburgerMenu } from "@/components/ui/hamburger-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
-const sections = [
-  { id: "buttons", label: "Buttons" },
-  { id: "cards", label: "Cards" },
-  { id: "forms", label: "Forms" },
-  { id: "dropdowns", label: "Dropdowns" },
-  { id: "typography", label: "Typography" },
-  { id: "legacy", label: "Legacy vs. Streamlined UI" },
-];
+import { MediaCard } from "@/components/ui/media-card";
+import { Progress } from "@/components/ui/progress";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { ThemedButton } from "@/components/ui/themed-button";
+import { ThemedCard } from "@/components/ui/themed-card";
+import { ThemedDialog } from "@/components/ui/themed-dialog";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 const DesignSystemPage = () => {
-  const [activeSection, setActiveSection] = useState(sections[0].id);
-  const [legacyView, setLegacyView] = useState<"legacy" | "streamlined">("streamlined");
+  const { theme } = useTheme();
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
 
-  const renderSection = (id: string) => {
-    switch (id) {
-      case "buttons":
-        return (
-          <section id="buttons" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Buttons</h2>
-            <div className="flex flex-wrap gap-4 mb-4">
-              <Button>Primary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button size="standard">Standard</Button>
-              <Button size="icon" aria-label="icon button">
-                <span role="img" aria-label="star">
-                  ⭐
-                </span>
-              </Button>
-              <Button asChild size="standard">
-                <Link to="/about">As Link</Link>
-              </Button>
-            </div>
-            <pre className="bg-gray-900 text-white rounded p-4 text-xs overflow-x-auto">
-              {`<Button>Primary</Button>
+  const components = [
+    {
+      name: "AnimatedHeader",
+      description: "A header component with animated title and subtitle",
+      example: (
+        <AnimatedHeader
+          title="Animated Header Example"
+          subtitle="This is a subtitle that demonstrates the component"
+          titleClassName="text-2xl font-bold"
+          subtitleClassName="text-lg"
+        />
+      ),
+      code: `<AnimatedHeader
+  title="Your Title"
+  subtitle="Your subtitle"
+  titleClassName="text-2xl font-bold"
+  subtitleClassName="text-lg"
+/>`,
+    },
+    {
+      name: "Background",
+      description: "A themed background component with animated gradients and grid",
+      example: (
+        <div className="h-32 relative">
+          <Background>
+            <div className="p-4">Background content</div>
+          </Background>
+        </div>
+      ),
+      code: `<Background>
+  <div>Your content here</div>
+</Background>`,
+    },
+    {
+      name: "Button",
+      description: "Base button component with variants",
+      example: (
+        <div className="flex gap-4">
+          <Button>Default</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
+      ),
+      code: `<Button>Default</Button>
 <Button variant="outline">Outline</Button>
-<Button size="standard">Standard</Button>
-<Button size="icon">...</Button>
-<Button asChild size="standard"><Link to="/about">As Link</Link></Button>`}
-            </pre>
-          </section>
-        );
-      case "cards":
-        return (
-          <section id="cards" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Cards</h2>
-            <div className="mb-4">
-              <Card className="p-6 rounded-xl border shadow bg-[#3B4252] text-[#ECEFF4]">
-                <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-                <p>Card content goes here.</p>
-              </Card>
-            </div>
-            <pre className="bg-gray-900 text-white rounded p-4 text-xs overflow-x-auto">
-              {`<Card className="p-6 rounded-xl border shadow bg-[#3B4252] text-[#ECEFF4]">
-  <h3 className="text-lg font-semibold mb-2">Card Title</h3>
-  <p>Card content goes here.</p>
-</Card>`}
-            </pre>
-          </section>
-        );
-      case "forms":
-        return (
-          <section id="forms" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Forms</h2>
-            <form className="space-y-4 mb-4">
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="you@example.com" />
-              </div>
-              <Button type="submit" size="standard">
-                Submit
-              </Button>
-            </form>
-            <pre className="bg-gray-900 text-white rounded p-4 text-xs overflow-x-auto">
-              {`<form className="space-y-4">
-  <div>
-    <Label htmlFor="email">Email</Label>
-    <Input id="email" type="email" placeholder="you@example.com" />
-  </div>
-  <Button type="submit" size="standard">Submit</Button>
-</form>`}
-            </pre>
-          </section>
-        );
-      case "dropdowns":
-        return (
-          <section id="dropdowns" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Dropdowns</h2>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button size="standard">Open Menu</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="rounded-md shadow bg-[#3B4252] text-[#ECEFF4] p-2 min-w-[160px]">
-                <DropdownMenuItem>Item 1</DropdownMenuItem>
-                <DropdownMenuItem>Item 2</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <pre className="bg-gray-900 text-white rounded p-4 text-xs overflow-x-auto mt-4">
-              {`<DropdownMenu>
+<Button variant="ghost">Ghost</Button>`,
+    },
+    {
+      name: "Card",
+      description: "Card component with header, content, and footer sections",
+      example: (
+        <Card>
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>Card Content</CardContent>
+          <CardFooter>Card Footer</CardFooter>
+        </Card>
+      ),
+      code: `<Card>
+  <CardHeader>
+    <CardTitle>Card Title</CardTitle>
+    <CardDescription>Card Description</CardDescription>
+  </CardHeader>
+  <CardContent>Card Content</CardContent>
+  <CardFooter>Card Footer</CardFooter>
+</Card>`,
+    },
+    {
+      name: "Dialog",
+      description: "Modal dialog component",
+      example: (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>Open Dialog</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+              <DialogDescription>Dialog Description</DialogDescription>
+            </DialogHeader>
+            <div>Dialog Content</div>
+            <DialogFooter>
+              <Button>Close</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      ),
+      code: `<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open Dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Dialog Title</DialogTitle>
+      <DialogDescription>Dialog Description</DialogDescription>
+    </DialogHeader>
+    <div>Dialog Content</div>
+    <DialogFooter>
+      <Button>Close</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`,
+    },
+    {
+      name: "DropdownMenu",
+      description: "Dropdown menu component",
+      example: (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button>Open Menu</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>Item 1</DropdownMenuItem>
+            <DropdownMenuItem>Item 2</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+      code: `<DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button size="standard">Open Menu</Button>
+    <Button>Open Menu</Button>
   </DropdownMenuTrigger>
-  <DropdownMenuContent className="rounded-md shadow bg-[#3B4252] text-[#ECEFF4] p-2 min-w-[160px]">
+  <DropdownMenuContent>
     <DropdownMenuItem>Item 1</DropdownMenuItem>
     <DropdownMenuItem>Item 2</DropdownMenuItem>
   </DropdownMenuContent>
-</DropdownMenu>`}
-            </pre>
-          </section>
-        );
-      case "typography":
-        return (
-          <section id="typography" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold mb-4">Typography</h2>
-            <div className="space-y-2 mb-4">
-              <h1 className="text-4xl font-bold">Heading 1</h1>
-              <h2 className="text-2xl font-bold">Heading 2</h2>
-              <h3 className="text-lg font-semibold">Heading 3</h3>
-              <p className="text-base">Body text example</p>
-              <span className="text-[#FFD700] font-bold">Accent text (GameCube Yellow)</span>
-            </div>
-            <pre className="bg-gray-900 text-white rounded p-4 text-xs overflow-x-auto">
-              {`<h1 className="text-4xl font-bold">Heading 1</h1>
-<h2 className="text-2xl font-bold">Heading 2</h2>
-<h3 className="text-lg font-semibold">Heading 3</h3>
-<p className="text-base">Body text example</p>
-<span className="text-[#FFD700] font-bold">Accent text (GameCube Yellow)</span>`}
-            </pre>
-          </section>
-        );
-      case "legacy":
-        return (
-          <section id="legacy" className="scroll-mt-24">
-            <div className="mb-8 pb-6 border-b">
-              <h2 className="text-2xl font-bold mb-4">Legacy vs. Streamlined UI</h2>
-              <p className="text-muted-foreground mb-6">
-                Compare the old and new component implementations side by side.
-              </p>
-              <div className="inline-flex items-center rounded-lg border p-1 bg-muted/30">
-                <button
-                  className={`px-4 py-2 rounded-md font-semibold transition-colors ${
-                    legacyView === "legacy"
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                  onClick={() => setLegacyView("legacy")}
-                >
-                  Legacy
-                </button>
-                <button
-                  className={`px-4 py-2 rounded-md font-semibold transition-colors ${
-                    legacyView === "streamlined"
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:bg-muted"
-                  }`}
-                  onClick={() => setLegacyView("streamlined")}
-                >
-                  Streamlined
-                </button>
-              </div>
-            </div>
-
-            <div className="space-y-12">
-              {/* Input Example */}
-              <div className="rounded-lg border bg-card p-6">
-                <h3 className="text-xl font-semibold mb-4">Input</h3>
-                <div className="flex flex-col md:flex-row gap-8">
-                  {legacyView === "legacy" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Legacy</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <input
-                          type="text"
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          placeholder="Legacy input"
-                        />
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />`}
-                      </pre>
-                    </div>
-                  )}
-                  {legacyView === "streamlined" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Streamlined</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <Input type="text" placeholder="Streamlined input" />
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<Input type="text" />`}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Label Example */}
-              <div className="rounded-lg border bg-card p-6">
-                <h3 className="text-xl font-semibold mb-4">Label</h3>
-                <div className="flex flex-col md:flex-row gap-8">
-                  {legacyView === "legacy" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Legacy</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <label className="block text-sm font-medium text-gray-700">Name</label>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<label className="block text-sm font-medium text-gray-700">Name</label>`}
-                      </pre>
-                    </div>
-                  )}
-                  {legacyView === "streamlined" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Streamlined</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <Label>Name</Label>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<Label>Name</Label>`}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Select/Dropdown Example */}
-              <div className="rounded-lg border bg-card p-6">
-                <h3 className="text-xl font-semibold mb-4">Select / Dropdown</h3>
-                <div className="flex flex-col md:flex-row gap-8">
-                  {legacyView === "legacy" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Legacy</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                        </select>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-  <option>Option 1</option>
-  <option>Option 2</option>
-</select>`}
-                      </pre>
-                    </div>
-                  )}
-                  {legacyView === "streamlined" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Streamlined</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button size="standard">Open Menu</Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent className="rounded-md shadow bg-[#3B4252] text-[#ECEFF4] p-2 min-w-[160px]">
-                            <DropdownMenuItem>Option 1</DropdownMenuItem>
-                            <DropdownMenuItem>Option 2</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button size="standard">Open Menu</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuItem>Option 1</DropdownMenuItem>
-    <DropdownMenuItem>Option 2</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>`}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Card Example */}
-              <div className="rounded-lg border bg-card p-6">
-                <h3 className="text-xl font-semibold mb-4">Card</h3>
-                <div className="flex flex-col md:flex-row gap-8">
-                  {legacyView === "legacy" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Legacy</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <div className="p-6 rounded-xl border shadow bg-[#3B4252] text-[#ECEFF4]">
-                          <h3>Card Title</h3>
-                          <p>Card content goes here.</p>
-                        </div>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<div className="p-6 rounded-xl border shadow bg-[#3B4252] text-[#ECEFF4]">
-  <h3>Card Title</h3>
-  <p>Card content goes here.</p>
-</div>`}
-                      </pre>
-                    </div>
-                  )}
-                  {legacyView === "streamlined" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Streamlined</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <Card className="p-6">
-                          <h3>Card Title</h3>
-                          <p>Card content goes here.</p>
-                        </Card>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<Card className="p-6">
-  <h3>Card Title</h3>
-  <p>Card content goes here.</p>
-</Card>`}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Form Example */}
-              <div className="rounded-lg border bg-card p-6">
-                <h3 className="text-xl font-semibold mb-4">Form</h3>
-                <div className="flex flex-col md:flex-row gap-8">
-                  {legacyView === "legacy" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Legacy</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <form className="space-y-4">
-                          <label className="block text-sm font-medium text-gray-700">Email</label>
-                          <input
-                            type="email"
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Email"
-                          />
-                          <button className="px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent">
-                            Submit
-                          </button>
-                        </form>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<form className="space-y-4">
-  <label className="block text-sm font-medium text-gray-700">Email</label>
-  <input type="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-  <button className="px-4 py-2 rounded-md font-medium transition-colors bg-accent text-white border border-accent hover:bg-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent">Submit</button>
-</form>`}
-                      </pre>
-                    </div>
-                  )}
-                  {legacyView === "streamlined" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Streamlined</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        <form className="space-y-4">
-                          <Label>Email</Label>
-                          <Input type="email" placeholder="Email" />
-                          <Button type="submit" size="standard">
-                            Submit
-                          </Button>
-                        </form>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`<form className="space-y-4">
-  <Label>Email</Label>
-  <Input type="email" />
-  <Button type="submit" size="standard">Submit</Button>
-</form>`}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Algorithm Trainer Cards */}
-              <div className="rounded-lg border bg-card p-6">
-                <h3 className="text-xl font-semibold mb-4">Algorithm Trainer Cards</h3>
-                <div className="flex flex-col md:flex-row gap-8">
-                  {legacyView === "legacy" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Legacy</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        {/* Panel Layout Card */}
-                        <div className="w-full flex-1 rounded-lg border bg-card shadow-sm">
-                          <div className="p-6">
-                            <div className="flex flex-col space-y-4">
-                              {/* Empty for structure demo */}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* REPL Card */}
-                        <div className="mt-4 w-full rounded-lg border bg-card shadow-sm">
-                          <div className="p-6">
-                            <div className="flex flex-col space-y-4">
-                              {/* Empty for structure demo */}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Pattern Controls Card */}
-                        <div className="mt-4 w-full rounded-lg border bg-card shadow-sm">
-                          <div className="p-4 flex justify-between items-center">
-                            {/* Empty for structure demo */}
-                          </div>
-                        </div>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`// Panel Layout Card
-<div className="w-full flex-1 rounded-lg border bg-card shadow-sm">
-  <div className="p-6">
-    <div className="flex flex-col space-y-4">
-      {/* Content */}
-    </div>
-  </div>
-</div>
-
-// REPL Card
-<div className="mt-4 w-full rounded-lg border bg-card shadow-sm">
-  <div className="p-6">
-    <div className="flex flex-col space-y-4">
-      {/* Content */}
-    </div>
-  </div>
-</div>
-
-// Pattern Controls Card
-<div className="mt-4 w-full rounded-lg border bg-card shadow-sm">
-  <div className="p-4 flex justify-between items-center">
-    {/* Content */}
-  </div>
-</div>`}
-                      </pre>
-                    </div>
-                  )}
-                  {legacyView === "streamlined" && (
-                    <div className="flex-1">
-                      <div className="mb-3 font-medium text-muted-foreground">Streamlined</div>
-                      <div className="p-4 rounded-md bg-muted/30">
-                        {/* Panel Layout Card */}
-                        <Card className="w-full flex-1">
-                          <div className="p-6">
-                            <div className="flex flex-col space-y-4">
-                              {/* Empty for structure demo */}
-                            </div>
-                          </div>
-                        </Card>
-
-                        {/* REPL Card */}
-                        <Card className="mt-4 w-full">
-                          <div className="p-6">
-                            <div className="flex flex-col space-y-4">
-                              {/* Empty for structure demo */}
-                            </div>
-                          </div>
-                        </Card>
-
-                        {/* Pattern Controls Card */}
-                        <Card className="mt-4 w-full">
-                          <div className="p-4 flex justify-between items-center">
-                            {/* Empty for structure demo */}
-                          </div>
-                        </Card>
-                      </div>
-                      <pre className="mt-4 bg-muted rounded-md p-4 text-xs overflow-x-auto">
-                        {`// Panel Layout Card
-<Card className="w-full flex-1">
-  <div className="p-6">
-    <div className="flex flex-col space-y-4">
-      {/* Content */}
-    </div>
-  </div>
-</Card>
-
-// REPL Card
-<Card className="mt-4 w-full">
-  <div className="p-6">
-    <div className="flex flex-col space-y-4">
-      {/* Content */}
-    </div>
-  </div>
-</Card>
-
-// Pattern Controls Card
-<Card className="mt-4 w-full">
-  <div className="p-4 flex justify-between items-center">
-    {/* Content */}
-  </div>
-</Card>`}
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      default:
-        return null;
-    }
-  };
+</DropdownMenu>`,
+    },
+    {
+      name: "HamburgerMenu",
+      description: "Animated hamburger menu component",
+      example: <HamburgerMenu />,
+      code: `<HamburgerMenu />`,
+    },
+    {
+      name: "Input",
+      description: "Input field component",
+      example: (
+        <div className="flex flex-col gap-4">
+          <Input placeholder="Default input" />
+          <Input type="password" placeholder="Password input" />
+        </div>
+      ),
+      code: `<Input placeholder="Default input" />
+<Input type="password" placeholder="Password input" />`,
+    },
+    {
+      name: "Label",
+      description: "Label component for form elements",
+      example: (
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="name">Name</Label>
+          <Input id="name" placeholder="Enter your name" />
+        </div>
+      ),
+      code: `<Label htmlFor="name">Name</Label>
+<Input id="name" placeholder="Enter your name" />`,
+    },
+    {
+      name: "MediaCard",
+      description: "Card component optimized for media content",
+      example: (
+        <MediaCard>
+          <h3 className="font-bold mb-2">Media Card</h3>
+          <p>Media content goes here</p>
+        </MediaCard>
+      ),
+      code: `<MediaCard>
+  <h3 className="font-bold mb-2">Media Card</h3>
+  <p>Media content goes here</p>
+</MediaCard>`,
+    },
+    {
+      name: "Progress",
+      description: "Progress bar component",
+      example: <Progress value={33} className="w-[200px]" />,
+      code: `<Progress value={33} className="w-[200px]" />`,
+    },
+    {
+      name: "Select",
+      description: "Select dropdown component",
+      example: (
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select an option" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="option1">Option 1</SelectItem>
+            <SelectItem value="option2">Option 2</SelectItem>
+          </SelectContent>
+        </Select>
+      ),
+      code: `<Select>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option1">Option 1</SelectItem>
+    <SelectItem value="option2">Option 2</SelectItem>
+  </SelectContent>
+</Select>`,
+    },
+    {
+      name: "Separator",
+      description: "Horizontal separator component",
+      example: (
+        <div className="space-y-4">
+          <div>Content above</div>
+          <Separator />
+          <div>Content below</div>
+        </div>
+      ),
+      code: `<div>
+  <div>Content above</div>
+  <Separator />
+  <div>Content below</div>
+</div>`,
+    },
+    {
+      name: "Slider",
+      description: "Slider input component",
+      example: <Slider defaultValue={[50]} max={100} step={1} className="w-[200px]" />,
+      code: `<Slider defaultValue={[50]} max={100} step={1} className="w-[200px]" />`,
+    },
+    {
+      name: "Tabs",
+      description: "Tabbed interface component",
+      example: (
+        <Tabs defaultValue="tab1">
+          <TabsList>
+            <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+            <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+          </TabsList>
+          <TabsContent value="tab1">Tab 1 content</TabsContent>
+          <TabsContent value="tab2">Tab 2 content</TabsContent>
+        </Tabs>
+      ),
+      code: `<Tabs defaultValue="tab1">
+  <TabsList>
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">Tab 1 content</TabsContent>
+  <TabsContent value="tab2">Tab 2 content</TabsContent>
+</Tabs>`,
+    },
+    {
+      name: "ThemedButton",
+      description: "Theme-aware button with hover effects",
+      example: (
+        <div className="flex gap-4">
+          <ThemedButton>Default</ThemedButton>
+          <ThemedButton variant="outline">Outline</ThemedButton>
+          <ThemedButton variant="ghost">Ghost</ThemedButton>
+        </div>
+      ),
+      code: `<ThemedButton>Default</ThemedButton>
+<ThemedButton variant="outline">Outline</ThemedButton>
+<ThemedButton variant="ghost">Ghost</ThemedButton>`,
+    },
+    {
+      name: "ThemedCard",
+      description: "Theme-aware card component",
+      example: (
+        <ThemedCard className="p-4">
+          <h3 className="font-bold mb-2">Card Title</h3>
+          <p>This is a themed card example</p>
+        </ThemedCard>
+      ),
+      code: `<ThemedCard className="p-4">
+  <h3 className="font-bold mb-2">Card Title</h3>
+  <p>Card content</p>
+</ThemedCard>`,
+    },
+    {
+      name: "ThemedDialog",
+      description: "Theme-aware dialog component",
+      example: (
+        <>
+          <ThemedButton onClick={() => setShowDialog(true)}>Open Dialog</ThemedButton>
+          <ThemedDialog isOpen={showDialog} onClose={() => setShowDialog(false)}>
+            <h2 className="text-xl font-bold mb-2">Dialog Title</h2>
+            <p>This is a themed dialog example</p>
+          </ThemedDialog>
+        </>
+      ),
+      code: `<ThemedDialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
+  <h2 className="text-xl font-bold mb-2">Dialog Title</h2>
+  <p>Dialog content</p>
+</ThemedDialog>`,
+    },
+    {
+      name: "Textarea",
+      description: "Textarea input component",
+      example: <Textarea placeholder="Type your message here..." className="w-[300px]" />,
+      code: `<Textarea
+  placeholder="Type your message here..."
+  className="w-[300px]"
+/>`,
+    },
+    {
+      name: "Tooltip",
+      description: "Tooltip component for additional information",
+      example: (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button>Hover me</Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Tooltip content</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ),
+      code: `<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button>Hover me</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Tooltip content</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>`,
+    },
+  ];
 
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-screen bg-background">
-      {/* Sidebar for desktop, horizontal nav for mobile */}
-      <aside className="md:w-56 flex-shrink-0 border-b md:border-b-0 md:border-r bg-main/80 sticky top-0 z-10">
-        {/* Mobile: horizontal scrollable nav */}
-        <nav className="flex md:hidden overflow-x-auto gap-2 px-2 py-3 bg-main/80">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => setActiveSection(section.id)}
-              className={`flex-shrink-0 px-3 py-2 rounded transition-colors font-medium text-base whitespace-nowrap ${
-                activeSection === section.id
-                  ? "bg-accent text-accent-foreground shadow"
-                  : "hover:bg-accent/20 text-foreground"
-              }`}
+    <Background>
+      <div className="container mx-auto px-4 py-12">
+        <AnimatedHeader
+          title="Design System"
+          subtitle="Explore our UI components and learn how to use them"
+          titleClassName={cn(
+            "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
+            theme === "nord"
+              ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text"
+              : `gradient-text-${theme}`
+          )}
+          subtitleClassName={cn(
+            "text-xl md:text-2xl max-w-3xl mx-auto mb-2",
+            theme === "nord" ? "text-[#ECEFF4] drop-shadow" : "text-foreground/80"
+          )}
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+          {components.map((component) => (
+            <motion.div
+              key={component.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className={cn(
+                "p-6 rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer",
+                theme === "nord"
+                  ? "border border-[#4C566A] text-[#ECEFF4] hover:bg-[#434C5E]"
+                  : theme === "snes"
+                    ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] hover:border-[#3498db] snes-glow"
+                    : "bg-main/60 border-accent/40"
+              )}
+              onClick={() => setSelectedComponent(component.name)}
             >
-              {section.label}
-            </button>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold">{component.name}</h3>
+                <Code2 className="h-5 w-5" />
+              </div>
+              <p className="text-sm mb-4 opacity-80">{component.description}</p>
+              <div className="p-4 rounded-lg bg-background/50">{component.example}</div>
+            </motion.div>
           ))}
-        </nav>
-        {/* Desktop: vertical sidebar */}
-        <nav className="hidden md:flex flex-col gap-2 py-12 px-4 h-full">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => setActiveSection(section.id)}
-              className={`text-left px-3 py-2 rounded transition-colors font-medium text-base ${
-                activeSection === section.id
-                  ? "bg-accent text-accent-foreground shadow"
-                  : "hover:bg-accent/20 text-foreground"
-              }`}
-            >
-              {section.label}
-            </button>
-          ))}
-        </nav>
-      </aside>
-      {/* Main Content */}
-      <div className="flex-1 px-2 sm:px-4 md:px-12 py-6 sm:py-12">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Design System</h1>
-        <div>
-          {/* Responsive: stack columns on mobile for legacy/streamlined comparisons */}
-          <style>{`
-            @media (max-width: 768px) {
-              .ds-comparison { flex-direction: column !important; }
-            }
-          `}</style>
-          {renderSection(activeSection)}
         </div>
+
+        <ThemedDialog isOpen={!!selectedComponent} onClose={() => setSelectedComponent(null)}>
+          {selectedComponent && (
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-4">{selectedComponent}</h2>
+              <div className="bg-background/50 p-4 rounded-lg mb-4">
+                {components.find((c) => c.name === selectedComponent)?.example}
+              </div>
+              <div className="bg-background/80 p-4 rounded-lg">
+                <pre className="text-sm overflow-x-auto">
+                  <code>{components.find((c) => c.name === selectedComponent)?.code}</code>
+                </pre>
+              </div>
+            </div>
+          )}
+        </ThemedDialog>
       </div>
-    </div>
+    </Background>
   );
 };
 

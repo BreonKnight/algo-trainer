@@ -5,30 +5,34 @@ import { Toaster } from "sonner";
 
 import AboutPage from "@/app/AboutPage";
 import DesignSystemPage from "@/app/DesignSystemPage";
-import PatternManagement from "@/components/admin/PatternManagement";
-import { TopBar } from "@/components/algorithm-trainer/layout/TopBar";
-import Practice from "@/components/practice/Practice";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
+import { ThemeProvider } from "@/components/common/ThemeProvider";
+import { TopBar } from "@/components/features/algorithm-trainer/components/layout/TopBar";
+import Practice from "@/components/features/practice/Practice";
+import PatternManagement from "@/components/layouts/admin/PatternManagement";
 import { Navigation } from "@/components/ui/navigation";
 
-import ErrorBoundary from "./components/ErrorBoundary";
 // Lazy load components
-const AlgorithmTrainer = lazy(() => import("./components/algorithm-trainer/AlgorithmTrainer"));
-const AlgoGuide = lazy(() => import("./components/algorithm-practice/AlgoGuide"));
-const SystemsDesign = lazy(() => import("./components/SystemsDesign/SystemsDesign"));
-const CSMath = lazy(() => import("./components/CSMath/CSMath"));
-const PythonTechniques = lazy(() => import("./components/algorithm-trainer/PythonTechniques"));
-const ProgressView = lazy(() => import("./components/progress/ProgressView"));
+const AlgorithmTrainer = lazy(
+  () => import("@/components/features/algorithm-trainer/components/core/AlgorithmTrainer")
+);
+const AlgoGuide = lazy(() => import("@/components/features/algorithm-practice/AlgoGuide"));
+const SystemsDesign = lazy(() => import("@/components/features/systemsDesign/SystemsDesign"));
+const CSMath = lazy(() => import("@/components/features/CSMath/CSMath"));
+const PythonTechniques = lazy(
+  () => import("@/components/features/algorithm-trainer/components/core/PythonTechniques")
+);
+const ProgressView = lazy(() => import("@/components/features/progress/ProgressView"));
 const AlgorithmComparison = lazy(
-  () => import("./components/algorithm-trainer/AlgorithmComparison")
+  () => import("@/components/features/algorithm-trainer/components/core/AlgorithmComparison")
 );
 const TutorialRoute = lazy(() =>
-  import("./components/algorithm-tutorials/AlgorithmTutorials").then((m) => ({
+  import("@/components/features/algorithm-tutorials/AlgorithmTutorials").then((m) => ({
     default: m.TutorialRoute,
   }))
 );
 const TutorialList = lazy(() =>
-  import("./components/algorithm-tutorials/AlgorithmTutorials").then((m) => ({
+  import("@/components/features/algorithm-tutorials/AlgorithmTutorials").then((m) => ({
     default: m.TutorialList,
   }))
 );

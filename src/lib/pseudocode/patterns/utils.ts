@@ -1,4 +1,4 @@
-import { PatternKey } from "@/components/algorithm-trainer/types";
+import { PatternKey } from "@/lib/patterns/types";
 import patterns from "@/lib/pseudocode/patterns.json";
 
 // Valid algorithm types in our system
