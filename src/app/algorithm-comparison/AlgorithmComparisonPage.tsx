@@ -1,5 +1,5 @@
-import AlgorithmComparison from "@/components/algorithm-trainer/AlgorithmComparison";
-import { PatternKey } from "@/components/algorithm-trainer/types";
+import AlgorithmComparison from "@/components/features/algorithm-trainer/components/core/AlgorithmComparison";
+import { PatternKey } from "@/components/features/algorithm-trainer/types/types";
 
 const algorithms: PatternKey[] = [
   "Bubble Sort",

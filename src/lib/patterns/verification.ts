@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
+import { AlgorithmPattern } from "@/components/features/algorithm-trainer/types/types";
 import { patternMapping } from "@/lib/patterns/mapping";
 import { PatternKey, PATTERN_KEYS, MonsterHunterPattern } from "@/lib/patterns/types";
 

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Code2, Menu } from "lucide-react";
+import { Code2 } from "lucide-react";
 import { useState } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
@@ -44,10 +44,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedCard } from "@/components/ui/themed-card";
 import { ThemedDialog } from "@/components/ui/themed-dialog";
-import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 

@@ -14,7 +14,7 @@ import {
 import { memo, useState, useMemo, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { GamificationButton } from "@/components/gamification/GamificationButton";
+import { GamificationButton } from "@/components/features/gamification/GamificationButton";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
