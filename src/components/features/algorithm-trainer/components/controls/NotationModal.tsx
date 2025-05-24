@@ -7,6 +7,7 @@ import {
   ThemedDialogHeader,
   ThemedDialogTitle,
 } from "@/components/ui/themed-dialog";
+
 interface NotationModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -48,7 +49,7 @@ export const NotationModal = forwardRef<HTMLDivElement, NotationModalProps>(func
         {notation.examples && notation.examples.length > 0 && (
           <div className="space-y-2">
             <h4 className="text-base font-semibold mb-1 text-[var(--accent)]">Examples</h4>
-            <ul className="list-disc list-inside space-y-2 text-base text-[var(--text-main)]">
+            <ul className="space-y-2">
               {notation.examples.map((example, index) => (
                 <li
                   key={index}

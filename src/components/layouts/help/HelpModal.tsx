@@ -14,7 +14,7 @@ export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) =
       return "bg-gradient-to-r from-[var(--accent2)] via-[var(--accent3)] to-[var(--accent)] text-main";
     if (theme === "kingdom-hearts")
       return "bg-gradient-to-r from-[var(--bg-main)] via-[var(--bg-secondary)] to-[var(--bg-main)] text-main border-2 border-[var(--accent)] shadow-md";
-    if (theme === "fornite")
+    if (theme === "fortnite")
       return "bg-gradient-to-r from-[var(--accent2)] via-[var(--accent)] via-[var(--accent3)] to-[var(--accent4)] text-main border-2 border-[var(--accent)] shadow-md";
     if (theme === "light")
       return "bg-gradient-to-r from-green-300 via-blue-300 to-purple-300 text-black";

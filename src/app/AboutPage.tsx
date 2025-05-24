@@ -237,7 +237,7 @@ const AboutPage = () => {
           )}
           <AnimatedHeader
             title="Master Algorithms, Don't be Afraid :)"
-            subtitle="Go beyond coding to understand the mathematical principles that make algorithms work.\nLearn to think mathematically about problem-solving and algorithm design."
+            subtitle="Go beyond coding to understand the mathematical principles that make algorithms work. Learn to think mathematically about problem-solving and algorithm design."
             titleClassName={cn(
               "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
               theme === "nord"
@@ -542,7 +542,7 @@ const AboutPage = () => {
               ? "bg-[#3B4252] border border-[#4C566A] text-[#ECEFF4]"
               : theme === "snes"
                 ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e]"
-                : "bg-main/60 border-accent/40 text-white"
+                : "bg-main/60 border-accent/40"
           )}
         >
           <h2
@@ -550,7 +550,7 @@ const AboutPage = () => {
               "text-2xl font-bold mb-8 text-center",
               theme === "nord"
                 ? "bg-gradient-to-r from-[#6A4BB6] via-[#58A6FF] to-[#FFD700] text-transparent bg-clip-text drop-shadow-lg"
-                : "text-white"
+                : getCardTextStyle(theme)
             )}
           >
             Core Learning Areas
@@ -565,19 +565,17 @@ const AboutPage = () => {
                     ? "border border-[#4C566A] text-[#ECEFF4] hover:bg-[#434C5E]"
                     : theme === "snes"
                       ? "bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] hover:border-[#3498db] snes-glow"
-                      : "bg-main/60 border-accent/40 text-white"
+                      : "bg-main/60 border-accent/40"
                 )}
               >
-                <div className={cn("mb-4", theme === "nord" ? "text-white" : "text-white")}>
-                  {section.icon}
-                </div>
+                <div className={cn("mb-4", getCardTextStyle(theme))}>{section.icon}</div>
                 <h3 className={cn("text-xl font-semibold mb-3", getGamecubeSectionColor(index))}>
                   {section.title}
                 </h3>
                 <p
                   className={cn(
                     "text-foreground/80",
-                    theme === "nord" ? "text-[#ECEFF4]/90" : "text-white/90"
+                    theme === "nord" ? "text-[#ECEFF4]/90" : getCardTextStyle(theme)
                   )}
                 >
                   {section.description}
@@ -639,7 +637,7 @@ const AboutPage = () => {
                   ? "text-white/90 drop-shadow"
                   : theme === "nord"
                     ? "text-white/90 drop-shadow"
-                    : "text-main/90 drop-shadow"
+                    : "text-foreground/90 drop-shadow"
             )}
           >
             The{" "}
@@ -672,30 +670,61 @@ const AboutPage = () => {
                     ? "text-[#1a237e]/90"
                     : theme === "nord"
                       ? "text-white/80"
-                      : "text-foreground/70"
+                      : "text-foreground/80"
                 )}
               >
                 <li>
-                  <span className="font-bold text-accent">📚 Start with the Basics:</span> Begin
-                  with the mathematical foundations section to build your theoretical understanding.
+                  <span
+                    className={cn("font-bold", theme === "nord" ? "text-[#FFD700]" : "text-accent")}
+                  >
+                    📚 Start with the Basics:
+                  </span>{" "}
+                  Begin with the mathematical foundations section to build your theoretical
+                  understanding.
                 </li>
                 <li>
-                  <span className="font-bold text-accent2">🧭 Follow the Learning Path:</span>{" "}
+                  <span
+                    className={cn(
+                      "font-bold",
+                      theme === "nord" ? "text-[#FFD700]" : "text-accent2"
+                    )}
+                  >
+                    🧭 Follow the Learning Path:
+                  </span>{" "}
                   Progress through topics in the recommended order, as each concept builds upon
                   previous knowledge.
                 </li>
                 <li>
-                  <span className="font-bold text-accent3">🧑‍💻 Practice with Examples:</span> Use the
-                  interactive code editor to implement algorithms and see how mathematical concepts
-                  translate into code.
+                  <span
+                    className={cn(
+                      "font-bold",
+                      theme === "nord" ? "text-[#FFD700]" : "text-accent3"
+                    )}
+                  >
+                    🧑‍💻 Practice with Examples:
+                  </span>{" "}
+                  Use the interactive code editor to implement algorithms and see how mathematical
+                  concepts translate into code.
                 </li>
                 <li>
-                  <span className="font-bold text-accent">📝 Track Your Progress:</span> Monitor
-                  your understanding through quizzes and challenges at the end of each section.
+                  <span
+                    className={cn("font-bold", theme === "nord" ? "text-[#FFD700]" : "text-accent")}
+                  >
+                    📝 Track Your Progress:
+                  </span>{" "}
+                  Monitor your understanding through quizzes and challenges at the end of each
+                  section.
                 </li>
                 <li>
-                  <span className="font-bold text-accent2">📖 Use the Resources:</span> Access
-                  additional materials, visualizations, and reference guides to deepen your
+                  <span
+                    className={cn(
+                      "font-bold",
+                      theme === "nord" ? "text-[#FFD700]" : "text-accent2"
+                    )}
+                  >
+                    📖 Use the Resources:
+                  </span>{" "}
+                  Access additional materials, visualizations, and reference guides to deepen your
                   understanding.
                 </li>
               </ol>
@@ -717,7 +746,7 @@ const AboutPage = () => {
                     ? "text-[#1a237e]/90"
                     : theme === "nord"
                       ? "text-white/80"
-                      : "text-foreground/70"
+                      : "text-foreground/80"
                 )}
               >
                 <p>
@@ -770,13 +799,16 @@ const AboutPage = () => {
                       <h4
                         className={cn(
                           "font-semibold mb-2 text-lg group-hover:underline",
-                          theme === "snes" ? "text-[#1a237e]" : ""
+                          theme === "snes" ? "text-[#1a237e]" : "text-foreground"
                         )}
                       >
                         {path.title}
                       </h4>
                       <p
-                        className={cn("text-sm mb-2", theme === "snes" ? "text-[#1a237e]/90" : "")}
+                        className={cn(
+                          "text-sm mb-2",
+                          theme === "snes" ? "text-[#1a237e]/90" : "text-foreground/80"
+                        )}
                       >
                         {path.description}
                       </p>
@@ -795,7 +827,11 @@ const AboutPage = () => {
                 <p
                   className={cn(
                     "mt-4",
-                    theme === "snes" ? "text-[#1a237e]/90" : theme === "nord" ? "text-white/80" : ""
+                    theme === "snes"
+                      ? "text-[#1a237e]/90"
+                      : theme === "nord"
+                        ? "text-white/80"
+                        : "text-foreground/80"
                   )}
                 >
                   We recommend starting with the{" "}
@@ -839,7 +875,7 @@ const AboutPage = () => {
                   ? "text-[#1a237e]/90"
                   : theme === "nord"
                     ? "text-white/80"
-                    : "text-foreground/70"
+                    : "text-foreground/80"
               )}
             >
               <li>Take time to understand the mathematical proofs and derivations</li>

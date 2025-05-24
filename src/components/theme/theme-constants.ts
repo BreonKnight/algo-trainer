@@ -8,7 +8,7 @@ export const THEMES = [
   "re2",
   "mh",
   "kingdom-hearts",
-  "fornite",
+  "fortnite",
 ] as const;
 
 export type Theme = (typeof THEMES)[number];

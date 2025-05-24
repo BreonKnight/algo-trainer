@@ -13,7 +13,7 @@ import {
   prismRe2,
   prismMh,
   prismKingdomHearts,
-  prismFornite,
+  prismFortnite,
 } from "./prismThemes";
 
 interface PseudocodeDisplayProps {
@@ -35,7 +35,7 @@ export const PseudocodeDisplay = ({ code }: PseudocodeDisplayProps) => {
     re2: prismRe2,
     mh: prismMh,
     "kingdom-hearts": prismKingdomHearts,
-    fornite: prismFornite,
+    fortnite: prismFortnite,
   };
   const syntaxStyle = themeMap[theme] || prismDracula;
 

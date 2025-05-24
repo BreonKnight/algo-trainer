@@ -9,12 +9,18 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaSearch,
-  FaTimes,
 } from "react-icons/fa";
 
 import { additionalConcepts } from "@/components/features/CSMath/concepts";
 import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
+import {
+  ThemedDialog,
+  ThemedDialogBody,
+  ThemedDialogDescription,
+  ThemedDialogHeader,
+  ThemedDialogTitle,
+} from "@/components/ui/themed-dialog";
 import { cn } from "@/lib/utils";
 
 export interface Concept {
@@ -263,110 +269,36 @@ interface SymbolModalProps {
   symbol: EnhancedSymbol;
   isOpen: boolean;
   onClose: () => void;
-  theme: string;
 }
 
-const SymbolModal: React.FC<SymbolModalProps> = ({ symbol, isOpen, onClose, theme }) => {
+const SymbolModal: React.FC<SymbolModalProps> = ({ symbol, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center p-4",
-        theme === "light" || theme === "solarized"
-          ? "bg-black/60 backdrop-blur-xl"
-          : "bg-black/60 backdrop-blur-xl"
-      )}
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        className={cn(
-          "relative w-full max-w-2xl rounded-xl p-6 shadow-2xl border",
-          theme === "light" || theme === "solarized"
-            ? "bg-background/95 backdrop-blur-sm border-accent/20"
-            : "bg-background/95 backdrop-blur-sm border-accent2/20"
-        )}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className={cn(
-            "absolute top-4 right-4 p-2 rounded-full hover:bg-accent hover:bg-opacity-20",
-            theme === "light" || theme === "solarized"
-              ? "text-accent hover:bg-accent"
-              : "text-accent2 hover:bg-accent2"
-          )}
-        >
-          <FaTimes className="h-5 w-5" />
-        </button>
-
-        <div className="flex items-start gap-4 mb-6">
-          <span
-            className={cn(
-              "text-4xl font-mono",
-              theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
-            )}
-          >
-            {symbol.symbol}
-          </span>
+    <ThemedDialog isOpen={isOpen} onClose={onClose} maxWidth="2xl">
+      <ThemedDialogHeader>
+        <div className="flex items-start gap-4">
+          <span className="text-4xl font-mono text-[var(--accent2)]">{symbol.symbol}</span>
           <div className="flex-1">
-            <h2
-              className={cn(
-                "text-2xl font-mono tracking-wide pb-2 border-b-2",
-                theme === "light" || theme === "solarized"
-                  ? "text-accent border-accent/30"
-                  : "text-accent2 border-accent2/30"
-              )}
-            >
-              {symbol.name}
-            </h2>
-            <p className="text-foreground mt-3 font-sans leading-relaxed">{symbol.description}</p>
+            <ThemedDialogTitle>{symbol.name}</ThemedDialogTitle>
+            <ThemedDialogDescription>{symbol.description}</ThemedDialogDescription>
           </div>
         </div>
-
+      </ThemedDialogHeader>
+      <ThemedDialogBody>
         <div className="space-y-4">
-          <div
-            className={cn(
-              "p-4 rounded-lg border",
-              theme === "light" || theme === "solarized"
-                ? "bg-background border-accent/20"
-                : "bg-background/95 border-accent2/20"
-            )}
-          >
-            <h3
-              className={cn(
-                "text-lg font-mono tracking-wide mb-3",
-                theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
-              )}
-            >
+          <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <h3 className="text-lg font-mono tracking-wide mb-3 text-[var(--accent)]">
               Example Usage
             </h3>
-            <p className="font-mono text-foreground leading-relaxed">{symbol.example}</p>
+            <p className="font-mono text-[var(--text-main)] leading-relaxed">{symbol.example}</p>
           </div>
 
-          <div
-            className={cn(
-              "p-4 rounded-lg border",
-              theme === "light" || theme === "solarized"
-                ? "bg-background border-accent/20"
-                : "bg-background/95 border-accent2/20"
-            )}
-          >
-            <h3
-              className={cn(
-                "text-lg font-mono tracking-wide mb-3",
-                theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
-              )}
-            >
+          <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <h3 className="text-lg font-mono tracking-wide mb-3 text-[var(--accent)]">
               Common Applications
             </h3>
-            <ul className="list-disc list-inside space-y-2 text-foreground font-sans">
+            <ul className="list-disc list-inside space-y-2 text-[var(--text-main)] font-sans">
               {symbol.applications?.map((app, index) => (
                 <li key={index} className="leading-relaxed">
                   {app}
@@ -375,23 +307,11 @@ const SymbolModal: React.FC<SymbolModalProps> = ({ symbol, isOpen, onClose, them
             </ul>
           </div>
 
-          <div
-            className={cn(
-              "p-4 rounded-lg border",
-              theme === "light" || theme === "solarized"
-                ? "bg-background border-accent/20"
-                : "bg-background/95 border-accent2/20"
-            )}
-          >
-            <h3
-              className={cn(
-                "text-lg font-mono tracking-wide mb-3",
-                theme === "light" || theme === "solarized" ? "text-accent" : "text-accent2"
-              )}
-            >
+          <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)]">
+            <h3 className="text-lg font-mono tracking-wide mb-3 text-[var(--accent)]">
               Related Concepts
             </h3>
-            <ul className="list-disc list-inside space-y-2 text-foreground font-sans">
+            <ul className="list-disc list-inside space-y-2 text-[var(--text-main)] font-sans">
               {symbol.relatedConcepts?.map((concept, index) => (
                 <li key={index} className="leading-relaxed">
                   {concept}
@@ -400,8 +320,8 @@ const SymbolModal: React.FC<SymbolModalProps> = ({ symbol, isOpen, onClose, them
             </ul>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </ThemedDialogBody>
+    </ThemedDialog>
   );
 };
 
@@ -687,7 +607,6 @@ const CSMath: React.FC = () => {
               symbol={selectedSymbol}
               isOpen={!!selectedSymbol}
               onClose={() => setSelectedSymbol(null)}
-              theme={theme}
             />
           )}
         </AnimatePresence>

@@ -55,7 +55,7 @@ const headingGradients: Record<string, string> = {
   re2: "linear-gradient(90deg, #8b0000 0%, #ffd700 100%)",
   mh: "linear-gradient(90deg, #2c3e50 0%, #e67e22 100%)",
   "kingdom-hearts": "linear-gradient(90deg, #1e90ff 0%, #ffd700 100%)",
-  fornite: "linear-gradient(90deg, #ffd700 0%, #00bfff 100%)",
+  fortnite: "linear-gradient(90deg, #ffd700 0%, #00bfff 100%)",
 };
 
 // Style variables for tabs and progress
