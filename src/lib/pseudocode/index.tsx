@@ -186,7 +186,7 @@ export function verifyPatternFiles() {
       const foundPaths: string[] = [];
       const exists = possiblePaths.some((path) => {
         try {
-          require.resolve(`../../components/algorithm-trainer/${path}`);
+          require.resolve(`../../components/features/algorithm-trainer/patterns/${path}`);
           foundPaths.push(path);
           patternFiles.set(name, foundPaths);
           return true;
@@ -235,7 +235,7 @@ export function verifyPatternFiles() {
 
   categoryDirs.forEach((dir) => {
     try {
-      const files = require(`../../components/algorithm-trainer/patterns/${dir}`);
+      const files = require(`../../components/features/algorithm-trainer/patterns/${dir}`);
       Object.keys(files).forEach((key) => {
         if (key.endsWith("Patterns")) {
           const patterns = files[key];
