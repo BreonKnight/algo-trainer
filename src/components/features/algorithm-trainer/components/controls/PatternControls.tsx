@@ -11,6 +11,8 @@ interface PatternControlsProps {
   onNextPattern: () => void;
   onRandomPattern: () => void;
   className?: string;
+  currentIndex?: number;
+  totalPatterns?: number;
 }
 
 export function PatternControls({
@@ -18,6 +20,8 @@ export function PatternControls({
   onNextPattern,
   onRandomPattern,
   className,
+  currentIndex,
+  totalPatterns,
 }: PatternControlsProps) {
   const { theme } = useTheme();
 
@@ -27,7 +31,8 @@ export function PatternControls({
         onPreviousPattern();
       } else if (e.key === "ArrowRight") {
         onNextPattern();
-      } else if (e.key === "r") {
+      } else if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "r") {
+        e.preventDefault(); // Prevent browser refresh
         onRandomPattern();
       }
     };
@@ -37,69 +42,100 @@ export function PatternControls({
   }, [onPreviousPattern, onNextPattern, onRandomPattern]);
 
   return (
-    <div className={cn("flex items-center gap-2", className)}>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={onPreviousPattern}
-              className={cn(
-                "h-8 w-8",
-                theme === "snes" && "bg-[#fffbe6] text-[#1a237e] border-2 border-[#3498db]"
-              )}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-xs">Previous pattern (←)</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+    <div
+      className={cn(
+        "fixed bottom-8 left-1/2 -translate-x-1/2 z-50",
+        "flex flex-col items-center gap-4",
+        "px-6 py-4 rounded-full",
+        "backdrop-blur-md bg-background/80 shadow-lg border",
+        "transition-all duration-300 ease-in-out",
+        "hover:shadow-xl hover:bg-background/90",
+        className
+      )}
+    >
+      <div className="flex items-center gap-4">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={onPreviousPattern}
+                className={cn(
+                  "h-12 w-12 transition-all duration-200 hover:scale-110",
+                  theme === "snes"
+                    ? "bg-[#fffbe6] text-[#1a237e] border-2 border-[#3498db] hover:bg-[#fffbe6]/90"
+                    : "hover:bg-secondary/80"
+                )}
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p className="text-sm font-medium">Previous pattern (←)</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={onRandomPattern}
-              className={cn(
-                "h-8 w-8",
-                theme === "snes" && "bg-[#fffbe6] text-[#1a237e] border-2 border-[#3498db]"
-              )}
-            >
-              <Shuffle className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-xs">Random pattern (R)</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={onRandomPattern}
+                className={cn(
+                  "h-12 w-12 transition-all duration-200 hover:scale-110",
+                  theme === "snes"
+                    ? "bg-[#fffbe6] text-[#1a237e] border-2 border-[#3498db] hover:bg-[#fffbe6]/90"
+                    : "hover:bg-secondary/80"
+                )}
+              >
+                <Shuffle className="h-6 w-6" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p className="text-sm font-medium">Random pattern (⌘⇧R / Ctrl+Shift+R)</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={onNextPattern}
-              className={cn(
-                "h-8 w-8",
-                theme === "snes" && "bg-[#fffbe6] text-[#1a237e] border-2 border-[#3498db]"
-              )}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="text-xs">Next pattern (→)</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={onNextPattern}
+                className={cn(
+                  "h-12 w-12 transition-all duration-200 hover:scale-110",
+                  theme === "snes"
+                    ? "bg-[#fffbe6] text-[#1a237e] border-2 border-[#3498db] hover:bg-[#fffbe6]/90"
+                    : "hover:bg-secondary/80"
+                )}
+              >
+                <ChevronRight className="h-6 w-6" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p className="text-sm font-medium">Next pattern (→)</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+
+      {currentIndex !== undefined && totalPatterns !== undefined && (
+        <div
+          className={cn(
+            "text-sm font-medium px-3 py-1 rounded-full",
+            theme === "snes"
+              ? "bg-[#fffbe6] text-[#1a237e] border border-[#3498db]"
+              : "bg-secondary/50 text-secondary-foreground"
+          )}
+        >
+          Pattern {currentIndex + 1} of {totalPatterns}
+        </div>
+      )}
     </div>
   );
 }

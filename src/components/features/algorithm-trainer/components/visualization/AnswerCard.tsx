@@ -21,7 +21,7 @@ import {
   re2Theme,
   mhTheme,
   kingdomHeartsTheme,
-  forniteTheme,
+  fortniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
@@ -96,7 +96,7 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
     monaco.editor.defineTheme("re2", re2Theme);
     monaco.editor.defineTheme("mh", mhTheme);
     monaco.editor.defineTheme("kingdom-hearts", kingdomHeartsTheme);
-    monaco.editor.defineTheme("fornite", forniteTheme);
+    monaco.editor.defineTheme("fortnite", fortniteTheme);
     monaco.editor.setTheme(theme);
 
     // Force layout update
@@ -178,27 +178,22 @@ export function AnswerCard({ currentPattern, showAnswer, setShowAnswer }: Answer
       )}
       ref={cardRef}
     >
-      <div className="flex-none flex justify-between items-center mb-4">
-        <div className="flex items-center gap-4">
-          <h2 className="text-main text-lg sm:text-xl md:text-2xl font-semibold truncate leading-relaxed">
-            Solution
-          </h2>
-          <Button
-            onClick={() => setShowAnswer(!showAnswer)}
-            className={cn(
-              "bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-9 px-4 rounded-md flex items-center justify-center transition-all",
-              showAnswer && "ring-2 ring-accent3/50"
-            )}
-          >
-            {showAnswer ? "Hide Answer" : "Show Answer"}
-          </Button>
-        </div>
+      <div className="flex-none flex justify-start items-center mb-4">
+        <Button
+          onClick={() => setShowAnswer(!showAnswer)}
+          className={cn(
+            "bg-accent3 hover:bg-accent3/90 text-main text-sm sm:text-base whitespace-nowrap h-9 px-4 rounded-md flex items-center justify-center transition-all",
+            showAnswer && "ring-2 ring-accent3/50"
+          )}
+        >
+          {showAnswer ? "Hide Answer" : "Show Answer"}
+        </Button>
       </div>
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
         {showAnswer && (
           <>
             <div className="flex-none flex justify-between items-center mb-3">
-              <h3 className="text-main text-base sm:text-lg font-semibold truncate flex leading-relaxed">
+              <h3 className="text-main text-base sm:text-lg font-semibold truncate leading-relaxed flex items-center">
                 {showTestData ? "Monster Hunter Guide:" : "Implementation:"}
               </h3>
               <div className="flex gap-2">

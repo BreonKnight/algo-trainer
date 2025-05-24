@@ -177,8 +177,8 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
           tabIndex={-1}
           className={cn(
             theme === "snes"
-              ? "relative p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full max-w-3xl h-auto max-h-[90vh] flex flex-col overflow-visible transition-all duration-300 hover:shadow-lg hover:border-[#3498db] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90] animate-modalIn"
-              : "relative p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full max-w-3xl h-auto max-h-[90vh] flex flex-col overflow-visible transition-all duration-300 hover:shadow-lg hover:border-secondary/30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90] animate-modalIn"
+              ? "relative p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-fit mx-auto h-auto max-h-[90vh] flex flex-col overflow-visible transition-all duration-300 hover:shadow-lg hover:border-[#3498db] fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90] animate-modalIn"
+              : "relative p-4 bg-secondary border-text-secondary w-fit mx-auto h-auto max-h-[90vh] flex flex-col overflow-visible transition-all duration-300 hover:shadow-lg hover:border-secondary/30 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[90] animate-modalIn"
           )}
           ref={(el) => {
             if (el && isExpanded) {
@@ -260,7 +260,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                 <div className="flex-1 min-w-0 text-center">
                   <h2
                     className={cn(
-                      "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-center mb-4",
+                      "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left mb-4",
                       isExpanded
                         ? "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl"
                         : "text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
@@ -277,12 +277,16 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                             }
                     }
                   >
-                    <div className="inline-block text-center">
+                    <div className="inline-block text-left">
                       <span
                         className="text-4xl font-extrabold uppercase tracking-wide bg-clip-text text-transparent"
                         style={
                           theme === "snes"
-                            ? { backgroundImage: "var(--gradient-snes)" }
+                            ? {
+                                color: "#4040e0",
+                                background: "none",
+                                backgroundColor: "transparent",
+                              }
                             : {
                                 backgroundImage:
                                   "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
@@ -292,13 +296,10 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                         {currentPattern}
                       </span>
                       <div
-                        className="h-1 rounded mt-2 w-12 mx-auto"
+                        className="h-1 rounded mt-2 w-12"
                         style={
                           theme === "snes"
-                            ? {
-                                background:
-                                  "linear-gradient(90deg, #e40058 0%, #4040e0 33%, #00a800 66%, #ffd700 100%)",
-                              }
+                            ? { backgroundColor: "#4040e0" }
                             : {
                                 background:
                                   "linear-gradient(to right, var(--gradient-from), var(--gradient-to))",
@@ -310,7 +311,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
                   <span
                     className={cn(
                       getCategoryColor(category),
-                      "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium"
+                      "text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium text-left"
                     )}
                   >
                     {category} {patternNumber !== undefined && `#${patternNumber}`}
@@ -329,14 +330,14 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
             </div>
             <div className="flex-1 min-h-0">
               {showMonsterGuide ? (
-                <div className="h-full overflow-auto rounded-xl bg-main/80 backdrop-blur-sm border border-secondary/20 mt-3 p-6 text-lg leading-relaxed">
+                <div className="h-full overflow-auto rounded-xl bg-secondary border border-secondary/20 mt-3 p-6 text-lg leading-relaxed">
                   <MonsterHunterGuide currentPattern={currentPattern} />
                 </div>
               ) : (
                 <div className="flex flex-col">
                   <div
                     ref={descRef}
-                    className={`${styles.pseudocodeContainer} w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3 overflow-y-auto`}
+                    className={`${styles.pseudocodeContainer} w-fit mx-auto bg-secondary rounded-xl border border-secondary/20 transition-all duration-300 mt-3 overflow-y-auto`}
                     style={{
                       maxHeight: "60vh",
                       minHeight: isDesktop ? "0" : "300px",
@@ -389,7 +390,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
       className={cn(
         theme === "snes"
           ? "p-4 bg-[#fffbe6] border-2 border-[#3498db] text-[#1a237e] rounded-xl shadow-[0_4px_24px_rgba(52,152,219,0.08)] w-full min-h-[180px] max-h-[549px] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#3498db]"
-          : "p-4 bg-secondary/50 backdrop-blur-sm border border-secondary/20 w-full min-h-[180px] max-h-[549px] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
+          : "p-4 bg-secondary border-text-secondary w-full min-h-[180px] max-h-[549px] flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-secondary/30"
       )}
       onClick={() => setIsExpanded(true)}
     >
@@ -428,7 +429,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
       <div className="mb-4">
         <h2
           className={cn(
-            "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-center mb-2",
+            "text-main font-bold leading-relaxed transition-all duration-300 hover:scale-[1.02] text-left mb-2",
             theme === "nord" ? " text-white" : " text-transparent bg-clip-text"
           )}
           style={
@@ -464,7 +465,7 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
         <span
           className={cn(
             getCategoryColor(category),
-            "block text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium text-center mb-2"
+            "block text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium text-left mb-2"
           )}
         >
           {category} {patternNumber !== undefined && `#${patternNumber}`}
@@ -480,14 +481,14 @@ export function PatternCard({ currentPattern, onPatternChange, patternNumber }: 
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto">
         {showMonsterGuide ? (
-          <div className="h-full overflow-hidden rounded-xl bg-main/80 backdrop-blur-sm border border-secondary/20 mt-3">
+          <div className="h-full overflow-hidden rounded-xl bg-secondary border border-secondary/20 mt-3">
             <MonsterHunterGuide currentPattern={currentPattern} />
           </div>
         ) : (
           <div className="h-full flex flex-col">
             <div
               ref={descRef}
-              className={`${styles.pseudocodeContainer} flex-1 w-full bg-main/80 backdrop-blur-sm rounded-xl border border-secondary/20 transition-all duration-300 mt-3 overflow-y-auto`}
+              className={`${styles.pseudocodeContainer} flex-1 w-fit mx-auto bg-secondary rounded-xl border border-secondary/20 transition-all duration-300 mt-3 overflow-y-auto`}
               style={{
                 height: isDesktop ? descHeight : "300px",
                 minHeight: isDesktop ? "0" : "300px",

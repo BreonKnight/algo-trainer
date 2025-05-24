@@ -17,7 +17,7 @@ import {
   re2Theme,
   mhTheme,
   kingdomHeartsTheme,
-  forniteTheme,
+  fortniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
@@ -213,7 +213,7 @@ export function CodeEditor({
       re2: "re2",
       mh: "mh",
       "kingdom-hearts": "kingdom-hearts",
-      fornite: "fornite",
+      fortnite: "fortnite",
     };
     return () => themeMap[theme] || "dracula";
   }, [theme]);
@@ -257,7 +257,7 @@ export function CodeEditor({
           re2: re2Theme,
           mh: mhTheme,
           "kingdom-hearts": kingdomHeartsTheme,
-          fornite: forniteTheme,
+          fortnite: fortniteTheme,
         };
 
         Object.entries(themes).forEach(([name, theme]) => {

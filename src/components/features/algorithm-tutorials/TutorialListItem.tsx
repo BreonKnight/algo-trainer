@@ -43,7 +43,7 @@ const getThemeListItemClass = (theme: string) =>
                   ? "bg-[#2c3e50]/95 border-[#34495e]/20 text-white"
                   : theme === "kingdom-hearts"
                     ? "bg-[#1e90ff]/95 border-[#4169e1]/20 text-white"
-                    : theme === "fornite"
+                    : theme === "fortnite"
                       ? "bg-[#ffd700]/95 border-[#ffa500]/20 text-black"
                       : "bg-background/95 border-accent2/20 text-main",
   ].join(" ");

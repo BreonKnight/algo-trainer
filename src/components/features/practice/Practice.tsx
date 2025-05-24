@@ -20,7 +20,7 @@ import {
   re2Theme,
   mhTheme,
   kingdomHeartsTheme,
-  forniteTheme,
+  fortniteTheme,
 } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
@@ -54,7 +54,7 @@ const Practice = () => {
       re2: "re2",
       mh: "mh",
       "kingdom-hearts": "kingdom-hearts",
-      fornite: "fornite",
+      fortnite: "fortnite",
     }),
     []
   );
@@ -77,7 +77,7 @@ const Practice = () => {
         re2: re2Theme,
         mh: mhTheme,
         "kingdom-hearts": kingdomHeartsTheme,
-        fornite: forniteTheme,
+        fortnite: fortniteTheme,
       };
       Object.entries(themesToDefine).forEach(([name, themeData]) => {
         try {

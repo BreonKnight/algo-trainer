@@ -194,7 +194,7 @@ const getThemeGradient = (theme: string) => {
       return "linear-gradient(45deg, #2c3e50 0%, #34495e 25%, #3498db 50%, #2980b9 75%, #1abc9c 100%)";
     case "kingdom-hearts":
       return "linear-gradient(45deg, #1e90ff 0%, #4169e1 25%, #0000cd 50%, #000080 75%, #00008b 100%)";
-    case "fornite":
+    case "fortnite":
       return "linear-gradient(45deg, #ffd700 0%, #ffa500 25%, #ff8c00 50%, #ff4500 75%, #ff0000 100%)";
     case "nord":
       return "linear-gradient(45deg, #2e3440 0%, #3b4252 25%, #434c5e 50%, #4c566a 75%, #5e81ac 100%)";

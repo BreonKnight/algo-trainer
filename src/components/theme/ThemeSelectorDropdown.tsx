@@ -48,13 +48,13 @@ const themeTriggerStyles: Record<string, string> = {
   ps2: "bg-blue-900 text-white border-blue-400",
   nord: "bg-gradient-to-r from-[#2e3440] via-[#3b4252] to-[#2e3440] text-[#81a1c1] font-bold border-[#88c0d0] shadow-[0_0_15px_rgba(136,192,208,0.3)] hover:shadow-[0_0_20px_rgba(136,192,208,0.5)]",
   snes: "bg-gradient-to-r from-[#ff0000] via-[#ffff00] to-[#00ff00] text-[#4040e0] font-bold border-[#ffa500] shadow-[0_0_15px_rgba(255,165,0,0.3)] hover:shadow-[0_0_20px_rgba(255,165,0,0.5)] animate-pulse [text-shadow:0_1px_2px_rgba(0,0,0,0.25)]",
-  fornite:
+  fortnite:
     "bg-gradient-to-r from-[#2ecc71] via-[#3498db] via-[#9b59b6] to-[#f1c40f] text-black border-[#3498db] shadow-md",
   default: "bg-gray-800 text-white border-gray-400",
 };
 
 const themeTriggerIcons: Record<string, IconConfig> = {
-  fornite: { IconComponent: Star, props: { className: "h-4 w-4 text-yellow-400" } },
+  fortnite: { IconComponent: Star, props: { className: "h-4 w-4 text-yellow-400" } },
   light: { IconComponent: Moon, props: { className: "h-4 w-4 group-hover:animate-pulse" } },
   solarized: { IconComponent: Moon, props: { className: "h-4 w-4 group-hover:animate-pulse" } },
   nord: {
@@ -77,7 +77,7 @@ const themeItemIcons: Record<string, IconConfig> = {
   snes: { IconComponent: Star, props: { className: "h-4 w-4 text-yellow-500" } },
   dracula: { IconComponent: Droplet, props: { className: "h-4 w-4 text-purple-500" } },
   solarized: { IconComponent: Sun, props: { className: "h-4 w-4" } },
-  fornite: { IconComponent: Star, props: { className: "h-4 w-4 text-yellow-400" } },
+  fortnite: { IconComponent: Star, props: { className: "h-4 w-4 text-yellow-400" } },
   default: { IconComponent: Moon, props: { className: "h-4 w-4" } }, // Default for items, e.g., for 'light' theme
 };
 
@@ -117,7 +117,7 @@ export function ThemeSelectorDropdown() {
             themeItemIcons[t] || themeItemIcons.default;
           const isCurrentTheme = t === theme;
           // Use theme directly for fortnite check in item specific styles
-          const fortniteSelectedItem = theme === "fornite" && isCurrentTheme;
+          const fortniteSelectedItem = theme === "fortnite" && isCurrentTheme;
 
           return (
             <DropdownMenuItem

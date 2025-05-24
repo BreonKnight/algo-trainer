@@ -45,7 +45,7 @@ const SystemsDesign: React.FC<SystemsDesignProps> = ({
 
   // Memoize theme check
   const isDarkTheme = useMemo(
-    () => ["dracula", "nord", "snes", "ps2", "re2", "kingdom-hearts", "fornite"].includes(theme),
+    () => ["dracula", "nord", "snes", "ps2", "re2", "kingdom-hearts", "fortnite"].includes(theme),
     [theme]
   );
 

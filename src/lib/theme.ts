@@ -502,7 +502,7 @@ export const kingdomHeartsTheme: editor.IStandaloneThemeData = {
   },
 };
 
-export const forniteTheme: editor.IStandaloneThemeData = {
+export const fortniteTheme: editor.IStandaloneThemeData = {
   base: "vs-dark",
   inherit: true,
   rules: [
