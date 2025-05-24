@@ -1,4 +1,4 @@
-import { algorithmPatterns } from "@/components/algorithm-trainer/patterns";
+import { algorithmPatterns } from "@/components/features/algorithm-trainer/patterns";
 import { Pattern, PatternCategory } from "@/lib/types/pattern-management";
 
 // In a real application, these would be API calls to your backend
@@ -30,17 +30,17 @@ export const patternManagementService = {
       id: title.toLowerCase().replace(/\s+/g, "-"),
       name: title,
       category: pattern.category,
-      timeComplexity: pattern.timeComplexity,
-      spaceComplexity: pattern.spaceComplexity,
+      timeComplexity: pattern.timeComplexity || "O(n)",
+      spaceComplexity: pattern.spaceComplexity || "O(n)",
       description: pattern.description,
       monsterHunterContext: pattern.description, // Using description as context for now
-      example: pattern.example,
+      example: pattern.example || "",
       process: pattern.keySteps || [],
-      implementation: pattern.implementation,
+      implementation: pattern.implementation || "",
       testCases: [
         {
           name: "Basic Test",
-          input: pattern.example,
+          input: pattern.example || "",
           expectedOutput: "Expected output based on example",
           monsterHunterTip: pattern.description,
         },

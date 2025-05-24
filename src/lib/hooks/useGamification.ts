@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { GAMIFICATION_ENDPOINTS, API_CONFIG } from "@/lib/config/api";
 
 interface Badge {

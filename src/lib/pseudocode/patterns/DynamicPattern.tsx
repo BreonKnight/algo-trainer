@@ -1,4 +1,4 @@
-import { PatternKey } from "@/components/algorithm-trainer/types";
+import { PatternKey } from "@/lib/patterns/types";
 
 import { AlgorithmPattern } from "./AlgorithmPattern";
 import { getPattern, getPatternKeyFromName } from "./utils";

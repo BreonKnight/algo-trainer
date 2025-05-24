@@ -1,31 +1,37 @@
-import { monsterHunterExplanations } from "@/components/algorithm-trainer/monsterHunterExplanations";
-import { arrayPatterns } from "@/components/algorithm-trainer/patterns/array/index";
-import { dataStructurePatterns } from "@/components/algorithm-trainer/patterns/data-structures/index";
-import { dynamicProgrammingPatterns } from "@/components/algorithm-trainer/patterns/dynamic-programming/index";
-import { graphPatterns } from "@/components/algorithm-trainer/patterns/graph/index";
-import { greedyPatterns } from "@/components/algorithm-trainer/patterns/greedy/index";
-import { matrixPatterns } from "@/components/algorithm-trainer/patterns/matrix/index";
-import { numberTheoryPatterns } from "@/components/algorithm-trainer/patterns/number-theory/index";
-import { searchingPatterns } from "@/components/algorithm-trainer/patterns/searching/index";
-import { sortingPatterns } from "@/components/algorithm-trainer/patterns/sorting/index";
-import { stringPatterns } from "@/components/algorithm-trainer/patterns/string/index";
-import { AlgorithmPattern } from "@/components/algorithm-trainer/types/pattern-types";
+import { monsterHunterExplanations } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterExplanations";
+import { arrayPatterns } from "@/components/features/algorithm-trainer/patterns/array";
+import { dataStructurePatterns } from "@/components/features/algorithm-trainer/patterns/data-structures";
+import { dynamicProgrammingPatterns } from "@/components/features/algorithm-trainer/patterns/dynamic-programming";
+import { graphPatterns } from "@/components/features/algorithm-trainer/patterns/graph";
+import { greedyPatterns } from "@/components/features/algorithm-trainer/patterns/greedy";
+import { matrixPatterns } from "@/components/features/algorithm-trainer/patterns/matrix";
+import { numberTheoryPatterns } from "@/components/features/algorithm-trainer/patterns/number-theory";
+import { searchingPatterns } from "@/components/features/algorithm-trainer/patterns/searching";
+import { sortingPatterns } from "@/components/features/algorithm-trainer/patterns/sorting";
+import { stringPatterns } from "@/components/features/algorithm-trainer/patterns/string";
+import { AlgorithmPattern } from "@/components/features/algorithm-trainer/types/pattern-types";
 import { MonsterHunterPattern, PatternCategory, PatternKey } from "@/lib/patterns/types";
 import { verifyPatterns, generateVerificationReport } from "@/lib/patterns/verification";
 
 // Convert monsterHunterExplanations to MonsterHunterPattern format
 const monsterHunterPatterns: Partial<Record<PatternKey, MonsterHunterPattern>> = {};
 for (const [key, value] of Object.entries(monsterHunterExplanations)) {
+  const typedValue = value as {
+    title: string;
+    description: string;
+    example: string;
+    tips: string[];
+  };
   monsterHunterPatterns[key as PatternKey] = {
-    title: value.title,
-    description: value.description,
-    monsterHunterTitle: value.title,
-    monsterHunterDescription: value.description,
-    monsterHunterExample: value.example,
-    monsterHunterTips: value.tips,
-    category: "Other" as PatternCategory, // Default category, will be updated based on mapping
-    example: value.example,
-    tips: value.tips,
+    title: typedValue.title,
+    description: typedValue.description,
+    monsterHunterTitle: typedValue.title,
+    monsterHunterDescription: typedValue.description,
+    monsterHunterExample: typedValue.example,
+    monsterHunterTips: typedValue.tips,
+    category: "Other" as PatternCategory,
+    example: typedValue.example,
+    tips: typedValue.tips,
   };
 }
 

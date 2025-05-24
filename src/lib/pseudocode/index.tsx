@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 
-import { PatternKey, PATTERN_KEYS } from "@/components/algorithm-trainer/types";
+import { PatternKey, PATTERN_KEYS } from "@/lib/patterns/types";
 
 import { DynamicPattern } from "./patterns/DynamicPattern";
 import { getAllPatterns } from "./patterns/utils";
