@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef } from "react";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 export const ThemedButton = forwardRef<HTMLButtonElement, ComponentProps<typeof Button>>(
   ({ className, ...props }, ref) => {

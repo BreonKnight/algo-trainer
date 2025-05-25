@@ -8,7 +8,7 @@ import DesignSystemPage from "@/app/DesignSystemPage";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import { TopBar } from "@/components/features/algorithm-trainer/components/layout/TopBar";
-import Practice from "@/components/features/practice/Practice";
+import Practice from '@algo-trainer/shared/stores/practice-store';
 import PatternManagement from "@/components/layouts/admin/PatternManagement";
 import { Navigation } from "@/components/ui/navigation";
 

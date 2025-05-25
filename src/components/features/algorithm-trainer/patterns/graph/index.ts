@@ -11,7 +11,7 @@ import { dijkstraPattern } from "@/components/features/algorithm-trainer/pattern
 import { floydCycleDetectionPattern } from "@/components/features/algorithm-trainer/patterns/graph/floyd-cycle-detection";
 import { floydWarshallPattern } from "@/components/features/algorithm-trainer/patterns/graph/floyd-warshall";
 import { fordFulkersonPattern } from "@/components/features/algorithm-trainer/patterns/graph/ford-fulkerson";
-import { graphRepresentationPattern } from "@/components/features/algorithm-trainer/patterns/graph/graph-representation";
+import { graphRepresentationPattern } from '@algo-trainer/shared/algorithms/graph/representation';
 import { hopcroftKarpPattern } from "@/components/features/algorithm-trainer/patterns/graph/hopcroft-karp";
 import { hungarianAlgorithmPattern } from "@/components/features/algorithm-trainer/patterns/graph/hungarian-algorithm";
 import { kahnsTopologicalSortPattern } from "@/components/features/algorithm-trainer/patterns/graph/kahns-topological-sort";

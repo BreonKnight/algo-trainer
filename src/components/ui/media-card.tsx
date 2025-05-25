@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 export function MediaCard({
   children,

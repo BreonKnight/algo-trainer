@@ -21,7 +21,7 @@ import {
   ThemedDialogHeader,
   ThemedDialogTitle,
 } from "@/components/ui/themed-dialog";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 export interface Concept {
   id: number;

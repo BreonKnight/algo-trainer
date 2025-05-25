@@ -49,7 +49,7 @@ import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedCard } from "@/components/ui/themed-card";
 import { ThemedDialog } from "@/components/ui/themed-dialog";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 const DesignSystemPage = () => {
   const { theme } = useTheme();

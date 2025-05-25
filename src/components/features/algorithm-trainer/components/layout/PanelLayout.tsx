@@ -3,11 +3,11 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { ChevronDown, ChevronUp, LayoutGridIcon } from "lucide-react";
 
 import { SortablePanel } from "@/components/features/algorithm-trainer/components/layout/SortablePanel";
-import { AnswerCard } from "@/components/features/algorithm-trainer/components/visualization/AnswerCard";
-import { CodeEditor } from "@/components/features/algorithm-trainer/components/visualization/CodeEditor";
-import { PatternCard } from "@/components/features/algorithm-trainer/components/visualization/PatternCard";
-import { usePanelManager } from "@/components/features/algorithm-trainer/hooks/usePanelManager";
-import { PatternKey } from "@/components/features/algorithm-trainer/types/types";
+import { AnswerCard } from '@algo-trainer/shared/components/visualization/AnswerCard';
+import { CodeEditor } from '@algo-trainer/shared/components/visualization/CodeEditor';
+import { PatternCard } from '@algo-trainer/shared/components/visualization/PatternCard';
+import { usePanelManager } from '@algo-trainer/shared/stores/panel-store';
+import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 interface PanelLayoutProps {
   selectedPattern: PatternKey;

@@ -1,6 +1,6 @@
 import { patterns as algorithmPatterns } from "@/components/features/algorithm-trainer/patterns/index";
 import { AlgorithmPattern } from "@/components/features/algorithm-trainer/types/pattern-types";
-import { PatternKey, PATTERN_KEYS } from "@/components/features/algorithm-trainer/types/types";
+import { PatternKey, PATTERN_KEYS } from '@algo-trainer/shared/types/algorithm-types';
 
 import { monsterHunterPatterns } from "./monsterHunterPatterns";
 import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended";

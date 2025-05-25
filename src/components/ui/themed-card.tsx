@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 export function ThemedCard({ className, ...props }: ComponentProps<typeof Card>) {
   const { theme } = useTheme();

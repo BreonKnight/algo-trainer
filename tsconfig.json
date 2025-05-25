@@ -18,7 +18,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@shared/*": ["shared/*"],
+      "@algo-trainer/shared/*": ["shared/*"]
     },
     "outDir": "./dist",
     "allowJs": true,
@@ -35,7 +37,7 @@
       "moduleResolution": "node"
     }
   },
-  "include": ["src/**/*", "scripts/**/*", "electron/**/*"],
+  "include": ["src/**/*", "scripts/**/*", "electron/**/*", "shared/**/*"],
   "exclude": ["node_modules", "dist", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

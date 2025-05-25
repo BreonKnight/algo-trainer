@@ -17,7 +17,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GamificationButton } from "@/components/features/gamification/GamificationButton";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 // Add custom styles for the gradient animation
 const styles = `

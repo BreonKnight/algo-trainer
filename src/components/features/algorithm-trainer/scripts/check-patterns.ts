@@ -1,7 +1,7 @@
 import { monsterHunterGuidePattern } from "@/components/features/algorithm-trainer/patterns/monster-hunter/monster-hunter-guide";
 import { monsterHunterPattern } from "@/components/features/algorithm-trainer/patterns/monster-hunter/monster-hunter-pattern";
 import { monsterHunterTestDataPattern } from "@/components/features/algorithm-trainer/patterns/monster-hunter/monster-hunter-test-data";
-import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+import { patternMapping } from '@algo-trainer/shared/utils/pattern-mapping';
 
 // Function to get all pattern keys from a pattern object
 function getPatternKeys(pattern: { title: string }): string[] {

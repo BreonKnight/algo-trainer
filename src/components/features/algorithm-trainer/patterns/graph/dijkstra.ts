@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from "@/components/features/algorithm-trainer/types/types";
+import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
 
 export const dijkstraPattern: AlgorithmPattern = {
   title: "Dijkstra's Algorithm",

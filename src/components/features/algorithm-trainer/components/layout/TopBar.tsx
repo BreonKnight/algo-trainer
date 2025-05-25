@@ -27,7 +27,7 @@ import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { MediaCard } from "@/components/ui/media-card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 interface TopBarProps {
   className?: string;

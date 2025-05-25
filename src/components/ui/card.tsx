@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 type CardVariant = "default" | "secondary" | "destructive" | "outline" | "glass";
 type CardSize = "sm" | "md" | "lg";

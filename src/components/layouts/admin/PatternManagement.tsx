@@ -12,7 +12,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { getValidationResults } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterPatternsCombined";
-import { patternMapping } from "@/lib/pseudocode/utils/pattern-mapping";
+import { patternMapping } from '@algo-trainer/shared/utils/pattern-mapping';
 import { patternManagementService } from "@/lib/services/pattern-management";
 import { Pattern, PatternFormData, TestCase } from "@/lib/types/pattern-management";
 

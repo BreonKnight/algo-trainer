@@ -4,7 +4,7 @@ import React from "react";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { ThemedButton } from "@/components/ui/themed-button";
-import { cn } from "@/lib/utils";
+import { cn } from '@algo-trainer/shared/utils/common';
 
 export const HelpModal = React.forwardRef<HTMLButtonElement, {}>((_props, ref) => {
   const { theme } = useTheme();
