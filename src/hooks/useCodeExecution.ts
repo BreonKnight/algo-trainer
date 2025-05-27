@@ -1,24 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export type GamificationProgressUpdate = {
-  points?: number;
-  experience?: number;
-  level?: number;
-  completedAlgorithms?: string[];
-  streak?: number;
+export type CodeExecution = {
+  linesOfCode: number;
+  executionTime: number;
+  hasError: boolean;
 };
 
-export function useUpdateGamificationProgress() {
+export function useRecordCodeExecution() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: GamificationProgressUpdate) => {
-      const res = await fetch("/api/gamification/progress/", {
+    mutationFn: async (data: CodeExecution) => {
+      const res = await fetch("/api/gamification/code-execution", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Failed to update progress");
+      if (!res.ok) throw new Error("Failed to record code execution");
       return res.json();
     },
     onSuccess: () => {

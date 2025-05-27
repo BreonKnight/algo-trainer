@@ -1,16 +1,18 @@
 import "./App.css";
 import { Suspense, lazy, memo, useMemo } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
 
 import AboutPage from "@/app/AboutPage";
+import AuthPage from "@/app/AuthPage";
 import DesignSystemPage from "@/app/DesignSystemPage";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import { TopBar } from "@/components/features/algorithm-trainer/components/layout/TopBar";
-import Practice from '@algo-trainer/shared/stores/practice-store';
 import PatternManagement from "@/components/layouts/admin/PatternManagement";
 import { Navigation } from "@/components/ui/navigation";
+
+import Practice from "@algo-trainer/shared/stores/practice-store";
 
 // Lazy load components
 const AlgorithmTrainer = lazy(
@@ -41,10 +43,14 @@ const TutorialList = lazy(() =>
 //console.log("Imported tutorials data:", tutorialsData);
 //console.log("Categories:", Object.keys(tutorialsData));
 const AppContent = memo(function AppContent() {
+  const location = useLocation();
+  const isAuthRoute = location.pathname === "/auth";
+
   const routeElements = useMemo(
     () => (
       <Routes>
         <Route path="/" element={<AlgorithmTrainer />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route
           path="/progress"
           element={
@@ -191,8 +197,8 @@ const AppContent = memo(function AppContent() {
     <div className="min-h-screen w-full bg-main">
       <Navigation />
       <div className="pt-16">
-        <TopBar />
-        <main className="pt-4">{routeElements}</main>
+        {!isAuthRoute && <TopBar />}
+        <main className={!isAuthRoute ? "pt-4" : ""}>{routeElements}</main>
       </div>
       <Toaster position="bottom-left" richColors theme="dark" />
     </div>
