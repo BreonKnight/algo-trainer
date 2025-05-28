@@ -20,4 +20,6 @@ export * from "./textarea";
 export * from "./themed-button";
 export * from "./themed-card";
 export * from "./themed-dialog";
+export * from "./toast";
+export * from "./use-toast.tsx";
 export * from "./tooltip";

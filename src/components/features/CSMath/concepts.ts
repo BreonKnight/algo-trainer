@@ -133,4 +133,37 @@ export const additionalConcepts: Concept[] = [
     mathematicalNotation:
       "lg(n) = log₂(n)\n\nBreaking this down:\n- lg(n) is the logarithm of n with base 2\n- It answers the question: '2 raised to what power equals n?'\n- This is different from ln(n), which uses base e\n\nExample with monster search:\nIf n = 1000 possible locations:\nlg(1000) ≈ 9.97\nThis means we need at most 10 steps to find the monster\nin a binary search of 1000 sorted locations",
   },
+  {
+    id: 16,
+    title: "Recursion: Monster Evolution Trees",
+    category: "Recursion",
+    monsterHunterExample:
+      "Think of monster evolution like a recursive tree. A Rathalos evolves from a Rathian, which evolved from a basic flying wyvern. Each evolution follows the same pattern but with increasing complexity. This is similar to how recursive functions call themselves with simpler inputs until reaching a base case.",
+    clrsExplanation:
+      "Recursion is a method where a function calls itself to solve smaller instances of the same problem. In CLRS, this is fundamental for algorithms like merge sort and binary search trees. The key is having a base case to stop the recursion and a recursive case that breaks down the problem.",
+    mathematicalNotation:
+      "T(n) = aT(n/b) + f(n)\n\nBreaking this down:\n- T(n) is the time complexity\n- a is the number of recursive calls\n- n/b is the size of each subproblem\n- f(n) is the cost of combining results\n\nExample with monster evolution:\n- Base case: Basic flying wyvern\n- Recursive case: Each evolution adds new abilities\n- Master theorem helps analyze the complexity",
+  },
+  {
+    id: 17,
+    title: "Dynamic Programming: Monster Weakness Patterns",
+    category: "Dynamic Programming",
+    monsterHunterExample:
+      "When fighting a monster, we need to remember which attacks were most effective at different health thresholds. This is like a dynamic programming table where we store the optimal strategy for each state. For example, if a monster is weak to fire at 70% health but resistant at 30%, we need to plan our strategy accordingly.",
+    clrsExplanation:
+      "Dynamic programming solves complex problems by breaking them into simpler subproblems and storing their solutions. In CLRS, this is used for problems like the longest common subsequence and matrix chain multiplication. The key is identifying overlapping subproblems and optimal substructure.",
+    mathematicalNotation:
+      "dp[i][j] = max(dp[i-1][j], dp[i][j-1], dp[i-1][j-1] + 1)\n\nBreaking this down:\n- dp[i][j] represents the optimal solution for subproblem (i,j)\n- The formula shows how to build solutions from smaller subproblems\n\nExample with monster weaknesses:\n- dp[i][j] could represent optimal damage at health i with weapon j\n- Each state depends on previous optimal choices",
+  },
+  {
+    id: 18,
+    title: "Greedy Algorithms: Monster Part Breaking",
+    category: "Greedy Algorithms",
+    monsterHunterExample:
+      "When breaking monster parts, we often focus on the most valuable parts first. This is like a greedy algorithm where we make the locally optimal choice at each step. For example, breaking a Rathalos's head might give us the best rewards, so we prioritize that over other parts.",
+    clrsExplanation:
+      "Greedy algorithms make the locally optimal choice at each step, hoping to find a global optimum. In CLRS, this is used for problems like activity selection and Huffman coding. While not always optimal, greedy algorithms are often efficient and provide good approximations.",
+    mathematicalNotation:
+      "GreedyChoice(S) = argmax_{x ∈ S} value(x)\n\nBreaking this down:\n- S is the set of available choices\n- value(x) is the benefit of choice x\n- argmax returns the choice with maximum value\n\nExample with part breaking:\n- S is the set of breakable parts\n- value(x) is the reward for breaking part x\n- We choose the part with highest value first",
+  },
 ];

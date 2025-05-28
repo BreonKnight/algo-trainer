@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "TR Mystical";
+  src:
+    url("https://font.download/font/tr-mystical/TRMystical-Regular.woff2") format("woff2"),
+    url("https://font.download/font/tr-mystical/TRMystical-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.mystical-text {
+  font-family: "TR Mystical", cursive;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}

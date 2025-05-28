@@ -1,14 +1,19 @@
-import axios from "axios";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
 import { getAuthToken } from "./authService";
 
 const API_URL = import.meta.env.VITE_AUTH_API_URL || "http://localhost:8000/api/v1";
+
+type ActivityMetadata = {
+  [key: string]: string | number | boolean | null;
+};
 
 // Types
 export interface UserActivity {
   id: number;
   user_id: number;
   activity_type: string;
-  metadata?: Record<string, any>;
+  metadata?: ActivityMetadata;
   created_at: string;
 }
 
@@ -59,6 +64,19 @@ export interface UserEngagementMetrics {
   user_retention_rate: number;
 }
 
+export interface UserAchievementStats {
+  total_achievements: number;
+  completed_achievements: number;
+  in_progress_achievements: number;
+  achievement_points: number;
+  recent_achievements: Array<{
+    id: number;
+    name: string;
+    completed_at: string;
+    points_earned: number;
+  }>;
+}
+
 // Analytics Service
 class AnalyticsService {
   private getHeaders() {
@@ -70,21 +88,24 @@ class AnalyticsService {
   }
 
   // User Activity Analytics
-  async trackActivity(activityType: string, metadata?: Record<string, any>): Promise<UserActivity> {
-    const response = await axios.post(
-      `${API_URL}/analytics/activity`,
-      { activity_type: activityType, metadata },
-      { headers: this.getHeaders() }
-    );
-    return response.data;
+  async trackActivity(activityType: string, metadata?: ActivityMetadata): Promise<UserActivity> {
+    const response = await fetch(`${API_URL}/analytics/activity`, {
+      method: "POST",
+      headers: this.getHeaders(),
+      body: JSON.stringify({ activity_type: activityType, metadata }),
+    });
+    if (!response.ok) throw new Error("Failed to track activity");
+    return response.json();
   }
 
   async getActivitySummary(days: number = 30): Promise<ActivitySummary> {
-    const response = await axios.get(`${API_URL}/analytics/activity/summary`, {
+    const searchParams = new URLSearchParams();
+    searchParams.append("days", days.toString());
+    const response = await fetch(`${API_URL}/analytics/activity/summary?${searchParams}`, {
       headers: this.getHeaders(),
-      params: { days },
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get activity summary");
+    return response.json();
   }
 
   async getActivities(params: {
@@ -94,74 +115,169 @@ class AnalyticsService {
     limit?: number;
     offset?: number;
   }): Promise<UserActivity[]> {
-    const response = await axios.get(`${API_URL}/analytics/activities`, {
+    const searchParams = new URLSearchParams();
+    if (params.activityType) searchParams.append("activity_type", params.activityType);
+    if (params.startDate) searchParams.append("start_date", params.startDate.toISOString());
+    if (params.endDate) searchParams.append("end_date", params.endDate.toISOString());
+    if (params.limit) searchParams.append("limit", params.limit.toString());
+    if (params.offset) searchParams.append("offset", params.offset.toString());
+
+    const response = await fetch(`${API_URL}/analytics/activities?${searchParams}`, {
       headers: this.getHeaders(),
-      params: {
-        activity_type: params.activityType,
-        start_date: params.startDate?.toISOString(),
-        end_date: params.endDate?.toISOString(),
-        limit: params.limit,
-        offset: params.offset,
-      },
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get activities");
+    return response.json();
   }
 
   // Achievement Analytics
   async getAchievementTrends(limit: number = 5, category?: string): Promise<AchievementTrends> {
-    const response = await axios.get(`${API_URL}/analytics/achievements/trends`, {
+    const searchParams = new URLSearchParams();
+    searchParams.append("limit", limit.toString());
+    if (category) searchParams.append("category", category);
+
+    const response = await fetch(`${API_URL}/analytics/achievements/trends?${searchParams}`, {
       headers: this.getHeaders(),
-      params: { limit, category },
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get achievement trends");
+    return response.json();
   }
 
   async getAchievementAnalytics(achievementId: number): Promise<AchievementAnalytics> {
-    const response = await axios.get(
-      `${API_URL}/analytics/achievements/${achievementId}/analytics`,
-      { headers: this.getHeaders() }
-    );
-    return response.data;
-  }
-
-  async getUserAchievementStats(): Promise<Record<string, any>> {
-    const response = await axios.get(`${API_URL}/analytics/achievements/user/stats`, {
+    const response = await fetch(`${API_URL}/analytics/achievements/${achievementId}/analytics`, {
       headers: this.getHeaders(),
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get achievement analytics");
+    return response.json();
+  }
+
+  async getUserAchievementStats(): Promise<UserAchievementStats> {
+    const response = await fetch(`${API_URL}/analytics/achievements/user/stats`, {
+      headers: this.getHeaders(),
+    });
+    if (!response.ok) throw new Error("Failed to get user achievement stats");
+    return response.json();
   }
 
   async getAchievementCompletionRates(category?: string): Promise<Record<string, number>> {
-    const response = await axios.get(`${API_URL}/analytics/achievements/completion-rates`, {
-      headers: this.getHeaders(),
-      params: { category },
-    });
-    return response.data;
+    const searchParams = new URLSearchParams();
+    if (category) searchParams.append("category", category);
+
+    const response = await fetch(
+      `${API_URL}/analytics/achievements/completion-rates?${searchParams}`,
+      {
+        headers: this.getHeaders(),
+      }
+    );
+    if (!response.ok) throw new Error("Failed to get achievement completion rates");
+    return response.json();
   }
 
   // User Engagement Analytics
   async getEngagementMetrics(days: number = 30): Promise<UserEngagementMetrics> {
-    const response = await axios.get(`${API_URL}/analytics/engagement`, {
+    const searchParams = new URLSearchParams();
+    searchParams.append("days", days.toString());
+    const response = await fetch(`${API_URL}/analytics/engagement?${searchParams}`, {
       headers: this.getHeaders(),
-      params: { days },
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get engagement metrics");
+    return response.json();
   }
 
   async getDailyEngagement(date?: Date): Promise<UserEngagement> {
-    const response = await axios.get(`${API_URL}/analytics/engagement/daily`, {
+    const searchParams = new URLSearchParams();
+    if (date) searchParams.append("date", date.toISOString());
+
+    const response = await fetch(`${API_URL}/analytics/engagement/daily?${searchParams}`, {
       headers: this.getHeaders(),
-      params: { date: date?.toISOString() },
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get daily engagement");
+    return response.json();
   }
 
   async getUserStreak(): Promise<{ current_streak: number; longest_streak: number }> {
-    const response = await axios.get(`${API_URL}/analytics/engagement/streak`, {
+    const response = await fetch(`${API_URL}/analytics/engagement/streak`, {
       headers: this.getHeaders(),
     });
-    return response.data;
+    if (!response.ok) throw new Error("Failed to get user streak");
+    return response.json();
   }
 }
 
 export const analyticsService = new AnalyticsService();
+
+// React Query Hooks
+export const useAnalytics = () => {
+  // User Activity Analytics
+  const trackActivity = useMutation({
+    mutationFn: ({
+      activityType,
+      metadata,
+    }: {
+      activityType: string;
+      metadata?: ActivityMetadata;
+    }) => analyticsService.trackActivity(activityType, metadata),
+  });
+
+  const activitySummary = useQuery({
+    queryKey: ["activitySummary"],
+    queryFn: () => analyticsService.getActivitySummary(),
+  });
+
+  const activities = useQuery({
+    queryKey: ["activities"],
+    queryFn: () => analyticsService.getActivities({}),
+  });
+
+  // Achievement Analytics
+  const achievementTrends = useQuery({
+    queryKey: ["achievementTrends"],
+    queryFn: () => analyticsService.getAchievementTrends(),
+  });
+
+  const achievementAnalytics = useQuery({
+    queryKey: ["achievementAnalytics"],
+    queryFn: () => analyticsService.getAchievementAnalytics(0),
+  });
+
+  const userAchievementStats = useQuery({
+    queryKey: ["userAchievementStats"],
+    queryFn: () => analyticsService.getUserAchievementStats(),
+  });
+
+  const achievementCompletionRates = useQuery({
+    queryKey: ["achievementCompletionRates"],
+    queryFn: () => analyticsService.getAchievementCompletionRates(),
+  });
+
+  // User Engagement Analytics
+  const engagementMetrics = useQuery({
+    queryKey: ["engagementMetrics"],
+    queryFn: () => analyticsService.getEngagementMetrics(),
+  });
+
+  const dailyEngagement = useQuery({
+    queryKey: ["dailyEngagement"],
+    queryFn: () => analyticsService.getDailyEngagement(),
+  });
+
+  const userStreak = useQuery({
+    queryKey: ["userStreak"],
+    queryFn: () => analyticsService.getUserStreak(),
+  });
+
+  return {
+    // User Activity Analytics
+    trackActivity,
+    activitySummary,
+    activities,
+    // Achievement Analytics
+    achievementTrends,
+    achievementAnalytics,
+    userAchievementStats,
+    achievementCompletionRates,
+    // User Engagement Analytics
+    engagementMetrics,
+    dailyEngagement,
+    userStreak,
+  };
+};

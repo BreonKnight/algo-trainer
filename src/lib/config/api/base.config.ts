@@ -1,8 +1,6 @@
 // Base URL configuration utility
 export const getBaseUrl = (service: string, port: string) => {
-  return process.env.NODE_ENV === "development"
-    ? `http://localhost:${port}/${service}`
-    : `/${service}`;
+  return process.env.NODE_ENV === "development" ? `http://localhost:${port}` : `/${service}`;
 };
 
 // Common API configuration
@@ -17,7 +15,7 @@ export const API_CONFIG = {
 
 // Base URLs for all services
 export const BASE_URLS = {
-  AUTH: getBaseUrl("api/v1", "8000"),
-  CODE_EXECUTION: getBaseUrl("api", "5002"),
-  GAMIFICATION: "/api/gamification",
+  AUTH: getBaseUrl("auth", "8000"),
+  CODE_EXECUTION: getBaseUrl("code-execution", "8002"),
+  GAMIFICATION: getBaseUrl("gamification", "8001"),
 } as const;

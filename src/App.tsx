@@ -1,18 +1,19 @@
 import "./App.css";
+import React from "react";
 import { Suspense, lazy, memo, useMemo } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Toaster } from "sonner";
-import React from "react";
 
 import AboutPage from "@/app/AboutPage";
 import AuthPage from "@/app/AuthPage";
 import DesignSystemPage from "@/app/DesignSystemPage";
+import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import { TopBar } from "@/components/features/algorithm-trainer/components/layout/TopBar";
+import GamificationDashboard from "@/components/GamificationDashboard";
 import PatternManagement from "@/components/layouts/admin/PatternManagement";
 import { Navigation } from "@/components/ui/navigation";
-import { AnalyticsDashboard } from "./components/AnalyticsDashboard";
 
 import Practice from "@algo-trainer/shared/stores/practice-store";
 
@@ -53,6 +54,7 @@ const AppContent = memo(function AppContent() {
       <Routes>
         <Route path="/" element={<AlgorithmTrainer />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/gamification" element={<GamificationDashboard />} />
         <Route
           path="/progress"
           element={
@@ -203,7 +205,6 @@ const AppContent = memo(function AppContent() {
         <main className={!isAuthRoute ? "pt-4" : ""}>{routeElements}</main>
       </div>
       <Toaster position="bottom-left" richColors theme="dark" />
-      <AnalyticsDashboard />
     </div>
   );
 });

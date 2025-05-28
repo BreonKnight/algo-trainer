@@ -17,13 +17,14 @@ interface Particle {
 }
 
 export default function AuthPage() {
-  const { login } = useAuth();
+  const { login, register, isAuthenticated } = useAuth();
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    name: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -408,11 +409,25 @@ export default function AuthPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await login(formData.email, formData.password);
+      await login({ email: formData.email, password: formData.password });
       toast.success("Login successful!");
-      navigate("/progress");
+      navigate("/gamification");
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await register({ email: formData.email, password: formData.password, name: formData.name });
+      toast.success("Signup successful!");
+      navigate("/progress");
+    } catch (error) {
+      toast.error("Signup failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -423,7 +438,86 @@ export default function AuthPage() {
       <div ref={containerRef} className="absolute inset-0" />
       <div className="relative z-10 flex items-center justify-center w-full h-full">
         {!isLogin ? (
-          <SignupForm3D />
+          <div className="w-full max-w-md p-8 space-y-8 bg-background/80 backdrop-blur-lg rounded-xl shadow-2xl">
+            <div>
+              <h2 className="text-3xl font-extrabold text-center text-foreground">
+                Create your account
+              </h2>
+              <p className="mt-2 text-center text-sm text-foreground/60">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => setIsLogin(true)}
+                  className="font-medium text-primary hover:text-primary/80"
+                >
+                  Sign in
+                </button>
+              </p>
+            </div>
+
+            <form onSubmit={handleSignup} className="mt-8 space-y-6">
+              <div className="rounded-md shadow-sm space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-foreground">
+                    Name
+                  </label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your name"
+                    className="mt-1 bg-background/50"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-foreground">
+                    Email address
+                  </label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Enter your email"
+                    className="mt-1 bg-background/50"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="block text-sm font-medium text-foreground">
+                    Password
+                  </label>
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Enter your password"
+                    className="mt-1 bg-background/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? "Creating account..." : "Create account"}
+                </button>
+              </div>
+            </form>
+          </div>
         ) : (
           <div className="w-full max-w-md p-8 space-y-8 bg-background/80 backdrop-blur-lg rounded-xl shadow-2xl">
             <div>

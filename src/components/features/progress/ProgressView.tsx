@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { BarChart3, TrendingUp, Activity, Target, ChevronRight } from "lucide-react";
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useEffect } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
@@ -9,15 +9,107 @@ import { CardContent, CardDescription, CardHeader, CardTitle } from "@/component
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { ThemedCard } from "@/components/ui/themed-card";
-import { cn } from '@algo-trainer/shared/utils/common';
+import { useToast } from "@/components/ui/use-toast";
+import { useAuth } from "@/lib/hooks/useAuth";
+
+import { cn } from "@algo-trainer/shared/utils/common";
+
+interface UserProgress {
+  level: number;
+  streak: number;
+  points: number;
+  algorithmsMastered: number;
+  totalAlgorithms: number;
+  achievements: Array<{
+    title: string;
+    progress: number;
+  }>;
+}
 
 const ProgressView = memo(function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);
+  const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
+  const [loading, setLoading] = useState(true);
   const { theme } = useTheme();
+  const { isAuthenticated } = useAuth();
+  const { toast } = useToast();
+
+  const fetchUserProgress = useCallback(async () => {
+    try {
+      setLoading(true);
+      // Fetch user engagement metrics
+      const engagementResponse = await fetch("/api/analytics/engagement", {
+        headers: isAuthenticated
+          ? {
+              Authorization: "Bearer authenticated",
+            }
+          : {},
+      });
+      const engagementData = await engagementResponse.json();
+
+      // Fetch user achievement stats
+      const achievementsResponse = await fetch("/api/analytics/achievements/user/stats", {
+        headers: isAuthenticated
+          ? {
+              Authorization: "Bearer authenticated",
+            }
+          : {},
+      });
+      const achievementsData = await achievementsResponse.json();
+
+      // Fetch user streak
+      const streakResponse = await fetch("/api/analytics/engagement/streak", {
+        headers: isAuthenticated
+          ? {
+              Authorization: "Bearer authenticated",
+            }
+          : {},
+      });
+      const streakData = await streakResponse.json();
+
+      setUserProgress({
+        level: engagementData.level || 1,
+        streak: streakData.current_streak || 0,
+        points: engagementData.total_points || 0,
+        algorithmsMastered: achievementsData.mastered_algorithms || 0,
+        totalAlgorithms: achievementsData.total_algorithms || 24,
+        achievements: achievementsData.recent_achievements || [],
+      });
+
+      setProgressValue(engagementData.level || 1);
+    } catch (error) {
+      console.error("Error fetching user progress:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load progress data. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }, [isAuthenticated, toast]);
+
+  useEffect(() => {
+    fetchUserProgress();
+  }, [fetchUserProgress]);
 
   const handleProgressChange = useCallback((value: number[]) => {
     setProgressValue(value[0]);
   }, []);
+
+  if (loading) {
+    return (
+      <Background>
+        <div className="container mx-auto p-4">
+          <div className="max-w-6xl mx-auto space-y-8">
+            <div className="flex items-center justify-center h-[50vh]">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
+            </div>
+          </div>
+        </div>
+      </Background>
+    );
+  }
 
   return (
     <Background>
@@ -35,7 +127,9 @@ const ProgressView = memo(function ProgressView() {
             </div>
             <div className="flex items-center gap-2">
               <Activity className="h-6 w-6 text-accent animate-pulse" />
-              <span className="text-sm font-medium text-accent">Level {progressValue}</span>
+              <span className="text-sm font-medium text-accent">
+                Level {userProgress?.level || 1}
+              </span>
             </div>
           </div>
 
@@ -56,7 +150,7 @@ const ProgressView = memo(function ProgressView() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{progressValue}</div>
+                <div className="text-2xl font-bold">{userProgress?.level || 1}</div>
                 <Progress value={progressValue} className="mt-2" />
                 <div className="text-xs text-muted-foreground mt-1">
                   {100 - progressValue}% to next level
@@ -75,9 +169,11 @@ const ProgressView = memo(function ProgressView() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">7</div>
+                <div className="text-2xl font-bold">{userProgress?.streak || 0}</div>
                 <div className="text-sm text-muted-foreground mt-1">Keep it up!</div>
-                <div className="text-xs text-accent mt-1">🔥 7 days strong</div>
+                <div className="text-xs text-accent mt-1">
+                  🔥 {userProgress?.streak || 0} days strong
+                </div>
               </CardContent>
             </ThemedCard>
 
@@ -90,9 +186,11 @@ const ProgressView = memo(function ProgressView() {
                 <CardTitle className="text-sm font-medium text-muted-foreground">Points</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">1,250</div>
+                <div className="text-2xl font-bold">{userProgress?.points || 0}</div>
                 <div className="text-sm text-muted-foreground mt-1">Total earned</div>
-                <div className="text-xs text-accent mt-1">⭐ 1,250 points collected</div>
+                <div className="text-xs text-accent mt-1">
+                  ⭐ {userProgress?.points || 0} points collected
+                </div>
               </CardContent>
             </ThemedCard>
 
@@ -107,9 +205,19 @@ const ProgressView = memo(function ProgressView() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">12</div>
-                <div className="text-sm text-muted-foreground mt-1">Out of 24</div>
-                <div className="text-xs text-accent mt-1">🏆 50% complete</div>
+                <div className="text-2xl font-bold">{userProgress?.algorithmsMastered || 0}</div>
+                <div className="text-sm text-muted-foreground mt-1">
+                  Out of {userProgress?.totalAlgorithms || 24}
+                </div>
+                <div className="text-xs text-accent mt-1">
+                  🏆{" "}
+                  {Math.round(
+                    ((userProgress?.algorithmsMastered || 0) /
+                      (userProgress?.totalAlgorithms || 24)) *
+                      100
+                  )}
+                  % complete
+                </div>
               </CardContent>
             </ThemedCard>
           </motion.div>
@@ -163,11 +271,7 @@ const ProgressView = memo(function ProgressView() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {[
-                    { title: "QuickSort Mastered", progress: 100 },
-                    { title: "Binary Search Practice", progress: 75 },
-                    { title: "Graph Traversals", progress: 50 },
-                  ].map((achievement, index) => (
+                  {userProgress?.achievements.map((achievement, index) => (
                     <div key={index} className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-sm font-medium">{achievement.title}</span>

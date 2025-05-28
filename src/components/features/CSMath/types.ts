@@ -6,3 +6,15 @@ export interface Concept {
   clrsExplanation: string;
   mathematicalNotation: string;
 }
+
+export interface BaseSymbol {
+  symbol: string;
+  name: string;
+  description: string;
+  example: string;
+}
+
+export interface EnhancedSymbol extends BaseSymbol {
+  applications: string[];
+  relatedConcepts: string[];
+}
