@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const twoSumPattern: AlgorithmPattern = {
   title: "Two Sum Algorithm (Brute Force)",

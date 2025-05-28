@@ -1,4 +1,4 @@
-import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
+import { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 
 // Add Activity Selection Monster Hunter Pattern
 const activitySelectionMonsterHunterPattern = new Map<PatternKey, string>([

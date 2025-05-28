@@ -1,6 +1,7 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
 import { patternMapping } from "@/lib/patterns/mapping";
 import { PatternKey, PATTERN_KEYS, MonsterHunterPattern } from "@/lib/patterns/types";
+
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 interface VerificationResult {
   missingPatterns: {

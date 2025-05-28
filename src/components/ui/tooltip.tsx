@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as React from "react";
 
-import { cn } from '@algo-trainer/shared/utils/common';
+import { cn } from "@algo-trainer/shared/utils/common";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 

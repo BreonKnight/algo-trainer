@@ -2,18 +2,19 @@ import { Book, Sword, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import { AlgorithmSelector } from '@algo-trainer/shared/components/algorithm-trainer/AlgorithmSelector';
 import { MonsterHunterGuide } from "@/components/features/algorithm-trainer/components/core/MonsterHunterGuide";
 import { monsterHunterPatternsByCategory } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterPatternsCombined";
-import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { categoryColors } from "@/lib/patterns";
 import { pseudocodePatterns } from "@/lib/pseudocode";
-import { patternMapping } from '@algo-trainer/shared/utils/pattern-mapping';
-import { cn } from '@algo-trainer/shared/utils/common';
 import styles from "@/styles/pseudocode.module.css";
+
+import { AlgorithmSelector } from "@algo-trainer/shared/components/algorithm-trainer/AlgorithmSelector";
+import { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
+import { cn } from "@algo-trainer/shared/utils/common";
+import { patternMapping } from "@algo-trainer/shared/utils/pattern-mapping";
 
 // Define the type for pseudocodePatterns
 type PseudocodePatterns = Record<string, () => JSX.Element>;

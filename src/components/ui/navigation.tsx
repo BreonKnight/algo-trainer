@@ -4,10 +4,9 @@ import {
   BarChart,
   Menu,
   X,
-  Code2,
+  Code,
   GraduationCap,
   Network,
-  Code,
   ListChecks,
   LucideIcon,
 } from "lucide-react";
@@ -158,7 +157,7 @@ export function Navigation() {
       "/tutorials": "../tutorials/Tutorials",
       "/practice": "../practice/Practice",
       "/python-techniques": "../python-techniques/PythonTechniques",
-      "/progress": "../progress/Progress",
+      "/dashboard": "../dashboard/Dashboard",
       "/systems-design": "../systems-design/SystemsDesign",
       "/": "../about/AboutPage",
     };
@@ -248,25 +247,12 @@ export function Navigation() {
             isLoading: loadingStates["/tutorials"],
           },
           {
-            path: "/python-techniques",
-            label: "Python",
-            icon: Code2,
-            onClick: (e: React.MouseEvent) => handleNavClick("/python-techniques", e),
-            onMouseEnter: () => preloadRoute("/python-techniques"),
-            isLoading: loadingStates["/python-techniques"],
-          },
-        ],
-      },
-      {
-        label: "Progress",
-        items: [
-          {
-            path: "/progress",
-            label: "Progress",
+            path: "/dashboard",
+            label: "Dashboard",
             icon: BarChart,
-            onClick: (e: React.MouseEvent) => handleNavClick("/progress", e),
-            onMouseEnter: () => preloadRoute("/progress"),
-            isLoading: loadingStates["/progress"],
+            onClick: (e: React.MouseEvent) => handleNavClick("/dashboard", e),
+            onMouseEnter: () => preloadRoute("/dashboard"),
+            isLoading: loadingStates["/dashboard"],
           },
           {
             path: "/systems-design",
@@ -297,8 +283,6 @@ export function Navigation() {
 
   // Memoize active state check
   const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
-
-  // Memoize theme checks
 
   // Memoize mobile menu toggle
   const toggleMobileMenu = useCallback(() => {
@@ -377,7 +361,7 @@ export function Navigation() {
         </Link>
       );
     },
-    [isActive, themeTextClass, scrollToTop]
+    [isActive, scrollToTop, themeTextClass]
   );
 
   return (

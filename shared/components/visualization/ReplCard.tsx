@@ -13,6 +13,11 @@ import { PythonCodeHandler } from "@/lib/python/codeHandler";
 
 interface ReplCardProps {
   userCode: string;
+  onSolutionSubmit?: (
+    isCorrect: boolean,
+    isFirstAttempt: boolean,
+    isPerfectSolution: boolean
+  ) => void;
 }
 
 // Custom hook for media query
@@ -34,7 +39,7 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-export function ReplCard({ userCode }: ReplCardProps) {
+export function ReplCard({ userCode, onSolutionSubmit }: ReplCardProps) {
   const [output, setOutput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [pyodide, setPyodide] = useState<PyodideInterface | null>(null);
@@ -222,6 +227,10 @@ export function ReplCard({ userCode }: ReplCardProps) {
       });
 
       triggerConfetti();
+
+      if (onSolutionSubmit) {
+        onSolutionSubmit(true, true, true); // You may want to adjust these values based on your logic
+      }
     } catch (error) {
       const errorMessage = PythonCodeHandler.handlePythonError(
         error instanceof Error ? error : String(error)

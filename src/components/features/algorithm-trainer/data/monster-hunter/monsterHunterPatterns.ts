@@ -1,4 +1,4 @@
-import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
+import { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 
 import { monsterHunterPatternsExtended } from "./monsterHunterPatternsExtended";
 import { monsterHunterPatternsExtended2 } from "./monsterHunterPatternsExtended2";

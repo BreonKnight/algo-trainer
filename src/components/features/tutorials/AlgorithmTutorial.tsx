@@ -2,7 +2,6 @@ import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import type { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
@@ -10,8 +9,11 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
+import { useUpdateGamificationProgress } from "@/hooks/useUpdateGamificationProgress";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import type { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
+import { cn } from "@algo-trainer/shared/utils/common";
 
 type Language = "python" | "javascript";
 
@@ -89,6 +91,7 @@ const isTutorialAvailable = (
 
 export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialProps) {
   const { theme } = useTheme();
+  const { trackTutorialCompletion } = useUpdateGamificationProgress();
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
   const [activeTab, setActiveTab] = useState("video");
@@ -117,6 +120,23 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
   // Get theme-aware gradient for headings
   const headingGradient =
     headingGradients[theme] || "linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)";
+
+  const handleQuizComplete = async () => {
+    if (currentTutorial) {
+      // Calculate quiz score
+      const totalQuestions = currentTutorial.quiz.length;
+      const correctAnswers = currentTutorial.quiz.filter(
+        (q) => quizAnswers[q.id] === q.correctAnswer
+      ).length;
+      const score = (correctAnswers / totalQuestions) * 100;
+
+      // Track tutorial completion with gamification
+      await trackTutorialCompletion(currentTutorial.id, score);
+
+      // Mark tutorial as completed in localStorage
+      localStorage.setItem(`tutorial-${currentTutorial.id}`, "completed");
+    }
+  };
 
   if (!tutorials || tutorials.length === 0) {
     return (
@@ -488,7 +508,10 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                       <Button
                         variant="secondary"
                         className="mt-4"
-                        onClick={() => setShowResults(true)}
+                        onClick={() => {
+                          setShowResults(true);
+                          handleQuizComplete();
+                        }}
                         disabled={
                           !currentTutorial ||
                           !currentTutorial.quiz ||

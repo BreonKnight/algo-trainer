@@ -31,7 +31,8 @@ import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedCard } from "@/components/ui/themed-card";
 import GamificationService, { UserProgress } from "@/lib/gamification";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface LeetCodeProblem {
   title: string;

@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const bitManipulationPattern: AlgorithmPattern = {
   title: "Bit Manipulation Pattern",

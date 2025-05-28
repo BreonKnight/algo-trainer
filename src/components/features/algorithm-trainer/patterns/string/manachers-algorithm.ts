@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const manachersAlgorithmPattern: AlgorithmPattern = {
   title: "Manacher's Algorithm",

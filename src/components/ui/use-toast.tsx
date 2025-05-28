@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-import { Toast, ToastContainer } from "./toast";
+import { ToastContainer } from "./toast";
 
 export type ToastProps = {
   title?: string;

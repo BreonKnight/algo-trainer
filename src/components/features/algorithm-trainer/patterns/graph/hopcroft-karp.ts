@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const hopcroftKarpPattern: AlgorithmPattern = {
   title: "Hopcroft-Karp's Algorithm",

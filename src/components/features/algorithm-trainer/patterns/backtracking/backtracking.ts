@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const backtrackingPattern: AlgorithmPattern = {
   title: "Backtracking Algorithm Pattern",

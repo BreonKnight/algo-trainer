@@ -2,7 +2,8 @@ import { ReactNode } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Card } from "@/components/ui/card";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface SolutionCardProps {
   children: ReactNode;

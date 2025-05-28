@@ -12,7 +12,8 @@ import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 
 import { monsterHunterPatternsByCategory } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterPatternsCombined";
-import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
+
+import { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 
 // Group patterns by their category
 const getPatternCategories = () => {

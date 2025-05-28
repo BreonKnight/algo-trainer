@@ -11,7 +11,6 @@ import { dijkstraPattern } from "@/components/features/algorithm-trainer/pattern
 import { floydCycleDetectionPattern } from "@/components/features/algorithm-trainer/patterns/graph/floyd-cycle-detection";
 import { floydWarshallPattern } from "@/components/features/algorithm-trainer/patterns/graph/floyd-warshall";
 import { fordFulkersonPattern } from "@/components/features/algorithm-trainer/patterns/graph/ford-fulkerson";
-import { graphRepresentationPattern } from '@algo-trainer/shared/algorithms/graph/representation';
 import { hopcroftKarpPattern } from "@/components/features/algorithm-trainer/patterns/graph/hopcroft-karp";
 import { hungarianAlgorithmPattern } from "@/components/features/algorithm-trainer/patterns/graph/hungarian-algorithm";
 import { kahnsTopologicalSortPattern } from "@/components/features/algorithm-trainer/patterns/graph/kahns-topological-sort";
@@ -23,6 +22,8 @@ import { primPattern } from "@/components/features/algorithm-trainer/patterns/gr
 import { stronglyConnectedComponentsPattern } from "@/components/features/algorithm-trainer/patterns/graph/strongly-connected-components";
 import { topologicalSortPattern } from "@/components/features/algorithm-trainer/patterns/graph/topological-sort";
 import { BasePattern, PatternCategory, PatternKey } from "@/lib/patterns/types";
+
+import { graphRepresentationPattern } from "@algo-trainer/shared/algorithms/graph/representation";
 
 export const graphPatterns: Partial<Record<PatternKey, BasePattern>> = {
   "A* Search": {

@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { AUTH_ENDPOINTS } from "@/lib/config/api/auth.config";
-import { setAuthToken, getAuthToken } from "@/lib/services/authService";
+import { setAuthToken, getAuthToken, removeAuthToken } from "@/lib/services/authService";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
@@ -66,10 +66,16 @@ export const useAuth = () => {
     },
   });
 
+  const logout = () => {
+    removeAuthToken();
+    queryClient.setQueryData(["auth"], false);
+  };
+
   return {
     isAuthenticated,
     login: loginMutation.mutate,
     register: registerMutation.mutate,
+    logout,
     isLoading: loginMutation.isPending || registerMutation.isPending,
     error: loginMutation.error || registerMutation.error,
   };

@@ -3,7 +3,8 @@ import { useState, useRef, useEffect } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 export function Timer() {
   const { theme } = useTheme();

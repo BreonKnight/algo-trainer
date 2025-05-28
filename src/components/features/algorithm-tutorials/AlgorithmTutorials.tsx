@@ -2,11 +2,12 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, Navigate } from "react-router-dom";
 
-import type { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { AlgorithmTutorial } from "@/components/features/tutorials/AlgorithmTutorial";
 import type { Tutorial } from "@/components/features/tutorials/AlgorithmTutorial";
 import { Background } from "@/components/ui/background";
 import tutorialsData from "@/data/tutorials.json";
+
+import type { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 //import { cn } from '@algo-trainer/shared/utils/common';
 
 import { TutorialListItem } from "./TutorialListItem";

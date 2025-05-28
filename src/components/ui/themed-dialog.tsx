@@ -7,7 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface ThemedDialogProps {
   isOpen: boolean;

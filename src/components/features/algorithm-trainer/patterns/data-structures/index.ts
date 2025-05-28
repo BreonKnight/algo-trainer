@@ -1,23 +1,24 @@
-import { bTreePattern } from '@algo-trainer/shared/data-structures/b-tree';
-import { circularLinkedListPattern } from '@algo-trainer/shared/data-structures/circular-linked-list';
-import { doublyLinkedListPattern } from '@algo-trainer/shared/data-structures/doubly-linked-list';
 import { fastAndSlowPointersPattern } from "@/components/features/algorithm-trainer/patterns/data-structures/fast-and-slow-pointers";
 import { fenwickTreePattern } from "@/components/features/algorithm-trainer/patterns/data-structures/fenwick-tree";
-import { hashTablePattern } from '@algo-trainer/shared/data-structures/hash-table';
-import { heapImplementationPattern } from '@algo-trainer/shared/data-structures/heap';
 import { inorderTraversalPattern } from "@/components/features/algorithm-trainer/patterns/data-structures/inorder-traversal";
-import { linkedListPattern } from '@algo-trainer/shared/data-structures/linked-list';
 import { monotonicQueuePattern } from "@/components/features/algorithm-trainer/patterns/data-structures/monotonic-queue";
 import { monotonicStackPattern } from "@/components/features/algorithm-trainer/patterns/data-structures/monotonic-stack";
-import { queueImplementationPattern } from '@algo-trainer/shared/data-structures/queue';
-import { redBlackTreePattern } from '@algo-trainer/shared/data-structures/red-black-tree';
-import { segmentTreePattern } from '@algo-trainer/shared/data-structures/segment-tree';
-import { sparseTablePattern } from '@algo-trainer/shared/data-structures/sparse-table';
-import { stackImplementationPattern } from '@algo-trainer/shared/data-structures/stack';
-import { triePattern } from '@algo-trainer/shared/data-structures/trie';
-import { unionFindPattern } from '@algo-trainer/shared/data-structures/union-find';
 import { createPatternRecord } from "@/lib/patterns/pattern-utils";
 import { BasePattern, PatternCategory } from "@/lib/patterns/types";
+
+import { bTreePattern } from "@algo-trainer/shared/data-structures/b-tree";
+import { circularLinkedListPattern } from "@algo-trainer/shared/data-structures/circular-linked-list";
+import { doublyLinkedListPattern } from "@algo-trainer/shared/data-structures/doubly-linked-list";
+import { hashTablePattern } from "@algo-trainer/shared/data-structures/hash-table";
+import { heapImplementationPattern } from "@algo-trainer/shared/data-structures/heap";
+import { linkedListPattern } from "@algo-trainer/shared/data-structures/linked-list";
+import { queueImplementationPattern } from "@algo-trainer/shared/data-structures/queue";
+import { redBlackTreePattern } from "@algo-trainer/shared/data-structures/red-black-tree";
+import { segmentTreePattern } from "@algo-trainer/shared/data-structures/segment-tree";
+import { sparseTablePattern } from "@algo-trainer/shared/data-structures/sparse-table";
+import { stackImplementationPattern } from "@algo-trainer/shared/data-structures/stack";
+import { triePattern } from "@algo-trainer/shared/data-structures/trie";
+import { unionFindPattern } from "@algo-trainer/shared/data-structures/union-find";
 
 export const dataStructurePatterns = createPatternRecord<BasePattern>({
   "Monotonic Queue": {

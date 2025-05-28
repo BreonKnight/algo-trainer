@@ -19,7 +19,8 @@ import {
   kingdomHeartsTheme,
   fortniteTheme,
 } from "@/lib/theme";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 // Lazy load Monaco editor
 const Editor = lazy(() => import("@monaco-editor/react"));

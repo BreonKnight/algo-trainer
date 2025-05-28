@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const greedyHuffmanCodingPattern: AlgorithmPattern = {
   title: "Greedy Huffman Coding Algorithm",

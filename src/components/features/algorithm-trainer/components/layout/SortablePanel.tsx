@@ -4,7 +4,8 @@ import { GripVertical } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface SortablePanelProps {
   id: string;

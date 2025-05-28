@@ -24,6 +24,11 @@ interface RawTutorial {
   }[];
 }
 
+interface TutorialListItemProps {
+  tutorial: RawTutorial;
+  onComplete?: (timeSpent: number) => void;
+}
+
 const getThemeListItemClass = (theme: string) =>
   [
     "block p-4 rounded-2xl border shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1",
@@ -48,11 +53,31 @@ const getThemeListItemClass = (theme: string) =>
                       : "bg-background/95 border-accent2/20 text-main",
   ].join(" ");
 
-export const TutorialListItem = memo(({ tutorial }: { tutorial: RawTutorial }) => {
+export const TutorialListItem = memo(({ tutorial, onComplete }: TutorialListItemProps) => {
   const { theme } = useTheme();
   const listItemClass = getThemeListItemClass(theme);
+
+  const handleClick = () => {
+    // Start tracking time when tutorial is opened
+    const startTime = Date.now();
+
+    // Store start time in localStorage
+    localStorage.setItem(`tutorial-${tutorial.id}-start`, startTime.toString());
+
+    // If onComplete is provided, calculate time spent and call it
+    if (onComplete) {
+      const timeSpent = Date.now() - startTime;
+      onComplete(timeSpent);
+    }
+  };
+
   return (
-    <Link key={tutorial.id} to={`/tutorials/${tutorial.id}`} className={listItemClass}>
+    <Link
+      key={tutorial.id}
+      to={`/tutorials/${tutorial.id}`}
+      className={listItemClass}
+      onClick={handleClick}
+    >
       <h3 className="font-medium text-lg mb-2 text-[var(--card-text)]">{tutorial.title}</h3>
       <p className="text-sm mb-4 text-[var(--card-text)]">{tutorial.description}</p>
       <div className="flex justify-between items-center">

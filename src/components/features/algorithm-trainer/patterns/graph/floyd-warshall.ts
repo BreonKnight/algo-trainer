@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const floydWarshallPattern: AlgorithmPattern = {
   title: "Floyd-Warshall Algorithm",

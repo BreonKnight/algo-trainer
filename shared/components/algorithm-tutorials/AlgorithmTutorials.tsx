@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams, Navigate } from "react-router-dom";
 
-import type { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { AlgorithmTutorial } from "@/components/features/tutorials/AlgorithmTutorial";
 import type { Tutorial } from "@/components/features/tutorials/AlgorithmTutorial";
 import { Background } from "@/components/ui/background";
 import tutorialsData from "@/data/tutorials.json";
+import { useUpdateGamificationProgress } from "@/hooks/useUpdateGamificationProgress";
+
+import type { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 //import { cn } from '@algo-trainer/shared/utils/common';
 
 import { TutorialListItem } from "./TutorialListItem";
@@ -55,10 +57,15 @@ const getThemeClasses = () => ({
 export function TutorialList() {
   const themeClasses = getThemeClasses();
   const tutorials = tutorialsData as TutorialsByCategory;
+  const { trackTutorialCompletion } = useUpdateGamificationProgress();
 
   const sortedCategories = useMemo(() => {
     return Object.entries(tutorials).sort(([a], [b]) => a.localeCompare(b));
   }, [tutorials]);
+
+  const handleTutorialComplete = async (tutorialId: string, timeSpent: number) => {
+    await trackTutorialCompletion(tutorialId, timeSpent);
+  };
 
   return (
     <Background>
@@ -80,7 +87,11 @@ export function TutorialList() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {categoryTutorials.map((tutorial) => (
-                <TutorialListItem key={tutorial.id} tutorial={tutorial} />
+                <TutorialListItem
+                  key={tutorial.id}
+                  tutorial={tutorial}
+                  onComplete={(timeSpent) => handleTutorialComplete(tutorial.id, timeSpent)}
+                />
               ))}
             </div>
           </div>
@@ -94,6 +105,7 @@ export function TutorialRoute() {
   const themeClasses = getThemeClasses();
   const { algorithm } = useParams();
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
+  const { trackTutorialCompletion } = useUpdateGamificationProgress();
 
   // Log initial route parameters
   console.log("Route Parameters:", {
@@ -155,9 +167,17 @@ export function TutorialRoute() {
     tutorialTitles: tutorials.map((t) => t.title),
   });
 
+  const handleTutorialComplete = async (tutorialId: string, timeSpent: number) => {
+    await trackTutorialCompletion(tutorialId, timeSpent);
+  };
+
   return (
     <Background>
-      <AlgorithmTutorial algorithm={algorithm as PatternKey} tutorials={tutorials} />
+      <AlgorithmTutorial
+        algorithm={algorithm as PatternKey}
+        tutorials={tutorials}
+        onComplete={handleTutorialComplete}
+      />
     </Background>
   );
 }

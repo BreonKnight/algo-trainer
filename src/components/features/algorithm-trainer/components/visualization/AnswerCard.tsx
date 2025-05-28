@@ -6,7 +6,6 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { monsterHunterPatterns } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterPatterns";
 import { monsterHunterTestData } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterTestData";
 import { patterns as algorithmPatterns } from "@/components/features/algorithm-trainer/patterns/index";
-import { PatternKey, AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,7 +22,9 @@ import {
   kingdomHeartsTheme,
   fortniteTheme,
 } from "@/lib/theme";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { PatternKey, AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface AnswerCardProps {
   currentPattern: PatternKey;

@@ -8,7 +8,8 @@ import React, { useState, useMemo, useCallback } from "react";
 import { useTheme } from "@/components/theme/use-theme";
 import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
 import { Background } from "@/components/ui/background";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 import { chapters, mhChapters } from "./chapters";
 

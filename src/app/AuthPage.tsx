@@ -1,9 +1,9 @@
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 
-import { SignupForm3D } from "@/components/auth/SignupForm3D";
 import { useTheme } from "@/components/theme/use-theme";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/lib/hooks/useAuth";
@@ -17,7 +17,7 @@ interface Particle {
 }
 
 export default function AuthPage() {
-  const { login, register, isAuthenticated } = useAuth();
+  const { login, register, isAuthenticated, logout } = useAuth();
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
@@ -34,6 +34,8 @@ export default function AuthPage() {
       console.error("Container ref is not available");
       return;
     }
+
+    const container = containerRef.current; // Store ref in variable for cleanup
 
     try {
       console.log("Starting Three.js initialization...");
@@ -58,11 +60,11 @@ export default function AuthPage() {
       });
 
       console.log("Setting renderer size...");
-      renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+      renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
 
       console.log("Appending renderer to container...");
-      containerRef.current.appendChild(renderer.domElement);
+      container.appendChild(renderer.domElement);
       renderer.domElement.style.position = "absolute";
       renderer.domElement.style.top = "0";
       renderer.domElement.style.left = "0";
@@ -330,10 +332,10 @@ export default function AuthPage() {
       // Handle window resize
       const handleResize = () => {
         console.log("Handling window resize...");
-        if (containerRef.current) {
-          camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
+        if (container) {
+          camera.aspect = container.clientWidth / container.clientHeight;
           camera.updateProjectionMatrix();
-          renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+          renderer.setSize(container.clientWidth, container.clientHeight);
         }
       };
 
@@ -382,8 +384,8 @@ export default function AuthPage() {
         console.log("Cleaning up Three.js scene...");
         window.removeEventListener("resize", handleResize);
         observer.disconnect();
-        if (containerRef.current && containerRef.current.contains(renderer.domElement)) {
-          containerRef.current.removeChild(renderer.domElement);
+        if (container.contains(renderer.domElement)) {
+          container.removeChild(renderer.domElement);
         }
         scene.clear();
         renderer.dispose();
@@ -411,8 +413,8 @@ export default function AuthPage() {
     try {
       await login({ email: formData.email, password: formData.password });
       toast.success("Login successful!");
-      navigate("/gamification");
-    } catch (error) {
+      navigate("/dashboard");
+    } catch {
       toast.error("Login failed. Please check your credentials.");
     } finally {
       setIsLoading(false);
@@ -426,12 +428,55 @@ export default function AuthPage() {
       await register({ email: formData.email, password: formData.password, name: formData.name });
       toast.success("Signup successful!");
       navigate("/progress");
-    } catch (error) {
+    } catch {
       toast.error("Signup failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully");
+      navigate("/");
+    } catch {
+      toast.error("Failed to logout");
+    }
+  };
+
+  if (isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/90" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--accent)_0%,_transparent_70%)] opacity-10 animate-pulse" />
+
+        <div className="container mx-auto px-4 py-8 relative z-10">
+          <div className="flex flex-col items-center justify-center min-h-[80vh]">
+            <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-accent via-accent2 to-accent3 bg-clip-text text-transparent animate-gradient-x mystical-text">
+              You are already logged in
+            </h1>
+            <div className="flex gap-4">
+              <button
+                onClick={() => navigate("/dashboard")}
+                className="px-6 py-3 rounded-lg bg-accent/10 hover:bg-accent/20 text-accent transition-all duration-300 transform hover:scale-105"
+              >
+                Go to Dashboard
+              </button>
+              <button
+                onClick={handleLogout}
+                className="flex items-center space-x-2 px-6 py-3 rounded-lg bg-accent/10 hover:bg-accent/20 text-accent transition-all duration-300 transform hover:scale-105"
+              >
+                <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-screen">

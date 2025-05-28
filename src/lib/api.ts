@@ -18,6 +18,14 @@ authApi.interceptors.request.use((config) => {
   return config;
 });
 
+export interface AchievementRequirements {
+  tutorial_completed?: number;
+  algorithm_solved?: number;
+  perfect_solutions?: number;
+  streak_days?: number;
+  points_earned?: number;
+}
+
 export interface GamificationData {
   total_achievements: number;
   achieved_count: number;
@@ -33,7 +41,7 @@ export interface GamificationData {
       name: string;
       description: string;
       points: number;
-      requirements: Record<string, any>;
+      requirements: AchievementRequirements;
       is_active: boolean;
       created_at: string;
       updated_at: string;

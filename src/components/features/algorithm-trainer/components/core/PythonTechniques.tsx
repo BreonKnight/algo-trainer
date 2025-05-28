@@ -7,7 +7,6 @@ import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
-import { cn } from '@algo-trainer/shared/utils/common';
 import {
   getCardClass,
   getButtonClass,
@@ -15,6 +14,8 @@ import {
   getCodeBlockClass,
   getIconClass,
 } from "@/lib/utils/theme-class-utils";
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 // Custom hook to detect desktop
 function useIsDesktop() {

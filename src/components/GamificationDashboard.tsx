@@ -5,21 +5,29 @@ import {
   ClockIcon,
   FireIcon,
   BoltIcon,
-  HeartIcon,
-  ShieldExclamationIcon,
+  ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
-import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { useTheme } from "@/components/theme/use-theme";
 import { BASE_URLS } from "@/lib/config/api/base.config";
 import { getAuthToken } from "@/lib/services/authService";
 
-interface TokenPayload {
-  sub: string;
-  exp: number;
+interface Achievement {
+  achievement: {
+    id: number;
+    name: string;
+    description: string;
+  };
+  achieved_at: string | null;
+}
+
+interface DailyEngagement {
+  id: number;
+  date: string;
+  time_spent: number;
+  points_earned: number;
 }
 
 interface AuthResponse {
@@ -61,7 +69,13 @@ interface GamificationData {
 const GamificationDashboard: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("overview");
   const [userId, setUserId] = useState<number | null>(null);
-  const { theme } = useTheme();
+
+  const handleLogout = () => {
+    // Clear the auth token
+    localStorage.removeItem("auth_token");
+    // Redirect to login page or home
+    window.location.href = "/login";
+  };
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -220,33 +234,50 @@ const GamificationDashboard: React.FC = () => {
     );
   }
 
-  if (!engagementData || !achievementsData || !streakData) return null;
+  if (!engagementData || !achievementsData || !streakData) {
+    console.log("Missing data:", {
+      engagementData,
+      achievementsData,
+      streakData,
+    });
+    return null;
+  }
+
+  console.log("Raw data received:", {
+    engagementData,
+    achievementsData,
+    streakData,
+  });
 
   const transformedData: GamificationData = {
-    userActivities: engagementData.daily_engagement.map((activity: any) => ({
-      id: activity.id,
-      type: "activity",
-      timestamp: activity.date,
-      details: `Earned ${activity.points_earned} points`,
-    })),
+    userActivities:
+      engagementData.daily_engagement?.map((activity: DailyEngagement) => ({
+        id: activity.id,
+        type: "activity",
+        timestamp: activity.date,
+        details: `Spent ${activity.time_spent} minutes, earned ${activity.points_earned} points`,
+      })) || [],
     engagementMetrics: {
-      totalPoints: engagementData.total_points || 0,
-      level: Math.floor((engagementData.total_points || 0) / 1000) + 1,
-      streak: streakData.current_streak || 0,
+      totalPoints: achievementsData.total_points || 0,
+      level: Math.floor((achievementsData.total_points || 0) / 1000) + 1,
+      streak: streakData.streak_days || 0,
       challengesCompleted: achievementsData.achieved_count || 0,
     },
-    leaderboard: engagementData.leaderboard || [],
-    achievements: achievementsData.recent_achievements.map((achievement: any) => ({
-      id: achievement.id,
-      name: achievement.name,
-      description: achievement.description,
-      unlocked: achievement.achieved_at !== null,
-    })),
+    leaderboard: [],
+    achievements:
+      achievementsData.recent_achievements?.map((achievement: Achievement) => ({
+        id: achievement.achievement.id,
+        name: achievement.achievement.name,
+        description: achievement.achievement.description,
+        unlocked: achievement.achieved_at !== null,
+      })) || [],
     socialData: {
       followers: 0,
       following: 0,
     },
   };
+
+  console.log("Transformed data:", transformedData);
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
@@ -256,13 +287,24 @@ const GamificationDashboard: React.FC = () => {
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-accent via-accent2 to-accent3 bg-clip-text text-transparent animate-gradient-x mystical-text">
-            Gamification Dashboard
-          </h1>
-          <p className="text-muted-foreground mystical-text">
-            Track your progress and achievements
-          </p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-accent via-accent2 to-accent3 bg-clip-text text-transparent animate-gradient-x mystical-text">
+              Gamification Dashboard
+            </h1>
+            <p className="text-muted-foreground mystical-text">
+              Track your progress and achievements
+            </p>
+          </div>
+          {userId && (
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-accent/10 hover:bg-accent/20 text-accent transition-all duration-300 transform hover:scale-105"
+            >
+              <ArrowRightOnRectangleIcon className="w-5 h-5" />
+              <span>Logout</span>
+            </button>
+          )}
         </div>
 
         {/* Combat-Style Navigation */}

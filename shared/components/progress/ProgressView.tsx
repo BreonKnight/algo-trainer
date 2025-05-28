@@ -9,7 +9,8 @@ import { CardContent, CardDescription, CardHeader, CardTitle } from "@/component
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
 import { ThemedCard } from "@/components/ui/themed-card";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 const ProgressView = memo(function ProgressView() {
   const [progressValue, setProgressValue] = useState(50);

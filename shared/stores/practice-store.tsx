@@ -5,7 +5,6 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { create } from "zustand";
 
-import { ReplCard } from '@algo-trainer/shared/components/visualization/ReplCard';
 import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Card } from "@/components/ui/card";
@@ -22,7 +21,9 @@ import {
   kingdomHeartsTheme,
   fortniteTheme,
 } from "@/lib/theme";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { ReplCard } from "@algo-trainer/shared/components/visualization/ReplCard";
+import { cn } from "@algo-trainer/shared/utils/common";
 
 // Zustand store for practice code
 const usePracticeStore = create<{ code: string; setCode: (c: string) => void }>((set) => ({

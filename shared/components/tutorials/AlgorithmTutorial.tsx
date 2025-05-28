@@ -2,16 +2,17 @@ import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import type { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { useTheme } from "@/components/theme/use-theme";
 import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
-import { cn } from '@algo-trainer/shared/utils/common';
+import { cn } from "@/lib/utils";
+
+import type { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 
 type Language = "python" | "javascript";
 
@@ -42,6 +43,7 @@ export interface QuizQuestion {
 interface AlgorithmTutorialProps {
   algorithm: PatternKey;
   tutorials: Tutorial[];
+  onComplete?: (tutorialId: string, timeSpent: number) => void;
 }
 
 // Theme-aware gradient map for headings
@@ -87,7 +89,7 @@ const isTutorialAvailable = (
   };
 };
 
-export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialProps) {
+export function AlgorithmTutorial({ algorithm, tutorials, onComplete }: AlgorithmTutorialProps) {
   const { theme } = useTheme();
   console.log("AlgorithmTutorial props:", { algorithm, tutorials });
 
@@ -107,6 +109,32 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
       (t) => localStorage.getItem(`tutorial-${t.id}`) === "completed"
     ).length;
     return (completed / tutorials.length) * 100;
+  };
+
+  // Handle tutorial completion
+  const handleTutorialComplete = () => {
+    if (!currentTutorial) return;
+
+    const startTime = localStorage.getItem(`tutorial-${currentTutorial.id}-start`);
+    const timeSpent = startTime ? Date.now() - parseInt(startTime) : 0;
+
+    if (onComplete) {
+      onComplete(currentTutorial.id, timeSpent);
+    }
+
+    // Clean up start time
+    localStorage.removeItem(`tutorial-${currentTutorial.id}-start`);
+  };
+
+  // Handle quiz completion
+  const handleQuizComplete = () => {
+    if (!currentTutorial) return;
+
+    const allQuestionsAnswered = currentTutorial.quiz.every((q) => quizAnswers[q.id] !== undefined);
+
+    if (allQuestionsAnswered) {
+      handleTutorialComplete();
+    }
   };
 
   // Get theme-specific card styles
@@ -488,7 +516,10 @@ export function AlgorithmTutorial({ algorithm, tutorials }: AlgorithmTutorialPro
                       <Button
                         variant="secondary"
                         className="mt-4"
-                        onClick={() => setShowResults(true)}
+                        onClick={() => {
+                          setShowResults(true);
+                          handleQuizComplete();
+                        }}
                         disabled={
                           !currentTutorial ||
                           !currentTutorial.quiz ||

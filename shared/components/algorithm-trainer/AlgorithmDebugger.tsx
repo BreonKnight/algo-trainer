@@ -1,10 +1,11 @@
 import { Play, Pause, SkipBack, SkipForward, RotateCcw, Bug } from "lucide-react";
 import { useState, useEffect } from "react";
 
-import { CodeEditor } from '@algo-trainer/shared/components/visualization/CodeEditor';
-import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+
+import { CodeEditor } from "@algo-trainer/shared/components/visualization/CodeEditor";
+import { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 
 interface AlgorithmDebuggerProps {
   algorithm: PatternKey;

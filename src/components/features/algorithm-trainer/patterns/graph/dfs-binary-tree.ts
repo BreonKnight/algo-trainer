@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const dfsBinaryTreePattern: AlgorithmPattern = {
   title: "DFS on Binary Tree",

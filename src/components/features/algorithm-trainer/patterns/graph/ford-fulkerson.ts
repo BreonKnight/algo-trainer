@@ -1,4 +1,4 @@
-import { AlgorithmPattern } from '@algo-trainer/shared/types/algorithm-types';
+import { AlgorithmPattern } from "@algo-trainer/shared/types/algorithm-types";
 
 export const fordFulkersonPattern: AlgorithmPattern = {
   title: "Ford-Fulkerson Algorithm",

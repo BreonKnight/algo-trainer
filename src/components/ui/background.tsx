@@ -1,4 +1,4 @@
-import { cn } from '@algo-trainer/shared/utils/common';
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface BackgroundProps {
   children: React.ReactNode;

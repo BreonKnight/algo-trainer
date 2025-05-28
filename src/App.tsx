@@ -1,19 +1,18 @@
 import "./App.css";
-import React from "react";
-import { Suspense, lazy, memo, useMemo } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Toaster } from "sonner";
+import React, { Suspense, lazy, memo, useMemo } from "react";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 
 import AboutPage from "@/app/AboutPage";
 import AuthPage from "@/app/AuthPage";
 import DesignSystemPage from "@/app/DesignSystemPage";
-import { AnalyticsDashboard } from "@/components/AnalyticsDashboard";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
+import Dashboard from "@/components/Dashboard";
 import { TopBar } from "@/components/features/algorithm-trainer/components/layout/TopBar";
-import GamificationDashboard from "@/components/GamificationDashboard";
 import PatternManagement from "@/components/layouts/admin/PatternManagement";
 import { Navigation } from "@/components/ui/navigation";
+import { getAuthToken } from "@/lib/services/authService";
 
 import Practice from "@algo-trainer/shared/stores/practice-store";
 
@@ -42,6 +41,18 @@ const TutorialList = lazy(() =>
   }))
 );
 
+// Protected Route Component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const token = getAuthToken();
+
+  if (!token) {
+    toast.error("Login or register to save progress");
+    return <Navigate to="/auth" replace />;
+  }
+
+  return <>{children}</>;
+};
+
 // Log the imported data structure
 //console.log("Imported tutorials data:", tutorialsData);
 //console.log("Categories:", Object.keys(tutorialsData));
@@ -54,7 +65,14 @@ const AppContent = memo(function AppContent() {
       <Routes>
         <Route path="/" element={<AlgorithmTrainer />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/gamification" element={<GamificationDashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/progress"
           element={

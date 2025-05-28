@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+
 import { cn } from "@algo-trainer/shared/utils/common";
 
 type ToastProps = {

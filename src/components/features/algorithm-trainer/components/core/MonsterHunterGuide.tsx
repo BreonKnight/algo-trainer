@@ -1,6 +1,7 @@
 import { monsterHunterExplanations } from "@/components/features/algorithm-trainer/data/monster-hunter/monsterHunterExplanations";
-import { PatternKey } from '@algo-trainer/shared/types/algorithm-types';
 import styles from "@/styles/pseudocode.module.css";
+
+import { PatternKey } from "@algo-trainer/shared/types/algorithm-types";
 
 interface MonsterHunterGuideProps {
   currentPattern: PatternKey;

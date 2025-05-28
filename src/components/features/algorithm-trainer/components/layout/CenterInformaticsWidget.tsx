@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Lightbulb, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
-import { cn } from '@algo-trainer/shared/utils/common';
+import { cn } from "@algo-trainer/shared/utils/common";
 
 const TIPS = [
   "Use two pointers for many array problems.",

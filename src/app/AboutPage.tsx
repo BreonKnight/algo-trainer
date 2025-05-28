@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import { Background } from "@/components/ui/background";
 import { AnimatedHeader } from "@/components/ui/AnimatedHeader";
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
+
 import { Button } from "@/components/ui/button";
 
 import snesController from "/snes-controller.svg";

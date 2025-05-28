@@ -2,7 +2,8 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { useState } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 import { notationData } from "./notation-data";
 import { NotationModal } from "./NotationModal";

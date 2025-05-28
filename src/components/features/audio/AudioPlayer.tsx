@@ -5,7 +5,8 @@ import React from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 interface YouTubePlayer {
   playVideo: () => void;

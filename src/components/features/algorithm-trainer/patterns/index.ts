@@ -115,7 +115,7 @@ export const patterns = createPatternRecord({
 // Alias for backward compatibility
 export const algorithmPatterns = patterns;
 
-export * from '@algo-trainer/shared/data-structures/union-find';
+export * from "@algo-trainer/shared/data-structures/union-find";
 
 // DEBUG: List patterns missing Monster Hunter guides
 

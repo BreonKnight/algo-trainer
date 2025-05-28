@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from '@algo-trainer/shared/utils/common';
+import { cn } from "@algo-trainer/shared/utils/common";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 

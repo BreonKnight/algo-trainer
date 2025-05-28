@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
-import { cn } from '@algo-trainer/shared/utils/common';
+
+import { cn } from "@algo-trainer/shared/utils/common";
 
 // Add custom gradient hamburger and X icons
 const GradientHamburger = ({ size = 28 }) => (
