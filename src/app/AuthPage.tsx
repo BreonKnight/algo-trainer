@@ -427,7 +427,7 @@ export default function AuthPage() {
     try {
       await register({ email: formData.email, password: formData.password, name: formData.name });
       toast.success("Signup successful!");
-      navigate("/progress");
+      navigate("/dashboard");
     } catch {
       toast.error("Signup failed. Please try again.");
     } finally {
@@ -439,7 +439,7 @@ export default function AuthPage() {
     try {
       await logout();
       toast.success("Logged out successfully");
-      navigate("/");
+      navigate("/auth");
     } catch {
       toast.error("Failed to logout");
     }

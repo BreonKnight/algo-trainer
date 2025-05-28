@@ -1,5 +1,5 @@
 import { HelpModal } from "@/components/layouts/help/HelpModal";
-import { ThemeSelectorDropdown } from "@/components/theme/ThemeSelectorDropdown";
+import ThemeSelectorDropdown from "@/components/theme/ThemeSelectorDropdown";
 import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSessionProgress } from "@/hooks/useSessionProgress";

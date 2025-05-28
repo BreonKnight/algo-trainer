@@ -3,26 +3,139 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Base theme colors
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        card: "var(--card)",
+        "card-foreground": "var(--card-foreground)",
+        popover: "var(--popover)",
+        "popover-foreground": "var(--popover-foreground)",
+        primary: "var(--primary)",
+        "primary-foreground": "var(--primary-foreground)",
+        secondary: "var(--secondary)",
+        "secondary-foreground": "var(--secondary-foreground)",
+        muted: "var(--muted)",
+        "muted-foreground": "var(--muted-foreground)",
+        accent: "var(--accent)",
+        "accent-foreground": "var(--accent-foreground)",
+        accent2: "var(--accent2)",
+        "accent2-foreground": "var(--accent2-foreground)",
+        accent3: "var(--accent3)",
+        "accent3-foreground": "var(--accent3-foreground)",
+        accent4: "var(--accent4)",
+        "accent4-foreground": "var(--accent4-foreground)",
+        destructive: "var(--destructive)",
+        "destructive-foreground": "var(--destructive-foreground)",
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+
+        // Theme-specific colors
         "snes-purple": "#7c5cbf",
         "snes-lavender": "#b9aee0",
         "snes-dark": "#6d6d6d",
-        // Add more SNES colors if needed
+        "nord-bg": "#2E3440",
+        "nord-fg": "#ECEFF4",
+        "nord-accent": "#81A1C1",
+        "dracula-bg": "#282A36",
+        "dracula-fg": "#F8F8F2",
+        "dracula-accent": "#BD93F9",
+      },
+      animation: {
+        "gradient-x": "gradient-x 15s ease infinite",
+        "gradient-y": "gradient-y 15s ease infinite",
+        "gradient-xy": "gradient-xy 15s ease infinite",
+      },
+      keyframes: {
+        "gradient-y": {
+          "0%, 100%": {
+            "background-size": "400% 400%",
+            "background-position": "center top",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "center center",
+          },
+        },
+        "gradient-x": {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+        "gradient-xy": {
+          "0%, 100%": {
+            "background-size": "400% 400%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
       },
     },
   },
   plugins: [],
   safelist: [
+    // Accent colors
     "text-accent",
     "hover:text-accent",
     "text-accent/80",
     "text-accent2",
     "hover:text-accent2",
     "text-accent2/80",
-    "text-blue-600",
-    "hover:text-blue-600",
-    "text-blue-600/80",
+    "text-accent3",
+    "hover:text-accent3",
+    "text-accent3/80",
     "text-accent4",
     "hover:text-accent4",
     "text-accent4/80",
+
+    // Background colors
+    "bg-accent",
+    "hover:bg-accent",
+    "bg-accent/80",
+    "bg-accent2",
+    "hover:bg-accent2",
+    "bg-accent2/80",
+    "bg-accent3",
+    "hover:bg-accent3",
+    "bg-accent3/80",
+    "bg-accent4",
+    "hover:bg-accent4",
+    "bg-accent4/80",
+
+    // Border colors
+    "border-accent",
+    "hover:border-accent",
+    "border-accent/80",
+    "border-accent2",
+    "hover:border-accent2",
+    "border-accent2/80",
+    "border-accent3",
+    "hover:border-accent3",
+    "border-accent3/80",
+    "border-accent4",
+    "hover:border-accent4",
+    "border-accent4/80",
+
+    // Shadow colors
+    "shadow-accent",
+    "hover:shadow-accent",
+    "shadow-accent/80",
+    "shadow-accent2",
+    "hover:shadow-accent2",
+    "shadow-accent2/80",
+    "shadow-accent3",
+    "hover:shadow-accent3",
+    "shadow-accent3/80",
+    "shadow-accent4",
+    "hover:shadow-accent4",
+    "shadow-accent4/80",
   ],
 };

@@ -1,21 +1,47 @@
-import { createContext } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Theme } from "@/components/theme/theme-constants";
+import { Theme, THEMES, THEME_COLORS } from "./theme-constants";
+import { ThemeContext } from "./theme-context-definition";
 
-interface ThemeContextType {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  toggleTheme: () => void;
-}
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme") as Theme;
+      return savedTheme || "dracula";
+    }
+    return "dracula";
+  });
 
-const ThemeContext = createContext<ThemeContextType>({
-  theme: "dracula",
-  setTheme: (theme: Theme) => {
-    console.log("Theme set to:", theme);
-  },
-  toggleTheme: () => {
-    console.log("Theme toggled");
-  },
-});
+  useEffect(() => {
+    const root = document.documentElement;
+    const colors = THEME_COLORS[theme as keyof typeof THEME_COLORS];
 
-export { ThemeContext };
+    // Apply theme colors as CSS variables
+    Object.entries(colors).forEach(([key, value]) => {
+      root.style.setProperty(`--${key}`, value as string);
+    });
+
+    // Add transition class for smooth theme changes
+    root.classList.add("theme-transition");
+    localStorage.setItem("theme", theme);
+
+    // Remove transition class after animation completes
+    const timeout = setTimeout(() => {
+      root.classList.remove("theme-transition");
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const currentIndex = THEMES.indexOf(theme);
+    const nextIndex = (currentIndex + 1) % THEMES.length;
+    setTheme(THEMES[nextIndex]);
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};

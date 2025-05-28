@@ -73,8 +73,8 @@ const GamificationDashboard: React.FC = () => {
   const handleLogout = () => {
     // Clear the auth token
     localStorage.removeItem("auth_token");
-    // Redirect to login page or home
-    window.location.href = "/login";
+    // Redirect to auth page
+    window.location.href = "/auth";
   };
 
   useEffect(() => {

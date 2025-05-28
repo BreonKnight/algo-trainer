@@ -2,7 +2,7 @@ import { Video, Code, FileText, Book, Check, Clock, Play, Lock, ArrowLeft } from
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { useTheme } from "@/components/theme/use-theme";
+import { useTheme } from "@/components/theme/theme-context";
 import { Background } from "@/components/ui/background";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";

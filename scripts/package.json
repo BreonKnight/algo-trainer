@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "Scripts for the Algo Trainer project",
   "scripts": {
-    "extract-patterns": "node extract-patterns.js"
+    "extract-patterns": "node extract-patterns.js",
+    "update-tutorial-videos": "node update-tutorial-videos.cjs",
+    "sync-monster-hunter-patterns": "node sync-monster-hunter-patterns.js",
+    "sync-missing-patterns": "node sync-missing-patterns.cjs",
+    "check-youtube-embeds": "node check-youtube-embeds.cjs",
+    "convert-pseudocode": "node convert-pseudocode-to-markdown.cjs"
   },
   "private": true
 }

@@ -6,12 +6,11 @@ import {
   GraduationCap,
   Target,
   ChevronRight,
-  Sparkles,
   ExternalLink,
   Clock,
   Database,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { CSSProperties } from "react";
 
 import { useTheme } from "@/components/theme/use-theme";
@@ -26,10 +25,8 @@ import {
   DialogTitle,
   DialogClose,
 } from "@/components/ui/dialog";
-import { Progress } from "@/components/ui/progress";
 import { ThemedButton } from "@/components/ui/themed-button";
 import { ThemedCard } from "@/components/ui/themed-card";
-import GamificationService, { UserProgress } from "@/lib/gamification";
 import { PseudocodeDisplay } from "@/lib/pseudocode/PseudocodeDisplay";
 
 import { cn } from "@algo-trainer/shared/utils/common";
@@ -1041,7 +1038,6 @@ def a_star(graph, start, goal, heuristic):
 ];
 
 export default function AlgoGuide() {
-  const [userProgress, setUserProgress] = useState<UserProgress | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>(categories[0].name);
   const [hoveredAlgorithm, setHoveredAlgorithm] = useState<string | null>(null);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<Algorithm | null>(null);
@@ -1205,18 +1201,6 @@ export default function AlgoGuide() {
     customTheme['".namespace"'] = { opacity: 0.7 };
   }
 
-  useEffect(() => {
-    const gamificationService = GamificationService.getInstance();
-    setUserProgress(gamificationService.getUserProgress());
-
-    const handleProgressUpdate = (progress: UserProgress) => {
-      setUserProgress(progress);
-    };
-
-    gamificationService.addListener(handleProgressUpdate);
-    return () => gamificationService.removeListener(handleProgressUpdate);
-  }, []);
-
   const selectedCategoryData = categories.find((cat) => cat.name === selectedCategory);
 
   return (
@@ -1237,112 +1221,7 @@ export default function AlgoGuide() {
                 subtitleClassName="text-base md:text-lg font-semibold text-accent tracking-wide drop-shadow-sm mt-1"
               />
             </div>
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-accent animate-pulse" />
-              <span className="text-sm font-medium text-accent">Level {userProgress?.level}</span>
-            </div>
           </motion.div>
-
-          {/* Progress Section */}
-          {userProgress && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-            >
-              <ThemedCard
-                className={cn(
-                  theme === "snes"
-                    ? "hover:border-[#3498db]"
-                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
-                )}
-              >
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Level</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProgress.level}</div>
-                  <Progress value={(userProgress.experience % 1000) / 10} className="mt-2" />
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {1000 - (userProgress.experience % 1000)} XP to next level
-                  </div>
-                </CardContent>
-              </ThemedCard>
-
-              <ThemedCard
-                className={cn(
-                  theme === "snes"
-                    ? "hover:border-[#3498db]"
-                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
-                )}
-              >
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    Day Streak
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProgress.streak}</div>
-                  <div className="text-sm text-muted-foreground mt-1">Keep it up!</div>
-                  <div className="text-xs text-accent mt-1">
-                    🔥 {userProgress.streak} days strong
-                  </div>
-                </CardContent>
-              </ThemedCard>
-
-              <ThemedCard
-                className={cn(
-                  theme === "snes"
-                    ? "hover:border-[#3498db]"
-                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
-                )}
-              >
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    Points
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProgress.points}</div>
-                  <div className="text-sm text-muted-foreground mt-1">Total earned</div>
-                  <div className="text-xs text-accent mt-1">
-                    ⭐ {userProgress.points} points collected
-                  </div>
-                </CardContent>
-              </ThemedCard>
-
-              <ThemedCard
-                className={cn(
-                  theme === "snes"
-                    ? "hover:border-[#3498db]"
-                    : "backdrop-blur-sm transition-all duration-300 hover:scale-105 bg-background/50 border-accent/10 hover:border-accent/20"
-                )}
-              >
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">
-                    Algorithms Mastered
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">
-                    {userProgress.completedAlgorithms.length}
-                  </div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    Out of {categories.reduce((acc, cat) => acc + cat.algorithms.length, 0)}
-                  </div>
-                  <div className="text-xs text-accent mt-1">
-                    🏆{" "}
-                    {Math.round(
-                      (userProgress.completedAlgorithms.length /
-                        categories.reduce((acc, cat) => acc + cat.algorithms.length, 0)) *
-                        100
-                    )}
-                    % complete
-                  </div>
-                </CardContent>
-              </ThemedCard>
-            </motion.div>
-          )}
 
           {/* Categories */}
           <motion.div
