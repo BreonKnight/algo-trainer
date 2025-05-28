@@ -66,7 +66,7 @@
     "lucide-react": "^0.294.0",
     "prism-react-renderer": "^2.4.1",
     "prismjs": "1.30.0",
-    "pyodide": "^0.27.5",
+    "pyodide": "^0.27.6",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",

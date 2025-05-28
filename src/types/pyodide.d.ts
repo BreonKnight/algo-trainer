@@ -12,6 +12,6 @@ interface PyodideInstance {
   globals: { [key: string]: PythonResult };
 }
 
-declare module "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.js" {
+declare module "https://cdn.jsdelivr.net/pyodide/v0.27.6/full/pyodide.js" {
   export function loadPyodide(config: { indexURL: string }): Promise<PyodideInstance>;
 }

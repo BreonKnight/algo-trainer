@@ -1,9 +1,10 @@
-import { useTheme } from "next-themes";
 import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
 
 import { SignupForm3D } from "@/components/auth/SignupForm3D";
+import { useTheme } from "@/components/theme/use-theme";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/lib/hooks/useAuth";
 
@@ -17,7 +18,8 @@ interface Particle {
 
 export default function AuthPage() {
   const { login } = useAuth();
-  const { resolvedTheme } = useTheme();
+  const { theme } = useTheme();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     email: "",
@@ -395,7 +397,7 @@ export default function AuthPage() {
         });
       }
     }
-  }, [resolvedTheme]);
+  }, [theme]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -405,14 +407,12 @@ export default function AuthPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       await login(formData.email, formData.password);
       toast.success("Login successful!");
-      setFormData({ email: "", password: "" });
+      navigate("/progress");
     } catch (error) {
-      toast.error("Login failed. Please try again.");
-      console.error("Login error:", error);
+      toast.error("Login failed. Please check your credentials.");
     } finally {
       setIsLoading(false);
     }

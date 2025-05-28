@@ -23,7 +23,7 @@ declare global {
 
 let pyodideInstance: PyodideInstance | null = null;
 
-const PYODIDE_VERSION = "v0.27.5";
+const PYODIDE_VERSION = "v0.27.6";
 const PYODIDE_CDN_URL = `https://cdn.jsdelivr.net/pyodide/${PYODIDE_VERSION}/full`;
 
 function getPyodideBaseUrl(): string {

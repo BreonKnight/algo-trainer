@@ -123,7 +123,7 @@ export function ReplCard({ userCode }: ReplCardProps) {
         const pyodideInstance = await loadPyodide({
           indexURL: isElectron
             ? "./pyodide" // Local path in Electron
-            : "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/", // CDN for web
+            : "https://cdn.jsdelivr.net/pyodide/v0.27.6/full/", // CDN for web
           stdout: (text: string) => {
             if (mounted) {
               setOutput((prev) => prev + text);
