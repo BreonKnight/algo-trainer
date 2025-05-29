@@ -435,14 +435,9 @@ export default function AuthPage() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast.success("Logged out successfully");
-      navigate("/auth");
-    } catch {
-      toast.error("Failed to logout");
-    }
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   if (isAuthenticated) {

@@ -84,7 +84,8 @@ const GamificationDashboard: React.FC = () => {
 
       if (!token) {
         toast.error("Please log in to view your gamification status");
-        return;
+        window.location.href = "/login";
+        return null;
       }
 
       try {

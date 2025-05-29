@@ -47,7 +47,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   if (!token) {
     toast.error("Login or register to save progress");
-    return <Navigate to="/auth" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <>{children}</>;
@@ -58,13 +58,13 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 //console.log("Categories:", Object.keys(tutorialsData));
 const AppContent = memo(function AppContent() {
   const location = useLocation();
-  const isAuthRoute = location.pathname === "/auth";
+  const isAuthRoute = location.pathname === "/login";
 
   const routeElements = useMemo(
     () => (
       <Routes>
         <Route path="/" element={<AlgorithmTrainer />} />
-        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/login" element={<AuthPage />} />
         <Route
           path="/dashboard"
           element={
