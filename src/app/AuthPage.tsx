@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as THREE from "three";
+import "@fontsource/inter/700.css";
 
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
@@ -16,10 +17,19 @@ interface Particle {
   velocity: THREE.Vector3;
   size: number;
   color: THREE.Color;
-  type: "array" | "tree" | "graph" | "stack";
+  type: "array" | "tree" | "graph" | "stack" | "queue" | "linkedList" | "hashTable" | "heap";
   state?: "idle" | "active" | "visited" | "sorted" | "comparing" | "swapping";
   animation?: {
-    type: "sort" | "traverse" | "search" | "push" | "pop";
+    type:
+      | "sort"
+      | "traverse"
+      | "search"
+      | "push"
+      | "pop"
+      | "enqueue"
+      | "dequeue"
+      | "insert"
+      | "delete";
     progress: number;
     target?: THREE.Vector3;
   };
@@ -52,6 +62,145 @@ export default function AuthPage() {
       // Scene setup
       console.log("Creating scene...");
       const scene = new THREE.Scene();
+
+      // Add space background
+      const createStar = () => {
+        const geometry = new THREE.SphereGeometry(0.02 + Math.random() * 0.03, 8, 8);
+        const material = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(0xffffff),
+          transparent: true,
+          opacity: 0.5 + Math.random() * 0.5,
+        });
+        const star = new THREE.Mesh(geometry, material);
+        star.position.set(
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 20,
+          (Math.random() - 0.5) * 20
+        );
+        return star;
+      };
+
+      // Create stars
+      const stars = Array.from({ length: 200 }, createStar);
+      stars.forEach((star) => scene.add(star));
+
+      // Theme-aware colors using CSS variables
+      const getThemeColor = (colorVar: string) => {
+        const computedStyle = getComputedStyle(document.documentElement);
+        const colorValue = computedStyle.getPropertyValue(colorVar).trim();
+
+        // Debug logging
+        console.debug(`Parsing color for ${colorVar}:`, colorValue);
+
+        // Handle empty or invalid values
+        if (!colorValue) {
+          console.warn(`Empty color value for ${colorVar}, using fallback`);
+          return new THREE.Color(0xffffff);
+        }
+
+        try {
+          // Handle HSL values in format "222.2 47.4% 11.2%"
+          if (colorValue.includes("%")) {
+            const hslMatch = colorValue.match(/(\d+\.?\d*)\s+(\d+\.?\d*)%\s+(\d+\.?\d*)%/);
+            if (hslMatch) {
+              const [, h, s, l] = hslMatch;
+              const color = new THREE.Color();
+              color.setHSL(parseFloat(h) / 360, parseFloat(s) / 100, parseFloat(l) / 100);
+              return color;
+            }
+          }
+
+          // Handle HSL values in format "hsl(222.2, 47.4%, 11.2%)"
+          if (colorValue.includes("hsl")) {
+            const hslMatch = colorValue.match(/hsl\((\d+\.?\d*),\s*(\d+\.?\d*)%,\s*(\d+\.?\d*)%\)/);
+            if (hslMatch) {
+              const [, h, s, l] = hslMatch;
+              const color = new THREE.Color();
+              color.setHSL(parseFloat(h) / 360, parseFloat(s) / 100, parseFloat(l) / 100);
+              return color;
+            }
+          }
+
+          // Handle hex values
+          if (colorValue.startsWith("#")) {
+            return new THREE.Color(colorValue);
+          }
+
+          // Handle RGB values
+          if (colorValue.startsWith("rgb")) {
+            const rgbMatch = colorValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+            if (rgbMatch) {
+              const [, r, g, b] = rgbMatch;
+              return new THREE.Color(parseInt(r) / 255, parseInt(g) / 255, parseInt(b) / 255);
+            }
+          }
+
+          // Try to parse as a named color
+          try {
+            return new THREE.Color(colorValue);
+          } catch {
+            console.warn(
+              `Failed to parse color value: ${colorValue} for ${colorVar}, using fallback`
+            );
+            return new THREE.Color(0xffffff);
+          }
+        } catch (error) {
+          console.warn(`Error parsing color ${colorValue} for ${colorVar}:`, error);
+          return new THREE.Color(0xffffff);
+        }
+      };
+
+      // Create a color cache to prevent repeated parsing
+      const colorCache = new Map<string, THREE.Color>();
+      let lastThemeClass = document.documentElement.className;
+
+      const getCachedColor = (colorVar: string) => {
+        const currentThemeClass = document.documentElement.className;
+        const cacheKey = `${colorVar}-${currentThemeClass}`;
+
+        if (!colorCache.has(cacheKey)) {
+          colorCache.set(cacheKey, getThemeColor(colorVar));
+        }
+        return colorCache.get(cacheKey)!;
+      };
+
+      // Create nebula effect
+      const nebulaGeometry = new THREE.SphereGeometry(10, 32, 32);
+      const nebulaMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          time: { value: 0 },
+          color1: { value: new THREE.Color(getCachedColor("--accent")) },
+          color2: { value: new THREE.Color(getCachedColor("--accent2")) },
+        },
+        vertexShader: `
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform float time;
+          uniform vec3 color1;
+          uniform vec3 color2;
+          varying vec2 vUv;
+          
+          float noise(vec2 p) {
+            return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+          }
+          
+          void main() {
+            vec2 uv = vUv;
+            float n = noise(uv + time * 0.1);
+            vec3 color = mix(color1, color2, n);
+            gl_FragColor = vec4(color, 0.1);
+          }
+        `,
+        transparent: true,
+        side: THREE.BackSide,
+      });
+      const nebula = new THREE.Mesh(nebulaGeometry, nebulaMaterial);
+      scene.add(nebula);
 
       console.log("Creating camera...");
       const camera = new THREE.PerspectiveCamera(
@@ -91,88 +240,16 @@ export default function AuthPage() {
       const particles: Particle[] = [];
       const particleCount = 100;
 
-      // Theme-aware colors using CSS variables
-      const getThemeColor = (colorVar: string) => {
-        const computedStyle = getComputedStyle(document.documentElement);
-        const colorValue = computedStyle.getPropertyValue(colorVar).trim();
-
-        // Debug logging
-        console.debug(`Parsing color for ${colorVar}:`, colorValue);
-
-        // Handle empty or invalid values
-        if (!colorValue) {
-          console.warn(`Empty color value for ${colorVar}, using fallback`);
-          return new THREE.Color(0xffffff);
-        }
-
-        try {
-          // Handle HSL values in format "222.2 47.4% 11.2%"
-          if (colorValue.includes("%")) {
-            const hslMatch = colorValue.match(/(\d+\.?\d*)\s+(\d+\.?\d*)%\s+(\d+\.?\d*)%/);
-            if (hslMatch) {
-              const [_, h, s, l] = hslMatch;
-              const color = new THREE.Color();
-              color.setHSL(parseFloat(h) / 360, parseFloat(s) / 100, parseFloat(l) / 100);
-              return color;
-            }
-          }
-
-          // Handle HSL values in format "hsl(222.2, 47.4%, 11.2%)"
-          if (colorValue.includes("hsl")) {
-            const hslMatch = colorValue.match(/hsl\((\d+\.?\d*),\s*(\d+\.?\d*)%,\s*(\d+\.?\d*)%\)/);
-            if (hslMatch) {
-              const [_, h, s, l] = hslMatch;
-              const color = new THREE.Color();
-              color.setHSL(parseFloat(h) / 360, parseFloat(s) / 100, parseFloat(l) / 100);
-              return color;
-            }
-          }
-
-          // Handle hex values
-          if (colorValue.startsWith("#")) {
-            return new THREE.Color(colorValue);
-          }
-
-          // Handle RGB values
-          if (colorValue.startsWith("rgb")) {
-            const rgbMatch = colorValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-            if (rgbMatch) {
-              const [_, r, g, b] = rgbMatch;
-              return new THREE.Color(parseInt(r) / 255, parseInt(g) / 255, parseInt(b) / 255);
-            }
-          }
-
-          // Try to parse as a named color
-          try {
-            return new THREE.Color(colorValue);
-          } catch (e) {
-            console.warn(
-              `Failed to parse color value: ${colorValue} for ${colorVar}, using fallback`
-            );
-            return new THREE.Color(0xffffff);
-          }
-        } catch (error) {
-          console.warn(`Error parsing color ${colorValue} for ${colorVar}:`, error);
-          return new THREE.Color(0xffffff);
-        }
-      };
-
-      // Create a color cache to prevent repeated parsing
-      const colorCache = new Map<string, THREE.Color>();
-
-      const getCachedColor = (colorVar: string) => {
-        if (!colorCache.has(colorVar)) {
-          colorCache.set(colorVar, getThemeColor(colorVar));
-        }
-        return colorCache.get(colorVar)!;
-      };
-
       const colors = {
         // Base colors from theme
         array: getCachedColor("--primary"),
         tree: getCachedColor("--destructive"),
         graph: getCachedColor("--secondary"),
         stack: getCachedColor("--accent"),
+        queue: getCachedColor("--accent2"),
+        linkedList: getCachedColor("--accent3"),
+        hashTable: getCachedColor("--muted"),
+        heap: getCachedColor("--muted-foreground"),
         active: getCachedColor("--accent"),
         visited: getCachedColor("--secondary"),
         sorted: getCachedColor("--primary"),
@@ -190,9 +267,16 @@ export default function AuthPage() {
 
       // Create particles with initial states
       for (let i = 0; i < particleCount; i++) {
-        const type = ["array", "tree", "graph", "stack"][
-          Math.floor(Math.random() * 4)
-        ] as Particle["type"];
+        const type = [
+          "array",
+          "tree",
+          "graph",
+          "stack",
+          "queue",
+          "linkedList",
+          "hashTable",
+          "heap",
+        ][Math.floor(Math.random() * 8)] as Particle["type"];
 
         // Create a more diverse color palette based on type
         let baseColor;
@@ -208,6 +292,18 @@ export default function AuthPage() {
             break;
           case "stack":
             baseColor = new THREE.Color(colors.stack);
+            break;
+          case "queue":
+            baseColor = new THREE.Color(colors.accent2);
+            break;
+          case "linkedList":
+            baseColor = new THREE.Color(colors.accent3);
+            break;
+          case "hashTable":
+            baseColor = new THREE.Color(colors.muted);
+            break;
+          case "heap":
+            baseColor = new THREE.Color(colors.mutedForeground);
             break;
         }
 
@@ -234,12 +330,26 @@ export default function AuthPage() {
           type,
           state: "idle",
           animation: {
-            type: ["sort", "traverse", "search", "push", "pop"][Math.floor(Math.random() * 5)] as
+            type: [
+              "sort",
+              "traverse",
+              "search",
+              "push",
+              "pop",
+              "enqueue",
+              "dequeue",
+              "insert",
+              "delete",
+            ][Math.floor(Math.random() * 9)] as
               | "sort"
               | "traverse"
               | "search"
               | "push"
-              | "pop",
+              | "pop"
+              | "enqueue"
+              | "dequeue"
+              | "insert"
+              | "delete",
             progress: 0,
           },
         });
@@ -589,6 +699,233 @@ export default function AuthPage() {
             if (stackLabel) group.add(stackLabel);
             break;
           }
+          case "queue": {
+            // Create a queue structure
+            const itemCount = 5;
+            const spacing = 0.15;
+            const itemSize = 0.2;
+
+            for (let i = 0; i < itemCount; i++) {
+              const itemGroup = new THREE.Group();
+
+              // Queue item
+              const item = new THREE.Mesh(
+                new THREE.BoxGeometry(itemSize, itemSize * 0.1, itemSize),
+                new THREE.MeshBasicMaterial({
+                  color: 0xffffff,
+                  wireframe: true,
+                })
+              );
+              item.position.x = i * spacing;
+              itemGroup.add(item);
+
+              // Item content
+              const content = new THREE.Mesh(
+                new THREE.SphereGeometry(itemSize * 0.3, 8, 8),
+                new THREE.MeshBasicMaterial({ color: 0xffffff })
+              );
+              content.position.x = i * spacing;
+              itemGroup.add(content);
+
+              // Add value
+              const value = Math.floor(Math.random() * 100);
+              const valueSprite = createTextSprite(
+                value.toString(),
+                new THREE.Vector3(i * spacing, 0, itemSize * 0.6)
+              );
+              if (valueSprite) itemGroup.add(valueSprite);
+
+              group.add(itemGroup);
+            }
+
+            // Add queue label
+            const queueLabel = createTextSprite(
+              "Queue",
+              new THREE.Vector3((itemCount * spacing) / 2 - itemSize, itemSize * 1.2, 0)
+            );
+            if (queueLabel) group.add(queueLabel);
+            break;
+          }
+          case "linkedList": {
+            // Create a linked list structure
+            const nodeCount = 5;
+            const spacing = 0.3;
+            const nodeSize = 0.15;
+
+            for (let i = 0; i < nodeCount; i++) {
+              const nodeGroup = new THREE.Group();
+
+              // Node
+              const node = new THREE.Mesh(
+                new THREE.CircleGeometry(nodeSize, 16),
+                new THREE.MeshBasicMaterial({
+                  color: 0xffffff,
+                  side: THREE.DoubleSide,
+                })
+              );
+              node.position.x = i * spacing;
+              nodeGroup.add(node);
+
+              // Node value
+              const value = Math.floor(Math.random() * 100);
+              const valueSprite = createTextSprite(
+                value.toString(),
+                new THREE.Vector3(i * spacing, 0, 0.01)
+              );
+              if (valueSprite) nodeGroup.add(valueSprite);
+
+              // Arrow to next node
+              if (i < nodeCount - 1) {
+                const arrow = new THREE.Mesh(
+                  new THREE.ConeGeometry(0.05, 0.1, 8),
+                  new THREE.MeshBasicMaterial({ color: 0xffffff })
+                );
+                arrow.position.x = i * spacing + spacing / 2;
+                arrow.rotation.z = Math.PI / 2;
+                nodeGroup.add(arrow);
+              }
+
+              group.add(nodeGroup);
+            }
+
+            // Add linked list label
+            const listLabel = createTextSprite(
+              "Linked List",
+              new THREE.Vector3((nodeCount * spacing) / 2 - nodeSize, nodeSize * 1.2, 0)
+            );
+            if (listLabel) group.add(listLabel);
+            break;
+          }
+          case "hashTable": {
+            // Create a hash table structure
+            const bucketCount = 4;
+            const itemsPerBucket = 2;
+            const bucketSpacing = 0.4;
+            const itemSpacing = 0.2;
+            const itemSize = 0.15;
+
+            for (let i = 0; i < bucketCount; i++) {
+              const bucketGroup = new THREE.Group();
+
+              // Bucket container
+              const bucket = new THREE.Mesh(
+                new THREE.BoxGeometry(itemSize * 2, itemSize * 3, itemSize),
+                new THREE.MeshBasicMaterial({
+                  color: 0xffffff,
+                  wireframe: true,
+                })
+              );
+              bucket.position.x = i * bucketSpacing;
+              bucketGroup.add(bucket);
+
+              // Bucket items
+              for (let j = 0; j < itemsPerBucket; j++) {
+                const item = new THREE.Mesh(
+                  new THREE.SphereGeometry(itemSize * 0.5, 8, 8),
+                  new THREE.MeshBasicMaterial({ color: 0xffffff })
+                );
+                item.position.set(i * bucketSpacing, -itemSize + j * itemSpacing, 0);
+                bucketGroup.add(item);
+
+                // Item value
+                const value = Math.floor(Math.random() * 100);
+                const valueSprite = createTextSprite(
+                  value.toString(),
+                  new THREE.Vector3(i * bucketSpacing, -itemSize + j * itemSpacing, itemSize * 0.6)
+                );
+                if (valueSprite) bucketGroup.add(valueSprite);
+              }
+
+              group.add(bucketGroup);
+            }
+
+            // Add hash table label
+            const tableLabel = createTextSprite(
+              "Hash Table",
+              new THREE.Vector3((bucketCount * bucketSpacing) / 2 - itemSize, itemSize * 2, 0)
+            );
+            if (tableLabel) group.add(tableLabel);
+            break;
+          }
+          case "heap": {
+            // Create a binary heap structure
+            const createHeapNode = (
+              depth: number,
+              x: number,
+              y: number,
+              value: number
+            ): THREE.Group => {
+              const nodeGroup = new THREE.Group();
+
+              // Node
+              const node = new THREE.Mesh(
+                new THREE.CircleGeometry(0.08, 16),
+                new THREE.MeshBasicMaterial({
+                  color: 0xffffff,
+                  side: THREE.DoubleSide,
+                })
+              );
+              node.position.set(x, y, 0);
+              nodeGroup.add(node);
+
+              // Node value
+              const valueSprite = createTextSprite(value.toString(), new THREE.Vector3(x, y, 0.01));
+              if (valueSprite) nodeGroup.add(valueSprite);
+
+              if (depth > 0) {
+                const spacing = 0.4;
+                const leftX = x - spacing;
+                const rightX = x + spacing;
+                const nextY = y - spacing;
+
+                // Left child
+                const leftChild = createHeapNode(
+                  depth - 1,
+                  leftX,
+                  nextY,
+                  Math.floor(Math.random() * 100)
+                );
+                nodeGroup.add(leftChild);
+
+                // Left connection
+                const leftLine = new THREE.Mesh(
+                  new THREE.CylinderGeometry(0.01, 0.01, spacing, 8),
+                  new THREE.MeshBasicMaterial({ color: 0xffffff })
+                );
+                leftLine.position.set((x + leftX) / 2, (y + nextY) / 2, 0);
+                leftLine.rotation.z = Math.atan2(nextY - y, leftX - x);
+                nodeGroup.add(leftLine);
+
+                // Right child
+                const rightChild = createHeapNode(
+                  depth - 1,
+                  rightX,
+                  nextY,
+                  Math.floor(Math.random() * 100)
+                );
+                nodeGroup.add(rightChild);
+
+                // Right connection
+                const rightLine = new THREE.Mesh(
+                  new THREE.CylinderGeometry(0.01, 0.01, spacing, 8),
+                  new THREE.MeshBasicMaterial({ color: 0xffffff })
+                );
+                rightLine.position.set((x + rightX) / 2, (y + nextY) / 2, 0);
+                rightLine.rotation.z = Math.atan2(nextY - y, rightX - x);
+                nodeGroup.add(rightLine);
+              }
+
+              return nodeGroup;
+            };
+
+            const heap = createHeapNode(2, 0, 0, Math.floor(Math.random() * 100));
+            group.add(heap);
+
+            // Add heap label
+            const heapLabel = createTextSprite("Binary Heap", new THREE.Vector3(0, 0.6, 0));
+            if (heapLabel) group.add(heapLabel);
+            break;
+          }
         }
 
         return group;
@@ -623,6 +960,19 @@ export default function AuthPage() {
       // Animation
       const animate = () => {
         requestAnimationFrame(animate);
+
+        // Update nebula
+        nebulaMaterial.uniforms.time.value += 0.01;
+        nebula.rotation.y += 0.0005;
+        nebula.rotation.x += 0.0003;
+
+        // Update stars
+        stars.forEach((star) => {
+          star.rotation.x += 0.0001;
+          star.rotation.y += 0.0001;
+          const material = star.material as THREE.MeshBasicMaterial;
+          material.opacity = 0.5 + Math.sin(Date.now() * 0.001 + star.position.x) * 0.25;
+        });
 
         // Update particle positions and animations
         meshes.forEach((mesh, i) => {
@@ -707,31 +1057,23 @@ export default function AuthPage() {
             }
           }
 
-          // Update color based on state with smooth transition
+          // Update color based on state
           if (particle.state && particle.state !== "idle") {
-            const stateColor = new THREE.Color(colors[particle.state]);
-            const currentColor = new THREE.Color();
-
+            const stateColor = colors[particle.state];
             mesh.traverse((child) => {
               if (child instanceof THREE.Mesh) {
                 const material = child.material as THREE.MeshBasicMaterial;
-                currentColor.copy(material.color);
-
-                // Convert colors to HSL for smoother transitions
-                const currentHSL = { h: 0, s: 0, l: 0 };
-                const targetHSL = { h: 0, s: 0, l: 0 };
-                currentColor.getHSL(currentHSL);
-                stateColor.getHSL(targetHSL);
-
-                // Interpolate HSL values
-                const newHSL = {
-                  h: currentHSL.h + (targetHSL.h - currentHSL.h) * 0.05,
-                  s: currentHSL.s + (targetHSL.s - currentHSL.s) * 0.05,
-                  l: currentHSL.l + (targetHSL.l - currentHSL.l) * 0.05,
-                };
-
-                // Set new color using interpolated HSL values
-                material.color.setHSL(newHSL.h, newHSL.s, newHSL.l);
+                // Use an even smaller lerp factor for very slow transitions
+                material.color.lerp(stateColor, 0.005);
+              }
+            });
+          } else {
+            const typeColor = colors[particle.type];
+            mesh.traverse((child) => {
+              if (child instanceof THREE.Mesh) {
+                const material = child.material as THREE.MeshBasicMaterial;
+                // Use an even smaller lerp factor for very slow transitions
+                material.color.lerp(typeColor, 0.005);
               }
             });
           }
@@ -791,18 +1133,32 @@ export default function AuthPage() {
 
       // Update colors when theme changes
       const updateColors = () => {
+        const currentThemeClass = document.documentElement.className;
+        if (currentThemeClass === lastThemeClass) return;
+
+        lastThemeClass = currentThemeClass;
+        colorCache.clear();
+
+        // Update nebula colors
+        nebulaMaterial.uniforms.color1.value = getCachedColor("--accent");
+        nebulaMaterial.uniforms.color2.value = getCachedColor("--accent2");
+
         const newColors = {
-          array: getThemeColor("--primary"),
-          tree: getThemeColor("--destructive"),
-          graph: getThemeColor("--secondary"),
-          stack: getThemeColor("--accent"),
-          active: getThemeColor("--accent"),
-          visited: getThemeColor("--secondary"),
-          sorted: getThemeColor("--primary"),
-          comparing: getThemeColor("--destructive"),
-          swapping: getThemeColor("--accent"),
-          accent2: getThemeColor("--accent2"),
-          accent3: getThemeColor("--accent3"),
+          array: getCachedColor("--primary"),
+          tree: getCachedColor("--destructive"),
+          graph: getCachedColor("--secondary"),
+          stack: getCachedColor("--accent"),
+          queue: getCachedColor("--accent2"),
+          linkedList: getCachedColor("--accent3"),
+          hashTable: getCachedColor("--muted"),
+          heap: getCachedColor("--muted-foreground"),
+          active: getCachedColor("--accent"),
+          visited: getCachedColor("--secondary"),
+          sorted: getCachedColor("--primary"),
+          comparing: getCachedColor("--destructive"),
+          swapping: getCachedColor("--accent"),
+          accent2: getCachedColor("--accent2"),
+          accent3: getCachedColor("--accent3"),
         };
 
         meshes.forEach((mesh, i) => {
@@ -810,35 +1166,16 @@ export default function AuthPage() {
           let newColor;
 
           if (particle.state && particle.state !== "idle") {
-            newColor = new THREE.Color(newColors[particle.state]);
+            newColor = newColors[particle.state];
           } else {
-            // Create a new base color with variation
-            const baseColor = new THREE.Color(newColors[particle.type]);
-            const hsl = { h: 0, s: 0, l: 0 };
-            baseColor.getHSL(hsl);
-            const saturation = Math.min(hsl.s + (Math.random() * 0.2 - 0.1), 1);
-            const lightness = Math.min(hsl.l + (Math.random() * 0.2 - 0.1), 1);
-            newColor = new THREE.Color().setHSL(hsl.h, saturation, lightness);
+            newColor = newColors[particle.type];
           }
 
           mesh.traverse((child) => {
             if (child instanceof THREE.Mesh) {
               const material = child.material as THREE.MeshBasicMaterial;
-              const currentColor = material.color.clone();
-              const currentHSL = { h: 0, s: 0, l: 0 };
-              const targetHSL = { h: 0, s: 0, l: 0 };
-
-              currentColor.getHSL(currentHSL);
-              newColor.getHSL(targetHSL);
-
-              // Interpolate HSL values with a smaller factor for smoother transitions
-              const newHSL = {
-                h: currentHSL.h + (targetHSL.h - currentHSL.h) * 0.03,
-                s: currentHSL.s + (targetHSL.s - currentHSL.s) * 0.03,
-                l: currentHSL.l + (targetHSL.l - currentHSL.l) * 0.03,
-              };
-
-              material.color.setHSL(newHSL.h, newHSL.s, newHSL.l);
+              // Use an even smaller lerp factor for very slow transitions
+              material.color.lerp(newColor, 0.005);
             }
           });
         });
@@ -1002,90 +1339,304 @@ export default function AuthPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="w-full max-w-md p-8 space-y-8 bg-background/80 backdrop-blur-lg rounded-xl shadow-2xl border border-accent/20"
+              className="w-full max-w-md p-10 space-y-10 glassmorphism unique-border shadow-2xl relative"
+              style={{
+                fontFamily: "Inter, ui-sans-serif, system-ui",
+                boxShadow: "0 4px 16px 0 rgba(31, 38, 135, 0.25), 0 0 20px 0 #a5b4fc33",
+                borderRadius: "1.2rem",
+                borderWidth: "1.5px",
+                borderStyle: "solid",
+                borderImage: "linear-gradient(90deg, #a5b4fc, #f472b6, #facc15) 1",
+                background: "rgba(30, 30, 60, 0.7)",
+                backdropFilter: "blur(10px)",
+              }}
             >
-              <div>
-                <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-primary via-accent to-accent2 bg-clip-text text-transparent">
-                  Create your account
-                </h2>
-                <p className="mt-2 text-center text-sm text-foreground/60">
+              {/* Animated particles background */}
+              <div
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{ maxHeight: "90%" }}
+              >
+                <svg
+                  width="100%"
+                  height="100%"
+                  className="absolute inset-0 animate-pulse"
+                  style={{ filter: "blur(2px)" }}
+                >
+                  <circle cx="20%" cy="30%" r="18" fill="#a5b4fc55">
+                    <animate
+                      attributeName="cy"
+                      values="30%;40%;30%"
+                      dur="6s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="80%" cy="60%" r="12" fill="#f472b655">
+                    <animate
+                      attributeName="cy"
+                      values="60%;50%;60%"
+                      dur="7s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="50%" cy="80%" r="10" fill="#facc1555">
+                    <animate
+                      attributeName="cy"
+                      values="80%;70%;80%"
+                      dur="8s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </svg>
+              </div>
+              <div className="relative z-10 text-center space-y-3">
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <h2
+                    className="text-3xl font-black tracking-widest bg-gradient-to-r from-primary via-accent to-accent2 bg-clip-text text-transparent uppercase flex items-center justify-center gap-2"
+                    style={{
+                      letterSpacing: "0.08em",
+                      fontFamily: "Inter, ui-sans-serif, system-ui",
+                    }}
+                  >
+                    🚀 AlgoTrainer
+                  </h2>
+                  <div className="mt-1 text-accent2 text-base font-mono tracking-wide">
+                    Continue your algorithm learning journey
+                  </div>
+                  <div className="mt-0.5 text-xs text-foreground/60 italic">
+                    Master algorithms, one step at a time.
+                  </div>
+                </motion.div>
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-sm text-foreground/70 mt-2"
+                >
                   Already have an account?{" "}
                   <button
                     type="button"
                     onClick={() => setIsLogin(true)}
-                    className="font-medium text-primary hover:text-primary/80 transition-colors"
+                    className="font-semibold text-primary hover:text-primary/80 transition-colors border border-primary rounded-lg px-3 py-1 ml-2 bg-background/60"
                   >
                     Sign in
                   </button>
-                </p>
+                </motion.p>
               </div>
 
-              <form onSubmit={handleSignup} className="mt-8 space-y-6">
-                <div className="rounded-md shadow-sm space-y-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground">
+              <div className="relative py-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-accent/20"></div>
+                </div>
+                <div className="relative flex justify-center">
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="px-6 py-2 bg-background/80 rounded-full border border-accent/20 shadow-lg shadow-accent/5"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg
+                        className="w-5 h-5 text-accent"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                      <span className="text-sm font-semibold bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">
+                        Begin Your Journey
+                      </span>
+                      <svg
+                        className="w-5 h-5 text-accent"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              <form onSubmit={handleSignup} className="mt-6 space-y-6">
+                <div className="rounded-md shadow-sm space-y-5">
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="space-y-2 group"
+                  >
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-semibold text-foreground/90 group-hover:text-accent transition-colors tracking-wide"
+                    >
                       Name
                     </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Enter your name"
-                      className="mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-colors"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground">
+                    <div className="relative">
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Enter your name"
+                        className="h-10 mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-all duration-300 pl-10 text-base group-hover:shadow-lg group-hover:shadow-accent/10"
+                      />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-accent/50 group-hover:text-accent transition-colors"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="space-y-2 group"
+                  >
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-semibold text-foreground/90 group-hover:text-accent transition-colors tracking-wide"
+                    >
                       Email address
                     </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email"
-                      className="mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-colors"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="password" className="block text-sm font-medium text-foreground">
+                    <div className="relative">
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Enter your email"
+                        className="h-10 mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-all duration-300 pl-10 text-base group-hover:shadow-lg group-hover:shadow-accent/10"
+                      />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-accent/50 group-hover:text-accent transition-colors"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.7 }}
+                    className="space-y-2 group"
+                  >
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-semibold text-foreground/90 group-hover:text-accent transition-colors tracking-wide"
+                    >
                       Password
                     </label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="new-password"
-                      required
-                      value={formData.password}
-                      onChange={handleChange}
-                      placeholder="Enter your password"
-                      className="mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-colors"
-                    />
-                  </div>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        autoComplete="new-password"
+                        required
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Enter your password"
+                        className="h-10 mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-all duration-300 pl-10 text-base group-hover:shadow-lg group-hover:shadow-accent/10"
+                      />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-accent/50 group-hover:text-accent transition-colors"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
 
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-primary via-accent to-accent2 hover:opacity-90 transition-opacity"
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8 }}
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Creating account...
-                    </>
-                  ) : (
-                    "Create account"
-                  )}
-                </Button>
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full h-10 text-base font-semibold bg-gradient-to-r from-primary via-accent to-accent2 hover:opacity-90 transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg hover:shadow-accent/20"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Creating account...
+                      </>
+                    ) : (
+                      <>
+                        <span>Create account</span>
+                        <svg
+                          className="w-5 h-5 ml-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </svg>
+                      </>
+                    )}
+                  </Button>
+                </motion.div>
               </form>
             </motion.div>
           ) : (
@@ -1095,74 +1646,262 @@ export default function AuthPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="w-full max-w-md p-8 space-y-8 bg-background/80 backdrop-blur-lg rounded-xl shadow-2xl border border-accent/20"
+              className="w-full max-w-md p-10 space-y-10 glassmorphism unique-border shadow-2xl relative"
+              style={{
+                fontFamily: "Inter, ui-sans-serif, system-ui",
+                boxShadow: "0 4px 16px 0 rgba(31, 38, 135, 0.25), 0 0 20px 0 #a5b4fc33",
+                borderRadius: "1.2rem",
+                borderWidth: "1.5px",
+                borderStyle: "solid",
+                borderImage: "linear-gradient(90deg, #a5b4fc, #f472b6, #facc15) 1",
+                background: "rgba(30, 30, 60, 0.7)",
+                backdropFilter: "blur(10px)",
+              }}
             >
-              <div>
-                <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-primary via-accent to-accent2 bg-clip-text text-transparent">
-                  Sign in to your account
-                </h2>
-                <p className="mt-2 text-center text-sm text-foreground/60">
+              {/* Animated particles background */}
+              <div
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{ maxHeight: "90%" }}
+              >
+                <svg
+                  width="100%"
+                  height="100%"
+                  className="absolute inset-0 animate-pulse"
+                  style={{ filter: "blur(2px)" }}
+                >
+                  <circle cx="20%" cy="30%" r="18" fill="#a5b4fc55">
+                    <animate
+                      attributeName="cy"
+                      values="30%;40%;30%"
+                      dur="6s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="80%" cy="60%" r="12" fill="#f472b655">
+                    <animate
+                      attributeName="cy"
+                      values="60%;50%;60%"
+                      dur="7s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="50%" cy="80%" r="10" fill="#facc1555">
+                    <animate
+                      attributeName="cy"
+                      values="80%;70%;80%"
+                      dur="8s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </svg>
+              </div>
+              <div className="relative z-10 text-center space-y-3">
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <h2
+                    className="text-3xl font-black tracking-widest bg-gradient-to-r from-primary via-accent to-accent2 bg-clip-text text-transparent uppercase flex items-center justify-center gap-2"
+                    style={{
+                      letterSpacing: "0.08em",
+                      fontFamily: "Inter, ui-sans-serif, system-ui",
+                    }}
+                  >
+                    🚀 AlgoTrainer
+                  </h2>
+                  <div className="mt-1 text-accent2 text-base font-mono tracking-wide">
+                    Welcome back to your algorithm learning journey
+                  </div>
+                  <div className="mt-0.5 text-xs text-foreground/60 italic">
+                    Continue mastering algorithms, one step at a time.
+                  </div>
+                </motion.div>
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-sm text-foreground/70 mt-2"
+                >
                   Don't have an account?{" "}
                   <button
                     type="button"
                     onClick={() => setIsLogin(false)}
-                    className="font-medium text-primary hover:text-primary/80 transition-colors"
+                    className="font-semibold text-primary hover:text-primary/80 transition-colors border border-primary rounded-lg px-3 py-1 ml-2 bg-background/60"
                   >
                     Sign up
                   </button>
-                </p>
+                </motion.p>
               </div>
 
-              <form onSubmit={handleLogin} className="mt-8 space-y-6">
-                <div className="rounded-md shadow-sm space-y-4">
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground">
+              <div className="relative py-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-accent/20"></div>
+                </div>
+                <div className="relative flex justify-center">
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="px-6 py-2 bg-background/80 rounded-full border border-accent/20 shadow-lg shadow-accent/5"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg
+                        className="w-5 h-5 text-accent"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                        />
+                      </svg>
+                      <span className="text-sm font-semibold bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">
+                        Continue Your Journey
+                      </span>
+                      <svg
+                        className="w-5 h-5 text-accent"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              <form onSubmit={handleLogin} className="mt-6 space-y-6">
+                <div className="rounded-md shadow-sm space-y-5">
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                    className="space-y-2 group"
+                  >
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-semibold text-foreground/90 group-hover:text-accent transition-colors tracking-wide"
+                    >
                       Email address
                     </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email"
-                      className="mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-colors"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="password" className="block text-sm font-medium text-foreground">
+                    <div className="relative">
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Enter your email"
+                        className="h-10 mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-all duration-300 pl-10 text-base group-hover:shadow-lg group-hover:shadow-accent/10"
+                      />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-accent/50 group-hover:text-accent transition-colors"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="space-y-2 group"
+                  >
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-semibold text-foreground/90 group-hover:text-accent transition-colors tracking-wide"
+                    >
                       Password
                     </label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="current-password"
-                      required
-                      value={formData.password}
-                      onChange={handleChange}
-                      placeholder="Enter your password"
-                      className="mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-colors"
-                    />
-                  </div>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        autoComplete="current-password"
+                        required
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder="Enter your password"
+                        className="h-10 mt-1 bg-background/50 border-accent/20 focus:border-accent/50 transition-all duration-300 pl-10 text-base group-hover:shadow-lg group-hover:shadow-accent/10"
+                      />
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg
+                          className="h-5 w-5 text-accent/50 group-hover:text-accent transition-colors"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
 
-                <Button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-primary via-accent to-accent2 hover:opacity-90 transition-opacity"
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8 }}
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    "Sign in"
-                  )}
-                </Button>
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full h-10 text-base font-semibold bg-gradient-to-r from-primary via-accent to-accent2 hover:opacity-90 transition-all duration-300 transform hover:scale-[1.01] hover:shadow-lg hover:shadow-accent/20"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                        Signing in...
+                      </>
+                    ) : (
+                      <>
+                        <span>Sign in</span>
+                        <svg
+                          className="w-5 h-5 ml-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                          />
+                        </svg>
+                      </>
+                    )}
+                  </Button>
+                </motion.div>
               </form>
             </motion.div>
           )}
