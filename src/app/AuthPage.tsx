@@ -94,28 +94,98 @@ export default function AuthPage() {
       // Theme-aware colors using CSS variables
       const getThemeColor = (colorVar: string) => {
         const computedStyle = getComputedStyle(document.documentElement);
-        return computedStyle.getPropertyValue(colorVar).trim() || "#000000";
+        const colorValue = computedStyle.getPropertyValue(colorVar).trim();
+
+        // Debug logging
+        console.debug(`Parsing color for ${colorVar}:`, colorValue);
+
+        // Handle empty or invalid values
+        if (!colorValue) {
+          console.warn(`Empty color value for ${colorVar}, using fallback`);
+          return new THREE.Color(0xffffff);
+        }
+
+        try {
+          // Handle HSL values in format "222.2 47.4% 11.2%"
+          if (colorValue.includes("%")) {
+            const hslMatch = colorValue.match(/(\d+\.?\d*)\s+(\d+\.?\d*)%\s+(\d+\.?\d*)%/);
+            if (hslMatch) {
+              const [_, h, s, l] = hslMatch;
+              const color = new THREE.Color();
+              color.setHSL(parseFloat(h) / 360, parseFloat(s) / 100, parseFloat(l) / 100);
+              return color;
+            }
+          }
+
+          // Handle HSL values in format "hsl(222.2, 47.4%, 11.2%)"
+          if (colorValue.includes("hsl")) {
+            const hslMatch = colorValue.match(/hsl\((\d+\.?\d*),\s*(\d+\.?\d*)%,\s*(\d+\.?\d*)%\)/);
+            if (hslMatch) {
+              const [_, h, s, l] = hslMatch;
+              const color = new THREE.Color();
+              color.setHSL(parseFloat(h) / 360, parseFloat(s) / 100, parseFloat(l) / 100);
+              return color;
+            }
+          }
+
+          // Handle hex values
+          if (colorValue.startsWith("#")) {
+            return new THREE.Color(colorValue);
+          }
+
+          // Handle RGB values
+          if (colorValue.startsWith("rgb")) {
+            const rgbMatch = colorValue.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+            if (rgbMatch) {
+              const [_, r, g, b] = rgbMatch;
+              return new THREE.Color(parseInt(r) / 255, parseInt(g) / 255, parseInt(b) / 255);
+            }
+          }
+
+          // Try to parse as a named color
+          try {
+            return new THREE.Color(colorValue);
+          } catch (e) {
+            console.warn(
+              `Failed to parse color value: ${colorValue} for ${colorVar}, using fallback`
+            );
+            return new THREE.Color(0xffffff);
+          }
+        } catch (error) {
+          console.warn(`Error parsing color ${colorValue} for ${colorVar}:`, error);
+          return new THREE.Color(0xffffff);
+        }
+      };
+
+      // Create a color cache to prevent repeated parsing
+      const colorCache = new Map<string, THREE.Color>();
+
+      const getCachedColor = (colorVar: string) => {
+        if (!colorCache.has(colorVar)) {
+          colorCache.set(colorVar, getThemeColor(colorVar));
+        }
+        return colorCache.get(colorVar)!;
       };
 
       const colors = {
         // Base colors from theme
-        array: getThemeColor("--primary"),
-        tree: getThemeColor("--destructive"),
-        graph: getThemeColor("--secondary"),
-        stack: getThemeColor("--accent"),
-        active: getThemeColor("--accent"),
-        visited: getThemeColor("--secondary"),
-        sorted: getThemeColor("--primary"),
-        comparing: getThemeColor("--destructive"),
-        swapping: getThemeColor("--accent"),
+        array: getCachedColor("--primary"),
+        tree: getCachedColor("--destructive"),
+        graph: getCachedColor("--secondary"),
+        stack: getCachedColor("--accent"),
+        active: getCachedColor("--accent"),
+        visited: getCachedColor("--secondary"),
+        sorted: getCachedColor("--primary"),
+        comparing: getCachedColor("--destructive"),
+        swapping: getCachedColor("--accent"),
 
         // Additional theme colors
-        accent2: getThemeColor("--accent2"),
-        accent3: getThemeColor("--accent3"),
-        muted: getThemeColor("--muted"),
-        mutedForeground: getThemeColor("--muted-foreground"),
-        card: getThemeColor("--card"),
-        cardForeground: getThemeColor("--card-foreground"),
+        accent2: getCachedColor("--accent2"),
+        accent3: getCachedColor("--accent3"),
+        muted: getCachedColor("--muted"),
+        mutedForeground: getCachedColor("--muted-foreground"),
+        card: getCachedColor("--card"),
+        cardForeground: getCachedColor("--card-foreground"),
       };
 
       // Create particles with initial states
