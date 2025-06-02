@@ -238,8 +238,8 @@ const AboutPage = () => {
             <img src={snesController} alt="SNES Controller" className="w-10 h-10 mx-auto mb-2" />
           )}
           <AnimatedHeader
-            title="Master Algorithms, Don't be Afraid :)"
-            subtitle="Go beyond coding to understand the mathematical principles that make algorithms work. Learn to think mathematically about problem-solving and algorithm design."
+            title="Welcome to Algorithm Learning"
+            subtitle="Your journey to mastering algorithms starts here. Explore our interactive platform, learn at your own pace, and build a strong foundation in computer science."
             titleClassName={cn(
               "text-4xl md:text-5xl font-bold mb-6 leading-[1.3] pb-2 text-transparent bg-clip-text gradient-text",
               theme === "nord"
@@ -254,6 +254,35 @@ const AboutPage = () => {
               theme === "nord" ? "text-[#ECEFF4]/90" : "text-foreground/70"
             )}
           />
+          <div className="flex justify-center gap-4 mt-8">
+            <Button
+              className={cn(
+                "px-8 py-4 text-lg shadow-lg border-2 animate-glow",
+                theme === "snes"
+                  ? "bg-[#3498db] text-[#fffbe6] border-[#1a237e] hover:bg-[#1a237e] hover:text-[#fffbe6]"
+                  : theme === "nord" &&
+                      "bg-[#58A6FF] text-[#2E3440] border-[#FFD700] hover:bg-[#FFD700] hover:text-[#2E3440] hover:border-[#58A6FF]"
+              )}
+              asChild
+              size="standard"
+            >
+              <Link to="/algorithm-trainer">Start Learning</Link>
+            </Button>
+            <Button
+              className={cn(
+                "px-8 py-4 text-lg shadow-lg border-2",
+                theme === "snes"
+                  ? "bg-[#fffbe6] text-[#1a237e] border-[#3498db] hover:bg-[#3498db] hover:text-[#fffbe6]"
+                  : theme === "nord" &&
+                      "bg-[#2E3440] text-[#ECEFF4] border-[#4C566A] hover:bg-[#4C566A] hover:text-[#81A1C1]"
+              )}
+              variant="outline"
+              asChild
+              size="standard"
+            >
+              <Link to="/login">Sign In</Link>
+            </Button>
+          </div>
         </div>
 
         {/* How It Works Stepper */}
@@ -663,7 +692,7 @@ const AboutPage = () => {
                   theme === "nord" && "text-[#FFD700] drop-shadow-md"
                 )}
               >
-                📝 How to Use the App
+                📝 How to Get Started
               </h3>
               <ol
                 className={cn(
@@ -679,10 +708,10 @@ const AboutPage = () => {
                   <span
                     className={cn("font-bold", theme === "nord" ? "text-[#FFD700]" : "text-accent")}
                   >
-                    📚 Start with the Basics:
+                    🏠 Explore the Platform:
                   </span>{" "}
-                  Begin with the mathematical foundations section to build your theoretical
-                  understanding.
+                  Start by exploring our interactive learning environment and understanding what we
+                  offer.
                 </li>
                 <li>
                   <span
@@ -691,10 +720,10 @@ const AboutPage = () => {
                       theme === "nord" ? "text-[#FFD700]" : "text-accent2"
                     )}
                   >
-                    🧭 Follow the Learning Path:
+                    📚 Choose Your Path:
                   </span>{" "}
-                  Progress through topics in the recommended order, as each concept builds upon
-                  previous knowledge.
+                  Select from our various learning paths - from mathematical foundations to
+                  practical implementation.
                 </li>
                 <li>
                   <span
@@ -703,19 +732,18 @@ const AboutPage = () => {
                       theme === "nord" ? "text-[#FFD700]" : "text-accent3"
                     )}
                   >
-                    🧑‍💻 Practice with Examples:
+                    🔐 Create an Account:
                   </span>{" "}
-                  Use the interactive code editor to implement algorithms and see how mathematical
-                  concepts translate into code.
+                  Sign up to track your progress, save your work, and access all features.
                 </li>
                 <li>
                   <span
                     className={cn("font-bold", theme === "nord" ? "text-[#FFD700]" : "text-accent")}
                   >
-                    📝 Track Your Progress:
+                    🎯 Set Your Goals:
                   </span>{" "}
-                  Monitor your understanding through quizzes and challenges at the end of each
-                  section.
+                  Define your learning objectives and start your journey with our structured
+                  curriculum.
                 </li>
                 <li>
                   <span
@@ -724,10 +752,10 @@ const AboutPage = () => {
                       theme === "nord" ? "text-[#FFD700]" : "text-accent2"
                     )}
                   >
-                    📖 Use the Resources:
+                    🚀 Start Learning:
                   </span>{" "}
-                  Access additional materials, visualizations, and reference guides to deepen your
-                  understanding.
+                  Begin with the basics and progress through increasingly complex topics at your own
+                  pace.
                 </li>
               </ol>
             </div>
@@ -760,7 +788,7 @@ const AboutPage = () => {
                     {
                       title: "1. Algorithm Learning",
                       description: "Master the mathematical foundations and theoretical concepts.",
-                      link: "/algorithm-learning",
+                      link: "/algo-guide",
                       accent:
                         theme === "nord"
                           ? "bg-gradient-to-br from-[#3b206a]/90 to-[#5a3fa0]/90 border border-white/30 text-white rounded-2xl shadow-lg"
@@ -899,7 +927,7 @@ const AboutPage = () => {
               asChild
               size="standard"
             >
-              <Link to="/algorithm-learning">Start Learning Now</Link>
+              <Link to="/algorithm-trainer">Start Learning Now</Link>
             </Button>
           </div>
           {/* Animations */}

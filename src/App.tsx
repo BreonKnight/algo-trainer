@@ -63,7 +63,7 @@ const AppContent = memo(function AppContent() {
   const routeElements = useMemo(
     () => (
       <Routes>
-        <Route path="/" element={<AlgorithmTrainer />} />
+        <Route path="/" element={<AboutPage />} />
         <Route path="/login" element={<AuthPage />} />
         <Route
           path="/dashboard"

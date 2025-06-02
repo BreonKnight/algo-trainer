@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import React from "react";
 
 interface AuthHeaderProps {
-  title: string;
   subtitle: string;
   description: string;
   isLogin: boolean;
@@ -10,7 +9,6 @@ interface AuthHeaderProps {
 }
 
 export const AuthHeader: React.FC<AuthHeaderProps> = ({
-  title,
   subtitle,
   description,
   isLogin,

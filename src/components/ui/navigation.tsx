@@ -9,6 +9,7 @@ import {
   Network,
   ListChecks,
   LucideIcon,
+  LogIn,
 } from "lucide-react";
 import { memo, useState, useMemo, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -16,6 +17,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GamificationButton } from "@/components/features/gamification/GamificationButton";
 import { useTheme } from "@/components/theme/use-theme";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/lib/hooks/useAuth";
 
 import { cn } from "@algo-trainer/shared/utils/common";
 
@@ -132,6 +134,7 @@ export function Navigation() {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
+  const { isAuthenticated } = useAuth();
 
   // Add effect to handle body scroll lock
   useEffect(() => {
@@ -247,14 +250,6 @@ export function Navigation() {
             isLoading: loadingStates["/tutorials"],
           },
           {
-            path: "/dashboard",
-            label: "Dashboard",
-            icon: BarChart,
-            onClick: (e: React.MouseEvent) => handleNavClick("/dashboard", e),
-            onMouseEnter: () => preloadRoute("/dashboard"),
-            isLoading: loadingStates["/dashboard"],
-          },
-          {
             path: "/systems-design",
             label: "Systems Design",
             icon: Network,
@@ -275,10 +270,19 @@ export function Navigation() {
             onMouseEnter: () => preloadRoute("/about"),
             isLoading: loadingStates["/about"],
           },
+          {
+            path: isAuthenticated ? "/dashboard" : "/login",
+            label: isAuthenticated ? "Dashboard" : "Login",
+            icon: isAuthenticated ? BarChart : LogIn,
+            onClick: (e: React.MouseEvent) =>
+              handleNavClick(isAuthenticated ? "/dashboard" : "/login", e),
+            onMouseEnter: () => preloadRoute(isAuthenticated ? "/dashboard" : "/login"),
+            isLoading: loadingStates[isAuthenticated ? "/dashboard" : "/login"],
+          },
         ],
       },
     ],
-    [handleNavClick, preloadRoute, loadingStates]
+    [handleNavClick, preloadRoute, loadingStates, isAuthenticated]
   );
 
   // Memoize active state check

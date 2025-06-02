@@ -45,6 +45,22 @@ interface Particle {
   animation?: ParticleAnimation;
 }
 
+// Toggle for vibrant mode
+const vibrantMode = true; // Set to false to use theme colors
+
+// Vibrant color palette for data structures
+const vibrantColors: Record<Particle["type"], string> = {
+  array: "#FF6384", // Pink
+  stack: "#36A2EB", // Blue
+  queue: "#FFCE56", // Yellow
+  tree: "#4BC0C0", // Teal
+  graph: "#9966FF", // Purple
+  linkedList: "#FF9F40", // Orange
+  hashTable: "#00A86B", // Green
+  heap: "#E7E9ED", // Light Gray
+  hash: "#C9CBCF", // Gray
+};
+
 // Three.js scene setup and management
 const createScene = () => {
   const scene = new THREE.Scene();
@@ -140,8 +156,7 @@ const createNebula = (color1: THREE.Color, color2: THREE.Color) => {
   return { nebula, material: nebulaMaterial };
 };
 
-const createParticles = (colors: Record<string, THREE.Color>, count: number) => {
-  const particles: Particle[] = [];
+const createParticles = (colors: Record<string, THREE.Color>) => {
   const types: Particle["type"][] = [
     "array",
     "tree",
@@ -152,7 +167,6 @@ const createParticles = (colors: Record<string, THREE.Color>, count: number) => 
     "hashTable",
     "heap",
   ];
-
   const animationTypes: ParticleAnimation["type"][] = [
     "sort",
     "traverse",
@@ -164,39 +178,43 @@ const createParticles = (colors: Record<string, THREE.Color>, count: number) => 
     "insert",
     "delete",
   ];
-
-  for (let i = 0; i < count; i++) {
-    const type = types[Math.floor(Math.random() * types.length)];
-    const baseColor = new THREE.Color(colors[type]);
-
-    // Add color variation
-    const hsl = { h: 0, s: 0, l: 0 };
-    baseColor.getHSL(hsl);
-    const saturation = Math.min(hsl.s + (Math.random() * 0.2 - 0.1), 1);
-    const lightness = Math.min(hsl.l + (Math.random() * 0.2 - 0.1), 1);
-    baseColor.setHSL(hsl.h, saturation, lightness);
-
-    particles.push({
-      position: new THREE.Vector3(
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10,
-        (Math.random() - 0.5) * 10
-      ),
-      velocity: new THREE.Vector3(
-        (Math.random() - 0.5) * 0.01,
-        (Math.random() - 0.5) * 0.01,
-        (Math.random() - 0.5) * 0.01
-      ),
-      size: Math.random() * 0.05 + 0.025,
-      color: baseColor,
-      type,
-      state: "idle",
-      animation: {
-        type: animationTypes[Math.floor(Math.random() * animationTypes.length)],
-        progress: 0,
-      },
-    });
-  }
+  const particles: Particle[] = [];
+  types.forEach((type) => {
+    for (let i = 0; i < 2; i++) {
+      let baseColor: THREE.Color;
+      if (vibrantMode) {
+        baseColor = new THREE.Color(vibrantColors[type]);
+      } else {
+        baseColor = new THREE.Color(colors[type]);
+      }
+      // Add color variation
+      const hsl = { h: 0, s: 0, l: 0 };
+      baseColor.getHSL(hsl);
+      const saturation = Math.min(hsl.s + (Math.random() * 0.2 - 0.1), 1);
+      const lightness = Math.min(hsl.l + (Math.random() * 0.2 - 0.1), 1);
+      baseColor.setHSL(hsl.h, saturation, lightness);
+      particles.push({
+        position: new THREE.Vector3(
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 10
+        ),
+        velocity: new THREE.Vector3(
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01
+        ),
+        size: Math.random() * 0.05 + 0.025,
+        color: baseColor,
+        type,
+        state: "idle" as const,
+        animation: {
+          type: animationTypes[Math.floor(Math.random() * animationTypes.length)],
+          progress: 0,
+        },
+      });
+    }
+  });
   return particles;
 };
 
@@ -281,12 +299,50 @@ const createTextSprite = (text: string, position: THREE.Vector3): THREE.Sprite |
 const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
   const group = new THREE.Group();
 
-  // Get theme colors
-  const primaryColor = getThemeColor("--primary");
-  const secondaryColor = getThemeColor("--secondary");
-  const accentColor = getThemeColor("--accent");
-  const mutedColor = getThemeColor("--muted");
-  const borderColor = getThemeColor("--border");
+  // If vibrantMode, use vibrant palette for all elements
+  let primaryColor: THREE.Color, accentColor: THREE.Color, borderColor: THREE.Color;
+  if (vibrantMode) {
+    primaryColor = new THREE.Color(vibrantColors[type]);
+    accentColor = new THREE.Color("#FFD700"); // Gold accent
+    borderColor = new THREE.Color("#bbbbbb"); // Lighter border for vibrant mode
+  } else {
+    // Get theme colors with fallbacks for SNES theme
+    const getContrastColor = (colorVar: string, fallbackVar: string) => {
+      const color = getThemeColor(colorVar);
+      const fallback = getThemeColor(fallbackVar);
+      const hsl = { h: 0, s: 0, l: 0 };
+      color.getHSL(hsl);
+      if (hsl.s < 0.2 || (hsl.l > 0.4 && hsl.l < 0.6)) {
+        return fallback;
+      }
+      return color;
+    };
+    primaryColor = getContrastColor("--primary", "--accent");
+    accentColor = getContrastColor("--accent", "--primary");
+    borderColor = getContrastColor("--border", "--accent");
+  }
+
+  // Add color variation to prevent monochromatic look
+  const addColorVariation = (color: THREE.Color, variation: number = 0.1) => {
+    const hsl = { h: 0, s: 0, l: 0 };
+    color.getHSL(hsl);
+
+    // Ensure minimum saturation
+    hsl.s = Math.max(hsl.s, 0.3);
+
+    // Add slight hue variation
+    hsl.h = (hsl.h + Math.random() * variation) % 1;
+
+    // Ensure good contrast
+    hsl.l = hsl.l < 0.5 ? Math.min(hsl.l + 0.1, 0.4) : Math.max(hsl.l - 0.1, 0.6);
+
+    color.setHSL(hsl.h, hsl.s, hsl.l);
+    return color;
+  };
+
+  const getVariedColor = (baseColor: THREE.Color) => {
+    return addColorVariation(baseColor.clone());
+  };
 
   switch (type) {
     case "array": {
@@ -295,21 +351,19 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
       const spacing = 0.02;
 
       for (let i = 0; i < cellCount; i++) {
-        // Create cell container with theme color
         const cell = new THREE.Mesh(
           new THREE.BoxGeometry(cellSize, cellSize, cellSize),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         cell.position.x = i * (cellSize + spacing);
         group.add(cell);
 
-        // Add cell content with theme color
         const content = new THREE.Mesh(
           new THREE.SphereGeometry(cellSize * 0.3, 8, 8),
-          new THREE.MeshBasicMaterial({ color: accentColor })
+          new THREE.MeshBasicMaterial({ color: getVariedColor(accentColor) })
         );
         content.position.x = i * (cellSize + spacing);
         group.add(content);
@@ -347,7 +401,7 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
       // Create base with theme color
       const base = new THREE.Mesh(
         new THREE.BoxGeometry(elementSize * 1.2, elementSize * 0.2, elementSize * 1.2),
-        new THREE.MeshBasicMaterial({ color: borderColor })
+        new THREE.MeshBasicMaterial({ color: getVariedColor(borderColor) })
       );
       base.position.y = -elementSize * 0.6;
       group.add(base);
@@ -356,8 +410,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const element = new THREE.Mesh(
           new THREE.BoxGeometry(elementSize, elementSize, elementSize),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         element.position.y = i * (elementSize + spacing);
@@ -390,7 +444,7 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
       const createArrow = (x: number, rotation: number) => {
         const arrow = new THREE.Mesh(
           new THREE.ConeGeometry(elementSize * 0.2, elementSize * 0.4, 8),
-          new THREE.MeshBasicMaterial({ color: accentColor })
+          new THREE.MeshBasicMaterial({ color: getVariedColor(accentColor) })
         );
         arrow.position.set(x, 0, 0);
         arrow.rotation.z = rotation;
@@ -404,8 +458,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const element = new THREE.Mesh(
           new THREE.BoxGeometry(elementSize, elementSize, elementSize),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         element.position.x = i * (elementSize + spacing);
@@ -439,8 +493,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const node = new THREE.Mesh(
           new THREE.SphereGeometry(nodeSize * 0.5, 8, 8),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         node.position.set(x, y, 0);
@@ -456,7 +510,7 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
       const createEdge = (start: THREE.Vector3, end: THREE.Vector3) => {
         const points = [start, end];
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
-        const material = new THREE.LineBasicMaterial({ color: borderColor });
+        const material = new THREE.LineBasicMaterial({ color: getVariedColor(borderColor) });
         const line = new THREE.Line(geometry, material);
         group.add(line);
       };
@@ -502,8 +556,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const node = new THREE.Mesh(
           new THREE.SphereGeometry(nodeSize * 0.5, 8, 8),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         node.position.set(x, y, 0);
@@ -517,13 +571,13 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         if (valueSprite) group.add(valueSprite);
       }
 
-      // Create edges with theme color
+      // Create edges with varied colors
       for (let i = 0; i < nodeCount; i++) {
         for (let j = i + 1; j < nodeCount; j++) {
           if (Math.random() > 0.5) {
             const points = [nodePositions[i], nodePositions[j]];
             const geometry = new THREE.BufferGeometry().setFromPoints(points);
-            const material = new THREE.LineBasicMaterial({ color: borderColor });
+            const material = new THREE.LineBasicMaterial({ color: getVariedColor(borderColor) });
             const line = new THREE.Line(geometry, material);
             group.add(line);
           }
@@ -545,8 +599,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const node = new THREE.Mesh(
           new THREE.SphereGeometry(nodeSize * 0.5, 8, 8),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         node.position.x = i * spacing;
@@ -562,7 +616,7 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         if (i < nodeCount - 1) {
           const arrow = new THREE.Mesh(
             new THREE.ConeGeometry(nodeSize * 0.2, nodeSize * 0.4, 8),
-            new THREE.MeshBasicMaterial({ color: accentColor })
+            new THREE.MeshBasicMaterial({ color: getVariedColor(accentColor) })
           );
           arrow.position.x = i * spacing + spacing / 2;
           arrow.rotation.z = -Math.PI / 2;
@@ -573,7 +627,7 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
             new THREE.Vector3((i + 1) * spacing - nodeSize * 0.3, 0, 0),
           ];
           const geometry = new THREE.BufferGeometry().setFromPoints(points);
-          const material = new THREE.LineBasicMaterial({ color: borderColor });
+          const material = new THREE.LineBasicMaterial({ color: getVariedColor(borderColor) });
           const line = new THREE.Line(geometry, material);
           group.add(line);
         }
@@ -597,8 +651,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const bucket = new THREE.Mesh(
           new THREE.BoxGeometry(bucketSize, bucketSize, bucketSize),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         bucket.position.x = i * spacing;
@@ -646,8 +700,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const node = new THREE.Mesh(
           new THREE.SphereGeometry(nodeSize * 0.5, 8, 8),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         node.position.set(x, y, 0);
@@ -663,7 +717,7 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
       const createEdge = (start: THREE.Vector3, end: THREE.Vector3) => {
         const points = [start, end];
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
-        const material = new THREE.LineBasicMaterial({ color: borderColor });
+        const material = new THREE.LineBasicMaterial({ color: getVariedColor(borderColor) });
         const line = new THREE.Line(geometry, material);
         group.add(line);
       };
@@ -703,8 +757,8 @@ const createDataStructureGeometry = (type: Particle["type"]): THREE.Group => {
         const bucket = new THREE.Mesh(
           new THREE.BoxGeometry(bucketSize, bucketSize, bucketSize),
           new THREE.MeshBasicMaterial({
-            color: primaryColor,
-            wireframe: true,
+            color: getVariedColor(primaryColor),
+            wireframe: vibrantMode ? false : true,
           })
         );
         bucket.position.x = i * spacing;
@@ -992,7 +1046,7 @@ export default function AuthPage() {
         swapping: getCachedColor("--error"),
       };
 
-      const particles = createParticles(colors, 100);
+      const particles = createParticles(colors);
       const { meshes } = createParticleMeshes(particles);
       meshes.forEach((mesh) => scene.add(mesh));
 

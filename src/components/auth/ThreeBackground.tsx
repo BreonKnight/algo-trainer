@@ -565,8 +565,6 @@ export const ThreeBackground: React.FC = () => {
           const particle = dataStructureParticles[i];
           const { velocity, pulseSpeed, pulsePhase, rotationSpeed, radius } = particle.userData;
 
-          // Store previous position for collision resolution
-          const prevPosition = particle.position.clone();
           particle.position.add(velocity);
 
           // Boundary checks with smoother damping
@@ -660,7 +658,7 @@ export const ThreeBackground: React.FC = () => {
 
         // Update stars
         stars.forEach((star) => {
-          const { originalSize, pulseSpeed, pulsePhase } = star.userData;
+          const { pulseSpeed, pulsePhase } = star.userData;
           const scale = 1 + Math.sin(time * pulseSpeed + pulsePhase) * 0.2;
           star.scale.set(scale, scale, scale);
 
